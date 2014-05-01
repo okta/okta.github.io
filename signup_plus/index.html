@@ -21,34 +21,77 @@ body_id: signup-form
          <div class="row">
           <div class="col-xs-12">
            <div class="row nopadding">
-            <div class="signup-form">
-               <div class="col-xs-7">
-                  <form class="form-horizontal" action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
-                     <input type=hidden name="oid" value="00DA0000000KWYD">
-                     <input type=hidden name="Campaign_ID" value="701F00000004ejZ">
-                     <input type=hidden name="retURL" value="http://okta.github.io/welcome.html">
-                     <input type=hidden name="lead_source" value="API-Github-SignUp">
-                     <div class="">
-                        <label for="first_name" class="col-xs-4 fl-control-label">First Name</label>
-                        <input  id="first_name" class="col-xs-7 input-lg" maxlength="40" name="first_name" size="20" type="text" required="required" />
-                     </div>
-                     <div class="">
-                        <label for="last_name" class="col-xs-4 fl-control-label">Last Name</label>
-                        <input  id="last_name" class="col-xs-7 input-lg" maxlength="80" name="last_name" size="20" type="text" required="required"/>
-                     </div>
-                     <div class="">
-                        <label for="email" class="col-xs-4 fl-control-label">Email</label>
-                        <input  id="email" class="col-xs-7 input-lg" maxlength="80" name="email" size="20" type="email" required="required" />
-                     </div>
-                     <input type="submit" name="submit" value="Sign Up" class="button signup-button nav-button-padding">
-                  </form>
-               </div>
-               <div class="col-xs-5" style="padding-bottom: 130px;
-border-left: 1px solid #eaeaea;">
-                  <p style="color: #0c87c9; line-height: 30px; margin-left: 30px">
-                  We’re here to help you spend more time building a great experience for your users, and less time implementing identity and access. 
-               </p>
-            </div>
+            <div class="signup-form signup-plus-form">
+
+
+
+
+             <div class="col-xs-7">
+
+<form class="form-horizontal"
+      action="https://www.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
+      method="POST">
+  <input type=hidden name="oid" value="00DA0000000KWYD">
+  <input type=hidden name="Campaign_ID" value="701F00000004ejZ">
+  <input type=hidden name="retURL" value="http://okta.github.io/welcome.html">
+  <input type=hidden name="role" value="Developer">
+  <input type=hidden name="lead_source" value="DevCom­Quote­DevPlus">
+
+  <div class="row">
+    <label for="first_name" class="col-xs-4 fl-control-label">First Name</label>
+    <input  id="first_name" class="col-xs-7 input-lg" maxlength="40" name="first_name" size="20" type="text" required="required">
+  </div>
+  <div class="row">
+    <label for="last_name" class="col-xs-4 fl-control-label">Last Name</label>
+    <input  id="last_name" class="col-xs-7 input-lg" maxlength="80" name="last_name" size="20" type="text" required="required">
+  </div>
+  <div class="row">
+    <label for="email" class="col-xs-4 fl-control-label">Email</label>
+    <input  id="email" class="col-xs-7 input-lg" maxlength="80" name="email" size="20" type="email" required="required">
+  </div>
+
+  <div class="row">
+    <label for="company_name"
+           class="col-xs-4 fl-control-label">Company Name</label>
+    <input id="row" class="col-xs-7 input-lg"
+           maxlength="80" name="company_name" size="20"
+           type="company_name">
+  </div>
+  <div class="row">
+    <label for="number_of_users"
+           class="col-xs-4 fl-control-label">Number of Users</label>
+    <input id="number_of_users" class="col-xs-7 input-lg"
+           maxlength="80" name="number_of_users" size="20"
+           type="number_of_users" required="required">
+  </div>
+  <div class="row">
+    <label for="logins_per_year"
+           class="col-xs-4 fl-control-label">Number of Logins per Year</label>
+    <input id="logins_per_year" class="col-xs-7 input-lg"
+           maxlength="80" name="logins_per_year" size="20"
+           type="logins_per_year" required="required">
+  </div>
+  <div class="row">
+    <label for="what_are_you_building"
+           class="col-xs-4 fl-control-label">What are you Building?</label>
+    <textarea id="what_are_you_building" class="col-xs-7 input-lg"
+              name="what_are_you_building"
+              type="what_are_you_building" required="required"></textarea>
+  </div>
+
+  <input type="submit" name="submit" value="Sign Up" class="button signup-button nav-button-padding">
+</form>
+
+             </div>
+
+
+
+
+             <div class="col-xs-5" style="padding-bottom: 130px; border-left: 1px solid #eaeaea;">
+                <p style="color: #0c87c9; line-height: 30px; margin-left: 30px">
+                We’re here to help you spend more time building a great experience for your users, and less time implementing identity and access.
+             </p>
+          </div>
          </div>
       </div>
    </div>

@@ -1008,11 +1008,28 @@ div#sticker {
 
 .signup-button {
   float: right;
-  margin-right: 36px;
+  margin-right: 23px;
   padding: 12px 25px !important;
   width: 150px;
 }
 
+.fl-control-label {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.signup-plus-form {
+  height: 745px;
+}
+
+.signup-plus-form .signup-button {
+  margin-top: 30px;
+}
+
+.signup-plus-form .fl-control-label {
+  font-size: 16px;
+}
 
 
 /* -- NEW GLOBAL STYLES MAY 2014
