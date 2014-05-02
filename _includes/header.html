@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="/assets/css/{{ include.css_file }}">
   {% endif %}
 
-  {% if page.css %}
-    <link rel="stylesheet" href="/assets/css/{{ page.css }}.css">
+  {% if page.css_file %}
+    <link rel="stylesheet" href="/assets/css/{{ page.css_file }}">
   {% endif %}
 </head>
 
@@ -56,7 +56,6 @@
          <li><a href="/discussion" {% if path[1] == "discussion" %} class="mrg-right-15 active-nav" {%else%} class="mrg-right-15 black" {% endif %}>Discussion</a></li>
          <li><a href="http://www.okta.com" data-num="{{p.weight}}" class="button-gray visit">Visit Okta.com</a></li>
          <li><a href="/signup" data-num="{{p.weight}}" class="button  nav-button-padding "><strong>Get Started</strong></a></li>
-         <li><a href="/signup_plus" data-num="{{p.weight}}" class="button  nav-button-padding "><strong>Dev +</strong></a></li>
        </ul>
      </div>
    </div>

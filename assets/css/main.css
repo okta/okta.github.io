@@ -12,7 +12,7 @@
  * -- */
 
 
-@import url(http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
 
 /* -------------------------- GLOBAL STYLES */
@@ -1020,7 +1020,7 @@ div#sticker {
 }
 
 .signup-plus-form {
-  height: 745px;
+  height: 700px;
 }
 
 .signup-plus-form .signup-button {
