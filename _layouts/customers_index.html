@@ -4,16 +4,11 @@
 
 <div class="boundary container-non-responsive customers-index" id="main-container">
 
-
-
   <div class="block title-block">
     <h1>{{ page.tagline }}</h1>
   </div>
 
-
-
   <div class="block customers-grid">
-
     {% for page in site.pages %}
       {% if page.layout == 'customer_story' %}
         {% assign path  = page.url | remove: "/index.html" %}
@@ -35,7 +30,6 @@
       {% endif %}
     {% endfor %}
 
-
     {% comment %}
       // the following loop closes the last div row
       // if not an even multiple of 3
@@ -50,14 +44,9 @@
     {% endfor %}
     {% assign last_idx = num_customers | modulo: 3 %}
     {% if last_idx != 0 %}</div>{% endif %}
-
   </div>
 
-
-
 </div>
-
-
 
 
 
