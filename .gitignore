@@ -25,3 +25,9 @@ classes
 # ignore mac specific files
 .DS_Store
 reload_views.rb
+
+
+/_site
+
+.bundle
+bin/*

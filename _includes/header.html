@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="shortcut icon" href="../../assets/ico/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=0.0, maximum-scale=1.0, user-scalable=no">
+
   <title>Okta Developers</title>
-  {% capture lvl %}{{ page.url | append:'index.html' | split:'/' | size }}{% endcapture %}
-  {% capture relative %}{% for i in (3..lvl) %}../{% endfor %}{% endcapture %}
-  <!-- Bootstrap core CSS -->
+
+  <link href="/assets/ico/favicon.png" rel="shortcut icon">
   <link href="/assets/dist/css/bootstrap.css" rel="stylesheet">
-  <link href="/assets/css/jquery.tocify.css" rel="stylesheet">
   <link href="/assets/css/main.css" rel="stylesheet">
-  {% if page.css %}
-  <link rel="stylesheet" href="{{site.baseurl}}/assets/css/{{ page.css }}.css" type="text/css" />
+
+  <script src="//use.typekit.net/pls8pog.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
+
+  {% if include.css_file %}
+    <link rel="stylesheet" href="/assets/css/{{ include.css_file }}">
+  {% endif %}
+
+  {% if page.css_file %}
+    <link rel="stylesheet" href="/assets/css/{{ page.css_file }}">
   {% endif %}
 </head>
-<body data-scrollspy="scrollspy" data-target="#sidebar" {% if page.url != "/index.html" %} class="body-features" {% endif %}>
+
+
+
+<body {% if include.body_id %}id="{{ include.body_id }}"{% endif %}>
+
   <nav class="navbar navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -27,20 +40,20 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
         <a class="navbar-brand" href="/index.html"><span class="logo-dev">developers</span></a>
       </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse">
+        {% assign path = page.url | split: '/' %}
         <ul class="nav navbar-nav navbar-right">
-         <!-- <li  {% if page.url == "/index.html" %} class="active-nav" {% endif %}><a href="/">Home</a></li> -->
-         <li><a href="/features.html" {% if page.url == "/features.html" %} class="active-nav" {%else%}  class="black" {% endif %}>Features</a></li>
-         <li><a href="/docs.html" {% if page.url == "/docs.html" %} class="active-nav" {%else%} class="black" {% endif %} >Docs</a></li>
-         <li><a href="/discussion.html" {% if page.url == "/discussion.html" %} class="mrg-right-15 active-nav" {%else%} class="mrg-right-15 black" {% endif %}>Discussion</a></li>
+         <li><a href="/features" {% if path[1] == "features" %} class="active-nav" {%else%}  class="black" {% endif %}>Features</a></li>
+         <li><a href="/docs/introduction_to_okta/overview.html" {% if path[1] == "docs" %} class="active-nav" {%else%} class="black" {% endif %} >Docs</a></li>
+         <!-- <li><a href="/pricing" {% if path[1] == "pricing" %} class="active-nav" {%else%} class="black" {% endif %} >Pricing</a></li> -->
+         <!-- <li><a href="/blog" {% if path[1] == "blog" %} class="active-nav" {%else%} class="black" {% endif %} >Blog</a></li> -->
+         <!-- <li><a href="/customers" {% if path[1] == "customers" %} class="active-nav" {%else%} class="black" {% endif %} >Customers</a></li> -->
+         <li><a href="/discussion" {% if path[1] == "discussion" %} class="mrg-right-15 active-nav" {%else%} class="mrg-right-15 black" {% endif %}>Discussion</a></li>
          <li><a href="http://www.okta.com" data-num="{{p.weight}}" class="button-gray visit">Visit Okta.com</a></li>
-        <li><a href="/signup.html" data-num="{{p.weight}}" class="button  nav-button-padding "><strong>Get Started</strong></a></li>
+         <li><a href="/signup_plus" class="button  nav-button-padding "><strong>Get Started</strong></a></li>
        </ul>
-     </div><!-- /.navbar-collapse -->
-   </div><!-- /.container -->
+     </div>
+   </div>
  </nav>

@@ -1,27 +1,15 @@
 ---
-layout: sdks
+layout: docs_page
 title: Sessions
-category : Endpoints
-tagline: "Endpoints - Sessions"
-tags : [endpoints, sessions]
-icon: "glyphicon glyphicon-sessions"
-position: leftsidebar
-priority: 2
 ---
-# Sessions
+
+
+
 ## Overview
 
 Okta uses a cookie-based authentication mechanism to maintain a user's authentication session across web requests.  The Session API provides operations to create and manage authentication sessions with your Okta organization.
 
-*Note:  The Session API currently does not support multi-factor authentication (MFA).  Sessions created for users with an assigned MFA policy will have a significantly constrained session and will not be able to access their applications.*
-
-- [Session Operations](#session-operations)
-  - [Create Session](#create-session)
-    - [Create Session with One-Time Token](#create-session-with-one-time-token)
-    - [Create Session with Embed Image URL](#create-session-with-embed-image-url)
-  - [Validate Session](#validate-session)
-  - [Extend Session](#extend-session)
-  - [Close Session](#close-session)
+> The Session API currently does not support multi-factor authentication (MFA).  Sessions created for users with an assigned MFA policy will have a significantly constrained session and will not be able to access their applications.
 
 ### Session Cookie
 
@@ -29,11 +17,46 @@ Okta utilizes a non-persistent HTTP session cookie to provide access to your Okt
 
 ### One-Time Token
 
-Okta provides a mechanism to validate a user's credentials via the Session API and obtain a one-time token that can be later exchanged for a session cookie using flows detailed [here](/docs/examples/session_cookie.md) for specific deployment scenarios. 
+Okta provides a mechanism to validate a user's credentials via the Session API and obtain a one-time token that can be later exchanged for a session cookie using flows detailed [here](/docs/examples/session_cookie.md) for specific deployment scenarios.
 
 A one-time token may only be used **once** to establish a session for a user.  If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same one-time token to get a new session cookie.
 
-*Note: One-time tokens are secrets and should be protected at rest as well as during transit. A one-time token for a user is equivalent to having the user's actual credentials*
+> One-time tokens are secrets and should be protected at rest as well as during transit. A one-time token for a user is equivalent to having the user's actual credentials
+
+## Session Model
+
+
+
+### Example
+
+```json
+{
+    "id": "000najcYVnjRS2aZG50MpHL4Q",
+    "userId": "00ubgaSARVOQDIOXMORI",
+    "mfaActive": false
+}
+```
+
+### Session Attributes
+
+Sessions have the following attributes:
+
+Attribute | Description | DataType | Nullable | Unique | Readonly
+--- | --- | ---	| --- | --- | ---
+id | unique key for the session | String | FALSE | TRUE | TRUE
+userId | unique key for the [user](users.md#get-user-with-id) | String | FALSE | FALSE | TRUE
+mfaActive | indicates whether the user has enrolled a valid MFA credential | Boolean | FALSE | FALSE | TRUE
+
+#### Conditional Token Attributes
+
+The [Create Session](#create-session) operation can optionally return the following values when requested.
+
+Field | Description
+--- | ---
+cookieToken | One-time token which can be used to obtain a session cookie for your organization by visiting either an application's embed link or a session redirect URL.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-by-visiting-a-session-redirect-link) or [retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-by-visiting-an-application-embed-link) for more info.
+cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-time token which when visited  sets the session cookie in your browser for your organization.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-with-a-hidden-image) for more info.
+
+
 
 ## Session Operations
 
@@ -47,17 +70,15 @@ Creates a new session for a user.
 
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
-additionalFields | Additional fields to include in the response | Query | comma separated list of String values | FALSE |
+additionalFields | Requests specific [token attributes](#conditional-token-attributes) | Query | comma separated list of String values | FALSE |
+username | `login` for an `ACTIVE` user | Body | String | TRUE |
+password | password for an `ACTIVE` user | Body | String | TRUE |
 
-###### Field Values
+##### Response Parameters
 
-Field | Description
---- | ---
-cookieToken | One-time token which can be used to obtain a session cookie for your organization by visiting either an application's embed link or a session redirect URL.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-by-visiting-a-session-redirect-link) or [retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-by-visiting-an-application-embed-link) for more info.
-cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-time token which when visited  sets the session cookie in your browser for your organization.<br><br>See [retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.md#retrieving-a-session-cookie-with-a-hidden-image) for more info.
+The new [Session](#session-model) for the user.
 
-
-#### Create Session with One-Time Token 
+#### Create Session with One-Time Token
 
 Validates a user's credentials and returns a one-time token that can be used to set a session cookie in the user's browser.
 
@@ -71,7 +92,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -d \
 '{
   "username": "art.vandelay@example.com",
-  "password": "correct horse battery staple" 
+  "password": "correct horse battery staple"
 }'
 ```
 
@@ -79,7 +100,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ```json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q", 
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false,
   "cookieToken": "00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
@@ -115,7 +136,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -d \
 '{
   "username": "art.vandelay@example.com",
-  "password": "correct horse battery staple" 
+  "password": "correct horse battery staple"
 }'
 ```
 
@@ -123,7 +144,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ```json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q", 
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false,
   "cookieTokenUrl": "https://your-subdomain.okta.com/login/sessionCookie?token=00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
@@ -157,6 +178,10 @@ Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 id | id of user's session | URL | String | TRUE |
 
+##### Response Parameters
+
+[Session](#session-model)
+
 ##### Request
 
 ```sh
@@ -170,7 +195,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ```json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q", 
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false
 }
@@ -188,7 +213,7 @@ Content-Type: application/json
     "errorLink": "E0000005",
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
-} 
+}
 ```
 
 ### Extend Session
@@ -197,12 +222,15 @@ Content-Type: application/json
 
 Extends the lifetime of a session for a user.
 
-#### Request Parameters
+##### Request Parameters
 
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 id | id of user's session | URL | String | TRUE |
 
+##### Response Parameters
+
+[Session](#session-model)
 
 ##### Request
 
@@ -218,7 +246,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 ```json
 {
-  "id": "000rWcxHV-lQUOzBhLJLYTl0Q", 
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false
 }
@@ -236,7 +264,7 @@ Content-Type: application/json
     "errorLink": "E0000005",
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
-} 
+}
 ```
 
 ### Close Session
@@ -250,6 +278,10 @@ Closes a session for a user (logout).
 Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 id | id of user's session | URL | String | TRUE |
+
+##### Response Parameters
+
+N/A
 
 ##### Request
 
@@ -278,5 +310,5 @@ Content-Type: application/json
     "errorLink": "E0000005",
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
-} 
+}
 ```

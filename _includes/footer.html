@@ -1,16 +1,39 @@
-<footer class="bs-footer" role="contentinfo">
-	<div class="container">
-		
-	</div>
-</footer>
-</body>
-<!-- Bootstrap core JavaScript
-	================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="{{ relative }}assets/js/jquery.js"></script>
-	<script src="{{ relative }}assets/dist/js/bootstrap.min.js"></script>
-	<script src="{{ relative }}assets/js/jquery-ui-1.10.3.custom.js"></script>
-	<script src="{{ relative }}assets/js/jquery.tocify.js"></script>
-	<script src="{{ relative }}assets/js/function.js"></script>
-	<script type="text/javascript" src="//use.typekit.net/pls8pog.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <footer class="container main-footer" role="contentinfo">
+      <div class="row">
+        <div class="col-md-7 footer-left">
+          &copy; {{ site.time | date: "%Y" }} Okta, Inc. All Rights Reserved.
+        </div>
+        <div class="col-md-5 footer-right">
+          Follow us:
+          <div class="social-icons">
+            <a class="youtube" href="http://www.youtube.com/user/OktaInc" target="_blank"></a>
+            <a class="facebook" href="http://www.facebook.com/oktaidentity" target="_blank"></a>
+            <a class="twitter" href="https://twitter.com/okta" target="_blank"></a>
+            <a class="rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank"></a>
+            <a class="linkedin" href="http://www.linkedin.com/company/okta-inc." target="_blank"></a>
+            <a class="googleplus" href="https://plus.google.com/u/0/108139509898948278735" target="_blank"></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+
+
+  <!-- <script src="/assets/js/jquery.js"></script> -->
+  <!-- <script src="/assets/dist/js/bootstrap.min.js"></script> -->
+  <!-- <script src="/assets/js/jquery-ui-1.10.3.custom.js"></script> -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="/assets/js/jquery.scrollTo.min.js"></script>
+  <script src="/assets/js/jquery.localScroll.min.js"></script>
+  <script src="/assets/js/function.js"></script>
+
+  {% if include.js_file %}
+    <script src="/assets/js/{{ include.js_file }}"></script>
+  {% endif %}
+
+
+
+</html>

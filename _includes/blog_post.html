@@ -1,0 +1,26 @@
+<article class="post-block">
+
+
+
+  <header class="post-title-block">
+    <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+    <div class="attribution">
+      <img src="/assets/img/{{ author.avatar }}"
+           alt="{{ author.avatar }}"
+           class="author-avatar">
+      <address>{{ author.full_name }}</address>
+      <span class="sepr">&middot;</span>
+      <time datetime="{{ post.date | date: '%F'}}">
+      {{ post.date | date: "%B %-d, %Y" }}
+      </time>
+    </div>
+  </header>
+
+  <section class="post-content">
+    {{ include.post_content }}
+  </section>
+
+
+
+</article>
+

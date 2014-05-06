@@ -1,65 +1,58 @@
 ---
-layout: sdks
+layout: docs_page
 title: Events
-category : Endpoints
-tagline: "Endpoints - Events"
-tags : [endpoints, events]
-icon: "glyphicon glyphicon-events"
-position: leftsidebar
-priority: 3
 ---
 
-# Events
-### Overview
+
+
+## Overview
 
 The Event API provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.
 
-- [Event Model](#event-model)
-	- [Attributes](#attributes)
-	- [Action Object](#action-object)
-		- [Categories](#action-categories)
-		- [Object Types](#action-objecttypes)
-	- [Actor Object](#actor-object)
-	- [Target Object](#target-object)
-	- [Actor/Target Object Types](#actortarget-objecttypes)
-- [List Events](#list-events)
-	
 
-### Event Model
+
+## Event Model
 
 Every organization has a system log that maintains a history of actions performed by users.  The Event model describes a single action that was performed by a set of actors for a set of targets.
 
 ### Example
 
 ```json
-{
-    "eventId": "tevIyAytNfpQo-rIZKhUDDRrg1365719153000",
-    "published": "2013-04-11T22:25:53.000Z",
+ {
+    "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
+    "published": "2013-11-19T07:46:30.000Z",
     "action": {
         "message": "User performed single sign on to app",
         "categories": [
             "Application Access"
         ],
-        "objectType": "app.auth.sso"
+        "objectType": "app.auth.sso",
+        "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
     },
     "actors": [
         {
-            "id": "00u3gjksoiRGRAZHLSYV",
-            "displayName": "Samus Aran",
-            "login": "samus.aran@example.com",
-            "objectType": "User"
-        }
-    ],
-    "targets": [
-        {
-            "id": "00u3gjksoiRGRAZHLSYV",
+            "id": "00ubgaSARVOQDIOXMORI",
             "displayName": "Samus Aran",
             "login": "samus.aran@example.com",
             "objectType": "User"
         },
         {
-            "id": "0oa3gjksodLJFLTUWWHC",
-            "displayName": "Okta Administration",
+            "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+            "displayName": "CHROME",
+            "ipAddress": "127.0.0.1",
+            "objectType": "Client"
+        }
+    ],
+    "targets": [
+        {
+            "id": "00ubgaSARVOQDIOXMORI",
+            "displayName": "Samus Aran",
+            "login": "samus.aran@example.com",
+            "objectType": "User"
+        },
+        {
+            "id": "0oadxaKUTKAXSXUZYJHC",
+            "displayName": "Salesforce.com",
             "objectType": "AppInstance"
         }
     ]
@@ -67,6 +60,7 @@ Every organization has a system log that maintains a history of actions performe
 ```
 
 ### Attributes
+
 The Event model is a ***read-only*** object and has a fixed set of attributes:
 
 Attribute | Description | DataType | Nullable
@@ -77,7 +71,7 @@ action | Identifies the action that the event describes | [Action Object](#actio
 actors | Describes zero or more entities that performed the action | Array of [Actor Object](#actor-object) | TRUE
 targets | Describes zero or more entities that the action was performed against | Array of [Target Object](#target-object) | TRUE
 
-*Note: The actor and/or target of an event is dependant on the action performed. Not all events have an actor or target.*
+> The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.
 
 ### Action Object
 
@@ -88,8 +82,9 @@ Attribute | Description | DataType | Nullable
 message | Description of an action | String | FALSE
 categories | [Categories](#action-categories) for an action | Array of String | FALSE
 objectType | Identifies the [unique type](#action-objecttypes) of an action | String | FALSE
+requestUri | Uri of the request that generated the event. | String | TRUE
 
-*Note: Actions that do not define any categories will have an zero element array value.*
+> Actions that do not define any categories will have an zero element array value.
 
 ``` json
 {
@@ -97,11 +92,13 @@ objectType | Identifies the [unique type](#action-objecttypes) of an action | St
     "categories": [
         "Application Access"
     ],
-    "objectType": "app.auth.sso"
+    "objectType": "app.auth.sso",
+    "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
 }
 ```
 
 #### Action Categories
+
 Categories for an action:
 
 * Application Assignment
@@ -118,23 +115,22 @@ Categories for an action:
 * Application Imports (Detailed)
 * SMS Messages
 
-*Note: Additional categories may be added in the future without versioning*
+> Additional categories may be added in the future without versioning
 
 #### Action ObjectTypes
 
 Action `objectType` identifies the unique action performed.
 
-
 ##### Application Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.auth.sso | Event occurred during single sign on
 app.auth.delegated.outbound | Event occurred during outbound delegated authentication
 
-##### Application User Management 
+##### Application User Management
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.user_management.push_password_update | Update user's password in application
 app.user_management.push_profile_success | Successfully created or updated user's profile in application
@@ -156,7 +152,7 @@ app.user_management.deprovision_task_complete | Deprovisioning task has been mar
 
 ##### Application Group Management
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.user_management.user_group_import.upsert_success | Successfully created or updated group from application
 app.user_management.user_group_import.delete_success | Successfully removed imported group that was deleted from application
@@ -179,7 +175,7 @@ app.user_management.grouppush.mapping.and.groups.deleted.rule.deleted | An exist
 
 ##### Delegated Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.inbound_del_auth.failure.not_supported" | application doesn't support delauth
 app.inbound_del_auth.failure.instance_not_found | Couldn't find delauth app instance
@@ -187,20 +183,20 @@ app.inbound_del_auth.failure.invalid_request.could_not_parse_credentials | Could
 app.inbound_del_auth.failure.account_not_found | Inbound delauth account not found
 app.inbound_del_auth.failure.invalid_login_credentials | Inbound delauth, invalid login credentials
 app.inbound_del_auth.login_success | Successful delauth login
-   
-##### Rich Client Authentication   
 
-ObjectType | Description 
+##### Rich Client Authentication
+
+ObjectType | Description
 --- | ---
-app.rich_client.instance_not_found | 
+app.rich_client.instance_not_found |
 app.rich_client.account_not_found |
 app.rich_client.multiple_accounts_found |
 app.rich_client.login_failure |
 app.rich_client.login_success |
 
-##### Admin Appplication  
+##### Admin Appplication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.admin.sso.no_response |
 app.admin.sso.bad_response |
@@ -208,7 +204,7 @@ app.admin.sso.orgapp.notfound |
 
 ##### Applications
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.generic.provision.assign_user_to_app | Assign external user to internal Okta user
 app.generic.provision.deactivate_user_from_app | Deactivate external user to internal Okta user
@@ -222,7 +218,7 @@ app.generic.import.user_update | Application has updated an exsiting user
 app.generic.config.app_username_update | User credentials for an application have been updated
 app.generic.config.app_password_update | User credentials for an application have been updated
 app.generic.import.user_delete | Application has deleted user
-app.generic.import.started | 
+app.generic.import.started |
 app.generic.import.complete |
 app.generic.import.user_match.complete |
 app.generic.import.details.add_custom_object |
@@ -241,15 +237,15 @@ app.generic.import.summary.group_membership |
 
 ##### Credential Recovery
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
-app.generic.reversibility.credentials.recover | 
+app.generic.reversibility.credentials.recover |
 app.generic.reversibility.personal.app.recovery |
 app.generic.reversibility.individual.app.recovery |
 
 ##### Application Instance
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 app.app_instance.change |
 app.app_instance.logo_update |
@@ -260,9 +256,9 @@ app.app_instance.config-error |
 
 ##### User Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
-core.user_auth.login_failed | 
+core.user_auth.login_failed |
 core.user_auth.login_success |
 core.user_auth.logout_success |
 core.user_auth.account_locked |
@@ -271,23 +267,22 @@ core.user_auth.mfa_bypass_attempted |
 
 ##### User MFA Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user.sms.message_sent.factor |
 core.user.sms.message_sent.verify |
 core.user.sms.message_sent.forgotpw |
 
-
 ##### User RADIUS Authentication
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user_auth.radius.login.succeeded |
 core.user_auth.radius.login.failed |
 
 ##### User Status
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user.config.password_update.success |
 core.user.config.password_update.failure |
@@ -299,7 +294,7 @@ core.user.config.user_creation.failure |
 
 ##### User Impersonation
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user.impersonation.session.initiated |
 core.user.impersonation.session.ended |
@@ -309,11 +304,10 @@ core.user.impersonation.grant.revoked |
 
 ##### User Administrator Roles
 
-ObjectType | Description 
+ObjectType | Description
 --- | ---
 core.user.admin_privilege.granted |
 core.user.admin_privilege.revoked |
-
 
 ### Actor Object
 
@@ -323,9 +317,9 @@ Attribute | Description | DataType | Nullable
 --- | --- | ---	| ---
 id | Unique key for actor| String | FALSE
 displayName | Name of actor used for display purposes | String | FALSE
-objectType | [User](#user-objecttype) | String | FALSE
+objectType | [User](#user-objecttype) or [Client](#client-objecttype)  | String | FALSE
 
-*Note: The schema of an actor is dependant on the actor's `objectType`*
+> The schema of an actor is dependent on the actor's `objectType`
 
 ### Target Object
 
@@ -337,7 +331,7 @@ id | Unique key for target| String | FALSE
 displayName | Name of target used for display purposes | String | FALSE
 objectType | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) | String | FALSE
 
-*Note: The schema of a target is dependant on the actor's `objectType`*
+> The schema of a target is dependent on the actor's `objectType`
 
 ### Actor/Target ObjectTypes
 
@@ -361,6 +355,8 @@ login | Unique login for [user](users.md#user-model) | String | FALSE
 }
 ```
 
+> The user can be retrieved by `id` with the [User API](users.md#get-user-with-id).
+
 #### AppInstance ObjectType
 
 A denormalized reference to an application
@@ -379,6 +375,29 @@ displayName | Label of application | String | FALSE
 }
 ```
 
+> The app can be retrieved by `id` with the [Apps API](apps.md#get-application).
+
+#### Client ObjectType
+
+A denormalized reference to a client such as a browser
+
+Attribute | Description | DataType | Nullable
+--- | --- | ---	| ---
+id | User agent of client | String | FALSE
+objectType | Client | String | FALSE
+displayName | Name of client | String | FALSE
+ipAddress | IP Address of client | String | TRUE
+
+
+```json
+{
+    "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.65 Safari/537.36",
+    "displayName": "CHROME",
+    "ipAddress": "127.0.0.1",
+    "objectType": "Client"
+}
+```
+
 ## List Events
 
 ### GET /events
@@ -391,9 +410,52 @@ Parameter | Description | Param Type | DataType | Required | Default
 --- | --- | --- | --- | --- | ---
 limit | Specifies the number of results to page | Query | Number | FALSE | 1000
 startDate | Specifies the timestamp to list events after | Query | Date | FALSE |
+filter | [Filter expression](../getting_started/design_principles.md#filtering) for events | Query | String | FALSE |
 after | Specifies the pagination cursor for the next page of events | Query | String | FALSE |
 
-*Note: The cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)*
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](../getting_started/design_principles.md#pagination)
+
+> `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request
+
+##### Filters
+
+The following expressions are supported for events with the `filter` query parameter:
+
+Filter | Description
+------ | -----------
+`action.objectType eq ":actionType"` | Events that have a specific [action objectType](#action-objectypes)
+`target.objectType eq ":objectType"` | Events published with a specific [target objectType](#actortarget-objecttypes)
+`target.id eq ":id"` | Events published with a specific target id
+`published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published before a specific datetime
+`published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated at a specific datetime
+`published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZZ"` | Events published updated after a specific datetime
+
+See [Filtering](../getting_started/design_principles.md#filtering) for more information on expressions
+
+> All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222013-06-01T00:00:00.000Z%22`
+
+**Filter Examples**
+
+Events published after 06/01/2013
+
+    filter=published gt "2013-06-01T00:00:00.000Z"
+
+Events published for a target user
+
+    filter=target.id eq "00uxc78lMKUMVIHLTAXY"
+
+Failed login events published after 06/01/2013
+
+    filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
+
+Events published after 06/01/2013 for a target user and application
+
+    filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+
+App SSO events for a target user and application
+
+    filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+
 
 #### Response Parameters
 
@@ -413,57 +475,70 @@ curl -v -H "Authorization:SSWS yourtoken" \
 
 ```
 HTTP/1.1 200 OK
+Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&limit=3>; rel="self"
 Link: <https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&limit=3>; rel="next"
-```
-```json
- [
+
+[
     {
-        "eventId": "tevYiodnDFOSrmv0TkiWsoxGg1373905156000",
-        "published": "2013-07-15T16:19:16.000Z",
+        "eventId": "tev8hc_KK9NRzKe2WtdvVQIOg1384845263000",
+        "published": "2013-11-19T07:14:23.000Z",
         "action": {
-            "message": "User updated their Okta password",
+            "message": "App activated",
             "categories": [],
-            "objectType": "core.user.config.password_update.success"
+            "objectType": "app.generic.config.app_activated",
+            "requestUri": "/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate"
         },
         "actors": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
-                "displayName": "Samus Aran",
-                "login": "samus.aran@example.com",
+                "id": "00upgyMVOKIYORVNYUUM",
+                "displayName": "Adam Malkovich",
+                "login": "adam.malkovich@example.com",
                 "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "192.168.1.100",
+                "objectType": "Client"
             }
         ],
         "targets": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
-                "displayName": "Samus Aran",
-                "login": "samus.aran@example.com",
-                "objectType": "User"
+                "id": "0oadxaKUTKAXSXUZYJHC",
+                "displayName": "Salesforce.com",
+                "objectType": "AppInstance"
             }
         ]
     },
     {
-        "eventId": "tevfTQM_IWNQRaTIWa8GNG1OA1373905156000",
-        "published": "2013-07-15T16:19:16.000Z",
+        "eventId": "tevaEByjeq-QZW-utKgDVVvng1384847185000",
+        "published": "2013-11-19T07:46:25.000Z",
         "action": {
             "message": "Sign-in successful",
             "categories": [
                 "Sign-in Success"
             ],
-            "objectType": "core.user_auth.login_success"
+            "objectType": "core.user_auth.login_success",
+            "requestUri": "/login/do-login"
         },
         "actors": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
+                "id": "00ubgaSARVOQDIOXMORI",
                 "displayName": "Samus Aran",
                 "login": "samus.aran@example.com",
                 "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "10.10.10.10",
+                "objectType": "Client"
             }
         ],
         "targets": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
+                "id": "00ubgaSARVOQDIOXMORI",
                 "displayName": "Samus Aran",
                 "login": "samus.aran@example.com",
                 "objectType": "User"
@@ -471,27 +546,41 @@ Link: <https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0
         ]
     },
     {
-        "eventId": "tevm1GHyjBeTqS1PXtzPhvpjA1373912507000",
-        "published": "2013-07-15T18:21:47.000Z",
+        "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
+        "published": "2013-11-19T07:46:30.000Z",
         "action": {
-            "message": "Session has expired",
-            "categories": [],
-            "objectType": "core.user_auth.session_expired"
+            "message": "User performed single sign on to app",
+            "categories": [
+                "Application Access"
+            ],
+            "objectType": "app.auth.sso",
+            "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
         },
         "actors": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
+                "id": "00ubgaSARVOQDIOXMORI",
                 "displayName": "Samus Aran",
                 "login": "samus.aran@example.com",
                 "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "10.10.10.10",
+                "objectType": "Client"
             }
         ],
         "targets": [
             {
-                "id": "00ub4tTFYKXCCZJSGFKM",
+                "id": "00ubgaSARVOQDIOXMORI",
                 "displayName": "Samus Aran",
                 "login": "samus.aran@example.com",
                 "objectType": "User"
+            },
+            {
+                "id": "0oadxaKUTKAXSXUZYJHC",
+                "displayName": "Salesforce.com",
+                "objectType": "AppInstance"
             }
         ]
     }

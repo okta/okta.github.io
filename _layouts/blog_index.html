@@ -1,0 +1,15 @@
+{% include header.html css_file='blog.css' body_id='blog' %}
+
+
+
+<div class="container-non-responsive blog" id="main-container">
+  {% for post in site.posts %}
+    {% assign author = site.data.authors[post.author] %}
+    {% capture _post_content %}{{ post.content }}{% endcapture %}
+    {% include blog_post.html post_content=_post_content %}
+  {% endfor %}
+</div>
+
+
+
+{% include footer.html %}

@@ -1,0 +1,42 @@
+{% include header.html css_file='customers.css' %}
+
+
+
+<div class="boundary customer-story" id="main-container">
+
+  <div class="title-block">
+    <div class="customer-logo">
+      <img src="{{ page.thumb_image }}" alt="" />
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.title_tagline }}</p>
+  </div>
+
+  <div class="customer-story-layout">
+    <div class="block customer-story-body">
+      {{ content }}
+      {% if page.diagram_image %}
+      <img src="{{ page.diagram_image }}"
+           alt="{{ page.title }} architecture diagram"
+           class="customer-story-diagram">
+      {% endif %}
+    </div>
+
+    <div class="block customer-story-sidebar">
+      <blockquote><em>"{{ page.sidebar_testimonial }}"</em>
+        <p>
+          <strong>{{ page.sidebar_testimonial_attribution }}</strong>
+          <br>
+          {{ page.sidebar_testimonial_meta }}
+        </p>
+      </blockquote>
+      {% capture sidebar_copy %}{{ page.sidebar_copy }}{% endcapture %}
+      {{ sidebar_copy | markdownify }}
+    </div>
+  </div>
+
+</div>
+
+
+
+{% include footer.html %} 

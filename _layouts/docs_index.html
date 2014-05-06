@@ -1,0 +1,39 @@
+{% include header.html css_file='docs.css' %}
+
+
+
+<div class="boundary docs docs-index" id="main-container">
+
+  <div class="block title-block">
+    <h1>{{ page.title }}</h1>
+    <p class="tagline">{{ page.tagline }}</p>
+  </div>
+
+  <div class="block docs-index-body">
+    {{ content }}
+    {% for nav in site.data.docs %}
+      <div class="docs-section">
+        <h2>{{ nav.title }}</h2>
+        <ul class="list-unstyled docs-index-list">
+          {% for item in nav.pages %}
+            {% for page in site.pages %}
+              {% if page.layout == 'docs_page' %}
+                {% assign name = page.path | replace: '.md', '' | split: '/' | last | downcase %}
+                {% if name == item %}
+                  <li data-name="{{ page.title }}">
+                    <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ page.title }}</a>
+                  </li>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+
+
+{% include footer.html %} 

@@ -1,0 +1,17 @@
+doug:
+  full_name: Doug Lee
+  display_name: Doug
+  avatar: avatar-doug.jpg
+  email: doug@bigbadgoose.com
+  web: http://www.bigbadgoose.com
+  twitter: https://twitter.com/duggiwuggi
+  github: https://github.com/duggi
+
+billy:
+  full_name: William Estoque
+  display_name: Billy
+  avatar: avatar-billy.jpg
+  email: billy@bigbadgoose.com
+  web: http://company.com
+  twitter: https://twitter.com/duggiwuggi
+  github: https://github.com/duggi

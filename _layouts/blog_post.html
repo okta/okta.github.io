@@ -1,0 +1,22 @@
+{% include header.html css_file='blog.css' body_id='blog' %}
+
+
+
+{% comment %}
+  // assigned variables will "leak" into the included file
+  // we must capture the content however otherwise {{ content }} 
+  // will leak as a raw string
+{% endcomment %}
+
+{% assign author = site.data.authors[page.author] %}
+{% assign post = page %}
+{% capture _post_content %}{{ content }}{% endcapture %}
+
+
+<div class="container-non-responsive blog" id="main-container">
+  {% include blog_post.html post_content=_post_content %}
+</div>
+
+
+
+{% include footer.html %}

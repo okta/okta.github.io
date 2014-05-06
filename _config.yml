@@ -1,71 +1,17 @@
 name: Okta
-pygments: true
+highlighter: pygments
 
-# CAUTION:
-#   - When in Localhost, your site will run from root "/" regardless of BASE_PATH
-#   - Only the following values are falsy: ["", null, false]
-#   - When setting BASE_PATH it must be a valid url.
-#     This means always setting the protocol (http|https) or prefixing with "/"
-BASE_PATH : false
+# -- note `blog/` still deploys, without `index.html` file
+#    to really prevent blog post deployment, use `_drafts/`
+exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md, blog, customers, pricing]
 
-# By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
-# ex: [BASE_PATH]/assets/themes/[THEME-NAME]
-#
-# Override this by defining an absolute path to assets here.
-# ex: 
-#   http://s3.amazonaws.com/yoursite/themes/watermelon
-#   /assets
-#
-ASSET_PATH : false
+# -- standard exclusions
+#exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md]
 
-# These paths are to the main pages Jekyll-Bootstrap ships with.
-# Some JB helpers refer to these paths; change them here if needed.
-#
-sdks_path: /sdks/index.html
-maruku:
-  use_tex:    false
-  use_divs:   false
-
-rdiscount:
-  extensions: []
-
-exclude:     []
-
-markdown: redcarpet
+markdown: redcarpet 
+markdown_ext: md
 redcarpet:
     extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
 
-kramdown:
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
-  use_coderay: false
 
-  coderay:
-    coderay_wrap: div
-    coderay_line_numbers: inline
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: style
-
-redcloth:
-  hard_breaks: true
-
-sitemap:
-  filename: "/site-map.xml"
-safe: true
-
-folder_priority:
-- text: Getting Started
-  weight: 1
-- text: Endpoints
-  weight: 2
-- text: Examples
-  weight: 3
-
-
-
-
+permalink: /blog/:year/:month/:day/:title
