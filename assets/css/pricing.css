@@ -104,10 +104,12 @@
 .left-btn, .right-btn {
   -webkit-transition: .15s;
   transition: .15s;
+  -ms-transform: scale(1);
   -webkit-transform: scale(1);
   transform: scale(1);
 }
 .left-btn:hover, .right-btn:hover {
+  -ms-transform: scale(1.05);
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }

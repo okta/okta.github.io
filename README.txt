@@ -99,3 +99,9 @@ Pages are single purpose html or markdown files
       `index_blurb` will be clipped over three lines of text
       `sidebar_copy` will be markdownified. Newlines sohuld be doubled.
 
+
+
+----------------------------- AUTHORS
+
+1.  Create an entry in _data/authors.yml
+2.  Put avatar image in assets/img. Make sure aspect ratio of image is square.

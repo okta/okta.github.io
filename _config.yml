@@ -1,5 +1,11 @@
 name: Okta
 highlighter: pygments
+
+# -- note `blog/` still deploys, without `index.html` file
+#    to really prevent blog post deployment, use `_drafts/`
+#exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md, blog, customers, pricing]
+
+# -- standard exclusions
 exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md]
 
 markdown: redcarpet 

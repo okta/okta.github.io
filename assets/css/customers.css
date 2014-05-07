@@ -17,8 +17,6 @@
 .customer-card .customer-logo {
   border: 1px solid #ccc;
   width: 305px; height: 228px;
-  -moz-transition: all .15s ease-out;
-  -ms-transition: all .15s ease-out;
   -webkit-transition: all .15s ease-out;
   transition: all .15s ease-out;
 }
@@ -50,8 +48,7 @@
 }
 
 .customer-card a:hover .customer-logo {
-  -moz-transform: scale(1.05);
-  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
@@ -92,7 +89,6 @@
 }
 
 .customer-story .title-block {
-  //background-image: url('/assets/img/bg-customer-story.jpg');
   position: relative;
   height: 200px;
   padding-top: 3em;

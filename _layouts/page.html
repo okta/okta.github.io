@@ -1,3 +1,9 @@
+{% comment %}
+  // following block allows legacy pages to declare
+  // `body_id` property in their front matter
+  // in new layouts this is a param in the header include
+{% endcomment %}
+
 {% if page.body_id %}
   {% include header.html body_id=page.body_id %}
 {% else %}
@@ -12,4 +18,4 @@
 
 
 
-{% include footer.html %} 
+{% include footer.html %}
