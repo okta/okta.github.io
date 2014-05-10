@@ -81,7 +81,7 @@ All requests that result in an error will return the appropriate 4xx or 5xx erro
 - errorSummary: A natural language explanation of the error
 - errorId: An id that identifies this request.  These ids are mapped to the internal error on the server side in order to assist in troubleshooting.
 
-```json
+~~~ json
 {
     "errorCode": "E0000001",
     "errorSummary": "Api validation failed",
@@ -93,7 +93,7 @@ All requests that result in an error will return the appropriate 4xx or 5xx erro
         }
     ]
 }
-```
+~~~
 
 See [Error Codes](error_codes.md) for a list of API error codes.
 
@@ -132,9 +132,11 @@ see the [Events](../endpoints/events.md) API for example.
 
 Pagination links are included in the [Link header](http://tools.ietf.org/html/rfc5988) of responses. It is **important** to follow these Link header values instead of constructing your own URLs as query parameters or  cursor formats may change without notice.
 
-    HTTP/1.1 200 OK
-    Link: <https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel="next",
-      <https://yoursubdomain.okta.com/api/v1/users?after=00ub4tTFYKXCCZJSGFKM>; rel="self"
+~~~ ruby
+HTTP/1.1 200 OK
+Link: <https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel="next",
+  <https://yoursubdomain.okta.com/api/v1/users?after=00ub4tTFYKXCCZJSGFKM>; rel="self"
+~~~
 
 The possible `rel` values are:
 
@@ -175,7 +177,7 @@ Operator | Description | Behavior
 -------- | ----------- | --------
 eq | equal | The attribute and operator values must be identical for a match.
 co | contains | The entire operator value must be a substring of the attribute value for a match.
-sw |starts with	| The entire operator value must be a substring of the attribute value, starting at the beginning of the attribute value. This criterion is satisfied if the two strings are identical.
+sw |starts with | The entire operator value must be a substring of the attribute value, starting at the beginning of the attribute value. This criterion is satisfied if the two strings are identical.
 pr | present (has value) | If the attribute has a non-empty value, or if it contains a non-empty node for complex attributes there is a match.
 gt | greater than | If the attribute value is greater than operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
 ge | greater than or equal | If the attribute value is greater than or equal to the operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
@@ -231,14 +233,14 @@ Object whose property names are link relation types (as defined by [RFC5988](htt
 
 > A resource may have multiple links that share the same link relation.
 
-```json
+~~~ json
 {
     "_links": {
         "self": { "href": "/example_resource" },
         "next": { "href": "/page=2" }
     }
 }
-```
+~~~
 
 
 
@@ -254,12 +256,12 @@ The following three headers are set in each response:
 
 `X-Rate-Limit-Reset` - the remaining time in the current rate-limit window before the rate limit resets, in UTC epoch seconds.
 
-```http
+~~~ ruby
 HTTP/1.1 200 OK
 X-RateLimit-Limit: 75
 X-RateLimit-Remaining: 70
 X-RateLimit-Reset: 1366037820
-```
+~~~
 
 If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is 75 request per-org per-second
 

@@ -82,7 +82,7 @@ This document provides further information about the errors that the Okta API re
 ## Okta Error Codes Listed by HTTP Return Code   
 
 <table>
-<tr><td><strong>HTTP Return Code</strong></td><td><strong>Error Code</strong></td><td><strong>Description</strong></td></tr>
+<tr><th><strong>HTTP Return Code</strong></th><th><strong>Error Code</strong></th><th><strong>Description</strong></th></tr>
 <tr><td rowspan="23" bgcolor="#FFFFFF"><strong>400</strong></td><td>E0000001</td><td>API validation failed.</td></tr>
 <tr><td>E0000002</td><td>The request was not valid.</td></tr>
 <tr><td>E0000003</td><td>The request body was not well-formed.</td></tr>

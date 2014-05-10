@@ -17,7 +17,7 @@ Every organization has a system log that maintains a history of actions performe
 
 ### Example
 
-```json
+~~~ json
  {
     "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
     "published": "2013-11-19T07:46:30.000Z",
@@ -57,14 +57,14 @@ Every organization has a system log that maintains a history of actions performe
         }
     ]
 }
-```
+~~~
 
 ### Attributes
 
 The Event model is a ***read-only*** object and has a fixed set of attributes:
 
 Attribute | Description | DataType | Nullable
---- | --- | ---	| ---
+---- | --- | --- | ---
 eventId | Unique key for event | String | FALSE
 published | Timestamp when event was published | Date | FALSE
 action | Identifies the action that the event describes | [Action Object](#action-object) | FALSE
@@ -78,7 +78,7 @@ targets | Describes zero or more entities that the action was performed against 
 Describes an activity that published an event
 
 Attribute | Description | DataType | Nullable
---- | --- | ---	| ---
+--- | --- | --- | ---
 message | Description of an action | String | FALSE
 categories | [Categories](#action-categories) for an action | Array of String | FALSE
 objectType | Identifies the [unique type](#action-objecttypes) of an action | String | FALSE
@@ -86,7 +86,7 @@ requestUri | Uri of the request that generated the event. | String | TRUE
 
 > Actions that do not define any categories will have an zero element array value.
 
-``` json
+~~~  json
 {
     "message": "User performed single sign on to app",
     "categories": [
@@ -95,7 +95,7 @@ requestUri | Uri of the request that generated the event. | String | TRUE
     "objectType": "app.auth.sso",
     "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
 }
-```
+~~~
 
 #### Action Categories
 
@@ -314,7 +314,7 @@ core.user.admin_privilege.revoked |
 Actor of an event
 
 Attribute | Description | DataType | Nullable
---- | --- | ---	| ---
+--- | --- | --- | ---
 id | Unique key for actor| String | FALSE
 displayName | Name of actor used for display purposes | String | FALSE
 objectType | [User](#user-objecttype) or [Client](#client-objecttype)  | String | FALSE
@@ -326,7 +326,7 @@ objectType | [User](#user-objecttype) or [Client](#client-objecttype)  | String 
 Target of an event
 
 Attribute | Description | DataType | Nullable
---- | --- | ---	| ---
+--- | --- | --- | ---
 id | Unique key for target| String | FALSE
 displayName | Name of target used for display purposes | String | FALSE
 objectType | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) | String | FALSE
@@ -340,20 +340,20 @@ objectType | [User](#user-objecttype) or [AppInstance](#appinstance-objecttype) 
 A denormalized reference to a [User](users.md#user-model).
 
 Attribute | Description | DataType | Nullable
---- | --- | ---	| ---
+--- | --- | --- | ---
 id | Unique key for [user](users.md#user-model) | String | FALSE
 objectType | User | String | FALSE
 displayName | [User's](users.md#profile-object) first and last name | String | FALSE
 login | Unique login for [user](users.md#user-model) | String | FALSE
 
-```json
+~~~ json
 {
     "id": "00u3gjksoiRGRAZHLSYV",
     "displayName": "Jon Stewart",
     "login": "user@example.org",
     "objectType": "User"
 }
-```
+~~~
 
 > The user can be retrieved by `id` with the [User API](users.md#get-user-with-id).
 
@@ -362,18 +362,18 @@ login | Unique login for [user](users.md#user-model) | String | FALSE
 A denormalized reference to an application
 
 Attribute | Description | DataType | Nullable
---- | --- | ---	| ---
+--- | --- | --- | ---
 id | Unique key for application | String | FALSE
 objectType | AppInstance | String | FALSE
 displayName | Label of application | String | FALSE
 
-```json
+~~~ json
 {
     "id": "0oab5cZEHFHXHGRNRRNL",
     "displayName": "Zendesk",
     "objectType": "AppInstance"
 }
-```
+~~~
 
 > The app can be retrieved by `id` with the [Apps API](apps.md#get-application).
 
@@ -382,21 +382,21 @@ displayName | Label of application | String | FALSE
 A denormalized reference to a client such as a browser
 
 Attribute | Description | DataType | Nullable
---- | --- | ---	| ---
+--- | --- | --- | ---
 id | User agent of client | String | FALSE
 objectType | Client | String | FALSE
 displayName | Name of client | String | FALSE
 ipAddress | IP Address of client | String | TRUE
 
 
-```json
+~~~ json
 {
     "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.65 Safari/537.36",
     "displayName": "CHROME",
     "ipAddress": "127.0.0.1",
     "objectType": "Client"
 }
-```
+~~~
 
 ## List Events
 
@@ -465,15 +465,16 @@ Array of [Events](#event-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
 -H "Accept:application/json" \
 -H "Content-type:application/json" \
 -X GET https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3
-```
+~~~
+
 ##### Response
 
-```
+~~~ ruby
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&limit=3>; rel="self"
@@ -585,4 +586,4 @@ Link: <https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0
         ]
     }
 ]
-```
+~~~

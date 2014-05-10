@@ -22,7 +22,7 @@ Content Type: application/json
 
 ### Example
 
-```json
+~~~ json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -65,14 +65,14 @@ Content Type: application/json
         }
     }
 }
-```
+~~~
 
 ### Metadata Attributes
 
 The User model defines several ***read-only*** attributes:
 
 Attribute | Description | DataType | Nullable
---- | --- | ---	| ---
+--- | --- | --- | ---
 id | unique key for user | String | FALSE
 status | current status | Enum: STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, DEPROVISIONED | FALSE
 created | timestamp when user was created | Date | FALSE
@@ -92,7 +92,7 @@ transitioningToStatus | target status of an inprogress asynchronous status trans
 
 Specifies standard and custom profile attributes for a user.
 
-```json
+~~~ json
 {
    "profile": {
         "firstName": "Isaac",
@@ -104,19 +104,19 @@ Specifies standard and custom profile attributes for a user.
         "moreCustomAttribs": "Yes we can!"
     }
 }
-```
+~~~
 
 #### Standard Attributes
 
 All profiles have the following attributes:
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 login | String | 5 | 100 | FALSE | TRUE | [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3)
-email |	String | 5 | 100 |	FALSE | TRUE |	[RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
-firstName | String | 1 | 50	| FALSE	| FALSE	|
-lastName | String | 1 | 50	| FALSE	| FALSE	|
-mobilePhone | String |	0 |	100	| TRUE | FALSE	|
+email | String | 5 | 100 |  FALSE | TRUE |  [RFC 5322 section 3.2.3](http://tools.ietf.org/html/rfc5322#section-3.2.3)
+firstName | String | 1 | 50 | FALSE | FALSE |
+lastName | String | 1 | 50  | FALSE | FALSE |
+mobilePhone | String |  0 | 100 | TRUE | FALSE  |
 
 > Avoid using a `login` with a `/` character.  Although `/` is a valid character according to [RFC 6531 section 3.3](http://tools.ietf.org/html/rfc6531#section-3.3), a user with this character in their `login` cannot be fetched by `login` ([see Get User with id](#get-user-with-id)) due to security risks with escaping this character.
 
@@ -129,13 +129,13 @@ Custom attributes may be added to a user profile.  Custom attributes must be sin
 Specifies credentials for a user.  Credential types and requirements vary depending on the operation and security policy of the organization.
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 password | [Password Object](#password-object) | | | TRUE | FALSE |
 recovery_question | [Recovery Question Object](#recovery-question-object) | | | TRUE | FALSE |
 
 > Some credential values are __write-only__
 
-```json
+~~~ json
 {
     "credentials": {
       "password" : { "value": "GoAw@y123" },
@@ -145,35 +145,35 @@ recovery_question | [Recovery Question Object](#recovery-question-object) | | | 
     }
   }
 }
-```
+~~~
 
 #### Password Object
 
-Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the ```value``` property defined (e.g. ```password: {}```) to indicate that a password value exists.
+Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the `value` property defined (e.g. `password: {}`) to indicate that a password value exists.
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 value | String | *Password Policy* | 40 | TRUE | FALSE | *Password Policy* 
 
 ##### Default Password Policy
 
 - Must be a minimum of 8 characters
 - Must have a character that meets 3 of the 4 following groups:
-	- Upper case
-	- Lower case
-	- Digit
-	- Non-Alpha or Digit
+  - Upper case
+  - Lower case
+  - Digit
+  - Non-Alpha or Digit
 - Must not contain the user's login or parts of the the login when split on the following characters: `,` `.` `_` `#` `@`
-	- *For example, a user with login i.brock@example.org will not be able set password brockR0cks! as the password contains the login part brock*
+  - *For example, a user with login i.brock@example.org will not be able set password brockR0cks! as the password contains the login part brock*
 
 #### Recovery Question Object
 
 Specifies a secret question and answer that is validated when a user forgets their password.  The answer property is **write-only**.
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | ---	| --- | --- | --- | ---
-question | String | 1 | 100 | TRUE | FALSE |
-answer | String | 1 | 100 | TRUE | FALSE |
+--------- | -------- | --------- | --------- | -------- | ------ | ----------
+question  | String   | 1         | 100       | TRUE     | FALSE  |
+answer    | String   | 1         | 100       | TRUE     | FALSE  |
 
 ### Links Object
 
@@ -235,7 +235,7 @@ X|X|TRUE|ACTIVE|Password|
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -250,11 +250,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "mobilePhone": "555-415-1337"
   }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00u1ero7vZFVEIYLWPBN",
     "status": "STAGED",
@@ -264,7 +264,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "lastLogin": null,
     "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
-	    "firstName": "Isaac",
+      "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -277,13 +277,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Create User with Recovery Question
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -304,11 +304,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
   }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00u1ero7vZFVEIYLWPBN",
     "status": "STAGED",
@@ -318,7 +318,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "lastLogin": null,
     "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
-	    "firstName": "Isaac",
+      "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -335,13 +335,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Create User with Password
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -359,11 +359,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "password" : { "value": "GoAw@y123" }
   }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00u1ero7vZFVEIYLWPBN",
     "status": "STAGED",
@@ -373,7 +373,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "lastLogin": null,
     "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
-	    "firstName": "Isaac",
+      "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -388,13 +388,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Create User with Password & Recovery Question
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -416,11 +416,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
   }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00u1ero7vZFVEIYLWPBN",
     "status": "STAGED",
@@ -430,7 +430,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "lastLogin": null,
     "lastUpdated": "2013-07-02T21:36:25.344Z",
     "profile": {
-	    "firstName": "Isaac",
+      "firstName": "Isaac",
         "lastName": "Brock",
         "email": "isaac@example.org",
         "login": "isaac@example.org",
@@ -447,7 +447,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### Get User
 
@@ -475,16 +475,16 @@ Fetched [User](#user-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users/me"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -527,23 +527,23 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 
 #### Get User with id
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -586,22 +586,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Get User with login
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users/isaac@example.org"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -644,22 +644,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Get User with login shortname
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users/isaac"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -702,7 +702,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### List Users
 
@@ -774,16 +774,16 @@ The default user limit is set to a very high number due to historical reasons wh
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users?limit=200"
-```
+~~~
 
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/users?limit=200>; rel="self"
@@ -799,7 +799,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         "lastLogin": null,
         "lastUpdated": "2013-07-02T21:36:25.344Z",
         "profile": {
-    	    "firstName": "Isaac",
+          "firstName": "Isaac",
             "lastName": "Brock",
             "email": "isaac@example.org",
             "login": "isaac@example.org",
@@ -855,22 +855,22 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
         }
     }    
 ]
-```
+~~~
 
 #### List Users with Search
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users?q=er&limit=1"
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 [
     {
         "id": "00uar9CIHZHPTVFRSEYZ",
@@ -915,22 +915,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }    
 ]
-```
+~~~
 
 #### List Users Updated after Timestamp
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users?filter=lastUpdated+gt+\"2013-07-01T00:00:00.000Z\""
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 [
     {
         "id": "00uar9CIHZHPTVFRSEYZ",
@@ -975,22 +975,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }    
 ]
-```
+~~~
 
 #### List Users with Status
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 [
     {
         "id": "00uar9CIHZHPTVFRSEYZ",
@@ -1035,7 +1035,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }    
 ]
-```
+~~~
 
 ### Update User
 
@@ -1063,7 +1063,7 @@ Updated [User](#user-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1079,11 +1079,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "isManager": false
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -1127,7 +1127,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```   
+~~~   
 
 #### Set Password
 
@@ -1139,7 +1139,7 @@ This is an administrative operation and does not validate existing user credenti
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1150,11 +1150,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "password" : { "value": "UpdatedP@55w0rd" }
   }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -1197,7 +1197,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```    
+~~~    
 
 #### Set Recovery Question & Answer
 
@@ -1205,7 +1205,7 @@ This is an administrative operation and does not validate existing user credenti
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1219,11 +1219,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
   }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "status": "ACTIVE",
@@ -1266,7 +1266,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 ## Related Resources    
 
 ### Get Assigned App Links
@@ -1287,16 +1287,16 @@ Array of App Links
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 [
     {
         "id": "auc01100002754172417",
@@ -1347,7 +1347,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "sortOrder": 2
     }
 ]
-```
+~~~
 
 ### Get Member Groups
 
@@ -1365,16 +1365,16 @@ id | `id` of user | URL | String | TRUE |
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups" 
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 [
   {
     "id": "0gabcd1234", 
@@ -1391,7 +1391,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
     }
   }
 ]
-```
+~~~
 
 ## Lifecycle Operations
 
@@ -1416,30 +1416,30 @@ sendEmail | Sends an activation email to the user if `true` | Query | Boolean | 
 
 Returns empty object by default. When `sendEmail` is `false`, returns an activation link for the user to set up their account.
 
-```json
+~~~json
 {
   "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO""
 }
-```
+~~~
 
 > If a password was set before the user was activated, then user must login with with their password and not the activation link
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"
-```
+~~~
 
 ##### Response
 
-```json    
+~~~json    
 {
   "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"
 }
-```
+~~~
 
 ### Deactivate User
 
@@ -1461,12 +1461,12 @@ Returns an empty object
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
-```
+~~~
 
 ### Unlock User
 
@@ -1487,12 +1487,12 @@ id | `id` of user | URL | String | TRUE |
 Returns an empty object
 
 ##### Request
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"
-```
+~~~
 
 ### Reset Password
 
@@ -1513,28 +1513,28 @@ sendEmail | Sends reset password email to the user if `true` | Query | Boolean |
 
 Returns an empty object by default. When `sendEmail` is `false`, returns a link for the user to reset their password.
 
-```json
+~~~json
 {
   "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
-```
+~~~
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 {
   "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
-```
+~~~
 
 ### Expire Password
 
@@ -1553,24 +1553,24 @@ tempPassword | Sets the user's password to a temporary password,  if `true` | Qu
 
 Returns an the complete user object by default. When `tempPassword` is `true`, returns the temporary password.
 
-```json
+~~~json
 {
     "tempPassword": "HR076gb6"
 }
-```
+~~~
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 {
     "id": "00udp9BOIVEWHAAGSXRJ",
     "status": "ACTIVE",
@@ -1619,10 +1619,10 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ## Credential Operations
-	
+  
 ### Forgot Password
 
 #### POST /users/:id/lifecycle/forgot_password
@@ -1640,29 +1640,29 @@ sendEmail | Sends a forgot password email to the user if `true` | Query | Boolea
 
 Returns an empty object by default. When `sendEmail` is `false`, returns a link for the user to reset their password. 
 
-```json
+~~~json
 {
   "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
-```
+~~~
 > This operation does not affect the status of the user.
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/forgot_password?sendEmail=false"
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 {
   "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
-```
+~~~
 
 #### POST /users/:id/credentials/forgot_password
   
@@ -1687,7 +1687,7 @@ recovery_question | Answer to user's current recovery question | Body | [Recover
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1697,11 +1697,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "password": { "value": "MyN3wP@55w0rd" }, 
     "recovery_question": { "answer": "Cowboy Dan" } 
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 {
     "credentials": {
         "password": {},
@@ -1710,7 +1710,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### Change Password
 
@@ -1734,7 +1734,7 @@ newPassword | New password for user | Body | [Password Object](#password-object)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1744,11 +1744,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
     "oldPassword": { "value": "GoAw@y123" },
     "newPassword": { "value": "MyN3wP@55w0rd" } 
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 {
     "credentials": {
         "password": {},
@@ -1757,7 +1757,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### Change Recovery Question
 
@@ -1781,7 +1781,7 @@ recovery_question | New recovery question & answer for user| Body | [Recovery Qu
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1794,17 +1794,17 @@ curl -v -H "Authorization: SSWS yourtoken" \
       "answer": "My recovery credentials are updated" 
     } 
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~json
 {
     "credentials": {
         "password": {},
         "recovery_question": {
-            "question": "What happens when I update my question?""
+            "question": "What happens when I update my question?"
         }
     }
 }
-```
+~~~

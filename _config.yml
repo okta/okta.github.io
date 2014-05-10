@@ -3,15 +3,22 @@ highlighter: pygments
 
 # -- note `blog/` still deploys, without `index.html` file
 #    to really prevent blog post deployment, use `_drafts/`
-exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md, blog, customers, pricing]
+#exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md, blog, customers, pricing]
 
 # -- standard exclusions
-#exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md]
+exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md]
 
-markdown: redcarpet 
+markdown: kramdown 
 markdown_ext: md
-redcarpet:
-    extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+#redcarpet:
+#    extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+
+kramdown:
+  use_coderay: true
+  coderay:
+    coderay_line_numbers: nil
+    coderay_css: class
+
 
 
 permalink: /blog/:year/:month/:day/:title

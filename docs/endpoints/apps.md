@@ -19,7 +19,7 @@ __This API is currently in `Beta` status and documentation is *draft* quality.  
 
 ### Example
 
-```json
+~~~ json
 {
     "id": "0oabhnUQFYHMBNVSVXMV",
     "name": "template_saml_2_0",
@@ -83,13 +83,13 @@ __This API is currently in `Beta` status and documentation is *draft* quality.  
         }
     }
 }
-```
+~~~
 
 ### Application Attributes
 All applications have the following attributes:
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
---- | --- | ---	| --- | --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | --- | ---
 id | unique key for app | String | | | FALSE | TRUE | TRUE
 name |  unique key for app definition ([App Names & Settings](#app-names--settings))| String | 1 | 255 | FALSE | TRUE | TRUE
 label | unique user-defined display name for app | String | 1 | 50 | FALSE | TRUE | FALSE
@@ -169,18 +169,18 @@ This setting modifies the same settings as the `Sign On` tab when editing an app
 Specifies access settings for the application.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable  | Default
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 selfService | Enable self service application assignment | Boolean | | | TRUE | FALSE
 errorRedirectUrl | Custom error page for this application | String | | | TRUE | NULL (Global Error Page)
 
-```json
+~~~ json
 {
     "accessibility": {
         "selfService": false,
         "errorRedirectUrl": null
     }
 }
-```
+~~~
 
 
 ### Visibility Object
@@ -188,12 +188,12 @@ errorRedirectUrl | Custom error page for this application | String | | | TRUE | 
 Specifies visibility settings for the application.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 autoSubmitToolbar | Automatically log in when user lands on login page | Boolean | | | FALSE | FALSE
 hide | Hides this app for specific end-user apps | [Hide Object](#hide-object) | | | FALSE |
 appLinks | Displays specific appLinks for the app | [AppLinks Object](#applinks-object) | | | FALSE |
 
-```json
+~~~ json
 {
     "visibility": {
         "autoSubmitToolbar": false,
@@ -206,31 +206,31 @@ appLinks | Displays specific appLinks for the app | [AppLinks Object](#applinks-
         }
     }
 }
-```
+~~~
 
 #### Hide Object
 
 Attribute | Description | DataType | Nullable | Default
---- | --- | ---	| --- | ---
+--- | --- | --- | --- | ---
 iOS | Okta Mobile for iOS | Boolean | FALSE | FALSE
 web | Okta Web Browser Home Page | Boolean | FALSE | FALSE
 
 #### AppLinks Object
 
-Each application defines 1 or more appLinks that can be published. AppLinks can be disabled by setting the link value to ```false```.
+Each application defines 1 or more appLinks that can be published. AppLinks can be disabled by setting the link value to `false` .
 
 ### Application Credentials Object
 
 Specifies app credentials and vaulting for the application.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
---- | --- | ---	| --- | --- | --- | ---
-scheme | Determines how credentials are managed for the ```signOnMode``` | [Authentication Scheme](#authentication-schemes) | | TRUE | NULL
+--- | --- | --- | --- | --- | --- | ---
+scheme | Determines how credentials are managed for the `signOnMode`  | [Authentication Scheme](#authentication-schemes) | | TRUE | NULL
 userNameTemplate | Default username that is generated when an application is assigned to a user | [UserName Template Object](#username-template-object) | | TRUE | *Okta UserName*
 userName | Shared username for app | String | 1 | 100 | TRUE | NULL
 password | Shared password for app | [Password Object](#password-object) | | | TRUE | NULL
 
-```json
+~~~ json
 {
     "credentials": {
         "scheme": "SHARED_USERNAME_AND_PASSWORD",
@@ -242,18 +242,18 @@ password | Shared password for app | [Password Object](#password-object) | | | T
         "password": {}
     }
 }
-```
+~~~
 
 #### Authentication Schemes
 
-Apps that are configured with the ```BASIC_AUTH```, ```BROWSER_PLUGIN```, or ```SECURE_PASSWORD_STORE``` have credentials vaulted by Okta and can be configured with the following schemes:
+Apps that are configured with the `BASIC_AUTH` , `BROWSER_PLUGIN` , or `SECURE_PASSWORD_STORE`  have credentials vaulted by Okta and can be configured with the following schemes:
 
 Scheme | Description | Shared UserName | Shared Password | App UserName | App Password
---- | --- | --- | ---	| --- | ---
+--- | --- | --- | --- | --- | ---
 SHARED_USERNAME_AND_PASSWORD | Users share a single username and password set by administrator | Admin:R/W | Admin:W | | |
-EXTERNAL_PASSWORD_SYNC	| Administrator sets username, password is the same as user's Okta password | | | Admin:R/W | *Current User Password*
-EDIT_USERNAME_AND_PASSWORD	| User sets username and password | | | Admin/User:R/W | Admin/User:W
-EDIT_PASSWORD_ONLY	| Administrator sets username, user sets password | | | Admin:R/W | Admin/User:W
+EXTERNAL_PASSWORD_SYNC  | Administrator sets username, password is the same as user's Okta password | | | Admin:R/W | *Current User Password*
+EDIT_USERNAME_AND_PASSWORD  | User sets username and password | | | Admin/User:R/W | Admin/User:W
+EDIT_PASSWORD_ONLY  | Administrator sets username, user sets password | | | Admin:R/W | Admin/User:W
 
 > `BOOKMARK`, `SAML_2_0`, and `WS_FEDERATION` signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The `scheme` property should be omitted for apps with these signOnModes
 
@@ -262,21 +262,21 @@ EDIT_PASSWORD_ONLY	| Administrator sets username, user sets password | | | Admin
 Specifies the template used to generate a user's username when the application is assigned via a group or directly to a user
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 template | mapping expression for username | String | | 1024 | TRUE | `${source.login}`
 type | type of mapping expression | Enum: `NONE`,  `BUILT_IN`, or `CUSTOM` | | | FALSE | BUILT_IN
 userSuffix | suffix for built-in mapping expressions | String | | | TRUE | NULL
 
 > You must use the `CUSTOM` type when defining your own expression that is not built-in
 
-```json
+~~~ json
 {
     "userNameTemplate": {
         "template": "${source.login}",
         "type": "BUILT_IN"
     }
 }
-```
+~~~
 
 ##### Built-In Expressions
 
@@ -298,10 +298,10 @@ LDAP UID + custom suffix | ${source.userName}${instance.userSuffix}
 
 ### Password Object
 
-Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the ```value``` property defined (e.g. ```password: {}```) to indicate that a password value exists.
+Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the `value`  property defined (e.g. `password: {}` ) to indicate that a password value exists.
 
 Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 value | String | | | TRUE | FALSE |
 
 ### Application Links Object
@@ -323,7 +323,7 @@ The application user model defines a user's application assignment and credentia
 
 ### Example
 
-```json
+~~~ json
 {
     "id": "00ubgfEUVRPSHGWHAZRI",
     "scope": "USER",
@@ -333,19 +333,19 @@ The application user model defines a user's application assignment and credentia
     },
     "lastUpdated": "2013-09-11T15:56:58.000Z",
     "_links": {
-    	"user": {
-        	"href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
+      "user": {
+          "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
         }
     }
 }
-```
+~~~
 
 ### Application User Attributes
 
 All application users have the following attributes:
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
---- | --- | ---	| --- | --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | --- | ---
 id | unique key of user | String | | | FALSE | TRUE | TRUE
 scope | toggles the assignment between user or group scope | Enum: `USER` or `GROUP` | | | FALSE | FALSE | FALSE
 lastUpdated | timestamp when app user was last updated | Date | | | FALSE | FALSE | TRUE
@@ -357,24 +357,24 @@ _links | discoverable resources related to the app user | [JSON HAL](http://tool
 Specifies a user's credentials for the application.  The [Authentication Scheme](#authentication-schemes) of the app determines whether a userName or password can be assigned to a user.
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Default
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 userName | username for app | String | 1 | 100 | TRUE | NULL
 password | password for app | [Password Object](#password-object) | | | TRUE | NULL
 
-```json
+~~~ json
 {
     "credentials": {
         "userName": "test",
         "password": {}
     }
 }
-```
+~~~
 
 *Note: The [UserName Template Object](#username-template-object) defines the default username generated when a user is assigned to an application.*
 
 If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
 
-```json
+~~~ json
 {
     "errorCode": "E0000041",
     "errorSummary": "Credentials should not be set on this resource based on the scheme.",
@@ -386,31 +386,31 @@ If you attempt to assign a username or password to an application with an incomp
         }
     ]
 }
-```
+~~~
 
 ## Application Group Model
 
 ### Example
 
-```json
+~~~ json
 {
     "id": "00gbkkGFFWZDLCNTAGQR",
     "lastUpdated": "2013-09-11T15:56:58.000Z",
     "priority": 0,
     "_links": {
-    	"user": {
-        	"href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
+      "user": {
+          "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
         }
     }
 }
-```
+~~~
 
 ### Application Group Attributes
 
 All application groups have the following attributes:
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
---- | --- | ---	| --- | --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | --- | ---
 id | unique key of group | String | | | FALSE | TRUE | TRUE
 lastUpdated | timestamp when app group was last updated | Date | | | FALSE | FALSE | TRUE
 priority | priority of group assignment| Number | 0 | 100 | TRUE | FALSE | FALSE
@@ -449,7 +449,7 @@ requestIntegration | Would you like Okta to add an integration for this app? | B
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -466,13 +466,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
-	"id": "0oafxqCAJWWGELFTYASJ",
+  "id": "0oafxqCAJWWGELFTYASJ",
     "name": "bookmark",
     "label": "Sample Bookmark App",
     "status": "ACTIVE",
@@ -517,7 +517,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
             "href": "https://example.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/lifecycle/deactivate"
         }
     }
-```
+~~~
 
 #### Add Basic Authentication Application
 
@@ -533,7 +533,7 @@ authURL | The URL of the authenticating site for this app | String | FALSE | FAL
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -550,11 +550,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "0oafwvZDWJKVLDCUWUAC",
     "name": "template_basic_auth",
@@ -603,7 +603,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Add Plugin SWA Application
 
@@ -621,7 +621,7 @@ buttonField | CSS selector for the login button in the login form | String | FAL
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -640,11 +640,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
 "id": "0oabkvBLDEKCNXBGYUAS",
     "name": "template_swa",
@@ -695,7 +695,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Add Plugin SWA (3 Field) Application
 
@@ -714,7 +714,7 @@ extraFieldValue | Value for extra field form field | String | FALSE | FALSE |
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -735,11 +735,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "0oabkvBLDEKCNXBGYUAS",
     "name": "template_swa",
@@ -792,7 +792,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 
 #### Add SWA Application (No Plugin)
@@ -816,7 +816,7 @@ optionalField3Value | Name of the optional value in the login form | String | TR
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -840,11 +840,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "0oafywQDNMXLYDBIHQTT",
     "name": "template_sps",
@@ -900,7 +900,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Add SAML 2.0 Application
 
@@ -908,7 +908,7 @@ Adds a SAML 2.0 WebSSO application
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -938,7 +938,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 #### Add WS-Federation Application
 
@@ -946,7 +946,7 @@ Adds a WS-Federation Passive Requestor Profile application with a SAML 2.0 token
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -973,7 +973,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ### Get Application
 
@@ -995,16 +995,16 @@ Fetched [Application](#application-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oabizCHPNYALCHDUIOD"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "0oabizCHPNYALCHDUIOD",
     "name": "template_saml_2_0",
@@ -1068,7 +1068,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### List Applications
 
@@ -1107,16 +1107,16 @@ Array of [Applications](#application-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 [
     {
         "id": "0oabizCHPNYALCHDUIOD",
@@ -1232,22 +1232,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 ]
-```
+~~~
 
 #### List Applications Assigned to User
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\""
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 [
     {
         "id": "0oabizCHPNYALCHDUIOD",
@@ -1363,22 +1363,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 ]
-```
+~~~
 
 #### List Applications Assigned to Group
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps?filter=group.id+eq+\"00gckgEHZXOUDGDJLYLG\""
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 [
        {
         "id": "0oabkvBLDEKCNXBGYUAS",
@@ -1431,7 +1431,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 ]
-```
+~~~
 
 
 ### Update Application
@@ -1457,7 +1457,7 @@ Updated [Application](#application-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1499,11 +1499,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "0oabkvBLDEKCNXBGYUAS",
     "name": "template_swa",
@@ -1557,13 +1557,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Set SWA User-Editable Password
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1605,11 +1605,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "0oabkvBLDEKCNXBGYUAS",
     "name": "template_swa",
@@ -1660,13 +1660,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Set SWA Okta Password
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1708,11 +1708,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "0oabkvBLDEKCNXBGYUAS",
     "name": "template_swa",
@@ -1763,13 +1763,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 #### Set SWA Shared Credentials
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -1813,11 +1813,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "0oabkvBLDEKCNXBGYUAS",
     "name": "template_swa",
@@ -1870,7 +1870,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### Delete Application
 
@@ -1889,22 +1889,22 @@ id | id of app to delete | URL | String | TRUE |
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X DELETE "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS"
-```
+~~~
 
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 204 No Content
-```
+~~~
 
 If the application has an `ACTIVE` status you will receive an error response.
 
-```
+~~~ ruby
 HTTP/1.1 403 Forbidden
 Content-Type: application/json
 
@@ -1919,7 +1919,7 @@ Content-Type: application/json
         }
     ]
 }
-```
+~~~
 
 ## Application Lifecycle Operations
 
@@ -1941,18 +1941,18 @@ An empty JSON object `{}`
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/activate"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {}
-```
+~~~
 
 ### Deactivate Application
 
@@ -1972,18 +1972,18 @@ An empty JSON object `{}`
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X POST "https://your-domain.okta.com/api/v1/apps/0oabkvBLDEKCNXBGYUAS/lifecycle/deactivate"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {}
-```
+~~~
 
 ## Application User Operations
 
@@ -2009,7 +2009,7 @@ All responses return the assigned [Application User](#application-user-model).
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -2023,11 +2023,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": { "value": "correcthorsebatterystaple" }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ud4tVDDXYVKPXKVLCO",
     "scope": "USER",
@@ -2037,12 +2037,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
     },
     "lastUpdated": "2013-09-11T15:56:58.000Z",
     "_links": {
-    	"user": {
-        	"href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
+      "user": {
+          "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
         }
     }
 }
-```
+~~~
 
 ### Get Assigned User for Application
 
@@ -2065,16 +2065,16 @@ Fetched [Application User](#application-user-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ud4tVDDXYVKPXKVLCO",
     "scope": "USER",
@@ -2084,12 +2084,12 @@ curl -v -H "Authorization: SSWS yourtoken" \
     },
     "lastUpdated": "2013-09-11T15:56:58.000Z",
     "_links": {
-    	"user": {
-        	"href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
+      "user": {
+          "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
         }
     }
 }
-```
+~~~
 
 ### List Users Assigned to Application
 
@@ -2113,47 +2113,47 @@ Array of [Application Users](#application-user-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 [
-	{
-	    "id": "00ud4tVDDXYVKPXKVLCO",
-	    "scope": "USER",
-	    "credentials": {
-	        "userName": "user@example.com",
-	        "password": {}
-	    },
-	    "lastUpdated": "2013-09-11T15:56:58.000Z",
-	    "_links": {
-	    	"user": {
-	        	"href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
-	        }
-	    }
-	},
-		{
-	    "id": "00ubgfEUVRPSHGWHAZRI",
-	    "scope": "USER",
-	    "credentials": {
-	        "userName": "admin@example.com",
-	        "password": {}
-	    },
-	    "lastUpdated": "2013-09-11T15:56:51.000Z",
-	    "_links": {
-	    	"user": {
-	        	"href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
-	        }
-	    }
-	}
+  {
+      "id": "00ud4tVDDXYVKPXKVLCO",
+      "scope": "USER",
+      "credentials": {
+          "userName": "user@example.com",
+          "password": {}
+      },
+      "lastUpdated": "2013-09-11T15:56:58.000Z",
+      "_links": {
+        "user": {
+            "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
+          }
+      }
+  },
+    {
+      "id": "00ubgfEUVRPSHGWHAZRI",
+      "scope": "USER",
+      "credentials": {
+          "userName": "admin@example.com",
+          "password": {}
+      },
+      "lastUpdated": "2013-09-11T15:56:51.000Z",
+      "_links": {
+        "user": {
+            "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
+          }
+      }
+  }
 ]
-```
+~~~
 
 ### Update Credentials for Application
 
@@ -2171,7 +2171,7 @@ appuser | App user | Body | [Application User](#application-user-model) | FALSE 
 
 If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
 
-```json
+~~~ json
 {
     "errorCode": "E0000041",
     "errorSummary": "Credentials should not be set on this resource based on the scheme.",
@@ -2183,7 +2183,7 @@ If you attempt to assign a username or password to an application with an incomp
         }
     ]
 }
-```
+~~~
 
 ##### Response Parameters
 
@@ -2191,7 +2191,7 @@ All responses return the assigned [Application User](#application-user-model).
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -2205,11 +2205,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "password": { "value": "updatedP@55word" }
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ud4tVDDXYVKPXKVLCO",
     "scope": "USER",
@@ -2219,12 +2219,13 @@ curl -v -H "Authorization: SSWS yourtoken" \
     },
     "lastUpdated": "2013-09-11T15:56:58.000Z",
     "_links": {
-    	"user": {
-        	"href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
+      "user": {
+          "href": "https://example.okta.com/api/v1/users/00ud4tVDDXYVKPXKVLCO"
         }
     }
 }
-```
+~~~
+
 ### Remove User from Application
 
 Removes an user from an application.
@@ -2246,18 +2247,18 @@ An empty JSON object `{}`
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/users/00ud4tVDDXYVKPXKVLCO"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {}
-```
+~~~
 
 ## Application Group Operations
 
@@ -2281,7 +2282,7 @@ All responses return the assigned [Application Group](#application-group-model).
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -2289,17 +2290,17 @@ curl -v -H "Authorization: SSWS yourtoken" \
 -d \
 '{
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00gbkkGFFWZDLCNTAGQR",
     "lastUpdated": "2013-10-02T07:38:20.000Z",
     "priority": 0
 }
-```
+~~~
 
 ### Get Assigned Group for Application
 
@@ -2322,22 +2323,22 @@ Fetched [Application Group](#application-group-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00gbkkGFFWZDLCNTAGQR",
     "lastUpdated": "2013-10-02T07:38:20.000Z",
     "priority": 0
 }
-```
+~~~
 
 ### List Groups Assigned to Application
 
@@ -2361,16 +2362,16 @@ Array of [Application Groups](#application-group-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 [
     {
         "id": "00gbkkGFFWZDLCNTAGQR",
@@ -2383,7 +2384,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "priority": 1
     }
 ]
-```
+~~~
 
 ### Remove Group from Application
 
@@ -2406,15 +2407,15 @@ An empty JSON object `{}`
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X DELETE "https://your-domain.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/groups/00gbkkGFFWZDLCNTAGQR"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {}
-```
+~~~
