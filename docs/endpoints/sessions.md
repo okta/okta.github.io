@@ -29,20 +29,20 @@ A one-time token may only be used **once** to establish a session for a user.  I
 
 ### Example
 
-```json
+~~~ json
 {
     "id": "000najcYVnjRS2aZG50MpHL4Q",
     "userId": "00ubgaSARVOQDIOXMORI",
     "mfaActive": false
 }
-```
+~~~
 
 ### Session Attributes
 
 Sessions have the following attributes:
 
 Attribute | Description | DataType | Nullable | Unique | Readonly
---- | --- | ---	| --- | --- | ---
+--- | --- | --- | --- | --- | ---
 id | unique key for the session | String | FALSE | TRUE | TRUE
 userId | unique key for the [user](users.md#get-user-with-id) | String | FALSE | FALSE | TRUE
 mfaActive | indicates whether the user has enrolled a valid MFA credential | Boolean | FALSE | FALSE | TRUE
@@ -84,7 +84,7 @@ Validates a user's credentials and returns a one-time token that can be used to 
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -94,22 +94,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
   "username": "art.vandelay@example.com",
   "password": "correct horse battery staple"
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
   "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false,
   "cookieToken": "00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
 }
-```
+~~~
 
 Invalid credentials will return a `401 Unauthorized` status code.
 
-```http
+~~~ ruby
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 
@@ -120,7 +120,7 @@ Content-Type: application/json
     "errorId": "oaeVCVElsluRpii8PP4GeLYxA",
     "errorCauses": []
 }
-```
+~~~
 
 #### Create Session with Embed Image URL
 
@@ -128,7 +128,7 @@ Validates a user's credentials and returns a URL with a one-time token for 1x1 t
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -138,22 +138,22 @@ curl -v -H "Authorization: SSWS yourtoken" \
   "username": "art.vandelay@example.com",
   "password": "correct horse battery staple"
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
   "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false,
   "cookieTokenUrl": "https://your-subdomain.okta.com/login/sessionCookie?token=00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
 }
-```
+~~~
 
 Invalid credentials will return a `401 Unauthorized` status code.
 
-```http
+~~~ ruby
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json
 
@@ -164,7 +164,7 @@ Content-Type: application/json
     "errorId": "oaeVCVElsluRpii8PP4GeLYxA",
     "errorCauses": []
 }
-```
+~~~
 
 ### Validate Session
 
@@ -184,26 +184,26 @@ id | id of user's session | URL | String | TRUE |
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X GET "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
   "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false
 }
-```
+~~~
 
 Invalid sessions will return a `403 Forbidden` status code.
 
-```http
+~~~ ruby
 HTTP/1.1 403 Forbidden
 Content-Type: application/json
 
@@ -214,7 +214,7 @@ Content-Type: application/json
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
 }
-```
+~~~
 
 ### Extend Session
 
@@ -234,27 +234,27 @@ id | id of user's session | URL | String | TRUE |
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X PUT "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
-```
+~~~
 
 ##### Response
 
 
-```json
+~~~ json
 {
   "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
   "userId": "00uld5QRRGEMJSSQJCUB",
   "mfaActive": false
 }
-```
+~~~
 
 Invalid sessions will return a `403 Forbidden` status code.
 
-```http
+~~~ ruby
 HTTP/1.1 403 Forbidden
 Content-Type: application/json
 
@@ -265,7 +265,7 @@ Content-Type: application/json
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
 }
-```
+~~~
 
 ### Close Session
 
@@ -285,22 +285,22 @@ N/A
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -X DELETE "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
-```
+~~~
 
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 204 No Content
-```
+~~~
 
 Invalid sessions will return a `403 Forbidden` status code.
 
-```http
+~~~ ruby
 HTTP/1.1 403 Forbidden
 Content-Type: application/json
 
@@ -311,4 +311,4 @@ Content-Type: application/json
     "errorId": "oaeweHTU2w9QlC7ySKNEASqhA",
     "errorCauses": []
 }
-```
+~~~

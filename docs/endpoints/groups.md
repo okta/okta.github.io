@@ -14,7 +14,7 @@ The Groups API provides operations to manage your organization groups an their u
 
 ### Example
 
-```json
+~~~ json
 {
     "id": "00g1emaKYZTWRYYRRTSK",
     "objectClass": [
@@ -45,7 +45,7 @@ The Groups API provides operations to manage your organization groups an their u
         }
     }
 }
-```
+~~~
 
 ### Group Attributes
 
@@ -69,23 +69,23 @@ Specifies required and optional attributes for a group.  The `objectClass` of gr
 Profile for any group that is **not** imported from Active Directory
 
 Attribute | Description | DataType | MinLength | MaxLength | Nullable | Readonly
---- | --- | ---	| --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | ---
 name | name of the group | String | 1 | 255 | FALSE | FALSE
 description | description of the group | String | 0 | 1024 | TRUE | FALSE
 
-```json
+~~~ json
 {
     "name": "West Coast",
     "description": "Straight Outta Compton"
 }
-```
+~~~
 
 #### ObjectClass: okta:windows_security_principal
 
 Profile for a group that is imported from Active Directory
 
 Attribute | Description | DataType | Nullable  | Readonly
---- | --- | ---	| --- | --- | ---
+--- | --- | --- | --- | --- | ---
 name | name of the windows group | String | FALSE | TRUE
 description | description of the windows group | String | FALSE | TRUE
 samAccountName | pre-windows 2000 name of the windows group | String | FALSE | TRUE
@@ -93,7 +93,7 @@ dn | the distinguished name of the windows group | String | FALSE | TRUE
 windowsDomainQualifiedName | fully-qualified name of the windows group | String | FALSE | TRUE
 externalId | base-64 encoded GUID (objectGUID) of the windows group | String | FALSE | TRUE
 
-```json
+~~~ json
 {
     "profile": {
         "name": "West Coast Users",
@@ -104,7 +104,7 @@ externalId | base-64 encoded GUID (objectGUID) of the windows group | String | F
         "externalId": "VKzYZ1C+IkSZxIWlrW5ITg=="
     }
 }
-```
+~~~
 
 ### Links Object
 
@@ -139,7 +139,7 @@ The created [Group](#group-model).
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
 -H "Accept:application/json" \
 -H "Content-type:application/json" \
@@ -151,11 +151,11 @@ curl -v -H "Authorization:SSWS yourtoken" \
     "description": "Straight Outta Compton"
   }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00gevhYMOEIQMDAPUQGQ",
     "objectClass": [
@@ -186,7 +186,7 @@ curl -v -H "Authorization:SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### Get Group
 
@@ -206,15 +206,15 @@ Fetched [Group](#group-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00gevhYMOEIQMDAPUQGQ",
     "objectClass": [
@@ -245,7 +245,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### List Groups
 
@@ -277,83 +277,83 @@ The default group limit is set to a very high number due to historical reasons w
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/groups?limit=200"
-```
+~~~
 
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/groups?limit=200>; rel="self"
 Link: <https://your-domain.okta.com/api/v1/groups?after=00ud4tVDDXYVKPXKVLCO&limit=200>; rel="next"
 
 [
-	{
-	    "id": "00gevhYMOEIQMDAPUQGQ",
-	    "objectClass": [
-	        "okta:user_group"
-	    ],
-	    "profile": {
-	        "name": "West Coast",
-	        "description": "Straight Outta Compton"
-	    },
-	    "_links": {
-	        "logo": [
-	            {
-	                "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
-	                "name": "medium",
-	                "type": "image/png"
-	            },
-	            {
-	                "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
-	                "name": "large",
-	                "type": "image/png"
-	            }
-	        ],
-	        "users": {
-	            "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users"
-	        },
-	        "apps": {
-	            "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps"
-	        }
-	    }
-	},
-	{
-	    "id": "00gq96KPRVMTHOQAQWAC",
-	    "objectClass": [
-	        "okta:user_group"
-	    ],
-	    "profile": {
-	        "name": "East Coast",
-	        "description": "Illmatic"
-	    },
-	    "_links": {
-	        "logo": [
-	            {
-	                "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
-	                "name": "medium",
-	                "type": "image/png"
-	            },
-	            {
-	                "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
-	                "name": "large",
-	                "type": "image/png"
-	            }
-	        ],
-	        "users": {
-	            "href": "https://your-domain.okta.com/api/v1/groups/00gq96KPRVMTHOQAQWAC/users"
-	        },
-	        "apps": {
-	            "href": "https://your-domain.okta.com/api/v1/groups/00gq96KPRVMTHOQAQWAC/apps"
-	        }
-	    }
-	}
+  {
+      "id": "00gevhYMOEIQMDAPUQGQ",
+      "objectClass": [
+          "okta:user_group"
+      ],
+      "profile": {
+          "name": "West Coast",
+          "description": "Straight Outta Compton"
+      },
+      "_links": {
+          "logo": [
+              {
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                  "name": "medium",
+                  "type": "image/png"
+              },
+              {
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                  "name": "large",
+                  "type": "image/png"
+              }
+          ],
+          "users": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users"
+          },
+          "apps": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps"
+          }
+      }
+  },
+  {
+      "id": "00gq96KPRVMTHOQAQWAC",
+      "objectClass": [
+          "okta:user_group"
+      ],
+      "profile": {
+          "name": "East Coast",
+          "description": "Illmatic"
+      },
+      "_links": {
+          "logo": [
+              {
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                  "name": "medium",
+                  "type": "image/png"
+              },
+              {
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                  "name": "large",
+                  "type": "image/png"
+              }
+          ],
+          "users": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gq96KPRVMTHOQAQWAC/users"
+          },
+          "apps": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gq96KPRVMTHOQAQWAC/apps"
+          }
+      }
+  }
 ]
-```
+~~~
 
 #### Search Groups
 
@@ -365,48 +365,48 @@ Searches for groups by `name` in your organization.
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/groups?q=West&limit=1"
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 [
-	{
-	    "id": "00gevhYMOEIQMDAPUQGQ",
-	    "objectClass": [
-	        "okta:user_group"
-	    ],
-	    "profile": {
-	        "name": "West Coast",
-	        "description": "Straight Outta Compton"
-	    },
-	    "_links": {
-	        "logo": [
-	            {
-	                "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
-	                "name": "medium",
-	                "type": "image/png"
-	            },
-	            {
-	                "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
-	                "name": "large",
-	                "type": "image/png"
-	            }
-	        ],
-	        "users": {
-	            "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users"
-	        },
-	        "apps": {
-	            "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps"
-	        }
-	    }
-	}
+  {
+      "id": "00gevhYMOEIQMDAPUQGQ",
+      "objectClass": [
+          "okta:user_group"
+      ],
+      "profile": {
+          "name": "West Coast",
+          "description": "Straight Outta Compton"
+      },
+      "_links": {
+          "logo": [
+              {
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                  "name": "medium",
+                  "type": "image/png"
+              },
+              {
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                  "name": "large",
+                  "type": "image/png"
+              }
+          ],
+          "users": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users"
+          },
+          "apps": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps"
+          }
+      }
+  }
 ]
-```
+~~~
 
 ### Update Group
 
@@ -431,7 +431,7 @@ Updated [Group](#group-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -443,11 +443,11 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "description": "Amended description",
     }
 }'
-```
+~~~
 
 ##### Response
 
-```json
+~~~ json
 {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "objectClass": [
@@ -478,7 +478,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
         }
     }
 }
-```
+~~~
 
 ### Remove Group
 
@@ -500,17 +500,17 @@ N/A
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -X DELETE "https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR"
-```
+~~~
 
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 204 No Content
-```
+~~~
 
 ## Group Member Operations
 
@@ -542,15 +542,15 @@ Array of [Users](users.md#user-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -X GET "https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2"
-```
+~~~
 
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2>; rel="self"
@@ -622,7 +622,7 @@ Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?aft
         }
     }
 ]
-```
+~~~
 
 ### Add User to Group
 
@@ -645,16 +645,17 @@ N/A
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
 -H "Accept:application/json" \
 -X PUT https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA
-```
+~~~
+
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 204 No Content
-```
+~~~
 
 ### Remove User from Group
 
@@ -677,16 +678,17 @@ N/A
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
 -H "Accept:application/json" \
 -X DELETE https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA
-```
+~~~
+
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 204 No Content
-```
+~~~
 
 ## Related Resources
 
@@ -712,15 +714,15 @@ Array of [Applications](apps.md#application-model)
 
 ##### Request
 
-```sh
+~~~ ruby
 curl -v -H "Authorization:SSWS yourtoken" \
 -H "Accept:application/json" \
 -X GET https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps
-```
+~~~
 
 ##### Response
 
-```http
+~~~ ruby
 HTTP/1.1 200 OK
 Content-Type: application/json
 Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps>; rel="self"
@@ -837,4 +839,4 @@ Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps?afte
         }
     }
 ]
-```
+~~~
