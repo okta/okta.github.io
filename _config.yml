@@ -8,7 +8,7 @@ highlighter: pygments
 # -- standard exclusions
 exclude: [Gemfile, Gemfile.lock, NOTES.txt, README.md]
 
-markdown: kramdown 
+markdown: kramdown
 markdown_ext: md
 #redcarpet:
 #    extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]

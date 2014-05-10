@@ -9,7 +9,7 @@ title: Apps
 
 The Application API provides operations to manage applications and/or assignments to users or groups for your organization.
 
-__This API is currently in `Beta` status and documentation is *draft* quality.  There may be small inconsistencies with actual API.__
+**This API is currently in `Beta` status and documentation is *draft* quality.  There may be small inconsistencies with actual API.**
 
 *Note: This API currently only supports applications without user-management features enabled at this time*
 
@@ -1447,7 +1447,7 @@ Parameter | Description | Param Type | DataType | Required | Default
 id | id of app to update | URL | String | TRUE |
 profile | Updated profile for user | Body | [Application](#application-model) | FALSE |
 
-> All attributes must be specified when updating an app  __Partial updates are not supported!__
+> All attributes must be specified when updating an app  **updates are not supported!**
 
 ##### Response Parameters
 

@@ -5,7 +5,7 @@ title: Tokens
 
 
 
-*Note:  This API is __deprecated__. Please see [Getting an API Token](/docs/getting_started/getting_a_token.md)*
+*Note:  This API is **deprecated**. Please see [Getting an API Token](/docs/getting_started/getting_a_token.md)*
 
 
 ## Create tokens

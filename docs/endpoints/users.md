@@ -133,7 +133,7 @@ Attribute | DataType | MinLength | MaxLength | Nullable | Unique | Validation
 password | [Password Object](#password-object) | | | TRUE | FALSE |
 recovery_question | [Recovery Question Object](#recovery-question-object) | | | TRUE | FALSE |
 
-> Some credential values are __write-only__
+> Some credential values are **write-only**
 
 ~~~ json
 {
@@ -1053,7 +1053,7 @@ credentials | Update credentials for user | Body | [Credentials Object](#credent
 
 `profile` and `credentials` can be updated independently or with a single request. 
 
-> All profile attributes must be specified when updating a user's profile.  __Partial updates are not supported!__
+> All profile attributes must be specified when updating a user's profile.  **Partial updates are not supported**!
 
 ##### Response Parameters
 
@@ -1403,7 +1403,7 @@ Lifecycle operations are non-idempotent operations that initiate a state transit
 
 Activates a user.  This operation can only be performed on users with a **STAGED** `status`.  Activation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of **ACTIVE** during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of **ACTIVE** when the activation process is complete.
 
-> Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to __ACTIVE__ status.
+> Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to **ACTIVE** status.
 
 ##### Request Parameters
 
@@ -1447,7 +1447,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 
 Deactivates a user.  This operation can only be performed on users that do not have a **DEPROVISIONED** `status`.  Deactivation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of **DEPROVISIONED** during deactivation to indicate that the user hasn't completed the asynchronous operation.  The user will have a `status` of **DEPROVISIONED** when the deactivation process is complete.
 
-> Deactivating a user is a __destructive__ operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  __This action cannot be recovered!__
+> Deactivating a user is a **destructive** operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  **This action cannot be recovered!**
 
 ##### Request Parameters
 
@@ -1730,7 +1730,7 @@ newPassword | New password for user | Body | [Password Object](#password-object)
 
 [Credentials](#credentials-object) of the user
 
-> The user will transition to __ACTIVE__ status when successfully invoked in __RECOVERY__ status
+> The user will transition to **ACTIVE** status when successfully invoked in **RECOVERY** status
 
 ##### Request
 
