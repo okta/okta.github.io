@@ -18,4 +18,8 @@
 
 
 
-{% include footer.html %}
+{% if page.js_file %}
+  {% include footer.html js_file=page.js_file %}
+{% else %}
+  {% include footer.html %}
+{% endif %}

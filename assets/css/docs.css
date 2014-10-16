@@ -104,6 +104,12 @@
 
 /* -------------------------- SIDEBAR */
 
+#docs-sidebar-wrap.fixed {
+  position: fixed;
+  top: 100px;
+  width: 236px; /* XXX: should use js to set width when fixed */
+}
+
 .docs-sidebar ul {
   border: 1px solid transparent; /* hack fixes jquery slidetoggle jump */
   margin-left: 20px;

@@ -5,7 +5,7 @@
  * but side effects of further work are unknown as of may 2014
  *
  * in general page specific styles used in this file
- * should not be applied to ne pages
+ * should not be applied to new pages
  * instead, use the css_file mechanism in page/layout front matter
  * to introduce specific stylesheets
  *
@@ -243,6 +243,14 @@ footer.main-footer {
   color: #999;
   font-weight: 300;
   font-size: 12px;
+}
+
+.main-footer a {
+  color: #999;
+}
+.main-footer .sepr {
+  display: inline-block;
+  margin: 0 .3em;
 }
 
 .footer-left {
@@ -952,12 +960,12 @@ div#sticker {
 }
 
 .recent-discussions {
-  margin-bottom: 100px;
+  margin-bottom: 6em;
 }
 
-.recent-discussions li {
-  margin-bottom: 18px;
-  font-size: 18px;
+h4.recent-subtitle {
+  font-size: 24px;
+  margin-top: 2em;
 }
 
 
@@ -1275,4 +1283,32 @@ pre code {
 }
 .highlight pre code {
   white-space: pre;
+}
+
+
+
+/* -------------------------- GITHUB RIBBON */
+
+#github-ribbon {
+  display: none!important;
+  position: fixed;
+  top: 90px;
+  right: 0;
+  z-index: 2;
+}
+
+#docs #github-ribbon {
+  display: block!important;
+}
+
+
+
+/* -------------------------- TERMS CONTENT */
+
+#terms .block.content h2 {
+  font-size: 18px;
+}
+
+#terms .block.content p {
+  font-size: 14px;
 }

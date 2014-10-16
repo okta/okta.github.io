@@ -2,26 +2,27 @@
 {% assign section = page.path | split: '/' %}
 {% assign page_name = page.title | replace: ' ', '_' | downcase %}
 
-{% for nav in site.data.docs %}
-  <div class="docs-sidebar-block">
-    <h2>
-      <div class="caret"></div>
-      {{ nav.title }}
-    </h2>
-    <ul class="list-unstyled">
-      {% for item in nav.pages %}
-        {% for doc_page in site.pages %}
-          {% if doc_page.layout == 'docs_page' %}
-            {% assign name = doc_page.path | replace: '.md', '' | split: '/' | last | downcase %}
-            {% if name == item %}
-              <li data-name="{{ doc_page.title }}" {% if page_name == name %}class="on"{% endif %}>
-                <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ doc_page.title }}</a>
-              </li>
+<div id="docs-sidebar-wrap">
+  {% for nav in site.data.docs %}
+    <div class="docs-sidebar-block">
+      <h2>
+        <div class="caret"></div>
+        {{ nav.title }}
+      </h2>
+      <ul class="list-unstyled">
+        {% for item in nav.pages %}
+          {% for doc_page in site.pages %}
+            {% if doc_page.layout == 'docs_page' %}
+              {% assign name = doc_page.path | replace: '.md', '' | split: '/' | last | downcase %}
+              {% if name == item %}
+                <li data-name="{{ doc_page.title }}" {% if page_name == name %}class="on"{% endif %}>
+                  <a href="/docs/{{ nav.section }}/{{ item }}.html">{{ doc_page.title }}</a>
+                </li>
+              {% endif %}
             {% endif %}
-          {% endif %}
+          {% endfor %}
         {% endfor %}
-      {% endfor %}
-    </ul>
-  </div>
-{% endfor %}
-
+      </ul>
+    </div>
+  {% endfor %}
+</div>

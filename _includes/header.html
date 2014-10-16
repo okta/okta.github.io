@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=0.0, maximum-scale=1.0, user-scalable=no">
-
   <title>Okta Developers</title>
-
   <link href="/assets/ico/favicon.png" rel="shortcut icon">
   <link href="/assets/dist/css/bootstrap.css" rel="stylesheet">
   <link href="/assets/css/main.css" rel="stylesheet">
-
   <script src="//use.typekit.net/pls8pog.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
-
   {% if include.css_file %}
     <link rel="stylesheet" href="/assets/css/{{ include.css_file }}">
   {% endif %}
-
   {% if page.css_file %}
     <link rel="stylesheet" href="/assets/css/{{ page.css_file }}">
   {% endif %}
@@ -29,8 +21,27 @@
 
 
 
-<body {% if include.body_id %}id="{{ include.body_id }}"{% endif %}>
+{% comment %}
+  legacy pages explicitly pass body_id
+  for new pages we resolve the module name to pass as body_id
+{% endcomment %}
 
+{% if include.body_id %}
+  {% assign body_id = include.body_id %}
+{% else %}
+  {% assign active_page_name  = page.url | split: "/" | last | remove: ".html" %}
+  {% assign split_url         = page.url | split: "/" %}
+  {% assign body_id           = split_url[1] %}
+{% endif %}
+
+
+
+<body id="{{ body_id }}">
+  <a href="https://github.com/okta/okta.github.io" id="github-ribbon" target="_blank">
+    <img src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67"
+         alt="Fork me on GitHub"
+         data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png">
+  </a>
   <nav class="navbar navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
