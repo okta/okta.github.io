@@ -278,7 +278,7 @@ None.
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/activate"
+-X POST "https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/activate"
 ~~~
 
 #### Response Example
@@ -330,7 +330,7 @@ None.
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"
+-X POST "https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"
 ~~~
 
 #### Response Example
@@ -382,7 +382,7 @@ None.
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/activate"
+-X POST "https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/activate"
 ~~~
 
 #### Response Example
@@ -434,7 +434,7 @@ None.
 curl -v -H "Authorization: SSWS yourtoken" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--X GET "https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate"
+-X POST "https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate"
 ~~~
 
 #### Response Example

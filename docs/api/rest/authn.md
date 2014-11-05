@@ -8,1184 +8,2379 @@ title: Authentication
 
 ## Overview
 
-The goal of the flows in the Authorization API is to obtain an authorization code. This authorization code can be exchanged for an access token using calls from the Sessions API that exchange a one-time token for a session cookie. Your client app can use our existing APIs to trade the authorization code for a session cookie.
+The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta [Sessions API](sessions.html) to obtain an Okta [session cookie](#/docs/examples/session_cookie.html) and access apps within Okta.  
 
-There are three types of functionality in this API.
+The API is targeted for developers who want to build their own end-to-end login experience to replace the built-in Okta login experience and addresses the following key scenarios:
 
-- **Primary authentication** allows you to verify username and password credentials. Verifying these credentials is the only part of the functionality that starts outside of Okta. In some cases this verification is all that is specified.
+- **Primary authentication** allows you to verify username and password credentials for a user.
 
-- **Multifactor authentication** (MFA) provides an additional layer of security for your enterprise applications by requiring the user to complete additional challenges besides the username and password. The authentication API supports the MFA enrollment and authentication flows. All MFA flows begin within Okta.
+- **Multifactor authentication** (MFA) strengthens the security of password-based authentication by requiring additional verification of another factor such as a temporary one-time password or an SMS passcode. The Auth API supports user enrollment with MFA factors enabled by the administrator, as well as MFA challenges based on your Sign-On security policy.
 
-- **Utilites** allow you to get user information, get status information, respond to a forgotten password request, and force users with expired passwords to set a new one. 
+- **Recovery** allows users to securely reset their password if they've forgotten it, or unlock their account if it has been locked out due to excessive failed login attempts. This functionality is subject to the security policy set by the administrator.
 
-   **Note:** For information on unlocking a locked out user, see <a href="http://developer.okta.com/docs/api/rest/users.html#unlock-user">Unlock User </a> in the Users API.
-
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break this API until it is released.
+> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta is free to break compatibility with this API until it released as GA.
 
 ## Authentication Model
 
-The current state of the authentication is tracked in a **stateToken**. This token is bound to the server-side status. The following table shows the possible values for this token.
-
-##### stateToken 
-
-Value|Description
------|-----------
-PASSWORD_EXPIRED|The user credentials are valid but expired; the user must change them with a POST to authn/credentials/change_password.
-RECOVERY|The user is in the middle of a forgot-password flow.
-PASSWORD_RESET|The user has answered their recovery question and needs to set a new password.
-LOCKED_OUT|The user account is locked; self-service unlock or admin unlock is required.
-MFA_UNENROLLED|The user credentials are valid, but MFA is required and no factors are set up yet.
-MFA_ENROLL_ACTIVATE|The user enrolled in a MFA factor, but the factor requires activation.
-MFA_REQUIRED|The user credentials are valid, but MFA is required.
-MFA_CHALLENGE|The user needs to enter the passCode from their MFA factor.
-SUCCESS|The user is authenticated.
-
-Each of these statuses has an expiration date and a cancellation link which that deletes the stateToken and returns the user to the UNAUTHENTICATED state.
-The current status of the state token is aways available.
-
-##### factorResult 
-
-In addition to these state values, the MFA_CHALLENGE state can return an addition attribute **factorResult**. The following table shows the possible values for this attribute.
-
-Value|Description
------|-----------
-WAITING|challenge request is being sent to device.
-FAILED|passcode or challenge answer is wrong.
-CANCELLED|verification request cancelled by user.
-TIMEOUT|user did not respond within a specified time window.
-TIME_WINDOW_EXCEEDED|The OTP you provided is within the Sync window, but outside the Look Ahead Window. This operation requires a second consecutive OTP.
-PASSCODE_REPLAYED|The OTP has already been seen by the service.
-ERROR|an unspecified error occurred during factor authentication; the corresponding "factorResultMessage" attribute should contain the details. 
+The Authentication API is a *stateful* API that implements a finite state machine with defined states and required transitions between those states.  State is transferred with a `stateToken` that is issued for each authentication or recovery transaction and must be passed with each request.  The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) format to publish `next` and `prev` links for the current transaction state which should be used to transition the state machine.  
 
 
+Attribute     | Description                                                                                           | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
+------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
+stateToken    | ephemeral token that encodes the current state of an authentication or recovery transaction           | String                                                         |           |           | TRUE     | FALSE  | TRUE
+expiresAt     | lifetime of the `stateToken`, `recoveryToken`, or `sessionToken` (See [Tokens](#tokens))              | Date                                                           |           |           | TRUE     | FALSE  | TRUE
+status        | current state of the  transaction                                                                     | [Authentication Status](#authentication-status)                |           |           | FALSE    | FALSE  | TRUE
+relayState    | Optional state value that is persisted for the lifetime of the authentication or recovery transaction | String                                                         |           | 2048      | TRUE     | FALSE  | TRUE
+_embedded     | [embedded resources](#embedded-resources) for the current `status`                                    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
+_links        | [link relations](#links-object) for the current `status`                                              | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
+ 
 
-## Use Cases
+### Authentication Status
 
-There are seven common use cases for the Authentication API that are detailed in the following section. Items in red all represent an unauthenticated state. Items in blue represent authentication processes. The goal of all flows is the authenticated state, shown in green. Most of these use cases use the **stateToken** and **factorResult** described in the [Authentication Model](#authentication-model) section. Use the following links to jump to a use case.
+![Authentication State Model Diagram](/assets/img/auth-state-model.png "Authentication State Model Diagram")
 
-[Primary Authentication](#primary-authentication)<br />
-[Authentication with an Enrolled MFA Factor](#authentication-with-an-enrolled-mfa-factor)<br />
-[Authentication with an Unenrolled MFA Factor](#authentication-with-an-unenrolled-mfa-factor)<br />
-[Expired Password Flow](#expired-password-flow)<br />
-[Forgotten Password Flow](#forgotten-password-flow)<br />
-[Get Basic Information](#get-basic-information)<br />
-[stateToken Status](#statetoken-status)<br />
+An authentication or recovery transaction has one of the following statuses:
+
+Value               | Description                                                                              | Next Action
+------------------- | ---------------------------------------------------------------------------------------- |
+PASSWORD_EXPIRED    | The user's password was successfully validated but is expired.                           | POST to the `next` link relation to [change the user's expired password](#change-expired-password).
+RECOVERY            | The user has requested a recovery token to reset their password or unlock their account. | POST to the `next` link relation to [answer the user's recovery question](#answer-recovery-question).
+PASSWORD_RESET      | The user successfully answered their recovery question and must to set a new password.   | POST to the `next` link relation to [reset the user's password](#reset-password).
+LOCKED_OUT          | The user account is locked; self-service unlock or admin unlock is required.             | POST to the `unlock` link relation to perform a [self-service unlock](#unlock-account).
+MFA_UNENROLLED      | The user must select and enroll an available factor for additional verification.         | POST to the `enroll` link relation for a specific factor to [enroll the factor](#enroll-factor).
+MFA_ENROLL_ACTIVATE | The user must activate the factor to complete enrollment.                                | POST to the `next` link relation to [activate the factor](#activate-factor).
+MFA_REQUIRED        | The user must provide additional verification with a previously enrolled factor.         | POST to the `verify` link relation for a specific factor to [provide additional verification](#verify-factor).
+MFA_CHALLENGE       | The user must verify the factor-specific challenge.                                      | POST to the `verify` link relation to [verify the factor](#verify-factor).
+SUCCESS             | The transaction has completed successfully                                               |
+
+You can advance the authentication or recovery transaction to the next status by posting a **status-specific** request to the the `next` link relation published in the [JSON HAL links object](#links-object) for the response.  [Enrolling a factor](#enroll-factor) and [verifying a factor](#verify-factor) do not have `next` link relationships as the end-user must make a selection of which factor to enroll or verify.
+
+> You should never assume a specific state transition or URL when navigating the [state model](#authentication-status).  Always inspect the response for `status` and dynamically follow the [published link relations](#links-object).
+
+~~~json
+{
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/ostf2xjtDKWFPZIKYDZV/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+
+### Tokens
+
+Authentication API operations will return different token types depending on the [status](#authentication-status) of the authentication or recovery transaction.
+
+#### State Token
+
+Ephemeral token that encodes the current state of an authentication or recovery transaction.
+
+- The `stateToken` must be passed with every request except when verifying a `recoveryToken` that was distributed out-of-band
+- The `stateToken` is only intended to be used between the web application performing end-user authentication and the Okta API. It should never distributed to the end-user via email or other out-of-band mechanism.
+- The lifetime of the `stateToken` is currently fixed and not customizable.
+
+> All Authentication API operations will return `401 Unauthorized` status code when you attempt to use an expired state token.
+
+~~~http
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+
+{
+    "errorCode": "E0000011",
+    "errorSummary": "Invalid token provided",
+    "errorLink": "E0000011",
+    "errorId": "oaeY-4G_TBUTBSZAn9n7oZCfw",
+    "errorCauses": []
+}
+~~~
+
+> State transitions are strictly enforced for state tokens.  You will receive a `403 Forbidden` status code if you attempt to use a state token for given [status](#authentication-status) with invalid Authentication API operation for the status.
+
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+  "errorCode": "E0000079",
+  "errorSummary": "This operation is not allowed in the current authentication state.",
+  "errorLink": "E0000079",
+  "errorId": "oaen9Ly_ivHQJ-STb8KiADh9w",
+  "errorCauses": [
+    {
+      "errorSummary": "This operation is not allowed in the current authentication state."
+    }
+  ]
+}
+~~~
+
+#### Recovery Token
+
+One-time token issued as `recoveryToken` response parameter when a recovery transaction transitions to the `RECOVERY` status.
+
+- The token can be exchanged for a `stateToken` to recover a user's password or unlock their account.
+- Unlike the `statusToken` the `recoveryToken` should be distributed out-of-band to a user such as via email.
+- The lifetime of the `recoveryToken` is managed by the organization's security policy.
+
+> The `recoveryToken` is usually sent directly to the end-user via email or SMS.  Obtaining a `recoveryToken` is a highly privileged operation and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to user's recovery question can reset their password or unlock their account.
+
+#### Session Token
+
+One-time token issued as `sessionToken` response parameter when an authentication transaction completes with the `SUCCESS` status.
+
+- The token can be exchanged for a session with the [Session API](sessions.html#create-session) or converted to a [session cookie](/docs/examples/session_cookie.html).
+- The lifetime of the `sessionToken` is the same as the lifetime of a user's session and managed by the organization's security policy.
+
+### Factor Result 
+
+The `MFA_CHALLENGE` state can return an additional attribute **factorResult** that provides additional context for the last factor verification attempt. The following table shows the possible values for this attribute.
+
+factorResult           | Description
+---------------------- | -------------------------------------------------------------------------------------------------------------------------------
+`WAITING`              | Factor verification has started but not yet completed (e.g user hasn't answered phone call yet)
+`CANCELLED`            | Factor verification was canceled by user
+`TIMEOUT`              | Unable to verify factor within the allowed time window
+`TIME_WINDOW_EXCEEDED` | Factor was successfully verified but outside of the computed time window.  Another verification is required in current time window.
+`PASSCODE_REPLAYED`    | Factor was previously verified within the same time window.  User must wait another time window and retry with a new verification.
+`ERROR`                | Unexpected server error occurred verifying factor.
+
+
+### Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current authentication status using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  These links are used to transition the [authentication status](#authentication-status) of the [state token](#state-token).
+
+Link Relation Type | Description
+------------------ | -----------------------------------------------------------------------------------------------------------
+next               | Transitions the authentication state machine to the next state.  **Note: The `name` of the link relationship will provide a hint of the next operation required**
+prev               | Transitions the authentication state machine to the previous state.
+cancel             | Cancels the current authentication transaction and revokes the [state token](#state-token).
+resend             | Resends a challenge or OTP to a device
+
+> The Links Object is **read-only**
+
+## Embedded Resources
+
+### User Object
+
+A subset of attributes of a [User](users.html#user-model) is available after successful primary authentication or during recovery.
+
+Attribute         | Description              | DataType                                              | MinLength | MaxLength | Nullable | Unique | Readonly
+----------------- | ------------------------ | ----------------------------------------------------- | --------- | --------- | -------- | ------ | --------
+id                | unique key for user      | String                                                |           |           | FALSE    | TRUE   | TRUE
+profile           | user's profile           | [User Profile Object](#user-profile-object)           |           |           | FALSE    | FALSE  | TRUE
+recovery_question | user's recovery question | [Recovery Question Object](#recovery-question-object) |           |           | TRUE     | FALSE  | TRUE
+
+~~~json
+{
+ "id": "00udnlQDVLVRIVXESCMZ",
+ "profile": {
+      "username": "isaac@example.org",
+      "firstName":"Isaac",
+      "lastName": "Brock",
+      "locale": "en_US",
+      "timeZone": "America/Los_Angeles"
+ },
+ "recovery_question": {
+    "question": "Who's a major player in the cowboy scene?"
+  }
+}
+~~~
+
+#### User Profile Object
+
+Subset of [profile attributes](users.html#profile-object) for a user
+
+Attribute | Description                                                                                                                 | DataType                                                                                            | MinLength | MaxLength | Nullable | Unique | Readonly
+--------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
+username  | unique username for user                                                                                                    | String                                                                                              | 5         | 100       | FALSE    | TRUE   | TRUE
+firstName | first name of user                                                                                                          | String                                                                                              | 1         | 50        | FALSE    | FALSE  | TRUE
+lastName  | last name of user                                                                                                           | String                                                                                              | 1         | 50        | FALSE    | FALSE  | TRUE
+locale    | user's preferred display formatting for localizing items such as currency, date time format, numerical representations, etc | ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code (en-US) | 5         | 5         | FALSE    | FALSE  | TRUE
+timeZone  | user's time zone in the "Olson" timezone database format                                                                    | "Area/Location" of "Olson" timezone                                                                 |           |           | FALSE    | FALSE  | TRUE
+
+#### Recovery Question Object
+
+User's recovery question used for verification of a recovery transaction
+
+Attribute         | Description              | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
+----------------- | ------------------------ | -------- | --------- | --------- | -------- | ------ | --------
+question          | user's recovery question | String   |           |           | FALSE    | TRUE   | TRUE
+
+
+### Factor Object
+
+A subset of attributes of a supported [Factor](factors.html#factor-model)
+
+Attribute     | Description                                                            | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
+------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
+id            | unique key for factor                                                  | String                                                         |           |           | TRUE     | TRUE   | TRUE
+factorType    | type of factor                                                         | [Factor Type](factors.html#factor-type)                        |           |           | FALSE    | TRUE   | TRUE
+provider      | factor provider                                                        | [Provider Type](factors.html#provider-type)                    |           |           | FALSE    | TRUE   | TRUE
+profile       | profile of a [supported factor](factors.html#supported-factors)        | [Factor Profile Object](factors.html#factor-profile-object)    |           |           | TRUE     | FALSE  | TRUE
+_embedded     | [embedded resources](#factor-embedded-resources) related to the factor | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
+_links        | [discoverable resources](#factor-links-object) for the factor          | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
+
+~~~json
+{
+  "id": "ostfm3hPNYSOIOIVTQWY",
+  "factorType": "token:software:totp",
+  "provider": "OKTA",
+  "profile": {
+      "credentialId": "isaac@example.org"
+  },
+  "_links": {
+      "verify": {
+          "href": "https://your-domain.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify",
+          "hints": {
+              "allow": [
+                  "POST"
+              ]
+          }
+      }
+  }
+}
+~~~
+
+#### Factor Embedded Resources
+
+##### TOTP Factor Activation Object
+
+TOTP factors when activated have an embedded verification object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
+
+Attribute     | Description                                       | DataType                                                       | MinLength | MaxLength | Nullable | Unique | Readonly
+------------- | ------------------------------------------------- | -------------------------------------------------------------- | --------- | --------- | -------- | ------ | --------
+timeStep      | time-step size for TOTP                           | String                                                         |           |           | FALSE    | FALSE  | TRUE
+sharedSecret  | unique secret key for prover                      | String                                                         |           |           | FALSE    | FALSE  | TRUE
+encoding      | encoding of `sharedSecret`                        | `base32` or `base64`                                           |           |           | FALSE    | FALSE  | TRUE
+keyLength     | number of digits in an HOTP value                 | Number                                                         |           |           | FALSE    | FALSE  | TRUE
+_links        | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |           |           | TRUE     | FALSE  | TRUE
+ 
+~~~ json
+ "activation": {
+    "timeStep": 30,
+    "sharedSecret": "HE64TMLL2IUZW2ZLB",
+    "encoding": "base32",
+    "keyLength": 6
+} 
+~~~
+
+###### TOTP Activation Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the TOTP activation object using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and operations.
+
+Link Relation Type | Description
+------------------ | -----------------------------------------------------------------------------------------------------------
+qrcode             | QR code that encodes the TOTP parameters that can be used for enrollment
+
+
+##### Phone Object
+
+The phone object describes previously enrolled phone numbers for the `sms` factor or for account recovery.
+
+Attribute     | Description          | DataType                                      | MinLength | MaxLength | Nullable | Unique | Readonly
+------------- | -------------------- | --------------------------------------------- | --------- | --------- | -------- | ------ | --------
+id            | unique key for phone | String                                        |           |           | FALSE    | TRUE   | TRUE
+profile       | profile of phone     | [Phone Profile Object](#phone-profile-object) |           |           | FALSE    | FALSE  | TRUE
+status        | status of phone      | `ACTIVE` or `INACTIVE`                        |           |           | FALSE    | FALSE  | TRUE
+
+~~~json
+{
+    "id": "mbl198rKSEWOSKRIVIFT",
+    "profile": {
+        "phoneNumber": "+1 XXX-XXX-1337"
+    },
+    "status": "ACTIVE"
+}
+~~~
+
+###### Phone Profile Object
+
+Attribute     | Description          | DataType | MinLength | MaxLength | Nullable | Unique | Readonly
+------------- | -------------------- | ---------| --------- | --------- | -------- | ------ | --------
+phoneNumber   | masked phone number  | String   |           |           | FALSE    | FALSE  | TRUE
+
+##### Factor Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the factor using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and operations.
+
+Link Relation Type | Description
+------------------ | -----------------------------------------------------------------------------------------------------------
+enroll             | [Enrolls a factor](#enroll-factor)
+verify             | [Verifies a factor](#verify-factor)
+questions          | Lists all possible questions for the `question` factor type
+resend             | Resends a challenge or OTP to a device
+
+> The Links Object is **read-only**
+
+## Authentication Operations
 
 
 ### Primary Authentication
-
-<img style="border: 0; padding: 2;" src="authn_nomfa.png" alt="Primary Authentication" />
-
-Primary authentication is always used to verify a user name and password whether or not other MFA factors are used. Primary authentication is only omitted for certain utility APIs that are anonymous or use an existing state token.
-
-The entry point into the authorization flow is a simple POST to the /api/v1/authn endpoint with the user's credentials. Optionally, the request can contain some client context and a relay state.
-
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn HTTP/1.1
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn
+
+Every authentication transaction starts with primary authentication which validates a user's username/password credential.  The [authentication status](#authentication-status) of the response will depend on the user's group memberships and assigned policies.  Password Policy and Sign-On Policy is evaluated during primary authentication to determine if the user's password is expired or if additional verification is required.
+
+- [Primary Authentication with Invalid Credentials](#primary-authentication-with-invalid-credentials)
+- [Primary Authentication with Expired Password](#primary-authentication-with-expired-password)
+- [Primary Authentication without Additional Verification](#primary-authentication-without-additional-verification)
+- [Primary Authentication with Additional Verification for Enrolled Factors](#primary-authentication-with-additional-verification-for-enrolled-factors)
+- [Primary Authentication with Factor Enrollment](#primary-authentication-with-factor-enrollment)
+
+> You must first enable MFA factors for your organization and assign a MFA Sign-On Policy to a group to enroll and/or verify an additional factor during authentication
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter   | Description                                                                                            | Param Type | DataType                          | MaxLength | Required | Default
+----------- | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | --------- | -------- |
+username    | User's non-qualified short-name (e.g. isaac) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            |           | TRUE     |
+password    | User's password credential                                                                             | Body       | String                            |           | TRUE     |
+relayState  | Optional state value that is persisted for the lifetime of the authentication transaction              | Body       | String                            | 2048      | FALSE    |
+context     | Provides additional context for the authentication transaction                                         | Body       | [Context Object](#context-object) |           | FALSE    |
+
+##### Context Object
+
+The Authentication API derives default context from the HTTP request and client socket.  The context object allows trusted web applications to override the default context by forwarding the originating context in the primary authentication request.
+
+Parameter   | Description                                                         | Param Type | DataType                          | Required | Default
+----------- | ------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | -------
+ipAddress   | IP Address of the user                                              | Body       | String                            | FALSE    |
+userAgent   | User Agent of the user                                              | Body       | String                            | FALSE    |
+deviceToken | A globally unique ID identifying the device of the user             | Body       | String                            | FALSE    |
+
+> Sign-On Security Policy may optionally require MFA based on network location.  Overriding HTTP request context is a highly privileged operation that should be limited to trusted web applications.  
+
+###### Device Token
+
+You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will still be challenged everytime instead of **per-device** or **per-session**.  It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+If the username or password is invalid you will receive a `401 Unauthorized` status code with the following error: 
+
+~~~http
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+
+{
+  "errorCode": "E0000004",
+  "errorSummary": "Authentication failed",
+  "errorLink": "E0000004",
+  "errorId": "oaeuHRrvMnuRga5UzpKIOhKpQ",
+  "errorCauses": []
+}
+~~~
+
+#### Primary Authentication with Invalid Credentials
+{:.api .api-operation}
+
+Authenticates a user with an invalid username or password.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn
+-d \
+'{
+  "username": "isaac@example.org",
+  "password" : "GoAw@y123",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "context": {
+    "ipAddress": "192.168.12.11",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
+    "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+
+{
+  "errorCode": "E0000004",
+  "errorSummary": "Authentication failed",
+  "errorLink": "E0000004",
+  "errorId": "oaeuHRrvMnuRga5UzpKIOhKpQ",
+  "errorCauses": []
+}
+~~~
+
+#### Primary Authentication with Expired Password
+
+Authenticates a user with an expired password.  The user must [change their expired password](#change-expired-password) to complete the authentication transaction.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn
+-d \
+'{
+  "username": "isaac@example.org",
+  "password" : "GoAw@y123",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "context": {
+    "ipAddress": "192.168.12.11",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
+    "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00s1pd3bZuOv-meJE13hz1B7SZl5EGc14Ii_CTBIYd",
+  "expiresAt": "2014-11-02T23:39:03.319Z",
+  "status": "PASSWORD_EXPIRED",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "password",
+      "href": "https://your-domain.okta.com/api/v1/authn/credentials/change_password",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Primary Authentication without Additional Verification
+
+Authenticates a user that is not assigned to a Sign-On Policy with a MFA challenge requirement.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn
+-d \
+'{
+  "username": "isaac@example.org",
+  "password": "GoAw@y123",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "context": {
+    "ipAddress": "192.168.12.11",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
+    "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00Fpzf4en68pCXTsMjcX8JPMctzN2Wiw4LDOBL_9pe",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+#### Primary Authentication with Additional Verification for Enrolled Factors
+
+Authenticates a user that has previously enrolled a factor for additional verification and assigned to a Sign-On Policy with a MFA challenge requirement.  The user must select and [verify](#verify-factor) a [factor](#factor-object) by `id` to complete the authentication transaction.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn
+-d \
+'{
+  "username": "isaac@example.org",
+  "password": "GoAw@y123",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "context": {
+    "ipAddress": "192.168.12.11",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
+    "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00FpGOgqHfl-6KZxh1bLXJDz35ENsShIY-lc5XHPzc",
+  "expiresAt": "2014-11-02T23:35:28.269Z",
+  "status": "MFA_REQUIRED",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factors": [
+      {
+        "id": "ufsm3jZGDQXPJDEIXZMP",
+        "factorType": "question",
+        "provider": "OKTA",
+        "profile": {
+          "question": "disliked_food",
+          "questionText": "What is the food you least liked as a child?"
+        },
+        "_links": {
+          "verify": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors/ufsm3jZGDQXPJDEIXZMP/verify",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "rsalhpMQVYKHZKXZJQEW",
+        "factorType": "token",
+        "provider": "RSA",
+        "profile": {
+          "credentialId": "isaac@example.org"
+        },
+        "_links": {
+          "verify": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors/rsalhpMQVYKHZKXZJQEW/verify",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "uftm3iHSGFQXHCUSDAND",
+        "factorType": "token:software:totp",
+        "provider": "GOOGLE",
+        "profile": {
+          "credentialId": "isaac@example.org"
+        },
+        "_links": {
+          "verify": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors/uftm3iHSGFQXHCUSDAND/verify",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "ostfm3hPNYSOIOIVTQWY",
+        "factorType": "token:software:totp",
+        "provider": "OKTA",
+        "profile": {
+          "credentialId": "isaac@example.org"
+        },
+        "_links": {
+          "verify": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "sms193zUBEROPBNZKPPE",
+        "factorType": "sms",
+        "provider": "OKTA",
+        "profile": {
+          "phoneNumber": "+1 XXX-XXX-1337"
+        },
+        "_links": {
+          "verify": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Primary Authentication with Factor Enrollment
+
+Authenticates a user assigned to a Sign-On Policy with a MFA challenge requirement who has not previously enrolled a factor for additional verification.  The user must select a [factor](#factor-object) to [enroll](#enroll-factor) to complete the authentication transaction.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn
+-d \
+'{
+  "username": "isaac@example.org",
+  "password": "GoAw@y123",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "context": {
+    "ipAddress": "192.168.12.11",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
+    "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
+  "expiresAt": "2014-11-02T23:44:41.736Z",
+  "status": "MFA_UNENROLLED",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factors": [
+      {
+        "factorType": "question",
+        "provider": "OKTA",
+        "_links": {
+          "questions": {
+            "href": "https://your-domain.okta.com/api/v1/users/00uoy3CXZHSMMJPHYXXP/factors/questions",
+            "hints": {
+              "allow": [
+                "GET"
+              ]
+            }
+          },
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "factorType": "token",
+        "provider": "RSA",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "factorType": "token:software:totp",
+        "provider": "GOOGLE",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "factorType": "token:software:totp",
+        "provider": "OKTA",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "factorType": "sms",
+        "provider": "OKTA",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+### Change Expired Password
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/credentials/change_password
+
+Okta enforces changing expired passwords during authentication when primary authentication returns the `PASSWORD_EXPIRED` status.  The user must change their existing password by posting a new password to the `next` link relation to successfully complete authentication.  
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter   | Description                                         | Param Type | DataType  | Required | Default
+----------- | --------------------------------------------------- | ---------- | --------- | -------- |
+stateToken  | [state token](#state-token) for current transaction | Body       | String    | TRUE     |
+oldPassword | User's current password that is expired             | Body       | String    | TRUE     |
+newPassword | New password for user                               | Body       | String    | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+If the `oldPassword` is invalid you will receive a `403 Forbidden` status code with the following error: 
+
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+  "errorCode": "E0000014",
+  "errorSummary": "Update of credentials failed",
+  "errorLink": "E0000014",
+  "errorId": "oaeYx8fd_-VQdONMI5OYcqoqw",
+  "errorCauses": [
+    {
+      "errorSummary": "oldPassword: The credentials provided were incorrect."
+    }
+  ]
+}
+~~~
+
+If the `newPassword` does not meet password policy requirements, you will receive a `403 Forbidden` status code with the following error: 
+
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+  "errorCode": "E0000080",
+  "errorSummary": "The password does meet the complexity requirements of the current password policy.",
+  "errorLink": "E0000080",
+  "errorId": "oaeuNNAquYEQkWFnUVG86Abbw",
+  "errorCauses": [
+    {
+      "errorSummary": "Passwords must have at least 8 characters, a lowercase letter, an uppercase letter, a number, no parts of your username"
+    }
+  ]
+}
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/credentials/change_password
+-d \
+'{
+  "stateToken": "00s1pd3bZuOv-meJE13hz1B7SZl5EGc14Ii_CTBIYd",
+  "oldPassword": "GoAw@y123",
+  "newPassword": "Ch-ch-ch-ch-Changes!"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00Fpzf4en68pCXTsMjcX8JPMctzN2Wiw4LDOBL_9pe",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+
+### Enroll Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors
+
+Enrolls a user with a [factor](factors.html#supported-factors) assigned by their administrator.  The operation is only available for users that have not previously enrolled a factor and have transitioned to the `MFA_UNENROLLED` [authentication status][#authentication-status]. 
+
+- [Enroll User with Security Question](#enroll-user-with-security-question)
+- [Enroll User with Okta SMS Factor](#enroll-user-with-okta-sms-factor)
+- [Enroll User with Okta Verify Factor](#enroll-user-with-okta-verify-factor)
+- [Enroll User with Google Authenticator Factor](#enroll-user-with-google-authenticator-factor)
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter   | Description                                                      | Param Type  | DataType                                                     | Required | Default
+----------- | ---------------------------------------------------------------- | ----------- | -------------------------------------------------------------| -------- | -------
+stateToken  | [state token](#state-token) for current transaction              | Body        | String                                                       | TRUE     |
+factorType  | type of factor                                                   | Body        | [Factor Type](factors.html#factor-type)                      | TRUE     |          
+provider    | factor provider                                                  | Body        | [Provider Type](factors.html#provider-type)                  | TRUE     |          
+profile     | profile of a [supported factor](factors.html#supported-factors)  | Body        | [Factor Profile Object](factors.html#factor-profile-object)  | TRUE     |          
+  
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+> Some [factor types](factors.html#factor-types) require [activation](#activate-factor) to complete the enrollment process.  The [authentication status](#authentication-status) will transition to `MFA_ENROLL_ACTIVATE` if a factor requires activation.
+
+#### Enroll User with Security Question
+{:.api .api-operation}
+
+Enrolls a user with the Okta `question` factor and [question profile](factors.html#question-profile).
+
+> Security Question factor does not require activation and is `ACTIVE` after enrollment
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors
+-d \
+'{
+  "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
+  "factorType": "question",
+  "provider": "OKTA",
+  "profile": {
+    "question": "name_of_first_plush_toy",
+    "answer": "blah"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T12:36:40.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00OhZsSfoCtbJTrU2XkwntfEl-jCj6ck6qcU_kA049",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+
+#### Enroll User with Okta SMS Factor
+{:.api .api-operation}
+
+Enrolls a user with the Okta `sms` factor and a [SMS profile](factors.html#sms-profile).  A text message with an OTP is sent to the device during enrollment and must be [activated](#activate-sms-factor) by following the `next` link relation to complete the enrollment process.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors
+-d \
+'{
+  "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
+  "factorType": "sms",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00lT7DEzQaeP6mv1_y3pdXjNEONzk83mXX-yhgEdVQ",
+  "expiresAt": "2014-11-03T00:46:09.700Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "mbl198rKSEWOSKRIVIFT",
+      "factorType": "sms",
+      "provider": "OKTA",
+      "profile": {
+        "phoneNumber": "+1 XXX-XXX-1337"
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/mbl198rKSEWOSKRIVIFT/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "resend": [
+      {
+        "name": "sms",
+        "href": "https://your-domain.okta.com/api/v1/authn/factors/mbl198rKSEWOSKRIVIFT/lifecycle/resend",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    ]
+  }
+}
+~~~
+
+#### Enroll User with Okta Verify Factor
+{:.api .api-operation}
+
+Enrolls a user with the Okta `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `next` link relation to complete the enrollment process.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors
+-d \
+'{
+  "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
+  "factorType": "token:software:totp",
+  "provider": "OKTA"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "expiresAt": "2014-11-03T00:50:49.912Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "ostf2xjtDKWFPZIKYDZV",
+      "factorType": "token:software:totp",
+      "provider": "OKTA",
+      "profile": {
+        "credentialId": "isaac@example.org"
+      },
+      "_embedded": {
+        "activation": {
+          "timeStep": 30,
+          "sharedSecret": "KBMTM32UJZSXQ2DW",
+          "encoding": "base32",
+          "keyLength": 6,
+          "_links": {
+            "qrcode": {
+              "href": "https://your-domain.okta.com/api/v1/users/00uoy3CXZHSMMJPHYXXP/factors/ostf2xjtDKWFPZIKYDZV/qr/00Mb0zqhJQohwCDkB2wOifajAsAosEAXvDwuCmsAZs",
+              "type": "image/png"
+            }
+          }
+        }
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/ostf2xjtDKWFPZIKYDZV/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Enroll User with Google Authenticator Factor
+{:.api .api-operation}
+
+Enrolls a user with the Google `token:software:totp` factor.  The factor must be [activated](#activate-totp-factor) after enrollment by following the `next` link relation to complete the enrollment process.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors
+-d \
+'{
+  "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
+  "factorType": "token:software:totp",
+  "provider": "OKTA"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "expiresAt": "2014-11-03T00:50:49.912Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "ostf2xjtDKWFPZIKYDZV",
+      "factorType": "token:software:totp",
+      "provider": "GOOGLE",
+      "profile": {
+        "credentialId": "isaac@example.org"
+      },
+      "_embedded": {
+        "activation": {
+          "timeStep": 30,
+          "sharedSecret": "KYCRM33UJZSXQ2DW",
+          "encoding": "base32",
+          "keyLength": 6,
+          "_links": {
+            "qrcode": {
+              "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/factors/uftm3iHSGFQXHCUSDAND/qr/00Mb0zqhJQohwCDkB2wOifajAsAosEAXvDwuCmsAZs",
+              "type": "image/png"
+            }
+          }
+        }
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/uftm3iHSGFQXHCUSDAND/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+
+### Activate Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/lifecycle/activate</span>
+
+The `sms` and `token:software:totp` [factor types](factors.html#factor-types) require activation to complete the enrollment process.
+
+- [Activate TOTP Factor](#activate-totp-factor)
+- [Activate SMS Factor](#activate-sms-factor)
+
+#### Activate TOTP Factor
+{:.api .api-operation}
+
+Activates a `token:software:totp` factor by verifying the OTP.
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                          | Param Type | DataType | Required | Default
+------------ | ---------------------------------------------------- | ---------- | -------- | -------- | -------
+fid          | `id` of factor returned from enrollment              | URL        | String   | TRUE     |
+stateToken   | [state token](#state-token)  for current transaction | Body       | String   | TRUE     |
+passCode     | OTP generated by device                              | Body       | String   | TRUE     |
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/ostf1fmaMGJLMNGNLIVG/lifecycle/activate
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "passCode": "123456"
+}'
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00Fpzf4en68pCXTsMjcX8JPMctzN2Wiw4LDOBL_9pe",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+#### Activate SMS Factor
+{:.api .api-operation}
+
+Activates a `sms` factor by verifying the OTP.  The request/response is identical to [activating a TOTP factor](#activate-totp-factor)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter   | Description                                                         | Param Type | DataType                          | Required | Default
------------ | ------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | -------
-login       | URL of the user to authenticate                                     | Body       | String                            | TRUE     |
-password    | Password for the user to authenticate                               | Body       | String                            | TRUE     |
-relayState  | An optional value to track this authentication                      | Body       | String                            | FALSE    |
-context     | Optional values to track how this authentication is accessed        | Body       | [Context Object](#context-object) | FALSE 
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+passCode     | OTP sent to mobile device                           | Body       | String   | TRUE     |
 
-###### Context Object
+##### Response Parameters
+{:.api .api-response .api-response-params}
 
-The Context Object tracks source of an authentication request.
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
 
-Parameter   | Description                                                         | Param Type | DataType                          | Required | Default
------------ | ------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | -------
-ipAddress   | The address from which the request originates                       | Body       | String                            | FALSE    |
-userAgent   | Agent and device information for the request                        | Body       | String                            | FALSE    |
-deviceToken | A globally unique ID identifying the device making the request      | Body       | String                            | FALSE    |
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
 
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
 
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
 
 ##### Request Example
-{:.api .api-request .api-request-example} 
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "passCode": "123456"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
 
 ~~~json
-POST /api/v1/authn HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
 {
-    "login": "user@example.com",
-    "password": "Abcd1234",
-    "relayState": "5Fij07bc0j",
-    "context": {
-        "ipAddress": "192.168.12.11",
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
-        "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
+  "expiresAt": "2014-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00Fpzf4en68pCXTsMjcX8JPMctzN2Wiw4LDOBL_9pe",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
     }
+  }
 }
 ~~~
 
-**Note:** The device token should be a globally unique ID which identifies the device from which the user is accessing the service.
+### Verify Factor
 
-##### Response Example
-{:.api .api-response .api-response-example}
+Verifies an enrolled factor for an authentication transaction with the `MFA_REQUIRED` or `MFA_CHALLENGE` [status](#authentication-status)
 
-In the response, a state token is presented and the status is `MFA_UNENROLLED`. 
+- [Verify Security Question Factor](#verify-security-question-factor)
+- [Verify SMS Factor](#verify-sms-factor)
+- [Verify TOTP Factor](#verify-totp-factor)
 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_UNENROLLED",
-    "expiresAt" : "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded" : {
-          "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Isaac",
-                  "lastName": "Brock",
-                  "login": "isaac@example.org",
-              }
-          },
-          "factors": [
-           {
-                "factorType": "sms",
-                "provider": "OKTA",
-                "deviceTypes": [ "mobile" ],
-                "_links": {
-                    "logo": { "href": "https://okta.com/static/sms.png" },
-                    "enroll": {
-                        "href": "http://your-domain.okta.com/api/v1/authn/factors",
-                        "hints": {
-                            "allow": [ "POST" ]
-                        }
-                    }
-                }
-           },
-           {
-               "factorType": "totp",
-               "provider":"OKTA",
-               "deviceTypes":["smartphone:ios","smartphone:android","smartphone:blackberry"],
-               "_links": {
-                   "logo": { "href": "https://okta.com/static/okta-verify.png" },
-                   "enroll": {
-                        "href": "http://your-domain.okta.com/api/v1/authn/factors",
-                        "hints": {
-                            "allow": [ "POST" ]
-                        }
-                    }
-               }
-           }],
-    },
-    "_links": {
-        "cancel": {
-             "href": "/api/v1/authn/cancel",
-             "hints": {
-                "allow": [ "POST" ]
-             }
-        }
-    }
-}
-~~~
-
-<hr />
-
-### Authentication with an Enrolled MFA Factor 
-
-<img style="border: 0; padding: 2;" src="authn_mfa.png" alt="Authentication with Enrolled MFA" />
-
-This example shows a user who is already enrolled in MFA and needs to complete the challenge phase. The value of the state token reflects that the user is already enrolled in MFA. This example also illustrates how to request an ID token. 
-
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn?response_type=code%20id_token HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "login": "user@example.com",
-    "password": "Abcd1234",
-    "relayState": "5Fij07bc0j",
-    "context": {
-        "ipAddress": "192.168.12.11",
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
-        "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
-    }
-}
-~~~
-
-The application passes the user credentials along with some context into the Okta /api/v1/authn endpoint.
- 
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_REQUIRED",
-    "expiresAt": "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded": {
-         "user": {
-             "id": "00udnlQDVLVRIVXESCMZ",
-             "lastLogin": "2014-06-06T05:47:17.000Z",
-             "profile": {
-                 "firstName": "Isaac",
-                 "lastName": "Brock",
-                 "login": "isaac@example.org",
-             }
-         },
-         "factors": [
-          {
-             "id": "00ud4tVDDXYVKPXKVLCO",
-             "factorType": "sms",
-             "deviceType": "phone",
-             "profile": {
-                 "displayName": "My Phone",
-                 "phoneNumber": "XXX-XXX-4567"
-             },
-             "_links": {
-                 "logo": { "href": "https://okta.com/static/sms.png" },
-                 "verify": { "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify" }
-             }
-          },
-          {
-             "id": "00ud4tVDDXYVKPXKVLCO",
-             "factorType": "totp",
-             "deviceType": "tablet",
-             "profile": {
-                 "displayName": "My IPad",
-             },
-             "_links": {
-                 "logo": { "href": "https://okta.com/static/verify.png" },
-                 "verify": { "href": "/api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify" }
-             }
-          }
-       ]
-    },
-    "_links": {
-        "cancel": { 
-            "href": "/api/v1/authn/cancel",
-            "hints": {
-                 "allow": [ "POST" ]
-             }
-        }
-    }
-}
-~~~
-
-A state token is generated, and the status is set to `MFA_REQUIRED`. This indicates that there are one or more enrolled factors. To choose which factor to use, follow the "verify" link for that factor. In this example the request POSTs to the SMS factor. At this time, there is no passcode to send. The operation only selects which factor to use. 
-
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "relayState": "5Fij07bc0j"
-}
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_CHALLENGE",
-    "expiresAt": "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded": {
-        "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Isaac",
-                  "lastName": "Brock",
-                  "login": "isaac@example.org",
-              }
-          }
-    },
-    "_links": { 
-        "next": {
-              "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify",
-              "hints": {
-                 "allow": [ "POST" ]
-              } 
-         },
-        "prev": {
-             "href": "/api/v1/authn/previous",
-             "hints": {
-                 "allow": [ "POST" ]
-             }
-        },
-        "cancel": {
-             "href": "/api/v1/authn/cancel",
-             "hints": {
-                 "allow": [ "POST" ]
-             }
-        }
-    }
-}
-~~~
-
-Now, the status is `MFA_CHALLENGE`. At this point the SMS code has been sent. Next, the user sends it back for verification. Once you obtain the passcode, POST it back to the same endpoint, as shown in the request below. 
-
-For factors such as Okta Verify, this intermediate step is not necessary since there is no background code for Okta to send to the user. In those cases, you can just choose the factor and POST the passcode all in one step.
- 
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "passCode": "123456",
-    "relayState": "5Fij07bc0j"
-}
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "status": "SUCCESS",
-    "relayState": "5Fij07bc0j"
-    "authCode": "08Aa6xn76LQVGsxC25xENmvyOSyWqMZK",
-    "id_token": "eyJpc3MiOiI3NjEzMjY3OTgwNjktcjVtbGpsbG4xcmQ0bHJiaGc3NWVmZ2lncDM2bTc4ajVAZGV2ZWxv
-                 cGVyLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJzY29wZSI6Imh0dHBzOi8vd3d3Lmdvb2dsZWFwaXMuY29t
-                 L2F1dGgvcHJlZGljdGlvbiIsImF1ZCI6Imh0dHBzOi8vYWNjb3VudHMuZ29vZ2xlLmNvbS9vL29hdXRo
-                 Mi90b2tlbiIsImV4cCI6MTMyODU1NDM4NSwiaWF0IjoxMzI4NTUwNzg1fQ",
-    "_embedded": {
-        "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Isaac",
-                  "lastName": "Brock",
-                  "login": "isaac@example.org",
-              }
-          }
-    }
-}
-~~~
-
-<hr />
-
-### Authentication with an Unenrolled MFA Factor 
-
-<img style="border: 0; padding: 2;" src="authn_mfa_unenrolled.png" alt="Authentication with Unenrolled MFA" />
-
-The following flows use the /api/v1/authn endpoint to navigate through primary user authentication, MFA enrollment, challenge, and verification. There are also the special cases of password expired and forgot-password. The end result is either an authorization code which can be redeemed for a session, or an ID token, or both. We follow the same patterns as OpenID Connect for specifying the response type.
-
-The client can optionally include some relay state on the URL or in the request body, with the *relayState* parameter. This parameter is echoed back in the response, and can be used anywhere along the chain for this API.
-
-The client can force an MFA challenge, even if Okta's policies do not require it. Use the *force_mfa* parameter, if you want to force a challenge.
-
-Parameter    | Description                     | Param Type | DataType | Required | Default
------------- | ------------------------------- | ---------- | -------- | -------- | -------
-response_type | The type that contains the response. Valid types are `code`, `id_token`, and `code%20id_token`         | String     | String   | False    | `code`
-force_mfa    | Forces an MFA challenge         | Boolean    | Boolean   | False   | False
-relayState   | Optional relay state            | String     | String    | False   | None
-
-
-
-#### Primary Authentication
-
-The entry point into the authorization flow is a simple POST to the /api/v1/authn endpoint with the user's credentials. This entry point is the same for several use cases. Optionally, the request can contain some client context and relay state.
-
+#### Verify Security Question Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn HTTP/1.1
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
+
+Verifies an answer to a `question` factor.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-None.
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+answer       | answer to security question                         | Body       | String   | TRUE     |
 
-##### Request Example
-{:.api .api-request .api-request-example} 
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+If the `answer` is invalid you will receive a `403 Forbidden` status code with the following error: 
 
 ~~~json
-POST /api/v1/authn HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
 {
-    "login": "user@example.com",
-    "password": "Abcd1234",
-    "relayState": "5Fij07bc0j",
-    "context": {
-        "ipAddress": "192.168.12.11",
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
-        "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your answer doesn't match our records. Please try again."
     }
-}
-~~~
-
-**Note:** The device token should be a globally unique ID which identifies the device from which the user is accessing the service.
-
-#####Response Example
-{:.api .api-response .api-response-example}
-
-In the response, a state token is presented and the status is `MFA_UNENROLLED`. 
-
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_UNENROLLED",
-    "expiresAt" : "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded" : {
-          "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Isaac",
-                  "lastName": "Brock",
-                  "login": "isaac@example.org",
-              }
-          },
-          "factors": [
-           {
-                "factorType": "sms",
-                "provider": "OKTA",
-                "deviceTypes": [ "mobile" ],
-                "_links": {
-                    "logo": { "href": "https://okta.com/static/sms.png" },
-                    "enroll": {
-                        "href": "http://your-domain.okta.com/api/v1/authn/factors",
-                        "hints": {
-                            "allow": [ "POST" ]
-                        }
-                    }
-                }
-           },
-           {
-               "factorType": "totp",
-               "provider":"OKTA",
-               "deviceTypes":["smartphone:ios","smartphone:android","smartphone:blackberry"],
-               "_links": {
-                   "logo": { "href": "https://okta.com/static/okta-verify.png" },
-                   "enroll": {
-                        "href": "http://your-domain.okta.com/api/v1/authn/factors",
-                        "hints": {
-                            "allow": [ "POST" ]
-                        }
-                    }
-               }
-           }],
-    },
-    "_links": {
-        "cancel": {
-             "href": "/api/v1/authn/cancel",
-             "hints": {
-                "allow": [ "POST" ]
-             }
-        }
-    }
-}
-~~~
-
-#### Factor Enrollment
-
-The user can now choose which factor to enroll in. The client should POST to one of the *enroll* links, depending on which factor is selected.
-
-**Note:** When enrolling in a factor, there is an *activate* parameter which indicates whether  to enroll in the factor and activate it by sending out the activation code all in one step. The default is `true`, but you change behavior using this parameter. If the factor is not activated now, there is a *resend* link in the response below which can be followed to send the activation code.
-
-What goes in the *profile* is specific to which factor you choose. The general requiremen
-
-Type | General Requirement
----- | -------------------
-SMS  | *phoneNumber*
-TOTP | no profile entry required
-Security Question |  *question* and *answer*
-
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON 
-POST /api/v1/authn/factors?activate=true HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "factorType": "sms",
-    "provider": "OKTA",
-    "deviceType": "mobile"
-    "relayState": "5Fij07bc0j",
-    "profile": {
-        "name": "My Phone",
-        "phoneNumber": "1-408-123-4567"
-    }
-}
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "id": "00fa0pazBD8AZNmHmbB5",
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "factorType": "sms",
-    "status": "MFA_ENROLL_ACTIVATE",
-    "expiresAt" : "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded" : {
-         "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Isaac",
-                  "lastName": "Brock",
-                  "login": "isaac@example.org",
-              }
-          }
-    },
-    "_links": {
-        "next": {
-             "href": "/api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/activate",
-             "hints": {
-                "allow": [ "POST" ]
-             }
-        },
-        "prev": {
-             "href": "/api/v1/authn/previous",
-             "hints": {
-                "allow": [ "POST" ]
-             }
-        },
-        "resend": {
-             "href": "/api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/resend",
-             "hints": {
-                "allow": [ "POST" ]
-             }
-        },
-        "cancel": { 
-             "href": "/api/v1/authn/cancel",
-             "hints": {
-                 "allow": [ "POST" ]
-             } 
-        }
-    }
-}
-~~~
-
-
-The status is now `MFA_ENROLL_ACTIVATE`. The user now obtains some sort of enrollment key or passcode from their device and the client POSTs it back to finish the enrollment.
- 
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn/factors/00fa0pazBD8AZNmHmbB5/lifecycle/activate HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "passCode": "123456",
-    "relayState": "5Fij07bc0j"
-}
-~~~
-
-**Note:**  If the security question factor were used, the attribute here would be `answer` instead of `passCode`.
- 
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "status": "SUCCESS",
-    "authCode": "08Aa6xn76LQVGsxC25xENmvyOSyWqMZK",
-    "relayState": "5Fij07bc0j"
-    "_embedded": {
-        "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Isaac",
-                  "lastName": "Brock",
-                  "login": "isaac@example.org",
-              }
-          }
-    }
-}
-~~~
-
-The final result is a successful authentication that generates an `authCode` that can be passed to the Sessions API to get a session cookie; for example `https://acme.okta.com/login/sessionCookie?token=08Aa6xn76LQVGsxC25xENmvyOSyWqMZK`.
-
-<hr />
-
-
-### Expired Password Flow
-
-<img style="border: 0; padding: 2;" src="authn_nomfa_expired_password.png" alt="Expired Password Flow" />
-
-<img style="border: 0; padding: 2;" src="authn_mfa_expired_password.png" alt="Expired Password Flow" />
-
-
-The following examples show how the flow changes if the user's password is expired.
-
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "login": "user@example.com",
-    "password": "Abcd1234",
-    "relayState": "5Fij07bc0j",
-    "context": {
-        "ipAddress": "192.168.12.11",
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
-        "deviceToken": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
-    }
-}
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "PASSWORD_EXPIRED",
-    "expiresAt": "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded": {
-        "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Add-Min",
-                  "lastName": "O'Cloudy Tud",
-                  "login": "administrator1@clouditude.net",
-              }
-          }
-    },
-    "_links": {
-        "next": {
-              "href": "/api/v1/authn/credentials/change_password",
-              "hints": {
-                 "allow": [ "POST" ]
-              }
-         },
-        "cancel": {
-             "href": "/api/v1/authn/cancel",
-             "hints": {
-                 "allow": [ "POST" ]
-             }
-        }
-    }
-}
-~~~
-
-Next, the app obtains the previous password and new password from the user, and POSTs them to the /api/v1/authn/credentials/change_password endpoint.
-
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn/credentials/change_password HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "oldPassword": "Abcd1234",
-    "newPassword": "1234Abcd",
-    "relayState": "5Fij07bc0j"
-}
-~~~
-
-This immediately moves the user into the next state (`MFA_UNENROLLED` or `MFA_REQUIRED`) or directly to the `SUCCESS` state if MFA is not enabled.
-
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_REQUIRED",
-    "expiresAt": "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded": {
-       "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Add-Min",
-                  "lastName": "O'Cloudy Tud",
-                  "login": "administrator1@clouditude.net",
-              }
-       },
-       "factors": [
-        {
-            "id": "00ud4tVDDXYVKPXKVLCO",
-            "factorType": "sms",
-            "deviceType": "phone",
-            "profile": {
-                "displayName": "My Phone",
-                "phoneNumber": "XXX-XXX-4567"
-            },
-            "_links": {
-                "logo": { "href": "https://okta.com/static/sms.png" },
-                "next": { "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify" }
-            }
-        },
-        {
-            "id": "00ud4tVDDXYVKPXKVLCO",
-            "factorType": "totp",
-            "deviceType": "tablet",
-            "profile": {
-                "displayName": "My IPad",
-            },
-            "_links": {
-                "logo": { "href": "https://okta.com/static/verify.png" },
-                "next": { "href": "/api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify" }
-            }
-        }
-       ]
-    },
-    "_links": {
-        "cancel": { "href": "/api/v1/authn/cancel" }
-    }
-}
-~~~
-
-At this point, the flow continues as before. The user must choose a verification factor, and then the app will receive an authorization code or an ID token. 
-
-<hr />
-
-### Forgotten Password Flow
-
-<img style="border: 0; padding: 2;" src="authn_mfa_forgotten_password.png" alt="Forgotten Password Flow" />
-
-The System Info endpoint has a Forgot Password link which can be used to take a username and trigger the forgotten password flow. To use it, POST the username to the /authn endpoint using the *forgot_password* query parameter. 
-
-**NOTE:** This flow assumes a trusted client, as it requires an API token. 
-
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn?forgot_password=true HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "login": "user@example.com",
-    "relayState": "5Fij07bc0j",
-    "context": {
-        "ipAddress": "192.168.12.11",
-        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3)",
-        "deviceId": "26q43Ak9Eh04p7H6Nnx0m69JqYOrfVBY"
-    }
-}
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "status": "RECOVERY",
-    "recoveryToken": "zcAuL98F0DOtdrwK7I6iaz6nSXrK7cPJ",
-    "relayState": "5Fij07bc0j",
-    "_embedded": {
-         "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "John",
-                  "lastName": "Smith",
-                  "login": "user@example.com",
-              }
-        }
-    },    
-    "_links": {
-        "next"  : { "name": "recovery", "href": "/api/v1/authn/recovery" },
-        "send" : [ 
-                   { 
-                      "name": "sms",
-                      "href": "/api/v1/authn/recovery/sms" 
-                   },
-                   {
-                      "name": "call",
-                      "href": "/api/v1/authn/recovery/call"
-                   }
-                ]
-    }
-}
-~~~
-
-This scenario presents the client with a recoveryToken to send  to the user in an email. Alternatively, if the org setting called "Users can reset password with SMS" is turned on **and**  the user has previously configured a phone number, there will be a SMS link to use to send a text to the user's phone with a one-time passcode. In both case, a recoveryToken or an SMS passCode, the user must tenter the code back into the client app, which POSTs it back to the /authn/recovery endpoint as shown below. 
-
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn/recovery HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "recoveryToken": "zcAuL98F0DOtdrwK7I6" [alternatively, in the future: "passCode" from SMS or voice call]
-    "relayState": "5Fij07bc0j",
-}
-~~~
-
-This redeems the recoveryCode or SMS passCode and presents the security question. If the recoveryToken or passCode is invalid, a 403 error is returned.
-
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "RECOVERY",
-    "expiresAt" : "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded" : {
-          "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "John",
-                  "lastName": "Smith",
-                  "login": "user@example.com",
-              },
-              "recovery_question": {
-                 "question": "Who's a major player in the cowboy scene?"
-              },
-          }
-    },
-    "_links": {
-        "next"  : { "name": "answer", href": "/api/v1/authn/recovery/answer" },
-        "cancel": { "href": "/api/v1/authn/cancel" }
-    }
-}
-~~~
-
-**Note:** The response now has a stateToken, as a valid recoveryToken was presented and the user is now within the recovery flow. The stateToken is used to finish the recovery, as shown below.
- 
-The final step is to answer the security question and set a new password. This can be accomplished in one step or two, depending on the structure of the client UI.
-
-##### Request Example
-{:.api .api-request .api-request-example} 
-
-~~~JSON
-POST /api/v1/authn/recovery/answer HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "answer": "Cowboy Dan"
-}
-~~~
-
-In this example, just the security answer was posted, so the status moves to `PASSWORD_RESET` until the new password is also posted. It is allowable to post them both in the same request to /authn/recovery/answer.
-
-##### Response Example
-{:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
-  
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "PASSWORD_RESET",
-    "expiresAt" : "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_links": {
-        "next"  : { "name": "password", "href": "/api/v1/authn/credentials/reset_password" },
-        "cancel": { "href": "/api/v1/authn/cancel" }
-    }
+  ]
 }
 ~~~
 
 ##### Request Example
-{:.api .api-request .api-request-example} 
+{:.api .api-request .api-request-example}
 
-~~~JSON
-POST /api/v1/authn/credentials/reset_password HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "newPassword": "NEW PASSWORD"
-}
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/ufs1pe3ISGKGPYKXRBKK/verify
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "answer": "mayonnaise"
+}'
 ~~~
 
-Now the password has been set and the authorization flow continues, either to `MFA_REQUIRED` or directly to `SUCCESS`.
- 
- 
 ##### Response Example
 {:.api .api-response .api-response-example}
- 
-~~~JSON
-HTTP/1.1 200 OK
-Content-Type: application/json
-  
+
+~~~json
 {
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_REQUIRED",
-    "expiresAt": "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded": {
-         "user": {
-             "id": "00udnlQDVLVRIVXESCMZ",
-             "lastLogin": "2014-06-06T05:47:17.000Z",
-             "profile": {
-                 "firstName": "John",
-                 "lastName": "Smith",
-                 "login": "user@example.com",
-             }
-         },
-         "factors": [
-          {
-             "id": "00ud4tVDDXYVKPXKVLCO",
-             "factorType": "sms",
-             "deviceType": "phone",
-             "profile": {
-                 "displayName": "My Phone",
-                 "phoneNumber": "XXX-XXX-4567"
-             },
-             "_links": {
-                 "logo": { "href": "https://okta.com/static/sms.png" },
-                 "next": { "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify" }
-             }
-          },
-          {
-             "id": "00ud4tVDDXYVKPXKVLCO",
-             "factorType": "totp",
-             "deviceType": "tablet",
-             "profile": {
-                 "displayName": "My IPad",
-             },
-             "_links": {
-                 "logo": { "href": "https://okta.com/static/verify.png" },
-                 "next": { "href": "/api/v1/authn/factors/01xy4tVDDXYVKPXKVLCA/verify" }
-             }
-          }
-       ]
-    },
-    "_links": {
-        "cancel": { "href": "/api/v1/authn/cancel" }
+  "expiresAt": "2014-11-03T13:50:17.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00ZD3Z7ixppspFljXV2t_Z6GfrYzqG7cDJ8reWo2hy",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
     }
+  }
 }
 ~~~
 
-<hr />
-
-### Get Basic Information
+#### Verify SMS Factor
 {:.api .api-operation}
 
-<img style="border: 0; padding: 2;" src="authn_get_basic_info.png" alt="Get Basic Information" />
-
-Returns basic information and links. The user data that is returned is considered anonymous, as this API is run without user authentication.
-
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span>/api/v1/authn/info
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
 
 ##### Request Parameters
+{:.api .api-request .api-request-params}
 
-None.
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
 
-#####Response Example
-{:.api .api-response .api-response-example}
+> If you omit `passCode` in the request a new OTP will be sent to the device, otherwise the request will attempt to verify the `passCode`
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+If the `passCode` is invalid you will receive a `403 Forbidden` status code with the following error: 
 
 ~~~json
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
 {
-    "id": "00oewwEGGIFFQTUCFCVJ",
-    "name": your-domain08",
-    "status": "ACTIVE",
-    "subdomain": "your-domain",
-    "website": "http://example.net/",
-    "technicalContact": "webmaster@example.net",
-    "_links": {
-        "home": {
-            "href": "http:/your-domain.okta.com"
-        },
-        "logoUrl": {
-            "href": "http:/your-domain.okta.com/img/logos/okta-logo.png"
-        },
-        "forgotPassword": {
-            "href": "http:/your-domain.okta.com/api/v1/authn?forgot_password=true",
-            "hints": {
-                "allow": [ "POST" ]
-            }
-        },
-        "help": {
-            "href": "http:/your-domain.okta.com/help/login"
-        }
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your answer doesn't match our records. Please try again."
     }
+  ]
 }
 ~~~
 
-<hr />
 
-### stateToken Status
+##### Send SMS OTP
+
+Omit `passCode` in the request to sent an OTP to the device
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
+}'
+~~~
+
+###### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00_7ekoccZn32i1u1hD_02dI54yW_cCXk2jniDYnMD",
+  "expiresAt": "2014-11-03T01:58:09.097Z",
+  "status": "MFA_CHALLENGE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "sms193zUBEROPBNZKPPE",
+      "factorType": "sms",
+      "provider": "OKTA",
+      "profile": {
+        "phoneNumber": "+1 XXX-XXX-1337"
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "verify",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "resend": [
+      {
+        "name": "sms",
+        "href": "https://your-domain.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify/resend",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    ]
+  }
+}
+~~~
+
+##### Verify SMS OTP
+
+Specify `passCode` in the request to verify the factor.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "passCode": "657866"
+}'
+~~~
+
+###### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T14:02:27.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00t6IUQiVbWpMLgtmwSjMFzqykb5QcaBNtveiWlGeM",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+#### Verify TOTP Factor
 {:.api .api-operation}
 
-<img style="border: 0; padding: 2;" src="authn_stateToken_status.png" alt="Get stateToken Status" />
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
 
-The main /api/v1/authn endpoint can also act as a "token state" endpoint which can be used to check the current status of a given MFA state token. Instead of a username/password, POST a stateToken. The response provides the userId, status, expiration time, and next action for the token.
+Verifies an OTP for a `token:software:totp` factor.
 
-This example is useful in the following three use cases:
+##### Request Parameters
+{:.api .api-request .api-request-params}
 
-<ol><li>A client diverges from the flow for some reason and then comes back to it; they want to check exactly where they are at and figure out the next action.</li>
-<li>The state token is about to expire and the client wants to keep it alive. POSTing to any of these endpoints including this one will reset the expiration time, which is 5 minutes by default.</li>
-<li>For asynchronous uses cases, where the state changes in the background and the client needs to poll and check for it to change.</li></ol>
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span>/api/v1/authn
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+If the passcode is invalid you will receive a `403 Forbidden` status code with the following error: 
+
+~~~json
+{
+  "errorCode": "E0000068",
+  "errorSummary": "Invalid Passcode/Answer",
+  "errorLink": "E0000068",
+  "errorId": "oaei_IfXcpnTHit_YEKGInpFw",
+  "errorCauses": [
+    {
+      "errorSummary": "Your passcode doesn't match our records. Please try again."
+    }
+  ]
+}
+~~~
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/ostfm3hPNYSOIOIVTQWY/verify
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "passCode": "657866"
+}'
+~~~
+
+###### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T14:02:27.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00t6IUQiVbWpMLgtmwSjMFzqykb5QcaBNtveiWlGeM",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+## Recovery Operations
+
+### Forgot Password
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/password</span>
+
+Issues a [recovery token](#recovery-token) for a given user that can be used to reset a user's password.
+
+> The `recoveryToken` is usually sent directly to the end-user via email or SMS.  Obtaining a `recoveryToken` is a highly privileged operation and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to user's recovery question can reset their password or unlock their account.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter   | Description                                                                                            | Param Type | DataType                          | MaxLength | Required | Default
+----------- | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | --------- | -------- |
+username    | User's non-qualified short-name (e.g. isaac) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            |           | TRUE     |
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                    | Body       | String                            | 2048      | FALSE    |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) with a `RECOVERY` status and an issued `recoveryToken` that can be distributed to the end-user.
+
+You will receive a `404 Not Found` status code if the `username` requested is not valid
 
 ##### Request Example
-{:.api .api-request .api-request-example} 
+{:.api .api-request .api-request-example}
 
-~~~JSON
-POST /api/v1/authn HTTP/1.1
-Host: acme.okta.com
-Authorization: SSWS xWA57AyBz5dyy1Xp7K2759A5820b8k2n
-Accept: application/json
-Content-Type: application/json
- 
-{
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "relayState": "5Fij07bc0j"
-}
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/recovery/password
+-d \
+'{
+  "username": "isaac@example.org",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to"
+}'
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
- 
-~~~JSON
 
-HTTP/1.1 200 OK
-Content-Type: application/json
- 
+~~~json
 {
-    "stateToken": "NzYxMDAxIiwKICJhdWQiOiAiczZCaGRSa3F0",
-    "status": "MFA_CHALLENGE",
-    "expiresAt": "2014-04-17T19:59:19.000Z",
-    "relayState": "5Fij07bc0j",
-    "_embedded": {
-        "user": {
-              "id": "00udnlQDVLVRIVXESCMZ",
-              "lastLogin": "2014-06-06T05:47:17.000Z",
-              "profile": {
-                  "firstName": "Add-Min",
-                  "lastName": "O'Cloudy Tud",
-                  "login": "administrator1@clouditude.net",
-              }
-          }
-    },
-    "_links": { 
-        "next": {
-              "href": "/api/v1/authn/factors/00ud4tVDDXYVKPXKVLCO/verify",
-              "hints": {
-                 "allow": [ "POST" ]
-              }
-         },
-        "prev": {
-             "href": "/api/v1/authn/previous",
-             "hints": {
-                 "allow": [ "POST" ]
-             }
-        },
-        "cancel": {
-             "href": "/api/v1/authn/cancel",
-             "hints": {
-                 "allow": [ "POST" ]
-             }
-        }
+  "expiresAt": "2014-11-10T04:06:58.000Z",
+  "status": "RECOVERY",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "recoveryToken": "VBQ0gwBp5LyJJFdbmWCM",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
     }
+  },
+  "_links": {
+    "next": {
+      "name": "recovery",
+      "href": "https://your-domain.okta.com/api/v1/authn/recovery/token",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
 }
 ~~~
 
+### Unlock Account
+{:.api .api-operation}
 
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/unlock</span>
 
+Issues a [recovery token](#recovery-token) for a user that can be used to unlock their account.
 
+> Self-service unlock must be enabled in your organization's password policy.
 
+> The `recoveryToken` is usually sent directly to the end-user via email or SMS.  Obtaining a `recoveryToken` is a highly privileged operation and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to user's recovery question can reset their password or unlock their account.
 
+##### Request Parameters
+{:.api .api-request .api-request-params}
 
+Parameter   | Description                                                                                            | Param Type | DataType                          | MaxLength | Required | Default
+----------- | ------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------- | --------- | -------- |
+username    | User's non-qualified short-name (e.g. isaac) or unique fully-qualified login (e.g issac@example.org)   | Body       | String                            |           | TRUE     |
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                    | Body       | String                            | 2048      | FALSE    |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) with a `RECOVERY` status and an issued `recoveryToken` that can be distributed to the end-user.
+
+You will receive a `404 Not Found` status code if the `username` requested is not valid
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/recovery/unlock
+-d \
+'{
+  "username": "isaac@example.org",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-10T04:06:58.000Z",
+  "status": "RECOVERY",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "recoveryToken": "VBQ0gwBp5LyJJFdbmWCM",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "recovery",
+      "href": "https://your-domain.okta.com/api/v1/authn/recovery/token",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+### Verify Recovery Token
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/token</span>
+
+Validates a [recovery token](#recovery-token) that was distributed to the end-user to continue the recovery transaction. 
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                                                                | Param Type | DataType | Required | Default
+------------- | ---------------------------------------------------------------------------------------------------------- | ---------- | -------- | -------- |
+recoveryToken | [Recovery token](#recovery-token) that was distributed to end-user via out-of-band mechanism such as email | Body       | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) with a `RECOVERY` status and an issued `stateToken` that must be used to complete the recovery transaction.
+
+You will receive a `401 Unauthorized` status code if you attempt to use an expired or invalid [recovery token](#recovery-token).
+
+~~~http
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+
+{
+    "errorCode": "E0000011",
+    "errorSummary": "Invalid token provided",
+    "errorLink": "E0000011",
+    "errorId": "oaeY-4G_TBUTBSZAn9n7oZCfw",
+    "errorCauses": []
+}
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/recovery/token
+-d \
+'{
+  "recoveryToken": "/myapp/some/deep/link/i/want/to/return/to"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb",
+  "expiresAt": "2014-11-03T04:35:20.748Z",
+  "status": "RECOVERY",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      },
+      "recovery_question": {
+        "question": "Who's a major player in the cowboy scene?"
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "answer",
+      "href": "https://your-domain.okta.com/api/v1/authn/recovery/answer",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+### Answer Recovery Question 
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/answer</span>
+
+Answers the user's recovery question to ensure only the end-user reclaimed the [recovery token](#recovery-token) for recovery transaction with a `RECOVERY` [status](#authentication-status).
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+answer       | answer to user's recovery question                  | Body       | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+You will receive a `403 Forbidden` status code if the `answer` to the user's [recovery question](#recovery-question-object) is invalid
+
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+    "errorCode": "E0000087",
+    "errorSummary": "The recovery question answer did not match our records.",
+    "errorLink": "E0000087",
+    "errorId": "oaeGEiIPFfeR3a_XxpezUH9ug",
+    "errorCauses": []
+}
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/recovery/answer
+-d \
+'{
+  "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb",
+  "answer": "Cowboy Dan"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00Ehr_AX8eU6E0LTLaa1uCWUmM2cMUa-2WVNxfnyyg",
+  "expiresAt": "2014-11-03T04:57:56.038Z",
+  "status": "PASSWORD_RESET",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "password",
+      "href": "https://your-domain.okta.com/api/v1/authn/credentials/reset_password",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+### Reset Password 
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/credentials/reset_password</span>
+
+Resets a user's password to complete a recovery transaction with a `PASSWORD_RESET` [status](#authentication-status).
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+newPassword  | user's new password                                 | Body       | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the next [authentication status](#authentication-status).
+
+You will receive a `403 Forbidden` status code if the `answer` to the user's [recovery question](#recovery-question-object) is invalid.
+
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+    "errorCode": "E0000087",
+    "errorSummary": "The recovery question answer did not match our records.",
+    "errorLink": "E0000087",
+    "errorId": "oaeGEiIPFfeR3a_XxpezUH9ug",
+    "errorCauses": []
+}
+~~~
+
+You will also receive a `403 Forbidden` status code if the `newPassword` does not meet password policy requirements for the user.
+
+~~~http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+
+{
+    "errorCode": "E0000080",
+    "errorSummary": "The password does meet the complexity requirements of the current password policy.",
+    "errorLink": "E0000080",
+    "errorId": "oaeS4O7BUp5Roefkk_y4Z2u8Q",
+    "errorCauses": [
+        {
+            "errorSummary": "Passwords must have at least 8 characters, a lowercase letter, an uppercase letter, a number, no parts of your username"
+        }
+    ]
+}
+~~~
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/credentials/reset_password
+-d \
+'{
+  "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb",
+  "newPassword": "Ch-ch-ch-ch-Changes!"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T04:57:56.038Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00t6IUQiVbWpMLgtmwSjMFzqykb5QcaBNtveiWlGeM",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+## State Management Operations
+
+### Get Authentication Status for Transaction
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn</span>
+
+Retrieves the current [authentication status](#authentication-status) for a [state token](#state-token).
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+stateToken   | [state token](#state-token) for a transaction       | Body       | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+[Authentication Object](#authentication-model) for the current [authentication status](#authentication-status).
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn
+-d \
+'{
+  "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00OxquNRT_jR-Vy1KoVLYcGvb-0Swj6NN6rWL0krV5",
+  "expiresAt": "2014-11-03T05:28:30.000Z",
+  "status": "MFA_CHALLENGE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "username": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "sms193zUBEROPBNZKPPE",
+      "factorType": "sms",
+      "provider": "OKTA",
+      "profile": {
+        "phoneNumber": "+1 XXX-XXX-1337"
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "verify",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/sms193zUBEROPBNZKPPE/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+### Cancel Transaction
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/cancel</span>
+
+Cancels the current authentication transaction and revokes the [state token](#state-token).
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+stateToken   | [state token](#state-token) for a transaction       | Body       | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                                                            | Param Type | DataType | Required | Default
+------------ | -------------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
+relayState   | Optional state value that was persisted for the authentication or recovery transaction | Body       | String   | TRUE     |
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/cancel
+-d \
+'{
+  "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to"
+}
+~~~
