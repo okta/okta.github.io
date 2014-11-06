@@ -1,53 +1,32 @@
 {% include header.html css_file='customers.css' %}
 
-
-
 <div class="boundary container-non-responsive customers-index" id="main-container">
-
   <div class="block title-block">
     <h1>{{ page.tagline }}</h1>
   </div>
-
-  <div class="block customers-grid">
-    {% for page in site.pages %}
-      {% if page.layout == 'customer_story' %}
+  {% for page in site.pages %}
+    {% if page.layout == 'customer_story' %}
+      <div class="row customer-row">
         {% assign path  = page.url | remove: "/index.html" %}
-        {% assign idx   = idx | plus: 1 %}
-        {% assign break = idx | modulo: 3 %}
-
-        {% if break == 1 %}<div class="row customer-row">{% endif %}
-
-        <div class="col-md-4 customer-card">
-          <a href="{{ path }}">
-            <div class="customer-logo">
-              <img src="{{ path }}/{{ page.index_image }}" alt="" />
+        <div class="col-md-3 col-md-offset-1">
+          <a href="{{ path }}/">
+            <div class="customer-logo-wrap">
+              <img src="{{ path }}/{{ page.index_image }}"
+                    alt="{{ path }} logo"
+                    width="220"
+                    class="customer-logo">
             </div>
-            <h2>{{ page.title }}</h2>
-            <p>{{ page.index_blurb }}</p>
           </a>
         </div>
-        {% if break == 0 %}</div>{% endif %}
-      {% endif %}
-    {% endfor %}
-
-    {% comment %}
-      // the following loop closes the last div row
-      // if not an even multiple of 3
-      // required as number of customers is different from
-      // number of site.pages
-    {% endcomment %}
-
-    {% for page in site.pages %}
-      {% if page.layout == 'customer_story' %}
-        {% assign num_customers = num_customers | plus: 1 %}
-      {% endif %}
-    {% endfor %}
-    {% assign last_idx = num_customers | modulo: 3 %}
-    {% if last_idx != 0 %}</div>{% endif %}
-  </div>
-
+        <div class="col-md-7">
+          <h2>{{ page.title }}</h2>
+          <p>{{ page.index_blurb }}</p>
+          <a href="{{ path }}" class="view-study-link">View case study <span>&rarr;</span></a>
+        </div>
+      </div>
+      <hr>
+    {% endif %}
+  {% endfor %}
 </div>
-
-
 
 {% include footer.html %}

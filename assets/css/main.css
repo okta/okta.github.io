@@ -5,7 +5,7 @@
  * but side effects of further work are unknown as of may 2014
  *
  * in general page specific styles used in this file
- * should not be applied to ne pages
+ * should not be applied to new pages
  * instead, use the css_file mechanism in page/layout front matter
  * to introduce specific stylesheets
  *
@@ -24,7 +24,7 @@ html, body {
 
 body {
   background-color: #eaeaea;
-  margin-top: 90px;
+  margin-top: 121px;  /* top offset */
 }
 
 body p {
@@ -111,6 +111,76 @@ ul li {
 
 
 
+/* -------------------------- TOPBAR */
+
+#topbar {
+  position: fixed;
+  background: #f3f9fb;
+  color: #777;
+  height: 31px;  /* top offset */
+  width: 100%;
+  top: 0;
+  z-index: 1100;
+  border-bottom: 1px solid #dae5eb;
+  box-shadow: inset 0 -7px 10px -7px rgba(0, 0, 0, 0.05);
+}
+
+#topbar .container {
+  width: 1060px;
+  margin-top: .35em;
+}
+
+#topbar .text-right > span {
+  padding-left: 2em;
+  display: inline-block;
+}
+
+#support-menu {
+  display: inline-block;
+}
+#support-menu-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  position: relative;
+  top: -1px;
+  color: #428bca;
+}
+#support-menu-dropdown {
+  right: 0;
+  left: initial;
+  text-align: left;
+  width: 350px;
+  padding: 1em;
+  box-shadow:  0 10px 30px rgba(0, 0, 0, 0.45);
+}
+#support-menu-dropdown li {
+  font-size: 14px;
+}
+#support-menu-dropdown span {
+  display: inline-block;
+  padding-left: .75em;
+  width: 260px;
+}
+#support-menu-dropdown li .fa {
+  vertical-align: top;
+  margin-top: .2em;
+  padding: .75em;
+  background: #eee;
+  color: #fff;
+  border-radius: 20px;
+}
+#support-menu-dropdown li .fa.fa-comment {
+  background: #00cbcb;
+}
+#support-menu-dropdown li .fa.fa-envelope {
+  background: #ff5c40;
+}
+#support-menu-dropdown li .fa.fa-phone {
+  background: #f6c763;
+}
+
+
 /* -------------------------- HEADER */
 
 .logo-dev {
@@ -119,6 +189,10 @@ ul li {
   position: absolute;
   color: #504f50;
   font-size: 16px;
+}
+
+#navbar {
+  top: 31px; /* top offset */
 }
 
 .navbar {
@@ -156,6 +230,7 @@ ul li {
 
 .navbar-brand {
   background: url(/assets/img/logo.png) no-repeat 0 0;
+  background-size: 150px;
   width: 150px;
   height: 50px;
 }
@@ -243,6 +318,14 @@ footer.main-footer {
   color: #999;
   font-weight: 300;
   font-size: 12px;
+}
+
+.main-footer a {
+  color: #999;
+}
+.main-footer .sepr {
+  display: inline-block;
+  margin: 0 .3em;
 }
 
 .footer-left {
@@ -464,12 +547,12 @@ body#home {
   margin-bottom: 10px;
 }
 
-
 .valprop-home {
   height: 476px;
   border-bottom: none;
-  background: url(/assets/img/home-bg.png);
-  margin-top: 90px;
+  /*background: url(/assets/img/home-bg.png);*/
+  background: #0069aa;
+  margin-top: 121px;  /* top offset */
   margin-bottom: 90px
 }
 .valprop-title {
@@ -520,21 +603,6 @@ body#home {
 
 .home-header {
   color: #fff;
-}
-
-.welcome-head {
-  margin-top: 45px;
-  padding-top: 10px;
-  background-color: #709c29;
-  text-align: center;
-  height: 90px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.welcome-body {
-  background-color: #fafafa;
-  padding: 50px;
 }
 
 .features-page {
@@ -952,12 +1020,13 @@ div#sticker {
 }
 
 .recent-discussions {
-  margin-bottom: 100px;
+  margin-bottom: 6em;
 }
 
-.recent-discussions li {
-  margin-bottom: 18px;
-  font-size: 18px;
+h4.recent-subtitle {
+  font-size: 24px;
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 
@@ -1058,7 +1127,7 @@ div#sticker {
 }
 
 .title-block {
-  background: #3d75b3;
+  background: #0069aa;
   padding-top: 4em;
   padding-bottom: 4em;
   color: #fff;
@@ -1275,4 +1344,16 @@ pre code {
 }
 .highlight pre code {
   white-space: pre;
+}
+
+
+
+/* -------------------------- TERMS CONTENT */
+
+#terms .block.content h2 {
+  font-size: 18px;
+}
+
+#terms .block.content p {
+  font-size: 14px;
 }

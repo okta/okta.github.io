@@ -1,37 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=0.0, maximum-scale=1.0, user-scalable=no">
-
   <title>Okta Developers</title>
-
   <link href="/assets/ico/favicon.png" rel="shortcut icon">
   <link href="/assets/dist/css/bootstrap.css" rel="stylesheet">
   <link href="/assets/css/main.css" rel="stylesheet">
 
-  <script src="//use.typekit.net/pls8pog.js"></script>
+  <!-- script src="//use.typekit.net/pls8pog.js"></script -->
+  <script src="//use.typekit.net/ejx0fam.js"></script><!-- typekit for bbg domain -->
   <script>try{Typekit.load();}catch(e){}</script>
 
   {% if include.css_file %}
     <link rel="stylesheet" href="/assets/css/{{ include.css_file }}">
   {% endif %}
-
   {% if page.css_file %}
     <link rel="stylesheet" href="/assets/css/{{ page.css_file }}">
   {% endif %}
+  {% if page.dist_css_file %}
+    <link rel="stylesheet" href="/assets/dist/css/{{ page.dist_css_file }}">
+  {% endif %}
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', '{{ site.ga_ua_id }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+
 </head>
 
 
 
-<body {% if include.body_id %}id="{{ include.body_id }}"{% endif %}>
+{% comment %}
+  legacy pages explicitly pass body_id
+  for new pages we resolve the module name to pass as body_id
+{% endcomment %}
 
-  <nav class="navbar navbar-fixed-top" role="navigation">
+{% if include.body_id %}
+  {% assign body_id = include.body_id %}
+{% else %}
+  {% assign active_page_name  = page.url | split: "/" | last | remove: ".html" %}
+  {% assign split_url         = page.url | split: "/" %}
+  {% assign body_id           = split_url[1] %}
+{% endif %}
+
+
+
+<body id="{{ body_id }}">
+
+  <!-- topbar -->
+  <div id="topbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+         <a href="https://www.okta.com/" target="_blank">Visit Okta.com</a>
+        </div>
+        <div class="col-md-8 text-right">
+          <span>Phone: {{ site.support_phone_number }}</span>
+          <!-- span><a href="#" id="support-trigger">Support <i class="fa fa-caret-down"></i></a></span -->
+          <span>
+            <div class="dropdown" id="support-menu">
+              <button class="btn btn-default dropdown-toggle" type="button" id="support-menu-btn" data-toggle="dropdown">
+                Support
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" id="support-menu-dropdown" role="menu" aria-labelledby="support-menu-btn">
+                <li role="presentation">
+                  <i class="fa fa-comment"></i>
+                  <span>
+                    Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank"><strong>Stack Overflow</strong></a><br>
+                    We'll answer it within 24 hours
+                  </span>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation">
+                  <i class="fa fa-envelope"></i>
+                  <span>
+                    To email our team, login to your <a href="https://www.okta.com/" target="_blank"><strong>Okta</strong></a> admin account and click ‘Help’</li>
+                  </span>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation">
+                  <i class="fa fa-phone"></i>
+                  <span>
+                    Call us:<br>
+                    <strong>1 (877) 722-7871</strong></li>
+                  </span>
+              </ul>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- header/main nav -->
+  <nav class="navbar navbar-fixed-top" id="navbar" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -47,11 +117,11 @@
         <ul class="nav navbar-nav navbar-right">
          <li><a href="/features" {% if path[1] == "features" %} class="active-nav" {%else%}  class="black" {% endif %}>Features</a></li>
          <li><a href="/docs/getting_started/design_principles.html" {% if path[1] == "docs" %} class="active-nav" {%else%} class="black" {% endif %} >Docs</a></li>
-         <!-- <li><a href="/pricing" {% if path[1] == "pricing" %} class="active-nav" {%else%} class="black" {% endif %} >Pricing</a></li> -->
+         <!-- li><a href="/pricing" {% if path[1] == "pricing" %} class="active-nav" {%else%} class="black" {% endif %} >Pricing</a></li -->
          <!-- <li><a href="/blog" {% if path[1] == "blog" %} class="active-nav" {%else%} class="black" {% endif %} >Blog</a></li> -->
-         <!-- <li><a href="/customers" {% if path[1] == "customers" %} class="active-nav" {%else%} class="black" {% endif %} >Customers</a></li> -->
+         <li><a href="/customers" {% if path[1] == "customers" %} class="active-nav" {%else%} class="black" {% endif %} >Customers</a></li>
          <li><a href="/discussion" {% if path[1] == "discussion" %} class="mrg-right-15 active-nav" {%else%} class="mrg-right-15 black" {% endif %}>Discussion</a></li>
-         <li><a href="http://www.okta.com" data-num="{{p.weight}}" class="button-gray visit">Visit Okta.com</a></li>
+         <!-- li><a href="http://www.okta.com" data-num="{{p.weight}}" class="button-gray visit">Visit Okta.com</a></li -->
          <li><a href="/signup_plus" class="button  nav-button-padding "><strong>Get Started</strong></a></li>
        </ul>
      </div>

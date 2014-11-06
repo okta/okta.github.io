@@ -2,7 +2,9 @@
     <footer class="container main-footer" role="contentinfo">
       <div class="row">
         <div class="col-md-7 footer-left">
-          &copy; {{ site.time | date: "%Y" }} Okta, Inc. All Rights Reserved.
+          &copy; {{ site.time | date: "%Y" }} Okta, Inc. All Rights Reserved
+          <span class="sepr">&middot;</span>
+          <a href="/terms">Terms and Conditions</a>
         </div>
         <div class="col-md-5 footer-right">
           Follow us:
@@ -20,20 +22,29 @@
 
   </body>
 
-  <!-- <script src="/assets/js/jquery.js"></script> -->
-  <!-- <script src="/assets/dist/js/bootstrap.min.js"></script> -->
-  <!-- <script src="/assets/js/jquery-ui-1.10.3.custom.js"></script> -->
+  <!-- <script src="/assets/dist/js/jquery.js"></script> -->
+  <!-- <script src="/assets/dist/js/jquery-ui-1.10.3.custom.js"></script> -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="/assets/dist/js/underscore.min.js"></script>
+  <script src="/assets/dist/js/bootstrap.min.js"></script>
+
+  <script src="/assets/dist/js/jquery.scrollTo.min.js"></script>
+  <script src="/assets/dist/js/jquery.localScroll.min.js"></script>
+  <script src="/assets/js/function.js"></script>
 
   {% if include.dist_js_file %}
     <script src="/assets/dist/js/{{ include.dist_js_file }}"></script>
   {% endif %}
 
-  <script src="/assets/js/jquery.scrollTo.min.js"></script>
-  <script src="/assets/js/jquery.localScroll.min.js"></script>
-  <script src="/assets/js/function.js"></script>
+  {% if page.dist_js_file %}
+    <script src="/assets/dist/js/{{ page.dist_js_file }}"></script>
+  {% endif %}
 
   {% if include.js_file %}
     <script src="/assets/js/{{ include.js_file }}"></script>
+  {% endif %}
+
+  {% if page.js_file %}
+    <script src="/assets/js/{{ page.js_file }}"></script>
   {% endif %}
 </html>

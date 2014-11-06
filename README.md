@@ -71,13 +71,13 @@ title: TITLE_CASE_NAME_OF_SECTION
 1.  Create an `index.md` folder in `customers/CUSTOMER_NAME` (e.g. *customers/box/index.md*)
 2.  Create the images:
 
- ```
-`thumb_image`:   250px x 120px
-`index_image`:   303px x 226px
-`diagram_image`: 694px x <n>px
+```
+`index_image`:     220px x 165px @144dpi  // image used on index page
+`header_image`:   1080px x 220px @144dpi  // title bar image on story page
+`diagram_image`:   694px x <n>px @144dpi  // information graphic at bottom of story page
 ```
 3.  Author front matter
- 
+
  ```
 `index_blurb` will be clipped over three lines of text
 `sidebar_copy` will be markdownified. Newlines sohuld be doubled.

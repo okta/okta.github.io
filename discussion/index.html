@@ -2,47 +2,49 @@
 layout: page
 title: Okta developers
 description: "Okta developers"
+js_file: discussion.js
 ---
 
 
 <div class="container-features">
-   <div class="valprop-features">
-      <div class="container-narrow">
-         <div class="row">
-            <div class="col-xs-8">
-               <h3 class="valprop-title discussion-header">Discussions</h3>
-            </div>
-            <div class="col-xs-4 mrg-top-50">
-               <a href="http://stackoverflow.com/search?q=okta" data-num="" class="button nav-button-padding">Go to Stack Overflow Forum</a>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-xs-12">
-               <p>The Okta team actively answers questions about the [okta-api] tag on Stack Overflow throughout the day. Please use this forum to post any questions you have.</p>
-            </div>
-         </div>
+  <div class="valprop-features">
+    <div class="container-narrow">
+      <div class="row">
+        <div class="col-xs-8">
+          <h3 class="valprop-title discussion-header">Discussions</h3>
+        </div>
+        <div class="col-xs-4 mrg-top-50">
+          <a href="http://stackoverflow.com/search?q=okta" data-num="" class="button nav-button-padding">Go to Stack Overflow Forum</a>
+        </div>
       </div>
-   </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <p>The Okta team actively answers questions about the [okta-api] tag on Stack Overflow throughout the day. Please use this forum to post any questions you have.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="container-features discussion-page">
-   <div class="row search-holder features-border nopadding">
-      <div class="col-xs-8 col-xs-offset-2">
-         <div class="search-holder">
-            <form target="_blank" action="http://stackoverflow.com/search">
-               <span class="input-group-addon search-icon"></span>
-            <input class="form-control input-lg" id="focusedInput" type="text" placeholder="Search the Stack Overflow forum" autocomplete="on" name="q">
-         </form>
-         </div>
+  <div class="row search-holder features-border nopadding">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="search-holder">
+        <form target="_blank" action="http://stackoverflow.com/search">
+          <span class="input-group-addon search-icon"></span>
+          <input class="form-control input-lg" id="focusedInput" type="text" placeholder="Search the Stack Overflow forum" autocomplete="on" name="q">
+        </form>
       </div>
-   </div>
-   <div class="row nopadding">
-      <div class="col-xs-8 col-xs-offset-2">
-         <h4 class="features-subtitle">Recent Discussion on Stack Overflow</h4>
-         <ul class="recent-discussions">
-            <li><a href="http://stackoverflow.com/questions/18041035/best-practices-and-tutorials-for-ios-authentication/18041322#18041322">Best practices and tutorials for iOS authentication.</a></li>
-            <li><a href="http://stackoverflow.com/questions/19886557/creating-an-oauth-store">Creating an OAuth store.</a></li>
-            <li><a href="http://stackoverflow.com/questions/21084678/simple-sso-solution-or-serviceweb-based-on-saml/21091077#21091077">simple sso solution or service(web) based on SAML.</a></li>
-         </ul>
-      </div>
-   </div>
+    </div>
+  </div>
+  <div class="row nopadding">
+    <div class="col-xs-8 col-xs-offset-2">
+      <h4 class="recent-subtitle">Recent Discussion on Stack Overflow</h4>
+      <!--ul class="recent-discussions">
+      <li><a href="http://stackoverflow.com/questions/18041035/best-practices-and-tutorials-for-ios-authentication/18041322#18041322">Best practices and tutorials for iOS authentication.</a></li>
+      <li><a href="http://stackoverflow.com/questions/19886557/creating-an-oauth-store">Creating an OAuth store.</a></li>
+      <li><a href="http://stackoverflow.com/questions/21084678/simple-sso-solution-or-serviceweb-based-on-saml/21091077#21091077">simple sso solution or service(web) based on SAML.</a></li>
+      </ul -->
+      <div id="stack-overflow" class="recent-discussions"></div>
+    </div>
+  </div>
 </div>

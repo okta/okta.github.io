@@ -1,0 +1,24 @@
+#confirm #main-container.boundary.confirm {
+  margin-top: 12em;
+  margin-bottom: 2em;
+}
+
+.confirm .block {
+  padding: 4em 2em 8em;
+}
+
+.welcome-head {
+  margin-top: 45px;
+  padding-top: 10px;
+  background-color: #709c29;
+  text-align: center;
+  height: 90px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.welcome-body {
+  background-color: #fafafa;
+  padding: 50px;
+}
+

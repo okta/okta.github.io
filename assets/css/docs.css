@@ -91,6 +91,15 @@
   background: #fafafa;
 }
 
+.btn-github {
+  transition: all .1s ease-in;
+}
+.btn-github:hover {
+  background: #fdfeff;
+  border-color: #0069aa;
+}
+
+
 
 /* -------------------------- TITLE BLOCK */
 
@@ -103,6 +112,12 @@
 
 
 /* -------------------------- SIDEBAR */
+
+#docs-sidebar-wrap.fixed {
+  position: fixed;
+  top: 131px;  /* top offset */
+  width: 236px; /* XXX: should use js to set width when fixed */
+}
 
 .docs-sidebar ul {
   border: 1px solid transparent; /* hack fixes jquery slidetoggle jump */
@@ -165,7 +180,6 @@
   font-size: 16px;
 }
 
-#docs-page-title,
 .docs-body h1 {
   padding-bottom: .5em;
   margin-bottom: 1em;
@@ -250,6 +264,27 @@
   background: transparent;
   color: #090;
 }
+
+.docs-body .page-title-block {
+  padding-bottom: .5em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid #888;
+}
+
+h1#docs-page-title {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border: 0 none;
+  width: 80%;
+  display: inline-block;
+}
+.docs-body .page-title-block .btn {
+  float: right;
+  position: relative;
+  top: 25px;
+  text-decoration: none;
+}
+
 
 /* ---------------- FORM CONTROLS */
 

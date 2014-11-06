@@ -3,54 +3,58 @@
 
 .customers-index .title-block {
   text-align: center;
+  margin-bottom: 2em;
 }
 
 .customer-row {
-  margin: 1em 0 3em;
-  height: 100%;
+  padding: 1.5em 0;
 }
 
-.customer-card {
-  text-align: center;
-}
-
-.customer-card .customer-logo {
+.customer-row .customer-logo-wrap {
   border: 1px solid #ccc;
-  width: 305px; height: 228px;
+  width: 220px; height: 165px;
+  overflow: hidden;
+}
+
+.customer-row .customer-logo {
   -webkit-transition: all .15s ease-out;
   transition: all .15s ease-out;
 }
 
-.customer-card h2 {
+.customer-row h2 {
   font-size: 1.2em;
   font-weight: 700;
-}
-
-.customer-card p {
-  font-size: 1.1em;
-  max-height: 4em; /* -- 3 lines of text */
-  overflow: hidden;
-}
-
-.customer-card h2,
-.customer-card p {
-  color: #666;
-}
-
-.customer-card a,
-.customer-card a:hover {
-  text-decoration: none;
-}
-
-.customer-card a:hover h2,
-.customer-card a:hover p {
+  margin-top: .2em;
   color: #000;
 }
 
-.customer-card a:hover .customer-logo {
-  -ms-transform: scale(1.05);
-  -webkit-transform: scale(1.05);
-  transform: scale(1.05);
+.customer-row p {
+  font-size: 1.1em;
+  /* max-height: 4em; -- 3 lines of text */
+  color: #666;
+  overflow: hidden;
+}
+
+.customer-row a:hover h2,
+.customer-row a:hover p {
+  color: #000;
+}
+
+.customer-row .customer-logo:hover {
+  -ms-transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+.customer-row .view-study-link {
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.customer-row .view-study-link span {
+  font-family: arial, sans-serif;
+  position: relative;
+  top: -1px;
 }
 
 
@@ -77,12 +81,16 @@
 /* -- body */
 .customer-story-body h2 {
   margin-top: 2em;
-  font-size: 22px;
+  font-size: 24px;
 }
 .customer-story-body h2:first-child {
   margin-top: 0;
 }
 
+.customer-story-body h3 {
+  margin-top: 1em;
+  font-size: 20px;
+}
 .customer-story-diagram {
   width: 694px;
   margin-top: 30px;
@@ -90,16 +98,10 @@
 
 .customer-story .title-block {
   position: relative;
-  height: 200px;
+  height: 220px;
   padding-top: 3em;
-}
-
-.customer-story .title-block .customer-logo {
-  position: absolute;
-  left: 40px; top: 40px;
-  width: 250px;
-  height: 120px;
-  overflow: hidden;
+  background-size: 1080px 220px;
+  background-repeat: no-repeat;
 }
 
 .customer-story .title-block h1,

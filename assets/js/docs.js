@@ -16,7 +16,7 @@ $(function() {
     for (var h = 0; h < headers.length; h++) {
       var header = headers[h];
 
-      if (typeof header.id !== "undefined" && header.id !== "" && 
+      if (typeof header.id !== "undefined" && header.id !== "" &&
         header.className.indexOf("no-link") !== 0) {
         header.appendChild(anchorForId(header.id), header);
       }
@@ -59,6 +59,7 @@ $(function() {
   };
 
   // ------------------------ SIDENAV
+
   $('.docs-sidebar-block > h2').on('click', function() {
     $this  = $(this);
     $ul    = $this.next('ul');
@@ -131,6 +132,24 @@ $(function() {
     var pos = $docsBody.width() + $docsBody.offset().left + 100;
     $scroller.css('left', pos);
   }
+
+
+  // ------------------------ STICKY LEFTNAV
+
+  var wrap = $("#docs-sidebar-wrap"),
+      $window=$(window);
+  var fixedScroll = function() {
+    if ($window.scrollTop() > 121) {
+      wrap.addClass("fixed");
+    } else {
+      wrap.removeClass("fixed");
+    }
+  }
+  fixedScroll(); // call on load in case we are already scrolled
+
+  var lazyFixedScroll = _.debounce(fixedScroll, 15);
+  $window.on("scroll", lazyFixedScroll);
+
 
   // ------------------------ CORS TEST
 
