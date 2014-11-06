@@ -10,16 +10,15 @@ xxxdiagram_image:  rotary-diagram.png
 title:          Rotary Simplifies Online Access for Members with Okta
 
 title_tagline:  >
-  Rotary International supports over 34,000 clubs in over 200 countries. A total of 1.2 million men and women are Rotarians. The organization’s wide range of charitable activities include everything from local literacy programs and food banks to co-leading the  global effort to eradicate polio, a goal 99 percent accomplished. Rotary’s international partners include the World Health Organization and UNICEF.
+  Okta enriches the online Rotary experience by integrating legacy and third-party platforms with a new central Rotary authentication system, enabling members of the Rotary community worldwide to work more effectively and productively for the good of their neighbors
 
 index_blurb: >
-  Okta enriches the online Rotary experience by integrating legacy and third-party platforms with a new central Rotary authentication system, enabling members of the Rotary community worldwide to work more effectively and productively for the good of their neighbors
+  TBD
 
 sidebar_testimonial: >
   Okta had the best approach for what we needed. They had a more complete vision to managing identity, and the integration and single sign-on approach was very consistent with what we needed to have happen in the coming years for our user base.
 sidebar_testimonial_attribution: Peter Markos
 sidebar_testimonial_meta: Chief Information Officer, Rotary
-
 
 sidebar_copy: >
   * Rotary needed to unify authentication for its suite of applications for over 1.2M members, and provide for an integrated experience across crowd-sourced applications created by the Rotary community.
@@ -29,16 +28,21 @@ sidebar_copy: >
 ---
 
 
+## About Rotary International
+Rotary International supports over 34,000 clubs in over 200 countries. A total of 1.2 million men and women are Rotarians. The organization’s wide range of charitable activities include everything from local literacy programs and food banks to co-leading the  global effort to eradicate polio, a goal 99 percent accomplished. Rotary’s international partners include the World Health Organization and UNICEF.
+
 
 ## Situation: Fluid access rights, siloed applications
 
 Rotary International's global network of clubs and members makes identity and information management a challenge. Rotary's applications are largely identity driven; the position a member holds in the organization, for example, dictates which information he or she can (and should) access. These identity-driven access requirements also extend to the many donors who contribute to Rotary causes. As Peter Markos, Rotary's Chief Information officer, explains, "Identity is at the core of what we provide our members. We need to know who you are, and we also need to know when you are that role." To compound this complexity, roles within individual clubs change annually, making for highly fluid identity authentication and access requirements.
 Rotary's informational sites and applications have evolved over the years as a series of standalone applications. Applications range from simple html landing pages to cloud-based eLearning portals and grant application tools. This diverse set of applications placed a heavy burden on Rotary's legacy identity platform architecture. "When you look at our systems," Markos continues, "as a non-profit we're dealing with some fairly legacy applications. We just found our technology was antiquated and wouldn't really meet our members' needs, and so what we really wanted to do was move our organization forward. We want to make sure we give them tools that match their expertise." Compounding this challenge were several valuable applications created and launched by individual Rotarians. Rotary members were unable to find value in these crowd-sourced applications because identity-based access and authentication from Rotary International's master data set was not easily available. "As often happens when you have a lot of home-grown applications, each one is built, if you will, with its own little quirks," Markos notes. "And what we're trying to do is move toward a standard model, where we're taking advantage of the efficiencies gained by a typical, standard implementation."
 
+
 ## Solution: Centralized authentication, provisioning, and a unified view of each user
 
 Markos considered several identity services before choosing Okta. Okta's identity service provides Rotary with a cloud-based directory that has enabled Rotary to migrate toward a single sign-on portal for its members and donors. The Okta service, moreover, is embedded completely within Rotary's infrastructure, so that user authentication, account creation, and access rights are entirely consistent with the Rotary interfaces users have come to know and recognize.
 The Okta REST API enables developers to leverage Okta's comprehensive identity platform programmatically, essentially embedding Okta within their products or sites.  Through the Okta API, Rotary was able to leverage the Okta platform to unify authentication.  As a highly scalable, always available service, Okta is able to support Rotary's rapidly growing user population.  Okta's provisioning capability, utilized via REST API, also enables Rotary to provision applications to a broad range of users, which has greatly simplified the "who you are" and "when you are" aspects of Rotary's identity management requirements. "Okta today is definitely making a difference in terms of managing our identity element," Markos says. "We're now using Okta for authentication, so we know who our members are and whether or not they're able to successfully login to our system. We're also integrating them into our CRM, so we know what role they are, and also when they are that role."
+
 
 ## Benefits: Modern scalable architecture, simplified end user experience
 

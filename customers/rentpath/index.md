@@ -9,13 +9,10 @@ diagram_image:  rentpath-diagram.png
 
 title:          RentPath Gives Advertisers a Unified Product Experience with Okta
 title_tagline: >
-
-  RentPath provides a suite of sites including Rent.com, Rentals.com, RentalHouses.com, Lovely and New Home Guide to help property managers, landlords and home sellers connect with consumers looking for a home.
-
-  RentPath sites allow consumers to search for listings by location, find a property manager, get a quote for moving services, browse new homes, and discover home builders by region. Advertisers can manage orders and listings centrally for syndication across all RentPath properties.
+  Okta simplifies the RentPath customer experience and unlocks engineering cycles by providing one central customer authentication service and single sign-on across all customer-facing tools.
 
 index_blurb: >
-  Okta simplifies the RentPath customer experience and unlocks engineering cycles by providing one central customer authentication service and single sign-on across all customer-facing tools.
+  TBD
 
 sidebar_testimonial: >
   Okta solved all our problems, at a fraction of the cost and time of every other vendor in the market. Who says you can't have it all?
@@ -30,6 +27,12 @@ sidebar_copy: >
   * Relying on Okta's highly available service and product roadmap allows the RentPath team to spend more time building features for customers and less time worrying about the identity layer.
 ---
 
+
+
+## About RentPath
+RentPath provides a suite of sites including Rent.com, Rentals.com, RentalHouses.com, Lovely and New Home Guide to help property managers, landlords and home sellers connect with consumers looking for a home.
+
+RentPath sites allow consumers to search for listings by location, find a property manager, get a quote for moving services, browse new homes, and discover home builders by region. Advertisers can manage orders and listings centrally for syndication across all RentPath properties.
 
 ## Situation: LDAP - Too much maintenance, yet not enough functionality
 

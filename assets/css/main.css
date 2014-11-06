@@ -605,21 +605,6 @@ body#home {
   color: #fff;
 }
 
-.welcome-head {
-  margin-top: 45px;
-  padding-top: 10px;
-  background-color: #709c29;
-  text-align: center;
-  height: 90px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.welcome-body {
-  background-color: #fafafa;
-  padding: 50px;
-}
-
 .features-page {
   background-color: #e1eff6;
 }
