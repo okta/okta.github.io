@@ -15,7 +15,7 @@ index_blurb: >
   TBD
 
 sidebar_testimonial: >
-  Okta solved all our problems, at a fraction of the cost and time of every other vendor in the market. Who says you can't have it all?
+  If we're engineering the security layer then we're focusing less time on the thing that differentiates us as a provider of services. The fact that I really haven't had to worry about Okta either from a development or operational standpoint is one of the best testaments that I can give toward its value.
 sidebar_testimonial_attribution: Dan Morris
 sidebar_testimonial_meta: Sr. Director of Architecture and Engineering, RentPath
 
