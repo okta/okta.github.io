@@ -25,3 +25,7 @@ permalink: /blog/:year/:month/:day/:title
 support_phone_number: "1-888-722-7871"
 github_base_url: "https://github.com/okta/okta.github.io/tree/master/"
 stack_overflow_forum_url: "http://stackoverflow.com/search?q=okta"
+
+# delete following line and uncomment actual google ua id on launch
+ga_ua_id: "xxx"
+#ga_ua_id: "UA-15777010-1"
