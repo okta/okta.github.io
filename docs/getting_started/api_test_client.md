@@ -21,7 +21,9 @@ title: API Test Client
 2. Launch Postman with new Chrome App Launcher
 
     ![Chrome App Launcher](/assets/img/chrome-ui-app-launcher.png "Chrome App Launcher")
-
+    
+    <br>
+    
     ![Postman App Icon](/assets/img/postman-icon.png "Postman App Icon")
 
 3. Import the environment template
@@ -76,13 +78,15 @@ Once you have setup your Postman environment, you can import pre-built collectio
 
     **Import the following templates:**
 
-    API      | Postman Template
-    -------- | ---------------------------------------------------------
-    Users    | https://www.getpostman.com/collections/8bf0965119e3a46fd18b
-    Groups   | https://www.getpostman.com/collections/342602f07409f65559fd
-    Sessions | https://www.getpostman.com/collections/570290000c864ac8d454
-    Apps     | https://www.getpostman.com/collections/d4296020e4118bdbfa7a
-    Events   | https://www.getpostman.com/collections/57071989b25f5fc96070
+    API            | Postman Template
+    -------------- | ---------------------------------------------------------
+    Users          | https://www.getpostman.com/collections/8bf0965119e3a46fd18b
+    Groups         | https://www.getpostman.com/collections/342602f07409f65559fd
+    Sessions       | https://www.getpostman.com/collections/570290000c864ac8d454
+    Apps           | https://www.getpostman.com/collections/d4296020e4118bdbfa7a
+    Events         | https://www.getpostman.com/collections/57071989b25f5fc96070
+    Authentication | https://www.getpostman.com/collections/005bc1ffcf4302fe4346
+    Factors        | https://www.getpostman.com/collections/871df976d79a9a5f7a85
 
 ### Sample Requests
 
