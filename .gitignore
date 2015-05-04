@@ -12,6 +12,7 @@ test-app-icons.html
 /junit*.properties
 atlassian-ide-plugin.xml
 classes
+reports-messages.properties
 
 # Include files from snapshotted ide config (which are ignored otherwise)
 !buildtools/ide/idea/.idea
