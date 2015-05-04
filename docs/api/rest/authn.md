@@ -378,6 +378,8 @@ deviceToken | A globally unique ID identifying the device of the user           
 
 You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will still be challenged everytime instead of **per-device** or **per-session**.  It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.  The max length for `deviceToken` is 32 characters.
 
+> If you pass a device token, the factor verification is remembered to avoid additional MFA prompts when using the same device, unless the the organizational MFA policy requires an MFA challenge every time. The policy ultimately determines whether a user is challenged or not.
+
 #### Response Parameters
 {:.api .api-response .api-response-params}
 
@@ -1499,6 +1501,8 @@ Parameter    | Description                                         | Param Type 
 fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
 stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
 answer       | answer to security question                         | Body       | String   | TRUE     |
+
+> The factor verification is remembered to avoid additional MFA prompts when using the same [device token](#device-token). Even if the device is remembered, the organizational MFA policy can require an MFA challenge every time. The policy ultimately determines whether a user is challenged or not.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}

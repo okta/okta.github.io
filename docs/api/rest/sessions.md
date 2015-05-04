@@ -65,6 +65,7 @@ cookieTokenUrl | URL for a a transparent 1x1 pixel image which contains a one-ti
 Creates a new session for a [user](users.html).
 
 - [Create Session with One-Time Token](#create-session-with-one-time-token)
+- [Create Session with Session Token](#create-session-with-session-token)
 - [Create Session with Embed Image URL](#create-session-with-embed-image-url)
 
 ##### Request Parameters
@@ -114,6 +115,52 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ~~~
 
 Invalid credentials will return a `401 Unauthorized` status code.
+
+~~~ ruby
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+
+{
+    "errorCode": "E0000004",
+    "errorSummary": "Authentication failed",
+    "errorLink": "E0000004",
+    "errorId": "oaeVCVElsluRpii8PP4GeLYxA",
+    "errorCauses": []
+}
+~~~
+
+#### Create Session with Session Token
+{:.api .api-operation}
+
+Uses a [`sessionToken`](authn.html#session-token) created by the Auth API to set a session cookie in the user's browser.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~ ruby
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-subdomain.okta.com/api/v1/sessions?additionalFields=cookieToken" \
+-d \
+'{
+  "sessionToken": "00Fpzf4en68pCXTsMjcX8JPMctzN2Wiw4LDOBL_9pz"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
+  "userId": "00uld5QRRGEMJSSQJCUB",
+  "mfaActive": false,
+  "cookieToken": "00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
+}
+~~~
+
+Invalid session tokens will return a `401 Unauthorized` status code.
 
 ~~~ ruby
 HTTP/1.1 401 Unauthorized
