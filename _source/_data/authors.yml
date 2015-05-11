@@ -1,9 +1,3 @@
-okta:
-full_name: Okta Generic
-display_name: Okta writer
-avatar: avatar-okta_logo.jpg
-github: https://github.com/example
-
 doug:
   full_name: Doug Lee
   display_name: Doug
@@ -46,3 +40,18 @@ hector_aguilar:
   avatar: avatar-hector_aguilar.jpg
   email: haguilar@okta.com
   github: https://github.com/haguilar-okta
+  
+matt_loughran:
+  full_name: Matt Loughran
+  display_name: Matt Loughran
+  avatar: avatar-mattloughran.jpg
+  email: matt.loughran@okta.com
+  github: https://github.com/mattloughran-okta
+
+okta_generic_blogger:
+  full_name: Okta Generic
+  display_name: Okta Staff
+  avatar: avatar-okta_logo.jpg
+  email: eng_docs@okta.com
+  github: https://github.com/example
+
