@@ -51,6 +51,7 @@ matt_loughran:
 okta_generic_blogger:
   full_name: Okta Generic
   display_name: Okta Staff
+  avatar: avatar-hector_aguilar.jpg
   email: eng_docs@okta.com
   github: https://github.com/example
 
