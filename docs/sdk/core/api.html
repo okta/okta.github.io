@@ -3,601 +3,327 @@
 <!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="">
+<!--<![endif]-->
+
 <head>
-	
-	<head>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="/favicon.ico">
-	<title>API &raquo; Okta Developer</title>
-	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
+    <head>
 
-	<link rel="canonical" href="http://developer.okta.com/docs/sdk/core/api.html">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <title>API &raquo; Okta Developer</title>
+        <meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
 
-	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/assets/css/animate.css">
-	<link rel="stylesheet" href="/assets/css/master.css">
-	<link rel="stylesheet" href="/assets/css/layout-docs.css">
-	<link rel="stylesheet" href="/assets/css/responsive.css">
+        <link rel="canonical" href="http://developer.okta.com/docs/sdk/core/api.html">
 
-
-  
-	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
-	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
-	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
-	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
-	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
-
-	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
-	<!-- TypeKit -->
-	<script src="//use.typekit.net/pls8pog.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
-	<!-- GA -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-15777010-3', 'auto');
-		ga('send', 'pageview');
-	</script>
-</head>
-
-	
-<body>
-	
-	<header class="site-header">
-	<div class="wrap">
-
-		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
-
-		<nav id="primary-nav" class="site-nav loaded">
-			<ul>
-				<li><a href="/product/">Product</a></li>
-				<li><a href="/pricing/">Pricing</a></li>
-				<li><a href="/customers/">Customers</a></li>
-				<li><a href="/docs/guides/overview.html">Docs</a></li>
-				<li><a href="/discussion/">Discussion</a></li>
-				<li class="has-dropdown"><a href="#">Support</a>
-					<div class="dropdown-window">
-						<p class="stack-overflow">
-							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.<br />
-							We'll answer it within 24 hours.
-						</p>
-						<p class="email">
-							Email us:<br />
-							<a href="mailto:developers@okta.com">developers@okta.com</a>
-						</p>
-						<p class="tel">
-							Call us:<br />
-							<a href="tel:18777227871">1 (877) 722-7871</a>
-						</p>
-					</div>
-				</li>
-			</ul>
-		</nav>
-
-		<a href="/search" class="gsc-trigger search-button"></a>
-
-
-		<div class="search-container">
-			<div class="gsc-container">
-				<script defer="defer">
-					(function() {
-						var cx = '005121479574088032773:mmh_vhv8uns';
-						var gcse = document.createElement('script');
-						gcse.type = 'text/javascript';
-						gcse.async = true;
-						gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-						'//cse.google.com/cse.js?cx=' + cx;
-						var s = document.getElementsByTagName('script')[0];
-						s.parentNode.insertBefore(gcse, s);
-					})();
-				</script>
-				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
-			</div>
-		</div>
-		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
-
-	</div>
-</header>
-
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P6JKVN"
-	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P6JKVN');</script>
-<!-- End Google Tag Manager -->
-
-
-	
-	<div class="page-content">
-		
-		
-			
-		
-
-<section class="section--with-sidebar docs-page">
-	<aside id="sidebar-wrapper" class="sticky-nav--sidebar">
-
-		
+        <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/css/animate.css">
+        <link rel="stylesheet" href="/assets/css/master.css">
+        <link rel="stylesheet" href="/assets/css/layout-docs.css">
+        <link rel="stylesheet" href="/assets/css/responsive.css">
 
 
 
+        <script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
+        <script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
+        <script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
+        <script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
+        <script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
+
+        <script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
+        <!-- TypeKit -->
+        <script src="//use.typekit.net/pls8pog.js"></script>
+        <script>
+            try {
+                Typekit.load();
+            } catch (e) {}
+        </script>
+        <!-- GA -->
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-15777010-3', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+
+
+    <body>
+
+        <header class="site-header">
+            <div class="wrap">
+
+                <h1 class="site-title"><a href="/">Okta Developer</a></h1>
+
+                <nav id="primary-nav" class="site-nav loaded">
+                    <ul>
+                        <li><a href="/product/">Product</a></li>
+                        <li><a href="/pricing/">Pricing</a></li>
+                        <li><a href="/customers/">Customers</a></li>
+                        <li><a href="/docs/guides/overview.html">Docs</a></li>
+                        <li><a href="/discussion/">Discussion</a></li>
+                        <li class="has-dropdown"><a href="#">Support</a>
+                            <div class="dropdown-window">
+                                <p class="stack-overflow">
+                                    Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.
+                                    <br /> We'll answer it within 24 hours.
+                                </p>
+                                <p class="email">
+                                    Email us:
+                                    <br />
+                                    <a href="mailto:developers@okta.com">developers@okta.com</a>
+                                </p>
+                                <p class="tel">
+                                    Call us:
+                                    <br />
+                                    <a href="tel:18777227871">1 (877) 722-7871</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                <a href="/search" class="gsc-trigger search-button"></a>
+
+
+                <div class="search-container">
+                    <div class="gsc-container">
+                        <script defer="defer">
+                            (function() {
+                                var cx = '005121479574088032773:mmh_vhv8uns';
+                                var gcse = document.createElement('script');
+                                gcse.type = 'text/javascript';
+                                gcse.async = true;
+                                gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                                    '//cse.google.com/cse.js?cx=' + cx;
+                                var s = document.getElementsByTagName('script')[0];
+                                s.parentNode.insertBefore(gcse, s);
+                            })();
+                        </script>
+                        <gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+                    </div>
+                </div>
+                <a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
+
+            </div>
+        </header>
+
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-P6JKVN" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <script>
+            (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-P6JKVN');
+        </script>
+        <!-- End Google Tag Manager -->
 
 
 
-<div id="docs-sidebar-wrap" id="sidebar-wrapper">
-	<div class="docs-sidebar-block" id="myScrollspy" >
-		
-			
-				
-		
-			
-				
-		
-			
-				
-		
-			
-				
-				<h2>
-					SDKs
-				</h2>
+        <div class="page-content">
 
-				
-					
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-								
-								<ul class="nav sidebar-nav nav-title">
-									<li data-name="API" class="on">
-										<a href="/docs/sdk/core/api.html">API</a>
-									</li>
-								</ul>
-									
-								
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-					
-						
-						
-							
-						
-					
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-						
-							
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-						
-					
-				
-			
-		
-			
-				
-		
-	</ul>
-</div>
-</div>
+            <section class="section--with-sidebar docs-page">
+                <aside id="sidebar-wrapper" class="sticky-nav--sidebar">
 
-	</aside>
+                    <div id="docs-sidebar-wrap" id="sidebar-wrapper">
+                        <div class="docs-sidebar-block" id="myScrollspy">
 
-	<div id="docs-body" class="body docs-body">
+                            <h2>SDKs</h2>
 
-		<nav id="sticky-nav" class="sticky-nav--top no-flexbox">
+                            <ul class="nav sidebar-nav nav-title">
+                                <li data-name="API" class="on">
+                                    <a href="/docs/sdk/core/api.html">API</a>
+                                </li>
+                            </ul>
 
-			
+                        </div>
+                    </div>
 
-	<a href="#" class="toggle-menu"></a>
-	<a  href="/docs/guides/overview.html">
-		Guides
-	</a>
-	<a  href="/docs/api/getting_started/design_principles.html">
-		API
-	</a>
-	<a  class="on"  href="/docs/sdk/core/api.html">
-		SDKs
-	</a>
-	<a  href="/docs/examples/session_cookie.html">
-		Examples
-	</a>
+                </aside>
+
+                <div id="docs-body" class="body docs-body">
+
+                    <nav id="sticky-nav" class="sticky-nav--top no-flexbox">
+                        <a href="#" class="toggle-menu"></a>
+                        <a href="/docs/guides/overview.html">Guides</a>
+                        <a href="/docs/api/getting_started/design_principles.html">API</a>
+                        <a class="on" href="/docs/sdk/core/api.html">SDKs</a>
+                        <a href="/docs/examples/session_cookie.html">Examples</a>
+                    </nav>
+
+                    <a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
+
+                    <header>
+                        <a href="https://github.com/okta/okta.github.io/tree/master/_source/docs/sdk/core/api.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
+                        <h1 class="h3">API</h1>
+                    </header>
+
+                    <section class="section--full-width section--sdk">
+                        <div class="wrap">
+                            <article class="col-1-3">
+                                <div class="sdk-img">
+                                    <div class="thumbnail net" />
+                                </div>
+                                <div class="content">
+                                    <ul class="sdk-list">
+                                        <li>.NET SDK</li>
+                                        <li>
+                                            <a class="" href="/docs/sdk/core/csharp_api_sdk/html/6af60b57-62fa-477c-a899-e2f21286c53d.htm">Getting Started</a>
+                                        </li>
+                                        <li>
+                                            <a class="" href="/docs/sdk/core/csharp_api_sdk/">Documentation</a>
+                                        </li>
+                                        <li>
+                                            <a class="" href="https://github.com/okta/oktasdk-csharp">GitHub</a>
+                                        </li>
+                                        <li>
+                                            <a class="" href="https://github.com/okta/okta-music-store">Sample App</a>
+                                        </li>
+                                    </ul>
+                                    <a href="http://www.nuget.org/packages/Okta.Core.Client/" class="btn">Download SDK</a>
+                                </div>
+                            </article>
+                            <article class="col-1-3">
+                                <div class="sdk-img">
+                                    <div class="thumbnail powershell" />
+                                </div>
+                                <div class="content">
+                                    <ul class="sdk-list">
+                                        <li>PowerShell SDK</li>
+                                        <li>
+                                            <a class="" href="https://github.com/okta/oktasdk-csharp/tree/master/Okta.Core.Automation">Documentation</a>
+                                        </li>
+                                        <li>
+                                            <a class="" href="https://github.com/okta/oktasdk-csharp">GitHub</a>
+                                        </li>
+                                    </ul>
+                                    <a href="https://chocolatey.org/packages/Okta.Core.Automation" class="btn">Download SDK</a>
+                                </div>
+                            </article>
+                            <article class="col-1-3">
+                                <div class="sdk-img">
+                                    <div class="thumbnail java" />
+                                </div>
+                                <div class="content">
+                                    <ul class="sdk-list">
+                                        <li>Java SDK</li>
+                                        <li>
+                                            <a class="" href="https://github.com/okta/oktasdk-java">GitHub</a>
+                                        </li>
+                                    </ul>
+                                    <a href="https://github.com/okta/oktasdk-java" class="btn">Download SDK</a>
+                                </div>
+                            </article>
+                            <article class="col-1-3">
+                                <div class="sdk-img">
+                                    <div class="thumbnail python" />
+                                </div>
+                                <div class="content">
+                                    <ul class="sdk-list">
+                                        <li>Python SDK</li>
+                                        <li>
+                                            <a class="" href="/docs/sdk/core/python_api_sdk/">Documentation</a>
+                                        </li>
+                                        <li>
+                                            <a class="" href="https://github.com/okta/oktasdk-python">GitHub</a>
+                                        </li>
+                                    </ul>
+                                    <a href="https://pypi.python.org/pypi/okta" class="btn">Download SDK</a>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+
+                    <style>
+                        #scroll-top-button {
+                            display: none;
+                        }
+                    </style>
+
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Remarketing tag -->
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            var google_conversion_id = 1006913831;
+            var google_custom_params = window.google_tag_params;
+            var google_remarketing_only = true;
+            /* ]]> */
+        </script>
+        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+        </script>
+        <noscript>
+            <div style="display:inline;">
+                <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0" />
+            </div>
+        </noscript>
+        <!-- End Remarketing tag -->
+
+        <!-- Crazy Egg Tracking -->
+        <script type="text/javascript">
+            setTimeout(function() {
+                var a = document.createElement("script");
+                var b = document.getElementsByTagName("script")[0];
+                a.src = document.location.protocol + "//script.crazyegg.com/pages/scripts/0021/9333.js?" + Math.floor(new Date().getTime() / 3600000);
+                a.async = true;
+                a.type = "text/javascript";
+                b.parentNode.insertBefore(a, b)
+            }, 1);
+        </script>
+        <!-- End Crazy Egg Tracking -->
+
+        <footer class="site-footer">
+            <div class="wrap">
+
+                <ul>
+                    <li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+                    <li><a href="mailto:developers@okta.com">Contact Support</a></li>
+                </ul>
+
+                <ul>
+                    <li><a class="icon-with-hover--github" href="http://github.com/okta" target="_blank">Github</a></li>
+                    <li><a class="icon-with-hover--twitter" href="http://twitter.com/okta" target="_blank">Twitter</a></li>
+                    <li><a class="icon-with-hover--stack-overflow" href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></li>
+                    <li><a class="icon-with-hover--rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank">News</a></li>
+                    <li><a class="icon-with-hover--help" href="http://community.okta.com" target="_blank">Help</a></li>
+                </ul>
+
+            </div>
+        </footer>
 
 
-		</nav>
+    </body>
 
-		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
-
-		
-		<header>
-			<a href="https://github.com/okta/okta.github.io/tree/master/_source/docs/sdk/core/api.md" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
-			<h1 class="h3">API</h1>
-		</header>
-		
-
-		<section class="section--full-width section--sdk">
-	<div class="wrap">
-		<article class="col-1-3">
-			<div class="sdk-img">
-				<a class="thumbnail net" href="/">
-				</a>
-			</div>
-			<div class="content">
-				<ul class="sdk-list">
-					<li>.NET SDK</li>
-					<li>
-						<a class="" href="/docs/sdk/core/csharp_api_sdk/html/6af60b57-62fa-477c-a899-e2f21286c53d.htm">Getting Started</a>
-					</li>
-					<li>
-						<a class="" href="/docs/sdk/core/csharp_api_sdk/">Documentation</a>
-					</li>
-					<li>
-						<a class="" href="https://github.com/okta/oktasdk-csharp">GitHub</a>
-					</li>
-					<li>
-						<a class="" href="https://github.com/okta/okta-music-store">Sample App</a>
-					</li>
-				</ul>
-				<a href="http://www.nuget.org/packages/Okta.Core.Client/" class="btn">Download SDK</a>
-			</div>
-		</article>
-		<article class="col-1-3">
-			<div class="sdk-img">
-				<a class="thumbnail powershell" href="/">
-				</a>
-			</div>
-			<div class="content">
-				<ul class="sdk-list">
-									<li>.NET SDK</li>
-					<li>
-						<a class="" href="https://github.com/okta/oktasdk-csharp/tree/master/Okta.Core.Automation">Documentation</a>
-					</li>
-					<li>
-						<a class="" href="https://github.com/okta/oktasdk-csharp">GitHub</a>
-					</li>
-				</ul>
-				<a href="https://chocolatey.org/packages/Okta.Core.Automation" class="btn">Download SDK</a>
-			</div>
-		</article>
-		<article class="col-1-3">
-			<div class="sdk-img">
-				<a class="thumbnail java" href="/">
-				</a>
-			</div>
-			<div class="content">
-				<ul class="sdk-list">
-									<li>.NET SDK</li>
-
-					<li>
-						<a class="" href="https://github.com/okta/oktasdk-java">GitHub</a>
-					</li>
-				</ul>
-				<a href="https://github.com/okta/oktasdk-java" class="btn">Download SDK</a>
-			</div>
-		</article>
-	</div>
-</section>
-
-<style>
-	#scroll-top-button {
-		display: none;
-	}
-</style>
-
-
-
-	</div>
-</section>
-		
-		
-			
-	</div>
-	
-	<!-- Remarketing tag -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 1006913831;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<!-- End Remarketing tag -->
-
-<!-- Crazy Egg Tracking -->
-<script type="text/javascript">
-setTimeout(function(){var a=document.createElement("script");
-var b=document.getElementsByTagName("script")[0];
-a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-<!-- End Crazy Egg Tracking -->
-
-<footer class="site-footer">
-	<div class="wrap">
-
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
-
-		<ul>
-			<li><a class="icon-with-hover--github" href="http://github.com/okta" target="_blank">Github</a></li>
-			<li><a class="icon-with-hover--twitter" href="http://twitter.com/okta" target="_blank">Twitter</a></li>
-			<li><a class="icon-with-hover--stack-overflow" href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></li>
-			<li><a class="icon-with-hover--rss" href="http://feeds.feedburner.com/OktaBlog" target="_blank">News</a></li>
-			<li><a class="icon-with-hover--help" href="http://community.okta.com" target="_blank">Help</a></li>
-		</ul>
-
-	</div>
-</footer>
-
-	
-</body>
-	
 </html>

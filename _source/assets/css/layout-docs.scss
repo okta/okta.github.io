@@ -1082,6 +1082,11 @@ input:focus {outline:0;}
 			background-size: auto 75px;
 			background-position: center;
 		}
+		.python {
+			background: $colorGrey url(/assets/img/python.png) no-repeat;
+			background-size: auto 75px;
+			background-position: center;
+		}
 	}
 	.content {
 		// text-align: center;
