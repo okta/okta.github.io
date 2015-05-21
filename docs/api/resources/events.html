@@ -3829,47 +3829,44 @@
 
 <h3 id="example">Example</h3>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-   <span class="key"><span class="delimiter">&quot;</span><span class="content">eventId</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">tevGr2BhQTMR72OiBGvKXTp2Q1399593071000</span><span class="delimiter">&quot;</span></span>,
-   <span class="key"><span class="delimiter">&quot;</span><span class="content">published</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">2014-05-08T23:51:11.000Z</span><span class="delimiter">&quot;</span></span>,
-   <span class="key"><span class="delimiter">&quot;</span><span class="content">requestId</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">req8U_MHmEbSai_0I4RopTnfA</span><span class="delimiter">&quot;</span></span>,
-   <span class="key"><span class="delimiter">&quot;</span><span class="content">sessionId</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">000cWiYg47QSFyk1YjE6cDcEg</span><span class="delimiter">&quot;</span></span>,
-   <span class="key"><span class="delimiter">&quot;</span><span class="content">action</span><span class="delimiter">&quot;</span></span>:{
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">Okta user created</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">categories</span><span class="delimiter">&quot;</span></span>:[
-         <span class="string"><span class="delimiter">&quot;</span><span class="content">User Creation</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+   "eventId":"tevGr2BhQTMR72OiBGvKXTp2Q1399593071000",
+   "published":"2014-05-08T23:51:11.000Z",
+   "requestId":"req8U_MHmEbSai_0I4RopTnfA",
+   "sessionId":"000cWiYg47QSFyk1YjE6cDcEg",
+   "action":{
+      "message":"Okta user created",
+      "categories":[
+         "User Creation"
       ],
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">core.user.config.user_creation.success</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">requestUri</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">Background</span><span class="delimiter">&quot;</span></span>
+      "objectType":"core.user.config.user_creation.success",
+      "requestUri":"Background"
    },
-   <span class="key"><span class="delimiter">&quot;</span><span class="content">actors</span><span class="delimiter">&quot;</span></span>:[
+   "actors":[
       {
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">00ue1aWYUCUFFKXLXELW</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">Add-Min O'Cloudy Tud</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">administrator1@clouditude.net</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">User</span><span class="delimiter">&quot;</span></span>
+         "id":"00ue1aWYUCUFFKXLXELW",
+         "displayName":"Add-Min O'Cloudy Tud",
+         "login":"administrator1@clouditude.net",
+         "objectType":"User"
       },
       {
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">Jakarta Commons-HttpClient/3.1</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">UNKNOWN</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">ipAddress</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">Client</span><span class="delimiter">&quot;</span></span>
+         "id":"Jakarta Commons-HttpClient/3.1",
+         "displayName":"UNKNOWN",
+         "ipAddress":"",
+         "objectType":"Client"
       }
    ],
-   <span class="key"><span class="delimiter">&quot;</span><span class="content">targets</span><span class="delimiter">&quot;</span></span>:[
+   "targets":[
       {
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">00ue1gAKBMCSWHRZYDJS</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">Inca-Louise O'Rain Dum</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">inca@clouditude.net</span><span class="delimiter">&quot;</span></span>,
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">User</span><span class="delimiter">&quot;</span></span>
+         "id":"00ue1gAKBMCSWHRZYDJS",
+         "displayName":"Inca-Louise O'Rain Dum",
+         "login":"inca@clouditude.net",
+         "objectType":"User"
       }
    ]
    
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="attributes">Attributes</h3>
 
@@ -3987,18 +3984,15 @@
   <p>Actions that do not define any categories will have an zero element array value.</p>
 </blockquote>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">User performed single sign on to app</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">categories</span><span class="delimiter">&quot;</span></span>: [
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">Application Access</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "message": "User performed single sign on to app",
+    "categories": [
+        "Application Access"
     ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">app.auth.sso</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">requestUri</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml</span><span class="delimiter">&quot;</span></span>
+    "objectType": "app.auth.sso",
+    "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h4 id="action-categories">Action Categories</h4>
 
@@ -4796,16 +4790,13 @@
   </tbody>
 </table>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00u3gjksoiRGRAZHLSYV</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Jon Stewart</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">user@example.org</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">User</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "00u3gjksoiRGRAZHLSYV",
+    "displayName": "Jon Stewart",
+    "login": "user@example.org",
+    "objectType": "User"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <blockquote>
   <p>The user can be retrieved by <code>id</code> with the <a href="users.html#get-user-with-id">User API</a>.</p>
@@ -4846,15 +4837,12 @@
   </tbody>
 </table>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">0oab5cZEHFHXHGRNRRNL</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Zendesk</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">AppInstance</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "0oab5cZEHFHXHGRNRRNL",
+    "displayName": "Zendesk",
+    "objectType": "AppInstance"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <blockquote>
   <p>The app can be retrieved by <code>id</code> with the <a href="apps.html#get-application">Apps API</a>.</p>
@@ -4901,16 +4889,13 @@
   </tbody>
 </table>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.65 Safari/537.36</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">CHROME</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">ipAddress</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">127.0.0.1</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Client</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.65 Safari/537.36",
+    "displayName": "CHROME",
+    "ipAddress": "127.0.0.1",
+    "objectType": "Client"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h2 id="event-operations">Event Operations</h2>
 
@@ -5055,132 +5040,126 @@
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization:SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-type:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">GET</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/events?startDate=<span class="integer">2013</span>-<span class="integer">07</span>-<span class="integer">15</span><span class="constant">T16</span>%<span class="integer">3</span><span class="constant">A00</span>%<span class="integer">3</span><span class="constant">A00</span>.<span class="error">000</span><span class="constant">Z</span><span class="error">\</span>&amp;limit=<span class="integer">3</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization:SSWS yourtoken" \
+-H "Accept:application/json" \
+-H "Content-type:application/json" \
+-X GET https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&amp;limit=3
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/events?startDate=<span class="integer">2013</span>-<span class="integer">07</span>-<span class="integer">15</span><span class="constant">T16</span>%<span class="integer">3</span><span class="constant">A00</span>%<span class="integer">3</span><span class="constant">A00</span>.<span class="error">000</span><span class="constant">Z</span>&amp;limit=<span class="integer">3</span>&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&amp;limit=<span class="integer">3</span>&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">next</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
+Link: &lt;https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&amp;limit=3&gt;; rel="self"
+Link: &lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&amp;limit=3&gt;; rel="next"
 
 [
     {
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">eventId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">tev8hc_KK9NRzKe2WtdvVQIOg1384845263000</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">published</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-11-19T07:14:23.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">action</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">App activated</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">categories</span><span class="delimiter">&quot;</span></span>: [],
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">app.generic.config.app_activated</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">requestUri</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate</span><span class="delimiter">&quot;</span></span>
+        "eventId": "tev8hc_KK9NRzKe2WtdvVQIOg1384845263000",
+        "published": "2013-11-19T07:14:23.000Z",
+        "action": {
+            "message": "App activated",
+            "categories": [],
+            "objectType": "app.generic.config.app_activated",
+            "requestUri": "/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate"
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">actors</span><span class="delimiter">&quot;</span></span>: [
+        "actors": [
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00upgyMVOKIYORVNYUUM</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Adam Malkovich</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">adam.malkovich@example.com</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">User</span><span class="delimiter">&quot;</span></span>
+                "id": "00upgyMVOKIYORVNYUUM",
+                "displayName": "Adam Malkovich",
+                "login": "adam.malkovich@example.com",
+                "objectType": "User"
             },
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">CHROME</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">ipAddress</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">192.168.1.100</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Client</span><span class="delimiter">&quot;</span></span>
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "192.168.1.100",
+                "objectType": "Client"
             }
         ],
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">targets</span><span class="delimiter">&quot;</span></span>: [
+        "targets": [
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">0oadxaKUTKAXSXUZYJHC</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Salesforce.com</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">AppInstance</span><span class="delimiter">&quot;</span></span>
+                "id": "0oadxaKUTKAXSXUZYJHC",
+                "displayName": "Salesforce.com",
+                "objectType": "AppInstance"
             }
         ]
     },
     {
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">eventId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">tevaEByjeq-QZW-utKgDVVvng1384847185000</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">published</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-11-19T07:46:25.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">action</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Sign-in successful</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">categories</span><span class="delimiter">&quot;</span></span>: [
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">Sign-in Success</span><span class="delimiter">&quot;</span></span>
+        "eventId": "tevaEByjeq-QZW-utKgDVVvng1384847185000",
+        "published": "2013-11-19T07:46:25.000Z",
+        "action": {
+            "message": "Sign-in successful",
+            "categories": [
+                "Sign-in Success"
             ],
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">core.user_auth.login_success</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">requestUri</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">/login/do-login</span><span class="delimiter">&quot;</span></span>
+            "objectType": "core.user_auth.login_success",
+            "requestUri": "/login/do-login"
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">actors</span><span class="delimiter">&quot;</span></span>: [
+        "actors": [
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00ubgaSARVOQDIOXMORI</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Samus Aran</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">samus.aran@example.com</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">User</span><span class="delimiter">&quot;</span></span>
+                "id": "00ubgaSARVOQDIOXMORI",
+                "displayName": "Samus Aran",
+                "login": "samus.aran@example.com",
+                "objectType": "User"
             },
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">CHROME</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">ipAddress</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">10.10.10.10</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Client</span><span class="delimiter">&quot;</span></span>
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "10.10.10.10",
+                "objectType": "Client"
             }
         ],
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">targets</span><span class="delimiter">&quot;</span></span>: [
+        "targets": [
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00ubgaSARVOQDIOXMORI</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Samus Aran</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">samus.aran@example.com</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">User</span><span class="delimiter">&quot;</span></span>
+                "id": "00ubgaSARVOQDIOXMORI",
+                "displayName": "Samus Aran",
+                "login": "samus.aran@example.com",
+                "objectType": "User"
             }
         ]
     },
     {
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">eventId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">tevR26HuMJMSkWsKBUcQ65Raw1384847190000</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">published</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-11-19T07:46:30.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">action</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">User performed single sign on to app</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">categories</span><span class="delimiter">&quot;</span></span>: [
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">Application Access</span><span class="delimiter">&quot;</span></span>
+        "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
+        "published": "2013-11-19T07:46:30.000Z",
+        "action": {
+            "message": "User performed single sign on to app",
+            "categories": [
+                "Application Access"
             ],
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">app.auth.sso</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">requestUri</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml</span><span class="delimiter">&quot;</span></span>
+            "objectType": "app.auth.sso",
+            "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">actors</span><span class="delimiter">&quot;</span></span>: [
+        "actors": [
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00ubgaSARVOQDIOXMORI</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Samus Aran</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">samus.aran@example.com</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">User</span><span class="delimiter">&quot;</span></span>
+                "id": "00ubgaSARVOQDIOXMORI",
+                "displayName": "Samus Aran",
+                "login": "samus.aran@example.com",
+                "objectType": "User"
             },
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">CHROME</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">ipAddress</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">10.10.10.10</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Client</span><span class="delimiter">&quot;</span></span>
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "10.10.10.10",
+                "objectType": "Client"
             }
         ],
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">targets</span><span class="delimiter">&quot;</span></span>: [
+        "targets": [
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00ubgaSARVOQDIOXMORI</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Samus Aran</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">samus.aran@example.com</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">User</span><span class="delimiter">&quot;</span></span>
+                "id": "00ubgaSARVOQDIOXMORI",
+                "displayName": "Samus Aran",
+                "login": "samus.aran@example.com",
+                "objectType": "User"
             },
             {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">0oadxaKUTKAXSXUZYJHC</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">displayName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Salesforce.com</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">objectType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">AppInstance</span><span class="delimiter">&quot;</span></span>
+                "id": "0oadxaKUTKAXSXUZYJHC",
+                "displayName": "Salesforce.com",
+                "objectType": "AppInstance"
             }
         ]
     }
 ]
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 
 	</div>

@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Roles Administration
+title: Roles
 ---
 
 * Will be replaced with the ToC

@@ -3839,40 +3839,37 @@
 
 <h3 id="example">Example</h3>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00g1emaKYZTWRYYRRTSK</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectClass</span><span class="delimiter">&quot;</span></span>: [
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">okta:user_group</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "00g1emaKYZTWRYYRRTSK",
+    "objectClass": [
+        "okta:user_group"
     ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Cloud Users</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Users that can access cloud apps</span><span class="delimiter">&quot;</span></span>
+    "profile": {
+        "name": "Cloud Users",
+        "description": "Users that can access cloud apps"
     },
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">logo</span><span class="delimiter">&quot;</span></span>: [
+    "_links": {
+        "logo": [
             {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://example.okta.com/img/logos/groups/okta-medium.png</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">medium</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                "href": "https://example.okta.com/img/logos/groups/okta-medium.png",
+                "name": "medium",
+                "type": "image/png"
             },
             {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://example.okta.com/img/logos/groups/okta-large.png</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">large</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                "href": "https://example.okta.com/img/logos/groups/okta-large.png",
+                "name": "large",
+                "type": "image/png"
             }
         ],
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://example.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users</span><span class="delimiter">&quot;</span></span>
+        "users": {
+            "href": "https://example.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users"
         },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">apps</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://example.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps</span><span class="delimiter">&quot;</span></span>
+        "apps": {
+            "href": "https://example.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps"
         }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="group-attributes">Group Attributes</h3>
 
@@ -3981,14 +3978,11 @@
   </tbody>
 </table>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">West Coast</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Straight Outta Compton</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "name": "West Coast",
+    "description": "Straight Outta Compton"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h4 id="objectclass-oktawindowssecurityprincipal">ObjectClass: okta:windows_security_principal</h4>
 
@@ -4050,20 +4044,17 @@
   </tbody>
 </table>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">West Coast Users</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">example.com/West Coast/West Coast Users</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">samAccountName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">West Coast</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">dn</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">CN=West Coast Users,OU=West Coast,DC=example,DC=com</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">windowsDomainQualifiedName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">EXAMPLE</span><span class="char">\\</span><span class="content">West Coast Users</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">externalId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">VKzYZ1C+IkSZxIWlrW5ITg==</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "profile": {
+        "name": "West Coast Users",
+        "description": "example.com/West Coast/West Coast Users",
+        "samAccountName": "West Coast",
+        "dn": "CN=West Coast Users,OU=West Coast,DC=example,DC=com",
+        "windowsDomainQualifiedName": "EXAMPLE\\West Coast Users",
+        "externalId": "VKzYZ1C+IkSZxIWlrW5ITg=="
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="links-object">Links Object</h3>
 
@@ -4139,58 +4130,52 @@
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization:SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-type:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">POST</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups \
+<pre><code class="language-ruby">curl -v -H "Authorization:SSWS yourtoken" \
+-H "Accept:application/json" \
+-H "Content-type:application/json" \
+-X POST https://your-domain.okta.com/api/v1/groups \
 -d \
-<span class="string"><span class="delimiter">'</span><span class="content">{
-  &quot;profile&quot;: {
-    &quot;name&quot;: &quot;West Coast&quot;,
-    &quot;description&quot;: &quot;Straight Outta Compton&quot;
+'{
+  "profile": {
+    "name": "West Coast",
+    "description": "Straight Outta Compton"
   }
-}</span><span class="delimiter">'</span></span>
-</pre></div>
-</div>
-</div>
+}'
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00gevhYMOEIQMDAPUQGQ</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectClass</span><span class="delimiter">&quot;</span></span>: [
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">okta:user_group</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "00gevhYMOEIQMDAPUQGQ",
+    "objectClass": [
+        "okta:user_group"
     ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">West Coast</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Straight Outta Compton</span><span class="delimiter">&quot;</span></span>
+    "profile": {
+        "name": "West Coast",
+        "description": "Straight Outta Compton"
     },
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">logo</span><span class="delimiter">&quot;</span></span>: [
+    "_links": {
+        "logo": [
             {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-medium.png</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">medium</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                "name": "medium",
+                "type": "image/png"
             },
             {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-large.png</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">large</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                "name": "large",
+                "type": "image/png"
             }
         ],
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users</span><span class="delimiter">&quot;</span></span>
+        "users": {
+            "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users"
         },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">apps</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps</span><span class="delimiter">&quot;</span></span>
+        "apps": {
+            "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps"
         }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="get-group">Get Group</h3>
 
@@ -4229,50 +4214,44 @@
 
 <h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">GET</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ"
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00gevhYMOEIQMDAPUQGQ</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectClass</span><span class="delimiter">&quot;</span></span>: [
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">okta:user_group</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "00gevhYMOEIQMDAPUQGQ",
+    "objectClass": [
+        "okta:user_group"
     ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">West Coast</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Straight Outta Compton</span><span class="delimiter">&quot;</span></span>
+    "profile": {
+        "name": "West Coast",
+        "description": "Straight Outta Compton"
     },
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">logo</span><span class="delimiter">&quot;</span></span>: [
+    "_links": {
+        "logo": [
             {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-medium.png</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">medium</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                "name": "medium",
+                "type": "image/png"
             },
             {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-large.png</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">large</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                "name": "large",
+                "type": "image/png"
             }
         ],
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users</span><span class="delimiter">&quot;</span></span>
+        "users": {
+            "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users"
         },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">apps</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps</span><span class="delimiter">&quot;</span></span>
+        "apps": {
+            "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps"
         }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="list-groups">List Groups</h3>
 
@@ -4346,87 +4325,81 @@
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">GET</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups?limit=200</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/groups?limit=200"
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups?limit=<span class="integer">200</span>&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups?after=<span class="integer">00</span>ud4tVDDXYVKPXKVLCO&amp;limit=<span class="integer">200</span>&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">next</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
+Link: &lt;https://your-domain.okta.com/api/v1/groups?limit=200&gt;; rel="self"
+Link: &lt;https://your-domain.okta.com/api/v1/groups?after=00ud4tVDDXYVKPXKVLCO&amp;limit=200&gt;; rel="next"
 
 [
   {
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00gevhYMOEIQMDAPUQGQ</span><span class="delimiter">&quot;</span></span>,
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">objectClass</span><span class="delimiter">&quot;</span></span>: [
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">okta:user_group</span><span class="delimiter">&quot;</span></span>
+      "id": "00gevhYMOEIQMDAPUQGQ",
+      "objectClass": [
+          "okta:user_group"
       ],
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">West Coast</span><span class="delimiter">&quot;</span></span>,
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Straight Outta Compton</span><span class="delimiter">&quot;</span></span>
+      "profile": {
+          "name": "West Coast",
+          "description": "Straight Outta Compton"
       },
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">logo</span><span class="delimiter">&quot;</span></span>: [
+      "_links": {
+          "logo": [
               {
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-medium.png</span><span class="delimiter">&quot;</span></span>,
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">medium</span><span class="delimiter">&quot;</span></span>,
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                  "name": "medium",
+                  "type": "image/png"
               },
               {
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-large.png</span><span class="delimiter">&quot;</span></span>,
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">large</span><span class="delimiter">&quot;</span></span>,
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                  "name": "large",
+                  "type": "image/png"
               }
           ],
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-              <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users</span><span class="delimiter">&quot;</span></span>
+          "users": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users"
           },
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">apps</span><span class="delimiter">&quot;</span></span>: {
-              <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps</span><span class="delimiter">&quot;</span></span>
+          "apps": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps"
           }
       }
   },
   {
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00gq96KPRVMTHOQAQWAC</span><span class="delimiter">&quot;</span></span>,
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">objectClass</span><span class="delimiter">&quot;</span></span>: [
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">okta:user_group</span><span class="delimiter">&quot;</span></span>
+      "id": "00gq96KPRVMTHOQAQWAC",
+      "objectClass": [
+          "okta:user_group"
       ],
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">East Coast</span><span class="delimiter">&quot;</span></span>,
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Illmatic</span><span class="delimiter">&quot;</span></span>
+      "profile": {
+          "name": "East Coast",
+          "description": "Illmatic"
       },
-      <span class="string"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">logo</span><span class="delimiter">&quot;</span></span>: [
+      "_links": {
+          "logo": [
               {
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-medium.png</span><span class="delimiter">&quot;</span></span>,
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">medium</span><span class="delimiter">&quot;</span></span>,
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                  "name": "medium",
+                  "type": "image/png"
               },
               {
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-large.png</span><span class="delimiter">&quot;</span></span>,
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">large</span><span class="delimiter">&quot;</span></span>,
-                  <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                  "name": "large",
+                  "type": "image/png"
               }
           ],
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-              <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gq96KPRVMTHOQAQWAC/users</span><span class="delimiter">&quot;</span></span>
+          "users": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gq96KPRVMTHOQAQWAC/users"
           },
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">apps</span><span class="delimiter">&quot;</span></span>: {
-              <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gq96KPRVMTHOQAQWAC/apps</span><span class="delimiter">&quot;</span></span>
+          "apps": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gq96KPRVMTHOQAQWAC/apps"
           }
       }
   }
 ]
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h4 class="api api-operation" id="search-groups">Search Groups</h4>
 
@@ -4442,52 +4415,46 @@
 
 <h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">GET</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups?q=West&amp;limit=1</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/groups?q=West&amp;limit=1"
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>[
+<pre><code class="language-json">[
   {
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00gevhYMOEIQMDAPUQGQ</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">objectClass</span><span class="delimiter">&quot;</span></span>: [
-          <span class="string"><span class="delimiter">&quot;</span><span class="content">okta:user_group</span><span class="delimiter">&quot;</span></span>
+      "id": "00gevhYMOEIQMDAPUQGQ",
+      "objectClass": [
+          "okta:user_group"
       ],
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">West Coast</span><span class="delimiter">&quot;</span></span>,
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Straight Outta Compton</span><span class="delimiter">&quot;</span></span>
+      "profile": {
+          "name": "West Coast",
+          "description": "Straight Outta Compton"
       },
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">logo</span><span class="delimiter">&quot;</span></span>: [
+      "_links": {
+          "logo": [
               {
-                  <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-medium.png</span><span class="delimiter">&quot;</span></span>,
-                  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">medium</span><span class="delimiter">&quot;</span></span>,
-                  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                  "name": "medium",
+                  "type": "image/png"
               },
               {
-                  <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-large.png</span><span class="delimiter">&quot;</span></span>,
-                  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">large</span><span class="delimiter">&quot;</span></span>,
-                  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                  "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                  "name": "large",
+                  "type": "image/png"
               }
           ],
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-              <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users</span><span class="delimiter">&quot;</span></span>
+          "users": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/users"
           },
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">apps</span><span class="delimiter">&quot;</span></span>: {
-              <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps</span><span class="delimiter">&quot;</span></span>
+          "apps": {
+              "href": "https://your-domain.okta.com/api/v1/groups/00gevhYMOEIQMDAPUQGQ/apps"
           }
       }
   }
 ]
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="update-group">Update Group</h3>
 
@@ -4542,58 +4509,52 @@
 
 <h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">PUT</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR</span><span class="delimiter">&quot;</span></span> \
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X PUT "https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR" \
 -d \
-<span class="string"><span class="delimiter">'</span><span class="content">{
-    &quot;profile&quot;: {
-        &quot;name&quot;: &quot;Ameliorate Name&quot;,
-        &quot;description&quot;: &quot;Amended description&quot;,
+'{
+    "profile": {
+        "name": "Ameliorate Name",
+        "description": "Amended description",
     }
-}</span><span class="delimiter">'</span></span>
-</pre></div>
-</div>
-</div>
+}'
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00ub0oNGTSWTBKOLGLNR</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">objectClass</span><span class="delimiter">&quot;</span></span>: [
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">okta:user_group</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "00ub0oNGTSWTBKOLGLNR",
+    "objectClass": [
+        "okta:user_group"
     ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Ameliorate Name</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Amended description</span><span class="delimiter">&quot;</span></span>
+    "profile": {
+        "name": "Ameliorate Name",
+        "description": "Amended description"
     },
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">logo</span><span class="delimiter">&quot;</span></span>: [
+    "_links": {
+        "logo": [
             {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-medium.png</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">medium</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+                "name": "medium",
+                "type": "image/png"
             },
             {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/img/logos/groups/okta-large.png</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">large</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image/png</span><span class="delimiter">&quot;</span></span>
+                "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+                "name": "large",
+                "type": "image/png"
             }
         ],
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR/users</span><span class="delimiter">&quot;</span></span>
+        "users": {
+            "href": "https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR/users"
         },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">apps</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR/apps</span><span class="delimiter">&quot;</span></span>
+        "apps": {
+            "href": "https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR/apps"
         }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="remove-group">Remove Group</h3>
 
@@ -4636,21 +4597,15 @@
 
 <h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">DELETE</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-X DELETE "https://your-domain.okta.com/api/v1/groups/00ub0oNGTSWTBKOLGLNR"
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">204</span> <span class="constant">No</span> <span class="constant">Content</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 204 No Content
+</code></pre>
 
 <h2 id="group-member-operations">Group Member Operations</h2>
 
@@ -4717,91 +4672,85 @@
 
 <h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">GET</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2"
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups/<span class="integer">00</span>g1fanEFIQHMQQJMHZP/users?limit=<span class="integer">2</span>&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups/<span class="integer">00</span>g1fanEFIQHMQQJMHZP/users?after=<span class="integer">00</span>u1f9cMYQZFMPVXIDIZ&amp;limit=<span class="integer">200</span>&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">next</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
+Link: &lt;https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?limit=2&gt;; rel="self"
+Link: &lt;https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?after=00u1f9cMYQZFMPVXIDIZ&amp;limit=200&gt;; rel="next"
 
 [
     {
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00u1f96ECLNVOKVMUSEA</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">created</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-12-12T16:14:22.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">activated</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-12-12T16:14:22.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">statusChanged</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-12-12T22:14:22.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">lastLogin</span><span class="delimiter">&quot;</span></span>: null,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">firstName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Easy</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">lastName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">easy-e@example.com</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">easy-e@example.com</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">mobilePhone</span><span class="delimiter">&quot;</span></span>: null
+        "id": "00u1f96ECLNVOKVMUSEA",
+        "status": "ACTIVE",
+        "created": "2013-12-12T16:14:22.000Z",
+        "activated": "2013-12-12T16:14:22.000Z",
+        "statusChanged": "2013-12-12T22:14:22.000Z",
+        "lastLogin": null,
+        "profile": {
+            "firstName": "Easy",
+            "lastName": "E",
+            "email": "easy-e@example.com",
+            "login": "easy-e@example.com",
+            "mobilePhone": null
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">credentials</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: {}
+        "credentials": {
+            "password": {}
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">resetPassword</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/users/00u1f96ECLNVOKVMUSEA/lifecycle/reset_password</span><span class="delimiter">&quot;</span></span>
+        "_links": {
+            "resetPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00u1f96ECLNVOKVMUSEA/lifecycle/reset_password"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">changeRecoveryQuestion</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/users/00u1f96ECLNVOKVMUSEA/credentials/change_recovery_question</span><span class="delimiter">&quot;</span></span>
+            "changeRecoveryQuestion": {
+                "href": "https://your-domain.okta.com/api/v1/users/00u1f96ECLNVOKVMUSEA/credentials/change_recovery_question"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/users/00u1f96ECLNVOKVMUSEA/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/users/00u1f96ECLNVOKVMUSEA/lifecycle/deactivate"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">changePassword</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/users/00u1f96ECLNVOKVMUSEA/credentials/change_password</span><span class="delimiter">&quot;</span></span>
+            "changePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00u1f96ECLNVOKVMUSEA/credentials/change_password"
             }
         }
     },
     {
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00u1f9cMYQZFMPVXIDIZ</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">created</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-12-12T16:14:42.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">activated</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-12-12T16:14:42.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">statusChanged</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-12-12T16:14:42.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">lastLogin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-12-12T18:14:42.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">profile</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">firstName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Dr.</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">lastName</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Dre</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">dr.dre@example.com</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">dr.dre@example.com</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">mobilePhone</span><span class="delimiter">&quot;</span></span>: null
+        "id": "00u1f9cMYQZFMPVXIDIZ",
+        "status": "ACTIVE",
+        "created": "2013-12-12T16:14:42.000Z",
+        "activated": "2013-12-12T16:14:42.000Z",
+        "statusChanged": "2013-12-12T16:14:42.000Z",
+        "lastLogin": "2013-12-12T18:14:42.000Z",
+        "profile": {
+            "firstName": "Dr.",
+            "lastName": "Dre",
+            "email": "dr.dre@example.com",
+            "login": "dr.dre@example.com",
+            "mobilePhone": null
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">credentials</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: {}
+        "credentials": {
+            "password": {}
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">resetPassword</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/users/00u1f9cMYQZFMPVXIDIZ/lifecycle/reset_password</span><span class="delimiter">&quot;</span></span>
+        "_links": {
+            "resetPassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00u1f9cMYQZFMPVXIDIZ/lifecycle/reset_password"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">changeRecoveryQuestion</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/users/00u1f9cMYQZFMPVXIDIZ/credentials/change_recovery_question</span><span class="delimiter">&quot;</span></span>
+            "changeRecoveryQuestion": {
+                "href": "https://your-domain.okta.com/api/v1/users/00u1f9cMYQZFMPVXIDIZ/credentials/change_recovery_question"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/users/00u1f9cMYQZFMPVXIDIZ/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/users/00u1f9cMYQZFMPVXIDIZ/lifecycle/deactivate"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">changePassword</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/users/00u1f9cMYQZFMPVXIDIZ/credentials/change_password</span><span class="delimiter">&quot;</span></span>
+            "changePassword": {
+                "href": "https://your-domain.okta.com/api/v1/users/00u1f9cMYQZFMPVXIDIZ/credentials/change_password"
             }
         }
     }
 ]
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="add-user-to-group">Add User to Group</h3>
 
@@ -4852,21 +4801,15 @@
 
 <h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization:SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">PUT</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups/<span class="integer">00</span>g1fanEFIQHMQQJMHZP/users/<span class="integer">00</span>u1f96ECLNVOKVMUSEA
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization:SSWS yourtoken" \
+-H "Accept:application/json" \
+-X PUT https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">204</span> <span class="constant">No</span> <span class="constant">Content</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 204 No Content
+</code></pre>
 
 <h3 class="api api-operation" id="remove-user-from-group">Remove User from Group</h3>
 
@@ -4917,21 +4860,15 @@
 
 <h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization:SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">DELETE</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups/<span class="integer">00</span>g1fanEFIQHMQQJMHZP/users/<span class="integer">00</span>u1f96ECLNVOKVMUSEA
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization:SSWS yourtoken" \
+-H "Accept:application/json" \
+-X DELETE https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users/00u1f96ECLNVOKVMUSEA
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">204</span> <span class="constant">No</span> <span class="constant">Content</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 204 No Content
+</code></pre>
 
 <h2 id="related-resources">Related Resources</h2>
 
@@ -4992,136 +4929,130 @@
 
 <h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization:SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">GET</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups/<span class="integer">00</span>g1fanEFIQHMQQJMHZP/apps
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization:SSWS yourtoken" \
+-H "Accept:application/json" \
+-X GET https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups/<span class="integer">00</span>g1fanEFIQHMQQJMHZP/apps&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-domain.okta.com/api/v1/groups/<span class="integer">00</span>g1fanEFIQHMQQJMHZP/apps?after=<span class="integer">0</span>oafxqCAJWWGELFTYASJ&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">next</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
+Link: &lt;https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps&gt;; rel="self"
+Link: &lt;https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps?after=0oafxqCAJWWGELFTYASJ&gt;; rel="next"
 
 [
  {
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">0oafwvZDWJKVLDCUWUAC</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">template_basic_auth</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">label</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Sample Basic Auth App</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">lastUpdated</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-09-30T00:56:52.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">created</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-09-30T00:56:52.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">accessibility</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">selfService</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">errorRedirectUrl</span><span class="delimiter">&quot;</span></span>: null
+        "id": "0oafwvZDWJKVLDCUWUAC",
+        "name": "template_basic_auth",
+        "label": "Sample Basic Auth App",
+        "status": "ACTIVE",
+        "lastUpdated": "2013-09-30T00:56:52.000Z",
+        "created": "2013-09-30T00:56:52.000Z",
+        "accessibility": {
+            "selfService": false,
+            "errorRedirectUrl": null
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">visibility</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">autoSubmitToolbar</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">hide</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">iOS</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>
+        "visibility": {
+            "autoSubmitToolbar": false,
+            "hide": {
+                "iOS": false,
+                "web": false
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">appLinks</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
+            "appLinks": {
+                "login": true
             }
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>: [],
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">signOnMode</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">BASIC_AUTH</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">credentials</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">scheme</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">EDIT_USERNAME_AND_PASSWORD</span><span class="delimiter">&quot;</span></span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">userNameTemplate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">template</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">${source.login}</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">BUILT_IN</span><span class="delimiter">&quot;</span></span>
+        "features": [],
+        "signOnMode": "BASIC_AUTH",
+        "credentials": {
+            "scheme": "EDIT_USERNAME_AND_PASSWORD",
+            "userNameTemplate": {
+                "template": "${source.login}",
+                "type": "BUILT_IN"
             }
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">settings</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">app</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">url</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://example.com/login.html</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">authURL</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://example.com/auth.html</span><span class="delimiter">&quot;</span></span>
+        "settings": {
+            "app": {
+                "url": "https://example.com/login.html",
+                "authURL": "https://example.com/auth.html"
             }
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">appLinks</span><span class="delimiter">&quot;</span></span>: [
+        "_links": {
+            "appLinks": [
                 {
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/home/template_basic_auth/0oafwvZDWJKVLDCUWUAC/1438</span><span class="delimiter">&quot;</span></span>,
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>,
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">text/html</span><span class="delimiter">&quot;</span></span>
+                    "href": "https://your-domain.okta.com/home/template_basic_auth/0oafwvZDWJKVLDCUWUAC/1438",
+                    "name": "login",
+                    "type": "text/html"
                 }
             ],
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/users</span><span class="delimiter">&quot;</span></span>
+            "users": {
+                "href": "https://your-domain.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/users"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/lifecycle/deactivate"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">groups</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/groups</span><span class="delimiter">&quot;</span></span>
+            "groups": {
+                "href": "https://your-domain.okta.com/api/v1/apps/0oafwvZDWJKVLDCUWUAC/groups"
             }
         }
     },
     {
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">0oafxqCAJWWGELFTYASJ</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">bookmark</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">label</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Sample Bookmark App</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">lastUpdated</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-10-02T22:06:24.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">created</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2013-10-01T04:22:27.000Z</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">accessibility</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">selfService</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">errorRedirectUrl</span><span class="delimiter">&quot;</span></span>: null
+        "id": "0oafxqCAJWWGELFTYASJ",
+        "name": "bookmark",
+        "label": "Sample Bookmark App",
+        "status": "ACTIVE",
+        "lastUpdated": "2013-10-02T22:06:24.000Z",
+        "created": "2013-10-01T04:22:27.000Z",
+        "accessibility": {
+            "selfService": false,
+            "errorRedirectUrl": null
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">visibility</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">autoSubmitToolbar</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">hide</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">iOS</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">web</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>
+        "visibility": {
+            "autoSubmitToolbar": false,
+            "hide": {
+                "iOS": false,
+                "web": false
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">appLinks</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
+            "appLinks": {
+                "login": true
             }
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>: [],
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">signOnMode</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">BOOKMARK</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">credentials</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">userNameTemplate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">template</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">${user.firstName}</span><span class="delimiter">&quot;</span></span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">CUSTOM</span><span class="delimiter">&quot;</span></span>
+        "features": [],
+        "signOnMode": "BOOKMARK",
+        "credentials": {
+            "userNameTemplate": {
+                "template": "${user.firstName}",
+                "type": "CUSTOM"
             }
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">settings</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">app</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">requestIntegration</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">url</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://example.com/bookmark.htm</span><span class="delimiter">&quot;</span></span>
+        "settings": {
+            "app": {
+                "requestIntegration": false,
+                "url": "https://example.com/bookmark.htm"
             }
         },
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">appLinks</span><span class="delimiter">&quot;</span></span>: [
+        "_links": {
+            "appLinks": [
                 {
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/home/bookmark/0oafxqCAJWWGELFTYASJ/1280</span><span class="delimiter">&quot;</span></span>,
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">login</span><span class="delimiter">&quot;</span></span>,
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">text/html</span><span class="delimiter">&quot;</span></span>
+                    "href": "https://your-domain.okta.com/home/bookmark/0oafxqCAJWWGELFTYASJ/1280",
+                    "name": "login",
+                    "type": "text/html"
                 }
             ],
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">users</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/users</span><span class="delimiter">&quot;</span></span>
+            "users": {
+                "href": "https://your-domain.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/users"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>
+            "deactivate": {
+                "href": "https://your-domain.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/lifecycle/deactivate"
             },
-            <span class="string"><span class="delimiter">&quot;</span><span class="content">groups</span><span class="delimiter">&quot;</span></span>: {
-                <span class="string"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/groups</span><span class="delimiter">&quot;</span></span>
+            "groups": {
+                "href": "https://your-domain.okta.com/api/v1/apps/0oafxqCAJWWGELFTYASJ/groups"
             }
         }
     }
 ]
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 
 	</div>

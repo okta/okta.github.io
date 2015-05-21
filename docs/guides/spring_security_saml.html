@@ -1921,11 +1921,8 @@ you set up earlier</li>
   <li>
     <p>Start Tomcat</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>$ /Library/Tomcat/bin/startup.sh
-</pre></div>
-</div>
-    </div>
+    <pre><code class="language-shell">$ /Library/Tomcat/bin/startup.sh
+</code></pre>
   </li>
   <li>
     <p>Load the Spring Security SAML sample application by opening this URL:
@@ -1984,20 +1981,14 @@ the green “Create” button
     <p>In Step 2 “Configure SAML”,
 Paste the URL below into the “Single sign on URL” field:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>http://localhost:8080/spring-security-saml2-sample/saml/SSO
-</pre></div>
-</div>
-    </div>
+    <pre><code class="language-shell">http://localhost:8080/spring-security-saml2-sample/saml/SSO
+</code></pre>
 
     <p>Then paste the URL below into the “Audience URI (SP Entity ID)”
 field:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>http://localhost:8080/spring-security-saml2-sample/saml/metadata
-</pre></div>
-</div>
-    </div>
+    <pre><code class="language-shell">http://localhost:8080/spring-security-saml2-sample/saml/metadata
+</code></pre>
 
     <p>Then click the green “Next” button</p>
 
@@ -2071,22 +2062,19 @@ easier to make small changes and test them this way).</p>
 to the end of the tag identified by this CSS selector syntax:
 <code>#metadata &gt; constructor-arg &gt; list</code>.</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="tag">&lt;bean</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">org.opensaml.saml2.metadata.provider.HTTPMetadataProvider</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-  <span class="comment">&lt;!-- URL containing the metadata --&gt;</span>
-  <span class="tag">&lt;constructor-arg&gt;</span>
-    <span class="comment">&lt;!-- This URL should look something like this: https://example.okta.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;</span>
-    <span class="tag">&lt;value</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">java.lang.String</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>{metadata-url}<span class="tag">&lt;/value&gt;</span>
-  <span class="tag">&lt;/constructor-arg&gt;</span>
-  <span class="comment">&lt;!-- Timeout for metadata loading in ms --&gt;</span>
-  <span class="tag">&lt;constructor-arg&gt;</span>
-    <span class="tag">&lt;value</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">int</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>5000<span class="tag">&lt;/value&gt;</span>
-  <span class="tag">&lt;/constructor-arg&gt;</span>
-  <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">parserPool</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">parserPool</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
-<span class="tag">&lt;/bean&gt;</span>
-</pre></div>
-</div>
-    </div>
+    <pre><code class="language-xml">&lt;bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider"&gt;
+  &lt;!-- URL containing the metadata --&gt;
+  &lt;constructor-arg&gt;
+    &lt;!-- This URL should look something like this: https://example.okta.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;
+    &lt;value type="java.lang.String"&gt;{metadata-url}&lt;/value&gt;
+  &lt;/constructor-arg&gt;
+  &lt;!-- Timeout for metadata loading in ms --&gt;
+  &lt;constructor-arg&gt;
+    &lt;value type="int"&gt;5000&lt;/value&gt;
+  &lt;/constructor-arg&gt;
+  &lt;property name="parserPool" ref="parserPool"/&gt;
+&lt;/bean&gt;
+</code></pre>
   </li>
   <li>
     <p>Make sure to replace the contents of <code>{metdata-url}</code> with the link
@@ -2100,12 +2088,9 @@ Spring Security SAML” instructions above!**</p>
     <p>If you are using Mac OS X, you can restart Tomcat using the commands
 below:</p>
 
-    <div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>$ /Library/Tomcat/bin/shutdown.sh
+    <pre><code class="language-shell">$ /Library/Tomcat/bin/shutdown.sh
 $ /Library/Tomcat/bin/startup.sh
-</pre></div>
-</div>
-    </div>
+</code></pre>
   </li>
 </ol>
 

@@ -792,36 +792,30 @@
 
 <h4 class="api api-request api-request-example" id="request-example">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">POST</span> <span class="regexp"><span class="delimiter">/</span><span class="content">api</span><span class="delimiter">/</span></span>v1/sessions?additionalFields=cookieToken <span class="constant">HTTP</span>/<span class="float">1.1</span>
-<span class="key">Host</span>: your-subdomain.okta.com
-<span class="key">Authorization</span>: <span class="constant">SSWS</span> yourtoken
-<span class="key">Accept</span>: application/json
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">POST /api/v1/sessions?additionalFields=cookieToken HTTP/1.1
+Host: your-subdomain.okta.com
+Authorization: SSWS yourtoken
+Accept: application/json
+Content-Type: application/json
 
 {
-  <span class="string"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">art.vandelay@example.com</span><span class="delimiter">&quot;</span></span>,
-  <span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">correct horse battery staple</span><span class="delimiter">&quot;</span></span>
+  "username": "art.vandelay@example.com",
+  "password": "correct horse battery staple"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h4 class="api api-response api-response-example" id="response-example">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
 
 {
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">000kYk6cDF7R02z4PxV5mhL4g</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">userId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00u9apFCRAIKHVPZLGXT</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">mfaActive</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">cookieToken</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span><span class="delimiter">&quot;</span></span>
+    "id": "000kYk6cDF7R02z4PxV5mhL4g",
+    "userId": "00u9apFCRAIKHVPZLGXT",
+    "mfaActive": false,
+    "cookieToken": "009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="visit-session-redirect-url-with-the-one-time-token">Visit session redirect URL with the one-time token</h3>
 
@@ -832,31 +826,22 @@
   <p>Only the Okta session redirect URL with one-time token is required</p>
 </blockquote>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">302</span> <span class="constant">Moved</span> <span class="constant">Temporarily</span>
-<span class="constant">Set</span>-<span class="key">Cookie</span>: my_app_session_cookie_name=my_apps_session_cookie_value; <span class="constant">Path</span>=<span class="regexp"><span class="delimiter">/</span><span class="content">
-Location: https:</span><span class="delimiter">/</span></span>/your-subdomain.okta.com/login/sessionCookieRedirect?token=<span class="integer">00</span><span class="integer">9</span><span class="constant">Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span>&amp;redirectUrl=https%<span class="integer">3</span><span class="constant">A</span>%<span class="integer">2</span><span class="constant">F</span>%<span class="integer">2</span><span class="constant">Fwww</span>.example.com%<span class="integer">2</span><span class="constant">Fportal</span>%<span class="integer">2</span><span class="constant">Fhome</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 302 Moved Temporarily
+Set-Cookie: my_app_session_cookie_name=my_apps_session_cookie_value; Path=/
+Location: https://your-subdomain.okta.com/login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome
+</code></pre>
 
 <p>The user’s browser will set your app’s session cookie and follow the redirect to Okta.  Okta will validate the one-time token and return a 302 status response that sets a session cookie for Okta and redirects the user’s browser back to your landing page.  After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications until the session is expired or the user closes the session (logout) or browser application.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">GET</span> <span class="regexp"><span class="delimiter">/</span><span class="content">login</span><span class="delimiter">/</span><span class="modifier">session</span></span>CookieRedirect?token=<span class="integer">00</span><span class="integer">9</span><span class="constant">Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span>&amp;redirectUrl=https%<span class="integer">3</span><span class="constant">A</span>%<span class="integer">2</span><span class="constant">F</span>%<span class="integer">2</span><span class="constant">Fwww</span>.example.com%<span class="integer">2</span><span class="constant">Fportal</span>%<span class="integer">2</span><span class="constant">Fhome</span> <span class="constant">HTTP</span>/<span class="float">1.1</span>
-<span class="key">Host</span>: your-subdomain.okta.com
-<span class="key">Accept</span>: *<span class="regexp"><span class="delimiter">/</span><span class="content">*
-</span></span></pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">GET /login/sessionCookieRedirect?token=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6&amp;redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome HTTP/1.1
+Host: your-subdomain.okta.com
+Accept: */*
+</code></pre>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">302</span> <span class="constant">Moved</span> <span class="constant">Temporarily</span>
-<span class="constant">Set</span>-<span class="key">Cookie</span>: sid=<span class="integer">000</span>aC_z7AZKTpSqtHFc0Ak6Vg; <span class="constant">Path</span>=<span class="regexp"><span class="delimiter">/</span><span class="content">
-Location: https:</span><span class="delimiter">/</span></span>/www.example.com/portal/home
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 302 Moved Temporarily
+Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
+Location: https://www.example.com/portal/home
+</code></pre>
 
 <h2 id="retrieving-a-session-cookie-by-visiting-an-application-embed-link">Retrieving a session cookie by visiting an application embed link</h2>
 
@@ -874,57 +859,45 @@ Location: https:</span><span class="delimiter">/</span></span>/www.example.com/p
 
 <h4 class="api api-request api-request-example" id="request-example-1">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">POST</span> <span class="regexp"><span class="delimiter">/</span><span class="content">api</span><span class="delimiter">/</span></span>v1/sessions?additionalFields=cookieToken <span class="constant">HTTP</span>/<span class="float">1.1</span>
-<span class="key">Host</span>: your-subdomain.okta.com
-<span class="key">Authorization</span>: <span class="constant">SSWS</span> yourtoken
-<span class="key">Accept</span>: application/json
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">POST /api/v1/sessions?additionalFields=cookieToken HTTP/1.1
+Host: your-subdomain.okta.com
+Authorization: SSWS yourtoken
+Accept: application/json
+Content-Type: application/json
 
 {
-  <span class="string"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">art.vandelay@example.com</span><span class="delimiter">&quot;</span></span>,
-  <span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">correct horse battery staple</span><span class="delimiter">&quot;</span></span>
+  "username": "art.vandelay@example.com",
+  "password": "correct horse battery staple"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h4 class="api api-response api-response-example" id="response-example-1">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
 
 {
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">000kYk6cDF7R02z4PxV5mhL4g</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">userId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00u9apFCRAIKHVPZLGXT</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">mfaActive</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">cookieToken</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span><span class="delimiter">&quot;</span></span>
+    "id": "000kYk6cDF7R02z4PxV5mhL4g",
+    "userId": "00u9apFCRAIKHVPZLGXT",
+    "mfaActive": false,
+    "cookieToken": "009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="visit-an-embed-link-with-the-one-time-token">Visit an embed link with the one-time token</h3>
 
 <p>After your login flow is complete you can launch an Okta application for the user with an <a href="/docs/api/rest/users.html#get-assigned-app-links">embed link</a> that contains the the one-time token as a query parameter <code>onetimetoken</code>.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">302</span> <span class="constant">Moved</span> <span class="constant">Temporarily</span>
-<span class="key">Location</span>: <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?onetimetoken=<span class="integer">00</span><span class="integer">9</span><span class="constant">Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 302 Moved Temporarily
+Location: https://your-subdomain/app/google/go1013td3mXAQOJCHEHQ/mail?onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6
+</code></pre>
 
 <p>When the link is visited, the token in the request will be used to initiate the user’s session before processing the application launch request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">302</span> <span class="constant">Moved</span> <span class="constant">Temporarily</span>
-<span class="constant">Set</span>-<span class="key">Cookie</span>: sid=<span class="integer">000</span>aC_z7AZKTpSqtHFc0Ak6Vg; <span class="constant">Path</span>=<span class="regexp"><span class="delimiter">/</span><span class="content">
-Location: https:</span><span class="delimiter">/</span></span>/mail.google.com/a/your-subdomain
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 302 Moved Temporarily
+Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
+Location: https://mail.google.com/a/your-subdomain
+</code></pre>
 
 <blockquote>
   <p>The HTTP response will vary depending on the specific Okta application but will always contain a <code>Set-Cookie</code> header.</p>
@@ -935,29 +908,25 @@ Location: https:</span><span class="delimiter">/</span></span>/mail.google.com/a
 <p>After your login flow is complete you can also initiate a SAML SSO into an Okta application for the user with either the <code>HTTP-Redirect</code> or <code>HTTP-POST</code>binding to the application’s SAML SSO URL
 that contains the the one-time token as query parameter <code>onetimetoken</code>.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">GET</span> <span class="regexp"><span class="delimiter">/</span><span class="content">app</span><span class="delimiter">/</span></span>template_saml_2_0/kbiyMOIMHNLGHJNCBURM/sso/saml?<span class="constant">RelayState</span>=%<span class="integer">2</span><span class="constant">Fsome</span>%<span class="integer">2</span><span class="constant">Fdeep</span>%<span class="integer">2</span><span class="constant">Flink</span>&amp;onetimetoken=<span class="integer">00</span><span class="integer">9</span><span class="constant">Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span> <span class="constant">HTTP</span>/<span class="float">1.1</span>
-<span class="key">Host</span>: your-subdomain.okta.com
-<span class="key">Accept</span>: *<span class="regexp"><span class="delimiter">/</span><span class="content">*
-</span></span></pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">GET /app/template_saml_2_0/kbiyMOIMHNLGHJNCBURM/sso/saml?RelayState=%2Fsome%2Fdeep%2Flink&amp;onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6 HTTP/1.1
+Host: your-subdomain.okta.com
+Accept: */*
+</code></pre>
 
 <p>When the link is visited, the token in the request will be used to initiate the user’s session before processing the SAML SSO request. A session cookie will be set in the browser and the user will have an active session with Okta and will be able to SSO into additional applications until the session is expired or the user closes the session (logout) or browser application.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: text/html;charset=utf-<span class="integer">8</span>
-<span class="constant">Set</span>-<span class="key">Cookie</span>: sid=<span class="integer">000</span>aC_z7AZKTpSqtHFc0Ak6Vg; <span class="constant">Path</span>=<span class="regexp"><span class="delimiter">/</span><span class="content">
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+Set-Cookie: sid=000aC_z7AZKTpSqtHFc0Ak6Vg; Path=/
 &lt;html&gt;
 &lt;body&gt;
     &lt;div&gt;
-        &lt;form id=&quot;appForm&quot; action=&quot;https:</span><span class="delimiter">/</span></span>/sp.example.com/auth/saml20<span class="string"><span class="delimiter">&quot;</span><span class="content"> method=</span><span class="delimiter">&quot;</span></span><span class="constant">POST</span><span class="string"><span class="delimiter">&quot;</span><span class="content">&gt;
-            &lt;input name=</span><span class="delimiter">&quot;</span></span><span class="constant">SAMLResponse</span><span class="string"><span class="delimiter">&quot;</span><span class="content"> type=</span><span class="delimiter">&quot;</span></span>hidden<span class="string"><span class="delimiter">&quot;</span><span class="content"> value=</span><span class="delimiter">&quot;</span></span><span class="constant">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c2FtbDJwOlJlc3BvbnNlIHhtbG5zOnNhbWwycD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly9va3RhcHMxLm9rdGEuY29tL2F1dGgvc2FtbDIwL2thcmwiIElEPSJpZDEzODE1MzU1NjY3MTAwODkwMDAxMzkzODMwOTY2IiBJc3N1ZUluc3RhbnQ9IjIwMTMtMTAtMTFUMjM6NTI6NDYuNjk4WiIgVmVyc2lvbj0iMi4wIj48c2FtbDI6SXNzdWVyIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OmVudGl0eSI</span>+aHR0cDovL3d3dy5va3RhLmNvbS9rYml5TU9JTUhOTEdISk5DQlVSTTwvc2FtbDI6SXNzdWVyPjxkczpTaWduYXR1cmUgeG1sbnM6ZHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyMiPjxkczpTaWduZWRJbmZvPjxkczpDYW5vbmljYWxpemF0aW9uTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8+<span class="constant">PGRzOlNpZ25hdHVyZU1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNyc2Etc2hhMSIvPjxkczpSZWZlcmVuY2UgVVJJPSIjaWQxMzgxNTM1NTY2NzEwMDg5MDAwMTM5MzgzMDk2NiI</span>+<span class="constant">PGRzOlRyYW5zZm9ybXM</span>+<span class="constant">PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8</span>+<span class="constant">PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjwvZHM6VHJhbnNmb3Jtcz48ZHM6RGlnZXN0TWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3NoYTEiLz48ZHM6RGlnZXN0VmFsdWU</span>+enNDNjJuOUI3S1RxN1pZdG5YM3M2dW9jYXRBPTwvZHM6RGlnZXN0VmFsdWU+<span class="constant">PC9kczpSZWZlcmVuY2U</span>+<span class="constant">PC9kczpTaWduZWRJbmZvPjxkczpTaWduYXR1cmVWYWx1ZT5aZ3YvamFJdkpGSW9EV29GRnUyM0dJVVJLSU9JMUdOd2FmWXhZbmdWY01pRnQ5UTRwOS9MQUhMSXVKYzhjdXh4UmlmYlpza1ZlRWh1TG1xV3JSSFpMRHh2djJ4Wm15eUM4UGlSc2xFSGlzMEhhQTY3bDF3dlBaTURTSWxhV3lJaFFzVkppVE90Nk9GSXpjNkZwZEFZVWU0Y3ptcEEyaW4vK2RmQTl0S1dYbkU9PC9kczpTaWduYXR1cmVWYWx1ZT48ZHM6S2V5SW5mbz48ZHM6WDUwOURhdGE</span>+<span class="constant">PGRzOlg1MDlDZXJ0aWZpY2F0ZT5NSUlDblRDQ0FnYWdBd0lCQWdJR0FTbE1OYXdETUEwR0NTcUdTSWIzRFFFQkJRVUFNSUdSTVFzd0NRWURWUVFHRXdKVlV6RVRNQkVHCkExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUVDZ3dFVDJ0MFlURVUKTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxR1NJYjNEUUVKQVJZTgphVzVtYjBCdmEzUmhMbU52YlRBZUZ3MHhNREEyTVRneE56VTJOVEphRncwME1EQTJNVGd4TnpVM05USmFNSUdSTVFzd0NRWURWUVFHCkV3SlZVekVUTUJFR0ExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUUKQ2d3RVQydDBZVEVVTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxRwpTSWIzRFFFSkFSWU5hVzVtYjBCdmEzUmhMbU52YlRDQm56QU5CZ2txaGtpRzl3MEJBUUVGQUFPQmpRQXdnWWtDZ1lFQWtIUDlpSGNYCnRja0ZVMmliNkpWUTNVUDRaMDFoc1QyWXh1ZUhqa2pxL0Z3N1o3aEtueDMwb0JBeFl6dGxUZitsSVpjVWlRVnc5WUF2NVVKNC9uaEMKSTdiQmM2SVVuYnIzUTZ5NitjbWJ1VlVnaVhodzVsTTR5a2tMQ2dLZ01uVk5hcHRYNGt4RGY0ZGVRbEorS0pLeFdDWjN5TXR5aEZYZQo0bUtvbUwxQzRyc0NBd0VBQVRBTkJna3Foa2lHOXcwQkFRVUZBQU9CZ1FBbVJEODBnMVYzU2lNYjdEdHZwMG1CZWk5elczaEw3Y0RYCnV2ZFlBMXU0Vmhhais1bWppYVJ5QlFDODJLaU1UZ1l4MGExOWZGeUVRWHlwcGU0Nzh3MUNBUFFBbjhIWEFMVHR3WUJpMUgvbHpKRTUKaU5MRE55dWVtTjhaUVV5TTFNeVNYbDhiVmNRSE4wZmpnOWVmWG9kYkw4VzVhLzZwTW9Mc2NaaDJHTUsrVkE9PTwvZHM6WDUwOUNlcnRpZmljYXRlPjwvZHM6WDUwOURhdGE</span>+<span class="constant">PC9kczpLZXlJbmZvPjwvZHM6U2lnbmF0dXJlPjxzYW1sMnA6U3RhdHVzIHhtbG5zOnNhbWwycD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDJwOlN0YXR1c0NvZGUgVmFsdWU9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpzdGF0dXM6U3VjY2VzcyIvPjwvc2FtbDJwOlN0YXR1cz48c2FtbDI6QXNzZXJ0aW9uIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBJRD0iaWQxMzgxNTM1NTY2NzE0OTg5MDAwMjMxOTQzNDgiIElzc3VlSW5zdGFudD0iMjAxMy0xMC0xMVQyMzo1Mjo0Ni42OThaIiBWZXJzaW9uPSIyLjAiPjxzYW1sMjpJc3N1ZXIgRm9ybWF0PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6bmFtZWlkLWZvcm1hdDplbnRpdHkiIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj5odHRwOi8vd3d3Lm9rdGEuY29tL2tiaXlNT0lNSE5MR0hKTkNCVVJNPC9zYW1sMjpJc3N1ZXI</span>+<span class="constant">PGRzOlNpZ25hdHVyZSB4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyI</span>+<span class="constant">PGRzOlNpZ25lZEluZm8</span>+<span class="constant">PGRzOkNhbm9uaWNhbGl6YXRpb25NZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzEwL3htbC1leGMtYzE0biMiLz48ZHM6U2lnbmF0dXJlTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3JzYS1zaGExIi8</span>+<span class="constant">PGRzOlJlZmVyZW5jZSBVUkk9IiNpZDEzODE1MzU1NjY3MTQ5ODkwMDAyMzE5NDM0OCI</span>+<span class="constant">PGRzOlRyYW5zZm9ybXM</span>+<span class="constant">PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8</span>+<span class="constant">PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjwvZHM6VHJhbnNmb3Jtcz48ZHM6RGlnZXN0TWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3NoYTEiLz48ZHM6RGlnZXN0VmFsdWU</span>+<span class="constant">LzRvakxrbFE3SDVLVlQvYXhMSk9nVEttQkRRPTwvZHM6RGlnZXN0VmFsdWU</span>+<span class="constant">PC9kczpSZWZlcmVuY2U</span>+<span class="constant">PC9kczpTaWduZWRJbmZvPjxkczpTaWduYXR1cmVWYWx1ZT5OSGNxQVJGT2FHd2N3bVlyRklMeTlGendnWDZDenVMcDlhQm5UZkxXdFpic0tOWFRvSS92dG9GVjhDMzFEOUlKVlVoOVhNcmtQckN4Q2VZZGczdnlUbmx5dG80SlJ1TlR2elhncFBEcGlDZ2RGaWhHeFJPRk9JVFhoQkdkRFNXbVdkYkNuQWJDZzBWT2xlZHNnQjMxTExudXFJaGIxSGJGVy9ZeFBhUTRmbEU9PC9kczpTaWduYXR1cmVWYWx1ZT48ZHM6S2V5SW5mbz48ZHM6WDUwOURhdGE</span>+<span class="constant">PGRzOlg1MDlDZXJ0aWZpY2F0ZT5NSUlDblRDQ0FnYWdBd0lCQWdJR0FTbE1OYXdETUEwR0NTcUdTSWIzRFFFQkJRVUFNSUdSTVFzd0NRWURWUVFHRXdKVlV6RVRNQkVHCkExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUVDZ3dFVDJ0MFlURVUKTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxR1NJYjNEUUVKQVJZTgphVzVtYjBCdmEzUmhMbU52YlRBZUZ3MHhNREEyTVRneE56VTJOVEphRncwME1EQTJNVGd4TnpVM05USmFNSUdSTVFzd0NRWURWUVFHCkV3SlZVekVUTUJFR0ExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUUKQ2d3RVQydDBZVEVVTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxRwpTSWIzRFFFSkFSWU5hVzVtYjBCdmEzUmhMbU52YlRDQm56QU5CZ2txaGtpRzl3MEJBUUVGQUFPQmpRQXdnWWtDZ1lFQWtIUDlpSGNYCnRja0ZVMmliNkpWUTNVUDRaMDFoc1QyWXh1ZUhqa2pxL0Z3N1o3aEtueDMwb0JBeFl6dGxUZitsSVpjVWlRVnc5WUF2NVVKNC9uaEMKSTdiQmM2SVVuYnIzUTZ5NitjbWJ1VlVnaVhodzVsTTR5a2tMQ2dLZ01uVk5hcHRYNGt4RGY0ZGVRbEorS0pLeFdDWjN5TXR5aEZYZQo0bUtvbUwxQzRyc0NBd0VBQVRBTkJna3Foa2lHOXcwQkFRVUZBQU9CZ1FBbVJEODBnMVYzU2lNYjdEdHZwMG1CZWk5elczaEw3Y0RYCnV2ZFlBMXU0Vmhhais1bWppYVJ5QlFDODJLaU1UZ1l4MGExOWZGeUVRWHlwcGU0Nzh3MUNBUFFBbjhIWEFMVHR3WUJpMUgvbHpKRTUKaU5MRE55dWVtTjhaUVV5TTFNeVNYbDhiVmNRSE4wZmpnOWVmWG9kYkw4VzVhLzZwTW9Mc2NaaDJHTUsrVkE9PTwvZHM6WDUwOUNlcnRpZmljYXRlPjwvZHM6WDUwOURhdGE</span>+<span class="constant">PC9kczpLZXlJbmZvPjwvZHM6U2lnbmF0dXJlPjxzYW1sMjpTdWJqZWN0IHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48c2FtbDI6TmFtZUlEIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6MS4xOm5hbWVpZC1mb3JtYXQ6ZW1haWxBZGRyZXNzIj5mcmVkZmxpbnRzdG9uZUByaW5jb25oaWxsLmNvbTwvc2FtbDI6TmFtZUlEPjxzYW1sMjpTdWJqZWN0Q29uZmlybWF0aW9uIE1ldGhvZD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmNtOmJlYXJlciI</span>+<span class="constant">PHNhbWwyOlN1YmplY3RDb25maXJtYXRpb25EYXRhIE5vdE9uT3JBZnRlcj0iMjAxMy0xMC0xMVQyMzo1Nzo0Ni43MTdaIiBSZWNpcGllbnQ9Imh0dHBzOi8vb2t0YXBzMS5va3RhLmNvbS9hdXRoL3NhbWwyMC9rYXJsIi8</span>+<span class="constant">PC9zYW1sMjpTdWJqZWN0Q29uZmlybWF0aW9uPjwvc2FtbDI6U3ViamVjdD48c2FtbDI6Q29uZGl0aW9ucyBOb3RCZWZvcmU9IjIwMTMtMTAtMTFUMjM6NDc6NDYuNzE3WiIgTm90T25PckFmdGVyPSIyMDEzLTEwLTExVDIzOjU3OjQ2LjcxN1oiIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48c2FtbDI6QXVkaWVuY2VSZXN0cmljdGlvbj48c2FtbDI6QXVkaWVuY2U</span>+aHR0cHM6Ly93d3cub2t0YS5jb20vc2FtbDIvc2VydmljZS1wcm92aWRlci9zcGJmZHY5MnFLU0JUR1VZR1VQTzwvc2FtbDI6QXVkaWVuY2U+<span class="constant">PC9zYW1sMjpBdWRpZW5jZVJlc3RyaWN0aW9uPjwvc2FtbDI6Q29uZGl0aW9ucz48c2FtbDI6QXV0aG5TdGF0ZW1lbnQgQXV0aG5JbnN0YW50PSIyMDEzLTEwLTExVDIzOjUyOjQ2LjY5OFoiIFNlc3Npb25JbmRleD0iaWQxMzgxNTM1NTY2Njk4LjY4MDQ3Mjc3IiB4bWxuczpzYW1sMj0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI</span>+<span class="constant">PHNhbWwyOkF1dGhuQ29udGV4dD48c2FtbDI6QXV0aG5Db250ZXh0Q2xhc3NSZWY</span>+dXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFjOmNsYXNzZXM6UGFzc3dvcmRQcm90ZWN0ZWRUcmFuc3BvcnQ8L3NhbWwyOkF1dGhuQ29udGV4dENsYXNzUmVmPjwvc2FtbDI6QXV0aG5Db250ZXh0Pjwvc2FtbDI6QXV0aG5TdGF0ZW1lbnQ+<span class="constant">PC9zYW1sMjpBc3NlcnRpb24</span>+<span class="constant">PC9zYW1sMnA6UmVzcG9uc2U</span>+<span class="string"><span class="delimiter">&quot;</span><span class="content">/&gt;
-            &lt;input name=</span><span class="delimiter">&quot;</span></span><span class="constant">RelayState</span><span class="string"><span class="delimiter">&quot;</span><span class="content"> type=</span><span class="delimiter">&quot;</span></span>hidden<span class="string"><span class="delimiter">&quot;</span><span class="content"> value=</span><span class="delimiter">&quot;</span></span>/some/deep/link<span class="string"><span class="delimiter">&quot;</span><span class="content">/&gt;
+        &lt;form id="appForm" action="https://sp.example.com/auth/saml20" method="POST"&gt;
+            &lt;input name="SAMLResponse" type="hidden" value="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c2FtbDJwOlJlc3BvbnNlIHhtbG5zOnNhbWwycD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly9va3RhcHMxLm9rdGEuY29tL2F1dGgvc2FtbDIwL2thcmwiIElEPSJpZDEzODE1MzU1NjY3MTAwODkwMDAxMzkzODMwOTY2IiBJc3N1ZUluc3RhbnQ9IjIwMTMtMTAtMTFUMjM6NTI6NDYuNjk4WiIgVmVyc2lvbj0iMi4wIj48c2FtbDI6SXNzdWVyIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OmVudGl0eSI+aHR0cDovL3d3dy5va3RhLmNvbS9rYml5TU9JTUhOTEdISk5DQlVSTTwvc2FtbDI6SXNzdWVyPjxkczpTaWduYXR1cmUgeG1sbnM6ZHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyMiPjxkczpTaWduZWRJbmZvPjxkczpDYW5vbmljYWxpemF0aW9uTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8+PGRzOlNpZ25hdHVyZU1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNyc2Etc2hhMSIvPjxkczpSZWZlcmVuY2UgVVJJPSIjaWQxMzgxNTM1NTY2NzEwMDg5MDAwMTM5MzgzMDk2NiI+PGRzOlRyYW5zZm9ybXM+PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8+PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjwvZHM6VHJhbnNmb3Jtcz48ZHM6RGlnZXN0TWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3NoYTEiLz48ZHM6RGlnZXN0VmFsdWU+enNDNjJuOUI3S1RxN1pZdG5YM3M2dW9jYXRBPTwvZHM6RGlnZXN0VmFsdWU+PC9kczpSZWZlcmVuY2U+PC9kczpTaWduZWRJbmZvPjxkczpTaWduYXR1cmVWYWx1ZT5aZ3YvamFJdkpGSW9EV29GRnUyM0dJVVJLSU9JMUdOd2FmWXhZbmdWY01pRnQ5UTRwOS9MQUhMSXVKYzhjdXh4UmlmYlpza1ZlRWh1TG1xV3JSSFpMRHh2djJ4Wm15eUM4UGlSc2xFSGlzMEhhQTY3bDF3dlBaTURTSWxhV3lJaFFzVkppVE90Nk9GSXpjNkZwZEFZVWU0Y3ptcEEyaW4vK2RmQTl0S1dYbkU9PC9kczpTaWduYXR1cmVWYWx1ZT48ZHM6S2V5SW5mbz48ZHM6WDUwOURhdGE+PGRzOlg1MDlDZXJ0aWZpY2F0ZT5NSUlDblRDQ0FnYWdBd0lCQWdJR0FTbE1OYXdETUEwR0NTcUdTSWIzRFFFQkJRVUFNSUdSTVFzd0NRWURWUVFHRXdKVlV6RVRNQkVHCkExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUVDZ3dFVDJ0MFlURVUKTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxR1NJYjNEUUVKQVJZTgphVzVtYjBCdmEzUmhMbU52YlRBZUZ3MHhNREEyTVRneE56VTJOVEphRncwME1EQTJNVGd4TnpVM05USmFNSUdSTVFzd0NRWURWUVFHCkV3SlZVekVUTUJFR0ExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUUKQ2d3RVQydDBZVEVVTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxRwpTSWIzRFFFSkFSWU5hVzVtYjBCdmEzUmhMbU52YlRDQm56QU5CZ2txaGtpRzl3MEJBUUVGQUFPQmpRQXdnWWtDZ1lFQWtIUDlpSGNYCnRja0ZVMmliNkpWUTNVUDRaMDFoc1QyWXh1ZUhqa2pxL0Z3N1o3aEtueDMwb0JBeFl6dGxUZitsSVpjVWlRVnc5WUF2NVVKNC9uaEMKSTdiQmM2SVVuYnIzUTZ5NitjbWJ1VlVnaVhodzVsTTR5a2tMQ2dLZ01uVk5hcHRYNGt4RGY0ZGVRbEorS0pLeFdDWjN5TXR5aEZYZQo0bUtvbUwxQzRyc0NBd0VBQVRBTkJna3Foa2lHOXcwQkFRVUZBQU9CZ1FBbVJEODBnMVYzU2lNYjdEdHZwMG1CZWk5elczaEw3Y0RYCnV2ZFlBMXU0Vmhhais1bWppYVJ5QlFDODJLaU1UZ1l4MGExOWZGeUVRWHlwcGU0Nzh3MUNBUFFBbjhIWEFMVHR3WUJpMUgvbHpKRTUKaU5MRE55dWVtTjhaUVV5TTFNeVNYbDhiVmNRSE4wZmpnOWVmWG9kYkw4VzVhLzZwTW9Mc2NaaDJHTUsrVkE9PTwvZHM6WDUwOUNlcnRpZmljYXRlPjwvZHM6WDUwOURhdGE+PC9kczpLZXlJbmZvPjwvZHM6U2lnbmF0dXJlPjxzYW1sMnA6U3RhdHVzIHhtbG5zOnNhbWwycD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDJwOlN0YXR1c0NvZGUgVmFsdWU9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpzdGF0dXM6U3VjY2VzcyIvPjwvc2FtbDJwOlN0YXR1cz48c2FtbDI6QXNzZXJ0aW9uIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBJRD0iaWQxMzgxNTM1NTY2NzE0OTg5MDAwMjMxOTQzNDgiIElzc3VlSW5zdGFudD0iMjAxMy0xMC0xMVQyMzo1Mjo0Ni42OThaIiBWZXJzaW9uPSIyLjAiPjxzYW1sMjpJc3N1ZXIgRm9ybWF0PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6bmFtZWlkLWZvcm1hdDplbnRpdHkiIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj5odHRwOi8vd3d3Lm9rdGEuY29tL2tiaXlNT0lNSE5MR0hKTkNCVVJNPC9zYW1sMjpJc3N1ZXI+PGRzOlNpZ25hdHVyZSB4bWxuczpkcz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyI+PGRzOlNpZ25lZEluZm8+PGRzOkNhbm9uaWNhbGl6YXRpb25NZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzEwL3htbC1leGMtYzE0biMiLz48ZHM6U2lnbmF0dXJlTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3JzYS1zaGExIi8+PGRzOlJlZmVyZW5jZSBVUkk9IiNpZDEzODE1MzU1NjY3MTQ5ODkwMDAyMzE5NDM0OCI+PGRzOlRyYW5zZm9ybXM+PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8+PGRzOlRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjwvZHM6VHJhbnNmb3Jtcz48ZHM6RGlnZXN0TWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3NoYTEiLz48ZHM6RGlnZXN0VmFsdWU+LzRvakxrbFE3SDVLVlQvYXhMSk9nVEttQkRRPTwvZHM6RGlnZXN0VmFsdWU+PC9kczpSZWZlcmVuY2U+PC9kczpTaWduZWRJbmZvPjxkczpTaWduYXR1cmVWYWx1ZT5OSGNxQVJGT2FHd2N3bVlyRklMeTlGendnWDZDenVMcDlhQm5UZkxXdFpic0tOWFRvSS92dG9GVjhDMzFEOUlKVlVoOVhNcmtQckN4Q2VZZGczdnlUbmx5dG80SlJ1TlR2elhncFBEcGlDZ2RGaWhHeFJPRk9JVFhoQkdkRFNXbVdkYkNuQWJDZzBWT2xlZHNnQjMxTExudXFJaGIxSGJGVy9ZeFBhUTRmbEU9PC9kczpTaWduYXR1cmVWYWx1ZT48ZHM6S2V5SW5mbz48ZHM6WDUwOURhdGE+PGRzOlg1MDlDZXJ0aWZpY2F0ZT5NSUlDblRDQ0FnYWdBd0lCQWdJR0FTbE1OYXdETUEwR0NTcUdTSWIzRFFFQkJRVUFNSUdSTVFzd0NRWURWUVFHRXdKVlV6RVRNQkVHCkExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUVDZ3dFVDJ0MFlURVUKTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxR1NJYjNEUUVKQVJZTgphVzVtYjBCdmEzUmhMbU52YlRBZUZ3MHhNREEyTVRneE56VTJOVEphRncwME1EQTJNVGd4TnpVM05USmFNSUdSTVFzd0NRWURWUVFHCkV3SlZVekVUTUJFR0ExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUUKQ2d3RVQydDBZVEVVTUJJR0ExVUVDd3dMVTFOUFVISnZkbWxrWlhJeEVqQVFCZ05WQkFNTUNXSnZiM1J6ZEhKaGNERWNNQm9HQ1NxRwpTSWIzRFFFSkFSWU5hVzVtYjBCdmEzUmhMbU52YlRDQm56QU5CZ2txaGtpRzl3MEJBUUVGQUFPQmpRQXdnWWtDZ1lFQWtIUDlpSGNYCnRja0ZVMmliNkpWUTNVUDRaMDFoc1QyWXh1ZUhqa2pxL0Z3N1o3aEtueDMwb0JBeFl6dGxUZitsSVpjVWlRVnc5WUF2NVVKNC9uaEMKSTdiQmM2SVVuYnIzUTZ5NitjbWJ1VlVnaVhodzVsTTR5a2tMQ2dLZ01uVk5hcHRYNGt4RGY0ZGVRbEorS0pLeFdDWjN5TXR5aEZYZQo0bUtvbUwxQzRyc0NBd0VBQVRBTkJna3Foa2lHOXcwQkFRVUZBQU9CZ1FBbVJEODBnMVYzU2lNYjdEdHZwMG1CZWk5elczaEw3Y0RYCnV2ZFlBMXU0Vmhhais1bWppYVJ5QlFDODJLaU1UZ1l4MGExOWZGeUVRWHlwcGU0Nzh3MUNBUFFBbjhIWEFMVHR3WUJpMUgvbHpKRTUKaU5MRE55dWVtTjhaUVV5TTFNeVNYbDhiVmNRSE4wZmpnOWVmWG9kYkw4VzVhLzZwTW9Mc2NaaDJHTUsrVkE9PTwvZHM6WDUwOUNlcnRpZmljYXRlPjwvZHM6WDUwOURhdGE+PC9kczpLZXlJbmZvPjwvZHM6U2lnbmF0dXJlPjxzYW1sMjpTdWJqZWN0IHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48c2FtbDI6TmFtZUlEIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6MS4xOm5hbWVpZC1mb3JtYXQ6ZW1haWxBZGRyZXNzIj5mcmVkZmxpbnRzdG9uZUByaW5jb25oaWxsLmNvbTwvc2FtbDI6TmFtZUlEPjxzYW1sMjpTdWJqZWN0Q29uZmlybWF0aW9uIE1ldGhvZD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmNtOmJlYXJlciI+PHNhbWwyOlN1YmplY3RDb25maXJtYXRpb25EYXRhIE5vdE9uT3JBZnRlcj0iMjAxMy0xMC0xMVQyMzo1Nzo0Ni43MTdaIiBSZWNpcGllbnQ9Imh0dHBzOi8vb2t0YXBzMS5va3RhLmNvbS9hdXRoL3NhbWwyMC9rYXJsIi8+PC9zYW1sMjpTdWJqZWN0Q29uZmlybWF0aW9uPjwvc2FtbDI6U3ViamVjdD48c2FtbDI6Q29uZGl0aW9ucyBOb3RCZWZvcmU9IjIwMTMtMTAtMTFUMjM6NDc6NDYuNzE3WiIgTm90T25PckFmdGVyPSIyMDEzLTEwLTExVDIzOjU3OjQ2LjcxN1oiIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48c2FtbDI6QXVkaWVuY2VSZXN0cmljdGlvbj48c2FtbDI6QXVkaWVuY2U+aHR0cHM6Ly93d3cub2t0YS5jb20vc2FtbDIvc2VydmljZS1wcm92aWRlci9zcGJmZHY5MnFLU0JUR1VZR1VQTzwvc2FtbDI6QXVkaWVuY2U+PC9zYW1sMjpBdWRpZW5jZVJlc3RyaWN0aW9uPjwvc2FtbDI6Q29uZGl0aW9ucz48c2FtbDI6QXV0aG5TdGF0ZW1lbnQgQXV0aG5JbnN0YW50PSIyMDEzLTEwLTExVDIzOjUyOjQ2LjY5OFoiIFNlc3Npb25JbmRleD0iaWQxMzgxNTM1NTY2Njk4LjY4MDQ3Mjc3IiB4bWxuczpzYW1sMj0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI+PHNhbWwyOkF1dGhuQ29udGV4dD48c2FtbDI6QXV0aG5Db250ZXh0Q2xhc3NSZWY+dXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFjOmNsYXNzZXM6UGFzc3dvcmRQcm90ZWN0ZWRUcmFuc3BvcnQ8L3NhbWwyOkF1dGhuQ29udGV4dENsYXNzUmVmPjwvc2FtbDI6QXV0aG5Db250ZXh0Pjwvc2FtbDI6QXV0aG5TdGF0ZW1lbnQ+PC9zYW1sMjpBc3NlcnRpb24+PC9zYW1sMnA6UmVzcG9uc2U+"/&gt;
+            &lt;input name="RelayState" type="hidden" value="/some/deep/link"/&gt;
         &lt;/form&gt;
 
-        &lt;script type=</span><span class="delimiter">&quot;</span></span>text/javascript<span class="string"><span class="delimiter">&quot;</span><span class="content">&gt;
+        &lt;script type="text/javascript"&gt;
 
           $(function(){
             document.getElementById('appForm').submit();
@@ -966,21 +935,16 @@ that contains the the one-time token as query parameter <code>onetimetoken</code
   &lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</span></span></pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="initiate-a-ws-federation-sso-with-the-one-time-token">Initiate a WS-Federation SSO with the one-time token</h3>
 
 <p>You can also use the same <a href="#initiate-a-saml-sso-with-the-one-time-token">flow as SAML</a> for template WS-Federation application as well by passing the one-time token as query parameter <code>onetimetoken</code>.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">GET</span> <span class="regexp"><span class="delimiter">/</span><span class="content">app</span><span class="delimiter">/</span></span>template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.<span class="error">0</span>&amp;wtrealm=https%<span class="integer">3</span><span class="constant">A</span>%<span class="integer">2</span><span class="constant">F</span>%<span class="integer">2</span><span class="constant">Fexample</span>.com%<span class="integer">2</span><span class="constant">FApp</span>%<span class="integer">2</span><span class="constant">F</span>&amp;wctx=rm%<span class="integer">3</span><span class="constant">D0</span>%<span class="integer">26</span>id%<span class="integer">3</span><span class="constant">Dpassive</span>%<span class="integer">26</span>ru%<span class="integer">3</span><span class="constant">D</span>%<span class="integer">2</span><span class="constant">FApp</span>%<span class="integer">2</span><span class="constant">FHome</span>%<span class="integer">2</span><span class="constant">FAbout</span>&amp;onetimetoken=<span class="integer">00</span><span class="integer">9</span><span class="constant">Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6</span> <span class="constant">HTTP</span>/<span class="float">1.1</span>
-<span class="key">Host</span>: your-subdomain.okta.com
-<span class="key">Accept</span>: *<span class="regexp"><span class="delimiter">/</span><span class="content">*
-</span></span></pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">GET /app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&amp;wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&amp;wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&amp;onetimetoken=009Db9G6Sc8o8VfE__SlGj4FPxaG63Wm89TpJnaDF6 HTTP/1.1
+Host: your-subdomain.okta.com
+Accept: */*
+</code></pre>
 
 <h2 id="retrieving-a-session-cookie-with-a-hidden-image">Retrieving a session cookie with a hidden image</h2>
 
@@ -996,56 +960,44 @@ that contains the the one-time token as query parameter <code>onetimetoken</code
 
 <h4 class="api api-request api-request-example" id="request-example-2">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">POST</span> <span class="regexp"><span class="delimiter">/</span><span class="content">api</span><span class="delimiter">/</span></span>v1/sessions?additionalFields=cookieTokenUrl <span class="constant">HTTP</span>/<span class="float">1.1</span>
-<span class="key">Host</span>: your-subdomain.okta.com
-<span class="key">Authorization</span>: <span class="constant">SSWS</span> yourtoken
-<span class="key">Accept</span>: application/json
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">POST /api/v1/sessions?additionalFields=cookieTokenUrl HTTP/1.1
+Host: your-subdomain.okta.com
+Authorization: SSWS yourtoken
+Accept: application/json
+Content-Type: application/json
 
 {
-  <span class="string"><span class="delimiter">&quot;</span><span class="content">username</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">art.vandelay@example.com</span><span class="delimiter">&quot;</span></span>,
-  <span class="string"><span class="delimiter">&quot;</span><span class="content">password</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">correct horse battery staple</span><span class="delimiter">&quot;</span></span>
+  "username": "art.vandelay@example.com",
+  "password": "correct horse battery staple"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h4 class="api api-response api-response-example" id="response-example-2">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: application/json
 
 {
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">000kYk6cDF7R02z4PxV5mhL4g</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">userId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00u9apFCRAIKHVPZLGXT</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">mfaActive</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">cookieTokenUrl</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV</span><span class="delimiter">&quot;</span></span>
+    "id": "000kYk6cDF7R02z4PxV5mhL4g",
+    "userId": "00u9apFCRAIKHVPZLGXT",
+    "mfaActive": false,
+    "cookieTokenUrl": "https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="add-image-tag-with-session-cookie-image-url">Add image tag with session cookie image URL</h3>
 
 <p>When you are ready to establish a session with Okta for the user, include the session cookie image URL in an image tag.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="tag">&lt;img</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-html">&lt;img src="https://your-subdomain.okta.com/login/sessionCookie?token=00nwBmuBFS4o2E5l58eSbgnr4NmY0-ELQR4Pvn2RZV"&gt;
+</code></pre>
 
 <p>When the page containing the tag is loaded, the token in the request will be used to initiate the user’s session, and a session cookie will be set in the browser. The image that renders is a 1x1 transparent image. After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications. The token is a one-time token, so successive page loads will have no impact on the user’s session. If the user logs out of Okta after using the token, they will not be able to reuse that same token to get a session cookie.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: image/png
-<span class="constant">Set</span>-<span class="key">Cookie</span>: sid=<span class="integer">000</span><span class="constant">O8P2OlZLTHuz4RZV8locXA</span>; <span class="constant">Path</span>=<span class="regexp"><span class="delimiter">/</span><span class="content">
-</span></span></pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Content-Type: image/png
+Set-Cookie: sid=000O8P2OlZLTHuz4RZV8locXA; Path=/
+</code></pre>
 
 
 	</div>

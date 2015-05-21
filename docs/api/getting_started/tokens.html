@@ -3822,30 +3822,24 @@
 
 <h4 id="request-example">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-type:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">POST</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-subdomain.okta.com/api/v1/tokens/ \
+<pre><code class="language-ruby">curl -v -H "Content-type:application/json" \
+-H "Accept:application/json" \
+-X POST https://your-subdomain.okta.com/api/v1/tokens/ \
 -d \
-<span class="string"><span class="delimiter">'</span><span class="content">{
-  &quot;username&quot;: &quot;user8u3VOJBREVQHBTAS@asdf.com&quot;,
-  &quot;password&quot;: &quot;SecretPass&quot;,
-  &quot;clientAppId&quot;: &quot;capalkhfadflkjh&quot;,
-  &quot;deviceName&quot;: &quot;Sample Device Name&quot;
-}</span><span class="delimiter">'</span></span>
-</pre></div>
-</div>
-</div>
+'{
+  "username": "user8u3VOJBREVQHBTAS@asdf.com",
+  "password": "SecretPass",
+  "clientAppId": "capalkhfadflkjh",
+  "deviceName": "Sample Device Name"
+}'
+</code></pre>
 
 <h4 id="response-example">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">token</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+  "token": "00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h2 id="revoke-tokens">Revoke tokens</h2>
 
@@ -3855,14 +3849,11 @@
 
 <h4 id="request-example-1">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-type:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization:SSWS 00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept:application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">DELETE</span> <span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>your-subdomain.okta.com/api/v1/tokens/
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Content-type:application/json" \
+-H "Authorization:SSWS 00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs" \
+-H "Accept:application/json" \
+-X DELETE https://your-subdomain.okta.com/api/v1/tokens/
+</code></pre>
 
 
 

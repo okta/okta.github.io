@@ -4060,165 +4060,159 @@
 
 <h4 class="api api-request api-request-example" id="request-example">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">GET</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/org/factors</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-domain.okta.com/api/v1/org/factors"
+</code></pre>
 
 <h4 class="api api-response api-response-example" id="response-example">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">google_otp</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">GOOGLE</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">token:software:totp</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/google_otp</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+        "id": "google_otp",
+        "provider": "GOOGLE",
+        "factorType": "token:software:totp",
+        "status": "ACTIVE",
+        "_links": {
+            "self": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/google_otp",
+                "hints": {
+                    "allow": [
+                        "GET"
                     ]
                 }
             },
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/google_otp/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+            "deactivate": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/google_otp/lifecycle/deactivate",
+                "hints": {
+                    "allow": [
+                        "POST"
                     ]
                 }
             }
         }
     },
     {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">okta_question</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OKTA</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">question</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">INACTIVE</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">activate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_question/lifecycle/activate</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+        "id": "okta_question",
+        "provider": "OKTA",
+        "factorType": "question",
+        "status": "INACTIVE",
+        "_links": {
+            "activate": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/okta_question/lifecycle/activate",
+                "hints": {
+                    "allow": [
+                        "POST"
                     ]
                 }
             },
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_question</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+            "self": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/okta_question",
+                "hints": {
+                    "allow": [
+                        "GET"
                     ]
                 }
             }
         }
     },
     {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">okta_otp</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OKTA</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">token:software:totp</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_otp</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+        "id": "okta_otp",
+        "provider": "OKTA",
+        "factorType": "token:software:totp",
+        "status": "ACTIVE",
+        "_links": {
+            "self": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/okta_otp",
+                "hints": {
+                    "allow": [
+                        "GET"
                     ]
                 }
             },
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://ryour-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+            "deactivate": {
+                "href": "http://ryour-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate",
+                "hints": {
+                    "allow": [
+                        "POST"
                     ]
                 }
             }
         }
     },
     {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">okta_sms</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OKTA</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">sms</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_sms</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+        "id": "okta_sms",
+        "provider": "OKTA",
+        "factorType": "sms",
+        "status": "ACTIVE",
+        "_links": {
+            "self": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/okta_sms",
+                "hints": {
+                    "allow": [
+                        "GET"
                     ]
                 }
             },
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+            "deactivate": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate",
+                "hints": {
+                    "allow": [
+                        "POST"
                     ]
                 }
             }
         }
     },
     {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">symantec_vip</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">SYMANTEC</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">token</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">NOT_SETUP</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">activate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://ryour-domain.okta.com/api/v1/org/factors/symantec_vip/lifecycle/activate</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+        "id": "symantec_vip",
+        "provider": "SYMANTEC",
+        "factorType": "token",
+        "status": "NOT_SETUP",
+        "_links": {
+            "activate": {
+                "href": "http://ryour-domain.okta.com/api/v1/org/factors/symantec_vip/lifecycle/activate",
+                "hints": {
+                    "allow": [
+                        "POST"
                     ]
                 }
             },
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/symantec_vip</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+            "self": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/symantec_vip",
+                "hints": {
+                    "allow": [
+                        "GET"
                     ]
                 }
             }
         }
     },
     {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">rsa_token</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">RSA</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">token</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">NOT_SETUP</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">activate</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/rsa_token/lifecycle/activate</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+        "id": "rsa_token",
+        "provider": "RSA",
+        "factorType": "token",
+        "status": "NOT_SETUP",
+        "_links": {
+            "activate": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/rsa_token/lifecycle/activate",
+                "hints": {
+                    "allow": [
+                        "POST"
                     ]
                 }
             },
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/rsa_token</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                    <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                        <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+            "self": {
+                "href": "http://your-domain.okta.com/api/v1/org/factors/rsa_token",
+                "hints": {
+                    "allow": [
+                        "GET"
                     ]
                 }
             }
         }
     }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="activate-sms">Activate SMS</h3>
 
@@ -4232,45 +4226,39 @@
 
 <h4 class="api api-request api-request-example" id="request-example-1">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">POST</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/activate</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/activate"
+</code></pre>
 
 <h4 class="api api-response api-response-example" id="response-example-1">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">okta_sms</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OKTA</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">sms</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_sms</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "okta_sms",
+    "provider": "OKTA",
+    "factorType": "sms",
+    "status": "ACTIVE",
+    "_links": {
+        "self": {
+            "href": "http://your-domain.okta.com/api/v1/org/factors/okta_sms",
+            "hints": {
+                "allow": [
+                    "GET"
                 ]
             }
         },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+        "deactivate": {
+            "href": "http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate",
+            "hints": {
+                "allow": [
+                    "POST"
                 ]
             }
         }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="deactivate-sms">Deactivate SMS</h3>
 
@@ -4284,45 +4272,39 @@
 
 <h4 class="api api-request api-request-example" id="request-example-2">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">POST</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"
+</code></pre>
 
 <h4 class="api api-response api-response-example" id="response-example-2">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">okta_sms</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OKTA</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">sms</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">INACTIVE</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">activate</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/activate</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "okta_sms",
+    "provider": "OKTA",
+    "factorType": "sms",
+    "status": "INACTIVE",
+    "_links": {
+        "activate": {
+            "href": "http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/activate",
+            "hints": {
+                "allow": [
+                    "POST"
                 ]
             }
         },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_sms</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+        "self": {
+            "href": "http://your-domain.okta.com/api/v1/org/factors/okta_sms",
+            "hints": {
+                "allow": [
+                    "GET"
                 ]
             }
         }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="activate-okta-verify">Activate Okta Verify</h3>
 
@@ -4336,45 +4318,39 @@
 
 <h4 class="api api-request api-request-example" id="request-example-3">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">POST</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/activate</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/activate"
+</code></pre>
 
 <h4 class="api api-response api-response-example" id="response-example-3">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">okta_otp</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OKTA</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">token:software:totp</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ACTIVE</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_otp</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "okta_otp",
+    "provider": "OKTA",
+    "factorType": "token:software:totp",
+    "status": "ACTIVE",
+    "_links": {
+        "self": {
+            "href": "http://your-domain.okta.com/api/v1/org/factors/okta_otp",
+            "hints": {
+                "allow": [
+                    "GET"
                 ]
             }
         },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">deactivate</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+        "deactivate": {
+            "href": "http://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate",
+            "hints": {
+                "allow": [
+                    "POST"
                 ]
             }
         }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="deactivate-okta-verify">Deactivate Okta Verify</h3>
 
@@ -4388,45 +4364,39 @@
 
 <h4 class="api api-request api-request-example" id="request-example-4">Request Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">POST</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate"
+</code></pre>
 
 <h4 class="api api-response api-response-example" id="response-example-4">Response Example</h4>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">okta_otp</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">provider</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OKTA</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">factorType</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">token:software:totp</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">status</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">INACTIVE</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">activate</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/activate</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">POST</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+    "id": "okta_otp",
+    "provider": "OKTA",
+    "factorType": "token:software:totp",
+    "status": "INACTIVE",
+    "_links": {
+        "activate": {
+            "href": "http://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/activate",
+            "hints": {
+                "allow": [
+                    "POST"
                 ]
             }
         },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://your-domain.okta.com/api/v1/org/factors/okta_otp</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">hints</span><span class="delimiter">&quot;</span></span>: {
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">allow</span><span class="delimiter">&quot;</span></span>: [
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">GET</span><span class="delimiter">&quot;</span></span>
+        "self": {
+            "href": "http://your-domain.okta.com/api/v1/org/factors/okta_otp",
+            "hints": {
+                "allow": [
+                    "GET"
                 ]
             }
         }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 
 	</div>

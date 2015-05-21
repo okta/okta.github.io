@@ -3848,15 +3848,12 @@
 
 <h3 id="example">Example</h3>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">000najcYVnjRS2aZG50MpHL4Q</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">userId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00ubgaSARVOQDIOXMORI</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">mfaActive</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>
+<pre><code class="language-json">{
+    "id": "000najcYVnjRS2aZG50MpHL4Q",
+    "userId": "00ubgaSARVOQDIOXMORI",
+    "mfaActive": false
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="session-attributes">Session Attributes</h3>
 
@@ -3988,49 +3985,40 @@
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">POST</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-subdomain.okta.com/api/v1/sessions?additionalFields=cookieToken</span><span class="delimiter">&quot;</span></span> \
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-subdomain.okta.com/api/v1/sessions?additionalFields=cookieToken" \
 -d \
-<span class="string"><span class="delimiter">'</span><span class="content">{
-  &quot;username&quot;: &quot;art.vandelay@example.com&quot;,
-  &quot;password&quot;: &quot;correct horse battery staple&quot;
-}</span><span class="delimiter">'</span></span>
-</pre></div>
-</div>
-</div>
+'{
+  "username": "art.vandelay@example.com",
+  "password": "correct horse battery staple"
+}'
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">000rWcxHV-lQUOzBhLJLYTl0Q</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">userId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00uld5QRRGEMJSSQJCUB</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">mfaActive</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">cookieToken</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
+  "userId": "00uld5QRRGEMJSSQJCUB",
+  "mfaActive": false,
+  "cookieToken": "00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>Invalid credentials will return a <code>401 Unauthorized</code> status code.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">401</span> <span class="constant">Unauthorized</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">HTTP/1.1 401 Unauthorized
+Content-Type: application/json
 
 {
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCode</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000004</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorSummary</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Authentication failed</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorLink</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000004</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">oaeVCVElsluRpii8PP4GeLYxA</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCauses</span><span class="delimiter">&quot;</span></span>: []
+    "errorCode": "E0000004",
+    "errorSummary": "Authentication failed",
+    "errorLink": "E0000004",
+    "errorId": "oaeVCVElsluRpii8PP4GeLYxA",
+    "errorCauses": []
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h4 class="api api-operation" id="create-session-with-embed-image-url">Create Session with Embed Image URL</h4>
 
@@ -4038,49 +4026,40 @@
 
 <h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">POST</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-subdomain.okta.com/api/v1/sessions?additionalFields=cookieTokenUrl</span><span class="delimiter">&quot;</span></span> \
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-subdomain.okta.com/api/v1/sessions?additionalFields=cookieTokenUrl" \
 -d \
-<span class="string"><span class="delimiter">'</span><span class="content">{
-  &quot;username&quot;: &quot;art.vandelay@example.com&quot;,
-  &quot;password&quot;: &quot;correct horse battery staple&quot;
-}</span><span class="delimiter">'</span></span>
-</pre></div>
-</div>
-</div>
+'{
+  "username": "art.vandelay@example.com",
+  "password": "correct horse battery staple"
+}'
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">000rWcxHV-lQUOzBhLJLYTl0Q</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">userId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00uld5QRRGEMJSSQJCUB</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">mfaActive</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">cookieTokenUrl</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-subdomain.okta.com/login/sessionCookie?token=00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4</span><span class="delimiter">&quot;</span></span>
+<pre><code class="language-json">{
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
+  "userId": "00uld5QRRGEMJSSQJCUB",
+  "mfaActive": false,
+  "cookieTokenUrl": "https://your-subdomain.okta.com/login/sessionCookie?token=00hbM-dbQNhKUtQY2lAl34Y0O9sHicFECHiTg3Ccv4"
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>Invalid credentials will return a <code>401 Unauthorized</code> status code.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">401</span> <span class="constant">Unauthorized</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">HTTP/1.1 401 Unauthorized
+Content-Type: application/json
 
 {
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCode</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000004</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorSummary</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Authentication failed</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorLink</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000004</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">oaeVCVElsluRpii8PP4GeLYxA</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCauses</span><span class="delimiter">&quot;</span></span>: []
+    "errorCode": "E0000004",
+    "errorSummary": "Authentication failed",
+    "errorLink": "E0000004",
+    "errorId": "oaeVCVElsluRpii8PP4GeLYxA",
+    "errorCauses": []
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="validate-session">Validate Session</h3>
 
@@ -4119,43 +4098,34 @@
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">GET</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X GET "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">000rWcxHV-lQUOzBhLJLYTl0Q</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">userId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00uld5QRRGEMJSSQJCUB</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">mfaActive</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>
+<pre><code class="language-json">{
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
+  "userId": "00uld5QRRGEMJSSQJCUB",
+  "mfaActive": false
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>Invalid sessions will return a <code>404 Not Found</code> status code.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">404</span> <span class="constant">Not</span> <span class="constant">Found</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">HTTP/1.1 404 Not Found
+Content-Type: application/json
 
 {
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCode</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000007</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorSummary</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorLink</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000007</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">oaeAu0LCZaeRMaJqzQ3OzFuow</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCauses</span><span class="delimiter">&quot;</span></span>: []
+    "errorCode": "E0000007",
+    "errorSummary": "Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)",
+    "errorLink": "E0000007",
+    "errorId": "oaeAu0LCZaeRMaJqzQ3OzFuow",
+    "errorCauses": []
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="extend-session">Extend Session</h3>
 
@@ -4194,43 +4164,34 @@
 
 <h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">PUT</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X PUT "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">000rWcxHV-lQUOzBhLJLYTl0Q</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">userId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">00uld5QRRGEMJSSQJCUB</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">mfaActive</span><span class="delimiter">&quot;</span></span>: <span class="value">false</span>
+<pre><code class="language-json">{
+  "id": "000rWcxHV-lQUOzBhLJLYTl0Q",
+  "userId": "00uld5QRRGEMJSSQJCUB",
+  "mfaActive": false
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>Invalid sessions will return a <code>404 Not Found</code> status code.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">404</span> <span class="constant">Not</span> <span class="constant">Found</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">HTTP/1.1 404 Not Found
+Content-Type: application/json
 
 {
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCode</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000007</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorSummary</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorLink</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000007</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">oaeAu0LCZaeRMaJqzQ3OzFuow</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCauses</span><span class="delimiter">&quot;</span></span>: []
+    "errorCode": "E0000007",
+    "errorSummary": "Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)",
+    "errorLink": "E0000007",
+    "errorId": "oaeAu0LCZaeRMaJqzQ3OzFuow",
+    "errorCauses": []
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 class="api api-operation" id="close-session">Close Session</h3>
 
@@ -4269,39 +4230,30 @@
 
 <h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>curl -v -<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Authorization: SSWS yourtoken</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Accept: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">H</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">Content-Type: application/json</span><span class="delimiter">&quot;</span></span> \
--<span class="constant">X</span> <span class="constant">DELETE</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X DELETE "https://your-subdomain.okta.com/api/v1/sessions/000rWcxHV-lQUOzBhLJLYTl0Q"
+</code></pre>
 
 <h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">204</span> <span class="constant">No</span> <span class="constant">Content</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 204 No Content
+</code></pre>
 
 <p>Invalid sessions will return a <code>404 Not Found</code> status code.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">404</span> <span class="constant">Not</span> <span class="constant">Found</span>
-<span class="constant">Content</span>-<span class="key">Type</span>: application/json
+<pre><code class="language-ruby">HTTP/1.1 404 Not Found
+Content-Type: application/json
 
 {
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCode</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000007</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorSummary</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorLink</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000007</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">oaeAu0LCZaeRMaJqzQ3OzFuow</span><span class="delimiter">&quot;</span></span>,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">errorCauses</span><span class="delimiter">&quot;</span></span>: []
+    "errorCode": "E0000007",
+    "errorSummary": "Not found: Resource not found: 000rWcxHV-lQUOzBhLJLYTl0Q (AppSession)",
+    "errorLink": "E0000007",
+    "errorId": "oaeAu0LCZaeRMaJqzQ3OzFuow",
+    "errorCauses": []
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 
 	</div>

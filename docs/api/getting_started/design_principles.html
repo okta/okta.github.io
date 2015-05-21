@@ -3922,21 +3922,18 @@ with no <code>body</code> param, be sure to set the <code>Content-Length</code> 
   <li><code>errorId</code>: An id that identifies this request.  These ids are mapped to the internal error on the server side in order to assist in troubleshooting.</li>
 </ul>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">errorCode</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000001</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">errorSummary</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Api validation failed</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">errorLink</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">E0000001</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">errorId</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">oaeHfmOAx1iRLa0H10DeMz5fQ</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">errorCauses</span><span class="delimiter">&quot;</span></span>: [
+<pre><code class="language-json">{
+    "errorCode": "E0000001",
+    "errorSummary": "Api validation failed",
+    "errorLink": "E0000001",
+    "errorId": "oaeHfmOAx1iRLa0H10DeMz5fQ",
+    "errorCauses": [
         {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">errorSummary</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">login: An object with this field already exists in the current organization</span><span class="delimiter">&quot;</span></span>
+            "errorSummary": "login: An object with this field already exists in the current organization"
         }
     ]
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>See <a href="error_codes.html">Error Codes</a> for a list of API error codes.</p>
 
@@ -3988,13 +3985,10 @@ with no <code>body</code> param, be sure to set the <code>Content-Length</code> 
 
 <p>Pagination links are included in the <a href="http://tools.ietf.org/html/rfc5988">Link header</a> of responses. It is <strong>important</strong> to follow these Link header values instead of constructing your own URLs as query parameters or  cursor formats may change without notice.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="key">Link</span>: &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>yoursubdomain.okta.com/api/v1/users?after=<span class="integer">00</span>ubfjQEMYBLRUWIEDKK; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">next</span><span class="delimiter">&quot;</span></span>,
-  &lt;<span class="key">https</span>:<span class="regexp"><span class="delimiter">/</span><span class="delimiter">/</span></span>yoursubdomain.okta.com/api/v1/users?after=<span class="integer">00</span>ub4tTFYKXCCZJSGFKM&gt;; rel=<span class="string"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+Link: &lt;https://yoursubdomain.okta.com/api/v1/users?after=00ubfjQEMYBLRUWIEDKK; rel="next",
+  &lt;https://yoursubdomain.okta.com/api/v1/users?after=00ub4tTFYKXCCZJSGFKM&gt;; rel="self"
+</code></pre>
 
 <p>The possible <code>rel</code> values are:</p>
 
@@ -4188,16 +4182,13 @@ filter=firstName eq "john"
   <p>A resource may have multiple links that share the same link relation.</p>
 </blockquote>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">_links</span><span class="delimiter">&quot;</span></span>: {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">self</span><span class="delimiter">&quot;</span></span>: { <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">/example_resource</span><span class="delimiter">&quot;</span></span> },
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">next</span><span class="delimiter">&quot;</span></span>: { <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">/page=2</span><span class="delimiter">&quot;</span></span> }
+<pre><code class="language-json">{
+    "_links": {
+        "self": { "href": "/example_resource" },
+        "next": { "href": "/page=2" }
     }
 }
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h2 id="rate-limiting">Rate Limiting</h2>
 
@@ -4211,14 +4202,11 @@ filter=firstName eq "john"
 
 <p><code>X-Rate-Limit-Reset</code> - the remaining time in the current rate-limit window before the rate limit resets, in UTC epoch seconds.</p>
 
-<div class="highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span class="constant">HTTP</span>/<span class="float">1.1</span> <span class="integer">200</span> <span class="constant">OK</span>
-<span class="constant">X</span>-<span class="constant">RateLimit</span>-<span class="key">Limit</span>: <span class="integer">20</span>
-<span class="constant">X</span>-<span class="constant">RateLimit</span>-<span class="key">Remaining</span>: <span class="integer">15</span>
-<span class="constant">X</span>-<span class="constant">RateLimit</span>-<span class="key">Reset</span>: <span class="integer">1366037820</span>
-</pre></div>
-</div>
-</div>
+<pre><code class="language-ruby">HTTP/1.1 200 OK
+X-RateLimit-Limit: 20
+X-RateLimit-Remaining: 15
+X-RateLimit-Reset: 1366037820
+</code></pre>
 
 <p>If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is on a per-org per-endpoint basis.</p>
 
