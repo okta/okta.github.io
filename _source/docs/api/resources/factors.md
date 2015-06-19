@@ -42,6 +42,7 @@ The following factor types are supported:
 
 Factor Type           | Description
 --------------------- | -----------
+`push`                | Allows the end user to provide a second authentication factor by tapping an approval button 
 `sms`                 | SMS
 `token`               | Software or hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device
 `token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm)
@@ -65,6 +66,7 @@ The following providers support the following factor types:
 
 Provider   | Factor Type
 ---------- | -----------------------------
+`OKTA`     | `push`
 `OKTA`     | `question`
 `OKTA`     | `sms`
 `OKTA`     | `token:software:totp`
@@ -795,6 +797,189 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+### Verify Push Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+
+Verifies a `push` factor. First, send a request to the device. When successfully sent, you are in a waiting state. Then, poll for user action.
+
+<u>Start the Verify Transaction</u>
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+    "factorResult": "TIMEOUT",
+    "_links": {
+        "verify": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            }
+        },
+        "factor": {
+            "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+            "hints": {
+                "allow": [
+                    "get",
+                    "DELETE"
+                ]
+            }
+        }
+    }
+}
+~~~
+
+<u>Poll the Verify Transaction</u>
+
+### Verify Transaction
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid*/verify
+
+Polls the verify transaction. There are four response examples showing a waiting state, a successful verification, a timeout, and a rejected verification.
+
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor                                      | URL        | String   | TRUE     |
+tid          | `id` of transaction                                 | URL        | String   | TRUE     |
+
+The <em>tid</em> is available in a returned link.
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+Waiting State
+
+~~~ json
+{
+  "expiresAt": "2015-04-01T15:57:32.000Z",
+  "factorResult": "WAITING",
+  "_links": {
+    "poll": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify/mst1eiHghhPxf0yhp0g",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify/mst1eiHghhPxf0yhp0g",
+      "hints": {
+        "allow": [
+          "DELETE"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+Approved
+
+~~~ json
+{
+  "factorResult": "SUCCESS"
+}
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+Timeout
+
+~~~ json
+{
+  "factorResult": "TIMEOUT",
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "factor": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+Rejected
+
+~~~ json
+{
+  "factorResult": "REJECTED",
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "factor": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    }
+  }
+}
+~~~
+
 ## Factor Lifecycle Operations
 
 ### Enroll Factor
@@ -1121,6 +1306,91 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+#### Enroll User with a Push Factor
+{:.api .api-operation}
+
+Enrolls a user with the Okta `push` factor. The factor must be [activated](#activate-push-factor) after enrollment by following the `activate` link relation to complete the enrollment process.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~ json
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/factors
+-d \
+'{
+  "factorType": "push",
+  "provider": "OKTA",
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ json
+{
+  "id": "mbl1nz9JHJGHWRKMTLHP",
+  "factorType": "push",
+  "provider": "OKTA",
+  "status": "PENDING_ACTIVATION",
+  "created": "2015-04-05T20:59:49.000Z",
+  "lastUpdated": "2015-04-06T03:59:49.000Z",
+  "profile": {
+      "credentialId": "nag@test.com",
+      "keys": [
+        {
+          "kty": "PKIX",
+          "use": "sig",
+          "kid": "default",
+          "x5c": [
+              null
+            ]
+          }
+        ]
+  },
+  "_links": {
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "qrcode": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/qr/00CnAHABTzHh9hjEij9qcteMrOoeFLK6evHruUH7p9",
+      "type": "image/png"
+    }
+  },
+  "_embedded": {
+    "activation": {
+      "links": null,
+      "deviceActivationToken": "I17JQoOqbYOPH_lMWK5F"
+    }
+  }
+}
+~~~
+
+
+
 ### Activate Factor
 {:.api .api-operation}
 
@@ -1130,6 +1400,7 @@ The `sms` and `token:software:totp` [factor types](#factor-types) require activa
 
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
+- [Activate Push Factor](#activate-push-factor)
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -1316,6 +1587,145 @@ curl -v -H "Authorization: SSWS yourtoken" \
   }
 }
 ~~~
+
+#### Activate Push Factor
+{:.api .api-operation}
+
+Poll the device to verify activation for a `push` factor is complete.  There are three response examples showing pending activation, successful activation, and a timed out request.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+uid          | `id` of user                                        | URL        | String   | TRUE     |
+fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+
+
+#### Response Parameters
+{:.api .api-response .api-response-params}
+
+Parameter    | Description                                         | Param Type | DataType                                            | Required | Default
+------------ | --------------------------------------------------- | ---------- | --------------------------------------------------- | -------- | -------
+factorResult | result of verification result                       | Body       | [Factor Verify Result](#factor-verify-result-object) | TRUE     |
+
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+In this example, the a response from the user is pending and has not timed out.
+
+~~~ json
+{
+  "expiresAt": "2015-04-01T15:57:32.000Z",
+  "factorResult": "WAITING",
+  "_links": {
+    "poll": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },  
+    "qrcode": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+      "type": "image/png"
+    },
+    "send": [
+      {
+        "name": "email",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/email",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      {
+        "name": "sms",
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/sms",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }              
+    ]
+  }
+}
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+In this example, the user has reponsed and activation is complete.
+
+~~~ json
+{
+  "id": "opfh52xcuft3J4uZc0g3",
+  "factorType": "push",
+  "provider": "OKTA",
+  "status": "ACTIVE",
+  "created": "2015-04-01T15:57:32.000Z",
+  "lastUpdated": "2015-04-01T16:04:56.000Z",
+  "profile": {
+    "platform": "IOS",
+    "deviceType": "SMARTPHONE",
+    "name": "brock iPhone",
+    "version": "8.1"
+  },
+  "_links": {
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },    
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+In this example, the user has not reponsed and the request timed out.
+
+~~~ json
+{
+  "factorResult": "TIMEOUT",
+  "_links": {
+    "activate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
 
 ### Reset Factor
 {:.api .api-operation}

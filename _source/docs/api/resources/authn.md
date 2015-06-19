@@ -832,6 +832,20 @@ curl -v -H "Authorization: SSWS yourtoken" \
           }
         }
       }
+      {
+        "factorType": "push",
+        "provider": "OKTA",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        }
+      }
     ]
   },
   "_links": {
@@ -958,6 +972,7 @@ Enrolls a user with a [factor](factors.html#supported-factors) assigned by their
 - [Enroll User with Okta SMS Factor](#enroll-user-with-okta-sms-factor)
 - [Enroll User with Okta Verify Factor](#enroll-user-with-okta-verify-factor)
 - [Enroll User with Google Authenticator Factor](#enroll-user-with-google-authenticator-factor)
+- [Enroll User with Push Factor](#enroll-user-with-push-factor)
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1310,6 +1325,244 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+#### Enroll User with Push Factor
+{:.api .api-operation}
+
+Enrolls a user with a push factor.  The factor must be [activated](#activate-push-factor) after enrollment by following the `next` link relation to complete the enrollment process.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors
+-d \
+'{
+  "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
+  "factorType": "push",
+  "provider": "OKTA"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00lT7DEzQaeP6mv1_y3pdXjNEONzk83mXX-yhgEdVQ",
+  "expiresAt": "2014-11-03T00:46:09.700Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "factorResult": "WAITING",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "login": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "opfh52xcuft3J4uZc0g3",
+      "factorType": "push",
+      "provider": "OKTA",
+      "profile": {
+
+      },
+      "_embedded": {
+        "activation": {
+          "expiresAt": "2015-04-01T15:57:32.000Z",
+          "_links": {
+            "qrcode": {
+              "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+              "type": "image/png"
+            },
+            "send": [
+              {
+                "name": "email",
+                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/email",
+                "hints": {
+                  "allow": [
+                    "POST"
+                  ]
+                }
+              },
+              {
+                "name": "sms",
+                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/sms",
+                "hints": {
+                  "allow": [
+                    "POST"
+                  ]
+                }
+              }              
+            ]
+          }
+        }
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "poll",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate/poll",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+<strong>Note: </strong> If the user cannot scan the QR code using the Okta Verify Push mobile app, then use the following methods to enroll by email or SMS.
+
+
+
+##### Request Example to Send SMS Link
+{:.api .api-request .api-request-example}
+
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}'
+~~~
+
+##### Request Example to Send Link by Email
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/opf1o51EADOTFXHHBXBP/lifecycle/activate/email
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00lT7DEzQaeP6mv1_y3pdXjNEONzk83mXX-yhgEdVQ",
+  "expiresAt": "2014-11-03T00:46:09.700Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "factorResult": "WAITING",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "login": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "opfh52xcuft3J4uZc0g3",
+      "factorType": "push",
+      "provider": "OKTA",
+      "profile": {
+
+      },
+      "_embedded": {
+        "activation": {
+          "expiresAt": "2015-04-01T15:57:32.000Z",
+          "_links": {
+            "qrcode": {
+              "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+              "type": "image/png"
+            },
+            "send": [
+              {
+                "name": "email",
+                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/email",
+                "hints": {
+                  "allow": [
+                    "POST"
+                  ]
+                }
+              },
+              {
+                "name": "sms",
+                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/sms",
+                "hints": {
+                  "allow": [
+                    "POST"
+                  ]
+                }
+              }              
+            ]
+          }
+        }
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "poll",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
 
 ### Activate Factor
 {:.api .api-operation}
@@ -1320,6 +1573,7 @@ The `sms` and `token:software:totp` [factor types](factors.html#factor-types) re
 
 - [Activate TOTP Factor](#activate-totp-factor)
 - [Activate SMS Factor](#activate-sms-factor)
+- [Activate Push Factor](#activate-push-factor)
 
 #### Activate TOTP Factor
 {:.api .api-operation}
@@ -1475,6 +1729,207 @@ curl -v -H "Authorization: SSWS yourtoken" \
 }
 ~~~
 
+#### Activate Push Factor
+{:.api .api-operation}
+
+Polls for device activation.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
+}
+}'
+~~~
+
+<strong>Three reponse examples are shown, WAITING state, SUCCESS, and TIMEOUT.</strong>
+
+<strong>Note:</strong> When activation expires, the <em>next</em> link relation reverts to activate. The embedded activation object is intentionally missing during timout.
+
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00lT7DEzQaeP6mv1_y3pdXjNEONzk83mXX-yhgEdVQ",
+  "expiresAt": "2014-11-03T00:46:09.700Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "factorResult": "WAITING",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "login": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "opfh52xcuft3J4uZc0g3",
+      "factorType": "push",
+      "provider": "OKTA",
+      "profile": {
+
+      },
+      "_embedded": {
+        "activation": {
+          "expiresAt": "2015-04-01T15:57:32.000Z",
+          "_links": {
+            "qrcode": {
+              "href": "https://your-domain.okta.com/api/v1/users/00ugti3kwafWJBRIY0g3/factors/opfh52xcuft3J4uZc0g3/qr/00fukNElRS_Tz6k-CFhg3pH4KO2dj2guhmaapXWbc4",
+              "type": "image/png"
+            },
+            "send": [
+              {
+                "name": "email",
+                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/email",
+                "hints": {
+                  "allow": [
+                    "POST"
+                  ]
+                }
+              },
+              {
+                "name": "sms",
+                "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/mbl1nz9JHJGHWRKMTLHP/lifecycle/activate/sms",
+                "hints": {
+                  "allow": [
+                    "POST"
+                  ]
+                }
+              }              
+            ]
+          }
+        }
+      }
+    }
+  },  
+  "_links": {
+    "next": {
+      "name": "poll",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00Fpzf4en68pCXTsMjcX8JPMctzN2Wiw4LDOBL_9pe",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "login": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00lT7DEzQaeP6mv1_y3pdXjNEONzk83mXX-yhgEdVQ",
+  "expiresAt": "2014-11-03T00:46:09.700Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "factorResult": "TIMEOUT",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "login": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "opfh52xcuft3J4uZc0g3",
+      "factorType": "push",
+      "provider": "OKTA",
+      "profile": {
+
+      }
+    }
+  },  
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
 ### Verify Factor
 
 Verifies an enrolled factor for an authentication transaction with the `MFA_REQUIRED` or `MFA_CHALLENGE` [status](#authentication-status)
@@ -1482,6 +1937,7 @@ Verifies an enrolled factor for an authentication transaction with the `MFA_REQU
 - [Verify Security Question Factor](#verify-security-question-factor)
 - [Verify SMS Factor](#verify-sms-factor)
 - [Verify TOTP Factor](#verify-totp-factor)
+- [Verify Push Factor](#verify-push-factor)
 
 #### Verify Security Question Factor
 {:.api .api-operation}
@@ -1798,6 +2254,194 @@ curl -v -H "Authorization: SSWS yourtoken" \
         "lastName": "Brock",
         "locale": "en_US",
         "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+### Verify Push Factor
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/factors/*:fid*/verify</span>
+
+After verifying, repeat the call to poll the device for a user reponse. 
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter    | Description                                         | Param Type | DataType | Required | Default
+------------ | --------------------------------------------------- | ---------- | -------- | -------- | -------
+fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     
+
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/authn/factors/ufs1pe3ISGKGPYKXRBKK/verify
+-d \
+'{
+  "stateToken": "00wlafXU2GV9I3tNvDNkOA1thqM5gDwCOgHID_-Iej"
+}'
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00Z20ZhXVrmyR3z8R-m77BvknHyckWCy5vNwEA6huD",
+  "expiresAt": "2014-11-02T23:44:41.736Z",
+  "status": "MFA_CHALLENGE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "factorResult": "WAITING",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "login": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factors": {
+      "id": "opfh52xcuft3J4uZc0g3",
+      "factorType": "push",
+      "provider": "OKTA",
+      "profile": {
+        "platform": "IOS",
+        "deviceType": "SMARTPHONE",
+        "name": "karl iPhone",
+        "version": "8.1"
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "poll",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "resend": [
+      {
+        "name": "push",
+        "href": "https://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/verify/resend",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    ]
+}
+~~~
+
+<u>Response from Poll for Verification Complete</u>
+
+The following response examples show different states: SUCCESS and TIMEOUT.
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2014-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00Fpzf4en68pCXTsMjcX8JPMctzN2Wiw4LDOBL_9xx",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "login": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+&nbsp;
+~~~json
+{
+  "stateToken": "00lT7DEzQaeP6mv1_y3pdXjNEONzk83mXX-yhgEdVQ",
+  "expiresAt": "2014-11-03T00:46:09.700Z",
+  "status": "MFA_ENROLL_ACTIVATE",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "factorResult": "TIMEOUT",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "profile": {
+        "login": "isaac@example.org",
+        "firstName": "Isaac",
+        "lastName": "Brock",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factor": {
+      "id": "opfh52xcuft3J4uZc0g3",
+      "factorType": "push",
+      "provider": "OKTA",
+      "profile": {
+
+      }
+    }
+  },  
+  "_links": {
+    "next": {
+      "name": "activate",
+      "href": "https://your-domain.okta.com/api/v1/authn/factors/opfh52xcuft3J4uZc0g3/lifecycle/activate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "prev": {
+      "href": "https://your-domain.okta.com/api/v1/authn/previous",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
       }
     }
   }
