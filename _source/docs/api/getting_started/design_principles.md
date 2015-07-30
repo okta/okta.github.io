@@ -159,38 +159,37 @@ The filter parameter **must** contain at least one valid Boolean expression. Eac
 ### Operators
 
 The operators supported in the expression are listed in the following table.
-
-Operator | Description | Behavior
--------- | ----------- | --------
-eq | equal | The attribute and operator values must be identical for a match.
-co | contains | The entire operator value must be a substring of the attribute value for a match.
-sw |starts with | The entire operator value must be a substring of the attribute value, starting at the beginning of the attribute value. This criterion is satisfied if the two strings are identical.
-pr | present (has value) | If the attribute has a non-empty value, or if it contains a non-empty node for complex attributes there is a match.
-gt | greater than | If the attribute value is greater than operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
-ge | greater than or equal | If the attribute value is greater than or equal to the operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
-lt | less than | If the attribute value is less than operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
-le | less than or equal | If the attribute value is less than or equal to the operator value, there is a match. The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
-
-Note: Some resources do not support all operators.
+|-----------|-----------------------|---------------------------------------------------------------------------|
+| Operator  | Description           | Behavior                                                                  |
+|:----------|:----------------------|:--------------------------------------------------------------------------|
+| eq        | equal                 | The filter exactly matches the property value                             |
+| pr        | present               | The property value is not empty and/or does not contain an empty node     |
+| gt        | greater than          | The filter is greater than the property value[^1]                         |
+| ge        | greater than or equal | The filter is greater than or equal to the property value[^1]             |
+| lt        | less than             | The filter is less than property value[^1]                                |
+| le        | less than or equal    | The filter is less than or equal to the property value[^1]                |
+|-----------|-----------------------|---------------------------------------------------------------------------|
 
 > All `Date` values use the ISO 8601 format `YYYY-MM-DDTHH:mm:ss.SSSZ`
 
 ### Attribute Operators
 
-Operator | Description | Behavior
--------- | ----------- | --------
-and | Logical And | The filter is only a match if both expressions evaluate to true.
-or | Logical or | The filter is a match if either expression evaluates to true.
+|-----------|-----------------------|---------------------------------------------------------------------------|
+| Operator  | Description           | Behavior                                                                  |
+|:----------|:----------------------|:--------------------------------------------------------------------------|
+| and       | Logical and           | The filter is only a match if both expressions evaluate to true.          |
+| or        | Logical or            | The filter is a match if either expression evaluates to true.             |
+|-----------|-----------------------|---------------------------------------------------------------------------|
 
 ### Logical Operators
 
-Operator | Description | Behavior
--------- | ----------- | --------
-() | Precedence grouping | Boolean expressions may be grouped using parentheses to change the standard order of operations; i.e., evaluate OR logical operators before logical AND operators.
+|-----------|-----------------------|---------------------------------------------------------------------------|
+| Operator  | Description           | Behavior                                                                  |
+|:----------|:----------------------|:--------------------------------------------------------------------------|
+| ()        | Precedence grouping   | Changes the standard order of operations                                  |
+|-----------|-----------------------|---------------------------------------------------------------------------|
 
 Filters must be evaluated using standard order of operations. Attribute operators have the highest precedence, followed by the grouping operator (i.e, parentheses), followed by the logical `AND` operator, followed by the logical `OR` operator.
-
-
 
 ## Hypermedia
 
@@ -265,3 +264,6 @@ In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Ok
 ### API Support
 
 The Okta API supports CORS on an API by API basis. If you’re building an application that needs CORS, please check that the specific operation supports CORS for your use case. APIs that support CORS are marked with the following icon <span class="api-label api-label-small api-label-cors"><i class="fa fa-cloud-download"></i> CORS</span>.
+
+[^footnote]:
+>[1] The actual comparison is dependent on the attribute type. For `String` attribute types, this is a lexicographical comparison and for `Date` types, it is a chronological comparison.
