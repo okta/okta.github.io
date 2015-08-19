@@ -1895,6 +1895,50 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
 
+### Tombstone User
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:id*/lifecycle/tombstone_login</span>
+
+When a user is deactivated, the user name is reserved and is not available for another user. If you "tombstone" a deprovisioned user, the login
+name is replaced with the user's id, so you can reuse the name. 
+
+Best Practice: Do not tombstone a user if there is a chance you will reactivate the user in the future.
+
+
+> Only tombstone a user that is in `DEPROVISIONED` status.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description  | Param Type | DataType | Required | Default
+--------- | ------------ | ---------- | -------- | -------- | -------
+id        | `id` of user | URL        | String   | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Returns an empty object.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~ ruby
+curl -v -H "Authorization: SSWS yourtoken" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-X POST "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/tombstone_login"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ ruby
+HTTP/1.1 200 OK
+Content-Type: application/json
+~~~
+
+
 ### Unlock User
 {:.api .api-operation}
 
