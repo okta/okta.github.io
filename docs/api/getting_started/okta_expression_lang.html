@@ -74,7 +74,7 @@
 						</p>
 						<p class="tel">
 							Call us:<br />
-							<a href="tel:18777227871">1 (877) 722-7871</a>
+							<a href="tel:18887227871">1 (888) 722-7871</a>
 						</p>
 					</div>
 				</li>
@@ -189,6 +189,7 @@
       <li><a href="#array-functions">Array Functions</a></li>
       <li><a href="#conversion-functions">Conversion Functions</a></li>
       <li><a href="#group-functions">Group Functions</a></li>
+      <li><a href="#time-functions">Time Functions</a></li>
       <li><a href="#managerassistant-functions">Manager/Assistant Functions</a></li>
       <li><a href="#directory-and-workday-functions">Directory and Workday Functions</a></li>
     </ul>
@@ -653,6 +654,56 @@ integer type range limitations when converting from a number to an integer with 
     </tr>
   </tbody>
 </table>
+
+<h3 id="time-functions">Time Functions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Input Parameter Signature</th>
+      <th>Return Type</th>
+      <th>Example</th>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Time.now</td>
+      <td>(String timeZoneId, String format)</td>
+      <td>String</td>
+      <td>Time.now()</td>
+      <td>2015-07-31T17:18:37.979Z (Current time, UTC format)</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>Time.now(“EST”)</td>
+      <td>2015-07-31T13:30:49.964-04:00 (Specified time zone)</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>Time.now(“EST”,”YYYY-MM-dd HH:mm:ss”)</td>
+      <td>2015-07-31 13:36:48 (Specified time zone and format, military time)</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Both input parameters are optional. The time zone ID supports both new and old style formats, listed below. The third example shows how to specify the military time format.</p>
+</blockquote>
+
+<h5 id="time-zone-ids">Time Zone IDs</h5>
+
+<p>The following old style IDs are supported: GMT, WET, CET, MET, ECT, EET, MIT, HST, AST, PST, MST, PNT, CST, EST, IET, PRT, CNT, AGT, BET, ART, CAT, EAT, NET, PLT, IST, BST, VST, CTT, JST, ACT, AET, SST, NST.</p>
+
+<p>The following new style IDs are supported: UTC, WET, CET, CET, CET, EET, Pacific/Apia, Pacific/Honolulu, America/Anchorage, America/Los_Angeles, America/Denver, America/Phoenix, America/Chicago, 
+America/New_York, America/Indiana/Indianapolis, America/Puerto_Rico, America/St_Johns, America/Argentina/Buenos_Aires, America/Sao_Paulo, Africa/Cairo, 
+Africa/Harare, Africa/Addis_Ababa, Asia/Yerevan, Asia/Karachi, Asia/Kolkata, Asia/Dhaka, Asia/Ho_Chi_Minh, Asia/Shanghai, Asia/Tokyo, Australia/Darwin, 
+Australia/Sydney, Pacific/Guadalcanal, Pacific/Auckland.</p>
 
 <h3 id="managerassistant-functions">Manager/Assistant Functions</h3>
 

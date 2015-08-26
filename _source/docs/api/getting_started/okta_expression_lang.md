@@ -128,6 +128,25 @@ Function  | Return Type | Example | Output
 `isMemberOfGroupNameContains` | Boolean | `isMemberOfGroupNameContains("admin")` | **True**, if the user under consideration is a member of any groups with names that contains *admin*; otherwise,  **False**.
 `isMemberOfGroupNameRegex` | Boolean | `isMemberOfGroupNameRegex("/.*admin.*")` | **True**, if the user under consideration is a member of any groups with names that contain *admin*; otherwise,  **False**.
 
+### Time Functions
+
+Function  | Input Parameter Signature | Return Type | Example | Output
+--------- | ------------------------- | ----------- | ------- | -------
+Time.now  | (String timeZoneId, String format) | String      | Time.now() | 2015-07-31T17:18:37.979Z (Current time, UTC format)
+| | | Time.now("EST") | 2015-07-31T13:30:49.964-04:00 (Specified time zone)
+| | | Time.now("EST","YYYY-MM-dd HH:mm:ss") | 2015-07-31 13:36:48 (Specified time zone and format, military time)
+
+>Both input parameters are optional. The time zone ID supports both new and old style formats, listed below. The third example shows how to specify the military time format.
+
+##### Time Zone IDs
+
+The following old style IDs are supported: GMT, WET, CET, MET, ECT, EET, MIT, HST, AST, PST, MST, PNT, CST, EST, IET, PRT, CNT, AGT, BET, ART, CAT, EAT, NET, PLT, IST, BST, VST, CTT, JST, ACT, AET, SST, NST.
+
+The following new style IDs are supported: UTC, WET, CET, CET, CET, EET, Pacific/Apia, Pacific/Honolulu, America/Anchorage, America/Los_Angeles, America/Denver, America/Phoenix, America/Chicago, 
+America/New_York, America/Indiana/Indianapolis, America/Puerto_Rico, America/St_Johns, America/Argentina/Buenos_Aires, America/Sao_Paulo, Africa/Cairo, 
+Africa/Harare, Africa/Addis_Ababa, Asia/Yerevan, Asia/Karachi, Asia/Kolkata, Asia/Dhaka, Asia/Ho_Chi_Minh, Asia/Shanghai, Asia/Tokyo, Australia/Darwin, 
+Australia/Sydney, Pacific/Guadalcanal, Pacific/Auckland.
+
 ### Manager/Assistant Functions
 
 Function  | Description | Example 
