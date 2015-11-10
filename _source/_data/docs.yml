@@ -34,6 +34,7 @@
     - oan_guidance
     - okta_mobile_connect
     - okta_sign-in_widget
+    - social_authentication
     - spring_security_saml
     - pysaml2
     - add_mfa

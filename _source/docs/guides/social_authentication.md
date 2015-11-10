@@ -4,6 +4,8 @@ title: Social Authentication
 excerpt: Setting up an Okta Social Authentication provider
 ---
 
+> Social Authentication is currently in **Early Access (EA)** status.
+
 1.  Click the blue "Admin" button to get into the Okta Administrator view.
 2.  From the "Security" menu, select "Identity Providers".
 3.  Use the "Add Identity Provider" drop-down menu to select the
