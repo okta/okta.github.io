@@ -1353,6 +1353,11 @@ curl -v -X GET \
 ### Update User
 {:.api .api-operation}
 
+- [Update Profile - Strict (PUT)](#update-profile)
+- [Update Profile - Partial (POST)](#update-profile-1)
+- [Set Password](#set-password)
+- [Set Recovery Question & Answer](#set-recovery-question--answer)
+
 > Use the `POST` method to make a partial update and the `PUT` method to delete unspecified properties.
 
 <span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:id*</span>
@@ -1378,7 +1383,7 @@ credentials | Update credentials for user | Body       | [Credentials Object](#c
 
 Updated [User](#user-model)
 
-#### Update Profile
+#### Update Profile - Strict (PUT)
 {:.api .api-operation}
 
 ##### Request Example
@@ -1479,7 +1484,7 @@ credentials | Update credentials for user | Body       | [Credentials Object](#c
 
 Updated [User](#user-model)
 
-#### Update Profile
+#### Update Profile - Partial (POST)
 {:.api .api-operation}
 
 ##### Request Example
