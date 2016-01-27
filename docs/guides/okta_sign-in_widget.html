@@ -218,7 +218,7 @@ of factors and comes with built-in support for all of the factors listed below:<
 <h2 id="self-service-password-reset">Self service password reset</h2>
 
 <p>The Okta Sign-In Widget has everything you need to give your users the
-ability reset their forgotten passwords, it comes with support
+ability to reset their forgotten passwords, it comes with support
 for sending reset notifications as well as prompting users to verify
 themselves by prompting them to answer a security question.</p>
 
@@ -244,7 +244,7 @@ might occur in a user login flow.</p>
 
 <p>If you are a developer, the best way to understand the Okta
 Sign-In Widget is to look at a simple example of the HTML
-needed to get it working. The HTML below shows you how the quickly
+needed to get it working. The HTML below shows you how to quickly
 and easily set up a fully featured login experience:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
@@ -279,20 +279,20 @@ tag, we include the  <code class="highlighter-rouge">okta-sign-in-1.0.2.min.js</
 logic for the Okta Sign-In Widget. </p>
 
 <p>We also include the <code class="highlighter-rouge">okta-theme-1.0.2.css</code> file, which contains all
-of the styling information for the the Okta Sign-In Widget.</p>
+of the styling information for the Okta Sign-In Widget.</p>
 
 <p>In the <code class="highlighter-rouge">&lt;body&gt;</code>, we add a <code class="highlighter-rouge">&lt;div&gt;</code> tag with an “<code class="highlighter-rouge">id</code>” of
 <code class="highlighter-rouge">okta-login-container</code>  – you can use any “<code class="highlighter-rouge">id</code>” value in this tag,
 we are just using <code class="highlighter-rouge">okta-login-container</code> here for the sake of clarity.</p>
 
-<p>Next, we add some JavaScript code to insert the the Okta Sign-In Widget
+<p>Next, we add some JavaScript code to insert the Okta Sign-In Widget
 into the <code class="highlighter-rouge">okta-login-container</code> tag. In this short example, this
 JavaScript is included at the end of the file. However, when you use
 this code on your own website, you will need to run these functions
 in the parts of your code that are run when the DOM is ready.</p>
 
 <p>Here is what that JavaScript code is doing: First, the line below
-initializes the the Okta Sign-In Widget object, note that 
+initializes the Okta Sign-In Widget object, note that 
 the <code class="highlighter-rouge">baseUrl</code> value <strong>MUST</strong> be the domain for <em>your</em> Okta
 organization.</p>
 
@@ -305,7 +305,7 @@ would replace the string “<code class="highlighter-rouge">example.okta.com</co
 </code></pre>
 </div>
 
-<p>Finally, the lines below actually render the the Okta Sign-In
+<p>Finally, the lines below actually render the Okta Sign-In
 Widget. Note that the value for <code class="highlighter-rouge">el</code> can be whatever <code class="highlighter-rouge">id</code> that you 
 specify, also note that we only define a “SUCCESS” callback. In a
 production environment, you will want to handle statuses beyond
@@ -325,7 +325,7 @@ callback as well. </p>
 
 <p>Now that you have a basic idea of how the Okta Sign-In widget works,
 your next step is to see these capabilities in action for
-yourself. The best way to do this is to set up a version of the the
+yourself. The best way to do this is to set up a version of the 
 Okta Sign-In Widget that is configured to point at your own Okta 
 organization.</p>
 
@@ -390,7 +390,7 @@ will have a lot more in-depth configuration.</p>
       <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
       <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'User %s succesfully authenticated %o'</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">login</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'User %s successfully authenticated %o'</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">login</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
           <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="s1">'https://example.com/'</span><span class="p">);</span>
         <span class="p">}</span>
       <span class="p">}</span>
@@ -505,14 +505,14 @@ started on TCP port 8000 of your local machine).</p>
 <p>If you used <code class="highlighter-rouge">python -m SimpleHTTPServer</code> command above, this URL will be
 <a href="http://localhost:8000/login-to-okta.html">http://localhost:8000/login-to-okta.html</a></p>
 
-<p>Once you’ve successfully loaded the the Okta Sign-In Widget, it is
+<p>Once you’ve successfully loaded the Okta Sign-In Widget, it is
 time to start exploring the capabilities of the
 widget. </p>
 
 <p>Here are two things for you to try:</p>
 
 <ol>
-  <li>Log in using credentials that you are know are invalid. 
+  <li>Log in using credentials that you know are invalid. 
 For example: Try using “invalid@example.com” as the user name and
 “invalid” as the password. You should see an error.</li>
   <li>Try using a valid user name and password. If everything works,
@@ -532,7 +532,7 @@ Your next step is to configure the Okta Sign-In Widget for your specific require
 the Okta Sign-In Widget. Now that you’ve seen it in action, it’s time to
 start configuring the widget for your specific needs.</p>
 
-<p>the Okta Sign-In Widget is fully customizable via CSS and JavaScript. 
+<p>The Okta Sign-In Widget is fully customizable via CSS and JavaScript. 
 Stylistic customizations, changing the way that the widget looks, is
 done via CSS. Customization of widget features, the way that the
 widget works, and text labels for the widget are done via JavaScript. </p>
@@ -543,37 +543,37 @@ the Okta Sign-In Widget using CSS and JavaScript.</p>
 <h2 id="customizing-style-with-css">Customizing style with CSS</h2>
 
 <p>You will need to write CSS style overloads to customize the “look
-and feel” of the the Okta Sign-In Widget.</p>
+and feel” of the Okta Sign-In Widget.</p>
 
 <p>Before you get started, it is useful to know how the widget works.
 Most important is understanding how the widget is created. The
-the Okta Sign-In Widget is created when the <code class="highlighter-rouge">renderEl()</code> JavaScript
-method is called. When the the <code class="highlighter-rouge">renderEl()</code> method is called, the
-the Okta Sign-In Widget will be created as a <code class="highlighter-rouge">&lt;div&gt;</code> tag with an
+ Okta Sign-In Widget is created when the <code class="highlighter-rouge">renderEl()</code> JavaScript
+method is called. When the <code class="highlighter-rouge">renderEl()</code> method is called, the
+Okta Sign-In Widget will be created as a <code class="highlighter-rouge">&lt;div&gt;</code> tag with an
 <code class="highlighter-rouge">id</code> of <code class="highlighter-rouge">okta-sign-in</code> which will be inserted inside of the tag that
 you specified in the <code class="highlighter-rouge">el</code> option to <code class="highlighter-rouge">renderEl</code> method.</p>
 
-<p>Here is what the opening tag for the the Okta Sign-In Widget will look like:</p>
+<p>Here is what the opening tag for the Okta Sign-In Widget will look like:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;div id="okta-sign-in" class="auth-container main-container no-beacon"&gt;
 </code></pre>
 </div>
 
-<p>Customization of the HTML <em>surrounding</em> the the Okta Sign-In Widget 
+<p>Customization of the HTML <em>surrounding</em> the Okta Sign-In Widget 
 is up to you. Customization of the widget itself will be done on
 the <code class="highlighter-rouge">#okta-login-container</code> selector and its child elements.</p>
 
-<p>A full list of the CSS selectors that you can use to style the
+<p>A full list of the CSS selectors that you can use to style 
 the Okta Sign-In Widget are in the <a href="https://example.okta.com/css/login/okta-theme.css">okta-theme.css</a> file. We strongly
 urge you to style your widget using only the selectors that are
 present in the <a href="https://example.okta.com/css/login/okta-theme.css">okta-theme.css</a> file, other elements in the widget
 will be subject to change and will cause your styling to break in
-future versions of the the Okta Sign-In Widget.</p>
+future versions of the Okta Sign-In Widget.</p>
 
-<h3 id="example-css-styling-for-the-the-okta-sign-in-widget">Example CSS styling for the the Okta Sign-In Widget</h3>
+<h3 id="example-css-styling-for-the-the-okta-sign-in-widget">Example CSS styling for the Okta Sign-In Widget</h3>
 
 <p>Below is some example CSS, which will give you an idea of how you
-can style the the Okta Sign-In Widget. You can try out this CSS yourself
+can style the Okta Sign-In Widget. You can try out this CSS yourself
 by copying the <code class="highlighter-rouge">&lt;style&gt;</code> tag below into the <code class="highlighter-rouge">&lt;head&gt;</code> section of
 the <code class="highlighter-rouge">login-to-okta.html</code> file that you created above.</p>
 
@@ -621,13 +621,13 @@ your HTML:</p>
 
 <p>The configuration options that are passed to the <code class="highlighter-rouge">OktaSignIn()</code>
 constructor are used to configure the functionality and text labels
-of the the Okta Sign-In Widget. An example of how to configure
+of the Okta Sign-In Widget. An example of how to configure
 <code class="highlighter-rouge">OktaSignIn()</code> is below, followed by a full list of all of the
 features and text labels that you can use to configure the Okta Sign-In Widget.</p>
 
 <h3 id="example">Example</h3>
 
-<p>Below is a working example of a customized the Okta Sign-In Widget. You can
+<p>Below is a working example of a customized version of the Okta Sign-In Widget. You can
 see what these customizations do by copying this code into your
 <code class="highlighter-rouge">login-to-okta.html</code> example file and reloading the page in your
 web browser. A full list of the supported customization options
