@@ -52,9 +52,7 @@ The id_token JWT consists of three period seperated base64 encoded JSON segments
   "profile":"http://profile.wordpress.com/john.doe",
   "zoneinfo":"America/Los_Angeles",
   "locale":"en-US",
-  "updated_at":1311280970,
   "email":"john.doe@example.com",
-  "email_verified":true,
   "address" : { "street_address": "123 Hollywood Blvd.", 
   		"locality": "Los Angeles", 
   		"region": "CA", 
@@ -113,9 +111,7 @@ This is the digital signature signed by Okta using the public key identified by 
 | profile     |  profile   | URL of the user's profile page.   | String    | "http://profile.wordpress.com/john.doe"     |
 | zoneinfo     |  profile  | String representing the user's time zone.   |  String   |  	"America/Los_Angeles"    |
 | locale     |  profile   | Language and [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.   | String    | "en-US"     |
-| updated_at     | profile    | Time the user's information was last updated, represented in Unix time (seconds).   | Integer    | 1311280970     |
 | email     |  email   | User's preferred e-mail address. The resource provider must <em>not</em> rely upon this value being unique.   | String    | "john.doe@example.com"     |
-| email_verified     |  email   | True if the user's e-mail address has been verified; otherwise false.   | boolean    | true     |
 | address     | address    | User's preferred postal address. The value of the address member is a JSON structure containing <em>street_address</em>, <em>locality</em>, <em>region</em>, <em>postal_code</em>, and <em>country</em>.   | JSON structure    | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" }     |
 | phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
 
@@ -232,9 +228,7 @@ Returns a JSON document with information corresponding to the data requested in 
   "profile":"http://profile.wordpress.com/john.doe",
   "zoneinfo":"America/Los_Angeles",
   "locale":"en-US",
-  "updated_at":1311280970,
   "email":"john.doe@example.com",
-  "email_verified":true,
   "address" : { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" },
   "phone_number":"+1 (425) 555-1212"
 }
@@ -403,13 +397,11 @@ This API endpoint returns the OpenID Connect related metadata that can be used b
         "middle_name",
         "family_name",
         "email",
-        "email_verified",
         "profile",
         "zoneinfo",
         "locale",
         "address",
-        "phone_number",
-        "updated_at"
+        "phone_number"
     ]
 }
 
