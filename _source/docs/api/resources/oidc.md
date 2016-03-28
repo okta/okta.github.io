@@ -1,24 +1,28 @@
 ---
 layout: docs_page
 title: OpenId Connect
+redirect_from: "docs/api/rest/oidc.html"
 ---
 
 # Overview
 
 The OpenID Connect API endpoints enable clients to use [OIDC workflows](http://openid.net/specs/openid-connect-core-1_0.html) with Okta.
 
-These APIs also allow using Okta as a broker for social-login scenarios where the user authenticates against identity providers like Google, Facebook and LinkedIn and gets back an Okta session.
+This API also enables you to use Okta as a broker for social-login scenarios where the user authenticates against identity providers like Google, Facebook, LinkedIn, and Microsoft,
+and returns an Okta session.
 
 
-> This API is currently in **Beta** status and provides no guarantees for backwards-compatibility.  Okta may make breaking changes this API until it is released.
+> This API is currently in **Early Access** status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.
 
 ## OpenId Connect Model
 
-OpenID Connect introduces an [id_token](http://openid.net/specs/openid-connect-core-1_0.html#IDToken) which is [JWT](https://tools.ietf.org/html/rfc7519) that contains information about an authentication event as well as claims about the authenticated user.
+OpenID Connect introduces an [`id_token`](http://openid.net/specs/openid-connect-core-1_0.html#IDToken) 
+which is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) that contains information about an authentication event 
+as well as claims about the authenticated user.
 
-The id_token JWT consists of three period seperated base64 encoded JSON segments. 
+The `id_token` JWT consists of three period-separated, base64-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature.
 
-#####Header -
+### Header
 
 ~~~json
 {
@@ -27,7 +31,7 @@ The id_token JWT consists of three period seperated base64 encoded JSON segments
 }
 ~~~
 
-#####Payload - 
+### Payload 
 
 ~~~json
 {
@@ -65,13 +69,17 @@ The id_token JWT consists of three period seperated base64 encoded JSON segments
 }
 ~~~
 
-#####Signature - 
+### Signature
 
-This is the digital signature signed by Okta using the public key identified by a public-key identified by the <em>kid</em> item in the header section.
+This is the digital signature that Okta signs, using the public key identified by the `kid` property in the header section.
 
 ### Id Token claims
 
-####Claims in the header section (always returned)
+The header and payload sections contain claims.
+
+####Claims in the header section
+
+Claim in the header are always returned.
 
 |--------------+-----------------------------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     | Description                                                                      | DataType     | Example                  |
@@ -81,7 +89,9 @@ This is the digital signature signed by Okta using the public key identified by 
 
 ####Claims in the payload section
 
-#####Scope independent claims (always returned)
+Claims in the payload are independent of scope (always returned) or dependent on scope (not always returned).
+
+#####Scope-independent claims (always returned)
 
 |--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     |  Description                                                                      | DataType     | Example                  |
@@ -99,7 +109,7 @@ This is the digital signature signed by Okta using the public key identified by 
 | nonce     |  Value used to associate a Client session with an ID token, and to mitigate replay attacks. This is only returned if <em>nonce</em> was present in the request that generated the Id token.    |  String   | "n-0S6_WzA2Mj"  |
 | at_hash     | The base64 encoded first 128-bits of the SHA-256 value of the access-token. This is only returned if an access token is also returned with id_token.  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"     |
 
-##### Scope dependent claims
+##### Scope-dependent claims
 
 |--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     | Required Scope | Description                                                                      | DataType     | Example                  |
@@ -122,7 +132,8 @@ This is the digital signature signed by Okta using the public key identified by 
 
 The client can also optionally request an access token along with the id token. In this case, in order to keep the size of the id token small, the id token body does not contain all the scope dependent claims. 
 
-Instead, the id token contains the <em>name</em> and <em>preferred_username</em> claims if the <em>profile</em> scope was requested and <em>email</em> claim if the <em>email</em> scope was requested. The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint that can be called using the access token.
+Instead, the id token contains the `name` and `preferred_username` claims if the `profile` scope was requested and `email` claim if the `email` scope was requested. 
+The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the access token.
 
 
 ##OIDC Operations
@@ -131,8 +142,9 @@ Instead, the id token contains the <em>name</em> and <em>preferred_username</em>
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/authorize</span>
+TODO: This isn't in postman. Mysti couldn't test.
 
-Starting point for the OpenId Connect flow. It authenticates user and returns an ID token along with an authorization grant to the client application as a part of the response the client might have requested.
+Starting point for the OpenId Connect flow. This request authenticates the user and returns an ID token along with an authorization grant to the client application as a part of the response the client might have requested.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -144,12 +156,20 @@ sessionToken      | An Okta one-time sessionToken. This allows an API-based user
 response_type     | Can be a combination of - code, token and id_token. The chosen combination determines which flow is used; see this reference from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). The code response type returns an authorization code which can be later exchanged for an access token or a refresh token. | Query        | String   |   TRUE   |  |
 client_id         | Obtained during client registration. It is the identifier for the client and it must match what is preregistered in Okta. | Query        | String   | TRUE     | 
 redirect_uri      | It is the callback location where the authorization code should be sent and it must match what is preregistered in Okta as a part of client registration. | Query        | String   |  TRUE    | 
-display           | Can be one of - <em>page</em> or <em>popup</em>. Specifies how to display the authentication and consent UI. This is a pass-through value that applies only when the "idp" param is also specified. | Query        | String   | FALSE     |  |
-response_mode     | Can be one of - <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em>. If <em>id_token</em> is specified as the response type, then <em>query</em> can't be used as the response mode.  | Query        | String   | FALSE      | Defaults to and is required to be fragment in implicit and hybrid flow, defaults to query in authorization code flow.
+display           | Specifies how to display the authentication and consent UI. Can be one of - <em>page</em> or <em>popup</em>. This is a pass-through value that applies only when the `idp` param is also specified. | Query        | String   | FALSE     |  |
+response_mode     | Specifies how the authorization response should be returned. Can be one of - <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em>. If <em>id_token</em> is specified as the response type, then <em>query</em> can't be used as the response mode.  | Query        | String   | FALSE      | In implicit and hybrid flow, `fragment` is the default and is required. In authorization code flow, `query` is the default.
 scope          | Can be a combination of - <em>openid</em>, <em>profile</em>, <em>email</em>, <em>address</em> and <em>phone</em>. The combination determines the claims that are returned in the id_token. The openid scope has to be specified to get back an id_token. | Query        | String   | TRUE     | 
 state          | A client application provided optional state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.   | Query        | String   |  FALSE    | 
 prompt         | Can be one of - <em>none</em> or <em>login</em>. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). | Query        | String   | FALSE     | The default behavior is based on whether there's an existing Okta session. 
 nonce          | Specifies a nonce that will be reflected back in the ID token. Can be used for CSRF protection. | Query        | String   | FALSE     | 
+
+##### Response mode values
+
+* <em>fragment</em>: TODO: need short explanation.
+* <em>form_post</em> TODO: need short explanation.
+* <em>query</em> TODO: need short explanation.
+* <em>okta_post_message</em>: Validates the `redirect_uri` from the client against the client registration in the database and returns the `/oauth2/v1/widget/callback` page
+which contains JavaScript to extract the ID token and `postMessage()` back to the parent window. Use this value for social authentication flows in the Okta login widget.
 
 #### Response Parameters
 {:.api .api-response .api-response-example}
@@ -168,21 +188,26 @@ error_description | Further description of the error. | String |
 
 #### Response Example (Success)
 
-When the request was made with a <em>fragment</em> response mode -
+The request was made with a <em>fragment</em> response mode.
 
+~~~http
 http://www.example.com/#
 <em>id_token</em>=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZGUubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInZlciI6MSwiaXNzIjoiaHR0cDovL3JhaW4ub2t0YTEuY29tOjE4MDIiLCJsb2dpbiI6ImFkbWluaXN0cmF0b3IxQGNsb3VkaXR1ZGUubmV0IiwiYXVkIjoidUFhdW5vZldrYURKeHVrQ0ZlQngiLCJpYXQiOjE0NDk2MjQwMjYsImV4cCI6MTQ0OTYyNzYyNiwiYW1yIjpbInB3ZCJdLCJqdGkiOiI0ZUFXSk9DTUIzU1g4WGV3RGZWUiIsImF1dGhfdGltZSI6MTQ0OTYyNDAyNiwiYXRfaGFzaCI6ImNwcUtmZFFBNWVIODkxRmY1b0pyX1EifQ.Btw6bUbZhRa89DsBb8KmL9rfhku--_mbNC2pgC8yu8obJnwO12nFBepui9KzbpJhGM91PqJwi_AylE6rp-ehamfnUAO4JL14PkemF45Pn3u_6KKwxJnxcWxLvMuuisnvIs7NScKpOAab6ayZU0VL8W6XAijQmnYTtMWQfSuaaR8rYOaWHrffh3OypvDdrQuYacbkT0csxdrayXfBG3UF5-ZAlhfch1fhFT3yZFdWwzkSDc0BGygfiFyNhCezfyT454wbciSZgrA9ROeHkfPCaX7KCFO8GgQEkGRoQntFBNjluFhNLJIUkEFovEDlfuB4tv_M8BM75celdy3jkpOurg
 &<em>access_token</em>=eyJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImlzcyI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyIiwiaWF0IjoxNDQ5NjI0MDI2LCJleHAiOjE0NDk2Mjc2MjYsImp0aSI6IlVmU0lURzZCVVNfdHA3N21BTjJxIiwic2NvcGVzIjpbIm9wZW5pZCIsImVtYWlsIl0sImNsaWVudF9pZCI6InVBYXVub2ZXa2FESnh1a0NGZUJ4IiwidXNlcl9pZCI6IjAwdWlkNEJ4WHc2STZUVjRtMGczIn0.HaBu5oQxdVCIvea88HPgr2O5evqZlCT4UXH4UKhJnZ5px-ArNRqwhxXWhHJisslswjPpMkx1IgrudQIjzGYbtLFjrrg2ueiU5-YfmKuJuD6O2yPWGTsV7X6i7ABT6P-t8PRz_RNbk-U1GXWIEkNnEWbPqYDAm_Ofh7iW0Y8WDA5ez1jbtMvd-oXMvJLctRiACrTMLJQ2e5HkbUFxgXQ_rFPNHJbNSUBDLqdi2rg_ND64DLRlXRY7hupNsvWGo0gF4WEUk8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw&<em>token_type</em>=Bearer<em>state</em>=waojafoawjgvbf
+~~~
 
 #### Response Example (Error)
 
-When the requested scope was invalid -
+The requested scope is invalid.
 
+~~~http
 http://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
+~~~
 
 ##### Possible errors
 
-The Okta OpenID Connect APIs are compliant with the OpenId Connect and OAuth2 spec with some Okta specific extensions. 
+The Okta OpenID Connect APIs are compliant with the OpenId Connect and OAuth2 spec with some Okta-specific extensions.
+ TODO: are the error ids listed Okta-specific? 
 
 [OAuth 2 Spec error codes](https://tools.ietf.org/html/rfc6749#section-4.1.2.1)
 
@@ -204,14 +229,15 @@ Error Id         | Details                                                      
 login_required  | The request specified that no prompt should be shown but the user is currently not authenticated.    |
 
 
-### Get user information
+### Get User Information
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET, POST</span> /oauth2/v1/userinfo</span>
+TODO: This isn't in postman. Mysti couldn't test.
 
-This API requires the access_token returned from the [/oauth2/v1/authorize](#authenticate-and-authorize-a-user) endpoint as an authorization header parameter.
+This API requires the `access_token returned` from the [/oauth2/v1/authorize](#authenticate-and-authorize-a-user) endpoint as an authorization header parameter.
 
-This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo)
+This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -248,7 +274,8 @@ Returns a JSON document with information corresponding to the data requested in 
 }
 ~~~
 
-The claims in the response are identical to those returned for the requested scopes in the id_token JWT, except for the 'sub' claim which is always present. Details of the individual claims is [documented above](#scope-dependent-claims)
+The claims in the response are identical to those returned for the requested scopes in the `id_token` JWT, except for the `sub` claim which is always present.
+Details of the individual claims are [documented above](#scope-dependent-claims).
 
 #### Response Example (Error)
 
@@ -270,16 +297,17 @@ Expires: 0​
 WWW-Authenticate: Bearer error="insufficient_scope", error_description="The access token must provide access to at least one of these scopes - profile, email, address or phone"
 ~~~
 
-### Create token
+### Create Token
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/token</span>
+TODO: This isn't in postman. Mysti couldn't test.(too many tokens in postman to trust search).
 
 The API takes an authorization code or a refresh token as the grant type and returns back an access token, id token and a refresh token.
 
-####Request parameters
+####Request Parameters
 
-The following parameters can be posted as a part of the url encoded form values to the API.
+The following parameters can be posted as a part of the URL-encoded form values to the API.
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
@@ -294,9 +322,12 @@ client_secret      | The client secret generated as a part of client registratio
 
 #####Authentication mechanisms
 
-The client can authenticate by providing client_id and client_secret as a part of the url encoded form parameters (as described in table above), or it can use basic authentication by providing the client_id and client_secret as a header. Only one authentication mechanism should be used with a given request and using both simultaneously will return an error.
+The client can authenticate by providing `client_id` and `client_secret` as a part of the URL-encoded form parameters (as described in table above),
+or it can use basic authentication by providing the `client_id` and `client_secret` as a header. 
+Use one authentication mechanism with a given request. Using both returns an error.
 
 For authentication via basic-auth, an HTTP header with the following format must be provided with the POST request.
+TODO: What is basic-auth? I didn't test the following.
 
 ~~~sh
 Authorization: Basic ${Base64(<client_id>:<client_secret>)} 
@@ -304,14 +335,14 @@ Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 
 ####Response parameters
 
-Based on the grant type, the returned JSON contains different set of tokens
+Based on the grant type, the returned JSON contains a different set of tokens.
 
 Input grant type   | Output token types                    |
 -------------------|---------------------------------------|
 code               | id token, access token, refresh token |
 refresh token      | access token, refresh token           |
 
-####Response example (Success)
+####Response Example (Success)
 
 ~~~json
 {
@@ -343,12 +374,14 @@ invalid_grant			| The <em>code</em> or <em>refresh_token</em> value was invalid.
 unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or <em>refresh_token</em>. |
 
 
-### Get OpenID Connect metadata
+### Get OpenID Connect Metadata
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /.well-known/openid-configuration</span>
 
 This API endpoint returns the OpenID Connect related metadata that can be used by clients to programmatically configure their interactions with Okta. This API doesn't require any authentication and returns a JSON object with the following structure.
+TODO: Why do the following sections have weird format in the .md? On the third tilde all the content has a line through it...?!
+TODO: This isn't in postman. Mysti couldn't test.
 
 ~~~json
 
