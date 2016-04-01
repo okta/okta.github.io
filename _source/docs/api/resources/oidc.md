@@ -22,6 +22,8 @@ as well as claims about the authenticated user.
 
 The `id_token` JWT consists of three period-separated, base64-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature.
 
+ID tokens should always be [validated](#validating-id-tokens) by the client to ensure their integrity.
+
 ### Header
 
 ~~~json
@@ -235,7 +237,7 @@ login_required  | The request specified that no prompt should be shown but the u
 <span class="api-uri-template api-uri-get"><span class="api-label">GET, POST</span> /oauth2/v1/userinfo</span>
 TODO: This isn't in postman. Mysti couldn't test.
 
-This API requires the `access_token returned` from the [/oauth2/v1/authorize](#authenticate-and-authorize-a-user) endpoint as an authorization header parameter.
+This API requires the `access_token` returned from the [/oauth2/v1/authorize](#authenticate-and-authorize-a-user) endpoint as an authorization header parameter.
 
 This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
@@ -297,7 +299,7 @@ Expires: 0​
 WWW-Authenticate: Bearer error="insufficient_scope", error_description="The access token must provide access to at least one of these scopes - profile, email, address or phone"
 ~~~
 
-### Create Token
+### Get Access Token
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/token</span>
@@ -373,8 +375,54 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 invalid_grant			| The <em>code</em> or <em>refresh_token</em> value was invalid. |
 unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or <em>refresh_token</em>. |
 
+### Validating ID Tokens
 
-### Get OpenID Connect Metadata
+You can pass ID tokens around different components of your app, and these components can use it as a lightweight authentication mechanism identifying the app and the user.
+But before you can use the information in the ID token or rely on it as an assertion that the user has authenticated, you must validate it to prove its integrity.
+
+ID tokens are sensitive and can be misused if intercepted. You must ensure that these tokens are handled securely by transmitting them only over HTTPS
+and only via POST data or within request headers. If you store them on your server, you must also store them securely.
+
+Clients MUST validate the ID token in the Token Response in the following manner:
+
+1. Verify that the `iss` (issuer) claim in the ID token exactly matches the issuer identifier for your Okta organization (which is typically obtained during [Discovery](#openid-discovery-document)). 
+2. Verify that the `aud` (audience) claim contains the `client_id` of your application.
+3. Verify the signature of the ID token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](#openid-discovery-document).
+4. Verify that the expiry time (from the `exp` claim) has not already passed.
+5. If a `nonce` value was sent in the Authentication Request, a `nonce` claim MUST be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.
+6. The client SHOULD check the `auth_time` claim value and request re-authentication using the `prompt=login` parameter if it determines too much time has elapsed since the last End-User authentication.
+
+Step 3 involves downloading the public JWKS from Okta (specified by the `jwks_uri` attribute in the [discovery document](#opendid-discovery-document)). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
+
+Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [ID token header](#claims-in-the-header-section).
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/keys</span>
+
+~~~json
+{
+  "keys": [
+    {
+      "kid": "DS7gC_ljzzhv2cP1adQ7F26kvVRi3IGeo3PP9PPxoo"
+      "alg": "RS256",
+      "e": "AQAB",
+      "n": "paDgqMZdppjqc2-Q1jvcJmUPvQ6Uwz1IofmuyTxh2C4OBXsAF0Szk_Y0jOa6pTWJAgbHF5bxkFbH11isA9WpNbuPa-CprC6gTfmpbAbwYDYi1awsVdpiLeGKYMcw14LXO2NojGENFE4N8O3kIwrhVk6b2d5RLNYvEQKVix6APZkK_flLFY-AOmWdf24BLksLlikzbyDm_r6tSiNQdxqfGejZHLtsZ9ZcDwOQDp-zr8l5QvSdLFtkiu6AQxALUvtC05kpkQogI3hHsMN7QMFqMw55EVSWOhCK774Mov_gsh34YClo64Qn_2GV4GGXuEAKfvCAYVBOyN-RWBHQV0qyIw",
+      "kty": "RSA",
+      "use": "sig",
+      "x5c": [
+        "MIIDnDCCAoSgAwIBAgIGAUsU5Y67MA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxDzANBgNVBAMMBnRyZXZvcjEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTAxMjMwMzQ1MDNaFw00NTAxMjMwMzQ2MDNaMIGOMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxDzANBgNVBAMMBnRyZXZvcjEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKWg4KjGXaaY6nNvkNY73CZlD70OlMM9SKH5rsk8YdguDgV7ABdEs5P2NIzmuqU1iQIGxxeW8ZBWx9dYrAPVqTW7j2vgqawuoE35qWwG8GA2ItWsLFXaYi3himDHMNeC1ztjaIxhDRRODfDt5CMK4VZOm9neUSzWLxEClYsegD2ZCv35SxWPgDplnX9uAS5LC5YpM28g5v6+rUojUHcanxno2Ry7bGfWXA8DkA6fs6/JeUL0nSxbZIrugEMQC1L7QtOZKZEKICN4R7DDe0DBajMOeRFUljoQiu++DKL/4LId+GApaOuEJ/9hleBhl7hACn7wgGFQTsjfkVgR0FdKsiMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAF99tKM4+djEcF4hvQkFuNmILMzuqBFOBvqcZStR1IheHJ69esNkw/QGFyhfVNgTvPf8BfY5A+sheFUDlDAXjWBeabaX1aUh1/Q6ac1izS2DzGT5O9Srs/c35ZGrsp4vwGeSfNzsMDhRV462ZMmKAmaIcjF5MiplHizNH/K1x+3uHuU6DPlIWsMDvjuGwTArM45hGRZlnxFCVSaGToNF0ppgOFjRkeng7Fm2sJkd8P1jezUGHFemuaBWv9wxIe5GlgH400dEPsobfcjTc4AisxsHyUJwoxlmg9gZgjvUaSCpUMsPTOBhDIYaMKjTTY9Y68YMSg3+2tQ7hOVdiDk76rA=="
+      ],
+      "x5t": "3ov_aKYnBnqVGsC06S1KFV6OUl8"
+    }
+  ]
+}
+~~~
+
+For efficiency your application can retrieve these public keys, cache them, and validate the ID token signatures locally. 
+
+There are standard open-source libraries available for every major language to perform [JWS](https://tools.ietf.org/html/rfc7515) signature validation.
+
+
+### OpenID Connect Discovery Document
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /.well-known/openid-configuration</span>
