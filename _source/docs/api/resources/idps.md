@@ -165,8 +165,8 @@ Okta supports the following enterprise and social IdPs:
 | `SAML2`      | Enterprise IdP provider that supports the [SAML 2.0 Web Browser SSO Profile](https://docs.oasis-open.org/security/saml/v2.0/saml-profiles-2.0-os.pdf) |
 | `FACEBOOK`   | [Facebook Login](https://developers.facebook.com/docs/facebook-login/overview/)                                                                       |
 | `GOOGLE`     | [Google Sign-In with OpenID Connect](https://developers.google.com/identity/protocols/OpenIDConnect)                                                  |
-| `LINKEDIN`   | [Sign In with LinkedIn](https://developer.linkedin.com/docs/signin-with-linkedin)                                                                    |
-| `MICROSOFT`  | [Microsoft Enterprise SSO](https://msdn.microsoft.com/en-us/library/aa745042\(v=bts.10\).aspx)
+| `LINKEDIN`   | [Sign In with LinkedIn](https://developer.linkedin.com/docs/signin-with-linkedin)                                                                     |
+| `MICROSOFT`  | [Microsoft Enterprise SSO](https://msdn.microsoft.com/en-us/library/aa745042)                                                                         |
 |--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ### Protocol Object
@@ -180,7 +180,7 @@ The Protocol object contains IdP-specific protocol settings for endpoints, bindi
 | `FACEBOOK`   | [OAuth 2.0](#oauth-20-protocol)            |
 | `GOOGLE`     | [OpenID Connect](#openid-connect-protocol) |
 | `LINKEDIN`   | [OAuth 2.0](#oauth-20-protocol)            |
-| `MICROSOFT`  | [OAuth 2.0](#oauth-20-protocol)            |
+| `MICROSOFT`  | [OpenID Connect](#openid-connect-protocol) |
 |--------------+--------------------------------------------+
 
 #### SAML 2.0 Protocol
