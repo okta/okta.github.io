@@ -155,6 +155,7 @@ Okta supports the following enterprise and social IdPs:
 | `FACEBOOK`   | [Facebook Login](https://developers.facebook.com/docs/facebook-login/overview/)                                                                       |
 | `GOOGLE`     | [Google Sign-In with OpenID Connect](https://developers.google.com/identity/protocols/OpenIDConnect)                                                  |
 | `LINKEDIN`   | [Sign In with Linked In](https://developer.linkedin.com/docs/signin-with-linkedin)                                                                    |
+| `MICROSOFT`  | [Microsoft Account](https://www.microsoft.com/en-us/account)
 |--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ### Protocol Object
@@ -168,6 +169,7 @@ IdP-specific protocol settings for endpoints, bindings, and algorithms used to c
 | `FACEBOOK`   | [OAuth 2.0](#oauth-20-protocol)            |
 | `GOOGLE`     | [OpenID Connect](#openid-connect-protocol) |
 | `LINKEDIN`   | [OAuth 2.0](#oauth-20-protocol)            |
+| `MICROSOFT`  | [OpenID Connect](#openid-connect-protocol) |
 |--------------+--------------------------------------------+
 
 #### SAML 2.0 Protocol
