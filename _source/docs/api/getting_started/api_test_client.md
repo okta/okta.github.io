@@ -82,7 +82,6 @@ Once you have setup your Postman environment, you can import pre-built collectio
     | Apps               | [Apps API](../postman/apps.json)                                        |
     | Schemas            | [Schemas API](../postman/schemas.json)                                  |
     | Events             | [Events API](../postman/events.json)                                    |
-    | OAuth 2.0 Clients  | [Client Registration API (EA)](../postman/client-registration.json)     |
     |--------------------+-------------------------------------------------------------------------|
 
     > You must import each collection individually
