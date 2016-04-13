@@ -177,6 +177,21 @@ nonce          | Specifies a nonce that is reflected back in the ID Token. Can b
       Okta Post Message is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1). 
       This value provides a secure way for a single-page application to perform a sign-in flow 
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
+      
+      This response mode validates the `redirect_uri` from the client against Okta's client registration.
+      If successful, it returns an HTML page which contains JavaScript to extract the ID token and send postMessage() back to the parent window. 
+      This page needs to know the `targetOrigin` in order for postMessage() to work; it will grab this from the redirect_uri passed in by the client (i.e. myApp.example.com). 
+
+      The pattern to configure the Okta Sign-in Widget:
+      
+      1. Register a client ID. Populate `redirect_uri` with the location of your SPA: https://myApp.example.com.
+      
+      2. Bootstrap the widget with the (Okta) `baseUrl,` `client_id,` and for social authentication, a list of IDP IDs.
+      
+      3. For social authentication, the widget should specify `response_mode=okta_post_message` as shown earlier.
+      
+      4. The `okta-post-message` page handles extracting the `id_token` and postMessage() back to the parent page where the Sign-In Widget is running.
+      
  * `state`: Always pass `state` with each authorize request to correlate the request and response. This correlation prevents and attacker from sending a different response (CSRF).
  For more information, see [this blog post about the importance of state in OAuth 2.0](http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html).
       
