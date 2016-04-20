@@ -173,18 +173,39 @@ nonce          | Specifies a nonce that is reflected back in the ID Token. Can b
     * <em>query</em> -- Parameters are encoded in the query string added to the `redirect_uri` when redirecting back to the client.
     * <em>form_post</em> -- Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
       and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.
-    * <em>okta_post_message</em> -- Uses HTML5 Web Messaging (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint
+    * <em>okta_post_message</em> -- Uses [HTML5 Web Messaging](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
       Okta Post Message is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1). 
       This value provides a secure way for a single-page application to perform a sign-in flow 
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
       
-      This response mode validates the `redirect_uri` from the client against Okta's client registration.
-      If successful, it returns an HTML page which contains JavaScript to extract the ID token and send postMessage() back to the parent window. 
+      If successful, the request returns an HTML page which contains JavaScript to extract the ID token and send postMessage() back to the parent window. 
       This HTML page extracts the `id_token` and `targetOrigin` for postMessage() to consume. The `redirect_uri` passed in by the client (i.e. myApp.example.com) contains `targetOrigin`.
+       
+      The data model for the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) call is in the next section.
       
  * `state`: Always pass `state` with each authorize request to correlate the request and response. This correlation prevents and attacker from sending a different response (CSRF).
  For more information, see [this blog post about the importance of state in OAuth 2.0](http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html).
       
+####postMessage() Data Model
+
+Use the postMessage() data model to help you when working with the <em>okta_post_message</em> value of the `response_mode` request parameter.
+
+`message`:
+      
+Parameter         | Description                                                                                        | DataType  | 
+----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
+id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`. | String    |
+access_token      | The `access_token` that be used to access the /userinfo endpoint. This is returned if the `response_type` included token. Important: Unlike the ID Token JWT, the `access_token` structure is Okta internal only and is subject to change. | String    |
+state             | If the request contained a state parameter, then the same unmodified value is returned back in the response. | String    |
+error             | The error-code string providing information if anything goes wrong. | String    |
+error_description | Additional description of the error. | String    |
+
+`targetOrigin` 
+
+Specifies what the origin of `parentWindow` must be in order for the postMessage() event to be dispatched
+(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the `redirect_uri` 
+specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.
+
 ####Response Parameters
 
 {:.api .api-response .api-response-example}
