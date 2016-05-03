@@ -380,7 +380,7 @@ Based on the grant type, the returned JSON contains a different set of tokens.
 
 Input grant type   | Output token types                    |
 -------------------|---------------------------------------|
-code               | ID Token, Access Token, Refresh Token |
+code               | ID Token, Access Token                |
 refresh Token      | Access Token, Refresh Token           |
 
 ####List of Errors 
@@ -405,7 +405,6 @@ unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or 
                       TEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw",
     "token_type" : "Bearer",
     "expires_in" : 3600,
-    "refresh_token" : "a9VpZDRCeFh3Nkk2VdY",
     "id_token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZG
                   UubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInZlciI6MSwiaXNzIjoiaHR0cDovL3JhaW4ub2t0YTEuY29tOjE4MDIiLCJsb
                   2dpbiI6ImFkbWluaXN0cmF0b3IxQGNsb3VkaXR1ZGUubmV0IiwiYXVkIjoidUFhdW5vZldrYURKeHVrQ0ZlQngiLCJpYXQiOjE0
