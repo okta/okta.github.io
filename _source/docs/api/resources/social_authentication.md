@@ -104,8 +104,14 @@ Advantages of using Okta Social Authentication include:
         After adding the `scope` and `response_type` parameters to
         your URL, it should look something like this:
         `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token`
+
+    3.  Add the requiered `state` GET parameter to the Social Auth "Login
+        URL":
+        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&state=staterandom`
+        
+        Ideally, the state parameter should be a random generated string value for each request performed this way and must be validated after retreiving an id_token back from Okta in your app.
     
-    3.  Add a `redirect_url` GET parameter to the Social Auth "Login
+    4.  Add a `redirect_url` GET parameter to the Social Auth "Login
         URL".
         
         The last required GET parameter you need to add to your URL is
@@ -116,10 +122,10 @@ Advantages of using Okta Social Authentication include:
         
         After adding the `redirect_url` GET parameter to 
         your URL, it should look something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&redirect_uri=https://app.example.com/social_auth`
+        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&state=staterandom&redirect_uri=https://app.example.com/social_auth`
         or, if you are logging your user into Okta, might look
         something like this:
-        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&redirect_uri=https://example.okta.com`
+        `https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&state=staterandom&redirect_uri=https://example.okta.com`
     
 8.  Add the Social Auth Login URL to the page where you want to
     enable Social Auth.
