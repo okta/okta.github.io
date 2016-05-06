@@ -212,6 +212,76 @@ Concatenate two strings | `user.firstName + user.lastName`
 Concatenate two strings with space | `user.firstName + " " + user.lastName`
 Ternary operator example:<br>If group code is 123, assign value of Sales, else assign Other | `user.groupCode == 123 ? 'Sales' : 'Other'`
 
+## Conditional Expressions
+
+You can specify IF...THEN...ELSE statements with the Okta EL. The primary use of these expressions is profile mappings and group rules. Group rules do not usually specificy an ELSE component.
+
+
+The format for conditional expressions is 
+<p><code>[Condition] ? [Value if TRUE] : [Value if FALSE]</code></p>
+
+
+<br>There are several rules for specifying the condition.
+
+* Expressions must have valid syntax.
+* Expressions must evaluate to Boolean.
+* Expressions cannot contain an assignment operator, such as =.
+* User attributes used in expressions can contain only available User or AppUser attributes.
+
+<br>The following functions are supported in conditions.
+
+* Any Okta Expression Language function
+* The AND operator
+* The OR operator
+* The ! operator to designate NOT
+* Standard arithmetic operators including <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code>.
+
+**Note:** Use the double equals sign, <code>==</code>, to check for equality.
+
+### Samples
+
+For these samples, assume that *user* has following attributes in Okta.
+
+Attribute | Type
+--------- | ----
+firstName | String
+lastName | String
+middleInitial | String
+fullName | String
+honoroficPrefix | String
+email1 | String
+email2 | String
+additionalEmail | Boolean
+city | String
+salary | Int
+isContractor | Boolean
+
+
+##### Samples Using Profile Mapping 
+
+The following samples are valid conditional expressions that apply to profile mapping. The attribute *courtesyTitle* is from another system being mapped to Okta. 
+
+
+<p>If the middle initial is not blank, the full name is the first name, middle initial, a period, and the last name; otherwise it is the first name and the last name.<br><code>fullName = String.len(middleInitial) > 0 ? fullName=String.join(firstName, " ", middleInitial, ". ", lastName) : fullName=String.join(firstName, " ", lastName)</code></p>
+
+<p>If there is a courtesy title, use it for the honorific prefix.<br><code>honorificPrefix=!courtesyTitle=="" ? honorificPrefix=courtesyTitle : honorificPrefix=""</code></p>
+
+<p>If either email2 or email3 exists, make additionalEmail true; otherwise, make it false.<br><code>additionalEmail=String.len(email2) > 0 OR String.len(email3) > 0 ? additionalEmail= rue : additionalEmail=False</code></p>
+
+##### Samples Using Group Rules
+
+The following samples are valid conditional expressions. The actions in these cases are group assignments.
+
+
+IF (Implicit) | Condition | Assign to this Group Name if Condition is TRUE
+------------- | --------- | ----------------------------------------------
+IF | String.stringContains(user.firstName, "dummy") | dummyUsers
+IF | user.city=="San Francisco" | sfo
+IF | user.salary >=1000000 | expensiveEmployee
+IF | !user.isContractor | fullTimeEmployees
+IF | user.salary > 1000000 AND !user.isContractor | expensiveFullTimeEmployees
+
+
 ## Popular Expressions
 
 Sample user data:
