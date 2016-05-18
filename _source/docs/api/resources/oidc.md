@@ -233,18 +233,19 @@ Error Id         | Details                                                      
 -----------------| -----------------------------------------------------------------------| 
 unsupported_response_type  | The specified response type is invalid or unsupported.   | 
 unsupported_response_mode  | The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes. For example, if the query response mode is specified for a response type that includes id_token.    | 
-invalid_scope  | The scopes list contains an invalid or unsupported value.    | 
-server_error  | The server encountered an internal error.    | 
-temporarily_unavailable  | The server is temporarily unavailable, but should be able to process the request at a later time.    |
+invalid_scope   | The scopes list contains an invalid or unsupported value.    | 
+server_error    | The server encountered an internal error.    | 
+temporarily_unavailable    | The server is temporarily unavailable, but should be able to process the request at a later time.    |
 invalid_request | The request is missing a necessary parameter or the parameter has an invalid value. |
 invalid_client  | The specified client id is invalid.
 access_denied   | The server denied the request. 
 
 [Open-ID Spec error codes](http://openid.net/specs/openid-connect-core-1_0.html#AuthError)
 
-Error Id         | Details                                                                | 
------------------| -----------------------------------------------------------------------| 
-login_required  | The request specified that no prompt should be shown but the user is currently not authenticated.    |
+Error Id           | Details                                                                | 
+-------------------| -----------------------------------------------------------------------| 
+login_required     | The request specified that no prompt should be shown but the user is currently not authenticated.    |
+insufficient_scope | The access token provided does not contain the necessary scopes to access the resource.              |
 
 ####Response Example (Success)
 
@@ -390,7 +391,7 @@ Error Id                |  Details                                              
 ------------------------+--------------------------------------------------------------------------------------------------------------|
 invalid_client          | The specified client id wasn't found. |
 invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
-invalid_grant			| The <em>code</em> or <em>refresh_token</em> value was invalid. |
+invalid_grant			| The <em>code</em> or <em>refresh_token</em> value was invalid, or the <em>redirect_uri</em> does not match the one used in the authorization request. |
 unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or <em>refresh_token</em>. |
 
 ####Response Example (Success)
@@ -422,10 +423,11 @@ unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or 
 ####Response Example (Error)
 
 ~~~http
-HTTP/1.1 400 Bad Request
+HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
 {
-	"error" : "invalid_grant"
+    "error" : "invalid_client",
+    "error_description" : "No client credentials found."
 }
 ~~~
 
@@ -504,7 +506,7 @@ All applications must roll over keys for adequate security. Please note the foll
 
 There are standard open-source libraries available for every major language to perform [JWS](https://tools.ietf.org/html/rfc7515) signature validation.
 
-###OpenID Connect Discovery Document
+##OpenID Connect Discovery Document
 {:.api .api-operation}
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /.well-known/openid-configuration</span>
@@ -536,7 +538,7 @@ This API doesn't require any authentication and returns a JSON object with the f
     "grant_types_supported": [
         "authorization_code",
         "implicit",
-	"refresh_token"
+        "refresh_token"
     ],
     "subject_types_supported": [
         "public"
@@ -554,7 +556,7 @@ This API doesn't require any authentication and returns a JSON object with the f
     "token_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
-	"none"
+        "none"
     ],
     "claims_supported": [
         "iss",
@@ -584,3 +586,4 @@ This API doesn't require any authentication and returns a JSON object with the f
     ]
 }
 ~~~
+
