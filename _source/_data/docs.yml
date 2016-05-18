@@ -15,6 +15,7 @@
   title: Authentication
   pages:
     - authn
+    - oauth2
     - oidc
     - social_authentication
     - sessions
