@@ -271,6 +271,12 @@ core.user_auth.account_locked |
 core.user_auth.session_expired |
 core.user_auth.mfa_bypass_attempted |
 
+##### User MFA Activation
+
+ObjectType | Description
+--- | ---
+core.user.factor.activate |
+
 ##### User MFA Authentication
 
 ObjectType | Description
