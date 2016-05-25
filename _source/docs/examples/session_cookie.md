@@ -21,6 +21,8 @@ The generated one-time token along with the URL for your landing page can then b
 
 When processing a user's login request in your web application, retrieve a one-time token by passing the user's credentials with the `cookieToken` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-session-token) operation.
 
+> Creating a session with `username` and `password` has been deprecated.  Use the [Authentication API](././api/resources/authn.html) to obtain a `sessionToken`.
+
 #### Request Example
 {:.api .api-request .api-request-example}
 
@@ -90,6 +92,8 @@ The generated one-time token can than be passed as a query parameter to an Okta 
 ### Validate credentials & retrieve a one-time token
 
 When processing a user's login request in your web application, retrieve an one-time token by passing the user's credentials with the `cookieToken` additionalFields query param to the [Create Session](/docs/api/rest/sessions.html#create-session-with-session-token) operation.
+
+> Creating a session with `username` and `password` has been deprecated.  Use the [Authentication API](././api/resources/authn.html) to obtain a `sessionToken`.
 
 #### Request Example
 {:.api .api-request .api-request-example}
