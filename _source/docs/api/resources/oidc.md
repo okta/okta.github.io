@@ -132,7 +132,7 @@ Claims in the payload are independent of scope (always returned) or dependent on
 | phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
 
 >The client can also optionally request an Access Token along with the ID Token. In this case, in order to keep the size of the ID Token small, the ID Token body does not contain all the scope dependent claims. 
-Instead, the ID token contains the `name` and `preferred_username` claims if the `profile` scope was requested and `email` claim if the `email` scope was requested.
+Instead, the ID Token contains the `name` and `preferred_username` claims if the `profile` scope was requested and `email` claim if the `email` scope was requested.
 
 >The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
 
@@ -215,7 +215,7 @@ But before you can use the information in the ID Token or rely on it as an asser
 ID Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS
 and only via POST data or within request headers. If you store them on your server, you must store them securely.
 
-Clients MUST validate the ID Token in the Token Response in the following manner:
+Clients must validate the ID Token in the Token Response in the following manner:
 
 1. Verify that the `iss` (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](#openid-discovery-document)). 
 2. Verify that the `aud` (audience) claim contains the `client_id` of your app.
@@ -314,7 +314,7 @@ This API doesn't require any authentication and returns a JSON object with the f
     "grant_types_supported": [
         "authorization_code",
         "implicit",
-        "refresh_token"
+	    "refresh_token"
     ],
     "subject_types_supported": [
         "public"
