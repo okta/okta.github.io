@@ -1,15 +1,14 @@
 ---
 layout: docs_page
 title: OpenID Connect
-redirect_from: "docs/api/rest/oidc.html"
 ---
 
 # Overview
 
 The OpenID Connect API endpoints enable clients to use [OIDC workflows](http://openid.net/specs/openid-connect-core-1_0.html) with Okta.
 
-This API also enables you to use Okta as a broker for social-login scenarios where the user authenticates against identity providers like Google, Facebook, LinkedIn, and Microsoft,
-and returns an Okta session.
+With OpenID Connect and Okta, a client can use Okta as a broker when the user authenticates against identity providers like Google, Facebook, LinkedIn, and Microsoft,
+and the client returns an Okta session.
 
 > This API is currently in **Early Access** status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.
 
@@ -111,7 +110,7 @@ Claims in the payload are independent of scope (always returned) or dependent on
 | at_hash     | The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"     |
 | c_hash  | The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the id_token. | String |    |
            
-#####Scope-dependent claims
+#####Scope-dependent claims (not always returned)
 
 |--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | Property     | Required Scope | Description                                                                      | DataType     | Example                  |
@@ -133,7 +132,7 @@ Claims in the payload are independent of scope (always returned) or dependent on
 | phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
 
 >The client can also optionally request an Access Token along with the ID Token. In this case, in order to keep the size of the ID Token small, the ID Token body does not contain all the scope dependent claims. 
-Instead, the id token contains the `name` and `preferred_username` claims if the `profile` scope was requested and `email` claim if the `email` scope was requested.
+Instead, the ID token contains the `name` and `preferred_username` claims if the `profile` scope was requested and `email` claim if the `email` scope was requested.
 
 >The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
 
@@ -146,7 +145,7 @@ Both the Access Token and the ID Token are acquired via [OAuth 2.0](oauth2.html)
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET, POST</span> /oauth2/v1/userinfo</span>
 
-This API requires the `access_token` returned from the [/oauth2/v1/authorize](oauth2.html#authentication-request) endpoint as an authorization header parameter.
+You must include the `access_token` returned from the [/oauth2/v1/authorize](oauth2.html#authentication-request) endpoint as an authorization header parameter.
 
 This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
@@ -162,7 +161,7 @@ curl -v -X POST \
 ####Response Parameters
 {:.api .api-response .api-response-example}
 
-Returns a JSON document with information corresponding to the data requested in the scopes list of the token.
+Returns a JSON document with information requested in the scopes list of the token.
 
 ####Response Example (Success)
 {:.api .api-response .api-response-example}
@@ -210,28 +209,28 @@ WWW-Authenticate: Bearer error="insufficient_scope", error_description="The acce
 
 ###Validating ID Tokens
 
-You can pass ID tokens around different components of your app, and these components can use it as a lightweight authentication mechanism identifying the app and the user.
-But before you can use the information in the ID token or rely on it as an assertion that the user has authenticated, you must validate it to prove its integrity.
+You can pass ID Tokens around different components of your app, and these components can use it as a lightweight authentication mechanism identifying the app and the user.
+But before you can use the information in the ID Token or rely on it as an assertion that the user has authenticated, you must validate it to prove its integrity.
 
-ID tokens are sensitive and can be misused if intercepted. You must ensure that these tokens are handled securely by transmitting them only over HTTPS
-and only via POST data or within request headers. If you store them on your server, you must also store them securely.
+ID Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS
+and only via POST data or within request headers. If you store them on your server, you must store them securely.
 
-Clients MUST validate the ID token in the Token Response in the following manner:
+Clients MUST validate the ID Token in the Token Response in the following manner:
 
-1. Verify that the `iss` (issuer) claim in the ID token exactly matches the issuer identifier for your Okta organization (which is typically obtained during [Discovery](#openid-discovery-document)). 
-2. Verify that the `aud` (audience) claim contains the `client_id` of your application.
-3. Verify the signature of the ID token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](#openid-discovery-document).
+1. Verify that the `iss` (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](#openid-discovery-document)). 
+2. Verify that the `aud` (audience) claim contains the `client_id` of your app.
+3. Verify the signature of the ID Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Discovery Document](#openid-discovery-document).
 4. Verify that the expiry time (from the `exp` claim) has not already passed.
-5. A `nonce` claim MUST be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.
-6. The client SHOULD check the `auth_time` claim value and request re-authentication using the `prompt=login` parameter if it determines too much time has elapsed since the last End-User authentication.
+5. A `nonce` claim must be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.
+6. The client should check the `auth_time` claim value and request re-authentication using the `prompt=login` parameter if it determines too much time has elapsed since the last end-user authentication.
 
 Step 3 involves downloading the public JWKS from Okta (specified by the `jwks_uri` attribute in the [discovery document](#opendid-discovery-document)). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
-Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [ID token header](#claims-in-the-header-section).
+Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [ID Token header](#claims-in-the-header-section).
 
-The ID token and the access token are signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID token header. To minimize the effects of key rotation, your application should check the `kid`, and if it has changed, check the `jwks_uri` value in the [well-known configuration](#openid-connect-metadata) for a new public key and `kid`. 
+The ID Token and the access token are signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID Token header. To minimize the effects of key rotation, your application should check the `kid`, and if it has changed, check the `jwks_uri` value in the [well-known configuration](#openid-connect-metadata) for a new public key and `kid`. 
 
-All applications must roll over keys for adequate security. Please note the following:
+All apps must roll over keys for adequate security. Please note the following:
 
 * For security purposes, Okta automatically rotates keys used to sign the token.
 * The current key rotation schedule is at least twice a year. This schedule can change without notice.
@@ -364,3 +363,7 @@ This API doesn't require any authentication and returns a JSON object with the f
 }
 ~~~
 
+See the OAuth 2.0 reference topic for more information about `authorization_endpoint` and `token_endpoint`:
+
+* [/oauth2/v1/authorize](oauth2.html#authentication-request)
+* [/oauth2/v1/token](oauth2.html#token-request)

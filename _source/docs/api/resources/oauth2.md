@@ -1,12 +1,15 @@
 ---
 layout: docs_page
 title: OAuth 2.0
-redirect_from: "docs/api/rest/oidc.html"
 ---
 
 # Overview
 
 The OAuth 2.0 API endpoints enable clients to use [OAuth 2.0 workflows](https://tools.ietf.org/html/rfc6749) with Okta.
+This authorization layer separates the role of client from that of resource owner by providing the client with an access token
+that can define scope, lifetime, and other attributes. 
+
+Additionally, these endpoints support the use of [OpenID Connect](/docs/api/resources/oidc.html) for OpenID Connect workflows such as social authentication.
 
 > This API is currently in **Early Access** status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.
 
@@ -41,11 +44,11 @@ code_challenge_method | Specifies the method that was used to derive the code ch
 
 ####Parameter Details
  
- * `idp` and `sessionToken` are Okta extensions to the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). 
-    All other parameters are specification-compliant and their behavior is consistent with the specification.
- * Each value for `response_mode` delivers different behavior:
-    * <em>fragment</em> -- Parameters are encoded in the URL fragment added to the `redirect_uri` when redirecting back to the client.
-    * <em>query</em> -- Parameters are encoded in the query string added to the `redirect_uri` when redirecting back to the client.
+ * <em>idp</em> and <em>sessionToken</em> are Okta extensions to the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). 
+    All other parameters comply with the [OAuth 2.0 specification](https://tools.ietf.org/html/rfc6749) and their behavior is consistent with the specification.
+ * Each value for <em>response_mode</em> delivers different behavior:
+    * <em>fragment</em> -- Parameters are encoded in the URL fragment added to the <em>redirect_uri</em> when redirecting back to the client.
+    * <em>query</em> -- Parameters are encoded in the query string added to the <em>redirect_uri</em> when redirecting back to the client.
     * <em>form_post</em> -- Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
       and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.
     * <em>okta_post_message</em> -- Uses [HTML5 Web Messaging](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
@@ -54,17 +57,17 @@ code_challenge_method | Specifies the method that was used to derive the code ch
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
       The data model for the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) call is in the next section.
       
- * Okta requires the OAuth 2.0 `state` parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
+ * Okta requires the OAuth 2.0 <em>state</em> parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
  The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state. 
- Using the `state` parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
+ Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
 
  * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose token_endpoint_auth_method is 'none', makes a code flow authorization request, the code_challenge parameter is required.
       
 ####postMessage() Data Model
 
-Use the postMessage() data model to help you when working with the <em>okta_post_message</em> value of the `response_mode` request parameter.
+Use the postMessage() data model to help you when working with the <em>okta_post_message</em> value of the <em>response_mode</em> request parameter.
 
-`message`:
+<em>message</em>:
 
 Parameter         | Description                                                                                        | DataType  | 
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
@@ -74,10 +77,10 @@ state             | If the request contained a `state` parameter, then the same 
 error             | The error-code string providing information if anything goes wrong.                                | String    |
 error_description | Additional description of the error.                                                               | String    |
 
-`targetOrigin`: 
+<em>targetOrigin</em>: 
 
-Specifies what the origin of `parentWindow` must be in order for the postMessage() event to be dispatched
-(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the `redirect_uri` 
+Specifies what the origin of <em>parentWindow</em> must be in order for the postMessage() event to be dispatched
+(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <em>redirect_uri</em> 
 specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.
 
 ####Response Parameters
@@ -91,14 +94,14 @@ Parameter         | Description                                                 
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em> .| String    | 
 access_token      | The access_token that be used to access the userinfo endpoint. This is returned if the <em>response_type</em>  included token. Unlike the ID Token JWT, the access_token structure is Okta internal only and is subject to change.| String  |
-token_type        | This is always <em>Bearer</em> and is returned only when <em>token</em> is specified as a `response_type`. | String |
+token_type        | This is always <em>Bearer</em> and is returned only when <em>token</em> is specified as a <em>response_type</em>. | String |
 state             | The same unmodified value from the request is returned back in the response. | String |
 error             | The error-code string providing information if anything went wrong. | String |
 error_description | Further description of the error. | String |
 
 #####Possible Errors
 
-The Okta OpenID Connect APIs are compliant with the OpenID Connect and OAuth2 spec with some Okta specific extensions. 
+These APIs are compliant with the OpenID Connect and OAuth2 spec with some Okta specific extensions. 
 
 [OAuth 2 Spec error codes](https://tools.ietf.org/html/rfc6749#section-4.1.2.1)
 
@@ -160,6 +163,8 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 The API takes an authorization code or a Refresh Token as the grant type and returns back an Access Token, ID Token and a Refresh Token.
 
+> Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
+
 ####Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
@@ -178,8 +183,8 @@ code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses 
 
 #####Token Authentication Methods
 
-The client can authenticate by providing `client_id` and `client_secret` as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the `client_id` and `client_secret` as an Authroization header using the Basic auth scheme. 
+The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
+or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authroization header using the Basic auth scheme. 
 Use one authentication mechanism with a given request. Using both returns an error.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
@@ -263,8 +268,8 @@ client_secret   | The client secret generated as a part of client registration. 
 
 #####Token Authentication Methods
 
-The client can authenticate by providing `client_id` and `client_secret` as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the `client_id` and `client_secret` as an Authroization header using the Basic auth scheme. 
+The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
+or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authroization header using the Basic auth scheme. 
 Use one authentication mechanism with a given request. Using both returns an error.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
@@ -359,6 +364,8 @@ Content-Type: application/json;charset=UTF-8
 
 The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
 
+> Note: No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
+
 ####Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
@@ -374,8 +381,8 @@ client_secret   | The client secret generated as a part of client registration. 
 
 A client may only revoke a token generated for that client.
 
-The client can authenticate by providing `client_id` and `client_secret` as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the `client_id` and `client_secret` as an Authroization header using the Basic auth scheme. 
+The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
+or it can use basic authentication by providing the <em>client_id</em> and `<em>client_secret</em> as an Authroization header using the Basic auth scheme. 
 Use one authentication mechanism with a given request. Using both returns an error.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
