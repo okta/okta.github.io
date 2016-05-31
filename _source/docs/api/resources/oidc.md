@@ -217,7 +217,7 @@ Irrespective of the response type, the contents of the response is always one of
 Parameter         | Description                                                                                        | DataType  | 
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em> .| String    | 
-access_token      | The access_token that be used to access the userinfo endpoint. This is returned if the <em>response_type</em>  included token. Unlike the ID Token JWT, the access_token structure is Okta internal only and is subject to change.| String  |
+access_token      | The access_token that is used to access the userinfo endpoint. This is returned if the <em>response_type</em>  included token. Unlike the ID Token JWT, the access_token structure is Okta internal only and is subject to change.| String  |
 token_type        | This is always <em>Bearer</em> and is returned only when <em>token</em> is specified as a `response_type`. | String |
 state             | The same unmodified value from the request is returned back in the response. | String |
 error             | The error-code string providing information if anything went wrong. | String |
@@ -283,7 +283,7 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET, POST</span> /oauth2/v1/userinfo</span>
 
-This API requires the `access_token` returned from the [/oauth2/v1/authorize](#authenticate-and-authorize-a-user) endpoint as an authorization header parameter.
+This API requires the `access_token` returned from the [/oauth2/v1/authorize](#authentication-request) endpoint as an authorization header parameter.
 
 This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
@@ -375,6 +375,13 @@ For authentication with Basic auth, an HTTP header with the following format mus
 ~~~sh
 Authorization: Basic ${Base64(<client_id>:<client_secret>)} 
 ~~~
+
+#####Refresh Tokens
+
+You can use refresh tokens if you create a mobile or web OIDC app. To use refresh tokens:
+
+* Check the <b>Allow Offline Access</b> checkbox in Okta to enable refresh tokens.
+* Pass the `offline_access` scope to your authorize request. 
 
 ####Response Parameters
 
