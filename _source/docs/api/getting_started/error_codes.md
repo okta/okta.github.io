@@ -77,6 +77,7 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000063"></a>E0000063|Invalid combination of parameters specified.|400|
 |<a name="E0000064"></a>E0000064|Password is expired and must be changed.|401|
 |<a name="E0000069"></a>E0000069|User Locked.|403|
+|<a name="E0000080"></a>E0000080|The password does meet the complexity requirements of the current password policy.|403|
 |<a name="E0000081"></a>E0000081|Cannot modify the test attribute because it is a reserved attribute for this application.|400|
 
 
