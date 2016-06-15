@@ -6,11 +6,134 @@ title: OpenID Connect
 # Overview
 
 The OpenID Connect API endpoints enable clients to use [OIDC workflows](http://openid.net/specs/openid-connect-core-1_0.html) with Okta.
-
 With OpenID Connect, a client can use Okta as a broker. The user authenticates against identity providers like Google, Facebook, LinkedIn, or Microsoft,
 and the client obtains an Okta session.
 
 > This API is currently in **Early Access** status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.
+
+## Authentication Basics with OAuth 2.0 and OpenID Connect
+
+OpenID Connect extends OAuth 2.0:
+ 
+* Provides a signed `id_token` for the client and a UserInfo endpoint from which you can fetch user attributes.
+* Provides a standard set of scopes and claims for identities including profile, email, address, and phone.
+* Suppolies built-in registration, discovery, and metadata for dynamic federations.
+* Supports enterprise use with high assurance levels and workflows for key SAML use cases.
+
+NOTE: illustration needs clean-up, but is it useful here? If not, what do we want?
+
+![OpenID Architecture Diagram](/assets/img/openID_overview.png)
+
+Think of OAuth 2.0 as an authorization framework for delegeated access to APIs, and OpenID Connect as an extension for authentication scenarios.
+
+## OpenID Connect Workflows
+
+OpenID Connect provides three basic workflows:
+
+* [Implicit flow](implicit-flow)
+* [Authorization code flow](authorization-code-flow)
+* [Hybrid flow](hybrid-flow)
+
+These flows don't necessarily map one-to-one with the different flows available in Okta. 
+By understanding the underlying flows, you can choose the right flow for your goals.
+ 
+### Implicit Flow 
+
+Implicit flow is the simplest, and is most often used for web apps including single-page apps (SPAs), because no 
+authorization code is returned. Implicit flow doesn't verify that the requesting client is the authenticated client.
+You can't refresh the tokens, so implicit flow is not ideal for mobile device apps.
+
+Implicit flow is also called a two-legged flow:
+
+1. A client sends an authentication request from a browser app's sign-in page.
+2. The request is redirected to Okta's authorization endpoint `/outh2/v1/authorize` and evaluated. 
+3. If authorization is successful, Okta returns an `id_token` and an access token (if requested).
+
+NOTE: image illustrating the steps here
+
+NOTE: Following is the full flow from the spec. Do we need to talk about AS, or is the shorter description above okay?? 
+
+1. Client prepares an Authentication Request containing the desired request parameters.
+2. Client sends the request to the Authorization Server.
+3. Authorization Server Authenticates the End-User.
+4. Authorization Server obtains End-User Consent/Authorization.
+5. Authorization Server sends the End-User back to the Client with an ID Token and, if requested, an Access Token.
+6. Client validates the ID token and retrieves the End-User's Subject Identifier.
+
+For example, assume that a movie-industry newspaper wanted to make a SPA available to its subscribers, so
+they can search for unproduced scripts. Users navigate to a sign-in page and
+enter their credentials, and the sign-in page sends a request to Okta's endpoint for evaluation. Upon successful authentication,
+Okta sends an `id_token` and access token to the newspaper's server, which then serves the single-page app to the browser.
+
+### Authorization Code Flow
+
+Authorization code flow verifies that the requesting client is the authenticated client.
+Instead of receiving an `id_token`, the authorization code flow returns an authorization code, which can be
+exchanged for an access token. This is also called a three-legged flow:
+
+1. A client sends an authentication request with request parameters.
+2. The request is redirected to Okta's authorization endpoint `/outh2/v1/authorize` and evaluated. 
+3. If authorization is successful, Okta returns an `id_token` and an access token in the response body.
+4. The client validates the `id_token` and exchanges the access token for the end user's subject identifier (???).
+
+NOTE: The following image--what needs to change? Besides the Azure AD, obviously.
+
+![Web App to Web API Diagram](/assets/img/app_to_api.png)
+
+NOTE: Following is the full flow from the spec. Does any of it need to be added? I didn't follow the End-User Consent/Authorization part.
+
+1. Client prepares an Authentication Request containing the desired request parameters.
+2. Client sends the request to the Authorization Server.
+3. Authorization Server Authenticates the End-User.
+4. Authorization Server obtains End-User Consent/Authorization.
+5. Authorization Server sends the End-User back to the Client with an Authorization Code.
+6. Client requests a response using the Authorization Code at the Token Endpoint.
+7. Client receives a response that contains an ID Token and Access Token in the response body.
+8. Client validates the ID token and retrieves the End-User's Subject Identifier.
+
+Example: NOTE: need help with this example.
+
+### Hybrid Flow
+
+Hybrid flow is similar to authorization code flow, but includes additional response type parameters. It can therefore [????].
+
+1. A client sends an authentication request with request parameters.
+2. The request is redirected to Okta's authorization endpoint `/outh2/v1/authorize` and evaluated. 
+3. If authorization is successful, Okta returns an `id_token`. 
+
+NOTE: image illustrating the flow here
+
+NOTE: Following is the full flow from the spec. Do I need to include anything? 
+
+1. Client prepares an Authentication Request containing the desired request parameters.
+2. Client sends the request to the Authorization Server.
+3. Authorization Server Authenticates the End-User.
+4. Authorization Server obtains End-User Consent/Authorization.
+5. Authorization Server sends the End-User back to the Client with an Authorization Code and, depending on the Response Type, one or more additional parameters.
+6. Client requests a response using the Authorization Code at the Token Endpoint.
+7. Client receives a response that contains an ID Token and Access Token in the response body.
+8. Client validates the ID Token and retrieves the End-User's Subject Identifier.
+
+Example: NOTE: need help with this example.
+
+Example: There are a lot of app types in Okta. What about SWA? template apps? SAML apps? 
+
+### Which Flow?
+
+Use the flow that corresponds to the type of app you're authenticating and the goals of the authentication:
+
+NOTE: Table Here from spec (http://openid.net/specs/openid-connect-core-1_0.html#Authentication)?
+
+* Web apps including single page application (SPA): Use implicit flow because you can't protect from man-in-the-middle
+attacks (you can't keep client secrets secure), and you don't need to refresh any tokens.
+* Web Server Application: Use authorization code flow so you can safely verify the client is the authenticated client.
+Because the authorization code isn't useful until it's exchanged for a token, there's no vulnerability to a man-in-the-middle attack.
+* Native Applications (desktops, mobile devices, or tablets): Use hybrid flow, because you need the ability to refresh tokens, you can keep client secrets secure,
+and a client ID is needed to verify that the client is the authenticated client.
+
+NOTE: What's the difference between a web applciation and a web server application? 
+NOTE: If we want more of the details from https://azure.microsoft.com/en-us/documentation/articles/active-directory-authentication-scenarios/, I'll need someone to
+help me sort out all the vocab differences between OIDC, Okta, and MSFT. 
 
 ## ID Token
 
