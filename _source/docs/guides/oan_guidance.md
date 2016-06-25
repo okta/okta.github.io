@@ -15,6 +15,11 @@ With over 4000 pre-integrated applications, the [Okta Application Network (OAN)]
 
 There are two main area of focus – Single Sign-On and Provisioning. You need to support at least one of these features in order to be part of Okta Application Network. Okta strongly recommends that you implement both. 
 
+## Developer Training: Enabling Advanced Provisioning via SCIM in your App
+   
+In this training, you'll learn SCIM standards details and implementation skills that'll dramatically reduce your development time. You'll get hands-on practice building, testing, and integrating a SCIM server with Okta. Join instructor Chris Barry on 7/21 at 10 AM PT. 
+   
+Register here: https://form.jotform.com/OktaTraining/SCIM
 
 ## Single Sign-On
 
@@ -84,7 +89,7 @@ _*The timeline outlined is our best estimate. The process may take more or less 
 
 <br/>
 
-**As a next step, please [Apply for SCIM beta](https://docs.google.com/forms/d/1RKvwFaY8hoMvWn2HEnIsXYY2uaDDZZtF8-p6h2a6e4E/viewform) and review [Okta’s SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) for technical documentation and details.**
+**As a next step, please [Apply to SCIM program](http://pages.okta.com/DeveloperSCIM.html) and review [Okta’s SCIM Beta Guide](http://developer.okta.com/docs/guides/scim_guidance.html) for technical documentation and details.**
 
 Have questions? Need help? Email <developers@okta.com>
 
