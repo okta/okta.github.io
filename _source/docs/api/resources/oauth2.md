@@ -159,7 +159,7 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/token</span>
 
-The API takes an authorization code or a Refresh Token as the grant type and returns back an Access Token, ID Token and a Refresh Token.
+The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if the client supports refresh tokens and the offline_access scope is requested. Additionally, using the authorization code grant type will return an ID Token if the <em>openid</em> scope is requested.
 
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
@@ -172,7 +172,9 @@ Parameter          | Description                                                
 grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
 code               | Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
 refresh_token      | Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation. | String |
-scope              | Expected only if <em>refresh_token</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. These scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
+username           | Expected if the grant_type specified <em>password</em>. | String |
+password           | Expected if the grant_type specified <em>password</em>. | String |
+scope              | Optional if either <em>refresh_token</em> or <em>password</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
 redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
@@ -190,12 +192,13 @@ Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 
 #### Response Parameters
 
-Based on the grant type, the returned JSON contains a different set of tokens.
+Based on the grant type, the returned JSON can contain a different set of tokens.
 
 Input grant type   | Output token types                    |
 -------------------|---------------------------------------|
-authorization_code | ID Token, Access Token, Refresh Token |
+authorization_code | Access Token, Refresh Token, ID Token |
 refresh_token      | Access Token, Refresh Token           |
+password           | Access Token, Refresh Token           |
 
 ##### Refresh Tokens for Web and Native Applications
 
