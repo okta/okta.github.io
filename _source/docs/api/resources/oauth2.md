@@ -159,7 +159,7 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /oauth2/v1/token</span>
 
-The API takes an authorization code or a Refresh Token as the grant type and returns back an Access Token, ID Token and a Refresh Token.
+The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if the client supports refresh tokens and the offline_access scope is requested. Additionally, using the authorization code grant type will return an ID Token if the <em>openid</em> scope is requested.
 
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
@@ -169,13 +169,17 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
+grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, or <em>refresh_token</em><span class="beta" style="display: inline">,  or <em>client_credentials</em></span>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |  
 code               | Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the /oauth2/v1/authorize endpoint. | String
 refresh_token      | Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation. | String |
-scope              | Expected only if <em>refresh_token</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. These scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
+username           | Expected if the grant_type specified <em>password</em>. | String |
+password           | Expected if the grant_type specified <em>password</em>. | String |
+scope              | Optional if either <em>refresh_token</em><span class="hide-beta" style="display: inline"> or <em>password</em></span><span class="beta" style="display: inline">, <em>password</em>,  or <em>client_credentials</em></span> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
 redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
 code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
 
+> The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is currently in **Beta** status.
+{:.beta}
 
 ##### Token Authentication Method
 
@@ -190,12 +194,22 @@ Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 
 #### Response Parameters
 
-Based on the grant type, the returned JSON contains a different set of tokens.
+Based on the grant type, the returned JSON can contain a different set of tokens.
 
 Input grant type   | Output token types                    |
 -------------------|---------------------------------------|
-authorization_code | ID Token, Access Token, Refresh Token |
+authorization_code | Access Token, Refresh Token, ID Token |
 refresh_token      | Access Token, Refresh Token           |
+password           | Access Token, Refresh Token           |
+{:.hide-beta}
+
+Input grant type   | Output token types                    |
+-------------------|---------------------------------------|
+authorization_code | Access Token, Refresh Token, ID Token |
+refresh_token      | Access Token, Refresh Token           |
+password           | Access Token, Refresh Token           |
+client_credentials | Access Token                          |
+{:.beta}
 
 ##### Refresh Tokens for Web and Native Applications
 
@@ -212,6 +226,7 @@ invalid_client          | The specified client id wasn't found. |
 invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
 invalid_grant           | The <em>code</em> or <em>refresh_token</em> value was invalid, or the <em>redirect_uri</em> does not match the one used in the authorization request. |
 unsupported_grant_type  | The grant_type was not <em>authorization_code</em> or <em>refresh_token</em>. |
+invalid_scope           | The scopes list contains an invalid or unsupported value.    |
 
 #### Response Example (Success)
 
@@ -249,6 +264,25 @@ Content-Type: application/json;charset=UTF-8
     "error_description" : "No client credentials found."
 }
 ~~~
+
+#### Custom scopes and claims
+{:.api .api-operation .beta}
+
+> This feature is currently in **Beta** status.
+{:.beta}
+
+The admin can configure custom scopes and claims via the UI. When custom scopes and claims are configured for a client, the access tokens that are minted will include the custom claims. It will also include custom scopes if they were part of the request.
+{:.beta}
+
+##### Custom scopes
+{:.beta}
+If the request that generates the access token contains any custom scopes, those scopes will be part of the <b>scp</b> claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html).
+{:.beta}
+
+##### Custom claims
+{:.beta}
+All configured custom claims will be part of the access token. They will be evaluated for the user if the grant type is not <em>client_credentials</em>.
+{:.beta}
 
 ### Introspection Request
 {:.api .api-operation}

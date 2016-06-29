@@ -157,6 +157,15 @@ $(function() {
 	$(document).ready(function() {
 		$('#gen-toc-container .nav').toggleClass('hide');
 		$('#toc_current_doc').toggleClass('clicked');
+		// Unhide beta if necessary
+		var query = window.location.search.substring(1);
+		var params = query.split("&");
+		for (i in params) {
+			if (params[i].split('=')[0] === 'beta') {
+				$('.beta').show();
+				$('.hide-beta').hide();
+			}
+		}
 		// Scroll to hash
 		if (window.location.hash !== '') {
 			var target = $(window.location.hash);
