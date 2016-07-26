@@ -1993,6 +1993,8 @@ curl -v -X POST \
 
 Fetches appLinks for all direct or indirect (via group membership) assigned applications.
 
+__Important Note__: you can replace /:id with /me in the url to get the applications assigned to the current user. The __/users/me/appLinks__ endpoint is CORS-enabled and can only be used with a valid Okta cookie (xhrFields: { withCredentials: true } in an AJAX call, for instance), typically in a browser client.
+
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
@@ -2078,6 +2080,8 @@ curl -v -X GET \
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:id*/groups</span><span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
 
 Fetches the groups of which the user is a member.
+
+__Important Note__: you can replace /:id with /me in the endpoint url to get the groups assigned to the current user. The __/users/me/groups__ endpoint is CORS-enabled and can only be used with a valid Okta cookie (xhrFields: { withCredentials: true } in an AJAX call, for instance), typically in a browser client.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
