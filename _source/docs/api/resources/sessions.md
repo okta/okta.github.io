@@ -31,6 +31,7 @@ Okta provides a very rich [Authentication API](./authn.html) to validate a [user
 ~~~ json
 {
   "id": "000najcYVnjRS2aZG50MpHL4Q",
+  "login": "user@example.com",
   "userId": "00ubgaSARVOQDIOXMORI",
   "login": "user@example.com",
   "expiresAt": "2015-08-30T18:41:35.818Z",
@@ -87,6 +88,7 @@ Sessions have the following properties:
 | Property                 | Description                                                                                   | DataType                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
 | ------------------------ | --------------------------------------------------------------------------------------------- | ----------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
 | id                       | unique key for the session                                                                    | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| login                    | unique identifier for the user (username)                                                     | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
 | userId                   | unique key for the [user](users.html#get-user-with-id)                                        | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
 | login                    | unique identifier for the [user](users.html#get-user-with-id)                                 | String                                    | FALSE    | TRUE   | TRUE     |           |           |            |
 | expiresAt                | timestamp when session expires                                                                | Date                                      | FALSE    | TRUE   | TRUE     |           |           |            |
@@ -219,6 +221,7 @@ curl -v -X POST \
 ~~~ json
 {
   "id": "000najcYVnjRS2aZG50MpHL4Q",
+  "login": "user@example.com",
   "userId": "00ubgaSARVOQDIOXMORI",
   "login": "user@example.com",
   "expiresAt": "2015-08-30T18:41:35.818Z",
@@ -316,6 +319,7 @@ curl -v -X PUT \
 ~~~ json
 {
   "id": "000najcYVnjRS2aZG50MpHL4Q",
+  "login": "user@example.com",
   "userId": "00ubgaSARVOQDIOXMORI",
   "login": "user@example.com",
   "expiresAt": "2015-08-30T18:41:35.818Z",
@@ -407,6 +411,144 @@ curl -v -X DELETE \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 "https://${org}.okta.com/api/v1/sessions/000NyyOduusQ2ibzaJUTPUqhQ"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ http
+HTTP/1.1 204 No Content
+~~~
+
+
+#### Get Current Session
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /sessions/me</span>
+<span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
+
+
+Get session information for the current user. Use this method in a browser based application to determine if the user is logged in.
+
+> The session `id` returned from `/sessions/me` is an `externalId` and can only be used with the [Refresh Session](#refresh-session) endpoint.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~ sh
+curl -v -X GET \
+-H "Cookie: sid=${okta_session_id}"
+"https://${org}.okta.com/api/v1/sessions/me"
+~~~
+
+##### Response Examples
+{:.api .api-response .api-response-example}
+
+`404 Not Found` status code is returned when a current session can not be found.
+
+~~~http
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+  "errorCode": "E0000007",
+  "errorSummary": "Not found: Resource not found: me (Session)",
+  "errorLink": "E0000007",
+  "errorId": "abcDeFghiJKLMNOPQRSTUvWXy",
+  "errorCauses": []
+}
+~~~
+
+A [Session Object](#session-model) is returned when a current session can be found.
+
+As noted above, `id` in the example below can only be used with the [Refresh Session](#refresh-session) endpoint.
+
+~~~ json
+{
+    "amr": [
+        "pwd"
+    ],
+    "expiresAt": "2016-01-03T09:13:17.000Z",
+    "id": "012a34BCDeFGhi56jklMNO_pQ",
+    "login": "user@example.com",
+    "idp": {
+        "id": "01a2bcdef3GHIJKLMNOP",
+        "type": "OKTA"
+    },
+    "lastFactorVerification": "2015-10-28T23:40:53.000Z",
+    "lastPasswordVerification": "2016-01-03T07:02:00.000Z",
+    "mfaActive": true,
+    "status": "ACTIVE",
+    "userId": "00u0abcdefGHIJKLMNOP",
+    "_links": {
+        "refresh": {
+            "hints": {
+                "allow": [
+                    "POST"
+                ]
+            },
+            "href": "https://example.okta.com/api/v1/sessions/012a34BCDeFGhi56jklMNO_pQ/lifecycle/refresh"
+        },
+        "self": {
+            "hints": {
+                "allow": [
+                    "GET",
+                    "DELETE"
+                ]
+            },
+            "href": "https://example.okta.com/api/v1/sessions/012a34BCDeFGhi56jklMNO_pQ"
+        },
+        "user": {
+            "hints": {
+                "allow": [
+                    "GET",
+                    "POST"
+                ]
+            },
+            "href": "https://example.okta.com/api/v1/users/me",
+            "name": "Isaac Brock"
+        }
+    }
+}
+~~~
+
+### Close Current Session
+{:.api .api-request .api-request-example}
+
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /sessions/me</span>
+<span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
+
+Close the session for the currently logged in user. Use this method in a browser based application to "log out" a user.
+
+~~~ sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Cookie: sid=${okta_session_id}" \
+"https://${org}.okta.com/api/v1/sessions/me"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~ http
+HTTP/1.1 204 No Content
+~~~
+
+### Refresh Session
+{:.api .api-request .api-request-example}
+
+Refresh a session using the `externalId` for that session.
+
+The `externalId` for a session is the `id` as returned by the [/sessions/me](#get-current-session) endpoint.
+
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /sessions/*:externalId*/lifecycle/refresh</span>
+<span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
+
+~~~ sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Cookie: sid=${okta_session_id}" \
+"https://${org}.okta.com/api/v1/sessions/me"
 ~~~
 
 ##### Response Example
