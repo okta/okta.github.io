@@ -4040,7 +4040,7 @@ curl -v -X GET \
 
 <span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /idps/credentials/keys/*:kid*</span>
 
-Deletes a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid`.
+Deletes a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid` if it is not being currently used by an IdP.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
