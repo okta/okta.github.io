@@ -2777,3 +2777,26 @@ curl -v -X POST \
   }
 }
 ~~~
+
+## Security Operations
+
+### Kill User Sessions
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:id*/sessions</span>
+
+Kills all active Okta sessions for the specified user in your Okta organization
+
+#### Request Example
+~~~ sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00u0abcdefGHIJKLMNOP/sessions"
+~~~
+
+#### Response Example
+~~~ http
+HTTP/1.1 204 No Content
+~~~
