@@ -368,6 +368,28 @@ Specifies the status of a factor verification attempt
 | `ERROR`                | Unexpected server error occurred verifying factor.                                                                                  |
 |------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
 
+#### SMS Object
+
+Specifies the status of an existing phone number. This object will be included as an embedded resource if a user has a verified phone number that has not yet been configured for MFA.
+
+|---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
+| Property      | Description                                       | DataType                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------------------------------------- | ------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| profile       | The profile for a `sms` factor.                   | [SMS Profile](#sms-profile)     | FALSE    | FALSE  | TRUE     |           |           |            |
+|---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
+
+~~~json
+{
+  "phones": [{
+    "id": "abc0de1f2ghijkLMn3o4",
+    "profile": {
+      "phoneNumber": "+14155551212"
+    },
+    "status": "ACTIVE"
+  }]
+}
+~~~
+
 ## Factor Operations
 
 ### Get Factor
@@ -703,6 +725,18 @@ curl -v -X GET \
           ]
         }
       }
+    },
+    "status": "NOT_SETUP",
+    "_embedded": {
+      "phones": [
+        {
+          "id": "abc0de1f2ghijkLMn3o4",
+          "profile": {
+            "phoneNumber": "+14155551212"
+          },
+          "status": "ACTIVE"
+        }
+      ]
     }
   },
   {

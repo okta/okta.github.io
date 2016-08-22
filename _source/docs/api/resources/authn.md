@@ -1336,6 +1336,8 @@ stateToken  | [state token](#state-token) for current transaction               
 factorType  | type of factor                                                                | Body        | [Factor Type](factors.html#factor-type)                      | TRUE     |
 provider    | factor provider                                                               | Body        | [Provider Type](factors.html#provider-type)                  | TRUE     |
 profile     | profile of a [supported factor](factors.html#supported-factors-for-providers) | Body        | [Factor Profile Object](factors.html#factor-profile-object)  | TRUE     |
+updatePhone | Set this to `true` to force enrollment of a new phone token.                  | Query       | Boolean                                                      | FALSE    | FALSE
+
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1489,6 +1491,30 @@ curl -v -X POST \
     ]
   }
 }
+~~~
+
+#### Force Enrollment of an Okta SMS Factor
+{:.api .api-operation}
+
+If the user configured a phone number for account recovery, that phone number must match the phone number used for a SMS factor.
+
+This behavior can be overridden by setting the `updatePhone` Query parameter to `true`.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-d '{
+  "stateToken": "007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb",
+  "factorType": "sms",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-415-555-1337"
+  }
+}' "https://${org}.okta.com/api/v1/authn/factors?updatePhone=true"
 ~~~
 
 #### Enroll Okta Verify TOTP Factor
