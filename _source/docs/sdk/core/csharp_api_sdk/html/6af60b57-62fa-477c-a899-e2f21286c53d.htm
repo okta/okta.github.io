@@ -44,7 +44,7 @@ usersClient.Deactivate(user);</pre></div></div></div><script type="text/javascri
           Loop through a list of OktaObjects.
         </p><div class="codeSnippetContainer"><div class="codeSnippetContainerTabs"><div id="ID1EAAAFAAA_tab1" class="codeSnippetContainerTabSingle">C#</div></div><div class="codeSnippetContainerCodeContainer"><div class="codeSnippetToolBar"><div class="codeSnippetToolBarText"><a id="ID1EAAAFAAA_copyCode" href="#" onclick="javascript:CopyToClipboard('ID1EAAAFAAA');return false;" title="Copy">Copy</a></div></div><div id="ID1EAAAFAAA_code_Div1" class="codeSnippetContainerCode" style="display: block"><pre xml:space="preserve"><span class="highlight-keyword">var</span> usersClient = <span class="highlight-keyword">new</span> UsersClient(<span class="highlight-literal">"your api token"</span>, <span class="highlight-literal">"your production subdomain"</span>);
 
-<span class="highlight-keyword">for</span>(<span class="highlight-keyword">var</span> user <span class="highlight-keyword">in</span> usersClient)
+<span class="highlight-keyword">foreach</span>(<span class="highlight-keyword">var</span> user <span class="highlight-keyword">in</span> usersClient)
 {
     <span class="highlight-comment">// Do something with each user</span>
 }</pre></div></div></div><script type="text/javascript">AddLanguageTabSet("ID1EAAAFAAA");</script></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID7RB')" onkeypress="SectionExpandCollapse_CheckKey('ID7RB', event)" tabindex="0"><img id="ID7RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Paged Enumeration</span></div><div id="ID7RBSection" class="collapsibleSection"><p>
