@@ -4,38 +4,27 @@ title: Platform Release Notes
 excerpt: Summary of changes to the Okta Platform since Release 2016.35
 ---
 
-## Release 2016.35
+## Release 2016.36
 
-## Feature Enhancements
- 
-### Improvements to Endpoint sessions/me
-<!-- OKTA-95047 -->
-* The parameter `createdAt` is returned in results.
-* If authentication is done using a social IdP or SAML, `lastPasswordVerification` isn't updated.
-* The parameter `lastPasswordVerification` is only updated when the password is verified.
+### System Log Enhancement
 
-### New Version of Okta Sign-In Widget 
+The names of [AppUser properties](http://developer.okta.com/docs/api/resources/apps.html#application-user-properties)
+during an import are included in the system log. <!-- (OKTA-96525) --><!-- ## Bug Fixed -->
 
-The new version of Okta Sign-In Widget, 1.6.0, is available:
+### Does Your Org Have These Changes Yet?
 
-* Okta Sign-In Widget supports two new factors: Windows Hello and U2F.
-* The Widget is localized for Czech.
-* Translations are shipped with the `npm` module.
+Check the footer of any Admin page in an org to verify the current release for that org. For example,
+scroll to the bottom of the <b>Admin</b> Dashboard page to see the version number:
 
-Learn about these and other improvements at [the Git site](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.6.0).
+![Release Number in Footer](/assets/img/release_notes/version_footer.png)
 
-<!-- ## Bugs Fixed The following issues are fixed: * -->
-
-## Does Your Org Have These Changes Yet?
-
-Check the footer of any Admin page in an org, for example the **Dashboard** or **Directory** tab, to verify the current release for that org.
-
-## Looking for Product Release Notes?
+### Looking for Product Release Notes?
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
-## Earlier Release Notes
+### Earlier Release Notes
 
+* [Platform Release Notes for Release 2016.35](platform-release-notes2016-35.html)
 * [Platform Release Notes for Release 2016.34](platform-release-notes2016-34.html)
 * [Platform Release Notes for Release 2016.33](platform-release-notes2016-33.html)
 * [Platform Release Notes for Release 2016.31](platform-release-notes2016-31.html)
