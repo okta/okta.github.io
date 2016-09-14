@@ -1,43 +1,56 @@
-<header class="site-header">
-	<div class="wrap">
+<header id="header">
+    <div class="Wrap">
+        <h1 class="logo"><a href="/">Okta</a></h1>
 
-		<h1 class="site-title"><a href="{{ site.baseurl }}">{{ site.title }}</a></h1>
-		<nav id="primary-nav" class="site-nav loaded">
-			<ul>
-				<li><a href="{{ "product/" | prepend: site.baseurl }}">Product</a></li>
-				<li><a href="{{ "docs/api/getting_started/design_principles.html" | prepend: site.baseurl }}">Docs</a></li>
-				<li><a href="{{ "discussion/" | prepend: site.baseurl }}">Discussion</a></li>
-				<li class="has-dropdown"><a href="#">Support</a>
-					<div class="dropdown-window">
-						<p class="stack-overflow">
-							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.
-						</p>
-						<p class="email">
-							Email us:<br />
-							<a href="mailto:developers@okta.com">developers@okta.com</a>
-						</p>
-						<p class="tel">
-							Call us:<br />
-							<a href="tel:18887227871">1 (888) 722-7871</a>
-						</p>
-					</div>
-				</li>
-			</ul>
-		</nav>
-
-		<a href="/search" class="gsc-trigger search-button"></a>
+        <!-- START Primary Nav -->
+        <nav>
+            <div id="top-nav">
+                <a href="#" id="mobile-close" class="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                </a>
 
 
-		<div class="search-container">
-			<div class="gsc-container">
-				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
-			</div>
-		</div>
-		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
+                <a class="Button--green" href="{{ site.get_started_url }}">Get Started</a>
+                <a class="SearchIcon" href="#"></a>
+                <ul>
+						<li><a href="/product/">Product</a></li>
+						<li><a href="/documentation/">Documentation</a></li>
+						<li><a href="/code/">Code</a></li>
+                    <li class="has-dropdown">
+                        <a href="#">Support</a>
+                        <div class="dropdown-window">
+                            <p class="stack-overflow">
+	                                Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>
+	                            </p>
+                            <p class="email">
+                                Email us:<br>
+                                <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+                            </p>
+                            <p class="tel">
+                                Call us:<br>
+                                <a href="tel:18887227871">1 (888) 722-7871</a>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <form id="form_search" method="get" action="http://developer.okta.com/search/">
+                    <input type="text" name="q" id="q" autocomplete="off">
+                </form>
+            </div>
 
-	</div>
+            <div id="mobile-nav">
+                <a id="mobile-search" href="http://okta.com/search/"><span class="icon-search-light"></span></a>
+                <a id="mobile-open" class="mobile-toggle" href="#top-nav">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+        </nav>
+        <!-- END Primary Nav -->
+    </div>
 </header>
-
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

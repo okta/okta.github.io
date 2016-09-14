@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+{% include head.html %}
+<body>
+  <div class="Page">
+    <!-- START Header -->
+    {% include header.html %}
+    <!-- END Header -->
+    <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent">
+      <!-- START Fixed sidebar -->
+      <aside class="Sidebar">
+        <h2 class="Sidebar-location Sidebar-toggle h6">HTTP Verbs</h3>
+           <div class="Sidebar-close Sidebar-toggle"></div>
+	   <div>
+	     <h3 class="Sidebar-title">Programming languages</h3>
+	     <ul class="Sidebar-nav">
+	       {% comment %}
+	       
+	       The code below gets a list of programming languages.
+	       It ultimately defines to variables:
+	       - 'langauge' the name of the directory in the '_code' directory that has the language
+	       - 'element' the 'index.md' file for the language subdirectory in '_code'
+	       
+	       {% endcomment %}
+	       {% assign indices = site.code | sort: 'id' %}
+	       {% for index in indices %}
+	         {% unless index.id contains '/index' %}
+	           {% continue %}
+	         {% endunless %}
+	         {% assign parts = index.id | split: "/" %}
+                 {% unless parts[3] contains 'index' %}
+	           {% continue %}
+	         {% endunless %}
+                 {% assign language = parts[2] %}
+                 {% assign element = index %}
+	       <li{% if element.title == page.title%} class="is-active"{% endif %}><a href="/code/{{ language | prepend: site.baseurl }}">{{ element.title }}</a></li>
+	       {% endfor %}
+	     </ul>
+	   </div>
+        </aside>
+      <!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main">
+	{{ content }}
+
+
+	<!-- HELLO WORLD -->
+	<!-- {% assign key = page.id | remove: "index" %} -->
+	<!-- {{ key | inspect }} -->
+	<!-- Tag: {{  site.categories | inspect }} -->
+	<!-- Key: {{ key | inspect }} -->
+	<!-- Pages: {{ site.code | sort: 'id' | inspect }} -->
+
+	<!-- <h1>{{ framework }}</h1> -->
+	<!-- <p> -->
+	<!--   {{ blurb }} -->
+	<!-- </p> -->
+	<!-- START Subpages Grid -->
+	<div class="Row">
+	{% assign indices = site.code | sort: 'id' %}
+	{% for index in indices %}
+	{% if index.id == page.id %}
+          {% continue %}
+	{% endif %}
+	{% unless index.id contains key %}
+	  {% continue %}
+	{% endunless %}
+	<!-- index.id {{ index.id | inspect }} -->
+	{% assign item = index %}
+	<div class="Column--4 Column--small-12">
+	  {% unless item.github_url %}
+	  <a href="{{ item.url | remove: '/index' }}.html">
+          {% endunless %}
+	    <h3 class="h4">{{ item.title }}</h3>
+	  {% unless item.github_url %}
+	  </a>
+          {% endunless %}
+	    <p>
+	      {{ item.excerpt }}
+	    </p>
+	    {% if item.github_url %}
+	    <a href="{{ item.github_url }}" class="github">Get it on Github</a>
+	    {% endif %}
+	  </div>
+	{% endfor %}
+	</div>
+	<!-- END Subpages Grid -->
+	
+	
+	
+      </div>
+      <!-- END Page Content -->
+	
+	
+    </section>
+    <!-- END Page Center w/Sub Nav & Content -->
+
+
+    <!-- START Footer -->
+    {% include footer.html %}
+    <!-- END Footer -->
+
+  </div>
+<script
+        src="https://code.jquery.com/jquery-3.1.0.min.js"
+        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+        crossorigin="anonymous"></script>
+<script src="/assets/js/master.js"></script>
+</body>
+</html>

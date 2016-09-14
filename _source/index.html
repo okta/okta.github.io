@@ -1,155 +1,49 @@
 ---
-meta_title: "The Identity Platform for Developers | Okta"
-meta_description: "Secure, scalable, and highly available authentication and user management for any app."
-layout: master
-css: page-home
-valprop: {
-	title: "The Identity Platform for Developers",
-	description: "Secure, scalable, and highly available authentication and user management for any app.",
-	show_cta: true
-}
-show_bottom_cta: true
+layout: base
 ---
-
-<section id="features" class="section--full-width text-align--center">
-	<div class="wrap">
-
-		<div class="row">
-			<a href="{{ "product/" | prepend: site.baseurl }}" class="col-1-3">
-
-				<h2 class="h5 text--small">Authenticate users to any<br />identity source</h2>
-				<p><img class="responsive--full-width" src="{{ "assets/images/graphics/identity-sources.png" | prepend: site.baseurl }}" /></p>
-				<p>Manage and authenticate users in Okta or connect an identity source</p>
-
-			</a>
-
-			<a href="{{ "product/#sso" | prepend: site.baseurl }}" class="col-1-3">
-
-				<h2 class="h5 text--small">Connect apps together<br />with single sign-on</h2>
-				<p><img class="responsive--full-width" src="{{ "assets/images/graphics/sso.png" | prepend: site.baseurl }}" /></p>
-				<p>Give users one username, one password, and one session across all apps</p>
-
-			</a>
-
-			<a href="{{ "product/#mfa" | prepend: site.baseurl }}" class="col-1-3">
-
-				<h2 class="h5 text--small">Increase security with<br />multi-factor authentication</h2>
-				<p><img class="responsive--full-width" src="{{ "assets/images/graphics/mfa.png" | prepend: site.baseurl }}" /></p>
-				<p>Integrate with existing tokens, or use Okta’s built-in factors</p>
-
-			</a>
-		</div>
-
-	</div>
+<!-- START Hero -->
+<section class="Hero">
+  <div class="Wrap">
+    <div class="Row u-stretch">
+      <div class="Column--4 Column--large-5 Column--medium-6 Column--small-12">
+	<h1 class="Hero-title">The Identity Platform for Developers</h1>
+	<p class="Hero-subtitle">Authentication, user management, and API authorization —
+	  secure, simple, always on.</p>
+	<p class="Hero-ctas">
+	  <a href="{{ site.get_started_url }}" class="Button--large Button--green">Get Started</a>
+	  <a href="/documentation/" class="Button--large Button--whiteOutline">View Docs</a>
+	</p>
+      </div>
+      <div class="Hero-image Column--7 ColumnOffset--1 Column--large-6 Column--medium-5 Column--small-12 ColumnOffset--small-0">
+	<img src="/assets/img/hero--home.png">
+      </div>
+    </div>
+  </div>
 </section>
-
-<section id="uptime" class="section--full-width bg--blue text-align--center">
-	<div class="wrap">
-
-		<header>
-			<h2>Architected for Zero Downtime at Scale</h2>
-			<p class="text--large">Never taken offline for scheduled maintenance or any other reason. Connecting millions of people to thousands of applications in 185 countries. Trusted by thousands of organizations.</p>
-		</header>
-		<img src="/assets/img/world.png" />
-
-		<p><a href="http://trust.okta.com" target="_blank" class="trailing-link">See Okta's Service Stats</a></p>
-
-	</div>
+<!-- END Hero -->
+<!-- START IconBar -->
+{% include iconbar.html %}
+<!-- END IconBar -->
+<!-- START SideBySidePromos -->
+<section class="SideBySidePromo-container">
+  <div class="SideBySidePromo">
+    <div class="SideBySidePromo-content">
+      <h2 class="SideBySidePromo-title">Solve Identity for Your App</h2>
+      <p class="SideBySidePromo-subtitle">Build	a more secure application faster with with the Okta Platform.</p>
+      <p><a class="Button--blueOutline Button--rounded" href="/product/">Product overview</a></p>
+    </div>
+    <div class="SideBySidePromo-bg"></div>
+  </div>
+  <div class="SideBySidePromo">
+    <div class="SideBySidePromo-content">
+      <h2 class="SideBySidePromo-title">Integrate with Okta</h2>
+      <p class="SideBySidePromo-subtitle">
+	Make your app enterprise-ready and connect with thousands of customers via the Okta Application Network.
+      </p>
+      <p class="SideBySidePromo-cta">
+	<a class="Button--blueOutline Button--rounded" href="/use_cases/integrate_with_okta/">Join us</a></p>
+    </div>
+    <div class="SideBySidePromo-bg"></div>
+  </div>
 </section>
-
-<section id="security" class="section--full-width">
-	<div class="wrap">
-
-		<header class="text-align--center">
-			<h2>Designed, Built, and Maintained by Security Experts</h2>
-			<p class="text--large text-align--center">Protecting user profiles and authentication requires constant attention. Our team is on the job.</p>
-		</header>
-
-		<div class="row">
-			<div class="col-1-3">
-
-				<img class="responsive--full-width" src="{{ "assets/images/graphics/shield.png" | prepend: site.baseurl }}" />
-
-			</div>
-
-			<div class="col-2-3">
-
-				<ul class="list--with-bullets text--large">
-					<li>Secure development practices & operations</li>
-					<li>Compute, network, & physical security</li>
-					<li>Independent audit & certification</li>
-				</ul>
-
-			</div>
-		</div>
-
-	</div>
-</section>
-
-<section id="sdk" class="section--full-width text-align--center">
-	<div class="wrap">
-
-		<header>
-			<h2>Delivered with Expert Support, Guides, Code Samples, and SDKs</h2>
-		</header>
-
-		<div class="row">
-			<a class="col-1-3" href="mailto:developers@okta.com">
-				<img class="responsive--full-width" src="{{ "assets/images/icons/large-cloud.png" | prepend: site.baseurl }}" width="150" />
-				We're Here to Help
-			</a>
-
-			<a class="col-1-3" href="{{ "docs/examples/dotnet_sample_application.html" | prepend: site.baseurl }}">
-				<img class="responsive--full-width" src="{{ "assets/images/icons/large-app.png" | prepend: site.baseurl }}" width="150" />
-				Visit the Sample App
-			</a>
-
-			<a class="col-1-3" href="{{ "docs/sdk/core/api.html" | prepend: site.baseurl }}">
-				<img class="responsive--full-width" src="{{ "assets/images/icons/large-lightning.png" | prepend: site.baseurl }}" width="150" />
-				Download an SDK
-			</a>
-		</div>
-
-	</div>
-</section>
-
-<section id="customers" class="section--full-width text-align--center">
-	<div class="wrap">
-
-		<header>
-			<h2>Trusted by Developers at Leading Organizations</h2>
-		</header>
-
-		<div class="row">
-			<div class="col-1-4">
-
-				<a href="{{ "customers/" | prepend: site.baseurl }}" class="logo-placard">
-					<img src="/assets/images/logos/adobe.png" />
-				</a>
-
-			</div>
-			<div class="col-1-4">
-
-				<a href="{{ "customers/" | prepend: site.baseurl }}" class="logo-placard">
-					<img src="/assets/images/logos/informatica.png" />
-				</a>
-
-			</div>
-			<div class="col-1-4">
-
-				<a href="{{ "customers/" | prepend: site.baseurl }}" class="logo-placard">
-					<img src="/assets/images/logos/advent.png" />
-				</a>
-
-			</div>
-			<div class="col-1-4">
-
-				<a href="{{ "customers/" | prepend: site.baseurl }}" class="logo-placard">
-					<img src="/assets/images/logos/rotary.png" />
-				</a>
-
-			</div>
-		</div>
-
-	</div>
-</section>
+<!-- END SideBySidePromos -->

@@ -1,37 +1,17 @@
 ---
-layout: master
+layout: base
 css: layout-docs
 js: docs
-hide_footer: true
 ---
-
-{% assign github_page_url = site.github_base_url | append: page.path %}
-
-<section class="section--with-sidebar docs-page">
-	<aside id="sidebar-wrapper-aside" class="sticky-nav--sidebar">
-
-		{% include docs_sidebar.html %}
-
-	</aside>
-
-	<div id="docs-body" class="docs-body">
-
-		<nav id="sticky-nav" class="sticky-nav--top">
-
-			{% include docs_nav.html %}
-
-		</nav>
-
-		<a href="#docs-body" id="scroll-top-button">Scroll to Top</a>
-
-		{% if page.title %}
-		<header>
-			<a href="{{ github_page_url }}" target="_blank" class="btn btn-default btn-sm btn-github"><i class="fa fa-github"></i> Edit on GitHub</a>
-			<h1 class="page-title">{{ page.title }}</h1>
-		</header>
-		{% endif %}
-
-		{{ content }}
-	</div>
-	
-</section>
+    <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent">
+      <!-- START Fixed sidebar -->
+      {% include sidebar.html %}
+      <!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+	{{ content }}
+      </div>
+      <!-- END Page Content -->
+    </section>
+    <!-- END Page Center w/Sub Nav & Content -->

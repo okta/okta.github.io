@@ -1,41 +1,34 @@
 <head>
+    <script src="//use.typekit.net/jff5neq.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="/favicon.ico">
-	<title>{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-	<meta name="description" content="{% if page.meta_description %}{{ page.meta_description }}{% elsif page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="canonical" href="{{ page.url | replace:'/index.html','' | prepend: site.url }}">
-
-	<link rel="stylesheet" href="{{ "assets/vendor/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl }}">
-	<link rel="stylesheet" href="{{ "assets/css/animate.css" | prepend: site.baseurl }}">
-	<link rel="stylesheet" href="{{ "assets/css/master.css" | prepend: site.baseurl }}">
-	{% if page.css %}<link rel="stylesheet" href="{{ "assets/css/" | prepend: site.baseurl | append: page.css }}.css">{% endif %}
-	{% if layout.css %}<link rel="stylesheet" href="{{ "assets/css/" | prepend: site.baseurl | append: layout.css }}.css">{% endif %}
-	<link rel="stylesheet" href="{{ "assets/css/responsive.css" | prepend: site.baseurl }}">
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+    {% if page.css %}<link rel="stylesheet" href="{{ "/assets/css/" | prepend: site.baseurl | append: page.css }}.css">{% endif %}
+    {% if layout.css %}<link rel="stylesheet" href="{{ "/assets/css/" | prepend: site.baseurl | append: layout.css }}.css">{% endif %}
+    <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
 
-  {% if page.underscore %}<script type="text/javascript" defer="defer" src="{{ "assets/js/underscore.min.js" | prepend: site.baseurl }}"></script>{% endif %}
-	<script type="text/javascript" defer="defer" src="{{ "assets/js/jquery.min.js" | prepend: site.baseurl }}"></script>
-	<script type="text/javascript" defer="defer" src="{{ "assets/js/tabber.js" | prepend: site.baseurl }}"></script>
-	<script type="text/javascript" defer="defer" src="{{ "assets/js/pacnav.js" | prepend: site.baseurl }}"></script>
-	<script type="text/javascript" defer="defer" src="{{ "assets/js/master.js" | prepend: site.baseurl }}"></script>
-	<script type="text/javascript" defer="defer" src="{{ "assets/js/scrollspy.js" | prepend: site.baseurl }}"></script>
-
-	{% if page.js %}<script type="text/javascript" defer="defer" src="{{ "assets/js/" | prepend: site.baseurl | append: page.js }}.js"></script>{% endif %}
-	{% if layout.js %}<script type="text/javascript" defer="defer" src="{{ "assets/js/" | prepend: site.baseurl | append: layout.js }}.js"></script>{% endif %}
-	<!-- TypeKit -->
-	<script src="//use.typekit.net/pls8pog.js"></script>
-	<script>try{Typekit.load({async:true});}catch(e){}</script>
-	<!-- GA -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', '{{ site.ga_ua_id }}', 'auto');
-		ga('send', 'pageview');
-	</script>
+    {% if page.js %}<script type="text/javascript" defer="defer" src="{{ "/assets/js/" | prepend: site.baseurl | append: page.js }}.js"></script>{% endif %}
+    {% if layout.js %}<script type="text/javascript" defer="defer" src="{{ "/assets/js/" | prepend: site.baseurl | append: layout.js }}.js"></script>{% endif %}    
+    
+    <title>{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+    
+    <!-- GA -->
+    <script>
+    	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    	ga('create', '{{ site.ga_ua_id }}', 'auto');
+    	ga('send', 'pageview');
+    </script>
 </head>

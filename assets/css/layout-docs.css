@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /*
  * Layout
  ------------------------------------------------------------ */
@@ -273,9 +272,6 @@ h6:hover .header-link {
   .api-operation:before {
     content: '\f12e'; }
 
-.api-uri-template em {
-  color: #090; }
-
 .api-request {
   color: #5d5d5d !important;
   font-weight: 500 !important; }
@@ -285,30 +281,47 @@ h6:hover .header-link {
   font-weight: 500 !important; }
 
 .api-request-params:before {
-  content: ""; }
+  content: "\f18e"; }
 
 .api-response-params:before {
-  content: ""; }
+  content: "\f190"; }
 
 .api-request-example:before {
-  content: ""; }
+  content: "\f0a9"; }
 
 .api-response-example:before {
-  content: ""; }
+  content: "\f0a8"; }
 
 .api-label {
   color: white;
   font-weight: 500;
-  padding: 3px 6px;
+  padding: 3px 10px;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: .25em;
   background: #4cbf9c;
   display: inline-block; }
+  .api-label i {
+    margin-right: 2px; }
 
 .api-label-small {
   font-size: 80%; }
+
+.api-label-margin-bottom {
+  margin-bottom: 10px; }
+
+.api-label-beta {
+  background: #46B3E9; }
+
+.api-label-ea {
+  background: #4CBF9C; }
+
+.api-label-deprecated {
+  background: #ff7640; }
+
+.api-label-cors {
+  background: #5d5d5d; }
 
 .api-uri-template {
   display: inline-block;
@@ -317,9 +330,11 @@ h6:hover .header-link {
   border-bottom: 1px solid #ccc;
   border-radius: .25em;
   padding-right: 10px;
-  background: #f5f5f5; }
+  background: #f5f5f5;
+  margin-right: 5px; }
   .api-uri-template em {
-    font-weight: bold; }
+    font-weight: bold;
+    color: #090; }
   .api-uri-template .api-label {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -327,25 +342,21 @@ h6:hover .header-link {
 
 .api-uri-get em {
   color: #090; }
-
 .api-uri-get .api-label {
   background: #090; }
 
 .api-uri-post em {
   color: #F39C44; }
-
 .api-uri-post .api-label {
   background: #F39C44; }
 
 .api-uri-put em {
   color: #0069aa; }
-
 .api-uri-put .api-label {
   background: #0069aa; }
 
 .api-uri-delete em {
   color: #d9534f; }
-
 .api-uri-delete .api-label {
   background: #d9534f; }
 

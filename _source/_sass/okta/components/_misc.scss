@@ -1,0 +1,83 @@
+ul.list--with-bullets {
+	margin-left: 0;
+	padding-left: 0;
+	
+	li {
+		padding-left: 6 + get-spacing('x-small');
+		position: relative;
+
+		&:before {
+			background: get-color('green-dark');
+			border-radius: 3px;
+			content: "";
+			display: block;
+			height: 6px;
+			left: 0;
+			margin-top: -3px;
+			position: absolute;
+			top: get-line-height('base') * 0.5;
+			width: 6px;
+		}
+
+		+ li {
+			margin-top: get-spacing('xx-small');
+		}
+	}
+}
+
+ul.toc {
+	@include padding(x-small xx-small);
+	background: mix(get-color('gray-light'), get-color('white'), 20%);
+	border: 1px solid get-color('gray-light');
+	border-radius: 3px;
+
+	ul {
+		margin: 0;
+		padding-left: $gutter-width / 2;
+	}
+
+	li {
+		@include font-size('small');
+		@include margin(xx-small 0);
+
+		&:before {
+			font-family: fontawesome;
+			content: '\f097';
+			font-size: 12px;
+			color: #ccc;
+			margin-right: 6px;
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+}
+
+ol.list--numbered {
+	list-style: decimal;
+	padding-left: 6px + $gutter-width / 4;
+
+	li + li {
+		margin-top: get-spacing('xx-small');
+	}
+}
+
+.trailing-link {
+	@include color('green-dark');
+	@include font-size('base');
+	font-weight: 600;
+	text-decoration: none;
+	text-transform: uppercase;
+
+	&:after {
+		color: get-color('green-dark');
+		content: "\203A";
+		display: inline-block;
+		font-size: get-font-size('base') + 2;
+		margin-left: 10px;
+		position: relative;
+		top: -2px;
+		vertical-align: middle;
+	}
+}

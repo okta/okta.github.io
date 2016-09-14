@@ -2,7 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Okta Developer</title>
-    <description>Secure, scalable, and highly available authentication and user management for any app.</description>
+    <description>Secure, scalable, and highly available authentication and user management for any app.
+</description>
     <link>http://developer.okta.com</link>
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
@@ -235,7 +236,7 @@ your client does not have a certificate for service-to-service communication,
 you can follow a similar pattern to create its certificate. But if it does have
 an existing certificate, you can just reuse that one.&lt;/p&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create our server&#39;s key&lt;/span&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create our server's key&lt;/span&gt;
 openssl genrsa -out server.key 2048
 
 &lt;span class=&quot;c&quot;&gt;# Create the csr and follow the prompts for country code, ou, etc&lt;/span&gt;
@@ -455,7 +456,7 @@ return a 403 response.&lt;/p&gt;
 
 &lt;span class=&quot;cm&quot;&gt;/**
 * A ContainerRequestFilter to do certificate validation beyond the tls validation.
-* For example, the filter matches the subject against a regex and will 403 if it doesn&#39;t match
+* For example, the filter matches the subject against a regex and will 403 if it doesn't match
 *
 * @author &amp;lt;a href=&quot;mailto:wdawson@okta.com&quot;&amp;gt;wdawson&amp;lt;/a&amp;gt;
 */&lt;/span&gt;
@@ -1044,7 +1045,7 @@ are now testing just one class at a time.&lt;/p&gt;
 
     &lt;p&gt;Add the following code under the dependency section:&lt;/p&gt;
 
-    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;org.easymock:easymock:3.1&#39;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'org.easymock:easymock:3.1'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
@@ -1223,8 +1224,8 @@ my summary is below:&lt;/p&gt;
 
     &lt;p&gt;Add the following code under the dependency section:&lt;/p&gt;
 
-    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;com.squareup.dagger:dagger:1.2.1&#39;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;provided&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;com.squareup.dagger:dagger-compiler:1.2.1&#39;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.squareup.dagger:dagger:1.2.1'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;provided&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.squareup.dagger:dagger-compiler:1.2.1'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
@@ -1380,24 +1381,24 @@ do:&lt;/p&gt;
 
     &lt;p&gt;Add the following code to the dependencies section:&lt;/p&gt;
 
-    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;classpath&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;org.robolectric:robolectric-gradle-plugin:0.12.+&#39;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;classpath&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'org.robolectric:robolectric-gradle-plugin:0.12.+'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Modify the application Gradle file&lt;/p&gt;
 
-    &lt;p&gt;Add the following code under &lt;code class=&quot;highlighter-rouge&quot;&gt;apply plugin: ‘com.android.application&#39;&lt;/code&gt;:&lt;/p&gt;
+    &lt;p&gt;Add the following code under &lt;code class=&quot;highlighter-rouge&quot;&gt;apply plugin: ‘com.android.application'&lt;/code&gt;:&lt;/p&gt;
 
-    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plugin&lt;/span&gt;: &lt;span class=&quot;s1&quot;&gt;&#39;robolectric&#39;&lt;/span&gt;
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;apply&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plugin&lt;/span&gt;: &lt;span class=&quot;s1&quot;&gt;'robolectric'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Add the following under the dependencies section:&lt;/p&gt;
 
-    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt;(&lt;span class=&quot;s1&quot;&gt;&#39;junit:junit:4.11&#39;&lt;/span&gt;)
-&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt;(&lt;span class=&quot;s1&quot;&gt;&#39;org.robolectric:robolectric:2.3&#39;&lt;/span&gt;)
+    &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt;(&lt;span class=&quot;s1&quot;&gt;'junit:junit:4.11'&lt;/span&gt;)
+&lt;span class=&quot;n&quot;&gt;androidTestCompile&lt;/span&gt;(&lt;span class=&quot;s1&quot;&gt;'org.robolectric:robolectric:2.3'&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
@@ -1405,7 +1406,7 @@ do:&lt;/p&gt;
     &lt;p&gt;Add this section:&lt;/p&gt;
 
     &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;robolectric&lt;/span&gt; {
-        &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;**/*Test.class&#39;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'**/*Test.class'&lt;/span&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;

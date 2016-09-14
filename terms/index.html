@@ -1,99 +1,97 @@
 <!doctype html>
-<!--[if lt IE 7 ]> <html class="ie6 no-flexbox"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7 no-flexbox"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
-<!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
-<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
-<head>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <script src="//use.typekit.net/jff5neq.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
-	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="/favicon.ico">
-	<title>Okta Developer</title>
-	<meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.">
-
-	<link rel="canonical" href="http://developer.okta.com/terms/">
-
-	<link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/assets/css/animate.css">
-	<link rel="stylesheet" href="/assets/css/master.css">
-	
-	<link rel="stylesheet" href="/assets/css/layout-docs.css">
-	<link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
 
-  
-	<script type="text/javascript" defer="defer" src="/assets/js/jquery.min.js"></script>
-	<script type="text/javascript" defer="defer" src="/assets/js/tabber.js"></script>
-	<script type="text/javascript" defer="defer" src="/assets/js/pacnav.js"></script>
-	<script type="text/javascript" defer="defer" src="/assets/js/master.js"></script>
-	<script type="text/javascript" defer="defer" src="/assets/js/scrollspy.js"></script>
-
-	
-	<script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
-	<!-- TypeKit -->
-	<script src="//use.typekit.net/pls8pog.js"></script>
-	<script>try{Typekit.load({async:true});}catch(e){}</script>
-	<!-- GA -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-15777010-3', 'auto');
-		ga('send', 'pageview');
-	</script>
+    
+        
+    
+    <title>Okta Developer</title>
+    <meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.
+">
+    <link rel="canonical" href="http://developer.okta.com/terms/">
+    <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
+    
+    <!-- GA -->
+    <script>
+    	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    	ga('create', 'UA-15777010-3', 'auto');
+    	ga('send', 'pageview');
+    </script>
 </head>
 
+  <body>
+	<div class="Page">
+          <!-- START Header -->
+	  <header id="header">
+    <div class="Wrap">
+        <h1 class="logo"><a href="/">Okta</a></h1>
+
+        <!-- START Primary Nav -->
+        <nav>
+            <div id="top-nav">
+                <a href="#" id="mobile-close" class="mobile-toggle">
+                    <span></span>
+                    <span></span>
+                </a>
 
 
+                <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+                <a class="SearchIcon" href="#"></a>
+                <ul>
+						<li><a href="/product/">Product</a></li>
+						<li><a href="/documentation/">Documentation</a></li>
+						<li><a href="/code/">Code</a></li>
+                    <li class="has-dropdown">
+                        <a href="#">Support</a>
+                        <div class="dropdown-window">
+                            <p class="stack-overflow">
+	                                Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>
+	                            </p>
+                            <p class="email">
+                                Email us:<br>
+                                <a href="mailto:developers@okta.com">developers@okta.com</a>
+                            </p>
+                            <p class="tel">
+                                Call us:<br>
+                                <a href="tel:18887227871">1 (888) 722-7871</a>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <form id="form_search" method="get" action="http://developer.okta.com/search/">
+                    <input type="text" name="q" id="q" autocomplete="off">
+                </form>
+            </div>
 
-<body id="terms">
-
-	<header class="site-header">
-	<div class="wrap">
-
-		<h1 class="site-title"><a href="/">Okta Developer</a></h1>
-		<nav id="primary-nav" class="site-nav loaded">
-			<ul>
-				<li><a href="/product/">Product</a></li>
-				<li><a href="/docs/api/getting_started/design_principles.html">Docs</a></li>
-				<li><a href="/discussion/">Discussion</a></li>
-				<li class="has-dropdown"><a href="#">Support</a>
-					<div class="dropdown-window">
-						<p class="stack-overflow">
-							Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>.
-						</p>
-						<p class="email">
-							Email us:<br />
-							<a href="mailto:developers@okta.com">developers@okta.com</a>
-						</p>
-						<p class="tel">
-							Call us:<br />
-							<a href="tel:18887227871">1 (888) 722-7871</a>
-						</p>
-					</div>
-				</li>
-			</ul>
-		</nav>
-
-		<a href="/search" class="gsc-trigger search-button"></a>
-
-
-		<div class="search-container">
-			<div class="gsc-container">
-				<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
-			</div>
-		</div>
-		<a href="https://www.okta.com/developer/signup/" class="cta-button button--small">Get Started</a>
-
-	</div>
+            <div id="mobile-nav">
+                <a id="mobile-search" href="http://okta.com/search/"><span class="icon-search-light"></span></a>
+                <a id="mobile-open" class="mobile-toggle" href="#top-nav">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+        </nav>
+        <!-- END Primary Nav -->
+    </div>
 </header>
-
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -104,26 +102,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-TJ45R6');</script>
 <!-- End Google Tag Manager -->
 
+	  <!-- END Header -->
+	  <section class="PageContent">
+  <article class="post">
 
-	<div class="page-content">
+  <header class="post-header">
+    <h1 class="post-title"></h1>
+  </header>
 
-		
-		<section id="valprop" class="section--full-width bg--light-blue">
-			<div class="wrap">
-				<header>
-					<h1>Terms &amp; Conditions</h1>
-					
-				</header>
-
-				
-			</div>
-		</section>
-		
-
-		<section class="section--full-width">
-	<div class="wrap">
-
-		<p>OKTA, INC.
+  <div class="post-content">
+    <p>OKTA, INC.
 DEVELOPER EDITION LICENSE AGREEMENT</p>
 
 <p>PLEASE READ THIS DEVELOPER EDITION LICENSE AGREEMENT (“AGREEMENT”) CAREFULLY BEFORE USING THE DEVELOPER SERVICE OFFERED BY OKTA, INC. (“OKTA”).  THE TERMS OF THIS AGREEMENT GOVERN YOUR USE OF OKTA’S DEVELOPER SERVICE.  IF YOU DO NOT AGREE TO THESE TERMS, DO NOT USE OKTA’S DEVELOPER SERVICE.  BY ACCEPTING THESE TERMS BELOW, BY USING OKTA’S DEVELOPER SERVICE IN ANY MANNER, OR BY SIGNING AN ORDER, YOU AND THE ENTITY YOU REPRESENT (“CUSTOMER”) AGREE THAT YOU HAVE READ AND AGREE TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS AGREEMENT TO THE EXCLUSION OF ALL OTHER TERMS. IF YOU DO NOT HAVE SUCH AUTHORITY, OR IF YOU DO NOT AGREE WITH THESE TERMS AND CONDITIONS, YOU MUST NOT ACCEPT THIS AGREEMENT AND MAY NOT USE THE DEVELOPER SERVICE.</p>
@@ -221,18 +209,14 @@ DEVELOPER EDITION LICENSE AGREEMENT</p>
 <p>12.9  Entire Agreement.  This Agreement together with the Orders hereunder constitutes the entire agreement between the parties hereto pertaining to the subject matter hereof, and any and all prior or contemporaneous written or oral agreements existing between the parties hereto and related to the subject matter hereof are expressly canceled. There are no third party beneficiaries to this Agreement. No modification, amendment or waiver of any provision of this Agreement will be effective unless in writing and signed by both parties hereto.  Notwithstanding any language to the contrary therein, no terms or conditions stated in a Customer purchase order or in any other Customer order documentation shall be incorporated into or form any part of this Agreement, and all such terms or conditions shall be null and void. Any failure to enforce any provision of this Agreement shall not constitute a waiver thereof or of any other provision.</p>
 
 
+  </div>
 
-	</div>
+</article>
+
 </section>
 
-
-		
-
-	</div>
-
-	
-		
-<!-- Remarketing tag -->
+	  <!-- START Footer -->
+	  <!-- Remarketing tag -->
 	<script type="text/javascript">
 		/* <![CDATA[ */
 		var google_conversion_id = 1006913831;
@@ -258,31 +242,37 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </script>
 <!-- End Crazy Egg Tracking -->
 
-<footer class="site-footer">
-	<div class="wrap">
+        <footer class="footer">
+            <div class="Wrap">
 
-		<ul>
-			<li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-			<li><a href="/blog">Blog</a></li>
-			<li><a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a></li>
-			<li><a href="/terms/">Terms &amp; Conditions</a></li>
-			<li><a href="/privacy/">Privacy Policy</a></li>
-			<li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-			<li><a href="mailto:developers@okta.com">Contact Support</a></li>
-		</ul>
+                <ul>
+                    <li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a></li>
+                    <li><a href="/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                    <li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
+                    <li><a href="mailto:developers@okta.com">Contact Support</a></li>
+                </ul>
 
-		<ul>
-			<li><a class="icon" href="http://github.com/okta" target="_blank"><i class="fa fa-github"></i></a></li>
-			<li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-			<li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-			<li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-			<li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li>
-		</ul>
+                <ul>
+                    <li><a class="icon" href="http://github.com/oktadeveloper" target="_blank"><i class="fa fa-github"></i></a></li>
+                    <li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
+                    <li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
+                    <!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
+                </ul>
 
+            </div>
+        </footer>
+
+	  <!-- END Footer -->
 	</div>
-</footer>
-
-	
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"
+    integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+    crossorigin="anonymous"></script>
+<!-- <script src="/assets/js/master.js"></script> -->
+<script src="/assets/js/okta.js"></script>
 </body>
-
 </html>

@@ -48,16 +48,26 @@
   slug: guides
   title: Guides
   pages:
-    - overview
-    - saml_guidance
     - oan_guidance
     - okta_mobile_connect
     - okta_sign-in_widget
     - add_mfa
+
+- section: guides
+  slug: guides
+  title: SAML
+  pages:
+    - saml_guidance
     - setting_up_a_saml_application_in_okta
     - spring_security_saml
     - pysaml2
     - simplesamlphp
+
+- section: guides
+  slug: guides
+  title: SCIM
+  pages:
+    - scim_developer_program
 
 # -- EXAMPLES
 - section: examples

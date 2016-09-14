@@ -1,0 +1,682 @@
+<ul class="list-unstyled toc" id="markdown-toc">
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#referencing-user-attributes">Referencing User Attributes</a>    <ul>
+      <li><a href="#okta-user-profile">Okta user profile</a></li>
+      <li><a href="#application-user-profile">Application user profile</a></li>
+    </ul>
+  </li>
+  <li><a href="#referencing-application-and-organization-properties">Referencing Application and Organization Properties</a>    <ul>
+      <li><a href="#application-properties">Application properties</a></li>
+      <li><a href="#organization-properties">Organization properties</a></li>
+    </ul>
+  </li>
+  <li><a href="#functions">Functions</a>    <ul>
+      <li><a href="#string-functions">String Functions</a></li>
+      <li><a href="#array-functions">Array Functions</a></li>
+      <li><a href="#conversion-functions">Conversion Functions</a></li>
+      <li><a href="#group-functions">Group Functions</a></li>
+      <li><a href="#managerassistant-functions">Manager/Assistant Functions</a></li>
+      <li><a href="#directory-and-workday-functions">Directory and Workday Functions</a></li>
+    </ul>
+  </li>
+  <li><a href="#constants-and-operators">Constants and Operators</a></li>
+  <li><a href="#popular-expressions">Popular Expressions</a></li>
+</ul>
+
+<h2 id="overview">Overview</h2>
+
+<p>Expressions allow you to reference, transform and combine attributes before you store them on a user profile or before passing them to an application for authentication or provisioning.  For example, you might use a custom expression to create a username by stripping @company.com from an email address.  Or you might combine <code>firstName</code> and <code>lastName</code> attributes into a single <code>displayName</code> attribute.</p>
+
+<p>This document details the features and syntax of Okta’s Expression Language which can be used throughout the Okta Admin Console and API. This document will be updated over time as new capabilities are added to the language.  Okta’s expression language is based on <a href="http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html">SpEL</a> and uses a subset of functionalities offered by SpEL.</p>
+
+<h2 id="referencing-user-attributes">Referencing User Attributes</h2>
+<p>When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.</p>
+
+<h3 id="okta-user-profile">Okta user profile</h3>
+<p>Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user’s core attributes.  To reference an Okta user profile attribute, just reference <code>user</code> and specify the attribute variable name.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Syntax</th>
+      <th>Definitions</th>
+      <th>Examples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>user.$attribute</code></td>
+      <td><code>user</code> reference to the Okta user<br /><code>$attribute</code> the attribute variable name</td>
+      <td>user.firstName<br />user.lastName<br />user.username<br />user.email</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="application-user-profile">Application user profile</h3>
+<p>In addition to an Okta user profile, all users have separate Application user profiles for each of their applications.  The Application user profiles are used to store application specific information about a user, such as application username or user role.  To reference an App user profile attribute, just specify the application variable and the attribute variable in that application’s App user profile. In specifying the application you can either name the specific application you’re referencing or use an implicit reference to an in-context application.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Syntax</th>
+      <th>Definitions</th>
+      <th>Examples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>$appuser.$attribute</code></td>
+      <td><code>$appUser</code> explicit reference to specific app<br /><code>$attribute</code> the attribute variable name</td>
+      <td>zendesk.firstName<br />active_directory.managerUpn<br />google_apps.email</td>
+    </tr>
+    <tr>
+      <td><code>appuser.$attribute</code></td>
+      <td><code>appUser</code> implicit reference to in-context app<br /><code>$attribute</code> the attribute variable name</td>
+      <td>appUser.firstName</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>With Universal Directory, there are about 30 attributes in the base Okta profile and any number of custom attributes can be added.  All App user profiles have a username attribute and possibly others depending on the application.   To find a full list of Okta user and App user attributes and their variable names, go to People &gt; Profile Editor.  If you’re not yet using Universal Directory, contact your Support or Professional Services team.</p>
+</blockquote>
+
+<h2 id="referencing-application-and-organization-properties">Referencing Application and Organization Properties</h2>
+<p>In addition to referencing user attributes, you can also reference App properties, and the properties of your Organization.  To reference a particular attribute, just specify the appropriate binding and the attribute variable name.  Here are some examples:</p>
+
+<h3 id="application-properties">Application properties</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Syntax</th>
+      <th>Definitions</th>
+      <th>Examples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>$app.$attribute</code></td>
+      <td><code>$app</code> explicit reference to specific app instance<br /><code>$attribute</code> the attribute variable name</td>
+      <td>google_apps_app.domain<br />zendesk_app.companySubDomain</td>
+    </tr>
+    <tr>
+      <td><code>app.$attribute</code></td>
+      <td><code>app</code> implicit reference to in-context app instance<br /><code>$attribute</code> the attribute variable name</td>
+      <td>app.domain<br />app.companySubDomain</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="organization-properties">Organization properties</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Syntax</th>
+      <th>Definitions</th>
+      <th>Examples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>org.$attribute</code></td>
+      <td><code>org</code> reference to Okta org<br /><code>$attribute</code> the attribute variable name</td>
+      <td>org.domain</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>For a full list of App and Org attributes, contact your Support or Professional Services team.</p>
+</blockquote>
+
+<h2 id="functions">Functions</h2>
+
+<p>Okta offers a variety of functions to manipulate attributes or properties to generate a desired output.  Functions can be combined and nested inside a single expression.</p>
+
+<h3 id="string-functions">String Functions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Input Parameter Signature</th>
+      <th>Return Type</th>
+      <th>Example</th>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>String.stringSwitch</code></td>
+      <td>(String input, String defaultString, String… keyValuePairs)</td>
+      <td>String</td>
+      <td>String.stringSwitch(“This is a test”, “default”, “key1”, “value1”)</td>
+      <td>default</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>String.stringSwitch(“This is a test”, “default”, “is”, “value1”)</td>
+      <td>value1</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>String.stringSwitch(“This is a test”, “default”, “key1”, “value1”, “test”, “value2”)</td>
+      <td>value2</td>
+    </tr>
+    <tr>
+      <td><code>String.stringContains</code></td>
+      <td>(String input, String searchString)</td>
+      <td>Boolean</td>
+      <td>String.stringContains(“This is a test”, “test”) </td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>String.stringContains(“This is a test”, “doesn’tExist”)</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td><code>String.removeSpaces</code></td>
+      <td>(String input)</td>
+      <td>String</td>
+      <td>String.removeSpaces(“This is a test”)</td>
+      <td>Thisisatest</td>
+    </tr>
+    <tr>
+      <td><code>String.join</code></td>
+      <td>(String separator, String… strings)</td>
+      <td>String</td>
+      <td>String.join(“,”, “This”, “is”, “a”, “test”)</td>
+      <td>This,is,a,test</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>String.join(“”, “This”, “is”, “a”, “test”)</td>
+      <td>Thisisatest</td>
+    </tr>
+    <tr>
+      <td><code>String.len</code></td>
+      <td>(String input)</td>
+      <td>Integer</td>
+      <td>String.len(“This”)</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td><code>String.append</code></td>
+      <td>(String str, String suffix)</td>
+      <td>String</td>
+      <td>String.append(“This is”, “ a test”)</td>
+      <td>This is a test</td>
+    </tr>
+    <tr>
+      <td><code>String.toUpperCase</code></td>
+      <td>(String input)</td>
+      <td>String</td>
+      <td>String.toUpperCase(“This”)</td>
+      <td>THIS</td>
+    </tr>
+    <tr>
+      <td><code>String.toLowerCase</code></td>
+      <td>(String input)</td>
+      <td>String</td>
+      <td>String.toLowerCase(“ThiS”)</td>
+      <td>this</td>
+    </tr>
+    <tr>
+      <td><code>String.substringBefore</code></td>
+      <td>(String input, String searchString)</td>
+      <td>String</td>
+      <td>String.substringBefore(“abc@okta.com”, “@”)</td>
+      <td>abc</td>
+    </tr>
+    <tr>
+      <td><code>String.substringAfter</code></td>
+      <td>(String input, String searchString)</td>
+      <td>String</td>
+      <td>String.substringAfter(“abc@okta.com”, “@”)</td>
+      <td>okta.com</td>
+    </tr>
+    <tr>
+      <td><code>String.substring </code></td>
+      <td>(String input, int startIndex, int endIndex)</td>
+      <td>String</td>
+      <td>String.substring(“This is a test”, 2, 9)</td>
+      <td>is is a</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The following deprecated functions perform some of the same tasks as the ones in the above table.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Example</th>
+      <th>Input</th>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>toUppercase(string)</code></td>
+      <td><code>toUppercase(source.firstName)</code></td>
+      <td>Alexander</td>
+      <td>ALEXANDER</td>
+    </tr>
+    <tr>
+      <td><code>toLowercase(string)</code></td>
+      <td><code>toLowercase(source.firstName)</code></td>
+      <td>AlexANDER</td>
+      <td>alexander</td>
+    </tr>
+    <tr>
+      <td><code>substringBefore(string, string)</code></td>
+      <td><code>substringBefore(user.email, '@')</code></td>
+      <td>alex@okta.com</td>
+      <td>alex</td>
+    </tr>
+    <tr>
+      <td><code>substringAfter(string, string)</code></td>
+      <td><code>substringAfter(user.email, '@')</code></td>
+      <td>alex@okta.com</td>
+      <td>@okta.com</td>
+    </tr>
+    <tr>
+      <td><code>substring(string, int, int)</code></td>
+      <td><code>substring(source.firstName, 1, 4)</code></td>
+      <td>Alexander</td>
+      <td>lex</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="array-functions">Array Functions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Return Type</th>
+      <th>Example</th>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Arrays.add(array, value)</code></td>
+      <td>Array</td>
+      <td>Arrays.add({10, 20, 30}, 40)</td>
+      <td>{10, 20, 30, 40}</td>
+    </tr>
+    <tr>
+      <td><code>Arrays.remove(array, value)</code></td>
+      <td>Array</td>
+      <td>Arrays.remove({10, 20, 30}, 20)</td>
+      <td>{10, 30}</td>
+    </tr>
+    <tr>
+      <td><code>Arrays.clear(array)</code></td>
+      <td>Array</td>
+      <td>Arrays.clear({10, 20, 30})</td>
+      <td>{ }</td>
+    </tr>
+    <tr>
+      <td><code>Arrays.get(array, position)</code></td>
+      <td>-</td>
+      <td>Arrays.get({1,2,3},0)</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td><code>Arrays.flatten(list of values)</code></td>
+      <td>Array</td>
+      <td>Arrays.flatten(10, {20, 30}, 40)</td>
+      <td>{10, 20, 30, 40}</td>
+    </tr>
+    <tr>
+      <td><code>Arrays.contains(array, value)</code></td>
+      <td>Boolean</td>
+      <td>Arrays.contains({10, 20, 30}, 10)</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>Arrays.contains({10, 20, 30}, 50)</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td><code>Arrays.size(array)</code></td>
+      <td>Integer</td>
+      <td>Arrays.size({10, 20, 30})</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>Arrays.size(NULL)</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td><code>Arrays.isEmpty(array)</code></td>
+      <td>Boolean</td>
+      <td>Arrays.isEmpty({10, 20})</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>Arrays.isEmpty(NULL)</td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="conversion-functions">Conversion Functions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Return Type</th>
+      <th>Example</th>
+      <th>Input</th>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Convert.toInt(string)</code></td>
+      <td>Integer</td>
+      <td><code>Convert.toInt(val)</code></td>
+      <td>String val = ‘1234’</td>
+      <td>1234</td>
+    </tr>
+    <tr>
+      <td><code>Convert.toInt(double)</code></td>
+      <td>Integer</td>
+      <td><code>Convert.toInt(val)</code></td>
+      <td>Double val = 123.4</td>
+      <td>123</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>Double val = 123.6</td>
+      <td>124</td>
+    </tr>
+    <tr>
+      <td><code>Convert.toNum(string)</code></td>
+      <td>Double</td>
+      <td><code>Convert.toNum(val)</code></td>
+      <td>String val = ‘3.141’</td>
+      <td>3.141</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Note:</strong>  Convert.toInt(double) rounds the passed numeric value either up or down to the nearest integer. Be sure to consider
+integer type range limitations when converting from a number to an integer with this function.</p>
+
+<h3 id="group-functions">Group Functions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Return Type</th>
+      <th>Example</th>
+      <th>Output</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>isMemberOfGroupName</code></td>
+      <td>Boolean</td>
+      <td><code>isMemberOfGroupName("group1")</code></td>
+      <td><strong>True</strong>, if the user under consideration is a member of *group1’; otherwise, <strong>False</strong>.</td>
+    </tr>
+    <tr>
+      <td><code>isMemberOfGroup</code></td>
+      <td>Boolean</td>
+      <td><code>isMemberOfGroupName("groupId")</code></td>
+      <td><strong>True</strong>, if the user under consideration is a member of group with id <em>groupId</em>; otherwise,  <strong>False</strong>.</td>
+    </tr>
+    <tr>
+      <td><code>isMemberOfAnyGroup</code></td>
+      <td>Boolean</td>
+      <td><code>isMemberOfAnyGroup("groupId1", "groupId2", "groupId3")</code></td>
+      <td><strong>True</strong>, if the user under consideration is a member of any groups with ids <em>groupId1</em>, <em>groupId2</em> or <em>groupId3</em>; otherwise <strong>False</strong>.</td>
+    </tr>
+    <tr>
+      <td><code>isMemberOfGroupNameStartsWith</code></td>
+      <td>Boolean</td>
+      <td><code>isMemberOfGroupNameStartsWith("San Fr")</code></td>
+      <td><strong>True</strong>, if the user under consideration is a member of any groups with names that starts with <em>San Fr</em>; otherwise,  <strong>False</strong>.</td>
+    </tr>
+    <tr>
+      <td><code>isMemberOfGroupNameContains</code></td>
+      <td>Boolean</td>
+      <td><code>isMemberOfGroupNameContains("admin")</code></td>
+      <td><strong>True</strong>, if the user under consideration is a member of any groups with names that contains <em>admin</em>; otherwise,  <strong>False</strong>.</td>
+    </tr>
+    <tr>
+      <td><code>isMemberOfGroupNameRegex</code></td>
+      <td>Boolean</td>
+      <td><code>isMemberOfGroupNameRegex("/.*admin.*")</code></td>
+      <td><strong>True</strong>, if the user under consideration is a member of any groups with names that contain <em>admin</em>; otherwise,  <strong>False</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="managerassistant-functions">Manager/Assistant Functions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>getManagerUser(managerSource).$attribute</code></td>
+      <td>Gets the manager’s Okta user attribute values</td>
+      <td>getManagerUser(“active_directory”).firstName</td>
+    </tr>
+    <tr>
+      <td><code>getManagerAppUser(managerSource, attributeSource).$attribute</code></td>
+      <td>Gets the manager’s app user attribute values for the app user of any appinstance.</td>
+      <td>getManagerAppUser(“active_directory”,”google”).firstName</td>
+    </tr>
+    <tr>
+      <td><code>getAssistantUser(assistantSource).$attribute</code></td>
+      <td>Gets the assistant’s Okta user attribute values.</td>
+      <td>getAssistantUser(“active_directory”).firstName</td>
+    </tr>
+    <tr>
+      <td><code>getAssistantAppUser(assistantSource, attributeSource).$attribute</code></td>
+      <td>Gets the assistant’s app user attribute values for the app user of any appinstance.</td>
+      <td>getAssistantAppUser(“active_directory”,”google”).firstName</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Pass the correct <strong>app name</strong> for the <em>managerSource</em>, <em>assistantSource</em>, and <em>attributeSource</em> parameters.<br />
+Note: At this time, only <strong>active_directory</strong> is supported for <em>managerSource</em> and <em>assistantSource</em>.</p>
+</blockquote>
+
+<h3 id="directory-and-workday-functions">Directory and Workday Functions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>hasDirectoryUser()</code></td>
+      <td>Checks whether the user has an Active Directory assignment and returns a boolean</td>
+    </tr>
+    <tr>
+      <td><code>hasWorkdayUser()</code></td>
+      <td>Checks whether the user has a Workday assignment and returns a boolean</td>
+    </tr>
+    <tr>
+      <td><code>findDirectoryUser()</code></td>
+      <td>Finds the Active Directory App user object and returns that object, or null if the user has more than one or no Active Directory assignments</td>
+    </tr>
+    <tr>
+      <td><code>findWorkdayUser()</code></td>
+      <td>Finds the Workday App user object and returns that object, or null if the user has more than one or no Active Directory assignments</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The functions above are often used in tandem to check whether a user has an AD or Workday assignment, and if so return an AD or Workday attribute.  See the ‘Popular Expressions’ table below for some examples.</p>
+
+<h2 id="constants-and-operators">Constants and Operators</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Common Actions</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Refer to a <code>String</code> constant</td>
+      <td>‘Hello world’</td>
+    </tr>
+    <tr>
+      <td>Refer to a <code>Integer</code> constant</td>
+      <td>1234</td>
+    </tr>
+    <tr>
+      <td>Refer to a <code>Number</code> constant</td>
+      <td>3.141</td>
+    </tr>
+    <tr>
+      <td>Refer to a <code>Boolean</code> constant</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>Concatenate two strings</td>
+      <td><code>user.firstName</code>+<code>user.lastName</code></td>
+    </tr>
+    <tr>
+      <td>Concatenate two strings with space</td>
+      <td><code>user.firstName</code>+” “+<code>user.lastName</code></td>
+    </tr>
+    <tr>
+      <td>Ternary operator example:<br />If group code is 123, assign value of Sales, else assign Other</td>
+      <td>user.groupCode==123?’Sales’:’Other’</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="popular-expressions">Popular Expressions</h2>
+
+<p>Sample user data:</p>
+
+<ul>
+  <li>Firstname = Winston</li>
+  <li>Lastname = Churchill</li>
+  <li>Email = winston.churchill@gmail.com</li>
+  <li>Login = winston.churchill@gmail.com</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value to Obtain</th>
+      <th>Expression</th>
+      <th>Example Output</th>
+      <th>Explanation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Firstname</td>
+      <td><code>user.firstName</code></td>
+      <td>Winston</td>
+      <td>Obtain the value of users’ firstname attribute.</td>
+    </tr>
+    <tr>
+      <td>Firstname + Lastname</td>
+      <td><code>user.firstName + user.lastName</code></td>
+      <td>WinstonChurchill</td>
+      <td>Obtain Firstname and Lastname values and append each together.</td>
+    </tr>
+    <tr>
+      <td>Firstname + Lastname with Separator</td>
+      <td><code>user.firstName + "." + user.lastName</code></td>
+      <td>Winston.Churchill</td>
+      <td>Obtain Firstname value, append a “.” character. Obtain and append the Lastname value.</td>
+    </tr>
+    <tr>
+      <td>First Initial + Lastname</td>
+      <td><code>substring(user.firstName, 0, 1) + user.lastName</code></td>
+      <td>WChurchill</td>
+      <td>Obtain Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Obtain and append the Lastname value.</td>
+    </tr>
+    <tr>
+      <td>First Initial + Lastname with Limit</td>
+      <td><code>substring(user.firstName, 0, 1) + substring(user.lastName, 0, 6)</code></td>
+      <td>WChurch</td>
+      <td>Obtain Firstname value. From result, retrieve 1 character starting at the beginning of the string. Obtain Lastname value. From result, retrieve characters greater than position 0 thru position 6, including position 6.</td>
+    </tr>
+    <tr>
+      <td>Lower Case First Initial + Lower Case Lastname with Separator</td>
+      <td><code>toLowerCase(substring( user.firstName, 0, 1)) + "." + toLowerCase(user.lastName)</code></td>
+      <td>w.churchhill</td>
+      <td>Obtain Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert result to lowercase. Append a “.” character. Obtain the Lastname value. Convert to lowercase and append.</td>
+    </tr>
+    <tr>
+      <td>Email Domain + Email Prefix with Separator</td>
+      <td><code>toUpperCase(substringBefore( substringAfter(user.email, "@"), ".")) + "\" + substringBefore( user.email, "@")</code></td>
+      <td>GMAIL\winston.churchill</td>
+      <td>Obtain Email value. From result, parse everything after the “@ character”. From result, parse everything before the “.” character. Convert to uppercase. Append a backslash “" character. Obtain the email value again. From result, parse for everything before the “@” character.</td>
+    </tr>
+    <tr>
+      <td>Email Domain + Lowercase First Initial and Lastname with Separator</td>
+      <td><code>toUpperCase(substringBefore( substringAfter(user.email, "@"), ".")) + "\" + toLowerCase(substring( user.firstName, 0, 1)) + toLowerCase(user.lastName)</code></td>
+      <td>GMAIL\wchurchill</td>
+      <td>Obtain Email value. From result, parse everything after the “@ character”. From result, parse everything before the “.” character. Convert to uppercase. Append a backslash “" character. Obtain the Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert it to lowercase. Obtain the Lastname value and convert it to lowercase.</td>
+    </tr>
+    <tr>
+      <td>Static Domain + Email Prefix with Separator</td>
+      <td><code>"XDOMAIN\" + toLowerCase(substring( user.firstName, 0, 1)) + toLowerCase(user.lastName)</code></td>
+      <td>XDOMAIN\wchurchill</td>
+      <td>Add “XDOMAIN” string. Append a backslash “" character. Obtain the Firstname value. From result, retrieve characters greater than position 0 thru position 1, including position 1. Convert it to lowercase. Obtain the Lastname value. Convert it to lowercase.</td>
+    </tr>
+    <tr>
+      <td>Workday ID</td>
+      <td><code>hasWorkdayUser()?findWorkdayUser().employeeID:null</code></td>
+      <td>123456</td>
+      <td>Check if user has a Workday assignment, and if so, return their Workday employee ID.</td>
+    </tr>
+    <tr>
+      <td>Active Directory UPN</td>
+      <td><code>hasDirectoryUser()?findDirectoryUser().managerUPN:null</code></td>
+      <td>bob@okta.com</td>
+      <td>Check if user has an Active Directory assignment, and if so, return their Active Directory manager UPN.</td>
+    </tr>
+  </tbody>
+</table>

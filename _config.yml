@@ -1,9 +1,13 @@
 name: The Identity Platform for Developers
 title: Okta Developer
-email: cody@flickerbox.com
-description: "Secure, scalable, and highly available authentication and user management for any app."
-baseurl: "/"
+email: developers@okta.com
+description: > # this means to ignore newlines until "baseurl:"
+  Secure, scalable, and highly available authentication and user management for any app.
+baseurl: ""
 url: "http://developer.okta.com"
+# url: "http://localhost:4000"
+twitter_username: okta
+github_username:  oktadeveloper
 
 gems:
   - jekyll-redirect-from
@@ -25,6 +29,7 @@ permalink: /blog/:year/:month/:day/:title
 
 support_phone_number: "1-888-722-7871"
 github_base_url: "https://github.com/okta/okta.github.io/tree/master/_source/"
+get_started_url: "https://www.okta.com/developer/signup"
 stack_overflow_forum_url: "http://stackoverflow.com/search?q=okta"
 
 ga_ua_id: "UA-15777010-3"
@@ -42,3 +47,38 @@ sitemap:
     priority_name: "priority"
 
 include: [_static]
+
+sass:
+    sass_dir: _sass
+
+collections:
+  standards:
+    output: true
+  code:
+    output: true
+  use_cases:
+    output: true
+  reference:
+    output: true
+  3rd_party_notices:
+    output: true
+  docs:
+    output: true
+    permalink: /:collection/:path:output_ext
+
+defaults:
+  -
+    scope:
+      collection: slides
+    values:
+      layout: documentation
+  -
+    scope:
+      collection: code
+    values:
+      layout: software
+  -
+    scope:
+      collection: reference
+    values:
+      layout: documentation
