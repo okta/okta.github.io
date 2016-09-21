@@ -208,9 +208,9 @@ More information is available for Okta support of [OpenID Connect](/docs/api/res
 
 For OpenID Connect and OAuth setup instructions, please take a look at these [setup instructions](https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw/blob/master/Okta-OIDC_SPA_JS-OSW_DevSetupGuide.pdf).
 
-A working [OpenID Connect sample with the Okta Sign-In Widget](https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw) can also be found on [GitHub].
+A working [OpenID Connect sample with the Okta Sign-In Widget](https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw) can also be found on GitHub.
 
-The Okta Sign-In Widget also provides built-in support for social authentication (Facebook, LinkeIn and Google), which is built on top OpenID Connect and OAuth 2.0. For social authentication setup instructions, please refer to [Social Authentication](/docs/api/resources/social_authentication.html).
+The Okta Sign-In Widget also provides support for social authentication (Facebook, LinkeIn and Google), which is built on top OpenID Connect and OAuth 2.0. For social authentication setup instructions, please refer to [Social Authentication](/docs/api/resources/social_authentication.html).
 
 
 Important note: to get the Sign-In Widget to work with OpenID Connect, OAuth and social authentication, you must allow iframe embedding in the `Admin Console -> Settings -> Customization` page (`IFrame Embedding` section). 
