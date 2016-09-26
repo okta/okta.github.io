@@ -14,7 +14,7 @@
 	}
 	
 	&-main {
-		@include padding(0 large large);
+		@include padding(0 large);
 		flex-grow: 1;
 		overflow: auto;
 		
@@ -710,7 +710,7 @@
 		padding-left: get-spacing('medium');
 		
 		&-main {
-			@include padding(large medium);
+			@include padding(0 medium);
 		}
 	}
 }
