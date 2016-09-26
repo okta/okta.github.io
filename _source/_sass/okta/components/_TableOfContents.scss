@@ -1,0 +1,156 @@
+.TableOfContents {
+	@include transition(transform normal);
+	align-self: flex-start;
+	left: calc(50% + #{$site-width * 0.5 - 200});
+	padding-left: get-spacing('small');
+	position: fixed;
+	top: 100px + get-spacing('large');
+	width: 200px;
+	z-index: 1000;
+	
+	&:before {
+		background: get-color('gray-light');
+		bottom: get-spacing('large');
+		content: '';
+		display: block;
+		left: 0;
+		position: absolute;
+		top: get-spacing('large');
+		width: 1px;
+	}
+	
+	&-indicator {
+		@include transition(height normal, transform normal);
+		background: get-color('blue-bright');
+		height: (get-spacing('xx-small') * 2) + 20;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 1px;
+		z-index: 10;
+	}
+	
+	&-item {
+		@include font-size('small');
+		@include padding(xx-small 0);
+		@include transition(color normal);
+		display: block;
+		line-height: 20px;
+		position: relative;
+		
+		&,
+		&:active
+		&:hover {
+			@include color('default');
+			text-decoration: none;
+		}
+	}
+
+	.is-level1 {
+		background: get-color('white');
+		font-weight: bold;
+		margin-left: get-spacing('-small');
+		padding-top: get-spacing('small');
+		
+		&:nth-child(2) {
+			padding-top: 0;
+		}
+	}
+	
+	.is-level4 {
+		margin-left: get-spacing('small');
+	}
+	
+	.is-level5 {
+		margin-left: get-spacing('small') * 2;
+	}
+	
+	.is-level6 {
+		margin-left: get-spacing('small') * 3;
+	}
+
+	.is-level2,
+	.is-level3,
+	.is-level4,
+	.is-level5,
+	.is-level6 {
+		cursor: pointer;
+	}
+	
+	.is-level3,
+	.is-level4,
+	.is-level5,
+	.is-level6 {
+		padding-left: get-spacing('small');
+		
+		&:before {
+			@include transition(border normal);
+			border: 1px solid get-color('gray-medium');
+			border-radius: 100%;
+			content: '';
+			display: block;
+			height: 6px;
+			left: 0;
+			position: absolute;
+			top: get-spacing('xx-small') + 6;
+			width: 6px;
+		}
+	}
+	
+	.is-active {
+		@include color('blue-bright');
+		
+		&:before {
+			border-color: get-color('blue-bright');
+		}
+	}
+}
+
+@include media('<1360px') {
+	.TableOfContents {
+		left: inherit;
+		right: get-spacing('medium');
+	}
+}
+
+@include media('<small') {
+	.TableOfContents {
+		@include padding(8px medium 0);
+		order: -1;
+		position: static;
+		width: 100%;
+		z-index: 10;
+		
+		&:before {
+			display: none;
+		}
+		
+		&-indicator {
+			display: none;
+		}
+		
+		.is-level1 {
+			margin-left: 0;
+			margin-top: 8px;
+		}
+		
+		.is-level4,
+		.is-level5,
+		.is-level6 {
+			display: none;
+		}
+		
+		.is-level1,
+		:last-child {
+			border-bottom: 1px solid get-color('gray-light');
+		}
+		
+		.is-active {
+			@include color('default');
+			
+			&:before {
+				border-color: get-color('gray-medium');
+			}
+		}
+	}
+}
