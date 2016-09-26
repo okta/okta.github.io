@@ -9,9 +9,7 @@ redirect_from:
 
 ## Overview
 
-The Okta Sign-In Widget is a JavaScript widget from Okta that gives you a customizable login experience that authenticates users on any web site.
-
-This page contains detailed reference information you can use to customize your sign-in widget.
+This page contains detailed reference information you can use to customize your Okta sign-in widget.
 Basic instructions for creating a sign-in widget are available in [Okta Sign-In Widget](./okta_sign-in_widget.html). 
 
 Prerequisites from the basic guide include: 
@@ -22,7 +20,7 @@ Prerequisites from the basic guide include:
 
 ### Example of a Customized Sign-In Widget
 
-> Okta Sign-In Widget documentation uses the domain name acme. Other Okta developer content uses `your-domain`.
+> The Okta Sign-In Widget documentation uses the `acme.com` domain name. Other Okta developer content may use `your-domain.com`.
 
 ~~~ javascript
 // Initialize
@@ -30,12 +28,11 @@ var oktaSignIn = new OktaSignIn({
   baseUrl: 'https://acme.okta.com',
   features: {
     rememberMe: true,
-    rememberDevice: true,
     smsRecovery: true,
     multiOptionalFactorEnroll: true
   },
   labels: {
-    'primaryauth.title': 'Partner login',
+    'primaryauth.title': 'Partner Sign-In',
     'help': 'Click here for more help'
   },
   transformUsername: function(username) {
@@ -53,7 +50,7 @@ oktaSignIn.session.exists(function (exists) {
 
   // Show the sign-in widget
   oktaSignIn.renderEl(
-    { el: '#sign-in-container' },
+    { el: '#okta-login-container' },
     // Success callback (invoked on successful authentication)
     function (res) {
       if (res.status === 'SUCCESS') {
@@ -73,12 +70,13 @@ oktaSignIn.session.exists(function (exists) {
 
  Property       | Description                              |  Type    |  Required    | Default
 --------------  | ---------------------------------------  | ------   | -----------  | -------
-`baseUrl`       | The base URL for your Okta organization. (e.g., `https://acme.okta.com` and `https://acme.oktapreview.com`).  |String    | Yes          | None
-`recoveryToken` | Bootstrap the widget in the recovery flow (e.g., Unlock Account or Forgot Password). | String    | No           | None
-`stateToken`    | Bootstrap the widget in a specific flow (e.g., Enroll MFA or MFA challenge). | String    | No           | None
-`logo`          | Logo to use in the widget (e.g., `https://acme.com/assets/logo/acme-logo.png`). | String    | No           | `Okta logo`
-`username`      | Bootstrap the widget with a username i.e., pre-fill the username in the widget. | String    | No           | None
-`transformUsername` | Transform the username before sending the request. The function is passed the username and the operation as parameters. [Example](#transformusername-example) | Function   | No           | None    
+`baseUrl`       | The base URL for your Okta organization. (e.g., `https://acme.okta.com`, `https://acme.oktapreview.com` or `https://acme.okta-emea.com`).  |String    | Yes          | None
+`recoveryToken` | Bootstraps the widget in the recovery flow (e.g., Unlock Account or Forgot Password). | String    | No           | None
+`stateToken`    | Bootstraps the widget in a specific flow (e.g., Enroll MFA or MFA challenge). | String    | No           | None
+`logo`          | Url of the logo image that shows up at the top of the widget (e.g. `https://acme.com/assets/logo/acme-logo.png`). | String    | No           | `Okta logo`
+`helpSupportNumber`          | Support phone number that shows up in the Password Reset flow (if the user clicks on `Can't access email`) and in the Unlock Account flow. | String    | No           | `Okta logo`
+`username`      | Bootstraps the widget with a username i.e., pre-fill the username in the widget. | String    | No           | None
+`transformUsername` | Transforms the username before sending the request. The function is passed the username and the operation as parameters. [Example](#transformusername-example) | Function   | No           | None    
 `features`      | Options to enable or disable a feature in the widget. [Option list](#features-options) [Example](#features-example) | Object | No           | None
 `helpLinks`     | Options to configure alternate help links in the widget. [Option list](#helplinks-options) [Example](#helplinks-example)   | Object | No           | None
 `labels`        | Options to localize labels in the widget. [Option list](#labels-options) | Object | No           | None
@@ -100,12 +98,13 @@ The following sections provide examples and option details for the last four con
     }
 ~~~
 
+The code above ensures that in case the current user clicked on the 'Forgot Password' or 'Unlock account' link, the sign-in widget will only proceed with the requested operation if and only if the user provided a username that ends with `@acme.com`. Otherwise, the sign-in widget will automatically append 
+
 #### features Example
 
 ~~~ javascript
     features: {
       rememberMe: true,
-      rememberDevice: false,
       selfServiceUnlock: true,
       multiOptionalFactorEnroll: true
     }
@@ -118,17 +117,15 @@ Enable or disable widget functionality with the following options for `features`
 -   `rememberMe` `(default: true)`
     Display a checkbox to enable "Remember me" functionality at login.
      
--   `rememberDevice` `(default: true)` 
-    Display a checkbox to enable "Trust this device" functionality in MFA required flow.
-     
--   `rememberDeviceAlways` `(default: false)`
-    Default the "Trust this device" checkbox to `true`.
-    
--   `autoPush` `(default: false)`
+ -   `autoPush` `(default: false)`
     Display a checkbox to enable "Send push automatically" functionality in the MFA required flow.
         
 -   `smsRecovery` `(default: false)`       
     Allow users with a configured mobile phone number to recover their password using an SMS message.
+    
+-   `callRecovery` `(default: false)`       
+    Allow users with a configured mobile phone number to recover their password using a voice call.
+    Note: only available starting v1.6.0 of the Sign-In Widget.
     
 -   `selfServiceUnlock` `(default: false)`
     Display the "Unlock Account" link to allow users to unlock their accounts.
@@ -138,6 +135,10 @@ Enable or disable widget functionality with the following options for `features`
     
 -   `router` `(default: false)`
     Update the browser location bar with a route on navigation.
+
+-   `windowsVerify` `(default: false)`
+    Need to get input from engineering.
+    
     
 #### helpLinks Example    
 
@@ -172,9 +173,6 @@ Enable help links with the following options:
    
 - `custom`
    Array of custom link objects. Each custom link object must have `text` and `href` properties.
-
-- `helpSupportNumber`
-  Option to display a Help/Support phone number if the user does not have access to email.
   
 #### labels Options
 
@@ -202,24 +200,90 @@ The following labels are among the most frequently used:
 
 Some labels contain "Okta." You may want to supply a different value for those labels.
 
-### OIDC Options
+## OpenID Connect, OAuth 2.0 and Social Integrations
 
-Options for the [OpenID Connect](/docs/api/resources/oidc.html#request-parameters) authentication flow.
-This flow is required for social authentication, and requires OAuth client registration with Okta.
-For instructions, see [Social Authentication](/docs/api/resources/social_authentication.html).
+The Okta Sign-In Widget provides built-in support for [OpenID Connect](http://openid.net/specs/openid-connect-core-1_0.html) and [OAuth 2.0](https://tools.ietf.org/html/rfc6749), particularly with the [Implicit Flow](http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth) for single-page web applications and the [Authorization Code Flow](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth) for  traditional server web applications.
 
-#### Example OIDC flow
+More information is available for Okta support of [OpenID Connect](/docs/api/resources/oidc.html#request-parameters) and [OAuth 2.0](/docs/api/resources/oauth2.html).
+
+For OpenID Connect and OAuth setup instructions, please take a look at these [setup instructions](https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw/blob/master/Okta-OIDC_SPA_JS-OSW_DevSetupGuide.pdf).
+
+A working [OpenID Connect sample with the Okta Sign-In Widget](https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw) can also be found on GitHub.
+
+The Okta Sign-In Widget also provides support for social authentication (Facebook, LinkeIn and Google), which is built on top OpenID Connect and OAuth 2.0. For social authentication setup instructions, please refer to [Social Authentication](/docs/api/resources/social_authentication.html).
+
+
+Important note: to get the Sign-In Widget to work with OpenID Connect, OAuth and social authentication, you must allow iframe embedding in the `Admin Console -> Settings -> Customization` page (`IFrame Embedding` section). 
+
+#### Example OpenID Connect configuration
 
 ~~~ javascript
 var oktaSignIn = new OktaSignIn({
   baseUrl: 'https://acme.okta.com',
-  features: {
-    rememberDevice: false,
-  },
-  // OIDC options
+  // OpenID Connect options
   clientId: 'GHtf9iJdr60A9IYrR0jw',
   redirectUri: 'https://acme.com/oauth2/callback/home',
-  authScheme: 'OAUTH2',
+  authParams: {
+    responseType: 'id_token',
+    responseMode: 'okta_post_message',
+    scope: [
+      'openid',
+      'email',
+      'profile',
+      'address',
+      'phone',
+      'groups'
+    ]
+  }
+  });
+
+oktaSignIn.renderEl({
+    el: '#sign-in-container'
+  },
+  function (res) {
+    // res.idToken - id_token generated
+    // res.claims - decoded id_token information
+  },
+  function (err) {
+    // handleErrors(err);
+  });
+~~~
+
+
+
+#### OpenID Connect Parameters
+
+ Property       | Description                              |  Type    |  Required    | Default
+--------------  | ---------------------------------------  | ------   | -----------  | -------
+ `clientId`     | [Client Id](oauth-clients) pre-registered with Okta for OIDC authentication flow. | String | Yes | None
+ `redirectUri`  | Callback location to send the authorization code to. This must be pre-registered as part of client registration. | String | Yes | `window.location.href`
+ `oAuthTimeout` | Timeout for OIDC authentication flow requests. | Number | No | `120000`
+ `authParams`   | Authentication parameters for OIDC. [List](#authParams-parameters) |See [List](#authParams-parameters) |See [List](#authParams-parameters) | See [List](#authParams-parameters)
+ 
+##### authParams parameters
+
+You can use any of the following parameters for `authParams`.
+
+ authParams Parameter       | Description                              |  Type    |  Required    | Default   | Valid Values
+--------------------------  | ---------------------------------------  | ------   | -----------  | -------   | ----------------
+`display`                   | Specify how to display the authentication UI. | String  | No           | `none` (for Okta) and `popup` (External IdP such as social) | `none`, `popup`, `page`
+`responseMode`              | Specify how the authorization response should be returned. | String | Yes | `okta_post_message` | `query`, `fragment`, `form_post`, `okta_post_message`
+`responseType`              | Specify the response type for OpenID Connect authentication. The authorization code returned can later be exchanged for Access token or Refresh token. | String | Yes | `id_token` | `id_token`, `code` (starting from v1.7.0)
+`scope`                     | Specify what information to make available in the `id_token`. `openid` is required. | Array | Yes | `['openid', 'email']` | `openid`, `email`, `profile`, `address`, `phone`, `groups` (maps to groups claim configured in the Authorization Server tab)   
+
+### Social Authentication Providers Options
+
+Social authentication with Facebook, Linked and Google is supported by Okta and requires OpenID Connect and OAuth configuration parameters as specified in the previous section. For Social Authentication setup instructions, please refer to [Social Authentication](/docs/api/resources/social_authentication.html).
+
+
+#### Example Social Authentication configuration
+
+~~~ javascript
+var oktaSignIn = new OktaSignIn({
+  baseUrl: 'https://acme.okta.com',
+  // OpenID Connect options
+  clientId: 'GHtf9iJdr60A9IYrR0jw',
+  redirectUri: 'https://acme.com/oauth2/callback/home',
   authParams: {
     responseType: 'id_token',
     responseMode: 'okta_post_message',
@@ -256,30 +320,16 @@ oktaSignIn.renderEl({
   });
 ~~~
 
-#### OIDC Parameters
+#### Social Authentication Parameters
+
+The table below only highlights the __additional__ parameters necessary for social authentication, on top of the [OpenID Connect/OAuth parameters](#openid-connect-parameters).
 
  Property       | Description                              |  Type    |  Required    | Default
 --------------  | ---------------------------------------  | ------   | -----------  | -------
- `clientId`     | [Client Id](oauth-clients) pre-registered with Okta for OIDC authentication flow. | String | Yes | None
- `redirectUri`  | Callback location to send the authorization code to. This must be pre-registered as part of client registration. | String | Yes | `window.location.href`
  `idps`         | External Identity Providers to use in OIDC authentication. Supported Identity providers - `GOOGLE`, `FACEBOOK` and `LINKEDIN`. Each IdP needs to be passed an object with `id` and `type`. | Array | No | `[]` 
  `idpDisplay`   | Display order for External Identity providers. `PRIMARY` to display external IdPs as primary, and `SECONDARY` to display Okta as the primary IdP. | String | No | `SECONDARY`
- `oAuthTimeout` | Timeout for OIDC authentication flow requests. | Number | No | `120000`
- `authScheme`   | Authentication scheme for OIDC authentication. | String | Yes | `OAUTH2`
- `authParams`   | Authentication parameters for OIDC. [List](#authParams-parameters) |See [List](#authParams-parameters) |See [List](#authParams-parameters) | See [List](#authParams-parameters)
- 
-##### Parameters for authParams
 
-You can use any of the following parameters for `authParams`.
-
- authParams Parameter       | Description                              |  Type    |  Required    | Default   | Valid Values
---------------------------  | ---------------------------------------  | ------   | -----------  | -------   | ----------------
-`display`                   | Specify how to display authentication UI. | String  | No           | `none` (for Okta) and `popup` (External Idp) | `none`, `popup`, `page`
-`responseMode`              | Specify how the authorization response should be returned. | String | Yes | `okta_post_message` | `query`, `fragment`, `form_post`, `okta_post_message`
-`responseType`              | Specify the response type for OIDC authentication. The authorization code returned can later be exchanged for Access token or Refresh token. | String | Yes | `id_token` | `code`, `token`, `id_token`
-`scope`                     | Specify what information to make available in the `id_token`. `openid` is required. | Array | Yes | `['openid', 'email']` | `openid`, `email`, `profile`, `address`, `phone`    
-
-## Render the widget
+## Public functions
 
 `.renderEl()` 
 
@@ -294,9 +344,6 @@ var oktaSignIn = new OktaSignIn({
 
 oktaSignIn.renderEl({
     el: '#sign-in-container',
-    features: {
-      rememberDevice: false,
-    },
     labels: {
       'primaryauth.title': 'Partner login',
       'help': 'Click here for more help'
@@ -329,7 +376,7 @@ failureCallback       | Function  | Yes           | Failure callback to invoke o
 
 Manage your Okta session with session functions in the Sign-in widget SDK.
 
-#### Check for an existing session
+#### Checking for an existing session
 
 `.session.exists()` 
 
@@ -352,7 +399,7 @@ Name                  |   Type    |   Required    | Description
 --------------------- | --------  | ------------  | -----------
 callback              | Function  | Yes           | Callback function. The function is passed a boolean value.
 
-#### Get the session
+#### Getting the current session
 
 `.session.get()` 
 
@@ -380,7 +427,7 @@ Name                  |   Type    |   Required    | Description
 --------------------- | --------  | ------------  | -----------
 callback              | Function  | Yes           | Callback function. The function is passed an object with status, session, user information if there is an active session and `{status: 'INACTIVE'}` if there is none.
 
-#### Refresh the session
+#### Refreshing the current session
 
 `.session.refresh()` 
 
@@ -409,7 +456,7 @@ Name                  |   Type    |   Required    | Description
 --------------------- | --------  | ------------  | -----------
 callback              | Function  | Yes           | Callback function. The function is passed an object with status, session, user information if there is an active session and `{status: 'INACTIVE'}` if there is none.
 
-#### Close the session
+#### Closing the current session
 
 `.session.close()` 
 
@@ -428,7 +475,7 @@ Name                  |   Type    |   Required    | Description
 --------------------- | --------  | ------------  | -----------
 callback              | Function  | Yes           | Callback function to invoke after closing the session. The function is invoked with an error message if the operation was not successful.
 
-#### Sign-out the user
+#### Signing out the user
 
 `.signOut()` 
 
@@ -449,13 +496,13 @@ callback              | Function  | Yes           | Callback function to invoke 
 
 ## Token Management
 
-Manage your ID tokens with the Sign-in Widget SDK.
+Manage your OpenID Connect ID token with the Sign-in Widget SDK.
 
-#### Refresh an id token
+#### Renewing an ID token
 
 `.idToken.refresh()`
  
-Refresh the `id_token` by extending its lifetime.
+Renews the `id_token` by requesting a new one from Okta (and thus extending its default lifetime of one hour).
 
 ##### Example
 ~~~ javascript
