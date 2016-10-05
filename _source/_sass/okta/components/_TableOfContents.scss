@@ -1,29 +1,21 @@
 .TableOfContents {
+	@include padding(large medium large 0);
 	@include transition(transform normal);
 	align-self: flex-start;
+	bottom: 0;
 	left: calc(50% + #{$site-width * 0.5 - 200});
-	padding-left: get-spacing('small');
+	overflow: auto;
 	position: fixed;
-	top: 100px + get-spacing('large');
-	width: 200px;
+	top: 100px;
+	width: 200px + get-spacing('medium');
 	z-index: 1000;
-	
-	&:before {
-		background: get-color('gray-light');
-		bottom: get-spacing('large');
-		content: '';
-		display: block;
-		left: 0;
-		position: absolute;
-		top: get-spacing('large');
-		width: 1px;
-	}
 	
 	&-indicator {
 		@include transition(height normal, transform normal);
 		background: get-color('blue-bright');
 		height: (get-spacing('xx-small') * 2) + 20;
 		left: 0;
+		margin-top: 25px + get-spacing('large');
 		position: absolute;
 		top: 0;
 		width: 1px;
@@ -47,9 +39,7 @@
 	}
 
 	.is-level1 {
-		background: get-color('white');
 		font-weight: bold;
-		margin-left: get-spacing('-small');
 		padding-top: get-spacing('small');
 		
 		&:nth-child(2) {
@@ -57,16 +47,40 @@
 		}
 	}
 	
+	.is-level2 {
+		padding-left: get-spacing('small');
+	}
+	
+	.is-level3 {
+		padding-left: get-spacing('small') * 2;
+		
+		&:before {
+			left: get-spacing('small');
+		}
+	}
+	
 	.is-level4 {
-		margin-left: get-spacing('small');
+		padding-left: get-spacing('small') * 3;
+		
+		&:before {
+			left: get-spacing('small') * 2;
+		}
 	}
 	
 	.is-level5 {
-		margin-left: get-spacing('small') * 2;
+		padding-left: get-spacing('small') * 4;
+		
+		&:before {
+			left: get-spacing('small') * 3;
+		}
 	}
 	
 	.is-level6 {
-		margin-left: get-spacing('small') * 3;
+		padding-left: get-spacing('small') * 5;
+		
+		&:before {
+			left: get-spacing('small') * 4;
+		}
 	}
 
 	.is-level2,
@@ -74,6 +88,7 @@
 	.is-level4,
 	.is-level5,
 	.is-level6 {
+		border-left: 1px solid get-color('gray-light');
 		cursor: pointer;
 	}
 	
@@ -81,8 +96,6 @@
 	.is-level4,
 	.is-level5,
 	.is-level6 {
-		padding-left: get-spacing('small');
-		
 		&:before {
 			@include transition(border normal);
 			border: 1px solid get-color('gray-medium');
@@ -90,7 +103,6 @@
 			content: '';
 			display: block;
 			height: 6px;
-			left: 0;
 			position: absolute;
 			top: get-spacing('xx-small') + 6;
 			width: 6px;
@@ -109,7 +121,7 @@
 @include media('<1360px') {
 	.TableOfContents {
 		left: inherit;
-		right: get-spacing('medium');
+		right: 0;
 	}
 }
 
