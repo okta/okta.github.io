@@ -4,16 +4,16 @@ title: Okta Auth SDK
 excerpt: Easily add sign-in capabilities to your fully branded web site.
 ---
 
-# Introduction
+## Overview
 
 The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/authn.html) and [OAuth 2.0 API](/docs/api/resources/oidc.html) to enable you to create a fully branded sign-in experience using JavaScript.
 
-# Prerequisites
+## Prerequisites
 
 - An Okta org - Register for [Okta Developer Edition](https://www.okta.com/developer/signup/) if you don't have an existing org
 - A domain that is [CORS enabled for your org](/docs/api/getting_started/enabling_cors.html)
 
-# Installation
+## Installation
 
 Include the following script tag in your target web page:
 
