@@ -210,7 +210,7 @@ $(function() {
 				}
 
 				if (siblingLevel == currentLevel) {
-					$sibling.css('display', 'inline-block');
+					$sibling.css('display', 'block');
 				} else {
 					$sibling.hide();
 				}
@@ -228,7 +228,7 @@ $(function() {
 					}
 
 					if (siblingLevel == currentLevel) {
-						$sibling.css('display', 'inline-block');
+						$sibling.css('display', 'block');
 					} else {
 						$sibling.hide();
 					}
