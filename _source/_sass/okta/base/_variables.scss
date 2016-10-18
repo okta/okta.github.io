@@ -63,10 +63,10 @@ $line-height:				(
 $colors:			(
 	'black':				#000000,
 	'white':				#fff,
-	
+
 	'default':				#5d5d5d,
 	'accent':				#007dc1,
-	
+
 	'blue-bright': 			#007dc1,
 	'blue-bright-hover': 	#0095e5,
 
@@ -113,7 +113,7 @@ $grid-width:				12;
 
 $line-break:				20px;
 $gutter-width:				20px;
-							 
+
 $breakpoints:				(
 							'xx-small':			320px,
 							'x-small':			480px,
@@ -121,10 +121,11 @@ $breakpoints:				(
 							'medium-small':		900px,
 							'medium':			1024px,
 							'large':			1200px,
+							'doc-min-toc': 1265px,
 							'x-large':			1400px,
 							'xx-large':			1600px
 							);
-						 
+
 $spacing:					(
 							'xx-small':			5px,
 							'x-small':			10px,

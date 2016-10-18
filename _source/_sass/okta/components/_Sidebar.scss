@@ -5,7 +5,7 @@
 	min-width: 280px;
 	position: relative;
 	width: 320px;
-	
+
 	&:before {
 		background: get-color('gray-lightest');
 		bottom: 0;
@@ -17,14 +17,14 @@
 		transform: translateX(-100%);
 		width: 50vw;
 	}
-	
+
 	&-title {
 		@include color('gray-dark');
 		@include font-size('base');
 		@include margin(medium 0 0);
 		font-weight: 600;
 	}
-	
+
 	&-nav {
 		&,
 		ul,
@@ -33,57 +33,56 @@
 			margin: 0;
 			padding: 0;
 		}
-		
+
 		ul {
 			border-left: 1px solid get-color('gray-light');
 			padding-left: get-spacing('x-small');
-			
+
 			a {
 				@include padding(0.1em x-small);
 				@include transition(background normal);
 				border-radius: 3px;
 			}
-			
+
 			a:active, a:hover {
 				background-color: get-color('gray-light');
 			}
 		}
-		
+
 		a {
 			@include color('default');
 			display: block;
 			font-weight: 400;
 			text-decoration: none;
 		}
-		
-		
+
+
 		> li,
 		ul {
 			@include margin(x-small 0);
 		}
-		
+
 		> li > a {
 			font-weight: 600;
 		}
-		
+
 		.is-active {
 			> a {
 				@include color('accent');
 			}
-			
+
 			> ul {
 				display: block;
 			}
 		}
 	}
-	
+
 	&-toggle {
 		display: none;
 	}
 }
 
-
-@include media("<=medium") {
+@include media('<doc-min-toc') {
 	.Sidebar {
 		@include transition(transform normal);
 		bottom: 0;
@@ -93,7 +92,7 @@
 		transform: translateX(-320px);
 		top: 100px;
 		z-index: 20;
-		
+
 		&-toggle {
 			display: block;
 			height: 28px;
@@ -103,11 +102,11 @@
 			transform: translate(50%, 0);
 			width: 28px;
 		}
-		
+
 		&.is-active {
 			transform: translateX(0);
 		}
-		
+
 		&.is-active &-toggle {
 			right: get-spacing('medium');
 			top: get-spacing('medium');

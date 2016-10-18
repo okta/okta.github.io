@@ -138,6 +138,12 @@
 			padding: 3px 5px;
 			border-right: 1px dotted #f0f0f0;
 			vertical-align: top;
+
+			code {
+				word-break: normal;
+				font-size: 12px;
+				color: #333333;
+			}
 		}
 
 		code, kbd, pre, samp, pre code {
@@ -151,6 +157,7 @@
 			color: #333333;
 			font-size: 14px;
 			font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+			word-break: break-all;
 		}
 
 		blockquote code,
@@ -533,20 +540,6 @@
 			display: none;
 		}
 
-		#gen-toc-container {
-			.nav-title {
-				background-color: get-color('blue-bright');
-			}
-			.sidebar-nav li a {
-				padding-left: 40px
-			}
-		}
-
-		#toc_current_doc {
-			background-color: white;
-			color: get-color('blue-bright');
-		}
-
 		.excerpt {
 			padding-left:40px
 		}
@@ -723,8 +716,15 @@
 	}
 }
 
-@include media('<small') {
+@include media('<large') {
 	.PageContent {
+		padding-left: 40px;
+	}
+}
+
+@include media('<doc-min-toc') {
+	.PageContent {
+		padding-left: 40px;
 		&.has-tableOfContents {
 			flex-direction: column;
 			padding-right: 0;
