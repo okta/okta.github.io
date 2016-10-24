@@ -1,0 +1,7 @@
+@include media('>=doc-min-toc') {
+  .PageContent {
+    &.has-tableOfContents &-main {
+      max-width: 840px;
+    }
+  }
+}

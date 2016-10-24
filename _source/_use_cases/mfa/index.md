@@ -31,7 +31,7 @@ Let’s get started!
 
 <iframe src="https://player.vimeo.com/video/123445568" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-# Prerequisites
+### Prerequisites
 
 To follow along with this guide, you will need to have your own Okta Developer Edition org and have Postman configured to make API requests to that account.
 
@@ -44,7 +44,7 @@ To follow along with this guide, you will need to have your own Okta Developer E
     Edition org, follow the
     [instructions on the Okta Developer Documentation page for setting up Postman](http://developer.okta.com/docs/getting_started/api_test_client.html).
 
-# Overview of API calls used for multi-factor authentication
+## Overview of API calls used for multi-factor authentication
 
 Below is an introduction to using Okta's Multi-Factor Authentication (MFA)
 API to add MFA to an existing application.
@@ -60,7 +60,7 @@ in an idiomatic way.
 
 Okta's helper libraries can be found here: <http://developer.okta.com/docs/sdk/core/api.html>
 
-## Setting up your Okta org for MFA
+### Setting up your Okta org for MFA
 
 Before you can start writing code, you'll need to make do a few
 things in the Admin interface to your Okta org.
@@ -68,7 +68,7 @@ things in the Admin interface to your Okta org.
 1.  Enable support for MFA.
 2.  Create an API token.
 
-### Enabling MFA in your Okta org
+#### Enabling MFA in your Okta org
 
 You must enable MFA from the Admin
 interface of your Okta org before you can use it from the
@@ -85,7 +85,7 @@ your Okta org:
     Authentication".
 8.  Click the green "Save" button.
 
-### Creating an API token for your Okta org
+#### Creating an API token for your Okta org
 
 Requests made to the Okta API are authenticated via an API
 token. Here is how to create an API token for your Okta
@@ -100,12 +100,12 @@ org:
 7.  Click the green "Create Token" button.
 8.  Configure Postman to use the Token you just created.
 
-### Set up Postman
+#### Set up Postman
 
 If you haven't set up Postman already, you will need to do that
 now. Here are [instructions for setting up Postman to work with Okta](http://developer.okta.com/docs/getting_started/api_test_client.html).
 
-## Test Postman
+#### Test Postman
 
 Before you get started, you will want to make sure your Postman
 setup is configured correctly, a "[Hello World](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program)" of sorts. Test your
@@ -120,7 +120,7 @@ Postman setup as follows:
 
 You'll know it is working if you get back JSON containing one or more user objects.
 
-## Create a test user
+#### Create a test user
 
 The first step in adding MFA to an existing
 application is to create a user account in Okta. Among other
@@ -144,7 +144,7 @@ random user generated using the [Random User Generator](https://randomuser.me/) 
 5.  Save the value of the "id" (the User ID) that is returned by Postman, you will
     be using this ID a lot. (In Okta, User ID's start with "00u")
 
-## Adding MFA
+### Adding MFA
 
 Now that you have created a user account in Okta, you are ready to
 setup MFA for that user account. A key part of enabling MFA for a
@@ -167,7 +167,7 @@ similar for all factors an works as follows:
 
 Once the factor has been enrolled, you can verify it as needed.
 
-### Adding a factor to a user account
+#### Adding a factor to a user account
 
 Using the User ID that you created earlier, add a Google
 Authenticator factor to that user as follows:
@@ -185,7 +185,7 @@ Authenticator factor to that user as follows:
     response in Postman. Open this URL in a new tab of your
     favorite browser.
 
-### Enroll the factor
+#### Enroll the factor
 
 After adding a factor to an Okta user, the next step is to have
 the user setup their factor and then prove that they have done
@@ -206,7 +206,7 @@ Continuing on from the steps above:
     passcode shown on Google Authenticator.
 9.  Click the blue "Send" button.
 
-### Verifying the factor
+#### Verifying the factor
 
 Now that you've verified the factor, you are ready to start
 verifying MFA tokens! Here is how to do that using Postman:
@@ -224,7 +224,7 @@ verifying MFA tokens! Here is how to do that using Postman:
     (Unsuccessful verification attempts will result in an HTTP
     status code of 403, with a JSON payload containing the key "errorCode").
 
-# Learn more
+## Learn more
 
 At this point, you should understand how to use the Okta API to add
 MFA to an existing application. You can learn more about using the
