@@ -1,0 +1,55 @@
+.MenuToggle {
+	cursor: pointer;
+	display: block;
+	height: 28px;
+	position: relative;
+	width: 28px;
+	
+	> svg {
+		//@include transition(opacity normal, transform normal);
+		display: block;
+		height: 28px;
+		width: 28px;
+	}
+	
+	&-circle {
+		//@include transition(stroke normal);
+		stroke: get-color('default');
+	}
+	
+	&-line1,
+	&-line2,
+	&-line3,
+	&-line4 {
+		//@include transition(fill normal, opacity normal, transform normal);
+		fill: get-color('default');
+		transform-origin: center;
+	}
+	
+	.is-active > & > svg,
+	&.is-active > svg {
+		transform: rotate(90deg);
+	}
+	
+	.is-active > & &-line1,
+	&.is-active &-line1 {
+		opacity: 0;
+		transform: translate(0, 5px);
+	}
+	
+	.is-active > & &-line2,	
+	&.is-active &-line2 {
+		transform: rotateZ(-45deg);
+	}
+	
+	.is-active > & &-line3,	
+	&.is-active &-line3 {
+		transform: rotateZ(45deg);
+	}
+	
+	.is-active > & &-line4,
+	&.is-active &-line4 {
+		opacity: 0;
+		transform: translate(0, -5px);
+	}
+}
