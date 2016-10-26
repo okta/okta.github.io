@@ -1,12 +1,20 @@
 .PageContent {
 	@extend %Wrap;
+	@include padding(large 0);
+	box-sizing: border-box;
 	display: flex;
 	max-width: $site-width + get-spacing('medium') * 2;
-	padding: 0;
+	overflow: hidden;
+	position: relative;
 	width: 100%;
+	z-index: 10;
+	
+	&.has-tableOfContents {
+		padding-right: 240px;
+	}
 	
 	&-main {
-		@include padding(large);
+		@include padding(0 large);
 		flex-grow: 1;
 		overflow: auto;
 		
@@ -706,13 +714,25 @@
 	}
 }
 
-@include media("<=medium") {
+@include media('<medium') {
 	.PageContent {
-		display: block;
-
+		padding-left: get-spacing('medium');
+		
 		&-main {
-			@include padding(medium small);
-			flex-grow: 1;
+			@include padding(0 medium);
+		}
+	}
+}
+
+@include media('<small') {
+	.PageContent {
+		&.has-tableOfContents {
+			flex-direction: column;
+			padding-right: 0;
+		}
+		
+		&.has-tableOfContents &-main {
+			width: 100%;
 		}
 	}
 }

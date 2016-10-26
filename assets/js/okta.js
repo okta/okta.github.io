@@ -1,2 +1,224 @@
-!function e(t,a,n){function o(r,s){if(!a[r]){if(!t[r]){var c="function"==typeof require&&require;if(!s&&c)return c(r,!0);if(i)return i(r,!0);var l=new Error("Cannot find module '"+r+"'");throw l.code="MODULE_NOT_FOUND",l}var d=a[r]={exports:{}};t[r][0].call(d.exports,function(e){var a=t[r][1][e];return o(a?a:e)},d,d.exports,e,t,a,n)}return a[r].exports}for(var i="function"==typeof require&&require,r=0;r<n.length;r++)o(n[r]);return o}({1:[function(e,t,a){!function(e){e.fn.extend({fbTabber:function(t){var a=t;return this.each(function(){var t=0,n=e("a",this),o=n.eq(0),i=n.eq(0);n.each(function(){e(this).data("index",++t)}),n.click(function(t){t.preventDefault(),i=o,o=e(this),i!==o&&(n.removeClass("active"),e(this).addClass("active"),"function"==typeof a.onClick&&a.onClick(o,i))})})}})}(jQuery)},{}],2:[function(e,t,a){!function(e){}(jQuery)},{}],3:[function(e,t,a){!function(e){e("#cors-test").delegate(":button","click",function(t){t.preventDefault();var a=e("#input-orgUrl").val();0!==a.indexOf("http://")&&0!==a.indexOf("https://")&&(a="https://"+a),e.ajax({url:a+"/api/v1/users/me",type:"GET",accept:"application/json",xhrFields:{withCredentials:!0}}).done(function(t){var a=_.template(e("#template-profile").html(),{user:t});e("#cors-test-result").html(a)}).fail(function(t,a,n){var o,i;switch(t.status){case 0:o="Cross-Origin Request Blocked",i="You must explictly add this site ("+window.location.origin+") to the list of allowed websites in your Okta Admin Dashboard";break;case 403:o=t.responseJSON.errorSummary,i="Please login to your Okta organization before running the test";break;default:o=t.responseJSON?t.responseJSON.errorSummary:t.statusText}e("#cors-test-result").html(e("<div>",{"class":"alert alert-danger",html:"<strong>"+o+":</strong> "+i||""}))})})}(jQuery)},{}],4:[function(e,t,a){!function(e){e(".mobile-toggle").click(function(){return e("body").toggleClass("mobile-nav-active"),!1}),e("#top-nav .SearchIcon").on("click",function(t){e(this).parent().toggleClass("search-active"),e("#top-nav #q").focus()}),e("#top-nav .has-dropdown > a").on("click",function(t){t.preventDefault(),t.stopPropagation(),e(this).parent().toggleClass("dropdown-active")}),e(".Sidebar-toggle").on("click",function(t){t.stopPropagation(),e(this).parent().toggleClass("Sidebar-active")}),e("#top-nav .has-dropdown > .dropdown-window, #top-nav #q, .Sidebar h2").on("click",function(e){e.preventDefault(),e.stopPropagation()}),e("#top-nav .has-dropdown > .dropdown-window a, #top-nav .SearchIcon, .Sidebar a").on("click",function(e){e.stopPropagation()}),e(window).bind("click",function(){e("#top-nav .has-dropdown").removeClass("dropdown-active"),e("#top-nav.search-active").removeClass("search-active")}),e("header, .Sidebar").bind("click",function(){e(".Sidebar.Sidebar-active").removeClass("Sidebar-active")})}(jQuery)},{}],5:[function(e,t,a){!function(e){var t=e("html[class*=ie]").length>0;e(".tabber").each(function(){e(this).fbTabber({onClick:function(a,n){var o=n.data("index"),i=a.data("index"),r=e(n.attr("href")),s=e(a.attr("href"));t||(r.removeClass("fadeInLeft").removeClass("fadeInRight").removeClass("fadeOutLeft").removeClass("fadeOutRight").removeClass("animated"),s.removeClass("fadeInLeft").removeClass("fadeInRight").removeClass("fadeOutLeft").removeClass("fadeOutRight").removeClass("animated")),r.css({display:"block",position:"relative",zIndex:5}),s.css({display:"block",position:"relative",zIndex:10}),t||(i>o?(s.addClass("fadeInRight"),r.addClass("fadeOutLeft")):i<o&&(s.addClass("fadeInLeft"),r.addClass("fadeOutRight")),s.addClass("animated"),r.addClass("animated")),t&&r.css({display:"none"})}})})}(jQuery)},{}]},{},[1,2,3,4,5]);
-//# sourceMappingURL=master.js.map
+//Tabber
+(function($)  {
+	
+	$.fn.extend({
+		
+		fbTabber: function(_options) {
+			
+			var options = _options;
+		
+			return this.each(function() {
+				
+				var index = 0;
+				var $tabs = $("a", this);
+				var $currentTab = $tabs.eq(0);
+				var $previousTab = $tabs.eq(0);
+				
+				$tabs.each(function() {
+					
+					$(this).data("index", ++index);
+					
+				});
+			
+				$tabs.click(function(e) {
+					
+					e.preventDefault();
+			
+					$previousTab = $currentTab;
+					$currentTab = $(this);
+			
+					if ($previousTab !== $currentTab) {
+						
+						$tabs.removeClass("active");
+						$(this).addClass("active");
+						
+						if (typeof options.onClick === "function") {
+							
+							options.onClick($currentTab, $previousTab);
+							
+						}
+						
+					}
+			
+				});
+				
+			});
+		
+		}
+		
+	});
+	
+})(jQuery);
+
+
+
+// Forms
+(function($) {
+
+    $('#cors-test').delegate(':button', "click", function(e) {
+        e.preventDefault();
+        var orgUrl = $('#input-orgUrl').val();
+        if (orgUrl.indexOf('http://') !== 0 && orgUrl.indexOf('https://') !== 0) {
+            orgUrl = 'https://' + orgUrl;
+        }
+
+        $.ajax({
+            url: orgUrl + '/api/v1/users/me',
+            type: 'GET',
+            accept: 'application/json',
+            xhrFields: { withCredentials: true }
+        }).done(function(data) {
+            var output = _.template($('#template-profile').html(), { user: data });
+            $('#cors-test-result').html(output);
+        }).fail(function(xhr, textStatus, error) {
+            var title, message;
+            switch (xhr.status) {
+                case 0 :
+                    title = 'Cross-Origin Request Blocked';
+                    message = 'You must explictly add this site (' + window.location.origin + ') to the list of allowed websites in your Okta Admin Dashboard';
+                    break;
+                case 403 :
+                    title = xhr.responseJSON.errorSummary;
+                    message = 'Please login to your Okta organization before running the test';
+                    break;
+                default :
+                    title = xhr.responseJSON ? xhr.responseJSON.errorSummary : xhr.statusText;
+                    break;
+            }
+            $('#cors-test-result').html($('<div>', {
+                'class': 'alert alert-danger',
+                'html': '<strong>' + title + ':</strong> ' + message || ''
+            }));
+        });
+    });
+
+})(jQuery);
+
+
+
+// Navigation
+(function($) {
+
+    // Mobile Nav Open
+    $(".mobile-toggle").click(function () {
+        $('body').toggleClass('mobile-nav-active');
+        return false;
+    });
+
+    // Search Open
+    $("#top-nav .SearchIcon").on('click', function(e){
+        $(this).parent().toggleClass("search-active");
+        $('#top-nav #q').focus();
+    });
+
+    // Support Dropdown Nav Open
+    $("#top-nav .has-dropdown > a").on("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $(this).parent().toggleClass("dropdown-active");
+    });
+
+    // Mobile Sidebar Open/Close
+    $(".Sidebar-toggle").on("click", function(e){
+        e.stopPropagation();
+        $(this).parent().toggleClass("is-active");
+    });
+
+    $("#top-nav .has-dropdown > .dropdown-window, #top-nav #q, .Sidebar h2").on("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    $("#top-nav .has-dropdown > .dropdown-window a, #top-nav .SearchIcon, .Sidebar a").on("click", function(e) {
+        e.stopPropagation();
+    });
+
+    $(window).bind("click", function() {
+        $("#top-nav .has-dropdown").removeClass("dropdown-active");
+        $("#top-nav.search-active").removeClass("search-active");
+    });
+
+    $('header, .Sidebar').bind("click", function() {
+        $(".Sidebar.is-active").removeClass("is-active");
+    });
+
+})(jQuery);
+
+
+
+// Product
+;(function($) {
+
+	var _isIE = ($("html[class*=ie]").length > 0);
+
+	$('.tabber').each(function() {
+		
+		$(this).fbTabber({	
+			onClick: function($current, $previous) {
+		
+				var prevIndex = $previous.data("index");
+				var currentIndex = $current.data("index");
+		
+				var $prevTarget = $($previous.attr("href"));
+				var $currentTarget = $($current.attr("href"));
+		
+				if (!_isIE)
+				{
+					$prevTarget
+					.removeClass("fadeInLeft")
+					.removeClass("fadeInRight")
+					.removeClass("fadeOutLeft")
+					.removeClass("fadeOutRight")
+					.removeClass("animated");
+		
+					$currentTarget
+					.removeClass("fadeInLeft")
+					.removeClass("fadeInRight")
+					.removeClass("fadeOutLeft")
+					.removeClass("fadeOutRight")
+					.removeClass("animated");
+				}
+		
+				$prevTarget.css({
+					display: "block",
+					position: "relative",
+					zIndex: 5
+				});
+		
+				$currentTarget.css({
+					display: "block",
+					position: "relative",
+					zIndex: 10
+				});
+		
+				if (!_isIE)
+				{
+					if (currentIndex > prevIndex)
+					{
+						$currentTarget.addClass("fadeInRight");
+						$prevTarget.addClass("fadeOutLeft");
+					}
+					else if (currentIndex < prevIndex)
+					{
+						$currentTarget.addClass("fadeInLeft");
+						$prevTarget.addClass("fadeOutRight");
+					}
+		
+					$currentTarget.addClass("animated");
+					$prevTarget.addClass("animated");
+				}
+		
+				if (_isIE)
+				{
+					$prevTarget.css({
+						display: "none"
+					});
+				}
+		
+			}
+		});
+	
+	});
+
+})(jQuery);
