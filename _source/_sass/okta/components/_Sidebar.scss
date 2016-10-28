@@ -82,7 +82,7 @@
 }
 
 @include media('<doc-min-toc') {
-	.Sidebar {
+	.DynamicSidebar.Sidebar {
 		@include padding(x-small small x-small 0);
 		background: get-color('white');
 		min-width: 100%;
