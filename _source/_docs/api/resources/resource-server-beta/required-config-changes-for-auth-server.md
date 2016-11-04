@@ -5,14 +5,14 @@ title: Configuration Changes Required for API Access Management Beta Update
 
 ## Configuration Changes Required for API Access Management Beta Update
 
-Okta provides the private authorization server for OAuth 2.0 (Beta).
+Okta provides a private authorization server for OAuth 2.0 (Beta).
 However, with release 2016.45, you can use a shared authorization server instead, which provides several benefits:
 
 * You created a separate private authorization server for each client, which required you to set scopes and claims 
   and group filters for each client on a separate server, but keeping many configurations in sync is challenging.
-  With the shared resource server, you can create a single configuration of scopes, claims, and Group filters, and
+  With the shared authorization server, you can create a single configuration of scopes, claims, and Group filters, and
   assign multiple clients. 
-* With the shared resource server, you can create one server per API or other service that you need to secure.
+* With the shared authorization server, you can create one server per API or other service that you need to secure.
   When you bring a new client online, you can choose which combination of services it can use by choosing the
   appropriate combination of authorization servers. This ensures that access is being granted with the same permissions
   (scopes) each time.
