@@ -1,6 +1,5 @@
 ---
 layout: docs_page
-weight: 2
 title: Getting a Token
 redirect_from: "/docs/getting_started/getting_a_token.html"
 ---

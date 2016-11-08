@@ -1,6 +1,5 @@
 ---
 layout: docs_page
-weight: 2
 title: Multi-Factor Authentication
 excerpt: Using Okta's Multi-Factor Authentication API to add MFA to an existing application.
 ---

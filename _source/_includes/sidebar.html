@@ -4,7 +4,7 @@
 	   <div>
 	     <h3 class="Sidebar-title">Use Cases</h3>
 	     <ul class="Sidebar-nav">
-	       {% assign documents = site.use_cases | sort: 'weight' %}
+	       {% assign documents = site.use_cases %}
 	       {% for document in documents %}
 	       {% unless document.id contains '/index' %}
                  {% continue %}
@@ -27,7 +27,7 @@
 		 </a>
 		 {% if page.id contains "docs/api/getting_started" %}
 		 <ul>
-		   {% assign docs = site.docs | sort: 'weight' %}
+		   {% assign docs = site.docs %}
 		   {% for doc in docs %}
 		     {% unless doc.id contains "docs/api/getting_started" %}{% continue %}{% endunless %}
 		     {% if doc.id contains "/index" %}{% continue %}{% endif %}

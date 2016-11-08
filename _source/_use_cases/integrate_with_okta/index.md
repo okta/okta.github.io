@@ -1,7 +1,6 @@
 ---
 layout: docs_page
 title: Integrate with Okta
-weight: 3
 excerpt: Make your app enterprise-ready and connect with thousands of customers via the Okta Application Network.
 redirect_from: "/docs/getting_started/oan_guidance.html"
 ---
