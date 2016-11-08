@@ -1,6 +1,5 @@
 ---
 layout: docs_page
-weight: 1
 title: API Test Client
 redirect_from: "/docs/getting_started/api_test_client.html"
 ---

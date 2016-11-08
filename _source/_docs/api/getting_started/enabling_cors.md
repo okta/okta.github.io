@@ -1,6 +1,5 @@
 ---
 layout: docs_page
-weight: 3
 title: Enabling CORS
 redirect_from: "/docs/getting_started/enabling_cors.html"
 scripts:
