@@ -350,14 +350,59 @@ oktaSignIn.renderEl({
       'help': 'https://acme.com/custom/help'
     }
   },
-  function (res) {
-    if (res.status === 'SUCCESS') {
-      // Success callback
-      res.session.setCookieAndRedirect('https://acme.com/home');
+
+  function success(res) {
+    // The properties in the response object depend on two factors:
+    // 1. The type of authentication flow that has just completed, determined by res.status
+    // 2. What type of token the widget is returning
+
+    // The user has started the password recovery flow, and is on the confirmation
+    // screen letting them know that an email is on the way.
+    if (res.status === 'FORGOT_PASSWORD_EMAIL_SENT') {
+      // Any followup action you want to take
+      return;
     }
+
+    // The user has started the unlock account flow, and is on the confirmation
+    // screen letting them know that an email is on the way.
+    if (res.status === 'UNLOCK_ACCOUNT_EMAIL_SENT') {
+      // Any followup action you want to take
+      return;
+    }
+
+    // The user has successfully completed the authentication flow
+    if (res.status === 'SUCCESS') {
+
+      // If the widget is not configured for OIDC, the response will contain
+      // user metadata and a sessionToken that can be converted to an Okta
+      // session cookie:
+      console.log(res.user);
+      res.session.setCookieAndRedirect('https://acme.com/app');
+
+      // If the widget is configured for OIDC with a single responseType, the
+      // response will be the token.
+      // i.e. authParams.responseType = 'id_token':
+      console.log(res.claims);
+      oktaSignIn.tokenManager.add('my_id_token', res);
+
+      // If the widget is configured for OIDC with multiple responseTypes, the
+      // response will be an array of tokens:
+      // i.e. authParams.responseType = ['id_token', 'token']
+      oktaSignIn.tokenManager.add('my_id_token', res[0]);
+      oktaSignIn.tokenManager.add('my_access_token', res[1]);
+
+      return;
+    }
+
   },
-  function (err) {
-    // Error callback
+
+  function error(err) {
+    // The widget will handle most types of errors - for example, if the user
+    // enters an invalid password or there are issues authenticating.
+    //
+    // This function is invoked with errors the widget cannot recover from:
+    // 1. Known errors: CONFIG_ERROR, UNSUPPORTED_BROWSER_ERROR, OAUTH_ERROR
+    // 2. Uncaught exceptions
     alert(err.message);
   });
 ~~~
