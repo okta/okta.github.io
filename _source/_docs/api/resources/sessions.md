@@ -548,7 +548,7 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
-#### Get Current Session
+### Get Current Session
 {:.api .api-operation}
 
 {% api_operation get /sessions/me %} {% api_cors %}
