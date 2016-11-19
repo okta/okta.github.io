@@ -272,20 +272,6 @@ The actions in a Rule define which scopes can be granted to the requests, thus d
 
 ## Endpoints
 
-{% beta %}
- Quick Reference
-
-| Desscription   | OpenID Connect | OAuth 2.0 |
-|:---|:---------------|:----------|
-|  [Authentication](#authentication-request)  | {% api_operation get /oauth2/v1/authorize %} {% api_lifecycle ea %}               | {% api_operation get /oauth2/:authorizationServerId/v1/authorize %} {% api_lifecycle beta %}          |
-|  [Token](#token-request) | {% api_operation post /oauth2/v1/token %} {% api_lifecycle ea %}               | {% api_operation post /oauth2/:authorizationServerId/v1/token %} {% api_lifecycle beta %}          |
-|  [Introspection Request](#introspection-request)  | {% api_operation post /oauth2/v1/introspect %} {% api_lifecycle ea %}               | {% api_operation post /oauth2/:authorizationServerId/v1/introspect %} {% api_lifecycle beta %}          |
-|  [Revocation Request](#revocation-request)  | {% api_operation post /oauth2/v1/revoke %} {% api_lifecycle ea %}               | {% api_operation post /oauth2/:authorizationServerId/v1/revoke %} {% api_lifecycle beta %}          |
-|  Get Keys  | {% api_operation get /oauth2/v1/keys %} (% api_lifecycle ea %}               |  {% api_operation get /oauth2/:authorizationServerId/v1/keys %} {% api_lifecycle beta %}         |
-|  Authorization Server Metadata Well-Known Discovery Document  | {% api_operation get /.well-known/openid-configuration %} {api_lifecycle ea %}               | {% api_operation get /oauth2/:authorizationServerId/.well-known/oauth-authorization-server %} {% api_lifecycle beta %}          |
-
-{% endbeta %}
-
 ### Authentication Request
 {:.api .api-operation}
 
@@ -296,8 +282,7 @@ OpenID Connect:
 
 {% beta %}
 
-OAuth 2.0:
-
+OAuth 2.0: 
 {% api_operation get /oauth2/:authorizationServerId/v1/authorize %} {% api_lifecycle beta %}
 {% endbeta %}
 
@@ -441,8 +426,13 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 ### Token Request
 {:.api .api-operation}
 
-{% api_operation post /oauth2/v1/token %} {% api_lifecycle ea %}
 {% beta %}
+OpenID Connect: 
+{% endbeta %}
+{% api_operation post /oauth2/v1/token %} {% api_lifecycle ea %}
+
+{% beta %}
+OAuth 2.0: 
 {% api_operation post /oauth2/:authorizationServerId/v1/token %} {% api_lifecycle beta %}
 {% endbeta %}
 
@@ -549,8 +539,13 @@ Content-Type: application/json;charset=UTF-8
 ### Introspection Request
 {:.api .api-operation}
 
-{% api_operation post /oauth2/v1/introspect %} {% api_lifecycle ea %}
 {% beta %}
+OpenID Connect: 
+{% endbeta %}
+{% api_operation post /oauth2/v1/introspect %} {% api_lifecycle ea %}
+
+{% beta %}
+OAuth 2.0: 
 {% api_operation post /oauth2/:authorizationServerId/v1/introspect %} {% api_lifecycle beta %}
 {% endbeta %}
 
@@ -667,7 +662,11 @@ Content-Type: application/json;charset=UTF-8
 ### Revocation Request
 {:.api .api-operation}
 
+{% beta %}
+OpenID Connect: 
+{% endbeta %}
 {% api_operation post /oauth2/v1/revoke %} {% api_lifecycle ea %}
+
 {% beta %}
 {% api_operation post /oauth2/:authorizationServerId/v1/revoke %} {% api_lifecycle beta %}
 {% endbeta %}
@@ -735,7 +734,10 @@ Content-Type: application/json;charset=UTF-8
 ### Get Keys
 {:.api .api-operation}
 
-{% api_operation get /oauth2/:authorizationServerId/v1/keys %} {% api_lifecycle beta %}
+
+OpenID Connect: {% api_operation get /oath2/v1/keys %} {% api_lifecycle ea %} See [OpenID Connect](/docs/api/resources/oidc.html#get-keys).
+
+OAuth 2.0: {% api_operation get /oauth2/:authorizationServerId/v1/keys %} {% api_lifecycle beta %}
 
 #### Response Example
 {:.api .api-response .api-response-example}
@@ -790,7 +792,9 @@ Standard open-source libraries are available for every major language to perform
 ### Authorization Server Metadata
 {:.api .api-operation}
 
-{% api_operation get /oauth2/:authorizationServerId/.well-known/oauth-authorization-server %} {% api_lifecycle beta %}
+OpenID Connect: {% api_opertion get /.well-known/openid-configuration %} {% api_lifecycle ea %}
+
+Oauth 2.0: {% api_operation get /oauth2/:authorizationServerId/.well-known/oauth-authorization-server %} {% api_lifecycle beta %}
 
 This API endpoint returns metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
 This API doesn't require any authentication and returns a JSON object with the following structure.
