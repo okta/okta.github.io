@@ -668,6 +668,7 @@ OpenID Connect:
 {% api_operation post /oauth2/v1/revoke %} {% api_lifecycle ea %}
 
 {% beta %}
+OAuth 2.0: 
 {% api_operation post /oauth2/:authorizationServerId/v1/revoke %} {% api_lifecycle beta %}
 {% endbeta %}
 
@@ -794,7 +795,7 @@ Standard open-source libraries are available for every major language to perform
 
 OpenID Connect: {% api_opertion get /.well-known/openid-configuration %} {% api_lifecycle ea %}
 
-Oauth 2.0: {% api_operation get /oauth2/:authorizationServerId/.well-known/oauth-authorization-server %} {% api_lifecycle beta %}
+OAuth 2.0: {% api_operation get /oauth2/:authorizationServerId/.well-known/oauth-authorization-server %} {% api_lifecycle beta %}
 
 This API endpoint returns metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
 This API doesn't require any authentication and returns a JSON object with the following structure.
