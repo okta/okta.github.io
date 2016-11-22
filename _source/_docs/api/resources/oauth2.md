@@ -786,9 +786,11 @@ This API doesn't require any authentication and returns a JSON object with the f
     "issuer": "https://${org}.okta.com",
     "authorization_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/authorize",
     "token_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/token",
+    "userinfo_endpoint": "https://${org}/oauth2/{authorizationServerId}/v1/userinfo",
     "jwks_uri": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/keys",
     "response_types_supported": [
         "code",
+        "code token",
         "code id_token",
         "code id_token token",
         "id_token",
@@ -820,6 +822,7 @@ This API doesn't require any authentication and returns a JSON object with the f
         "profile",
         "address",
         "phone",
+        "offline_access",
         "scope1"
     ],
     "token_endpoint_auth_methods_supported": [
