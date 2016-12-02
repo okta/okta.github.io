@@ -442,16 +442,18 @@ refresh_token      | Expected if the grant_type specified *refresh_token*. The v
 username           | Expected if the grant_type specified *password*. | String |
 password           | Expected if the grant_type specified *password*. | String |
 scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
-redirect_uri       | Expected if grant_type is *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
+redirect_uri       | Expected if grant_type specified *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
+code_verifier      | Expected if grant_type specified *authorization_code* for native applications. The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
+client_id          | Expected if *code_verifier* is included or client credentials are not provided in the Authorization header. This is used in conjunction with the client_secret parameter to authenticate the client application. | String |
+client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the Authorization header. This is used in conjunction with the client_id parameter to authenticate the client application. | String |
 
 > The [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` is `client_credentials`) is currently **Beta**.
 
 
 ##### Token Authentication Method
 
-The client can authenticate by providing the [`client_id`](oidc.html#request-parameters) 
-and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) as an Authorization header in the Basic auth scheme (basic authentication).
+For clients authenticating by client credentials, provide the [`client_id`](oidc.html#request-parameters) 
+and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) either as an Authorization header in the Basic auth scheme (basic authentication) or as additional parameters to the POST body. Including credentials in both the headers and the POST body is not allowed.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
 
