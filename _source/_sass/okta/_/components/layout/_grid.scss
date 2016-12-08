@@ -66,6 +66,13 @@
 @for $i from 1 through $grid-width {
 	.Column--#{$i} {
 		width: 100% * ($i / $grid-width);
+
+		// shim for IE because it calculates width, then adds padding (which is backwards and causes wrapping)
+		@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+			width: floor(100% * ($i / $grid-width)) - 2;
+			flex-basis: floor(100% * ($i / $grid-width)) - 2;
+			padding: 0 1% $gutter-width;
+		}
 	}
 
 	.ColumnOffset--#{$i - 1} {

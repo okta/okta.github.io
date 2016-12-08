@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-weight: 4
+weight: 5
 title: Okta Expression Language
 excerpt: The features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API.
 redirect_from:

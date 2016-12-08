@@ -39,7 +39,7 @@ scroll to the bottom of the Admin **Dashboard** page to see the version number:
 
 For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 
-## Earlier Release Notes
+## Earlier Platform Release Notes
 
 * [Platform Release Notes for Release 2016.47](platform-release-notes2016-47.html)
 * [Platform Release Notes for Release 2016.46](platform-release-notes2016-46.html)

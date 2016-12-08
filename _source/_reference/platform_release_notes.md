@@ -1,7 +1,7 @@
 ---
 layout: docs_page
-weight: 5
-title: Release Notes
+weight: 6
+title: Platform Release Notes
 link: /docs/platform-release-notes/platform-release-notes.html
 excerpt: Information on the changes and updates in the Okta platform.
 ---
