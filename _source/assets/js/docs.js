@@ -179,7 +179,7 @@ $(function() {
 			// Defined in _sass/okta/components/_Sidebar.scss
 			// See also: _source/_sass/okta/_/base/_variables.scss:66
 			if (! isMobile) {
-				$toc.scrollLock();
+				$toc.scrollLock('enable');
 			}
 		};
 
@@ -315,6 +315,13 @@ $(function() {
 
 		$(window).on('resize', function(){
 			isMobile = window.getComputedStyle(document.body,':before').content.includes("toc-mobile");
+
+			if (isMobile) {
+				$toc.scrollLock('disable');
+			}
+			else {
+				$toc.scrollLock('enable');
+			}
 		});
 		$(window).on('scroll', onScroll);
 		$(window).on('resize', onScroll);
