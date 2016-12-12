@@ -310,7 +310,7 @@ The ID Token is signed by an RSA private key. Okta publishes the corresponding p
 To stay in sync with Okta's key rotation, your application should check the `kid`, and if it has changed, 
 check the `jwks_uri` value in the [well-known configuration](#openid-connect-discovery-document) for a new public key and `kid`.
 
-All apps must roll over keys for adequate security. Please note the following:
+Please note the following:
 
 * For security purposes, Okta automatically rotates keys used to sign the token.
 * The current key rotation schedule is four times a year. This schedule can change without notice.
