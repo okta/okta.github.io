@@ -7,6 +7,10 @@ body {
     padding-top: 100px;
     position: relative;
 
+  @include media('<medium') {
+    padding-top: 75px;
+  }
+
   &.Page-Full-Width {
 
     .PageContent {

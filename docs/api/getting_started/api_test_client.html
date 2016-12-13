@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
-    <title>API Test Client | Okta Developer</title>
-    <meta name="description" content="Overview">
+    <title>Getting Started With the Okta APIs | Okta Developer</title>
+    <meta name="description" content="Getting Started With the Okta API">
     <link rel="canonical" href="http://developer.okta.com/docs/api/getting_started/api_test_client.html">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
 
@@ -76,7 +76,7 @@
             </div>
 
             <div id="mobile-nav">
-                <a id="mobile-search" href="http://okta.com/search/"><span class="icon-search-light"></span></a>
+                <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
                 <a id="mobile-open" class="mobile-toggle" href="#top-nav">
                     <span></span>
                     <span></span>
@@ -99,1121 +99,366 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 	  <!-- END Header -->
 	      <!-- START Page Center w/Sub Nav & Content -->
-    <section class="PageContent DynamicSidebar">
+    <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar -->
-              <aside class="Sidebar">
-        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
-           <div class="Sidebar-close Sidebar-toggle"></div>
-	   <div>
-	     <h3 class="Sidebar-title">Use Cases</h3>
-	     <ul class="Sidebar-nav">
-	       
-	       
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-	       <li><a href="/use_cases/authentication">Authentication</a></li>
-	       
-	       
-	       <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
-	       
-	       
-	       <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
-	       
-	       <!-- <li class="is-active"> -->
-	       <!-- 	 <a href="#">Working with the Okta API</a> -->
-	       <!-- 	 <ul> -->
-	       <!-- 	   <li><a href="#">Versioning</a></li> -->
-	       <!-- 	   <li class="is-active"><a href="#">HTTP Verbs</a></li> -->
-	       <!-- 	 </ul> -->
-	       <!-- </li> -->
-	     </ul>
-	     <h3 class="Sidebar-title">Reference</h3>
-	     <ul class="Sidebar-nav">
-	       <li>
-		 <a href="/docs/api/getting_started/">
-		   Getting Started
-		 </a>
-		 
-		 <ul>
-		   
-		   
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/getting_started/api_test_client.html">API Test Client</a></li>
-		   
-		     
-		     
-		     <li><a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a></li>
-		   
-		     
-		     
-		     <li><a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a></li>
-		   
-		     
-		     
-		     <li><a href="/docs/api/getting_started/design_principles.html">Design Principles</a></li>
-		   
-		 </ul>
-		 
-	       </li>
-	       
-	       
-	       <li>
-		 <span>
-		   Authentication Reference
-		 </span>
-		 <ul>
-		     <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-		 
-		     <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
-		 
-		     <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
-		 
-		     <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-		 
-		     <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
-		 </ul>
-	       </li>
+      <aside class="Sidebar">
+    <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
+    <div class="Sidebar-close Sidebar-toggle"></div>
+    <div>
+        <h3 class="Sidebar-title">Use Cases</h3>
+        <ul class="Sidebar-nav">
+            
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+            <li><a href="/use_cases/authentication">Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
+            
+        </ul>
 
-	       <li>
-		 <span>
-		   API Reference
-		 </span>
-		 <ul>
-                     
-                     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/apps.html">Apps</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/events.html">Events</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/schemas.html">Schemas</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/templates.html">Templates</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/users.html">Users</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		 </ul>
-	       </li>
+        <h3 class="Sidebar-title">Reference</h3>
+        <ul class="Sidebar-nav">
+            <li>
+                <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+                
+                    <ul>
+                    
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="is-active"><a href="/docs/api/getting_started/api_test_client.html">Getting Started With the Okta APIs</a></li>
+                    
+                        
+                        
+                        <li><a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a></li>
+                    
+                        
+                        
+                        <li><a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a></li>
+                    
+                        
+                        
+                        <li><a href="/docs/api/getting_started/design_principles.html">Design Principles</a></li>
+                    
+                    </ul>
+                
+            </li>
 
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/reference/error_codes">
-		   Error Codes
-		 </a>
-	       </li>
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/reference/okta_expression_language">
-		   Okta Expression Language
-		 </a>
-	       </li>
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/docs/platform-release-notes/platform-release-notes.html">
-		   Release Notes
-		 </a>
-	       </li>
-	       
-	       <!-- <li class="is-active"> -->
-	       <!-- 	 <a href="#">Working with the Okta API</a> -->
-	       <!-- 	 <ul> -->
-	       <!-- 	   <li><a href="#">Versioning</a></li> -->
-	       <!-- 	   <li class="is-active"><a href="#">HTTP Verbs</a></li> -->
-	       <!-- 	 </ul> -->
-	       <!-- </li> -->
-	     </ul>
+            
+            
 
-	     
+            <li>
+                <a href="/docs/api/resources/authn.html">Authentication Reference</a>
 
-	   </div>
-        </aside>
+                
+            </li>
+
+            <li>
+                <a href="/docs/api/resources/apps.html">API Reference</a>
+
+                
+
+            </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/reference/error_codes">
+                        Error Codes
+                    </a>
+                </li>
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/reference/okta_expression_language">
+                        Okta Expression Language
+                    </a>
+                </li>
+            
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/docs/platform-release-notes/platform-release-notes.html">
+                        Platform Release Notes
+                    </a>
+                </li>
+            
+        </ul>
+
+        
+
+        <script>
+            if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+                document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+            }
+
+            if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+                document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+            }
+        </script>
+
+    </div>
+</aside>
 
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-      <h2 id="overview">Overview</h2>
+      <h1 id="getting-started-with-the-okta-api">Getting Started With the Okta API</h1>
 
-<p><a href="http://getpostman.com">Postman</a> is an awesome REST API test client that a lot of people at Okta use to test the Okta API.  We have built templates for all of the Okta APIs that makes playing with the Okta APIs simple and easy if you don’t have time to practice your <em>Command Line Fu</em> with <a href="http://en.wikipedia.org/wiki/CURL">cURL</a></p>
+<p>A great way to learn an API is to issue requests and inspect the responses. You can easily access our Postman collections and Example environment to do just that.</p>
 
-<p><img src="/assets/img/postman-chrome-web-store.png" alt="Postman Chrome Web Store" /></p>
+<p><img src="/assets/img/postman.png" alt="Postman and an Okta Collection" /></p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<p>To use these collections, you’ll need to set up your environment, import the collections, send a test request, and verify the results.</p>
 
-<ul>
-  <li>Chrome Web Browser</li>
-  <li><a href="/docs/api/getting_started/getting_a_token.html">API Key created in the Okta Admin UI</a></li>
-</ul>
-
-<h2 id="setup">Setup</h2>
+<h2 id="set-up-your-environment">Set Up Your Environment</h2>
 
 <ol>
-  <li><a href="https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop">Download Postman Chrome Extension</a></li>
+  <li><a href="https://www.okta.com/platform-signup/">Sign up for an Okta Developer org</a></li>
+  <li>Log into your Okta Developer org and <a href="getting_a_token.html">create an API key</a>.</li>
+  <li><a href="http://getpostman.com">Install the Postman App</a>.</li>
   <li>
-    <p>Launch <strong>Postman</strong> with new Chrome App Launcher</p>
-
-    <p><img src="/assets/img/chrome-ui-app-launcher.png" alt="Chrome App Launcher" title="Chrome App Launcher" /></p>
+    <p>Launch Postman and import the Okta Example environment for Postman by copying this link: <a href="http://developer.okta.com/docs/api/postman/example.okta.com.environment">http://developer.okta.com/docs/api/postman/example.okta.com.environment</a>.
+ <img src="/assets/img/import_enviro.png" alt="Importing the Okta Example Environment" /></p>
   </li>
   <li>
-    <p>Import and configure a new environment template for your Okta organization</p>
-
-    <p>You should <a href="../postman/example.okta.com.environment">import the example Postman environment</a> and duplicate for each Okta environment (dev, test, preview, prod)</p>
-
-    <ol>
-      <li>Click the <strong>Import</strong> button in the top toolbar
-   <img src="/assets/img/postman-ui-import-button.png" alt="Import Button" title="Import Button" /></li>
-      <li>Select the <strong>From URL</strong> tab, paste <a href="../postman/example.okta.com.environment">this URL for the example.okta.com environment</a>, and click the <strong>Import</strong> button
-   <img src="/assets/img/postman-ui-import-env.png" alt="Import Environment" title="Import Environment" /></li>
-      <li>Select the <strong>No environment</strong> pull-down in the top-right of the UI and select <strong>Manage environments</strong>
- <img src="/assets/img/postman-ui-manage-env.png" alt="Manage Environments" title="Manage Environments" /></li>
-      <li>Click the <strong>Duplicate environment</strong> icon to create a new environment from imported template
- <img src="/assets/img/postman-ui-duplicate-env.png" alt="Duplicate Environment" title="Duplicate Environment" /></li>
-      <li>
-        <p>Click the name to edit the duplicated environment, assign a new name, and specify the following values:</p>
-
-        <ul>
-          <li><code class="highlighter-rouge">url</code>: full-qualified base URL for your Okta organization such as <em>https://acme.okta.com</em></li>
-          <li><code class="highlighter-rouge">apikey</code>: the API key you generated as part of prerequisites</li>
-          <li><code class="highlighter-rouge">email-suffix</code>: used by request templates for email addresses and logins of new users</li>
-          <li><code class="highlighter-rouge">subdomain</code>: <em>orgname</em> in https://<em>orgname</em>.okta.com</li>
-        </ul>
-
-        <blockquote>
-          <p>We recommend you name the new environment the name of your Okta organization such as example.okta.com in case you have both a preview and production organization</p>
-        </blockquote>
-
-        <p><img src="/assets/img/postman-ui-edit-env.png" alt="Edit Environment" title="Edit Environment" /></p>
-      </li>
-      <li>Modify Postman settings to “Retain headers on clicking on links” (Optional)
-   <img src="/assets/img/postman-ui-settings.png" alt="Postman Settings" title="Postman Settings" /></li>
-    </ol>
+    <p>Make sure the <code class="highlighter-rouge">example.okta.com</code> environment is selected.
+ <img src="/assets/img/postman_example_start.png" alt="Postman app with collections" /></p>
   </li>
-  <li>
-    <p>Select and verify your configured environment</p>
-
-    <ol>
-      <li>
-        <p>Ensure you have selected your environment in the pull-down</p>
-
-        <p><img src="/assets/img/postman-ui-choose-env.png" alt="Choose Environment" title="Choose Environment" /></p>
-
-        <blockquote>
-          <p>Your selected environment should have your name that you configured above and not say <code class="highlighter-rouge">No environment</code> or <code class="highlighter-rouge">example.okta.com</code></p>
-        </blockquote>
-      </li>
-      <li>
-        <p>You can preview your configured environment variables by clicking the large <strong>X</strong> icon next to the environment pull-down</p>
-
-        <p><img src="/assets/img/postman-ui-preview-env.png" alt="Preview Environment" title="Preview Environment" /></p>
-      </li>
-    </ol>
+  <li>Click the eye icon next to <code class="highlighter-rouge">example.okta.com</code> and select <strong>Edit</strong> to replace or add these values:
+    <ul>
+      <li><code class="highlighter-rouge">url</code>: Replace the example value with your org’s URL, for example <strong>https://myOrg.okta.com</strong>. This becomes the new name of your environment.</li>
+      <li><code class="highlighter-rouge">apikey</code>: Enter the API Key you created in your org, for example <strong>00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS</strong>.</li>
+      <li><code class="highlighter-rouge">email-suffix</code>: Enter the email suffix for your domain, for example <strong>myOrg.com</strong>.</li>
+      <li><code class="highlighter-rouge">subdomain</code>: Enter the subdomain, for example <strong>myOrg</strong>.</li>
+      <li><code class="highlighter-rouge">username</code>, <code class="highlighter-rouge">password</code>: Enter the username and password for the API user that sends your requests.</li>
+    </ul>
   </li>
+  <li>Save your changes by selecting <strong>Update</strong>. Now your environment looks similar to this example:
+ <img src="/assets/img/postman_example_enviro.png" alt="Example.okta.com environment with required values" /></li>
 </ol>
 
-<h2 id="collections">Collections</h2>
+<h2 id="import-a-collection">Import a Collection</h2>
 
-<p>Once you have setup your Postman environment, you can import pre-built collections for the Okta APIs</p>
+<p>Import the collection for the Users API:</p>
+
+<p><a href="https://app.getpostman.com/run-collection/78060451b3ba309f5bcf"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<blockquote>
+  <p>Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page, 
+or use the <a href="#collections-quick-reference">Collection Quick Reference</a>. This tutorial only requires the Users collection import.</p>
+</blockquote>
+
+<h2 id="send-a-request">Send a Request</h2>
+
+<p>To test your configuration, send a request to list all the users in your org:</p>
 
 <ol>
-  <li>
-    <p>Click the <strong>Import</strong> button again at the top of the UI</p>
-
-    <p><img src="/assets/img/postman-ui-import-button.png" alt="Import Button" title="Import Button" /></p>
-  </li>
-  <li>
-    <p>Select the <strong>From URL</strong> tab and import the following URLs:</p>
-
-    <table>
-      <thead>
-        <tr>
-          <th style="text-align: left">Resource</th>
-          <th style="text-align: left">Postman Collection</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: left">Authentication</td>
-          <td style="text-align: left"><a href="../postman/authentication.json">Authentication API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Sessions</td>
-          <td style="text-align: left"><a href="../postman/sessions.json">Sessions API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Users</td>
-          <td style="text-align: left"><a href="../postman/users.json">Users API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Factors</td>
-          <td style="text-align: left"><a href="../postman/factors.json">Factors API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Groups</td>
-          <td style="text-align: left"><a href="../postman/groups.json">Groups API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Identity Providers</td>
-          <td style="text-align: left"><a href="../postman/idps.json">IDP API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Admin Roles</td>
-          <td style="text-align: left"><a href="../postman/admin-roles.json">Admin Roles API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Apps</td>
-          <td style="text-align: left"><a href="../postman/apps.json">Apps API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Schemas</td>
-          <td style="text-align: left"><a href="../postman/schemas.json">Schemas API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Events</td>
-          <td style="text-align: left"><a href="../postman/events.json">Events API</a></td>
-        </tr>
-        <tr>
-          <td style="text-align: left">Templates</td>
-          <td style="text-align: left"><a href="../postman/templates.json">Templates API</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <blockquote>
-      <p>You must import each collection individually</p>
-    </blockquote>
-  </li>
-  <li>
-    <p>Click <strong>Collections</strong> to view your imported collections
-  <img src="/assets/img/postman-ui-collections.png" alt="View Collections" title="View Collections" /></p>
-  </li>
+  <li>Make sure you’ve imported the Users API collection and configured your example environment using the instructions in the previous section.</li>
+  <li>Select the <strong>Collections</strong> tab in Postman, open the <strong>List Users</strong> folder, and select <strong>GET List Users</strong>.</li>
+  <li>Click <strong>Send</strong>. The result pane automatically displays the results of your request:
+ <img src="/assets/img/postman_response.png" alt="GET List Users" />
+ If you receive errors, it’s likely that one of the values in the environment isn’t set correctly. Check the values and try again.</li>
 </ol>
 
-<h2 id="requests">Requests</h2>
+<p>Once you have completed this simple request, you are ready to explore the Okta API.</p>
 
-<p>The imported collections contain URLs and JSON request bodies that have sample data with variables such as <strong>{{userId}}</strong>.  You will need to replace URL and body variables with ids of specific resources for your specific organization.  This can usually be accomplished by first listing a resource collection with a search or filter, than copying the <code class="highlighter-rouge">id</code> of a specific resource.  See API documentation for the specific request for details.</p>
+<h2 id="collections-quick-reference">Collections Quick Reference</h2>
+
+<p>Import any Okta API collection for Postman from the following list:</p>
 
 <table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Collections</th>
+      <th style="text-align: left">click to Run</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td>URL templates often have variables such as <code class="highlighter-rouge">url</code> or <code class="highlighter-rouge">userId</code></td>
-      <td><img src="/assets/img/postman-ui-replace-id.png" alt="URL template with ID" title="URL template with ID" /></td>
+      <td style="text-align: left">Authentication</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/07df454531c56cb5fe71"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
-      <td><strong>POST</strong> or <strong>PUT</strong> requests often have variables in the <strong>Body</strong> tab</td>
-      <td><img src="/assets/img/postman-ui-body-variable.png" alt="Body environment variable" title="Body environment variable" /></td>
+      <td style="text-align: left">Apps</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
-      <td>You can copy an <code class="highlighter-rouge">id</code> from a previous response such as a <code class="highlighter-rouge">GET</code> request and paste it in another request.</td>
-      <td><img src="/assets/img/postman-ui-paste-id.png" alt="Copy and replace ID" title="Copy and replace ID in URL" /></td>
+      <td style="text-align: left">Events</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
-      <td>You can also set environment variables directly from the right-click context menu.  This is recommended so you can re-use the <code class="highlighter-rouge">id</code> across multiple requests</td>
-      <td><img src="/assets/img/postman-ui-set-variable-id.png" alt="Set environment variable" title="Set environment variable" /></td>
+      <td style="text-align: left">Factors</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/b055a859dbe24a54814a"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
-      <td>Always check the request preview to ensure all <strong>{{variables}}</strong> have been properly replaced before sending the request by click the the generate snippet button <strong>&lt;/&gt;</strong></td>
-      <td><img src="/assets/img/postman-ui-gen-snip-button.png" alt="Generate snippet button" title="Generate snippet button" /> <br /> <img src="/assets/img/postman-ui-req-prevew.png" alt="Request preview" title="Request preview" /></td>
+      <td style="text-align: left">Groups</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Identity Providers (IdP)</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/8438ef3445415386b407"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Admin Roles</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Schemas</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/443242e60287fb4b8d6d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Custom SMS Templates</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Users</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/78060451b3ba309f5bcf"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
   </tbody>
 </table>
 
+<p>These buttons are also available at the top of each API reference page in <a href="/docs/api/resources/auth.html">developer.okta.com</a>.</p>
+
+<h2 id="tips">Tips</h2>
+
+<p>Now that you have a working collection, you can use the following tips to work more efficiently.</p>
+
+<h3 id="find-ids-for-okta-api-requests">Find IDs for Okta API Requests</h3>
+
+<p>Your imported collections contain URLs and JSON request bodies that have sample data with variables such as <strong>{{userId}}</strong>.
+Replace URL and body variables with the IDs of the resources you wish to specify.</p>
+
+<p>To find an ID:</p>
+
+<ol>
+  <li>
+    <p>List a resource collection with a search or filter. For example, list the users in your org, as you did in the previous section.
+ <img src="/assets/img/postman_response2.png" alt="List Users Response" /></p>
+  </li>
+  <li>
+    <p>Copy the <code class="highlighter-rouge">id</code> of the resource, in this example the <code class="highlighter-rouge">id</code> for Tony Stark, in your next request.</p>
+  </li>
+</ol>
+
+<h3 id="retain-headers-when-clicking-links">Retain Headers When Clicking Links</h3>
+
+<p>Retaining the headers is helpful when you click HAL links in responses.</p>
+
+<p>To retain the headers:</p>
+
+<ol>
+  <li>Launch Postman and click the wrench icon.</li>
+  <li>Select <strong>Settings</strong>.</li>
+  <li>In the <strong>Headers</strong> column, enable <strong>Retain headers when clicking on links</strong>.</li>
+</ol>
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+          <div class="TableOfContents-item is-level1">
+              <script>
+                  document.write(document.title.split('|')[0].trim());
+              </script>
+          </div>
+          <div class="TableOfContentsLoader"></div>
       </div>
       <!-- END Page Content -->
     </section>

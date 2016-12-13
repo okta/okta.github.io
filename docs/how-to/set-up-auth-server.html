@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
     <title>Set Up Authorization Service | Okta Developer</title>
-    <meta name="description" content="Set Up an Authorization Service with OAuth 2.0 or OpenID Connect">
+    <meta name="description" content="Set Up an Authorization Service">
     <link rel="canonical" href="http://developer.okta.com/docs/how-to/set-up-auth-server.html">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
 
@@ -76,7 +76,7 @@
             </div>
 
             <div id="mobile-nav">
-                <a id="mobile-search" href="http://okta.com/search/"><span class="icon-search-light"></span></a>
+                <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
                 <a id="mobile-open" class="mobile-toggle" href="#top-nav">
                     <span></span>
                     <span></span>
@@ -99,857 +99,127 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 	  <!-- END Header -->
 	      <!-- START Page Center w/Sub Nav & Content -->
-    <section class="PageContent DynamicSidebar">
+    <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar -->
-              <aside class="Sidebar">
-        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
-           <div class="Sidebar-close Sidebar-toggle"></div>
-	   <div>
-	     <h3 class="Sidebar-title">Use Cases</h3>
-	     <ul class="Sidebar-nav">
-	       
-	       
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-	       <li><a href="/use_cases/authentication">Authentication</a></li>
-	       
-	       
-	       <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
-	       
-	       
-	       <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
-	       
-	       <!-- <li class="is-active"> -->
-	       <!-- 	 <a href="#">Working with the Okta API</a> -->
-	       <!-- 	 <ul> -->
-	       <!-- 	   <li><a href="#">Versioning</a></li> -->
-	       <!-- 	   <li class="is-active"><a href="#">HTTP Verbs</a></li> -->
-	       <!-- 	 </ul> -->
-	       <!-- </li> -->
-	     </ul>
-	     <h3 class="Sidebar-title">Reference</h3>
-	     <ul class="Sidebar-nav">
-	       <li>
-		 <a href="/docs/api/getting_started/">
-		   Getting Started
-		 </a>
-		 
-	       </li>
-	       
-	       
-	       <li>
-		 <span>
-		   Authentication Reference
-		 </span>
-		 <ul>
-		     <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-		 
-		     <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
-		 
-		     <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
-		 
-		     <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-		 
-		     <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
-		 </ul>
-	       </li>
+      <aside class="Sidebar">
+    <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
+    <div class="Sidebar-close Sidebar-toggle"></div>
+    <div>
+        <h3 class="Sidebar-title">Use Cases</h3>
+        <ul class="Sidebar-nav">
+            
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+            <li><a href="/use_cases/authentication">Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
+            
+        </ul>
 
-	       <li>
-		 <span>
-		   API Reference
-		 </span>
-		 <ul>
-                     
-                     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/apps.html">Apps</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/events.html">Events</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/schemas.html">Schemas</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/templates.html">Templates</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/users.html">Users</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		 </ul>
-	       </li>
+        <h3 class="Sidebar-title">Reference</h3>
+        <ul class="Sidebar-nav">
+            <li>
+                <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+                
+            </li>
 
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/reference/error_codes">
-		   Error Codes
-		 </a>
-	       </li>
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/reference/okta_expression_language">
-		   Okta Expression Language
-		 </a>
-	       </li>
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/docs/platform-release-notes/platform-release-notes.html">
-		   Release Notes
-		 </a>
-	       </li>
-	       
-	       <!-- <li class="is-active"> -->
-	       <!-- 	 <a href="#">Working with the Okta API</a> -->
-	       <!-- 	 <ul> -->
-	       <!-- 	   <li><a href="#">Versioning</a></li> -->
-	       <!-- 	   <li class="is-active"><a href="#">HTTP Verbs</a></li> -->
-	       <!-- 	 </ul> -->
-	       <!-- </li> -->
-	     </ul>
+            
+            
 
-	     
+            <li>
+                <a href="/docs/api/resources/authn.html">Authentication Reference</a>
 
-	   </div>
-        </aside>
+                
+            </li>
+
+            <li>
+                <a href="/docs/api/resources/apps.html">API Reference</a>
+
+                
+
+            </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/reference/error_codes">
+                        Error Codes
+                    </a>
+                </li>
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/reference/okta_expression_language">
+                        Okta Expression Language
+                    </a>
+                </li>
+            
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/docs/platform-release-notes/platform-release-notes.html">
+                        Platform Release Notes
+                    </a>
+                </li>
+            
+        </ul>
+
+        
+
+        <script>
+            if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+                document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+            }
+
+            if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+                document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+            }
+        </script>
+
+    </div>
+</aside>
 
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
@@ -957,7 +227,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h2 id="overview">Overview</h2>
 
 <blockquote>
-  <p>API Access Management is <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span>.</p>
+  <p>API Access Management is EA.</p>
 </blockquote>
 
 <p>API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints. 
@@ -1020,10 +290,10 @@ claims as defined in the authorization server.</p>
     <p>Choose <strong>Add Authorization Server</strong> and supply the requested information.</p>
 
     <ul>
-      <li>Name</li>
-      <li>Resource URI. URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as <code class="highlighter-rouge">http://api.example.com/pets</code>.
+      <li><strong>Name</strong></li>
+      <li><strong>Resource URI</strong>—URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as <code class="highlighter-rouge">http://api.example.com/pets</code>.
 This value is used as the default <a href="https://tools.ietf.org/html/rfc7519#section-4.1.3">audience</a> for Access Tokens.</li>
-      <li>Description</li>
+      <li><strong>Description</strong></li>
     </ul>
   </li>
 </ol>
@@ -1059,12 +329,11 @@ and the access policy decides which ones to grant and which ones to deny.</p>
 
 <ol>
   <li>In the Okta user interface, navigate to <strong>Security &gt; API</strong>.</li>
+  <li>Choose the name of the authorization server to display it, and choose <strong>Claims</strong>.
+<img src="/assets/img/claims1.png" alt="Choose Claims" width="800px" />
+ Okta provides a default subject claim. You can edit the mapping, or create your own claims.</li>
   <li>
-    <p>Choose the name of the authorization server to display it.
-<img src="/assets/img/claims1.png" alt="Choose Claims" width="800px" /></p>
-  </li>
-  <li>
-    <p>Choose <strong>Claims &gt; Add Claim</strong> and provide the requested information.
+    <p>Choose <strong>Add Claim</strong> and provide the requested information.
 <img src="/assets/img/claim.png" alt="Edit Claims" width="800px" /></p>
 
     <ul>
@@ -1083,6 +352,17 @@ Be sure to check that your expression returns the results expected–the express
   </li>
 </ol>
 
+<p>While in the Claims list, you can:</p>
+
+<ul>
+  <li>Sort claims by type.</li>
+  <li>
+    <p>Delete claims you’ve created, or disable claims for testing or debugging purposes.</p>
+
+    <p><img src="/assets/img/claims2.png" alt="Claims List" width="640px" /></p>
+  </li>
+</ul>
+
 <h3 id="create-access-policies">Create Access Policies</h3>
 
 <p>Create access policies and rules for a client or set of clients.</p>
@@ -1090,24 +370,22 @@ Be sure to check that your expression returns the results expected–the express
 <ol>
   <li>In the Okta user interface, navigate to <strong>Security &gt; API</strong>.</li>
   <li>Choose the name of an authorization server.</li>
-  <li>
-    <p>Choose <strong>Access Policies &gt; Add New Access Policy</strong> and provide the requested information.
-<img src="/assets/img/access_policy1.png" alt="Add Access Policy" width="640px" /></p>
-
+  <li>Choose <strong>Access Policies &gt; Add New Access Policy</strong> 
+ <img src="/assets/img/access_policy1.png" alt="Add Access Policy" width="640px" /></li>
+  <li>Provide the requested information:
     <ul>
-      <li>Name</li>
-      <li>Description</li>
-      <li>Assign to <strong>All clients</strong>, or select <strong>The following clients:</strong> and enter the name of the clients covered by this access policy.</li>
+      <li><strong>Name</strong></li>
+      <li><strong>Description</strong></li>
+      <li>Assign to <strong>All clients</strong>, or select <strong>The following clients:</strong> and enter the name of the clients covered by this access policy.
+ <img src="/assets/img/access_policy2.png" alt="Access Policy Configuration" width="640px" /></li>
     </ul>
   </li>
 </ol>
 
-<p>While in the Access Policy list, you can:</p>
-
-<ul>
-  <li>Set access policies to be active or deactivate them for testing or debugging purposes.</li>
-  <li>Reorder any policies you create using drag-n-drop.</li>
-</ul>
+<p>While in the Access Policy list, you can:
+* Set access policies to be active or deactivate them for testing or debugging purposes.
+* Reorder any policies you create using drag-n-drop.<br />
+    <img src="/assets/img/access_policy3.png" alt="Access Policy List" width="640px" /></p>
 
 <p>Polices are evaluated in priority order, as are the rules in a policy. 
 The first policy and rule that matches the client request is applied and no further rule or policy processing occurs.</p>
@@ -1156,6 +434,14 @@ that specifies the condition <strong>No user</strong>.</p>
 of the ID Token or Access Token are as expected.</p>
 
 
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+          <div class="TableOfContents-item is-level1">
+              <script>
+                  document.write(document.title.split('|')[0].trim());
+              </script>
+          </div>
+          <div class="TableOfContentsLoader"></div>
       </div>
       <!-- END Page Content -->
     </section>

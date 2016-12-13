@@ -5,7 +5,7 @@ beta: true
 redirect_from: "/docs/getting_started/factor_admin.html"
 ---
 
-# Overview
+# Factors Administration API
 
 The Okta Factors Administration API is a subset of the Factors API. It provides operations to activate or deactivate which factor types are available to use for multi-factor authentication. Activating a factor type with this API does not enable multi-factor authentication. It makes an activated factor available for multi-factor authentication only.
 

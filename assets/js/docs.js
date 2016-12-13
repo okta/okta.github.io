@@ -1,6 +1,6 @@
 $(function() {
 
-  var fixedNavHeight = 160;
+	var fixedNavHeight = 160;
 
 	var linkify = function() {
 		var anchorForId = function (id) {
@@ -66,6 +66,7 @@ $(function() {
 
 	$(document).ready(function() {
 
+		var isMobile   = window.getComputedStyle(document.body,':before').content.includes("toc-mobile");
 		var offset     = 140;
 		var headerData = [];
 
@@ -77,7 +78,7 @@ $(function() {
 		var $sidebar   = $('.Sidebar');
 		var $content   = $('.PageContent-main');
 		var $headers   = [];
-		var $toc       = $('<div>').addClass('TableOfContents').appendTo($page);
+		var $toc       = ($('.TableOfContents').length > 0) ? $('.TableOfContents') : $('<div>').addClass('TableOfContents').appendTo($page);
 		var $tocItems  = [];
 		var $indicator = $('<div>').addClass('TableOfContents-indicator').appendTo($toc);
 
@@ -93,7 +94,9 @@ $(function() {
 
 		var buildTOC = function() {
 
-			if (!$content.children('h1:first-child').length) {
+			$toc.removeClass('TableOfContentsPreload');
+
+			if (!$content.children('h1:first-child').length && $('.is-level1').length == 0) {
 				var $menuItem = $('<div>');
 				var text = document.title.split('|')[0].trim();
 
@@ -105,6 +108,11 @@ $(function() {
 					.appendTo($toc);
 			}
 
+			// due to limited space for default TOC header add extra room for a wrapped title if it is longer than 50 characters
+			if (document.title.length > 50) {
+				$('.TableOfContents').addClass('large-header');
+			}
+
 			var $items   = $('h1, h2, h3, h4.api.api-operation, h4:not(.api), h5.api.api-operation, h5:not(.api), h6.api.api-operation, h6:not(.api)', $content);
 			var pageEle  = $page[0];
 			var pageRect = pageEle.getBoundingClientRect();
@@ -112,7 +120,7 @@ $(function() {
 			$.each($items, function(index, value) {
 
 				var $this = $items.eq(index);
-				var level = $this.prop('tagName').substr(1, 2);
+				var level = ($this.prop('tagName').substr(1, 2) > 1) ? $this.prop('tagName').substr(1, 2) : 2;
 				var text = $this.text();
 				var thisEle = $this[0];
 				var thisRect = thisEle.getBoundingClientRect();
@@ -166,11 +174,12 @@ $(function() {
 		};
 
 		var init = function() {
+
 			$page.addClass('has-tableOfContents');
 			// Defined in _sass/okta/components/_Sidebar.scss
 			// See also: _source/_sass/okta/_/base/_variables.scss:66
-			if ($(window).width() > 1024) {
-				$toc.scrollLock();
+			if (! isMobile) {
+				$toc.scrollLock('enable');
 			}
 		};
 
@@ -211,29 +220,12 @@ $(function() {
 
 		var setActiveItem = function(i) {
 
-			var $activeItem  = $($tocItems[i]);
-			var thisLevel    = parseInt($activeItem.data('level'));
-			var currentLevel = thisLevel;
+			if (! isMobile) {
+				var $activeItem  = $($tocItems[i]);
+				var thisLevel    = parseInt($activeItem.data('level'));
+				var currentLevel = thisLevel;
 
-			for (var j = i; j > 0; j--) {
-				var $sibling = $($tocItems[j]);
-				var siblingLevel = parseInt($sibling.data('level'));
-
-				if (siblingLevel < currentLevel) {
-					currentLevel = siblingLevel;
-				}
-
-				if (siblingLevel == currentLevel) {
-					$sibling.css('display', 'block');
-				} else {
-					$sibling.hide();
-				}
-			}
-
-			if (i < $tocItems.length - 1) {
-				currentLevel = $($tocItems[i + 1]).data('level');
-
-				for (var j = (i + 1); j < $tocItems.length; j++) {
+				for (var j = i; j > 0; j--) {
 					var $sibling = $($tocItems[j]);
 					var siblingLevel = parseInt($sibling.data('level'));
 
@@ -247,57 +239,90 @@ $(function() {
 						$sibling.hide();
 					}
 				}
+
+				if (i < $tocItems.length - 1) {
+					currentLevel = $($tocItems[i + 1]).data('level');
+
+					for (var j = (i + 1); j < $tocItems.length; j++) {
+						var $sibling = $($tocItems[j]);
+						var siblingLevel = parseInt($sibling.data('level'));
+
+						if (siblingLevel < currentLevel) {
+							currentLevel = siblingLevel;
+						}
+
+						if (siblingLevel == currentLevel) {
+							$sibling.css('display', 'block');
+						} else {
+							$sibling.hide();
+						}
+					}
+				}
+
+				var nextClasses = [];
+
+				for (var i = $activeItem.data('level'); i > 0; i--) {
+					nextClasses.push('.is-level' + i);
+				}
+
+				var $nextItem = $activeItem.nextAll(nextClasses.join(', ')).eq(0);
+
+				var scrollTop = $toc.scrollTop();
+
+				var firstEle = $tocItems[0];
+				var firstRect = firstEle.getBoundingClientRect();
+
+				var activeEle = $activeItem[0];
+				var activeRect = activeEle.getBoundingClientRect();
+
+				var tocEle = $toc[0];
+				var tocRect = tocEle.getBoundingClientRect();
+
+				var tocOffset = scrollTop + activeRect.top - tocRect.top - 60;
+
+				var nextEle;
+				var nextRect;
+				var scale;
+				var marginTop = 0;
+				var indicatorOffset = (activeRect.top - firstRect.top);
+
+				if ($nextItem.length) {
+					nextEle = $nextItem[0];
+					nextRect = nextEle.getBoundingClientRect();
+					scale = (nextRect.top - activeRect.top);
+				} else {
+					scale = (activeRect.bottom - activeRect.top);
+				}
+
+				$indicator.css({
+					'height': scale + 'px',
+					'transform': 'translate(0, ' + indicatorOffset + 'px)'
+				});
+
+				$tocItems.removeClass('is-active');
+				$activeItem.addClass('is-active');
+
+				if (scrollTop != tocOffset) {
+					$toc.scrollTop(tocOffset);
+				}
 			}
-
-			var nextClasses = [];
-
-			for (var i = $activeItem.data('level'); i > 0; i--) {
-				nextClasses.push('.is-level' + i);
+			else {
+				// comment out to keep mobile TOC limited to level1 items visible only
+				// or change selector to display/hide varying levels of depth
+				$('.is-level2, .is-level3, .is-level4, .is-level5, .is-level6').css({'display':'block'});
 			}
-
-			var $nextItem = $activeItem.nextAll(nextClasses.join(', ')).eq(0);
-
-			var scrollTop = $toc.scrollTop();
-
-			var firstEle = $tocItems[0];
-			var firstRect = firstEle.getBoundingClientRect();
-
-			var activeEle = $activeItem[0];
-			var activeRect = activeEle.getBoundingClientRect();
-
-			var tocEle = $toc[0];
-			var tocRect = tocEle.getBoundingClientRect();
-
-			var tocOffset = scrollTop + activeRect.top - tocRect.top - 60;
-
-			var nextEle;
-			var nextRect;
-			var scale;
-			var marginTop = 0;
-			var indicatorOffset = (activeRect.top - firstRect.top);
-
-			if ($nextItem.length) {
-				nextEle = $nextItem[0];
-				nextRect = nextEle.getBoundingClientRect();
-				scale = (nextRect.top - activeRect.top);
-			} else {
-				scale = (activeRect.bottom - activeRect.top);
-			}
-
-			$indicator.css({
-				'height': scale + 'px',
-				'transform': 'translate(0, ' + indicatorOffset + 'px)'
-			});
-
-			$tocItems.removeClass('is-active');
-			$activeItem.addClass('is-active');
-
-			if (scrollTop != tocOffset) {
-				$toc.scrollTop(tocOffset);
-			}
-
 		};
 
+		$(window).on('resize', function(){
+			isMobile = window.getComputedStyle(document.body,':before').content.includes("toc-mobile");
+
+			if (isMobile) {
+				$toc.scrollLock('disable');
+			}
+			else {
+				$toc.scrollLock('enable');
+			}
+		});
 		$(window).on('scroll', onScroll);
 		$(window).on('resize', onScroll);
 

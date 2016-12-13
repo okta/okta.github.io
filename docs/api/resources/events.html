@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
     <title>Events | Okta Developer</title>
-    <meta name="description" content="Overview">
+    <meta name="description" content="Events API">
     <link rel="canonical" href="http://developer.okta.com/docs/api/resources/events.html">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
 
@@ -76,7 +76,7 @@
             </div>
 
             <div id="mobile-nav">
-                <a id="mobile-search" href="http://okta.com/search/"><span class="icon-search-light"></span></a>
+                <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
                 <a id="mobile-open" class="mobile-toggle" href="#top-nav">
                     <span></span>
                     <span></span>
@@ -99,864 +99,2339 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 	  <!-- END Header -->
 	      <!-- START Page Center w/Sub Nav & Content -->
-    <section class="PageContent DynamicSidebar">
+    <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar -->
-              <aside class="Sidebar">
-        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
-           <div class="Sidebar-close Sidebar-toggle"></div>
-	   <div>
-	     <h3 class="Sidebar-title">Use Cases</h3>
-	     <ul class="Sidebar-nav">
-	       
-	       
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-	       <li><a href="/use_cases/authentication">Authentication</a></li>
-	       
-	       
-	       <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
-	       
-	       
-	       <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
-	       
-	       <!-- <li class="is-active"> -->
-	       <!-- 	 <a href="#">Working with the Okta API</a> -->
-	       <!-- 	 <ul> -->
-	       <!-- 	   <li><a href="#">Versioning</a></li> -->
-	       <!-- 	   <li class="is-active"><a href="#">HTTP Verbs</a></li> -->
-	       <!-- 	 </ul> -->
-	       <!-- </li> -->
-	     </ul>
-	     <h3 class="Sidebar-title">Reference</h3>
-	     <ul class="Sidebar-nav">
-	       <li>
-		 <a href="/docs/api/getting_started/">
-		   Getting Started
-		 </a>
-		 
-	       </li>
-	       
-	       
-	       <li>
-		 <span>
-		   Authentication Reference
-		 </span>
-		 <ul>
-		     <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-		 
-		     <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
-		 
-		     <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
-		 
-		     <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-		 
-		     <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
-		 </ul>
-	       </li>
+      <aside class="Sidebar">
+    <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
+    <div class="Sidebar-close Sidebar-toggle"></div>
+    <div>
+        <h3 class="Sidebar-title">Use Cases</h3>
+        <ul class="Sidebar-nav">
+            
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+            <li><a href="/use_cases/authentication">Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
+            
+        </ul>
 
-	       <li>
-		 <span>
-		   API Reference
-		 </span>
-		 <ul>
-                     
-                     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/apps.html">Apps</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/events.html">Events</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/schemas.html">Schemas</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/templates.html">Templates</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/users.html">Users</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		 </ul>
-	       </li>
+        <h3 class="Sidebar-title">Reference</h3>
+        <ul class="Sidebar-nav">
+            <li>
+                <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+                
+            </li>
 
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/reference/error_codes">
-		   Error Codes
-		 </a>
-	       </li>
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/reference/okta_expression_language">
-		   Okta Expression Language
-		 </a>
-	       </li>
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/docs/platform-release-notes/platform-release-notes.html">
-		   Release Notes
-		 </a>
-	       </li>
-	       
-	       <!-- <li class="is-active"> -->
-	       <!-- 	 <a href="#">Working with the Okta API</a> -->
-	       <!-- 	 <ul> -->
-	       <!-- 	   <li><a href="#">Versioning</a></li> -->
-	       <!-- 	   <li class="is-active"><a href="#">HTTP Verbs</a></li> -->
-	       <!-- 	 </ul> -->
-	       <!-- </li> -->
-	     </ul>
+            
+            
 
-	     
+            <li>
+                <a href="/docs/api/resources/authn.html">Authentication Reference</a>
 
-	   </div>
-        </aside>
+                
+                    <ul id="Sidebar_References" class="Sidebar-hide">
+                        
+                        
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                    </ul>
+                
+            </li>
+
+            <li>
+                <a href="/docs/api/resources/apps.html">API Reference</a>
+
+                
+                    <ul id="Sidebar_Resources" class="Sidebar-hide">
+                        
+                        
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/apps.html">Apps</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li class="is-active"><a href="/docs/api/resources/events.html">Events</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/factors.html">Factors</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/templates.html">Templates</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/users.html">Users</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                    </ul>
+                
+
+            </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/reference/error_codes">
+                        Error Codes
+                    </a>
+                </li>
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/reference/okta_expression_language">
+                        Okta Expression Language
+                    </a>
+                </li>
+            
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/docs/platform-release-notes/platform-release-notes.html">
+                        Platform Release Notes
+                    </a>
+                </li>
+            
+        </ul>
+
+        
+
+        <script>
+            if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+                document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+            }
+
+            if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+                document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+            }
+        </script>
+
+    </div>
+</aside>
 
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-      <h2 id="overview">Overview</h2>
+      <h1 id="events-api">Events API</h1>
 
-<p>The Okta Event API provides read access to your organization’s system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.</p>
+<p>The Okta Event API provides read access to your organization’s system log. Export event data as a batch job from your organization to another system for reporting or analysis.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Explore the Events API: <a href="https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<h2 id="event-operations">Event Operations</h2>
+
+<h3 class="api api-operation" id="list-events">List Events</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /events</span></p>
+
+<p>Fetch a list of events from your Okta organization system log</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>limit</td>
+      <td>Specifies the number of results to page</td>
+      <td>Query</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <td>startDate</td>
+      <td>Specifies the timestamp to list events after</td>
+      <td>Query</td>
+      <td>Date</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>filter</td>
+      <td><a href="/docs/api/getting_started/design_principles.html#filtering">Filter expression</a> for events</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>after</td>
+      <td>Specifies the pagination cursor for the next page of events</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a></p>
+</blockquote>
+
+<blockquote>
+  <p><code class="highlighter-rouge">startDate</code> and <code class="highlighter-rouge">filter</code> query parameters are mutually exclusive and cannot be used together in the same request</p>
+</blockquote>
+
+<h6 id="filters">Filters</h6>
+
+<p>The following expressions are supported for events with the <code class="highlighter-rouge">filter</code> query parameter:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Filter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">action.objectType eq ":actionType"</code></td>
+      <td>Events that have a specific <a href="#action-objecttypes">action objectType</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target.objectType eq ":objectType"</code></td>
+      <td>Events published with a specific <a href="#actortarget-objecttypes">target objectType</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target.id eq ":id"</code></td>
+      <td>Events published with a specific target id</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td>Events published before a specific datetime</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td>Events published updated at a specific datetime</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td>Events published updated after a specific datetime</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See <a href="/docs/getting_started/design_principles.html#filtering">Filtering</a> for more information on expressions</p>
+
+<blockquote>
+  <p>All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code class="highlighter-rouge">filter=published gt "2013-06-01T00:00:00.000Z"</code> is encoded as <code class="highlighter-rouge">filter=published%20gt%20%222013-06-01T00:00:00.000Z%22</code></p>
+</blockquote>
+
+<p><strong>Filter Examples</strong></p>
+
+<p>Events published after 06/01/2013</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z"
+</code></pre>
+</div>
+
+<p>Events published for a target user</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=target.id eq "00uxc78lMKUMVIHLTAXY"
+</code></pre>
+</div>
+
+<p>Failed login events published after 06/01/2013</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
+</code></pre>
+</div>
+
+<p>Events published after 06/01/2013 for a target user and application</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+</code></pre>
+</div>
+
+<p>App SSO events for a target user and application</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
+
+<p>Array of <a href="#event-model">Events</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z</span><span class="se">\&amp;</span><span class="s2">limit=3"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&amp;limit=3&gt;; rel="self"</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&amp;limit=3&gt;; rel="next"</span>
+
+<span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tev8hc_KK9NRzKe2WtdvVQIOg1384845263000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:14:23.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App activated"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app.generic.config.app_activated"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00upgyMVOKIYORVNYUUM"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adam Malkovich"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adam.malkovich@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.1.100"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oadxaKUTKAXSXUZYJHC"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AppInstance"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevaEByjeq-QZW-utKgDVVvng1384847185000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:46:25.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign-in successful"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Sign-in Success"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core.user_auth.login_success"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/login/do-login"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.10"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevR26HuMJMSkWsKBUcQ65Raw1384847190000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:46:30.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User performed single sign on to app"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Application Access"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app.auth.sso"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.10"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oadxaKUTKAXSXUZYJHC"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AppInstance"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
 
 <h2 id="event-model">Event Model</h2>
 
@@ -1006,7 +2481,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 id="attributes">Attributes</h3>
 
-<p>The Event model is a <strong><em>read-only</em></strong> object and has a fixed set of attributes:</p>
+<p>The Event model is read only, with a fixed set of attributes:</p>
 
 <table>
   <thead>
@@ -2194,278 +3669,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </span></code></pre>
 </div>
 
-<h2 id="event-operations">Event Operations</h2>
-
-<h3 class="api api-operation" id="list-events">List Events</h3>
-
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /events</span></p>
-
-<p>Fetch a list of events from your Okta organization system log</p>
-
-<h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>limit</td>
-      <td>Specifies the number of results to page</td>
-      <td>Query</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>1000</td>
-    </tr>
-    <tr>
-      <td>startDate</td>
-      <td>Specifies the timestamp to list events after</td>
-      <td>Query</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>filter</td>
-      <td><a href="/docs/api/getting_started/design_principles.html#filtering">Filter expression</a> for events</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>after</td>
-      <td>Specifies the pagination cursor for the next page of events</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p>The <code class="highlighter-rouge">after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a></p>
-</blockquote>
-
-<blockquote>
-  <p><code class="highlighter-rouge">startDate</code> and <code class="highlighter-rouge">filter</code> query parameters are mutually exclusive and cannot be used together in the same request</p>
-</blockquote>
-
-<h6 id="filters">Filters</h6>
-
-<p>The following expressions are supported for events with the <code class="highlighter-rouge">filter</code> query parameter:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Filter</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">action.objectType eq ":actionType"</code></td>
-      <td>Events that have a specific <a href="#action-objecttypes">action objectType</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">target.objectType eq ":objectType"</code></td>
-      <td>Events published with a specific <a href="#actortarget-objecttypes">target objectType</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">target.id eq ":id"</code></td>
-      <td>Events published with a specific target id</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Events published before a specific datetime</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Events published updated at a specific datetime</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Events published updated after a specific datetime</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>See <a href="/docs/getting_started/design_principles.html#filtering">Filtering</a> for more information on expressions</p>
-
-<blockquote>
-  <p>All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code class="highlighter-rouge">filter=published gt "2013-06-01T00:00:00.000Z"</code> is encoded as <code class="highlighter-rouge">filter=published%20gt%20%222013-06-01T00:00:00.000Z%22</code></p>
-</blockquote>
-
-<p><strong>Filter Examples</strong></p>
-
-<p>Events published after 06/01/2013</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z"
-</code></pre>
-</div>
-
-<p>Events published for a target user</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=target.id eq "00uxc78lMKUMVIHLTAXY"
-</code></pre>
-</div>
-
-<p>Failed login events published after 06/01/2013</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
-</code></pre>
-</div>
-
-<p>Events published after 06/01/2013 for a target user and application</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
-</code></pre>
-</div>
-
-<p>App SSO events for a target user and application</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
-
-<p>Array of <a href="#event-model">Events</a></p>
-
-<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z</span><span class="se">\&amp;</span><span class="s2">limit=3"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&amp;limit=3&gt;; rel="self"</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&amp;limit=3&gt;; rel="next"</span>
-
-<span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tev8hc_KK9NRzKe2WtdvVQIOg1384845263000"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:14:23.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App activated"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app.generic.config.app_activated"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00upgyMVOKIYORVNYUUM"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adam Malkovich"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adam.malkovich@example.com"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.168.1.100"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oadxaKUTKAXSXUZYJHC"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AppInstance"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevaEByjeq-QZW-utKgDVVvng1384847185000"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:46:25.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign-in successful"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"Sign-in Success"</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core.user_auth.login_success"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/login/do-login"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.10"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevR26HuMJMSkWsKBUcQ65Raw1384847190000"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:46:30.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User performed single sign on to app"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                </span><span class="s2">"Application Access"</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"app.auth.sso"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"actors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHROME"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.10.10.10"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Client"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ubgaSARVOQDIOXMORI"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samus Aran"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"samus.aran@example.com"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oadxaKUTKAXSXUZYJHC"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"objectType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AppInstance"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-</div>
-
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+          <div class="TableOfContents-item is-level1">
+              <script>
+                  document.write(document.title.split('|')[0].trim());
+              </script>
+          </div>
+          <div class="TableOfContentsLoader"></div>
       </div>
       <!-- END Page Content -->
     </section>

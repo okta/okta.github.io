@@ -3,13 +3,228 @@ layout: docs_page
 title: System Log (Beta)
 ---
 
-## Overview
+# System Log API
 
 > Note: This API is in Beta status. 
 
 The Okta System Log API provides read access to your organization's system log. This API provides more functionality than the Events API.
 
 Use this API to export event data as a batch job from your organization to another system for reporting or analysis.
+
+
+## Event Operations
+
+### List Events
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span>
+
+Fetch a list of events from your Okta organization system log.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+
+Parameter | Description                                                                         | Param Type | DataType | Required | Minimum  | Maximum | Default
+--------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------    -------   -------
+limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE     |       0  |     100 |  
+since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 | 
+filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE    |
+q         | Finds a user that matches firstName, lastName, and email properties                 | Query      | String   | FALSE    |
+until     | Specifies the first date after which results aren't returned, can be empty which denotes no end date | Query      | DateTime | FALSE    |
+after     | An opaque identifier used for pagination                                            | Query      | String   | FALSE    |
+
+The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
+
+
+###### Filter
+
+The following expressions are supported for events with the `filter` query parameter (see [Filtering](http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering):
+
+Filter                                       | Description
+-------------------------------------------- | ------------------------------------------------------------------------------
+`eventType eq ":eventType"`                  | Events that have a specific action [eventType](#attributes)
+`target.id eq ":id"`                         | Events published with a specific target id
+`actor.id eq ":id"`                          | Events published with a specific target id
+
+
+See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information about expressions.
+
+**Filter Examples**
+Events published for a target user
+
+    filter=target.id eq "00uxc78lMKUMVIHLTAXY"
+
+Failed login events
+
+    filter=action.eventType eq "core.user_auth.login_failed"
+
+Events published for a target user and application
+
+    filter=target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+
+App SSO events for a target user and application
+
+    filter=action.eventType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+
+Events published for a given ip address
+
+    filter=client.ipAddress eq "184.73.186.14"
+
+##### Query with q
+
+> Important: The query parameter `q` behaves differently than described in  [Filtering](/docs/getting_started/design_principles.html).
+
+The query parameter `q` searches string fields.
+
+**Query Examples**
+
+* Events that mention a specific city: `q=San Francisco`
+
+* Events that mention a specific url: `q=interestingURI.com`
+
+* Events that mention a specific person: `q=firstName lastName`
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Array of [Log objects](#log-model)
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+> This operation requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding). For example, `since=2016-05-25T00:00:00+00:00` is encoded as `since=2016-06-02T00%3A00%3A00%2B00%3A00`.
+
+
+~~~sh
+http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&q=FAILURE
+http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&q=
+http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&filter=eventType eq "user.session.start"
+http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=&limit=20&filter=eventType eq "user.session.end"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+[
+  {
+    "version": "0",
+    "severity": "INFO",
+    "client": {
+      "zone": "OFF_NETWORK",
+      "device": "Unknown",
+      "userAgent": {
+        "os": "Unknown",
+        "browser": "UNKNOWN",
+        "rawUserAgent": "UNKNOWN-DOWNLOAD"
+      },
+      "ipAddress": "12.97.85.90"
+    },
+    "actor": {
+      "id": "00u1qw1mqitPHM8AJ0g7",
+      "type": "User",
+      "alternateId": "admin@tc1-trexcloud.com",
+      "displayName": "John Fung"
+    },
+    "outcome": {
+      "result": "SUCCESS"
+    },
+    "uuid": "f790999f-fe87-467a-9880-6982a583986c",
+    "published": "2016-05-31T22:23:07.777Z",
+    "eventType": "user.session.start",
+    "displayMessage": "User login to Okta",
+    "transaction": {
+      "type": "WEB",
+      "id": "V04Oy4ubUOc5UuG6s9DyNQAABtc"
+    },
+    "debugContext": {
+      "debugData": {
+        "requestUri": "/login/do-login"
+      }
+    },
+    "legacyEventType": "core.user_auth.login_success",
+    "authentication_context": {
+      "authenticationStep": 0,
+      "externalSessionId": "1013FfF-DKQSvCI4RVXChzX-w"
+    }
+  },
+  {
+    "version":"0",
+    "severity":"INFO",
+    "client": {
+      "zone":"OFF_NETWORK",
+      "device":"Unknown",
+      "id":null,
+      "userAgent": {
+        "os":"Unknown",
+        "browser":"UNKNOWN",
+        "rawUserAgent":"UNKNOWN-UNKNOWN"
+      },
+      "ipAddress":"127.0.0.1",
+      "geographicalContext":{
+        "city":null,
+        "state":null,
+        "country":null,
+        "geolocation":{
+          "lat":36.12,
+          "lon":-114.17
+        },
+        "postalCode":null
+      }
+    },
+    "actor": {
+      "id":"00ujkqmCDIS4dRtaY0g3",
+      "type":"User",
+      "alternateId":"administrator1@clouditude.net",
+      "displayName":"Add-Min O'Cloudy Tud",
+      "detailEntry":null
+    },
+    "outcome": {
+      "result":"SUCCESS",
+      "reason":null
+    },"target": [
+      {
+        "id":"00T1pkSJOMoElZWVY0g3",
+        "type":"Token",
+        "alternateId":"unknown",
+        "displayName":"unknown",
+        "detailEntry":null
+      }
+    ],
+    "uuid":"af4736fb-ef84-4cfb-bcfa-8f541ca99abf",
+    "published":"2016-05-27T19:38:59.031Z",
+    "eventType":"system.api_token.create",
+    "displayMessage":"Create API token",
+    "transaction": {
+      "type":"WEB",
+      "id":"reqz_ADxMMoTSOd7TgdnbjUXw",
+      "detail":null
+    },
+    "debugContext": {
+      "debugData": {
+        "originalPrincipal": {
+          "alternateId":"admin@saasure.com",
+          "displayName":"Piras Add-min",
+          "id":"00ujjjNmP7E3U2Rq50g3",
+          "type":"User"
+        },
+        "requestUri":"/api/1/devtools/global/test/orgs/specific"
+      }
+    },
+    "legacyEventType":"api.token.create",
+    "authentication_context": {
+      "issuer":null,
+      "authenticationProvider":null,
+      "credentialProvider":null,
+      "credentialType":null,
+      "interface":null,
+      "authenticationStep":0,
+      "externalSessionId":"101NN7VYcLqQ5u2Mi1lbmnEmg"
+    }
+  }
+]
+~~~
 
 ## Log Model
 
@@ -335,218 +550,3 @@ Describes security data regarding an event
 | version    | ip address version                                             | V4 or V6        | TRUE     |         |           |           |            |
 | source     | details regarding the source                                   | String          | TRUE     |         |           |           |            |
 |------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-
-
-## Event Operations
-
-### List Events
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span>
-
-Fetch a list of events from your Okta organization system log.
-
-##### Request Parameters
-{:.api .api-request .api-request-params}
-
-
-Parameter | Description                                                                         | Param Type | DataType | Required | Minimum  | Maximum | Default
---------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------    -------   -------
-limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE     |       0  |     100 |  
-since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 | 
-filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE    |
-q         | Finds a user that matches firstName, lastName, and email properties                 | Query      | String   | FALSE    |
-until     | Specifies the first date after which results aren't returned, can be empty which denotes no end date | Query      | DateTime | FALSE    |
-after     | An opaque identifier used for pagination                                            | Query      | String   | FALSE    |
-
-The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
-
-
-###### Filter
-
-The following expressions are supported for events with the `filter` query parameter (see [Filtering](http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering):
-
-Filter                                       | Description
--------------------------------------------- | ------------------------------------------------------------------------------
-`eventType eq ":eventType"`                  | Events that have a specific action [eventType](#attributes)
-`target.id eq ":id"`                         | Events published with a specific target id
-`actor.id eq ":id"`                          | Events published with a specific target id
-
-
-See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information about expressions.
-
-**Filter Examples**
-Events published for a target user
-
-    filter=target.id eq "00uxc78lMKUMVIHLTAXY"
-
-Failed login events
-
-    filter=action.eventType eq "core.user_auth.login_failed"
-
-Events published for a target user and application
-
-    filter=target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
-
-App SSO events for a target user and application
-
-    filter=action.eventType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
-
-Events published for a given ip address
-
-    filter=client.ipAddress eq "184.73.186.14"
-
-##### Query with q
-
-> Important: The query parameter `q` behaves differently than described in  [Filtering](/docs/getting_started/design_principles.html).
-
-The query parameter `q` searches string fields.
-
-**Query Examples**
-
-* Events that mention a specific city: `q=San Francisco`
-
-* Events that mention a specific url: `q=interestingURI.com`
-
-* Events that mention a specific person: `q=firstName lastName`
-
-##### Response Parameters
-{:.api .api-response .api-response-params}
-
-Array of [Log objects](#log-model)
-
-##### Request Example
-{:.api .api-request .api-request-example}
-
-> This operation requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding). For example, `since=2016-05-25T00:00:00+00:00` is encoded as `since=2016-06-02T00%3A00%3A00%2B00%3A00`.
-
-
-~~~sh
-http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&q=FAILURE
-http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&q=
-http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=2016-06-01T23:59:59+00:00&limit=20&filter=eventType eq "user.session.start"
-http://MyOrg.okta.com/api/v1/logs?since=2016-05-25T00:00:00+00:00&until=&limit=20&filter=eventType eq "user.session.end"
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
-
-~~~json
-[
-  {
-    "version": "0",
-    "severity": "INFO",
-    "client": {
-      "zone": "OFF_NETWORK",
-      "device": "Unknown",
-      "userAgent": {
-        "os": "Unknown",
-        "browser": "UNKNOWN",
-        "rawUserAgent": "UNKNOWN-DOWNLOAD"
-      },
-      "ipAddress": "12.97.85.90"
-    },
-    "actor": {
-      "id": "00u1qw1mqitPHM8AJ0g7",
-      "type": "User",
-      "alternateId": "admin@tc1-trexcloud.com",
-      "displayName": "John Fung"
-    },
-    "outcome": {
-      "result": "SUCCESS"
-    },
-    "uuid": "f790999f-fe87-467a-9880-6982a583986c",
-    "published": "2016-05-31T22:23:07.777Z",
-    "eventType": "user.session.start",
-    "displayMessage": "User login to Okta",
-    "transaction": {
-      "type": "WEB",
-      "id": "V04Oy4ubUOc5UuG6s9DyNQAABtc"
-    },
-    "debugContext": {
-      "debugData": {
-        "requestUri": "/login/do-login"
-      }
-    },
-    "legacyEventType": "core.user_auth.login_success",
-    "authentication_context": {
-      "authenticationStep": 0,
-      "externalSessionId": "1013FfF-DKQSvCI4RVXChzX-w"
-    }
-  },
-  {
-    "version":"0",
-    "severity":"INFO",
-    "client": {
-      "zone":"OFF_NETWORK",
-      "device":"Unknown",
-      "id":null,
-      "userAgent": {
-        "os":"Unknown",
-        "browser":"UNKNOWN",
-        "rawUserAgent":"UNKNOWN-UNKNOWN"
-      },
-      "ipAddress":"127.0.0.1",
-      "geographicalContext":{
-        "city":null,
-        "state":null,
-        "country":null,
-        "geolocation":{
-          "lat":36.12,
-          "lon":-114.17
-        },
-        "postalCode":null
-      }
-    },
-    "actor": {
-      "id":"00ujkqmCDIS4dRtaY0g3",
-      "type":"User",
-      "alternateId":"administrator1@clouditude.net",
-      "displayName":"Add-Min O'Cloudy Tud",
-      "detailEntry":null
-    },
-    "outcome": {
-      "result":"SUCCESS",
-      "reason":null
-    },"target": [
-      {
-        "id":"00T1pkSJOMoElZWVY0g3",
-        "type":"Token",
-        "alternateId":"unknown",
-        "displayName":"unknown",
-        "detailEntry":null
-      }
-    ],
-    "uuid":"af4736fb-ef84-4cfb-bcfa-8f541ca99abf",
-    "published":"2016-05-27T19:38:59.031Z",
-    "eventType":"system.api_token.create",
-    "displayMessage":"Create API token",
-    "transaction": {
-      "type":"WEB",
-      "id":"reqz_ADxMMoTSOd7TgdnbjUXw",
-      "detail":null
-    },
-    "debugContext": {
-      "debugData": {
-        "originalPrincipal": {
-          "alternateId":"admin@saasure.com",
-          "displayName":"Piras Add-min",
-          "id":"00ujjjNmP7E3U2Rq50g3",
-          "type":"User"
-        },
-        "requestUri":"/api/1/devtools/global/test/orgs/specific"
-      }
-    },
-    "legacyEventType":"api.token.create",
-    "authentication_context": {
-      "issuer":null,
-      "authenticationProvider":null,
-      "credentialProvider":null,
-      "credentialType":null,
-      "interface":null,
-      "authenticationStep":0,
-      "externalSessionId":"101NN7VYcLqQ5u2Mi1lbmnEmg"
-    }
-  }
-]
-~~~

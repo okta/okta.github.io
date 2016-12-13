@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
 
     <title>OpenID Connect | Okta Developer</title>
-    <meta name="description" content="Overview">
+    <meta name="description" content="OpenID Connect API">
     <link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc.html">
     <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
 
@@ -76,7 +76,7 @@
             </div>
 
             <div id="mobile-nav">
-                <a id="mobile-search" href="http://okta.com/search/"><span class="icon-search-light"></span></a>
+                <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
                 <a id="mobile-open" class="mobile-toggle" href="#top-nav">
                     <span></span>
                     <span></span>
@@ -99,862 +99,2061 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 	  <!-- END Header -->
 	      <!-- START Page Center w/Sub Nav & Content -->
-    <section class="PageContent DynamicSidebar">
+    <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar -->
-              <aside class="Sidebar">
-        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
-           <div class="Sidebar-close Sidebar-toggle"></div>
-	   <div>
-	     <h3 class="Sidebar-title">Use Cases</h3>
-	     <ul class="Sidebar-nav">
-	       
-	       
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-                 
-	       
-	       <li><a href="/use_cases/authentication">Authentication</a></li>
-	       
-	       
-	       <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
-	       
-	       
-	       <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
-	       
-	       <!-- <li class="is-active"> -->
-	       <!-- 	 <a href="#">Working with the Okta API</a> -->
-	       <!-- 	 <ul> -->
-	       <!-- 	   <li><a href="#">Versioning</a></li> -->
-	       <!-- 	   <li class="is-active"><a href="#">HTTP Verbs</a></li> -->
-	       <!-- 	 </ul> -->
-	       <!-- </li> -->
-	     </ul>
-	     <h3 class="Sidebar-title">Reference</h3>
-	     <ul class="Sidebar-nav">
-	       <li>
-		 <a href="/docs/api/getting_started/">
-		   Getting Started
-		 </a>
-		 
-	       </li>
-	       
-	       
-	       <li>
-		 <span>
-		   Authentication Reference
-		 </span>
-		 <ul>
-		     <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-		 
-		     <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
-		 
-		     <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
-		 
-		     <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-		 
-		     <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
-		 </ul>
-	       </li>
+      <aside class="Sidebar">
+    <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
+    <div class="Sidebar-close Sidebar-toggle"></div>
+    <div>
+        <h3 class="Sidebar-title">Use Cases</h3>
+        <ul class="Sidebar-nav">
+            
+            
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+            <li><a href="/use_cases/authentication">Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
+            
+            
+            <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
+            
+        </ul>
 
-	       <li>
-		 <span>
-		   API Reference
-		 </span>
-		 <ul>
-                     
-                     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/apps.html">Apps</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/events.html">Events</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/factors.html">Factors (MFA)</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/groups.html">Groups</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/schemas.html">Schemas</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/templates.html">Templates</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     <li><a href="/docs/api/resources/users.html">Users</a></li>
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		     
-		 </ul>
-	       </li>
+        <h3 class="Sidebar-title">Reference</h3>
+        <ul class="Sidebar-nav">
+            <li>
+                <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+                
+            </li>
 
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/reference/error_codes">
-		   Error Codes
-		 </a>
-	       </li>
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/reference/okta_expression_language">
-		   Okta Expression Language
-		 </a>
-	       </li>
-	       
-	       
-	       
-	       
-	       
-	       <li>
-		 <a href="/docs/platform-release-notes/platform-release-notes.html">
-		   Release Notes
-		 </a>
-	       </li>
-	       
-	       <!-- <li class="is-active"> -->
-	       <!-- 	 <a href="#">Working with the Okta API</a> -->
-	       <!-- 	 <ul> -->
-	       <!-- 	   <li><a href="#">Versioning</a></li> -->
-	       <!-- 	   <li class="is-active"><a href="#">HTTP Verbs</a></li> -->
-	       <!-- 	 </ul> -->
-	       <!-- </li> -->
-	     </ul>
+            
+            
 
-	     
+            <li>
+                <a href="/docs/api/resources/authn.html">Authentication Reference</a>
 
-	   </div>
-        </aside>
+                
+                    <ul id="Sidebar_References" class="Sidebar-hide">
+                        
+                        
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li class="is-active"><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                    </ul>
+                
+            </li>
+
+            <li>
+                <a href="/docs/api/resources/apps.html">API Reference</a>
+
+                
+                    <ul id="Sidebar_Resources" class="Sidebar-hide">
+                        
+                        
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/apps.html">Apps</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/events.html">Events</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/factors.html">Factors</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/templates.html">Templates</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                <li><a href="/docs/api/resources/users.html">Users</a></li>
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                        
+                    </ul>
+                
+
+            </li>
+            
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/reference/error_codes">
+                        Error Codes
+                    </a>
+                </li>
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/reference/okta_expression_language">
+                        Okta Expression Language
+                    </a>
+                </li>
+            
+                
+                
+                
+                
+                
+
+                <li>
+                    <a href="/docs/platform-release-notes/platform-release-notes.html">
+                        Platform Release Notes
+                    </a>
+                </li>
+            
+        </ul>
+
+        
+
+        <script>
+            if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+                document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+            }
+
+            if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+                document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+            }
+        </script>
+
+    </div>
+</aside>
 
       <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-      <h1 id="overview">Overview</h1>
+      <h1 id="openid-connect-api">OpenID Connect API</h1>
 
 <p>The OpenID Connect API endpoints enable clients to use <a href="http://openid.net/specs/openid-connect-core-1_0.html">OIDC workflows</a> with Okta.
 With OpenID Connect, a client can use Okta as a broker. The user authenticates against identity providers like Google, Facebook, LinkedIn, or Microsoft,
@@ -1393,18 +2592,55 @@ as well as claims about the authenticated user.</p>
 <p>Be aware of the following before you work with scope-dependent claims:</p>
 
 <ul>
-  <li>
-    <p>The client can also optionally request an Access Token along with the ID Token. In this case, in order to keep the size of the ID Token small, the ID Token body does not contain all the scope dependent claims. 
-Instead, the ID token contains the <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">preferred_username</code> claims if the <code class="highlighter-rouge">profile</code> scope was requested and <code class="highlighter-rouge">email</code> claim if the <code class="highlighter-rouge">email</code> scope was requested.</p>
-  </li>
-  <li>
-    <p>The full set of claims for the requested scopes is available via the <a href="#get-user-information">/oauth2/v1/userinfo</a> endpoint. Call this endpoint using the Access Token.</p>
-  </li>
-  <li>
-    <p>To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100. 
+  <li>To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100. 
 If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
-For more information about configuring an app for OpenID Connect, including group claims, see <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect">Using OpenID Connect</a>.</p>
+For more information about configuring an app for OpenID Connect, including group claims, see <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect">Using OpenID Connect</a>.</li>
+  <li>
+    <p><strong>Important:</strong> Scope-dependent claims are returned differently depending on the values in <code class="highlighter-rouge">response_type</code> and the scopes requested:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Response Type</th>
+          <th style="text-align: left">Claims Returned in ID Token</th>
+          <th style="text-align: left">Claims Returned from the Userinfo Endpoint</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">code </code></td>
+          <td style="text-align: left">N/A</td>
+          <td style="text-align: left">N/A</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">token</code></td>
+          <td style="text-align: left">N/A</td>
+          <td style="text-align: left">N/A</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">id_token</code></td>
+          <td style="text-align: left">Claims associated with requested scopes.</td>
+          <td style="text-align: left">N/A</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">id_token</code> <code class="highlighter-rouge">code </code></td>
+          <td style="text-align: left">Claims associated with requested scopes.</td>
+          <td style="text-align: left">N/A</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">id_token</code> <code class="highlighter-rouge">token</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">email</code> if email scope is requested; <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">preferred_username</code> if profile scope is requested</td>
+          <td style="text-align: left">Claims associated with the requested scopes</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">code</code> <code class="highlighter-rouge">id_token</code> <code class="highlighter-rouge">token</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">email</code> if email scope is requested; <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">preferred_username</code> if profile scope is requested</td>
+          <td style="text-align: left">Claims associated with the requested scopes</td>
+        </tr>
+      </tbody>
+    </table>
   </li>
+  <li>The full set of claims for the requested scopes is available via the <a href="#get-user-information">/oauth2/v1/userinfo</a> endpoint. Call this endpoint using the Access Token.</li>
 </ul>
 
 <h2 id="endpoints">Endpoints</h2>
@@ -1626,10 +2862,10 @@ This API doesn’t require any authentication and returns a JSON object with the
     </span><span class="nt">"response_types_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"code"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"code id_token"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code token"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"code id_token token"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"id_token token"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"token"</span><span class="w">
+        </span><span class="s2">"id_token token"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"response_modes_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"query"</span><span class="p">,</span><span class="w">
@@ -1640,7 +2876,8 @@ This API doesn’t require any authentication and returns a JSON object with the
     </span><span class="nt">"grant_types_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"authorization_code"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"implicit"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"refresh_token"</span><span class="w">
+        </span><span class="s2">"refresh_token"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"password"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"subject_types_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"public"</span><span class="w">
@@ -1653,7 +2890,9 @@ This API doesn’t require any authentication and returns a JSON object with the
         </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"profile"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"phone"</span><span class="w">
+        </span><span class="s2">"phone"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"offline_access"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"groups"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"token_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
@@ -1662,14 +2901,15 @@ This API doesn’t require any authentication and returns a JSON object with the
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"claims_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"iss"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ver"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"sub"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"aud"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"iat"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"exp"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"jti"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"auth_time"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"amr"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"idp"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"idp_type"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nonce"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nickname"</span><span class="p">,</span><span class="w">
@@ -1684,7 +2924,13 @@ This API doesn’t require any authentication and returns a JSON object with the
         </span><span class="s2">"locale"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"phone_number"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updated_at"</span><span class="w">
+        </span><span class="s2">"picture"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"website"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"gender"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"birthdate"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"at_hash"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"c_hash"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"introspection_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/introspect"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"introspection_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1709,6 +2955,14 @@ This API doesn’t require any authentication and returns a JSON object with the
   <li><a href="oauth2.html#token-request">/oauth2/v1/token</a></li>
 </ul>
 
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+          <div class="TableOfContents-item is-level1">
+              <script>
+                  document.write(document.title.split('|')[0].trim());
+              </script>
+          </div>
+          <div class="TableOfContentsLoader"></div>
       </div>
       <!-- END Page Content -->
     </section>

@@ -1,12 +1,12 @@
 ---
 layout: docs_page
 title: Set Up Authorization Service
-excerpt: Set Up an Authorization Service with OAuth 2.0 or OpenID Connect
+excerpt: Set Up an Authorization Service
 ---
 
 ## Overview
 
-> API Access Management is {% api_lifecycle beta %}.
+> API Access Management is EA.
 
 API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints. 
 An authorization server defines your security boundary, for example "staging" or "production."
@@ -57,10 +57,10 @@ This document provides step-by-step instructions for creating and configuring th
 
 2. Choose **Add Authorization Server** and supply the requested information.
 
-    * Name
-    * Resource URI. URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as `http://api.example.com/pets`.
+    * **Name**
+    * **Resource URI**&mdash;URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as `http://api.example.com/pets`.
       This value is used as the default [audience](https://tools.ietf.org/html/rfc7519#section-4.1.3) for Access Tokens.
-    * Description 
+    * **Description** 
 
 When complete, your authorization server **Settings** tab displays the information that you provided and allows you to edit it.
 <img src="/assets/img/auth_server2.png" alt="Add Authorization Server" width="640px" />
@@ -89,10 +89,10 @@ Tokens contain claims that are statements about the subject or another subject, 
 Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
 
 1. In the Okta user interface, navigate to **Security > API**.
-2. Choose the name of the authorization server to display it.
+2. Choose the name of the authorization server to display it, and choose **Claims**.
 <img src="/assets/img/claims1.png" alt="Choose Claims" width="800px" />
-
-3. Choose **Claims > Add Claim** and provide the requested information.
+ Okta provides a default subject claim. You can edit the mapping, or create your own claims.
+3. Choose **Add Claim** and provide the requested information.
 <img src="/assets/img/claim.png" alt="Edit Claims" width="800px" />
 
     * **Name**
@@ -103,6 +103,13 @@ Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
         * **Filter**: This option displays if you chose **Groups** in the previous field. Use it to add a group filter. If you leave it blank, all users are specified for this claim.
     * **Disable claim**: Check this option if you want to temporarily disable the claim for testing or debugging.
     * **Include in**: Specify whether the claim is valid for any scope, or select the scopes for which it is valid.
+
+While in the Claims list, you can:
+
+* Sort claims by type.
+* Delete claims you've created, or disable claims for testing or debugging purposes.
+
+    <img src="/assets/img/claims2.png" alt="Claims List" width="640px" />
     
 ### Create Access Policies
 
@@ -110,17 +117,18 @@ Create access policies and rules for a client or set of clients.
 
 1. In the Okta user interface, navigate to **Security > API**.
 2. Choose the name of an authorization server. 
-3. Choose **Access Policies > Add New Access Policy** and provide the requested information.
-<img src="/assets/img/access_policy1.png" alt="Add Access Policy" width="640px" />
-
-    * Name
-    * Description
+3. Choose **Access Policies > Add New Access Policy** 
+    <img src="/assets/img/access_policy1.png" alt="Add Access Policy" width="640px" />
+4. Provide the requested information:
+    * **Name**
+    * **Description**
     * Assign to **All clients**, or select **The following clients:** and enter the name of the clients covered by this access policy.
+    <img src="/assets/img/access_policy2.png" alt="Access Policy Configuration" width="640px" />
 
 While in the Access Policy list, you can:
-
 * Set access policies to be active or deactivate them for testing or debugging purposes.
 * Reorder any policies you create using drag-n-drop.  
+    <img src="/assets/img/access_policy3.png" alt="Access Policy List" width="640px" />
 
 Polices are evaluated in priority order, as are the rules in a policy. 
 The first policy and rule that matches the client request is applied and no further rule or policy processing occurs.

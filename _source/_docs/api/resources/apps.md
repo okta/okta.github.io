@@ -4,753 +4,13 @@ title: Apps
 redirect_from: "/docs/api/rest/apps.html"
 ---
 
-## Overview
+# Apps API
 
 The Okta Application API provides operations to manage applications and/or assignments to users or groups for your organization.
 
-## Application Model
+## Getting Started
 
-### Example
-
-~~~json
-{
-  "id": "0oaud6YvvS7AghVmH0g3",
-  "name": "testorg_testsamlapp_1",
-  "label": "Test SAML App",
-  "status": "ACTIVE",
-  "lastUpdated": "2016-06-29T16:13:47.000Z",
-  "created": "2016-06-29T16:13:47.000Z",
-  "accessibility": {
-    "selfService": false,
-    "errorRedirectUrl": null,
-    "loginRedirectUrl": null
-  },
-  "visibility": {
-    "autoSubmitToolbar": false,
-    "hide": {
-      "iOS": false,
-      "web": false
-    },
-    "appLinks": {
-      "testorgone_testsamlapp_1_link": true
-    }
-  },
-  "features": [],
-  "signOnMode": "SAML_2_0",
-  "credentials": {
-    "userNameTemplate": {
-      "template": "${source.login}",
-      "type": "BUILT_IN"
-    },
-    "signing": {}
-  },
-  "settings": {
-    "app": {},
-    "notifications": {
-      "vpn": {
-        "network": {
-          "connection": "ANYWHERE"
-        },
-        "message": "Help message text.",
-        "helpUrl": "http://www.help-site.example.com/"
-      }
-    },
-    "signOn": {
-      "defaultRelayState": "",
-      "ssoAcsUrl": "https://www.example.com/sso/saml",
-      "idpIssuer": "http://www.okta.com/${org.externalKey}",
-      "audience": "https://www.example.com/",
-      "recipient": "https://www.example.com/sso/saml",
-      "destination": "https://www.example.com/sso/saml",
-      "subjectNameIdTemplate": "${user.userName}",
-      "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
-      "responseSigned": true,
-      "assertionSigned": true,
-      "signatureAlgorithm": "RSA_SHA256",
-      "digestAlgorithm": "SHA256",
-      "honorForceAuthn": true,
-      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
-      "spIssuer": null,
-      "requestCompressed": false,
-      "attributeStatements": []
-    }
-  },
-  "_links": {
-    "logo": [
-      {
-        "name": "medium",
-        "href": "http://testorgone.okta.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
-        "type": "image/png"
-      }
-    ],
-    "appLinks": [
-      {
-        "name": "testorgone_testsamlapp_1_link",
-        "href": "http://testorgone.okta.com/home/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/alnun3sSjdvR9IYuy0g3",
-        "type": "text/html"
-      }
-    ],
-    "help": {
-      "href": "http://testorgone-admin.okta.com:/app/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/setup/help/SAML_2_0/instructions",
-      "type": "text/html"
-    },
-    "users": {
-      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/users"
-    },
-    "deactivate": {
-      "href": "http://testorgone.okta.com:/api/v1/apps/0oaud6YvvS7AghVmH0g3/lifecycle/deactivate"
-    },
-    "groups": {
-      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/groups"
-    },
-    "metadata": {
-      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/sso/saml/metadata",
-      "type": "application/xml"
-    }
-  }
-}
-~~~
-
-### Application Properties
-
-All applications have the following properties:
-
-|----------------+--------------------------------------------+-------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property       | Description                                | DataType                                                          | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | ------------------------------------------ | ----------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id             | unique key for app                         | String                                                            | FALSE    | TRUE   | TRUE     |           |           |            |
-| name           | unique key for app definition              | String ([App Names & Settings](#app-names--settings))             | FALSE    | TRUE   | TRUE     | 1         | 255       |            |
-| label          | unique user-defined display name for app   | String                                                            | FALSE    | TRUE   | FALSE    | 1         | 50        |            |
-| created        | timestamp when app was created             | Date                                                              | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated    | timestamp when app was last updated        | Date                                                              | FALSE    | FALSE  | TRUE     |           |           |            |
-| status         | status of app                              | `ACTIVE` or `INACTIVE`                                            | FALSE    | FALSE  | TRUE     |           |           |            |
-| features       | enabled app features                       | [Features](#features)                                             | TRUE     | FALSE  | FALSE    |           |           |            |
-| signOnMode     | authentication mode of app                 | [SignOn Mode](#signon-modes)                                      | FALSE    | FALSE  | FALSE    |           |           |            |
-| accessibility  | access settings for app                    | [Accessibility Object](#accessibility-object)                     | TRUE     | FALSE  | FALSE    |           |           |            |
-| visibility     | visibility settings for app                | [Visibility Object](#visibility-object)                           | TRUE     | FALSE  | FALSE    |           |           |            |
-| credentials    | credentials for the specified `signOnMode` | [Application Credentials Object](#application-credentials-object) | TRUE     | FALSE  | FALSE    |           |           |            |
-| settings       | settings for app                           | Object ([App Names & Settings](#app-names--settings))             | TRUE     | FALSE  | FALSE    |           |           |            |
-| _links         | discoverable resources related to the app  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded      | embedded resources related to the app      | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    | TRUE     | FALSE  | TRUE     |           |           |            |
-|----------------+--------------------------------------------+-------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-
-> `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created
-
-#### App Names & Settings
-
-The Okta Application Network (OAN) defines the catalog of applications that can be added to your Okta organization.  Each application has a unique name (key) and schema that defines the required and optional settings for the application.  When adding an application, the unique app name must be specified in the request as well as any required settings.
-
-The catalog is currently not exposed via an API.  While additional apps may be added via the API, only the following template applications are documented:
-
-|---------------------+-------------------------------------------------------------------------------|
-| Name                | Example                                                                       |
-| ------------------- | ------------------------------------------------------------------------------|
-| bookmark            | [Add Bookmark Application](#add-bookmark-application)                         |
-| template_basic_auth | [Add Basic Authentication Application](#add-basic-authentication-application) |
-| template_swa        | [Add Plugin SWA Application](#add-plugin-swa-application)                     |
-| template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)   |
-| tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)             |
-| template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)               |
-| Custom SAML 2.0     | [Add Custom SAML 2.0 Application](#add-custom-saml-application)               |
-| Custom SWA          | [Add Custom SWA Application](#add-custom-swa-application)                     |
-|---------------------+-------------------------------------------------------------------------------|
-
-The current workaround is to manually configure the desired application via the Okta Admin UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
-
-> App provisioning settings currently cannot be managed via the API and must be configured via the Okta Admin UI.
-
-#### Features
-
-Applications may support optional provisioning features on a per-app basis.
-
-> Provisioning features currently may not be configured via the API and must be configured via the Okta Admin UI.
-
-The list of provisioning features an app may support are:
-
-|------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| App Feature            | Admin UI Name          | Description                                                                                                                                                                                                                                    |
-| ---------------------- | ---------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| IMPORT_NEW_USERS       | User Import            | Creates or links a user in Okta to a user from the application.                                                                                                                                                                                |
-| IMPORT_PROFILE_UPDATES | User Import            | Updates a linked user's app profile during manual or scheduled imports.                                                                                                                                                                        |
-| PROFILE_MASTERING      | Profile Master         | Designates the app as the identity lifecycle and profile attribute authority for linked users.  The user's profile in Okta is *read-only*                                                                                                      |
-| IMPORT_USER_SCHEMA     |                        | Discovers the profile schema for a user from the app automatically                                                                                                                                                                             |
-| PUSH_NEW_USERS         | Create Users           | Creates or links a user account in the application when assigning the app to a user in Okta.                                                                                                                                                   |
-| PUSH_PROFILE_UPDATES   | Update User Properties | Updates a user's profile in the app when the user's profile changes in Okta (Profile Master).                                                                                                                                                  |
-| PUSH_USER_DEACTIVATION | Deactivate Users       | Deactivates a user's account in the app when unassigned from the app in Okta or deactivated.                                                                                                                                                   |
-| REACTIVATE_USERS       | Deactivate Users       | Reactivates an existing inactive user when provisioning a user to the app.                                                                                                                                                                     |
-| PUSH_PASSWORD_UPDATES  | Sync Okta Password     | Updates the user's app password when their password changes in Okta.                                                                                                                                                                           |
-| GROUP_PUSH             | Group Push             | Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app will be synced as group members to the app.    |
-|------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-
-#### SignOn Modes
-
-Applications support a limited set of sign-on modes that specify how a user is authenticated to the app.
-
-The list of possible modes an app may support are:
-
-|-----------------------+-------------------------------------------------------------------------|
-| Mode                  | Description                                                             |
-| --------------------- | ------------------------------------------------------------------------|
-| BOOKMARK              | Just a bookmark (no-authentication)                                     |
-| BASIC_AUTH            | HTTP Basic Authentication with Okta Browser Plugin                      |
-| BROWSER_PLUGIN        | Secure Web Authentication (SWA) with Okta Browser Plugin                |
-| SECURE_PASSWORD_STORE | Secure Web Authentication (SWA) with POST (plugin not required)         |
-| SAML_2_0              | Federated Authentication with SAML 2.0 WebSSO                           |
-| WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requestor Profile   |
-| AUTO_LOGIN            | Secure Web Authentication (SWA)
-| Custom                | App-Specific SignOn Mode                                                |
-|-----------------------+-------------------------------------------------------------------------|
-
-This setting modifies the same settings as the `Sign On` tab when editing an application in your Okta Administration app.
-
-### Accessibility Object
-
-Specifies access settings for the application.
-
-|------------------+--------------------------------------------+----------+----------+---------+-----------+-----------+------------|
-| Property         | Description                                | DataType | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------------- | ------------------------------------------ | -------- | -------- | ------- | --------- | --------- | ---------- |
-| selfService      | Enable self-service application assignment | Boolean  | TRUE     | FALSE   |           |           |            |
-| errorRedirectUrl | Custom error page for this application     | String   | TRUE     | NULL    |           |           |            |
-| loginRedirectUrl | Custom login page for this application     | String   | TRUE     | NULL    |           |           |            |
-|------------------+--------------------------------------------+----------+----------+---------+-----------+------------------------|
-
-> The `errorRedirectUrl` and `loginRedirectUrl` default to the organization default pages when empty
-
-~~~json
-{
-  "accessibility": {
-    "selfService": false,
-    "errorRedirectUrl": null
-  }
-}
-~~~
-
-
-### Visibility Object
-
-Specifies visibility settings for the application.
-
-|-------------------+----------------------------------------------------|-------------------------------------+----------+---------|-----------|-----------+------------|
-| Property          | Description                                        | DataType                            | Nullable | Default | MinLength | MaxLength | Validation |
-| ----------------- | -------------------------------------------------- | ----------------------------------- | -------- | ------- | --------- | --------- | ---------- |
-| autoSubmitToolbar | Automatically log in when user lands on login page | Boolean                             | FALSE    | FALSE   |           |           |            |
-| hide              | Hides this app for specific end-user apps          | [Hide Object](#hide-object)         | FALSE    | FALSE   |           |           |            |
-| appLinks          | Displays specific appLinks for the app             | [AppLinks Object](#applinks-object) | FALSE    |         |           |           |            |
-|-------------------+----------------------------------------------------|-------------------------------------+----------+---------|-----------|-----------+------------|
-
-~~~json
-{
-  "visibility": {
-    "autoSubmitToolbar": false,
-    "hide": {
-      "iOS": false,
-      "web": false
-    },
-    "appLinks": {
-      "login": true
-    }
-  }
-}
-~~~
-
-#### Hide Object
-
-|-----------+----------------------------------------------------|----------|----------|---------|-----------|-----------+------------|
-| Property  | Description                                        | DataType | Nullable | Default | MinLength | MaxLength | Validation |
-| --------- | -------------------------------------------------- | -------- | -------- | ------- | --------- | --------- | ---------- |
-| iOS       | Okta Mobile for iOS or Android (pre-dates Android) | Boolean  | FALSE    | FALSE   |           |           |            |
-| web       | Okta Web Browser Home Page                         | Boolean  | FALSE    | FALSE   |           |           |            |
-|-----------+----------------------------------------------------|----------|----------|---------|-----------|-----------+------------|
-
-#### AppLinks Object
-
-Each application defines 1 or more appLinks that can be published. AppLinks can be disabled by setting the link value to `false` .
-
-### Application Credentials Object
-
-Specifies credentials and scheme for the application's `signOnMode`.
-
-|------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
-| Property         | Description                                                                                                    | DataType                                                  | Nullable | Default         | MinLength | MaxLength | Validation |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
-| scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)          | TRUE     |                 |           |           |            |
-| userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object)     | TRUE     | *Okta UserName* |           |           |            |
-| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | False    |                 |           |           |            |
-| userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
-| password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |
-|------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
-
-~~~json
-{
-  "credentials": {
-    "scheme": "SHARED_USERNAME_AND_PASSWORD",
-    "userNameTemplate": {
-      "template": "${source.login}",
-      "type": "BUILT_IN"
-    },
-    "signing": {
-      "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
-    },
-    "userName": "test",
-    "password": {}
-  }
-}
-~~~
-
-#### Authentication Schemes
-
-Applications that are configured with the `BASIC_AUTH`, `BROWSER_PLUGIN`, or `SECURE_PASSWORD_STORE`  have credentials vaulted by Okta and can be configured with the following schemes:
-
-|------------------------------+---------------------------------------------------------------------------+-----------------+-----------------+------------------+--------------------------|
-| Scheme                       | Description                                                               | Shared UserName | Shared Password | App UserName     | App Password             |
-| ---------------------------- | ------------------------------------------------------------------------- | --------------- | --------------- | ---------------- | -------------------------|
-| SHARED_USERNAME_AND_PASSWORD | Users share a single username and password set by administrator           | Admin:`R/W`     | Admin:`W`       |                  |                          |
-| EXTERNAL_PASSWORD_SYNC       | Administrator sets username, password is the same as user's Okta password |                 |                 | Admin:`R/W`      | *Current User Password*  |
-| EDIT_USERNAME_AND_PASSWORD   | User sets username and password                                           |                 |                 | Admin/User:`R/W` | Admin/User:`W`           |
-| EDIT_PASSWORD_ONLY           | Administrator sets username, user sets password                           |                 |                 | Admin:`R/W`      | Admin/User:`W`           |
-| ADMIN_SETS_CREDENTIALS       | Administrator sets username and password                                  |                 |                 | Admin: `R/W`     | Admin: `W`
-|------------------------------+---------------------------------------------------------------------------+-----------------+-----------------+------------------+--------------------------|
-
-> `BOOKMARK`, `SAML_2_0`, and `WS_FEDERATION` signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The `scheme` property should be omitted for apps with these signOnModes
-
-#### UserName Template Object
-
-Specifies the template used to generate a user's username when the application is assigned via a group or directly to a user
-
-|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
-| Property   | Description                             | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
-| ---------- | --------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
-| template   | mapping expression for username         | String                           | TRUE     | `${source.login}` |           | 1024      |            |
-| type       | type of mapping expression              | `NONE`,  `BUILT_IN`, or `CUSTOM` | FALSE    | BUILT_IN          |           |           |            |
-| userSuffix | suffix for built-in mapping expressions | String                           | TRUE     | NULL              |           |           |            |
-|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
-
-> You must use the `CUSTOM` type when defining your own expression that is not built-in
-
-~~~json
-{
-  "userNameTemplate": {
-    "template": "${source.login}",
-    "type": "BUILT_IN"
-  }
-}
-~~~
-
-#### Signing Credential Object
-Determines the [key](#application-key-credential-model) used for signing assertions for the `signOnMode`
-
-|------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
-| Property   | Description                                                                                 | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
-| ---------- | ------------------------------------------------------------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
-| kid        | Reference for [key credential for the app](#application-key-store-operations)    | String                           | FALSE    |                   |           |           |            |
-|------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
-
-> You must to enable the key rollover feature to view `kid`. Key rollover is an Early Access feature; contact Customer Support to enable it.
-
-~~~json
-{
-  "signing": {
-    "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
-  }
-}
-~~~
-
-##### Built-In Expressions
-
-The following expressions are built-in and may be used with the `BUILT_IN` template type:
-
-|---------------------------------+-----------------------------------------------|
-| Name                            | Template Expression                           |
-| ------------------------------- | ----------------------------------------------|
-| Okta username                   | ${source.login}                               |
-| Okta username prefix            | ${fn:substringBefore(source.login, ""@"")}    |
-| Email                           | ${source.email}                               |
-| Email prefix                    | ${fn:substringBefore(source.email, ""@"")}    |
-| Email (lowercase)               | ${fn:toLowerCase(source.email)}               |
-| AD SAM Account Name             | ${source.samAccountName}                      |
-| AD SAM Account Name (lowercase) | ${fn:toLowerCase(source.samAccountName)}      |
-| AD User Principal Name          | ${source.userName}                            |
-| AD User Principal Name prefix   | ${fn:substringBefore(source.userName, ""@"")} |
-| AD Employee ID                  | ${source.employeeID}                          |
-| LDAP UID + custom suffix        | ${source.userName}${instance.userSuffix}      |
-|---------------------------------+-----------------------------------------------|
-
-### Password Object
-
-Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the `value`  property defined (e.g. `password: {}` ) to indicate that a password value exists.
-
-|-----------+-------------+----------+----------+---------+-----------+-----------+------------|
-| Property  | Description | DataType | Nullable | Default | MinLength | MaxLength | Validation |
-| --------- | ----------- | -------- | -------- | ------- | --------- | --------- | ---------- |
-| value     |             | String   | TRUE     |         |           |           |            |
-|-----------+-------------+----------+----------+---------+-----------+-----------+------------|
-
-### Application Links Object
-
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of an application using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.  The Links Object is **read-only**.
-
-|--------------------+---------------------------------------------------------------------------------------------|
-| Link Relation Type | Description                                                                                 |
-| ------------------ | --------------------------------------------------------------------------------------------|
-| self               | The actual application                                                                      |
-| activate           | [Lifecycle action](#activate-application) to transition application to `ACTIVE` status      |
-| deactivate         | [Lifecycle action](#deactivate-application) to transition application to `INACTIVE` status  |
-| metadata           | Protocol-specific metadata document for the configured `SignOnMode`                         |
-| users              | [User](#application-user-operations) assignments for application                            |
-| groups             | [Group](#application-group-operations) assignments for application                          |
-| logo               | Application logo image                                                                      |
-|--------------------+---------------------------------------------------------------------------------------------|
-
-### Notifications Object
-
-Specifies notifications settings for the application. The VPN notification feature allows admins to communicate a requirement for signing into VPN-required apps.
-
-|-------------------+----------------------------------------------------+------------------------------------------------------+----------+---------+-----------+-----------+------------|
-| Property          | Description                                        | DataType                                             | Nullable | Default | MinLength | MaxLength | Validation |
-| ----------------- | -------------------------------------------------- | ---------------------------------------------------- | -------- | ------- | --------- | --------- | ---------- |
-| vpn               | VPN notification settings                          | [VPN Notification Object](#vpn-notification-object)  | FALSE    |         |           |           |            |
-|-------------------+----------------------------------------------------+------------------------------------------------------+----------+---------+-----------+-----------+------------|
-
-~~~json
-{
-  "notifications": {
-    "vpn": {
-      "network": {
-        "connection": "ANYWHERE"
-      },
-      "message": "Help message text.",
-      "helpUrl": "http:/www.help-site.example.com"
-     }
-   }
- }
-~~~
-
-#### VPN Notification Object
-
-Specifies properties for a VPN notification
-
-|-----------+--------------------------------------------------------------------------------------------+-----------------------------------+----------+---------+-----------+-----------+------------|
-| Property  | Description                                                                                | DataType                          | Nullable | Default | MinLength | MaxLength | Validation |
-| --------- | ------------------------------------------------------------------------------------------ | --------------------------------  | -------- | ------- | --------- | ----------| ---------- |
-| network   | The network connections for the VPN.                                                       | [Network Object](#network-object) | FALSE    |         |           |           |            |
-| message   | An optional message to your end users.                                                     | String                            | TRUE     |         |           |           |            |
-| helpurl   | An optional URL to help page URL to assist your end users in signing into your company VPN | String                            | TRUE     |         |           |           |            |
-|-----------+--------------------------------------------------------------------------------------------+-----------------------------------+----------+---------+-----------+-----------+------------|
-
-#### Network Object
-
-|------------+-------------------------------------------------------+--------------------------------------------------------+----------+------------+-----------+-----------+------------|
-| Property   | Description                                           | DataType                                               | Nullable | Default    | MinLength | MaxLength | Validation |
-| ---------- | ----------------------------------------------------- | ------------------------------------------------------ | -------- | -----------| --------- | ----------| ---------- |
-| connection | The VPN settings on the app. Choices are shown below. | `DISABLED`, `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | FALSE    | `DISABLED` |           |           |            |
-|------------+-------------------------------------------------------+--------------------------------------------------------+----------+------------+-----------+-----------+------------|
-
-There are four choices for the `connection` property.
-
- - `DISABLED` – The default state. Retain this setting for apps that do not require a VPN connection.
- - `ANYWHERE` – Displays VPN connection information regardless of the browser's client IP. The notification appears before the end user can access the app.
- - `ON_NETWORK` – Displays VPN connection information only when a browser's client IP matches the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
- - `OFF_NETWORK` – Displays VPN connection information only when the browser's client IP does not match the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
-
-#### Attribute Statements Object
-
-Specifies (optional) attribute statements for a SAML application.
-
-|------------+----------------------------------------------------------------------------------------------+-------------+----------|
-| Property   | Description                                                                                  | DataType    | Nullable |
-| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
-| name       | The reference name of the attribute statement                                                | String      | FALSE    |
-| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
-| namespace  | The name format of the attribute                                                             | String      | FALSE    |
-| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
-| values     | The value of the attribute; Supports [Okta EL](../getting_started/okta_expression_lang.html) | String      | FALSE    |
-|------------+--------------------------------------------------------------------------------------------- | ----------- | -------- |
-
-##### Supported Namespaces
-
-Label           | Value
-----------------| -------------------------------------------------------
-Unspecified     | urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified
-URI Reference   | urn:oasis:names:tc:SAML:2.0:attrname-format:uri
-Basic           | urn:oasis:names:tc:SAML:2.0:attrname-format:basic
-
-~~~json
-{
-  ...
-  "settings": {
-    "signOn" : {
-      ...
-      "attributeStatements": [
-        {
-          "type": "EXPRESSION",
-          "name": "Attribute One",
-          "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
-          "values": [
-            "Value One"
-          ]
-        },
-        {
-          "type": "EXPRESSION",
-          "name": "Attribute Two",
-          "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
-          "values": [
-            "Value Two"
-          ]
-        }
-      ]
-    }
-  }
-}
-~~~
-
-## Application User Model
-
-The application user model defines a user's app-specific profile and credentials for an application.
-
-### Example
-
-~~~json
-{
-  "id": "00u11z6WHMYCGPCHCRFK",
-  "externalId": "70c14cc17d3745e8a9f98d599a68329c",
-  "created": "2014-06-24T15:27:59.000Z",
-  "lastUpdated": "2014-06-24T15:28:14.000Z",
-  "scope": "USER",
-  "status": "ACTIVE",
-  "statusChanged": "2014-06-24T15:28:14.000Z",
-  "passwordChanged": "2014-06-24T15:27:59.000Z",
-  "syncState": "SYNCHRONIZED",
-  "lastSync": "2014-06-24T15:27:59.000Z",
-  "credentials": {
-    "userName": "saml.jackson@example.com",
-    "password": {}
-  },
-  "profile": {
-    "secondEmail": null,
-    "lastName": "Jackson",
-    "mobilePhone": null,
-    "email": "saml.jackson@example.com",
-    "salesforceGroups": [
-      "Employee"
-    ],
-    "role": "CEO",
-    "firstName": "Saml",
-    "profile": "Standard User"
-  },
-  "_links": {
-    "app": {
-      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV"
-    },
-    "user": {
-      "href": "https://example.okta.com/api/v1/users/00u11z6WHMYCGPCHCRFK"
-    }
-  }
-}
-~~~
-
-### Application User Properties
-
-All application user assignments have the following properties:
-
-|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
-| Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id               | unique key of [User](/docs/api/resources/users.html)                             | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
-| externalId       | id of user in target app *(must be imported or provisioned)* | String                                                                      | TRUE     | TRUE   | TRUE     |           | 512       |            |
-| created          | timestamp when app user was created                          | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated      | timestamp when app user was last updated                     | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
-| scope            | toggles the assignment between user or group scope           | `USER` or `GROUP`                                                           | FALSE    | FALSE  | FALSE    |           |           |            |
-| status           | status of app user                                           | `STAGED`, `PROVISIONED`, `ACTIVE`, `INACTIVE`, or `DEPROVISIONED`           | FALSE    | FALSE  | TRUE     |           |           |            |
-| statusChanged    | timestamp when status was last changed                       | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
-| passwordChanged  | timestamp when app password last changed                     | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
-| syncState        | synchronization state for app user                           | `DISABLED`, `OUT_OF_SYNC`, `SYNCING`, `SYNCHRONIZED`, `ERROR`               | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastSync         | timestamp when last sync operation was executed              | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
-| credentials      | credentials for assigned app                                 | [Application User Credentials Object](#application-user-credentials-object) | TRUE     | FALSE  | FALSE    |           |           |            |
-| profile          | app-specific profile for the user                            | [Application User Profile Object](#application-user-profile-object)         | FALSE    | FALSE  | TRUE     |           |           |            |
-| _embedded        | embedded resources related to the app user                   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
-| _links           | discoverable resources related to the app user               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
-|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
-
-> `lastSync` is only updated for applications with the `IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature
-
-#### External ID
-
-Users in Okta are linked to a user in a target application via an `externalId`.  Okta anchors an user with his or her `externalId` during an import or provisioning synchronization event.  Okta uses the native app-specific identifier or primary key for the user as the `externalId`.  The `externalId` is selected during import when the user is confirmed (reconciled) or during provisioning when the user has been successfully created in the target application.
-
-> SSO Application Assignments (e.g. SAML or SWA) do not have an `externalId` as they are not synchronized with the application.
-
-#### Application User Status
-
-##### Single Sign-On
-
-Users assigned to an application for SSO without provisioning features enabled will have a an `ACTIVE` status with `syncState` as `DISABLED`.
-
-##### User Import
-
-Users imported and confirmed by an application with the `IMPORT_PROFILE_UPDATES` feature will have an `ACTIVE` status.  The application user's `syncState` depends on whether the `PROFILE_MASTERING` feature is enabled for the application. When `PROFILE_MASTERING` is enabled the `syncState` transitions to `SYNCHRONIZED` otherwise the `syncState` is `DISABLED`.
-
-##### User Provisioning
-
-User provisioning in Okta is an asynchronous background job that is triggered during assignment of user (or indirectly via a group assignment).
-
-1. User is assigned to an application that has `PUSH_NEW_USERS` feature enabled
-    * Application user will have a `STAGED` status with no `externalId` while the background provisioning job is queued.
-2. When the background provisioning job completes successfully, the application user transitions to the `PROVISIONED` status.
-    * Application user is assigned an `externalId` when successfully provisioned in target application.  The `externalId` should be immutable for the life of the assignment
-3. If the background provisioning job completes with an error, the application user remains with the `STAGED` status but will have `syncState` as `ERROR`.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
-
-When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user's `syncState` will have the following values:
-
-|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| syncState    | Description                                                                                                                                                                            |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| OUT_OF_SYNC  | Application user has changes that have not been pushed to the target application                                                                                                       |
-| SYNCING      | Background provisioning job is running to update the user's profile in the target application                                                                                          |
-| SYNCHRONIZED | All changes to the app user profile have successfully been synchronized with the target application                                                                                    |
-| ERROR        | Background provisioning job failed to update the user's profile in the target application. A provisioning task is created in the Okta Admin UI that must be resolved to retry the job. |
-|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-
-> User provisioning currently must be configured via the Okta Admin UI and is only available to with specific editions.
-
-### Application User Credentials Object
-
-Specifies a user's credentials for the application.  The [Authentication Scheme](#authentication-schemes) of the application determines whether a userName or password can be assigned to a user.
-
-|-----------+------------------+-------------------------------------+----------+---------+-----------+-----------+------------|
-| Property  | Description      | DataType                            | Nullable | Default | MinLength | MaxLength | Validation |
-| --------- | ---------------- | ----------------------------------- | -------- | ------- | --------- | --------- | ---------- |
-| userName  | username for app | String                              | TRUE     |         | 1         | 100       |            |
-| password  | password for app | [Password Object](#password-object) | TRUE     |         |           |           |            |
-|-----------+------------------+-------------------------------------+----------+---------+-----------+-----------+------------|
-
-~~~json
-{
-  "credentials": {
-    "userName": "test",
-    "password": {}
-  }
-}
-~~~
-
-> The application's [UserName Template](#username-template-object) defines the default username generated when a user is assigned to an application.
-
-If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
-
-~~~json
-{
-  "errorCode": "E0000041",
-  "errorSummary": "Credentials should not be set on this resource based on the scheme.",
-  "errorLink": "E0000041",
-  "errorId": "oaeUM77NBynQQu4C_qT5ngjGQ",
-  "errorCauses": [
-    {
-      "errorSummary": "User level credentials should not be provided for this scheme."
-    }
-  ]
-}
-~~~
-
-### Application User Profile Object
-
-Application User profiles are app-specific but may be customized by the Profile Editor in the Okta Admin UI. SSO apps typically don't support a user profile while apps with [user provisioning features](#features) have an app-specific profiles with optional and/or required properties.  Any profile properties visible in the Okta Admin UI for an application assignment can also be assigned via the API. Some properties are reference properties and imported from the target application and only allow specific values to be configured.
-
-#### Profile Editor
-
-![Profile Editor UI](/assets/img/okta-admin-ui-profile-editor.png "Profile Editor UI")
-
-> Managing profiles for applications is restricted to specific editions and requires access to the Universal Directory Early Access feature
-
-#### Example Application Assignment
-
-![App Assignment UI](/assets/img/okta-admin-ui-app-assignment.png "App Assignment UI")
-
-#### Example Profile Object
-
-~~~json
-{
-  "profile": {
-    "secondEmail": null,
-    "lastName": "Jackson",
-    "mobilePhone": null,
-    "email": "saml.jackson@example.com",
-    "salesforceGroups": [
-      "Employee"
-    ],
-    "role": "CEO",
-    "firstName": "Saml",
-    "profile": "Standard User"
-  }
-}
-~~~
-
-## Application Group Model
-
-### Example
-
-~~~json
-{
-  "id": "00gbkkGFFWZDLCNTAGQR",
-  "lastUpdated": "2013-09-11T15:56:58.000Z",
-  "priority": 0,
-  "_links": {
-    "user": {
-      "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
-    }
-  }
-}
-~~~
-
-### Application Group Properties
-
-All application groups have the following properties:
-
-|--------------+-------------------------------------------------+----------------------------------------------------------------|----------+--------|----------|-----------|-----------+------------|
-| Property     | Description                                     | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------ | ----------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id           | unique key of group                             | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| lastUpdated  | timestamp when app group was last updated       | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| priority     | priority of group assignment                    | Number                                                         | TRUE     | FALSE  | FALSE    | 0         | 100       |            |
-| _links       | discoverable resources related to the app group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05) | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded    | embedded resources related to the app group     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-|--------------+-------------------------------------------------+----------------------------------------------------------------|----------+--------|----------|-----------|-----------+------------|
-
-## Application Key Credential Model
-
-The application key credential model defines a [JSON Web Key](https://tools.ietf.org/html/rfc7517) for a signature or encryption credential for an application.
-
-> Currently only the X.509 JWK format is supported for applications with the `SAML_2_0` sign-on mode.
-
-### Example
-
-~~~json
-{
-  "created": "2015-11-20T21:09:30.000Z",
-  "expiresAt": "2017-11-20T21:09:29.000Z",
-  "x5c": [
-    "MIIDmDCCAoCgAwIBAgIGAVEmuwhKMA0GCSqGSIb3DQEBBQUAMIGMMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxDTALBgNVBAMMBHJhaW4xHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMTIwMjEwODMwWhcNMTcxMTIwMjEwOTI5WjCBjDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMQ0wCwYDVQQDDARyYWluMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ml7//IDMpngTKGJJ5qhodUaOY2Yx7k6mCYyETA8wjVfJjWFYVDwfTJ5kB7zbuPBNVDFuLIxMqGyJk3i2/nSBKe1eAC2lv+WK2R5xqSgXNNLlnhR3xMp8ed7TCmrHFRoS46uIBpMfvROij4cmOjVtX1ZGTjdqC8Z8bPg+JiZW9BkBo9sdEIjWjZTzMpmuHJ26EcJkuODFp5jr3/SKv3LvFAjbF5slEXrZLyUFrmSL0AXU6fWszN1llUoPBjS9uSTelOsS4PvBUy/oH1e7vbo8jag68ym2+wbbTw9toOjGcdOcwsT7Phwh0ixjt1/oKnjNvMKHapSr2GoiY8cltkQ2wIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQBkYvW3dtPU5spAvUUNHZmk76C0GC0Dg+XD15menebia931qeO6o21SJLbcRr+0Doy8p59r8ZmqIj/jJOhCrA0jqiKT+wch/494K6OYz8k3jJ3OtrBQ3OtYJ7gpAq0QuWf/G3tFpH23tW/8VfBtalwPMxiffG9rkFzPYAoNgYHXAGLO5yRz3TC0Z8nkcY5xPO/NAN1gsWvlvTBxf3B06giug7g+szRaReAjpM3WUFz9XG4Hs/EtaqiBFeArWRqWxxO7igmSQEEmlAHYCCoTZ/Atvwa96CqCTlM2Dr45aT1h8tkaVFXl8HGdt1/m8mnw53PbgxvYW2AvN5JBwp9S8c6w"
-  ],
-  "x5t#S256": "CyhOiLD8_9hCFT02nUbkvmlNncBsb31xY_SUbF6fHPA",
-  "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
-  "kty": "RSA",
-  "use": "sig"
-}
-~~~
-
-### Application Key Credential (Certificate) Properties
-
-|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
-| Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| created          | timestamp when certificate was created                       | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
-| expiresAt        | timestamp when certificate expires                           | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
-| x5c              | X.509 certificate chain                                      | Array                                                                       | TRUE     | TRUE   | TRUE     |           |           |            |
-| x5t#S256         | X.509 certificate SHA-256 thumbprint                         | String                                                                      | TRUE     | TRUE   | TRUE     |           |           |            |
-| kid              | unique identifier for the certificate                        | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
-| kty              | cryptographic algorithm family for the certificate's keypair | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
-| use              | acceptable usage of the certificate                          | String                                                                      | TRUE     | FALSE  | TRUE     |           |           |            |
-|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
-
+Explore the Apps API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b)
 
 ## Application Operations
 
@@ -4503,3 +3763,752 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==</ds:X509Certificate>
     </md:IDPSSODescriptor>
 </md:EntityDescriptor>
 ~~~
+
+## Models
+
+* [Application Model](#application-model)
+* [Application User Model](#application-user-model)
+* [Appliction Group Model](#application-group-model)
+
+### Application Model
+
+#### Example
+
+~~~json
+{
+  "id": "0oaud6YvvS7AghVmH0g3",
+  "name": "testorg_testsamlapp_1",
+  "label": "Test SAML App",
+  "status": "ACTIVE",
+  "lastUpdated": "2016-06-29T16:13:47.000Z",
+  "created": "2016-06-29T16:13:47.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "testorgone_testsamlapp_1_link": true
+    }
+  },
+  "features": [],
+  "signOnMode": "SAML_2_0",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "signing": {}
+  },
+  "settings": {
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "ANYWHERE"
+        },
+        "message": "Help message text.",
+        "helpUrl": "http://www.help-site.example.com/"
+      }
+    },
+    "signOn": {
+      "defaultRelayState": "",
+      "ssoAcsUrl": "https://www.example.com/sso/saml",
+      "idpIssuer": "http://www.okta.com/${org.externalKey}",
+      "audience": "https://www.example.com/",
+      "recipient": "https://www.example.com/sso/saml",
+      "destination": "https://www.example.com/sso/saml",
+      "subjectNameIdTemplate": "${user.userName}",
+      "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+      "responseSigned": true,
+      "assertionSigned": true,
+      "signatureAlgorithm": "RSA_SHA256",
+      "digestAlgorithm": "SHA256",
+      "honorForceAuthn": true,
+      "authnContextClassRef": "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport",
+      "spIssuer": null,
+      "requestCompressed": false,
+      "attributeStatements": []
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "http://testorgone.okta.com/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "type": "image/png"
+      }
+    ],
+    "appLinks": [
+      {
+        "name": "testorgone_testsamlapp_1_link",
+        "href": "http://testorgone.okta.com/home/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/alnun3sSjdvR9IYuy0g3",
+        "type": "text/html"
+      }
+    ],
+    "help": {
+      "href": "http://testorgone-admin.okta.com:/app/testorgone_testsamlapp_1/0oaud6YvvS7AghVmH0g3/setup/help/SAML_2_0/instructions",
+      "type": "text/html"
+    },
+    "users": {
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/users"
+    },
+    "deactivate": {
+      "href": "http://testorgone.okta.com:/api/v1/apps/0oaud6YvvS7AghVmH0g3/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/groups"
+    },
+    "metadata": {
+      "href": "http://testorgone.okta.com/api/v1/apps/0oaud6YvvS7AghVmH0g3/sso/saml/metadata",
+      "type": "application/xml"
+    }
+  }
+}
+~~~
+
+#### Application Properties
+
+All applications have the following properties:
+
+|----------------+--------------------------------------------+-------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                | DataType                                                          | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ------------------------------------------ | ----------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id             | unique key for app                         | String                                                            | FALSE    | TRUE   | TRUE     |           |           |            |
+| name           | unique key for app definition              | String ([App Names & Settings](#app-names--settings))             | FALSE    | TRUE   | TRUE     | 1         | 255       |            |
+| label          | unique user-defined display name for app   | String                                                            | FALSE    | TRUE   | FALSE    | 1         | 50        |            |
+| created        | timestamp when app was created             | Date                                                              | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated    | timestamp when app was last updated        | Date                                                              | FALSE    | FALSE  | TRUE     |           |           |            |
+| status         | status of app                              | `ACTIVE` or `INACTIVE`                                            | FALSE    | FALSE  | TRUE     |           |           |            |
+| features       | enabled app features                       | [Features](#features)                                             | TRUE     | FALSE  | FALSE    |           |           |            |
+| signOnMode     | authentication mode of app                 | [SignOn Mode](#signon-modes)                                      | FALSE    | FALSE  | FALSE    |           |           |            |
+| accessibility  | access settings for app                    | [Accessibility Object](#accessibility-object)                     | TRUE     | FALSE  | FALSE    |           |           |            |
+| visibility     | visibility settings for app                | [Visibility Object](#visibility-object)                           | TRUE     | FALSE  | FALSE    |           |           |            |
+| credentials    | credentials for the specified `signOnMode` | [Application Credentials Object](#application-credentials-object) | TRUE     | FALSE  | FALSE    |           |           |            |
+| settings       | settings for app                           | Object ([App Names & Settings](#app-names--settings))             | TRUE     | FALSE  | FALSE    |           |           |            |
+| _links         | discoverable resources related to the app  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded      | embedded resources related to the app      | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+--------------------------------------------+-------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+
+> `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created
+
+##### App Names & Settings
+
+The Okta Application Network (OAN) defines the catalog of applications that can be added to your Okta organization.  Each application has a unique name (key) and schema that defines the required and optional settings for the application.  When adding an application, the unique app name must be specified in the request as well as any required settings.
+
+The catalog is currently not exposed via an API.  While additional apps may be added via the API, only the following template applications are documented:
+
+|---------------------+-------------------------------------------------------------------------------|
+| Name                | Example                                                                       |
+| ------------------- | ------------------------------------------------------------------------------|
+| bookmark            | [Add Bookmark Application](#add-bookmark-application)                         |
+| template_basic_auth | [Add Basic Authentication Application](#add-basic-authentication-application) |
+| template_swa        | [Add Plugin SWA Application](#add-plugin-swa-application)                     |
+| template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)   |
+| tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)             |
+| template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)               |
+| Custom SAML 2.0     | [Add Custom SAML 2.0 Application](#add-custom-saml-application)               |
+| Custom SWA          | [Add Custom SWA Application](#add-custom-swa-application)                     |
+|---------------------+-------------------------------------------------------------------------------|
+
+The current workaround is to manually configure the desired application via the Okta Admin UI in a preview (sandbox) organization and view the application via [Get Application](#get-application)
+
+> App provisioning settings currently cannot be managed via the API and must be configured via the Okta Admin UI.
+
+##### Features
+
+Applications may support optional provisioning features on a per-app basis.
+
+> Provisioning features currently may not be configured via the API and must be configured via the Okta Admin UI.
+
+The list of provisioning features an app may support are:
+
+|------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| App Feature            | Admin UI Name          | Description                                                                                                                                                                                                                                    |
+| ---------------------- | ---------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| IMPORT_NEW_USERS       | User Import            | Creates or links a user in Okta to a user from the application.                                                                                                                                                                                |
+| IMPORT_PROFILE_UPDATES | User Import            | Updates a linked user's app profile during manual or scheduled imports.                                                                                                                                                                        |
+| PROFILE_MASTERING      | Profile Master         | Designates the app as the identity lifecycle and profile attribute authority for linked users.  The user's profile in Okta is *read-only*                                                                                                      |
+| IMPORT_USER_SCHEMA     |                        | Discovers the profile schema for a user from the app automatically                                                                                                                                                                             |
+| PUSH_NEW_USERS         | Create Users           | Creates or links a user account in the application when assigning the app to a user in Okta.                                                                                                                                                   |
+| PUSH_PROFILE_UPDATES   | Update User Properties | Updates a user's profile in the app when the user's profile changes in Okta (Profile Master).                                                                                                                                                  |
+| PUSH_USER_DEACTIVATION | Deactivate Users       | Deactivates a user's account in the app when unassigned from the app in Okta or deactivated.                                                                                                                                                   |
+| REACTIVATE_USERS       | Deactivate Users       | Reactivates an existing inactive user when provisioning a user to the app.                                                                                                                                                                     |
+| PUSH_PASSWORD_UPDATES  | Sync Okta Password     | Updates the user's app password when their password changes in Okta.                                                                                                                                                                           |
+| GROUP_PUSH             | Group Push             | Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app will be synced as group members to the app.    |
+|------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+##### SignOn Modes
+
+Applications support a limited set of sign-on modes that specify how a user is authenticated to the app.
+
+The list of possible modes an app may support are:
+
+|-----------------------+-------------------------------------------------------------------------|
+| Mode                  | Description                                                             |
+| --------------------- | ------------------------------------------------------------------------|
+| BOOKMARK              | Just a bookmark (no-authentication)                                     |
+| BASIC_AUTH            | HTTP Basic Authentication with Okta Browser Plugin                      |
+| BROWSER_PLUGIN        | Secure Web Authentication (SWA) with Okta Browser Plugin                |
+| SECURE_PASSWORD_STORE | Secure Web Authentication (SWA) with POST (plugin not required)         |
+| SAML_2_0              | Federated Authentication with SAML 2.0 WebSSO                           |
+| WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requestor Profile   |
+| AUTO_LOGIN            | Secure Web Authentication (SWA)
+| Custom                | App-Specific SignOn Mode                                                |
+|-----------------------+-------------------------------------------------------------------------|
+
+This setting modifies the same settings as the `Sign On` tab when editing an application in your Okta Administration app.
+
+### Accessibility Object
+
+Specifies access settings for the application.
+
+|------------------+--------------------------------------------+----------+----------+---------+-----------+-----------+------------|
+| Property         | Description                                | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| ---------------- | ------------------------------------------ | -------- | -------- | ------- | --------- | --------- | ---------- |
+| selfService      | Enable self-service application assignment | Boolean  | TRUE     | FALSE   |           |           |            |
+| errorRedirectUrl | Custom error page for this application     | String   | TRUE     | NULL    |           |           |            |
+| loginRedirectUrl | Custom login page for this application     | String   | TRUE     | NULL    |           |           |            |
+|------------------+--------------------------------------------+----------+----------+---------+-----------+------------------------|
+
+> The `errorRedirectUrl` and `loginRedirectUrl` default to the organization default pages when empty
+
+~~~json
+{
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null
+  }
+}
+~~~
+
+
+### Visibility Object
+
+Specifies visibility settings for the application.
+
+|-------------------+----------------------------------------------------|-------------------------------------+----------+---------|-----------|-----------+------------|
+| Property          | Description                                        | DataType                            | Nullable | Default | MinLength | MaxLength | Validation |
+| ----------------- | -------------------------------------------------- | ----------------------------------- | -------- | ------- | --------- | --------- | ---------- |
+| autoSubmitToolbar | Automatically log in when user lands on login page | Boolean                             | FALSE    | FALSE   |           |           |            |
+| hide              | Hides this app for specific end-user apps          | [Hide Object](#hide-object)         | FALSE    | FALSE   |           |           |            |
+| appLinks          | Displays specific appLinks for the app             | [AppLinks Object](#applinks-object) | FALSE    |         |           |           |            |
+|-------------------+----------------------------------------------------|-------------------------------------+----------+---------|-----------|-----------+------------|
+
+~~~json
+{
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": false,
+      "web": false
+    },
+    "appLinks": {
+      "login": true
+    }
+  }
+}
+~~~
+
+#### Hide Object
+
+|-----------+----------------------------------------------------|----------|----------|---------|-----------|-----------+------------|
+| Property  | Description                                        | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| --------- | -------------------------------------------------- | -------- | -------- | ------- | --------- | --------- | ---------- |
+| iOS       | Okta Mobile for iOS or Android (pre-dates Android) | Boolean  | FALSE    | FALSE   |           |           |            |
+| web       | Okta Web Browser Home Page                         | Boolean  | FALSE    | FALSE   |           |           |            |
+|-----------+----------------------------------------------------|----------|----------|---------|-----------|-----------+------------|
+
+#### AppLinks Object
+
+Each application defines 1 or more appLinks that can be published. AppLinks can be disabled by setting the link value to `false` .
+
+### Application Credentials Object
+
+Specifies credentials and scheme for the application's `signOnMode`.
+
+|------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
+| Property         | Description                                                                                                    | DataType                                                  | Nullable | Default         | MinLength | MaxLength | Validation |
+| ---------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
+| scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)          | TRUE     |                 |           |           |            |
+| userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object)     | TRUE     | *Okta UserName* |           |           |            |
+| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | False    |                 |           |           |            |
+| userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
+| password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |
+|------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
+
+~~~json
+{
+  "credentials": {
+    "scheme": "SHARED_USERNAME_AND_PASSWORD",
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "signing": {
+      "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
+    },
+    "userName": "test",
+    "password": {}
+  }
+}
+~~~
+
+#### Authentication Schemes
+
+Applications that are configured with the `BASIC_AUTH`, `BROWSER_PLUGIN`, or `SECURE_PASSWORD_STORE`  have credentials vaulted by Okta and can be configured with the following schemes:
+
+|------------------------------+---------------------------------------------------------------------------+-----------------+-----------------+------------------+--------------------------|
+| Scheme                       | Description                                                               | Shared UserName | Shared Password | App UserName     | App Password             |
+| ---------------------------- | ------------------------------------------------------------------------- | --------------- | --------------- | ---------------- | -------------------------|
+| SHARED_USERNAME_AND_PASSWORD | Users share a single username and password set by administrator           | Admin:`R/W`     | Admin:`W`       |                  |                          |
+| EXTERNAL_PASSWORD_SYNC       | Administrator sets username, password is the same as user's Okta password |                 |                 | Admin:`R/W`      | *Current User Password*  |
+| EDIT_USERNAME_AND_PASSWORD   | User sets username and password                                           |                 |                 | Admin/User:`R/W` | Admin/User:`W`           |
+| EDIT_PASSWORD_ONLY           | Administrator sets username, user sets password                           |                 |                 | Admin:`R/W`      | Admin/User:`W`           |
+| ADMIN_SETS_CREDENTIALS       | Administrator sets username and password                                  |                 |                 | Admin: `R/W`     | Admin: `W`
+|------------------------------+---------------------------------------------------------------------------+-----------------+-----------------+------------------+--------------------------|
+
+> `BOOKMARK`, `SAML_2_0`, and `WS_FEDERATION` signOnModes do not support an authentication scheme as they use a federated SSO protocol.  The `scheme` property should be omitted for apps with these signOnModes
+
+#### UserName Template Object
+
+Specifies the template used to generate a user's username when the application is assigned via a group or directly to a user
+
+|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+| Property   | Description                             | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
+| ---------- | --------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
+| template   | mapping expression for username         | String                           | TRUE     | `${source.login}` |           | 1024      |            |
+| type       | type of mapping expression              | `NONE`,  `BUILT_IN`, or `CUSTOM` | FALSE    | BUILT_IN          |           |           |            |
+| userSuffix | suffix for built-in mapping expressions | String                           | TRUE     | NULL              |           |           |            |
+|------------+-----------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+
+> You must use the `CUSTOM` type when defining your own expression that is not built-in
+
+~~~json
+{
+  "userNameTemplate": {
+    "template": "${source.login}",
+    "type": "BUILT_IN"
+  }
+}
+~~~
+
+#### Signing Credential Object
+Determines the [key](#application-key-credential-model) used for signing assertions for the `signOnMode`
+
+|------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+| Property   | Description                                                                                 | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
+| ---------- | ------------------------------------------------------------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
+| kid        | Reference for [key credential for the app](#application-key-store-operations)    | String                           | FALSE    |                   |           |           |            |
+|------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+
+> You must to enable the key rollover feature to view `kid`. Key rollover is an Early Access feature; contact Customer Support to enable it.
+
+~~~json
+{
+  "signing": {
+    "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
+  }
+}
+~~~
+
+##### Built-In Expressions
+
+The following expressions are built-in and may be used with the `BUILT_IN` template type:
+
+|---------------------------------+-----------------------------------------------|
+| Name                            | Template Expression                           |
+| ------------------------------- | ----------------------------------------------|
+| Okta username                   | ${source.login}                               |
+| Okta username prefix            | ${fn:substringBefore(source.login, ""@"")}    |
+| Email                           | ${source.email}                               |
+| Email prefix                    | ${fn:substringBefore(source.email, ""@"")}    |
+| Email (lowercase)               | ${fn:toLowerCase(source.email)}               |
+| AD SAM Account Name             | ${source.samAccountName}                      |
+| AD SAM Account Name (lowercase) | ${fn:toLowerCase(source.samAccountName)}      |
+| AD User Principal Name          | ${source.userName}                            |
+| AD User Principal Name prefix   | ${fn:substringBefore(source.userName, ""@"")} |
+| AD Employee ID                  | ${source.employeeID}                          |
+| LDAP UID + custom suffix        | ${source.userName}${instance.userSuffix}      |
+|---------------------------------+-----------------------------------------------|
+
+### Password Object
+
+Specifies a password for a user.  A password value is a **write-only** property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the `value`  property defined (e.g. `password: {}` ) to indicate that a password value exists.
+
+|-----------+-------------+----------+----------+---------+-----------+-----------+------------|
+| Property  | Description | DataType | Nullable | Default | MinLength | MaxLength | Validation |
+| --------- | ----------- | -------- | -------- | ------- | --------- | --------- | ---------- |
+| value     |             | String   | TRUE     |         |           |           |            |
+|-----------+-------------+----------+----------+---------+-----------+-----------+------------|
+
+### Application Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of an application using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.  The Links Object is **read-only**.
+
+|--------------------+---------------------------------------------------------------------------------------------|
+| Link Relation Type | Description                                                                                 |
+| ------------------ | --------------------------------------------------------------------------------------------|
+| self               | The actual application                                                                      |
+| activate           | [Lifecycle action](#activate-application) to transition application to `ACTIVE` status      |
+| deactivate         | [Lifecycle action](#deactivate-application) to transition application to `INACTIVE` status  |
+| metadata           | Protocol-specific metadata document for the configured `SignOnMode`                         |
+| users              | [User](#application-user-operations) assignments for application                            |
+| groups             | [Group](#application-group-operations) assignments for application                          |
+| logo               | Application logo image                                                                      |
+|--------------------+---------------------------------------------------------------------------------------------|
+
+### Notifications Object
+
+Specifies notifications settings for the application. The VPN notification feature allows admins to communicate a requirement for signing into VPN-required apps.
+
+|-------------------+----------------------------------------------------+------------------------------------------------------+----------+---------+-----------+-----------+------------|
+| Property          | Description                                        | DataType                                             | Nullable | Default | MinLength | MaxLength | Validation |
+| ----------------- | -------------------------------------------------- | ---------------------------------------------------- | -------- | ------- | --------- | --------- | ---------- |
+| vpn               | VPN notification settings                          | [VPN Notification Object](#vpn-notification-object)  | FALSE    |         |           |           |            |
+|-------------------+----------------------------------------------------+------------------------------------------------------+----------+---------+-----------+-----------+------------|
+
+~~~json
+{
+  "notifications": {
+    "vpn": {
+      "network": {
+        "connection": "ANYWHERE"
+      },
+      "message": "Help message text.",
+      "helpUrl": "http:/www.help-site.example.com"
+     }
+   }
+ }
+~~~
+
+#### VPN Notification Object
+
+Specifies properties for a VPN notification
+
+|-----------+--------------------------------------------------------------------------------------------+-----------------------------------+----------+---------+-----------+-----------+------------|
+| Property  | Description                                                                                | DataType                          | Nullable | Default | MinLength | MaxLength | Validation |
+| --------- | ------------------------------------------------------------------------------------------ | --------------------------------  | -------- | ------- | --------- | ----------| ---------- |
+| network   | The network connections for the VPN.                                                       | [Network Object](#network-object) | FALSE    |         |           |           |            |
+| message   | An optional message to your end users.                                                     | String                            | TRUE     |         |           |           |            |
+| helpurl   | An optional URL to help page URL to assist your end users in signing into your company VPN | String                            | TRUE     |         |           |           |            |
+|-----------+--------------------------------------------------------------------------------------------+-----------------------------------+----------+---------+-----------+-----------+------------|
+
+#### Network Object
+
+|------------+-------------------------------------------------------+--------------------------------------------------------+----------+------------+-----------+-----------+------------|
+| Property   | Description                                           | DataType                                               | Nullable | Default    | MinLength | MaxLength | Validation |
+| ---------- | ----------------------------------------------------- | ------------------------------------------------------ | -------- | -----------| --------- | ----------| ---------- |
+| connection | The VPN settings on the app. Choices are shown below. | `DISABLED`, `ANYWHERE`, `ON_NETWORK`, or `OFF_NETWORK` | FALSE    | `DISABLED` |           |           |            |
+|------------+-------------------------------------------------------+--------------------------------------------------------+----------+------------+-----------+-----------+------------|
+
+There are four choices for the `connection` property.
+
+ - `DISABLED` – The default state. Retain this setting for apps that do not require a VPN connection.
+ - `ANYWHERE` – Displays VPN connection information regardless of the browser's client IP. The notification appears before the end user can access the app.
+ - `ON_NETWORK` – Displays VPN connection information only when a browser's client IP matches the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
+ - `OFF_NETWORK` – Displays VPN connection information only when the browser's client IP does not match the configured Pubic Gateway IPs. The notification appears before the end user can access the app.
+
+#### Attribute Statements Object
+
+Specifies (optional) attribute statements for a SAML application.
+
+|------------+----------------------------------------------------------------------------------------------+-------------+----------|
+| Property   | Description                                                                                  | DataType    | Nullable |
+| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
+| name       | The reference name of the attribute statement                                                | String      | FALSE    |
+| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
+| namespace  | The name format of the attribute                                                             | String      | FALSE    |
+| ---------- | -------------------------------------------------------------------------------------------- | ----------- | -------- |
+| values     | The value of the attribute; Supports [Okta EL](../getting_started/okta_expression_lang.html) | String      | FALSE    |
+|------------+--------------------------------------------------------------------------------------------- | ----------- | -------- |
+
+##### Supported Namespaces
+
+Label           | Value
+----------------| -------------------------------------------------------
+Unspecified     | urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified
+URI Reference   | urn:oasis:names:tc:SAML:2.0:attrname-format:uri
+Basic           | urn:oasis:names:tc:SAML:2.0:attrname-format:basic
+
+~~~json
+{
+  ...
+  "settings": {
+    "signOn" : {
+      ...
+      "attributeStatements": [
+        {
+          "type": "EXPRESSION",
+          "name": "Attribute One",
+          "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified",
+          "values": [
+            "Value One"
+          ]
+        },
+        {
+          "type": "EXPRESSION",
+          "name": "Attribute Two",
+          "namespace": "urn:oasis:names:tc:SAML:2.0:attrname-format:basic",
+          "values": [
+            "Value Two"
+          ]
+        }
+      ]
+    }
+  }
+}
+~~~
+
+### Application User Model
+
+The application user model defines a user's app-specific profile and credentials for an application.
+
+#### Example
+
+~~~json
+{
+  "id": "00u11z6WHMYCGPCHCRFK",
+  "externalId": "70c14cc17d3745e8a9f98d599a68329c",
+  "created": "2014-06-24T15:27:59.000Z",
+  "lastUpdated": "2014-06-24T15:28:14.000Z",
+  "scope": "USER",
+  "status": "ACTIVE",
+  "statusChanged": "2014-06-24T15:28:14.000Z",
+  "passwordChanged": "2014-06-24T15:27:59.000Z",
+  "syncState": "SYNCHRONIZED",
+  "lastSync": "2014-06-24T15:27:59.000Z",
+  "credentials": {
+    "userName": "saml.jackson@example.com",
+    "password": {}
+  },
+  "profile": {
+    "secondEmail": null,
+    "lastName": "Jackson",
+    "mobilePhone": null,
+    "email": "saml.jackson@example.com",
+    "salesforceGroups": [
+      "Employee"
+    ],
+    "role": "CEO",
+    "firstName": "Saml",
+    "profile": "Standard User"
+  },
+  "_links": {
+    "app": {
+      "href": "https://example.okta.com/api/v1/apps/0oabhnUQFYHMBNVSVXMV"
+    },
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00u11z6WHMYCGPCHCRFK"
+    }
+  }
+}
+~~~
+
+#### Application User Properties
+
+All application user assignments have the following properties:
+
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+| Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id               | unique key of [User](/docs/api/resources/users.html)                             | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| externalId       | id of user in target app *(must be imported or provisioned)* | String                                                                      | TRUE     | TRUE   | TRUE     |           | 512       |            |
+| created          | timestamp when app user was created                          | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated      | timestamp when app user was last updated                     | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| scope            | toggles the assignment between user or group scope           | `USER` or `GROUP`                                                           | FALSE    | FALSE  | FALSE    |           |           |            |
+| status           | status of app user                                           | `STAGED`, `PROVISIONED`, `ACTIVE`, `INACTIVE`, or `DEPROVISIONED`           | FALSE    | FALSE  | TRUE     |           |           |            |
+| statusChanged    | timestamp when status was last changed                       | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
+| passwordChanged  | timestamp when app password last changed                     | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
+| syncState        | synchronization state for app user                           | `DISABLED`, `OUT_OF_SYNC`, `SYNCING`, `SYNCHRONIZED`, `ERROR`               | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastSync         | timestamp when last sync operation was executed              | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
+| credentials      | credentials for assigned app                                 | [Application User Credentials Object](#application-user-credentials-object) | TRUE     | FALSE  | FALSE    |           |           |            |
+| profile          | app-specific profile for the user                            | [Application User Profile Object](#application-user-profile-object)         | FALSE    | FALSE  | TRUE     |           |           |            |
+| _embedded        | embedded resources related to the app user                   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
+| _links           | discoverable resources related to the app user               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)              | TRUE     | FALSE  | TRUE     |           |           |            |
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+
+> `lastSync` is only updated for applications with the `IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature
+
+##### External ID
+
+Users in Okta are linked to a user in a target application via an `externalId`.  Okta anchors an user with his or her `externalId` during an import or provisioning synchronization event.  Okta uses the native app-specific identifier or primary key for the user as the `externalId`.  The `externalId` is selected during import when the user is confirmed (reconciled) or during provisioning when the user has been successfully created in the target application.
+
+> SSO Application Assignments (e.g. SAML or SWA) do not have an `externalId` as they are not synchronized with the application.
+
+##### Application User Status
+
+###### Single Sign-On
+
+Users assigned to an application for SSO without provisioning features enabled will have a an `ACTIVE` status with `syncState` as `DISABLED`.
+
+###### User Import
+
+Users imported and confirmed by an application with the `IMPORT_PROFILE_UPDATES` feature will have an `ACTIVE` status.  The application user's `syncState` depends on whether the `PROFILE_MASTERING` feature is enabled for the application. When `PROFILE_MASTERING` is enabled the `syncState` transitions to `SYNCHRONIZED` otherwise the `syncState` is `DISABLED`.
+
+###### User Provisioning
+
+User provisioning in Okta is an asynchronous background job that is triggered during assignment of user (or indirectly via a group assignment).
+
+1. User is assigned to an application that has `PUSH_NEW_USERS` feature enabled
+    * Application user will have a `STAGED` status with no `externalId` while the background provisioning job is queued.
+2. When the background provisioning job completes successfully, the application user transitions to the `PROVISIONED` status.
+    * Application user is assigned an `externalId` when successfully provisioned in target application.  The `externalId` should be immutable for the life of the assignment
+3. If the background provisioning job completes with an error, the application user remains with the `STAGED` status but will have `syncState` as `ERROR`.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.
+
+When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user's `syncState` will have the following values:
+
+|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| syncState    | Description                                                                                                                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| OUT_OF_SYNC  | Application user has changes that have not been pushed to the target application                                                                                                       |
+| SYNCING      | Background provisioning job is running to update the user's profile in the target application                                                                                          |
+| SYNCHRONIZED | All changes to the app user profile have successfully been synchronized with the target application                                                                                    |
+| ERROR        | Background provisioning job failed to update the user's profile in the target application. A provisioning task is created in the Okta Admin UI that must be resolved to retry the job. |
+|--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+> User provisioning currently must be configured via the Okta Admin UI and is only available to with specific editions.
+
+#### Application User Credentials Object
+
+Specifies a user's credentials for the application.  The [Authentication Scheme](#authentication-schemes) of the application determines whether a userName or password can be assigned to a user.
+
+|-----------+------------------+-------------------------------------+----------+---------+-----------+-----------+------------|
+| Property  | Description      | DataType                            | Nullable | Default | MinLength | MaxLength | Validation |
+| --------- | ---------------- | ----------------------------------- | -------- | ------- | --------- | --------- | ---------- |
+| userName  | username for app | String                              | TRUE     |         | 1         | 100       |            |
+| password  | password for app | [Password Object](#password-object) | TRUE     |         |           |           |            |
+|-----------+------------------+-------------------------------------+----------+---------+-----------+-----------+------------|
+
+~~~json
+{
+  "credentials": {
+    "userName": "test",
+    "password": {}
+  }
+}
+~~~
+
+> The application's [UserName Template](#username-template-object) defines the default username generated when a user is assigned to an application.
+
+If you attempt to assign a username or password to an application with an incompatible [Authentication Scheme](#authentication-schemes) you will receive the following error:
+
+~~~json
+{
+  "errorCode": "E0000041",
+  "errorSummary": "Credentials should not be set on this resource based on the scheme.",
+  "errorLink": "E0000041",
+  "errorId": "oaeUM77NBynQQu4C_qT5ngjGQ",
+  "errorCauses": [
+    {
+      "errorSummary": "User level credentials should not be provided for this scheme."
+    }
+  ]
+}
+~~~
+
+#### Application User Profile Object
+
+Application User profiles are app-specific but may be customized by the Profile Editor in the Okta Admin UI. SSO apps typically don't support a user profile while apps with [user provisioning features](#features) have an app-specific profiles with optional and/or required properties.  Any profile properties visible in the Okta Admin UI for an application assignment can also be assigned via the API. Some properties are reference properties and imported from the target application and only allow specific values to be configured.
+
+##### Profile Editor
+
+![Profile Editor UI](/assets/img/okta-admin-ui-profile-editor.png "Profile Editor UI")
+
+> Managing profiles for applications is restricted to specific editions and requires access to the Universal Directory Early Access feature
+
+##### Example Application Assignment
+
+![App Assignment UI](/assets/img/okta-admin-ui-app-assignment.png "App Assignment UI")
+
+##### Example Profile Object
+
+~~~json
+{
+  "profile": {
+    "secondEmail": null,
+    "lastName": "Jackson",
+    "mobilePhone": null,
+    "email": "saml.jackson@example.com",
+    "salesforceGroups": [
+      "Employee"
+    ],
+    "role": "CEO",
+    "firstName": "Saml",
+    "profile": "Standard User"
+  }
+}
+~~~
+
+### Application Group Model
+
+#### Example
+
+~~~json
+{
+  "id": "00gbkkGFFWZDLCNTAGQR",
+  "lastUpdated": "2013-09-11T15:56:58.000Z",
+  "priority": 0,
+  "_links": {
+    "user": {
+      "href": "https://example.okta.com/api/v1/users/00ubgfEUVRPSHGWHAZRI"
+    }
+  }
+}
+~~~
+
+#### Application Group Properties
+
+All application groups have the following properties:
+
+|--------------+-------------------------------------------------+----------------------------------------------------------------|----------+--------|----------|-----------|-----------+------------|
+| Property     | Description                                     | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------ | ----------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id           | unique key of group                             | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| lastUpdated  | timestamp when app group was last updated       | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| priority     | priority of group assignment                    | Number                                                         | TRUE     | FALSE  | FALSE    | 0         | 100       |            |
+| _links       | discoverable resources related to the app group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05) | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded    | embedded resources related to the app group     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|--------------+-------------------------------------------------+----------------------------------------------------------------|----------+--------|----------|-----------|-----------+------------|
+
+### Application Key Credential Model
+
+The application key credential model defines a [JSON Web Key](https://tools.ietf.org/html/rfc7517) for a signature or encryption credential for an application.
+
+> Currently only the X.509 JWK format is supported for applications with the `SAML_2_0` sign-on mode.
+
+#### Example
+
+~~~json
+{
+  "created": "2015-11-20T21:09:30.000Z",
+  "expiresAt": "2017-11-20T21:09:29.000Z",
+  "x5c": [
+    "MIIDmDCCAoCgAwIBAgIGAVEmuwhKMA0GCSqGSIb3DQEBBQUAMIGMMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxDTALBgNVBAMMBHJhaW4xHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMTIwMjEwODMwWhcNMTcxMTIwMjEwOTI5WjCBjDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMQ0wCwYDVQQDDARyYWluMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ml7//IDMpngTKGJJ5qhodUaOY2Yx7k6mCYyETA8wjVfJjWFYVDwfTJ5kB7zbuPBNVDFuLIxMqGyJk3i2/nSBKe1eAC2lv+WK2R5xqSgXNNLlnhR3xMp8ed7TCmrHFRoS46uIBpMfvROij4cmOjVtX1ZGTjdqC8Z8bPg+JiZW9BkBo9sdEIjWjZTzMpmuHJ26EcJkuODFp5jr3/SKv3LvFAjbF5slEXrZLyUFrmSL0AXU6fWszN1llUoPBjS9uSTelOsS4PvBUy/oH1e7vbo8jag68ym2+wbbTw9toOjGcdOcwsT7Phwh0ixjt1/oKnjNvMKHapSr2GoiY8cltkQ2wIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQBkYvW3dtPU5spAvUUNHZmk76C0GC0Dg+XD15menebia931qeO6o21SJLbcRr+0Doy8p59r8ZmqIj/jJOhCrA0jqiKT+wch/494K6OYz8k3jJ3OtrBQ3OtYJ7gpAq0QuWf/G3tFpH23tW/8VfBtalwPMxiffG9rkFzPYAoNgYHXAGLO5yRz3TC0Z8nkcY5xPO/NAN1gsWvlvTBxf3B06giug7g+szRaReAjpM3WUFz9XG4Hs/EtaqiBFeArWRqWxxO7igmSQEEmlAHYCCoTZ/Atvwa96CqCTlM2Dr45aT1h8tkaVFXl8HGdt1/m8mnw53PbgxvYW2AvN5JBwp9S8c6w"
+  ],
+  "x5t#S256": "CyhOiLD8_9hCFT02nUbkvmlNncBsb31xY_SUbF6fHPA",
+  "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
+  "kty": "RSA",
+  "use": "sig"
+}
+~~~
+
+#### Application Key Credential (Certificate) Properties
+
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+| Property         | Description                                                  | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ---------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| created          | timestamp when certificate was created                       | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| expiresAt        | timestamp when certificate expires                           | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
+| x5c              | X.509 certificate chain                                      | Array                                                                       | TRUE     | TRUE   | TRUE     |           |           |            |
+| x5t#S256         | X.509 certificate SHA-256 thumbprint                         | String                                                                      | TRUE     | TRUE   | TRUE     |           |           |            |
+| kid              | unique identifier for the certificate                        | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| kty              | cryptographic algorithm family for the certificate's keypair | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| use              | acceptable usage of the certificate                          | String                                                                      | TRUE     | FALSE  | TRUE     |           |           |            |
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|

@@ -49,7 +49,7 @@ can all be configured easily in the Okta administration console in the Okta dash
 
 ## Sign-in Widget
 
-The [Okta Sign-in Widget](/docs/api/resources/okta_signin_widget.html)
+The [Okta Sign-in Widget](/code/javascript/okta_sign-in_widget.html)
 provides an embeddable Javascript sign-in implementation that can
 easily be embedded into your customized login page.  The Sign-in
 widget carries the same feature set in the standard Okta sign-in page

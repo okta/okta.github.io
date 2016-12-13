@@ -4,64 +4,19 @@ title: Templates
 redirect_from: "/docs/api/rest/templates.html"
 ---
 
-## Overview
-The Okta Templates API provides operations to manage custom templates. Currently only the SMS custom templates are implemented.
+# Custom Templates API
 
-## SMS Templates
+The Okta Templates API provides operations to manage custom templates. 
+
+> Currently, only the SMS custom templates are implemented.
+
 SMS templates customize the SMS message sent to users. One default SMS template is provided. All custom templates must have the variable **${code}** as part of the text. The **${code}** variable is replaced with the actual SMS code when the message is sent. Optionally, you can use the variable **${org.name}**. If a template contains **${org.name}**, it is replaced with organization name before the SMS message is sent.
 
-## SMS Template Model
+## Getting Started with Custom Templates
 
-### Example
-~~~json
-{
-  "id": "cstk2flOtuCMDJK4b0g3",
-  "name": "Custom",
-  "type": "SMS_VERIFY_CODE",
-  "template": "Your ${org.name} code is: ${code}",
-  "created": "2016-06-21T20:49:52.000Z",
-  "lastUpdated": "2016-06-21T20:49:52.000Z",
-  "translations": {
-    "it": "Il codice ${org.name} è: ${code}.",
-    "fr": "Votre code ${org.name} : ${code}.",
-    "es": "Tu código de ${org.name} es: ${code}."
-  }
-}
-~~~
-
-### SMS Template Attributes
-
-All templates have the following properties:
-
-|------------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
-| Property               | Description                                                  | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ---------------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id                     | unique key for template                                      | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| name                   | human readable name of the template                          | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
-| type                   | type of the template                                         | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
-| template               | text of the template                                         | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
-| created                | timestamp when template was created                          | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated            | timestamp when template was last updated                     | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| translations           | list of translations                                         |                                                                |          |        |          |           |           |            |
-|   <language>           | language that was used for translation                       | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
-|   <translated_template>| translated text of the template                              | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
-|------------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
-
-### SMS Template Types
-
-Select a fallback template based on the workflow.
-
-|-------------------+--------------------------------------------------------------------------------------------------+
-| Type              | Description                                                                                      |
-| ----------------- | ------------------------------------------------------------------------------------------------ |
-| `SMS_VERIFY_CODE` | This template is used when the SMS for code verification is sent.                                |
-|-------------------+--------------------------------------------------------------------------------------------------+
+Explore the Custom Templates API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06)
 
 
-### SMS Template Translations
-
-Template translations are optionally provided when we want to be able to localize the SMS messages. Translations are
-provided in pairs: the language and translated template text.
 
 ## Template Operations
 
@@ -456,3 +411,56 @@ curl -v -X DELETE \
 ~~~http
 HTTP/1.1 204 No Content
 ~~~
+
+## SMS Template Model
+
+### Example
+~~~json
+{
+  "id": "cstk2flOtuCMDJK4b0g3",
+  "name": "Custom",
+  "type": "SMS_VERIFY_CODE",
+  "template": "Your ${org.name} code is: ${code}",
+  "created": "2016-06-21T20:49:52.000Z",
+  "lastUpdated": "2016-06-21T20:49:52.000Z",
+  "translations": {
+    "it": "Il codice ${org.name} è: ${code}.",
+    "fr": "Votre code ${org.name} : ${code}.",
+    "es": "Tu código de ${org.name} es: ${code}."
+  }
+}
+~~~
+
+### SMS Template Attributes
+
+All templates have the following properties:
+
+|------------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
+| Property               | Description                                                  | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ---------------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id                     | unique key for template                                      | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| name                   | human readable name of the template                          | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
+| type                   | type of the template                                         | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
+| template               | text of the template                                         | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
+| created                | timestamp when template was created                          | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated            | timestamp when template was last updated                     | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| translations           | list of translations                                         |                                                                |          |        |          |           |           |            |
+|   <language>           | language that was used for translation                       | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
+|   <translated_template>| translated text of the template                              | String                                                         | FALSE    | FALSE  | FALSE    |           |           |            |
+|------------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
+
+### SMS Template Types
+
+Select a fallback template based on the workflow.
+
+|-------------------+--------------------------------------------------------------------------------------------------+
+| Type              | Description                                                                                      |
+| ----------------- | ------------------------------------------------------------------------------------------------ |
+| `SMS_VERIFY_CODE` | This template is used when the SMS for code verification is sent.                                |
+|-------------------+--------------------------------------------------------------------------------------------------+
+
+
+### SMS Template Translations
+
+Template translations are optionally provided when we want to be able to localize the SMS messages. Translations are
+provided in pairs: the language and translated template text.

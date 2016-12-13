@@ -3,7 +3,7 @@ layout: docs_page
 title: OpenID Connect
 ---
 
-# Overview
+# OpenID Connect API
 
 The OpenID Connect API endpoints enable clients to use [OIDC workflows](http://openid.net/specs/openid-connect-core-1_0.html) with Okta.
 With OpenID Connect, a client can use Okta as a broker. The user authenticates against identity providers like Google, Facebook, LinkedIn, or Microsoft,
@@ -306,11 +306,11 @@ Step 3 involves downloading the public JWKS from Okta (specified by the *jwks_ur
 
 Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [ID Token header](#claims-in-the-header-section).
 
-The ID Token is signed by an RSA private key. Okta publishes the corresponding public key and adds a public-key identifier `kid` in the ID Token header.
-To stay in sync with Okta's key rotation, your application should check the `kid`, and if it has changed, 
+The ID Token is signed by an RSA private key, and we publish the future signing key well in advance.
+However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed, 
 check the `jwks_uri` value in the [well-known configuration](#openid-connect-discovery-document) for a new public key and `kid`.
 
-All apps must roll over keys for adequate security. Please note the following:
+Please note the following:
 
 * For security purposes, Okta automatically rotates keys used to sign the token.
 * The current key rotation schedule is four times a year. This schedule can change without notice.
@@ -411,10 +411,10 @@ This API doesn't require any authentication and returns a JSON object with the f
     "response_types_supported": [
         "code",
         "code id_token",
+        "code token",
         "code id_token token",
         "id_token",
-        "id_token token",
-        "token"
+        "id_token token"
     ],
     "response_modes_supported": [
         "query",
@@ -425,7 +425,8 @@ This API doesn't require any authentication and returns a JSON object with the f
     "grant_types_supported": [
         "authorization_code",
         "implicit",
-        "refresh_token"
+        "refresh_token",
+        "password"
     ],
     "subject_types_supported": [
         "public"
@@ -438,7 +439,9 @@ This API doesn't require any authentication and returns a JSON object with the f
         "email",
         "profile",
         "address",
-        "phone"
+        "phone",
+        "offline_access",
+        "groups"
     ],
     "token_endpoint_auth_methods_supported": [
         "client_secret_basic",
@@ -447,14 +450,15 @@ This API doesn't require any authentication and returns a JSON object with the f
     ],
     "claims_supported": [
         "iss",
+        "ver",
         "sub",
         "aud",
         "iat",
         "exp",
+        "jti",
         "auth_time",
         "amr",
         "idp",
-        "idp_type",
         "nonce",
         "name",
         "nickname",
@@ -469,7 +473,13 @@ This API doesn't require any authentication and returns a JSON object with the f
         "locale",
         "address",
         "phone_number",
-        "updated_at"
+        "picture",
+        "website",
+        "gender",
+        "birthdate",
+        "updated_at",
+        "at_hash",
+        "c_hash"
     ],
     "introspection_endpoint": "https://${org}.okta.com/oauth2/v1/introspect",
     "introspection_endpoint_auth_methods_supported": [

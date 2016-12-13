@@ -3,7 +3,7 @@ layout: docs_page
 title: OAuth 2.0
 ---
 
-## Overview
+# OAuth 2.0 API
 
 Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) authorization server and a certified [OpenID Provider](http://openid.net/certification). 
 The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
@@ -22,7 +22,7 @@ At the very basic level, the main API endpoints are:
 * [Authorize](#authentication-request) endpoint initiates an OAuth 2.0 or OpenID Connect request.
 * [Token](#token-request) endpoint redeems an authorization grant (returned by the [Authorize](#authentication-request) endpoint) for an access token.
 
-### Basic Flows
+## Basic Flows
 
 1. Browser/Single-Page Application
 
@@ -69,7 +69,7 @@ At the very basic level, the main API endpoints are:
     This is what the `state` parameter is used for in the flows described above; the client should send a state value in on the authorization request, 
     and it must validate that returned "state" parameter from the authorization server matches the original value.
 
-### Custom User Experience
+## Custom User Experience
 
 By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don't have an existing session. 
 If you prefer to use a fully customized user experience, you can instead authenticate the user via the [Authentication API](http://developer.okta.com/docs/api/resources/authn.html). 
@@ -84,7 +84,7 @@ The lifetime of Access Token can be configured in the [Access Policies](#access-
 {% endbeta %}
 
 
-#### JWT Header
+### JWT Header
 
 
 ~~~json
@@ -95,7 +95,7 @@ The lifetime of Access Token can be configured in the [Access Policies](#access-
 ~~~
 
 
-#### JWT Payload
+### JWT Payload
 
 
 ~~~json
@@ -121,11 +121,11 @@ The lifetime of Access Token can be configured in the [Access Policies](#access-
 ~~~
 
 
-#### JWT Signature
+### JWT Signature
 
 This is a digital signature Okta generates using the public key identified by the `kid` property in the header section.
 
-### Scopes and claims
+## Scopes and claims
 
 Access Tokens include reserved scopes and claims.
 
@@ -139,7 +139,7 @@ Based on the granted scopes, claims are added into the Access Token returned fro
 
 {% endbeta %}
 
-#### Reserved scopes and claims
+### Reserved scopes and claims
 
 The Okta Authorization Server defines a number of reserved scopes and claims which can't be overridden.
 
@@ -147,11 +147,11 @@ The Okta Authorization Server defines a number of reserved scopes and claims whi
 * [Reserved claims in the header section](#reserved-claims-in-the-header-section)
 * [Reserved claims in the payload section](#reserved-claims-in-the-payload-section)
 
-##### Reserved scopes
+#### Reserved scopes
 
 Reserved scopes include 'openid', 'profile', 'email', 'address', 'phone', 'offline_access', all defined in OpenID Connect.
 
-##### Reserved claims in the header section
+#### Reserved claims in the header section
 
 The header only includes the following reserved claims:
 
@@ -161,7 +161,7 @@ The header only includes the following reserved claims:
 | alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
 | kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [metadata](#authorization-server-metadata) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
 
-##### Reserved claims in the payload section
+#### Reserved claims in the payload section
 
 The payload includes the following reserved claims:
 
@@ -180,17 +180,17 @@ The payload includes the following reserved claims:
 | scp     | Array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
 
 {% beta %}
-#### Custom scopes and claims
+### Custom scopes and claims
 
 The admin can configure custom scopes and claims for the Authorization Server.
 
-##### Custom scopes
+#### Custom scopes
 
 If the request that generates the access token contains any custom scopes, those scopes will be part of the *scp* claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html). The form of these custom scopes must conform to the [OAuth2 specification](https://tools.ietf.org/html/rfc6749#section-3.3).
 
 >*Note:* Scope names can contain the characters < (less than) or > (greater than), but not both characters.
 
-##### Custom claims
+#### Custom claims
 
 Custom claims are associated with scopes. If one of the associated scopes is granted to the access token, the custom claim will be added into it. The value of a custom claim can be either an [expression](/reference/okta_expression_language) or group filter. The expression will be evaluated at runtime, and if the evaluated result is null, that custom claim will not be added into the access token.
 
@@ -198,7 +198,7 @@ Custom claims are associated with scopes. If one of the associated scopes is gra
 
 {% endbeta %}
 
-### Validating Access Tokens
+## Validating Access Tokens
 
 Okta uses public key cryptography to sign tokens and verify that they are valid. 
 
@@ -211,14 +211,28 @@ An Access Token must be validated in the following manner:
 1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
 2. Verify that the `aud` (audience) claim is the requested URL.
 3. Verify `cid` (client id) claim is your client id.
-4. Verify the signature according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT `alg` header parameter. Use the public keys provided by Okta via the [Get Keys endpoint](#get-keys).
+4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](#get-keys).
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
-Step 4 uses the same signature verification method as [OIDC](oidc.html#validating-id-tokens).
+Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [authorization server metadata](#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
-The signing keys for the Access Token are rotated in the same way as [OIDC](oidc.html#validating-id-tokens).
+Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](#token-authentication-method).
 
-#### Alternative Validation
+The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
+However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed, 
+check the `jwks_uri` value in the [authorization server metadata](#authorization-server-metadata) for a new public key and `kid`.
+
+Please note the following:
+
+* For security purposes, Okta automatically rotates keys used to sign the token.
+* The current key rotation schedule is four times a year. This schedule can change without notice.
+* In case of an emergency, Okta can rotate keys as needed.
+* Okta always publishes keys to the JWKS.
+* To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.
+
+Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
+
+### Alternative Validation
 
 You can use an [introspection endpoint](#introspection-request) for validation.
 
@@ -785,11 +799,8 @@ This API doesn't require any authentication and returns a JSON object with the f
     "jwks_uri": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/keys",
     "response_types_supported": [
         "code",
-        "code id_token",
-        "code id_token token",
-        "id_token",
-        "id_token token",
-        "token"
+        "token",
+        "code token"
     ],
     "response_modes_supported": [
         "query",
@@ -802,27 +813,31 @@ This API doesn't require any authentication and returns a JSON object with the f
         "implicit",
         "refresh_token",
         "password"
-        "client_credential"
+        "client_credentials"
     ],
     "subject_types_supported": [
         "public"
     ],
-    "id_token_signing_alg_values_supported": [
-        "RS256"
-    ],
     "scopes_supported": [
-        "openid",
-        "email",
-        "profile",
-        "address",
-        "phone",
-        "scope1"
+        "offline_access",
     ],
     "token_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "none"
     ],
+    "claims_supported": [
+       "ver",
+       "jti",
+       "iss",
+       "aud",
+       "iat",
+       "exp",
+       "cid",
+       "uid",
+       "scp",
+       "sub"
+  ],
     "code_challenge_methods_supported": [
         "S256"
     ],
@@ -841,4 +856,108 @@ This API doesn't require any authentication and returns a JSON object with the f
 }
 ~~~
 
+### Authorization Server OpenID Connect Metadata
+{:.api .api-operation}
+
+{% api_operation get /oauth2/:authorizationServerId/.well-known/openid-configuration %} {% api_lifecycle beta %}
+
+This API endpoint returns OpenID Connect metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
+This API doesn't require any authentication and returns a JSON object with the following structure.
+
+~~~json
+{
+    "issuer": "https://${org}.okta.com",
+    "authorization_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/authorize",
+    "token_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/token",
+    "userinfo_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/userinfo",
+    "jwks_uri": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/keys",
+    "response_types_supported": [
+        "code",
+        "id_token",
+        "code id_token",
+        "code token",
+        "id_token token",
+        "code id_token token"
+    ],
+    "response_modes_supported": [
+        "query",
+        "fragment",
+        "form_post",
+        "okta_post_message"
+    ],
+    "grant_types_supported": [
+        "authorization_code",
+        "implicit",
+        "refresh_token",
+        "password"
+    ],
+    "subject_types_supported": [
+        "public"
+    ],
+    "id_token_signing_alg_values_supported": [
+        "RS256"
+    ],
+    "scopes_supported": [
+        "openid",
+        "email",
+        "profile",
+        "address",
+        "phone",
+        "offline_access",
+    ],
+    "token_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ],
+   "claims_supported": [
+        "iss",
+        "ver",
+        "sub",
+        "aud",
+        "iat",
+        "exp",
+        "jti",
+        "auth_time",
+        "amr",
+        "idp",
+        "nonce",
+        "name",
+        "nickname",
+        "preferred_username",
+        "given_name",
+        "middle_name",
+        "family_name",
+        "email",
+        "email_verified",
+        "profile",
+        "zoneinfo",
+        "locale",
+        "address",
+        "phone_number",
+        "picture",
+        "website",
+        "gender",
+        "birthdate",
+        "updated_at",
+        "at_hash",
+        "c_hash"
+  ],
+    "code_challenge_methods_supported": [
+        "S256"
+    ],
+    "introspection_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/introspect",
+    "introspection_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ],
+    "revocation_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/revoke",
+    "revocation_endpoint_auth_methods_supported": [
+        "client_secret_basic",
+        "client_secret_post",
+        "none"
+    ]
+}
+~~~
 {% endbeta %}

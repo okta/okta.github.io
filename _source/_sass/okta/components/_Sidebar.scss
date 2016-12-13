@@ -4,6 +4,11 @@
 	min-width: 280px;
 	position: relative;
 	width: 320px;
+	border-left: solid 1px get-color('gray-lightest');
+
+	&-hide {
+		display: none;
+	}
 
 	&:before {
 		background: get-color('gray-lightest');
@@ -20,8 +25,10 @@
 	&-title {
 		@include color('gray-dark');
 		@include font-size('base');
-		@include margin(medium 0 0);
-		font-weight: 600;
+		@include margin(medium 0 xx-small);
+		font-weight: 400;
+		text-transform: uppercase;
+		border-bottom: solid 1px get-color('gray-dark');
 	}
 
 	&-nav {
@@ -34,7 +41,7 @@
 		}
 
 		ul {
-			border-left: 1px solid get-color('gray-light');
+			border-left: 1px solid get-color('gray-lightest');
 			padding-left: get-spacing('x-small');
 
 			a {
@@ -61,7 +68,8 @@
 			@include margin(x-small 0);
 		}
 
-		> li > a {
+		> li > a,
+		> li > span {
 			font-weight: 600;
 		}
 

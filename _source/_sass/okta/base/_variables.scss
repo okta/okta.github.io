@@ -9,48 +9,48 @@ $asset-path: "/assets";
 // Typography
 //-----------------------------------------------------------------------
 
-$font-family:				'proxima-nova', Helvetica, Arial, sans-serif;
-$font-family--alt:			'museo', Helvetica, Arial, sans-serif;
+$font-family:             'proxima-nova', Helvetica, Arial, sans-serif;
+$font-family--alt:        'museo', Helvetica, Arial, sans-serif;
 
-$font-size:					(
-							'small':			14px,
-							'base':				16px,
-							'button':			14px,
-							'h6':				20px,
-							'h5':				22px,
-							'h4':				24px,
-							'h3':				28px,
-							'h2':				32px,
-							'h1':				36px
-							);
+$font-size:     (
+                'small':            14px,
+                'base':             16px,
+                'button':           14px,
+                'h6':               20px,
+                'h5':               22px,
+                'h4':               24px,
+                'h3':               28px,
+                'h2':               32px,
+                'h1':               36px
+);
 
 
-$font-weight: 				(
-							'x-small':			300,
-							'small':			400,
-							'base': 			400,
-							'button': 			600,
-							'h6': 				500,
-							'h5': 				500,
-							'h4': 				500,
-							'h3': 				500,
-							'h2': 				500,
-							'h1': 				500,
-							'semibold':			500,
-							'mediumbold':		600,
-							'bold':				700,
-							);
+$font-weight:   (
+                'x-small':          300,
+                'small':            400,
+                'base':             400,
+                'button':           600,
+                'h6':               500,
+                'h5':               500,
+                'h4':               500,
+                'h3':               500,
+                'h2':               500,
+                'h1':               500,
+                'semibold':         500,
+                'mediumbold':       600,
+                'bold':             700,
+);
 
-$line-height:				(
-							'small':			24px,
-							'base':				26px,
-							'h6':				30px,
-							'h5':				32px,
-							'h4':				34px,
-							'h3':				38px,
-							'h2':				42px,
-							'h1':				46px
-							);
+$line-height:   (
+                'small':            24px,
+                'base':             26px,
+                'h6':               30px,
+                'h5':               32px,
+                'h4':               34px,
+                'h3':               38px,
+                'h2':               42px,
+                'h1':               46px
+);
 
 
 
@@ -60,47 +60,47 @@ $line-height:				(
 
 
 // Project/Client Colors
-$colors:			(
-	'black':				#000000,
-	'white':				#fff,
+$colors:        (
+                'black':                  #000000,
+                'white':                  #fff,
 
-	'default':				#5d5d5d,
-	'accent':				#007dc1,
+                'default':                #5d5d5d,
+                'accent':                 #007dc1,
 
-	'blue-bright': 			#007dc1,
-	'blue-bright-hover': 	#0095e5,
+                'blue-bright':            #007dc1,
+                'blue-bright-hover':      #0095e5,
 
-	'blue-medium': 			#46b3e9,
-	'blue-medium-hover': 	#4cc3ff,
+                'blue-medium':            #46b3e9,
+                'blue-medium-hover':      #4cc3ff,
 
-	'blue-light': 			#a9e6fd,
-	'blue-light-hover': 	#5dd2fc,
+                'blue-light':             #a9e6fd,
+                'blue-light-hover':       #5dd2fc,
 
-	'green-dark': 			#4cbf9c,
-	'green-dark-hover': 	#5ce5bc,
+                'green-dark':             #4cbf9c,
+                'green-dark-hover':       #5ce5bc,
 
-	'green-light': 			#4cdb82,
-	'green-light-hover': 	#59ff99,
+                'green-light':            #4cdb82,
+                'green-light-hover':      #59ff99,
 
-	'charcoal': 			#5d5d5d,
-	'charcoal-hover': 		#8f8f8f,
+                'charcoal':               #5d5d5d,
+                'charcoal-hover':         #8f8f8f,
 
-	'gray-dark': 			#abadac,
-	'gray-dark-hover': 		#dee0df,
+                'gray-dark':              #abadac,
+                'gray-dark-hover':        #dee0df,
 
-	'gray-medium': 			#c2c3c3,
-	'gray-medium-hover': 	#f2f5f5,
+                'gray-medium':            #c2c3c3,
+                'gray-medium-hover':      #f2f5f5,
 
-	'gray-light': 			#e6e6e8,
-	'gray-light-hover': 	#b3b3b5,
+                'gray-light':             #e6e6e8,
+                'gray-light-hover':       #b3b3b5,
 
-	'gray-lighter': 		#e4e4e4,
-	'gray-lighter-hover': 	#eee,
+                'gray-lighter':           #e4e4e4,
+                'gray-lighter-hover':     #eee,
 
-	'gray-lightest': 		#fafafa,
-	'gray-lightest-hover': 	#a9e6fd,
+                'gray-lightest':          #fafafa,
+                'gray-lightest-hover':    #a9e6fd,
 
-	'blue-products':		#E0EEF6
+                'blue-products':          #E0EEF6
 );
 
 
@@ -108,33 +108,33 @@ $colors:			(
 // Layout
 //-----------------------------------------------------------------------
 
-$site-width:				1280px;
-$grid-width:				12;
+$site-width:    1280px;
+$grid-width:    12;
 
-$line-break:				20px;
-$gutter-width:				20px;
+$line-break:    20px;
+$gutter-width:  20px;
 
-$breakpoints:				(
-							'xx-small':			320px,
-							'x-small':			480px,
-							'small':			768px,
-							'medium-small':		900px,
-							'medium':			1024px,
-							'large':			1200px,
-							'doc-min-toc': 1265px,
-							'x-large':			1400px,
-							'xx-large':			1600px
-							);
+$breakpoints:   (
+                'xx-small':               320px,
+                'x-small':                480px,
+                'small':                  768px,
+                'medium-small':           900px,
+                'medium':                 1024px,
+                'large':                  1200px,
+                'doc-min-toc':            1265px,
+                'x-large':                1400px,
+                'xx-large':               1600px
+);
 
-$spacing:					(
-							'xx-small':			5px,
-							'x-small':			10px,
-							'small':			20px,
-							'medium':			40px,
-							'large':			60px,
-							'x-large':			80px,
-							'xx-large':			120px
-							);
+$spacing:       (
+                'xx-small':               5px,
+                'x-small':                10px,
+                'small':                  20px,
+                'medium':                 40px,
+                'large':                  60px,
+                'x-large':                80px,
+                'xx-large':               120px
+);
 
 
 
@@ -142,10 +142,10 @@ $spacing:					(
 // Transitions
 //-----------------------------------------------------------------------
 
-$transition-speed:			(
-							'x-slow':			0.8s,
-							'slow':				0.6s,
-							'normal':			0.4s,
-							'fast':				0.2s,
-							'x-fast':			0.1s
-							);
+$transition-speed:(
+                'x-slow':                 0.8s,
+                'slow':                   0.6s,
+                'normal':                 0.4s,
+                'fast':                   0.2s,
+                'x-fast':                 0.1s
+);

@@ -4,9 +4,209 @@ title: Events
 redirect_from: "/docs/api/rest/events.html"
 ---
 
-## Overview
+# Events API
 
-The Okta Event API provides read access to your organization's system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.
+The Okta Event API provides read access to your organization's system log. Export event data as a batch job from your organization to another system for reporting or analysis.
+
+## Getting Started
+
+Explore the Events API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86)
+
+## Event Operations
+
+### List Events
+{:.api .api-operation}
+
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /events</span>
+
+Fetch a list of events from your Okta organization system log
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter | Description                                                                         | Param Type | DataType | Required | Default
+--------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
+limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE    | 1000
+startDate | Specifies the timestamp to list events after                                        | Query      | Date     | FALSE    |
+filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query      | String   | FALSE    |
+after     | Specifies the pagination cursor for the next page of events                         | Query      | String   | FALSE    |
+
+> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
+
+> `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request
+
+###### Filters
+
+The following expressions are supported for events with the `filter` query parameter:
+
+Filter                                       | Description
+-------------------------------------------- | ------------------------------------------------------------------------------
+`action.objectType eq ":actionType"`         | Events that have a specific [action objectType](#action-objecttypes)
+`target.objectType eq ":objectType"`         | Events published with a specific [target objectType](#actortarget-objecttypes)
+`target.id eq ":id"`                         | Events published with a specific target id
+`published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published before a specific datetime
+`published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published updated at a specific datetime
+`published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published updated after a specific datetime
+
+See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
+
+> All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222013-06-01T00:00:00.000Z%22`
+
+**Filter Examples**
+
+Events published after 06/01/2013
+
+    filter=published gt "2013-06-01T00:00:00.000Z"
+
+Events published for a target user
+
+    filter=target.id eq "00uxc78lMKUMVIHLTAXY"
+
+Failed login events published after 06/01/2013
+
+    filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
+
+Events published after 06/01/2013 for a target user and application
+
+    filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+
+App SSO events for a target user and application
+
+    filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Array of [Events](#event-model)
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json
+Link: <https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&limit=3>; rel="self"
+Link: <https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&limit=3>; rel="next"
+
+[
+    {
+        "eventId": "tev8hc_KK9NRzKe2WtdvVQIOg1384845263000",
+        "published": "2013-11-19T07:14:23.000Z",
+        "action": {
+            "message": "App activated",
+            "categories": [],
+            "objectType": "app.generic.config.app_activated",
+            "requestUri": "/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate"
+        },
+        "actors": [
+            {
+                "id": "00upgyMVOKIYORVNYUUM",
+                "displayName": "Adam Malkovich",
+                "login": "adam.malkovich@example.com",
+                "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "192.168.1.100",
+                "objectType": "Client"
+            }
+        ],
+        "targets": [
+            {
+                "id": "0oadxaKUTKAXSXUZYJHC",
+                "displayName": "Salesforce.com",
+                "objectType": "AppInstance"
+            }
+        ]
+    },
+    {
+        "eventId": "tevaEByjeq-QZW-utKgDVVvng1384847185000",
+        "published": "2013-11-19T07:46:25.000Z",
+        "action": {
+            "message": "Sign-in successful",
+            "categories": [
+                "Sign-in Success"
+            ],
+            "objectType": "core.user_auth.login_success",
+            "requestUri": "/login/do-login"
+        },
+        "actors": [
+            {
+                "id": "00ubgaSARVOQDIOXMORI",
+                "displayName": "Samus Aran",
+                "login": "samus.aran@example.com",
+                "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "10.10.10.10",
+                "objectType": "Client"
+            }
+        ],
+        "targets": [
+            {
+                "id": "00ubgaSARVOQDIOXMORI",
+                "displayName": "Samus Aran",
+                "login": "samus.aran@example.com",
+                "objectType": "User"
+            }
+        ]
+    },
+    {
+        "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
+        "published": "2013-11-19T07:46:30.000Z",
+        "action": {
+            "message": "User performed single sign on to app",
+            "categories": [
+                "Application Access"
+            ],
+            "objectType": "app.auth.sso",
+            "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
+        },
+        "actors": [
+            {
+                "id": "00ubgaSARVOQDIOXMORI",
+                "displayName": "Samus Aran",
+                "login": "samus.aran@example.com",
+                "objectType": "User"
+            },
+            {
+                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
+                "displayName": "CHROME",
+                "ipAddress": "10.10.10.10",
+                "objectType": "Client"
+            }
+        ],
+        "targets": [
+            {
+                "id": "00ubgaSARVOQDIOXMORI",
+                "displayName": "Samus Aran",
+                "login": "samus.aran@example.com",
+                "objectType": "User"
+            },
+            {
+                "id": "0oadxaKUTKAXSXUZYJHC",
+                "displayName": "Salesforce.com",
+                "objectType": "AppInstance"
+            }
+        ]
+    }
+]
+~~~
 
 ## Event Model
 
@@ -56,7 +256,7 @@ Every organization has a system log that maintains a history of actions performe
 
 ### Attributes
 
-The Event model is a ***read-only*** object and has a fixed set of attributes:
+The Event model is read only, with a fixed set of attributes:
 
 |-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
 | Property  | Description                                                           | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
@@ -411,200 +611,4 @@ A denormalized reference to a client such as a browser
     "ipAddress": "127.0.0.1",
     "objectType": "Client"
 }
-~~~
-
-## Event Operations
-
-### List Events
-{:.api .api-operation}
-
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /events</span>
-
-Fetch a list of events from your Okta organization system log
-
-##### Request Parameters
-{:.api .api-request .api-request-params}
-
-Parameter | Description                                                                         | Param Type | DataType | Required | Default
---------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------
-limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE    | 1000
-startDate | Specifies the timestamp to list events after                                        | Query      | Date     | FALSE    |
-filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query      | String   | FALSE    |
-after     | Specifies the pagination cursor for the next page of events                         | Query      | String   | FALSE    |
-
-> The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
-
-> `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request
-
-###### Filters
-
-The following expressions are supported for events with the `filter` query parameter:
-
-Filter                                       | Description
--------------------------------------------- | ------------------------------------------------------------------------------
-`action.objectType eq ":actionType"`         | Events that have a specific [action objectType](#action-objecttypes)
-`target.objectType eq ":objectType"`         | Events published with a specific [target objectType](#actortarget-objecttypes)
-`target.id eq ":id"`                         | Events published with a specific target id
-`published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published before a specific datetime
-`published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published updated at a specific datetime
-`published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"`  | Events published updated after a specific datetime
-
-See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information on expressions
-
-> All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222013-06-01T00:00:00.000Z%22`
-
-**Filter Examples**
-
-Events published after 06/01/2013
-
-    filter=published gt "2013-06-01T00:00:00.000Z"
-
-Events published for a target user
-
-    filter=target.id eq "00uxc78lMKUMVIHLTAXY"
-
-Failed login events published after 06/01/2013
-
-    filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
-
-Events published after 06/01/2013 for a target user and application
-
-    filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
-
-App SSO events for a target user and application
-
-    filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
-
-
-##### Response Parameters
-{:.api .api-response .api-response-params}
-
-Array of [Events](#event-model)
-
-##### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X GET \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z\&limit=3"
-~~~
-
-##### Response Example
-{:.api .api-response .api-response-example}
-
-~~~http
-HTTP/1.1 200 OK
-Content-Type: application/json
-Link: <https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&limit=3>; rel="self"
-Link: <https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&limit=3>; rel="next"
-
-[
-    {
-        "eventId": "tev8hc_KK9NRzKe2WtdvVQIOg1384845263000",
-        "published": "2013-11-19T07:14:23.000Z",
-        "action": {
-            "message": "App activated",
-            "categories": [],
-            "objectType": "app.generic.config.app_activated",
-            "requestUri": "/api/v1/apps/0oadxaKUTKAXSXUZYJHC/lifecycle/activate"
-        },
-        "actors": [
-            {
-                "id": "00upgyMVOKIYORVNYUUM",
-                "displayName": "Adam Malkovich",
-                "login": "adam.malkovich@example.com",
-                "objectType": "User"
-            },
-            {
-                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
-                "displayName": "CHROME",
-                "ipAddress": "192.168.1.100",
-                "objectType": "Client"
-            }
-        ],
-        "targets": [
-            {
-                "id": "0oadxaKUTKAXSXUZYJHC",
-                "displayName": "Salesforce.com",
-                "objectType": "AppInstance"
-            }
-        ]
-    },
-    {
-        "eventId": "tevaEByjeq-QZW-utKgDVVvng1384847185000",
-        "published": "2013-11-19T07:46:25.000Z",
-        "action": {
-            "message": "Sign-in successful",
-            "categories": [
-                "Sign-in Success"
-            ],
-            "objectType": "core.user_auth.login_success",
-            "requestUri": "/login/do-login"
-        },
-        "actors": [
-            {
-                "id": "00ubgaSARVOQDIOXMORI",
-                "displayName": "Samus Aran",
-                "login": "samus.aran@example.com",
-                "objectType": "User"
-            },
-            {
-                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
-                "displayName": "CHROME",
-                "ipAddress": "10.10.10.10",
-                "objectType": "Client"
-            }
-        ],
-        "targets": [
-            {
-                "id": "00ubgaSARVOQDIOXMORI",
-                "displayName": "Samus Aran",
-                "login": "samus.aran@example.com",
-                "objectType": "User"
-            }
-        ]
-    },
-    {
-        "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
-        "published": "2013-11-19T07:46:30.000Z",
-        "action": {
-            "message": "User performed single sign on to app",
-            "categories": [
-                "Application Access"
-            ],
-            "objectType": "app.auth.sso",
-            "requestUri": "/app/salesforce/kdx9PWYBPEOBAUNVRBHK/sso/saml"
-        },
-        "actors": [
-            {
-                "id": "00ubgaSARVOQDIOXMORI",
-                "displayName": "Samus Aran",
-                "login": "samus.aran@example.com",
-                "objectType": "User"
-            },
-            {
-                "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.57 Safari/537.36",
-                "displayName": "CHROME",
-                "ipAddress": "10.10.10.10",
-                "objectType": "Client"
-            }
-        ],
-        "targets": [
-            {
-                "id": "00ubgaSARVOQDIOXMORI",
-                "displayName": "Samus Aran",
-                "login": "samus.aran@example.com",
-                "objectType": "User"
-            },
-            {
-                "id": "0oadxaKUTKAXSXUZYJHC",
-                "displayName": "Salesforce.com",
-                "objectType": "AppInstance"
-            }
-        ]
-    }
-]
 ~~~

@@ -3,60 +3,13 @@ layout: docs_page
 title: Admin Roles
 ---
 
-## Overview
+# Admin Roles API
 
 The Okta Administrator Roles API provides operations to manage administrative role assignments for a user.
 
-## Role Model
+## Getting Started with Admin Roles
 
-### Example
-
-~~~json
-{
-  "id": "ra1b7aguRQ7e5iKYb0g4",
-  "label": "Read-only Administrator",
-  "type": "READ_ONLY_ADMIN",
-  "status": "ACTIVE",
-  "created": "2015-09-04T03:27:16.000Z",
-  "lastUpdated": "2015-09-04T03:27:16.000Z"
-}
-~~~
-
-### Role Properties
-
-The role model defines several **read-only** properties:
-
-|--------------+-------------------------------------------------------+-------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property     | Description                                           | DataType                                                                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ---------    | ----------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id           | unique key for the role assignment                    | String                                                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
-| label        | display name of role                                  | String                                                                                    | FALSE    | FALSE  | TRUE     |           |           |            |
-| type         | type of role                                          | `SUPER_ADMIN`, `ORG_ADMIN`, `APP_ADMIN`, `USER_ADMIN`, `MOBILE_ADMIN`, `READ_ONLY_ADMIN`  | FALSE    | FALSE  | TRUE     |           |           |            |
-| status       | status of role assignment                             | `ACTIVE`                                                                                  | FALSE    | FALSE  | TRUE     |           |           |            |
-| created      | timestamp when app user was created                   | Date                                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated  | timestamp when app user was last updated              | Date                                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
-| _embedded    | embedded resources related to the role assignment     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                            | TRUE     | FALSE  | TRUE     |           |           |            |
-| _links       | discoverable resources related to the role assignment | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                            | TRUE     | FALSE  | TRUE     |           |           |            |
-|--------------+-------------------------------------------------------+-------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-
-#### Role Types
-
-Some roles support optional targets that constrain the role to a specific set of groups or apps.  If an optional target is not specified, then the role assignment is unbounded (e.g applies to all groups or apps).
-
-Refer to the [product documentation](https://support.okta.com/articles/Knowledge_Article/99850906-Administrator-Roles) for a complete definition of permissions granted to each role.
-
-|-------------------+------------------------------|-------------------------+
-| Role Type         | Label                        | Optional Targets        |
-| ----------------- | -----------------------------| ------------------------|
-| `SUPER_ADMIN`     | Super Administrator          |                         |
-| `ORG_ADMIN`       | Organizational Administrator |                         |
-| `APP_ADMIN`       | Application Administrator    | Apps                    |
-| `USER_ADMIN`      | User Administrator           | [Groups](./groups.html) |
-| `MOBILE_ADMIN`    | Mobile Administrator         |                         |
-| `READ_ONLY_ADMIN` | Read-only Administrator      |                         |
-|-------------------+------------------------------|-------------------------+
-
-> The `USER_ADMIN` role is [Early Access](https://support.okta.com/articles/Knowledge_Article/The-User-Admin-Role)
+Explore the Administrator Roles API:  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b) 
 
 ## Role Assignment Operations
 
@@ -564,3 +517,54 @@ curl -v -X DELETE \
 ~~~ http
 HTTP/1.1 204 No Content
 ~~~
+
+## Role Model
+
+### Example
+
+~~~json
+{
+  "id": "ra1b7aguRQ7e5iKYb0g4",
+  "label": "Read-only Administrator",
+  "type": "READ_ONLY_ADMIN",
+  "status": "ACTIVE",
+  "created": "2015-09-04T03:27:16.000Z",
+  "lastUpdated": "2015-09-04T03:27:16.000Z"
+}
+~~~
+
+### Role Properties
+
+The role model defines several **read-only** properties:
+
+|--------------+-------------------------------------------------------+-------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property     | Description                                           | DataType                                                                                  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ---------    | ----------------------------------------------------- | ----------------------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id           | unique key for the role assignment                    | String                                                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| label        | display name of role                                  | String                                                                                    | FALSE    | FALSE  | TRUE     |           |           |            |
+| type         | type of role                                          | `SUPER_ADMIN`, `ORG_ADMIN`, `APP_ADMIN`, `USER_ADMIN`, `MOBILE_ADMIN`, `READ_ONLY_ADMIN`  | FALSE    | FALSE  | TRUE     |           |           |            |
+| status       | status of role assignment                             | `ACTIVE`                                                                                  | FALSE    | FALSE  | TRUE     |           |           |            |
+| created      | timestamp when app user was created                   | Date                                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated  | timestamp when app user was last updated              | Date                                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| _embedded    | embedded resources related to the role assignment     | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                            | TRUE     | FALSE  | TRUE     |           |           |            |
+| _links       | discoverable resources related to the role assignment | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                            | TRUE     | FALSE  | TRUE     |           |           |            |
+|--------------+-------------------------------------------------------+-------------------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+
+#### Role Types
+
+Some roles support optional targets that constrain the role to a specific set of groups or apps.  If an optional target is not specified, then the role assignment is unbounded (e.g applies to all groups or apps).
+
+Refer to the [product documentation](https://support.okta.com/articles/Knowledge_Article/99850906-Administrator-Roles) for a complete definition of permissions granted to each role.
+
+|-------------------+------------------------------|-------------------------+
+| Role Type         | Label                        | Optional Targets        |
+| ----------------- | -----------------------------| ------------------------|
+| `SUPER_ADMIN`     | Super Administrator          |                         |
+| `ORG_ADMIN`       | Organizational Administrator |                         |
+| `APP_ADMIN`       | Application Administrator    | Apps                    |
+| `USER_ADMIN`      | User Administrator           | [Groups](./groups.html) |
+| `MOBILE_ADMIN`    | Mobile Administrator         |                         |
+| `READ_ONLY_ADMIN` | Read-only Administrator      |                         |
+|-------------------+------------------------------|-------------------------+
+
+> The `USER_ADMIN` role is [Early Access](https://support.okta.com/articles/Knowledge_Article/The-User-Admin-Role)

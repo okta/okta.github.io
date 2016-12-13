@@ -4,7 +4,7 @@ title: OAuth 2.0 Clients
 redirect_from: "/docs/api/rest/oauth-clients.html"
 ---
 
-## Overview
+# OAuth 2.0 Clients API
 
 The OAuth Clients API provides operations to register and manage client applications for use with Okta's
 OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in [RFC7591](https://tools.ietf.org/html/rfc7591).

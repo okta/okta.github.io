@@ -1,401 +1,22 @@
 ---
 layout: docs_page
-title: Factors (MFA)
+title: Factors
 redirect_from: "/docs/api/rest/factors.html"
 ---
 
-## Overview
+# Factors API
 
-The Okta Factors API provides operations to enroll, manage, and verify factors for multi-factor authentication (MFA).  It is optimized for both administrative and end-user account management, but may also be used verify a factor at any time.
+The Okta Factors API provides operations to enroll, manage, and verify factors for multi-factor authentication (MFA).  Manage both administration and end-user accounts, or verify an individual factor at any time.
 
-The Factors API contains three types of operations:
+## Getting Started with the Factors API
 
- - **[Factor Operations](#factor-operations)** &ndash; List factors and security questions.
- - **[Factor Lifecycle Operations](#factor-lifecycle-operations)** &ndash; Enroll, activate, and reset factors.
- - **[Factor Verification Operations](#factor-verification-operations)** &ndash; Verify a factor
-
-## Factor Model
-
-### Example
-
-~~~json
-{
-  "id": "smsk33ujQ59REImFX0g3",
-  "factorType": "sms",
-  "provider": "OKTA",
-  "status": "ACTIVE",
-  "created": "2015-02-04T07:07:25.000Z",
-  "lastUpdated": "2015-02-04T07:07:25.000Z",
-  "profile": {
-    "phoneNumber": "+1415551337"
-  },
-  "_links": {
-    "verify": {
-      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3/verify",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3",
-      "hints": {
-        "allow": [
-          "GET",
-          "DELETE"
-        ]
-      }
-    },
-    "user": {
-      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    }
-  }
-}
-~~~
-
-
-### Factor Properties
-
-Factors have the following properties:
-
-|----------------+------------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property       | Description                                                      | DataType                                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id             | unique key for factor                                            | String                                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| factorType     | type of factor                                                   | [Factor Type](#factor-type)                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
-| provider       | factor provider                                                  | [Provider Type](#provider-type)                                                | FALSE    | TRUE   | TRUE     |           |           |            |
-| status         | status of factor                                                 | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, `EXPIRED` | FALSE    | FALSE  | TRUE     |           |           |            |
-| created        | timestamp when factor was created                                | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated    | timestamp when factor was last updated                           | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| profile        | profile of a [supported factor](#supported-factors-for-providers)| [Factor Profile Object](#factor-profile-object)                                | TRUE     | FALSE  | FALSE    |           |           |            |
-| verify         | optional verification  for factor enrollment                     | [Factor Verification Object](#factor-verification-object)                      | TRUE     | FALSE  | FALSE    |           |           |            |
-| _links         | [discoverable resources](#links-object) related to the factor    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded      | [embedded resources](#embedded-resources) related to the factor  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
-|----------------+------------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-
-> `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after a factor is enrolled.
-
-#### Factor Type
-
-The following factor types are supported:
-
-|-----------------------+---------------------------------------------------------------------------------------------------------------------|
-| Factor Type           | Description                                                                                                         |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------|
-| `push`                | Out-of-band verification via push notification to a device and transaction verification with digital signature      |
-| `sms`                 | Software [OTP](http://en.wikipedia.org/wiki/One-time_password) sent via SMS to a registered phone number            |
-| `call`                | Software [OTP](http://en.wikipedia.org/wiki/One-time_password) sent via Voice Call to a registered phone number     |
-| `token`               | Software or hardware [One-time Password (OTP)](http://en.wikipedia.org/wiki/One-time_password) device               |
-| `token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) |
-| `token:hardware`      | Hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device                             |
-| `question`            | Additional knowledge based security question                                                                        |
-| `web`                 | HTML inline frame (iframe) for embedding verification from a 3rd party                                              |
-|-----------------------+---------------------------------------------------------------------------------------------------------------------|
-
-#### Provider Type
-
-The following providers are supported:
-
-|------------+-------------------------------|
-| Provider   | Description                   |
-| ---------- | ----------------------------- |
-| `OKTA`     | Okta                          |
-| `RSA`      | RSA SecurID                   |
-| `SYMANTEC` | Symantec VIP                  |
-| `GOOGLE`   | Google                        |
-| `DUO`      | Duo Security                  |
-| `YUBICO`   | Yubico                        |
-|------------+-------------------------------|
-
-#### Supported Factors for Providers
-
-Each provider supports a subset of factor types.  The following table lists the factor types supported for each provider:
-
-|------------+------------------------|
-| Provider   | Factor Type            |
-| ---------- | -----------------------|
-| `OKTA`     | `push`                 |
-| `OKTA`     | `question`             |
-| `OKTA`     | `sms`                  |
-| `OKTA`     | `call`                 |
-| `OKTA`     | `token:software:totp`  |
-| `GOOGLE`   | `token:software:totp`  |
-| `SYMANTEC` | `token`                |
-| `RSA`      | `token`                |
-| `DUO`      | `web`                  |
-| `YUBICO`   | `token:hardware`       |
-|------------+------------------------|
-
-### Factor Profile Object
-
-Profiles are specific to the [factor type](#factor-type).
-
-#### Question Profile
-
-Specifies the profile for a `question` factor
-
-|---------------+---------------------------+-----------+---------+---------+----------+-----------+-----------+------------|
-| Property      | Description               | DataType  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ------------------------- | --------- | -------- | -------| -------- | --------- | --------- | ---------- |
-| question      | unique key for question   | String    | FALSE    | TRUE   | TRUE     |           |           |            |
-| questionText  | display text for question | String    | FALSE    | FALSE  | TRUE     |           |           |            |
-| answer        | answer to question        | String    | TRUE     | FALSE  | FALSE    |           |           |            |
-|---------------+---------------------------+-----------+---------+---------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "profile": {
-    "question": "favorite_art_piece",
-    "questionText": "What is your favorite piece of art?"
-  }
-}
-~~~
-
-#### SMS Profile
-
-Specifies the profile for a `sms` factor
-
-|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
-| Property      | Description                   | DataType                                                        | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ----------------------------- | --------------------------------------------------------------- | -------- | ------- | -------- | --------- | --------- | ---------- |
-| phoneNumber   | phone number of mobile device | String [E.164 formatted](http://en.wikipedia.org/wiki/E.164)    | FALSE    | TRUE    | FALSE    |           | 15        |            |
-|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "profile": {
-    "phoneNumber": "+1-555-415-1337"
-  }
-}
-~~~
-
-E.164 numbers can have a maximum of fifteen digits and are usually written as follows: [+][country code][subscriber number including area code]. Phone numbers that are not formatted in E.164 may work, but it depends on the phone or handset that is being used as well as the carrier from which the call or SMS is being originated.
-
-For example, to convert a US phone number (415 599 2671) to E.164 format, one would need to add the ‘+’ prefix and the country code (which is 1) in front of the number (+1 415 599 2671). In the UK and many other countries internationally, local dialing requires the addition of a 0 in front of the subscriber number. However, to use E.164 formatting, this 0 must be removed. A number such as 020 7183 8750 in the UK would be formatted as +44 20 7183 8750.
-
-#### Call Profile
-
-Specifies the profile for a `call` factor
-
-|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
-| Property      | Description                   | DataType                                                        | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ----------------------------- | --------------------------------------------------------------- | -------- | ------- | -------- | --------- | --------- | ---------- |
-| phoneNumber   | phone number of the device    | String [E.164 formatted](http://en.wikipedia.org/wiki/E.164)    | FALSE    | TRUE    | FALSE    |           | 15        |            |
-| phoneExtension| extension of the device       | String                                                          | TRUE     | FALSE   | FALSE    |           | 15        |            | 
-|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "profile": {
-    "phoneNumber": "+1-555-415-1337",
-    "phoneExtension": "1234"
-  }
-}
-~~~
-
-E.164 numbers can have a maximum of fifteen digits and are usually written as follows: [+][country code][subscriber number including area code]. Phone numbers that are not formatted in E.164 may work, but it depends on the phone or handset that is being used as well as the carrier from which the call or SMS is being originated.
-
-For example, to convert a US phone number (415 599 2671) to E.164 format, one would need to add the ‘+’ prefix and the country code (which is 1) in front of the number (+1 415 599 2671). In the UK and many other countries internationally, local dialing requires the addition of a 0 in front of the subscriber number. However, to use E.164 formatting, this 0 must be removed. A number such as 020 7183 8750 in the UK would be formatted as +44 20 7183 8750.
-
-PhoneExtension is optional.
-
-#### Token Profile
-
-Specifies the profile for a `token`, `token:hardware`, `token:software`, or `token:software:totp` factor
-
-|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
-| Property      | Description        | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ------------------ | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
-| credentialId  | id for credential  | String    | FALSE    | FALSE   | TRUE     |           |           |            |
-|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "profile": {
-    "credentialId": "dade.murphy@example.com"
-  }
-}
-~~~
-
-#### Web Profile
-
-Specifies the profile for a `web` factor
-
-|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
-| Property      | Description        | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ------------------ | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
-| credentialId  | id for credential  | String    | FALSE    | FALSE   | TRUE     |           |           |            |
-|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "profile": {
-    "credentialId": "dade.murphy@example.com"
-  }
-}
-~~~
-
-### Factor Verification Object
-
-Specifies additional verification data for `token` or `token:hardware` factors
-
-|---------------+----------------------------+-----------+----------+---------+----------+-----------+-----------+------------|
-| Property      | Description                | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
-| ------------- | -------------------------- | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
-| passCode     | OTP for current time window | String    | FALSE    | FALSE   | FALSE    |           |           |            |
-| nextPassCode | OTP for next time window    | String    | TRUE     | FALSE   | FALSE    |           |           |            |
-|--------------+-----------------------------+-----------+----------+---------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "verify": {
-    "passCode": "875498",
-    "nextPassCode": "678195"
-  }
-}
-~~~
-
-### Links Object
-
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a factor using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
-
-|--------------------+--------------------------------------------------------------------------------- |
-| Link Relation Type | Description                                                                      |
-| ------------------ | -------------------------------------------------------------------------------- |
-| self               | The actual factor                                                                |
-| activate           | [Lifecycle action](#activate-factor) to transition factor to `ACTIVE` status     |
-| questions          | List of questions for the `question` factor type                                 |
-| verify             | [Verify the factor](#factor-verification-operations)                             |
-| send               | List of delivery options to send an activation or factor challenge               |
-| resend             | List of delivery options to resend activation or factor challenge                |
-| poll               | Polls factor for completion of activation of verification                        |
-|--------------------+--------------------------------------------------------------------------------- |
-
-> The Links Object is **read-only**.
-
-## Embedded Resources
-
-### TOTP Factor Activation Object
-
-TOTP factors when activated have an embedded activation object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
-
-|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| timeStep       | time-step size for TOTP                           | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| sharedSecret   | unique secret key for prover                      | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| encoding       | encoding of `sharedSecret`                        | `base32` or `base64`                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| keyLength      | number of digits in an HOTP value                 | Number                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "activation": {
-    "timeStep": 30,
-    "sharedSecret": "HE64TMLL2IUZW2ZLB",
-    "encoding": "base32",
-    "keyLength": 6
-  }
-}
-~~~
-
-### Push Factor Activation Object
-
-Push factors must complete activation on the device by scanning the QR code or visiting activation link sent via email or sms.
-
-|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| expiresAt      | lifetime of activation                            | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| factorResult   | result of factor activation                       | `WAITING`, `CANCELLED`, `TIMEOUT`, or `ERROR`                  | FALSE    | FALSE  | TRUE     |           |           |            |
-| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | FALSE    | FALSE  | TRUE     |           |           |            |
-|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "activation": {
-    "expiresAt": "2015-11-13T07:44:22.000Z",
-    "factorResult": "WAITING",
-    "_links": {
-      "send": [
-        {
-          "name": "email",
-          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email",
-          "hints": {
-            "allow": [
-              "POST"
-            ]
-          }
-        },
-        {
-          "name": "sms",
-          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms",
-          "hints": {
-            "allow": [
-              "POST"
-            ]
-          }
-        }
-      ],
-      "qrcode": {
-        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa",
-        "type": "image/png"
-      }
-    }
-  }
-}
-~~~
-
-#### Push Factor Activation Links Object
-
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the push factor activation object using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and operations.
-
-|--------------------+------------------------------------------------------------------------------------|
-| Link Relation Type | Description                                                                        |
-| ------------------ | ---------------------------------------------------------------------------------- |
-| qrcode             | QR code that encodes the push activation code needed for enrollment on the device  |
-| send               | Sends an activation link via `email` or `sms` for users who can't scan the QR code |
-|--------------------+------------------------------------------------------------------------------------|
-
-
-### Factor Verify Result Object
-
-Describes the outcome of a factor verification request
-
-|---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
-| Property      | Description                                       | DataType                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| ------------- | ------------------------------------------------- | ------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| factorResult  | result of factor verification                     | [Factor Result](#factor-result) | FALSE    | FALSE  | TRUE     |           |           |            |
-| factorMessage | optional display message for factor verification  | String                          | TRUE     | FALSE  | TRUE     |           |           |            |
-|---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
-
-#### Factor Result
-
-Specifies the status of a factor verification attempt
-
-|------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
-| Result                 | Description                                                                                                                         |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------|
-| `SUCCESS`              | The factor was successfully verified.                                                                                                    |
-| `CHALLENGE`            | Another verification is required.                                                                                                    |
-| `WAITING`              | The factor verification has started but not yet completed (e.g user hasn't answered phone call yet).                                     |
-| `FAILED`               | The factor verification failed.                                                                                                          |
-| `REJECTED`             | The factor verification was denied by user.                                                                                              |
-| `CANCELLED`            | The factor verification was canceled by user.                                                                                            |
-| `TIMEOUT`              | Okta was unable to verify the factor within the allowed time window.                                                                              |
-| `TIME_WINDOW_EXCEEDED` | The factor was successfully verified but outside of the computed time window.  Another verification is required in current time window. |
-| `PASSCODE_REPLAYED`    | The factor was previously verified within the same time window.  The user must wait another time window and retry with a new verification.  |
-| `ERROR`                | An unexpected server error occurred verifying factor.                                                                                  |
-|------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
+Explore the Factors API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b055a859dbe24a54814a)
 
 ## Factor Operations
+
+ - **[List Operations](#factor-operations)** &ndash; List factors and security questions.
+ - **[Lifecycle Operations](#factor-lifecycle-operations)** &ndash; Enroll, activate, and reset factors.
+ - **[Verification Operations](#factor-verification-operations)** &ndash; Verify a factor
 
 ### Get Factor
 {:.api .api-operation}
@@ -2753,3 +2374,384 @@ curl -v -X POST \
   "factorResult": "SUCCESS"
 }
 ~~~
+
+## Factor Model
+
+### Example
+
+~~~json
+{
+  "id": "smsk33ujQ59REImFX0g3",
+  "factorType": "sms",
+  "provider": "OKTA",
+  "status": "ACTIVE",
+  "created": "2015-02-04T07:07:25.000Z",
+  "lastUpdated": "2015-02-04T07:07:25.000Z",
+  "profile": {
+    "phoneNumber": "+1415551337"
+  },
+  "_links": {
+    "verify": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3/verify",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/smsk33ujQ59REImFX0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "user": {
+      "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+
+### Factor Properties
+
+Factors have the following properties:
+
+|----------------+------------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                                      | DataType                                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id             | unique key for factor                                            | String                                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| factorType     | type of factor                                                   | [Factor Type](#factor-type)                                                    | FALSE    | TRUE   | TRUE     |           |           |            |
+| provider       | factor provider                                                  | [Provider Type](#provider-type)                                                | FALSE    | TRUE   | TRUE     |           |           |            |
+| status         | status of factor                                                 | `NOT_SETUP`, `PENDING_ACTIVATION`, `ENROLLED`, `ACTIVE`, `INACTIVE`, `EXPIRED` | FALSE    | FALSE  | TRUE     |           |           |            |
+| created        | timestamp when factor was created                                | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated    | timestamp when factor was last updated                           | Date                                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| profile        | profile of a [supported factor](#supported-factors-for-providers)| [Factor Profile Object](#factor-profile-object)                                | TRUE     | FALSE  | FALSE    |           |           |            |
+| verify         | optional verification  for factor enrollment                     | [Factor Verification Object](#factor-verification-object)                      | TRUE     | FALSE  | FALSE    |           |           |            |
+| _links         | [discoverable resources](#links-object) related to the factor    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded      | [embedded resources](#embedded-resources) related to the factor  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                 | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+------------------------------------------------------------------+--------------------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+
+> `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after a factor is enrolled.
+
+#### Factor Type
+
+The following factor types are supported:
+
+|-----------------------+---------------------------------------------------------------------------------------------------------------------|
+| Factor Type           | Description                                                                                                         |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------|
+| `push`                | Out-of-band verification via push notification to a device and transaction verification with digital signature      |
+| `sms`                 | Software [OTP](http://en.wikipedia.org/wiki/One-time_password) sent via SMS to a registered phone number            |
+| `call`                | Software [OTP](http://en.wikipedia.org/wiki/One-time_password) sent via Voice Call to a registered phone number     |
+| `token`               | Software or hardware [One-time Password (OTP)](http://en.wikipedia.org/wiki/One-time_password) device               |
+| `token:software:totp` | Software [Time-based One-time Password (TOTP)](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) |
+| `token:hardware`      | Hardware one-time password [OTP](http://en.wikipedia.org/wiki/One-time_password) device                             |
+| `question`            | Additional knowledge based security question                                                                        |
+| `web`                 | HTML inline frame (iframe) for embedding verification from a 3rd party                                              |
+|-----------------------+---------------------------------------------------------------------------------------------------------------------|
+
+#### Provider Type
+
+The following providers are supported:
+
+|------------+-------------------------------|
+| Provider   | Description                   |
+| ---------- | ----------------------------- |
+| `OKTA`     | Okta                          |
+| `RSA`      | RSA SecurID                   |
+| `SYMANTEC` | Symantec VIP                  |
+| `GOOGLE`   | Google                        |
+| `DUO`      | Duo Security                  |
+| `YUBICO`   | Yubico                        |
+|------------+-------------------------------|
+
+#### Supported Factors for Providers
+
+Each provider supports a subset of factor types.  The following table lists the factor types supported for each provider:
+
+|------------+------------------------|
+| Provider   | Factor Type            |
+| ---------- | -----------------------|
+| `OKTA`     | `push`                 |
+| `OKTA`     | `question`             |
+| `OKTA`     | `sms`                  |
+| `OKTA`     | `call`                 |
+| `OKTA`     | `token:software:totp`  |
+| `GOOGLE`   | `token:software:totp`  |
+| `SYMANTEC` | `token`                |
+| `RSA`      | `token`                |
+| `DUO`      | `web`                  |
+| `YUBICO`   | `token:hardware`       |
+|------------+------------------------|
+
+### Factor Profile Object
+
+Profiles are specific to the [factor type](#factor-type).
+
+#### Question Profile
+
+Specifies the profile for a `question` factor
+
+|---------------+---------------------------+-----------+---------+---------+----------+-----------+-----------+------------|
+| Property      | Description               | DataType  | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------------- | --------- | -------- | -------| -------- | --------- | --------- | ---------- |
+| question      | unique key for question   | String    | FALSE    | TRUE   | TRUE     |           |           |            |
+| questionText  | display text for question | String    | FALSE    | FALSE  | TRUE     |           |           |            |
+| answer        | answer to question        | String    | TRUE     | FALSE  | FALSE    |           |           |            |
+|---------------+---------------------------+-----------+---------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "profile": {
+    "question": "favorite_art_piece",
+    "questionText": "What is your favorite piece of art?"
+  }
+}
+~~~
+
+#### SMS Profile
+
+Specifies the profile for a `sms` factor
+
+|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description                   | DataType                                                        | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ----------------------------- | --------------------------------------------------------------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| phoneNumber   | phone number of mobile device | String [E.164 formatted](http://en.wikipedia.org/wiki/E.164)    | FALSE    | TRUE    | FALSE    |           | 15        |            |
+|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}
+~~~
+
+E.164 numbers can have a maximum of fifteen digits and are usually written as follows: [+][country code][subscriber number including area code]. Phone numbers that are not formatted in E.164 may work, but it depends on the phone or handset that is being used as well as the carrier from which the call or SMS is being originated.
+
+For example, to convert a US phone number (415 599 2671) to E.164 format, one would need to add the ‘+’ prefix and the country code (which is 1) in front of the number (+1 415 599 2671). In the UK and many other countries internationally, local dialing requires the addition of a 0 in front of the subscriber number. However, to use E.164 formatting, this 0 must be removed. A number such as 020 7183 8750 in the UK would be formatted as +44 20 7183 8750.
+
+#### Call Profile
+
+Specifies the profile for a `call` factor
+
+|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description                   | DataType                                                        | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ----------------------------- | --------------------------------------------------------------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| phoneNumber   | phone number of the device    | String [E.164 formatted](http://en.wikipedia.org/wiki/E.164)    | FALSE    | TRUE    | FALSE    |           | 15        |            |
+| phoneExtension| extension of the device       | String                                                          | TRUE     | FALSE   | FALSE    |           | 15        |            | 
+|---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "profile": {
+    "phoneNumber": "+1-555-415-1337",
+    "phoneExtension": "1234"
+  }
+}
+~~~
+
+E.164 numbers can have a maximum of fifteen digits and are usually written as follows: [+][country code][subscriber number including area code]. Phone numbers that are not formatted in E.164 may work, but it depends on the phone or handset that is being used as well as the carrier from which the call or SMS is being originated.
+
+For example, to convert a US phone number (415 599 2671) to E.164 format, one would need to add the ‘+’ prefix and the country code (which is 1) in front of the number (+1 415 599 2671). In the UK and many other countries internationally, local dialing requires the addition of a 0 in front of the subscriber number. However, to use E.164 formatting, this 0 must be removed. A number such as 020 7183 8750 in the UK would be formatted as +44 20 7183 8750.
+
+PhoneExtension is optional.
+
+#### Token Profile
+
+Specifies the profile for a `token`, `token:hardware`, `token:software`, or `token:software:totp` factor
+
+|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description        | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------ | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| credentialId  | id for credential  | String    | FALSE    | FALSE   | TRUE     |           |           |            |
+|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "profile": {
+    "credentialId": "dade.murphy@example.com"
+  }
+}
+~~~
+
+#### Web Profile
+
+Specifies the profile for a `web` factor
+
+|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description        | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------ | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| credentialId  | id for credential  | String    | FALSE    | FALSE   | TRUE     |           |           |            |
+|---------------+--------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "profile": {
+    "credentialId": "dade.murphy@example.com"
+  }
+}
+~~~
+
+### Factor Verification Object
+
+Specifies additional verification data for `token` or `token:hardware` factors
+
+|---------------+----------------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+| Property      | Description                | DataType  | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
+| ------------- | -------------------------- | --------- | -------- | ------- | -------- | --------- | --------- | ---------- |
+| passCode     | OTP for current time window | String    | FALSE    | FALSE   | FALSE    |           |           |            |
+| nextPassCode | OTP for next time window    | String    | TRUE     | FALSE   | FALSE    |           |           |            |
+|--------------+-----------------------------+-----------+----------+---------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "verify": {
+    "passCode": "875498",
+    "nextPassCode": "678195"
+  }
+}
+~~~
+
+### Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current status of a factor using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
+
+|--------------------+--------------------------------------------------------------------------------- |
+| Link Relation Type | Description                                                                      |
+| ------------------ | -------------------------------------------------------------------------------- |
+| self               | The actual factor                                                                |
+| activate           | [Lifecycle action](#activate-factor) to transition factor to `ACTIVE` status     |
+| questions          | List of questions for the `question` factor type                                 |
+| verify             | [Verify the factor](#factor-verification-operations)                             |
+| send               | List of delivery options to send an activation or factor challenge               |
+| resend             | List of delivery options to resend activation or factor challenge                |
+| poll               | Polls factor for completion of activation of verification                        |
+|--------------------+--------------------------------------------------------------------------------- |
+
+> The Links Object is **read-only**.
+
+## Embedded Resources
+
+### TOTP Factor Activation Object
+
+TOTP factors when activated have an embedded activation object which describes the [TOTP](http://tools.ietf.org/html/rfc6238) algorithm parameters.
+
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| timeStep       | time-step size for TOTP                           | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| sharedSecret   | unique secret key for prover                      | String                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| encoding       | encoding of `sharedSecret`                        | `base32` or `base64`                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| keyLength      | number of digits in an HOTP value                 | Number                                                         | FALSE    | FALSE  | TRUE     |           |           |            |
+| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "activation": {
+    "timeStep": 30,
+    "sharedSecret": "HE64TMLL2IUZW2ZLB",
+    "encoding": "base32",
+    "keyLength": 6
+  }
+}
+~~~
+
+### Push Factor Activation Object
+
+Push factors must complete activation on the device by scanning the QR code or visiting activation link sent via email or sms.
+
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| Property       | Description                                       | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| -------------- | ------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| expiresAt      | lifetime of activation                            | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| factorResult   | result of factor activation                       | `WAITING`, `CANCELLED`, `TIMEOUT`, or `ERROR`                  | FALSE    | FALSE  | TRUE     |           |           |            |
+| _links         | discoverable resources related to the activation  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | FALSE    | FALSE  | TRUE     |           |           |            |
+|----------------+---------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "activation": {
+    "expiresAt": "2015-11-13T07:44:22.000Z",
+    "factorResult": "WAITING",
+    "_links": {
+      "send": [
+        {
+          "name": "email",
+          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/email",
+          "hints": {
+            "allow": [
+              "POST"
+            ]
+          }
+        },
+        {
+          "name": "sms",
+          "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/lifecycle/activate/sms",
+          "hints": {
+            "allow": [
+              "POST"
+            ]
+          }
+        }
+      ],
+      "qrcode": {
+        "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opfbtzzrjgwauUsxO0g4/qr/00Ji8qVBNJD4LmjYy1WZO2VbNqvvPdaCVua-1qjypa",
+        "type": "image/png"
+      }
+    }
+  }
+}
+~~~
+
+#### Push Factor Activation Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the push factor activation object using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and operations.
+
+|--------------------+------------------------------------------------------------------------------------|
+| Link Relation Type | Description                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| qrcode             | QR code that encodes the push activation code needed for enrollment on the device  |
+| send               | Sends an activation link via `email` or `sms` for users who can't scan the QR code |
+|--------------------+------------------------------------------------------------------------------------|
+
+
+### Factor Verify Result Object
+
+Describes the outcome of a factor verification request
+
+|---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
+| Property      | Description                                       | DataType                        | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------------------------------------- | ------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| factorResult  | result of factor verification                     | [Factor Result](#factor-result) | FALSE    | FALSE  | TRUE     |           |           |            |
+| factorMessage | optional display message for factor verification  | String                          | TRUE     | FALSE  | TRUE     |           |           |            |
+|---------------+---------------------------------------------------+---------------------------------+----------+--------+----------|-----------|-----------+------------|
+
+#### Factor Result
+
+Specifies the status of a factor verification attempt
+
+|------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
+| Result                 | Description                                                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------|
+| `SUCCESS`              | The factor was successfully verified.                                                                                                    |
+| `CHALLENGE`            | Another verification is required.                                                                                                    |
+| `WAITING`              | The factor verification has started but not yet completed (e.g user hasn't answered phone call yet).                                     |
+| `FAILED`               | The factor verification failed.                                                                                                          |
+| `REJECTED`             | The factor verification was denied by user.                                                                                              |
+| `CANCELLED`            | The factor verification was canceled by user.                                                                                            |
+| `TIMEOUT`              | Okta was unable to verify the factor within the allowed time window.                                                                              |
+| `TIME_WINDOW_EXCEEDED` | The factor was successfully verified but outside of the computed time window.  Another verification is required in current time window. |
+| `PASSCODE_REPLAYED`    | The factor was previously verified within the same time window.  The user must wait another time window and retry with a new verification.  |
+| `ERROR`                | An unexpected server error occurred verifying factor.                                                                                  |
+|------------------------+-------------------------------------------------------------------------------------------------------------------------------------|

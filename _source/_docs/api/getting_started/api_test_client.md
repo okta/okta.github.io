@@ -1,103 +1,100 @@
 ---
 layout: docs_page
 weight: 1
-title: API Test Client
+title: Getting Started With the Okta APIs
 redirect_from: "/docs/getting_started/api_test_client.html"
 ---
 
-## Overview
+# Overview
 
-[Postman](http://getpostman.com) is an awesome REST API test client that a lot of people at Okta use to test the Okta API.  We have built templates for all of the Okta APIs that makes playing with the Okta APIs simple and easy if you don't have time to practice your *Command Line Fu* with [cURL](http://en.wikipedia.org/wiki/CURL)
+A great way to learn an API is to issue requests and inspect the responses. You can easily access our Postman collections and Example environment to do just that.
 
-![Postman Chrome Web Store](/assets/img/postman-chrome-web-store.png)
+![Postman and an Okta Collection](/assets/img/okta_postman_logo.png)
 
-## Prerequisites
+To use these collections, you'll need to set up your environment, import the collections, send a test request, and verify the results.
 
-- Chrome Web Browser
-- [API Key created in the Okta Admin UI](/docs/api/getting_started/getting_a_token.html)
+## Set Up Your Environment
 
-## Setup
+1. [Create an API token](getting_a_token.html){:target="_blank"}.
+2. [Install the Postman App](https://www.getpostman.com/apps){:target="_blank"}.
+3. Launch Postman and click the 'import button'. Select import from link, and paste this link into the textbox: `http://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
+    ![Importing the Okta Example Environment](/assets/img/import_enviro.png)
 
-1. [Download Postman Chrome Extension](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop)
-2. Launch **Postman** with new Chrome App Launcher
+4. Once you have clicked import, make sure the `example.oktapreview.com` environment is selected.
+    ![Postman app with collections](/assets/img/postman_example_start.png)
 
-    ![Chrome App Launcher](/assets/img/chrome-ui-app-launcher.png "Chrome App Launcher")
+5. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
+    * Rename your environment to something you'll recognize, for example **myOrg**.
+    * `url`: Replace the example value with your org's URL, for example **https://myOrg.oktapreview.com**. This becomes the new name of your environment. Do **not** include '-admin' in the subdomain.
+    * `apikey`: Enter the API token you created in your org, for example **00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS**.
+    * `email-suffix`: Enter the email suffix for your domain, for example **myOrg.com**.
+    * `subdomain`: Enter the subdomain, for example **myOrg**. Do **not** include '-admin' in the subdomain.
 
-3. Import and configure a new environment template for your Okta organization
+6. Save your changes by selecting **Update**. Now your environment looks similar to this example:
+    ![Example.okta.com environment with required values](/assets/img/postman_example_enviro.png)
 
-    You should [import the example Postman environment](../postman/example.okta.com.environment) and duplicate for each Okta environment (dev, test, preview, prod)
+## Import a Collection
 
-    1. Click the **Import** button in the top toolbar
-      ![Import Button](/assets/img/postman-ui-import-button.png "Import Button")
-    2. Select the **From URL** tab, paste [this URL for the example.okta.com environment](../postman/example.okta.com.environment), and click the **Import** button
-      ![Import Environment](/assets/img/postman-ui-import-env.png "Import Environment")
-    3. Select the **No environment** pull-down in the top-right of the UI and select **Manage environments**
-        ![Manage Environments](/assets/img/postman-ui-manage-env.png "Manage Environments")
-    4. Click the **Duplicate environment** icon to create a new environment from imported template
-        ![Duplicate Environment](/assets/img/postman-ui-duplicate-env.png "Duplicate Environment")
-    5. Click the name to edit the duplicated environment, assign a new name, and specify the following values:
+Import the collection for the Users API: 
 
-        - `url`: full-qualified base URL for your Okta organization such as *https://acme.okta.com*
-        - `apikey`: the API key you generated as part of prerequisites
-        - `email-suffix`: used by request templates for email addresses and logins of new users
-        - `subdomain`: *orgname* in https://*orgname*.okta.com
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf){:target="_blank"}
 
-        > We recommend you name the new environment the name of your Okta organization such as example.okta.com in case you have both a preview and production organization
+> Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page, 
+or use the [Collections Quick Reference](#collections-quick-reference). This tutorial only requires the Users collection import.
 
-        ![Edit Environment](/assets/img/postman-ui-edit-env.png "Edit Environment")
-    6. Modify Postman settings to "Retain headers on clicking on links" (Optional)
-      ![Postman Settings](/assets/img/postman-ui-settings.png "Postman Settings")
+## Send a Request
 
-4. Select and verify your configured environment
+To test your configuration, send a request to list all the users in your org:
 
-    1. Ensure you have selected your environment in the pull-down
+1. Make sure you've imported the Users API collection and configured your example environment using the instructions in the previous section.
+2. Select the **Collections** tab in Postman, open the **List Users** folder, and select **GET List Users**.
+3. Click **Send**. The result pane automatically displays the results of your request:
+    ![GET List Users](/assets/img/postman_response.png)
+    If you receive errors, it's likely that one of the values in the environment isn't set correctly. Check the values and try again.
 
-        ![Choose Environment](/assets/img/postman-ui-choose-env.png "Choose Environment")
+Once you have completed this simple request, you are ready to explore the Okta API. 
 
-        > Your selected environment should have your name that you configured above and not say `No environment` or `example.okta.com`
+## Collections Quick Reference
 
-    2. You can preview your configured environment variables by clicking the large **X** icon next to the environment pull-down
+Import any Okta API collection for Postman from the following list:
 
-        ![Preview Environment](/assets/img/postman-ui-preview-env.png "Preview Environment")
+|  Collections  | click to Run   |
+|:---|:---|
+| Authentication | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71) | 
+| Apps | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b) | 
+| Events | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86) | 
+| Factors | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b055a859dbe24a54814a) | 
+| Groups | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f) | 
+| Identity Providers (IdP) | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8438ef3445415386b407) | 
+| Admin Roles | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b) | 
+| Schemas | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/443242e60287fb4b8d6d) | 
+| Custom SMS Templates | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06) | 
+| Users  | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf) | 
 
-## Collections
+These buttons are also available at the top of each API reference page in [developer.okta.com](/docs/api/resources/apps.html).
 
-Once you have setup your Postman environment, you can import pre-built collections for the Okta APIs
+## Tips
 
-1. Click the **Import** button again at the top of the UI
+Now that you have a working collection, you can use the following tips to work more efficiently.
 
-    ![Import Button](/assets/img/postman-ui-import-button.png "Import Button")
+### Find IDs for Okta API Requests
 
-2. Select the **From URL** tab and import the following URLs:
+Your imported collections contain URLs and JSON request bodies that have sample data with variables such as **\{\{userId\}\}**.
+Replace URL and body variables with the IDs of the resources you wish to specify.
 
-    |--------------------+-------------------------------------------------------------------------|
-    | Resource           | Postman Collection                                                      |
-    |:-------------------|:------------------------------------------------------------------------|
-    | Authentication     | [Authentication API](../postman/authentication.json)                    |
-    | Sessions           | [Sessions API](../postman/sessions.json)                                |
-    | Users              | [Users API](../postman/users.json)                                      |
-    | Factors            | [Factors API](../postman/factors.json)                                  |
-    | Groups             | [Groups API](../postman/groups.json)                                    |
-    | Identity Providers | [IDP API](../postman/idps.json)                                         |
-    | Admin Roles        | [Admin Roles API](../postman/admin-roles.json)                          |
-    | Apps               | [Apps API](../postman/apps.json)                                        |
-    | Schemas            | [Schemas API](../postman/schemas.json)                                  |
-    | Events             | [Events API](../postman/events.json)                                    |
-    | Templates          | [Templates API](../postman/templates.json)                                    |
-    |--------------------+-------------------------------------------------------------------------|
+To find an ID:
 
-    > You must import each collection individually
+1. List a resource collection with a search or filter. For example, list the users in your org, as you did in the previous section.
+    ![List Users Response](/assets/img/postman_response2.png)
+    
+2. Copy the `id` of the resource, in this example the `id` for Tony Stark, in your next request. 
 
-3. Click **Collections** to view your imported collections
-  ![View Collections](/assets/img/postman-ui-collections.png "View Collections")
+### Retain Headers When Clicking Links
 
-## Requests
+Retaining the headers is helpful when you click HAL links in responses.
 
-The imported collections contain URLs and JSON request bodies that have sample data with variables such as **\{\{userId\}\}**.  You will need to replace URL and body variables with ids of specific resources for your specific organization.  This can usually be accomplished by first listing a resource collection with a search or filter, than copying the `id` of a specific resource.  See API documentation for the specific request for details.
+To retain the headers:
 
---- | ---
-URL templates often have variables such as `url` or `userId` | ![URL template with ID](/assets/img/postman-ui-replace-id.png "URL template with ID")
-**POST** or **PUT** requests often have variables in the **Body** tab | ![Body environment variable](/assets/img/postman-ui-body-variable.png "Body environment variable")
-You can copy an `id` from a previous response such as a `GET` request and paste it in another request. | ![Copy and replace ID](/assets/img/postman-ui-paste-id.png "Copy and replace ID in URL")
-You can also set environment variables directly from the right-click context menu.  This is recommended so you can re-use the `id` across multiple requests | ![Set environment variable](/assets/img/postman-ui-set-variable-id.png "Set environment variable")
-Always check the request preview to ensure all **\{\{variables\}\}** have been properly replaced before sending the request by click the the generate snippet button **</>**  | ![Generate snippet button](/assets/img/postman-ui-gen-snip-button.png "Generate snippet button") <br> ![Request preview](/assets/img/postman-ui-req-prevew.png "Request preview")
+1. Launch Postman and click the wrench icon.
+2. Select **Settings**.
+3. In the **Headers** column, enable **Retain headers when clicking on links**.

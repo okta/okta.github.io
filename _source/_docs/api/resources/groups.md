@@ -4,151 +4,13 @@ title: Groups
 redirect_from: "/docs/api/rest/groups.html"
 ---
 
-## Overview
+# Groups API
 
 The Okta Groups API provides operations to manage Okta groups and their user members for your organization.
 
-See [Importing and Using Groups in Okta](https://support.okta.com/help/articles/Knowledge_Article/92113353-Importing-and-Using-Groups-in-Okta) for more information on managing groups within Okta.
+## Getting Started with the Groups API
 
-## Group Model
-
-### Example
-
-~~~json
-{
-  "id": "00g1emaKYZTWRYYRRTSK",
-  "created": "2015-02-06T10:11:28.000Z",
-  "lastUpdated": "2015-10-05T19:16:43.000Z",
-  "lastMembershipUpdated": "2015-11-28T19:15:32.000Z",
-  "objectClass": [
-    "okta:user_group"
-  ],
-  "type": "OKTA_GROUP",
-  "profile": {
-    "name": "West Coast Users",
-    "description": "Straight Outta Compton"
-  },
-  "_links": {
-    "logo": [
-      {
-        "name": "medium",
-        "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
-        "type": "image/png"
-      },
-      {
-        "name": "large",
-        "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
-        "type": "image/png"
-      }
-    ],
-    "users": {
-      "href": "https://your-domain.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users"
-    },
-    "apps": {
-      "href": "https://your-domain.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps"
-    }
-  }
-}
-~~~
-
-### Group Attributes
-
-All groups have the following properties:
-
-|-----------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
-| Property              | Description                                                  | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| --------------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id                    | unique key for group                                         | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| created               | timestamp when group was created                             | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated           | timestamp when group's `profile` was last updated            | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastMembershipUpdated | timestamp when group's memberships were last updated         | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
-| objectClass           | determines the group's `profile`                             | Array of String                                                | TRUE     | FALSE  | TRUE     | 1         |           |            |
-| type                  | determines how a group's profile and memberships are managed | [Group Type](#group-type)                                      | FALSE    | FALSE  | TRUE     |           |           |            |
-| profile               | the group's profile properties                               | [Profile Object](#profile-object)                              | FALSE    | FALSE  | FALSE    |           |           |            |
-| _links                | [discoverable resources](#links-object) related to the group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded             | [embedded resources](#embedded-object) related to the group  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-|-----------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
-
-> `id`, `created`, `lastUpdated`, `lastMembershipUpdated`, `objectClass`, `type`, and `_links` are only available after a group is created
-
-### Group Type
-
-Okta supports several types of groups that constrain how the group's profile and memberships are managed.
-
-|--------------+-----------------------------------------------------------------------------------------------------------------+
-| Type         | Description                                                                                                     |
-| ------------ | --------------------------------------------------------------------------------------------------------------- |
-| `OKTA_GROUP` | Group profile and memberships are directly managed in Okta via static assignments or indirectly via group rules |
-| `APP_GROUP`  | Group profile and memberships are imported and must be managed within the application that imported the group   |
-| `BUILT_IN`   | Group profile and memberships are managed by Okta and cannot be modified                                        |
-|--------------+-----------------------------------------------------------------------------------------------------------------+
-
-> Active Directory and LDAP groups will also have `APP_GROUP` type
-
-### Profile Object
-
-Specifies required and optional properties for a group.  The `objectClass` of group determines what additional properties are available.
-
-#### ObjectClass: okta:user_group
-
-Profile for any group that is **not** imported from Active Directory
-
-|-------------+--------------------------+----------+----------+----------+-----------+-----------+------------|
-| Property    | Description              | DataType | Nullable | Readonly | MinLength | MaxLength | Validation |
-| ----------- | ------------------------ | -------- | -------- | -------- | --------- | --------- | ---------- |
-| name        | name of the group        | String   | FALSE    | FALSE    | 1         | 255       |            |
-| description | description of the group | String   | TRUE     | FALSE    | 0         | 1024      |            |
-|-------------+--------------------------+----------+----------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "name": "West Coast Users",
-  "description": "Straight Outta Compton"
-}
-~~~
-
-#### ObjectClass: okta:windows_security_principal
-
-Profile for a group that is imported from Active Directory
-
-|----------------------------+--------------------------------------------------------+----------+-----------+----------+-----------+-----------+------------|
-| Property                   | Description                                            | DataType | Nullable  | Readonly | MinLength | MaxLength | Validation |
-| -------------------------- | ------------------------------------------------------ | -------- | --------- | -------- | --------- | --------- | ---------- |
-| name                       | name of the windows group                              | String   | FALSE     | TRUE     |           |           |            |
-| description                | description of the windows group                       | String   | FALSE     | TRUE     |           |           |            |
-| samAccountName             | pre-windows 2000 name of the windows group             | String   | FALSE     | TRUE     |           |           |            |
-| dn                         | the distinguished name of the windows group            | String   | FALSE     | TRUE     |           |           |            |
-| windowsDomainQualifiedName | fully-qualified name of the windows group              | String   | FALSE     | TRUE     |           |           |            |
-| externalId                 | base-64 encoded GUID (objectGUID) of the windows group | String   | FALSE     | TRUE     |           |           |            |
-|----------------------------+--------------------------------------------------------+----------+-----------+----------+-----------+-----------+------------|
-
-~~~json
-{
-  "profile": {
-    "name": "West Coast Users",
-    "description": "example.com/West Coast/West Coast Users",
-    "samAccountName": "West Coast Users",
-    "dn": "CN=West Coast Users,OU=West Coast,DC=example,DC=com",
-    "windowsDomainQualifiedName": "EXAMPLE\\West Coast Users",
-    "externalId": "VKzYZ1C+IkSZxIWlrW5ITg=="
-  }
-}
-~~~
-
-### Links Object
-
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the group using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
-
-|--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Link Relation Type | Description                                                                                                                                                      |
-| ------------------ | -----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| self               | The primary URL for the group                                                                                                                                    |
-| logo               | Provides links to logo images for the group if available                                                                                                         |
-| users              | Provides [group member operations](#group-member-operations) for the group                                                                                       |
-| apps               | Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations) |
-|--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-
-> The Links Object is **read-only**.
+Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f)
 
 ## Group Operations
 
@@ -1370,3 +1232,143 @@ Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps?afte
     }
 ]
 ~~~
+
+## Group Model
+
+### Example
+
+~~~json
+{
+  "id": "00g1emaKYZTWRYYRRTSK",
+  "created": "2015-02-06T10:11:28.000Z",
+  "lastUpdated": "2015-10-05T19:16:43.000Z",
+  "lastMembershipUpdated": "2015-11-28T19:15:32.000Z",
+  "objectClass": [
+    "okta:user_group"
+  ],
+  "type": "OKTA_GROUP",
+  "profile": {
+    "name": "West Coast Users",
+    "description": "Straight Outta Compton"
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+        "type": "image/png"
+      },
+      {
+        "name": "large",
+        "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://your-domain.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users"
+    },
+    "apps": {
+      "href": "https://your-domain.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps"
+    }
+  }
+}
+~~~
+
+### Group Attributes
+
+All groups have the following properties:
+
+|-----------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
+| Property              | Description                                                  | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| --------------------- | ------------------------------------------------------------ | -------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id                    | unique key for group                                         | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
+| created               | timestamp when group was created                             | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastUpdated           | timestamp when group's `profile` was last updated            | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| lastMembershipUpdated | timestamp when group's memberships were last updated         | Date                                                           | FALSE    | FALSE  | TRUE     |           |           |            |
+| objectClass           | determines the group's `profile`                             | Array of String                                                | TRUE     | FALSE  | TRUE     | 1         |           |            |
+| type                  | determines how a group's profile and memberships are managed | [Group Type](#group-type)                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| profile               | the group's profile properties                               | [Profile Object](#profile-object)                              | FALSE    | FALSE  | FALSE    |           |           |            |
+| _links                | [discoverable resources](#links-object) related to the group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded             | [embedded resources](#embedded-object) related to the group  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+|-----------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
+
+> `id`, `created`, `lastUpdated`, `lastMembershipUpdated`, `objectClass`, `type`, and `_links` are only available after a group is created
+
+### Group Type
+
+Okta supports several types of groups that constrain how the group's profile and memberships are managed.
+
+|--------------+-----------------------------------------------------------------------------------------------------------------+
+| Type         | Description                                                                                                     |
+| ------------ | --------------------------------------------------------------------------------------------------------------- |
+| `OKTA_GROUP` | Group profile and memberships are directly managed in Okta via static assignments or indirectly via group rules |
+| `APP_GROUP`  | Group profile and memberships are imported and must be managed within the application that imported the group   |
+| `BUILT_IN`   | Group profile and memberships are managed by Okta and cannot be modified                                        |
+|--------------+-----------------------------------------------------------------------------------------------------------------+
+
+> Active Directory and LDAP groups will also have `APP_GROUP` type
+
+### Profile Object
+
+Specifies required and optional properties for a group.  The `objectClass` of group determines what additional properties are available.
+
+#### ObjectClass: okta:user_group
+
+Profile for any group that is **not** imported from Active Directory
+
+|-------------+--------------------------+----------+----------+----------+-----------+-----------+------------|
+| Property    | Description              | DataType | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ----------- | ------------------------ | -------- | -------- | -------- | --------- | --------- | ---------- |
+| name        | name of the group        | String   | FALSE    | FALSE    | 1         | 255       |            |
+| description | description of the group | String   | TRUE     | FALSE    | 0         | 1024      |            |
+|-------------+--------------------------+----------+----------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "name": "West Coast Users",
+  "description": "Straight Outta Compton"
+}
+~~~
+
+#### ObjectClass: okta:windows_security_principal
+
+Profile for a group that is imported from Active Directory
+
+|----------------------------+--------------------------------------------------------+----------+-----------+----------+-----------+-----------+------------|
+| Property                   | Description                                            | DataType | Nullable  | Readonly | MinLength | MaxLength | Validation |
+| -------------------------- | ------------------------------------------------------ | -------- | --------- | -------- | --------- | --------- | ---------- |
+| name                       | name of the windows group                              | String   | FALSE     | TRUE     |           |           |            |
+| description                | description of the windows group                       | String   | FALSE     | TRUE     |           |           |            |
+| samAccountName             | pre-windows 2000 name of the windows group             | String   | FALSE     | TRUE     |           |           |            |
+| dn                         | the distinguished name of the windows group            | String   | FALSE     | TRUE     |           |           |            |
+| windowsDomainQualifiedName | fully-qualified name of the windows group              | String   | FALSE     | TRUE     |           |           |            |
+| externalId                 | base-64 encoded GUID (objectGUID) of the windows group | String   | FALSE     | TRUE     |           |           |            |
+|----------------------------+--------------------------------------------------------+----------+-----------+----------+-----------+-----------+------------|
+
+~~~json
+{
+  "profile": {
+    "name": "West Coast Users",
+    "description": "example.com/West Coast/West Coast Users",
+    "samAccountName": "West Coast Users",
+    "dn": "CN=West Coast Users,OU=West Coast,DC=example,DC=com",
+    "windowsDomainQualifiedName": "EXAMPLE\\West Coast Users",
+    "externalId": "VKzYZ1C+IkSZxIWlrW5ITg=="
+  }
+}
+~~~
+
+### Links Object
+
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the group using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  This object is used for dynamic discovery of related resources and lifecycle operations.
+
+|--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Link Relation Type | Description                                                                                                                                                      |
+| ------------------ | -----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| self               | The primary URL for the group                                                                                                                                    |
+| logo               | Provides links to logo images for the group if available                                                                                                         |
+| users              | Provides [group member operations](#group-member-operations) for the group                                                                                       |
+| apps               | Lists all [applications](apps.html#application-model) that are assigned to the group. See [Application Group Operations](apps.html#application-group-operations) |
+|--------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+> The Links Object is read only.
