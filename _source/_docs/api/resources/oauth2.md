@@ -368,7 +368,7 @@ Irrespective of the response type, the contents of the response is always one of
 Parameter         | Description                                                                                        | DataType  | 
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------| 
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the *response_type* includes *id_token*.| String    | 
-access_token      | The *access_token* that is used to access the resource. This is returned if the *response_type* included a token. Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change.| String  |
+access_token      | The *access_token* that is used to access the resource. This is returned if the *response_type* included a token. | String  |
 token_type        | The token type is always `Bearer` and is returned only when *token* is specified as a *response_type*. | String |
 code              | An opaque value that can be used to redeem tokens from [token endpoint](#token-request).| String    | 
 expires_in        | The number of seconds until the *access_token* expires. This is only returned if the response included an *access_token*. | String |
@@ -659,7 +659,6 @@ Content-Type: application/json;charset=UTF-8
 
 ### Revocation Request
 {:.api .api-operation}
-
 
 {% api_operation post /oauth2/:authorizationServerId/v1/revoke %}
 

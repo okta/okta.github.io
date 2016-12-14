@@ -221,7 +221,8 @@ Both the Access Token and the ID Token are acquired via [OAuth 2.0](oauth2.html)
 ### Get User Information
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET, POST</span> /oauth2/v1/userinfo</span>
+{% api_operation get /oauth2/v1/userinfo %}
+{% api_operation post /oauth2/v1/userinfo %}
 
 You must include the `access_token` returned from the [/oauth2/v1/authorize](oauth2.html#authentication-request) endpoint as an authorization header parameter.
 
@@ -336,7 +337,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter       | Description                                                                                         | Type       |
 ----------------+-----------------------------------------------------------------------------------------------------+------------|
-token           | An access token or refresh token.                                                                   | String     |  
+token           | An access token, ID token, or refresh token.                                                                   | String     |  
 token_type_hint | A hint of the type of *token*.                                                               | String     |
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
@@ -498,7 +499,7 @@ Content-Type: application/json;charset=UTF-8
 ### Get Keys
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/keys</span>
+{% api_operation get /oauth2/v1/keys %}
 
 If automatic key rotation is disabled, provide the *client_id* to fetch public keys for your app. Otherwise, this endpoint returns the public keys automatically rotated.
 
@@ -563,12 +564,12 @@ Standard open-source libraries are available for every major language to perform
 
 #### Alternative Validation 
 
-You can use an [introspection request](#introspection-request) for validation if you have the API Access Management feature.
+You can use an [introspection request](#introspection-request) for validation.
 
 ### OpenID Connect Discovery Document
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /.well-known/openid-configuration</span>
+{% api_operation get /.well-known/openid-configuration %}
 
 This API endpoint returns metadata related to OpenID Connect that can be used by clients to programmatically configure their interactions with Okta. 
 This API doesn't require any authentication and returns a JSON object with the following structure.
