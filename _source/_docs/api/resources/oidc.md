@@ -319,6 +319,182 @@ Please note the following:
 
 >If your application cannot retrieve keys dynamically, the administrator can disable the automatic key rotation in the administration UI, [generate a key credential](apps.html#generate-new-application-key-credential) and [update the application](apps.html#update-key-credential-for-application) to use it for signing.
 
+### Introspection Request
+{:.api .api-operation}
+
+{% api_operation post /oauth2/v1/introspect %}
+
+The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not. 
+If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive. 
+An implicit client can only introspect its own tokens, while a confidential client may inspect all access tokens.
+
+> Note; [ID Tokens](oidc.html#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
+
+#### Request Parameters
+
+The following parameters can be posted as a part of the URL-encoded form values to the API.
+
+Parameter       | Description                                                                                         | Type       |
+----------------+-----------------------------------------------------------------------------------------------------+------------|
+token           | An access token or refresh token.                                                                   | String     |  
+token_type_hint | A hint of the type of *token*.                                                               | String     |
+client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
+client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
+
+##### Token Authentication Methods
+
+The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above),
+or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
+Use one authentication mechanism with a given request. Using both returns an error.
+
+For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
+
+~~~sh
+Authorization: Basic ${Base64(<client_id>:<client_secret>)} 
+~~~
+
+#### Response Parameters
+
+Based on the type of token and whether it is active or not, the returned JSON contains a different set of information. Besides the claims in the token, the possible top-level members include:
+
+Parameter   | Description                                                                                         | Type       |
+------------+-----------------------------------------------------------------------------------------------------+------------|
+active      | An access token or refresh token.                                                                   | boolean    |  
+token_type  | The type of the token. The value is always `Bearer`.                                                | String     |
+scope       | A space-delimited list of scopes.                                                                   | String     |
+client_id   | The ID of the client associated with the token.                                                     | String     |
+username    | The username associated with the token.                                                             | String     |
+exp         | The expiration time of the token in seconds since January 1, 1970 UTC.                              | long       |
+iat         | The issuing time of the token in seconds since January 1, 1970 UTC.                                 | long       |
+nbf         | A timestamp in seconds since January 1, 1970 UTC when this token is not be used before.             | long       |
+sub         | The subject of the token.                                                                           | String     |
+aud         | The audience of the token.                                                                          | String     |
+iss         | The issuer of the token.                                                                            | String     |
+jti         | The identifier of the token.                                                                        | String     |
+device_id   | The ID of the device associated with the token                                                      | String     |
+uid         | The user ID. This parameter is returned only if the token is an access token and the subject is an end user.     | String     |
+
+#### List of Errors 
+
+Error Id                |  Details                                                                                                     |
+------------------------+--------------------------------------------------------------------------------------------------------------|
+invalid_client          | The specified client id wasn't found. |
+invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
+
+#### Response Example (Success, Access Token)
+
+~~~json
+{
+    "active" : true,
+    "token_type" : "Bearer",
+    "scope" : "openid profile",
+    "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
+    "username" : "john.doe@example.com",
+    "exp" : 1451606400,
+    "iat" : 1451602800,
+    "sub" : "john.doe@example.com",
+    "aud" : "http://api.example.com",
+    "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
+    "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
+    "uid" : "00uid4BxXw6I6TV4m0g3"
+}
+~~~
+
+#### Response Example (Success, Refresh Token)
+
+~~~json
+{
+    "active" : true,
+    "token_type" : "Bearer",
+    "scope" : "openid profile email",
+    "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
+    "username" : "john.doe@example.com",
+    "exp" : 1451606400,
+    "sub" : "john.doe@example.com",
+    "device_id" : "q4SZgrA9sOeHkfst5uaa"
+}
+~~~
+
+#### Response Example (Success, Inactive Token)
+
+~~~json
+{
+    "active" : false
+}
+~~~
+
+#### Response Example (Error)
+
+~~~http
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+{
+    "error" : "invalid_client",
+    "error_description" : "No client credentials found."
+}
+~~~
+
+### Revocation Request
+{:.api .api-operation}
+
+
+{% api_operation post /oauth2/v1/revoke %}
+
+The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
+
+#### Request Parameters
+
+The following parameters can be posted as a part of the URL-encoded form values to the API.
+
+Parameter       | Description                                                                                         | Type       |
+----------------+-----------------------------------------------------------------------------------------------------+------------|
+token           | An access token or refresh token.                                                                   | String     |  
+token_type_hint | A hint of the type of *token*.                                                               | String     |
+client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
+client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
+
+##### Token Authentication Methods
+
+A client may only revoke a token generated for that client.
+
+The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above),
+or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
+Use one authentication mechanism with a given request. Using both returns an error.
+
+For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
+
+~~~sh
+Authorization: Basic ${Base64(<client_id>:<client_secret>)} 
+~~~
+
+#### Response Parameters
+
+A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid, expired, or revoked token will still be considered a success as to not leak information
+
+#### List of Errors 
+
+Error Id                |  Details                                                                                                     |
+------------------------+--------------------------------------------------------------------------------------------------------------|
+invalid_client          | The specified client id wasn't found. |
+invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
+
+#### Response Example (Success)
+
+~~~http
+HTTP/1.1 204 No Content
+~~~
+
+#### Response Example (Error)
+
+~~~http
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
+{
+    "error" : "invalid_client",
+    "error_description" : "No client credentials found."
+}
+~~~
+
 ### Get Keys
 {:.api .api-operation}
 
@@ -387,7 +563,7 @@ Standard open-source libraries are available for every major language to perform
 
 #### Alternative Validation 
 
-You can use an [OAuth 2.0 introspection request](/docs/api/resources/oauth2.html#introspection-request) for validation if you have the API Access Management feature.
+You can use an [introspection request](#introspection-request) for validation if you have the API Access Management feature.
 
 ### OpenID Connect Discovery Document
 {:.api .api-operation}
@@ -497,7 +673,7 @@ This API doesn't require any authentication and returns a JSON object with the f
 
 {% api_operation get /oauth2/v1/authorize %}
 
-This is a starting point for OAuth 2.0 flows such as implicit and authorization code flows. This request authenticates the user and returns tokens along with an authorization grant to the client application as a part of the response the client might have requested.
+This is a starting point for OpenID Connect flows such as implicit and authorization code flows. This request authenticates the user and returns tokens along with an authorization grant to the client application as a part of the response the client might have requested.
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -521,8 +697,8 @@ code_challenge_method | Specifies the method that was used to derive the code ch
 
 #### Parameter Details
  
- * *idp* and *sessionToken* are Okta extensions to the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). 
-    All other parameters comply with the [OAuth 2.0 specification](https://tools.ietf.org/html/rfc6749) and their behavior is consistent with the specification.
+ * *idp* and *sessionToken* are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). 
+    All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.
  * Each value for *response_mode* delivers different behavior:
     * *fragment* -- Parameters are encoded in the URL fragment added to the *redirect_uri* when redirecting back to the client.
     * *query* -- Parameters are encoded in the query string added to the *redirect_uri* when redirecting back to the client.
@@ -739,67 +915,5 @@ Content-Type: application/json;charset=UTF-8
 }
 ~~~
 
-### Revocation Request
-{:.api .api-operation}
-
-
-{% api_operation post /oauth2/:authorizationServerId/v1/revoke %}
-
-The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
-
-> Note: No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
-
-#### Request Parameters
-
-The following parameters can be posted as a part of the URL-encoded form values to the API.
-
-Parameter       | Description                                                                                         | Type       |
-----------------+-----------------------------------------------------------------------------------------------------+------------|
-token           | An access token or refresh token.                                                                   | String     |  
-token_type_hint | A hint of the type of *token*.                                                               | String     |
-client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
-client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
-
-##### Token Authentication Methods
-
-A client may only revoke a token generated for that client.
-
-The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.
-
-For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
-
-~~~sh
-Authorization: Basic ${Base64(<client_id>:<client_secret>)} 
-~~~
-
-#### Response Parameters
-
-A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid, expired, or revoked token will still be considered a success as to not leak information
-
-#### List of Errors 
-
-Error Id                |  Details                                                                                                     |
-------------------------+--------------------------------------------------------------------------------------------------------------|
-invalid_client          | The specified client id wasn't found. |
-invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
-
-#### Response Example (Success)
-
-~~~http
-HTTP/1.1 204 No Content
-~~~
-
-#### Response Example (Error)
-
-~~~http
-HTTP/1.1 401 Unauthorized
-Content-Type: application/json;charset=UTF-8
-{
-    "error" : "invalid_client",
-    "error_description" : "No client credentials found."
-}
-~~~
 
 
