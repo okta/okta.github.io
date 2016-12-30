@@ -1,0 +1,26 @@
+{
+  "name": "developer.okta.com-ci-testing",
+  "version": "0.0.1",
+  "description": "Dependencies to run automated Selenium tests on developer.okta.com",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "webdriver-manager update && protractor tests/selenium/conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okta/okta.github.io.git"
+  },
+  "author": "Joel Franusic <joel.franusic@okta.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/okta/okta.github.io/issues"
+  },
+  "homepage": "https://github.com/okta/okta.github.io#readme",
+  "devDependencies": {
+    "jasmine-reporters": "^2.2.0",
+    "protractor": "^4.0.14"
+  }
+}
