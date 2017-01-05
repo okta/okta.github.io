@@ -46,7 +46,7 @@ Trusted applications are backend applications that act as authentication broker 
 ### Primary Authentication
 {:.api .api-operation}
 
-{% api_operation post /api/v1/authn %}
+{% api_operation post /authn %}
 
 Every authentication transaction starts with primary authentication which validates a user's primary password credential. **Password Policy**, **MFA Policy**,  and **Sign-On Policy** are evaluated during primary authentication to determine if the user's password is expired, a factor should be enrolled, or additional verification is required. The [transaction state](#transaction-state) of the response depends on the user's status, group memberships and assigned policies.
 
@@ -731,7 +731,7 @@ curl -v -X POST \
 ### Change Password
 {:.api .api-operation}
 
-{% api_operation post api/v1/authn/credentials/change_password %}
+{% api_operation post /authn/credentials/change_password %}
 
 This operation changes a user's password by providing the existing password and the new password password for authentication transactions with either the `PASSWORD_EXPIRED` or `PASSWORD_WARN` state.
 
@@ -838,7 +838,7 @@ You can enroll, activate, and verify factors using the `/api/v1/authn/factors` e
 ### Enroll Factor
 {:.api .api-operation}
 
-{% api_operation post /api/v1/authn/factors %}
+{% api_operation post /authn/factors %}
 
 Enrolls a user with a [factor](factors.html#supported-factors-for-providers) assigned by their **MFA Policy**.
 

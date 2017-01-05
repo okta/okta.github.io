@@ -259,7 +259,7 @@ users |  | <a href="#UserConditionObject">User Condition Object</a> | No |
 ### Get a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em></span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /policies/<em>:policyId</em></span>
 
 #### Request Parameters
 
@@ -285,7 +285,7 @@ HTTP 200:
 ### Get a Policy with Rules
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>?expand=rules</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /policies/<em>:policyId</em>?expand=rules</span>
 
 #### Request Parameters
 
@@ -312,7 +312,7 @@ HTTP 200:
 ### Get All Policies by Type
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies?type=<em>:type</em></span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /policies?type=<em>:type</em></span>
 
 #### Request Parameters
 
@@ -340,7 +340,7 @@ HTTP 204:
 ### Delete Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em></span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /policies/<em>:policyId</em></span>
 
 #### Request Parameters
 
@@ -366,7 +366,7 @@ HTTP 204:
 ### Update a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em></span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /policies/<em>:policyId</em></span>
 
 #### Request Parameters
 
@@ -405,7 +405,7 @@ HTTP 200:
 ### Create a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /policies</span>
 
 #### Request Parameters
 
@@ -446,7 +446,7 @@ HTTP 204:
 ### Activate a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/activate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /policies/<em>:policyId</em>/lifecycle/activate</span>
 
 #### Request Parameters
 
@@ -472,7 +472,7 @@ HTTP 204:
 ### Deactivate a Policy
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/deactivate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /policies/<em>:policyId</em>/lifecycle/deactivate</span>
 
 #### Request Parameters
 
@@ -500,7 +500,7 @@ HTTP 200:
 ### Get Policy Rules
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /policies/<em>:policyId</em>/rules</span>
 
 #### Request Parameters
 
@@ -526,7 +526,7 @@ HTTP 200:
 ### Create a rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /policies/<em>:policyId</em>/rules</span>
 
 #### Request Parameters
 
@@ -570,7 +570,7 @@ HTTP 200:
 ### Delete a rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
 
 #### Request Parameters
 
@@ -596,7 +596,7 @@ HTTP 204:
 ### Get a rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
 
 #### Request Parameters
 
@@ -622,7 +622,7 @@ HTTP 200:
 ### Update a rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /policies/<em>:policyId</em>/rules/<em>:ruleId</em></span>
 
 #### Request Parameters
 
@@ -669,7 +669,7 @@ HTTP 200:
 ### Activate A Rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/activate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/activate</span>
 
 #### Request Parameters
 
@@ -695,7 +695,7 @@ HTTP 204:
 ### Deactivate A Rule
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/deactivate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/deactivate</span>
 
 #### Request Parameters
 
