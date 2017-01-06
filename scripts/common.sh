@@ -2,6 +2,9 @@
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+# Where the generated Jekyll site will be placed
+GENERATED_SITE_LOCATION="_site"
+
 # Print an easily visible line, useful for log files.
 function interject() {
     echo "----- ${1} -----"
@@ -47,8 +50,6 @@ function check_for_jekyll_dependencies() {
     
 
 function generate_html() {
-    GENERATED_SITE_LOCATION="_site"
-
     check_for_jekyll_dependencies
     
     interject 'Using Jekyll to generate HTML'
