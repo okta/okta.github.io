@@ -20,7 +20,7 @@ Explore the Schemas API: [![Run in Postman](https://run.pstmn.io/button.svg)](ht
 ### Get User Schema
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /meta/schemas/user/default</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/meta/schemas/user/default</span>
 
 Fetches the default schema for a User
 
@@ -149,7 +149,7 @@ curl -v -X GET \
 ### Add Property to User Profile Schema
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /api/v1/meta/schemas/user/default</span>
 
 Adds one or more [custom user profile properties](#user-profile-schema-property-object) to the user schema
 
@@ -320,7 +320,7 @@ curl -v -X POST \
 ### Update User Profile Schema Property
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /api/v1/meta/schemas/user/default</span>
 
 Updates one or more [custom user profile properties](#user-profile-schema-property-object) in the schema or a [permission](#schema-property-permission-object) for a [user profile base property](#user-profile-base-subschema).
 
@@ -491,7 +491,7 @@ curl -v -X POST \
 ### Remove Property from User Profile Schema
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /meta/schemas/user/default</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /api/v1/meta/schemas/user/default</span>
 
 Removes one or more [custom user profile properties](#user-profile-schema-property) from the user schema.
 A property cannot be removed if it is being referenced as a [matchAttribute](./idps.html#subject-policy-object) in SAML2 IdPs.

@@ -16,7 +16,7 @@ Explore the Administrator Roles API:  [![Run in Postman](https://run.pstmn.io/bu
 ### List Roles Assigned to User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/:uid/roles</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/:uid/roles</span>
 
 Lists all roles assigned to a user.
 
@@ -70,7 +70,7 @@ curl -v -X GET \
 ### Assign Role to User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/roles</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/roles</span>
 
 Assigns a role to a user.
 
@@ -117,7 +117,7 @@ curl -v -X POST \
 ### Unassign Role from User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/roles/*:rid*</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/roles/*:rid*</span>
 
 Unassigns a role from a user.
 
@@ -161,7 +161,7 @@ HTTP/1.1 204 No Content
 #### List Group Targets for User Admin Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/roles/*:rid*/targets/groups</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/roles/*:rid*/targets/groups</span>
 
 Lists all group targets for a `USER_ADMIN` role assignment.
 
@@ -236,7 +236,7 @@ curl -v -X GET \
 #### Add Group Target to User Admin Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:uid*/roles/*:rid*/targets/groups/*:gid*</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/users/*:uid*/roles/*:rid*/targets/groups/*:gid*</span>
 
 Adds a group target for a `USER_ADMIN` role assignment.
 
@@ -279,7 +279,7 @@ HTTP/1.1 204 No Content
 #### Remove Group Target from User Admin Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/roles/*:rid*/targets/groups/*:gid*</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/roles/*:rid*/targets/groups/*:gid*</span>
 
 Removes a group target from a `USER_ADMIN` role assignment.
 
@@ -324,7 +324,7 @@ HTTP/1.1 204 No Content
 #### List App Targets for App Admin Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/roles/*:rid*/targets/catalog/apps</span>
 
 Lists all app targets for an `APP_ADMIN` role assignment.
 
@@ -433,7 +433,7 @@ curl -v -X GET \
 #### Add App Target to App Admin Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName*</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName*</span>
 
 Adds an app target for an `APP_ADMIN` role assignment.
 
@@ -476,7 +476,7 @@ HTTP/1.1 204 No Content
 #### Remove App Target from App Admin Role
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName*</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/roles/*:rid*/targets/catalog/apps/*:appName*</span>
 
 Removes an app target from an `APP_ADMIN` role assignment.
 

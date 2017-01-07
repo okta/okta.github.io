@@ -17,7 +17,7 @@ Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 ### Add Group
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /groups</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/groups</span>
 
 Adds a new group with `OKTA_GROUP` type to your organization.
 
@@ -95,7 +95,7 @@ curl -v -X POST \
 ### Get Group
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /groups/*:id*</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/groups/*:id*</span>
 
 Fetches a specific group by `id` from your organization
 
@@ -165,7 +165,7 @@ curl -v -X GET \
 ### List Groups
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /groups</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/groups</span>
 
 Enumerates groups in your organization with pagination. A subset of groups can be returned that match a supported filter expression or query.
 
@@ -766,7 +766,7 @@ Link: <https://your-domain.okta.com/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&lim
 ### Update Group
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /groups/*:id*</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/groups/*:id*</span>
 
 Updates the profile for a group with `OKTA_GROUP` type from your organization.
 
@@ -848,7 +848,7 @@ curl -v -X PUT \
 ### Remove Group
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /groups/*:id*</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/groups/*:id*</span>
 
 Removes a group with `OKTA_GROUP` type from your organization.
 
@@ -891,7 +891,7 @@ HTTP/1.1 204 No Content
 ### List Group Members
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /groups/*:id*/users</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/groups/*:id*/users</span>
 
 Enumerates all [users](#users.html) that are a member of a group.
 
@@ -1000,7 +1000,7 @@ Link: <https://your-domain.okta.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/users?aft
 ### Add User to Group
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /groups/*:gid*/users/*:uid*</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/groups/*:gid*/users/*:uid*</span>
 
 Adds a [user](users.html#user-model) to a group with `OKTA_GROUP` type.
 
@@ -1041,7 +1041,7 @@ HTTP/1.1 204 No Content
 ### Remove User from Group
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /groups/*:gid*/users/*:uid*</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/groups/*:gid*/users/*:uid*</span>
 
 Removes a [user](users.html#user-model) from a group with `OKTA_GROUP` type.
 
@@ -1084,7 +1084,7 @@ HTTP/1.1 204 No Content
 ### List Assigned Applications
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /groups/*:id*/apps</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/groups/*:id*/apps</span>
 
 Enumerates all [applications](apps.html#application-model) that are assigned to a group. See [Application Group Operations](apps.html#application-group-operations)
 

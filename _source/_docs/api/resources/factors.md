@@ -733,9 +733,9 @@ curl -v -X POST \
 ##### Enroll Okta SMS Factor Using Custom Template
 {:.api .api-operation}
 
-Customize (and optionally localize) the SMS message sent to the user on enrollment. 
-* If the request has an `Accept_Language` header and the template contains a translation for that language, the SMS message is sent using the translated template. 
-* If the language provided in the `Accept-Language` header doesn't exist, the SMS message is sent using the template text. 
+Customize (and optionally localize) the SMS message sent to the user on enrollment.
+* If the request has an `Accept_Language` header and the template contains a translation for that language, the SMS message is sent using the translated template.
+* If the language provided in the `Accept-Language` header doesn't exist, the SMS message is sent using the template text.
 * If the provided <em>templateId</em> doesn't match the existing template, the SMS message is sent using the default template.
 
 >For instructions about how to create custome templates, see [SMS Template](templates.html#sms-template).
@@ -1352,7 +1352,7 @@ curl -v -X POST \
 ### Activate Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/lifecycle/activate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/lifecycle/activate</span>
 
 The `sms` and `token:software:totp` [factor types](#factor-type) require activation to complete the enrollment process.
 
@@ -1625,7 +1625,7 @@ curl -v -X POST \
           "DELETE"
         ]
       }
-    },    
+    },
     "user": {
       "href": "https://your-domain.okta.com/api/v1/users/00u15s1KDETTQMQYABRL",
       "hints": {
@@ -1824,7 +1824,7 @@ curl -v -X DELETE \
 ### Verify Security Question Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
 
 Verifies an answer to a `question` factor.
 
@@ -1886,7 +1886,7 @@ curl -v -X POST \
 ### Verify SMS Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
 
 Verifies an OTP for a `sms` factor.
 
@@ -1966,9 +1966,9 @@ curl -v -X POST \
 #### Verify SMS Factor Using A Custom Template
 {:.api .api-operation}
 
-Customize (and optionally localize) the SMS message sent to the user on verification. 
-* If the request has an `Accept-Language` header and the template contains translation for that language, the SMS message is sent in that language. 
-* If the language provided in the `Accept-Language` header doesn't exist in the template definition, the SMS message is sent using the template text. 
+Customize (and optionally localize) the SMS message sent to the user on verification.
+* If the request has an `Accept-Language` header and the template contains translation for that language, the SMS message is sent in that language.
+* If the language provided in the `Accept-Language` header doesn't exist in the template definition, the SMS message is sent using the template text.
 * If the provided `templateId` doesn't match an existing template, the SMS message is sent using the default template.
 
 To create custom templates, see [Templates](templates.html#sms-template).
@@ -1992,7 +1992,7 @@ curl -v -X POST \
 ### Verify Call Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
 
 Verifies an OTP for a `call` factor
 
@@ -2069,7 +2069,7 @@ curl -v -X POST \
 ### Verify TOTP Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
 
 Verifies an OTP for a `token:software:totp` factor
 
@@ -2130,7 +2130,7 @@ curl -v -X POST \
 ### Verify Push Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
 
 Creates a new verification transaction and sends an asynchronous push notification to the device for the user to approve or reject.  You must [poll the transaction](#poll-for-verify-transaction-completion) to determine when it completes or expires.
 
@@ -2199,7 +2199,7 @@ curl -v -X POST \
 #### Poll for Verify Transaction Completion
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /users/*:uid*/factors/*:fid*/transactions/*:tid*
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid*
 
 Polls a push verification transaction for completion.  The transaction result is `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
 
@@ -2317,7 +2317,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
 ### Verify Token Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /users/*:uid*/factors/*:fid*/verify</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
 
 Verifies an OTP for a `token` or `token:hardware` factor
 
@@ -2548,7 +2548,7 @@ Specifies the profile for a `call` factor
 | Property      | Description                   | DataType                                                        | Nullable | Unique  | Readonly | MinLength | MaxLength | Validation |
 | ------------- | ----------------------------- | --------------------------------------------------------------- | -------- | ------- | -------- | --------- | --------- | ---------- |
 | phoneNumber   | phone number of the device    | String [E.164 formatted](http://en.wikipedia.org/wiki/E.164)    | FALSE    | TRUE    | FALSE    |           | 15        |            |
-| phoneExtension| extension of the device       | String                                                          | TRUE     | FALSE   | FALSE    |           | 15        |            | 
+| phoneExtension| extension of the device       | String                                                          | TRUE     | FALSE   | FALSE    |           | 15        |            |
 |---------------+-------------------------------+-----------------------------------------------------------------+----------+---------+----------+-----------+-----------+------------|
 
 ~~~json

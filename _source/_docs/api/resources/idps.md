@@ -27,7 +27,7 @@ Each identity provider (IdP) requires some setup. Use the Okta setup guide for y
 ### Add Identity Provider
 {:.api .api-operation}
 
-{% api_operation post /idps %}
+{% api_operation post /api/v1/idps %}
 
 Adds a new IdP to your organization.
 
@@ -774,7 +774,7 @@ curl -v -X POST \
 ### Get Identity Provider
 {:.api .api-operation}
 
-{% api_operation get /idps/*:id* %}
+{% api_operation get /api/v1/idps/*:id* %}
 
 Fetches an IdP by `id`.
 
@@ -882,7 +882,7 @@ curl -v -X GET \
 ### List Identity Providers
 {:.api .api-operation}
 
-{% api_operation get /idps %}
+{% api_operation get /api/v1/idps %}
 
 Enumerates IdPs in your organization with pagination. A subset of IdPs can be returned that match a supported filter expression or query.
 
@@ -1522,7 +1522,7 @@ Link: <https://your-domain.okta.com/api/v1/idps?after=0oaxdqpA88PtFNmhu0g3&limit
 ### Update Identity Provider
 {:.api .api-operation}
 
-{% api_operation put /idps/*:id* %}
+{% api_operation put /api/v1/idps/*:id* %}
 
 Updates the configuration for an IdP.
 
@@ -1665,7 +1665,7 @@ curl -v -X PUT \
 ### Delete Identity Provider
 {:.api .api-operation}
 
-{% api_operation delete /idps/*:id* %}
+{% api_operation delete /api/v1/idps/*:id* %}
 
 Removes an IdP from your organization.
 
@@ -1708,7 +1708,7 @@ HTTP/1.1 204 No Content
 ### Activate Identity Provider
 {:.api .api-operation}
 
-{% api_operation post /idps/*:id*/lifecycle/activate %}
+{% api_operation post /api/v1/idps/*:id*/lifecycle/activate %}
 
 Activates an inactive IdP.
 
@@ -1818,7 +1818,7 @@ curl -v -X POST \
 ### Deactivate Identity Provider
 {:.api .api-operation}
 
-{% api_operation post /idps/*:id*/lifecycle/deactivate %}
+{% api_operation post /api/v1/idps/*:id*/lifecycle/deactivate %}
 
 Deactivates an active IdP.
 
@@ -1932,7 +1932,7 @@ Operations for just-in-time provisioning or account linking with a `CALLOUT` act
 ### Get Identity Provider Transaction
 {:.api .api-operation}
 
-{% api_operation get /idps/tx/*:tid* %}
+{% api_operation get /api/v1/idps/tx/*:tid* %}
 
 Fetches an IdP transaction by `id`
 
@@ -2011,7 +2011,7 @@ curl -v -X GET \
 ### Get Source IdP User for IdP Transaction
 {:.api .api-operation}
 
-{% api_operation get /idps/tx/*:tid*/source %}
+{% api_operation get /api/v1/idps/tx/*:tid*/source %}
 
 Fetches the source [IdP user](#identity-provider-user-model) for a transaction.
 
@@ -2063,7 +2063,7 @@ curl -v -X GET \
 ### Get Target User for IdP Provision Transaction
 {:.api .api-operation}
 
-{% api_operation get /idps/tx/*:tid*/target %}
+{% api_operation get /api/v1/idps/tx/*:tid*/target %}
 
 Fetches the target transformed [Okta user profile](/docs/api/resources/users.html#profile-object) for a just-in-time provisioning transaction.
 
@@ -2120,7 +2120,7 @@ curl -v -X GET \
 ### List Users for IdP Link Transaction
 {:.api .api-operation}
 
-{% api_operation get /idps/tx/*:tid*/users %}
+{% api_operation get /api/v1/idps/tx/*:tid*/users %}
 
 Enumerates the candidate [Okta users](/docs/api/resources/users.html#user-model) for an account link transaction.
 
@@ -2211,7 +2211,7 @@ curl -v -X GET \
 ### Provision IdP User
 {:.api .api-operation}
 
-{% api_operation post /idps/tx/*:tid*/lifecycle/provision %}
+{% api_operation post /api/v1/idps/tx/*:tid*/lifecycle/provision %}
 
 Provisions an IdP user as a new Okta user.
 
@@ -2287,7 +2287,7 @@ curl -v -X POST \
 ### Link IdP User
 {:.api .api-operation}
 
-{% api_operation post /idps/tx/*:tid*/lifecycle/confirm/*:uid* %}
+{% api_operation post /api/v1/idps/tx/*:tid*/lifecycle/confirm/*:uid* %}
 
 Links an IdP user to an [existing Okta user](#list-users-for-idp-link-transaction).
 
@@ -2365,7 +2365,7 @@ curl -v -X POST \
 ### Find Users
 {:.api .api-operation} 
 
-{% api_operation get /idps/*:id*/users %}
+{% api_operation get /api/v1/idps/*:id*/users %}
 
 Find all the users linked to an identity provider
 
@@ -2429,7 +2429,7 @@ GET https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
 ### Unlink User from IdP
 {:.api .api-operation} 
 
-{% api_operation delete /idps/*:id*/users/*:uid* %}
+{% api_operation delete /api/v1/idps/*:id*/users/*:uid* %}
 
 Removes the link between the Okta user and the IdP user. 
 The next time the user federates into Okta via this IdP, they have to re-link their account according to the account link policy configured in Okta for this IdP.
@@ -2463,7 +2463,7 @@ DELETE https://example.okta.com//api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9l
 ### Add X.509 Certificate Public Key
 {:.api .api-operation}
 
-{% api_operation post /idps/credentials/keys %}
+{% api_operation post /api/v1/idps/credentials/keys %}
 
 Adds a new X.509 certificate credential to the IdP key store.
 
@@ -2547,7 +2547,7 @@ Location: https://${org}.okta.com/api/v1/idps/credentials/keys/74bb2164-e0c8-445
 ### Get Key
 {:.api .api-operation}
 
-{% api_operation get /idps/credentials/keys/*:kid* %}
+{% api_operation get /api/v1/idps/credentials/keys/*:kid* %}
 
 Gets a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid`.
 
@@ -2612,7 +2612,7 @@ curl -v -X GET \
 ### List Keys
 {:.api .api-operation}
 
-{% api_operation get /idps/credentials/keys %}
+{% api_operation get /api/v1/idps/credentials/keys %}
 
 Enumerates IdP key credentials.
 
@@ -2680,7 +2680,7 @@ curl -v -X GET \
 ### Delete Key
 {:.api .api-operation}
 
-{% api_operation delete /idps/credentials/keys/*:kid* %}
+{% api_operation delete /api/v1/idps/credentials/keys/*:kid* %}
 
 Deletes a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid` if it is not currently being used by an Active or Inactive IdP.
 
@@ -2723,7 +2723,7 @@ HTTP/1.1 204 No Content
 ### Generate New IdP Signing Key Credential
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /idps/*:id*/credentials/keys/generate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/idps/*:id*/credentials/keys/generate</span>
 
 Generates a new X.509 certificate for an IdP signing key credential to be used for signing assertions sent to the IdP
 
@@ -2797,7 +2797,7 @@ Content-Type: application/json
 ### List Signing Key Credentials for IdP
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/*:id*/credentials/keys</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/idps/*:id*/credentials/keys</span>
 
 Enumerates signing key credentials for an IdP
 
@@ -2859,7 +2859,7 @@ curl -v -X GET \
 ### Get Signing Key Credential for IdP
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /idps/*:id*/credentials/keys/*:kid*</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/idps/*:id*/credentials/keys/*:kid*</span>
 
 Gets a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid`
 

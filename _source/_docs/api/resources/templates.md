@@ -23,7 +23,7 @@ Explore the Custom Templates API: [![Run in Postman](https://run.pstmn.io/button
 ### Add SMS Template
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /templates/sms</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/templates/sms</span>
 
 Adds a new custom SMS template to your organization.
 
@@ -83,7 +83,7 @@ curl -v -X POST \
 ### Get SMS Template
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /templates/sms/*:id*</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/templates/sms/*:id*</span>
 
 Fetches a specific template by `id`
 
@@ -132,7 +132,7 @@ curl -v -X GET \
 ### List SMS Templates
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /templates/sms</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/templates/sms</span>
 
 Enumerates custom SMS templates in your organization. A subset of templates can be returned that match a template type.
 
@@ -251,7 +251,7 @@ curl -v -X GET \
 ### Update SMS Template
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /templates/sms/*:id*</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/templates/sms/*:id*</span>
 
 Updates the SMS template.
 
@@ -310,7 +310,7 @@ curl -v -X PUT \
 ### Partial SMS Template Update
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /templates/sms/*:id*</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/templates/sms/*:id*</span>
 
 Updates only some of the SMS template properties:
 
@@ -375,7 +375,7 @@ curl -v -X POST \
 ### Remove SMS Template
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /templates/sms/*:id*</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/templates/sms/*:id*</span>
 
 Removes an SMS template.
 

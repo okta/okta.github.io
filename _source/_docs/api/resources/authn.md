@@ -1682,7 +1682,7 @@ In this example we will put all the elements together in html page.
 
         <!-- The host, sig_request, and post_action values will be given via the Auth API -->
         <script>
-            Duo.init({  
+            Duo.init({
                 'host': 'api-your-host.duosecurity.com',
                 'sig_request': 'TX|...your-signature',
                 'post_action': 'https://your-domain.okta.com/api/v1/authn/factors/dsflnpo99zpfMyaij0g3/lifecycle/duoCallback'
@@ -1818,7 +1818,7 @@ curl -v -X POST \
 ### Activate Factor
 {:.api .api-operation}
 
-{% api_operation post /authn/factors/*:fid*/lifecycle/activate %}
+{% api_operation post /api/v1/authn/factors/*:fid*/lifecycle/activate %}
 
 The `sms`,`call` and `token:software:totp` [factor types](factors.html#factor-type) require activation to complete the enrollment process.
 
@@ -2552,7 +2552,7 @@ u2f.register(appId, registerRequests, [], function (data) {
 </script>
 ~~~
 
-Activate a `u2f` factor by verifying the registration data and client data.  
+Activate a `u2f` factor by verifying the registration data and client data.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2642,7 +2642,7 @@ Verifies an enrolled factor for an authentication transaction with the `MFA_REQU
 #### Verify Security Question Factor
 {:.api .api-operation}
 
-{% api_operation post /authn/factors/*:fid*/verify %}
+{% api_operation post /api/v1/authn/factors/*:fid*/verify %}
 
 Verifies an answer to a `question` factor.
 
@@ -2717,7 +2717,7 @@ curl -v -X POST \
 #### Verify SMS Factor
 {:.api .api-operation}
 
-{% api_operation post /authn/factors/*:fid*/verify %}
+{% api_operation post /api/v1/authn/factors/*:fid*/verify %}
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2883,7 +2883,7 @@ curl -v -X POST \
 #### Verify TOTP Factor
 {:.api .api-operation}
 
-{% api_operation post /authn/factors/*:fid*/verify %}
+{% api_operation post /api/v1/authn/factors/*:fid*/verify %}
 
 Verifies an OTP for a `token:software:totp` factor.
 
@@ -2958,7 +2958,7 @@ curl -v -X POST \
 #### Verify Push Factor
 {:.api .api-operation}
 
-{% api_operation post /authn/factors/*:fid*/verify %}
+{% api_operation post /api/v1/authn/factors/*:fid*/verify %}
 
 Sends an asynchronous push notification (challenge) to the device for the user to approve or reject.  The `factorResult` for the transaction will have a result of `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
 
@@ -3362,7 +3362,7 @@ curl -v -X POST \
 
 <!-- The host, sig_request, and post_action values will be given via the Auth API -->
 <script>
-    Duo.init({  
+    Duo.init({
         'host': 'api-your-host.duosecurity.com',
         'sig_request': 'TX|...your-signature',
         'post_action': 'https://your-domain.okta.com/api/v1/authn/factors/dsflnpo99zpfMyaij0g3/lifecycle/duoCallback'
@@ -3413,7 +3413,7 @@ curl -v -X POST \
 
 > Verifying a U2F factor is an {% api_lifecycle ea %} feature.
 
-{% api_operation post /authn/factors/*:fid*/verify %}
+{% api_operation post /api/v1/authn/factors/*:fid*/verify %}
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3588,7 +3588,7 @@ curl -v -X POST \
 #### Verify Call Factor
 {:.api .api-operation}
 
-{% api_operation post /authn/factors/*:fid*/verify %}
+{% api_operation post /api/v1/authn/factors/*:fid*/verify %}
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3744,7 +3744,7 @@ curl -v -X POST \
 ### Forgot Password
 {:.api .api-operation}
 
-{% api_operation post /authn/recovery/password %}
+{% api_operation post /api/v1/authn/recovery/password %}
 
 Starts a new password recovery transaction for a given user and issues a [recovery token](#recovery-token) that can be used to reset a user's password.
 
@@ -4027,7 +4027,7 @@ curl -v -X POST \
 ### Unlock Account
 {:.api .api-operation}
 
-{% api_operation post /authn/recovery/unlock %}
+{% api_operation post /api/v1/authn/recovery/unlock %}
 
 Starts a new unlock recovery transaction for a given user and issues a [recovery token](#recovery-token) that can be used to unlock a user's account.
 
@@ -4249,7 +4249,7 @@ curl -v -X POST \
 #### Verify SMS Recovery Factor
 {:.api .api-operation}
 
-{% api_operation post /authn/recovery/factors/sms/verify %}
+{% api_operation post /api/v1/authn/recovery/factors/sms/verify %}
 
 Verifies a SMS OTP (`passCode`) sent to the user's mobile phone for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
 
@@ -4345,7 +4345,7 @@ curl -v -X POST \
 ###### Resend SMS Recovery Challenge
 {:.api .api-operation}
 
-{% api_operation post /authn/recovery/factors/sms/resend %}
+{% api_operation post /api/v1/authn/recovery/factors/sms/resend %}
 
 Resends a SMS OTP (`passCode`) to the user's mobile phone
 
@@ -4419,7 +4419,7 @@ curl -v -X POST \
 #### Verify Call Recovery Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/factors/call/verify</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/recovery/factors/call/verify</span>
 
 Verifies a Voice Call OTP (`passCode`) sent to the user's device for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
 
@@ -4513,7 +4513,7 @@ curl -v -X POST \
 ###### Resend Call Recovery Challenge
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /authn/recovery/factors/call/resend</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/recovery/factors/call/resend</span>
 
 Resends a Voice Call with OTP (`passCode`) to the user's phone
 
@@ -4588,7 +4588,7 @@ curl -v -X POST \
 ### Verify Recovery Token
 {:.api .api-operation}
 
-{% api_operation post /authn/recovery/token %}
+{% api_operation post /api/v1/authn/recovery/token %}
 
 Validates a [recovery token](#recovery-token) that was distributed to the end-user to continue the recovery transaction.
 
@@ -4682,7 +4682,7 @@ curl -v -X POST \
 ### Answer Recovery Question
 {:.api .api-operation}
 
-{% api_operation post /authn/recovery/answer %}
+{% api_operation post /api/v1/authn/recovery/answer %}
 
 Answers the user's recovery question to ensure only the end-user redeemed the [recovery token](#recovery-token) for recovery transaction with a `RECOVERY` [status](#transaction-state).
 
@@ -4763,7 +4763,7 @@ curl -v -X POST \
        },
        "age":{
          "minAgeMinutes":0,
-         "historyCount":0  
+         "historyCount":0
       }
     }
   },
@@ -4792,7 +4792,7 @@ curl -v -X POST \
 ### Reset Password
 {:.api .api-operation}
 
-{% api_operation post /authn/credentials/reset_password %}
+{% api_operation post /api/v1/authn/credentials/reset_password %}
 
 Resets a user's password to complete a recovery transaction with a `PASSWORD_RESET` [state](#transaction-state).
 
@@ -4887,7 +4887,7 @@ curl -v -X POST \
 ### Get Transaction State
 {:.api .api-operation}
 
-{% api_operation post /authn %}
+{% api_operation post /api/v1/authn %}
 
 Retrieves the current [transaction state](#transaction-state) for a [state token](#state-token).
 
@@ -4975,7 +4975,7 @@ curl -v -X POST \
 ### Previous Transaction State
 {:.api .api-operation}
 
-{% api_operation post /authn/previous %}
+{% api_operation post /api/v1/authn/previous %}
 
 Moves the current [transaction state](#transaction-state) back to the previous state.
 
@@ -5096,7 +5096,7 @@ curl -v -X POST \
 ### Skip Transaction State
 {:.api .api-operation}
 
-{% api_operation post /authn/skip %}
+{% api_operation post /api/v1/authn/skip %}
 
 Skips the current [transaction state](#transaction-state) and advances the state machine to the next state.
 
@@ -5151,7 +5151,7 @@ curl -v -X POST \
 ### Cancel Transaction
 {:.api .api-operation}
 
-{% api_operation post /authn/cancel %}
+{% api_operation post /api/v1/authn/cancel %}
 
 Cancels the current transaction and revokes the [state token](#state-token).
 
