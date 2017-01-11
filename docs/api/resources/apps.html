@@ -1,2274 +1,155 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
-  <head>
-    <script src="//use.typekit.net/jff5neq.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+<head>
+  <script src="//use.typekit.net/jff5neq.js">
+  </script>
+  <script>
+  try{Typekit.load({ async: true });}catch(e){}
+  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
+  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
+  <title>Apps | Okta Developer</title>
+  <meta name="description" content="Apps API">
+  <link rel="canonical" href="http://developer.okta.com/docs/api/resources/apps.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-    
-    
-    <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
-
-    <title>Apps | Okta Developer</title>
-    <meta name="description" content="Apps API">
-    <link rel="canonical" href="http://developer.okta.com/docs/api/resources/apps.html">
-    <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml">
-
-    <!-- GA -->
-    <script>
-    	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    	ga('create', 'UA-15777010-3', 'auto');
-    	ga('send', 'pageview');
-    </script>
+  <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-15777010-3', 'auto');
+        ga('send', 'pageview');
+  </script>
 </head>
 
-  <body>
-	<div class="Page">
-          <!-- START Header -->
-	  <header id="header">
-    <div class="Wrap">
-        <h1 class="logo"><a href="/">Okta</a></h1>
-
-        <!-- START Primary Nav -->
+<body>
+  <div class="Page">
+    <!-- START Header -->
+    <header id="header">
+      <div class="Wrap">
+        <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
-            <div id="top-nav">
-                <a href="#" id="mobile-close" class="mobile-toggle">
-                    <span></span>
-                    <span></span>
-                </a>
-
-
-                <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
-                <a class="SearchIcon" href="#"></a>
-                <ul>
-						<li><a href="/product/">Product</a></li>
-						<li><a href="/documentation/">Documentation</a></li>
-						<li><a href="/code/">Code</a></li>
-                    <li class="has-dropdown">
-                        <a href="#">Support</a>
-                        <div class="dropdown-window">
-                            <p class="stack-overflow">
-	                                Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a>
-	                            </p>
-                            <p class="email">
-                                Email us:<br>
-                                <a href="mailto:developers@okta.com">developers@okta.com</a>
-                            </p>
-                            <p class="tel">
-                                Call us:<br>
-                                <a href="tel:18887227871">1 (888) 722-7871</a>
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-                <form id="form_search" method="get" action="http://developer.okta.com/search/">
-                    <input type="text" name="q" id="q" autocomplete="off">
-                </form>
-            </div>
-
-            <div id="mobile-nav">
-                <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
-                <a id="mobile-open" class="mobile-toggle" href="#top-nav">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </a>
-            </div>
-        </nav>
-        <!-- END Primary Nav -->
-    </div>
-</header>
-<!-- Google Tag Manager -->
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TJ45R6');</script>
-<!-- End Google Tag Manager -->
-
-	  <!-- END Header -->
-	      <!-- START Page Center w/Sub Nav & Content -->
+          <div id="top-nav">
+            <a href="#" id="mobile-close" class="mobile-toggle">
+              <span></span>
+              <span></span>
+            </a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="SearchIcon" href="#"></a>
+            <ul>
+              <li>
+                <a href="/product/">Product</a>
+              </li>
+              <li>
+                <a href="/documentation/">Documentation</a>
+              </li>
+              <li>
+                <a href="/code/">Code</a>
+              </li>
+              <li class="has-dropdown">
+                <a href="#">Support</a>
+                <div class="dropdown-window">
+                  <p class="stack-overflow">Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></p>
+                  <p class="email">Email us:<br>
+                  <a href="mailto:developers@okta.com">developers@okta.com</a></p>
+                  <p class="tel">Call us:<br>
+                  <a href="tel:18887227871">1 (888) 722-7871</a></p>
+                </div>
+              </li>
+            </ul>
+            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+              <input type="text" name="q" id="q" autocomplete="off">
+            </form>
+          </div>
+          <div id="mobile-nav">
+            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-open" class="mobile-toggle" href="#top-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+        </nav><!-- END Primary Nav -->
+      </div>
+    </header><!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJ45R6');
+    </script> <!-- End Google Tag Manager -->
+     <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
-      <!-- START Fixed sidebar -->
-      <aside class="Sidebar">
-    <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h3>
-    <div class="Sidebar-close Sidebar-toggle"></div>
-    <div>
-        <h3 class="Sidebar-title">Use Cases</h3>
-        <ul class="Sidebar-nav">
-            
-            
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-                
-            
-            <li><a href="/use_cases/authentication">Authentication</a></li>
-            
-            
-            <li><a href="/use_cases/mfa">Multi-Factor Authentication</a></li>
-            
-            
-            <li><a href="/use_cases/api_security">API Access Management</a></li>
-            
-            
-            <li><a href="/use_cases/integrate_with_okta">Integrate with Okta</a></li>
-            
-        </ul>
-
-        <h3 class="Sidebar-title">Reference</h3>
-        <ul class="Sidebar-nav">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+        <div class="Sidebar-close Sidebar-toggle"></div>
+        <div>
+          <h3 class="Sidebar-title">Use Cases</h3>
+          <ul class="Sidebar-nav">
             <li>
-                <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
-                
+              <a href="/use_cases/authentication">Authentication</a>
             </li>
-
-            
-            
-
             <li>
-                <a href="/docs/api/resources/authn.html">Authentication Reference</a>
-
-                
-                    <ul id="Sidebar_References" class="Sidebar-hide">
-                        
-                        
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                    </ul>
-                
+              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
             </li>
-
             <li>
-                <a href="/docs/api/resources/apps.html">API Reference</a>
-
-                
-                    <ul id="Sidebar_Resources" class="Sidebar-hide">
-                        
-                        
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li class="is-active"><a href="/docs/api/resources/apps.html">Apps</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/events.html">Events</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/factors.html">Factors</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/groups.html">Groups</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/templates.html">Templates</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                <li><a href="/docs/api/resources/users.html">Users</a></li>
-                            
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                        
-                    </ul>
-                
-
+              <a href="/use_cases/api_security">API Access Management</a>
             </li>
-            
-            
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
-                <li>
-                    <a href="/reference/error_codes">
-                        Error Codes
-                    </a>
-                </li>
-            
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
-                <li>
-                    <a href="/reference/okta_expression_language">
-                        Okta Expression Language
-                    </a>
-                </li>
-            
-                
-                
-                
-                
-                
-
-                <li>
-                    <a href="/docs/platform-release-notes/platform-release-notes.html">
-                        Platform Release Notes
-                    </a>
-                </li>
-            
-        </ul>
-
-        
-
-        <script>
+            <li>
+              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+            </li>
+          </ul>
+          <h3 class="Sidebar-title">Reference</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+              <ul id="Sidebar_References" class="Sidebar-hide">
+                <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
+                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
+                <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
+                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/docs/api/resources/apps.html">API Reference</a>
+              <ul id="Sidebar_Resources" class="Sidebar-hide">
+                <li class="is-active"><a href="/docs/api/resources/apps.html">Apps</a></li>
+                <li><a href="/docs/api/resources/events.html">Events</a></li>
+                <li><a href="/docs/api/resources/factors.html">Factors</a></li>
+                <li><a href="/docs/api/resources/groups.html">Groups</a></li>
+                <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
+                <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
+                <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+                <li><a href="/docs/api/resources/templates.html">Templates</a></li>
+                <li><a href="/docs/api/resources/users.html">Users</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/reference/error_codes">Error Codes</a>
+            </li>
+            <li>
+              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+            </li>
+            <li>
+              <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+            </li>
+          </ul>
+          
+          <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
             }
@@ -2276,12 +157,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             if (document.querySelectorAll("#Sidebar_References .is-active").length) {
                 document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
             }
-        </script>
-
-    </div>
-</aside>
-
-      <!-- END Fixed sidebar -->
+          </script>
+        </div>
+      </aside>
+<!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/apps.md">Edit Page</a>
@@ -2297,7 +176,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="add-application">Add Application</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps</span></p>
 
 <p>Adds a new application to your Okta organization.</p>
 
@@ -3684,7 +1563,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="get-application">Get Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/<em>:id</em></span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:id</em></span></p>
 
 <p>Fetches an application from your Okta organization by <code class="highlighter-rouge">id</code>.</p>
 
@@ -3830,7 +1709,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="list-applications">List Applications</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps</span></p>
 
 <p>Enumerates apps added to your organization with pagination. A subset of apps can be returned that match a supported filter expression or query.</p>
 
@@ -4575,7 +2454,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="update-application">Update Application</h3>
 
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/<em>:id</em></span></p>
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/apps/<em>:id</em></span></p>
 
 <p>Updates an application in your organization.</p>
 
@@ -5359,7 +3238,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="delete-application">Delete Application</h3>
 
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /apps/<em>:id</em></span></p>
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/<em>:id</em></span></p>
 
 <p>Removes an inactive application.</p>
 
@@ -5412,7 +3291,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 </div>
 
-<p>If the application has an <code class="highlighter-rouge">ACTIVE</code> status you will receive an error response.</p>
+<p>If the application has an <code class="highlighter-rouge">ACTIVE</code> status the response contains an error message.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -5435,7 +3314,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="activate-application">Activate Application</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/<em>:id</em>/lifecycle/activate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:id</em>/lifecycle/activate</span></p>
 
 <p>Activates an inactive application.</p>
 
@@ -5486,7 +3365,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="deactivate-application">Deactivate Application</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/<em>:id</em>/lifecycle/deactivate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:id</em>/lifecycle/deactivate</span></p>
 
 <p>Deactivates an active application.</p>
 
@@ -5539,7 +3418,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="assign-user-to-application-for-sso">Assign User to Application for SSO</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/<em>:aid</em>/users</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:aid</em>/users</span></p>
 
 <p>Assigns a user without a <a href="#application-user-profile-object">profile</a> to an application for SSO.</p>
 
@@ -5638,7 +3517,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="assign-user-to-application-for-sso--provisioning">Assign User to Application for SSO &amp; Provisioning</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/<em>:aid</em>/users</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:aid</em>/users</span></p>
 
 <p>Assigns an user to an application with <a href="#application-user-credentials-object">credentials</a> and an app-specific <a href="#application-user-profile-object">profile</a>. Profile mappings defined for the application are first applied before applying any profile properties specified in the request.</p>
 
@@ -5685,7 +3564,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><a href="#application-user-model">Application User</a> with user profile mappings applied</p>
 
-<p>Your request will be rejected with a <code class="highlighter-rouge">403 Forbidden</code> status for applications with the <code class="highlighter-rouge">PUSH_NEW_USERS</code> or <code class="highlighter-rouge">PUSH_PROFILE_UPDATES</code> features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.</p>
+<p>Your request is rejected with a <code class="highlighter-rouge">403 Forbidden</code> status for applications with the <code class="highlighter-rouge">PUSH_NEW_USERS</code> or <code class="highlighter-rouge">PUSH_PROFILE_UPDATES</code> features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.</p>
 
 <p><em>It is recommended to omit mapped properties during assignment to minimize assignment errors.</em></p>
 
@@ -5764,7 +3643,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="get-assigned-user-for-application">Get Assigned User for Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/<em>:aid</em>/users/<em>:uid</em></span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em>/users/<em>:uid</em></span></p>
 
 <p>Fetches a specific user assignment for application by <code class="highlighter-rouge">id</code>.</p>
 
@@ -5857,7 +3736,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="list-users-assigned-to-application">List Users Assigned to Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/<em>:aid</em>/users</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em>/users</span></p>
 
 <p>Enumerates all assigned <a href="#application-user-model">application users</a> for an application.</p>
 
@@ -5997,7 +3876,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="update-application-credentials-for-assigned-user">Update Application Credentials for Assigned User</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/<em>:aid</em>/users/<em>:uid</em></span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:aid</em>/users/<em>:uid</em></span></p>
 
 <p>Updates a user’s <a href="#application-user-credentials-object">credentials</a> for an assigned application</p>
 
@@ -6046,7 +3925,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><a href="#application-user-model">Application User</a></p>
 
-<p>Your request will be rejected with a <code class="highlighter-rouge">400 Bad Request</code> status if you attempt to assign a username or password to an application with an incompatible <a href="#authentication-schemes">Authentication Scheme</a></p>
+<p>Your request is rejected with a <code class="highlighter-rouge">400 Bad Request</code> status if you attempt to assign a username or password to an application with an incompatible <a href="#authentication-schemes">Authentication Scheme</a></p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000041"</span><span class="p">,</span><span class="w">
@@ -6111,7 +3990,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h3 class="api api-operation" id="update-application-profile-for-assigned-user">Update Application Profile for Assigned User</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/<em>:aid</em>/users/<em>:uid</em></span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:aid</em>/users/<em>:uid</em></span></p>
 
 <p>Updates a user’s profile for an application</p>
 
@@ -6160,7 +4039,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p><a href="#application-user-model">Application User</a> with user profile mappings applied</p>
 
-<p>Your request will be rejected with a <code class="highlighter-rouge">403 Forbidden</code> status for applications with the <code class="highlighter-rouge">PUSH_NEW_USERS</code> or <code class="highlighter-rouge">PUSH_PROFILE_UPDATES</code> features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.</p>
+<p>Your request is rejected with a <code class="highlighter-rouge">403 Forbidden</code> status for applications with the <code class="highlighter-rouge">PUSH_NEW_USERS</code> or <code class="highlighter-rouge">PUSH_PROFILE_UPDATES</code> features enabled if the request specifies a value for an attribute that is defined by an application user profile mapping (Universal Directory) and the value for the attribute does not match the output of the mapping.</p>
 
 <blockquote>
   <p>The Okta API currently doesn’t support entity tags for conditional updates.  It is only safe to fetch the most recent profile with <a href="#get-assigned-user-for-application">Get Assigned User for Application</a>, apply your profile update, then <code class="highlighter-rouge">POST</code> back the updated profile as long as you are the <strong>only</strong> user updating a user’s application profile.</p>
@@ -6168,11 +4047,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <div class="beta">
 <p>During the profile image Beta, image property definitions in the schema are of the <code class="highlighter-rouge">Object</code> data type with an additional <code class="highlighter-rouge">extendedType</code> of <code class="highlighter-rouge">Image</code>.
-When a user’s app profile is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:</p>
+When a user’s app profile is retrieved via the API, however, the value is a URL (represented as a String).  Some caveats apply:</p>
 
 <p>1) Image properties are described differently in the schema than how the data actually comes back.  This discrepancy is deliberate for the time being, but is likely to change after Beta.  Special handling rules apply (described below).</p>
 
-<p>2) During Beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned will resolve to the image (that is, a logged in user can click it and retrieve the image).</p>
+<p>2) During Beta, the URL returned is a placeholder URL, resolving to a placeholder image.  By GA, the URL returned resolves to the image (that is, a logged-in user can click it and retrieve the image).</p>
 
 <p><strong>Updating image property values via Users API</strong></p>
 
@@ -6180,7 +4059,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <p>1)  When performing a full update, if the property is not passed, it is unset (if set).  The same applies if a partial update explicitly sets it to null.</p>
 
-<p>2)  When “updating” the value, it must be set to the value returned by a GET on that user (resulting in no change).  Any other value will not validate.</p>
+<p>2)  When “updating” the value, it must be set to the value returned by a GET on that user (resulting in no change).  No other value is valid.</p>
 
 </div>
 
@@ -6254,12 +4133,12 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="remove-user-from-application">Remove User from Application</h3>
 
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /apps/<em>:aid</em>/users/<em>:uid</em></span></p>
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/<em>:aid</em>/users/<em>:uid</em></span></p>
 
 <p>Removes an assignment for a user from an application.</p>
 
 <blockquote>
-  <p>This is a destructive operation and the user’s app profile will not be recoverable.  If the app is enabled for provisioning and configured to deactivate users, the user will also be deactivated in the target application.</p>
+  <p>This is a destructive operation; you cannot recover the user’s app profile.  If the app is enabled for provisioning and configured to deactivate users, the user is also deactivated in the target application.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h5>
@@ -6319,7 +4198,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="assign-group-to-application">Assign Group to Application</h3>
 
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /apps/<em>:aid</em>/groups/<em>:gid</em></span></p>
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/apps/<em>:aid</em>/groups/<em>:gid</em></span></p>
 
 <p>Assigns a group to an application</p>
 
@@ -6391,7 +4270,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="get-assigned-group-for-application">Get Assigned Group for Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/<em>:aid</em>/groups/<em>:gid</em></span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em>/groups/<em>:gid</em></span></p>
 
 <p>Fetches an application group assignment</p>
 
@@ -6454,7 +4333,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="list-groups-assigned-to-application">List Groups Assigned to Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/<em>:aid</em>/groups</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em>/groups</span></p>
 
 <p>Enumerates group assignments for an application.</p>
 
@@ -6536,7 +4415,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="remove-group-from-application">Remove Group from Application</h3>
 
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /apps/<em>:aid</em>/groups/<em>:gid</em></span></p>
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/<em>:aid</em>/groups/<em>:gid</em></span></p>
 
 <p>Removes a group assignment from an application.</p>
 
@@ -6601,7 +4480,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="generate-new-application-key-credential">Generate New Application Key Credential</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/<em>:aid</em>/credentials/keys/generate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:aid</em>/credentials/keys/generate</span></p>
 
 <p>Generates a new X.509 certificate for an application key credential</p>
 
@@ -6677,7 +4556,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 </span></code></pre>
 </div>
 
-<p>If validityYears is out of range (2 - 10 years), you will receive an error response.</p>
+<p>If validityYears is out of range (2 - 10 years), you receive an error response.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">400</span> <span class="ne">Bad Request</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -6698,7 +4577,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="clone-application-key-credential">Clone Application Key Credential</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /apps/<em>:aid</em>/credentials/keys/<em>:kid</em>/clone?targetAid=<em>:targetAid</em></span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:aid</em>/credentials/keys/<em>:kid</em>/clone?targetAid=<em>:targetAid</em></span></p>
 
 <p>Clones a X.509 certificate for an application key credential from a source application to target application.</p>
 
@@ -6786,7 +4665,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 </span></code></pre>
 </div>
 
-<p>If key is already present in the list of key credentials for the target application, you will receive a 400 error response.</p>
+<p>If key is already present in the list of key credentials for the target application, you receive a 400 error response.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">400</span> <span class="ne">Bad Request</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -6807,7 +4686,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="list-key-credentials-for-application">List Key Credentials for Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/<em>:aid</em>/credentials/keys</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em>/credentials/keys</span></p>
 
 <p>Enumerates key credentials for an application</p>
 
@@ -6882,7 +4761,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="get-key-credential-for-application">Get Key Credential for Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/<em>:aid</em>/credentials/keys/<em>:kid</em></span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em>/credentials/keys/<em>:kid</em></span></p>
 
 <p>Gets a specific <a href="#application-key-credential-model">application key credential</a> by <code class="highlighter-rouge">kid</code></p>
 
@@ -6952,7 +4831,7 @@ When a user’s app profile is retrieved via the API, however, the value will be
 
 <h3 class="api api-operation" id="preview-saml-metadata-for-application">Preview SAML metadata for Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /apps/<em>:aid</em>/sso/saml/metadata</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em>/sso/saml/metadata</span></p>
 
 <p>Preview SAML metadata based on a specific key credential for an application</p>
 
@@ -7454,7 +5333,7 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
     <tr>
       <td>GROUP_PUSH</td>
       <td>Group Push</td>
-      <td>Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app will be synced as group members to the app.</td>
+      <td>Creates or links a group in the app when a mapping is defined for a group in Okta.  Okta is the the master for group memberships and all group members in Okta who are also assigned to the app are synced as group members to the app.</td>
     </tr>
   </tbody>
 </table>
@@ -8001,7 +5880,7 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
 
 <h3 id="password-object">Password Object</h3>
 
-<p>Specifies a password for a user.  A password value is a <strong>write-only</strong> property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the <code class="highlighter-rouge">value</code>  property defined (e.g. <code class="highlighter-rouge">password: {}</code> ) to indicate that a password value exists.</p>
+<p>Specifies a password for a user.  A password value is a <strong>write-only</strong> property.  When a user has a valid password and a response object contains a password credential, then the Password Object is a bare object without the <code class="highlighter-rouge">value</code>  property defined (e.g. <code class="highlighter-rouge">password: {}</code> ) to indicate that a password value exists.</p>
 
 <table>
   <thead>
@@ -8537,11 +6416,11 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
 
 <h6 id="single-sign-on">Single Sign-On</h6>
 
-<p>Users assigned to an application for SSO without provisioning features enabled will have a an <code class="highlighter-rouge">ACTIVE</code> status with <code class="highlighter-rouge">syncState</code> as <code class="highlighter-rouge">DISABLED</code>.</p>
+<p>Users assigned to an application for SSO without provisioning features enabled have a an <code class="highlighter-rouge">ACTIVE</code> status with <code class="highlighter-rouge">syncState</code> as <code class="highlighter-rouge">DISABLED</code>.</p>
 
 <h6 id="user-import">User Import</h6>
 
-<p>Users imported and confirmed by an application with the <code class="highlighter-rouge">IMPORT_PROFILE_UPDATES</code> feature will have an <code class="highlighter-rouge">ACTIVE</code> status.  The application user’s <code class="highlighter-rouge">syncState</code> depends on whether the <code class="highlighter-rouge">PROFILE_MASTERING</code> feature is enabled for the application. When <code class="highlighter-rouge">PROFILE_MASTERING</code> is enabled the <code class="highlighter-rouge">syncState</code> transitions to <code class="highlighter-rouge">SYNCHRONIZED</code> otherwise the <code class="highlighter-rouge">syncState</code> is <code class="highlighter-rouge">DISABLED</code>.</p>
+<p>Users imported and confirmed by an application with the <code class="highlighter-rouge">IMPORT_PROFILE_UPDATES</code> feature have an <code class="highlighter-rouge">ACTIVE</code> status.  The application user’s <code class="highlighter-rouge">syncState</code> depends on whether the <code class="highlighter-rouge">PROFILE_MASTERING</code> feature is enabled for the application. When <code class="highlighter-rouge">PROFILE_MASTERING</code> is enabled the <code class="highlighter-rouge">syncState</code> transitions to <code class="highlighter-rouge">SYNCHRONIZED</code> otherwise the <code class="highlighter-rouge">syncState</code> is <code class="highlighter-rouge">DISABLED</code>.</p>
 
 <h6 id="user-provisioning">User Provisioning</h6>
 
@@ -8550,7 +6429,7 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
 <ol>
   <li>User is assigned to an application that has <code class="highlighter-rouge">PUSH_NEW_USERS</code> feature enabled
     <ul>
-      <li>Application user will have a <code class="highlighter-rouge">STAGED</code> status with no <code class="highlighter-rouge">externalId</code> while the background provisioning job is queued.</li>
+      <li>Application user has a <code class="highlighter-rouge">STAGED</code> status with no <code class="highlighter-rouge">externalId</code> while the background provisioning job is queued.</li>
     </ul>
   </li>
   <li>When the background provisioning job completes successfully, the application user transitions to the <code class="highlighter-rouge">PROVISIONED</code> status.
@@ -8558,10 +6437,10 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
       <li>Application user is assigned an <code class="highlighter-rouge">externalId</code> when successfully provisioned in target application.  The <code class="highlighter-rouge">externalId</code> should be immutable for the life of the assignment</li>
     </ul>
   </li>
-  <li>If the background provisioning job completes with an error, the application user remains with the <code class="highlighter-rouge">STAGED</code> status but will have <code class="highlighter-rouge">syncState</code> as <code class="highlighter-rouge">ERROR</code>.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.</li>
+  <li>If the background provisioning job completes with an error, the application user remains with the <code class="highlighter-rouge">STAGED</code> status but has <code class="highlighter-rouge">syncState</code> as <code class="highlighter-rouge">ERROR</code>.  A provisioning task is created in the Okta Admin UI that must be resolved to retry the job.</li>
 </ol>
 
-<p>When the <code class="highlighter-rouge">PUSH_PROFILE_UPDATES</code> feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user’s <code class="highlighter-rouge">syncState</code> will have the following values:</p>
+<p>When the <code class="highlighter-rouge">PUSH_PROFILE_UPDATES</code> feature is enabled, updates to an upstream profile are pushed downstream to the application according to profile mastering priority.  The app user’s <code class="highlighter-rouge">syncState</code> has the following values:</p>
 
 <table>
   <thead>
@@ -8648,7 +6527,7 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
   <p>The application’s <a href="#username-template-object">UserName Template</a> defines the default username generated when a user is assigned to an application.</p>
 </blockquote>
 
-<p>If you attempt to assign a username or password to an application with an incompatible <a href="#authentication-schemes">Authentication Scheme</a> you will receive the following error:</p>
+<p>If you attempt to assign a username or password to an application with an incompatible <a href="#authentication-schemes">Authentication Scheme</a> you receive the following error:</p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000041"</span><span class="p">,</span><span class="w">
@@ -8916,57 +6795,66 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
-          <div class="TableOfContents-item is-level1">
-              <script>
+        <div class="TableOfContents-item is-level1">
+          <script>
                   document.write(document.title.split('|')[0].trim());
-              </script>
-          </div>
-          <div class="TableOfContentsLoader"></div>
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="footer">
+      <div class="Wrap">
+        <ul>
+          <li>
+            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+          </li>
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+          <li>
+            <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+          </li>
+          <li>
+            <a href="/terms/">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="/3rd_party_notices/">3rd Party Notices</a>
+          </li>
+          <li>
+            <a href="/privacy/">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+          </li>
+          <li>
+            <a href="mailto:developers@okta.com">Contact Support</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a class="icon" href="http://github.com/oktadeveloper" target="_blank"><i class="fa fa-github"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
+          </li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
+        </ul>
       </div>
-      <!-- END Page Content -->
-    </section>
-    <!-- END Page Center w/Sub Nav & Content -->
-
-	  <!-- START Footer -->
-	  
-        <footer class="footer">
-            <div class="Wrap">
-
-                <ul>
-                    <li><a href="http://www.okta.com" target="_blank">Okta.com</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a></li>
-                    <li><a href="/terms/">Terms &amp; Conditions</a></li>
-                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
-                    <li><a href="/privacy/">Privacy Policy</a></li>
-                    <li><a href="http://okta.com/developer/contact/">Contact Sales</a></li>
-                    <li><a href="mailto:developers@okta.com">Contact Support</a></li>
-                </ul>
-
-                <ul>
-                    <li><a class="icon" href="http://github.com/oktadeveloper" target="_blank"><i class="fa fa-github"></i></a></li>
-                    <li><a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
-                    <li><a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a></li>
-                    <!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
-                </ul>
-
-            </div>
-        </footer>
-
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
-    integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-    crossorigin="anonymous"></script>
-
-    
-    
-
-    
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js"></script>
-
-    <script src="/assets/js/master.js"></script>
-
-    <!-- Remarketing tag -->
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
+    </script>
+    <script src="/assets/js/master.js">
+    </script> <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -8975,26 +6863,19 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
         /* ]]> */
     </script>
     <div style="display:none;">
-        <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-    </script>
-    </div>
-    <noscript>
-        <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"/>
-        </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-
-    <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+      </script>
+    </div><noscript>
+    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
+     <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+    </script> <!-- End Crazy Egg Tracking -->
 
-	  <!-- END Footer -->
-	</div>
+     <!-- END Footer -->
+  </div>
 </body>
 </html>
