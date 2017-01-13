@@ -1,7 +1,8 @@
 ---
 layout: docs_page
 title: Okta Sign-In Widget
-excerpt: Easily add sign-in capabilities with Okta's pre-packaged UI component.
+excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta. An <a href="/code/javascript/okta_sign-in_widget_ref.html">in-depth reference</a> is also available.
+weight: 1
 redirect_from:
     - "/docs/guides/okta_sign-in_widget.html"
 ---

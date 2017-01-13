@@ -1,6 +1,8 @@
 ---
 layout: docs_page
 title: Okta Sign-In Widget Reference
+weight: 100
+hide_from_layout: 1
 excerpt: Reference information for customizing the Okta Sign-In Widget.
 redirect_from:
     - "/_docs/api/resources/okta_signin_widget.html"
@@ -257,11 +259,11 @@ oktaSignIn.renderEl({
  `authParams`   | Authentication parameters for OIDC. [List](#authParams-parameters) |See [List](#authParams-parameters) |See [List](#authParams-parameters) | See [List](#authParams-parameters)
 
 Reminder: You can find the client ID and redirect URI for an app in the Okta Admin user interface:
- 
+
 1. From the top navigation bar, select **Applications** > **Applications**:
 2. Select an application and choose **General**.
 3. The client ID is listed in the **Client Credentials** pane; the redirect URI is listed in the **General Settings** pane.
- 
+
 ##### authParams parameters
 
 You can use any of the following parameters for `authParams`.

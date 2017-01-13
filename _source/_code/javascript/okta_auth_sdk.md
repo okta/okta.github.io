@@ -1,7 +1,8 @@
 ---
 layout: docs_page
 title: Okta Auth SDK
-excerpt: Easily add sign-in capabilities to your fully branded web site.
+weight: 10
+excerpt: A Javascript wrapper for Okta's Authentication APIs. Build your own branded UI and power sign-in with Okta.
 ---
 
 # Overview
