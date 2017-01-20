@@ -1535,8 +1535,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 <h4 class="api api-operation" id="list-users-with-search">List Users with Search</h4>
 
 <blockquote>
-  <p><span class="api-label api-label-ea api-label-margin-bottom"><i class="fa fa-flag"></i> Early Access</span><br />Listing users with search is an Early Access feature which you can request from Okta Support.
-It’s been tested to the same level as Generally Available (GA) features, so you can use it in a production environment.</p>
+  <p>Listing users with search is <a href="/docs/api/getting_started/releases-at-okta.html">an <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span> feature</a>.</p>
 </blockquote>
 
 <p>Searches for user by the properties specified in the search parameter (case insensitive).</p>
@@ -2566,7 +2565,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </div>
 
 <blockquote>
-  <p>Deleting users is an <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span> feature.</p>
+  <p>Deleting users is <a href="/docs/api/getting_started/releases-at-okta.html">an <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span> feature</a>.</p>
 </blockquote>
 
 <h3 class="api api-operation" id="delete-user">Delete User</h3>
@@ -3588,6 +3587,10 @@ and the user is presented with the password-expired page where he or she can cha
 </table>
 
 <div class="beta">
+<blockquote>
+  <p>Note: Profile image is <a href="/docs/api/getting_started/releases-at-okta.html">a <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span> feature</a>.</p>
+</blockquote>
+
 <p>During the profile image Beta, image property definitions in the schema are of the <code class="highlighter-rouge">Object</code> data type with an additional <code class="highlighter-rouge">extendedType</code> of <code class="highlighter-rouge">Image</code>.
 When a user is retrieved via the API, however, the value will be a URL (represented as a String).  Some caveats apply:</p>
 

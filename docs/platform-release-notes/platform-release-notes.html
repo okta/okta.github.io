@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.02">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.03">
   <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
@@ -145,7 +145,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201703">Release 2017.03</h2>
+      <h2 id="release-201704">Release 2017.04</h2>
 
 <h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
 
@@ -157,58 +157,19 @@
   <li>Shortly after March 8, 2017, the new, more granular rate limits will be enforced. At that point, the warnings in the System Log will change to error notifications.</li>
 </ol>
 
-<p>Of course, as each change is released, we’ll announced the change here.</p>
+<p>Of course, as each change is released, we’ll announce the change here.</p>
 
 <p>For a full description of the rate limit changes, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
 
 <h3 id="feature-improvements">Feature Improvements</h3>
 
-<h4 id="search-for-authorization-servers-by-name-or-resource-uri">Search for Authorization Servers by Name or Resource URI</h4>
-
-<p>You can now search (exact match) for an authorization server name or resource URI:
-To see the new search box, log into your Okta org, and from the Admin Dashboard, visit <strong>Security &gt; API &gt; Authorization Servers</strong>.
-<!-- OKTA-97833 --></p>
-
-<p><img src="/assets/img/release_notes/rn-search-as.png" alt="Search box for authorization servers" /></p>
-
-<h4 id="manual-key-rotation-key-pinning">Manual Key Rotation (Key Pinning)</h4>
-
-<p>In the Okta Admin user interface, you can set an authorization server to manually rotate keys.
-Keys are rotated automatically by default.</p>
-
-<blockquote>
-  <p>Important: Automatic key rotation is more secure than manual key rotation. Use manual key rotation only if you can’t use automatic key rotation.</p>
-</blockquote>
-
-<p>To change an authorization server configuration to use manual key rotation:</p>
-
-<ol>
-  <li>Log into the Okta org.</li>
-  <li>Choose <strong>Admin</strong>.</li>
-  <li>Choose <strong>Security</strong> &gt; <strong>API</strong>.</li>
-  <li>Open an authorization server for editing.</li>
-  <li>Change the value of <strong>Signing Key Rotation</strong> to Manual and save.</li>
-  <li>In the authorization server Settings tab, click the <strong>Rotate Signing Keys</strong> button to rotate the keys manually. This button doesn’t display when <strong>Signing Key Rotation</strong> is set to Automatic.
-<!-- OKTA-110682 --></li>
-</ol>
-
-<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
-
 <ul>
-  <li>Requesting an authorization code with <code class="highlighter-rouge">response_mode</code> set to <code class="highlighter-rouge">okta_post_message</code> failed to return
-the error message (“The authorization server does not support the requested response mode”) in the
-response. Instead it redirected the error response to the URI specified in <code class="highlighter-rouge">redirect_uri</code>. (OKTA-103437)</li>
-  <li>The one-time <code class="highlighter-rouge">sessionToken</code> in the response from the POST <code class="highlighter-rouge">/api/v1/authn</code> request with username
-and password was valid for two hours after issuance. It is now valid for 5 minutes for added security. (OKTA-109907)</li>
-  <li>Modifying the rule conditions (attributes) of a default rule that affects policy
-evaluation didn’t return a read-only attribute error.
-If you modified one of these read-only attributes previously, and need to change the attribute back to its initial value,
-contact Okta Technical Support. (OKTA-110155)</li>
-  <li>Using the <code class="highlighter-rouge">search</code> parameter with GET <code class="highlighter-rouge">/api/v1/users</code> when the user is federated returned an incorrect
-value for <code class="highlighter-rouge">provider</code>. (OKTA-110929)</li>
-  <li>When authentication fails because of the user’s sign-on policy, the HTTP code returned was 403
-but is now 401. (OKTA-111888)</li>
+  <li>In the Add Rule dialog box (<strong>Security &gt; API &gt; <em>authorization server name</em> &gt; Access Policies &gt; Add Rule</strong>),
+the pre-filled default values include all grant types and the <code class="highlighter-rouge">All scopes</code> radio button.
+<!-- (OKTA-110748, OKTA-110751) --></li>
 </ul>
+
+<!-- ### Platform Bugs Fixed -->
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 

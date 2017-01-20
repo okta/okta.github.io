@@ -235,13 +235,59 @@ During policy evaluation each policy of the appropriate type is considered in tu
 <p>When policy is evaluated for a user, policy “A” will be evaluated first.  If the user is a member of the “Administrators” group then the rules associated with policy “A” will be evaluated.   If a match is found then the policy settings will be applied.
 If the user is not a member of teh “Administrators” group, then policy B would be evaluated.</p>
 
-<!-- ### Policy JSON Example
+<h3 id="policy-json-example-okta-sign-on-policy">Policy JSON Example (Okta Sign On Policy)</h3>
 
-~~~json
-{
-    [ADD UPDATED JSON HERE]
-}
-~~~ -->
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA_SIGN_ON"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00pmez6igjv4TYOLl0g3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sales Policy"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Policy for Sales Department"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"people"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"00gmexWGbl9VauvTP0g3"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-11T18:53:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-11T18:53:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ed.okta1.com:1802/api/v1/policies/00pmez6igjv4TYOLl0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"DELETE"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ed.okta1.com:1802/api/v1/policies/00pmez6igjv4TYOLl0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"POST"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ed.okta1.com:1802/api/v1/policies/00pmez6igjv4TYOLl0g3/rules"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"POST"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h3 id="PolicyObject">Policy Object</h3>
 
@@ -365,7 +411,6 @@ See <a href="#Conditions">conditions</a></p>
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -374,35 +419,24 @@ See <a href="#Conditions">conditions</a></p>
       <td>The policy or rule</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
     <tr>
       <td>activate</td>
-      <td>Action to activate a policy or rule</td>
+      <td>Action to activate a policy or rule (present if the rule is currently inactive)</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
     <tr>
       <td>deactivate</td>
-      <td>Action to deactivate a policy or rule</td>
+      <td>Action to deactivate a policy or rule (present if the rule is currently active)</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
     <tr>
       <td>rules</td>
-      <td>Rules objects for a policy only</td>
+      <td>Action to retrieve the rules objects for the given policy</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>policy</td>
-      <td>Policy object for a rule only</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -431,15 +465,63 @@ For example if a particular policy had two rules, “A” and “B” as below.<
 </ul>
 
 <p>If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
-the action in Rule A would be taken, and Rule B is not evaluated.</p>
+the action in Rule A would be taken, and Rule B would not be evaluated.</p>
 
-<!-- ### Rules Message Example
+<h3 id="rules-message-example-password-policy">Rules Message Example (Password Policy)</h3>
 
-~~~json
-{
-    [ADD UPDATED JSON HERE]
-}
-~~~ -->
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASSWORD"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0prlmqTXCzP5SegYJ0g3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Legacy Rule"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"priority"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-10T21:42:22.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-10T21:42:22.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"people"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"network"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ANYWHERE"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"passwordChange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALLOW"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"selfServicePasswordReset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALLOW"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"selfServiceUnlock"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DENY"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ed.okta1.com:1802/api/v1/policies/00plmpDXfWU34nb280g3/rules/0prlmqTXCzP5SegYJ0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"DELETE"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://ed.okta1.com:1802/api/v1/policies/00plmpDXfWU34nb280g3/rules/0prlmqTXCzP5SegYJ0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"POST"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h3 id="RulesObject">Rules Object</h3>
 
@@ -519,6 +601,13 @@ the action in Rule A would be taken, and Rule B is not evaluated.</p>
       <td>No</td>
       <td> </td>
     </tr>
+    <tr>
+      <td>_links</td>
+      <td>Hyperlinks</td>
+      <td><a href="#RulesLinksObject">Links Object</a></td>
+      <td>No</td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
 
@@ -531,7 +620,7 @@ the action in Rule A would be taken, and Rule B is not evaluated.</p>
 <p>The Conditions Object(s) specify the conditions that must be met during policy evaluation in order to apply the rule in question.   All policy conditions, as well as conditions for at least one rule must be met in order to apply the settings specified in the policy and the associated rule.  Policies and rules may contain different conditions depending on the policy type.  The conditions which can be used with a particular policy depends on the policy type.
 See <a href="#Conditions">conditions</a></p>
 
-<h3 id="LinksObject">Links Object</h3>
+<h3 id="RulesLinksObject">Links Object</h3>
 
 <p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current rule.  The Links Object is used for dynamic discovery of related resources.  The Links Object is <strong>read-only</strong>.</p>
 
@@ -542,7 +631,6 @@ See <a href="#Conditions">conditions</a></p>
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -551,21 +639,18 @@ See <a href="#Conditions">conditions</a></p>
       <td>The policy or rule</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
     <tr>
       <td>activate</td>
-      <td>Action to activate a policy or rule</td>
+      <td>Action to activate the rule (present if the rules is currently inactive)</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
     <tr>
       <td>deactivate</td>
-      <td>Action to deactivate a policy or rule</td>
+      <td>Action to deactivate the rule (present if the rule is currently active)</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -583,7 +668,6 @@ See <a href="#Conditions">conditions</a></p>
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -592,19 +676,19 @@ See <a href="#Conditions">conditions</a></p>
       <td>The group condition</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
     <tr>
       <td>users</td>
       <td>The user condition</td>
       <td>String</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h4 id="UserConditionObject">User Condition Object</h4>
+
+<p>Specifies a set of users to be included or excluded</p>
 
 <table>
   <thead>
@@ -613,7 +697,6 @@ See <a href="#Conditions">conditions</a></p>
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -622,19 +705,19 @@ See <a href="#Conditions">conditions</a></p>
       <td>The users to be included</td>
       <td>Array</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
     <tr>
       <td>exclude</td>
       <td>The users to be excluded</td>
       <td>Array</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h4 id="GroupConditionObject">Group Condition Object</h4>
+
+<p>Specifies a set of groups whose users to be included or excluded</p>
 
 <table>
   <thead>
@@ -643,7 +726,6 @@ See <a href="#Conditions">conditions</a></p>
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -652,14 +734,12 @@ See <a href="#Conditions">conditions</a></p>
       <td>The groups to be included</td>
       <td>Array</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
     <tr>
       <td>exclude</td>
       <td>The groups to be excluded</td>
       <td>Array</td>
       <td>Yes</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -714,7 +794,9 @@ See <a href="#Conditions">conditions</a></p>
   </tbody>
 </table>
 
-<h4 id="PeopleConditionObject">People Condition Object</h4>
+<h4 id="AuthProviderConditionObject">Authentication Provider Condition Object</h4>
+
+<p>Specifies an authentication provider, which masters some or all users.</p>
 
 <table>
   <thead>
@@ -728,18 +810,14 @@ See <a href="#Conditions">conditions</a></p>
   </thead>
   <tbody>
     <tr>
-      <td>users</td>
-      <td> </td>
-      <td><a href="#UserConditionObject">User Condition Object</a></td>
-      <td>No</td>
-      <td> </td>
+      <td>provider</td>
+      <td>Specifies the required authentication provider</td>
+      <td>‘Okta’, ‘Active Directory’</td>
+      <td>Yes</td>
+      <td>‘Okta’</td>
     </tr>
   </tbody>
 </table>
-
-<!-- #### Authentication Provider Condition Object
-
-[THIS SECTION TBD] -->
 
 <h2 id="policy-api-operations">Policy API Operations</h2>
 
@@ -791,6 +869,10 @@ See <a href="#Conditions">conditions</a></p>
 
 <p>HTTP 200: 
 <a href="#PolicyObject">Policy Object</a></p>
+
+<p>Included as embedded objects, one or more</p>
+
+<p><a href="#PolicyRule">Policy Rules</a></p>
 
 <h3 class="api api-operation" id="get-all-policies-by-type">Get All Policies by Type</h3>
 
@@ -855,20 +937,23 @@ HTTP 204:
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
-  "name": "Example",
-  "description": "This is an example policy",
-  "conditions": {
-    "people": {
-      "groups": {
-        "include": [
-            "00gab0CDEFGHIJKLMNOP"
-        ]
-      }
-    }
-  }
-}'</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}"</span>
-</code></pre>
+      "type": "OKTA_SIGN_ON",
+      "id": "00plrilJ7jZ66Gn0X0g3",
+      "status": "ACTIVE",
+      "name": "Default Policy",
+      "description": "The default policy applies in all situations if no other policy applies.",
+      "priority": 1,
+      "conditions": {
+        "people": {
+          "groups": {
+            "include": [
+              "00glr9dY4kWK9k5ZM0g3"
+            ]
+         }
+        }
+     }, \
+"https://${org}.okta.com/api/v1/policies/{policyId}"
+</span></code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-types-4">Response Types</h5>
@@ -891,22 +976,21 @@ HTTP 204:
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
-    "type": "OKTA_SIGN_ON",
-    "name": "Corporate Policy",
-    "description": "Standard policy for every employee",
-    "system": false,
-    "conditions": {
+      "type": "OKTA_SIGN_ON",
+      "status": "ACTIVE",
+      "name": "Default Policy",
+      "description": "The default policy applies in all situations if no other policy applies.",
+      "conditions": {
         "people": {
-            "groups": {
-                "include": [
-                    "00gab0CDEFGHIJKLMNOP"
-                ]
-            }
+          "groups": {
+            "include": [
+              "00glr9dY4kWK9k5ZM0g3"
+            ]
+          }
         }
-    }
-}'</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies"</span>
-</code></pre>
+      }, \
+"https://${org}.okta.com/api/v1/policies"
+</span></code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-types-5">Response Types</h5>
@@ -1000,23 +1084,25 @@ HTTP 204:
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
-    "type": "SIGN_ON",
-    "name": "Deny",
-    "conditions": {
-        "network": {
-            "connection": "ANYWHERE"
-        },
-        "authContext": {
-            "authType": "ANY"
-        }
+  "name": "New Policy Rule",
+  "conditions": {
+    "people": {
+      "users": {
+        "exclude": []
+      }
     },
-    "actions": {
-        "signon": {
-            "access": "DENY",
-            "requireFactor": false
-        }
+    "network": {
+      "connection": "ON_NETWORK"
+    },
+    "authContext": {
+      "authType": "ANY"
     }
-}'</span> <span class="se">\</span>
+  },
+  "actions": {
+    "signon": {
+      "access": "ALLOW"
+    }
+  }'</span> <span class="se">\</span>
 <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules"</span>
 </code></pre>
 </div>
@@ -1166,7 +1252,8 @@ HTTP 204:
 
 <h2 id="OktaSignOnPolicy">Okta Sign On Policy</h2>
 
-<!-- [THIS SECTION IN PROGRESS] -->
+<p>Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challanged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
+Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be peformed before a specific Okta application can be invoked.</p>
 
 <h3 id="policy-settings-data">Policy Settings Data</h3>
 
@@ -1175,14 +1262,35 @@ HTTP 204:
 <h3 id="policy-conditions">Policy Conditions</h3>
 <p>The following conditions may be applied to Okta Sign On Policy</p>
 
-<h3 id="rules-action-data">Rules Action Data</h3>
+<p><a href="#PeopleObject">People Condition</a></p>
 
-<h3 id="SignonObject">Signon Action Object</h3>
+<h3 id="okta-sign-on-rules-action-data">Okta Sign On Rules Action Data</h3>
+
+<h4 id="signon-action-example">Signon Action Example</h4>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="s2">"actions"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"signon"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALLOW"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"requireFactor"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"factorPromptMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SESSION"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rememberDeviceByDefault"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"factorLifetime"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"session"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"usePersistentCookie"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxSessionIdleMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"maxSessionLifetimeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="SignonObject">Signon Action Object</h4>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
+      <th>Property</th>
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
@@ -1195,45 +1303,52 @@ HTTP 204:
       <td><code class="highlighter-rouge">ALLOW</code> or <code class="highlighter-rouge">DENY</code></td>
       <td><code class="highlighter-rouge">ALLOW</code> or <code class="highlighter-rouge">DENY</code></td>
       <td>Yes</td>
-      <td> </td>
+      <td>N/A</td>
     </tr>
     <tr>
       <td>requireFactor</td>
-      <td> </td>
+      <td>Indicates if multi-factor authentication is required</td>
       <td>Boolean</td>
       <td>No</td>
       <td>false</td>
     </tr>
     <tr>
       <td>factorPromptMode</td>
+      <td>Indicates if the user should be challenged for second factor authentication (MFA) based on the device being used, a factor session lifetime, or on every sign on attempt.</td>
       <td><code class="highlighter-rouge">DEVICE</code>, <code class="highlighter-rouge">SESSION</code> or <code class="highlighter-rouge">ALWAYS</code></td>
-      <td><code class="highlighter-rouge">DEVICE</code>, <code class="highlighter-rouge">SESSION</code> or <code class="highlighter-rouge">ALWAYS</code></td>
+      <td>Yes, if requireFactor is true</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>rememberDeviceByDefault</td>
+      <td>Indicates if Okta should automatically remember the device</td>
+      <td>Boolean</td>
       <td>No</td>
-      <td> </td>
+      <td>false</td>
     </tr>
     <tr>
       <td>factorLifetime</td>
-      <td>How long until factor times out</td>
+      <td>Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is set to ‘SESSION’</td>
       <td>Integer</td>
-      <td>No</td>
-      <td> </td>
+      <td>Yes, if requireFactor is true</td>
+      <td>N/A</td>
     </tr>
     <tr>
       <td>session</td>
-      <td>Session Rules</td>
+      <td>Properties governing the user’s session lifetime</td>
       <td><a href="#SignonSessionObject">Signon Session Object</a></td>
       <td>No</td>
-      <td> </td>
+      <td>See below</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="SignonSessionObject">Signon Session Object</h3>
+<h5 id="SignonSessionObject">Signon Session Object</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
+      <th>Property</th>
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
@@ -1246,14 +1361,14 @@ HTTP 204:
       <td>Maximum number of minutes that a user session can be idle before the session is ended.</td>
       <td>Integer</td>
       <td>No</td>
-      <td> </td>
+      <td>120</td>
     </tr>
     <tr>
       <td>maxSessionLifetimeMinutes</td>
       <td>Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to <code class="highlighter-rouge">0</code>.</td>
       <td>Integer</td>
       <td>No</td>
-      <td> </td>
+      <td>0</td>
     </tr>
     <tr>
       <td>usePersistentCookie</td>
@@ -1267,6 +1382,12 @@ HTTP 204:
 
 <h3 id="rules-conditions">Rules Conditions</h3>
 <p>The following conditions may be applied to the rules associated with Okta Sign On Policy</p>
+
+<p><a href="#PeopleObject">People Condition</a></p>
+
+<p><a href="#NetworkConditionObject">Network Condition</a></p>
+
+<p><a href="#AuthContextConditionObject">AuthContext Condition</a></p>
 
 <h2 id="OktaMFAPolicy">Okta MFA Policy</h2>
 
@@ -1432,7 +1553,7 @@ HTTP 204:
 <h3 id="policy-conditions-1">Policy Conditions</h3>
 <p>The following conditions may be applied to Okta MFA Policy</p>
 
-<h3 id="rules-action-data-1">Rules Action Data</h3>
+<h3 id="rules-action-data">Rules Action Data</h3>
 
 <h4 id="RulesActionsEnrollObject">Rules Actions Enroll Object</h4>
 
@@ -1462,17 +1583,669 @@ HTTP 204:
 
 <h2 id="GroupPasswordPolicy">Password Policy</h2>
 
-<p>[THIS SECTION TBD]</p>
+<p>Password policy controls settings that deterine a user’s password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.</p>
+
+<h4 id="policy-settings-example">Policy Settings Example</h4>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">   </span><span class="s2">"settings"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"maxAgeDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"expireWarnDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"lockout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"maxAttempts"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"autoUnlockMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"showLockoutFailures"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="nt">"recovery"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"factors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"recovery_question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+             </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+             </span><span class="p">}</span><span class="w">
+           </span><span class="p">}</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"okta_email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+             </span><span class="nt">"recoveryToken"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+               </span><span class="nt">"tokenLifetimeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="w">
+             </span><span class="p">}</span><span class="w">
+           </span><span class="p">}</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"okta_sms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"okta_call"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="nt">"delegation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"skipUnlock"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h3 id="policy-settings-data-2">Policy Settings Data</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>password</td>
+      <td>Password settings</td>
+      <td><a href="#PasswordObject">Password Policy Password Object</a></td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>recovery</td>
+      <td>Recovery settings</td>
+      <td><a href="#RecoveryObject">Password Policy Recovery Object</a></td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>delegation</td>
+      <td>Delegation settings</td>
+      <td><a href="#DelegationObject">Password Policy Delegation Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="PasswordObject">Password Object</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>complexity</td>
+      <td>Complexity settings</td>
+      <td><a href="#PasswordComplexityObject">Password Complexity Object</a></td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>age</td>
+      <td>Age settings</td>
+      <td><a href="#PasswordAgeObject">Password Age Object</a></td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>lockout</td>
+      <td>Lockout settings</td>
+      <td><a href="#PasswordLockoutObject">Password Lockout Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="PasswordComplexityObject">Complexity Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>minLength</td>
+      <td>Minimum password length</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>minLowerCase</td>
+      <td>Indicates if a password must contain at least one lower case letter: 0 indicates no, 1 indicates yes</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>minUpperCase</td>
+      <td>Indicates if a password must contain at least one upper case letter: 0 indicates no, 1 indicates yes</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>minNumber</td>
+      <td>Indicates if a password must contain at least one number: 0 indicates no, 1 indicates yes</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>minSymbol</td>
+      <td>Indicates if a password must contain at least one symbol (e.g., !@#$%^&amp;*): 0 indicates no, 1 indicates yes</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>excludeUserName</td>
+      <td>Indicates if the user name must be excluded from the password</td>
+      <td>boolean</td>
+      <td>no</td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="PasswordAgeObject">Age Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>maxAgeDays</td>
+      <td>Specifies how long (in days) a password remains valid before it expireds: 0 indicates no limit</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>expireWarnDays</td>
+      <td>Specifies the number of days prior to password expiration when a user will be warned to reset their password: 0 indicates no warning</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>minAgeMinutes</td>
+      <td>Specifies the minimum time interval (in minutes) between password changes: 0 indicates no limit</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <td>historyCount</td>
+      <td>Specifies the number of distinct passwords that a user must create before they can reuse a previous password: 0 indicates none</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="PasswordLockoutObject">Lockout Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>maxAttempts</td>
+      <td>Specifies the number of times users can attempt to log in to their accounts with an invalid password before their accounts are locked: 0 indicates no limit</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>autoUnlockMinutes</td>
+      <td>Specifies the time interval (in minutes) a locked account remaind locked before it is automatically unlocked: 0 indicates no limit</td>
+      <td>integer</td>
+      <td>No</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>showLockoutFailures</td>
+      <td>Inidcates if the user should be informed when their account is locked</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="RecoveryObject">Recovery Object</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>factors</td>
+      <td>Settings for the factors that may be used for recovery</td>
+      <td><a href="#RecoveryFactorsObject">Recovery Factors Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="RecoveryFactorsObject">Recovery Factors Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>recovery_question</td>
+      <td>Settings for security question factor</td>
+      <td><a href="#RecoveryQuestionFactorObject">Recovery Question Factor Object</a></td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>okta_email</td>
+      <td>Settings for email factor</td>
+      <td><a href="#EmailFactorObject">Email Factor Object</a></td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>okta_sms</td>
+      <td>Settings for SMS factor</td>
+      <td><a href="#SMSFactorObject">SMS Factor Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="RecoveryQuestionFactorObject">Recovery Question Factor Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>status</td>
+      <td>Indicates if the factor is enabled.  This property is read-only</td>
+      <td><code class="highlighter-rouge">ACTIVE</code></td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>Configuration settings for security question factor</td>
+      <td><a href="#RecoveryQuestionFactorPropertiesObject">Recovery Question Factor Properties Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="RecoveryQuestionFactorPropertiesObject">Recovery Question Factor Properties Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>complexity</td>
+      <td>Complexity settings for recovery question</td>
+      <td><a href="#RecoveryQuestionFactorPropertiesComplexityObject">Recovery Question Factor Properties Complexity Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="RecoveryQuestionFactorPropertiesComplexityObject">Recovery Question Factor Properties Complexity Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>minLength</td>
+      <td>Minimum length of the password recovery question answer</td>
+      <td>Integer</td>
+      <td>No</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="EmailFactorObject">Email Factor Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>status</td>
+      <td>Indicates if the factor is enabled.  This property is read-only</td>
+      <td><code class="highlighter-rouge">ACTIVE</code></td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>sConfiguration ettings for okta email factor</td>
+      <td><a href="#EmailFactorPropertiesObject">Email Factor Properties Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="EmailFactorPropertiesObject">Email Factor Properties Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>recoveryToken</td>
+      <td>Recovery token settings</td>
+      <td><a href="EmailFactorPropertiesREcoveryTokenObject ">Email Factor Properties Recovery Token Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="EmailFactorPropertiesREcoveryTokenObject">Email Factor Properties Recovery Token Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>tokenLifetimeMinutes</td>
+      <td>Lifetime (in minutes) of the recovery token</td>
+      <td>Integer</td>
+      <td>No</td>
+      <td>10080</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="SMSFactorObject">SMS Factor Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>status</td>
+      <td>Indicates if the factor is enabled.</td>
+      <td><code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">INACTIVE</code></td>
+      <td>No</td>
+      <td>‘INACTIVE’</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="delegation-object">Delegation Object</h4>
+<p>{ #DelegationObject }</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>options</td>
+      <td>Delegation options</td>
+      <td><a href="#DelegationOptionsObject">Delegation Options Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="DelegationOptionsObject">Options Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>skipUnlock</td>
+      <td>Indicates if, when performing an unlock operation on an Active Directory mastered user who is locked out of Okta, the system should also attempt to unlock the user’s Windows account.</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="policy-conditions-2">Policy Conditions</h3>
 <p>The following conditions may be applied to Password Policy</p>
 
-<h3 id="rules-action-data-2">Rules Action Data</h3>
+<p><a href="#PeopleObject">People Condition</a></p>
+
+<p><a href="#AuthProviderConditionObject">Authentication Povider Condition</a></p>
+
+<h3 id="password-rules-action-data">Password Rules Action Data</h3>
+
+<h4 id="passsword-actions-example">Passsword Actions Example</h4>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="s2">"actions"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"passwordChange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALLOW"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"selfServicePasswordReset"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALLOW"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"selfServiceUnlock"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALLOW"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="PaswordActionObject">Password Action Object</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>passwordChange</td>
+      <td>Properties governing the change password operation</td>
+      <td><a href="#PasswordChangeActionObject">Password Change Object</a></td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>selfServicePasswordReset</td>
+      <td>Properties governing the self-service password reset (forgot password) operation</td>
+      <td><a href="#PasswordResetActionObject">Self Service Password Reset Object</a></td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td>selfServiceUnlock</td>
+      <td>Properties governing the self-service unlock operation</td>
+      <td><a href="#SelfServiceUnockActionObject">Self Service Unlock Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="PasswordChangeActionObject">Password Change Action Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>access</td>
+      <td>Indicates if the action is permitted</td>
+      <td><code class="highlighter-rouge">ALLOW</code>, <code class="highlighter-rouge">DENY</code></td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">DENY</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="PasswordResetActionObject">Self Service Password Reset Action Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>access</td>
+      <td>Indicates if the action is permitted</td>
+      <td><code class="highlighter-rouge">ALLOW</code>, <code class="highlighter-rouge">DENY</code></td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">DENY</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="SelfServiceUnockActionObject">Self Service Unlock Action Object</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>access</td>
+      <td>Indicates if the action is permitted</td>
+      <td><code class="highlighter-rouge">ALLOW</code>, <code class="highlighter-rouge">DENY</code></td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">DENY</code></td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="rules-conditions-2">Rules Conditions</h3>
-<p>The following conditions may be applied to the rules associated with Okta Password Policy</p>
+<p>The following conditions may be applied to the rules associated with Password Policy</p>
+
+<p><a href="#PeopleObject">People Condition</a></p>
+
+<p><a href="#NetworkConditionObject">Network Condition</a></p>
+
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

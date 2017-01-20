@@ -13,9 +13,9 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
-  <title>Getting a Token | Okta Developer</title>
-  <meta name="description" content="Create an API token">
-  <link rel="canonical" href="http://developer.okta.com/docs/api/getting_started/getting_a_token.html">
+  <title>Okta Release Lifecycle | Okta Developer</title>
+  <meta name="description" content="Okta Release Lifecycle">
+  <link rel="canonical" href="http://developer.okta.com/docs/api/getting_started/releases-at-okta.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
   <script>
@@ -116,7 +116,7 @@
                 <li>
                   <a href="/docs/api/getting_started/api_test_client.html">Getting Started With the Okta APIs</a>
                 </li>
-                <li class="is-active">
+                <li>
                   <a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a>
                 </li>
                 <li>
@@ -125,7 +125,7 @@
                 <li>
                   <a href="/docs/api/getting_started/design_principles.html">Design Principles</a>
                 </li>
-                <li>
+                <li class="is-active">
                   <a href="/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>
                 </li>
               </ul>
@@ -161,48 +161,198 @@
 <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/getting_started/getting_a_token.md">Edit Page</a>
-      <h1 id="create-an-api-token">Create an API token</h1>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/getting_started/releases-at-okta.md">Edit Page</a>
+      <h1 id="okta-release-lifecycle">Okta Release Lifecycle</h1>
+
+<p>Features of the Okta platform travel through a regular lifecycle:</p>
+
+<ul>
+  <li><a href="#beta">Beta</a></li>
+  <li><a href="#early-access-ea">Early Access (EA)</a></li>
+  <li><a href="#general-availability-ga">General Availability (GA)</a></li>
+  <li><a href="#deprecation">Deprecation</a></li>
+</ul>
+
+<p>This lifecycle applies to most features and behaviors of the platform.</p>
+
+<blockquote>
+  <p>Note: Okta reserves the right to add new parameters, properties, or resources to the API without advance notice. 
+These updates are non-breaking because they are additive. Follow <a href="/docs/api/getting_started/design_principles.html">the compatibility rules</a> to ensure your application doesn’t break
+when additive changes are made. 
+Breaking changes such as removing or renaming an attribute are released as a new version of the API, and Okta provides a migration path for new API versions.</p>
+</blockquote>
+
+<p>Changes, regardless of lifecycle stage, are always reported in the <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>.</p>
+
+<h2 id="quick-reference-table">Quick Reference Table</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: center">Beta (High touch)</th>
+      <th style="text-align: center">Beta (Low touch)</th>
+      <th style="text-align: center">EA</th>
+      <th style="text-align: center">GA</th>
+      <th style="text-align: center">Deprecated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Contact with Product Team</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">API  Changes</td>
+      <td style="text-align: center">Subject to change</td>
+      <td style="text-align: center">Subject to change</td>
+      <td style="text-align: center">Backwards compatible</td>
+      <td style="text-align: center">Backwards compatible</td>
+      <td style="text-align: center">N/A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Okta Support</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Service-level agreements</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Announced in Release Notes</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">In preview orgs</td>
+      <td style="text-align: center">By invitation</td>
+      <td style="text-align: center">By invitation</td>
+      <td style="text-align: center">By request</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">In production orgs</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">By request</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Documentation</td>
+      <td style="text-align: center">Limited</td>
+      <td style="text-align: center">Limited</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+      <td style="text-align: center">X</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="beta">Beta</h2>
+
+<p>Features in Beta are managed and supported by the Product Team and have been internally validated for a set of use cases. 
+Minimal documentation is supplied for platform Beta releases; API endpoint and configuration information are usually supplied.</p>
+
+<blockquote>
+  <p>Important: Okta only enables Beta features in non-production or sandbox environments, because features in Beta aren’t supported by Okta Customer Support and
+may change at any time during the Beta release.</p>
+</blockquote>
+
+<p>Okta selects a small number of customers for early testing of features in a Beta release. 
+Customers participating in a Beta program agree to provide feedback which is required for maturing the feature; 
+however, the timeline for addressing specific areas of feedback (including bugs) is determined by Okta’s market requirements for that feature.
+Any customer interested in a feature in Beta must apply by visiting <a href="https://oktabeta.zendesk.com/hc/en-us">our Beta Signup page</a>. 
+Only customers with use cases that match our use cases are invited.</p>
+
+<p>Beta releases are either high touch or low touch:</p>
+
+<ul>
+  <li>High-touch Beta releases involve regular contact with Okta, typically consisting of conference calls covering specified use cases, deployment guidance, and feedback.</li>
+  <li>Low-touch Beta releases are self-directed without ongoing support and limited to collecting feedback.</li>
+</ul>
+
+<p>Documentation for features in Beta release is marked with the Beta icon: <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></p>
+
+<h2 id="early-access-ea">Early Access (EA)</h2>
+
+<p>A feature in an Early Access (EA) release is new or enhanced functionality made available for customers to selectively “opt-in” to and use in both Production and non-Production environments.</p>
+
+<p>Features in EA:</p>
+
+<ul>
+  <li>Are supported by Okta Customer Support.</li>
+  <li>Obey the platform SLAs. APIs are <a href="/docs/api/getting_started/design_principles.html">backwards compatible</a>.</li>
+</ul>
+
+<blockquote>
+  <p>Note: A platform feature may skip EA if it doesn’t affect other features or functionality. 
+Also, although we strive for API-first development, a platform feature in EA may add functionality later.</p>
+</blockquote>
+
+<p>Any bug fixes or improvements are managed and fixed with the same timeline and processes as those in General Availability.</p>
+
+<p>Features in EA release are marked with the EA icon: <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></p>
+
+<h2 id="general-availability-ga">General Availability (GA)</h2>
+
+<p>A feature in General Availability (GA) is new or enhanced functionality that is enabled by default for all customers. 
+Beginning in February 2017, features move from EA (enabled by request) to GA (enabled for all orgs) in a regular cadence:</p>
 
 <ol>
-  <li>
-    <p>Log in to your Okta organization as a user with admin
-privileges.</p>
-
-    <p>If you don’t have an Okta organization, you can create a free Okta
-Developer Edition organization <a href="https://www.okta.com/developer/signup/" target="_blank">at this link</a>.</p>
-  </li>
-  <li>
-    <p>Click on the blue “Admin” button.
-<img src="/assets/img/okta-admin-ui-button-admin.png" alt="Admin" /></p>
-  </li>
-  <li>
-    <p>Click on “API” in the Security menu.
-<img src="/assets/img/okta-admin-api-link.png" alt="API" /></p>
-  </li>
-  <li>
-    <p>Click on the “Create token” button.
-<img src="/assets/img/okta-create-api-token-button.png" alt="Create Token" /></p>
-  </li>
-  <li>
-    <p>Name your token and click “Create token”.</p>
-  </li>
-  <li>
-    <p>Make note of your API token, as you will only see it one time.</p>
-  </li>
+  <li>EA features become GA in preview orgs in the first release of the month.</li>
+  <li>These same features become GA in production orgs in the first release of the next month.</li>
 </ol>
 
-<p>Note, tokens generated by this mechanism will have the permissions of the user who generated them. A user must be enrolled in MFA to create an API token.</p>
+<p>Features in GA are supported by Okta Customer Support, and issues are addressed according to your Customer Agreement with Okta.</p>
 
-<p><img src="/assets/img/okta-admin-ui-token.png" alt="Okta Admin Token UI" title="Okta Admin Token UI" /></p>
+<p>Documentation for features in GA release are not marked with any icons.</p>
 
-<h2 id="token-expiration">Token Expiration</h2>
+<h2 id="deprecation">Deprecation</h2>
 
-<p>Okta uses a bearer token for API authentication with a sliding scale expiration. Tokens are valid for 30 days and automatically refresh with each API call.  Tokens that are not used for 30 days will expire. The token lifetime is currently fixed and cannot be changed for your organization.</p>
+<p>A feature identified as Deprecated is no longer recommended and may be removed in the future. 
+The recommended path forward is included in the relevant documentation, libraries, or references.
+When Okta schedules an end-of-life plan, that information is also included.</p>
 
-<h2 id="token-deactivation">Token Deactivation</h2>
+<p>Documentation for features that have been deprecated are marked with the Deprecated icon: <span class="api-label api-label-deprecated "><i class="fa fa-fire-extinguisher"></i> Deprecated</span></p>
 
-<p>If a user account is deactivated in Okta, the API Token is deprovisioned at the same time.</p>
+<h2 id="exceptions-to-the-beta-ea-ga-lifecycle">Exceptions to the Beta-EA-GA Lifecycle</h2>
+
+<p>Some changes may not go through the full Beta-EA-GA lifecycle:</p>
+
+<ul>
+  <li>Bug fixes that change only the incorrect behavior of the bug.</li>
+  <li>Cosmetic changes, such as changing the label of a field in the Okta User Interface.</li>
+  <li>Changes that are narrow in scope or effect, or purely additive, such as adding a new attribute.</li>
+</ul>
+
+<p>Changes like these may be released to preview orgs any week of the month, and appear in production the next week.</p>
+
+<p>Other exceptions include:</p>
+
+<ul>
+  <li>Occasionally, a feature is released using an iterative, custom schedule to enable close monitoring.
+Such features may spend more than one month between preview and production for their GA release.</li>
+  <li>Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.</li>
+</ul>
+
+<p>As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
