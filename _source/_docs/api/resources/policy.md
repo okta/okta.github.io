@@ -37,7 +37,6 @@ Policies that have no rules are not considered during evaluation, and will never
 ### Policy Types
 Different policy types control settings for different operations.  All policy types share a common framework, message structure and API, but have different policy settings and rule data.  The data structures specific to each policy type are discussed in the various sections below.
 
-
 <a href="#OktaSignOnPolicy">Okta Sign On Policy</a>
 
 <a href="#OktaMFAPolicy">Okta MFA Policy</a>
@@ -67,13 +66,59 @@ For example, assume the following policies exist.
 When policy is evaluated for a user, policy "A" will be evaluated first.  If the user is a member of the "Administrators" group then the rules associated with policy "A" will be evaluated.   If a match is found then the policy settings will be applied.
 If the user is not a member of teh "Administrators" group, then policy B would be evaluated.
 
-<!-- ### Policy JSON Example
+### Policy JSON Example (Okta Sign On Policy)
 
 ~~~json
-{
-    [ADD UPDATED JSON HERE]
-}
-~~~ -->
+  {
+    "type": "OKTA_SIGN_ON",
+    "id": "00pmez6igjv4TYOLl0g3",
+    "status": "ACTIVE",
+    "name": "Sales Policy",
+    "description": "Policy for Sales Department",
+    "priority": 1,
+    "system": false,
+    "conditions": {
+      "people": {
+        "groups": {
+          "include": [
+            "00gmexWGbl9VauvTP0g3"
+          ]
+        }
+      }
+    },
+    "created": "2017-01-11T18:53:00.000Z",
+    "lastUpdated": "2017-01-11T18:53:00.000Z",
+    "_links": {
+      "self": {
+        "href": "http://ed.okta1.com:1802/api/v1/policies/00pmez6igjv4TYOLl0g3",
+        "hints": {
+          "allow": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "deactivate": {
+        "href": "http://ed.okta1.com:1802/api/v1/policies/00pmez6igjv4TYOLl0g3/lifecycle/deactivate",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      },
+      "rules": {
+        "href": "http://ed.okta1.com:1802/api/v1/policies/00pmez6igjv4TYOLl0g3/rules",
+        "hints": {
+          "allow": [
+            "GET",
+            "POST"
+          ]
+        }
+      }
+    }
+  }
+~~~
 
 ### Policy Object
 {: #PolicyObject }
@@ -117,10 +162,9 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 self | The policy or rule | String | Yes | 
-activate | Action to activate a policy or rule | String | Yes | 
-deactivate | Action to deactivate a policy or rule | String | Yes | 
-rules | Rules objects for a policy only | String | Yes | 
-policy | Policy object for a rule only | String | Yes | 
+activate | Action to activate a policy or rule (present if the rule is currently inactive) | String | Yes | 
+deactivate | Action to deactivate a policy or rule (present if the rule is currently active) | String | Yes | 
+rules | Action to retrieve the rules objects for the given policy | String | Yes | 
 
 ## Rules
 Each policy may contain one or more rules.  Rules, like policies contain conditions, which must be satisfied in order for the rule to be applied.  
@@ -142,15 +186,63 @@ For example if a particular policy had two rules, "A" and "B" as below.
 - Rule B has priority 2 and applies to ON_NETWORK scenarios.
 
 If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
-the action in Rule A would be taken, and Rule B is not evaluated.
+the action in Rule A would be taken, and Rule B would not be evaluated.
 
-<!-- ### Rules Message Example
+### Rules Message Example (Password Policy) 
 
 ~~~json
-{
-    [ADD UPDATED JSON HERE]
-}
-~~~ -->
+  {
+    "type": "PASSWORD",
+    "id": "0prlmqTXCzP5SegYJ0g3",
+    "status": "ACTIVE",
+    "name": "Legacy Rule",
+    "priority": 1,
+    "created": "2017-01-10T21:42:22.000Z",
+    "lastUpdated": "2017-01-10T21:42:22.000Z",
+    "system": false,
+    "conditions": {
+      "people": {
+        "users": {
+          "exclude": []
+        }
+      },
+      "network": {
+        "connection": "ANYWHERE"
+      }
+    },
+    "actions": {
+      "passwordChange": {
+        "access": "ALLOW"
+      },
+      "selfServicePasswordReset": {
+        "access": "ALLOW"
+      },
+      "selfServiceUnlock": {
+        "access": "DENY"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "http://ed.okta1.com:1802/api/v1/policies/00plmpDXfWU34nb280g3/rules/0prlmqTXCzP5SegYJ0g3",
+        "hints": {
+          "allow": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "deactivate": {
+        "href": "http://ed.okta1.com:1802/api/v1/policies/00plmpDXfWU34nb280g3/rules/0prlmqTXCzP5SegYJ0g3/lifecycle/deactivate",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  }
+~~~
 
 ### Rules Object
 {: #RulesObject }
@@ -168,6 +260,7 @@ created | Timestamp when the rule was created | Date | No | Assigned
 lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
 conditions | Conditions for rule | <a href="#RuleConditionsObject">Conditions Object</a> | No | 
 actions | Actions for rule | <a href="#RulesActionsObject">Rules Actions Objects</a> | No | 
+_links | Hyperlinks | <a href="#RulesLinksObject">Links Object</a> | No | 
 
 ### Actions Objects
 {: #RulesActionsObject }
@@ -181,15 +274,15 @@ The Conditions Object(s) specify the conditions that must be met during policy e
 See <a href="#Conditions">conditions</a>
 
 ### Links Object
-{: #LinksObject }
+{: #RulesLinksObject }
 
 Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current rule.  The Links Object is used for dynamic discovery of related resources.  The Links Object is **read-only**.
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 self | The policy or rule | String | Yes | 
-activate | Action to activate a policy or rule | String | Yes | 
-deactivate | Action to deactivate a policy or rule | String | Yes | 
+activate | Action to activate the rule (present if the rules is currently inactive) | String | Yes | 
+deactivate | Action to deactivate the rule (present if the rule is currently active) | String | Yes | 
 
 ### Conditions
 {: #Conditions }
@@ -208,6 +301,7 @@ users | The user condition | String | Yes |
 #### User Condition Object
 {: #UserConditionObject }
 
+Specifies a set of users to be included or excluded
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
@@ -217,6 +311,8 @@ exclude | The users to be excluded | Array | Yes |
 
 #### Group Condition Object
 {: #GroupConditionObject }
+
+Specifies a set of groups whose users to be included or excluded
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
@@ -232,7 +328,6 @@ Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 authType |  | `ANY` or `RADIUS` | No | 
 
-
 #### Network Condition Object
 {: #NetworkConditionObject }
 
@@ -242,17 +337,14 @@ Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No | 
 
+#### Authentication Provider Condition Object
+{: #AuthProviderConditionObject }
 
-#### People Condition Object
-{: #PeopleConditionObject }
+Specifies an authentication provider, which masters some or all users.
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-users |  | <a href="#UserConditionObject">User Condition Object</a> | No | 
-
-<!-- #### Authentication Provider Condition Object
-
-[THIS SECTION TBD] -->
+provider | Specifies the required authentication provider  | 'Okta', 'Active Directory' | Yes | 'Okta'
 
 ## Policy API Operations
 
@@ -308,6 +400,10 @@ curl -v -X GET \
 
 HTTP 200: 
 <a href="#PolicyObject">Policy Object</a>
+
+Included as embedded objects, one or more
+
+<a href="#PolicyRule">Policy Rules</a>
 
 ### Get All Policies by Type
 {:.api .api-operation}
@@ -381,18 +477,21 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-  "name": "Example",
-  "description": "This is an example policy",
-  "conditions": {
-    "people": {
-      "groups": {
-        "include": [
-            "00gab0CDEFGHIJKLMNOP"
-        ]
-      }
-    }
-  }
-}' \
+      "type": "OKTA_SIGN_ON",
+      "id": "00plrilJ7jZ66Gn0X0g3",
+      "status": "ACTIVE",
+      "name": "Default Policy",
+      "description": "The default policy applies in all situations if no other policy applies.",
+      "priority": 1,
+      "conditions": {
+        "people": {
+          "groups": {
+            "include": [
+              "00glr9dY4kWK9k5ZM0g3"
+            ]
+         }
+        }
+     }, \
 "https://${org}.okta.com/api/v1/policies/{policyId}"
 ~~~
 
@@ -420,20 +519,19 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-    "type": "OKTA_SIGN_ON",
-    "name": "Corporate Policy",
-    "description": "Standard policy for every employee",
-    "system": false,
-    "conditions": {
+      "type": "OKTA_SIGN_ON",
+      "status": "ACTIVE",
+      "name": "Default Policy",
+      "description": "The default policy applies in all situations if no other policy applies.",
+      "conditions": {
         "people": {
-            "groups": {
-                "include": [
-                    "00gab0CDEFGHIJKLMNOP"
-                ]
-            }
+          "groups": {
+            "include": [
+              "00glr9dY4kWK9k5ZM0g3"
+            ]
+          }
         }
-    }
-}' \
+      }, \
 "https://${org}.okta.com/api/v1/policies"
 ~~~
 
@@ -541,23 +639,25 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
-    "type": "SIGN_ON",
-    "name": "Deny",
-    "conditions": {
-        "network": {
-            "connection": "ANYWHERE"
-        },
-        "authContext": {
-            "authType": "ANY"
-        }
+  "name": "New Policy Rule",
+  "conditions": {
+    "people": {
+      "users": {
+        "exclude": []
+      }
     },
-    "actions": {
-        "signon": {
-            "access": "DENY",
-            "requireFactor": false
-        }
+    "network": {
+      "connection": "ON_NETWORK"
+    },
+    "authContext": {
+      "authType": "ANY"
     }
-}' \
+  },
+  "actions": {
+    "signon": {
+      "access": "ALLOW"
+    }
+  }' \
 "https://${org}.okta.com/api/v1/policies/{policyId}/rules"
 ~~~
 
@@ -723,7 +823,8 @@ HTTP 204:
 ## Okta Sign On Policy
 {: #OktaSignOnPolicy }
 
-<!-- [THIS SECTION IN PROGRESS] -->
+Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challanged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
+Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be peformed before a specific Okta application can be invoked.
 
 ### Policy Settings Data
 
@@ -732,31 +833,61 @@ Okta sign on policy does not contain policy settings data.  In the case of sign 
 ### Policy Conditions
 The following conditions may be applied to Okta Sign On Policy
 
-### Rules Action Data
+<a href="#PeopleObject">People Condition</a>
 
-### Signon Action Object
+### Okta Sign On Rules Action Data
+
+#### Signon Action Example
+
+~~~json
+  "actions": {
+    "signon": {
+      "access": "ALLOW",
+      "requireFactor": true,
+      "factorPromptMode": "SESSION",
+      "rememberDeviceByDefault": false,
+      "factorLifetime": 15,
+      "session": {
+        "usePersistentCookie": false,
+        "maxSessionIdleMinutes": 120,
+        "maxSessionLifetimeMinutes": 0
+      }
+    }
+  }
+~~~
+
+
+#### Signon Action Object
 {: #SignonObject }
 
-Parameter | Description | Data Type | Required | Default
+Property | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 access | `ALLOW` or `DENY` | `ALLOW` or `DENY` | Yes | 
-requireFactor |  | Boolean | No | false
-factorPromptMode | `DEVICE`, `SESSION` or `ALWAYS` | `DEVICE`, `SESSION` or `ALWAYS` | No | 
-factorLifetime | How long until factor times out | Integer | No | 
-session | Session Rules | <a href="#SignonSessionObject">Signon Session Object</a> | No | 
+requireFactor | Indicates if multi-factor authentication is required | Boolean | No | false
+factorPromptMode | Indicates if the user should be challenged for second factor authentication (MFA) based on the device being used, a factor session lifetime, or on every sign on attempt. | `DEVICE`, `SESSION` or `ALWAYS` | No | 
+rememberDeviceByDefault | [TBD]  | Boolean | No | false
+factorLifetime | Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is set to 'SESSION' | Integer | No | 
+session | Properties governing the user's session lifetime | <a href="#SignonSessionObject">Signon Session Object</a> | No | 
 
 
-### Signon Session Object
+##### Signon Session Object
 {: #SignonSessionObject }
 
-Parameter | Description | Data Type | Required | Default
+Property | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-maxSessionIdleMinutes | Maximum number of minutes that a user session can be idle before the session is ended. | Integer | No | 
-maxSessionLifetimeMinutes | Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to `0`. | Integer | No | 
+maxSessionIdleMinutes | Maximum number of minutes that a user session can be idle before the session is ended. | Integer | No | 120
+maxSessionLifetimeMinutes | Maximum number of minutes from user login that a user session will be active. Set this to force users to sign-in again after the number of specified minutes. Disable by setting to `0`. | Integer | No | 0
 usePersistentCookie | If set to `false`, user session cookies will only last the length of a browser session. If set to `true`, user session cookies will last across browser sessions. This setting does not impact Okta Administrator users, who can *never* have persistant session cookies. | Boolean | No | false
 
 ### Rules Conditions
 The following conditions may be applied to the rules associated with Okta Sign On Policy
+
+<a href="#PeopleObject">People Condition</a>
+
+<a href="#NetworkConditionObject">Network Condition</a>
+
+<a href="#AuthContextConditionObject">AuthContext Condition</a>
+
 
 ## Okta MFA Policy
 {: #OktaMFAPolicy }
@@ -821,14 +952,255 @@ The following conditions may be applied to the rules associated with Okta MFA Po
 ## Password Policy
 {: #GroupPasswordPolicy }
 
-[THIS SECTION TBD]
+Password policy controls settings that deterine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
+
+#### Policy Settings Example
+~~~json
+   "settings": {
+     "password": {
+       "complexity": {
+         "minLength": 8,
+         "minLowerCase": 1,
+         "minUpperCase": 1,
+         "minNumber": 1,
+         "minSymbol": 0,
+         "excludeUsername": true
+       },
+       "age": {
+         "maxAgeDays": -1,
+         "expireWarnDays": -1,
+         "minAgeMinutes": -1,
+         "historyCount": -1
+       },
+       "lockout": {
+         "maxAttempts": 10,
+         "autoUnlockMinutes": -1,
+         "showLockoutFailures": false
+       }
+     },
+     "recovery": {
+       "factors": {
+         "recovery_question": {
+           "status": "ACTIVE",
+           "properties": {
+             "complexity": {
+               "minLength": 4
+             }
+           }
+         },
+         "okta_email": {
+           "status": "ACTIVE",
+           "properties": {
+             "recoveryToken": {
+               "tokenLifetimeMinutes": 60
+             }
+           }
+         },
+         "okta_sms": {
+           "status": "INACTIVE"
+         },
+         "okta_call": {
+           "status": "INACTIVE"
+         }
+       }
+     },
+     "delegation": {
+       "options": {
+         "skipUnlock": false
+       }
+     }
+   }
+~~~
 
 ### Policy Settings Data
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+password | Password settings | <a href="#PasswordObject">Password Policy Password Object</a> | No
+recovery | Recovery settings | <a href="#RecoveryObject">Password Policy Recovery Object</a> | No
+delegation | Delegation settings | <a href="#DelegationObject">Password Policy Delegation Object</a> | No
+
+#### Password Object
+{: #PasswordObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+complexity | Complexity settings | <a href="#PasswordComplexityObject">Password Complexity Object</a> | No
+age | Age settings | <a href="#PasswordAgeObject">Password Age Object</a> | No
+lockout | Lockout settings | <a href="#PasswordLockoutObject">Password Lockout Object</a> | No
+
+##### Complexity Object
+{: #PasswordComplexityObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+minLength | Minimum password length | integer | No | 8
+minLowerCase | Indicates if a password must contain at least one lower case letter: 0 indicates no, 1 indicates yes  | integer | No | 1
+minUpperCase | Indicates if a password must contain at least one upper case letter: 0 indicates no, 1 indicates yes | integer | No | 1
+minNumber | Indicates if a password must contain at least one number: 0 indicates no, 1 indicates yes | integer | No | 1
+minSymbol | Indicates if a password must contain at least one symbol (e.g., !@#$%^&*): 0 indicates no, 1 indicates yes | integer | No | 1
+excludeUserName | Indicates if the user name must be excluded from the password | boolean | no | true
+
+##### Age Object
+{: #PasswordAgeObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+maxAgeDays | Specifies how long (in days) a password remains valid before it expireds: -1 indicates no limit | integer | No | -1
+expireWarnDays | Specifies the number of days prior to password expiration when a user will be warned to reset their password: -1 indicates no warning  | integer | No | -1
+minAgeMinutes | Specifies the minimum time interval (in minutes) between password changes: -1 indicates no limit | integer | No | -1
+historyCount | Specifies the number of distinct passwords that a user must create before they can reuse a previous password: -1 indicates none  | integer | No | -1
+
+##### Lockout Object
+{: #PasswordLockoutObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+maxAttempts | Specifies the number of times users can attempt to log in to their accounts with an invalid password before their accounts are locked: -1 indicates no limit | integer | No | -1
+autoUnlockMinutes | Specifies the time interval (in minutes) a locked account remaind locked before it is automatically unlocked: -1 indicates no limit | integer | No | -1
+showLockoutFailures | Inidcates if the user should be informed when their account is locked | Boolean | No | false
+
+#### Recovery Object
+{: #RecoveryObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+factors | Settings for the factors that may be used for recovery | <a href="#RecoveryFactorsObject">Recovery Factors Object</a> | No
+
+##### Recovery Factors Object
+{: #RecoveryFactorsObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+recovery_question | Settings for security question factor | <a href="#RecoveryQuestionFactorObject">Recovery Question Factor Object</a> | No
+okta_email | Settings for email factor | <a href="#EmailFactorObject">Email Factor Object</a> | No
+okta_sms | Settings for SMS factor | <a href="#SMSFactorObject">SMS Factor Object</a> | No
+
+###### Recovery Question Factor Object
+{: #RecoveryQuestionFactorObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes | 
+properties | Configuration settings for security question factor | <a href="#RecoveryQuestionFactorPropertiesObject">Recovery Question Factor Properties Object</a> | No
+
+###### Recovery Question Factor Properties Object
+{: #RecoveryQuestionFactorPropertiesObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+complexity | Complexity settings for recovery question | <a href="#RecoveryQuestionFactorPropertiesComplexityObject">Recovery Question Factor Properties Complexity Object</a> | No
+
+###### Recovery Question Factor Properties Complexity Object
+{: #RecoveryQuestionFactorPropertiesComplexityObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+minLength | Minimum length of the password recovery question answer | Integer | No | 4
+
+###### Email Factor Object
+{: #EmailFactorObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes | 
+properties | sConfiguration ettings for okta email factor | <a href="#EmailFactorPropertiesObject">Email Factor Properties Object</a> | No
+
+###### Email Factor Properties Object
+{: #EmailFactorPropertiesObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+recoveryToken | Recovery token settings | <a href="EmailFactorPropertiesREcoveryTokenObject ">Email Factor Properties Recovery Token Object</a> | No
+
+###### Email Factor Properties Recovery Token Object
+{: #EmailFactorPropertiesREcoveryTokenObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | --- | ---
+tokenLifetimeMinutes | Lifetime (in minutes) of the recovery token | Integer | No | 10080
+
+###### SMS Factor Object
+{: #SMSFactorObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | --- | ---
+status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` | No | 'INACTIVE'
+
+#### Delegation Object
+{ #DelegationObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+options | Delegation options | <a href="#DelegationOptionsObject">Delegation Options Object</a> | No
+
+##### Options Object
+{: #DelegationOptionsObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | ---
+skipUnlock | Indicates if, when performing an unlock operation on an Active Directory mastered user who is locked out of Okta, the system should also attempt to unlock the user's Windows account. | Boolean | No | false
 
 ### Policy Conditions
 The following conditions may be applied to Password Policy
 
-### Rules Action Data
+<a href="#PeopleObject">People Condition</a>
+
+<a href="#AuthProviderConditionObject">Authentication Povider Condition</a>
+
+### Password Rules Action Data
+
+#### Passsword Actions Example
+
+~~~json
+  "actions": {
+    "passwordChange": {
+     "access": "ALLOW"
+    },
+    "selfServicePasswordReset": {
+     "access": "ALLOW"
+    },
+    "selfServiceUnlock": {
+     "access": "ALLOW"
+    }
+  },
+~~~
+
+#### Password Action Object
+{: #PaswordActionObject }
+
+Property | Description | Data Type | Required | 
+| --- | --- | --- | ---
+passwordChange | Properties governing the change password operation | <a href="#PasswordChangeActionObject">Password Change Object</a> | No | 
+selfServicePasswordReset | Properties governing the self-service password reset (forgot password) operation | <a href="#PasswordResetActionObject">Self Service Password Reset Object</a> | No | 
+selfServiceUnlock | Properties governing the self-service unlock operation | <a href="#SelfServiceUnockActionObject">Self Service Unlock Object</a> | No | 
+
+##### Password Change Action Object
+{: #PasswordChangeActionObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | --- | ---
+access | Indicates if the action is permitted | `ALLOW`, `DENY` | No | `DENY`
+
+##### Self Service Password Reset Action Object
+{: #PasswordResetActionObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | --- | ---
+access | Indicates if the action is permitted | `ALLOW`, `DENY` | No | `DENY`
+
+##### Self Service Unlock Action Object
+{: #SelfServiceUnockActionObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | --- | --- | ---
+access | Indicates if the action is permitted | `ALLOW`, `DENY` | No | `DENY`
 
 ### Rules Conditions
-The following conditions may be applied to the rules associated with Okta Password Policy
+The following conditions may be applied to the rules associated with Password Policy
+
+<a href="#PeopleObject">People Condition</a>
+
+<a href="#NetworkConditionObject">Network Condition</a>
+
+
