@@ -1076,7 +1076,7 @@ Application imports are responsible for updating group profiles with <code class
 </table>
 
 <blockquote>
-  <p>All profile properties must be specified when updating a user’s profile, <strong>partial updates are not supported!</strong></p>
+  <p>All profile properties must be specified when updating a groups’s profile, <strong>partial updates are not supported!</strong></p>
 </blockquote>
 
 <h5 class="api api-response api-response-params" id="response-parameters-3">Response Parameters</h5>
@@ -1465,6 +1465,688 @@ Application imports are responsible for managing group memberships for groups wi
 </code></pre>
 </div>
 
+<h3 class="api api-operation" id="create-group-rule">Create Group Rule</h3>
+
+<p><span class="api-uri-template api-uri-POST"><span class="api-label">POST</span> /api/v1/groups/rules</span></p>
+
+<p>Creates a group rule to dynamically add users to the specified group if they match the condition</p>
+
+<blockquote>
+  <p>Group rules would be created with status=’INACTIVE’.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-8">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>ParamType</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>condition.expression.value</td>
+      <td>Okta expression which would result in a boolean value</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>condition.expression.type</td>
+      <td>currently it is : urn:okta:expression:1.0</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>condition.people.users.exclude</td>
+      <td>userIds which would be excluded when rules are processed</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>condition.people.groups.exclude</td>
+      <td>is currently not supported</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>actions.assignUserToGroups.groupIds</td>
+      <td>List of groupIds to which users would be added. Currently we support only one group as target group</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-8">Response Parameters</h5>
+
+<p>Created <a href="#rule-model">Rule</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+      "type": "group_rule",
+      "name": "Engineering group rule",
+      "conditions": {
+          "people": {
+            "users": {
+              "exclude": [
+                "00u22w79JPMEeeuLr0g4"
+              ]
+            },
+            "groups": {
+              "exclude": []
+            }
+          },
+          "expression": {
+            "value": "user.role==\"Engineer\"",
+            "type": "urn:okta:expression:1.0"
+          }
+        },
+      "actions": {
+        "assignUserToGroups": {
+          "groupIds": [
+            "00gjitX9HqABSoqTB0g3"
+          ]
+        }
+      }
+    }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/groups/rules"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group_rule"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0pr3f7zMZZHPgUoWO0g4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Engineering group rule"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T14:40:04.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T14:40:04.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"people"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"00u22w79JPMEeeuLr0g4"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.role==\"Engineer\""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:okta:expression:1.0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"assignUserToGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"groupIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"00gjitX9HqABSoqTB0g3"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="update-group-rule">Update Group Rule</h3>
+
+<p><span class="api-uri-template api-uri-POST"><span class="api-label">POST</span> /api/v1/groups/rules/<em>:id</em></span></p>
+
+<p>Updates a group rule.</p>
+
+<blockquote>
+  <p>Only rules with status=’INACTIVE’ can be updated and <br />
+currently action section is not updatable.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-9">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>ParamType</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>id of the rule to be updated</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>valid statuses are ACTIVE, INACTIVE and INVALID</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>condition.expression.value</td>
+      <td>okta expression which would result in a boolean value</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>condition.expression.type</td>
+      <td>currently it is : urn:okta:expression:1.0</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>condition.people.users.exclude</td>
+      <td>userIds which would be excluded when rules are processed</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>condition.people.groups.exclude</td>
+      <td>is currently not supported</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>actions.assignUserToGroups.groupIds</td>
+      <td>List of groupIds to which users would be added. Currently we support only one group as target group</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-9">Response Parameters</h5>
+
+<p>Updated <a href="#rule-model">Rule</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+      "type": "group_rule",
+      "id": "0pr3f7zMZZHPgUoWO0g4",
+      "status": "INACTIVE",
+      "name": "Engineering group rule",
+      "conditions": {
+          "people": {
+            "users": {
+              "exclude": [
+                "00u22w79JPMEeeuLr0g4"
+              ]
+            },
+            "groups": {
+              "exclude": []
+            }
+          },
+          "expression": {
+            "value": "user.role==\"Engineer\"",
+            "type": "urn:okta:expression:1.0"
+          }
+        },
+      "actions": {
+        "assignUserToGroups": {
+          "groupIds": [
+            "00gjitX9HqABSoqTB0g3"
+          ]
+        }
+      }
+    }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/groups/rules/0pr3f7zMZZHPgUoWO0g4"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group_rule"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0pr3f7zMZZHPgUoWO0g4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Engineering group rule"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T14:40:04.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T14:40:04.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"people"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"00u22w79JPMEeeuLr0g4"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.role==\"Engineer\""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:okta:expression:1.0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"assignUserToGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"groupIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"00gjitX9HqABSoqTB0g3"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="list-group-rules">List Group Rules</h3>
+
+<p><span class="api-uri-template api-uri-GET"><span class="api-label">GET</span> /api/v1/groups/rules</span></p>
+
+<p>Lists all group rules for your organization.</p>
+
+<blockquote>
+  <p>If you don’t specify any value for limit, a maximum of 50 results are returned.<br />
+The maximum value for limit is 300.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>ParamType</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>limit</td>
+      <td>Specifies the number of rule results in a page</td>
+      <td>Query</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>after</td>
+      <td>Specifies the pagination cursor for the next page of rules</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-10">Response Parameters</h5>
+
+<p>Array of <a href="#rule-model">Rules</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/groups/rules?limit=30"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="err">HTTP/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">OK</span><span class="w">
+</span><span class="err">Content-Type:</span><span class="w"> </span><span class="err">application/json</span><span class="w">
+</span><span class="err">Link:</span><span class="w"> </span><span class="err">&lt;https://your-domain.okta.com/api/v</span><span class="mi">1</span><span class="err">/groups/rules?limit=</span><span class="mi">20</span><span class="err">&gt;;</span><span class="w"> </span><span class="err">rel=</span><span class="s2">"self"</span><span class="w">
+</span><span class="err">Link:</span><span class="w"> </span><span class="err">&lt;https://your-domain.okta.com/api/v</span><span class="mi">1</span><span class="err">/groups/rules?after=</span><span class="mi">0</span><span class="err">pr</span><span class="mi">3</span><span class="err">f</span><span class="mi">7</span><span class="err">zMZZHPgUoWO</span><span class="mi">0</span><span class="err">g</span><span class="mi">4</span><span class="err">&amp;limit=</span><span class="mi">20</span><span class="err">&gt;;</span><span class="w"> </span><span class="err">rel=</span><span class="s2">"next"</span><span class="w">
+</span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group_rule"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0pr2kssg22YHgTkgW0g4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Engineering group rule"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-26T20:19:44.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T01:50:44.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isMemberOfAnyGroup(\"00g25dgglwXD93m300g4\",\"00gjitX9HqABSoqTB0g3\")"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:okta:expression:1.0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"assignUserToGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"groupIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"00g25nqEUecj5LYAI0g4"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group_rule"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0pr3f7txB2OIOVLuQ0g4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sales group"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T01:08:38.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T01:08:38.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"people"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"00u22w79JPMEeeuLr0g4"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.role==\"Sales Engineer\""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:okta:expression:1.0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"assignUserToGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"groupIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"00gjitX9HqABSoqTB0g3"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group_rule"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0pr3f7zMZZHPgUoWO0g4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco group rule"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T01:10:04.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T01:10:04.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.location==\"san Francisco\""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:okta:expression:1.0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"assignUserToGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"groupIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"00gjitX9HqABSoqTB0g3"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="get-group-rule">Get Group Rule</h3>
+
+<p><span class="api-uri-template api-uri-GET"><span class="api-label">GET</span> /api/v1/groups/rules/<em>:id</em></span></p>
+
+<p>Fetches a specific group rule by id from your organization</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-11">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>ParamType</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>id of a group rule</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-11">Response Parameters</h5>
+
+<p>Specified <a href="#rule-model">Rule</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/groups/rules/0pr3f7zMZZHPgUoWO0g4"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group_rule"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0pr3f7zMZZHPgUoWO0g4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Engineering Group"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T14:40:04.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T14:40:04.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"people"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"00u22w79JPMEeeuLr0g4"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.role==\"Engineer\""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:okta:expression:1.0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"assignUserToGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"groupIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"00gjitX9HqABSoqTB0g3"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="delete-a-group-rule">Delete a group Rule</h3>
+
+<p><span class="api-uri-template api-uri-DELETE"><span class="api-label">DELETE</span> /api/v1/groups/rules/<em>:id</em></span></p>
+
+<p>Removes a specific group rule by id from your organization</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-12">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>ParamType</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>id of a group rule</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-12">Response Parameters</h5>
+
+<p>N/A</p>
+
+<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/groups/rules/0pr3f7zMZZHPgUoWO0g4"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">No Content</span>
+</code></pre>
+</div>
+
+<h3 class="api api-operation" id="activate-a-group-rule">Activate a group Rule</h3>
+
+<p><span class="api-uri-template api-uri-POST"><span class="api-label">POST</span> /api/v1/groups/rules/<em>:id</em>/lifecycle/activate</span></p>
+
+<p>Activates a specific group rule by id from your organization</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>ParamType</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>id of a group rule</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-13">Response Parameters</h5>
+
+<p>N/A</p>
+
+<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/groups/rules/0pr3f7zMZZHPgUoWO0g4/lifecycle/activate"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">No Content</span>
+</code></pre>
+</div>
+
+<h3 class="api api-operation" id="deactivate-a-group-rule">Deactivate a group Rule</h3>
+
+<p><span class="api-uri-template api-uri-POST"><span class="api-label">POST</span> /api/v1/groups/rules/<em>:id</em>/lifecycle/deactivate</span></p>
+
+<p>Deactivates a specific group rule by id from your organization</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>ParamType</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>id of a group rule</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h5>
+
+<p>N/A</p>
+
+<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/groups/rules/0pr3f7zMZZHPgUoWO0g4/lifecycle/deactivate"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">No Content</span>
+</code></pre>
+</div>
+
 <h2 id="related-resources">Related Resources</h2>
 
 <h3 class="api api-operation" id="list-assigned-applications">List Assigned Applications</h3>
@@ -1473,7 +2155,7 @@ Application imports are responsible for managing group memberships for groups wi
 
 <p>Enumerates all <a href="apps.html#application-model">applications</a> that are assigned to a group. See <a href="apps.html#application-group-operations">Application Group Operations</a></p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-8">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-15">Request Parameters</h5>
 
 <table>
   <thead>
@@ -1518,11 +2200,11 @@ Application imports are responsible for managing group memberships for groups wi
   <p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a></p>
 </blockquote>
 
-<h5 class="api api-response api-response-params" id="response-parameters-8">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h5>
 
 <p>Array of <a href="apps.html#application-model">Applications</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1532,7 +2214,7 @@ Application imports are responsible for managing group memberships for groups wi
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -1898,6 +2580,44 @@ Application imports are responsible for managing group memberships for groups wi
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"West Coast Users"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Straight Outta Compton"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h2 id="rule-model">Rule Model</h2>
+
+<h3 id="example-1">Example</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"group_rule"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0pr3f7zMZZHPgUoWO0g4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Engineers Group Rule"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T14:40:04.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-01T14:40:04.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"people"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"00u22w79JPMEeeuLr0g4"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"expression"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.role==\"Engineer\""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:okta:expression:1.0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"assignUserToGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"groupIds"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"00gjitX9HqABSoqTB0g3"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
