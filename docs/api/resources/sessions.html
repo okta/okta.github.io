@@ -390,7 +390,12 @@
 
 <h3 class="api api-operation" id="extend-session">Extend Session</h3>
 
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/sessions/<em>:id</em></span> <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-deprecated "><i class="fa fa-fire-extinguisher"></i> Deprecated</span></a></p>
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/sessions/<em>:id</em></span> 
+          <a href="/docs/api/getting_started/releases-at-okta.html#deprecation">
+            <span class="api-label api-label-deprecated ">
+              <i class="fa fa-fire-extinguisher"></i> Deprecated
+            </span>
+          </a></p>
 
 <p>Extends the lifetime of a user’s session.</p>
 
@@ -983,7 +988,13 @@
 </table>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">mfaActive</code> parameter is <a href="/docs/api/getting_started/releases-at-okta.html">a <span class="api-label api-label-deprecated "><i class="fa fa-fire-extinguisher"></i> Deprecated</span> feature</a>. Use the <code class="highlighter-rouge">lastFactorVerification</code> attribute in conjunction with <code class="highlighter-rouge">amr</code> to understand if the user has performed MFA for the current session. Use the <a href="./factors.html#list-enrolled-factors">Factors API</a> to query the factor enrollment status for a given user.</p>
+  <p>The <code class="highlighter-rouge">mfaActive</code> parameter is a 
+          <a href="/docs/api/getting_started/releases-at-okta.html#deprecation">
+            <span class="api-label api-label-deprecated ">
+              <i class="fa fa-fire-extinguisher"></i> Deprecated
+            </span>
+          </a>
+           feature. Use the <code class="highlighter-rouge">lastFactorVerification</code> attribute in conjunction with <code class="highlighter-rouge">amr</code> to understand if the user has performed MFA for the current session. Use the <a href="./factors.html#list-enrolled-factors">Factors API</a> to query the factor enrollment status for a given user.</p>
 </blockquote>
 
 <h4 id="optional-session-properties">Optional Session Properties</h4>
@@ -1010,11 +1021,23 @@
 </table>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">cookieToken</code> is <a href="/docs/api/getting_started/releases-at-okta.html">a <span class="api-label api-label-deprecated "><i class="fa fa-fire-extinguisher"></i> Deprecated</span> property</a>. Instead, use the <a href="./authn.html">Authentication API</a>, which supports the full user authentication pipeline and produces a <code class="highlighter-rouge">sessionToken</code> which can be used in this API.</p>
+  <p>The <code class="highlighter-rouge">cookieToken</code> is a 
+          <a href="/docs/api/getting_started/releases-at-okta.html#deprecation">
+            <span class="api-label api-label-deprecated ">
+              <i class="fa fa-fire-extinguisher"></i> Deprecated
+            </span>
+          </a>
+           property. Instead, use the <a href="./authn.html">Authentication API</a>, which supports the full user authentication pipeline and produces a <code class="highlighter-rouge">sessionToken</code> which can be used in this API.</p>
 </blockquote>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">cookieTokenUrl</code> is <a href="/docs/api/getting_started/releases-at-okta.html">a <span class="api-label api-label-deprecated "><i class="fa fa-fire-extinguisher"></i> Deprecated</span> property</a>. because modern browsers block cookies set via embedding images from another origin (cross-domain).</p>
+  <p>The <code class="highlighter-rouge">cookieTokenUrl</code> is a 
+          <a href="/docs/api/getting_started/releases-at-okta.html#deprecation">
+            <span class="api-label api-label-deprecated ">
+              <i class="fa fa-fire-extinguisher"></i> Deprecated
+            </span>
+          </a>
+           property. because modern browsers block cookies set via embedding images from another origin (cross-domain).</p>
 </blockquote>
 
 <h3 id="session-status">Session Status</h3>

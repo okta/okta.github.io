@@ -186,7 +186,7 @@ OpenID Connect extends OAuth 2.0:</p>
 
 <p><img src="/assets/img/openID_overview.png" alt="OpenID Architecture Diagram" /></p>
 
-<p>Okta is the identity provider responsible for verifying the identity of users and applications that exist in an organization’s directory, 
+<p>Okta is the identity provider responsible for verifying the identity of users and applications that exist in an organization’s directory,
 and issuing identity tokens upon successful authentication of those users and applications.</p>
 
 <p>The basic authentication flow with Okta as your identity provider:</p>
@@ -201,8 +201,8 @@ and issuing identity tokens upon successful authentication of those users and ap
 </ol>
 
 <blockquote>
-  <p>Important: Okta uses public key cryptography to sign tokens and verify that they are valid. 
-See the last section of <a href="#validating-id-tokens">Validating ID Tokens</a> for more information on the necessary logic 
+  <p>Important: Okta uses public key cryptography to sign tokens and verify that they are valid.
+See the last section of <a href="#validating-id-tokens">Validating ID Tokens</a> for more information on the necessary logic
 you must have in your application to ensure it’s always updated with the latest keys.</p>
 </blockquote>
 
@@ -219,8 +219,8 @@ The claims in a security token are dependent upon the type of token, the type of
 
 <h2 id="scopes">Scopes</h2>
 
-<p>OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens. 
-The scopes associated with Access Tokens determine which claims are available when they are used 
+<p>OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens.
+The scopes associated with Access Tokens determine which claims are available when they are used
 to access <a href="http://developer.okta.com/docs/api/resources/oidc.html#get-user-information">the OIDC <code class="highlighter-rouge">userinfo</code> endpoint</a>. The following scopes are supported:</p>
 
 <table>
@@ -283,8 +283,8 @@ be a valid OAuth 2.0 request, but it’s not an OpenID Connect request.</li>
 
 <h2 id="id-token">ID Token</h2>
 
-<p>OpenID Connect introduces an <a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a> 
-which is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> that contains information about an authentication event 
+<p>OpenID Connect introduces an <a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a>
+which is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> that contains information about an authentication event
 as well as claims about the authenticated user.</p>
 
 <p>ID Tokens should always be <a href="#validating-id-tokens">validated</a> by the client to ensure their integrity.</p>
@@ -327,11 +327,11 @@ as well as claims about the authenticated user.</p>
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="mi">1311280970</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"john.doe@example.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"email_verified"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Hollywood Blvd."</span><span class="p">,</span><span class="w"> 
-  		</span><span class="nt">"locality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Los Angeles"</span><span class="p">,</span><span class="w"> 
-  		</span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w"> 
-  		</span><span class="nt">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90210"</span><span class="p">,</span><span class="w"> 
-  		</span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w"> 
+  </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Hollywood Blvd."</span><span class="p">,</span><span class="w">
+  		</span><span class="nt">"locality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Los Angeles"</span><span class="p">,</span><span class="w">
+  		</span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w">
+  		</span><span class="nt">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90210"</span><span class="p">,</span><span class="w">
+  		</span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
   	</span><span class="p">},</span><span class="w">
   </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="s2">"+1 (425) 555-1212"</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -603,7 +603,7 @@ as well as claims about the authenticated user.</p>
 <p>Be aware of the following before you work with scope-dependent claims:</p>
 
 <ul>
-  <li>To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100. 
+  <li>To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100.
 If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
 For more information about configuring an app for OpenID Connect, including group claims, see <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect">Using OpenID Connect</a>.</li>
   <li>
@@ -703,7 +703,7 @@ For more information about configuring an app for OpenID Connect, including grou
 </span></code></pre>
 </div>
 
-<p>The claims in the response are identical to those returned for the requested scopes in the <em>id_token</em> JWT, except for the sub-claim which is always present. 
+<p>The claims in the response are identical to those returned for the requested scopes in the <em>id_token</em> JWT, except for the sub-claim which is always present.
 See <a href="#scope-dependent-claims-not-always-returned">Scope-Dependent Claims</a> for more information about individual claims.</p>
 
 <h4 class="api api-response api-response-example" id="response-example-error">Response Example (Error)</h4>
@@ -770,8 +770,8 @@ and only via POST data or within request headers. If you store them on your serv
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/introspect</span></p>
 
-<p>The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not. 
-If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive. 
+<p>The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not.
+If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
 An implicit client can only introspect its own tokens, while a confidential client may inspect all access tokens.</p>
 
 <blockquote>
@@ -822,7 +822,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
 </div>
 
@@ -1038,7 +1038,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
 </div>
 
@@ -1158,9 +1158,9 @@ Use one authentication mechanism with a given request. Using both returns an err
 </div>
 
 <blockquote>
-  <p>Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document. 
-It is safe to cache or persist downloaded keys for performance. 
-However, if the client application is pinned to a signing key, the verification might fail since Okta rotates the key automatically. 
+  <p>Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document.
+It is safe to cache or persist downloaded keys for performance.
+However, if the client application is pinned to a signing key, the verification might fail since Okta rotates the key automatically.
 Pinned client applications must periodically check the Okta signing keys.</p>
 </blockquote>
 
@@ -1176,7 +1176,7 @@ Pinned client applications must periodically check the Okta signing keys.</p>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /.well-known/openid-configuration</span></p>
 
-<p>This API endpoint returns metadata related to OpenID Connect that can be used by clients to programmatically configure their interactions with Okta. 
+<p>This API endpoint returns metadata related to OpenID Connect that can be used by clients to programmatically configure their interactions with Okta.
 This API doesn’t require any authentication and returns a JSON object with the following structure.</p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -1412,7 +1412,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 <h4 id="parameter-details">Parameter Details</h4>
 
 <ul>
-  <li><em>idp</em> and <em>sessionToken</em> are Okta extensions to <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">the OpenID specification</a>. 
+  <li><em>idp</em> and <em>sessionToken</em> are Okta extensions to <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">the OpenID specification</a>.
  All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.</li>
   <li>Each value for <em>response_mode</em> delivers different behavior:
     <ul>
@@ -1421,15 +1421,15 @@ This API doesn’t require any authentication and returns a JSON object with the
       <li><em>form_post</em> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
 and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.</li>
       <li><em>okta_post_message</em> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
-<em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>. 
-This value provides a secure way for a single-page application to perform a sign-in flow 
+<em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>.
+This value provides a secure way for a single-page application to perform a sign-in flow
 in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
 The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage</a> call is in the next section.</li>
     </ul>
   </li>
   <li>
-    <p>Okta requires the OAuth 2.0 <em>state</em> parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
- The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state. 
+    <p>Okta requires the OAuth 2.0 <em>state</em> parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF).
+ The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state.
  Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
   </li>
   <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose token_endpoint_auth_method is ‘none’, makes a code flow authorization request, the code_challenge parameter is required.</li>
@@ -1481,12 +1481,12 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
 <p><em>targetOrigin</em>:</p>
 
 <p>Specifies what the origin of <em>parentWindow</em> must be in order for the postMessage() event to be dispatched
-(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <em>redirect_uri</em> 
+(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <em>redirect_uri</em>
 specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.</p>
 
 <h4 id="response-parameters-3">Response Parameters</h4>
 
-<p>The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI. 
+<p>The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI.
 Irrespective of the response type, the contents of the response is always one of the following.</p>
 
 <table>
@@ -1659,7 +1659,13 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/token</span></p>
 
-<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <a href="/docs/api/getting_started/releases-at-okta.html"><em>client_credentials</em> <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></a> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
+<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> 
+          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
+            <span class="api-label api-label-beta ">
+              <i class="fa fa-warning"></i> Beta
+            </span>
+          </a>
+           and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
 
 <blockquote>
   <p>Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.</p>
@@ -1669,70 +1675,41 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <p>The following parameters can be posted as a part of the URL-encoded form values to the API.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>grant_type</td>
-      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <a href="/docs/api/getting_started/releases-at-okta.html"><em>client_credentials</em> <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></a>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>code</td>
-      <td>Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the <a href="#authentication-request">authorization endpoint</a>.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>refresh_token</td>
-      <td>Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>username</td>
-      <td>Expected if the grant_type specified <em>password</em>.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>password</td>
-      <td>Expected if the grant_type specified <em>password</em>.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>scope</td>
-      <td>Optional if <em>refresh_token</em>, or <em>password</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>redirect_uri</td>
-      <td>Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client.</td>
-      <td>String</td>
-    </tr>
-    <tr>
-      <td>code_verifier</td>
-      <td>The code verifier of <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request.</td>
-      <td>String</td>
-    </tr>
-  </tbody>
-</table>
+<p>Parameter          | Description                                                                                         | Type       |
+——————-+—————————————————————————————————–+————|
+grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <a href="/docs/api/getting_started/releases-at-okta.html"><em>client_credentials</em> 
+          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
+            <span class="api-label api-label-beta ">
+              <i class="fa fa-warning"></i> Beta
+            </span>
+          </a>
+          </a>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |
+code               | Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the <a href="#authentication-request">authorization endpoint</a>. | String
+refresh_token      | Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation. | String |
+username           | Expected if the grant_type specified <em>password</em>. | String |
+password           | Expected if the grant_type specified <em>password</em>. | String |
+scope              | Optional if <em>refresh_token</em>, or <em>password</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
+redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
+code_verifier      | The code verifier of <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |</p>
 
 <blockquote>
-  <p>The <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> is <code class="highlighter-rouge">client_credentials</code>) is <a href="/docs/api/getting_started/releases-at-okta.html">a <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span> feature</a>.</p>
+  <p>The <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> is <code class="highlighter-rouge">client_credentials</code>) is a 
+          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
+            <span class="api-label api-label-beta ">
+              <i class="fa fa-warning"></i> Beta
+            </span>
+          </a>
+           feature.</p>
 </blockquote>
 
 <h5 id="token-authentication-method">Token Authentication Method</h5>
 
-<p>The client can authenticate by providing the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> 
+<p>The client can authenticate by providing the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a>
 and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> as an Authorization header in the Basic auth scheme (basic authentication).</p>
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
 </div>
 

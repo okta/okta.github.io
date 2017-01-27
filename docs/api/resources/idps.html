@@ -843,7 +843,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
                 "filter": null,
                 "action": "AUTO"
             },
-            "subject": { 
+            "subject": {
                 "userNameTemplate": {
                     "template": "idpuser.userPrincipalName",
                     "type": null
@@ -2212,7 +2212,7 @@ Exact matches are returned before partial matches.</p>
 
 <p>Fetches an IdP transaction by <code class="highlighter-rouge">id</code></p>
 
-<p>You must use a <code class="highlighter-rouge">CALLOUT</code> action for <a href="#user-provisioning-action-type">user provisioning</a> or <a href="#account-link-action-type">account linking</a> 
+<p>You must use a <code class="highlighter-rouge">CALLOUT</code> action for <a href="#user-provisioning-action-type">user provisioning</a> or <a href="#account-link-action-type">account linking</a>
 to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-7">Request Parameters</h5>
@@ -2267,7 +2267,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FACEBOOK"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -2612,7 +2612,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FACEBOOK"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -2717,7 +2717,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FACEBOOK"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1"</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -2827,7 +2827,7 @@ to obtain an IdP transaction <code class="highlighter-rouge">id</code>.</p>
 
 <p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/idps/<em>:id</em>/users/<em>:uid</em></span></p>
 
-<p>Removes the link between the Okta user and the IdP user. 
+<p>Removes the link between the Okta user and the IdP user.
 The next time the user federates into Okta via this IdP, they have to re-link their account according to the account link policy configured in Okta for this IdP.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h5>
@@ -3199,7 +3199,13 @@ The next time the user federates into Okta via this IdP, they have to re-link th
 <h2 id="identity-provider-signing-key-store-operations">Identity Provider Signing Key Store Operations</h2>
 
 <blockquote>
-  <p>You must enable the key rollover feature to perform the following operations. Key rollover is <a href="/docs/api/getting_started/releases-at-okta.html">an <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span> feature</a>; contact Customer Support to enable it.</p>
+  <p>You must enable the key rollover feature to perform the following operations. Key rollover is an 
+          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
+            <span class="api-label api-label-ea ">
+              <i class="fa fa-flag"></i> Early Access
+            </span>
+          </a>
+           feature; contact Customer Support to enable it.</p>
 </blockquote>
 
 <blockquote>
@@ -4444,7 +4450,13 @@ The next time the user federates into Okta via this IdP, they have to re-link th
 <p>Determines the <a href="#identity-provider-key-credential-model">IdP Key Credential</a> used to sign requests sent to the IdP.</p>
 
 <blockquote>
-  <p>You must enable the key rollover feature to perform <a href="#identity-provider-signing-key-store-operations">Signing Key Operations</a>. Key rollover is <a href="/docs/api/getting_started/releases-at-okta.html">an <span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span> feature</a>; contact Customer Support to enable it.</p>
+  <p>You must enable the key rollover feature to perform <a href="#identity-provider-signing-key-store-operations">Signing Key Operations</a>. Key rollover is an 
+          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
+            <span class="api-label api-label-ea ">
+              <i class="fa fa-flag"></i> Early Access
+            </span>
+          </a>
+           feature; contact Customer Support to enable it.</p>
 </blockquote>
 
 <table>
@@ -5715,7 +5727,13 @@ The next time the user federates into Okta via this IdP, they have to re-link th
 </table>
 
 <blockquote>
-  <p>*<code class="highlighter-rouge">CUSTOM_ATTRIBUTE</code> with <code class="highlighter-rouge">matchType</code> is an <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span> feature</a>. Contact Support to enable it.</p>
+  <p>*<code class="highlighter-rouge">CUSTOM_ATTRIBUTE</code> with <code class="highlighter-rouge">matchType</code> is an 
+          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
+            <span class="api-label api-label-ea ">
+              <i class="fa fa-flag"></i> Early Access
+            </span>
+          </a>
+           feature. Contact Support to enable it.</p>
 </blockquote>
 
 <p>Property Details</p>
@@ -5778,7 +5796,7 @@ The next time the user federates into Okta via this IdP, they have to re-link th
     <p>IdP user profile attributes can be referenced with the <code class="highlighter-rouge">idpuser</code> prefix such as <code class="highlighter-rouge">idpuser.subjectNameId</code>.</p>
   </li>
   <li>
-    <p>You must define a IdP user profile attribute before it can be referenced in an Okta EL expression. To define an IdP user attribute policy, you may need to create a new IdP instance without a base profile property, edit the IdP user profile, 
+    <p>You must define a IdP user profile attribute before it can be referenced in an Okta EL expression. To define an IdP user attribute policy, you may need to create a new IdP instance without a base profile property, edit the IdP user profile,
  then update the IdP instance with an expression that references the IdP user profile attribute you just created.</p>
   </li>
 </ul>
@@ -6058,8 +6076,8 @@ The next time the user federates into Okta via this IdP, they have to re-link th
 
 <h3 id="links-object">Links Object</h3>
 
-<p>Specifies link relationships (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the IdP 
-using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.<br />
+<p>Specifies link relationships (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the IdP
+using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.
 This object is used for dynamic discovery of related resources and lifecycle operations, and is read only.</p>
 
 <table>
@@ -6114,7 +6132,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FACEBOOK"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54.197.192.167"</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -6382,7 +6400,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) 
+    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko)
         Chrome/47.0.2526.106 Safari/537.36"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54.197.192.167"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -6392,7 +6410,7 @@ This object is used for dynamic discovery of related resources and lifecycle ope
 
 <h3 id="links-object-1">Links Object</h3>
 
-<p>Specifies link relationships (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the IdP transaction using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.<br />
+<p>Specifies link relationships (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the IdP transaction using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.
 This object is used for dynamic discovery of related resources and lifecycle operations, and is read only.</p>
 
 <table>

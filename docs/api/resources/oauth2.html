@@ -166,18 +166,39 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/oauth2.md">Edit Page</a>
       <h1 id="oauth-20-api">OAuth 2.0 API</h1>
 
-<p>Okta is a fully standards-compliant <a href="http://oauth.net/documentation">OAuth 2.0</a> authorization server and a certified <a href="http://openid.net/certification">OpenID Provider</a>. 
+<p>Okta is a fully standards-compliant <a href="http://oauth.net/documentation">OAuth 2.0</a> authorization server and a certified <a href="http://openid.net/certification">OpenID Provider</a>.
 The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.</p>
 
 <p>There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:</p>
 
 <ul>
-  <li>Social Authentication – <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></a></li>
-  <li>OpenID Connect – <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></a></li>
-  <li>API Access Management – <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-ea "><i class="fa fa-flag"></i> Early Access</span></a></li>
+  <li>
+    <p>Social Authentication – 
+        <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
+          <span class="api-label api-label-ea ">
+            <i class="fa fa-flag"></i> Early Access
+          </span>
+        </a></p>
+  </li>
+  <li>
+    <p>OpenID Connect – 
+        <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
+          <span class="api-label api-label-ea ">
+            <i class="fa fa-flag"></i> Early Access
+          </span>
+        </a></p>
+  </li>
+  <li>
+    <p>API Access Management – 
+        <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
+          <span class="api-label api-label-ea ">
+            <i class="fa fa-flag"></i> Early Access
+          </span>
+        </a></p>
+  </li>
 </ul>
 
-<p>It’s important to understand which use case you are targeting and build your application according to the correct patterns for that use case. 
+<p>It’s important to understand which use case you are targeting and build your application according to the correct patterns for that use case.
 The OAuth 2.0 APIs each have several different <a href="#authentication-request">query params</a> which dictate which type of flow you are using and the mechanics of that flow.</p>
 
 <p>At the very basic level, the main API endpoints are:</p>
@@ -215,7 +236,7 @@ The OAuth 2.0 APIs each have several different <a href="#authentication-request"
     <p><img src="/assets/img/native_auth_flow.png" alt="Native Application Flow" /></p>
 
     <blockquote>
-      <p>Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn’t treated as a secret. 
+      <p>Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn’t treated as a secret.
      Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
      For more information, see the PKCE note in <a href="#parameter-details">Parameter Details</a>.</p>
     </blockquote>
@@ -245,8 +266,8 @@ The OAuth 2.0 APIs each have several different <a href="#authentication-request"
     <p><img src="/assets/img/service_app_flow.png" alt="Service Application Flow" />.</p>
 
     <blockquote>
-      <p>Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints. 
- This is what the <code class="highlighter-rouge">state</code> parameter is used for in the flows described above; the client should send a state value in on the authorization request, 
+      <p>Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints.
+ This is what the <code class="highlighter-rouge">state</code> parameter is used for in the flows described above; the client should send a state value in on the authorization request,
  and it must validate that returned “state” parameter from the authorization server matches the original value.</p>
     </blockquote>
   </li>
@@ -254,8 +275,8 @@ The OAuth 2.0 APIs each have several different <a href="#authentication-request"
 
 <h2 id="custom-user-experience">Custom User Experience</h2>
 
-<p>By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don’t have an existing session. 
-If you prefer to use a fully customized user experience, you can instead authenticate the user via the <a href="http://developer.okta.com/docs/api/resources/authn.html">Authentication API</a>. 
+<p>By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don’t have an existing session.
+If you prefer to use a fully customized user experience, you can instead authenticate the user via the <a href="http://developer.okta.com/docs/api/resources/authn.html">Authentication API</a>.
 This authentication method produces a <code class="highlighter-rouge">sessionToken</code> which can be passed into the Authorize Endpoint, and the user won’t see an Okta login page.</p>
 
 <h2 id="access-token">Access Token</h2>
@@ -539,7 +560,7 @@ A Refresh Token will be returned if ‘offline_access’ scope is requested usin
 
 <p>Because Rule A has a higher priority, the requests for user U are evaluated in Rule A, and Rule B is not evaluated.</p>
 
-<p>The requests with client_credential grant type match “no user” condition, which excludes everyone, because there is no user session for the request.</p>
+<p>The requests with <code class="highlighter-rouge">client_credentials</code> grant type match “no user” condition, which excludes everyone, because there is no user session for the request.</p>
 
 <p>The actions in a Rule define which scopes can be granted to the requests, thus determines which claims will be added into the tokens. They also define the lifetime of the Access Token and Refresh Token.</p>
 
@@ -547,8 +568,8 @@ A Refresh Token will be returned if ‘offline_access’ scope is requested usin
 
 <p>API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints. An authorization server defines your security boundary, for example “staging” or “production.” Within each authorization server you can define your own OAuth scopes, claims, and access policies. This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.</p>
 
-<p>At its core, an authorization server is simply an OAuth 2.0 token minting engine. 
-Each authorization server has a unique issuer URI and its own signing key for tokens in order to keep proper boundary between security domains. 
+<p>At its core, an authorization server is simply an OAuth 2.0 token minting engine.
+Each authorization server has a unique issuer URI and its own signing key for tokens in order to keep proper boundary between security domains.
 The authorization server also acts as an OpenID Connect Provider, which means you can request ID tokens in addition to access tokens from the authorization server endpoints.
 To configure an authorization server, log into your org and navigate to <strong>Security</strong> &gt; <strong>API</strong> &gt; <strong>Add Authorization Server</strong>.</p>
 
@@ -704,7 +725,7 @@ However, you can also use OpenID Connect with an authorization server specified:
 <h4 id="parameter-details">Parameter Details</h4>
 
 <ul>
-  <li><em>idp</em> and <em>sessionToken</em> are Okta extensions to the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">OIDC specification</a>. 
+  <li><em>idp</em> and <em>sessionToken</em> are Okta extensions to the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">OIDC specification</a>.
  All other parameters comply with the <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 specification</a> and their behavior is consistent with the specification.</li>
   <li>Each value for <em>response_mode</em> delivers different behavior:
     <ul>
@@ -713,15 +734,15 @@ However, you can also use OpenID Connect with an authorization server specified:
       <li><em>form_post</em> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
 and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.</li>
       <li><em>okta_post_message</em> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
-<em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>. 
-This value provides a secure way for a single-page application to perform a sign-in flow 
+<em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>.
+This value provides a secure way for a single-page application to perform a sign-in flow
 in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
 The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage</a> call is in the next section.</li>
     </ul>
   </li>
   <li>
-    <p>Okta requires the OAuth 2.0 <em>state</em> parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF). 
- The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state. 
+    <p>Okta requires the OAuth 2.0 <em>state</em> parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF).
+ The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state.
  Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
   </li>
   <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose token_endpoint_auth_method is ‘none’, makes a code flow authorization request, the code_challenge parameter is required.</li>
@@ -773,12 +794,12 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
 <p><em>targetOrigin</em>:</p>
 
 <p>Specifies what the origin of <em>parentWindow</em> must be in order for the postMessage() event to be dispatched
-(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <em>redirect_uri</em> 
+(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <em>redirect_uri</em>
 specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.</p>
 
 <h4 id="response-parameters">Response Parameters</h4>
 
-<p>The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI. 
+<p>The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI.
 Irrespective of the response type, the contents of the response is always one of the following.</p>
 
 <table>
@@ -951,7 +972,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/token</span></p>
 
-<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <a href="/docs/api/getting_started/releases-at-okta.html"><em>client_credentials</em> <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></a> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
+<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
 
 <blockquote>
   <p>Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.</p>
@@ -972,7 +993,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <a href="/docs/api/getting_started/releases-at-okta.html"><em>client_credentials</em> <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></a>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
+      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1023,18 +1044,14 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
   </tbody>
 </table>
 
-<blockquote>
-  <p>The <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> is <code class="highlighter-rouge">client_credentials</code>) is <a href="/docs/api/getting_started/releases-at-okta.html">a <span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span> feature</a>.</p>
-</blockquote>
-
 <h5 id="token-authentication-method">Token Authentication Method</h5>
 
-<p>For clients authenticating by client credentials, provide the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> 
+<p>For clients authenticating by client credentials, provide the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a>
 and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> either as an Authorization header in the Basic auth scheme (basic authentication) or as additional parameters to the POST body. Including credentials in both the headers and the POST body is not allowed.</p>
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
 </div>
 
@@ -1153,8 +1170,8 @@ and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-Open
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/introspect</span></p>
 
-<p>The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not. 
-If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive. 
+<p>The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not.
+If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
 An implicit client can only introspect its own tokens, while a confidential client may inspect all access tokens.</p>
 
 <blockquote>
@@ -1205,7 +1222,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
 </div>
 
@@ -1425,7 +1442,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span> 
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
 </div>
 
@@ -1742,7 +1759,12 @@ This API doesn’t require any authentication and returns a JSON object with the
   </tbody>
 </table>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as</span> <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as</span> 
+          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
+            <span class="api-label api-label-beta ">
+              <i class="fa fa-warning"></i> Beta
+            </span>
+          </a></p>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1869,7 +1891,12 @@ This API doesn’t require any authentication and returns a JSON object with the
   </tbody>
 </table>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as/:authorizationServerId</span> <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as/:authorizationServerId</span> 
+          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
+            <span class="api-label api-label-beta ">
+              <i class="fa fa-warning"></i> Beta
+            </span>
+          </a></p>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1957,7 +1984,12 @@ This API doesn’t require any authentication and returns a JSON object with the
 
 <p>Returns authorization server identified by authorizationServerId.</p>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/as/:authorizationServerId</span> <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/as/:authorizationServerId</span> 
+          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
+            <span class="api-label api-label-beta ">
+              <i class="fa fa-warning"></i> Beta
+            </span>
+          </a></p>
 
 <h4 id="request-example">Request Example</h4>
 
@@ -2097,7 +2129,12 @@ This API doesn’t require any authentication and returns a JSON object with the
 
 <p>Returns the current keys in rotation for the authorization server.</p>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/as/:authorizationServerId/credentials/keys</span> <a href="/docs/api/getting_started/releases-at-okta.html"><span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span></a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/as/:authorizationServerId/credentials/keys</span> 
+          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
+            <span class="api-label api-label-beta ">
+              <i class="fa fa-warning"></i> Beta
+            </span>
+          </a></p>
 
 <h4 id="request-example-1">Request Example</h4>
 
@@ -2190,7 +2227,12 @@ If keys are rotated manually, any intermediate cache should be invalidated and k
   </tbody>
 </table>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as/:authorizationServerId/credentials/lifecycle/keyRotate</span> [<span class="api-label api-label-beta "><i class="fa fa-warning"></i> Beta</span>(/docs/api/getting_started/releases-at-okta.html)</p>
+<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as/:authorizationServerId/credentials/lifecycle/keyRotate</span> 
+          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
+            <span class="api-label api-label-beta ">
+              <i class="fa fa-warning"></i> Beta
+            </span>
+          </a></p>
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
