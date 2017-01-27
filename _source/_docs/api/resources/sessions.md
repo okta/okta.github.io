@@ -667,7 +667,7 @@ Sessions have the following properties:
 | mfaActive                                 | indicates whether the user has [enrolled an MFA factor](./factors.html#list-enrolled-factors) | Boolean                                   | FALSE    | FALSE  | TRUE     |
 |-------------------------------------------+-----------------------------------------------------------------------------------------------+-------------------------------------------+----------+--------+----------|
 
-> The `mfaActive` parameter is a {% api_lifecycle deprecated %} feature]. Use the `lastFactorVerification` attribute in conjunction with `amr` to understand if the user has performed MFA for the current session. Use the [Factors API](./factors.html#list-enrolled-factors) to query the factor enrollment status for a given user.
+> The `mfaActive` parameter is a {% api_lifecycle deprecated %} feature. Use the `lastFactorVerification` attribute in conjunction with `amr` to understand if the user has performed MFA for the current session. Use the [Factors API](./factors.html#list-enrolled-factors) to query the factor enrollment status for a given user.
 
 #### Optional Session Properties
 
@@ -682,7 +682,7 @@ The [Create Session](#create-session) operation can optionally return the follow
 
 > The `cookieToken` is a {% api_lifecycle deprecated %} property. Instead, use the [Authentication API](./authn.html), which supports the full user authentication pipeline and produces a `sessionToken` which can be used in this API.
 
-> The `cookieTokenUrl` is a {% api_lifecycle deprecated %} property]. because modern browsers block cookies set via embedding images from another origin (cross-domain).
+> The `cookieTokenUrl` is a {% api_lifecycle deprecated %} property. because modern browsers block cookies set via embedding images from another origin (cross-domain).
 
 ### Session Status
 
