@@ -330,5 +330,11 @@ $(function() {
 		init();
 		onScroll();
 
+		if (window.location.hash) {
+			$body.animate({
+				scrollTop: $(window.location.hash).offset().top - offset
+			});
+		}
+
 	});
 }());
