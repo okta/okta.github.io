@@ -25,7 +25,7 @@ At the very basic level, the main API endpoints are:
 ## Getting Started
 
 If you are new to OAuth 2.0, read this topic before experimenting with the Postman collection. If you are familiar with the
-flows defined by the spec, you may want to experiment with the Postman collection first:
+flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may want to experiment with the Postman collection first:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3230565cff5b258b270d)
 
