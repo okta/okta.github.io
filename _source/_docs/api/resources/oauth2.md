@@ -22,6 +22,13 @@ At the very basic level, the main API endpoints are:
 * [Authorize](#authentication-request) endpoint initiates an OAuth 2.0 request.
 * [Token](#token-request) endpoint redeems an authorization grant (returned by the [Authorize](#authentication-request) endpoint) for an access token.
 
+## Getting Started
+
+If you are new to OAuth 2.0, read this topic before experimenting with the Postman collection. If you are familiar with the
+flows defined by the spec, you may want to experiment with the Postman collection first:
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3230565cff5b258b270d)
+
 ## Basic Flows
 
 1. Browser/Single-Page Application
