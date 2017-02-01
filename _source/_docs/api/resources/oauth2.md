@@ -119,7 +119,11 @@ The lifetime of Access Token can be configured in the [Access Policies](#access-
     "flights",
     "custom"
   ],
-  "flight_number": "AX102",
+  "number_of_flights": 2,
+  "flight_number": [
+    "AX102",
+    "CT508"
+  ],
   "custom_claim": "CustomValue"
 }
 ~~~
@@ -190,7 +194,7 @@ If the request that generates the access token contains any custom scopes, those
 
 #### Custom claims
 
-Custom claims are associated with scopes. If one of the associated scopes is granted to the access token, the custom claim will be added into it. The value of a custom claim can be either an [expression](/reference/okta_expression_language) or group filter. The expression will be evaluated at runtime, and if the evaluated result is null, that custom claim will not be added into the access token.
+Custom claims are associated with scopes. If one of the associated scopes is granted to the Access Token, the custom claim is added into it. The value of a custom claim can be either an [expression](/reference/okta_expression_language) or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn't added into the Access Token. The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.
 
 >*Note:* For the custom claim with group filter, its value has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
 
@@ -448,7 +452,8 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/:authorizationServerId/v1/token %}
 
-The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
+
+The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* and the corresponding credentials and returns back an Access Token. A Refresh Token is returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type returns an ID Token if the *openid* scope is requested.
 
 > Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
 
@@ -458,7 +463,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |
+grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta uses to authorize the creation of the tokens. | String |  
 code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String
 refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
 username           | Expected if the grant_type specified *password*. | String |
@@ -616,7 +621,7 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 {
     "active" : true,
     "token_type" : "Bearer",
-    "scope" : "openid profile",
+    "scope" : "openid email flights custom",
     "client_id" : "a9VpZDRCeFh3Nkk2VdYa",
     "username" : "john.doe@example.com",
     "exp" : 1451606400,
@@ -625,7 +630,13 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
     "aud" : "http://api.example.com",
     "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
-    "uid" : "00uid4BxXw6I6TV4m0g3"
+    "uid" : "00uid4BxXw6I6TV4m0g3",
+    "number_of_flights": 2,
+    "flight_number": [
+      "AX102",
+      "CT508"
+    ],
+    "custom_claim": "CustomValue"
 }
 ~~~
 
