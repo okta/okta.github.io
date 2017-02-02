@@ -2620,7 +2620,9 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:id*/lifecycle/deactivate</span>
 
-Deactivates an active application.
+Deactivate an active application. Invalidate all tokens issued by that application
+immediately and permanently. Reactivating the application does not restore the
+validity of those tokens.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
