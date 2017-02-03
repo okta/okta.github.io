@@ -331,9 +331,7 @@ $(function() {
 		onScroll();
 
 		if (window.location.hash) {
-			$body.animate({
-				scrollTop: $(window.location.hash).offset().top - offset
-			});
+			$('html,body').scrollTop($(window.location.hash).offset().top - offset);
 		}
 
 	});
