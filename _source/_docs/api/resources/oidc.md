@@ -827,7 +827,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
 grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or [*client_credentials* {% api_lifecycle beta %}](/docs/api/getting_started/releases-at-okta.html). Determines the mechanism Okta will use to authorize the creation of the tokens. | String |
-code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String
+code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String |
 refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
 username           | Expected if the grant_type specified *password*. | String |
 password           | Expected if the grant_type specified *password*. | String |
