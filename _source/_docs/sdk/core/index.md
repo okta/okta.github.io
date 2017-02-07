@@ -1,3 +1,3 @@
 ---
-redirect_to: "/docs/sdk/core/api.html"
+redirect_to: "/docs/code/"
 ---
