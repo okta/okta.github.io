@@ -87,7 +87,7 @@ Okta [Sessions API](/docs/api/resources/sessions.html) to obtain an Okta [sessio
 
 For many consumer-facing applications, authentication and registration
 are increasingly relying on social identity providers such as
-Facebook, LinkedIn and Google. Okta has [built-in support](docs/api/resources/social_authentication.html) for these
+Facebook, LinkedIn and Google. Okta has [built-in support](/docs/api/resources/social_authentication.html) for these
 social identity providers to support new user registration,
 authentication and profile updates based on OAuth scopes from the
 social providers.  For applications that have existing accounts, Okta
