@@ -2,6 +2,8 @@
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+source "scripts/import_markdown.sh"
+
 # Where the generated Jekyll site will be placed
 GENERATED_SITE_LOCATION="_site"
 
@@ -55,6 +57,7 @@ function generate_html() {
     interject 'Using Jekyll to generate HTML'
     
     if [ ! -d $GENERATED_SITE_LOCATION ]; then
+        import_markdown
         bundle exec jekyll build
         local status=$?
         interject 'Done generating HTML'
