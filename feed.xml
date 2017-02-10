@@ -79,7 +79,7 @@
 
 &lt;p&gt;&lt;strong&gt;Happy Okta’ing!&lt;/strong&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 22 Mar 2016 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</guid>
       </item>
@@ -109,7 +109,7 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/150714428&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 05 Jan 2016 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</guid>
       </item>
@@ -124,7 +124,7 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2015/12/07/oauth</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/07/oauth</guid>
       </item>
@@ -546,7 +546,7 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
 licensed under &lt;a href=&quot;http://www.apache.org/licenses/LICENSE-2.0&quot;&gt;Apache 2.0&lt;/a&gt;. All
 rights reserved.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 02 Dec 2015 00:00:00 +0000</pubDate>
+        <pubDate>Wed, 02 Dec 2015 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</guid>
       </item>
@@ -607,7 +607,7 @@ In the event of trust page problems, make sure that you have ways to easily and 
 
 &lt;p&gt;&lt;em&gt;The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Jun 2015 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/06/11/trustpage</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/06/11/trustpage</guid>
       </item>
@@ -694,7 +694,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 &lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component.&lt;/p&gt;
 
 </description>
-        <pubDate>Fri, 22 May 2015 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 22 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/22/tcmalloc</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/22/tcmalloc</guid>
       </item>
@@ -913,7 +913,7 @@ enforce limits and design for infinity.&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</guid>
       </item>
@@ -1019,7 +1019,7 @@ where we were last fall, our goal is &lt;strong&gt;zero failover time&lt;/strong
 their hands dirty tackling product issues? Our CTO doesn’t code very often, but when
 he does, he patches the JVM.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</guid>
       </item>
@@ -1181,7 +1181,7 @@ steps in writing on our wiki. Thanks guys!&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Thu, 23 Apr 2015 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 23 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</guid>
       </item>
@@ -1340,7 +1340,7 @@ dependency, not a real one.&lt;/p&gt;
 how to make tests isolated. You can also check out the full code at
 &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 14 Apr 2015 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 14 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</guid>
       </item>
@@ -1534,7 +1534,7 @@ because of a bad network connection.&lt;/p&gt;
 to achieve test isolation using dependency injection. You can also
 check out the full code at &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 07 Apr 2015 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 07 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</guid>
       </item>
