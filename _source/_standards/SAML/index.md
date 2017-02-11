@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: SAML
+title: SAML and Okta
 excerpt: Learn how to Single Sign-On enable your web and mobile application
 icon: /assets/img/icons/saml.svg
 permalink: /standards/SAML/

@@ -1,12 +1,12 @@
 ---
 layout: docs_page
-title: Provisioning with Lifecycle Management
+title: SCIM Provisioning with Lifecycle Management
 excerpt: Enable SCIM-based provisioning from Okta to your application.
 icon: /assets/img/icons/scim.svg
 permalink: /standards/SCIM/
 redirect_from: "/docs/guides/scim_guidance.html"
 ---
-# Provisioning with Okta's Lifecycle Management 
+# SCIM: Provisioning with Okta's Lifecycle Management
 Developers at a software vendor (ISV), Okta customers, and system-integrators (SI) want to facilitate fast, 
 enterprise-wide deployment of their app by integrating with Okta for user provisioning primarily via the SCIM standard. 
 This article describes:
@@ -1135,17 +1135,17 @@ Here’s the process for getting joint customers involved in testing the newly d
 
 In order for an app to be published in the Okta Application Network, it must meet the following criteria:
 
-- [ ] ISV configuration guide explaining:
-    - [ ] The supported features
-    - [ ] Step-by-step instructions for setting up the integration
-- [ ] Gotchas & known issues
-- [ ] Support and Contact Info
-- [ ] ISV Support Contact
-- [ ] ISV Escalation Contact
-- [ ] Full, permanent test tenant provided to Okta
-- [ ] RunScope Test Suite
-- [ ] Final Full QA by Okta
-- [ ] Customer validation
+* ISV configuration guide explaining:
+    * The supported features
+    * Step-by-step instructions for setting up the integration
+* Gotchas & known issues
+* Support and Contact Info
+* ISV Support Contact
+* ISV Escalation Contact
+* Full, permanent test tenant provided to Okta
+* RunScope Test Suite
+* Final Full QA by Okta
+* Customer validation
 
 ## Provisioning FAQs
 
