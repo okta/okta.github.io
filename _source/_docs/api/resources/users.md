@@ -2306,7 +2306,7 @@ Content-Type: application/json
 ### Clear User Sessions
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/sessions
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /users/*:uid*/sessions
 
 Removes all active identity provider sessions. This will force the user to authenticate on the next operation.
 

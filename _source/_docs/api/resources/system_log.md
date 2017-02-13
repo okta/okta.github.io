@@ -19,7 +19,7 @@ Use this API to export event data as a batch job from your organization to anoth
 ### List Events
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /logs</span>
 
 Fetch a list of events from your Okta organization system log.
 
