@@ -22,6 +22,8 @@ the section titled “Configuring Spring Security SAML to work with Okta”.
 * Will be replaced with the ToC
 {:toc .list-unstyled .toc}
 
+>Note: The Spring security SAML toolkit you download is not Okta's toolkit and is not supported by Okta.  
+
 ## Requirements
 
 Please make sure the following are installed before starting installation:

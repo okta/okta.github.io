@@ -74,6 +74,8 @@ Okta to a sample PHP application using SimpleSAMLphp.
 Start by following the [instructions for installing
 SimpleSAMLphp](https://simplesamlphp.org/docs/stable/simplesamlphp-install).
 
+>Note: SimpleSAMLphp is third-party software and is not supported by Okta. 
+
 Depending on the system you are installing SimpleSAMLphp on, your
 installation might require you to make some custom configuration changes.
 In particular, this guide assumes that you have PHP running on your local
