@@ -21,7 +21,7 @@ cd ${OKTA_HOME}/${REPO}
 source "scripts/common.sh"
 
 check_for_jekyll_dependencies
-check_for_protractor_dependencies
+check_for_npm_dependencies
 
 # Make a temporary file, then unlink it (-u)
 # this gives us a nice name for a temporary file
