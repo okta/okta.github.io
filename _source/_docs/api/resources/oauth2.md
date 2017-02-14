@@ -86,7 +86,9 @@ This authentication method produces a `sessionToken` which can be passed into th
 
 An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#jwt-header), [payload](#jwt-payload), and [signature](#jwt-signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
 
-The lifetime of Access Token can be configured in the [Access Policies](#access-policies).
+The lifetime of Access Token can be configured in the [Access Policies](#access-policies). If the client that
+issued the token is deactivated, the token is immediately and permanently invalidated. Reactivating the
+client does not make the token valid again.
 
 ### JWT Header
 
@@ -249,9 +251,11 @@ The lifetime of a Refresh Token is configured in [Access Policies](#access-polic
 ## Id Token
 An authorization server can also issue an Id Token to the client, just like [OIDC](oidc#id-token). The differences are 1) 'groups' is not a reserved scope or claim. To get a claim with group information, the administrators have to define a custom claim with a group filter and associate it with a scope. 2) the custom properties in the app user profile will not be put in the Id Token by default even if profile scope is granted. To get a claim for a custom property, the administrators have to define a custom claim with an Okta EL expression and associate it with a scope.
 
-The lifetime of an Id Token is 1 hour.
+The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
+immediately and permanently invalidated. Reactivating the client does not make the token valid again.
 
-The same validation steps for [OIDC](oidc.html#validating-id-tokens) can also be applied to Id Token for OAuth2, except the public keys should be retrieved via the [Get Keys endpoint](#get-keys).
+The same validation steps for [OIDC](oidc.html#validating-id-tokens) can also be applied to Id Token for
+OAuth2, except the public keys should be retrieved via the [Get Keys endpoint](#get-keys).
 
 
 ## Access Policies
