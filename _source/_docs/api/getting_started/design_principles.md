@@ -28,7 +28,7 @@ The Okta API is a versioned API.  Okta reserves the right to add new parameters,
 
 All URLs listed in the documentation should be preceded with your organization's subdomain (tenant) https://*{yoursubdomain}*.okta.com/api/*{apiversion}* and API version.
 
-The `apiversion` is is currently v1.
+The `apiversion` is currently v1.
 
 > All API requests must use HTTPS scheme
 
