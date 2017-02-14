@@ -5,6 +5,14 @@
 # Where the generated Jekyll site will be placed
 GENERATED_SITE_LOCATION="_site"
 
+if [[ -z "${BUILD_FAILURE}" ]]; then
+    export BUILD_FAILURE=1
+fi
+
+if [[ -z "${SUCCESS}" ]]; then
+    export SUCCESS=1
+fi
+
 # Print an easily visible line, useful for log files.
 function interject() {
     echo "----- ${1} -----"
@@ -65,5 +73,11 @@ function generate_html() {
     fi
 }
 
-
-
+function require_env_var() {
+    local env_var_name=$1
+    eval env_var=\$$env_var_name
+    if [[ -z "${env_var}" ]]; then
+        echo "Environment variable '${env_var_name}' must be defined, but isn't.";
+        exit 1
+    fi
+}
