@@ -9,8 +9,10 @@ redirect_from: "/docs/api/rest/oauth-clients.html"
 The OAuth Clients API provides operations to register and manage client applications for use with Okta's
 OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in [RFC7591](https://tools.ietf.org/html/rfc7591).
 
-Note that clients managed via this API are modeled as applications in Okta and will show in the Applications section of the
-Administrator dashboard. Changes made via the API will reflect in the UI and vice versa.
+Note that clients managed via this API are modeled as applications in Okta and appear in the Applications section of the
+Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
+follow the rules described in [Access Token](http://developer.okta.com/docs/api/resources/oauth2.html#access-token)
+and [ID Token](http://developer.okta.com/docs/api/resources/oauth2.html#id-token).
 
 > This API is an {% api_lifecycle beta%} feature.
 

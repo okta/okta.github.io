@@ -26,15 +26,16 @@ Fetch a list of events from your Okta organization system log.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-
-Parameter | Description                                                                         | Param Type | DataType | Required | Minimum  | Maximum | Default
---------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------    -------   -------
-limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE     |       0  |     100 |
-since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 |
-filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE    |
-q         | Finds a user that matches firstName, lastName, and email properties                 | Query      | String   | FALSE    |
-until     | Specifies the first date after which results aren't returned, can be empty which denotes no end date | Query      | DateTime | FALSE    |
-after     | An opaque identifier used for pagination                                            | Query      | String   | FALSE    |
+|---------- + ------------------------------------------------------------------------------------+------------+----------+----------+----------+---------|
+| Parameter | Description                                                                         | Param Type | DataType | Required | Minimum  | Maximum |
+| --------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------- | --------|
+| limit     | Specifies the number of results to page                                             | Query      | Number   | FALSE    |       0  |     100 |
+| since     | Specifies the last date before the oldest result is returned                        | Query      | DateTime | TRUE     |       0  |    1000 |
+| filter    | [Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE    |          |          |
+| q         | Finds a user that matches firstName, lastName, and email properties                 | Query      | String   | FALSE    |          |          |
+| until     | Specifies the first date after which results aren't returned, can be empty which denotes no end date | Query      | DateTime | FALSE    |          |          |
+| after     | An opaque identifier used for pagination                                            | Query      | String   | FALSE    |          |          |
+|-----------+-------------------------------------------------------------------------------------+------------+----------+----------+----------+----------|
 
 The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
 
@@ -352,26 +353,26 @@ Use the following example by replacing the explanatory text with valid values.
 
 The Log model is read-only. The following properties are available:
 
-|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property  | Description                                                           | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------   | --------------------------------------------------------------------- | ---------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- | ---------- |
-| eventId   | Unique key for event                                                  | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| published | Timestamp when event was published                                    | Date                                                           | FALSE    | FALSE  | TRUE     | 1         | 255       |            |
-| eventType | Type of event that was published                                      | String                                                         | FALSE    | FALSE  | TRUE     | 1         | 255       |            |
-| version   | versioning indicator                                                  | String                                                         | FALSE    | FALSE  | TRUE     | 1         | 255       |            |
-| severity  | Indicates how severe the event is. DEBUG, INFO, WARN, ERROR           | String                                                         | FALSE    | FALSE  | TRUE     | 1         | 255       |            |
-| legacyEventType | legacy event type                                               | String                                                         | TRUE     | FALSE  | TRUE     | 1         | 255       |            |
-| displayMessage | display message regarding the event                              | String                                                         | TRUE     | FALSE  | TRUE     | 1         | 255       |            |
-| actor     | Describes zero or more entities that performed the action             | Array of [Actor Object](#actor-object)                         | TRUE     | FALSE  | TRUE     |           |           |            |
-| client    | Identifies the client that requested the action                       | [Client Object](#client-object)                                | TRUE     | FALSE  | TRUE     |           |           |            |
-| outcome   | Identifies the outcome of the action                                  | [Outcome Object](#outcome-object)                              | TRUE     | FALSE  | TRUE     |           |           |            |
-| target    | Identifies the targets of the action                                  | [Target Object](#target-object)                                | TRUE     | FALSE  | TRUE     |           |           |            |
-| transaction   |  Identifies the transaction details of the action                 | [Transaction Object](#transaction-object)                      | TRUE     | FALSE  | TRUE     |           |           |            |
-| debugContext   | Identifies the debug request data of the action                  | [DebugContext Object](#debugcontext-object)                    | TRUE     | FALSE  | TRUE     |           |           |            |
-| authenticationContext | Identifies the authentication data of the action          | [AuthenticationContext Object](#authenticationcontext-object)  | TRUE     | FALSE  | TRUE     |           |           |            |
-| securityContext | Identifies the security data of the action                      | [SecurityContext Object](#securitycontext-object)              | TRUE     | FALSE  | TRUE     |           |           |            |
-| request   | Identifies the request data of the action                             | [Request Object](#request-object)                              | TRUE     | FALSE  | TRUE     |           |           |            |
-|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------|
+| Property  | Description                                                           | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength |
+| -------   | --------------------------------------------------------------------- | ---------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- |
+| eventId   | Unique key for an event                                               | String                                                         | FALSE    | TRUE   | TRUE     |           |           |
+| published | Timestamp when event was published                                    | Date                                                           | FALSE    | FALSE  | TRUE     | 1         | 255       |
+| eventType | Type of event that was published                                      | String                                                         | FALSE    | FALSE  | TRUE     | 1         | 255       |
+| version   | Versioning indicator                                                  | String                                                         | FALSE    | FALSE  | TRUE     | 1         | 255       |
+| severity  | Indicates how severe the event is: `DEBUG`, `INFO`, `WARN`, `ERROR`   | String                                                         | FALSE    | FALSE  | TRUE     | 1         | 255       |
+| legacyEventType | Legacy event type                                               | String                                                         | TRUE     | FALSE  | TRUE     | 1         | 255       |
+| displayMessage | The display message for an event                                 | String                                                         | TRUE     | FALSE  | TRUE     | 1         | 255       |
+| actor     | Describes zero or more entities that performed an action              | Array of [Actor Object](#actor-object)                         | TRUE     | FALSE  | TRUE     |           |           |
+| client    | Identifies the client that requested an action                        | [Client Object](#client-object)                                | TRUE     | FALSE  | TRUE     |           |           |
+| outcome   | Identifies the outcome of an action                                   | [Outcome Object](#outcome-object)                              | TRUE     | FALSE  | TRUE     |           |           |
+| target    | Identifies the targets of an action                                   | [Target Object](#target-object)                                | TRUE     | FALSE  | TRUE     |           |           |
+| transaction   |  Identifies the transaction details of an action                  | [Transaction Object](#transaction-object)                      | TRUE     | FALSE  | TRUE     |           |           |
+| debugContext   | Identifies the debug request data of sn action                   | [DebugContext Object](#debugcontext-object)                    | TRUE     | FALSE  | TRUE     |           |           |
+| authenticationContext | Identifies the authentication data of an action           | [AuthenticationContext Object](#authenticationcontext-object)  | TRUE     | FALSE  | TRUE     |           |           |
+| securityContext | Identifies the security data of an action                       | [SecurityContext Object](#securitycontext-object)              | TRUE     | FALSE  | TRUE     |           |           |
+| request   | Identifies the request data of an action                              | [Request Object](#request-object)                              | TRUE     | FALSE  | TRUE     |           |           |
+|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------|
 
 > The actor and/or target of an event is dependent on the action performed. All events have actors. Not all events have targets.
 
@@ -379,31 +380,31 @@ The Log model is read-only. The following properties are available:
 
 ### Actor Object
 
-Describes the actor which performs the action
+Describes the user, app, client, or other entity (actor) who performed an action on a target
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| id         | Id of the target                                               | String          | FALSE    |         |           |           |            |
-| type       | type of the target                                             | String          | FALSE    |         |           |           |            |
-| alternateId | alternative id of the target                                  | String          | TRUE     |         |           |           |            |
-| displayName | Display name of the target                                    | String          | TRUE     |         |           |           |            |
-| detail     | A map that goes from a String key to a value                   | Map[String->Object | TRUE  |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|-------------+-----------------------------------------------+-------------------+----------|
+| Property    | Description                                   | DataType          | Nullable |
+| ----------- | ----------------------------------------------| ----------------- | -------- |
+| id          | ID of an actor                                | String            | FALSE    |
+| type        | Type of an actor                              | String            | FALSE    |
+| alternateId | Alternative ID of an actor                    | String            | TRUE     |
+| displayName | Display name of an actor                      | String            | TRUE     |
+| detail      | Details about an actor                        | Map[String->Object| TRUE     |
+|-------------+-----------------------------------------------+-------------------+----------|
 
 ### Target Object
 
-Describes the target of the action
+The entity upon which an actor performs an action. Targets may be anything: an app user, a login token or anything else.
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| id         | Id of the target                                               | String          | FALSE    |         |           |           |            |
-| type       | type of the target                                             | String          | FALSE    |         |           |           |            |
-| alternateId | alternative id of the target                                  | String          | TRUE     |         |           |           |            |
-| displayName | Display name of the target                                    | String          | TRUE     |         |           |           |            |
-| detail     | A map that goes from a String key to a value                   | Map[String->Object | TRUE  |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|-------------+--------------------------------------------------------------+-----------------+----------|
+| Property    | Description                                                  | DataType        | Nullable |
+| ----------- | ------------------------------------------------------------ | --------------- | -------- |
+| id          | ID of a target                                               | String          | FALSE    |
+| type        | Type of a target                                             | String          | FALSE    |
+| alternateId | alternative id of a target                                   | String          | TRUE     |
+| displayName | Display name of a target                                     | String          | TRUE     |
+| detail      | Details about the target                                     | Map[String->Object | TRUE  |
+|-------------+--------------------------------------------------------------+-----------------+----------|
 
 ~~~ json
 {
@@ -418,137 +419,140 @@ Describes the target of the action
 
 ### Client Object
 
-Describes the client performing the action
+Describes the browser or other client the actor used to perform an action on a target
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| userAgent  | Id of the target                                               | String          | TRUE     |         |           |           |            |
-| geographicalContext | Geographical context data of the event                | [GeographicalContext Object](#geographicalcontext-object) | TRUE | |           |           |            |
-| zone       | zone client is in                                              | String          | TRUE     |         |           |           |            |
-| ipAddress  | Ip address of the client                                       | String          | TRUE     |         |           |           |            |
-| device     | Device that the client was using                               | String          | TRUE     |         |           |           |            |
-| id         | id of the client                                               | String          | TRUE     |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+--------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                  | DataType        | Nullable |
+| ---------- | ------------------------------------------------------------ | --------------- | -------- |
+| userAgent  | ID of the client used by an actor to perform an action       | String          | TRUE     |
+| geographicalContext | Geographical context data of the event              | [GeographicalContext Object](#geographicalcontext-object) | TRUE |
+| zone       | Zone where the client is located                             | String          | TRUE     |
+| ipAddress  | Ip address of the client                                     | String          | TRUE     |
+| device     | Device that the client operated from                         | String          | TRUE     |
+| id         | ID of the client                                             | String          | TRUE     |
+|------------+--------------------------------------------------------------+-----------------+----------|
 
 ### GeographicalContext Object
 
-Describes the location data regarding where the action was performed
+Describes the location of the target that the action was performed on
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| geolocation | geolocation of the target                                     | [Geolocation Object](#geolocation-object) | TRUE |        |           |           |            |
-| city       | city of the event                                              | String          | TRUE     |         |           |           |            |
-| state      | zone client is in                                              | String          | TRUE     |         |           |           |            |
-| country    | country of the client                                          | String          | TRUE     |         |           |           |            |
-| postalCode | Device that the client was using                               | String          | TRUE     |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| geolocation | Geolocation of the target                                     | [Geolocation Object](#geolocation-object) | TRUE |
+| city       | City of the event                                              | String          | TRUE     |
+| state      | Zone client is in                                              | String          | TRUE     |
+| country    | Country of the client                                          | String          | TRUE     |
+| postalCode | Device that the client was using                               | String          | TRUE     |
+|------------+----------------------------------------------------------------+-----------------+----------|
 
 ### Geolocation Object
 
-Describes transaction data an event
+The latitude and longitude of the geolocation where an action was performed
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| lat        | latitude                                                       | Double          | FALSE    |         |           |           |            |
-| lon        | longitude                                                      | Double          | FALSE    |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| lat        | Latitude                                                       | Double          | FALSE    |
+| lon        | Longitude                                                      | Double          | FALSE    |
+|------------+----------------------------------------------------------------+-----------------+----------|
 
 
 ### Outcome Object
 
-Describes transaction data an event
+Describes the result of an action and the reason for that result
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| result     | Result of the action. SUCCESS, FAILURE, SKIPPED, UNKNOWN       | String          | FALSE    |         |           |           |            |
-| reason     | Type of transaction, "WEB" or "JOB"                            | String          | TRUE     |         | 1         | 255       |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+------------------------------------------------------------------------+-----------------+----------+---------+-----------+-----------|
+| Property   | Description                                                            | DataType        | Nullable | Default | MinLength | MaxLength |
+| ---------- | ---------------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- |
+| result     | Result of the action: `SUCCESS`, `FAILURE`, `SKIPPED`, `UNKNOWN`       | String          | FALSE    |         |           |           |
+| reason     | Reason for the result, for example `INVALID_CREDENTIALS`               | String          | TRUE     |         | 1         | 255       |
+|------------+------------------------------------------------------------------------+-----------------+----------+---------+-----------+-----------|
 
 ### Transaction Object
 
-Describes transaction data an event
+Describes the transaction data for an event
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| id         | Id of the transaction Object                                   | String          | TRUE     |         |           |           |            |
-| type       | Type of transaction, "WEB" or "JOB"                            | String          | TRUE     |         |           |           |            |
-| detail     | A map that goes from a String key to a value                   | Map[String->Object | TRUE  |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| id         | Id of the transaction Object                                   | String          | TRUE     |
+| type       | Type of transaction: `WEB` or `JOB`                            | String          | TRUE     |
+| detail     | Details about the transaction                                  | Map[String->Object | TRUE  |
+|------------+----------------------------------------------------------------+-----------------+----------|
 
 ### DebugContext Object
 
-Describes additional context regarding the event
+Describes additional context regarding an event
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| debugData  | A map that goes from a String key to a value                   | Map[String->Object | TRUE  |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| debugData  | A map that goes from a String key to a value                   | Map[String->Object | TRUE  |
+|------------+----------------------------------------------------------------+-----------------+----------|
+
+This object provides a way to store additional text about an event for debugging. For example, when you create an API token, 
+`debugData` shows the `RequestUri` used to obtain the token, for example `/api/internal/tokens`.
 
 ### AuthenticationContext Object
 
-Describes authentication data regarding an event
+Describes authentication data for an event
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| authenticationProvider | OKTA_AUTHENTICATION_PROVIDER, ACTIVE_DIRECTORY, LDAP, FEDERATION, SOCIAL, FACTOR_PROVIDER | String | TRUE  | | | |            |
-| credentialProvider | OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY | Array of String | TRUE  |     |           |           |            |
-| credentialType | type of credential OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL | String        | TRUE     |         |           |           |            |
-| issuer     | Uri of the request that generated the event.                   | [Issuer Object](#issuer-object) | TRUE     |         |           |           |            |
-| externalSessionId | Uri of the request that generated the event.            | String          | TRUE     |         | 1         | 255       |            |
-| interface  | Uri of the request that generated the event.                   | String          | TRUE     |         | 1         | 255       |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------+-----------+-----------|
+| Property   | Description                                                    | DataType        | Nullable | MinLength | MaxLength |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- | --------- | --------- |
+| authenticationProvider | Type of authentication provider: `OKTA_AUTHENTICATION_PROVIDER`, `ACTIVE_DIRECTORY`, `LDAP`, `FEDERATION`, `SOCIAL`, `FACTOR_PROVIDER` | String | TRUE  | | |
+| credentialProvider | Type of credential provider: OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY | Array of String | TRUE  |           |           |
+| credentialType | Type of credential: `OTP`, `SMS`, `PASSWORD`, `ASSERTION`, `IWA`, `EMAIL` | String        | TRUE     |           |           |
+| issuer     | URI of the request that generated the event.                   | [Issuer Object](#issuer-object) | TRUE     |           |           |
+| externalSessionId | Uri of the request that generated the event.            | String          | TRUE     | 1         | 255       |
+| interface  | URI of the request that generated the event.                   | String          | TRUE     | 1         | 255       |
+|------------+----------------------------------------------------------------+-----------------+----------+-----------+-----------|
 
 ### Issuer Object
 
 Describes an issuer in the authentication context
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| id         | An id for the issuer                                           | String          | TRUE     |         |           |           |            |
-| type       | The type of the issuer                                         | Array of String | TRUE     |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| id         | An ID for the issuer                                           | String          | TRUE     |
+| type       | The type of the issuer                                         | Array of String | TRUE     |
+|------------+----------------------------------------------------------------+-----------------+----------|
 
 ### SecurityContext Object
 
-Describes security data regarding an event
+Describes security data related to an event
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| asNumber   | AS Number                                                      | Integer         | TRUE     |         |           |           |            |
-| asOrg      | AS Organization                                                | String          | TRUE     |         |           |           |            |
-| isp        | Internet Service Provider                                      | String          | TRUE     |         |           |           |            |
-| domain     | domain                                                         | String          | TRUE     |         |           |           |            |
-| isProxy    | if event is from a known proxy                                 | Bool            | TRUE     |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| asNumber   | AS Number                                                      | Integer         | TRUE     |
+| asOrg      | AS Organization                                                | String          | TRUE     |
+| isp        | Internet Service Provider                                      | String          | TRUE     |
+| domain     | Domain                                                         | String          | TRUE     |
+| isProxy    | Specifies whether an event is from a known proxy               | Bool            | TRUE     |
+|------------+----------------------------------------------------------------+-----------------+----------|
 
 ### Request Object
 
 Describes request data regarding an event
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| ipChain    | chain of ip data                                               | Array of IpAddress | TRUE  |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| ipChain    | Describes the IP addresses used to perform an action           | Array of [IpAddress](#ipaddress-object) | TRUE  |
+|------------+----------------------------------------------------------------+-----------------+----------|
 
-### SecurityContext Object
+### IpAddress Object
 
-Describes security data regarding an event
+Describes an IP address used in a request.
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| ip         | ip address                                                     | String          | TRUE     |         |           |           |            |
-| geographicalContext | Geographical context of the ip address                | [GeographicalContext Object](#geographicalcontext-object)          | TRUE     |         |           |           |            |
-| version    | ip address version                                             | V4 or V6        | TRUE     |         |           |           |            |
-| source     | details regarding the source                                   | String          | TRUE     |         |           |           |            |
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| ip         | IP address                                                     | String          | TRUE     |
+| geographicalContext | Geographical context of the IP address                | [GeographicalContext Object](#geographicalcontext-object)          | TRUE     |
+| version    | IP address version                                             | V4 or V6        | TRUE     |
+| source     | Details regarding the source                                   | String          | TRUE     |
+|------------+----------------------------------------------------------------+-----------------+----------|

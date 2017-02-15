@@ -55,11 +55,9 @@ involved in adding MFA to your
 application. How use actually make these calls will depend on the
 programming language and web framework that your application uses.
 
-If you are writing code in .NET or Java, [Okta has helper libraries](http://developer.okta.com/docs/sdk/core/api.html)
+If you are writing code in .NET or Java, [Okta has helper libraries](http://developer.okta.com/code/index.html)
 that will make it easy to add support for Okta to your application
 in an idiomatic way.
-
-Okta's helper libraries can be found here: <http://developer.okta.com/docs/sdk/core/api.html>
 
 ### Setting up your Okta org for MFA
 

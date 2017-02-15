@@ -258,19 +258,19 @@ Every organization has a system log that maintains a history of actions performe
 
 The Event model is read only, with a fixed set of attributes:
 
-|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property  | Description                                                           | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------   | --------------------------------------------------------------------- | ---------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- | ---------- |
-| eventId   | Unique key for event                                                  | String                                                         | FALSE    | TRUE   | TRUE     |           |           |            |
-| published | Timestamp when event was published                                    | Date                                                           | FALSE    | TRUE   | TRUE     | 1         | 255       |            |
-| requestId | Identifies the request                                                | String                                                         | TRUE     | FALSE  | TRUE     | 1         | 50        |            |
-| sessionId | Session in which the event occurred                                   | String                                                         | TRUE     | FALSE  | TRUE     |           |           |            |
-| action    | Identifies the action that the event describes                        | [Action Object](#action-object)                                | FALSE    | FALSE  | TRUE     |           |           |            |
-| actors    | Describes zero or more entities that performed the action             | Array of [Actor Object](#actor-object)                         | FALSE    | FALSE  | TRUE     |           |           |            |
-| targets   | Describes zero or more entities that the action was performed against | Array of [Target Object](#target-object)                       | TRUE     | FALSE  | TRUE     |           |           |            |
-| _links    | discoverable resources related to the event                           | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded | embedded resources related to the event                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------|
+| Property  | Description                                                           | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength |
+| -------   | --------------------------------------------------------------------- | ---------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- |
+| eventId   | Unique key for event                                                  | String                                                         | FALSE    | TRUE   | TRUE     |           |           |
+| published | Timestamp when event was published                                    | Date                                                           | FALSE    | TRUE   | TRUE     | 1         | 255       |
+| requestId | Identifies the request                                                | String                                                         | TRUE     | FALSE  | TRUE     | 1         | 50        |
+| sessionId | Session in which the event occurred                                   | String                                                         | TRUE     | FALSE  | TRUE     |           |           |
+| action    | Identifies the action that the event describes                        | [Action Object](#action-object)                                | FALSE    | FALSE  | TRUE     |           |           |
+| actors    | Describes zero or more entities that performed the action             | Array of [Actor Object](#actor-object)                         | FALSE    | FALSE  | TRUE     |           |           |
+| targets   | Describes zero or more entities that the action was performed against | Array of [Target Object](#target-object)                       | TRUE     | FALSE  | TRUE     |           |           |
+| _links    | discoverable resources related to the event                           | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |
+| _embedded | embedded resources related to the event                               | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |
+|-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------|
 
 > The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.
 
@@ -278,16 +278,16 @@ The Event model is read only, with a fixed set of attributes:
 
 ### Action Object
 
-Describes an activity that published an event
+Describes an activity performed by a user, app, client, or other entity (actor) on a target
 
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
-| Property   | Description                                                    | DataType        | Nullable | Default | MinLength | MaxLength | Validation |
-| ---------- | -------------------------------------------------------------- | --------------- | -------- | ------- | --------- | --------- | ---------- |
-| message    | Description of an action                                       | String          | FALSE    |         |           |           |            |
-| categories | [Categories](#action-categories) for an action                 | Array of String | FALSE    |         |           |           |            |
-| objectType | Identifies the [unique type](#action-objecttypes) of an action | String          | FALSE    |         |           |           |            |
-| requestUri | Uri of the request that generated the event.                   | String          | TRUE     |         |           |           |            |  
-|------------+----------------------------------------------------------------+-----------------+----------+---------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------+-----------------+----------|
+| Property   | Description                                                    | DataType        | Nullable |
+| ---------- | -------------------------------------------------------------- | --------------- | -------- |
+| message    | Description of an action                                       | String          | FALSE    |
+| categories | [Categories](#action-categories) for an action                 | Array of String | FALSE    |
+| objectType | Identifies the [unique type](#action-objecttypes) of an action | String          | FALSE    |
+| requestUri | Uri of the request that generated the event.                   | String          | TRUE     |
+|------------+----------------------------------------------------------------+-----------------+----------|
 
 > Actions that do not define any categories will have a zero element array value.
 
@@ -517,7 +517,7 @@ core.user.admin_privilege.revoked |
 
 ### Actor Object
 
-Actor of an event
+Describes the user, app, client, or other entity (actor) who performed an action on a target
 
 |-------------+----------------------------------------------------------+----------+----------+---------+-----------+-----------+------------|
 | Property    | Description                                              | DataType | Nullable | Default | MinLength | MaxLength | Validation |
@@ -531,7 +531,7 @@ Actor of an event
 
 ### Target Object
 
-Target of an event
+The entity upon which an actor performs an action. Targets may be anything, even a login token.
 
 |-------------+--------------------------------------------------------------------+----------+----------+---------+-----------+-----------+------------|
 | Property    | Description                                                        | DataType | Nullable | Default | MinLength | MaxLength | Validation |
@@ -543,7 +543,7 @@ Target of an event
 
 > The schema of a target is dependent on the actor's `objectType`
 
-### Actor/Target ObjectTypes
+### Actor and Target ObjectTypes
 
 #### User ObjectType
 
@@ -571,7 +571,7 @@ A denormalized reference to a [User](users.html#user-model).
 
 #### AppInstance ObjectType
 
-A denormalized reference to an application
+Describes an application
 
 |-------------+-------------------------------------------+---------------+----------+---------+-----------+-----------|
 | Property    | Description                               | DataType      | Nullable | Default | MinLength | MaxLength |
@@ -593,7 +593,7 @@ A denormalized reference to an application
 
 #### Client ObjectType
 
-A denormalized reference to a client such as a browser
+Describes a client such as a browser
 
 |-------------+-----------------------+----------+----------+---------+-----------+-----------|
 | Property    | Description           | DataType | Nullable | Default | MinLength | MaxLength |
