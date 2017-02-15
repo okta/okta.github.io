@@ -6,7 +6,7 @@
 # Author: Joël Franusic (joel.franusic@okta.com)
 # Copyright 2016 Okta, Inc.
 
-source "scripts/common.sh"
+source "${0%/*}/common.sh"
 
 require_env_var "OKTA_HOME"
 require_env_var "REPO"

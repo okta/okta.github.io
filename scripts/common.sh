@@ -5,12 +5,14 @@
 # Where the generated Jekyll site will be placed
 GENERATED_SITE_LOCATION="_site"
 
+# Define these ENV vars if they aren't defined already,
+# so these scripts can be run outside of CI
 if [[ -z "${BUILD_FAILURE}" ]]; then
     export BUILD_FAILURE=1
 fi
 
 if [[ -z "${SUCCESS}" ]]; then
-    export SUCCESS=1
+    export SUCCESS=0
 fi
 
 source "scripts/import_external_markdown.sh"

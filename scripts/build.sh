@@ -7,7 +7,7 @@
 DEPLOY_BRANCH="master"
 TARGET_S3_BUCKET="s3://developer.okta.com-staging"
 
-source "scripts/common.sh"
+source "${0%/*}/common.sh"
 
 require_env_var "OKTA_HOME"
 require_env_var "BRANCH"
