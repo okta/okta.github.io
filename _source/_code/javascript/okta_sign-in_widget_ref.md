@@ -93,7 +93,7 @@ The following sections provide examples and option details for the last four con
       var suffix = '@acme.com';
 
       // op can be PRIMARY_AUTH, FORGOT_PASSWORD or UNLOCK_ACCOUNT
-      if (_.contains['FORGOT_PASSWORD', 'UNLOCK_ACCOUNT'], op) {
+      if (_.contains(['FORGOT_PASSWORD', 'UNLOCK_ACCOUNT'], op)) {
         return (username.indexOf(suffix) !== -1) ? username : (username + suffix);
       }
     }
