@@ -1,7 +1,7 @@
 ---
 layout: docs_page
-title: SAML and Okta
-excerpt: Learn how to Single Sign-On enable your web and mobile application
+title: SAML
+excerpt: Enable single sign-on for your web and mobile application
 icon: /assets/img/icons/saml.svg
 permalink: /standards/SAML/
 redirect_from:
@@ -111,7 +111,7 @@ As discussed earlier, an IDP-initiated login flow starts from the IDP.  Since it
 
 In an SP-initiated flow, the user tries to access a protected resource directly on the SP side without the IDP being aware of the attempt.  Two issues arise.  First is the need to identify the right IDP if authentication of a federated identity is needed.  With SP-initiated login, the SP initially does not know anything about the identity.  As a developer, you need to figure out how the SP can determine which IDP should be receiving the SAML request.  In some cases, if your application URLs contain subdomain information that is mapped to a unique tenant and IDP, then the resource link being hit is enough to identify the IDP.  If this isn’t the case, then you might need to prompt the end user for additional information from the end user such as user id, email, or a company id; something that allows the SP to identify which IDP the user attempting to access the resource belongs to.  Remember, you are only prompting for an identifier, not credentials.
 
-Another issue with SP-initated login flow is the support for deep-links. Most applications support deep-links.  For example, you might receive a link to a document that resides on a content management system.  Ideally, if you need to authenticate prior to accessing the document, you would like to be taken to the document immediately after authentication.
+Another issue with SP-initiated login flow is the support for deep-links. Most applications support deep-links.  For example, you might receive a link to a document that resides on a content management system.  Ideally, if you need to authenticate prior to accessing the document, you would like to be taken to the document immediately after authentication.
 
 SAML is an asynchronous protocol by design.  The SP-initiated login begins the flow by generating a SAML Authentication Request that gets redirected to the IDP.  At this point, the SP does not store any information about the request.  When the SAML response comes back from the IDP, the SP wouldn’t know anything about the initial deep-link that triggered the authentication request.  Luckily, SAML supports this with a parameter called RelayState.
 
@@ -149,11 +149,14 @@ For more details, see the [technical overview for Okta Mobile Connect](/docs/gui
 
 Use the [Okta SAML validation tool](http://saml.oktadev.com/) to speed up the process of developing a SAML SP.
 
-This tool makes it easy for you to send SAML Requests to your SAML SP, it allows you to quickly change the contents of the SAML requests and simplifies the process of debugging SAML issues by automatically decoding SAML payloads and displaying server headers for you.
+This tool makes it easy for you to send SAML Requests to your SAML SP. It  allows you to quickly change the contents of the SAML requests and simplifies the process of debugging SAML issues by automatically decoding SAML payloads and displaying server headers for you.
+
+You can also install the [SAML Tracer extension to Firefox](saml_tracer.html) for testing, or similar tools for other browsers. 
 
 ## SAML Toolkits
 
-There are many available OpenSource toolkits that implement the SAML 2.0 specificaiton for the WebSSO Profile for Service Providers in different programming languages.  The following is a list of recommended toolkits:
+OpenSource toolkits that implement the SAML 2.0 specification for the WebSSO Profile for Service Providers in different programming languages
+can help you build your applications and integrations:
 
 - [.NET Framework](https://en.wikipedia.org/wiki/.NET_Framework_version_history) 4.5 or above: [Kentor Authentication Services](https://github.com/KentorIT/authservices#kentor-authentication-services)
 - .NET Framework 4 or below: [ComponentSpace SAML 2.0](http://www.componentspace.com/SAMLv20.aspx) - Paid software, licenses start at $299
@@ -162,6 +165,8 @@ There are many available OpenSource toolkits that implement the SAML 2.0 specifi
 - PHP: [SimpleSAMLphp](/docs/guides/simplesamlphp.html)
 - Python: [PySAML2](/docs/guides/pysaml2.html)
 - Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
+
+> Note: Okta doesn't own or maintain these toolkits, though we do provide documentation to help you use them with Okta.
 
 ## Reference
 

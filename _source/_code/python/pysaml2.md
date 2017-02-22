@@ -25,6 +25,8 @@ application that demonstrates how to use {{ page.saml_library }} in a {{ page.fr
 After you have Okta working with the example application,
 adapt the example code for your production environment.
 
+>Note: The library is not Okta's and is not supported by Okta. 
+
 This guide assumes that you are familiar with the basics of {{ page.programming_language }}
 software development: using the command line, editing text files,
 using [virtualenv](https://virtualenv.pypa.io/en/latest/), and using
