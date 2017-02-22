@@ -7,22 +7,26 @@
 DEPLOY_BRANCH="master"
 TARGET_S3_BUCKET="s3://developer.okta.com-staging"
 
-if [ "${BRANCH}" != "${DEPLOY_BRANCH}" ];
-then
-    echo "build.sh: Not in branch '${DEPLOY_BRANCH}', not pushing website to S3"
-    exit ${SUCCESS};
-fi
+source "${0%/*}/common.sh"
+
+require_env_var "OKTA_HOME"
+require_env_var "BRANCH"
+require_env_var "REPO"
 
 # `cd` to the path where Okta's build system has this repository
 cd ${OKTA_HOME}/${REPO}
-
-source "scripts/common.sh"
 
 interject "Building HTML in $(pwd)"
 if ! generate_html;
 then
     echo "Error building site"
     exit ${BUILD_FAILURE};
+fi
+
+if [ "${BRANCH}" != "${DEPLOY_BRANCH}" ];
+then
+    echo "build.sh: Not in branch '${DEPLOY_BRANCH}', not pushing website to S3"
+    exit ${SUCCESS};
 fi
 
 interject "Uploading HTML from '${GENERATED_SITE_LOCATION}' to '${TARGET_S3_BUCKET}'"

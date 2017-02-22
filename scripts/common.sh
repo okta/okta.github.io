@@ -5,16 +5,28 @@
 # Where the generated Jekyll site will be placed
 GENERATED_SITE_LOCATION="_site"
 
+# Define these ENV vars if they aren't defined already,
+# so these scripts can be run outside of CI
+if [[ -z "${BUILD_FAILURE}" ]]; then
+    export BUILD_FAILURE=1
+fi
+
+if [[ -z "${SUCCESS}" ]]; then
+    export SUCCESS=0
+fi
+
+source "scripts/import_external_markdown.sh"
+
 # Print an easily visible line, useful for log files.
 function interject() {
     echo "----- ${1} -----"
 }
 
-function check_for_protractor_dependencies() {
-    interject 'Checking Protractor dependencies'
+function check_for_npm_dependencies() {
+    interject 'Checking NPM dependencies'
     command -v npm > /dev/null 2>&1 || { echo "This script requires 'npm', which is not installed"; exit 1; }
     npm install --only=dev
-    interject 'Done checking Protractor dependencies'
+    interject 'Done checking NPM dependencies'
 }
 
 function check_for_jekyll_dependencies() {
@@ -55,6 +67,8 @@ function generate_html() {
     interject 'Using Jekyll to generate HTML'
     
     if [ ! -d $GENERATED_SITE_LOCATION ]; then
+        check_for_npm_dependencies
+        import_external_markdown
         bundle exec jekyll build
         local status=$?
         interject 'Done generating HTML'
@@ -65,5 +79,11 @@ function generate_html() {
     fi
 }
 
-
-
+function require_env_var() {
+    local env_var_name=$1
+    eval env_var=\$$env_var_name
+    if [[ -z "${env_var}" ]]; then
+        echo "Environment variable '${env_var_name}' must be defined, but isn't.";
+        exit 1
+    fi
+}

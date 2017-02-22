@@ -6,10 +6,13 @@
 # Author: Joël Franusic (joel.franusic@okta.com)
 # Copyright 2016 Okta, Inc.
 
+source "${0%/*}/common.sh"
+
+require_env_var "OKTA_HOME"
+require_env_var "REPO"
+
 # `cd` to the path where Okta's build system has this repository
 cd ${OKTA_HOME}/${REPO}
-
-source "scripts/common.sh"
 
 function url_consistency_check() {
     interject "Checking ${GENERATED_SITE_LOCATION} to make sure documentation uses proper prefixes ('/api/v1', '/oauth2', etc) in example URLs"
