@@ -20,7 +20,7 @@ Though kramdown gives us benefits of readbilty it comes at the cost of requiring
 the site. Jekyll, handles this nicely by detecting changes to the file system and refreshing automatically. To setup
 Jekyll to be able to build and view the site, follow the steps below: 
 
-1. Install RVM if you don't already have it. On OSX `brew install rvm` or on linux `yum install rvm`. To ensure you have
+1. Install RVM if you don't already have it. On OSX [install the stable version](https://rvm.io/rvm/install) or on linux `yum install rvm`. To ensure you have
    rvm installed properly run `rvm list` and ensure that there is a version marked as 'current'.
 2. Clone repository `git clone git@github.com:okta/okta.github.io.git`
 3. Go into project directory `cd okta.github.io`
@@ -54,7 +54,7 @@ and generate the final site content.
 
 ### Build Steps
 
-1. Create a topic branch or your work `git checkout -b <branch_name>`
+1. Create a topic branch of your work `git checkout -b <branch_name>`
 2. Make changes / additions in _source directory
 3. Compile changes into the _site directory `bundle exec jekyll serve --watch`
 4. Navigate the site and validate your changes

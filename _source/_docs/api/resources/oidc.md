@@ -558,7 +558,7 @@ It is safe to cache or persist downloaded keys for performance.
 However, if the client application is pinned to a signing key, the verification might fail since Okta rotates the key automatically.
 Pinned client applications must periodically check the Okta signing keys.
 
-Any of the two or three keys listed are used to sign tokens.The order of keys in the result doesn't indicate which keys are used.
+Any of the two or three keys listed are used to sign tokens. The order of keys in the result doesn't indicate which keys are used.
 
 Standard open-source libraries are available for every major language to perform [JWS](https://tools.ietf.org/html/rfc7515) signature validation.
 
