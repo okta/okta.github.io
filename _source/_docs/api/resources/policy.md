@@ -1132,7 +1132,7 @@ Property | Description | Data Type | Required | Default
 status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` | No | 'INACTIVE'
 
 #### Delegation Object
-{ #DelegationObject }
+{: #DelegationObject }
 
 Property | Description | Data Type | Required | 
 | --- | --- | --- | ---
