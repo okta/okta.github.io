@@ -4745,7 +4745,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb",
-  "answer": "Cowboy Dan"
+  "answer": "Annie Oakley"
 }' "https://${org}.okta.com/api/v1/authn/recovery/answer"
 ~~~
 

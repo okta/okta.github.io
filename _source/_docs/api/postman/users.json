@@ -103,7 +103,7 @@
 			"description": "",
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"synced": false,
-			"rawModeData": "{\n  \"credentials\": {\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Cowboy Dan\"\n    }\n  }\n}"
+			"rawModeData": "{\n  \"credentials\": {\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Annie Oakley\"\n    }\n  }\n}"
 		},
 		{
 			"id": "11bd973f-4cd2-b4fc-e939-b816d711a7c5",
@@ -295,7 +295,7 @@
 			"description": "",
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"synced": false,
-			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"credentials\": {\n    \"password\" : { \"value\": \"{{password}}\" },\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Cowboy Dan\"\n    }\n  }\n}"
+			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"credentials\": {\n    \"password\" : { \"value\": \"{{password}}\" },\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Annie Oakley\"\n    }\n  }\n}"
 		},
 		{
 			"id": "740e9ec9-fac6-4fa1-3853-07983054b5f6",
@@ -353,7 +353,7 @@
 			"description": "",
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"synced": false,
-			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"credentials\": {\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Cowboy Dan\"\n    }\n  }\n}"
+			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"credentials\": {\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Annie Oakley\"\n    }\n  }\n}"
 		},
 		{
 			"id": "7fdfe339-5d1b-c9c4-ac51-c7835205868a",
@@ -412,7 +412,7 @@
 			"description": "",
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"synced": false,
-			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"credentials\": {\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Cowboy Dan\"\n    }\n  }\n}"
+			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"credentials\": {\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Annie Oakley\"\n    }\n  }\n}"
 		},
 		{
 			"id": "a1b8c20a-184a-e47b-203d-1a720b96abfd",
@@ -683,7 +683,7 @@
 			"description": "",
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"synced": false,
-			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"credentials\": {\n    \"password\" : { \"value\": \"{{password}}\" },\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Cowboy Dan\"\n    }\n  }\n}"
+			"rawModeData": "{\n  \"profile\": {\n    \"firstName\": \"Isaac\",\n    \"lastName\": \"Brock\",\n    \"email\": \"isaac@{{email-suffix}}\",\n    \"login\": \"isaac@{{email-suffix}}\"\n  },\n  \"credentials\": {\n    \"password\" : { \"value\": \"{{password}}\" },\n    \"recovery_question\": {\n      \"question\": \"Who's a major player in the cowboy scene?\",\n      \"answer\": \"Annie Oakley\"\n    }\n  }\n}"
 		},
 		{
 			"id": "e8e5801c-80ca-1d0c-6dcb-0e6aa18ed574",
@@ -761,7 +761,7 @@
 			"description": "",
 			"collectionId": "59081abb-bd74-7c67-a8d9-ef999536c95e",
 			"synced": false,
-			"rawModeData": "{\n  \"password\": { \"value\": \"{{password}}\" }, \n    \"recovery_question\": { \"answer\": \"Cowboy Dan\" } \n}"
+			"rawModeData": "{\n  \"password\": { \"value\": \"{{password}}\" }, \n    \"recovery_question\": { \"answer\": \"Annie Oakley\" } \n}"
 		},
 		{
 			"id": "fdcad079-ba62-6393-f6c1-500f65f92f74",
