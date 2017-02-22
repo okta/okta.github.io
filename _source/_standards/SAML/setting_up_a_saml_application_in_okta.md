@@ -8,7 +8,7 @@ redirect_from:
     - "/docs/examples/configuring_a_saml_application_in_okta.html"
 ---
 
-# Overview
+# Setting Up a SAML Application in Okta
 
 The first step in configuring an application to support SAML based Single Sign-On from Okta is to set up an application in Okta.
 
@@ -18,64 +18,53 @@ SAML Identity Provider or "SAML IdP"), with the details of your application
 
 Here is how to set up a SAML application in Okta:
 
-1.  Log in to your Okta organization as a user with administrative
-    privileges.
+ 1.  Log in to your Okta organization as a user with administrative
+    privileges. If you don't have an Okta organization, you can create a free Okta
+    <a href="https://www.okta.com/developer/signup/" target="_blank">Developer Edition organization</a>.
 
-    If you don't have an Okta organization, you can create a free Okta
-    Developer Edition organization here:
-    <https://www.okta.com/developer/signup/>
-
-2.  Click on the blue "Admin" button
+ 2.  Click on the blue "Admin" button
     ![Admin](/assets/img/okta-admin-ui-button-admin.png)
 
-3.  Click on the "Add Applications" shortcut
+ 3.  Click on the "Add Applications" shortcut
     ![Add Applications](/assets/img/okta-admin-ui-add-applications.png)
 
-4.  Click on the green "Create New App" button
+ 4.  Click on the green "Create New App" button
     ![Create New App](/assets/img/okta-admin-ui-button-create-new-app.png)
 
-5.  In the dialog that opens, select the "SAML 2.0" option, then click
+ 5.  In the dialog that opens, select the "SAML 2.0" option, then click
     the green "Create" button
     ![Create a New Application Integration](/assets/img/okta-admin-ui-create-new-application-integration.png)
 
-6.  In Step 1 "General Settings", enter "Example SAML Application" in the
+ 6.  In Step 1 "General Settings", enter "Example SAML Application" in the
     "App name" field, then click the green "Next" button.
     ![General Settings](/assets/img/example-saml-application-okta-general-settings.png)
 
-7.  In Step 2 "Configure SAML"
-
-    - Paste the URL below into the "Single sign on URL" and "Audience URI (SP Entity ID)" fields:
+ 7.  In Step 2 "Configure SAML," section A "SAML Settings", paste the URL below into the "Single sign on URL" and "Audience URI (SP Entity ID)" fields:
 
       ~~~ shell
       http://example.com/saml/sso/example-okta-com
       ~~~
+     
+     ![SAML Settings](/assets/img/example-saml-application-okta-configure-settings1.png)
 
-    - Click "Show Advanced Settings"
-
-      Change the value of "Request compression" to "Compressed".
-
-    - In the "Attribute Statements" section, add three attribute statements:
+ 8. In the "Attribute Statements" section, add three attribute statements:
       1. "FirstName" set to "user.firstName"
       2. "LastName" set to "user.lastName"
       3. "Email" set to "user.email"
 
-    - Then click the green "Next" button
+      ![SAML Settings](/assets/img/example-saml-application-okta-configure-settings2.png)
 
-    ![SAML Settings](/assets/img/example-saml-application-okta-configure-settings.png)
+    Click Next to continue.
 
+ 9. In Step 3 "Feedback", select "I'm an Okta customer adding an internal app", and "This is an internal app that we have created," then click Finish.
 
-8.  In Step 3 "Feedback", click the checkbox next to the text "This is
-    an internal application that we created", then click the green
-    "Finish" button.
-    ![App type](/assets/img/okta-admin-ui-new-application-step-3-feedback.png)
+    ![App type](/assets/img/example-saml-application-okta-configure-settings3.png)
 
-9.  You will now see the "Sign On" section of your newly created "Example
-    SAML Application" application.
-
-10. Keep this page open it a separate tab or browser window. You will
-    need to return to this page later in this guide and copy the
-    "Identity Provider metadata" link. (To copy the that link, right
-    click on the "Identity Provider metadata" link and select "Copy")
+10.  The "Sign On" section of your newly created "Example
+    SAML Application" application appears. Keep this page open it a separate tab or browser window. You will
+    return to this page later in this guide and copy the
+    "Identity Provider metadata" link. (To copy that link, right-click
+    on the "Identity Provider metadata" link and select "Copy")
     ![Sign on methods](/assets/img/okta-admin-ui-identity-provider-metadata-link.png)
 
 11. Right-click on the "People" section of the "Example SAML Application"
@@ -94,5 +83,6 @@ Here is how to set up a SAML application in Okta:
     the green "Confirm Assignments" button to keep the defaults.
     ![Enter user attributes](/assets/img/example-saml-application-okta-confirm-assignments.png)
 
-14. You are now ready to configure SAML in your application. The information in the tab you
-    opened in step \#10 contains the information that you'll need to configure SAML in your application.
+You are now ready to configure SAML in your application. The information in the tab you
+opened in step \#10 contains the information that you'll need to configure SAML in your application.
+
