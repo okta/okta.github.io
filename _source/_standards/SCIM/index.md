@@ -1153,14 +1153,41 @@ In order for an app to be published in the Okta Application Network, it must mee
 
 **What are the differences between SCIM 1.1 and 2.0?**
 
-| Section | SCIM 1.1 | SCIM 2.0 | Notes |
-| --- | --- | --- | --- |
-| Namespaces | `urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0`  |  `urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User` | Namespaces are different therefore 2.0 is not backwards compatible with 1.1 |
-| Service Provider Config Endpoint | /ServiceProviderConfig<b>s</b> | /ServiceProviderConfig | Notice 2.0 does NOT have an 's' at the end |
-| Patch Protocol | [Section 3.3.2](http://www.simplecloud.info/specs/draft-scim-api-01.html#edit-resource-with-patch) | [Section 3.5.2: Uses JSON Patch](https://tools.ietf.org/html/rfc7644#section-3.5.2) | |
-| Error Response Schema | [Section 3.9](http://www.simplecloud.info/specs/draft-scim-api-01.html#anchor6) | [Section 3.12](https://tools.ietf.org/html/rfc7644#section-3.12) | |
-| Reference Type | N/A | Supports ref type pointing to the full url of another SCIM Resource | |
-| Query by POST /search | N/A | [Section 3.4.3](https://tools.ietf.org/html/rfc7644#section-3.4.3) | |
+* Namespaces:  Namespaces are different, therefore 2.0 is not backwards compatible with 1.1
+
+    | SCIM 1.1 | SCIM 2.0 |
+    | --- | --- |
+    | `urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0`  |  `urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User` |
+
+* Service Provider Configuration Endpoint: There's no `s` at the end of the SCIM 2.0 endpoint.
+
+    | SCIM 1.1 | SCIM 2.0 |
+    | --- | --- |
+    | `/ServiceProviderConfigs` | `/ServiceProviderConfig` |
+
+* Patch Protocol
+
+    | SCIM 1.1 | SCIM 2.0 |
+    | --- | --- |
+    | [Section 3.3.2](http://www.simplecloud.info/specs/draft-scim-api-01.html#edit-resource-with-patch) | [Section 3.5.2: Uses JSON Patch](https://tools.ietf.org/html/rfc7644#section-3.5.2) |
+
+* Error Response Schema
+
+    | SCIM 1.1 | SCIM 2.0 |
+    | --- | --- |
+    | [Section 3.9](http://www.simplecloud.info/specs/draft-scim-api-01.html#anchor6) | [Section 3.12](https://tools.ietf.org/html/rfc7644#section-3.12) |
+
+* Reference Type
+
+    | SCIM 1.1 | SCIM 2.0 |
+    | --- | --- |
+    | N/A | Supports reference type pointing to the full URL of another SCIM Resource |
+
+* Query by POST /search
+    
+    | SCIM 1.1 | SCIM 2.0 |
+    | --- | --- |
+    | N/A | [Section 3.4.3](https://tools.ietf.org/html/rfc7644#section-3.4.3) |
 
 **Our API is similar to SCIM, but is not 100% compliant. Can we still integrate with Okta?**
 
