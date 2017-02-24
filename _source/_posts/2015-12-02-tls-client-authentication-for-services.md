@@ -419,9 +419,3 @@ you implement these authentication concepts in your applications.
 2. [Common openssl commands](https://www.sslshopper.com/article-most-common-openssl-commands.html)
 3. [Dropwizard https configuration manual](http://www.dropwizard.io/0.7.0/docs/manual/configuration.html#man-configuration-https)
 4. [Jersey client documentation](https://jersey.java.net/documentation/latest/client.html#d0e5128)
-
-{: style="text-align: center;font-size: x-small;"}
-Copyright &copy; 2015 Okta, Inc. article licensed under
-[CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) and code samples
-licensed under [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0). All
-rights reserved.
