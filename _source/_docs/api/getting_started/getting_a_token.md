@@ -37,3 +37,12 @@ Okta uses a bearer token for API authentication with a sliding scale expiration.
 ## Token Deactivation
 
 If a user account is deactivated in Okta, the API Token is deprovisioned at the same time.
+
+## Token Permissions
+
+API tokens inherit the API access of the user who creates them.
+
+Tasks in the UI or API and the role required to perform them have been
+documented:
+
+[Administrator Roles](https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators)
