@@ -960,7 +960,7 @@ curl -v -X POST \
 ### Get Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:id*</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*</span>
 
 Fetches an application from your Okta organization by `id`.
 
@@ -969,7 +969,7 @@ Fetches an application from your Okta organization by `id`.
 
 Parameter | Description    | Param Type | DataType | Required | Default
 --------- | -------------- | ---------- | -------- | -------- | -------
-id        | `id` of an app | URL        | String   | TRUE     |
+aid       | ID of an app | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1135,9 +1135,9 @@ The following link expansions are supported to embed additional resources into t
 
 Expansion    | Description
 ------------ | ---------------------------------------------------------------------------------------------------------------
-`user/:id`   | Embeds the [Application User](#application-user-model) for an assigned user such as `user/00ucw2RPGIUNTDQOYPOF`
+`user/:uid`   | Embeds the [Application User](#application-user-model) for an assigned user such as `user/00ucw2RPGIUNTDQOYPOF`
 
-> The `user/:id` expansion can currently only be used in conjunction with the `user.id eq ":uid"` filter (See [List Applications Assigned to User](#list-applications-assigned-to-user)).
+> The `user/:uid` expansion can currently only be used in conjunction with the `user.id eq ":uid"` filter (See [List Applications Assigned to User](#list-applications-assigned-to-user)).
 
 
 ##### Response Parameters
@@ -1341,7 +1341,7 @@ curl -v -X GET \
 "https://${org}.okta.com/api/v1/apps?filter=user.id+eq+\"00ucw2RPGIUNTDQOYPOF\"&expand=user/00ucw2RPGIUNTDQOYPOF"
 ~~~
 
-> The `expand=user/:id` query parameter optionally return the user's [Application User](#application-user-model) information  in the response body's `_embedded` property.
+> The `expand=user/:uid` query parameter optionally return the user's [Application User](#application-user-model) information  in the response body's `_embedded` property.
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -1768,7 +1768,7 @@ curl -v -X GET \
 ### Update Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/apps/*:id*</span>
+<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/apps/*:aid*</span>
 
 Updates an application in your organization.
 
@@ -1777,7 +1777,7 @@ Updates an application in your organization.
 
 Parameter | Description         | Param Type | DataType                          | Required | Default
 --------- | ------------------- | ---------- | --------------------------------- | -------- | -------
-id        | id of app to update | URL        | String                            | TRUE     |
+aid       | ID of app to update | URL        | String                            | TRUE     |
 app       | Updated app         | Body       | [Application](#application-model) | FALSE    |
 
 > All properties must be specified when updating an app.  **Delta updates are not supported.**
@@ -2521,7 +2521,7 @@ curl -v -X PUT \
 ### Delete Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/*:id*</span>
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/*:aid*</span>
 
 Removes an inactive application.
 
@@ -2532,7 +2532,7 @@ Removes an inactive application.
 
 Parameter | Description         | Param Type | DataType | Required | Default
 --------- | ------------------- | ---------- | -------- | -------- | -------
-id        | id of app to delete | URL        | String   | TRUE     |
+aid       | ID of app to delete | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2581,7 +2581,7 @@ Content-Type: application/json
 ### Activate Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:id*/lifecycle/activate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/lifecycle/activate</span>
 
 Activates an inactive application.
 
@@ -2590,7 +2590,7 @@ Activates an inactive application.
 
 Parameter | Description           | Param Type | DataType | Required | Default
 --------- | --------------------- | ---------- | -------- | -------- | -------
-id        | `id` of app to activate | URL        | String   | TRUE     |
+aid       | ID of app to activate | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2618,7 +2618,7 @@ curl -v -X POST \
 ### Deactivate Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:id*/lifecycle/deactivate</span>
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/lifecycle/deactivate</span>
 
 Deactivates an active application.
 
@@ -2627,7 +2627,7 @@ Deactivates an active application.
 
 Parameter | Description               | Param Type | DataType | Required | Default
 --------- | ------------------------- | ---------- | -------- | -------- | -------
-id        | `id` of app to deactivate | URL        | String   | TRUE     |
+aid       | ID of app to deactivate   | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2666,10 +2666,10 @@ Assigns a user without a [profile](#application-user-profile-object) to an appli
 
 Parameter | Description                                                            | Param Type | DataType                                    | Required | Default
 --------- | ---------------------------------------------------------------------- | ---------- | ------------------------------------------- | -------- | -------
-aid       | unique key of [Application](#application-model)                        | URL        | String                                      | TRUE     |
-appuser   | user's [credentials](#application-user-credentials-object) for the app | Body       | [Application User](#application-user-model) | TRUE     |
+aid       | Unique key of [Application](#application-model)                        | URL        | String                                      | TRUE     |
+appuser   | User's [credentials](#application-user-credentials-object) for the app | Body       | [Application User](#application-user-model) | TRUE     |
 
-> Only the user's `id` is required for the request body of applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials
+> Only the user's ID is required for the request body of applications with [SignOn Modes](#signon-modes) or [Authentication Schemes](#authentication-schemes) that do not require or support credentials
 
 > If your SSO application requires a profile but doesn't have provisioning enabled, you should add a profile to the request and use the [Assign User to Application for SSO & Provisioning](#assign-user-to-application-for-sso--provisioning) operation
 
