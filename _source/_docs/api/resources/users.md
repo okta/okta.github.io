@@ -147,7 +147,7 @@ curl -v -X POST \
   "credentials": {
     "recovery_question": {
       "question": "Who'\''s a major player in the cowboy scene?",
-      "answer": "Cowboy Dan"
+      "answer": "Annie Oakley"
     }
   }
 }' "https://${org}.okta.com/api/v1/users?activate=false"
@@ -281,7 +281,7 @@ curl -v -X POST \
     "password" : { "value": "tlpWENT2m" },
     "recovery_question": {
       "question": "Who'\''s a major player in the cowboy scene?",
-      "answer": "Cowboy Dan"
+      "answer": "Annie Oakley"
     }
   }
 }' "https://${org}.okta.com/api/v1/users?activate=false"
@@ -2429,7 +2429,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "password": { "value": "uTVM,TPw55" },
-  "recovery_question": { "answer": "Cowboy Dan" }
+  "recovery_question": { "answer": "Annie Oakley" }
 }' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
 ~~~
 
@@ -2810,7 +2810,7 @@ Specifies primary authentication and recovery credentials for a user.  Credentia
     },
     "recovery_question": {
       "question": "Who's a major player in the cowboy scene?",
-      "answer": "Cowboy Dan"
+      "answer": "Annie Oakley"
     },
     "provider": {
       "type": "OKTA",
