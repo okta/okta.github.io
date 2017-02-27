@@ -1,12 +1,17 @@
 {
-  "name": "developer.okta.com-ci-testing",
-  "version": "0.0.1",
-  "description": "Dependencies to run automated Selenium tests on developer.okta.com",
+  "name": "@okta/okta.github.io",
+  "version": "0.0.4",
+  "publishConfig": {
+    "registry": "https://artifacts.aue1d.saasure.com/artifactory/api/npm/npm-okta"
+  },
+  "description": "NPM dependencies for testing and building developer.okta.com",
   "directories": {
     "doc": "docs",
     "test": "tests"
   },
   "scripts": {
+    "ci-update-package": "ci-update-package",
+    "ci-pkginfo:dataload": "ci-pkginfo -t dataload",
     "test": "webdriver-manager update && protractor tests/selenium/conf.js"
   },
   "repository": {
@@ -19,6 +24,10 @@
     "url": "https://github.com/okta/okta.github.io/issues"
   },
   "homepage": "https://github.com/okta/okta.github.io#readme",
+  "optionalDependencies": {
+    "@okta/ci-update-package": "1.4.0",
+    "@okta/ci-pkginfo": "1.2.0"
+  },
   "devDependencies": {
     "jasmine-reporters": "^2.2.0",
     "protractor": "^4.0.14"

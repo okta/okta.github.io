@@ -25,7 +25,7 @@ function interject() {
 function check_for_npm_dependencies() {
     interject 'Checking NPM dependencies'
     command -v npm > /dev/null 2>&1 || { echo "This script requires 'npm', which is not installed"; exit 1; }
-    npm install --only=dev
+    npm install
     interject 'Done checking NPM dependencies'
 }
 
