@@ -107,6 +107,9 @@
             <li class="is-active">
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -163,13 +194,13 @@
 
 <p>Use the following instructions to support single sign-on for your app in the public-facing Okta Application Network:</p>
 
-<h4 id="prepare-your-application">1. Prepare Your Application</h4>
+<h4 id="1-prepare-your-application">1. Prepare Your Application</h4>
 
 <ul>
   <li>Use Okta’s <a href="/docs/guides/saml_guidance.html">Single Sign-On with Okta</a> guide for best practices on supporting SAML in your app which includes toolkits and testing tools.</li>
 </ul>
 
-<h4 id="integrate-your-app">2. Integrate Your App</h4>
+<h4 id="2-integrate-your-app">2. Integrate Your App</h4>
 
 <ul>
   <li>Sign up for an Okta <a href="https://www.okta.com/developer/signup/">developer account</a>.</li>
@@ -183,16 +214,16 @@
 Okta won’t contact you until this option is selected.</p>
 
 <blockquote>
-  <p>Note: Okta doesn’t proactively add SWA-only, branded apps to the OAN. If you want a branded app in the OAN that only supports SWA to all customers, submit a request to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>.</p>
+  <p>Note: Okta doesn’t proactively add SWA-only, branded apps to the OAN. If you want a branded app in the OAN that only supports SWA to all customers, submit a request to <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
 </blockquote>
 
-<h4 id="need-help">3. Need Help?</h4>
+<h4 id="3-need-help">3. Need Help?</h4>
 
-<p>Get stuck or have questions? See our Okta Application Network FAQs (below), email <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> or post your questions on <a href="https://stackoverflow.com">stackoverflow</a>.</p>
+<p>Get stuck or have questions? See our Okta Application Network FAQs (below), email <a href="mailto:developers@okta.com">developers@okta.com</a> or post your questions on <a href="https://stackoverflow.com">stackoverflow</a>.</p>
 
-<h4 id="partner-with-okta-optional">4. Partner with Okta (Optional)</h4>
+<h4 id="4-partner-with-okta-optional">4. Partner with Okta (Optional)</h4>
 
-<p>Already part of the Okta App Network but looking for a more “go-to-market” partnership? Email <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> about becoming an <a href="https://www.okta.com/partners/">Okta App Partner</a>. App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.</p>
+<p>Already part of the Okta App Network but looking for a more “go-to-market” partnership? Email <a href="mailto:developers@okta.com">developers@okta.com</a> about becoming an <a href="https://www.okta.com/partners/">Okta App Partner</a>. App Partners are fully integrated with Okta and get access to great benefits like marketing support and a free version of Okta for your app.</p>
 
 <h2 id="provisioning">Provisioning</h2>
 
@@ -210,13 +241,13 @@ Get started by reviewing the program process, SCIM docs, and applying to the pro
 
 <p><strong>Q: Do I need to contact Okta first to start integrating my application?</strong></p>
 
-<p>A: No, the materials here should be enough to help you get started. You should start by enabling <a href="/docs/guides/saml_guidance.html">SAML</a> with your application. Then test your app integration and submit for review by Okta with the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard">App Wizard</a>. Get stuck or have questions? Email <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>.</p>
+<p>A: No, the materials here should be enough to help you get started. You should start by enabling <a href="/docs/guides/saml_guidance.html">SAML</a> with your application. Then test your app integration and submit for review by Okta with the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard">App Wizard</a>. Get stuck or have questions? Email <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
 
 <p><br /></p>
 
 <p><strong>Q: I am having issues integrating my app or have questions about single sign-on support in my app. How do I contact Okta?</strong></p>
 
-<p>A: If you have any technical questions, you can submit them to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> or post your questions on <a href="https://stackoverflow.com">stackoverflow</a>.</p>
+<p>A: If you have any technical questions, you can submit them to <a href="mailto:developers@okta.com">developers@okta.com</a> or post your questions on <a href="https://stackoverflow.com">stackoverflow</a>.</p>
 
 <p><br /></p>
 
@@ -252,7 +283,7 @@ Get started by reviewing the program process, SCIM docs, and applying to the pro
 
 <p><strong>Q: What is the process after I have submitted my app using the App Wizard?</strong></p>
 
-<p>A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>.</p>
+<p>A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
 
 <p><br /></p>
 
@@ -266,19 +297,19 @@ Get started by reviewing the program process, SCIM docs, and applying to the pro
 
 <p><strong>Q: I’m setting up a SAML 2.0 app using the App Wizard and we have different domains for each customer. How do you manage these types of situations?</strong></p>
 
-<p>A: Currently, the App Wizard does not support custom domains. Create an app integration as you normally would using the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard">App Wizard</a>. In step #3 Feedback, please try to include in the “How to enable SAML” section or email <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>. Our team will work with you to add this functionality when they begin to work with you.</p>
+<p>A: Currently, the App Wizard does not support custom domains. Create an app integration as you normally would using the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard">App Wizard</a>. In step #3 Feedback, please try to include in the “How to enable SAML” section or email <a href="mailto:developers@okta.com">developers@okta.com</a>. Our team will work with you to add this functionality when they begin to work with you.</p>
 
 <p><br /></p>
 
 <p><strong>Q: My app currently supports WS-FED for single sign-on. Can I use the App Wizard?</strong></p>
 
-<p>A: The Okta App Wizard only supports SAML 2.0 for federated single sign-on. If your app supports WS-Fed, you will instead need to create a <a href="https://support.okta.com/help/articles/Knowledge_Article/Web-Security-Federation-WS-Fed-Template-Overview">WS-Fed Template App</a>. Once completed, the Template Application you have created will only be able to be used within your account. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> with your app name in the subject line.</p>
+<p>A: The Okta App Wizard only supports SAML 2.0 for federated single sign-on. If your app supports WS-Fed, you will instead need to create a <a href="https://support.okta.com/help/articles/Knowledge_Article/Web-Security-Federation-WS-Fed-Template-Overview">WS-Fed Template App</a>. Once completed, the Template Application you have created will only be able to be used within your account. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to <a href="mailto:developers@okta.com">developers@okta.com</a> with your app name in the subject line.</p>
 
 <p><br /></p>
 
 <p><strong>Q: I am creating a SWA using the App Wizard but I realize my application has additional fields on the login page beyond the standard username and password (example: Customer / OrgID). Can an app with additional fields like this on the login be configured using the App Wizard?</strong></p>
 
-<p>A: Currently, the App Wizard does not support extra login fields. Create an app using the Plug-in (SWA) Template Application. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> with your app name in the subject line.</p>
+<p>A: Currently, the App Wizard does not support extra login fields. Create an app using the Plug-in (SWA) Template Application. In order to promote your Template App to the Okta Application Network, please email a screenshot of the configured app details to <a href="mailto:developers@okta.com">developers@okta.com</a> with your app name in the subject line.</p>
 
 <p><br /></p>
 
@@ -304,7 +335,7 @@ Get started by reviewing the program process, SCIM docs, and applying to the pro
 
 <p><strong>Q: In general, how can I get familiar with the Okta product?</strong></p>
 
-<p>A: To get started, check out the <a href="https://support.okta.com/help">Okta Help Center</a> or <a href="https://www.youtube.com/playlist?list=PLIid085fSVdurJ8l_UgfNGJohaSW6w97p">Okta Academy on YouTube</a>. App Partners are eligible for live Okta 101 sessions as well, please email <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> if you are interested.</p>
+<p>A: To get started, check out the <a href="https://support.okta.com/help">Okta Help Center</a> or <a href="https://www.youtube.com/playlist?list=PLIid085fSVdurJ8l_UgfNGJohaSW6w97p">Okta Academy on YouTube</a>. App Partners are eligible for live Okta 101 sessions as well, please email <a href="mailto:developers@okta.com">developers@okta.com</a> if you are interested.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

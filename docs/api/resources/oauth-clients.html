@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -169,17 +201,13 @@
 <p>The OAuth Clients API provides operations to register and manage client applications for use with Okta’s
 OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in <a href="https://tools.ietf.org/html/rfc7591">RFC7591</a>.</p>
 
-<p>Note that clients managed via this API are modeled as applications in Okta and will show in the Applications section of the
-Administrator dashboard. Changes made via the API will reflect in the UI and vice versa.</p>
+<p>Note that clients managed via this API are modeled as applications in Okta and appear in the Applications section of the
+Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
+follow the rules described in <a href="http://developer.okta.com/docs/api/resources/oauth2.html#access-token">Access Token</a>
+and <a href="http://developer.okta.com/docs/api/resources/oauth2.html#id-token">ID Token</a>.</p>
 
 <blockquote>
-  <p>This API is an 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a>
-           feature.</p>
+  <p>This API is an  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature.</p>
 </blockquote>
 
 <h2 id="client-application-model">Client Application Model</h2>
@@ -374,13 +402,7 @@ Administrator dashboard. Changes made via the API will reflect in the UI and vic
 </blockquote>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">service</code> application type and <code class="highlighter-rouge">client_credentials</code> grant type <a href="/docs/api/getting_started/releases-at-okta.html">are 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a>
-           features</a>.</p>
+  <p>The <code class="highlighter-rouge">service</code> application type and <code class="highlighter-rouge">client_credentials</code> grant type <a href="/docs/api/getting_started/releases-at-okta.html">are  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  features</a>.</p>
 </blockquote>
 
 <blockquote>

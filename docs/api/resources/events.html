@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -505,7 +537,6 @@
       <th>Readonly</th>
       <th>MinLength</th>
       <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -518,7 +549,6 @@
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>published</td>
@@ -529,7 +559,6 @@
       <td>TRUE</td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
     <tr>
       <td>requestId</td>
@@ -540,7 +569,6 @@
       <td>TRUE</td>
       <td>1</td>
       <td>50</td>
-      <td> </td>
     </tr>
     <tr>
       <td>sessionId</td>
@@ -549,7 +577,6 @@
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -562,7 +589,6 @@
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>actors</td>
@@ -571,7 +597,6 @@
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -584,7 +609,6 @@
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>_links</td>
@@ -595,7 +619,6 @@
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>_embedded</td>
@@ -604,7 +627,6 @@
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -621,7 +643,7 @@
 
 <h3 id="action-object">Action Object</h3>
 
-<p>Describes an activity that published an event</p>
+<p>Describes an activity performed by a user, app, client, or other entity (actor) on a target</p>
 
 <table>
   <thead>
@@ -630,10 +652,6 @@
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -642,40 +660,24 @@
       <td>Description of an action</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>categories</td>
       <td><a href="#action-categories">Categories</a> for an action</td>
       <td>Array of String</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>objectType</td>
       <td>Identifies the <a href="#action-objecttypes">unique type</a> of an action</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>requestUri</td>
       <td>Uri of the request that generated the event.</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -1372,7 +1374,7 @@
 
 <h3 id="actor-object">Actor Object</h3>
 
-<p>Actor of an event</p>
+<p>Describes the user, app, client, or other entity (actor) who performed an action on a target</p>
 
 <table>
   <thead>
@@ -1427,7 +1429,7 @@
 
 <h3 id="target-object">Target Object</h3>
 
-<p>Target of an event</p>
+<p>The entity upon which an actor performs an action. Targets may be anything, even a login token.</p>
 
 <table>
   <thead>
@@ -1480,7 +1482,7 @@
   <p>The schema of a target is dependent on the actor’s <code class="highlighter-rouge">objectType</code></p>
 </blockquote>
 
-<h3 id="actortarget-objecttypes">Actor/Target ObjectTypes</h3>
+<h3 id="actor-and-target-objecttypes">Actor and Target ObjectTypes</h3>
 
 <h4 id="user-objecttype">User ObjectType</h4>
 
@@ -1558,7 +1560,7 @@
 
 <h4 id="appinstance-objecttype">AppInstance ObjectType</h4>
 
-<p>A denormalized reference to an application</p>
+<p>Describes an application</p>
 
 <table>
   <thead>
@@ -1617,7 +1619,7 @@
 
 <h4 id="client-objecttype">Client ObjectType</h4>
 
-<p>A denormalized reference to a client such as a browser</p>
+<p>Describes a client such as a browser</p>
 
 <table>
   <thead>

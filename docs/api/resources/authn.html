@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -918,9 +950,11 @@
 <p>Authenticates a user with a password that is about to expire.  The user should <a href="#change-password">change their password</a> to complete the authentication transaction but may opt-out (skip).</p>
 
 <blockquote>
-  <p>Please note:
-* The <code class="highlighter-rouge">warnBeforePasswordExpired</code> option must be explicitly specified as <code class="highlighter-rouge">true</code> to allow the authentication transaction to transition to <code class="highlighter-rouge">PASSWORD_WARN</code> status.
-* Non-expired passwords successfully complete the authentication transaction if this option is omitted or is specified as <code class="highlighter-rouge">false</code>.</p>
+  <p>Please note:</p>
+  <ul>
+    <li>The <code class="highlighter-rouge">warnBeforePasswordExpired</code> option must be explicitly specified as <code class="highlighter-rouge">true</code> to allow the authentication transaction to transition to <code class="highlighter-rouge">PASSWORD_WARN</code> status.</li>
+    <li>Non-expired passwords successfully complete the authentication transaction if this option is omitted or is specified as <code class="highlighter-rouge">false</code>.</li>
+  </ul>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-password-expiration-warning">Request Example: Password Expiration Warning</h5>
@@ -2052,13 +2086,7 @@
 <h4 class="api api-operation" id="enroll-u2f-factor">Enroll U2F Factor</h4>
 
 <blockquote>
-  <p>Enrolling a U2F factor is an 
-          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-            <span class="api-label api-label-ea ">
-              <i class="fa fa-flag"></i> Early Access
-            </span>
-          </a>
-           feature.</p>
+  <p>Enrolling a U2F factor is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
 </blockquote>
 
 <p>Enrolls a user with a U2F factor.  The enrollment process starts with getting an <code class="highlighter-rouge">appId</code> and <code class="highlighter-rouge">nonce</code> from Okta and using those to get registration information from the U2F key using the U2F javascript API.</p>
@@ -2942,13 +2970,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 <h4 class="api api-operation" id="activate-u2f-factor">Activate U2F Factor</h4>
 
 <blockquote>
-  <p>Activating a U2F factor is an 
-          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-            <span class="api-label api-label-ea ">
-              <i class="fa fa-flag"></i> Early Access
-            </span>
-          </a>
-           feature.</p>
+  <p>Activating a U2F factor is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
 </blockquote>
 
 <p>Activation gets the registration information from the U2F token using the platform APIs and passes it to Okta.</p>
@@ -3958,13 +3980,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 <h4 class="api api-operation" id="verify-u2f-factor">Verify U2F Factor</h4>
 
 <blockquote>
-  <p>Verifying a U2F factor is <a href="/docs/api/getting_started/releases-at-okta.html">an 
-          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-            <span class="api-label api-label-ea ">
-              <i class="fa fa-flag"></i> Early Access
-            </span>
-          </a>
-           feature</a>.</p>
+  <p>Verifying a U2F factor is <a href="/docs/api/getting_started/releases-at-okta.html">an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature</a>.</p>
 </blockquote>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/factors/<em>:fid</em>/verify</span></p>
@@ -5521,7 +5537,7 @@ Okta will not publish additional metadata about the user until primary authentic
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
   "stateToken": "00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb",
-  "answer": "Cowboy Dan"
+  "answer": "Annie Oakley"
 }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/authn/recovery/answer"</span>
 </code></pre>
 </div>

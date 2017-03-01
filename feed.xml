@@ -79,7 +79,7 @@
 
 &lt;p&gt;&lt;strong&gt;Happy Okta’ing!&lt;/strong&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 22 Mar 2016 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</guid>
       </item>
@@ -109,7 +109,7 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/150714428&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 05 Jan 2016 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</guid>
       </item>
@@ -124,7 +124,7 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2015/12/07/oauth</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/07/oauth</guid>
       </item>
@@ -540,13 +540,8 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.dropwizard.io/0.7.0/docs/manual/configuration.html#man-configuration-https&quot;&gt;Dropwizard https configuration manual&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://jersey.java.net/documentation/latest/client.html#d0e5128&quot;&gt;Jersey client documentation&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p style=&quot;text-align: center;font-size: x-small;&quot;&gt;Copyright © 2015 Okta, Inc. article licensed under
-&lt;a href=&quot;http://creativecommons.org/licenses/by-sa/3.0/&quot;&gt;CC BY-SA 3.0&lt;/a&gt; and code samples
-licensed under &lt;a href=&quot;http://www.apache.org/licenses/LICENSE-2.0&quot;&gt;Apache 2.0&lt;/a&gt;. All
-rights reserved.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 02 Dec 2015 00:00:00 +0000</pubDate>
+        <pubDate>Wed, 02 Dec 2015 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</guid>
       </item>
@@ -603,11 +598,11 @@ In the event of trust page problems, make sure that you have ways to easily and 
 
 &lt;p&gt;###Conclusion&lt;/p&gt;
 
-&lt;p&gt;Designing and developing the Trust Page has taught me much in the last few months. I’d be happy to hear from you on this topic, so please feel free to send comments or questions to &lt;a href=&quot;&amp;#109;&amp;#097;&amp;#105;&amp;#108;&amp;#116;&amp;#111;:&amp;#118;&amp;#105;&amp;#109;&amp;#097;&amp;#114;&amp;#115;&amp;#104;&amp;#046;&amp;#107;&amp;#097;&amp;#114;&amp;#098;&amp;#104;&amp;#097;&amp;#114;&amp;#105;&amp;#064;&amp;#111;&amp;#107;&amp;#116;&amp;#097;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&quot;&gt;&amp;#118;&amp;#105;&amp;#109;&amp;#097;&amp;#114;&amp;#115;&amp;#104;&amp;#046;&amp;#107;&amp;#097;&amp;#114;&amp;#098;&amp;#104;&amp;#097;&amp;#114;&amp;#105;&amp;#064;&amp;#111;&amp;#107;&amp;#116;&amp;#097;&amp;#046;&amp;#099;&amp;#111;&amp;#109;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Designing and developing the Trust Page has taught me much in the last few months. I’d be happy to hear from you on this topic, so please feel free to send comments or questions to &lt;a href=&quot;mailto:vimarsh.karbhari@okta.com&quot;&gt;vimarsh.karbhari@okta.com&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Jun 2015 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/06/11/trustpage</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/06/11/trustpage</guid>
       </item>
@@ -694,7 +689,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 &lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component.&lt;/p&gt;
 
 </description>
-        <pubDate>Fri, 22 May 2015 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 22 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/22/tcmalloc</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/22/tcmalloc</guid>
       </item>
@@ -710,7 +705,7 @@ goals.&lt;sup id=&quot;fnref:the-knowledge-creating-company&quot;&gt;&lt;a href=
 principles we’ve used to guide development at Okta. They continue to evolve
 as we experiment and learn.&lt;/p&gt;
 
-&lt;h2 id=&quot;create-user-value&quot;&gt;1. Create User Value&lt;/h2&gt;
+&lt;h2 id=&quot;1-create-user-value&quot;&gt;1. Create User Value&lt;/h2&gt;
 
 &lt;p&gt;First and foremost, writing software is about creating value for users. This
 seems straight forward, but as systems evolve and become more complex we
@@ -729,7 +724,7 @@ changes out in weekly sprints.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://imgs.xkcd.com/comics/the_general_problem.png&quot; alt=&quot;xkcd - pass the salt&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;keep-it-simple&quot;&gt;2. Keep it Simple&lt;/h2&gt;
+&lt;h2 id=&quot;2-keep-it-simple&quot;&gt;2. Keep it Simple&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Everything should be made as simple as possible, but no simpler — Albert
@@ -772,7 +767,7 @@ each other’s skills.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg&quot; alt=&quot;wtfs per minute&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;know-thy-service-with-data&quot;&gt;3. Know Thy-Service With Data&lt;/h2&gt;
+&lt;h2 id=&quot;3-know-thy-service-with-data&quot;&gt;3. Know Thy-Service With Data&lt;/h2&gt;
 
 &lt;p&gt;In the world of “big data” this point needs little explanation. Okta collects
 massive amounts of operational data about our systems to:&lt;/p&gt;
@@ -801,7 +796,7 @@ correlation&lt;/li&gt;
 &lt;p&gt;Technologies we use to gain visibility include: PagerDuty, RedShift,
 Zabbix, ThousandEyes, Boundary, Pingdom, App Dynamics, Splunk, ELK, S3.&lt;/p&gt;
 
-&lt;h2 id=&quot;make-failure-cheap&quot;&gt;4. Make Failure Cheap&lt;/h2&gt;
+&lt;h2 id=&quot;4-make-failure-cheap&quot;&gt;4. Make Failure Cheap&lt;/h2&gt;
 
 &lt;p&gt;Every software system will experience failures and all code has bugs. While we
 constantly work at having fewer, it’s unrealistic to assume they won’t occur. So,
@@ -846,7 +841,7 @@ rollback&lt;/li&gt;
   &lt;p&gt;An escalator can never break; it can only become stairs – Mitch Hedberg&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;automate-everything&quot;&gt;5. Automate Everything&lt;/h2&gt;
+&lt;h2 id=&quot;5-automate-everything&quot;&gt;5. Automate Everything&lt;/h2&gt;
 
 &lt;p&gt;All tasks performed routinely should
 be automated. These are automation principles we follow:&lt;/p&gt;
@@ -871,7 +866,7 @@ be automated. These are automation principles we follow:&lt;/p&gt;
   &lt;li&gt;Docker - Containerizing services&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;with-performance-less-is-more&quot;&gt;6. With Performance, Less is More&lt;/h2&gt;
+&lt;h2 id=&quot;6-with-performance-less-is-more&quot;&gt;6. With Performance, Less is More&lt;/h2&gt;
 
 &lt;p&gt;We find especially with performance, there are typically huge wins to be had in
 up front design decisions which may come at very little to no cost. Our design
@@ -905,15 +900,15 @@ enforce limits and design for infinity.&lt;/li&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:the-knowledge-creating-company&quot;&gt;
-      &lt;p&gt;Ikujiro Nonaka, and Hirotaka Takeuchi. The Knowledge Creating Company. Oxford University Press, 1995. Print. https://books.google.com/books/about/The_Knowledge_creating_Company.html?id=B-qxrPaU1-MC &lt;a href=&quot;#fnref:the-knowledge-creating-company&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Ikujiro Nonaka, and Hirotaka Takeuchi. The Knowledge Creating Company. Oxford University Press, 1995. Print. https://books.google.com/books/about/The_Knowledge_creating_Company.html?id=B-qxrPaU1-MC&amp;nbsp;&lt;a href=&quot;#fnref:the-knowledge-creating-company&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:agile-cost-curve&quot;&gt;
-      &lt;p&gt;Scott Ambler. Examining the Agile Cost of Change Curve. Website. http://www.agilemodeling.com/essays/costOfChange.htm &lt;a href=&quot;#fnref:agile-cost-curve&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Scott Ambler. Examining the Agile Cost of Change Curve. Website. http://www.agilemodeling.com/essays/costOfChange.htm&amp;nbsp;&lt;a href=&quot;#fnref:agile-cost-curve&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</guid>
       </item>
@@ -1019,7 +1014,7 @@ where we were last fall, our goal is &lt;strong&gt;zero failover time&lt;/strong
 their hands dirty tackling product issues? Our CTO doesn’t code very often, but when
 he does, he patches the JVM.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</guid>
       </item>
@@ -1181,7 +1176,7 @@ steps in writing on our wiki. Thanks guys!&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Thu, 23 Apr 2015 00:00:00 +0000</pubDate>
+        <pubDate>Thu, 23 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</guid>
       </item>
@@ -1340,7 +1335,7 @@ dependency, not a real one.&lt;/p&gt;
 how to make tests isolated. You can also check out the full code at
 &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 14 Apr 2015 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 14 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</guid>
       </item>
@@ -1534,7 +1529,7 @@ because of a bad network connection.&lt;/p&gt;
 to achieve test isolation using dependency injection. You can also
 check out the full code at &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 07 Apr 2015 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 07 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</guid>
       </item>

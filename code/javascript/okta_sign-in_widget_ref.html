@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -297,7 +328,7 @@ Basic instructions for creating a sign-in widget are available in <a href="./okt
       <span class="kd">var</span> <span class="nx">suffix</span> <span class="o">=</span> <span class="s1">'@acme.com'</span><span class="p">;</span>
 
       <span class="c1">// op can be PRIMARY_AUTH, FORGOT_PASSWORD or UNLOCK_ACCOUNT</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">contains</span><span class="p">[</span><span class="s1">'FORGOT_PASSWORD'</span><span class="p">,</span> <span class="s1">'UNLOCK_ACCOUNT'</span><span class="p">],</span> <span class="nx">op</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">contains</span><span class="p">([</span><span class="s1">'FORGOT_PASSWORD'</span><span class="p">,</span> <span class="s1">'UNLOCK_ACCOUNT'</span><span class="p">],</span> <span class="nx">op</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">return</span> <span class="p">(</span><span class="nx">username</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">suffix</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">?</span> <span class="nx">username</span> <span class="p">:</span> <span class="p">(</span><span class="nx">username</span> <span class="o">+</span> <span class="nx">suffix</span><span class="p">);</span>
       <span class="p">}</span>
     <span class="p">}</span>

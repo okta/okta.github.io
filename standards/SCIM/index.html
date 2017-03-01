@@ -13,7 +13,7 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
-  <title>Provisioning with Lifecycle Management | Okta Developer</title>
+  <title>SCIM Provisioning with Lifecycle Management | Okta Developer</title>
   <meta name="description" content="Enable SCIM-based provisioning from Okta to your application.">
   <link rel="canonical" href="http://developer.okta.com/standards/SCIM/">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li class="is-active">
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -145,7 +176,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_standards/SCIM/index.md">Edit Page</a>
-      <h1 id="provisioning-with-oktas-lifecycle-management">Provisioning with Okta’s Lifecycle Management</h1>
+      <h1 id="scim-provisioning-with-oktas-lifecycle-management">SCIM: Provisioning with Okta’s Lifecycle Management</h1>
 <p>Developers at a software vendor (ISV), Okta customers, and system-integrators (SI) want to facilitate fast, 
 enterprise-wide deployment of their app by integrating with Okta for user provisioning primarily via the SCIM standard. 
 This article describes:</p>
@@ -265,7 +296,7 @@ In this scenario, the HR app, not Active Directory, feeds employee profile detai
 <blockquote>
   <p>Note: Integrations for the “App-as-Master” use case are significantly more complex than the Directory-as-Master use case and take more time to build and support. 
 This is because these integrations sync a larger number of attributes and lifecycle states, and more directly impact the Okta user profile and downstream apps. 
-If you want your integration to support it, we recommend contacting <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> to double check your design before starting development.</p>
+If you want your integration to support it, we recommend contacting <a href="mailto:developers@okta.com">developers@okta.com</a> to double check your design before starting development.</p>
 </blockquote>
 
 <h4 id="attribute-level-mastering">Attribute-Level Mastering</h4>
@@ -336,7 +367,7 @@ An alternative option is to build and host a SCIM facade middleware that transla
 between the Okta SCIM Client and the cloud app’s proprietary API. The Okta integration would be to this SCIM facade.</p>
 
 <blockquote>
-  <p>Have questions? Need help? Email us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> or post your question on <a href="http://stackoverflow.com/search?q=okta,scim">Stack Overflow</a>.</p>
+  <p>Have questions? Need help? Email us at <a href="mailto:developers@okta.com">developers@okta.com</a> or post your question on <a href="http://stackoverflow.com/search?q=okta,scim">Stack Overflow</a>.</p>
 </blockquote>
 
 <h2 id="scim-based-provisioning-integration">SCIM-Based Provisioning Integration</h2>
@@ -764,7 +795,7 @@ attributes is a critical part of working with Okta.</p>
 <p>Your SCIM API must be able to filter users by <code class="highlighter-rouge">userName</code> and should
 also support filtering by <code class="highlighter-rouge">id</code> and <code class="highlighter-rouge">emails</code>. Filtering support
 is required because most provisioning actions require the ability
-for Okta to determine if a user resource exists on your system. The filter Okta generates will be based on the <code class="highlighter-rouge">userName</code> field, following the pattern “userName eq “…” ”.</p>
+for Okta to determine if a user resource exists on your system. The filter Okta generates will be based on the <code class="highlighter-rouge">userName</code> field, following the pattern “userName eq “…” “.</p>
 
 <p>Consider the scenario where an Okta customer with thousands of
 users has a provisioning integration with your system, which also
@@ -1111,7 +1142,7 @@ you’ll need to get your app published in <a href="https://www.okta.com/resourc
 </ol>
 
 <blockquote>
-  <p>Have questions? Need help? Email us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> or post your question on <a href="http://stackoverflow.com/search?q=okta,scim">Stack Overflow</a>.</p>
+  <p>Have questions? Need help? Email us at <a href="mailto:developers@okta.com">developers@okta.com</a> or post your question on <a href="http://stackoverflow.com/search?q=okta,scim">Stack Overflow</a>.</p>
 </blockquote>
 
 <h3 id="private-app-option">Private App Option</h3>
@@ -1298,7 +1329,7 @@ test your SCIM integration directly with Okta. To do so, you will first need to 
 
 <p>Note: If you are using OAuth Authorization Code Grant flow as your authentication method 
 or need to support the Profile Master action, Okta will need to custom-configure a template app for you. 
-Please request this in your email to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>.</p>
+Please request this in your email to <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
 
 <ol>
   <li>
@@ -1428,9 +1459,9 @@ For more details, see the <a href="http://saml-doc.okta.com/Provisioning_Docs/SC
 <p>Here’s the process for getting joint customers involved in testing the newly developed SCIM integration:</p>
 
 <ul>
-  <li>Identify joint customers interested in piloting the integration. Here’s <a href="https://docs.google.com/document/d/1UCvtjTj-nfKUVff4xMGwWz_hKlHBOZrCMbFkJHMkc-g/edit">a template email</a> to assist in outreach.</li>
-  <li>Once identified, an Okta admin from the joint customer will need to email <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a> asking for this integration to be assigned to their Okta preview org (please have them specify org subdomain in their request). Okta will then assign the app.</li>
-  <li>Integration and configuration review with the joint customer. Partners are responsible for managing the customer identification and testing process, but Okta can support as needed. Please coordinate by emailing <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>.</li>
+  <li>Identify joint customers interested in piloting the integration.</li>
+  <li>Once identified, an Okta admin from the joint customer will need to email <a href="mailto:developers@okta.com">developers@okta.com</a> asking for this integration to be assigned to their Okta preview org (please have them specify org subdomain in their request). Okta will then assign the app.</li>
+  <li>Integration and configuration review with the joint customer. Partners are responsible for managing the customer identification and testing process, but Okta can support as needed. Please coordinate by emailing <a href="mailto:developers@okta.com">developers@okta.com</a>.</li>
 </ul>
 
 <h4 id="publish-to-okta-application-network">Publish to Okta Application Network</h4>
@@ -1438,20 +1469,20 @@ For more details, see the <a href="http://saml-doc.okta.com/Provisioning_Docs/SC
 <p>In order for an app to be published in the Okta Application Network, it must meet the following criteria:</p>
 
 <ul>
-  <li>[ ] ISV configuration guide explaining:
+  <li>ISV configuration guide explaining:
     <ul>
-      <li>[ ] The supported features</li>
-      <li>[ ] Step-by-step instructions for setting up the integration</li>
+      <li>The supported features</li>
+      <li>Step-by-step instructions for setting up the integration</li>
     </ul>
   </li>
-  <li>[ ] Gotchas &amp; known issues</li>
-  <li>[ ] Support and Contact Info</li>
-  <li>[ ] ISV Support Contact</li>
-  <li>[ ] ISV Escalation Contact</li>
-  <li>[ ] Full, permanent test tenant provided to Okta</li>
-  <li>[ ] RunScope Test Suite</li>
-  <li>[ ] Final Full QA by Okta</li>
-  <li>[ ] Customer validation</li>
+  <li>Gotchas &amp; known issues</li>
+  <li>Support and Contact Info</li>
+  <li>ISV Support Contact</li>
+  <li>ISV Escalation Contact</li>
+  <li>Full, permanent test tenant provided to Okta</li>
+  <li>RunScope Test Suite</li>
+  <li>Final Full QA by Okta</li>
+  <li>Customer validation</li>
 </ul>
 
 <h2 id="provisioning-faqs">Provisioning FAQs</h2>
@@ -1460,54 +1491,116 @@ For more details, see the <a href="http://saml-doc.okta.com/Provisioning_Docs/SC
 
 <p><strong>What are the differences between SCIM 1.1 and 2.0?</strong></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Section</th>
-      <th>SCIM 1.1</th>
-      <th>SCIM 2.0</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Namespaces</td>
-      <td><code class="highlighter-rouge">urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0</code></td>
-      <td><code class="highlighter-rouge">urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User</code></td>
-      <td>Namespaces are different therefore 2.0 is not backwards compatible with 1.1</td>
-    </tr>
-    <tr>
-      <td>Service Provider Config Endpoint</td>
-      <td>/ServiceProviderConfig<b>s</b></td>
-      <td>/ServiceProviderConfig</td>
-      <td>Notice 2.0 does NOT have an ‘s’ at the end</td>
-    </tr>
-    <tr>
-      <td>Patch Protocol</td>
-      <td><a href="http://www.simplecloud.info/specs/draft-scim-api-01.html#edit-resource-with-patch">Section 3.3.2</a></td>
-      <td><a href="https://tools.ietf.org/html/rfc7644#section-3.5.2">Section 3.5.2: Uses JSON Patch</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Error Response Schema</td>
-      <td><a href="http://www.simplecloud.info/specs/draft-scim-api-01.html#anchor6">Section 3.9</a></td>
-      <td><a href="https://tools.ietf.org/html/rfc7644#section-3.12">Section 3.12</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Reference Type</td>
-      <td>N/A</td>
-      <td>Supports ref type pointing to the full url of another SCIM Resource</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Query by POST /search</td>
-      <td>N/A</td>
-      <td><a href="https://tools.ietf.org/html/rfc7644#section-3.4.3">Section 3.4.3</a></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li>
+    <p>Namespaces:  Namespaces are different, therefore 2.0 is not backwards compatible with 1.1</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">urn:scim:schemas:core:1.0 urn:scim:schemas:extension:enterprise:1.0</code></td>
+          <td><code class="highlighter-rouge">urn:ietf:params:scim:schemas:core:2.0:User urn:ietf:params:scim:schemas:extension:enterprise:2.0:User</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Service Provider Configuration Endpoint: There’s no <code class="highlighter-rouge">s</code> at the end of the SCIM 2.0 endpoint.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">/ServiceProviderConfigs</code></td>
+          <td><code class="highlighter-rouge">/ServiceProviderConfig</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Patch Protocol</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="http://www.simplecloud.info/specs/draft-scim-api-01.html#edit-resource-with-patch">Section 3.3.2</a></td>
+          <td><a href="https://tools.ietf.org/html/rfc7644#section-3.5.2">Section 3.5.2: Uses JSON Patch</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Error Response Schema</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="http://www.simplecloud.info/specs/draft-scim-api-01.html#anchor6">Section 3.9</a></td>
+          <td><a href="https://tools.ietf.org/html/rfc7644#section-3.12">Section 3.12</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Reference Type</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>N/A</td>
+          <td>Supports reference type pointing to the full URL of another SCIM Resource</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Query by POST /search</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SCIM 1.1</th>
+          <th>SCIM 2.0</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>N/A</td>
+          <td><a href="https://tools.ietf.org/html/rfc7644#section-3.4.3">Section 3.4.3</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
 
 <p><strong>Our API is similar to SCIM, but is not 100% compliant. Can we still integrate with Okta?</strong></p>
 
@@ -1577,7 +1670,7 @@ Note that Okta only supports filtering via the eq operator on the SCIM userName 
 
 <p><strong>If I submit my app with a set of attributes, and then I want to add attributes during the testing phase of the app, is this acceptable?</strong></p>
 
-<p>Yes. Add a new app instance in your dev org to test the new attributes and email <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;">&#100;&#101;&#118;&#101;&#108;&#111;&#112;&#101;&#114;&#115;&#064;&#111;&#107;&#116;&#097;&#046;&#099;&#111;&#109;</a>.</p>
+<p>Yes. Add a new app instance in your dev org to test the new attributes and email <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
 
 <p><strong>Once my app has been published, and I add additional attributes, how do I republish my app? Can I republish frequently?</strong></p>
 

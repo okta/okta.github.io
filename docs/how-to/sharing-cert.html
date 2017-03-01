@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -171,7 +202,7 @@ which you wish to share a certificate, and <code class="highlighter-rouge">app2<
 
 <p>This example also works if the apps are two instances of the same app, or two different apps.</p>
 
-<h4 id="generate-a-new-credential-for-the-source-app">1. Generate a new credential for the source app</h4>
+<h4 id="1-generate-a-new-credential-for-the-source-app">1. Generate a new credential for the source app</h4>
 
 <p>Using the source app ID (<code class="highlighter-rouge">app</code>’s ID), generate a new credential for the source app:</p>
 
@@ -218,7 +249,7 @@ which you wish to share a certificate, and <code class="highlighter-rouge">app2<
 </span></code></pre>
 </div>
 
-<h4 id="update-the-source-app-to-use-the-new-certificate">2. Update the source app to use the new certificate</h4>
+<h4 id="2-update-the-source-app-to-use-the-new-certificate">2. Update the source app to use the new certificate</h4>
 
 <p>Update the source app with the application key credential’s ID, <code class="highlighter-rouge">kid</code> so that the source app 
 uses the new credential to sign assertions.</p>
@@ -275,7 +306,7 @@ uses the new credential to sign assertions.</p>
   <p>Note: The response has been truncated for clarity.</p>
 </blockquote>
 
-<h4 id="share-the-source-apps-key-credential-kid-with-the-target-app">3. Share the source app’s key credential (kid) with the target app</h4>
+<h4 id="3-share-the-source-apps-key-credential-kid-with-the-target-app">3. Share the source app’s key credential (kid) with the target app</h4>
 
 <p>Request:</p>
 
@@ -323,7 +354,7 @@ uses the new credential to sign assertions.</p>
   <p>Note: If you try to clone a credential that the target app instance already has, the API responds with a 400 error code.</p>
 </blockquote>
 
-<h4 id="update-the-target-app-to-use-the-new-credential-that-you-just-shared">4. Update the target app to use the new credential that you just shared</h4>
+<h4 id="4-update-the-target-app-to-use-the-new-credential-that-you-just-shared">4. Update the target app to use the new credential that you just shared</h4>
 
 <p>Update the target app to use the new credential that you just shared.
 When you update the target app with the <code class="highlighter-rouge">kid</code>, the target app starts

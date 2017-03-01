@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -417,7 +449,7 @@
   "credentials": {
     "recovery_question": {
       "question": "Who'</span><span class="se">\'</span><span class="s1">'s a major player in the cowboy scene?",
-      "answer": "Cowboy Dan"
+      "answer": "Annie Oakley"
     }
   }
 }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?activate=false"</span>
@@ -549,7 +581,7 @@
     "password" : { "value": "tlpWENT2m" },
     "recovery_question": {
       "question": "Who'</span><span class="se">\'</span><span class="s1">'s a major player in the cowboy scene?",
-      "answer": "Cowboy Dan"
+      "answer": "Annie Oakley"
     }
   }
 }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?activate=false"</span>
@@ -1535,13 +1567,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 <h4 class="api api-operation" id="list-users-with-search">List Users with Search</h4>
 
 <blockquote>
-  <p>Listing users with search is an 
-          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-            <span class="api-label api-label-ea ">
-              <i class="fa fa-flag"></i> Early Access
-            </span>
-          </a>
-           feature.</p>
+  <p>Listing users with search is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
 </blockquote>
 
 <p>Searches for user by the properties specified in the search parameter (case insensitive).</p>
@@ -2571,13 +2597,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </div>
 
 <blockquote>
-  <p>Deleting users is an 
-          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-            <span class="api-label api-label-ea ">
-              <i class="fa fa-flag"></i> Early Access
-            </span>
-          </a>
-           feature.</p>
+  <p>Deleting users is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
 </blockquote>
 
 <h3 class="api api-operation" id="delete-user">Delete User</h3>
@@ -3163,7 +3183,7 @@ and the user is presented with the password-expired page where he or she can cha
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
   "password": { "value": "uTVM,TPw55" },
-  "recovery_question": { "answer": "Cowboy Dan" }
+  "recovery_question": { "answer": "Annie Oakley" }
 }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span>
 </code></pre>
 </div>
@@ -3600,13 +3620,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <div class="beta">
 <blockquote>
-  <p>Note: Profile image is a 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a>
-           feature.</p>
+  <p>Note: Profile image is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature.</p>
 </blockquote>
 
 <p>During the profile image Beta, image property definitions in the schema are of the <code class="highlighter-rouge">Object</code> data type with an additional <code class="highlighter-rouge">extendedType</code> of <code class="highlighter-rouge">Image</code>.
@@ -4123,7 +4137,7 @@ When running reports, remember that the data is valid as of the last login or li
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"recovery_question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Who's a major player in the cowboy scene?"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"answer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cowboy Dan"</span><span class="w">
+      </span><span class="nt">"answer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Annie Oakley"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">

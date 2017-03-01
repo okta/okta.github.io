@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -198,12 +229,7 @@
 <p>The session token along with the URL for your landing page can then be used to complete the following <a href="http://tools.ietf.org/html/rfc6570">URI Template</a> <code class="highlighter-rouge">https://your-subdomain.okta.com/login/sessionCookieRedirect?token={sessionToken}&amp;redirectUrl={redirectUrl}</code> that will retrieve a session cookie for a user’s browser when visited.</p>
 
 <blockquote>
-  <p>You must have your redirect URI white-listed as a Trusted Origin within Okta. This is required to protect against open redirect attacks. 
-          <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-            <span class="api-label api-label-ea ">
-              <i class="fa fa-flag"></i> Early Access
-            </span>
-          </a></p>
+  <p>You must have your redirect URI white-listed as a Trusted Origin within Okta. This is required to protect against open redirect attacks.  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
 </blockquote>
 
 <blockquote>

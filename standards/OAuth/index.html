@@ -13,8 +13,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
-  <title>OAuth 2.0 | Okta Developer</title>
-  <meta name="description" content="The next evolution of the OAuth protocol focusing on client developer simplicity">
+  <title>OAuth 2.0 and Okta | Okta Developer</title>
+  <meta name="description" content="The next evolution of the OAuth protocol focuses on client developer simplicity">
   <link rel="canonical" href="http://developer.okta.com/standards/OAuth/">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li class="is-active">
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -145,11 +176,22 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_standards/OAuth/index.md">Edit Page</a>
-      <p>OAuth 2.0 is the next evolution of the OAuth protocol and is not backwards compatible with OAuth 1.0. OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and living room devices. The specification and associated RFCs are developed by the IETF OAuth WG;[5] the main framework was published in October 2012. (It was expected to be finalized by the end of 2010, according to Eran Hammer.[6] However, due to discordant views about the evolution of OAuth, Hammer left the working group.[7])</p>
+      <h1 id="oauth-20-and-okta">OAuth 2.0 and Okta</h1>
 
-<p>Facebook’s Graph API only supports OAuth 2.0.[8] Google supports OAuth 2.0 as the recommended authentication mechanism for all of its APIs.[9] As of 2011 Microsoft[10] has added OAuth 2.0 experimental support to their APIs.</p>
+<p>OAuth 2.0 is the next evolution of the OAuth protocol and is not backwards compatible with OAuth 1.0. 
+OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and living room devices.</p>
 
-<p>The OAuth 2.0 Framework[11] and Bearer Token Usage[12] were published in October 2012. Other documents are still being worked on within the OAuth working group.</p>
+<p>The specification and associated RFCs are developed by <a href="https://tools.ietf.org/wg/oauth/">the IETF OAuth WG</a>.
+<a href="https://tools.ietf.org/html/rfc6749">The main framework</a> and <a href="https://tools.ietf.org/html/rfc6750">Bearer Token Usage</a> were published in 2012. 
+Other documents are still being worked on within the OAuth working group.</p>
+
+<p>For detailed information about Okta’s implementation of OAuth 2.0:</p>
+
+<ul>
+  <li><a href="http://developer.okta.com/use_cases/api_security/">Okta’s API Access Management Introduction</a></li>
+  <li><a href="http://developer.okta.com/docs/api/resources/oauth2.html">OAuth 2.0 flows and Okta’s API for OAuth 2.0</a></li>
+  <li><a href="https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=api%20access%20management">Help for configuring API Access Management in the Okta UI</a></li>
+</ul>
 
 
       </div>

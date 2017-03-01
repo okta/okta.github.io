@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -172,30 +204,9 @@ The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Con
 <p>There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:</p>
 
 <ul>
-  <li>
-    <p>Social Authentication – 
-        <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-          <span class="api-label api-label-ea ">
-            <i class="fa fa-flag"></i> Early Access
-          </span>
-        </a></p>
-  </li>
-  <li>
-    <p>OpenID Connect – 
-        <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-          <span class="api-label api-label-ea ">
-            <i class="fa fa-flag"></i> Early Access
-          </span>
-        </a></p>
-  </li>
-  <li>
-    <p>API Access Management – 
-        <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea">
-          <span class="api-label api-label-ea ">
-            <i class="fa fa-flag"></i> Early Access
-          </span>
-        </a></p>
-  </li>
+  <li>Social Authentication –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
+  <li>OpenID Connect –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
+  <li>API Access Management –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
 </ul>
 
 <p>It’s important to understand which use case you are targeting and build your application according to the correct patterns for that use case.
@@ -290,7 +301,9 @@ This authentication method produces a <code class="highlighter-rouge">sessionTok
 
 <p>An Access Token is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> encoded in base64URL format that contains <a href="#jwt-header">a header</a>, <a href="#jwt-payload">payload</a>, and <a href="#jwt-signature">signature</a>. A resource server can authorize the client to access particular resources based on the <a href="#scopes-and-claims">scopes and claims</a> in the Access Token.</p>
 
-<p>The lifetime of Access Token can be configured in the <a href="#access-policies">Access Policies</a>.</p>
+<p>The lifetime of Access Token can be configured in the <a href="#access-policies">Access Policies</a>. If the client that
+issued the token is deactivated, the token is immediately and permanently invalidated. Reactivating the
+client does not make the token valid again.</p>
 
 <h3 id="jwt-header">JWT Header</h3>
 
@@ -537,9 +550,11 @@ A Refresh Token will be returned if ‘offline_access’ scope is requested usin
 <h2 id="id-token">Id Token</h2>
 <p>An authorization server can also issue an Id Token to the client, just like <a href="oidc#id-token">OIDC</a>. The differences are 1) ‘groups’ is not a reserved scope or claim. To get a claim with group information, the administrators have to define a custom claim with a group filter and associate it with a scope. 2) the custom properties in the app user profile will not be put in the Id Token by default even if profile scope is granted. To get a claim for a custom property, the administrators have to define a custom claim with an Okta EL expression and associate it with a scope.</p>
 
-<p>The lifetime of an Id Token is 1 hour.</p>
+<p>The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
+immediately and permanently invalidated. Reactivating the client does not make the token valid again.</p>
 
-<p>The same validation steps for <a href="oidc.html#validating-id-tokens">OIDC</a> can also be applied to Id Token for OAuth2, except the public keys should be retrieved via the <a href="#get-keys">Get Keys endpoint</a>.</p>
+<p>The same validation steps for <a href="oidc.html#validating-id-tokens">OIDC</a> can also be applied to Id Token for
+OAuth2, except the public keys should be retrieved via the <a href="#get-keys">Get Keys endpoint</a>.</p>
 
 <h2 id="access-policies">Access Policies</h2>
 
@@ -1732,14 +1747,13 @@ This API doesn’t require any authentication and returns a JSON object with the
 </span></code></pre>
 </div>
 
-<div class="beta">
 <h2 id="authorization-server-operations">Authorization Server Operations</h2>
 
 <h3 id="create-authorization-server">Create Authorization Server</h3>
 
 <p>Creates a new Authorization server with key rotation mode as <code class="highlighter-rouge">AUTO</code>.</p>
 
-<h4 id="request-parameters">Request Parameters</h4>
+<h4 id="request-parameters-4">Request Parameters</h4>
 
 <table>
   <thead>
@@ -1772,12 +1786,7 @@ This API doesn’t require any authentication and returns a JSON object with the
   </tbody>
 </table>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as</span> 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as</span>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></p>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1790,7 +1799,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-1">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ausnsopoM6vBRB3PD0g3"</span><span class="p">,</span><span class="w">
@@ -1865,7 +1874,7 @@ This API doesn’t require any authentication and returns a JSON object with the
   <p>Switching between rotation modes will not change the active signing key.</p>
 </blockquote>
 
-<h4 id="request-parameters-1">Request Parameters</h4>
+<h4 id="request-parameters-5">Request Parameters</h4>
 
 <table>
   <thead>
@@ -1904,12 +1913,7 @@ This API doesn’t require any authentication and returns a JSON object with the
   </tbody>
 </table>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as/:authorizationServerId</span> 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as/:authorizationServerId</span>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></p>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1927,7 +1931,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-1">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-2">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ausnsopoM6vBRB3PD0g3"</span><span class="p">,</span><span class="w">
@@ -1997,12 +2001,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 
 <p>Returns authorization server identified by authorizationServerId.</p>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/as/:authorizationServerId</span> 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/as/:authorizationServerId</span>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></p>
 
 <h4 id="request-example">Request Example</h4>
 
@@ -2014,7 +2013,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-2">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-3">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ausnsopoM6vBRB3PD0g3"</span><span class="p">,</span><span class="w">
@@ -2142,12 +2141,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 
 <p>Returns the current keys in rotation for the authorization server.</p>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/as/:authorizationServerId/credentials/keys</span> 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/as/:authorizationServerId/credentials/keys</span>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></p>
 
 <h4 id="request-example-1">Request Example</h4>
 
@@ -2159,7 +2153,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-3">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-4">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"keys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2219,7 +2213,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 If keys are rotated manually, any intermediate cache should be invalidated and keys should be fetched again using the <a href="oauth2.html#get-keys">get keys</a> endpoint.</p>
 </blockquote>
 
-<h4 id="request-parameters-2">Request Parameters</h4>
+<h4 id="request-parameters-6">Request Parameters</h4>
 
 <table>
   <thead>
@@ -2240,12 +2234,7 @@ If keys are rotated manually, any intermediate cache should be invalidated and k
   </tbody>
 </table>
 
-<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as/:authorizationServerId/credentials/lifecycle/keyRotate</span> 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a></p>
+<p class="api api-operation"><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/as/:authorizationServerId/credentials/lifecycle/keyRotate</span>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></p>
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
@@ -2259,7 +2248,7 @@ If keys are rotated manually, any intermediate cache should be invalidated and k
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-4">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-5">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"keys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -2304,7 +2293,7 @@ If keys are rotated manually, any intermediate cache should be invalidated and k
 </span></code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-error">Response Example (Error)</h4>
+<h4 class="api api-response api-response-example" id="response-example-error-4">Response Example (Error)</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
@@ -2319,7 +2308,87 @@ If keys are rotated manually, any intermediate cache should be invalidated and k
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
-</div>
+
+<h2 id="troubleshooting-for-api-access-management">Troubleshooting for API Access Management</h2>
+
+<blockquote>
+  <p>API Access Management is  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a> .</p>
+</blockquote>
+
+<p>If you run into trouble setting up an authorization server or performing
+other tasks for API Access Management, use the following suggestions to resolve your issues.</p>
+
+<h3 id="always-start-with-the-system-log">Always Start with the System Log</h3>
+
+<p>The system log contains detailed information about why a request was denied and other useful information.</p>
+
+<h3 id="limits">Limits</h3>
+
+<ul>
+  <li>
+    <p>Each authorization server can have only one resource. If you have resources that share a common path,
+you can control access to the common path with one authorization server.</p>
+  </li>
+  <li>
+    <p>Scopes are unique per authorization server.</p>
+  </li>
+  <li>
+    <p>The resource URI you specify in an authorization server must be an absolute path.</p>
+  </li>
+  <li>
+    <p>Tokens can expire, be explicitly revoked at the endpoint, or implicitly revoked by a change in configuration.</p>
+  </li>
+  <li>Token revocation can be implicit in two ways: token expiration or a change to the source.
+    <ul>
+      <li>Expiration happens at different times:
+        <ul>
+          <li>ID Token expires after one hour.</li>
+          <li>Access Token expiration is configured in a policy, but is always between five minutes and one day.</li>
+          <li>Refresh Token expiration depends on two factors: 1) Expiration is configured in an Access Policy, no limits, 
+but must be greater than or equal to the Access Token lifetime, and 2) Revocation if the Refresh Token
+isn’t exercised within a specified time. Configure the specified time in an Access Policy, with a minimum of ten minutes.</li>
+        </ul>
+      </li>
+      <li>Revocation happens when a configuration is changed or deleted:
+        <ul>
+          <li>User deactivation or deletion.</li>
+          <li>Configuration in the authorization server is changed or deleted.</li>
+          <li>The <a href="https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm#OIDCWizard">client app</a> is deactivated, changed, unassigned, or deleted.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>If a client requests multiple scopes, but the policy for that client only allows for a subset of the scopes,
+then the token isn’t minted and an error is returned. The system log contains the details about the error.</li>
+</ul>
+
+<h3 id="subtle-behavior">Subtle Behavior</h3>
+
+<p>Some behaviors aren’t obvious:</p>
+
+<ul>
+  <li>
+    <p>A user must be assigned to the client in Okta for the client to get Access Tokens from that client. 
+You can assign the client directly (direct user assignment) or indirectly (group assignment).</p>
+  </li>
+  <li>
+    <p>If you haven’t created a rule in a policy in the authorization server to allow the client, user, and 
+scope combination that you want, the request fails.
+To resolve, create at least one rule in a policy in the authorization server for the relevant resource
+that specifies client, user, and scope.</p>
+  </li>
+  <li>
+    <p>OpenID Connect scopes are granted by default, so if you are requesting only those scopes ( <code class="highlighter-rouge">openid</code>, <code class="highlighter-rouge">profile</code>, <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">address</code>, <code class="highlighter-rouge">phone</code>, or <code class="highlighter-rouge">offline_access</code> ), you don’t need to define any scopes for them, but you still need a policy and rule
+in the authorization server. The rule grants the OpenID Connect scopes by default, so they don’t need to be configured in the rule.
+Token expiration times depend on how they are defined in the rules, and which policies and rules match the request.</p>
+  </li>
+  <li>
+    <p>OpenID scopes can be requested with custom scopes. For example, a request can include <code class="highlighter-rouge">openid</code> and a custom scope.</p>
+  </li>
+  <li>
+    <p>The evaluation of a policy always takes place during the initial authentication of the user (or of the client in case of client credentials flow). If the flow is not immediately finished, such as when a token is requested using <code class="highlighter-rouge">authorization_code</code> grant type, the policy is not evaluated again, and a change in the policy after the user or client is initially authenticated won’t affect the continued flow.</p>
+  </li>
+</ul>
 
 
       </div>

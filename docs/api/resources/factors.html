@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li class="is-active"><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -997,10 +1029,12 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <h5 class="api api-operation" id="enroll-okta-sms-factor-using-custom-template">Enroll Okta SMS Factor Using Custom Template</h5>
 
-<p>Customize (and optionally localize) the SMS message sent to the user on enrollment.
-* If the request has an <code class="highlighter-rouge">Accept_Language</code> header and the template contains a translation for that language, the SMS message is sent using the translated template.
-* If the language provided in the <code class="highlighter-rouge">Accept-Language</code> header doesn’t exist, the SMS message is sent using the template text.
-* If the provided <em>templateId</em> doesn’t match the existing template, the SMS message is sent using the default template.</p>
+<p>Customize (and optionally localize) the SMS message sent to the user on enrollment.</p>
+<ul>
+  <li>If the request has an <code class="highlighter-rouge">Accept_Language</code> header and the template contains a translation for that language, the SMS message is sent using the translated template.</li>
+  <li>If the language provided in the <code class="highlighter-rouge">Accept-Language</code> header doesn’t exist, the SMS message is sent using the template text.</li>
+  <li>If the provided <em>templateId</em> doesn’t match the existing template, the SMS message is sent using the default template.</li>
+</ul>
 
 <blockquote>
   <p>For instructions about how to create custome templates, see <a href="templates.html#sms-template">SMS Template</a>.</p>
@@ -2446,10 +2480,12 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <h4 class="api api-operation" id="verify-sms-factor-using-a-custom-template">Verify SMS Factor Using A Custom Template</h4>
 
-<p>Customize (and optionally localize) the SMS message sent to the user on verification.
-* If the request has an <code class="highlighter-rouge">Accept-Language</code> header and the template contains translation for that language, the SMS message is sent in that language.
-* If the language provided in the <code class="highlighter-rouge">Accept-Language</code> header doesn’t exist in the template definition, the SMS message is sent using the template text.
-* If the provided <code class="highlighter-rouge">templateId</code> doesn’t match an existing template, the SMS message is sent using the default template.</p>
+<p>Customize (and optionally localize) the SMS message sent to the user on verification.</p>
+<ul>
+  <li>If the request has an <code class="highlighter-rouge">Accept-Language</code> header and the template contains translation for that language, the SMS message is sent in that language.</li>
+  <li>If the language provided in the <code class="highlighter-rouge">Accept-Language</code> header doesn’t exist in the template definition, the SMS message is sent using the template text.</li>
+  <li>If the provided <code class="highlighter-rouge">templateId</code> doesn’t match an existing template, the SMS message is sent using the default template.</li>
+</ul>
 
 <p>To create custom templates, see <a href="templates.html#sms-template">Templates</a>.</p>
 

@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.04">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.05">
   <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -145,36 +176,44 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201705">Release 2017.05</h2>
+      <h2 id="release-201709">Release 2017.09</h2>
 
 <h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
 
-<p>We are making rate limits more granular and will roll the changes out over the next few months:</p>
+<p>We are making org-wide rate limits more granular, and treating authenticated end-user interactions
+separately. More granular rate limits will further lessen the likelihood of calls to one URI impacting
+another. Treating authenticated end-user interactions separately will lessen the chances of one user’s
+impacting another. We’re also providing a transition period so you can see what these changes will
+look like in your Okta system log before enforcing them:</p>
 
 <ol>
-  <li>Shortly after February 28, 2017, we’ll provide system log alerts to let you know that you would have exceeded any of these new API rate limits.</li>
-  <li>Sometime in March, 2017, we’ll treat authenticated end-user interactions on a per-user basis. Interactions like SSO after login won’t apply to your org-wide API rate limits.</li>
-  <li>Shortly after March 31, 2017, the new, more granular rate limits will be enforced. At that point, the warnings in the System Log will change to error notifications.</li>
+  <li>Shortly after February 28, 2017, we’ll provide system log alerts to let you know that you
+would have exceeded any of these new API rate limits.</li>
+  <li>Sometime in March, 2017, we’ll treat authenticated end-user interactions on a per-user basis.
+Interactions like SSO after login won’t apply to your org-wide API rate limits.</li>
+  <li>Shortly after March 31, 2017, we will enforce the new, more granular rate limits. At that
+point, the warnings in the System Log will change to error notifications.</li>
 </ol>
 
 <p>Of course, as each change is released, we’ll announce the change here.</p>
 
 <p>For a full description of the rate limit changes, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
 
-<h3 id="feature-improvements">Feature Improvements</h3>
+<h3 id="feature-improvement">Feature Improvement</h3>
 
-<ul>
-  <li>For OpenID Connect Client apps, when selecting <code class="highlighter-rouge">General settings &gt; Implicit grant type</code>, you can now use checkboxes to
-include <code class="highlighter-rouge">ID Tokens</code>, <code class="highlighter-rouge">Access Tokens</code>, or both.
-<!-- (OKTA-94252) --></li>
-</ul>
+<p>For a collection of Users, the Links object contains only the self
+link. This feature will be in preview for at least a month.
+<!-- (OKTA-115269) --></p>
 
 <h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
 <ul>
-  <li>In API Access Management, where an <code class="highlighter-rouge">Access Token</code> contains claims that evaluate to an
- array, we did not send the claims as a JSON array and did not ensure that the values were of
- the correct types. For an example of the output format, see <a href="/docs/api/resources/oauth2.html#jwt-payload">JWT Payload</a> (OKTA-113034)</li>
+  <li>
+    <p>The OpenID Connect and API Access Management ID Tokens contained an extraneous attribute. (OKTA-95042)</p>
+  </li>
+  <li>
+    <p>Some users created with the API were not activated automatically. (OKTA-112833)</p>
+  </li>
 </ul>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>

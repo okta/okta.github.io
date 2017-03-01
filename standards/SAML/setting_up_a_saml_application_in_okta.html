@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Setting up a SAML application in Okta | Okta Developer</title>
-  <meta name="description" content="Overview">
+  <meta name="description" content="Setting Up a SAML Application in Okta">
   <link rel="canonical" href="http://developer.okta.com/standards/SAML/setting_up_a_saml_application_in_okta">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -145,7 +176,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_standards/SAML/setting_up_a_saml_application_in_okta.md">Edit Page</a>
-      <h1 id="overview">Overview</h1>
+      <h1 id="setting-up-a-saml-application-in-okta">Setting Up a SAML Application in Okta</h1>
 
 <p>The first step in configuring an application to support SAML based Single Sign-On from Okta is to set up an application in Okta.</p>
 
@@ -158,78 +189,63 @@ SAML Identity Provider or “SAML IdP”), with the details of your application
 <ol>
   <li>
     <p>Log in to your Okta organization as a user with administrative
-privileges.</p>
-
-    <p>If you don’t have an Okta organization, you can create a free Okta
-Developer Edition organization here:
-<a href="https://www.okta.com/developer/signup/">https://www.okta.com/developer/signup/</a></p>
+    privileges. If you don’t have an Okta organization, you can create a free Okta
+    <a href="https://www.okta.com/developer/signup/" target="_blank">Developer Edition organization</a>.</p>
   </li>
   <li>
     <p>Click on the blue “Admin” button
-<img src="/assets/img/okta-admin-ui-button-admin.png" alt="Admin" /></p>
+    <img src="/assets/img/okta-admin-ui-button-admin.png" alt="Admin" /></p>
   </li>
   <li>
     <p>Click on the “Add Applications” shortcut
-<img src="/assets/img/okta-admin-ui-add-applications.png" alt="Add Applications" /></p>
+    <img src="/assets/img/okta-admin-ui-add-applications.png" alt="Add Applications" /></p>
   </li>
   <li>
     <p>Click on the green “Create New App” button
-<img src="/assets/img/okta-admin-ui-button-create-new-app.png" alt="Create New App" /></p>
+    <img src="/assets/img/okta-admin-ui-button-create-new-app.png" alt="Create New App" /></p>
   </li>
   <li>
     <p>In the dialog that opens, select the “SAML 2.0” option, then click
-the green “Create” button
-<img src="/assets/img/okta-admin-ui-create-new-application-integration.png" alt="Create a New Application Integration" /></p>
+    the green “Create” button
+    <img src="/assets/img/okta-admin-ui-create-new-application-integration.png" alt="Create a New Application Integration" /></p>
   </li>
   <li>
     <p>In Step 1 “General Settings”, enter “Example SAML Application” in the
-“App name” field, then click the green “Next” button.
-<img src="/assets/img/example-saml-application-okta-general-settings.png" alt="General Settings" /></p>
+    “App name” field, then click the green “Next” button.
+    <img src="/assets/img/example-saml-application-okta-general-settings.png" alt="General Settings" /></p>
   </li>
   <li>
-    <p>In Step 2 “Configure SAML”</p>
+    <p>In Step 2 “Configure SAML,” section A “SAML Settings”, paste the URL below into the “Single sign on URL” and “Audience URI (SP Entity ID)” fields:</p>
 
-    <ul>
-      <li>
-        <p>Paste the URL below into the “Single sign on URL” and “Audience URI (SP Entity ID)” fields:</p>
-
-        <div class="language-shell highlighter-rouge"><pre class="highlight"><code>http://example.com/saml/sso/example-okta-com
+    <div class="language-shell highlighter-rouge"><pre class="highlight"><code> http://example.com/saml/sso/example-okta-com
 </code></pre>
-        </div>
-      </li>
-      <li>
-        <p>Click “Show Advanced Settings”</p>
+    </div>
 
-        <p>Change the value of “Request compression” to “Compressed”.</p>
-      </li>
-      <li>In the “Attribute Statements” section, add three attribute statements:
-        <ol>
-          <li>“FirstName” set to “user.firstName”</li>
-          <li>“LastName” set to “user.lastName”</li>
-          <li>“Email” set to “user.email”</li>
-        </ol>
-      </li>
-      <li>Then click the green “Next” button</li>
-    </ul>
+    <p><img src="/assets/img/example-saml-application-okta-configure-settings1.png" alt="SAML Settings" /></p>
+  </li>
+  <li>In the “Attribute Statements” section, add three attribute statements:
+    <ol>
+      <li>“FirstName” set to “user.firstName”</li>
+      <li>“LastName” set to “user.lastName”</li>
+      <li>“Email” set to “user.email”</li>
+    </ol>
 
-    <p><img src="/assets/img/example-saml-application-okta-configure-settings.png" alt="SAML Settings" /></p>
+    <p><img src="/assets/img/example-saml-application-okta-configure-settings2.png" alt="SAML Settings" /></p>
+
+    <p>Click Next to continue.</p>
   </li>
   <li>
-    <p>In Step 3 “Feedback”, click the checkbox next to the text “This is
-an internal application that we created”, then click the green
-“Finish” button.
-<img src="/assets/img/okta-admin-ui-new-application-step-3-feedback.png" alt="App type" /></p>
+    <p>In Step 3 “Feedback”, select “I’m an Okta customer adding an internal app”, and “This is an internal app that we have created,” then click Finish.</p>
+
+    <p><img src="/assets/img/example-saml-application-okta-configure-settings3.png" alt="App type" /></p>
   </li>
   <li>
-    <p>You will now see the “Sign On” section of your newly created “Example
-SAML Application” application.</p>
-  </li>
-  <li>
-    <p>Keep this page open it a separate tab or browser window. You will
-need to return to this page later in this guide and copy the
-“Identity Provider metadata” link. (To copy the that link, right
-click on the “Identity Provider metadata” link and select “Copy”)
-<img src="/assets/img/okta-admin-ui-identity-provider-metadata-link.png" alt="Sign on methods" /></p>
+    <p>The “Sign On” section of your newly created “Example
+    SAML Application” application appears. Keep this page open it a separate tab or browser window. You will
+    return to this page later in this guide and copy the
+    “Identity Provider metadata” link. (To copy that link, right-click
+    on the “Identity Provider metadata” link and select “Copy”)
+    <img src="/assets/img/okta-admin-ui-identity-provider-metadata-link.png" alt="Sign on methods" /></p>
   </li>
   <li>
     <p>Right-click on the “People” section of the “Example SAML Application”
@@ -245,16 +261,14 @@ will open. Type your username into the search box, select the
 checkbox next to your username, then click the green “Next” button
 <img src="/assets/img/okta-admin-ui-confirm-assignments.png" alt="People search box" /></p>
   </li>
-  <li>
-    <p>You will be prompted to “Enter user-specific attributes”. Just click
+  <li>You will be prompted to “Enter user-specific attributes”. Just click
 the green “Confirm Assignments” button to keep the defaults.
-<img src="/assets/img/example-saml-application-okta-confirm-assignments.png" alt="Enter user attributes" /></p>
-  </li>
-  <li>
-    <p>You are now ready to configure SAML in your application. The information in the tab you
-opened in step #10 contains the information that you’ll need to configure SAML in your application.</p>
-  </li>
+<img src="/assets/img/example-saml-application-okta-confirm-assignments.png" alt="Enter user attributes" /></li>
 </ol>
+
+<p>You are now ready to configure SAML in your application. The information in the tab you
+opened in step #10 contains the information that you’ll need to configure SAML in your application.</p>
+
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

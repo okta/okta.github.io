@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li class="is-active"><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -166,13 +198,7 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/system_log.md">Edit Page</a>
       <h1 id="system-log-api">System Log API</h1>
 
-<p>This API is a 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a>
-           feature.</p>
+<p>This API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature.</p>
 
 <p>The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API:</p>
 
@@ -203,7 +229,6 @@
       <th>Required</th>
       <th>Minimum</th>
       <th>Maximum</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -215,7 +240,6 @@
       <td>FALSE</td>
       <td>0</td>
       <td>100</td>
-      <td> </td>
     </tr>
     <tr>
       <td>since</td>
@@ -225,7 +249,6 @@
       <td>TRUE</td>
       <td>0</td>
       <td>1000</td>
-      <td> </td>
     </tr>
     <tr>
       <td>filter</td>
@@ -233,7 +256,6 @@
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -245,7 +267,6 @@
       <td>FALSE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>until</td>
@@ -255,7 +276,6 @@
       <td>FALSE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>after</td>
@@ -263,7 +283,6 @@
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -628,18 +647,16 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Readonly</th>
       <th>MinLength</th>
       <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>eventId</td>
-      <td>Unique key for event</td>
+      <td>Unique key for an event</td>
       <td>String</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td>TRUE</td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -652,7 +669,6 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <td>TRUE</td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
     <tr>
       <td>eventType</td>
@@ -663,148 +679,134 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <td>TRUE</td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
     <tr>
       <td>version</td>
-      <td>versioning indicator</td>
+      <td>Versioning indicator</td>
       <td>String</td>
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
     <tr>
       <td>severity</td>
-      <td>Indicates how severe the event is. DEBUG, INFO, WARN, ERROR</td>
+      <td>Indicates how severe the event is: <code class="highlighter-rouge">DEBUG</code>, <code class="highlighter-rouge">INFO</code>, <code class="highlighter-rouge">WARN</code>, <code class="highlighter-rouge">ERROR</code></td>
       <td>String</td>
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
     <tr>
       <td>legacyEventType</td>
-      <td>legacy event type</td>
+      <td>Legacy event type</td>
       <td>String</td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
     <tr>
       <td>displayMessage</td>
-      <td>display message regarding the event</td>
+      <td>The display message for an event</td>
       <td>String</td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
     <tr>
       <td>actor</td>
-      <td>Describes zero or more entities that performed the action</td>
+      <td>Describes zero or more entities that performed an action</td>
       <td>Array of <a href="#actor-object">Actor Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>client</td>
-      <td>Identifies the client that requested the action</td>
+      <td>Identifies the client that requested an action</td>
       <td><a href="#client-object">Client Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>outcome</td>
-      <td>Identifies the outcome of the action</td>
+      <td>Identifies the outcome of an action</td>
       <td><a href="#outcome-object">Outcome Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>target</td>
-      <td>Identifies the targets of the action</td>
+      <td>Identifies the targets of an action</td>
       <td><a href="#target-object">Target Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>transaction</td>
-      <td>Identifies the transaction details of the action</td>
+      <td>Identifies the transaction details of an action</td>
       <td><a href="#transaction-object">Transaction Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>debugContext</td>
-      <td>Identifies the debug request data of the action</td>
+      <td>Identifies the debug request data of sn action</td>
       <td><a href="#debugcontext-object">DebugContext Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>authenticationContext</td>
-      <td>Identifies the authentication data of the action</td>
+      <td>Identifies the authentication data of an action</td>
       <td><a href="#authenticationcontext-object">AuthenticationContext Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>securityContext</td>
-      <td>Identifies the security data of the action</td>
+      <td>Identifies the security data of an action</td>
       <td><a href="#securitycontext-object">SecurityContext Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td> </td>
       <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>request</td>
-      <td>Identifies the request data of the action</td>
+      <td>Identifies the request data of an action</td>
       <td><a href="#request-object">Request Object</a></td>
       <td>TRUE</td>
       <td>FALSE</td>
       <td>TRUE</td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -821,7 +823,7 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
 
 <h3 id="actor-object">Actor Object</h3>
 
-<p>Describes the actor which performs the action</p>
+<p>Describes the user, app, client, or other entity (actor) who performed an action on a target</p>
 
 <table>
   <thead>
@@ -830,69 +832,45 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>id</td>
-      <td>Id of the target</td>
+      <td>ID of an actor</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>type</td>
-      <td>type of the target</td>
+      <td>Type of an actor</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>alternateId</td>
-      <td>alternative id of the target</td>
+      <td>Alternative ID of an actor</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>displayName</td>
-      <td>Display name of the target</td>
+      <td>Display name of an actor</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>detail</td>
-      <td>A map that goes from a String key to a value</td>
+      <td>Details about an actor</td>
       <td>Map[String-&gt;Object</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="target-object">Target Object</h3>
 
-<p>Describes the target of the action</p>
+<p>The entity upon which an actor performs an action. Targets may be anything: an app user, a login token or anything else.</p>
 
 <table>
   <thead>
@@ -901,62 +879,38 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>id</td>
-      <td>Id of the target</td>
+      <td>ID of a target</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>type</td>
-      <td>type of the target</td>
+      <td>Type of a target</td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>alternateId</td>
-      <td>alternative id of the target</td>
+      <td>alternative id of a target</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>displayName</td>
-      <td>Display name of the target</td>
+      <td>Display name of a target</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>detail</td>
-      <td>A map that goes from a String key to a value</td>
+      <td>Details about the target</td>
       <td>Map[String-&gt;Object</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -973,7 +927,7 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
 
 <h3 id="client-object">Client Object</h3>
 
-<p>Describes the client performing the action</p>
+<p>Describes the browser or other client the actor used to perform an action on a target</p>
 
 <table>
   <thead>
@@ -982,79 +936,51 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>userAgent</td>
-      <td>Id of the target</td>
+      <td>ID of the client used by an actor to perform an action</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>geographicalContext</td>
       <td>Geographical context data of the event</td>
       <td><a href="#geographicalcontext-object">GeographicalContext Object</a></td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>zone</td>
-      <td>zone client is in</td>
+      <td>Zone where the client is located</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>ipAddress</td>
       <td>Ip address of the client</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>device</td>
-      <td>Device that the client was using</td>
+      <td>Device that the client operated from</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>id</td>
-      <td>id of the client</td>
+      <td>ID of the client</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="geographicalcontext-object">GeographicalContext Object</h3>
 
-<p>Describes the location data regarding where the action was performed</p>
+<p>Describes the location of the target that the action was performed on</p>
 
 <table>
   <thead>
@@ -1063,69 +989,45 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>geolocation</td>
-      <td>geolocation of the target</td>
+      <td>Geolocation of the target</td>
       <td><a href="#geolocation-object">Geolocation Object</a></td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>city</td>
-      <td>city of the event</td>
+      <td>City of the event</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>state</td>
-      <td>zone client is in</td>
+      <td>Zone client is in</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>country</td>
-      <td>country of the client</td>
+      <td>Country of the client</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>postalCode</td>
       <td>Device that the client was using</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="geolocation-object">Geolocation Object</h3>
 
-<p>Describes transaction data an event</p>
+<p>The latitude and longitude of the geolocation where an action was performed</p>
 
 <table>
   <thead>
@@ -1134,39 +1036,27 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>lat</td>
-      <td>latitude</td>
+      <td>Latitude</td>
       <td>Double</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>lon</td>
-      <td>longitude</td>
+      <td>Longitude</td>
       <td>Double</td>
       <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="outcome-object">Outcome Object</h3>
 
-<p>Describes transaction data an event</p>
+<p>Describes the result of an action and the reason for that result</p>
 
 <table>
   <thead>
@@ -1178,36 +1068,33 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Default</th>
       <th>MinLength</th>
       <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>result</td>
-      <td>Result of the action. SUCCESS, FAILURE, SKIPPED, UNKNOWN</td>
+      <td>Result of the action: <code class="highlighter-rouge">SUCCESS</code>, <code class="highlighter-rouge">FAILURE</code>, <code class="highlighter-rouge">SKIPPED</code>, <code class="highlighter-rouge">UNKNOWN</code></td>
       <td>String</td>
       <td>FALSE</td>
-      <td> </td>
       <td> </td>
       <td> </td>
       <td> </td>
     </tr>
     <tr>
       <td>reason</td>
-      <td>Type of transaction, “WEB” or “JOB”</td>
+      <td>Reason for the result, for example <code class="highlighter-rouge">INVALID_CREDENTIALS</code></td>
       <td>String</td>
       <td>TRUE</td>
       <td> </td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="transaction-object">Transaction Object</h3>
 
-<p>Describes transaction data an event</p>
+<p>Describes the transaction data for an event</p>
 
 <table>
   <thead>
@@ -1216,10 +1103,6 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -1228,37 +1111,25 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <td>Id of the transaction Object</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>type</td>
-      <td>Type of transaction, “WEB” or “JOB”</td>
+      <td>Type of transaction: <code class="highlighter-rouge">WEB</code> or <code class="highlighter-rouge">JOB</code></td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>detail</td>
-      <td>A map that goes from a String key to a value</td>
+      <td>Details about the transaction</td>
       <td>Map[String-&gt;Object</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="debugcontext-object">DebugContext Object</h3>
 
-<p>Describes additional context regarding the event</p>
+<p>Describes additional context regarding an event</p>
 
 <table>
   <thead>
@@ -1267,10 +1138,6 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -1279,17 +1146,16 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <td>A map that goes from a String key to a value</td>
       <td>Map[String-&gt;Object</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
+<p>This object provides a way to store additional text about an event for debugging. For example, when you create an API token, 
+<code class="highlighter-rouge">debugData</code> shows the <code class="highlighter-rouge">RequestUri</code> used to obtain the token, for example <code class="highlighter-rouge">/api/internal/tokens</code>.</p>
+
 <h3 id="authenticationcontext-object">AuthenticationContext Object</h3>
 
-<p>Describes authentication data regarding an event</p>
+<p>Describes authentication data for an event</p>
 
 <table>
   <thead>
@@ -1298,50 +1164,40 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
       <th>MinLength</th>
       <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>authenticationProvider</td>
-      <td>OKTA_AUTHENTICATION_PROVIDER, ACTIVE_DIRECTORY, LDAP, FEDERATION, SOCIAL, FACTOR_PROVIDER</td>
+      <td>Type of authentication provider: <code class="highlighter-rouge">OKTA_AUTHENTICATION_PROVIDER</code>, <code class="highlighter-rouge">ACTIVE_DIRECTORY</code>, <code class="highlighter-rouge">LDAP</code>, <code class="highlighter-rouge">FEDERATION</code>, <code class="highlighter-rouge">SOCIAL</code>, <code class="highlighter-rouge">FACTOR_PROVIDER</code></td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
     <tr>
       <td>credentialProvider</td>
-      <td>OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY</td>
+      <td>Type of credential provider: OKTA_CREDENTIAL_PROVIDER, RSA, SYMANTEC, GOOGLE, DUO, YUBIKEY</td>
       <td>Array of String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
     <tr>
       <td>credentialType</td>
-      <td>type of credential OTP, SMS, PASSWORD, ASSERTION, IWA, EMAIL</td>
+      <td>Type of credential: <code class="highlighter-rouge">OTP</code>, <code class="highlighter-rouge">SMS</code>, <code class="highlighter-rouge">PASSWORD</code>, <code class="highlighter-rouge">ASSERTION</code>, <code class="highlighter-rouge">IWA</code>, <code class="highlighter-rouge">EMAIL</code></td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
     <tr>
       <td>issuer</td>
-      <td>Uri of the request that generated the event.</td>
+      <td>URI of the request that generated the event.</td>
       <td><a href="#issuer-object">Issuer Object</a></td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -1350,20 +1206,16 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <td>Uri of the request that generated the event.</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
     <tr>
       <td>interface</td>
-      <td>Uri of the request that generated the event.</td>
+      <td>URI of the request that generated the event.</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
       <td>1</td>
       <td>255</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -1379,39 +1231,27 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>id</td>
-      <td>An id for the issuer</td>
+      <td>An ID for the issuer</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>type</td>
       <td>The type of the issuer</td>
       <td>Array of String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="securitycontext-object">SecurityContext Object</h3>
 
-<p>Describes security data regarding an event</p>
+<p>Describes security data related to an event</p>
 
 <table>
   <thead>
@@ -1420,10 +1260,6 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -1432,50 +1268,30 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <td>AS Number</td>
       <td>Integer</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>asOrg</td>
       <td>AS Organization</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>isp</td>
       <td>Internet Service Provider</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>domain</td>
-      <td>domain</td>
+      <td>Domain</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>isProxy</td>
-      <td>if event is from a known proxy</td>
+      <td>Specifies whether an event is from a known proxy</td>
       <td>Bool</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -1491,29 +1307,21 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>ipChain</td>
-      <td>chain of ip data</td>
-      <td>Array of IpAddress</td>
+      <td>Describes the IP addresses used to perform an action</td>
+      <td>Array of <a href="#ipaddress-object">IpAddress</a></td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="securitycontext-object-1">SecurityContext Object</h3>
+<h3 id="ipaddress-object">IpAddress Object</h3>
 
-<p>Describes security data regarding an event</p>
+<p>Describes an IP address used in a request.</p>
 
 <table>
   <thead>
@@ -1522,52 +1330,32 @@ http://MyOrg.okta.com/api/v1/logs?since<span class="o">=</span>2016-05-25T00:00:
       <th>Description</th>
       <th>DataType</th>
       <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>ip</td>
-      <td>ip address</td>
+      <td>IP address</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>geographicalContext</td>
-      <td>Geographical context of the ip address</td>
+      <td>Geographical context of the IP address</td>
       <td><a href="#geographicalcontext-object">GeographicalContext Object</a></td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>version</td>
-      <td>ip address version</td>
+      <td>IP address version</td>
       <td>V4 or V6</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
       <td>source</td>
-      <td>details regarding the source</td>
+      <td>Details regarding the source</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>

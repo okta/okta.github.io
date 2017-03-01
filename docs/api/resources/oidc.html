@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -1164,7 +1196,7 @@ However, if the client application is pinned to a signing key, the verification 
 Pinned client applications must periodically check the Okta signing keys.</p>
 </blockquote>
 
-<p>Any of the two or three keys listed are used to sign tokens.The order of keys in the result doesn’t indicate which keys are used.</p>
+<p>Any of the two or three keys listed are used to sign tokens. The order of keys in the result doesn’t indicate which keys are used.</p>
 
 <p>Standard open-source libraries are available for every major language to perform <a href="https://tools.ietf.org/html/rfc7515">JWS</a> signature validation.</p>
 
@@ -1659,13 +1691,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/token</span></p>
 
-<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a>
-           and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
+<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
 
 <blockquote>
   <p>Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.</p>
@@ -1675,31 +1701,60 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <p>The following parameters can be posted as a part of the URL-encoded form values to the API.</p>
 
-<p>Parameter          | Description                                                                                         | Type       |
-——————-+—————————————————————————————————–+————|
-grant_type         | Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <a href="/docs/api/getting_started/releases-at-okta.html"><em>client_credentials</em> 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a>
-          </a>. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |
-code               | Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the <a href="#authentication-request">authorization endpoint</a>. | String
-refresh_token      | Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation. | String |
-username           | Expected if the grant_type specified <em>password</em>. | String |
-password           | Expected if the grant_type specified <em>password</em>. | String |
-scope              | Optional if <em>refresh_token</em>, or <em>password</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
-redirect_uri       | Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-code_verifier      | The code verifier of <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |</p>
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>grant_type</td>
+      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> (<em>client_credentials</em> is in Beta release). Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the <a href="#authentication-request">authorization endpoint</a>.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>refresh_token</td>
+      <td>Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>username</td>
+      <td>Expected if the grant_type specified <em>password</em>.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>password</td>
+      <td>Expected if the grant_type specified <em>password</em>.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>scope</td>
+      <td>Optional if <em>refresh_token</em>, or <em>password</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>redirect_uri</td>
+      <td>Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client.</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>code_verifier</td>
+      <td>The code verifier of <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request.</td>
+      <td>String</td>
+    </tr>
+  </tbody>
+</table>
 
 <blockquote>
-  <p>The <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> is <code class="highlighter-rouge">client_credentials</code>) is a 
-          <a href="/docs/api/getting_started/releases-at-okta.html#beta">
-            <span class="api-label api-label-beta ">
-              <i class="fa fa-warning"></i> Beta
-            </span>
-          </a>
-           feature.</p>
+  <p>The <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> is <code class="highlighter-rouge">client_credentials</code>) is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature.</p>
 </blockquote>
 
 <h5 id="token-authentication-method">Token Authentication Method</h5>

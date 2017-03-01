@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Policy | Okta Developer</title>
-  <meta name="description" content="  This API is currently in Early Access (EA) status.">
+  <meta name="description" content="Policy API">
   <link rel="canonical" href="http://developer.okta.com/docs/api/resources/policy.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -131,6 +134,7 @@
                 <li><a href="/docs/api/resources/factors.html">Factors</a></li>
                 <li><a href="/docs/api/resources/groups.html">Groups</a></li>
                 <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
+                <li class="is-active"><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
@@ -148,7 +152,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -164,11 +196,11 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/policy.md">Edit Page</a>
-      <blockquote>
-  <p>This API is currently in <strong>Early Access (EA)</strong> status.</p>
-</blockquote>
+      <h1 id="policy-api">Policy API</h1>
 
-<h1 id="policy-api">Policy API</h1>
+<blockquote>
+  <p>The Policy API is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  <a href="/docs/api/getting_started/releases-at-okta.html">release</a>.</p>
+</blockquote>
 
 <p>The Okta Policy API enables an Administrator to perform policy and policy rule operations.  The policy framework is used by Okta to control rules and settings that govern, among other things, user session lifetime, whether multi-factor authentication is required when logging in, what MFA factors may be employed, password complexity requirements, and what types of self-service operations are permitted under various circumstances.</p>
 
@@ -189,6 +221,435 @@
   <li>Create, read, update, and delete a rule for a policy</li>
   <li>Activate and deactivate a rule</li>
 </ul>
+
+<h2 id="policy-api-operations">Policy API Operations</h2>
+
+<h3 class="api api-operation" id="get-a-policy">Get a Policy</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em></span></p>
+
+<h4 id="request-parameters">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types">Response Types</h5>
+
+<p>HTTP 200: 
+<a href="#PolicyObject">Policy Object</a></p>
+
+<h3 class="api api-operation" id="get-a-policy-with-rules">Get a Policy with Rules</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>?expand=rules</span></p>
+
+<h4 id="request-parameters-1">Request Parameters</h4>
+
+<ul>
+  <li>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</li>
+  <li>The <code class="highlighter-rouge">expand=rules</code> query parameter returns up to twenty rules for the specified policy. If the policy has more than 20 rules, this request returns an error.</li>
+</ul>
+
+<h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}?expand=rules"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-1">Response Types</h5>
+
+<p>HTTP 200: 
+<a href="#PolicyObject">Policy Object</a></p>
+
+<p>Included as embedded objects, one or more</p>
+
+<p><a href="#PolicyRule">Policy Rules</a></p>
+
+<h3 class="api api-operation" id="get-all-policies-by-type">Get All Policies by Type</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies?type=<em>:type</em></span></p>
+
+<h4 id="request-parameters-2">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies?type={type}"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-2">Response Types</h5>
+
+<p>HTTP 200: 
+<a href="#PolicyObject">Policy Object</a>
+HTTP 204: 
+<a href="#PolicyObject">Policy Object</a></p>
+
+<h3 class="api api-operation" id="delete-policy">Delete Policy</h3>
+
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em></span></p>
+
+<h4 id="request-parameters-3">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-3">Response Types</h5>
+
+<p>HTTP 204: 
+<em>No Content</em></p>
+
+<h3 class="api api-operation" id="update-a-policy">Update a Policy</h3>
+
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em></span></p>
+
+<h4 id="request-parameters-4">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+      "type": "OKTA_SIGN_ON",
+      "id": "00plrilJ7jZ66Gn0X0g3",
+      "status": "ACTIVE",
+      "name": "Default Policy",
+      "description": "The default policy applies in all situations if no other policy applies.",
+      "priority": 1,
+      "conditions": {
+        "people": {
+          "groups": {
+            "include": [
+              "00glr9dY4kWK9k5ZM0g3"
+            ]
+         }
+        }
+     }, \
+"https://${org}.okta.com/api/v1/policies/{policyId}"
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-4">Response Types</h5>
+
+<p>HTTP 200: 
+<a href="#PolicyObject">Policy Object</a></p>
+
+<h3 class="api api-operation" id="create-a-policy">Create a Policy</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies</span></p>
+
+<h4 id="request-parameters-5">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+      "type": "OKTA_SIGN_ON",
+      "status": "ACTIVE",
+      "name": "Default Policy",
+      "description": "The default policy applies in all situations if no other policy applies.",
+      "conditions": {
+        "people": {
+          "groups": {
+            "include": [
+              "00glr9dY4kWK9k5ZM0g3"
+            ]
+          }
+        }
+      }, \
+"https://${org}.okta.com/api/v1/policies"
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-5">Response Types</h5>
+
+<p>HTTP 204: 
+<a href="#PolicyObject">Policy Object</a></p>
+
+<h3 class="api api-operation" id="activate-a-policy">Activate a Policy</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/activate</span></p>
+
+<h4 id="request-parameters-6">Request Parameters</h4>
+
+<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/lifecycle/activate"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-6">Response Types</h5>
+
+<p>HTTP 204: 
+<em>No Content is returned when the activation is successful.</em></p>
+
+<h3 class="api api-operation" id="deactivate-a-policy">Deactivate a Policy</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/deactivate</span></p>
+
+<h4 id="request-parameters-7">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/lifecycle/deactivate"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-7">Response Types</h5>
+
+<p>HTTP 200: 
+<em>No Content is returned when the deactivation is successful.</em></p>
+
+<h2 id="rules-operations">Rules Operations</h2>
+
+<h3 class="api api-operation" id="get-policy-rules">Get Policy Rules</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules</span></p>
+
+<h4 id="request-parameters-8">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-8">Response Types</h5>
+
+<p>HTTP 200: 
+<a href="#RulesObject">Rules Object</a></p>
+
+<h3 class="api api-operation" id="create-a-rule">Create a rule</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules</span></p>
+
+<h4 id="request-parameters-9">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "name": "New Policy Rule",
+  "conditions": {
+    "people": {
+      "users": {
+        "exclude": []
+      }
+    },
+    "network": {
+      "connection": "ON_NETWORK"
+    },
+    "authContext": {
+      "authType": "ANY"
+    }
+  },
+  "actions": {
+    "signon": {
+      "access": "ALLOW"
+    }
+  }'</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-9">Response Types</h5>
+
+<p>HTTP 200: 
+<a href="#RulesObject">Rules Object</a></p>
+
+<h3 class="api api-operation" id="delete-a-rule">Delete a rule</h3>
+
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
+
+<h4 id="request-parameters-10">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-10">Response Types</h5>
+
+<p>HTTP 204: 
+<em>No Content</em></p>
+
+<h3 class="api api-operation" id="get-a-rule">Get a rule</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
+
+<h4 id="request-parameters-11">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-11">Response Types</h5>
+
+<p>HTTP 200: 
+<a href="#RulesObject">Rules Object</a></p>
+
+<h3 class="api api-operation" id="update-a-rule">Update a rule</h3>
+
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
+
+<h4 id="request-parameters-12">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "name": "My Updated Policy Rule",
+  "conditions": {
+    "people": {
+      "users": {
+        "exclude": []
+      }
+    },
+    "network": {
+      "connection": "ON_NETWORK"
+    },
+    "authContext": {
+      "authType": "ANY"
+    }
+  },
+  "actions": {
+    "signon": {
+      "access": "DENY"
+    }
+  }
+}'</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-12">Response Types</h5>
+
+<p>HTTP 200: 
+<a href="#RulesObject">Rules Object</a></p>
+
+<h3 class="api api-operation" id="activate-a-rule">Activate A Rule</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/activate</span></p>
+
+<h4 id="request-parameters-13">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-13">Response Types</h5>
+
+<p>HTTP 204: 
+<em>No content</em></p>
+
+<h3 class="api api-operation" id="deactivate-a-rule">Deactivate A Rule</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/deactivate</span></p>
+
+<h4 id="request-parameters-14">Request Parameters</h4>
+
+<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-types-14">Response Types</h5>
+
+<p>HTTP 204: 
+<em>No content</em></p>
 
 <h2 id="policies">Policies</h2>
 
@@ -819,435 +1280,6 @@ See <a href="#Conditions">conditions</a></p>
   </tbody>
 </table>
 
-<h2 id="policy-api-operations">Policy API Operations</h2>
-
-<h3 class="api api-operation" id="get-a-policy">Get a Policy</h3>
-
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em></span></p>
-
-<h4 id="request-parameters">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types">Response Types</h5>
-
-<p>HTTP 200: 
-<a href="#PolicyObject">Policy Object</a></p>
-
-<h3 class="api api-operation" id="get-a-policy-with-rules">Get a Policy with Rules</h3>
-
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>?expand=rules</span></p>
-
-<h4 id="request-parameters-1">Request Parameters</h4>
-
-<ul>
-  <li>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</li>
-  <li>The <code class="highlighter-rouge">expand=rules</code> query parameter returns up to twenty rules for the specified policy. If the policy has more than 20 rules, this request returns an error.</li>
-</ul>
-
-<h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}?expand=rules"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-1">Response Types</h5>
-
-<p>HTTP 200: 
-<a href="#PolicyObject">Policy Object</a></p>
-
-<p>Included as embedded objects, one or more</p>
-
-<p><a href="#PolicyRule">Policy Rules</a></p>
-
-<h3 class="api api-operation" id="get-all-policies-by-type">Get All Policies by Type</h3>
-
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies?type=<em>:type</em></span></p>
-
-<h4 id="request-parameters-2">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies?type={type}"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-2">Response Types</h5>
-
-<p>HTTP 200: 
-<a href="#PolicyObject">Policy Object</a>
-HTTP 204: 
-<a href="#PolicyObject">Policy Object</a></p>
-
-<h3 class="api api-operation" id="delete-policy">Delete Policy</h3>
-
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em></span></p>
-
-<h4 id="request-parameters-3">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-3">Response Types</h5>
-
-<p>HTTP 204: 
-<em>No Content</em></p>
-
-<h3 class="api api-operation" id="update-a-policy">Update a Policy</h3>
-
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em></span></p>
-
-<h4 id="request-parameters-4">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
--d <span class="s1">'{
-      "type": "OKTA_SIGN_ON",
-      "id": "00plrilJ7jZ66Gn0X0g3",
-      "status": "ACTIVE",
-      "name": "Default Policy",
-      "description": "The default policy applies in all situations if no other policy applies.",
-      "priority": 1,
-      "conditions": {
-        "people": {
-          "groups": {
-            "include": [
-              "00glr9dY4kWK9k5ZM0g3"
-            ]
-         }
-        }
-     }, \
-"https://${org}.okta.com/api/v1/policies/{policyId}"
-</span></code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-4">Response Types</h5>
-
-<p>HTTP 200: 
-<a href="#PolicyObject">Policy Object</a></p>
-
-<h3 class="api api-operation" id="create-a-policy">Create a Policy</h3>
-
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies</span></p>
-
-<h4 id="request-parameters-5">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
--d <span class="s1">'{
-      "type": "OKTA_SIGN_ON",
-      "status": "ACTIVE",
-      "name": "Default Policy",
-      "description": "The default policy applies in all situations if no other policy applies.",
-      "conditions": {
-        "people": {
-          "groups": {
-            "include": [
-              "00glr9dY4kWK9k5ZM0g3"
-            ]
-          }
-        }
-      }, \
-"https://${org}.okta.com/api/v1/policies"
-</span></code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-5">Response Types</h5>
-
-<p>HTTP 204: 
-<a href="#PolicyObject">Policy Object</a></p>
-
-<h3 class="api api-operation" id="activate-a-policy">Activate a Policy</h3>
-
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/activate</span></p>
-
-<h4 id="request-parameters-6">Request Parameters</h4>
-
-<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/lifecycle/activate"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-6">Response Types</h5>
-
-<p>HTTP 204: 
-<em>No Content is returned when the activation is successful.</em></p>
-
-<h3 class="api api-operation" id="deactivate-a-policy">Deactivate a Policy</h3>
-
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/deactivate</span></p>
-
-<h4 id="request-parameters-7">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/lifecycle/deactivate"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-7">Response Types</h5>
-
-<p>HTTP 200: 
-<em>No Content is returned when the deactivation is successful.</em></p>
-
-<h2 id="rules-operations">Rules Operations</h2>
-
-<h3 class="api api-operation" id="get-policy-rules">Get Policy Rules</h3>
-
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules</span></p>
-
-<h4 id="request-parameters-8">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-8">Response Types</h5>
-
-<p>HTTP 200: 
-<a href="#RulesObject">Rules Object</a></p>
-
-<h3 class="api api-operation" id="create-a-rule">Create a rule</h3>
-
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules</span></p>
-
-<h4 id="request-parameters-9">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
--d <span class="s1">'{
-  "name": "New Policy Rule",
-  "conditions": {
-    "people": {
-      "users": {
-        "exclude": []
-      }
-    },
-    "network": {
-      "connection": "ON_NETWORK"
-    },
-    "authContext": {
-      "authType": "ANY"
-    }
-  },
-  "actions": {
-    "signon": {
-      "access": "ALLOW"
-    }
-  }'</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-9">Response Types</h5>
-
-<p>HTTP 200: 
-<a href="#RulesObject">Rules Object</a></p>
-
-<h3 class="api api-operation" id="delete-a-rule">Delete a rule</h3>
-
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
-
-<h4 id="request-parameters-10">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-10">Response Types</h5>
-
-<p>HTTP 204: 
-<em>No Content</em></p>
-
-<h3 class="api api-operation" id="get-a-rule">Get a rule</h3>
-
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
-
-<h4 id="request-parameters-11">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-11">Response Types</h5>
-
-<p>HTTP 200: 
-<a href="#RulesObject">Rules Object</a></p>
-
-<h3 class="api api-operation" id="update-a-rule">Update a rule</h3>
-
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
-
-<h4 id="request-parameters-12">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
--d <span class="s1">'{
-  "name": "My Updated Policy Rule",
-  "conditions": {
-    "people": {
-      "users": {
-        "exclude": []
-      }
-    },
-    "network": {
-      "connection": "ON_NETWORK"
-    },
-    "authContext": {
-      "authType": "ANY"
-    }
-  },
-  "actions": {
-    "signon": {
-      "access": "DENY"
-    }
-  }
-}'</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-12">Response Types</h5>
-
-<p>HTTP 200: 
-<a href="#RulesObject">Rules Object</a></p>
-
-<h3 class="api api-operation" id="activate-a-rule">Activate A Rule</h3>
-
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/activate</span></p>
-
-<h4 id="request-parameters-13">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-13">Response Types</h5>
-
-<p>HTTP 204: 
-<em>No content</em></p>
-
-<h3 class="api api-operation" id="deactivate-a-rule">Deactivate A Rule</h3>
-
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/deactivate</span></p>
-
-<h4 id="request-parameters-14">Request Parameters</h4>
-
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
-
-<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-types-14">Response Types</h5>
-
-<p>HTTP 204: 
-<em>No content</em></p>
-
 <h2 id="type-specific-policy-data-structures">Type Specific Policy Data Structures</h2>
 
 <h2 id="OktaSignOnPolicy">Okta Sign On Policy</h2>
@@ -1389,9 +1421,12 @@ Note that Okta sign on policy is not the same thing as application sign on polic
 
 <p><a href="#AuthContextConditionObject">AuthContext Condition</a></p>
 
-<h2 id="OktaMFAPolicy">Okta MFA Policy</h2>
+<h2 id="OktaMFAPolicy">MFA Policy</h2>
 
-<!-- [THIS SECTION IN PROGRESS] -->
+<blockquote>
+  <p>The MFA Policy API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  <a href="/docs/api/getting_started/releases-at-okta.html">release</a>.
+<!-- [THIS SECTION IN PROGRESS] --></p>
+</blockquote>
 
 <h3 id="policy-settings-data-1">Policy Settings Data</h3>
 
@@ -1582,6 +1617,10 @@ Note that Okta sign on policy is not the same thing as application sign on polic
 <p>The following conditions may be applied to the rules associated with Okta MFA Policy</p>
 
 <h2 id="GroupPasswordPolicy">Password Policy</h2>
+
+<blockquote>
+  <p>The Password Policy API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  <a href="/docs/api/getting_started/releases-at-okta.html">release</a>.</p>
+</blockquote>
 
 <p>Password policy controls settings that deterine a user’s password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.</p>
 
@@ -2067,8 +2106,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
   </tbody>
 </table>
 
-<h4 id="delegation-object">Delegation Object</h4>
-<p>{ #DelegationObject }</p>
+<h4 id="DelegationObject">Delegation Object</h4>
 
 <table>
   <thead>

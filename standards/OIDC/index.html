@@ -13,7 +13,7 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
-  <title>OpenID Connect | Okta Developer</title>
+  <title>OpenID Connect and Okta | Okta Developer</title>
   <meta name="description" content="A simple identity layer on top of the OAuth 2.0 protocol">
   <link rel="canonical" href="http://developer.okta.com/standards/OIDC/">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
@@ -107,6 +107,9 @@
             <li>
               <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
+            <li>
+              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+            </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
           <ul class="Sidebar-nav">
@@ -129,7 +132,35 @@
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
-          
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li class="is-active">
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
           <script>
             if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
                 document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
@@ -145,9 +176,22 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_standards/OIDC/index.md">Edit Page</a>
-      <p>OpenID Connect is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end-user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end-user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
+      <h1 id="openid-connect-and-okta">OpenID Connect and Okta</h1>
 
-<p>OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end-users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.</p>
+<p>OpenID Connect is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end-user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end-user in an interoperable and REST-like manner. 
+In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
+
+<p>OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end-users. 
+The <a href="http://openid.net/connect/">specification suite</a> is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.</p>
+
+<p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a>.</p>
+
+<p>For more information about Okta and OpenID Connect, see:</p>
+
+<ul>
+  <li><a href="http://developer.okta.com/use_cases/api_security/">Okta’s API Access Management Introduction</a></li>
+  <li><a href="http://developer.okta.com/docs/api/resources/oidc.html">API for OpenID Connect</a></li>
+</ul>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
