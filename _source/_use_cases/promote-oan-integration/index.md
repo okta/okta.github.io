@@ -10,7 +10,7 @@ excerpt: Raise awareness for your Okta Application Network integration among joi
 You’ve completed your integration with Okta and published it on the Okta Application Network (OAN). Now it’s time to tell the world! 
 Raising awareness for your integration among joint customers and new prospects will help accelerate adoption, differentiate your app from competitors, and drive new business. 
 
-Please keep us in the loop with your marketing plans by emailing partnerdg@okta.com.
+Please keep us in the loop with your marketing plans by emailing <partnerdg@okta.com>.
 
 ## Marketing Activities
 

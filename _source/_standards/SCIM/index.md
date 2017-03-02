@@ -1272,22 +1272,17 @@ Zendesk - https://developer.zendesk.com/apps
 
 ## Helpful Resources
 
-https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/
+[SCIM Overview](https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/)
 
+[Okta End-User Management](https://support.okta.com/help/articles/Knowledge_Article/28352376-Overview-of-End-User-Management)
 
-https://support.okta.com/help/articles/Knowledge_Article/28352376-Overview-of-End-User-Management
+[Okta Provisioning Basics](https://support.okta.com/help/articles/Knowledge_Article/Provisioning-Concepts-and-Methods)
 
+[SCIM and Facebook](https://developers.facebook.com/docs/facebook-at-work/provisioning/scim-api)
 
-https://support.okta.com/help/articles/Knowledge_Article/Provisioning-Concepts-and-Methods
+[OpenID Explained](http://openidexplained.com/)
 
-
-https://developers.facebook.com/docs/facebook-at-work/provisioning/scim-api
-
-
-http://openidexplained.com/
-
-
-https://developers.onelogin.com/scim
+[SCIM and Onelogin](https://developers.onelogin.com/scim)
 
 ## Appendix: Using the Example SCIM Server
 
