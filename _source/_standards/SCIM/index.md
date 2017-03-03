@@ -45,9 +45,11 @@ CRUD actions relate to Provisioning in the following ways:
 
 #### Create Users
 
-* Create new users in the downstream application based on values derived from the Okta user profile and Okta group assignment. 
-* Read (Import) users & groups
-* Import users & groups from the downstream application in order to match them to existing Okta users, or to create new Okta users from the imported application.
+Create new users in the downstream application based on values derived from the Okta user profile and Okta group assignment. 
+
+#### Read (Import) Users and Groups
+
+Import users & groups from the downstream application in order to match them to existing Okta users, or to create new Okta users from the imported application.
 
 #### Update Users
 
