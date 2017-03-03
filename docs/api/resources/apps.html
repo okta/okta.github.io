@@ -1595,7 +1595,7 @@
 
 <h3 class="api api-operation" id="get-application">Get Application</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:id</em></span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em></span></p>
 
 <p>Fetches an application from your Okta organization by <code class="highlighter-rouge">id</code>.</p>
 
@@ -1614,8 +1614,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td><code class="highlighter-rouge">id</code> of an app</td>
+      <td>aid</td>
+      <td>ID of an app</td>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
@@ -1861,14 +1861,14 @@
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">user/:id</code></td>
+      <td><code class="highlighter-rouge">user/:uid</code></td>
       <td>Embeds the <a href="#application-user-model">Application User</a> for an assigned user such as <code class="highlighter-rouge">user/00ucw2RPGIUNTDQOYPOF</code></td>
     </tr>
   </tbody>
 </table>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">user/:id</code> expansion can currently only be used in conjunction with the <code class="highlighter-rouge">user.id eq ":uid"</code> filter (See <a href="#list-applications-assigned-to-user">List Applications Assigned to User</a>).</p>
+  <p>The <code class="highlighter-rouge">user/:uid</code> expansion can currently only be used in conjunction with the <code class="highlighter-rouge">user.id eq ":uid"</code> filter (See <a href="#list-applications-assigned-to-user">List Applications Assigned to User</a>).</p>
 </blockquote>
 
 <h5 class="api api-response api-response-params" id="response-parameters-2">Response Parameters</h5>
@@ -2067,7 +2067,7 @@
 </div>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">expand=user/:id</code> query parameter optionally return the user’s <a href="#application-user-model">Application User</a> information  in the response body’s <code class="highlighter-rouge">_embedded</code> property.</p>
+  <p>The <code class="highlighter-rouge">expand=user/:uid</code> query parameter optionally return the user’s <a href="#application-user-model">Application User</a> information  in the response body’s <code class="highlighter-rouge">_embedded</code> property.</p>
 </blockquote>
 
 <h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
@@ -2486,7 +2486,7 @@
 
 <h3 class="api api-operation" id="update-application">Update Application</h3>
 
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/apps/<em>:id</em></span></p>
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/apps/<em>:aid</em></span></p>
 
 <p>Updates an application in your organization.</p>
 
@@ -2505,8 +2505,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>id of app to update</td>
+      <td>aid</td>
+      <td>ID of app to update</td>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
@@ -3270,7 +3270,7 @@
 
 <h3 class="api api-operation" id="delete-application">Delete Application</h3>
 
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/<em>:id</em></span></p>
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/<em>:aid</em></span></p>
 
 <p>Removes an inactive application.</p>
 
@@ -3293,8 +3293,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>id of app to delete</td>
+      <td>aid</td>
+      <td>ID of app to delete</td>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
@@ -3346,7 +3346,7 @@
 
 <h3 class="api api-operation" id="activate-application">Activate Application</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:id</em>/lifecycle/activate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:aid</em>/lifecycle/activate</span></p>
 
 <p>Activates an inactive application.</p>
 
@@ -3365,8 +3365,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td><code class="highlighter-rouge">id</code> of app to activate</td>
+      <td>aid</td>
+      <td>ID of app to activate</td>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
@@ -3397,7 +3397,7 @@
 
 <h3 class="api api-operation" id="deactivate-application">Deactivate Application</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:id</em>/lifecycle/deactivate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/<em>:aid</em>/lifecycle/deactivate</span></p>
 
 <p>Deactivates an active application.</p>
 
@@ -3416,8 +3416,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td><code class="highlighter-rouge">id</code> of app to deactivate</td>
+      <td>aid</td>
+      <td>ID of app to deactivate</td>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
@@ -3470,7 +3470,7 @@
   <tbody>
     <tr>
       <td>aid</td>
-      <td>unique key of <a href="#application-model">Application</a></td>
+      <td>Unique key of <a href="#application-model">Application</a></td>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
@@ -3478,7 +3478,7 @@
     </tr>
     <tr>
       <td>appuser</td>
-      <td>user’s <a href="#application-user-credentials-object">credentials</a> for the app</td>
+      <td>User’s <a href="#application-user-credentials-object">credentials</a> for the app</td>
       <td>Body</td>
       <td><a href="#application-user-model">Application User</a></td>
       <td>TRUE</td>
@@ -3488,7 +3488,7 @@
 </table>
 
 <blockquote>
-  <p>Only the user’s <code class="highlighter-rouge">id</code> is required for the request body of applications with <a href="#signon-modes">SignOn Modes</a> or <a href="#authentication-schemes">Authentication Schemes</a> that do not require or support credentials</p>
+  <p>Only the user’s ID is required for the request body of applications with <a href="#signon-modes">SignOn Modes</a> or <a href="#authentication-schemes">Authentication Schemes</a> that do not require or support credentials</p>
 </blockquote>
 
 <blockquote>

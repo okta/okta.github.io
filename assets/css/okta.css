@@ -2921,6 +2921,44 @@ body {
     background: transparent; }
   #header ul li a:before {
     background: transparent; } }
+.AnnouncementBar {
+  background: #5d5d5d;
+  padding: 30px 0; }
+  .AnnouncementBar .Wrap, .AnnouncementBar .tabber > ul, .AnnouncementBar .PageContent, .AnnouncementBar .SideBySidePromo-container {
+    align-items: center;
+    display: flex; }
+  .AnnouncementBar-title {
+    color: #fff;
+    flex-shrink: 0;
+    line-height: 52px;
+    margin: 0 60px 0 0;
+    white-space: nowrap; }
+    .AnnouncementBar-title img {
+      display: inline-block;
+      height: 35px;
+      margin-left: 5px;
+      vertical-align: middle; }
+  .AnnouncementBar-text {
+    color: #c2c3c3;
+    flex-grow: 1; }
+    .AnnouncementBar-text a {
+      color: #fff; }
+
+@media (max-width: 767px) {
+  .AnnouncementBar .Wrap, .AnnouncementBar .tabber > ul, .AnnouncementBar .PageContent, .AnnouncementBar .SideBySidePromo-container {
+    align-items: flex-start;
+    flex-direction: column; }
+  .AnnouncementBar-title {
+    line-height: 35px;
+    margin-right: 0;
+    margin-bottom: 20px; } }
+@media (max-width: 479px) {
+  .AnnouncementBar-title {
+    font-size: 28px;
+    line-height: 28px;
+    white-space: normal; }
+    .AnnouncementBar-title img {
+      height: 28px; } }
 .PageContent {
   padding: 0;
   box-sizing: border-box;
