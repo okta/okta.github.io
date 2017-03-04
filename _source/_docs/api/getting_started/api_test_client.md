@@ -60,16 +60,17 @@ Import any Okta API collection for Postman from the following list:
 
 |  Collections  | click to Run   |
 |:---|:---|
-| Authentication | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71) | 
-| Apps | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b) | 
-| Events | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86) | 
-| Factors | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b055a859dbe24a54814a) | 
-| Groups | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f) | 
-| Identity Providers (IdP) | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8438ef3445415386b407) | 
-| Admin Roles | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b) | 
-| Schemas | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/443242e60287fb4b8d6d) | 
-| Custom SMS Templates | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06) | 
-| Users  | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf) | 
+| Authentication | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71) |
+| OAuth 2.0 and OpenID Connect | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6) |
+| Apps | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b) |
+| Events | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86) |
+| Factors | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b055a859dbe24a54814a) |
+| Groups | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f) |
+| Identity Providers (IdP) | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8438ef3445415386b407) |
+| Admin Roles | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b) |
+| Schemas | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/443242e60287fb4b8d6d) |
+| Custom SMS Templates | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06) |
+| Users  | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf) |
 
 These buttons are also available at the top of each API reference page in [developer.okta.com](/docs/api/resources/apps.html).
 

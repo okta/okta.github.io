@@ -27,7 +27,7 @@ At the very basic level, the main API endpoints are:
 If you are new to OAuth 2.0, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may want to experiment with the Postman collection first:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3230565cff5b258b270d)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
 
 ## Basic Flows
 
@@ -248,7 +248,7 @@ A Refresh Token will be returned if 'offline_access' scope is requested using au
 
 The lifetime of a Refresh Token is configured in [Access Policies](#access-policies), the minimum value is 24 hours. The refresh token can also expire after a period if no clients redeem it for an Access Token. The period should be equal to or larger than 10 minutes. If the token's lifetime is set to unlimited, the Authorization Server will not check if clients use it or not.
 
-## Id Token
+## ID Token
 An authorization server can also issue an Id Token to the client, just like [OIDC](oidc#id-token). The differences are 1) 'groups' is not a reserved scope or claim. To get a claim with group information, the administrators have to define a custom claim with a group filter and associate it with a scope. 2) the custom properties in the app user profile will not be put in the Id Token by default even if profile scope is granted. To get a claim for a custom property, the administrators have to define a custom claim with an Okta EL expression and associate it with a scope.
 
 The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
@@ -308,6 +308,8 @@ However, you can also use OpenID Connect with an authorization server specified:
 You can't mix tokens between different authorization servers. By design, authorization servers don't have trust relationships with each other.
 
 ## Endpoints
+
+Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
 
 ### Authentication Request
 {:.api .api-operation}

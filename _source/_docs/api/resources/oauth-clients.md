@@ -14,7 +14,16 @@ Administrator dashboard. Changes made via the API appear in the UI and vice vers
 follow the rules described in [Access Token](http://developer.okta.com/docs/api/resources/oauth2.html#access-token)
 and [ID Token](http://developer.okta.com/docs/api/resources/oauth2.html#id-token).
 
-> This API is an {% api_lifecycle beta%} feature.
+> This API is a {% api_lifecycle beta%} feature.
+
+Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
+
+## Getting Started
+
+If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
+flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html), you may want to experiment with the Postman collection first:
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
 
 ## Client Application Model
 
@@ -116,6 +125,8 @@ Client applications have the following properties:
 > All redirect URIs must be absolute URIs and must not include a fragment compontent.
 
 ## Client Application Operations
+
+Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
 
 ### Register New Client
 {:.api .api-operation}
