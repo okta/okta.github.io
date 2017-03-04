@@ -1,11 +1,10 @@
 ---
----
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.09
+excerpt: Summary of changes to the Okta Platform since Release 2017.05
 ---
 
-## Release 2017.10
+## Release 2017.09
 
 ### Advance Notice: API Rate Limit Improvements
 
@@ -15,27 +14,28 @@ another. Treating authenticated end-user interactions separately will lessen the
 impacting another. We’re also providing a transition period so you can see what these changes will
 look like in your Okta system log before enforcing them:
 
-1. Starting in early April, 2017, we'll provide system log alerts to let you know that you
+1. Shortly after February 28, 2017, we'll provide system log alerts to let you know that you
 would have exceeded any of these new API rate limits.
-2. Starting in mid-April, 2017, we’ll treat authenticated end-user interactions on a per-user basis.
+2. Sometime in March, 2017, we’ll treat authenticated end-user interactions on a per-user basis.
 Interactions like SSO after login won't apply to your org-wide API rate limits.
-3. Early in May, 2017, we will enforce the new, more granular rate limits. At that
+3. Shortly after March 31, 2017, we will enforce the new, more granular rate limits. At that
 point, the warnings in the System Log will change to error notifications.
 
 Of course, as each change is released, we'll announce the change here.
 
 For a full description of the rate limit changes, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
-<!-- ### Feature Improvement
+### Feature Improvement
 
-xxx.  -->
-<!-- (OKTA-xxx) -->
+For a collection of Users, the Links object contains only the self
+link. This feature will be in preview for at least a month.
+<!-- (OKTA-115269) -->
 
 ### Platform Bugs Fixed
 
- * Request to [`/api/v1/authn/factors/<factorId>/verify`](http://developer.okta.com/docs/api/resources/authn.html#enroll-factor) responded with a valid `stateToken` after user status
- became `LOCKED_OUT`, causing user interface errors. (OKTA-115153)
- * The AuthSJ SDK produced a debug log message with some browsers. (OKTA-115460)
+ * The OpenID Connect and API Access Management ID Tokens contained an extraneous attribute. (OKTA-95042)
+
+ * Some users created with the API were not activated automatically. (OKTA-112833)
 
 ### Does Your Org Have This Change Yet?
 
