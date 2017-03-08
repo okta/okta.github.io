@@ -13,9 +13,9 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
-  <title>Getting a Token | Okta Developer</title>
-  <meta name="description" content="Create an API token">
-  <link rel="canonical" href="http://developer.okta.com/docs/api/getting_started/getting_a_token.html">
+  <title>Platform Release Notes | Okta Developer</title>
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.05">
+  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-09.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
   <script>
@@ -115,23 +115,6 @@
           <ul class="Sidebar-nav">
             <li>
               <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
-              <ul>
-                <li>
-                  <a href="/docs/api/getting_started/api_test_client.html">Getting Started With the Okta APIs</a>
-                </li>
-                <li class="is-active">
-                  <a href="/docs/api/getting_started/getting_a_token.html">Getting a Token</a>
-                </li>
-                <li>
-                  <a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS</a>
-                </li>
-                <li>
-                  <a href="/docs/api/getting_started/design_principles.html">Design Principles</a>
-                </li>
-                <li>
-                  <a href="/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>
-                </li>
-              </ul>
             </li>
             <li>
               <a href="/docs/api/resources/authn.html">Authentication Reference</a>
@@ -145,7 +128,7 @@
             <li>
               <a href="/reference/okta_expression_language">Okta Expression Language</a>
             </li>
-            <li>
+            <li class="is-active">
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
@@ -192,55 +175,60 @@
 <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/getting_started/getting_a_token.md">Edit Page</a>
-      <h1 id="create-an-api-token">Create an API token</h1>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2017-09.md">Edit Page</a>
+      <h2 id="release-201709">Release 2017.09</h2>
+
+<h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
+
+<p>We are making org-wide rate limits more granular, and treating authenticated end-user interactions
+separately. More granular rate limits will further lessen the likelihood of calls to one URI impacting
+another. Treating authenticated end-user interactions separately will lessen the chances of one user’s
+impacting another. We’re also providing a transition period so you can see what these changes will
+look like in your Okta system log before enforcing them:</p>
 
 <ol>
-  <li>
-    <p>Log in to your Okta organization as a user with admin
-privileges.</p>
-
-    <p>If you don’t have an Okta organization, you can create a free Okta
-Developer Edition organization <a href="https://www.okta.com/developer/signup/" target="_blank">at this link</a>.</p>
-  </li>
-  <li>
-    <p>Click on the blue “Admin” button.
-<img src="/assets/img/okta-admin-ui-button-admin.png" alt="Admin" /></p>
-  </li>
-  <li>
-    <p>Click on “API” in the Security menu.
-<img src="/assets/img/okta-admin-api-link.png" alt="API" /></p>
-  </li>
-  <li>
-    <p>Click on the “Create token” button.
-<img src="/assets/img/okta-create-api-token-button.png" alt="Create Token" /></p>
-  </li>
-  <li>
-    <p>Name your token and click “Create token”.</p>
-  </li>
-  <li>
-    <p>Make note of your API token, as you will only see it one time.</p>
-  </li>
+  <li>Shortly after February 28, 2017, we’ll provide system log alerts to let you know that you
+would have exceeded any of these new API rate limits.</li>
+  <li>Sometime in March, 2017, we’ll treat authenticated end-user interactions on a per-user basis.
+Interactions like SSO after login won’t apply to your org-wide API rate limits.</li>
+  <li>Shortly after March 31, 2017, we will enforce the new, more granular rate limits. At that
+point, the warnings in the System Log will change to error notifications.</li>
 </ol>
 
-<p><img src="/assets/img/okta-admin-ui-token.png" alt="Okta Admin Token UI" title="Okta Admin Token UI" /></p>
+<p>Of course, as each change is released, we’ll announce the change here.</p>
 
-<h2 id="token-expiration">Token Expiration</h2>
+<p>For a full description of the rate limit changes, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
 
-<p>Okta uses a bearer token for API authentication with a sliding scale expiration. Tokens are valid for 30 days and automatically refresh with each API call.  Tokens that are not used for 30 days will expire. The token lifetime is currently fixed and cannot be changed for your organization.</p>
+<h3 id="feature-improvement">Feature Improvement</h3>
 
-<h2 id="token-deactivation">Token Deactivation</h2>
+<p>For a collection of Users, the Links object contains only the self
+link. This feature will be in preview for at least a month.
+<!-- (OKTA-115269) --></p>
 
-<p>If a user account is deactivated in Okta, the API Token is deprovisioned at the same time.</p>
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
-<h2 id="token-permissions">Token Permissions</h2>
+<ul>
+  <li>
+    <p>The OpenID Connect and API Access Management ID Tokens contained an extraneous attribute. (OKTA-95042)</p>
+  </li>
+  <li>
+    <p>Some users created with the API were not activated automatically. (OKTA-112833)</p>
+  </li>
+</ul>
 
-<p>API tokens inherit the API access of the user who creates them.</p>
+<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 
-<p>Tasks in the UI or API and the role required to perform them have been
-documented:</p>
+<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
 
-<p><a href="https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators">Administrator Roles</a></p>
+<p><img src="/assets/img/release_notes/version_footer.png" alt="Release Number in Footer" /></p>
+
+<h3 id="looking-for-something-else">Looking for Something Else?</h3>
+
+<ul>
+  <li><a href="platform-release-notes2016-index.html">Platform Release Note Index</a></li>
+  <li>For changes outside the Okta platform, see the <a href="http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub">Release Notes Knowledge Hub</a>.</li>
+</ul>
+
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
