@@ -1,5 +1,4 @@
 ---
----
 layout: docs_page
 title: Platform Release Notes
 excerpt: Summary of changes to the Okta Platform since Release 2017.09
