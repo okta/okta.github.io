@@ -543,15 +543,11 @@ Below is how the sample application handles account deactivation:
 For more details on user attribute updates to `/Users/{id}` SCIM endpoint, see [section 3.5.2](https://tools.ietf.org/html/rfc7644#section-3.5.2)
 of the [SCIM 2.0 Protocol Specification](https://tools.ietf.org/html/rfc7644).
 
-##### Filtering on `id`, `userName`, and `emails`
+##### Filtering on `userName eq` (Required)
 
-Being able to filter results by the `id`, `userName`, or `emails`
-attributes is a critical part of working with Okta.
-
-Your SCIM API must be able to filter users by `userName` and should
-also support filtering by `id` and `emails`. Filtering support
-is required because most provisioning actions require the ability
-for Okta to determine if a user resource exists on your system. The filter Okta generates will be based on the `userName` field, following the pattern "userName eq "..." ".
+Your SCIM API must be able to filter users following the pattern  "userName eq "..." ". 
+This is because most provisioning actions, besides Import Users, require the ability
+for Okta to determine if a user resource exists on your system. 
 
 Consider the scenario where an Okta customer with thousands of
 users has a provisioning integration with your system, which also
@@ -569,10 +565,6 @@ userName eq "jane.doe"
 userName eq "jane.doe@example.com"
 ~~~
 
-At the moment, Okta only supports the `eq` filter operator. However, the
-[filtering capabilities](https://tools.ietf.org/html/rfc7644#section-3.4.2.2) described in the SCIM 2.0 Protocol Specification are
-much more complicated.
-
 Here is an example of how to implement SCIM filtering in Python:
 
     request_filter = request.args.get('filter')
@@ -584,23 +576,21 @@ Here is an example of how to implement SCIM filtering in Python:
         search_key = getattr(User, search_key_name)
         query = query.filter(search_key == search_value)
 
-Note: The sample code above only supports the `eq` operator. We
-recommend that you add support for all of the filter operators
-described in [table 3](https://tools.ietf.org/html/rfc7644#page-18) of the SCIM 2.0 Protocol Specification.
-
 For more details on filtering in SCIM 2.0, see [section 3.4.2.2](https://tools.ietf.org/html/rfc7644#section-3.4.2.2)
 of the [SCIM 2.0 Protocol Specification](https://tools.ietf.org/html/rfc7644).
 
-##### Filtering on externalId
+##### Filtering on Additional Parameters (Optional)
 
-In addition to supporting filtering on `id`, `userName`, and
-`emails`, your application should also support filtering on
-`externalId`.
+Okta currently only supports filtering on `username eq`. However, we may support additional parameters and operators in the future to unlock new use cases. You may want to support these now to future-proof your application. These additional filters may include the following:
 
-Okta will use the `externalId` to determine if your application
-already has an account. `externalId` is used as a stable identifier
-for users, because the `userName` and email addresses for a user
-can change.
+`meta.lastModified`: This filter would be needed to fetch incremental updates
+from SCIM APIs by querying for resources using a filter expression
+that requests resources which were updated since the last update. This will likely be done using the `gt` filter operator. For
+example:
+
+> `filter=meta.lastModified gt "2011-05-13T04:42:34Z"`
+
+`externalId`: Okta may use the `externalId` as a more robust alternative to `userName` when determining if the user already exists in your application during a reactivation flow. `externalId` is a more stable identifier for users, because the `userName` and email addresses for a user can change.
 
 Here is an example of an `externalId` filter that might be sent to
 your application:
@@ -609,12 +599,9 @@ your application:
 externalId eq "00u1abcdefGHIJKLMNOP"
 ~~~
 
-Note: The sample application included in this project does not yet
-demonstrate how to implement storing and filtering by
-`externalId`. However, Okta strongly recommends that your SCIM
-implementation supports storing and filtering by `externalId`. For
-details on supporting `externalId`, see
-[section 3.1](https://tools.ietf.org/html/rfc7643#section-3.1) of [RFC 7643](https://tools.ietf.org/html/rfc7643). Quoted below:
+For details about supporting `externalId`, see
+[section 3.1](https://tools.ietf.org/html/rfc7643#section-3.1) of [RFC 7643](https://tools.ietf.org/html/rfc7643), excerpted below.
+Note that in the following excerpt, "provisioning client" refers to Okta and the service provider refers to you, the 3rd-party that Okta is making calls to.
 
 > (externalId is) "A String that is an identifier for the resource
 > as defined by the provisioning client.  The "externalId" may
@@ -636,6 +623,8 @@ When adding support for `externalId` filtering to your application,
 we suggest that you use OAuth2.0 for authentication and use the
 OAuth2.0 `client_id` to scope the `externalId` to the provisioning
 domain.
+
+`emails` and `id`: Both of these attributes could also be used by Okta to determine if the user already exists in your application, instead of `userName` or `externalId`.
 
 ##### Resource Paging
 
@@ -1229,10 +1218,13 @@ This subdomain field can be configured with Okta after you submit your app for O
 
 **Why do I need to implement the type attribute for attributes such as emails/phoneNumbers/addresses?**
 
-The SCIM User Profile allows for an array of emails. The only way to differentiate between emails is to use the type sub-attribute. See section 2.4 of RFC 7643 for more details:
-When returning multi-valued attributes, service providers SHOULD canonicalize the value returned (e.g., by returning a value for the sub-attribute “type”, such as “home” or “work”) when appropriate (e.g., for email addresses and URLs).
-Service providers MAY return element objects with the same “value” sub-attribute more than once with a different “type” sub-attribute (e.g., the same email address may be used for work and home) but SHOULD NOT return the same (type, value) combination more than once per attribute, as this complicates processing by the client.
-When defining schema for multi-valued attributes, it is considered a good practice to provide a type attribute that MAY be used for the purpose of canonicalization of values. In the schema definition for an attribute, the service provider MAY define the recommended canonical values (see Section 7).
+The SCIM User Profile allows for an array of emails. The only way to differentiate between emails is to use the `type` sub-attribute. 
+
+* When returning multi-valued attributes, service providers SHOULD canonicalize the value returned (e.g., by returning a value for the sub-attribute “type”, such as “home” or “work”) when appropriate (e.g., for email addresses and URLs).
+* Service providers MAY return element objects with the same “value” sub-attribute more than once with a different `type` sub-attribute (e.g., the same email address may be used for work and home) but SHOULD NOT return the same (type, value) combination more than once per attribute, as this complicates processing by the client.
+* When defining schema for multi-valued attributes, it is considered a good practice to provide a `type` attribute that MAY be used for the purpose of canonicalization of values. In the schema definition for an attribute, the service provider MAY define the recommended canonical values (see [RFC 7643 Section 7](https://tools.ietf.org/html/rfc7643#section-7)).
+
+See [Section 2.4 of RFC 7643](https://tools.ietf.org/html/rfc7643#section-2.4) for more details.
 
 **I only have one email/phone number/address in my user profile. Do I need to implement the array of emails/phone numbers/addresses?**
 
