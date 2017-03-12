@@ -590,7 +590,7 @@ described in [table 3](https://tools.ietf.org/html/rfc7644#page-18) of the SCIM 
 For more details on filtering in SCIM 2.0, see [section 3.4.2.2](https://tools.ietf.org/html/rfc7644#section-3.4.2.2)
 of the [SCIM 2.0 Protocol Specification](https://tools.ietf.org/html/rfc7644).
 
-##### Filtering on externalId
+##### Filtering on externalId CHANGED
 
 In addition to supporting filtering on `id`, `userName`, and
 `emails`, your application should also support filtering on
