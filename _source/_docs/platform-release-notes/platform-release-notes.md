@@ -54,7 +54,7 @@ returned the user's status as ACTIVE rather than RECOVERY. (OKTA-109772)
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
-
+![Release Number in Footer](/assets/img/release_notes/version_footer.png)
 
 ### Looking for Something Else?
 
