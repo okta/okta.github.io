@@ -207,7 +207,7 @@ tags: [activemq, jvm]
 ---
 ```
 
-3. Supporting images should be placed in `_source/assets/img` and should follow the convetion:
+3. Supporting images should be placed in `_source/assets/img` and should follow the convention:
    `<name_of_post>-image-name.extension` where name of the post doesn't include the ".md" extension. This will allow us
    to know which images are referenced by which post.
 3. Look at other posts for examples.

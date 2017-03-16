@@ -97,3 +97,12 @@ okta_generic_blogger:
   display_name: Okta Staff
   avatar: avatar-okta_logo.jpg
   email: eng_docs@okta.com
+
+mraible:
+  full_name: Matt Raible
+  display_name: Matt Raible
+  avatar: avatar-matt_raible.jpg
+  email: matt.raible@okta.com
+  web: http://raibledesigns.com
+  twitter: https://twitter.com/mraible
+  github: https://github.com/mraible
