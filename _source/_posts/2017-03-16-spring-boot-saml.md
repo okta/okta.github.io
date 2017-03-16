@@ -168,7 +168,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 Create an `MvcConfig.java` file in the same directory and use it to set the default view to `index`.
 
-```
+```java
 package com.example;
 
 import org.springframework.context.annotation.Configuration;
