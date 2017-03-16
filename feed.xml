@@ -8,6 +8,239 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Get Started with Spring Boot, SAML, and Okta</title>
+        <description>&lt;p&gt;Today I’d like to show you how build a Spring Boot application that leverages Okta’s Platform API for authentication via SAML. SAML (Security Assertion Markup Language) is an XML-based standard for securely exchanging authentication and authorization information between entities—specifically between identity providers, service providers, and users. Well-known IdPs include Salesforce, Okta, OneLogin, and Shibboleth.&lt;/p&gt;
+
+&lt;p&gt;My Okta developer experience began a couple years ago (in December 2014) when I worked for a client that was adopting it. I was tasked with helping them decide on a web framework to use, so I built prototypes with Node, Ruby, and Spring. I documented my findings in &lt;a href=&quot;https://raibledesigns.com/rd/entry/integrating_node_js_ruby_and&quot;&gt;a blog post&lt;/a&gt;. Along the way, &lt;a href=&quot;https://twitter.com/mraible/status/550057304331001856&quot;&gt;I tweeted&lt;/a&gt; my issues with Spring Boot, and &lt;a href=&quot;http://stackoverflow.com/questions/27713524/how-do-i-configure-spring-security-saml-to-work-with-okta?stw=2&quot;&gt;asked how to fix it&lt;/a&gt; on Stack Overflow. I ended up figuring out the solution through trial-and-error and my findings made it into the &lt;a href=&quot;http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816&quot;&gt;official Spring documentation&lt;/a&gt;&lt;a href=&quot;http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816&quot;&gt;.&lt;/a&gt; Things have changed a lot since then and now Spring Security 4.2 has support for auto-loading custom DSLs. And guess what, there’s even a DSL for SAML configuration!&lt;/p&gt;
+
+&lt;p&gt;Ready to get started? You can follow along in with the written tutorial below, &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-saml-example&quot;&gt;check out the code on GitHub&lt;/a&gt;, or watch the screencast I made to walk you through the same process!&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center&quot;&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/JBtyGfrz-jA&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;sign-up-for-an-okta-developer-account&quot;&gt;Sign Up for an Okta Developer Account&lt;/h2&gt;
+
+&lt;p&gt;Fast forward two years, and I find myself as an Okta employee. To start developing with Okta, I created a new developer account at &lt;a href=&quot;http://developer.okta.com&quot;&gt;http://developer.okta.com&lt;/a&gt;. Make sure you take a screenshot or write down your Okta URL after you’ve signed up. You’ll need this URL to get back to the admin console.&lt;/p&gt;
+
+&lt;p&gt;You’ll receive an email to activate your account and change your temporary password. After completing these steps, you’ll land on your dashboard with some annotations about “apps”.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-a-saml-application-on-okta&quot;&gt;Create a SAML Application on Okta&lt;/h2&gt;
+
+&lt;p&gt;At the time of this writing, the easiest way to create a SAML-aware Spring Boot application is to use Spring Security’s &lt;a href=&quot;[https://github.com/spring-projects/spring-security-saml-dsl](https://github.com/spring-projects/spring-security-saml-dsl)&quot;&gt;SAML DSL project&lt;/a&gt;. It contains a sample project that provides &lt;a href=&quot;https://github.com/spring-projects/spring-security-saml-dsl/blob/master/samples/spring-security-saml-dsl-sample/README.md&quot;&gt;instructions&lt;/a&gt; for configuring Okta as a SAML provider. These instructions will likely work for you if you’re experienced Spring Boot and Okta developer. If you’re new to both, this “start from scratch” tutorial might work better for you.&lt;/p&gt;
+
+&lt;p&gt;Just like I did, the first thing you’ll need to do is create a developer account at &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt;. After activating your account, login to it and click on the “Admin” button in the top right.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/okta-userhome.png&quot; alt=&quot;Okta UserHome&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On the next screen, click “Add Applications” in the top right.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/okta-dashboard.png&quot; alt=&quot;Okta Dashboard&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This will bring you to a screen with a “Create New App” green button on the left.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/create-new-app.png&quot; alt=&quot;Create New App&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the button and choose “Web” for the platform and “SAML 2.0” for the sign on method.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/new-app-saml-2.0.png&quot; alt=&quot;New App with SAML 2.0&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the “Create” button. The next screen will prompt you for an application name. I used “Spring SAML”, but any name will work.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/app-name.png&quot; alt=&quot;Enter App name&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the “Next” button. This brings you to the second step, configuring SAML. Enter the following values:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Single sign on URL: &lt;code class=&quot;highlighter-rouge&quot;&gt;https://localhost:8443/saml/SSO&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Audience URI: &lt;code class=&quot;highlighter-rouge&quot;&gt;https://localhost:8443/saml/metadata&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/saml-integration.png&quot; alt=&quot;SAML Integration&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Scroll to the bottom of the form and click “Next”. This will bring you to the third step, feedback. Choose “I’m an Okta customer adding an internal app” and optionally select the App type.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/customer-or-partner.png&quot; alt=&quot;Customer or Partner&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the “Finish” button to continue. This will bring you to the application’s “Sign On” tab which has a section with a link to your applications metadata in a yellow box. Copy the &lt;strong&gt;Identity Provider metadata&lt;/strong&gt; link as you’ll need it to configure your Spring Boot application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/saml-metadata.png&quot; alt=&quot;SAML Metadata&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The final setup step you’ll need is to assign people to the application. Click on the “People” tab and the “Assign to People” button. You’ll see a list of people with your account in it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/assign-people.png&quot; alt=&quot;Assign People&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the assign button, accept the default username (your email), and click the “Done” button.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-a-spring-boot-application-with-saml-support&quot;&gt;Create a Spring Boot Application with SAML Support&lt;/h2&gt;
+
+&lt;p&gt;Navigate to &lt;a href=&quot;https://start.spring.io&quot;&gt;https://start.spring.io&lt;/a&gt; in your favorite browser and select Security, Web, Thymeleaf, and DevTools as dependencies.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/start.spring.png&quot; alt=&quot;start.spring.io&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click “Generate Project”, download the generated ZIP file and open it in your favorite editor. Add the &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-security-saml-dsl&lt;/code&gt; dependency to your &lt;code class=&quot;highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.security.extensions&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-security-saml-dsl&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0.0.M3&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You’ll also need to add the Spring Milestone repository since a milestone release is all that’s available at the time of this writing.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;repositories&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;repository&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&amp;gt;&lt;/span&gt;spring-milestones&lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Spring Milestones&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://repo.spring.io/libs-milestone&lt;span class=&quot;nt&quot;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you’d like to see instructions for Gradle, please view the project’s &lt;a href=&quot;https://github.com/spring-projects/spring-security-saml-dsl/blob/master/README.md&quot;&gt;README.md&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;src/main/resources/application.properties&lt;/code&gt;, add the following key/value pairs. Make sure to use the “Identity Provider metadata” value you copied earlier (hint: you can find it again under the “Sign On” tab in your Okta application).&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server.port = 8443
+server.ssl.enabled = true
+server.ssl.key-alias = spring
+server.ssl.key-store = src/main/resources/saml/keystore.jks
+server.ssl.key-store-password = secret
+
+security.saml2.metadata-url = &amp;lt;your metadata url&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;From a terminal window, navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;src/main/resources&lt;/code&gt; directory of your app and create a &lt;code class=&quot;highlighter-rouge&quot;&gt;saml&lt;/code&gt; directory. Navigate into the directory and run the following command. Use “secret” when prompted for a keystore password.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;keytool -genkey -v -keystore keystore.jks -alias spring -keyalg RSA -keysize 2048 -validity 10000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The values for the rest of the questions don’t matter since you’re not generating a real certificate. However, you will need to answer “yes” to the following question.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Is &lt;span class=&quot;nv&quot;&gt;CN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Unknown, &lt;span class=&quot;nv&quot;&gt;OU&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Unknown, &lt;span class=&quot;nv&quot;&gt;O&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Unknown, &lt;span class=&quot;nv&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Unknown, &lt;span class=&quot;nv&quot;&gt;ST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Unknown, &lt;span class=&quot;nv&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Unknown correct?
+  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;no]:
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;SecurityConfiguration.java&lt;/code&gt; file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;com.example&lt;/code&gt; package.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;org&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;springframework&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;security&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;saml2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SAMLConfigurer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;saml&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.beans.factory.annotation.Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.builders.HttpSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.configuration.EnableWebSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@EnableWebSecurity&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableGlobalMethodSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;securedEnabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SecurityConfiguration&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebSecurityConfigurerAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${security.saml2.metadata-url}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metadataUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpSecurity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authorizeRequests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;antMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/saml/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;permitAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anyRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authenticated&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;saml&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;serviceProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;keyStore&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;storeFilePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;saml/keystore.jks&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;secret&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;keyname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;spring&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;keyPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;secret&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;protocol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hostname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;localhost:8443&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;basePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;identityProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;metadataFilePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadataUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create an &lt;code class=&quot;highlighter-rouge&quot;&gt;MvcConfig.java&lt;/code&gt; file in the same directory and use it to set the default view to &lt;code class=&quot;highlighter-rouge&quot;&gt;index&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;example&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.web.servlet.config.annotation.ViewControllerRegistry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MvcConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebMvcConfigurerAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addViewControllers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ViewControllerRegistry&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addViewController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setViewName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;index&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Since you chose Thymeleaf when creating your application, you can create a &lt;code class=&quot;highlighter-rouge&quot;&gt;src/main/resources/templates/index.html&lt;/code&gt; and it will automatically be rendered after you sign-in. Create this file and populate it with the following HTML.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Spring Security SAML Example&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+Hello SAML!
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;run-the-app-and-login-with-okta&quot;&gt;Run the App and Login with Okta&lt;/h2&gt;
+
+&lt;p&gt;Start the app using your IDE or &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt; and navigate to &lt;a href=&quot;https://localhost:8443&quot;&gt;https://localhost:8443&lt;/a&gt;. If you’re using Chrome, you’ll likely see a privacy error.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/connection-not-private.png&quot; alt=&quot;Connection Not Private&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the “ADVANCED” link at the bottom. Then click the “proceed to localhost (unsafe)” link.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/connection-not-private-proceed.png&quot; alt=&quot;Proceed to localhost&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, you’ll be redirected to Okta to sign in and redirected back to your app. If you’re already logged in, you won’t see anything from Okta. If you sign out from Okta, you’ll see a login screen such as the one below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/okta-login.png&quot; alt=&quot;Okta Login&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After you’ve logged in, you should see a screen like the one below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/spring-boot-saml/hello-saml.png&quot; alt=&quot;Hello SAML&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;source-code&quot;&gt;Source Code&lt;/h2&gt;
+
+&lt;p&gt;You can find the source code for this article at &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-saml-example&quot;&gt;https://github.com/oktadeveloper/okta-spring-boot-saml-example&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;learn-more&quot;&gt;Learn More&lt;/h2&gt;
+
+&lt;p&gt;This article showed you how to create a SAML application in Okta and talk to it using Spring Boot and Spring Security’s SAML extension. The SAML extension hasn’t had a GA release, but hopefully will soon. I also believe it’s possible to take the SAML DSL (in &lt;code class=&quot;highlighter-rouge&quot;&gt;SecurityConfiguration.java&lt;/code&gt;) and create a Spring Boot starter that allows you to get started with SAML simply by configuring application properties.&lt;/p&gt;
+
+&lt;p&gt;Have questions or comments? Post your question to Stack Overflow with the “&lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;okta&lt;/a&gt;” or “&lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta-api&quot;&gt;okta-api&lt;/a&gt;” tag, hit me up via email at &lt;a href=&quot;mailto:matt.raible@okta.com&quot;&gt;matt.raible@okta.com&lt;/a&gt;, or ping me on Twitter &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;@mraible&lt;/a&gt;. In future articles, I’ll show you to to configure Spring Boot with OAuth 2.0 and Okta. Then I’ll explore different techniques of authenticating with Angular and using the access token to talk to a secured Spring Boot application. Until then, happy authenticating! 😊&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 16 Mar 2017 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2017/03/16/spring-boot-saml</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/16/spring-boot-saml</guid>
+      </item>
+    
+      <item>
         <title>How to use KentorIT AuthServices with Okta</title>
         <description>&lt;p&gt;If you’re wondering how to configure an ASP.NET application with &lt;a href=&quot;https://github.com/KentorIT/authservices&quot;&gt;KentorIT’s AuthServices&lt;/a&gt; and Okta, you’ve come to the right place. But before delving into the specifics of how to make Okta work with an SAML-enabled ASP.NET application powered by KentorIT AuthServices, is is worth spending some time going over a critical, but easily fixable issue:&lt;/p&gt;
 

@@ -9,7 +9,7 @@ Today I'd like to show you how build a Spring Boot application that leverages Ok
 
 My Okta developer experience began a couple years ago (in December 2014) when I worked for a client that was adopting it. I was tasked with helping them decide on a web framework to use, so I built prototypes with Node, Ruby, and Spring. I documented my findings in [a blog post](https://raibledesigns.com/rd/entry/integrating_node_js_ruby_and). Along the way, [I tweeted](https://twitter.com/mraible/status/550057304331001856) my issues with Spring Boot, and [asked how to fix it](http://stackoverflow.com/questions/27713524/how-do-i-configure-spring-security-saml-to-work-with-okta?stw=2) on Stack Overflow. I ended up figuring out the solution through trial-and-error and my findings made it into the [official Spring documentation](http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816)[.](http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816) Things have changed a lot since then and now Spring Security 4.2 has support for auto-loading custom DSLs. And guess what, there's even a DSL for SAML configuration!
 
-Ready to get started? You can follow along in with the written tutorial below, [check out the code on GitHub](https://github.com/oktadeveloper/okta-spring-boot-saml-example), or watch the screencast I made to walk you through the same process!
+Ready to get started? You can follow along in with the written tutorial below, [check out the code on GitHub](https://github.com/oktadeveloper/okta-spring-boot-saml-example), or watch the screencast I made to walk you through the same process.
 
 <div style="text-align: center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/JBtyGfrz-jA" frameborder="0" allowfullscreen></iframe>
@@ -27,42 +27,42 @@ At the time of this writing, the easiest way to create a SAML-aware Spring Boot 
 
 Just like I did, the first thing you'll need to do is create a developer account at [https://developer.okta.com](https://developer.okta.com). After activating your account, login to it and click on the "Admin" button in the top right. 
 
-![Okta UserHome](/assets/img/blog/spring-boot-saml/okta-userhome.png)
+<img alt="Okta UserHome" src="/assets/img/blog/spring-boot-saml/okta-userhome.png" style="width: 800px">
 
 On the next screen, click "Add Applications" in the top right.
 
-![Okta Dashboard](/assets/img/blog/spring-boot-saml/okta-dashboard.png)
+<img alt="Okta Dashboard" src="/assets/img/blog/spring-boot-saml/okta-dashboard.png" style="width: 800px">
 
 This will bring you to a screen with a "Create New App" green button on the left.
 
-![Create New App](/assets/img/blog/spring-boot-saml/create-new-app.png)
+<img alt="Create New App" src="/assets/img/blog/spring-boot-saml/create-new-app.png" style="width: 800px">
 
 Click the button and choose "Web" for the platform and "SAML 2.0” for the sign on method.
 
-![New App with SAML 2.0](/assets/img/blog/spring-boot-saml/new-app-saml-2.0.png)
+<img alt="New App with SAML 2.0" src="/assets/img/blog/spring-boot-saml/new-app-saml-2.0.png"  style="width: 800px">
 
 Click the "Create" button. The next screen will prompt you for an application name. I used "Spring SAML”, but any name will work.
 
-![Enter App name](/assets/img/blog/spring-boot-saml/app-name.png)
+<img alt="Enter App name" src="/assets/img/blog/spring-boot-saml/app-name.png" style="width: 800px">
 
 Click the "Next" button. This brings you to the second step, configuring SAML. Enter the following values:
 
 * Single sign on URL: `https://localhost:8443/saml/SSO`
 * Audience URI: `https://localhost:8443/saml/metadata`
 
-![SAML Integration](/assets/img/blog/spring-boot-saml/saml-integration.png)
+<img alt="SAML Integration" src="/assets/img/blog/spring-boot-saml/saml-integration.png" style="width: 800px">
 
 Scroll to the bottom of the form and click "Next". This will bring you to the third step, feedback. Choose "I'm an Okta customer adding an internal app” and optionally select the App type.
 
-![Customer or Partner](/assets/img/blog/spring-boot-saml/customer-or-partner.png)
+<img alt="Customer or Partner" src="/assets/img/blog/spring-boot-saml/customer-or-partner.png" style="width: 800px">
 
 Click the "Finish" button to continue. This will bring you to the application's "Sign On” tab which has a section with a link to your applications metadata in a yellow box. Copy the **Identity Provider metadata** link as you'll need it to configure your Spring Boot application.
 
-![SAML Metadata](/assets/img/blog/spring-boot-saml/saml-metadata.png)
+<img alt="SAML Metadata" src="/assets/img/blog/spring-boot-saml/saml-metadata.png" style="width: 800px">
 
 The final setup step you'll need is to assign people to the application. Click on the "People" tab and the "Assign to People” button. You'll see a list of people with your account in it. 
 
-![Assign People](/assets/img/blog/spring-boot-saml/assign-people.png)
+<img alt="Assign People" src="/assets/img/blog/spring-boot-saml/assign-people.png" style="width: 800px">
 
 Click the assign button, accept the default username (your email), and click the "Done" button.
 
@@ -70,7 +70,7 @@ Click the assign button, accept the default username (your email), and click the
 
 Navigate to [https://start.spring.io](https://start.spring.io) in your favorite browser and select Security, Web, Thymeleaf, and DevTools as dependencies. 
 
-![start.spring.io](/assets/img/blog/spring-boot-saml/start.spring.png)
+<img alt="start.spring.io" src="/assets/img/blog/spring-boot-saml/start.spring.png" style="width: 800px">
 
 Click "Generate Project", download the generated ZIP file and open it in your favorite editor. Add the `spring-security-saml-dsl` dependency to your `pom.xml`. 
 
@@ -204,19 +204,19 @@ Hello SAML!
 
 Start the app using your IDE or `mvn spring-boot:run` and navigate to [https://localhost:8443](https://localhost:8443). If you're using Chrome, you'll likely see a privacy error.
 
-![Connection Not Private](/assets/img/blog/spring-boot-saml/connection-not-private.png)
+<img alt="Connection Not Private" src="/assets/img/blog/spring-boot-saml/connection-not-private.png" style="width: 800px">
 
 Click the "ADVANCED" link at the bottom. Then click the "proceed to localhost (unsafe)” link.
 
-![Proceed to localhost](/assets/img/blog/spring-boot-saml/connection-not-private-proceed.png)
+<img alt="Proceed to localhost" src="/assets/img/blog/spring-boot-saml/connection-not-private-proceed.png" style="width: 800px">
 
 Next, you'll be redirected to Okta to sign in and redirected back to your app. If you're already logged in, you won't see anything from Okta. If you sign out from Okta, you'll see a login screen such as the one below.
 
-![Okta Login](/assets/img/blog/spring-boot-saml/okta-login.png)
+<img alt="Okta Login" src="/assets/img/blog/spring-boot-saml/okta-login.png" style="width: 800px">
 
 After you've logged in, you should see a screen like the one below.
 
-![Hello SAML](/assets/img/blog/spring-boot-saml/hello-saml.png)
+<img alt="Hello SAML" src="/assets/img/blog/spring-boot-saml/hello-saml.png" style="width: 800px">
 
 ## Source Code
 
