@@ -105,10 +105,7 @@
               <a href="/use_cases/api_security">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
-            </li>
-            <li>
-              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+              <a href="/use_cases/promote-oan-integration">Promote Your Integration</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -224,7 +221,7 @@ The OAuth 2.0 APIs each have several different <a href="#authentication-request"
 <p>If you are new to OAuth 2.0, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>, you may want to experiment with the Postman collection first:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/3230565cff5b258b270d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="basic-flows">Basic Flows</h2>
 
@@ -547,7 +544,7 @@ A Refresh Token will be returned if ‘offline_access’ scope is requested usin
 
 <p>The lifetime of a Refresh Token is configured in <a href="#access-policies">Access Policies</a>, the minimum value is 24 hours. The refresh token can also expire after a period if no clients redeem it for an Access Token. The period should be equal to or larger than 10 minutes. If the token’s lifetime is set to unlimited, the Authorization Server will not check if clients use it or not.</p>
 
-<h2 id="id-token">Id Token</h2>
+<h2 id="id-token">ID Token</h2>
 <p>An authorization server can also issue an Id Token to the client, just like <a href="oidc#id-token">OIDC</a>. The differences are 1) ‘groups’ is not a reserved scope or claim. To get a claim with group information, the administrators have to define a custom claim with a group filter and associate it with a scope. 2) the custom properties in the app user profile will not be put in the Id Token by default even if profile scope is granted. To get a claim for a custom property, the administrators have to define a custom claim with an Okta EL expression and associate it with a scope.</p>
 
 <p>The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
@@ -613,6 +610,8 @@ However, you can also use OpenID Connect with an authorization server specified:
 
 <h2 id="endpoints">Endpoints</h2>
 
+<p>Explore the OAuth 2.0 API: <a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
 <h3 class="api api-operation" id="authentication-request">Authentication Request</h3>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/:authorizationServerId/v1/authorize</span></p>
@@ -643,7 +642,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>sessionToken</td>
-      <td>An Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the <a href="authn.html">Authentication API</a>.</td>
+      <td>An Okta one-time session token. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the <a href="authn.html">Authentication API</a>.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -651,7 +650,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>response_type</td>
-      <td>Can be a combination of <em>code</em>, <em>token</em>, and <em>id_token</em>. The chosen combination determines which flow is used; see this reference from the <a href="https://tools.ietf.org/html/rfc6749#section-3.1.1">OAuth 2.0 specification</a>. The code response type returns an authorization code which can be later exchanged for an Access Token or a Refresh Token.</td>
+      <td>Can be a combination of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, and <code class="highlighter-rouge">id_token</code>. The chosen combination determines which flow is used; see this reference from the <a href="https://tools.ietf.org/html/rfc6749#section-3.1.1">OAuth 2.0 specification</a>. The code response type returns an authorization code which can be later exchanged for an Access Token or a Refresh Token.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -659,7 +658,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>client_id</td>
-      <td>Obtained during either <a href="../../guides/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It is the identifier for the client and it must match what is preregistered in Okta.</td>
+      <td>Obtained during either <a href="../../guides/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It is the identifier for the client and it must match what has been registered in Okta during client registration.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -667,7 +666,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>redirect_uri</td>
-      <td>Specifies the callback location where the authorization code should be sent and it must match what is preregistered in Okta as a part of client registration.</td>
+      <td>Specifies the callback location where the authorization code should be sent and it must match what has been registered in Okta during client registration.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -675,7 +674,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>display</td>
-      <td>Specifies how to display the authentication and consent UI. Valid values: <em>page</em> or <em>popup</em>.</td>
+      <td>Specifies how to display the authentication and consent UI. Valid values: <code class="highlighter-rouge">page</code> or <code class="highlighter-rouge">popup</code>.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -691,7 +690,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>response_mode</td>
-      <td>Specifies how the authorization response should be returned. <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
+      <td>Specifies how the authorization response should be returned. <a href="#parameter-details">Valid values: <code class="highlighter-rouge">fragment</code>, <code class="highlighter-rouge">form_post</code>, <code class="highlighter-rouge">query</code> or <code class="highlighter-rouge">okta_post_message</code></a>. If <code class="highlighter-rouge">id_token</code> or <code class="highlighter-rouge">token</code> is specified as the <em>response_type</em>, then <code class="highlighter-rouge">query</code> isn’t allowed as a <em>response_mode</em>. Defaults to <code class="highlighter-rouge">fragment</code> in implicit and hybrid flows. Defaults to <code class="highlighter-rouge">query</code> in authorization code flow and cannot be set as <code class="highlighter-rouge">okta_post_message</code>.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -699,7 +698,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>scope</td>
-      <td><strong>Required.</strong> Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the access_token and id_token. The openid scope has to be specified to get back an id_token.</td>
+      <td><strong>Required.</strong> Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the Access Token and ID Token. The <code class="highlighter-rouge">openid</code> scope has to be specified to get back an ID Token.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -715,7 +714,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>prompt</td>
-      <td>Can be either <em>none</em> or <em>login</em>. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there’s an existing Okta session.</td>
+      <td>Can be either <code class="highlighter-rouge">none</code> or <code class="highlighter-rouge">login</code>. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there’s an existing Okta session.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -755,12 +754,12 @@ However, you can also use OpenID Connect with an authorization server specified:
  All other parameters comply with the <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 specification</a> and their behavior is consistent with the specification.</li>
   <li>Each value for <em>response_mode</em> delivers different behavior:
     <ul>
-      <li><em>fragment</em> – Parameters are encoded in the URL fragment added to the <em>redirect_uri</em> when redirecting back to the client.</li>
-      <li><em>query</em> – Parameters are encoded in the query string added to the <em>redirect_uri</em> when redirecting back to the client.</li>
-      <li><em>form_post</em> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
+      <li><code class="highlighter-rouge">fragment</code> – Parameters are encoded in the URL fragment added to the <em>redirect_uri</em> when redirecting back to the client.</li>
+      <li><code class="highlighter-rouge">query</code> – Parameters are encoded in the query string added to the <em>redirect_uri</em> when redirecting back to the client.</li>
+      <li><code class="highlighter-rouge">form_post</code> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
 and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.</li>
-      <li><em>okta_post_message</em> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
-<em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>.
+      <li><code class="highlighter-rouge">okta_post_message</code> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
+<code class="highlighter-rouge">okta_post_message</code> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>.
 This value provides a secure way for a single-page application to perform a sign-in flow
 in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
 The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage</a> call is in the next section.</li>
@@ -771,7 +770,9 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
  The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state.
  Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
   </li>
-  <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose token_endpoint_auth_method is ‘none’, makes a code flow authorization request, the code_challenge parameter is required.</li>
+  <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as <em>code_verifier</em> and derives <em>code_challenge</em> from it using the method specified in <em>code_challenge_method</em>. 
+ Then the client passes the <em>code_challenge</em> and <em>code_challenge_method</em> in the authorization request for code flow. When a client tries to redeem the code, it must pass the <em>code_verifer</em>. Okta recomputes the challenge and returns the requested token only if it matches the <em>code_challenge</em> in the original authorization request. When a client, whose <em>token_endpoint_auth_method</em> is <code class="highlighter-rouge">none</code>, makes a code flow authorization request, <em>code_challenge</em> is required.
+ Since <em>code_challenge_method</em> only supports S256, this means that the value for <em>code_challenge</em> must be: <code class="highlighter-rouge">BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))</code>. According to the <a href="https://tools.ietf.org/html/rfc7636">PKCE spec</a>, the <em>code_verifier</em> must be at least 43 characters and no more than 128 characters.</li>
 </ul>
 
 <h4 id="postmessage-data-model">postMessage() Data Model</h4>

@@ -105,10 +105,7 @@
               <a href="/use_cases/api_security">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
-            </li>
-            <li>
-              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+              <a href="/use_cases/promote-oan-integration">Promote Your Integration</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -243,22 +240,22 @@ Because of this, Okta doesn’t make delete requests to the user APIs in downstr
 <p>Okta sets the user’s password to either match the Okta password or to be a randomly generated password. 
 Learn more about the overall use case <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-Sync-Password?retURL=%2Fhelp%2Fapex%2FKnowledgeArticleJson%3Fc%3DOkta_Documentation%253ADirectories%26p%3D101%26inline%3D1&amp;popup=true">here</a>.</p>
 
-<h4 id="mastering-users">Mastering Users</h4>
+<h4 id="profile-mastering-users">Profile Mastering Users</h4>
+
+<blockquote>
+  <p>Profile Mastering Users is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option. 
+<a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback. 
+While in Beta, Okta may make breaking changes, so the integration with the feature can’t be published in the Okta Application Network or used by customers in production environments.</p>
+</blockquote>
 
 <p>Mastering is a more sophisticated version of read (import) Users. 
-Mastering defines the flow and maintenance of user object attributes and their lifecycle state. 
+Mastering defines the flow and maintenance of user-object attributes and their lifecycle state. 
 When a profile is mastered from a given resource (application or directory), 
 the Okta user profile’s attributes and lifecycle state are derived exclusively from that resource. 
-In other words, an Okta user mastered by Active Directory has an Okta profile. 
+In other words, an Okta user mastered by Active Directory (or HR system) has an Okta profile. 
 However, the profile isn’t editable in Okta by the user or Okta admin, and derives its information exclusively from Active Directory. 
 If the lifecycle state of the user in Active Directory moves to Disabled, 
-the linked Okta user will also switch to the corresponding lifecycle state of Deactivated on the next the read (import).</p>
-
-<p>A more granular version of mastering is Attribute-Level mastering. 
-This is where Mastering can be applied at the Attribute level, rather than only at the whole Profile level. 
-This permits an Okta user profile to derive portions of its attributes from multiple different Masters.</p>
-
-<p>Mastering is an advanced action. If you want your integration to support it, we recommend contacting Okta to double check your design before starting development.</p>
+the linked Okta user also switches to the corresponding lifecycle state of Deactivated on the next the read (import).</p>
 
 <h3 id="provisioning-use-cases">Provisioning Use Cases</h3>
 
@@ -286,37 +283,47 @@ Similarly, removing or deactivating an employee from Active Directory triggers d
 
 <h4 id="app-as-master">App-as-Master</h4>
 
+<blockquote>
+  <p>App-as-Master is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option. 
+<a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback. 
+While in Beta, Okta may make breaking changes, so the integration with the feature can’t be published in the Okta Application Network or used by customers in production environments.</p>
+</blockquote>
+
 <p>While most apps fit the category of a downstream app in the directory-as-master use case, some apps can be the master. This is the App-as-Master use case.</p>
 
-<p>The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information. An HR app like Workday or Successfactors Employee Central is the most common example. 
+<p>The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information. 
+An HR app like Workday or Successfactors Employee Central is the most common example. 
 In this scenario, the HR app, not Active Directory, feeds employee profile details downstream into directories like AD and Okta, and apps like Box.</p>
 
 <!-- More info on configuring app-as-master in Okta is [here](). Note: link was missing from source -->
 
 <blockquote>
   <p>Note: Integrations for the “App-as-Master” use case are significantly more complex than the Directory-as-Master use case and take more time to build and support. 
-This is because these integrations sync a larger number of attributes and lifecycle states, and more directly impact the Okta user profile and downstream apps. 
-If you want your integration to support it, we recommend contacting <a href="mailto:developers@okta.com">developers@okta.com</a> to double check your design before starting development.</p>
+This is because these integrations sync a larger number of attributes and lifecycle states, and more directly impact the Okta user profile and downstream apps.</p>
 </blockquote>
 
-<h4 id="attribute-level-mastering">Attribute-Level Mastering</h4>
+<h4 id="advanced-app-as-master-use-cases">Advanced App-as-Master Use Cases</h4>
 
-<p>Most apps fall clearly into the groupings above:</p>
+<p>There are several advanced App-as-Master use cases that aren’t currently supported by the SCIM-Based Provisioning option, but may be added in the future. 
+Until then, consider out-of-band processes that work around these use cases.</p>
 
 <ul>
-  <li>Directory-as-master—all employee profile attributes in an app are set by the upstream directory</li>
-  <li>App-as-master—the app itself is the employee system of record for downstream apps, Active Directory, and Okta</li>
+  <li>
+    <p>Attribute-level mastering—The app wants to be the master for some employee attributes like phone number, while letting Okta or another app master other attributes. We call this attribute-level mastering.</p>
+  </li>
+  <li>
+    <p>Pre-hire interval—In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance. 
+A pre-hire interval configuration would specify how many days before the employee’s hire date Okta should import the employee.</p>
+  </li>
+  <li>
+    <p>Real-time sync/termination—In an HR-as-Master use case, a change in employee status within the HR system may need to be immediately reflected in Okta.
+Involuntary terminations is one scenario where an employee’s access to sensitive apps and content via Okta needs to be cut off within minutes.</p>
+  </li>
+  <li>
+    <p>Incremental/delta import—Importing a large number of user profiles from an app into Okta can take minutes, even hours. 
+This can become a major performance and timing issue if frequent updates are needed. Currently, the SCIM-Based Provisioning option doesn’t support the ability to import only those user profiles that have changed since the last import. In the future, we may support this via filtering on <code class="highlighter-rouge">meta.lastModified</code>. (<a href="#filtering-on-metalastmodified">More information</a>)</p>
+  </li>
 </ul>
-
-<p>However, some apps exist somewhere in the middle. These apps want to be the master for certain employee attributes like phone number, while letting the directory master most other attributes. We call this attribute-level mastering.</p>
-
-<p>Unified communications apps like RingCentral are common examples of apps for which attribute-level mastering might be desired. How does this use case work?</p>
-
-<p>When a new employee joins a company he/she will typically be added first to AD which, via Okta, will trigger the provisioning of a new RingCentral account. In the employee profile attributes that are exchanged between AD and RingCentral, phone number will be missing however, as AD does not initially know the new employee’s phone number. This number is first established in RingCentral.</p>
-
-<p>If the phone number attribute is set in Okta to be Mastered by RingCentral, once the phone number is initially established in RingCentral, it will be synced back to AD. This will allow IT to have more complete information about the new employee.</p>
-
-<p>See Okta’s <a href="https://support.okta.com/help/articles/Knowledge_Article/Attribute-Level-Mastering">online help</a> for more info on configuring attribute-level mastering in Okta.</p>
 
 <h2 id="ways-to-build-provisioning">Ways to Build Provisioning</h2>
 
@@ -787,15 +794,11 @@ def users_patch(user_id):
 <p>For more details on user attribute updates to <code class="highlighter-rouge">/Users/{id}</code> SCIM endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.5.2">section 3.5.2</a>
 of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
 
-<h5 id="filtering-on-id-username-and-emails">Filtering on <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">userName</code>, and <code class="highlighter-rouge">emails</code></h5>
+<h5 id="filtering-on-username-eq-required">Filtering on <code class="highlighter-rouge">userName eq</code> (Required)</h5>
 
-<p>Being able to filter results by the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">userName</code>, or <code class="highlighter-rouge">emails</code>
-attributes is a critical part of working with Okta.</p>
-
-<p>Your SCIM API must be able to filter users by <code class="highlighter-rouge">userName</code> and should
-also support filtering by <code class="highlighter-rouge">id</code> and <code class="highlighter-rouge">emails</code>. Filtering support
-is required because most provisioning actions require the ability
-for Okta to determine if a user resource exists on your system. The filter Okta generates will be based on the <code class="highlighter-rouge">userName</code> field, following the pattern “userName eq “…” “.</p>
+<p>Your SCIM API must be able to filter users following the pattern  “userName eq “…” “. 
+This is because most provisioning actions, besides Import Users, require the ability
+for Okta to determine if a user resource exists on your system.</p>
 
 <p>Consider the scenario where an Okta customer with thousands of
 users has a provisioning integration with your system, which also
@@ -813,10 +816,6 @@ userName eq "jane.doe@example.com"
 </code></pre>
 </div>
 
-<p>At the moment, Okta only supports the <code class="highlighter-rouge">eq</code> filter operator. However, the
-<a href="https://tools.ietf.org/html/rfc7644#section-3.4.2.2">filtering capabilities</a> described in the SCIM 2.0 Protocol Specification are
-much more complicated.</p>
-
 <p>Here is an example of how to implement SCIM filtering in Python:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>request_filter = request.args.get('filter')
@@ -830,23 +829,23 @@ if match:
 </code></pre>
 </div>
 
-<p>Note: The sample code above only supports the <code class="highlighter-rouge">eq</code> operator. We
-recommend that you add support for all of the filter operators
-described in <a href="https://tools.ietf.org/html/rfc7644#page-18">table 3</a> of the SCIM 2.0 Protocol Specification.</p>
-
 <p>For more details on filtering in SCIM 2.0, see <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2.2">section 3.4.2.2</a>
 of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
 
-<h5 id="filtering-on-externalid">Filtering on externalId</h5>
+<h5 id="filtering-on-additional-parameters-optional">Filtering on Additional Parameters (Optional)</h5>
 
-<p>In addition to supporting filtering on <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">userName</code>, and
-<code class="highlighter-rouge">emails</code>, your application should also support filtering on
-<code class="highlighter-rouge">externalId</code>.</p>
+<p>Okta currently only supports filtering on <code class="highlighter-rouge">username eq</code>. However, we may support additional parameters and operators in the future to unlock new use cases. You may want to support these now to future-proof your application. These additional filters may include the following:</p>
 
-<p>Okta will use the <code class="highlighter-rouge">externalId</code> to determine if your application
-already has an account. <code class="highlighter-rouge">externalId</code> is used as a stable identifier
-for users, because the <code class="highlighter-rouge">userName</code> and email addresses for a user
-can change.</p>
+<p><code class="highlighter-rouge">meta.lastModified</code>: This filter would be needed to fetch incremental updates
+from SCIM APIs by querying for resources using a filter expression
+that requests resources which were updated since the last update. This will likely be done using the <code class="highlighter-rouge">gt</code> filter operator. For
+example:</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">filter=meta.lastModified gt "2011-05-13T04:42:34Z"</code></p>
+</blockquote>
+
+<p><code class="highlighter-rouge">externalId</code>: Okta may use the <code class="highlighter-rouge">externalId</code> as a more robust alternative to <code class="highlighter-rouge">userName</code> when determining if the user already exists in your application during a reactivation flow. <code class="highlighter-rouge">externalId</code> is a more stable identifier for users, because the <code class="highlighter-rouge">userName</code> and email addresses for a user can change.</p>
 
 <p>Here is an example of an <code class="highlighter-rouge">externalId</code> filter that might be sent to
 your application:</p>
@@ -855,12 +854,9 @@ your application:</p>
 </code></pre>
 </div>
 
-<p>Note: The sample application included in this project does not yet
-demonstrate how to implement storing and filtering by
-<code class="highlighter-rouge">externalId</code>. However, Okta strongly recommends that your SCIM
-implementation supports storing and filtering by <code class="highlighter-rouge">externalId</code>. For
-details on supporting <code class="highlighter-rouge">externalId</code>, see
-<a href="https://tools.ietf.org/html/rfc7643#section-3.1">section 3.1</a> of <a href="https://tools.ietf.org/html/rfc7643">RFC 7643</a>. Quoted below:</p>
+<p>For details about supporting <code class="highlighter-rouge">externalId</code>, see
+<a href="https://tools.ietf.org/html/rfc7643#section-3.1">section 3.1</a> of <a href="https://tools.ietf.org/html/rfc7643">RFC 7643</a>, excerpted below.
+Note that in the following excerpt, “provisioning client” refers to Okta and the service provider refers to you, the 3rd-party that Okta is making calls to.</p>
 
 <blockquote>
   <p>(externalId is) “A String that is an identifier for the resource
@@ -884,6 +880,8 @@ controlled by the client setting the value.</p>
 we suggest that you use OAuth2.0 for authentication and use the
 OAuth2.0 <code class="highlighter-rouge">client_id</code> to scope the <code class="highlighter-rouge">externalId</code> to the provisioning
 domain.</p>
+
+<p><code class="highlighter-rouge">emails</code> and <code class="highlighter-rouge">id</code>: Both of these attributes could also be used by Okta to determine if the user already exists in your application, instead of <code class="highlighter-rouge">userName</code> or <code class="highlighter-rouge">externalId</code>.</p>
 
 <h5 id="resource-paging">Resource Paging</h5>
 
@@ -1639,10 +1637,15 @@ This subdomain field can be configured with Okta after you submit your app for O
 
 <p><strong>Why do I need to implement the type attribute for attributes such as emails/phoneNumbers/addresses?</strong></p>
 
-<p>The SCIM User Profile allows for an array of emails. The only way to differentiate between emails is to use the type sub-attribute. See section 2.4 of RFC 7643 for more details:
-When returning multi-valued attributes, service providers SHOULD canonicalize the value returned (e.g., by returning a value for the sub-attribute “type”, such as “home” or “work”) when appropriate (e.g., for email addresses and URLs).
-Service providers MAY return element objects with the same “value” sub-attribute more than once with a different “type” sub-attribute (e.g., the same email address may be used for work and home) but SHOULD NOT return the same (type, value) combination more than once per attribute, as this complicates processing by the client.
-When defining schema for multi-valued attributes, it is considered a good practice to provide a type attribute that MAY be used for the purpose of canonicalization of values. In the schema definition for an attribute, the service provider MAY define the recommended canonical values (see Section 7).</p>
+<p>The SCIM User Profile allows for an array of emails. The only way to differentiate between emails is to use the <code class="highlighter-rouge">type</code> sub-attribute.</p>
+
+<ul>
+  <li>When returning multi-valued attributes, service providers SHOULD canonicalize the value returned (e.g., by returning a value for the sub-attribute “type”, such as “home” or “work”) when appropriate (e.g., for email addresses and URLs).</li>
+  <li>Service providers MAY return element objects with the same “value” sub-attribute more than once with a different <code class="highlighter-rouge">type</code> sub-attribute (e.g., the same email address may be used for work and home) but SHOULD NOT return the same (type, value) combination more than once per attribute, as this complicates processing by the client.</li>
+  <li>When defining schema for multi-valued attributes, it is considered a good practice to provide a <code class="highlighter-rouge">type</code> attribute that MAY be used for the purpose of canonicalization of values. In the schema definition for an attribute, the service provider MAY define the recommended canonical values (see <a href="https://tools.ietf.org/html/rfc7643#section-7">RFC 7643 Section 7</a>).</li>
+</ul>
+
+<p>See <a href="https://tools.ietf.org/html/rfc7643#section-2.4">Section 2.4 of RFC 7643</a> for more details.</p>
 
 <p><strong>I only have one email/phone number/address in my user profile. Do I need to implement the array of emails/phone numbers/addresses?</strong></p>
 

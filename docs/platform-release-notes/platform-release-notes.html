@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.09">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.10">
   <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
@@ -105,10 +105,7 @@
               <a href="/use_cases/api_security">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
-            </li>
-            <li>
-              <a href="/use_cases/promote-oan-integration">Promote Your OAN Integration</a>
+              <a href="/use_cases/promote-oan-integration">Promote Your Integration</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -176,7 +173,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201710">Release 2017.10</h2>
+      <h2 id="release-201711">Release 2017.11</h2>
 
 <h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
 
@@ -189,7 +186,7 @@ look like in your Okta system log before enforcing them:</p>
 <ol>
   <li>Starting in early April, 2017, we’ll provide system log alerts to let you know that you
 would have exceeded any of these new API rate limits.</li>
-  <li>Starting in mid-April, 2017, we’ll treat authenticated end-user interactions on a per-user basis.
+  <li>Starting in early April, 2017, we’ll treat authenticated end-user interactions on a per-user basis.
 Interactions like SSO after login won’t apply to your org-wide API rate limits.</li>
   <li>Early in May, 2017, we will enforce the new, more granular rate limits. At that
 point, the warnings in the System Log will change to error notifications.</li>
@@ -199,18 +196,33 @@ point, the warnings in the System Log will change to error notifications.</li>
 
 <p>For a full description of the rate limit changes, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
 
-<!-- ### Feature Improvement
-
-xxx.  -->
-<!-- (OKTA-xxx) -->
-
-<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
+<h3 id="feature-improvements">Feature Improvements</h3>
 
 <ul>
-  <li>Request to <a href="http://developer.okta.com/docs/api/resources/authn.html#enroll-factor"><code class="highlighter-rouge">/api/v1/authn/factors/&lt;factorId&gt;/verify</code></a> responded with a valid <code class="highlighter-rouge">stateToken</code> after user status
- became <code class="highlighter-rouge">LOCKED_OUT</code>, causing user interface errors. (OKTA-115153)</li>
-  <li>The AuthSJ SDK produced a debug log message with some browsers. (OKTA-115460)</li>
+  <li>Sample code to demonstrate OIDC authorization flows is available from the following locations:
+    <ul>
+      <li><a href="https://github.com/okta/samples-js-angular-1">https://github.com/okta/samples-js-angular-1</a></li>
+      <li><a href="https://github.com/okta/samples-nodejs-express-4">https://github.com/okta/samples-nodejs-express-4</a></li>
+      <li><a href="https://github.com/okta/samples-elm">https://github.com/okta/samples-elm</a></li>
+      <li><a href="https://github.com/okta/samples-python-django">https://github.com/okta/samples-python-django</a></li>
+      <li><a href="https://github.com/okta/samples-haskell-scotty">https://github.com/okta/samples-haskell-scotty</a></li>
+      <li><a href="https://github.com/okta/samples-js-react">https://github.com/okta/samples-js-react</a></li>
+      <li><a href="https://github.com/okta/samples-java-spring-mvc">https://github.com/okta/samples-java-spring-mvc</a>
+<!-- (OKTA-118575) --></li>
+    </ul>
+  </li>
+  <li>System log now records the result of applying the Okta sign-on policy to determine whether
+ to use multi-factor authentication for a user trying to log in. This log entry includes
+ the user’s zone.</li>
 </ul>
+
+<p><img src="../../assets/img/graphics/SysLogMFA.png" alt="Log screen" />
+<!-- (OKTA-114417) --></p>
+
+<h3 id="platform-bug-fixed">Platform Bug Fixed</h3>
+
+<p>For a user mastered from Active Directory and in password reset mode, the /api/v1/users API
+returned the user’s status as ACTIVE rather than RECOVERY. (OKTA-109772)</p>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 
