@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.11
+excerpt: Summary of changes to the Okta Platform since Release 2017.10
 ---
 
-## Release 2017.12
+## Release 2017.11
 
 ### Advance Notice: API Rate Limit Improvements
 
@@ -25,21 +25,30 @@ Of course, as each change is released, we'll announce the change here.
 
 For a full description of the rate limit changes, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
-<!--
 ### Feature Improvements
- * xxx
--->
+
+ * Sample code to demonstrate OIDC authorization flows is available from the following locations:
+   * [https://github.com/okta/samples-js-angular-1](https://github.com/okta/samples-js-angular-1)
+   * [https://github.com/okta/samples-nodejs-express-4](https://github.com/okta/samples-nodejs-express-4)
+   * [https://github.com/okta/samples-elm](https://github.com/okta/samples-elm)
+   * [https://github.com/okta/samples-python-django](https://github.com/okta/samples-python-django)
+   * [https://github.com/okta/samples-haskell-scotty](https://github.com/okta/samples-haskell-scotty)
+   * [https://github.com/okta/samples-js-react](https://github.com/okta/samples-js-react)
+   * [https://github.com/okta/samples-java-spring-mvc](https://github.com/okta/samples-java-spring-mvc)
+<!-- (OKTA-118575) -->
+
+ * System log now records the result of applying the Okta sign-on policy to determine whether
+ to use multi-factor authentication for a user trying to log in. This log entry includes
+ the user's zone.
+
+![Log screen](../../assets/img/graphics/SysLogMFA.png)
 <!-- (OKTA-114417) -->
 
-### Platform Bugs Fixed
- * The `/api/v1/apps` API sometimes incorrectly returned `null` for the `realm` or `groupName`
- attribute for a Template WS-Fed application. (OKTA-117274)
- * PUT to the `/api/v1/idps/{idpId}` API sometimes incorrectly returned an HTTP response code of 500
- rather than 400. (OKTA-117691)
- * The `/api/v1/idps` API improperly allowed social identity providers to be created
- when the admin did not have sufficient permissions. Those providers could not be used. (OKTA-118067)
- * The `/api/v1/apps` API returned an incorrect number of app instances when pagination and permissions
- filtering were both in effect. (OKTA-113411)
+### Platform Bug Fixed
+
+For a user mastered from Active Directory and in password reset mode, the /api/v1/users API
+returned the user's status as ACTIVE rather than RECOVERY. (OKTA-109772)
+
 
 ### Does Your Org Have This Change Yet?
 
