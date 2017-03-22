@@ -28,7 +28,6 @@ To use these collections, you'll need to set up your environment, import the col
     * `url`: Replace the example value with your org's URL, for example **https://myOrg.oktapreview.com**. This becomes the new name of your environment. Do **not** include '-admin' in the subdomain.
     * `apikey`: Enter the API token you created in your org, for example **00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS**.
     * `email-suffix`: Enter the email suffix for your domain, for example **myOrg.com**.
-    * `subdomain`: Enter the subdomain, for example **myOrg**. Do **not** include '-admin' in the subdomain.
 
 6. Save your changes by selecting **Update**. Now your environment looks similar to this example:
     ![Example.okta.com environment with required values](/assets/img/postman_example_enviro.png)
