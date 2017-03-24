@@ -1211,12 +1211,12 @@ you implement these authentication concepts in your applications.</p>
 
 <p>Two of the most important aspects of the product are Product Status/Trust and Customer Support. Having dissected both of these from many angles in my recent work, I know that businesses neglect them at their peril.</p>
 
-<p>###Communicate transparently</p>
+<h3 id="communicate-transparently">Communicate transparently</h3>
 
 <p>The Product Status/Trust page is the first place customers visit on your site when they have a problem. Consider yourself lucky if the customer only had an problem with a browser (like cache), or an issue with their laptop. For more serious issues, customers expect transparency and effective communication from the Product Status/Trust page. They want information that communicates exactly what the problem is. </p>
 
-<p>###Serve multiple audiences
-A Product Status/Trust page is also one of the first places that prospects are likely to visit. In fact, when the product is gaining momentum, prospect traffic may exceed customer traffic. </p>
+<h3 id="serve-multiple-audiences">Serve multiple audiences</h3>
+<p>A Product Status/Trust page is also one of the first places that prospects are likely to visit. In fact, when the product is gaining momentum, prospect traffic may exceed customer traffic. </p>
 
 <p>I’ve rarely seen a Status/Trust page actually serve both customers and prospects effectively. The key is to find the correct balance. As the product becomes popular, customers and prospects visit the page with very different mindsets.</p>
 
@@ -1283,14 +1283,14 @@ In the event of trust page problems, make sure that you have ways to easily and 
 
 <p>Those red and yellow spikes in late October, 2014 seized our attention and spurred an aggressive response from Okta’s site operations team. The team took immediate action to prevent this situation from getting worse and potentially causing a issue with our site.</p>
 
-<p>##Tuning the database</p>
+<h2 id="tuning-the-database">Tuning the database</h2>
 
 <p>As a first step, we tuned our MySQL database to fully utilize the amount of RAM in our server instances. We had been running with a relatively small buffer pool
 compared to the amount of available RAM, which meant that we were sacrificing both performance and money.  Increasing the size of the buffer pool decreased page response times and nearly eliminated disk reads.</p>
 
 <p><img style="width:50%" src="/assets/img/EliminateDiskReads.png" alt="Almost eliminated disk reads" /></p>
 
-<p>##Doubling hardware resources</p>
+<h2 id="doubling-hardware-resources">Doubling hardware resources</h2>
 
 <p>Despite the buffer pool adjustment, we continued to see significant CPU contention. In response, we doubled the size of our servers (244 GB of RAM, 32 CPU cores, and 2 x 320 GB HDDs). CPU contention decreased (see the trough in the following image), but probably because of the Thanksgiving holiday, not the additional hardware.</p>
 
@@ -1302,7 +1302,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 <p>Why did CPU contention increase after we’d doubled the CPUs? Shouldn’t it have decreased?</p>
 
-<p>##Kernel mutex bottleneck</p>
+<h2 id="kernel-mutex-bottleneck">Kernel mutex bottleneck</h2>
 
 <p>The alarming amount of yellow in our graphs showed extremely high <strong>system CPU usage</strong> (and <strong>user CPU usage</strong> was also too high). Clearly, the operating system was working very hard at <em>something</em>. The metrics we pulled revealed that all the InnoDB threads were busy waiting on the kernel mutex. We had known that kernel mutex was a bottleneck even before we’d doubled hardware resources, but we hadn’t understood why.</p>
 
@@ -1314,7 +1314,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 <p>The right course – the one we ultimately took – was to stick with the more powerful servers and tune them properly.</p>
 
-<p>##Adopting TCMalloc</p>
+<h2 id="adopting-tcmalloc">Adopting TCMalloc</h2>
 
 <p>We quickly found several resources online, including a <a href="http://goog-perftools.sourceforge.net/doc/tcmalloc.html">key blog post</a> about <strong>TCMalloc</strong> (Thread-Caching Memory Allocation) and an article about <a href="http://www.olivierdoucet.info/blog/2012/05/19/debugging-a-mysql-stall/">debugging MySQL</a>.</p>
 
@@ -1326,7 +1326,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 <p><em>Had we finally solved our scalability problem?</em></p>
 
-<p>##Transparent Huge Pages: Thanks for your help…please don’t help</p>
+<h2 id="transparent-huge-pages-thanks-for-your-helpplease-dont-help">Transparent Huge Pages: Thanks for your help…please don’t help</h2>
 
 <p>By the next morning <strong>CPU contention was worse</strong>.</p>
 
@@ -1346,10 +1346,9 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 <p>In a sense, encountering the dramatic effect of THP, an operating system problem, was clarifying. It validated our previous remedies, and turning it off definitely strengthened our platform.</p>
 
-<p>##Lessons learned</p>
+<h2 id="lessons-learned">Lessons learned</h2>
 
 <p>Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component.</p>
-
 
 	  </section>
 	</article>
