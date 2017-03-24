@@ -50,5 +50,5 @@ To verify the current release for an org, click the **Admin** button and check t
 ### Looking for Something Else?
 
 * [Platform Release Note Index](platform-release-notes2016-index.html)
-* For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+* For changes outside the Okta platform, see the [Product Release Notes](https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm).
 
