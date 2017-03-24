@@ -1105,6 +1105,17 @@ The test follows this pattern:
 10. Re assign the Application to the user.
 11. Validates the user creation/update in Application.
 
+If you are already familiar with Runscope, then import the
+OKTA SCIM 2.0 CRUD Test and configure the `SCIM Base
+  URL` variable to point at the base URL for your SCIM server, for
+example: `https://example.com/scim/v2`.
+
+* [Okta SCIM 2.0 CRUD Test JSON](SCIMFiles/Okta-SCIM-CRUD-Test.json)
+
+If you are not familiar with Runscope, follow [the detailed
+instructions](#set-up-runscope) to get started with using Runscope to test your
+SCIM server.
+
 ##### Prepare the Customer-Facing Configuration Guide
 
 We recommend preparing the customer-facing configuration guide before beginning to work through the submission document. 
