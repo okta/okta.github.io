@@ -1,8 +1,8 @@
 ---
 layout: blog_post
-title: Get Started with Spring Boot, OAuth 2.0, and Okta
-author: mraible
-tags: [spring-boot, oauth, okta]
+title: Beginner's Guide to JWTs in Java
+author: lindsay.brunner
+tags: [jwt, java, oauth, okta]
 ---
   
 # Beginner’s Guide to JWTs in Java
