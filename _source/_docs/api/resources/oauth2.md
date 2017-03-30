@@ -369,7 +369,7 @@ login_hint | A username to prepopulate if prompting for authentication.  | Query
  The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
  Using the *state* parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
 
- * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as *code_verifier* and derives *code_challenge* from it using the method specified in *code_challenge_method*. 
+ * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as *code_verifier* and derives *code_challenge* from it using the method specified in *code_challenge_method*.
     Then the client passes the *code_challenge* and *code_challenge_method* in the authorization request for code flow. When a client tries to redeem the code, it must pass the *code_verifer*. Okta recomputes the challenge and returns the requested token only if it matches the *code_challenge* in the original authorization request. When a client, whose *token_endpoint_auth_method* is ``none``, makes a code flow authorization request, *code_challenge* is required.
     Since *code_challenge_method* only supports S256, this means that the value for *code_challenge* must be: `BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))`. According to the [PKCE spec](https://tools.ietf.org/html/rfc7636), the *code_verifier* must be at least 43 characters and no more than 128 characters.
 
@@ -472,8 +472,8 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/:authorizationServerId/v1/token %}
 
-
-The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* and the corresponding credentials and returns back an Access Token. A Refresh Token is returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type returns an ID Token if the *openid* scope is requested.
+This API returns Access Tokens, ID Tokens, and Refresh Tokens. What combination of these it returns depends upon the
+request parameters.
 
 #### Request Parameters
 
@@ -481,21 +481,41 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta uses to authorize the creation of the tokens. | String |  
-code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String
-refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
-username           | Expected if the grant_type specified *password*. | String |
-password           | Expected if the grant_type specified *password*. | String |
-scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
-redirect_uri       | Expected if grant_type specified *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-code_verifier      | Expected if grant_type specified *authorization_code* for native applications. The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
-client_id          | Expected if *code_verifier* is included or client credentials are not provided in the Authorization header. This is used in conjunction with the client_secret parameter to authenticate the client application. | String |
-client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the Authorization header. This is used in conjunction with the client_id parameter to authenticate the client application. | String |
+grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*.
+Determines the mechanism Okta uses to authorize the creation of the tokens. | String |
+code               | Expected if grant_type specified *authorization_code*. The value is what was returned from
+the [authorization endpoint](#authentication-request). | String
+refresh_token      | Expected if the grant_type is *refresh_token*. The value is what was returned from this
+endpoint via a previous invocation. | String |
+username           | Expected if the grant_type is *password*. | String |
+password           | Expected if the grant_type is *password*. | String |
+scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of
+scopes to be included in the Access Token. For the *refresh_token* grant type, these scopes must be a subset of the
+scopes originally used to generate the Refresh Token. | String |
+redirect_uri       | Expected if grant_type is *authorization_code*. Specifies the callback location where the
+authorization was sent; must match what is preregistered in Okta for this client. | String |
+code_verifier      | Expected if grant_type is *authorization_code* for native applications. The code verifier
+is [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify that it matches the code_
+challenge in the authorization request. | String |
+client_id          | Expected if *code_verifier* is included or client credentials are not provided in the Authorization
+header. Used with the client_secret parameter to authenticate the client application. | String |
+client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the
+Authorization header. Used with the client_id parameter to authenticate the client application. | String |
+
+The following conditions determine which tokens the response contains:
+ * If the request succeeds, the response includes an Access Token.
+ * If *scope* includes *offline_access*, and *grant_type* is either *authorization_code*, *refresh_token*, or *password*,
+ the response includes a Refresh Token.
+ * If *scope* includes *openid*, and *grant_type* is either *authorization_code* or *password*, the response includes an
+ ID Token.
+
 
 ##### Token Authentication Method
 
 For clients authenticating by client credentials, provide the [`client_id`](oidc.html#request-parameters)
-and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) either as an Authorization header in the Basic auth scheme (basic authentication) or as additional parameters to the POST body. Including credentials in both the headers and the POST body is not allowed.
+and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) either as an
+Authorization header in the Basic auth scheme (basic authentication) or as additional parameters to the POST body.
+Including credentials in both the headers and the POST body is not allowed.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
 
@@ -511,7 +531,7 @@ Input grant type   | Output token types                    |
 -------------------|---------------------------------------|
 authorization_code | Access Token, Refresh Token, ID Token |
 refresh_token      | Access Token, Refresh Token           |
-password           | Access Token, Refresh Token           |
+password           | Access Token, Refresh Token, ID Token           |
 client_credentials | Access Token                          |
 
 
@@ -519,7 +539,8 @@ client_credentials | Access Token                          |
 
 For web and native application types, an additional process is required:
 
-1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
+1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client
+application page.
 2. Pass the *offline_access* scope to your authorize request.
 
 #### List of Errors
@@ -527,9 +548,11 @@ For web and native application types, an additional process is required:
 Error Id                |  Details                                                                                                     |
 ------------------------+--------------------------------------------------------------------------------------------------------------|
 invalid_client          | The specified client id wasn't found. |
-invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
-invalid_grant           | The *code* or *refresh_token* value was invalid, or the *redirect_uri* does not match the one used in the authorization request. |
-unsupported_grant_type  | The grant_type was not *authorization_code* or *refresh_token*. |
+invalid_request         | The request structure is invalid. For example, the basic authentication header is malformed,
+or both header and form parameters were used for authentication or no authentication information was provided. |
+invalid_grant           | The *code* or *refresh_token* value is invalid, or the *redirect_uri* does not match the
+one used in the authorization request. |
+unsupported_grant_type  | The *grant_type* request parameter does not have one of the supported values.
 invalid_scope           | The scopes list contains an invalid or unsupported value.    |
 
 #### Response Example (Success)
@@ -1476,32 +1499,32 @@ other tasks for API Access Management, use the following suggestions to resolve 
 
 ### Always Start with the System Log
 
-The system log contains detailed information about why a request was denied and other useful information. 
+The system log contains detailed information about why a request was denied and other useful information.
 
 ### Limits
 
 * Each authorization server can have only one resource. If you have resources that share a common path,
 you can control access to the common path with one authorization server.
 
-* Scopes are unique per authorization server. 
+* Scopes are unique per authorization server.
 
 * The resource URI you specify in an authorization server must be an absolute path.
 
-* Tokens can expire, be explicitly revoked at the endpoint, or implicitly revoked by a change in configuration. 
+* Tokens can expire, be explicitly revoked at the endpoint, or implicitly revoked by a change in configuration.
 
-* Token revocation can be implicit in two ways: token expiration or a change to the source. 
+* Token revocation can be implicit in two ways: token expiration or a change to the source.
     * Expiration happens at different times:
         * ID Token expires after one hour.
         * Access Token expiration is configured in a policy, but is always between five minutes and one day.
-        * Refresh Token expiration depends on two factors: 1) Expiration is configured in an Access Policy, no limits, 
+        * Refresh Token expiration depends on two factors: 1) Expiration is configured in an Access Policy, no limits,
           but must be greater than or equal to the Access Token lifetime, and 2) Revocation if the Refresh Token
           isn't exercised within a specified time. Configure the specified time in an Access Policy, with a minimum of ten minutes.
-    
+
     * Revocation happens when a configuration is changed or deleted:
         * User deactivation or deletion.
         * Configuration in the authorization server is changed or deleted.
         * The [client app](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm#OIDCWizard) is deactivated, changed, unassigned, or deleted.
-        
+
 * If a client requests multiple scopes, but the policy for that client only allows for a subset of the scopes,
 then the token isn't minted and an error is returned. The system log contains the details about the error.
 
@@ -1509,10 +1532,10 @@ then the token isn't minted and an error is returned. The system log contains th
 
 Some behaviors aren't obvious:
 
-* A user must be assigned to the client in Okta for the client to get Access Tokens from that client. 
+* A user must be assigned to the client in Okta for the client to get Access Tokens from that client.
 You can assign the client directly (direct user assignment) or indirectly (group assignment).
 
-* If you haven't created a rule in a policy in the authorization server to allow the client, user, and 
+* If you haven't created a rule in a policy in the authorization server to allow the client, user, and
 scope combination that you want, the request fails.
 To resolve, create at least one rule in a policy in the authorization server for the relevant resource
 that specifies client, user, and scope.
