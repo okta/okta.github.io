@@ -2905,6 +2905,219 @@ curl -v -X GET \
 }
 ~~~
 
+## Identity Provider User Operations
+
+### Listing IdPs associated with a user
+{:.api .api-operation}
+
+{% api_operation GET /api/v1/users/*:uid*/idps %}
+
+Lists the IdPs associated with the user.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
+------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+uid           | `id` of the Okta User                                                           | URL        | String                                        | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Return the associated [Identity Providers](#identity-provider-model)
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/idps"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+[{
+  "id": "0oa62b57p7c8PaGpU0h7",
+  "type": "FACEBOOK",
+  "name": "Facebook",
+  "status": "ACTIVE",
+  "created": "2016-03-24T23:18:27.000Z",
+  "lastUpdated": "2016-03-24T23:18:27.000Z",
+  "protocol": {
+    "type": "OAUTH2",
+    "endpoints": {
+      "authorization": {
+        "url": "https://www.facebook.com/dialog/oauth",
+        "binding": "HTTP-REDIRECT"
+      },
+      "token": {
+        "url": "https://graph.facebook.com/v2.5/oauth/access_token",
+        "binding": "HTTP-POST"
+      }
+    },
+    "scopes": [
+      "public_profile",
+      "email"
+    ],
+    "credentials": {
+      "client": {
+        "client_id": "your-client-id",
+        "client_secret": "your-client-secret"
+      }
+    }
+  },
+  "policy": {
+    "provisioning": {
+      "action": "AUTO",
+      "profileMaster": true,
+      "groups": {
+        "action": "NONE"
+      }
+    },
+    "accountLink": {
+      "filter": null,
+      "action": "AUTO"
+    },
+    "subject": {
+      "userNameTemplate": {
+        "template": "idpuser.userPrincipalName"
+      },
+      "filter": null,
+      "matchType": "USERNAME"
+    },
+    "maxClockSkew": 0
+  },
+  "_links": {
+    "authorize": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize?idp=0oa62b57p7c8PaGpU0h7&
+          client_id={clientId}&response_type={responseType}&response_mode={responseMode}&
+          scope={scopes}&redirect_uri={redirectUri}&state={state}",
+      "templated": true,
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    },
+    "clientRedirectUri": {
+      "href": "https://your-domain.okta.com/oauth2/v1/authorize/callback",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "idpUser": {
+        "href": "http://rain.okta1.com:1802/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR",
+        "hints": {
+          "allow": [
+            "GET",
+            "DELETE"
+          ]
+        }
+      }
+  }
+}]
+~~~
+
+If the user does not exist, you receive an error response.
+
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "errorCode": "E0000007",
+  "errorSummary": "Not found: Resource not found: 00u3b8ixnOCwbn8Sn0g4 (User)",
+  "errorLink": "E0000007",
+  "errorId": "oaeYW9k9yJuSSSkhaMQdA1-Zg",
+  "errorCauses": []
+}
+~~~
+
+### Link a user to a Social IdP without a transaction
+{:.api .api-operation}
+
+{% api_operation POST /api/v1/idps/*:id*/users/*:uid* %}
+
+Links an Okta user to an existing Social [Identity Provider](#identity-provider-model). This does not support the SAML2 [Identity Provider Type](#identity-provider-type).
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
+------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+id            | `id` of the IdP                                                                 | URL        | String                                        | TRUE     |
+uid           | `id` of the Okta User                                                           | URL        | String                                        | TRUE     |
+externalId    | unique IdP-specific identifier for user                                         | Body        | String                                        | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Return the associated [Identity Providers](#identity-provider-model)
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "externalId" : "121749775026145"
+}' "https://${org}.okta.com/api/v1/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "00ub0oNGTSWTBKOLGLNR",
+  "externalId": "121749775026145",
+  "created": "2017-03-30T02:19:51.000Z",
+  "lastUpdated": "2017-03-30T02:19:51.000Z",
+  "_links": {
+    "self": {
+      "href": "http://rain.okta1.com:1802/api/v1/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR",
+      "hints": {
+        "allow": [
+          "GET",
+          "DELETE"
+        ]
+      }
+    },
+    "idp": {
+      "href": "http://rain.okta1.com:1802/api/v1/idps/0oa62b57p7c8PaGpU0h7"
+    },
+    "user": {
+      "href": "http://rain.okta1.com:1802/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+    }
+  }
+}
+~~~
+
+If either the user or the IdP does not exist, you receive an error response.
+
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "errorCode": "E0000007",
+  "errorSummary": "Not found: Resource not found: 00ub0oNGTSWTBKOLGLNR (User)",
+  "errorLink": "E0000007",
+  "errorId": "oaeYW9k9yJuSSSkhaMQdA1-Zg",
+  "errorCauses": []
+}
+~~~
+
 ## Identiy Provider Model
 
 ### Example
@@ -3019,7 +3232,6 @@ curl -v -X GET \
   }
 }
 ~~~
-
 
 ### Identity Provider Attributes
 
