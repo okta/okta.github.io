@@ -472,8 +472,10 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/:authorizationServerId/v1/token %}
 
-This API returns Access Tokens, ID Tokens, and Refresh Tokens. What combination of these it returns depends upon the
-request parameters.
+This API returns Access Tokens, ID Tokens, and Refresh Tokens. To be granted a token, you can present an
+authorization code, a previously obtained Refresh Token, user credentials, or client credentials. What you present
+to obtain tokens and which combination of tokens the request returns depend upon the request.
+parameters.
 
 #### Request Parameters
 
@@ -486,7 +488,7 @@ Determines the mechanism Okta uses to authorize the creation of the tokens. | St
 code               | Expected if grant_type specified *authorization_code*. The value is what was returned from
 the [authorization endpoint](#authentication-request). | String
 refresh_token      | Expected if the grant_type is *refresh_token*. The value is what was returned from this
-endpoint via a previous invocation. | String |
+endpoint in a previous request. | String |
 username           | Expected if the grant_type is *password*. | String |
 password           | Expected if the grant_type is *password*. | String |
 scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of
@@ -502,8 +504,8 @@ header. Used with the client_secret parameter to authenticate the client applica
 client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the
 Authorization header. Used with the client_id parameter to authenticate the client application. | String |
 
-The following conditions determine which tokens the response contains:
- * If the request succeeds, the response includes an Access Token.
+If the request succeeds, the following conditions determine which tokens the response contains:
+ * The response includes an Access Token.
  * If *scope* includes *offline_access*, and *grant_type* is either *authorization_code*, *refresh_token*, or *password*,
  the response includes a Refresh Token.
  * If *scope* includes *openid*, and *grant_type* is either *authorization_code* or *password*, the response includes an
