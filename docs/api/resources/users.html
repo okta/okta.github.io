@@ -2986,9 +2986,9 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/<em>:uid</em>/sessions</span></p>
 
-<p>Removes all active identity provider sessions. This will force the user to authenticate on the next operation.</p>
+<p>Removes all active identity provider sessions. This forces the user to authenticate on the next operation. Optionally revokes OpenID Connect and OAuth refresh and access tokens issued to the user.</p>
 
-<p><strong>Note:</strong> This will not clear the sessions created for web sign-in or native applications.</p>
+<p><strong>Note:</strong> This does not clear the sessions created for web sign-in or native applications.</p>
 
 <h4 class="api api-request api-request-params" id="request-parameters-16">Request Parameters</h4>
 
@@ -3011,6 +3011,14 @@ and the user is presented with the password-expired page where he or she can cha
       <td>String</td>
       <td>TRUE</td>
       <td> </td>
+    </tr>
+    <tr>
+      <td>oauthTokens</td>
+      <td>Revoke issued OpenID Connect and OAuth refresh and access tokens</td>
+      <td>Query</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
     </tr>
   </tbody>
 </table>

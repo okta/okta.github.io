@@ -15,7 +15,7 @@ if [[ -z "${SUCCESS}" ]]; then
     export SUCCESS=0
 fi
 
-source "scripts/import_external_markdown.sh"
+source "${0%/*}/import_external_markdown.sh"
 
 # Print an easily visible line, useful for log files.
 function interject() {

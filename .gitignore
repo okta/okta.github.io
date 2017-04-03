@@ -40,3 +40,6 @@ _site/*
 .bundle
 bin/*
 .jekyll-metadata
+
+# Ignore node packages added for tests added via npm
+node_modules/*

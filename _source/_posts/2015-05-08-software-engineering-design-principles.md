@@ -130,7 +130,7 @@ deployments. At this phase we reduce the cost of failure by:
 * Hiding beta features behind flags in the code
 * Incremental rollout first to test accounts and then in batches of customers
 * Automated deployment process
-* Code and infrastructure is forward and backward compatible allowing
+* Code and infrastructure is forwards and backwards compatible allowing
   rollback
 * Health check and automatically remove down nodes
 * Return a degraded / read-only response over nothing at all

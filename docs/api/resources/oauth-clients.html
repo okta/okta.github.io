@@ -404,11 +404,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
 </blockquote>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">client_id</code> and <code class="highlighter-rouge">client_secret</code> must consist of printable characters. The precise set of permissible characters is defined in <a href="https://tools.ietf.org/html/rfc6749#appendix-A">Appendix A of the OAuth 2.0 Spec</a>. Both values may contain at most 100 characters, and the <code class="highlighter-rouge">client_secret</code> must contain at least 14 characters.</p>
-</blockquote>
-
-<blockquote>
-  <p>The <code class="highlighter-rouge">service</code> application type and <code class="highlighter-rouge">client_credentials</code> grant type <a href="/docs/api/getting_started/releases-at-okta.html">are  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  features</a>.</p>
+  <p>The <code class="highlighter-rouge">client_id</code> must consist of alphanumeric characters, the following special characters <code class="highlighter-rouge">$-_.+!*'(),</code> and must contain between 6 and 100 characters, inclusive. The <code class="highlighter-rouge">client_secret</code> must consist of printable characters, which are defined in <a href="https://tools.ietf.org/html/rfc6749#appendix-A">the OAuth 2.0 Spec</a>, and must contain between 14 and 100 characters, inclusive.</p>
 </blockquote>
 
 <blockquote>

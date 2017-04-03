@@ -24,7 +24,7 @@ The behavior of the Okta Authentication API varies depending on the type of your
 
 ### Public Application
 
-Public applications are any application that anonymously start an authentication or recovery transaction without an API token such as the [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html).  Public applications are aggressively rate-limited to prevent abuse and require primary authentication to be successfully completed before releasing any metadata about a user.
+A public application is an application that anonymously starts an authentication or recovery transaction without an API token, such as the [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html).  Public applications are aggressively rate-limited to prevent abuse and require primary authentication to be successfully completed before releasing any metadata about a user.
 
 ### Trusted Application
 
@@ -94,7 +94,7 @@ The context object allows [trusted web applications](#trusted-application) such 
 
 > You must always pass the same `deviceToken` for a user's device with every authentication request for **per-device** or **per-session** Sign-On Policy factor challenges.  If the `deviceToken` is absent or does not match the previous `deviceToken`, the user will be challenged every-time instead of **per-device** or **per-session**.
 
-It is recommend that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.
+It is recommended that you generate a UUID or GUID for each client and persist the `deviceToken` as a persistent cookie or HTML5 localStorage item scoped to your web application's origin.
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3852,7 +3852,7 @@ curl -v -X POST \
 
 #### Forgot Password with SMS Factor
 
-Starts a new password recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's mobile phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for user to [verify the OTP](#verify-sms-recovery-factor).
+Starts a new password recovery transaction with a user identifier (`username`) and asynchronously sends a SMS OTP (challenge) to the user's mobile phone.  This operation will transition the recovery transaction to the `RECOVERY_CHALLENGE` state and wait for the user to [verify the OTP](#verify-sms-recovery-factor).
 
 > Primary authentication of a user's recovery credential (e.g email or SMS) has not yet completed.
 > Okta will not publish additional metadata about the user until primary authentication has successfully completed.
@@ -5350,8 +5350,8 @@ Authentication API operations will return different token types depending on the
 Ephemeral token that encodes the current state of an authentication or recovery transaction.
 
 - The `stateToken` must be passed with every request except when verifying a `recoveryToken` that was distributed out-of-band
-- The `stateToken` is only intended to be used between the web application performing end-user authentication and the Okta API. It should never distributed to the end-user via email or other out-of-band mechanism.
-- The lifetime of the `stateToken` uses a sliding scale expiration algorithm that extends with every request.  Always introspect the `expiresAt` property for the transaction when making decisions based on lifetime.
+- The `stateToken` is only intended to be used between the web application performing end-user authentication and the Okta API. It should never be distributed to the end-user via email or other out-of-band mechanisms.
+- The lifetime of the `stateToken` uses a sliding scale expiration algorithm that extends with every request.  Always inspect the `expiresAt` property for the transaction when making decisions based on lifetime.
 
 > All Authentication API operations will return `401 Unauthorized` status code when you attempt to use an expired state token.
 
@@ -5425,7 +5425,7 @@ The following table shows the possible values for this property:
 
 ### Links Object
 
-Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current [transaction state](#transaction-state) using the [JSON Hypertext Application Language](http://tools.ietf.org/html/draft-kelly-json-hal-06) specification.  These links are used to transition the [state machine](#transaction-state) of the authentication or recovery transaction.
+Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988)) available for the current [transaction state](#transaction-state) using the [JSON](https://tools.ietf.org/html/rfc7159) specification.  These links are used to transition the [state machine](#transaction-state) of the authentication or recovery transaction.
 
 |--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Link Relation Type | Description                                                                                                                                                               |
@@ -5668,19 +5668,6 @@ The phone object describes previously enrolled phone numbers for the `sms` facto
 | ------------- | -------------------- | ---------| -------- | ------ | -------- |
 | phoneNumber   | masked phone number  | String   | FALSE    | FALSE  | TRUE     |
 |---------------+----------------------|----------+----------|--------|----------|
-
-
-##### Phone Object
-
-The phone object describes previously enrolled phone numbers for the `sms` factor.
-
-|---------------+----------------------+-----------------------------------------------+----------+--------+----------|
-| Property      | Description          | DataType                                      | Nullable | Unique | Readonly |
-| ------------- | -------------------- | --------------------------------------------- | -------- | ------ | -------- |
-| id            | unique key for phone | String                                        | FALSE    | TRUE   | TRUE     |
-| profile       | profile of phone     | [Phone Profile Object](#phone-profile-object) | FALSE    | FALSE  | TRUE     |
-| status        | status of phone      | `ACTIVE` or `INACTIVE`                        | FALSE    | FALSE  | TRUE     |
-|---------------+----------------------+-----------------------------------------------+----------+--------+----------|
 
 ##### Push Factor Activation Object
 

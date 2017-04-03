@@ -4346,7 +4346,7 @@ Users in Okta are linked to a user in a target application via an `externalId`. 
 
 ###### Single Sign-On
 
-Users assigned to an application for SSO without provisioning features enabled have a an `ACTIVE` status with `syncState` as `DISABLED`.
+Users assigned to an application for SSO without provisioning features enabled have an `ACTIVE` status with `syncState` as `DISABLED`.
 
 ###### User Import
 
@@ -4373,7 +4373,7 @@ When the `PUSH_PROFILE_UPDATES` feature is enabled, updates to an upstream profi
 | ERROR        | Background provisioning job failed to update the user's profile in the target application. A provisioning task is created in the Okta Admin UI that must be resolved to retry the job. |
 |--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-> User provisioning currently must be configured via the Okta Admin UI and is only available to with specific editions.
+> User provisioning currently must be configured via the Okta Admin UI and is only available with specific editions.
 
 #### Application User Credentials Object
 

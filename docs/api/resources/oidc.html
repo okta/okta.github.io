@@ -741,7 +741,7 @@ For more information about configuring an app for OpenID Connect, including grou
 </span></code></pre>
 </div>
 
-<p>The claims in the response are identical to those returned for the requested scopes in the <em>id_token</em> JWT, except for the sub-claim which is always present.
+<p>The claims in the response are identical to those returned for the requested scopes in the <em>id_token</em> JWT, except for the <em>sub</em> claim which is always present.
 See <a href="#scope-dependent-claims-not-always-returned">Scope-Dependent Claims</a> for more information about individual claims.</p>
 
 <h4 class="api api-response api-response-example" id="response-example-error">Response Example (Error)</h4>
@@ -1697,7 +1697,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/token</span></p>
 
-<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
+<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
 
 <blockquote>
   <p>Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.</p>
@@ -1718,7 +1718,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
   <tbody>
     <tr>
       <td>grant_type</td>
-      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> (<em>client_credentials</em> is in Beta release). Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
+      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1758,10 +1758,6 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
     </tr>
   </tbody>
 </table>
-
-<blockquote>
-  <p>The <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> is <code class="highlighter-rouge">client_credentials</code>) is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature.</p>
-</blockquote>
 
 <h5 id="token-authentication-method">Token Authentication Method</h5>
 

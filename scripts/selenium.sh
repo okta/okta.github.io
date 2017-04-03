@@ -18,7 +18,7 @@ set -e
 # `cd` to the path where Okta's build system has this repository
 cd ${OKTA_HOME}/${REPO}
 
-source "scripts/common.sh"
+source "${0%/*}/common.sh"
 
 check_for_jekyll_dependencies
 check_for_npm_dependencies
