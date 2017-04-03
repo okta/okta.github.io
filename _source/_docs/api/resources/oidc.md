@@ -806,6 +806,47 @@ Error Id           | Details                                                    
 login_required     | The request specified that no prompt should be shown but the user is currently not authenticated.    |
 insufficient_scope | The Access Token provided does not contain the necessary scopes to access the resource.              |
 
+#### Request Examples
+
+This request initiates the authorization code flow, as signaled by `response_type=code`.
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/oauth2/{{authorizationServerId}}/v1/authorize?
+  client_id={{clientId}}&
+  response_type=code&
+  response_mode=form_post&
+  scope=openid offline_access&
+  redirect_uri={{redirect_uri}}&
+  state={{state}}&
+  nonce={{nonce}}
+~~~
+
+
+This returns an authorization code that you can use as the *code* parameter in a token request.
+
+To obtain an ID Token and optionally an Access Token directly from the authorization server, use the same request,
+but with `response_type=id_token` or `response_type=id_token token`:
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://${org}.okta.com/oauth2/{{authorizationServerId}}/v1/authorize?
+  client_id={{clientId}}&
+  response_type=id_token token&
+  response_mode=form_post&
+  scope=openid offline_access&
+  redirect_uri={{redirect_uri}}&
+  state={{state}}&
+  nonce={{nonce}}
+~~~
+
+
 
 #### Response Example (Success)
 
@@ -839,30 +880,6 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 ~~~
 
 
-#### Request Example
-
-This request initiates the authorization code flow, as signaled by `response_type=code`.
-
-~~~sh
-curl -v -X GET \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/{{authorizationServerId}}/v1/authorize?
-  client_id={{clientId}}&
-  response_type=code&
-  response_mode=form_post&
-  scope=openid offline_access&
-  redirect_uri={{redirect_uri}}&
-  state={{state}}&
-  nonce={{nonce}}
-~~~
-
-
-This returns an authorization code that you can use as the *code* parameter in a token request.
-
-To obtain an ID Token and optionally an Access Token directly from the authorization server, use the same request,
-but with `response_type=id_token` or `response_type=id_token token`.
 
 ### Token Request
 {:.api .api-operation}
