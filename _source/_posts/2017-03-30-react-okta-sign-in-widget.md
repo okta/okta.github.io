@@ -5,7 +5,7 @@ author: leebrandt
 tags: [react, sign-in widget, okta, es6]
 ---
 
-React has quickly become one of the most favored front-end web frameworks, andis second only to plain old HTML5, [according to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html). So it’s no surprise that [developers are learning it](https://www.lynda.com/React-js-training-tutorials/7049-0.html), and [employers are asking for it](https://stackoverflow.com/jobs?sort=i&q=ReactJS).
+React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, [according to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html). So it’s no surprise that [developers are learning it](https://www.lynda.com/React-js-training-tutorials/7049-0.html), and [employers are asking for it](https://stackoverflow.com/jobs?sort=i&q=ReactJS).
 
 In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using [Okta’s Sign-In Widget](http://developer.okta.com/code/javascript/okta_sign-in_widget). The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!
 ## Get the Simple React Seed Project
@@ -174,6 +174,7 @@ We’re almost there, but you don't necessarily want to render the widget right 
   }
 ```
 >*You might have noticed a weird bit of code in that `showLogin` method. That first line: `Backbone.history.stop()`. The widget itself uses [Backbone.js]() to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the `Backbone.history`. Since you've now moved it out into a `showLogin` function, the widget is going to re-render whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because it’s going to restart when the widget is rendered.*
+
 ## The Final LoginPage React Component
 Let's wrap this up. Make sure you bind the class's `this` context to each of your methods. Add a `logout` method, and change your `render` method to make a decision on what to render, based on whether there is a currently logged in user.
 
