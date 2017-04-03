@@ -816,13 +816,13 @@ curl -v -X GET \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 "https://${org}.okta.com/oauth2/{{authorizationServerId}}/v1/authorize?
-  client_id={{clientId}}&
+  client_id=${client_id}&
   response_type=code&
   response_mode=form_post&
   scope=openid offline_access&
-  redirect_uri={{redirect_uri}}&
-  state={{state}}&
-  nonce={{nonce}}
+  redirect_uri=${redirect_uri}&
+  state=${state}&
+  nonce=${nonce}"
 ~~~
 
 
@@ -837,14 +837,14 @@ curl -v -X GET \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 "https://${org}.okta.com/oauth2/{{authorizationServerId}}/v1/authorize?
-  client_id={{clientId}}&
+  client_id=${client_id}&
   response_type=id_token token&
   response_mode=form_post&
   scope=openid offline_access&
-  redirect_uri={{redirect_uri}}&
-  state={{state}}&
-  nonce={{nonce}}
-~~~
+  redirect_uri=${redirect_uri}&
+  state=${state}&
+  nonce=${nonce}"
+~
 
 
 
@@ -871,8 +871,6 @@ The requested scope is invalid:
 ~~~
 http://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
 ~~~
-
-
 
 ### Token Request
 {:.api .api-operation}

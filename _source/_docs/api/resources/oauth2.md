@@ -6,7 +6,7 @@ title: OAuth 2.0
 # OAuth 2.0 API
 
 Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) authorization server and a certified [OpenID Provider](http://openid.net/certification).
-The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
+The OAuth 2.0 APIs provide API security via scoped Access Tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
 
 There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:
 
@@ -36,7 +36,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
     * Optimized for browser-only [Public Clients](https://tools.ietf.org/html/rfc6749#section-2.1)
     * Uses [Implicit Flow](https://tools.ietf.org/html/rfc6749#section-4.2)
     * Access token returned directly from authorization request (Front-channel only)
-    * Does not support refresh tokens
+    * Does not support Refresh Tokens
     * Assumes Resource Owner and Public Client are on the same device
 
     ![Browser/Single-Page Application](/assets/img/browser_spa_implicit_flow.png)
@@ -243,10 +243,10 @@ You can use an [introspection endpoint](#introspection-request) for validation.
 ## Refresh Token
 
 A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
-A Refresh Token will be returned if 'offline_access' scope is requested using authorization_code, password, or refresh_token grant type.
+A Refresh Token is returned if 'offline_access' scope is requested using authorization_code, password, or refresh_token grant type.
 
 
-The lifetime of a Refresh Token is configured in [Access Policies](#access-policies), the minimum value is 24 hours. The refresh token can also expire after a period if no clients redeem it for an Access Token. The period should be equal to or larger than 10 minutes. If the token's lifetime is set to unlimited, the Authorization Server will not check if clients use it or not.
+The lifetime of a Refresh Token is configured in [Access Policies](#access-policies), the minimum value is 24 hours. The Refresh Token can also expire after a period if no clients redeem it for an Access Token. The period should be equal to or larger than 10 minutes. If the token's lifetime is set to unlimited, the Authorization Server will not check if clients use it or not.
 
 ### Refresh Token Revocation
 
@@ -262,12 +262,12 @@ No other modifications affect existing tokens.
 An Authorization Server can also issue an ID Token to the client, as in [OIDC](oidc#id-token), but with the following differences:
 
 * The ID Token cannot contain a reserved scope or claim called 'groups'. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
-* The custom properties in the app user profile are not included in the Id Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.
+* The custom properties in the app user profile are not included in the ID Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.
 
-The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
+The lifetime of an ID Token is 1 hour. If the client that issued the token is deactivated, the token is
 immediately and permanently invalidated. Reactivating the client does not make the token valid again.
 
-The same validation steps for [OIDC](oidc.html#validating-id-tokens) can also be applied to Id Token for
+The same validation steps for [OIDC](oidc.html#validating-id-tokens) can also be applied to ID Token for
 OAuth2, except the public keys should be retrieved via the [Get Keys endpoint](#get-keys).
 
 ## Access Policies
@@ -306,7 +306,7 @@ API Access Management allows you to build custom authorization servers in Okta w
 
 At its core, an authorization server is simply an OAuth 2.0 token minting engine.
 Each authorization server has a unique issuer URI and its own signing key for tokens in order to keep proper boundary between security domains.
-The authorization server also acts as an OpenID Connect Provider, which means you can request ID tokens in addition to access tokens from the authorization server endpoints.
+The authorization server also acts as an OpenID Connect Provider, which means you can request ID Tokens in addition to access tokens from the authorization server endpoints.
 To configure an authorization server, log into your org and navigate to **Security** > **API** > **Add Authorization Server**.
 
 ## OpenID Connect and Authorization Servers
@@ -363,7 +363,7 @@ login_hint | A username to prepopulate if prompting for authentication.  | Query
     * ``okta_post_message`` -- Uses [HTML5 Web Messaging](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
       ``okta_post_message`` is an adaptation of the [Web Message Response Mode](https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1).
       This value provides a secure way for a single-page application to perform a sign-in flow
-      in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
+      in a popup window or an iFrame and receive the ID Token and/or access token back in the parent page without leaving the context of that page.
       The data model for the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) call is in the next section.
  * Okta requires the OAuth 2.0 *state* parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF).
  The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
@@ -588,7 +588,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter       | Description                                                                                         | Type       |
 ----------------+-----------------------------------------------------------------------------------------------------+------------|
-token           | An access token or refresh token.                                                                   | String     |
+token           | An access token or Refresh Token.                                                                   | String     |
 token_type_hint | A hint of the type of *token*.                                                               | String     |
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
@@ -611,7 +611,7 @@ Based on the type of token and whether it is active or not, the returned JSON co
 
 Parameter   | Description                                                                                         | Type       |
 ------------+-----------------------------------------------------------------------------------------------------+------------|
-active      | An access token or refresh token.                                                                   | boolean    |
+active      | An access token or Refresh Token.                                                                   | boolean    |
 token_type  | The type of the token. The value is always `Bearer`.                                                | String     |
 scope       | A space-delimited list of scopes.                                                                   | String     |
 client_id   | The ID of the client associated with the token.                                                     | String     |
@@ -705,7 +705,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter       | Description                                                                                         | Type       |
 ----------------+-----------------------------------------------------------------------------------------------------+------------|
-token           | An access token or refresh token.                                                                   | String     |
+token           | An Access Token or Refresh Token.                                                                   | String     |
 token_type_hint | A hint of the type of *token*.                                                               | String     |
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
