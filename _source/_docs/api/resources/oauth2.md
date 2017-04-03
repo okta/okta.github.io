@@ -504,14 +504,6 @@ header. Used with the client_secret parameter to authenticate the client applica
 client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the
 Authorization header. Used with the client_id parameter to authenticate the client application. | String |
 
-If the request succeeds, the following conditions determine which tokens the response contains:
- * The response includes an Access Token.
- * If *scope* includes *offline_access*, and *grant_type* is either *authorization_code*, *refresh_token*, or *password*,
- the response includes a Refresh Token.
- * If *scope* includes *openid*, and *grant_type* is either *authorization_code* or *password*, the response includes an
- ID Token.
-
-
 ##### Token Authentication Method
 
 For clients authenticating by client credentials, provide the [`client_id`](oidc.html#request-parameters)
@@ -527,15 +519,22 @@ Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 
 #### Response Parameters
 
-Based on the grant type, the returned JSON can contain a different set of tokens.
+Depending on the grant type, you can obtain only certain kinds of token.
 
-Input grant type   | Output token types                    |
+Grant type         | Available tokens                      |
 -------------------|---------------------------------------|
 authorization_code | Access Token, Refresh Token, ID Token |
+password           | Access Token, Refresh Token, ID Token |
 refresh_token      | Access Token, Refresh Token           |
-password           | Access Token, Refresh Token, ID Token           |
 client_credentials | Access Token                          |
 
+The specific subset of the available tokens that the request returns depends on other request parameters:
+
+To include      | Requirements                      |
+----------------|-----------------------------------|
+Access Token    | None                              |
+Refresh Token   | *scope* includes *offline_access* |
+ID Token        | *scope* includes *openid*         |
 
 ##### Refresh Tokens for Web and Native Applications
 
