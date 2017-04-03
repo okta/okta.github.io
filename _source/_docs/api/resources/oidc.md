@@ -849,7 +849,7 @@ curl -v -X GET \
 
 
 #### Response Example (Success)
-This example is for the implicit flow. `response_type=id_token token` and `scope` includes
+This example is for the implicit flow; `response_type=id_token token` and `scope` includes
 `offline_access`, so the response contains an Access Token, an ID Token, and a Refresh Token.
 
 
