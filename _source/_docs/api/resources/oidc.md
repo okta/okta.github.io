@@ -869,8 +869,12 @@ This example is for the implicit flow; `response_type=id_token token` and `scope
 The requested scope is invalid:
 
 ~~~
-http://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
+The requested scope is invalid:
+
 ~~~
+HTTP/1.1 302 Found
+   Location: https://client.example.com/?error=access_denied&error.errorCode=invalid_scope&error.description=One+or+more+scopes+are+not+configured+for+the+authorization+server+resource.
+   ~~~
 
 ### Token Request
 {:.api .api-operation}
