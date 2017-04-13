@@ -142,46 +142,57 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Value("${security.saml2.metadata-url}")
     String metadataUrl;
 
+    @Value("${server.ssl.key-alias}")
+    String keyAlias;
+
+    @Value("${server.ssl.key-store-password}")
+    String password;
+
+    @Value("${server.port}")
+    String port;
+
+    @Value("${server.ssl.key-store}")
+    String keyStoreFilePath;
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/saml/**").permitAll()
+                .antMatchers("/saml*").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .apply(saml())
                 .serviceProvider()
                     .keyStore()
                         .storeFilePath("saml/keystore.jks")
-                        .password("secret")
-                        .keyname("spring")
-                        .keyPassword("secret")
+                        .password(this.password)
+                        .keyname(this.keyAlias)
+                        .keyPassword(this.password)
                         .and()
                     .protocol("https")
-                    .hostname("localhost:8443")
+                    .hostname(String.format("%s:%s", "localhost", this.port))
                     .basePath("/")
                     .and()
                 .identityProvider()
-                    .metadataFilePath(metadataUrl)
-                    .and();
+                .metadataFilePath(this.metadataUrl);
     }
 }
 ```
 
-Create an `MvcConfig.java` file in the same directory and use it to set the default view to `index`.
+Create an `IndexController.java` file in the same directory and use it to set the default view to `index`.
 
 ```java
 package com.example;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@Configuration
-public class MvcConfig extends WebMvcConfigurerAdapter {
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("index");
+@Controller
+public class IndexController {
+
+    @RequestMapping("/")
+    public String index() {
+        return "index";
     }
 }
 ```
@@ -227,5 +238,7 @@ You can find the source code for this article at [https://github.com/oktadevelop
 This article showed you how to create a SAML application in Okta and talk to it using Spring Boot and Spring Security's SAML extension. The SAML extension hasn't had a GA release, but hopefully will soon. I also believe it's possible to take the SAML DSL (in `SecurityConfiguration.java`) and create a Spring Boot starter that allows you to get started with SAML simply by configuring application properties.
 
 Have questions or comments? Post your question to Stack Overflow with the "[okta](http://stackoverflow.com/questions/tagged/okta)" or "[okta-api](http://stackoverflow.com/questions/tagged/okta-api)” tag, hit me up via email at [matt.raible@okta.com](mailto:matt.raible@okta.com), or ping me on Twitter [@mraible](https://twitter.com/mraible). In future articles, I'll show you to to configure Spring Boot with OAuth 2.0 and Okta. Then I'll explore different techniques of authenticating with Angular and using the access token to talk to a secured Spring Boot application. Until then, happy authenticating! 😊
+
+**Update:** Thanks to [Alexey Soshin](https://github.com/AlexeySoshin) for contributing a [pull request](https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2) to make the code in this blog post more bootiful!
 
 
