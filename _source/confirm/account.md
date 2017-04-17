@@ -4,6 +4,7 @@ title: "Welcome! You're ready to go."
 valprop: {
 	title: "Welcome! You're ready to go."
 }
+redirect_to: "https://www.okta.com/developer/signup"
 ---
 
 

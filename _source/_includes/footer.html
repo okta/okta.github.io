@@ -1,79 +1,79 @@
 <footer class="footer">
-      <div class="Wrap">
-        <ul>
-          <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
-          </li>
-          <li>
-            <a href="/blog">Blog</a>
-          </li>
-          <li>
-            <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
-          </li>
-          <li>
-            <a href="/terms/">Terms & Conditions</a>
-          </li>
-          <li>
-            <a href="/3rd_party_notices/">3rd Party Notices</a>
-          </li>
-          <li>
-            <a href="/privacy/">Privacy Policy</a>
-          </li>
-          <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
-          </li>
-          <li>
-            <a href="mailto:{{ site.email }}">Contact Support</a>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <a class="icon" href="http://github.com/{{ site.github_username }}" target="_blank"><i class="fa fa-github"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="http://twitter.com/{{ site.twitter_username }}" target="_blank"><i class="fa fa-twitter"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
-          </li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
-        </ul>
-      </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>{%
-    for script in page.scripts %}
-    <script src="{{ script }}">
-    </script>{%
-    endfor %}{%
-    for script in layout.scripts %}
-    <script src="{{ script }}">
-    </script>{%
-    endfor %}{% if page.js %}
-    <script type="text/javascript" defer="defer" src="{{ "/assets/js/" | prepend: site.baseurl | append: page.js }}.js">
-    </script>{% endif %}{% if layout.js %}
-    <script type="text/javascript" defer="defer" src="{{ "/assets/js/" | prepend: site.baseurl | append: layout.js }}.js">
-    </script>{% endif %}
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
-    setTimeout(function(){var a=document.createElement("script");
-    var b=document.getElementsByTagName("script")[0];
-    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
-    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+			<div class="Wrap">
+				<ul>
+					<li>
+						<a href="https://www.okta.com/" target="_blank">Okta.com</a>
+					</li>
+					<li>
+						<a href="/blog">Blog</a>
+					</li>
+					<li>
+						<a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+					</li>
+					<li>
+						<a href="/terms/">Terms & Conditions</a>
+					</li>
+					<li>
+						<a href="/3rd_party_notices/">3rd Party Notices</a>
+					</li>
+					<li>
+						<a href="/privacy/">Privacy Policy</a>
+					</li>
+					<li>
+						<a href="https://www.okta.com/developer/contact/">Contact Sales</a>
+					</li>
+					<li>
+						<a href="mailto:{{ site.email }}">Contact Support</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<a class="icon" href="http://github.com/{{ site.github_username }}" target="_blank"><i class="fa fa-github"></i></a>
+					</li>
+					<li>
+						<a class="icon" href="http://twitter.com/{{ site.twitter_username }}" target="_blank"><i class="fa fa-twitter"></i></a>
+					</li>
+					<li>
+						<a class="icon" href="{{ site.dev_forum }}" title="Okta Developer Forum" target="_blank"><i class="fa fa-comments"></i></a>
+					</li>
+					<li>
+						<a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
+					</li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
+				</ul>
+			</div>
+		</footer>
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
+		</script>{%
+		for script in page.scripts %}
+		<script src="{{ script }}">
+		</script>{%
+		endfor %}{%
+		for script in layout.scripts %}
+		<script src="{{ script }}">
+		</script>{%
+		endfor %}{% if page.js %}
+		<script type="text/javascript" defer="defer" src="{{ "/assets/js/" | prepend: site.baseurl | append: page.js }}.js">
+		</script>{% endif %}{% if layout.js %}
+		<script type="text/javascript" defer="defer" src="{{ "/assets/js/" | prepend: site.baseurl | append: layout.js }}.js">
+		</script>{% endif %}
+		<script src="/assets/js/master.js">
+		</script> <!-- Remarketing tag -->
+		<script type="text/javascript">
+				/* <![CDATA[ */
+				var google_conversion_id = 1006913831;
+				var google_custom_params = window.google_tag_params;
+				var google_remarketing_only = true;
+				/* ]]> */
+		</script>
+		<div style="display:none;">
+			<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+			</script>
+		</div><noscript>
+		<div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
+		 <!-- Crazy Egg Tracking -->
+		<script type="text/javascript">
+		setTimeout(function(){var a=document.createElement("script");
+		var b=document.getElementsByTagName("script")[0];
+		a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+		a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+		</script> <!-- End Crazy Egg Tracking -->

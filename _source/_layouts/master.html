@@ -23,13 +23,13 @@
         endif %}
 		{{ content }}
 		{% if page.show_bottom_cta %}
-		<section id="bottom-cta" class="section--full-width text-align--center">
-			<div class="wrap">
+		<section id="bottom-cta" class="ProductSection--bottom-cta">
+			<div class="Wrap">
 				<header>
 					<h2>Get Started with Okta Now!</h2>
 					<p class="text--medium">Your identity layer is ready to go. Getting started takes just a few minutes.</p>
 				</header>
-				<a href="https://www.okta.com/developer/signup/" class="button--large"><span>Get a Free Developer Account</span></a>
+				<a href="{{ site.get_started_url }}" class="Button--green Button--large"><span>Get a Free Developer Account</span></a>
 			</div>
 		</section>{%
         endif %}

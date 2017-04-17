@@ -83,3 +83,7 @@ defaults:
       collection: reference
     values:
       layout: documentation
+
+# Bug: 37458
+# Add Discourse link
+dev_forum:  https://devforum.okta.com/
