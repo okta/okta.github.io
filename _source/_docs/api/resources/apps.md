@@ -4443,6 +4443,8 @@ Each application defines 1 or more appLinks that can be published. AppLinks can 
 
 Specifies credentials and scheme for the application's `signOnMode`.
 
+> Note: To update the app you can provide just the [Signing Credential Object](#signing-credential-object) instead of the entire Application Credential Object.
+
 |------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
 | Property         | Description                                                                                                    | DataType                                                  | Nullable | Default         | MinLength | MaxLength | Validation |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
@@ -4510,15 +4512,16 @@ Specifies the template used to generate a user's username when the application i
 ~~~
 
 #### Signing Credential Object
+
 Determines the [key](#application-key-credential-model) used for signing assertions for the `signOnMode`
 
-|------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
-| Property   | Description                                                                                 | DataType                         | Nullable | Default           | MinLength | MaxLength | Validation |
-| ---------- | ------------------------------------------------------------------------------------------- | -------------------------------- | -------- | ----------------- | --------- | ----------| ---------- |
-| kid        | Reference for [key credential for the app](#application-key-store-operations)    | String                           | FALSE    |                   |           |           |            |
-|------------+---------------------------------------------------------------------------------------------+----------------------------------+----------+-------------------+-----------+-----------+------------|
+|------------+----------------------------------------------------------------------------------+----------+----------|
+| Property   | Description                                                                      | DataType | Nullable |
+| ---------- | ------------------------------------------------------------------------------------------- | -------- |
+| kid        | Reference for [key credential for the app](#application-key-store-operations)    | String   | FALSE    |
+|------------+----------------------------------------------------------------------------------+----------+----------|
 
-> You must to enable the key rollover feature to view `kid`. Key rollover is an Early Access feature; contact Customer Support to enable it.
+> You must enable the key rollover feature to view `kid`. Key rollover is an {% api_lifecycle ea%} feature.
 
 ~~~json
 {
