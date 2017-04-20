@@ -127,6 +127,7 @@ installing component
 
 Open `src/app/search/search.component.html` and replace its default HTML with the following:
 
+{% raw %}
 ```html
 <h2>Search</h2>
 <form>
@@ -135,6 +136,7 @@ Open `src/app/search/search.component.html` and replace its default HTML with th
 </form>
 <pre>{{searchResults | json}}</pre>
 ```
+{% endraw %}
 
 The [Router documentation](https://angular.io/docs/ts/latest/guide/router.html) for Angular provides the information you need to setup a route to the `SearchComponent` you just generated. Here's a quick summary:
 
@@ -334,6 +336,7 @@ import { SearchService } from './shared';
 
 Now clicking the search button should work. To make the results look better, remove the `<pre>` tag and replace it with a `<table>` in `src/app/search/search.component.html`.
 
+{% raw %}
 ```html
 <table *ngIf="searchResults">
   <thead>
@@ -354,6 +357,7 @@ Now clicking the search button should work. To make the results look better, rem
   </tbody>
 </table>
 ```
+{% endraw %}
 
 Then add some additional CSS in `src/app/search/search.component.css` to improve its table layout.
 
@@ -413,9 +417,11 @@ This section showed you how to fetch and display search results. The next sectio
 
 Modify `search.component.html` to add a link for editing a person.
 
+{% raw %}
 ```html
 <td><a [routerLink]="['/edit', person.id]">{{person.name}}</a></td>
 ```
+{% endraw %}
 
 Run the following command to generate an `EditComponent`.
 
@@ -441,6 +447,7 @@ const appRoutes: Routes = [
 
 Update `src/app/edit/edit.component.html` to display an editable form. You might notice I've added `id` attributes to most elements. This is to make things easier when writing integration tests with Protractor.
 
+{% raw %}
 ```html
 <div *ngIf="person">
   <h3>{{editName}}</h3>
@@ -469,6 +476,7 @@ Update `src/app/edit/edit.component.html` to display an editable form. You might
   <button (click)="cancel()" id="cancel">Cancel</button>
 </div>
 ```
+{% endraw %}
 
 Modify `EditComponent` to import model and service classes and to use the `SearchService` to get data.
 
@@ -651,6 +659,7 @@ To make name required, modify `edit.component.html` to add a `required` attribut
 
 You'll also need to wrap everything in a `<form>` element. Add `<form>` after the `<h3>` tag and close it before the last `</div>`. You'll also need to add an `(ngSubmit)` handler to the form and change the save button to be a regular submit button.
 
+{% raw %}
 ```html
 <h3>{{editName}}</h3>
 <form (ngSubmit)="save()" ngNativeValidate>
@@ -659,6 +668,7 @@ You'll also need to wrap everything in a `<form>` element. Add `<form>` after th
   <button (click)="cancel()" id="cancel">Cancel</button>
 </form>
 ```
+{% endraw %}
 
 After making these changes, any field with a `required` attribute will be required.
 
@@ -747,6 +757,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 
 Create `src/app/home/home.component.ts` and configure it to have **Login** and **Logout** buttons.
 
+{% raw %}
 ```typescript
 import { Component } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
@@ -783,6 +794,7 @@ export class HomeComponent {
   }
 }
 ```
+{% endraw %}
 
 Create `src/app/shared/auth/auth.guard.service.ts` to navigate to the `HomeComponent` if the user is not authenticated.
 
@@ -881,6 +893,7 @@ The components in this section use Bootstrap CSS classes. Add a reference to Boo
 
 Change `HomeComponent` to declare `OktaAuth` and modify its `template` so it has a button to login, as well as a sign-in form.
 
+{% raw %}
 ```typescript
 declare let OktaAuth: any;
 
@@ -921,6 +934,7 @@ declare let OktaAuth: any;
 </div>`
 })
 ```
+{% endraw %}
 
 After making these changes, the `HomeComponent` should render as follows.
 

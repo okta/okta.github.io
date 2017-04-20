@@ -193,6 +193,7 @@ export class AppComponent implements OnInit {
 
 And modify `app.component.html` to have a `<div>` with `id="okta-login-container"` and a place to show the logged in user's email.
 
+{% raw %}
 ```html
 <div *ngIf="!user" id="okta-login-container"></div>
 
@@ -202,6 +203,7 @@ And modify `app.component.html` to have a `<div>` with `id="okta-login-container
   <button (click)="logout()">Logout</button>
 </div>
 ```
+{% endraw %}
 
 Run `ng serve`, and open your browser to [http://localhost:4200](http://localhost:4200). You should see the sign-in widget.
 
