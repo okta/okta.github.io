@@ -128,7 +128,8 @@ security:
       userAuthorizationUri: # authorization_endpoint 
       clientAuthenticationScheme: form
     resource:
-      # from your Auth Server's metadata, check .well-known/openid-configuration if not in .well-known/oauth-authorization-server
+      # from your Auth Server's metadata, check .well-known/openid-configuration 
+      # if not in .well-known/oauth-authorization-server
       userInfoUri: # userinfo_endpoint
       preferTokenInfo: false
 ```

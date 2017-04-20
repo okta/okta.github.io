@@ -667,7 +667,8 @@ After making these changes, any field with a `required` attribute will be requir
 In this screenshot, you might notice the address fields are blank. This is explained by the error in your console.
 
 ```
-If ngModel is used within a form tag, either the name attribute must be set or the form control must be defined as 'standalone' in ngModelOptions.
+If ngModel is used within a form tag, either the name attribute must be set or the form 
+control must be defined as 'standalone' in ngModelOptions.
 
 Example 1: <input [(ngModel)]="person.firstName" name="first">
 Example 2: <input [(ngModel)]="person.firstName" [ngModelOptions]="{standalone: true}">
