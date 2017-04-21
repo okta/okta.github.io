@@ -186,9 +186,6 @@
 			overflow: auto;
 			code {
 				white-space: pre;
-				// fix wide code listings that don't overflow automatically
-				// Not sure why this fixes it, but it does! --mraible
-				width: 100px;
 			}
 		}
 

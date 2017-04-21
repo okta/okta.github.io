@@ -3,14 +3,12 @@ layout: master
 css: page-blog
 show_bottom_cta: true
 ---
-<section class="PageContent" id="blog-post">{% comment %}
+<section id="blog-post" class="main-container">{% comment %}
 	// assigned variables will "leak" into the included file
 	// we must capture the content however otherwise {{ content }}
 	// will leak as a raw string
 	{% endcomment %}{% assign post = page %}{% capture _post_content %}{{ content }}{% endcapture %}
-	<div class="PageContent-main">
-		<div class="wrap blog">
-			{% include blog_post.html post_content=_post_content %}
-		</div>
+	<div class="wrap blog">
+		{% include blog_post.html post_content=_post_content %}
 	</div>
 </section>
