@@ -1035,19 +1035,19 @@ Please request this in your email to <developers@okta.com>.
 
 #### Submit for Okta Review
 
-Once you have a functioning SCIM integration in your Okta developer org, and have confirmed support for [Okta’s required SCIM server capabilities](#required-scim-server-capabilities), you are ready to formally submit your app for review by Okta.
+Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OAN Manager. 
 
-Your submission will provide Okta with all the metadata needed to create a customized app (includes default mappings, link to config docs) which will be used by joint customers and eventually published publicly in [the Okta Application Network](https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324). Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.
+Your submission provides Okta with all the metadata needed to create a customized app for publication in [the Okta Application Network](https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324). Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.
 
-We recommend completing a few actions before submitting your application to Okta:
+We recommend completing these five steps before actual submission, with detailed instructions in the next section:
 
 1. Check the Profile Attributes for your application.
 2. Check the Attribute Mappings for your application.
 3. Run the second set of Runscope tests: Okta SCIM 2.0 CRUD Test.
 4. Prepare the customer-facing configuration guide.
+5. Create a demo video showing working integration (optional)
 
-After performing these four steps (instructions below), use [this form](https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform) to submit for Okta review.
-
+After performing these steps, login to the OAN Manager to complete the submission form and track review status.
 
 ##### Check the Profile Attributes for your application
 
