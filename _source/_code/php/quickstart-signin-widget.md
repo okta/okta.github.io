@@ -1,7 +1,7 @@
 ---
 layout: docs_page
-title: Sign In Widget
-excerpt: Quickstart guide for using the sign in widget with PHP.
+title: Okta Sign-In Widget
+excerpt: Quickstart guide for using the Okta Sign-In Wwidget with PHP.
 support_email: developers@okta.com
 ---
 
@@ -11,31 +11,33 @@ The Okta Sign-In Widget is a JavaScript widget from Okta that gives you a fully 
 ![Screenshot of basic Okta Sign-In Widget](/assets/img/okta-signin.png)
 
 # Configuring your Organization
-There are some steps to prepare for the use of the Sign-In Widget. We will need to sign up for Okta, set up CORS and 
-create an authorization server. Follow the below guide to get up and running with our customizable Sign-In Widget.
+There are some steps to prepare for the use of the Okta Sign-In Widget. We need to sign up for Okta, set up CORS 
+and create an authorization server. Use this guide to get up and running with our customizable Okta Sign-In Widget.
 
 ## Sign-up for Okta
 1. Go to [https://www.okta.com/developer/signup/]() and complete the form.
-2. After submitting the form, you will be presented with your Okta URL. Make note of this url, you will need it later. You will also receive an confirmation email.
-3. Once you click on the sign-in link in your email, Okta will finish provisioning your account for you. Sign in with the password provided in the email.
+2. After submitting the form, you are presented with your Okta URL. Make note of this URL, you will need it later. You 
+will also receive an confirmation email.
+3. Once you click on the sign-in link in your email, Okta finishes provisioning your account for you. Sign in with the
+ password provided in the email.
 4. Follow the remaining steps for account creation on the form provided after logging in and then click `Create My Account`
 
-After your are finished creating your account, you will be logged into your new organization. In the top right of the screen, there is an `Admin` button. Clicking on that button is where we'll be spending most of our time during this guide.  For the remainder of this quickstart, we're going to
- assume the domain for your organization will be `dev-123456.oktapreview.com`. For your application, you'll want to
-  change this url to match your own organizations url. 
+After your are finished creating your account, you will be logged into your new organization. In the top right of the screen, there is an `Admin` button. 
+Clicking on the `Admin` button will take you to your Okta Administration Dashboard and this is where we'll be spending 
+most of our time during this guide. For the remainder of this quickstart, we're going to assume the domain for your 
+organization will be `dev-123456.oktapreview.com`. For your application, you'll want to change this url to match your own organizations url. 
 
 ## Enable CORS for your Domain
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
-You can enable CORS by following the steps in our guide for [guide for Enabling CORS](http://developer.okta
-.com/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the web server you are 
+You can enable CORS by following the steps in our guide for [guide for Enabling CORS](/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the web server you are 
 using to host the HTML for the Okta Sign-In Widget (see below for instructions). For our example, we'll be setting 
 our example to be hosted on `http://localhost:8000`. We'll need to add `http://localhost:8000` as a trusted CORS 
 endpoint in Okta.
 
 To do so, follow the steps below:
 1. Navigate to `Admin -> Security -> API` page of your Okta dashboard.
-2. In the `Trusted Origins` tab, click on `Add Origin`. This will open a model window with a form to fill out.
+2. In the `Trusted Origins` tab, click on `Add Origin`. This will open a modal window with a form to fill out.
 3. Give your new origin a name, we will use `PHP Sign-In Widget Example` as ours.
 4. In the Origin URL field, fill in your web server that you are hosting on, we'll use `http://localhost:8000`.
 5. Check `CORS` in the `Type` section and then click `Save`
@@ -58,11 +60,11 @@ with to handle the user authentication services. To set this up, follow the step
      - This is the URI for the OAuth resource that consumes the Access Tokens. 
      - This value is used as the default 
     audience for Access Tokens
-   - Description: This is the development site for our Sign-In widget example in PHP.
+   - Description: This is the development site for our Sign-In Widget example in PHP.
 5. Click `Save`
 
 ## Create an Access Policy
-Our new authorization server will need to have an access policy created so it knows how to handle its users. To 
+Our new authorization server needs to have an access policy, so it knows how to handle its users. To 
 create a new policy, follow the steps below:
  
 1. Navigate to `Admin -> Security -> API` page of your Okta dashboard.
@@ -96,11 +98,11 @@ For your new policy that we just created, we'll need to add a rule to tell the p
 
 ## Create your application
 Now that we have our access policy set up, we need an application to communicate with. This is the application that 
-will be the core of your project. To create an application, follow the steps below:
+will represent the application the Widget signs users into. To create an application, follow the steps below:
 
 1. Navigate to `Admin -> Applications` page of your Okta dashboard.
 2. Click `Add Application`. This will take you to the add application page, we will select the button `Create New 
-App` instead of selecting a pre-defined one. This will open a model window and give you a few options. We'll be using
+App` instead of selecting a pre-defined one. This will open a modal window and give you a few options. We'll be using
  the following:
    - Platform: Web
    - Sign on method: OpenID Connect
@@ -134,11 +136,11 @@ couple of different ways to include the sign-in widget in your application. You 
  sign-in widget, there's a little bit of configuration you have to do to talk with your new authentication server.
  
 ## Installing and Configuring the Sign In Widget
-There are 2 files we will require for the sign in widget to work, a js file and a css file. You will also be able to 
+There are 2 files we will require for the sign in widget to work, a JS file and a CSS file. You will also be able to 
 supply a 3rd file from our CDN or supply your own for the theme of the signin widget.
   
 ```html
-<!-- Latest CDN production Javascript and CSS: 1.6.0 -->
+<!-- Latest CDN production Javascript and CSS: 1.11.0 -->
 <script
   src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js"
   type="text/javascript"></script>
@@ -154,14 +156,15 @@ supply a 3rd file from our CDN or supply your own for the theme of the signin wi
   rel="stylesheet"/>
 ```
 Add the above to your login page. For our example, we will be using `login.php` as our login page. Also on the login 
-page, we need to add a little bit of configuration for the signin widget to work. The first thing is to create an 
+page, we need to add a little bit of configuration for the sign-in widget to work. The first thing is to create an 
 area on the page to give us a target for the widget to be placed.
 
 ```html
 <div id="okta-login"></div>
 ```
 
-> This element, a div is our example, should remain empty.
+> This element, a div in our example, should remain empty and can be placed where you would like the sign-in widget 
+to be rendered..
 
 We also need to add a script block to initialize and configure the widget.
 
@@ -186,18 +189,18 @@ We also need to add a script block to initialize and configure the widget.
 </script>
 ```
 
-| Key                     | Description                                                                                                |
-|-------------------------|------------------------------------------------------------------------------------------------------------|
-| baseUrl                 | This is your Organization url in Okta. It will be the url of the admin pages without the `-admin`          |
-| clientId                | The client ID of the Okta application.                                                                     |
-| redirectUri             | Where we will send the user to once they attempt a login.                                                  |
-| authParams.responseType | What we want back from a successful login                                                                  |
-| authParams.issuer       | The issuer of the authentication server. Can be retrieved from `Admin -> Security -> API -> {Auth Server}` |
-| authParams.display      | Redirect to the authorization server when an External Identity Provider button is clicked                  |
+| Key                     | Description                                                                                                                                          |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| baseUrl                 | This is your Organization url in Okta. It will be the url of the admin pages without the `-admin` for example `https://dev-123456.oktapreview.com`   |
+| clientId                | The client ID of the Okta application.                                                                                                               |
+| redirectUri             | Where we will send the user to once they attempt a login.                                                                                            |
+| authParams.responseType | What we want back from a successful login                                                                                                            |
+| authParams.issuer       | The issuer of the authentication server. Can be retrieved from `Admin -> Security -> API -> {Auth Server}`                                           |
+| authParams.display      | Redirect to the authorization server when an External Identity Provider button is clicked                                                            |
 
 Now we can visit the `login.php` page and see the Sign In Widget. You should be able to log into your main account. 
 If you have a successful login, you will be redirected to our `oauth2-callback.php` page which is where we will go 
-through the []Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-1.3.1) to get our `access_token`.
+through the [Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-1.3.1) to get our `access_token`.
 
 ## Responding to a Successful Login.
 Next, we exchange the returned authorization code for an `access_token`. In this sample, we will use curl to do the 
@@ -257,15 +260,15 @@ An Access Token must be validated in the following manner:
 1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
 2. Verify that the `aud` (audience) claim is the requested URL.
 3. Verify `cid` (client id) claim is your client id.
-4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](#get-keys).
+4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
-Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [authorization server metadata](#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
+Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
-Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](#token-authentication-method).
+Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
 
 The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
-However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](#authorization-server-metadata) and you can go back to the [jwks uri](#get-keys) to get keys again from Okta
+However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
 
 Please note the following:
 
@@ -275,7 +278,7 @@ Please note the following:
 * Okta always publishes keys to the JWKS.
 * To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.
 {% beta %}
-* The administrator can switch the authorization server key rotation mode to `MANUAL` by [updating the authorization server](#update-authorization-server) and then control when to [rotate the keys](#rotate-authorization-server-keys).
+* The administrator can switch the authorization server key rotation mode to `MANUAL` by [updating the authorization server](/docs/api/resources/oauth2.html#update-authorization-server) and then control when to [rotate the keys](#rotate-authorization-server-keys).
 {% endbeta %}
 
 Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
