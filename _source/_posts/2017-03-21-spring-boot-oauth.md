@@ -13,7 +13,7 @@ OAuth doesn’t validate a user’s identity — that’s taken care of by an au
 
 In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta Platform API. You can sign up for a [forever-free Okta developer account here](https://www.okta.com/developer/signup/).
 
-If you don’t want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/okta-spring-boot-oauth-example)! You can also watch a video of this tutorial below.
+If you don’t want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/okta-spring-boot-oauth-example)! You can also watch the a video of this tutorial below.
 
 <div style="text-align: center">
 <iframe width="560" height="315" style="max-width: 100%" src="https://www.youtube.com/embed/Rix3f3k64hI" frameborder="0" allowfullscreen></iframe>
