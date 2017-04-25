@@ -53,7 +53,7 @@ We will need to set up our own authorization server for our example. This is wha
 with to handle the user authentication services. To set this up, follow the steps below:
 1. Navigate to `Admin -> Security -> API` page of your Okta dashboard.
 2. Select the Authorization Servers tab if not already selected.
-3. Click on `Add Authorization Server`. This will open a model window with a form to fill out.
+3. Click on `Add Authorization Server`. This will open a modal window with a form to fill out.
 4. Fill in the form with your informtaion. For our example, we will be using the following:
    - Name: PHP Sign-In Widget Example - Develop
    - Resource URI: http://localhost:8000 
