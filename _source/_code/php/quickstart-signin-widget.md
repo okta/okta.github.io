@@ -82,7 +82,7 @@ For your new policy that we just created, we'll need to add a rule to tell the p
  
 1. Navigate to `Admin -> Security -> API -> Access Policies` page of your Okta dashboard.
 2. Select the policy we just created `Policy 1`.
-3. Click on `Add Rule`. This will open a model window with a form to fill out.
+3. Click on `Add Rule`. This will open a modal window with a form to fill out.
 4. Provide the requested information. For our example, we will be using the following:
    - Rule Name: Primary Rule
    - Grant type is: 
