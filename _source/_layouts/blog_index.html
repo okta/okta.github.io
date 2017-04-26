@@ -3,11 +3,7 @@ layout: master
 css: page-blog
 show_bottom_cta: true
 ---
-<section class="PageContent" id="blog-index">
-  <!-- START Page Content -->
-  <div class="PageContent-main">
-	<div class="wrap blog">{% for post in site.posts %}{% capture _post_content %}{{ post.content }}{% endcapture %}{% include blog_post.html post_content=_post_content %}{% endfor %}
+<section id="blog-index" class="main-container">
+    <div class="wrap blog">{% for post in site.posts %}{% capture _post_content %}{{ post.content }}{% endcapture %}{% include blog_post.html post_content=_post_content %}{% endfor %}
 	</div>
-  </div>
-  <!-- END Page Content -->
 </section>

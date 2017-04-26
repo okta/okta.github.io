@@ -699,11 +699,15 @@ Parameter             | Description                                             
 --------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- | -------- | ----- | ----------------------------------------
 defaultRelayState     | Identifies a specific application resource in an IDP initiated SSO scenario.                                      | String                                               | TRUE     | FALSE |
 ssoAcsUrl             | Single Sign On Url                                                                                                | String                                               | FALSE    | FALSE |  [URL](http://tools.ietf.org/html/rfc3986)
+ssoAcsUrlOverride     | Overrides the `ssoAcsUrl` setting                                                                                 | String                                               | TRUE     | FALSE |  [URL](http://tools.ietf.org/html/rfc3986)
 recipient             | The location where the app may present the SAML assertion                                                         | String                                               | FALSE    | FALSE |  [URL](http://tools.ietf.org/html/rfc3986)
+recipientOverride     | Overrides the `recipient` setting                                                                                 | String                                               | TRUE     | FALSE |  [URL](http://tools.ietf.org/html/rfc3986)
 destination           | Identifies the location where the SAML response is intended to be sent inside of the SAML assertion               | String                                               | FALSE    | FALSE |  [URL](http://tools.ietf.org/html/rfc3986)
+destinationOverride   | Overrides the `destination` setting                                                                               | String                                               | TRUE     | FALSE |
 audience              | Audience URI (SP Entity ID)                                                                                       | String                                               | FALSE    | FALSE |
+audienceOverride      | Overrides the `audience` setting                                                                                  | String                                               | TRUE     | FALSE |
 idpIssuer             | SAML Issuer ID                                                                                                    | String                                               | FALSE    | FALSE |
-subjectNameIdTemplate | Template for app user's username when a user is assigned to the app.                                              | String                                               | FALSE     | FALSE |
+subjectNameIdTemplate | Template for app user's username when a user is assigned to the app.                                              | String                                               | FALSE    | FALSE |
 subjectNameIdFormat   | Identifies the SAML processing rules.                                                                             | String                                               | FALSE    | FALSE |
 responseSigned        | Determines whether the SAML authentication response message is digitally signed by the IDP or not                 | Boolean                                              | FALSE    | FALSE |
 assertionSigned       | determines whether the SAML assertion is digitally signed or not                                                  | Boolean                                              | FALSE    | FALSE |
@@ -713,9 +717,14 @@ honorForceAuthn       | Prompt user to re-authenticate if SP asks for it        
 authnContextClassRef  | Identifies the SAML authentication context class for the assertion's authentication statement                     | String                                               | FALSE    | FALSE |
 attributeStatements   | Check [here](http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html) for details | [Attribute Statements](#attribute-statements-object) | FALSE    | FALSE |
 
-> Fields that require certificate uploads can't be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.
+* Fields that require certificate uploads can't be enabled through the API, such as Single Log Out and Assertion Encryption. These must be updated through the UI.
+* Either (or both) "responseSigned" or "assertionSigned" must be TRUE.
+* The override settings `ssoAcsUrlOverride`, `recipientOverride`, `destinationOverride`, and `audienceOverride` provide an alternative way of persisting post back and similar other urls.
+    For example, you can use `ssoAcsUrlOverride` supports the cloud access security broker (CASB) use case for Office365 app instances.
 
-> Either (or both) "responseSigned" or "assertionSigned" must be TRUE.
+    * In SAML 1.1 (for example, Office365 apps), `destinationOverride` isn't available.
+    * In SAML 2.0, like Box app, all four overrides are available.
+    * In App Wizard SAML App, no override attributes are available.
 
 ##### Supported Values for Custom SAML App
 The following values are support for creating custom SAML 2.0 Apps. Check [Attribute Statements](#attribute-statements-object) to see its supported values.
