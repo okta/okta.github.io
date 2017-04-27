@@ -13,6 +13,13 @@
 .main-container > .blog {
   max-width: 1360px; // result of calculation in _PageContent.scss
   margin: 0 auto;
+
+  .post-content {
+
+    iframe {
+      max-width: 100%;
+    }
+  }
 }
 
 .wrap {
