@@ -313,6 +313,14 @@ else {
 }
 ```
 
+Once you have the `JWK` you can now verify the access token. Our example is using the [gree/jose](https://packagist.org/packages/gree/jose) library.
+
+```php
+$jwt_string = 'eyJ...';
+$jws = JOSE_JWT::decode($jwt_string);
+$jws->verify($jwk, 'RS256');
+```
+
 Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
 
 The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
