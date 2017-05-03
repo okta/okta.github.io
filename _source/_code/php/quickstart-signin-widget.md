@@ -263,7 +263,53 @@ An Access Token must be validated in the following manner:
 4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
+```php
+if($res->claims['iss'] != 'https://dev-123456.oktapreview.com/') {
+    return $response->withStatus(401);
+}
+
+if($res->claims['aud'] != $oidcClientId) {
+    return $response->withStatus(401);
+}
+
+if($res->claims['exp'] < time()-300) {
+    return $response->withStatus(401);
+}
+
+```
+
 Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
+
+```php
+$jwk = null;
+
+ if($kidInCache) {
+    $jwk = getKidFromCache($kid);
+ }
+else {
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7/v1/keys');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    $output = curl_exec($ch);
+
+    curl_close($ch);
+
+    $output = json_decode($output);
+
+    foreach ($output->keys as $key) {
+        // poormans cache
+        storeKidInCache($key->kid, $key);
+       
+        $cachedJwks[$key->kid] = $key;
+        if ($key->kid == $kid) {
+            $jwk = $key;
+        }
+    }
+}
+```
 
 Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
 
