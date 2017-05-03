@@ -5,7 +5,6 @@ description: > # this means to ignore newlines until "baseurl:"
   Secure, scalable, and highly available authentication and user management for any app.
 baseurl: ""
 url: "http://developer.okta.com"
-# url: "http://localhost:4000"
 twitter_username: okta
 github_username:  oktadeveloper
 
@@ -35,22 +34,15 @@ stack_overflow_forum_url: "http://stackoverflow.com/search?q=okta"
 
 ga_ua_id: "UA-15777010-3"
 
-sitemap:
-    file: "/sitemap.xml"
-    exclude:
-        - "/atom.xml"
-        - "/feed.xml"
-        - "/feed/index.xml"
-        - "/search.json"
-    include_posts:
-        - "/index.html"
-    change_frequency_name: "change_frequency"
-    priority_name: "priority"
+# This is different from "url"
+# This variable will prevent user from committing sitemap with local url
+production_url: "http://developer.okta.com"
 
 include: [_static]
 
 sass:
     sass_dir: _sass
+    style: compressed
 
 collections:
   standards:

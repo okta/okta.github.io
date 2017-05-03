@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page design-principles">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -322,7 +328,7 @@ with no <code class="highlighter-rouge">body</code> param, be sure to set the <c
 <p>See <a href="error_codes.html">Error Codes</a> for a list of API error codes.</p>
 
 <blockquote>
-  <p>Only the <code class="highlighter-rouge">errorCode</code> property is supported for runtime error flow control.  The <code class="highlighter-rouge">errorSummary</code> property is only to intended for troubleshooting and may change over time</p>
+  <p>Only the <code class="highlighter-rouge">errorCode</code> property is supported for runtime error flow control.  The <code class="highlighter-rouge">errorSummary</code> property is only intended for troubleshooting and may change over time.</p>
 </blockquote>
 
 <h2 id="authentication">Authentication</h2>
@@ -557,21 +563,40 @@ filter=firstName eq "john"
 <ul>
   <li>A target URI</li>
   <li>The name of the link relation (<code class="highlighter-rouge">rel</code>)</li>
-  <li>A few other optional properties to help with deprecation, content negotiation, etc.</li>
+  <li>Other optional properties to help with deprecation, object state or lifecycle management, content negotiation, etc.</li>
+  <li>Links are implicitly of media type <code class="highlighter-rouge">application/json</code>.  Other media types are only returned in cases where the link is not an API endpoint.</li>
 </ul>
 
 <blockquote>
-  <p>A resource may have multiple links that share the same link relation.</p>
+  <p>A resource may have multiple links that share the same link relation, as shown below for the “logo” link.</p>
 </blockquote>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/assets/img/logos/groups/active_directory-medium.b3959116154f9d44bd4d0f6b2ae31ea6.png"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"large"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/assets/img/logos/groups/active_directory-large.0e7a58559ac90c4bbc7b33fa14018c50.png"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">],</span><span class="w">
         </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/example_resource"</span><span class="w"> </span><span class="p">},</span><span class="w">
         </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/page=2"</span><span class="w"> </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
+
+<h4 id="links-in-collections">Links in collections</h4>
+
+<p>Note that HAL links returned in a collection of resources may not reflect the total set of operations that are possible on that resource.  For example, in a user collection links indicating that a given user can be “unlocked” may not be returned and, if returned, may not reflect the correct user state.</p>
+
+<p>Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by ‘id’ using the “self” link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state.</p>
 
 <h2 id="rate-limiting">Rate Limiting</h2>
 
@@ -583,7 +608,7 @@ filter=firstName eq "john"
 
 <p><code class="highlighter-rouge">X-Rate-Limit-Remaining</code> - the number of requests left for the current rate-limit window.</p>
 
-<p><code class="highlighter-rouge">X-Rate-Limit-Reset</code> - the remaining time in the current rate-limit window before the rate limit resets, in UTC epoch seconds.</p>
+<p><code class="highlighter-rouge">X-Rate-Limit-Reset</code> - the time at which the rate limit will reset, specified in UTC epoch time.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">X-Rate-Limit-Limit</span><span class="p">:</span> <span class="s">20</span>
@@ -613,10 +638,10 @@ filter=firstName eq "john"
 
 <p><a href="http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing">Cross-Origin Resource Sharing (CORS)</a> is a mechanism that allows a web page to make an AJAX call using <a href="http://en.wikipedia.org/wiki/XMLHttpRequest">XMLHttpRequest (XHR)</a> to a domain that is  different from the one from where the script was loaded.  Such “cross-domain” requests would otherwise be forbidden by web browsers, per the <a href="http://en.wikipedia.org/wiki/Same_origin_policy">same origin security policy</a>.  CORS defines a <a href="http://www.w3.org/TR/cors/">standardized</a> way in which the browser and the server can interact to determine whether or not to allow the cross-origin request.</p>
 
-<p>In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website orgin must be explictly permitted via the Okta Admin Dashboard for CORS.  See <a href="./enabling_cors.html">Enabling CORS</a> for details on how to allow your website to make cross-orgin requests.</p>
+<p>In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the Okta Admin Dashboard for CORS.  See <a href="./enabling_cors.html">Enabling CORS</a> for details on how to allow your website to make cross-origin requests.</p>
 
 <blockquote>
-  <p><strong>Caution:</strong> Only grant access to specific orgins (websites) that you control and trust to access the Okta API.</p>
+  <p><strong>Caution:</strong> Only grant access to specific origins (websites) that you control and trust to access the Okta API.</p>
 </blockquote>
 
 <h3 id="api-support">API Support</h3>
@@ -639,7 +664,7 @@ filter=firstName eq "john"
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -657,7 +682,7 @@ filter=firstName eq "john"
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>

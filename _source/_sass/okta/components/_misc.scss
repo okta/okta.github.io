@@ -1,7 +1,7 @@
 ul.list--with-bullets {
 	margin-left: 0;
 	padding-left: 0;
-	
+
 	li {
 		padding-left: 6 + get-spacing('x-small');
 		position: relative;
@@ -43,7 +43,7 @@ ul.toc {
 		&:before {
 			font-family: fontawesome;
 			content: '\f097';
-			font-size: 12px;
+			@include font-size('new-small');
 			color: #ccc;
 			margin-right: 6px;
 		}
@@ -85,4 +85,45 @@ ol.list--numbered {
 #edit-link {
 	float: right;
 	margin-top: 20px;
+}
+
+ul.list--with-mark {
+	margin-left: 0;
+	padding-left: 0;
+
+	li {
+		padding-left: 10 + get-spacing('x-small');
+		position: relative;
+
+		&:before {
+			font-family: FontAwesome;
+			content: "\f00c";
+			display: block;
+			@include font-size('new-small');
+			left: 0;
+			position: absolute;
+		}
+
+		+ li {
+			margin-top: get-spacing('xx-small');
+		}
+	}
+}
+
+ul.list--with-icons {
+	margin-left: 0;
+	padding-left: 0;
+
+	li {
+		padding-left: 10 + get-spacing('x-small');
+		position: relative;
+
+		+ li {
+			margin-top: get-spacing('xx-small');
+		}
+
+		.fa {
+			@include margin(0 10px 0 0);
+		}
+	}
 }

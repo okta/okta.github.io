@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page oauth-2.0">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -557,8 +563,7 @@ A Refresh Token will be returned if ‘offline_access’ scope is requested usin
 <p>No other modifications affect existing tokens.</p>
 
 <h2 id="id-token">ID Token</h2>
-<p>An Authorization Server can also issue an ID Token to the client, as in <a href="oidc#id-token">OIDC</a>, but with the following differences:
-but with the following differences:</p>
+<p>An Authorization Server can also issue an ID Token to the client, as in <a href="oidc#id-token">OIDC</a>, but with the following differences:</p>
 
 <ul>
   <li>The ID Token cannot contain a reserved scope or claim called ‘groups’. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.</li>
@@ -757,6 +762,14 @@ However, you can also use OpenID Connect with an authorization server specified:
     <tr>
       <td>code_challenge_method</td>
       <td>Specifies the method that was used to derive the code challenge. Only S256 is supported.</td>
+      <td>Query</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>login_hint</td>
+      <td>A username to prepopulate if prompting for authentication.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -2426,7 +2439,7 @@ Token expiration times depend on how they are defined in the rules, and which po
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -2444,7 +2457,7 @@ Token expiration times depend on how they are defined in the rules, and which po
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>

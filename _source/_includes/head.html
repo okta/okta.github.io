@@ -1,13 +1,21 @@
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	{% if page.sitemap.exclude == "yes" %}
+ 		<meta name="robots" content="noindex,nofollow">
+ 	{% endif %}
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">{%
   if page.css %}
   <link rel="stylesheet" href="{{ "/assets/css/" | prepend: site.baseurl | append: page.css }}.css">

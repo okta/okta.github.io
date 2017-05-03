@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page system-log-(beta)">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -195,57 +201,58 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/system_log.md">Edit Page</a>
       <h1 id="system-log-api">System Log API</h1>
 
-<p>This API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature.</p>
+<p><a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  This API is still in beta.</p>
 
-<p>The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API:</p>
+<p>The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the <a href="/docs/api/resources/events.html">Events API</a>:</p>
 
 <ul>
   <li>The System Log API supports more query parameters than the Events API.</li>
   <li>The System Log API returns more objects than the Events API.</li>
 </ul>
 
-<p>Use this API to export event data as a batch job from your organization to another system for reporting or analysis.</p>
+<h2 id="getting-started">Getting Started</h2>
 
-<h2 id="motivation">Motivation</h2>
+<p>The System Log API has one endpoint:</p>
 
-<p>Example calls follow each use case discussion. Full API details follow in the List Events section.</p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span></p>
+
+<p><a href="https://app.getpostman.com/run-collection/8f19fc704561a8b44e27" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p>See below for <a href="#examples">Examples</a> and more on how to use the System Log API.</p>
+
+<h2 id="examples">Examples</h2>
 
 <h3 id="debugging">Debugging</h3>
-<p>Use this API call to troubleshoot user problems.
-Query:
-https://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00&amp;until=2017-04-12T23:59:59+00:00&amp;limit=20&amp;q=userFirstName+userLastName
-Curl Command:</p>
+<p>The System Logs API can be used to troubleshoot user problems. For example, you
+can use the following <code class="highlighter-rouge">curl</code> command to see events from user “Jane Doe”:</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11T00%3A00%3A00%2B00%3A00&amp;until=2017-04-12T23%3A59%3A59%2B00%3A00&amp;limit=20&amp;q=userFirstName+userLastName"
+"https://${org}.okta.com/api/v1/logs?q=Jane+Doe"
 </code></pre>
 </div>
 
 <h3 id="polling">Polling</h3>
-<p>Use this API to enable a client to trigger an action in response to an event.
-Query:
-https://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00&amp;until=&amp;limit=20&amp;filter=event_type+eq+”user.session.access_admin_app”
-Curl command:</p>
+<p>You can also use this API to search for particular types of events:</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11T00%3A00%3A00%2B00%3A00&amp;until=&amp;limit=20&amp;filter=event_type+eq+%22user.session.start%22"
+"https://${org}.okta.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
 </code></pre>
 </div>
 
-<h3 id="transferring-data-to-siem-system-security-information-and-event-management-system">Transferring Data to SIEM System (Security Information and Event Management System)</h3>
-<p>Use this API to enable clients to export parts of their system log to a different SIEM for analysis or compliance. To obtain the entire dataset, query from an early enough time.
-Query:
-https://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00
-Curl command:</p>
+<h3 id="transferring-data-to-a-separate-system">Transferring Data to a separate system</h3>
+<p>You can export your logs to a separate system for analysis or compliance. To obtain the entire dataset, query from the appropriate point of time in the past.</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11T00%3A00%3A00%2B00%3A00"
+"https://${org}.okta.com/api/v1/logs?since=2017-03-11"
 </code></pre>
 </div>
 
@@ -257,93 +264,66 @@ Curl command:</p>
 
 <p>Fetch a list of events from your Okta organization system log.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
+<h4 class="api api-request api-request-params" id="request-parameters">Request Parameters</h4>
 
 <table>
   <thead>
     <tr>
       <th>Parameter</th>
       <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Minimum</th>
-      <th>Maximum</th>
+      <th>Format</th>
+      <th>Default</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>limit</td>
-      <td>Specifies the number of results to return per page</td>
-      <td>Query</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>0</td>
+      <td><code class="highlighter-rouge">until</code></td>
+      <td>Upper time bound of events to return.</td>
+      <td><a href="https://www.w3.org/TR/NOTE-datetime">ISO8601 date/time</a>, must be temporally later than <code class="highlighter-rouge">since</code></td>
+      <td>Current time</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">since</code></td>
+      <td>Lower time bound of events to return.</td>
+      <td><a href="https://www.w3.org/TR/NOTE-datetime">ISO8601 date/time</a>, max 180 days ago</td>
+      <td>7 days prior to <code class="highlighter-rouge">until</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">filter</code></td>
+      <td><a href="/docs/api/getting_started/design_principles.html#filtering">SCIM Filter expression</a> for events.</td>
+      <td><a href="/docs/api/getting_started/design_principles.html#filtering">SCIM Filter expression</a></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">q</code></td>
+      <td>String search over all fields.</td>
+      <td>String</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">limit</code></td>
+      <td>Number of results to return per page.</td>
+      <td>Integer between 0 and 100</td>
       <td>100</td>
     </tr>
     <tr>
-      <td>since</td>
-      <td>Specifies the datetime, inclusive and in ISO8601 format, to list events after</td>
-      <td>Query</td>
-      <td>DateTime</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
+      <td><code class="highlighter-rouge">sortOrder</code></td>
+      <td>Time order in which to return events.</td>
+      <td>“ASCENDING” or “DESCENDING”</td>
+      <td>“ASCENDING”</td>
     </tr>
     <tr>
-      <td>filter</td>
-      <td><a href="/docs/api/getting_started/design_principles.html#filtering">SCIM Filter expression</a> for events</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>q</td>
-      <td>Search String fields for matching phrase</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>until</td>
-      <td>Specifies the first datetime, inclusive and in ISO8601 format, after which results aren’t returned, can be empty which denotes no end date</td>
-      <td>Query</td>
-      <td>DateTime</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>after</td>
-      <td>An opaque identifier used for pagination</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>sortOrder</td>
-      <td>the sort to apply to the results, which can be ASCENDING or DESCENDING. Events are ordered by time that the event was inserted into the db; because of this, events may not be strictly ordered by their stated timestamp.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
+      <td><code class="highlighter-rouge">after</code></td>
+      <td>Opaque identifier used for <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a>.</td>
       <td> </td>
       <td> </td>
     </tr>
   </tbody>
 </table>
 
-<p>The <code class="highlighter-rouge">after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a>.
-The <code class="highlighter-rouge">since</code> parameter must not be more than 180 days prior to the current day.</p>
+<h5 id="filter">Filter</h5>
 
-<h6 id="filter">Filter</h6>
-
-<p>The following expressions are supported for events with the <code class="highlighter-rouge">filter</code> query parameter (see <a href="http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering">Filtering</a>:</p>
+<p>The following expressions are supported for events with the <code class="highlighter-rouge">filter</code> query parameter:</p>
 
 <table>
   <thead>
@@ -370,8 +350,9 @@ The <code class="highlighter-rouge">since</code> parameter must not be more than
 
 <p>See <a href="/docs/getting_started/design_principles.html#filtering">Filtering</a> for more information about expressions.</p>
 
-<p><strong>Filter Examples</strong>
-Events published for a target user</p>
+<h6 id="filter-examples">Filter Examples</h6>
+
+<p>Events published for a target user</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>filter=target.id eq "00uxc78lMKUMVIHLTAXY"
 </code></pre>
@@ -403,13 +384,9 @@ Events published for a target user</p>
 
 <h5 id="query-with-q">Query with q</h5>
 
-<blockquote>
-  <p>Important: The query parameter <code class="highlighter-rouge">q</code> behaves differently than described in  <a href="/docs/getting_started/design_principles.html">Filtering</a>.</p>
-</blockquote>
-
 <p>The query parameter <code class="highlighter-rouge">q</code> searches string fields.</p>
 
-<p><strong>Query Examples</strong></p>
+<h6 id="query-examples">Query Examples</h6>
 
 <ul>
   <li>
@@ -423,152 +400,60 @@ Events published for a target user</p>
   </li>
 </ul>
 
-<h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response">Response</h5>
 
-<p>Array of <a href="#log-model">Log objects</a></p>
+<p>The response contains a JSON array of <a href="#log-model">Log objects</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
+<h2 id="log-objects">Log objects</h2>
 
-<blockquote>
-  <p>This operation requires <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoding</a>. For example, <code class="highlighter-rouge">since=2017-03-11T00:00:00+00:00</code> is encoded as <code class="highlighter-rouge">since=2017-03-11T00%3A00%3A00%2B00%3A00</code>.</p>
-</blockquote>
+<p>Each Log object describes a single action performed by a set of actors for a set of targets.</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>http://myorg.okta.com/api/v1/logs?since<span class="o">=</span>2017-03-11T00:00:00+00:00&amp;until<span class="o">=</span>2017-03-12T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>FAILURE
-http://myorg.okta.com/api/v1/logs?since<span class="o">=</span>2017-03-11T00:00:00+00:00&amp;until<span class="o">=</span>2017-03-12T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;q<span class="o">=</span>
-http://myorg.okta.com/api/v1/logs?since<span class="o">=</span>2017-03-11T00:00:00+00:00&amp;until<span class="o">=</span>2017-03-12T23:59:59+00:00&amp;limit<span class="o">=</span>20&amp;filter<span class="o">=</span>eventType eq <span class="s2">"user.session.start"</span>
-http://myorg.okta.com/api/v1/logs?since<span class="o">=</span>2017-03-11T00:00:00+00:00&amp;until<span class="o">=</span>&amp;limit<span class="o">=</span>20&amp;filter<span class="o">=</span>eventType eq <span class="s2">"user.session.end"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INFO"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFF_NETWORK"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"device"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"browser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNKNOWN"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"rawUserAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNKNOWN-DOWNLOAD"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.97.85.90"</span><span class="w">
+<h3 id="example-log-object">Example Log object</h3>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INFO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OFF_NETWORK"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"device"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"os"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"browser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNKNOWN"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"rawUserAgent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UNKNOWN-DOWNLOAD"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u1qw1mqitPHM8AJ0g7"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@tc1-trexcloud.com"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Fung"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f790999f-fe87-467a-9880-6982a583986c"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-31T22:23:07.777Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.session.start"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"displayMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User login to Okta"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WEB"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"V04Oy4ubUOc5UuG6s9DyNQAABtc"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"debugContext"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"debugData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/login/do-login"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"legacyEventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core.user_auth.login_success"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"authentication_context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"authenticationStep"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"externalSessionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1013FfF-DKQSvCI4RVXChzX-w"</span><span class="w">
+    </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.97.85.90"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u1qw1mqitPHM8AJ0g7"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@tc1-trexcloud.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"displayName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Fung"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f790999f-fe87-467a-9880-6982a583986c"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-31T22:23:07.777Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.session.start"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"displayMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User login to Okta"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WEB"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"V04Oy4ubUOc5UuG6s9DyNQAABtc"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"debugContext"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"debugData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/login/do-login"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"version"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"severity"</span><span class="p">:</span><span class="s2">"INFO"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"zone"</span><span class="p">:</span><span class="s2">"OFF_NETWORK"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"device"</span><span class="p">:</span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"userAgent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"os"</span><span class="p">:</span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"browser"</span><span class="p">:</span><span class="s2">"UNKNOWN"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"rawUserAgent"</span><span class="p">:</span><span class="s2">"UNKNOWN-UNKNOWN"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"ipAddress"</span><span class="p">:</span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"geographicalContext"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"country"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"geolocation"</span><span class="p">:{</span><span class="w">
-          </span><span class="nt">"lat"</span><span class="p">:</span><span class="mf">36.12</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"lon"</span><span class="p">:</span><span class="mf">-114.17</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"postalCode"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ujkqmCDIS4dRtaY0g3"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"User"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="s2">"administrator1@clouditude.net"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"Add-Min O'Cloudy Tud"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"detailEntry"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"outcome"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"result"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"reason"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00T1pkSJOMoElZWVY0g3"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"Token"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"detailEntry"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"uuid"</span><span class="p">:</span><span class="s2">"af4736fb-ef84-4cfb-bcfa-8f541ca99abf"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"published"</span><span class="p">:</span><span class="s2">"2016-05-27T19:38:59.031Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"eventType"</span><span class="p">:</span><span class="s2">"system.api_token.create"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"displayMessage"</span><span class="p">:</span><span class="s2">"Create API token"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"WEB"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"reqz_ADxMMoTSOd7TgdnbjUXw"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"detail"</span><span class="p">:</span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"debugContext"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"debugData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"originalPrincipal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"alternateId"</span><span class="p">:</span><span class="s2">"admin@saasure.com"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"displayName"</span><span class="p">:</span><span class="s2">"Piras Add-min"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ujjjNmP7E3U2Rq50g3"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"User"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"requestUri"</span><span class="p">:</span><span class="s2">"/api/1/devtools/global/test/orgs/specific"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"legacyEventType"</span><span class="p">:</span><span class="s2">"api.token.create"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"authentication_context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"issuer"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"authenticationProvider"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"credentialProvider"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"credentialType"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"interface"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"authenticationStep"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"externalSessionId"</span><span class="p">:</span><span class="s2">"101NN7VYcLqQ5u2Mi1lbmnEmg"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"legacyEventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core.user_auth.login_success"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authentication_context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"authenticationStep"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"externalSessionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1013FfF-DKQSvCI4RVXChzX-w"</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
-<h2 id="log-model">Log Model</h2>
-
-<p>Every organization has a system log that maintains a history of actions performed by users.  The Log model describes a single action performed by a set of actors for a set of targets.</p>
-
-<h3 id="annotated-example">Annotated Example</h3>
-
-<p>Use the following example by replacing the explanatory text with valid values.</p>
+<h3 id="log-object-annotated-example">Log Object annotated Example</h3>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code>{
 "uuid": Randomly generated String, Required
@@ -684,7 +569,7 @@ http://myorg.okta.com/api/v1/logs?since<span class="o">=</span>2017-03-11T00:00:
 
 <h3 id="attributes">Attributes</h3>
 
-<p>The Log model is read-only. The following properties are available:</p>
+<p>Log objects are read-only. The following properties are available:</p>
 
 <table>
   <thead>
@@ -1386,14 +1271,28 @@ http://myorg.okta.com/api/v1/logs?since<span class="o">=</span>2017-03-11T00:00:
 <h2 id="response-headers">Response Headers</h2>
 
 <h3 id="self-link-response-header">Self Link Response Header</h3>
-<p>The response always includes a <code class="highlighter-rouge">self</code> link, which is a link to the current query that was executed.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;https://myorg.okta.com/api/v1/logs?q=&amp;sortOrder=DESCENDING&amp;limit=20&amp;until=2017-03-17T23%3A59%3A59%2B00%3A00&amp;since=2017-03-10T00%3A00%3A00%2B00%3A00&gt;; rel="self"
+<p>The response always includes a <code class="highlighter-rouge">self</code> <code class="highlighter-rouge">Link</code> header, which is a link to the current query that was executed.</p>
+
+<p>This header is of the form:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;url&gt;; rel="self"
+</code></pre>
+</div>
+
+<p>For example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;https://${org}.okta.com/api/v1/logs?q=&amp;sortOrder=DESCENDING&amp;limit=20&amp;until=2017-03-17T23%3A59%3A59%2B00%3A00&amp;since=2017-03-10T00%3A00%3A00%2B00%3A00&gt;; rel="self"
 </code></pre>
 </div>
 
 <h3 id="next-link-response-header">Next Link Response Header</h3>
-<p>The <code class="highlighter-rouge">next</code> link gives the query to get the next batch of results, if any. Note that while the self link will always exist, the <code class="highlighter-rouge">next</code> link may not exist. This is the case where either there is no data returned by the query or the ‘until’ parameter is defiend and there is no more data.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;https://myorg.okta.com/api/v1/logs?q=&amp;sortOrder=DESCENDING&amp;limit=20&amp;until=2017-03-17T15%3A41%3A12.994Z&amp;after=349996bd-5091-45dc-a39f-d357867a30d7&amp;since=2017-03-10T00%3A00%3A00%2B00%3A00&gt;; rel="next"
+<p>The response may include a <code class="highlighter-rouge">next</code> <code class="highlighter-rouge">Link</code> header, which is a link to the next page of results, if there is one. Note that while the <code class="highlighter-rouge">self</code> <code class="highlighter-rouge">Link</code> will always exist, the <code class="highlighter-rouge">next</code> <code class="highlighter-rouge">Link</code> may not exist.</p>
+
+<p>This header is of the form:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;url&gt;; rel="next"
+</code></pre>
+</div>
+
+<p>For example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;https://${org}.okta.com/api/v1/logs?q=&amp;sortOrder=DESCENDING&amp;limit=20&amp;until=2017-03-17T15%3A41%3A12.994Z&amp;after=349996bd-5091-45dc-a39f-d357867a30d7&amp;since=2017-03-10T00%3A00%3A00%2B00%3A00&gt;; rel="next"
 </code></pre>
 </div>
 
@@ -1481,7 +1380,7 @@ http://myorg.okta.com/api/v1/logs?since<span class="o">=</span>2017-03-11T00:00:
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -1499,7 +1398,7 @@ http://myorg.okta.com/api/v1/logs?since<span class="o">=</span>2017-03-11T00:00:
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>

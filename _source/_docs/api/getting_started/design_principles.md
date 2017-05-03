@@ -232,18 +232,41 @@ Object whose property names are link relation types (as defined by [RFC5988](htt
 
 - A target URI
 - The name of the link relation (`rel`)
-- A few other optional properties to help with deprecation, content negotiation, etc.
+- Other optional properties to help with deprecation, object state or lifecycle management, content negotiation, etc.
+- Links are implicitly of media type `application/json`.  Other media types are only returned in cases where the link is not an API endpoint.
 
-> A resource may have multiple links that share the same link relation.
+> A resource may have multiple links that share the same link relation, as shown below for the "logo" link.
 
 ~~~ json
 {
     "_links": {
+        "logo": [
+            {
+              "name": "medium",
+              "href": "https://your-domain.okta.com/assets/img/logos/groups/active_directory-medium.b3959116154f9d44bd4d0f6b2ae31ea6.png",
+              "type": "image/png"
+            },
+            {
+              "name": "large",
+              "href": "https://your-domain.okta.com/assets/img/logos/groups/active_directory-large.0e7a58559ac90c4bbc7b33fa14018c50.png",
+              "type": "image/png"
+            }
+         ],
         "self": { "href": "/example_resource" },
         "next": { "href": "/page=2" }
     }
 }
 ~~~
+
+
+
+
+
+#### Links in collections
+
+Note that HAL links returned in a collection of resources may not reflect the total set of operations that are possible on that resource.  For example, in a user collection links indicating that a given user can be "unlocked" may not be returned and, if returned, may not reflect the correct user state.
+
+Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by 'id' using the "self" link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state.
 
 ## Rate Limiting
 

@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page users">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -2392,16 +2398,17 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <h5 class="api api-response api-response-params" id="response-parameters-7">Response Parameters</h5>
 
-<p>Returns empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns an activation link for the user to set up their account.</p>
+<p>Returns empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.</p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="w">
+  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
 <blockquote>
-  <p>If a password was set before the user was activated, then user must login with with their password and not the activation link</p>
+  <p>If a password was set before the user was activated, then user must login with with their password or the activationToken and not the activation link.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
@@ -2417,19 +2424,20 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 <h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="w">
+  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
-<h3 class="api api-operation" id="deactivate-user">Deactivate User</h3>
+<h3 class="api api-operation" id="reactivate-user">Reactivate User</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/deactivate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/reactivate</span></p>
 
-<p>Deactivates a user.  This operation can only be performed on users that do not have a <code class="highlighter-rouge">DEPROVISIONED</code> status.  Deactivation of a user is an asynchronous operation.  The user will have the <code class="highlighter-rouge">transitioningToStatus</code> property with a value of <code class="highlighter-rouge">DEPROVISIONED</code> during deactivation to indicate that the user hasn’t completed the asynchronous operation.  The user will have a status of <code class="highlighter-rouge">DEPROVISIONED</code> when the deactivation process is complete.</p>
+<p>Reactivates a user.  This operation can only be performed on users with a <code class="highlighter-rouge">PROVISIONED</code> status.  This operation restarts the activation workflow if for some reason the user activation was not completed when using the activationToken from <a href="#activate-user">Activate User</a>.</p>
 
 <blockquote>
-  <p>Deactivating a user is a <strong>destructive</strong> operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  <strong>This action cannot be recovered!</strong></p>
+  <p>Users that do not have a password must complete the flow by completing <a href="#reset-password">Reset Password</a> and MFA enrollment steps to transition the user to <code class="highlighter-rouge">ACTIVE</code> status.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-8">Request Parameters</h5>
@@ -2454,12 +2462,27 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
       <td>TRUE</td>
       <td> </td>
     </tr>
+    <tr>
+      <td>sendEmail</td>
+      <td>Sends an activation email to the user if <code class="highlighter-rouge">true</code></td>
+      <td>Query</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
   </tbody>
 </table>
 
 <h5 class="api api-response api-response-params" id="response-parameters-8">Response Parameters</h5>
 
-<p>Returns an empty object.</p>
+<p>Returns empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XE6wE17zmphl3KqAPFxO"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
@@ -2467,26 +2490,42 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reactivate?sendEmail=false"</span>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-success">Response Example (Success)</h5>
 
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XE6wE17zmphl3KqAPFxO"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-unexpected-user-status">Response Example (Unexpected user status)</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-</code></pre>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000038"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This operation is not allowed in the user's current status."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000038"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaefEpMS5yqTMGYEfxp0S_knw"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 </div>
 
-<h3 class="api api-operation" id="suspend-user">Suspend User</h3>
+<h3 class="api api-operation" id="deactivate-user">Deactivate User</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/suspend</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/deactivate</span></p>
 
-<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete.</p>
+<p>Deactivates a user.  This operation can only be performed on users that do not have a <code class="highlighter-rouge">DEPROVISIONED</code> status.  Deactivation of a user is an asynchronous operation.  The user will have the <code class="highlighter-rouge">transitioningToStatus</code> property with a value of <code class="highlighter-rouge">DEPROVISIONED</code> during deactivation to indicate that the user hasn’t completed the asynchronous operation.  The user will have a status of <code class="highlighter-rouge">DEPROVISIONED</code> when the deactivation process is complete.</p>
 
 <blockquote>
-  <p>Suspended users cannot log in to Okta. Their group and app assignments are retained.
-Suspended users can only be unsuspended or deactivated.</p>
+  <p>Deactivating a user is a <strong>destructive</strong> operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  <strong>This action cannot be recovered!</strong></p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-9">Request Parameters</h5>
@@ -2518,31 +2557,33 @@ Suspended users can only be unsuspended or deactivated.</p>
 
 <p>Returns an empty object.</p>
 
-<p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
-Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">ACTIVE</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
-
 <h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/suspend"</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 </code></pre>
 </div>
 
-<h3 class="api api-operation" id="unsuspend-user">Unsuspend User</h3>
+<h3 class="api api-operation" id="suspend-user">Suspend User</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/unsuspend</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/suspend</span></p>
 
-<p>Unsuspends a user and returns them to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.</p>
+<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete.</p>
+
+<blockquote>
+  <p>Suspended users cannot log in to Okta. Their group and app assignments are retained.
+Suspended users can only be unsuspended or deactivated.</p>
+</blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h5>
 
@@ -2574,7 +2615,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 <p>Returns an empty object.</p>
 
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
-Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">SUSPENDED</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
+Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">ACTIVE</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
@@ -2582,29 +2623,22 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unsuspend"</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/suspend"</span>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 </code></pre>
 </div>
 
-<blockquote>
-  <p>Deleting users is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
-</blockquote>
+<h3 class="api api-operation" id="unsuspend-user">Unsuspend User</h3>
 
-<h3 class="api api-operation" id="delete-user">Delete User</h3>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/unsuspend</span></p>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">DELETE</span> /api/v1/users/<em>:id</em></span></p>
-
-<p>Deletes a user permanently.  This operation can only be performed on users that have a <code class="highlighter-rouge">DEPROVISIONED</code> status.  <strong>This action cannot be recovered!</strong></p>
-
-<p>This operation on a user entity that has not been deactivated will cause that user to be deactivated.  A second DELETE
-would be required to effect the full deletion.</p>
+<p>Unsuspends a user and returns them to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-11">Request Parameters</h5>
 
@@ -2635,36 +2669,38 @@ would be required to effect the full deletion.</p>
 
 <p>Returns an empty object.</p>
 
-<p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.</p>
+<p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
+Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">SUSPENDED</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unsuspend"</span>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">ACCEPTED</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{}</span><span class="w">
-</span></code></pre>
+</code></pre>
 </div>
 
-<h3 class="api api-operation" id="unlock-user">Unlock User</h3>
-
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/unlock</span></p>
-
-<p>Unlocks a user with a <code class="highlighter-rouge">LOCKED_OUT</code> status and returns them to <code class="highlighter-rouge">ACTIVE</code> status.  Users will be able to login with their current password.</p>
-
 <blockquote>
-  <p>This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.</p>
+  <p>Deleting users is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
 </blockquote>
+
+<h3 class="api api-operation" id="delete-user">Delete User</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">DELETE</span> /api/v1/users/<em>:id</em></span></p>
+
+<p>Deletes a user permanently.  This operation can only be performed on users that have a <code class="highlighter-rouge">DEPROVISIONED</code> status.  <strong>This action cannot be recovered!</strong></p>
+
+<p>This operation on a user entity that has not been deactivated will cause that user to be deactivated.  A second DELETE
+would be required to effect the full deletion.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-12">Request Parameters</h5>
 
@@ -2693,9 +2729,69 @@ would be required to effect the full deletion.</p>
 
 <h5 class="api api-response api-response-params" id="response-parameters-12">Response Parameters</h5>
 
-<p>Returns an empty object</p>
+<p>Returns an empty object.</p>
+
+<p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">ACCEPTED</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="unlock-user">Unlock User</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/unlock</span></p>
+
+<p>Unlocks a user with a <code class="highlighter-rouge">LOCKED_OUT</code> status and returns them to <code class="highlighter-rouge">ACTIVE</code> status.  Users will be able to login with their current password.</p>
+
+<blockquote>
+  <p>This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code class="highlighter-rouge">id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-13">Response Parameters</h5>
+
+<p>Returns an empty object</p>
+
+<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2722,7 +2818,7 @@ would be required to effect the full deletion.</p>
 
 <p><strong>Note:</strong> You can also use this API to convert a user with the Okta Credential Provider to a use a Federated Provider. After this conversion, the user cannot directly sign in with password. The second example demonstrates this usage.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h5>
 
 <table>
   <thead>
@@ -2762,7 +2858,7 @@ would be required to effect the full deletion.</p>
   <li>The lookup searches login IDs first, then primary email addresses, and then secondary email addresses.</li>
 </ul>
 
-<h5 class="api api-response api-response-params" id="response-parameters-13">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h5>
 
 <p>Returns an empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns a link for the user to reset their password.</p>
 
@@ -2772,7 +2868,7 @@ would be required to effect the full deletion.</p>
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2820,7 +2916,7 @@ If <code class="highlighter-rouge">tempPassword</code> is passed, the user’s p
 When the user tries to log in to Okta, delegated authentication finds the password-expired status in the Active Directory,
 and the user is presented with the password-expired page where he or she can change the password.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-15">Request Parameters</h5>
 
 <table>
   <thead>
@@ -2853,7 +2949,7 @@ and the user is presented with the password-expired page where he or she can cha
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h5>
 
 <p>Returns the complete user object by default. When <code class="highlighter-rouge">tempPassword</code> is <code class="highlighter-rouge">true</code>, returns the temporary password.</p>
 
@@ -2863,7 +2959,7 @@ and the user is presented with the password-expired page where he or she can cha
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2934,7 +3030,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p>This operation resets all factors for the specified user. All MFA factor enrollments returned to the unenrolled state. The user’s status remains ACTIVE. This link is present only if the user is currently enrolled in one or more MFA factors.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-15">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-16">Request Parameters</h5>
 
 <table>
   <thead>
@@ -2959,11 +3055,11 @@ and the user is presented with the password-expired page where he or she can cha
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-16">Response Parameters</h5>
 
 <p>Returns an empty object by default.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2990,7 +3086,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><strong>Note:</strong> This does not clear the sessions created for web sign-in or native applications.</p>
 
-<h4 class="api api-request api-request-params" id="request-parameters-16">Request Parameters</h4>
+<h4 class="api api-request api-request-params" id="request-parameters-17">Request Parameters</h4>
 
 <table>
   <thead>
@@ -3023,11 +3119,11 @@ and the user is presented with the password-expired page where he or she can cha
   </tbody>
 </table>
 
-<h4 class="api api-response api-response-params" id="response-parameters-16">Response Parameters</h4>
+<h4 class="api api-response api-response-params" id="response-parameters-17">Response Parameters</h4>
 
 <p><code class="highlighter-rouge">204 No Content</code></p>
 
-<h4 class="api api-request api-request-example" id="request-example-28">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-29">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3051,7 +3147,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p>Generates a one-time token (OTT) that can be used to reset a user’s password.  The user will be required to validate their security question’s answer when visiting the reset link.  This operation can only be performed on users with a valid <a href="#recovery-question-object">recovery question credential</a> and have an <code class="highlighter-rouge">ACTIVE</code> status.</p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-17">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-18">Request Parameters</h5>
 
 <table>
   <thead>
@@ -3091,7 +3187,7 @@ and the user is presented with the password-expired page where he or she can cha
   <li>The lookup searches login IDs first, then primary email addresses, and then secondary email addresses.</li>
 </ul>
 
-<h5 class="api api-response api-response-params" id="response-parameters-17">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-18">Response Parameters</h5>
 
 <p>Returns an empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns a link for the user to reset their password.</p>
 
@@ -3105,7 +3201,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3131,7 +3227,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-params" id="request-parameters-18">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-19">Request Parameters</h5>
 
 <table>
   <thead>
@@ -3172,7 +3268,7 @@ and the user is presented with the password-expired page where he or she can cha
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-18">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-19">Response Parameters</h5>
 
 <p><a href="#credentials-object">Credentials</a> of the user</p>
 
@@ -3180,7 +3276,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3216,7 +3312,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p>Changes a user’s password by validating the user’s current password.  This operation can only be performed on users in <code class="highlighter-rouge">STAGED</code>, <code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">PASSWORD_EXPIRED</code>, or <code class="highlighter-rouge">RECOVERY</code> status that have a valid <a href="#password-object">password credential</a></p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-19">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-20">Request Parameters</h5>
 
 <table>
   <thead>
@@ -3257,7 +3353,7 @@ and the user is presented with the password-expired page where he or she can cha
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-19">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-20">Response Parameters</h5>
 
 <p><a href="#credentials-object">Credentials</a> of the user</p>
 
@@ -3265,7 +3361,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>The user will transition to <code class="highlighter-rouge">ACTIVE</code> status when successfully invoked in <code class="highlighter-rouge">RECOVERY</code> status</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3301,7 +3397,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p>Changes a user’s recovery question &amp; answer credential by validating the user’s current password.  This operation can only be performed on users in <strong>STAGED</strong>, <strong>ACTIVE</strong> or <strong>RECOVERY</strong> <code class="highlighter-rouge">status</code> that have a valid <a href="#password-object">password credential</a></p>
 
-<h5 class="api api-request api-request-params" id="request-parameters-20">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-21">Request Parameters</h5>
 
 <table>
   <thead>
@@ -3342,7 +3438,7 @@ and the user is presented with the password-expired page where he or she can cha
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-20">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-21">Response Parameters</h5>
 
 <p><a href="#credentials-object">Credentials</a> of the user</p>
 
@@ -3350,7 +3446,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-33">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4379,7 +4475,7 @@ When running reports, remember that the data is valid as of the last login or li
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -4397,7 +4493,7 @@ When running reports, remember that the data is valid as of the last login or li
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>

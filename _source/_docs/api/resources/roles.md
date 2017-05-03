@@ -480,7 +480,7 @@ HTTP/1.1 204 No Content
 
 Removes an app target from an `APP_ADMIN` role assignment.
 
-> Removing the last app target changes the scope of the role assignment from only applying to specific app targets to applying to **all** app targets.
+> Don't remove the last app target from a role assignment, as this causes an exception.  If you need a role assignment that applies to all apps, the API consumer should delete the `APP_ADMIN` role assignment and recreate it.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}

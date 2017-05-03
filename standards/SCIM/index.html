@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page scim-provisioning-with-lifecycle-management">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -1001,6 +1007,30 @@ status code, see <a href="https://tools.ietf.org/html/rfc6585#section-4">section
 </code></pre>
 </div>
 
+<h5 id="create-group-post-groups">Create Group: POST /Groups</h5>
+
+<p>With Group Push Beta, Okta now supports creation of a Group along with its user memberships in the downstream SCIM enabled application if your SCIM 2.0 API supports it. The caveat is that the users must already be provisioned in your SCIM enabled application.</p>
+
+<h5 id="read-group-details-get-groupsid">Read Group Details: GET /Groups/{id}</h5>
+
+<p>With Group Push Beta, Okta now supports reading the Group’s details by group id along with the membership details. If a Group is not found, your SCIM application may return a HTTP status 404(“not found”).For more details on the <code class="highlighter-rouge">/Groups/{id}</code> SCIM endpoint, see <a href="https://tools.ietf.org/html/rfc7644#section-3.4.1">section 3.4.1</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
+<h5 id="update-group-details-put-groupsid">Update Group Details: PUT /Groups/{id}</h5>
+
+<p>With Group Push Beta, any updates to the Group profile and memberships in Okta can now be reflected into your SCIM application. Okta will do the following to make the Group changes effective:</p>
+<ul>
+  <li>Make a GET request against <code class="highlighter-rouge">/Groups/{id}</code> on your SCIM API for the
+group to update.</li>
+  <li>Take the resource returned from your SCIM API and update only the
+attributes that need to be updated.</li>
+  <li>Make a PUT request against <code class="highlighter-rouge">/Groups/{id}</code> in your SCIM API with
+the updated resource as the payload.</li>
+</ul>
+
+<h5 id="delete-group-delete-groupsid">Delete Group: DELETE /Groups/{id}</h5>
+
+<p>With Group Push Beta, Okta can delete the Group in your SCIM enabled application. For more details on deleting resources, see section <a href="https://tools.ietf.org/html/rfc7644#section-3.6">3.6</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
+
 <h3 id="scim-features-not-implemented-by-okta">SCIM Features Not Implemented by Okta</h3>
 
 <p>The following features are currently not supported by Okta:</p>
@@ -1042,27 +1072,6 @@ covered in
 <a href="https://tools.ietf.org/html/rfc7644#section-3.11">section 3.11</a> of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specification</a>.</p>
 
 <p>Okta does not currently make SCIM requests with the <code class="highlighter-rouge">/Me</code> URI alias.</p>
-
-<h4 id="groups-api-endpoint">/Groups API endpoint</h4>
-
-<p>Okta currently does not support using the <code class="highlighter-rouge">/Groups</code> endpoint of a SCIM
-API, except for <a href="#get-groups-api-endpoint"><code class="highlighter-rouge">GET /Groups</code></a>. When support is added for the <code class="highlighter-rouge">/Groups</code> endpoint, Okta plans
-to use the following HTTP requests against the <code class="highlighter-rouge">/Groups</code> endpoint:</p>
-
-<ul>
-  <li>
-    <p>Read list of Groups: GET /Groups</p>
-  </li>
-  <li>
-    <p>Create Group: POST /Groups</p>
-  </li>
-  <li>
-    <p>Read Group detail: GET /Groups/{id}</p>
-  </li>
-  <li>
-    <p>Delete Group: DELETE /Groups/{id}</p>
-  </li>
-</ul>
 
 <h4 id="schemas-api-endpoint">/Schemas API endpoint</h4>
 
@@ -1346,20 +1355,21 @@ Please request this in your email to <a href="mailto:developers@okta.com">develo
 
 <h4 id="submit-for-okta-review">Submit for Okta Review</h4>
 
-<p>Once you have a functioning SCIM integration in your Okta developer org, and have confirmed support for <a href="#required-scim-server-capabilities">Okta’s required SCIM server capabilities</a>, you are ready to formally submit your app for review by Okta.</p>
+<p>Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OAN Manager.</p>
 
-<p>Your submission will provide Okta with all the metadata needed to create a customized app (includes default mappings, link to config docs) which will be used by joint customers and eventually published publicly in <a href="https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324">the Okta Application Network</a>. Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.</p>
+<p>Your submission provides Okta with all the metadata needed to create a customized app for publication in <a href="https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324">the Okta Application Network</a>. Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.</p>
 
-<p>We recommend completing a few actions before submitting your application to Okta:</p>
+<p>We recommend completing these five steps before actual submission, with detailed instructions in the next section:</p>
 
 <ol>
   <li>Check the Profile Attributes for your application.</li>
   <li>Check the Attribute Mappings for your application.</li>
   <li>Run the second set of Runscope tests: Okta SCIM 2.0 CRUD Test.</li>
   <li>Prepare the customer-facing configuration guide.</li>
+  <li>Create a demo video showing working integration (optional)</li>
 </ol>
 
-<p>After performing these four steps (instructions below), use <a href="https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform">this form</a> to submit for Okta review.</p>
+<p>After performing these steps, navigate to the OAN Manager at <a href="https://oanmanager.okta.com/">https://oanmanager.okta.com/</a> to complete the submission form and track review status.</p>
 
 <h5 id="check-the-profile-attributes-for-your-application">Check the Profile Attributes for your application</h5>
 
@@ -2056,7 +2066,7 @@ only happen if the User table isn’t defined.</p>
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -2074,7 +2084,7 @@ only happen if the User table isn’t defined.</p>
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>

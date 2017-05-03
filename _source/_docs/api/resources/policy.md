@@ -723,7 +723,7 @@ The Rules model defines several attributes:
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier of the rule | String | No | Assigned
-type | Rule type | `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
+type | Rule type | `OKTA_SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | Yes | 
 status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | ACTIVE
 priority | Priority of the rule | Integer | No | Last / Lowest Priority
 system | This is set to 'true' on system rules, which cannot be deleted. | Boolean | No | false
@@ -868,7 +868,7 @@ requireFactor | Indicates if multi-factor authentication is required | Boolean |
 factorPromptMode | Indicates if the user should be challenged for second factor authentication (MFA) based on the device being used, a factor session lifetime, or on every sign on attempt. | `DEVICE`, `SESSION` or `ALWAYS` | Yes, if requireFactor is true | N/A
 rememberDeviceByDefault | Indicates if Okta should automatically remember the device  | Boolean | No | false
 factorLifetime | Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is set to 'SESSION' | Integer | Yes, if requireFactor is true | N/A
-session | Properties governing the user's session lifetime | <a href="#SignonSessionObject">Signon Session Object</a> | No | See below
+session | Properties governing the user's session lifetime | <a href="#SignonSessionObject">Signon Session Object</a> | No | 
 
 
 ##### Signon Session Object
@@ -890,34 +890,61 @@ The following conditions may be applied to the rules associated with Okta Sign O
 <a href="#AuthContextConditionObject">AuthContext Condition</a>
 
 
-## MFA Policy
+## Multifactor (MFA) Policy
 {: #OktaMFAPolicy }
 
 > The MFA Policy API is a {% api_lifecycle beta %} [release](/docs/api/getting_started/releases-at-okta.html).
-<!-- [THIS SECTION IN PROGRESS] -->
+
+Multifactor (MFA) Policy controls which MFA methods are available for a user, as well as when a user may enroll in a particular factor.  
+
+#### Policy Settings Example
+Note that policy settings are included only for those factors which have been enabled.
+
+~~~json
+   "settings": {
+     "factors": {
+       "okta_question": {
+         "enroll": {
+           "self": "OPTIONAL"
+         },
+         "consent": {
+           "type": "NONE"
+         }
+       },
+       "okta_sms": {
+         "enroll": {
+           "self": "REQUIRED"
+         },
+         "consent": {
+           "type": "NONE"
+         }
+       }
+     }
+   }
+~~~
 
 ### Policy Settings Data
 
 #### Policy Factors Configuration Object
 {: #PolicyFactorsConfigurationObject }
 
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | --- | ---
-google_otp | Google Authenticator | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-okta_otp | Okta Verify TOTP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-okta_push | Okta Verify Push | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-okta_question | Okta Security Question | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
-symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No | 
+Parameter | Description | Data Type | Required 
+| --- | --- | --- | --- 
+google_otp | Google Authenticator | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No  
+okta_otp | Okta Verify TOTP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No   
+okta_push | Okta Verify Push | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No   
+okta_question | Okta Security Question | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No    
+okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No    
+rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No    
+symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No    
 
 #### Policy MFA Factor Object
 {: #PolicyFactorObject }
 
-Parameter | Description | Data Type | Required | Default
-| --- | --- | --- | --- | ---
-consent |  | <a href="#PolicyFactorConsentObject">Policy Factor Consent Object</a> | No | 
-enroll |  | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> | No | 
+Parameter | Description | Data Type | Required 
+| --- | --- | --- | --- 
+consent | Consent requirements for the factor | <a href="#PolicyFactorConsentObject">Policy Factor Consent Object</a> | No  
+enroll | Enrollment requirements for the factor | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> | No  
 
 
 #### Policy Factor Enroll Object
@@ -925,31 +952,59 @@ enroll |  | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> 
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- | ---
-self |  | `NOT_ALLOWED`, `OPTIONAL` or `REQUIRED` | Yes | 
+self | Requirements for use-initiated enrollment | `NOT_ALLOWED`, `OPTIONAL` or `REQUIRED` | No | `NOT_ALLOWED`
 
 #### Policy Factor Consent Object
 {: #PolicyFactorConsentObject }
 
+The Policy Factor Consent Object is an extensibility point.  In the future, policy may be configureable to require user consent to specified terms when enrolling in a factor.   At present settings other than type = `NONE` are ignored.
+
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- | ---
-terms | The format of the consent dialog to be presented. | `TEXT`, `RTF`, `MARKDOWN` or `URL` | No | 
-type | Does the user need to consent to `NONE` or `TERMS_OF_SERVICE`. | String | No | NONE
-value | The contents of the consent dialog. | String | No | 
+terms | Specifies the consent terms to be offered the user upon enrolling in the factor. | <a href="#PolicyFactorConsentTerms">Policy Factor Consent Terms</a> | No | 
+type | User consent type required before enrolling in the factor: `NONE` or `TERMS_OF_SERVICE`. | String | No | NONE
+
+#### Policy Factor Consent Terms
+{: #PolicyFactorConsentTerms }
+
+At present the Policy Factor Consent Terms settings are ignored.
+
+Parameter | Description | Data Type | Required | Default
+| --- | --- | --- | --- | ---
+format | The format of the consent dialog to be presented. | `TEXT`, `RTF`, `MARKDOWN` or `URL` | No | N/A
+value | The contents of the consent dialog. | String | No | N/A
 
 ### Policy Conditions
-The following conditions may be applied to Okta MFA Policy
+The following conditions may be applied to Multifactor Policy
 
-### Rules Action Data
+<a href="#PeopleObject">People Condition</a>
+
+### Multifactor Rules Action Data
+
+#### Multifactor Enrollment Rules Actions Example
+
+~~~json
+  "actions": {
+    "enroll": {
+      "self": "CHALLENGE"
+    }
+  },
+~~~
+
 
 #### Rules Actions Enroll Object
 {: #RulesActionsEnrollObject }
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- | ---
-self | Should the user be enrolled the first time they `LOGIN`, the next time they are `CHALLENGE`d, or `NEVER`? | `CHALLENGE`, `LOGIN` or `NEVER` | Yes | 
+self | Should the user be enrolled the first time they `LOGIN`, the next time they are `CHALLENGE`d, or `NEVER`? | `CHALLENGE`, `LOGIN` or `NEVER` | Yes | N/A
 
 ### Rules Conditions
-The following conditions may be applied to the rules associated with Okta MFA Policy 
+The following conditions may be applied to the rules associated with MFA Enrollment Policy 
+
+<a href="#PeopleObject">People Condition</a>
+
+<a href="#NetworkConditionObject">Network Condition</a>
 
 ## Password Policy
 {: #GroupPasswordPolicy }
@@ -959,6 +1014,7 @@ The following conditions may be applied to the rules associated with Okta MFA Po
 Password policy controls settings that deterine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
 
 #### Policy Settings Example
+
 ~~~json
    "settings": {
      "password": {
@@ -1052,7 +1108,7 @@ Property | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 maxAgeDays | Specifies how long (in days) a password remains valid before it expireds: 0 indicates no limit | integer | No | 0
 expireWarnDays | Specifies the number of days prior to password expiration when a user will be warned to reset their password: 0 indicates no warning  | integer | No | 0
-minAgeMinutes | Specifies the minimum time interval (in minutes) between password changes: 0 indicates no limit | integer | No | -1
+minAgeMinutes | Specifies the minimum time interval (in minutes) between password changes: 0 indicates no limit | integer | No | 0
 historyCount | Specifies the number of distinct passwords that a user must create before they can reuse a previous password: 0 indicates none  | integer | No | 0
 
 ##### Lockout Object

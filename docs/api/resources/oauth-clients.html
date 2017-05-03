@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page oauth-2.0-clients">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -394,37 +400,71 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
   </tbody>
 </table>
 
-<blockquote>
-  <p>When creating a client application, you can specify the <code class="highlighter-rouge">client_id</code> or let Okta generate a value for it. Thereafter, the <code class="highlighter-rouge">client_id</code> is immutable.</p>
-</blockquote>
+<p>Property Details</p>
 
-<blockquote>
-  <p>The <code class="highlighter-rouge">client_secret</code> is only shown on the initial creation of a client application (and only if the <code class="highlighter-rouge">token_endpoint_auth_method</code> is one that requires a client secret).
-  It is never returned in a GET call. If a <code class="highlighter-rouge">client_secret</code> is not provided on creation and the <code class="highlighter-rouge">token_endpoint_auth_method</code> requires one Okta will generate a random <code class="highlighter-rouge">client_secret</code> for the client application.</p>
-</blockquote>
+<ul>
+  <li>
+    <p>When creating a client application, you can specify the <code class="highlighter-rouge">client_id</code> or let Okta generate a value for it. Thereafter, the <code class="highlighter-rouge">client_id</code> is immutable.</p>
+  </li>
+  <li>
+    <p>The <code class="highlighter-rouge">client_secret</code> is only shown on the initial creation of a client application (and only if the <code class="highlighter-rouge">token_endpoint_auth_method</code> is one that requires a client secret).
+It is never returned in a GET call. If a <code class="highlighter-rouge">client_secret</code> is not provided on creation and the <code class="highlighter-rouge">token_endpoint_auth_method</code> requires one Okta will generate a random <code class="highlighter-rouge">client_secret</code> for the client application.</p>
+  </li>
+  <li>
+    <p>The <code class="highlighter-rouge">client_id</code> must consist of alphanumeric characters, the following special characters <code class="highlighter-rouge">$-_.+!*'(),</code>, must contain between 6 and 100 characters, inclusive, and must not be the reserved word <code class="highlighter-rouge">ALL_CLIENTS</code>. The <code class="highlighter-rouge">client_secret</code> must consist of printable characters, which are defined in <a href="https://tools.ietf.org/html/rfc6749#appendix-A">the OAuth 2.0 Spec</a>, and must contain between 14 and 100 characters, inclusive.</p>
+  </li>
+  <li>
+    <p>At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
+<a href="https://tools.ietf.org/html/rfc6749#section-4.3">Resource Owner Password</a> flow (if <code class="highlighter-rouge">grant_types</code> contains the value <code class="highlighter-rouge">password</code>)
+or <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> contains the value <code class="highlighter-rouge">client_credentials</code>)
+then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.</p>
+  </li>
+  <li>
+    <p>All redirect URIs must be absolute URIs and must not include a fragment compontent.</p>
+  </li>
+  <li>
+    <p>Different application types have different valid values for the corresponding grant type:</p>
 
-<blockquote>
-  <p>The <code class="highlighter-rouge">client_id</code> must consist of alphanumeric characters, the following special characters <code class="highlighter-rouge">$-_.+!*'(),</code> and must contain between 6 and 100 characters, inclusive. The <code class="highlighter-rouge">client_secret</code> must consist of printable characters, which are defined in <a href="https://tools.ietf.org/html/rfc6749#appendix-A">the OAuth 2.0 Spec</a>, and must contain between 14 and 100 characters, inclusive.</p>
-</blockquote>
-
-<blockquote>
-  <p>The <code class="highlighter-rouge">grant_types</code> and <code class="highlighter-rouge">response_types</code> values described above are partially orthogonal, as they refer to arguments passed to different
+    <table>
+      <thead>
+        <tr>
+          <th>Application Type</th>
+          <th>Valid Grant Type</th>
+          <th>Requirements</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">web</code></td>
+          <td><code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">refresh_token</code></td>
+          <td>Must have at least <code class="highlighter-rouge">authorization_code</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">native</code></td>
+          <td><code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code></td>
+          <td>Must have at least <code class="highlighter-rouge">authorization_code</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">browser</code></td>
+          <td><code class="highlighter-rouge">implicit</code></td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">service</code></td>
+          <td><code class="highlighter-rouge">client_credentials</code></td>
+          <td>Works with OAuth 2.0 flow (not OpenID Connect)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>The <code class="highlighter-rouge">grant_types</code> and <code class="highlighter-rouge">response_types</code> values described above are partially orthogonal, as they refer to arguments passed to different
   endpoints in the <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 protocol</a>. However, they are related in that the <code class="highlighter-rouge">grant_types</code>
   available to a client influence the <code class="highlighter-rouge">response_types</code> that the client is allowed to use, and vice versa. For instance, a <code class="highlighter-rouge">grant_types</code>
   value that includes <code class="highlighter-rouge">authorization_code</code> implies a <code class="highlighter-rouge">response_types</code> value that includes <code class="highlighter-rouge">code</code>, as both values are defined as part of
   the OAuth 2.0 authorization code grant.</p>
-</blockquote>
-
-<blockquote>
-  <p>At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
-  <a href="https://tools.ietf.org/html/rfc6749#section-4.3">Resource Owner Password</a> flow (if <code class="highlighter-rouge">grant_types</code> contains the value <code class="highlighter-rouge">password</code>)
-  or <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> contains the value <code class="highlighter-rouge">client_credentials</code>)
-  then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.</p>
-</blockquote>
-
-<blockquote>
-  <p>All redirect URIs must be absolute URIs and must not include a fragment compontent.</p>
-</blockquote>
+  </li>
+</ul>
 
 <h2 id="client-application-operations">Client Application Operations</h2>
 
@@ -446,7 +486,6 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <th>ParamType</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -456,7 +495,6 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <td>Body</td>
       <td><a href="#oauth-client-model">Client Settings</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -562,7 +600,6 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <th>ParamType</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -572,7 +609,6 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -1188,7 +1224,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -1206,7 +1242,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>

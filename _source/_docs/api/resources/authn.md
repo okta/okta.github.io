@@ -54,6 +54,7 @@ The requests and responses vary depending on the application type, and whether a
 
 - [Primary Authentication with Public Application](#primary-authentication-with-public-application)&mdash;[Request Example](#request-example-public-application)
 - [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)&mdash;[Request Example](#request-example-trusted-application)
+- [Primary Authentication with activationToken](#primary-authentication-with-activation-token)&mdash;[Request Example](#request-example-activation-token)
 - [Primary Authentication with Password Expiration Warning](#primary-authentication-with-password-expiration-warning)&mdash;[Request Example](#request-example-password-expiration-warning)
 
 > You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication.
@@ -61,13 +62,16 @@ The requests and responses vary depending on the application type, and whether a
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
+As part of the authentication call either the username and password or the token parameter must be provided.
+
 Parameter   | Description                                                                                                      | Param Type | DataType                          | Required | Default | MaxLength
 ----------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | ------- | ---------
-username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |         |
-password    | User's password credential                                                                                       | Body       | String                            | TRUE     |         |
+username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | FALSE    |         |
+password    | User's password credential                                                                                       | Body       | String                            | FALSE    |         |
 relayState  | Optional state value that is persisted for the lifetime of the authentication transaction                        | Body       | String                            | FALSE    |         | 2048
 options     | Opt-in features for the authentication transaction                                                               | Body       | [Options Object](#options-object) | FALSE    |         |
 context     | Provides additional context for the authentication transaction                                                   | Body       | [Context Object](#context-object) | FALSE    |         |
+token       | Token received as part of activation user request                                                                | Body       | String                            | FALSE    |         |
 
 ##### Options Object
 
@@ -584,7 +588,7 @@ User is assigned to a **MFA Policy** that requires enrollment during sign-on and
 
 Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides [client request context](../getting_started/design_principles.html#client-request-context).
 
-> Specifying your own `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *admin API token*.
+> Specifying your own `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *API token*.
 
 > The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
 
@@ -637,9 +641,270 @@ curl -v -X POST \
 }
 ~~~
 
+#### Primary Authentication with Activation Token
+
+Authenticates a user via a [trusted application](#trusted-application) or proxy that overrides [client request context](../getting_started/design_principles.html#client-request-context).
+
+> Specifying your own `deviceToken` is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid *API token*.
+
+> The **public IP address** of your [trusted application](#trusted-application) must be [whitelisted as a gateway IP address](../getting_started/design_principles.html#ip-address) to forward the user agent's original IP address with the `X-Forwarded-For` HTTP header
+
+##### Request Example: Activation Token
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" \
+-H "X-Forwarded-For: 23.235.46.133" \
+-d '{
+  "token": "o7AFoTGE9xjQiHQK6dAa"
+}' "https://${org}.okta.com/api/v1/authn"
+~~~
+
+##### Response Example (Success - User with Password, no MFA)
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "expiresAt": "2017-03-29T21:42:30.000Z",
+  "status": "SUCCESS",
+  "sessionToken": "20111DuMTdPoBlMOqX5R_OAV3ku2bTWxP6wUIRT_jqkU6XTvOsJLmDq",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "passwordChanged": "2017-03-29T21:37:25.000Z",
+      "profile": {
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+~~~
+
+##### Response Example (Success - User with Password and Configured MFA)
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "stateToken": "00bMktAiPaI0Jo97bpiKxEw7drTgtukJKs33abrSpb",
+  "expiresAt": "2017-03-29T21:49:09.000Z",
+  "status": "MFA_ENROLL",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "passwordChanged": "2017-03-29T21:37:25.000Z",
+      "profile": {
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "factors": [
+      {
+        "factorType": "question",
+        "provider": "OKTA",
+        "vendorName": "OKTA",
+        "_links": {
+          "questions": {
+            "href": "https://your-domain.okta.com/api/v1/users/00u1nehnZ6qp4Qy8G0g4/factors/questions",
+            "hints": {
+              "allow": [
+                "GET"
+              ]
+            }
+          },
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        },
+        "status": "NOT_SETUP"
+      },
+      {
+        "factorType": "token:software:totp",
+        "provider": "OKTA",
+        "vendorName": "OKTA",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        },
+        "status": "NOT_SETUP"
+      },
+      {
+        "factorType": "token:software:totp",
+        "provider": "GOOGLE",
+        "vendorName": "GOOGLE",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        },
+        "status": "NOT_SETUP"
+      },
+      {
+        "factorType": "sms",
+        "provider": "OKTA",
+        "vendorName": "OKTA",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        },
+        "status": "NOT_SETUP"
+      },
+      {
+        "factorType": "push",
+        "provider": "OKTA",
+        "vendorName": "OKTA",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        },
+        "status": "NOT_SETUP"
+      },
+      {
+        "factorType": "token:hardware",
+        "provider": "YUBICO",
+        "vendorName": "YUBICO",
+        "_links": {
+          "enroll": {
+            "href": "https://your-domain.okta.com/api/v1/authn/factors",
+            "hints": {
+              "allow": [
+                "POST"
+              ]
+            }
+          }
+        },
+        "status": "NOT_SETUP"
+      }
+    ]
+  },
+  "_links": {
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+##### Response Example (Success - User Without Password)
+{:.api .api-response .api-response-example}
+
+In the case where the user was created without credentials the response will trigger the workflow to [set the user's password](#change-password). After the password is configured, depending on the MFA setting, the workflow continues with MFA enrollment or a successful authentication completes. 
+
+~~~json
+{
+  "stateToken": "005Oj4_rx1yAYP2MFNobMXlM2wJ3QEyzgifBd_T6Go",
+  "expiresAt": "2017-03-29T21:35:47.000Z",
+  "status": "PASSWORD_RESET",
+  "recoveryType": "ACCOUNT_ACTIVATION",
+  "_embedded": {
+    "user": {
+      "id": "00ub0oNGTSWTBKOLGLNR",
+      "passwordChanged": "2015-09-08T20:14:45.000Z",
+      "profile": {
+        "login": "dade.murphy@example.com",
+        "firstName": "Dade",
+        "lastName": "Murphy",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    },
+    "policy": {
+      "expiration": {
+        "passwordExpireDays": 5
+      },
+      "complexity": {
+        "minLength": 8,
+        "minLowerCase": 1,
+        "minUpperCase": 1,
+        "minNumber": 1,
+        "minSymbol": 0
+      }
+    }
+  },
+  "_links": {
+    "next": {
+      "name": "resetPassword",
+      "href": "https://your-domain.okta.com/api/v1/authn/credentials/reset_password",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    },
+    "cancel": {
+      "href": "https://your-domain.okta.com/api/v1/authn/cancel",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+~~~
+
+##### Response Example (Failure - Invalid or Expired Token)
+{:.api .api-response .api-response-example}
+
+~~~http
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json
+
+{
+  "errorCode": "E0000004",
+  "errorSummary": "Authentication failed",
+  "errorLink": "E0000004",
+  "errorId": "oae2fYYJmkuTg-NyozqBkb3sw",
+  "errorCauses": []
+}
+~~~
+
 #### Primary Authentication with Password Expiration Warning
 
-Authenticates a user with a password that is about to expire.  The user should [change their password](#change-password) to complete the authentication transaction but may opt-out (skip).
+Authenticates a user with a password that is about to expire.  The user should [change their password](#change-password) to complete the authentication transaction but may skip.
 
 >Please note:
 * The `warnBeforePasswordExpired` option must be explicitly specified as `true` to allow the authentication transaction to transition to `PASSWORD_WARN` status.
@@ -5568,16 +5833,17 @@ Specifies the password requirements related to password age and history
 
 A subset of [factor properties](factors.html#factor-model) published in an authentication transaction during `MFA_ENROLL`, `MFA_REQUIRED`, or `MFA_CHALLENGE` states
 
-|----------------+-------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------|
-| Property       | Description                                                                   | DataType                                                       | Nullable | Unique | Readonly |
-| -------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | ---------|
-| id             | unique key for factor                                                         | String                                                         | TRUE     | TRUE   | TRUE     |
-| factorType     | type of factor                                                                | [Factor Type](factors.html#factor-type)                        | FALSE    | TRUE   | TRUE     |
-| provider       | factor provider                                                               | [Provider Type](factors.html#provider-type)                    | FALSE    | TRUE   | TRUE     |
-| profile        | profile of a [supported factor](factors.html#supported-factors-for-providers) | [Factor Profile Object](factors.html#factor-profile-object)    | TRUE     | FALSE  | TRUE     |
-| _embedded      | [embedded resources](#factor-embedded-resources) related to the factor        | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
-| _links         | [discoverable resources](#factor-links-object) for the factor                 | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
-|----------------+-------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------|
+|----------------+------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------|
+| Property       | Description                                                                              | DataType                                                       | Nullable | Unique | Readonly |
+| -------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------- | ------ | ---------|
+| id             | unique key for factor                                                                    | String                                                         | TRUE     | TRUE   | TRUE     |
+| factorType     | type of factor                                                                           | [Factor Type](factors.html#factor-type)                        | FALSE    | TRUE   | TRUE     |
+| provider       | factor provider                                                                          | [Provider Type](factors.html#provider-type)                    | FALSE    | TRUE   | TRUE     |
+| vendorName     | factor Vendor Name (Same as provider but for On Prem MFA it depends on Admin Settings)   | [Provider Type](factors.html#vendor-name)                      | FALSE    | TRUE   | TRUE     |
+| profile        | profile of a [supported factor](factors.html#supported-factors-for-providers)            | [Factor Profile Object](factors.html#factor-profile-object)    | TRUE     | FALSE  | TRUE     |
+| _embedded      | [embedded resources](#factor-embedded-resources) related to the factor                   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
+| _links         | [discoverable resources](#factor-links-object) for the factor                            | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
+|----------------+------------------------------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------|
 
 ~~~json
 {

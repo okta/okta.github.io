@@ -704,6 +704,7 @@ prompt         | Can be either *none* or *login*. The value determines if Okta s
 nonce          | Specifies a nonce that is reflected back in the ID Token. It is used to mitigate replay attacks. | Query        | String   | TRUE     |
 code_challenge | Specifies a challenge of [PKCE](#parameter-details). The challenge is verified in the Access Token request.  | Query        | String   | FALSE    |
 code_challenge_method | Specifies the method that was used to derive the code challenge. Only S256 is supported.  | Query        | String   | FALSE    |
+login_hint | A username to prepopulate if prompting for authentication.  | Query        | String   | FALSE    |
 
 #### Parameter Details
 

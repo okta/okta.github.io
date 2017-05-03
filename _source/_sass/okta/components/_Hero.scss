@@ -16,17 +16,17 @@
 		font-size: 40px;
 		line-height: 50px;
 		margin-bottom: 0;
-		
+
 		span {
 			white-space: nowrap;
 		}
 	}
-	
+
 	&-subtitle {
 		@extend %h5;
 		@include margin(x-small 0 medium);
 	}
-	
+
 	&-image {
 		img {
 			display: block;
@@ -35,7 +35,7 @@
 			max-width: calc(100% + 60px);
 		}
 	}
-	
+
 	%Row {
 		align-items: center;
 	}
@@ -43,21 +43,21 @@
 	%Button + %Button {
 		margin-left: get-spacing('x-small');
 	}
-	
+
 }
 
 @include media('<small') {
 	.Hero {
 		@include padding(x-large 0);
-		
+
 		&-title {
 			font-size: 32px;
 			line-height: 42px;
 		}
-		
+
 		&-image {
 			order: -1;
-			
+
 			img {
 				height: auto;
 				margin: -11.5vw -3.5vw -5vw;
@@ -66,19 +66,19 @@
 				width: calc(100% + 7vw);
 			}
 		}
-		
+
 		&-ctas {
 			display: flex;
 			justify-content: space-between;
 			width: 100%;
-			
+
 			.Button--large {
 				display: block;
 				padding-left: 0;
 				padding-right: 0;
 				text-align: center;
 				width: calc(50% - #{get-spacing('xx-small')});
-				
+
 				+ .Button--large {
 					margin-left: 0;
 				}
@@ -91,11 +91,11 @@
 	.Hero {
 		& &-ctas {
 			flex-direction: column;
-			
+
 			.Button--large {
 				margin: 0;
 				width: 100%;
-				
+
 				+ .Button--large {
 					margin-top: get-spacing('xx-small');
 				}
@@ -111,14 +111,14 @@
 	background-repeat: repeat;
 	background-size: auto 100%;
 	text-align: center;
-	
+
 	.Wrap {
 		max-width: $site-width - 200;
 	}
-	
+
 	.Hero-image {
 		@include margin(medium 0 0);
-		
+
 		img {
 			height: auto !important;
 			margin: 0 !important;
@@ -137,14 +137,14 @@
 	.Hero-subtitle {
 		font-size: 30px;
 	}
-	
+
 	.Wrap {
 		max-width: $site-width - 200;
 		h1 {
 			margin: 0.5em 0;
 		}
 	}
-	
+
 	.oan-logo {
 		width: 90px;
 		display: inline-block;
@@ -153,14 +153,33 @@
 @include media('<medium-small') {
 	.Hero--integrate {
 		padding: 100px 0;
-		
+
 		.Hero-title {
 			font-size: 30px;
 		}
-		
+
 		.Hero-subtitle {
 			font-size: 24px;
 		}
 	}
 }
 
+// Some of the styles are redundant
+// we want to ensure that we are using the new style
+.Hero--stormpath {
+	@extend %Hero;
+	@include color('white');
+	@include padding(large 0);
+
+	background: get-color('blue-bright');
+	text-align: center;
+	h1 {
+		@include font-weight('x-small');
+		@include font-size('new-h1');
+		@include line-height('large');
+	}
+	p {
+		@include color('white');
+		@include font-size('base');
+	}
+}

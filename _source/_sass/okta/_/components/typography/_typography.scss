@@ -8,15 +8,15 @@
 	@include media('<medium') {
 		@include margin(($line-break * 2) 0 $line-break);
 	}
-	
+
 	@include media('<small') {
 		br {
 			display: none;
 		}
 	}
-	
-	a, 
-	a:active, 
+
+	a,
+	a:active,
 	a:hover {
 		color: inherit;
 	}
@@ -92,8 +92,8 @@ h6,
 p,
 ul,
 ol,
-blockquote, 
-table, 
+blockquote,
+table,
 address,
 form,
 pre {
@@ -110,7 +110,7 @@ a {
 	@include transition(normal color);
 	text-decoration: none;
 
-	&:active, 
+	&:active,
 	&:hover {
 		color: lighten(get-color('accent'), 10%);
 		text-decoration: underline;

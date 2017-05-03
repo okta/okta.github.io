@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page enabling-cors">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -194,7 +200,7 @@
 
 <p><a href="http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing">Cross-Origin Resource Sharing (CORS)</a> is a mechanism that allows a web page to make an AJAX call using <a href="http://en.wikipedia.org/wiki/XMLHttpRequest">XMLHttpRequest (XHR)</a> to a domain that is  different from the one from where the script was loaded.  Such “cross-domain” requests would otherwise be forbidden by web browsers, per the <a href="http://en.wikipedia.org/wiki/Same_origin_policy">same origin security policy</a>.  CORS defines a <a href="http://www.w3.org/TR/cors/">standardized</a> way in which the browser and the server can interact to determine whether or not to allow the cross-origin request</p>
 
-<p>In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explictly permitted via the Okta Admin Dashboard for CORS.</p>
+<p>In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Okta API with the Okta session cookie. Every website origin must be explicitly permitted via the Okta Admin Dashboard for CORS.</p>
 
 <blockquote>
   <p><strong>Caution:</strong> Only grant access to specific origins (websites) that you control and trust to access the Okta API.</p>
@@ -265,7 +271,7 @@
 <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
 <span class="k">if</span> <span class="p">(</span><span class="s2">"withCredentials"</span> <span class="k">in</span> <span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">alert</span><span class="p">(</span><span class="s1">'Invalid URL or Cross-Origin Request Blocked.  You must explictly add this site ('</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="s1">') to the list of allowed websites in your Okta Admin Dashboard'</span><span class="p">);</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="s1">'Invalid URL or Cross-Origin Request Blocked.  You must explicitly add this site ('</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="s1">') to the list of allowed websites in your Okta Admin Dashboard'</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
@@ -299,7 +305,7 @@
       <span class="k">break</span><span class="p">;</span>
     <span class="nl">default</span> <span class="p">:</span>
       <span class="nx">title</span> <span class="o">=</span> <span class="s1">'Invalid URL or Cross-Origin Request Blocked'</span><span class="p">;</span>
-      <span class="nx">message</span> <span class="o">=</span> <span class="s1">'You must explictly add this site ('</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="s1">') to the list of allowed websites in your Okta Admin Dashboard'</span><span class="p">;</span>
+      <span class="nx">message</span> <span class="o">=</span> <span class="s1">'You must explicitly add this site ('</span> <span class="o">+</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span> <span class="o">+</span> <span class="s1">') to the list of allowed websites in your Okta Admin Dashboard'</span><span class="p">;</span>
       <span class="k">break</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="nx">alert</span><span class="p">(</span><span class="nx">title</span> <span class="o">+</span> <span class="s1">': '</span> <span class="o">+</span> <span class="nx">message</span><span class="p">);</span>
@@ -434,7 +440,7 @@ SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -452,7 +458,7 @@ SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>

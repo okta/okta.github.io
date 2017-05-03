@@ -4,7 +4,7 @@
 <!--[if IE 8 ]>    <html class="ie8 no-flexbox"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
 <!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
-<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern"> <!--<![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head>{%
     include head.html %}{% if include.body_id %}{% assign body_id = include.body_id %}{% else %}{% assign active_page_name  = page.url | split: "/" | last | remove: ".html" %}{% assign split_url         = page.url | split: "/" %}{% assign body_id           = split_url[1] %}{% endif %}
     <body id="{{ body_id }}">
@@ -23,13 +23,13 @@
         endif %}
 		{{ content }}
 		{% if page.show_bottom_cta %}
-		<section id="bottom-cta" class="section--full-width text-align--center">
-			<div class="wrap">
+		<section id="bottom-cta" class="ProductSection--bottom-cta">
+			<div class="Wrap">
 				<header>
 					<h2>Get Started with Okta Now!</h2>
 					<p class="text--medium">Your identity layer is ready to go. Getting started takes just a few minutes.</p>
 				</header>
-				<a href="https://www.okta.com/developer/signup/" class="button--large"><span>Get a Free Developer Account</span></a>
+				<a href="{{ site.get_started_url }}" class="Button--green Button--large"><span>Get a Free Developer Account</span></a>
 			</div>
 		</section>{%
         endif %}

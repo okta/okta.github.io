@@ -82,6 +82,7 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000069"></a>E0000069|User Locked.|403|
 |<a name="E0000081"></a>E0000081|Cannot modify the test attribute because it is a reserved attribute for this application.|400|
 |<a name="E0000109"></a>E0000109|An SMS message was recently sent. Please wait 30 seconds before trying again.|429|
+|<a name="E0000112"></a>E0000112|Cannot update this user because they are still being activated. Please try again in a few minutes.|409|
 
 
 ## Okta Error Codes Listed by HTTP Return Code
@@ -145,7 +146,8 @@ This document provides further information about the errors that the Okta API re
 <tr><td>E0000026</td><td>This endpoint has been deprecated.</td></tr>
 <tr><td>E0000048</td><td>Entity not found exception.</td></tr>
 <tr><td>E0000060</td><td>Unsupported operation.</td></tr>
-<tr><td rowspan="1" bgcolor="#FFFFFF"><strong>409</strong></td><td>E0000055</td><td>Duplicate group.</td></tr>
+<tr><td rowspan="2" bgcolor="#FFFFFF"><strong>409</strong></td><td>E0000055</td><td>Duplicate group.</td></tr>
+<tr><td>E0000112</td><td>Cannot update this user because they are still being activated. Please try again in a few minutes.</td></tr>
 <tr><td rowspan="2" bgcolor="#FFFFFF"><strong>429</strong></td><td>E0000047</td><td>API call exceeded rate limit due to too many requests.</td></tr>
 <tr><td>E0000109</td><td>An SMS message was recently sent. Please wait 30 seconds before trying again.</td></tr>
 <tr><td rowspan="4" bgcolor="#FFFFFF"><strong>500</strong></td><td>E0000009</td><td>Internal Server Error.</td></tr>

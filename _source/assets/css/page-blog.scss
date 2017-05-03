@@ -10,13 +10,13 @@
 ;
 
 
-#main-container.blog {
-  width: 800px;
+.main-container > .blog {
+  max-width: 1360px; // result of calculation in _PageContent.scss
   margin: 0 auto;
 }
 
 .wrap {
-	padding: 0 10px;
+  padding: 0 10px;
 }
 
 .post-block {
@@ -98,11 +98,10 @@
 }
 
 .blog pre {
-  background-color: #fafafa;
-	display: block;
+  background-color: #f0f0f0;
+  display: block;
   padding: 9.5px;
   margin: 0 0 10px;
-  font-size: 13px;
   line-height: 1.428571429;
   color: #333333;
   word-break: break-all;

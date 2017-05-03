@@ -20,7 +20,7 @@ $(function() {
       switch (xhr.status) {
         case 0 :
         title = 'Cross-Origin Request Blocked';
-        message = 'You must explictly add this site (' + window.location.origin + ') to the list of allowed websites in your Okta Admin Dashboard';
+        message = 'You must explicitly add this site (' + window.location.origin + ') to the list of allowed websites in your Okta Admin Dashboard';
         break;
         case 403 :
         title = xhr.responseJSON.errorSummary;

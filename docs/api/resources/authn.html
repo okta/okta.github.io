@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page authentication-api">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -221,7 +227,7 @@
 
 <h3 id="public-application">Public Application</h3>
 
-<p>Public applications are any application that anonymously start an authentication or recovery transaction without an API token such as the <a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a>.  Public applications are aggressively rate-limited to prevent abuse and require primary authentication to be successfully completed before releasing any metadata about a user.</p>
+<p>A public application is an application that anonymously starts an authentication or recovery transaction without an API token, such as the <a href="/docs/guides/okta_sign-in_widget.html">Okta Sign-In Widget</a>.  Public applications are aggressively rate-limited to prevent abuse and require primary authentication to be successfully completed before releasing any metadata about a user.</p>
 
 <h3 id="trusted-application">Trusted Application</h3>
 
@@ -256,6 +262,7 @@
 <ul>
   <li><a href="#primary-authentication-with-public-application">Primary Authentication with Public Application</a>—<a href="#request-example-public-application">Request Example</a></li>
   <li><a href="#primary-authentication-with-trusted-application">Primary Authentication with Trusted Application</a>—<a href="#request-example-trusted-application">Request Example</a></li>
+  <li><a href="#primary-authentication-with-activation-token">Primary Authentication with activationToken</a>—<a href="#request-example-activation-token">Request Example</a></li>
   <li><a href="#primary-authentication-with-password-expiration-warning">Primary Authentication with Password Expiration Warning</a>—<a href="#request-example-password-expiration-warning">Request Example</a></li>
 </ul>
 
@@ -264,6 +271,8 @@
 </blockquote>
 
 <h4 class="api api-request api-request-params" id="request-parameters">Request Parameters</h4>
+
+<p>As part of the authentication call either the username and password or the token parameter must be provided.</p>
 
 <table>
   <thead>
@@ -283,7 +292,7 @@
       <td>User’s non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com)</td>
       <td>Body</td>
       <td>String</td>
-      <td>TRUE</td>
+      <td>FALSE</td>
       <td> </td>
       <td> </td>
     </tr>
@@ -292,7 +301,7 @@
       <td>User’s password credential</td>
       <td>Body</td>
       <td>String</td>
-      <td>TRUE</td>
+      <td>FALSE</td>
       <td> </td>
       <td> </td>
     </tr>
@@ -319,6 +328,15 @@
       <td>Provides additional context for the authentication transaction</td>
       <td>Body</td>
       <td><a href="#context-object">Context Object</a></td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>token</td>
+      <td>Token received as part of activation user request</td>
+      <td>Body</td>
+      <td>String</td>
       <td>FALSE</td>
       <td> </td>
       <td> </td>
@@ -400,7 +418,7 @@
   <p>You must always pass the same <code class="highlighter-rouge">deviceToken</code> for a user’s device with every authentication request for <strong>per-device</strong> or <strong>per-session</strong> Sign-On Policy factor challenges.  If the <code class="highlighter-rouge">deviceToken</code> is absent or does not match the previous <code class="highlighter-rouge">deviceToken</code>, the user will be challenged every-time instead of <strong>per-device</strong> or <strong>per-session</strong>.</p>
 </blockquote>
 
-<p>It is recommend that you generate a UUID or GUID for each client and persist the <code class="highlighter-rouge">deviceToken</code> as a persistent cookie or HTML5 localStorage item scoped to your web application’s origin.</p>
+<p>It is recommended that you generate a UUID or GUID for each client and persist the <code class="highlighter-rouge">deviceToken</code> as a persistent cookie or HTML5 localStorage item scoped to your web application’s origin.</p>
 
 <h4 class="api api-response api-response-params" id="response-parameters">Response Parameters</h4>
 
@@ -888,7 +906,7 @@
 <p>Authenticates a user via a <a href="#trusted-application">trusted application</a> or proxy that overrides <a href="../getting_started/design_principles.html#client-request-context">client request context</a>.</p>
 
 <blockquote>
-  <p>Specifying your own <code class="highlighter-rouge">deviceToken</code> is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid <em>admin API token</em>.</p>
+  <p>Specifying your own <code class="highlighter-rouge">deviceToken</code> is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid <em>API token</em>.</p>
 </blockquote>
 
 <blockquote>
@@ -942,9 +960,269 @@
 </span></code></pre>
 </div>
 
+<h4 id="primary-authentication-with-activation-token">Primary Authentication with Activation Token</h4>
+
+<p>Authenticates a user via a <a href="#trusted-application">trusted application</a> or proxy that overrides <a href="../getting_started/design_principles.html#client-request-context">client request context</a>.</p>
+
+<blockquote>
+  <p>Specifying your own <code class="highlighter-rouge">deviceToken</code> is a highly privileged operation limited to trusted web applications and requires making authentication requests with a valid <em>API token</em>.</p>
+</blockquote>
+
+<blockquote>
+  <p>The <strong>public IP address</strong> of your <a href="#trusted-application">trusted application</a> must be <a href="../getting_started/design_principles.html#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header</p>
+</blockquote>
+
+<h5 class="api api-request api-request-example" id="request-example-activation-token">Request Example: Activation Token</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-H <span class="s2">"User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"</span> <span class="se">\</span>
+-H <span class="s2">"X-Forwarded-For: 23.235.46.133"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "token": "o7AFoTGE9xjQiHQK6dAa"
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/authn"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-success---user-with-password-no-mfa">Response Example (Success - User with Password, no MFA)</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-29T21:42:30.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sessionToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20111DuMTdPoBlMOqX5R_OAV3ku2bTWxP6wUIRT_jqkU6XTvOsJLmDq"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-29T21:37:25.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-success---user-with-password-and-configured-mfa">Response Example (Success - User with Password and Configured MFA)</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00bMktAiPaI0Jo97bpiKxEw7drTgtukJKs33abrSpb"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-29T21:49:09.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MFA_ENROLL"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-29T21:37:25.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"factors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"question"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"questions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00u1nehnZ6qp4Qy8G0g4/factors/questions"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"GET"</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"POST"</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_SETUP"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token:software:totp"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"POST"</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_SETUP"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token:software:totp"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GOOGLE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GOOGLE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"POST"</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_SETUP"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sms"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"POST"</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_SETUP"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"push"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"POST"</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_SETUP"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token:hardware"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YUBICO"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YUBICO"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"POST"</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_SETUP"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"cancel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-success---user-without-password">Response Example (Success - User Without Password)</h5>
+
+<p>In the case where the user was created without credentials the response will trigger the workflow to <a href="#change-password">set the user’s password</a>. After the password is configured, depending on the MFA setting, the workflow continues with MFA enrollment or a successful authentication completes.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"005Oj4_rx1yAYP2MFNobMXlM2wJ3QEyzgifBd_T6Go"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-29T21:35:47.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PASSWORD_RESET"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"recoveryType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCOUNT_ACTIVATION"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"_embedded"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-08T20:14:45.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"policy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"expiration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resetPassword"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/credentials/reset_password"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"cancel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-failure---invalid-or-expired-token">Response Example (Failure - Invalid or Expired Token)</h5>
+
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+
+<span class="p">{</span><span class="w">
+  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000004"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Authentication failed"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000004"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oae2fYYJmkuTg-NyozqBkb3sw"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h4 id="primary-authentication-with-password-expiration-warning">Primary Authentication with Password Expiration Warning</h4>
 
-<p>Authenticates a user with a password that is about to expire.  The user should <a href="#change-password">change their password</a> to complete the authentication transaction but may opt-out (skip).</p>
+<p>Authenticates a user with a password that is about to expire.  The user should <a href="#change-password">change their password</a> to complete the authentication transaction but may skip.</p>
 
 <blockquote>
   <p>Please note:</p>
@@ -4498,7 +4776,7 @@ See the Response Example in this section for details.</li>
 
 <h4 id="forgot-password-with-sms-factor">Forgot Password with SMS Factor</h4>
 
-<p>Starts a new password recovery transaction with a user identifier (<code class="highlighter-rouge">username</code>) and asynchronously sends a SMS OTP (challenge) to the user’s mobile phone.  This operation will transition the recovery transaction to the <code class="highlighter-rouge">RECOVERY_CHALLENGE</code> state and wait for user to <a href="#verify-sms-recovery-factor">verify the OTP</a>.</p>
+<p>Starts a new password recovery transaction with a user identifier (<code class="highlighter-rouge">username</code>) and asynchronously sends a SMS OTP (challenge) to the user’s mobile phone.  This operation will transition the recovery transaction to the <code class="highlighter-rouge">RECOVERY_CHALLENGE</code> state and wait for the user to <a href="#verify-sms-recovery-factor">verify the OTP</a>.</p>
 
 <blockquote>
   <p>Primary authentication of a user’s recovery credential (e.g email or SMS) has not yet completed.
@@ -6427,8 +6705,8 @@ to skip the other factors.</p>
 
 <ul>
   <li>The <code class="highlighter-rouge">stateToken</code> must be passed with every request except when verifying a <code class="highlighter-rouge">recoveryToken</code> that was distributed out-of-band</li>
-  <li>The <code class="highlighter-rouge">stateToken</code> is only intended to be used between the web application performing end-user authentication and the Okta API. It should never distributed to the end-user via email or other out-of-band mechanism.</li>
-  <li>The lifetime of the <code class="highlighter-rouge">stateToken</code> uses a sliding scale expiration algorithm that extends with every request.  Always introspect the <code class="highlighter-rouge">expiresAt</code> property for the transaction when making decisions based on lifetime.</li>
+  <li>The <code class="highlighter-rouge">stateToken</code> is only intended to be used between the web application performing end-user authentication and the Okta API. It should never be distributed to the end-user via email or other out-of-band mechanisms.</li>
+  <li>The lifetime of the <code class="highlighter-rouge">stateToken</code> uses a sliding scale expiration algorithm that extends with every request.  Always inspect the <code class="highlighter-rouge">expiresAt</code> property for the transaction when making decisions based on lifetime.</li>
 </ul>
 
 <blockquote>
@@ -6537,7 +6815,7 @@ to skip the other factors.</p>
 
 <h3 id="links-object">Links Object</h3>
 
-<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current <a href="#transaction-state">transaction state</a> using the <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON Hypertext Application Language</a> specification.  These links are used to transition the <a href="#transaction-state">state machine</a> of the authentication or recovery transaction.</p>
+<p>Specifies link relations (See <a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>) available for the current <a href="#transaction-state">transaction state</a> using the <a href="https://tools.ietf.org/html/rfc7159">JSON</a> specification.  These links are used to transition the <a href="#transaction-state">state machine</a> of the authentication or recovery transaction.</p>
 
 <table>
   <thead>
@@ -6965,6 +7243,14 @@ to skip the other factors.</p>
       <td>TRUE</td>
     </tr>
     <tr>
+      <td>vendorName</td>
+      <td>factor Vendor Name (Same as provider but for On Prem MFA it depends on Admin Settings)</td>
+      <td><a href="factors.html#vendor-name">Provider Type</a></td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
       <td>profile</td>
       <td>profile of a <a href="factors.html#supported-factors-for-providers">supported factor</a></td>
       <td><a href="factors.html#factor-profile-object">Factor Profile Object</a></td>
@@ -7185,49 +7471,6 @@ to skip the other factors.</p>
   </tbody>
 </table>
 
-<h5 id="phone-object-1">Phone Object</h5>
-
-<p>The phone object describes previously enrolled phone numbers for the <code class="highlighter-rouge">sms</code> factor.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>unique key for phone</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-    </tr>
-    <tr>
-      <td>profile</td>
-      <td>profile of phone</td>
-      <td><a href="#phone-profile-object">Phone Profile Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-    </tr>
-    <tr>
-      <td>status</td>
-      <td>status of phone</td>
-      <td><code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">INACTIVE</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-    </tr>
-  </tbody>
-</table>
-
 <h5 id="push-factor-activation-object">Push Factor Activation Object</h5>
 
 <p>Push factors must complete activation on the device by scanning the QR code or visiting activation link sent via email or sms.</p>
@@ -7371,7 +7614,7 @@ to skip the other factors.</p>
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -7389,7 +7632,7 @@ to skip the other factors.</p>
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>

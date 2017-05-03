@@ -35,6 +35,8 @@ after     | Specifies the pagination cursor for the next page of events         
 
 > `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request
 
+> `startDate` defaults to 1 hour ago when `filter`, `after` and `startDate` query parameters are omitted.
+
 ###### Filters
 
 The following expressions are supported for events with the `filter` query parameter:

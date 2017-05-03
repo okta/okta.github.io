@@ -5,58 +5,58 @@ title: System Log (Beta)
 
 # System Log API
 
-This API is a {% api_lifecycle beta %} feature.
+{% api_lifecycle beta %} This API is still in beta.
 
-The Okta System Log API provides read access to your organization's system log. This API provides more functionality than the Events API:
+The Okta System Log API provides read access to your organization's system log. This API provides more functionality than the [Events API](/docs/api/resources/events.html):
 
 * The System Log API supports more query parameters than the Events API.
 * The System Log API returns more objects than the Events API.
 
-Use this API to export event data as a batch job from your organization to another system for reporting or analysis.
+## Getting Started
 
-## Motivation
+The System Log API has one endpoint:
 
-Example calls follow each use case discussion. Full API details follow in the List Events section.
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span>
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8f19fc704561a8b44e27){:target="_blank"}
+
+See below for [Examples](#examples) and more on how to use the System Log API.
+
+## Examples
 
 ### Debugging
-Use this API call to troubleshoot user problems.
-Query:
-https://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00&until=2017-04-12T23:59:59+00:00&limit=20&q=userFirstName+userLastName
-Curl Command:
+The System Logs API can be used to troubleshoot user problems. For example, you
+can use the following `curl` command to see events from user "Jane Doe":
+
 ```
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11T00%3A00%3A00%2B00%3A00&until=2017-04-12T23%3A59%3A59%2B00%3A00&limit=20&q=userFirstName+userLastName"
+"https://${org}.okta.com/api/v1/logs?q=Jane+Doe"
 ```
 
 ### Polling
-Use this API to enable a client to trigger an action in response to an event.
-Query:
-https://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00&until=&limit=20&filter=event_type+eq+"user.session.access_admin_app"
-Curl command:
+You can also use this API to search for particular types of events:
+
 ```
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11T00%3A00%3A00%2B00%3A00&until=&limit=20&filter=event_type+eq+%22user.session.start%22"
+"https://${org}.okta.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
 ```
 
-### Transferring Data to SIEM System (Security Information and Event Management System)
-Use this API to enable clients to export parts of their system log to a different SIEM for analysis or compliance. To obtain the entire dataset, query from an early enough time.
-Query:
-https://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00
-Curl command:
+### Transferring Data to a separate system
+You can export your logs to a separate system for analysis or compliance. To obtain the entire dataset, query from the appropriate point of time in the past.
+
 ```
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11T00%3A00%3A00%2B00%3A00"
+"https://${org}.okta.com/api/v1/logs?since=2017-03-11"
 ```
-
 
 ## Event Operations
 
@@ -67,27 +67,24 @@ curl -v -X GET \
 
 Fetch a list of events from your Okta organization system log.
 
-##### Request Parameters
+#### Request Parameters
 {:.api .api-request .api-request-params}
 
-|---------- + ------------------------------------------------------------------------------------+------------+----------+----------+----------+---------|
-| Parameter | Description                                                                         | Param Type | DataType | Required | Minimum  | Maximum |
-| --------- | ----------------------------------------------------------------------------------- | ---------- | -------- | -------- | -------- | --------|
-| limit     | Specifies the number of results to return per page                                  | Query      | Number   | FALSE    |       0  |     100 |
-| since     | Specifies the datetime, inclusive and in ISO8601 format, to list events after                     | Query      | DateTime | TRUE     |          |         |
-| filter    | [SCIM Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events | Query | String | FALSE |        |         |
-| q         | Search String fields for matching phrase                                            | Query      | String   | FALSE    |          |         |
-| until     | Specifies the first datetime, inclusive and in ISO8601 format, after which results aren't returned, can be empty which denotes no end date | Query       | DateTime | FALSE   |          |          |
-| after     | An opaque identifier used for pagination                                            | Query      | String   | FALSE    |          |         |
-| sortOrder | the sort to apply to the results, which can be ASCENDING or DESCENDING. Events are ordered by time that the event was inserted into the db; because of this, events may not be strictly ordered by their stated timestamp.                        | Query      | String   | FALSE    |          |         |
-|-----------+-------------------------------------------------------------------------------------+------------+----------+----------+----------+----------|
+|------------ + ------------------------------------------------------------------------------------------------------+--------+--------------------|
+| Parameter   | Description                                                                                           | Format                                                   | Default                 |
+| ----------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ----------------------- |
+| `until`     | Upper time bound of events to return.                                                                 | [ISO8601 date/time](https://www.w3.org/TR/NOTE-datetime), must be temporally later than `since` | Current time            |
+| `since`     | Lower time bound of events to return.                                                                 | [ISO8601 date/time](https://www.w3.org/TR/NOTE-datetime), max 180 days ago         | 7 days prior to `until` |
+| `filter`    | [SCIM Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events.      | [SCIM Filter expression](/docs/api/getting_started/design_principles.html#filtering) | |
+| `q`         | String search over all fields.                                                                        | String                                                   |                         |         
+| `limit`     | Number of results to return per page.                                                                 | Integer between 0 and 100                                | 100                     |
+| `sortOrder` | Time order in which to return events.                                                                 | "ASCENDING" or "DESCENDING"                              | "ASCENDING"             |
+| `after`     | Opaque identifier used for [Pagination](/docs/api/getting_started/design_principles.html#pagination). |                                                          |                         |
+|-------------+-------------------------------------------------------------------------------------------------------+----------------------------------------------------------+-------------------------|
 
-The `after` cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
-The `since` parameter must not be more than 180 days prior to the current day.
+##### Filter
 
-###### Filter
-
-The following expressions are supported for events with the `filter` query parameter (see [Filtering](http://developer.okta.com/docs/api/getting_started/design_principles.html#filtering):
+The following expressions are supported for events with the `filter` query parameter:
 
 Filter                                       | Description
 -------------------------------------------- | ------------------------------------------------------------------------------
@@ -98,7 +95,8 @@ Filter                                       | Description
 
 See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information about expressions.
 
-**Filter Examples**
+###### Filter Examples
+
 Events published for a target user
 
     filter=target.id eq "00uxc78lMKUMVIHLTAXY"
@@ -121,11 +119,9 @@ Events published for a given ip address
 
 ##### Query with q
 
-> Important: The query parameter `q` behaves differently than described in  [Filtering](/docs/getting_started/design_principles.html).
-
 The query parameter `q` searches string fields.
 
-**Query Examples**
+###### Query Examples
 
 * Events that mention a specific city: `q=San Francisco`
 
@@ -133,154 +129,62 @@ The query parameter `q` searches string fields.
 
 * Events that mention a specific person: `q=firstName lastName`
 
-##### Response Parameters
+##### Response 
 {:.api .api-response .api-response-params}
 
-Array of [Log objects](#log-model)
-
-##### Request Example
-{:.api .api-request .api-request-example}
-
-> This operation requires [URL encoding](http://en.wikipedia.org/wiki/Percent-encoding). For example, `since=2017-03-11T00:00:00+00:00` is encoded as `since=2017-03-11T00%3A00%3A00%2B00%3A00`.
+The response contains a JSON array of [Log objects](#log-model).
 
 
-~~~sh
-http://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00&until=2017-03-12T23:59:59+00:00&limit=20&q=FAILURE
-http://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00&until=2017-03-12T23:59:59+00:00&limit=20&q=
-http://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00&until=2017-03-12T23:59:59+00:00&limit=20&filter=eventType eq "user.session.start"
-http://myorg.okta.com/api/v1/logs?since=2017-03-11T00:00:00+00:00&until=&limit=20&filter=eventType eq "user.session.end"
-~~~
+## Log objects
 
-##### Response Example
-{:.api .api-response .api-response-example}
+Each Log object describes a single action performed by a set of actors for a set of targets.
 
+### Example Log object
 ~~~json
-[
-  {
-    "version": "0",
-    "severity": "INFO",
-    "client": {
-      "zone": "OFF_NETWORK",
-      "device": "Unknown",
-      "userAgent": {
-        "os": "Unknown",
-        "browser": "UNKNOWN",
-        "rawUserAgent": "UNKNOWN-DOWNLOAD"
-      },
-      "ipAddress": "12.97.85.90"
+{
+  "version": "0",
+  "severity": "INFO",
+  "client": {
+    "zone": "OFF_NETWORK",
+    "device": "Unknown",
+    "userAgent": {
+      "os": "Unknown",
+      "browser": "UNKNOWN",
+      "rawUserAgent": "UNKNOWN-DOWNLOAD"
     },
-    "actor": {
-      "id": "00u1qw1mqitPHM8AJ0g7",
-      "type": "User",
-      "alternateId": "admin@tc1-trexcloud.com",
-      "displayName": "John Fung"
-    },
-    "outcome": {
-      "result": "SUCCESS"
-    },
-    "uuid": "f790999f-fe87-467a-9880-6982a583986c",
-    "published": "2016-05-31T22:23:07.777Z",
-    "eventType": "user.session.start",
-    "displayMessage": "User login to Okta",
-    "transaction": {
-      "type": "WEB",
-      "id": "V04Oy4ubUOc5UuG6s9DyNQAABtc"
-    },
-    "debugContext": {
-      "debugData": {
-        "requestUri": "/login/do-login"
-      }
-    },
-    "legacyEventType": "core.user_auth.login_success",
-    "authentication_context": {
-      "authenticationStep": 0,
-      "externalSessionId": "1013FfF-DKQSvCI4RVXChzX-w"
+    "ipAddress": "12.97.85.90"
+  },
+  "actor": {
+    "id": "00u1qw1mqitPHM8AJ0g7",
+    "type": "User",
+    "alternateId": "admin@tc1-trexcloud.com",
+    "displayName": "John Fung"
+  },
+  "outcome": {
+    "result": "SUCCESS"
+  },
+  "uuid": "f790999f-fe87-467a-9880-6982a583986c",
+  "published": "2016-05-31T22:23:07.777Z",
+  "eventType": "user.session.start",
+  "displayMessage": "User login to Okta",
+  "transaction": {
+    "type": "WEB",
+    "id": "V04Oy4ubUOc5UuG6s9DyNQAABtc"
+  },
+  "debugContext": {
+    "debugData": {
+      "requestUri": "/login/do-login"
     }
   },
-  {
-    "version":"0",
-    "severity":"INFO",
-    "client": {
-      "zone":"OFF_NETWORK",
-      "device":"Unknown",
-      "id":null,
-      "userAgent": {
-        "os":"Unknown",
-        "browser":"UNKNOWN",
-        "rawUserAgent":"UNKNOWN-UNKNOWN"
-      },
-      "ipAddress":"127.0.0.1",
-      "geographicalContext":{
-        "city":null,
-        "state":null,
-        "country":null,
-        "geolocation":{
-          "lat":36.12,
-          "lon":-114.17
-        },
-        "postalCode":null
-      }
-    },
-    "actor": {
-      "id":"00ujkqmCDIS4dRtaY0g3",
-      "type":"User",
-      "alternateId":"administrator1@clouditude.net",
-      "displayName":"Add-Min O'Cloudy Tud",
-      "detailEntry":null
-    },
-    "outcome": {
-      "result":"SUCCESS",
-      "reason":null
-    },"target": [
-      {
-        "id":"00T1pkSJOMoElZWVY0g3",
-        "type":"Token",
-        "alternateId":"unknown",
-        "displayName":"unknown",
-        "detailEntry":null
-      }
-    ],
-    "uuid":"af4736fb-ef84-4cfb-bcfa-8f541ca99abf",
-    "published":"2016-05-27T19:38:59.031Z",
-    "eventType":"system.api_token.create",
-    "displayMessage":"Create API token",
-    "transaction": {
-      "type":"WEB",
-      "id":"reqz_ADxMMoTSOd7TgdnbjUXw",
-      "detail":null
-    },
-    "debugContext": {
-      "debugData": {
-        "originalPrincipal": {
-          "alternateId":"admin@saasure.com",
-          "displayName":"Piras Add-min",
-          "id":"00ujjjNmP7E3U2Rq50g3",
-          "type":"User"
-        },
-        "requestUri":"/api/1/devtools/global/test/orgs/specific"
-      }
-    },
-    "legacyEventType":"api.token.create",
-    "authentication_context": {
-      "issuer":null,
-      "authenticationProvider":null,
-      "credentialProvider":null,
-      "credentialType":null,
-      "interface":null,
-      "authenticationStep":0,
-      "externalSessionId":"101NN7VYcLqQ5u2Mi1lbmnEmg"
-    }
+  "legacyEventType": "core.user_auth.login_success",
+  "authentication_context": {
+    "authenticationStep": 0,
+    "externalSessionId": "1013FfF-DKQSvCI4RVXChzX-w"
   }
-]
+}
 ~~~
 
-## Log Model
-
-Every organization has a system log that maintains a history of actions performed by users.  The Log model describes a single action performed by a set of actors for a set of targets.
-
-### Annotated Example
-
-Use the following example by replacing the explanatory text with valid values.
+### Log Object annotated Example
 
 ~~~ html
 {
@@ -396,7 +300,7 @@ Use the following example by replacing the explanatory text with valid values.
 
 ### Attributes
 
-The Log model is read-only. The following properties are available:
+Log objects are read-only. The following properties are available:
 
 |-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------|
 | Property  | Description                                                           | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength |
@@ -595,15 +499,29 @@ Describes an IP address used in a request.
 ## Response Headers
 
 ### Self Link Response Header
-The response always includes a `self` link, which is a link to the current query that was executed.
+The response always includes a `self` `Link` header, which is a link to the current query that was executed.
+
+This header is of the form:
 ```
-Link: <https://myorg.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T23%3A59%3A59%2B00%3A00&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="self"
+Link: <url>; rel="self"
+```
+
+For example:
+```
+Link: <https://${org}.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T23%3A59%3A59%2B00%3A00&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="self"
 ```
 
 ### Next Link Response Header
-The `next` link gives the query to get the next batch of results, if any. Note that while the self link will always exist, the `next` link may not exist. This is the case where either there is no data returned by the query or the 'until' parameter is defiend and there is no more data.
+The response may include a `next` `Link` header, which is a link to the next page of results, if there is one. Note that while the `self` `Link` will always exist, the `next` `Link` may not exist. 
+
+This header is of the form:
 ```
-Link: <https://myorg.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T15%3A41%3A12.994Z&after=349996bd-5091-45dc-a39f-d357867a30d7&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="next"
+Link: <url>; rel="next"
+```
+
+For example:
+```
+Link: <https://${org}.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T15%3A41%3A12.994Z&after=349996bd-5091-45dc-a39f-d357867a30d7&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="next"
 ```
 
 ## Timeouts

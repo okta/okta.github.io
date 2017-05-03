@@ -25,7 +25,7 @@ implementation of single sign-on.
 Okta is a [Certified OpenID Connect provider](http://openid.net/certification/).
 Building on top of OAuth 2.0 framework, OpenID Connect is a modern
 implementation to support authentication and single sign-on.  If you
-are an Okta customer, our [OpenID Connect endopints](/docs/api/resources/oidc.html) are a great way to support SSO and
+are an Okta customer, our [OpenID Connect endpoints](/docs/api/resources/oidc.html) are a great way to support SSO and
 is a simpler alternative to SAML.
 
 For ISVs that are looking at providing SSO for their customers, both

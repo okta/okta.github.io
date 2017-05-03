@@ -102,25 +102,38 @@ Client applications have the following properties:
 | _links                     | discoverable resources related to the app                         | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                               | TRUE     | FALSE  | TRUE     |
 |----------------------------+-------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------+--------+----------|
 
-> When creating a client application, you can specify the `client_id` or let Okta generate a value for it. Thereafter, the `client_id` is immutable.
+Property Details
 
-> The `client_secret` is only shown on the initial creation of a client application (and only if the `token_endpoint_auth_method` is one that requires a client secret).
+* When creating a client application, you can specify the `client_id` or let Okta generate a value for it. Thereafter, the `client_id` is immutable.
+
+* The `client_secret` is only shown on the initial creation of a client application (and only if the `token_endpoint_auth_method` is one that requires a client secret).
   It is never returned in a GET call. If a `client_secret` is not provided on creation and the `token_endpoint_auth_method` requires one Okta will generate a random `client_secret` for the client application.
 
-> The `client_id` must consist of alphanumeric characters, the following special characters `$-_.+!*'(),` and must contain between 6 and 100 characters, inclusive. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
+* The `client_id` must consist of alphanumeric characters, the following special characters `$-_.+!*'(),`, must contain between 6 and 100 characters, inclusive, and must not be the reserved word `ALL_CLIENTS`. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
 
-> The `grant_types` and `response_types` values described above are partially orthogonal, as they refer to arguments passed to different
-  endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the `grant_types`
-  available to a client influence the `response_types` that the client is allowed to use, and vice versa. For instance, a `grant_types`
-  value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
-  the OAuth 2.0 authorization code grant.
-
-> At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
+* At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
   [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
   or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
   then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
 
-> All redirect URIs must be absolute URIs and must not include a fragment compontent.
+* All redirect URIs must be absolute URIs and must not include a fragment compontent.
+
+* Different application types have different valid values for the corresponding grant type:
+
+    |-------------------+---------------------------------------------------------------+-----------------------------------------------------------------------------------|
+    | Application Type  | Valid Grant Type                                              | Requirements                                                                      |
+    | ----------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+    | `web`             | `authorization_code`, `implicit`, `refresh_token`             | Must have at least `authorization_code`                                           |
+    | `native`          | `authorization_code`, `implicit`, `password`, `refresh_token` | Must have at least `authorization_code`                                           |
+    | `browser`         | `implicit`                                                    |                                                                                   |
+    | `service`         | `client_credentials`                                          | Works with OAuth 2.0 flow (not OpenID Connect)                                    |
+
+* The `grant_types` and `response_types` values described above are partially orthogonal, as they refer to arguments passed to different
+    endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the `grant_types`
+    available to a client influence the `response_types` that the client is allowed to use, and vice versa. For instance, a `grant_types`
+    value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
+    the OAuth 2.0 authorization code grant.
+
 
 ## Client Application Operations
 
@@ -136,8 +149,8 @@ Adds a new client application to your organization.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                               | ParamType | DataType                               | Required | Default
---------- | ----------------------------------------- | --------- | -------------------------------------- | -------- | ---
+Parameter | Description                               | ParamType | DataType                               | Required |
+--------- | ----------------------------------------- | --------- | -------------------------------------- | -------- |
 settings  | OAuth client registration settings        | Body      | [Client Settings](#oauth-client-model) | TRUE     |
 
 ##### Response Parameters
@@ -238,8 +251,8 @@ Fetches a specific client by `clientId` from your organization
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                     | ParamType | DataType | Required | Default
---------- | ------------------------------- | --------- | -------- | -------- | -------
+Parameter | Description                     | ParamType | DataType | Required |
+--------- | ------------------------------- | --------- | -------- | -------- |
 clientId  | `clientId` of a specific client | URL       | String   | TRUE     |
 
 ##### Response Parameters

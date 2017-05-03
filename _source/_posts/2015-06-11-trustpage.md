@@ -39,20 +39,20 @@ For prospects, the Status/Trust page must do at least the following:
  
 Once users get their hands on a product, they often find new ways to use it that the founders never imagined. This experimentation can shape the future of products and platforms. This is especially true of products that also provide APIs. The growth of B2B2C, B2C2B and other hybrid distribution models means that you are putting your product in front of many different types of audiences, including direct customers, partners, resellers, channel partners, and early and late stage prospects. Understanding how all of these audiences report on the service, interpret the SLA, and react to downtime is crucial if you want to create products that users value.
 
-###Be highly available but prepare for risk 
+### Be highly available but prepare for risk 
 
 It is a truism that one cannot solve for all technical constraints. Choosing the right platform on which to build your Product and Status/Trust pages is very important, but hosting both pages on the same platform risks both being down at the same time if your site crashes. 
 
 Obviously, you cannot afford to let your Trust/Status page go down, so **high availability** is key. But just in case the page ever _does_ go down, you need a **risk mitigation plan**. Central to this is making sure that you are contsantly monitoring your Trust/Status page with enterprise-class monitoring tools. 
 
-###Send rapid, robust, and consistent notifications
+### Send rapid, robust, and consistent notifications
 In the event of trust page problems, make sure that you have ways to easily and automatically notify customers and site ops as soon as issues are detected. Employ RSS, Twitter, and other channels to notify customers; invest in monitoring tools to notify site ops.
 
 If you send notifications manually, take care not to introduce human error when the site is having issues, as these are usually chaotic periods for your ops team. 
 
 Realize that many of your customers will probably check your trust page _and_ call support, so it’s important that the trust page and the support team provide the same information. This also argues for ensuring that your support team is a key stakeholder in the development of your trust page. 
 
-###Conclusion
+### Conclusion
 
 Designing and developing the Trust Page has taught me much in the last few months. I’d be happy to hear from you on this topic, so please feel free to send comments or questions to <vimarsh.karbhari@okta.com>.
 

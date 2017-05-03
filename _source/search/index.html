@@ -1,5 +1,5 @@
 ---
-layout: master
+layout: base
 css: page-search
 js: search
 valprop: {
@@ -8,18 +8,37 @@ show_cta: false
 }
 show_bottom_cta: true
 ---
+<div class="PageContent">
+	<div class="PageContent-main">
 
-<section id="search" class="section--full-width">
-
-	<div class="wrap">
-
-		<div class="search-container" data-slide-toggle-name="search">
-			<div class="site-container">
-				<span class="por">
-					<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
-					<gcse:searchresults-only></gcse:searchresults-only>
-				</span>
+		<div class="Row">
+			<div class="Column--12">
+				<h1>Search</h1>
 			</div>
 		</div>
+
+		<section id="search">
+			<div class="Row">
+				<div class="Column--12">
+					<div class="search-container" data-slide-toggle-name="search">
+						<div class="site-container">
+							<span class="por">
+								<gcse:searchbox-only resultsUrl="/search" enableAutoComplete="true"></gcse:searchbox-only>
+								<gcse:searchresults-only></gcse:searchresults-only>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+<section id="bottom-cta" class="ProductSection--bottom-cta">
+	<div class="Wrap">
+		<header>
+			<h2>Get Started with Okta Now!</h2>
+			<p>Your identity layer is ready to go. Getting started takes just a few minutes.</p>
+		</header>
+		<a href="https://www.okta.com/developer/signup" class="Button--green Button--large"><span>Get a Free Developer Account</span></a>
 	</div>
 </section>

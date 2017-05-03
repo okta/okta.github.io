@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
-  <script src="//use.typekit.net/jff5neq.js">
-  </script>
   <script>
-  try{Typekit.load({ async: true });}catch(e){}
-  </script>
+  (function(d) {
+    var config = {
+      kitId: 'jff5neq',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
@@ -29,7 +35,7 @@
 </head>
 
 <body>
-  <div class="Page">
+  <div class="Page policy">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -40,7 +46,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup">Get Started</a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -1006,7 +1012,7 @@ the action in Rule A would be taken, and Rule B would not be evaluated.</p>
     <tr>
       <td>type</td>
       <td>Rule type</td>
-      <td><code class="highlighter-rouge">OKTA_SIGN_ON</code> or <code class="highlighter-rouge">MFA_ENROLL</code></td>
+      <td><code class="highlighter-rouge">OKTA_SIGN_ON</code> or <code class="highlighter-rouge">PASSWORD</code> or <code class="highlighter-rouge">MFA_ENROLL</code></td>
       <td>Yes</td>
       <td> </td>
     </tr>
@@ -1367,7 +1373,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
       <td>Properties governing the user’s session lifetime</td>
       <td><a href="#SignonSessionObject">Signon Session Object</a></td>
       <td>No</td>
-      <td>See below</td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -1418,12 +1424,39 @@ Note that Okta sign on policy is not the same thing as application sign on polic
 
 <p><a href="#AuthContextConditionObject">AuthContext Condition</a></p>
 
-<h2 id="OktaMFAPolicy">MFA Policy</h2>
+<h2 id="OktaMFAPolicy">Multifactor (MFA) Policy</h2>
 
 <blockquote>
-  <p>The MFA Policy API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  <a href="/docs/api/getting_started/releases-at-okta.html">release</a>.
-<!-- [THIS SECTION IN PROGRESS] --></p>
+  <p>The MFA Policy API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  <a href="/docs/api/getting_started/releases-at-okta.html">release</a>.</p>
 </blockquote>
+
+<p>Multifactor (MFA) Policy controls which MFA methods are available for a user, as well as when a user may enroll in a particular factor.</p>
+
+<h4 id="policy-settings-example">Policy Settings Example</h4>
+<p>Note that policy settings are included only for those factors which have been enabled.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">   </span><span class="s2">"settings"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"factors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"okta_question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPTIONAL"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"consent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"okta_sms"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REQUIRED"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"consent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+       </span><span class="p">}</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h3 id="policy-settings-data-1">Policy Settings Data</h3>
 
@@ -1436,7 +1469,6 @@ Note that Okta sign on policy is not the same thing as application sign on polic
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -1445,49 +1477,42 @@ Note that Okta sign on policy is not the same thing as application sign on polic
       <td>Google Authenticator</td>
       <td><a href="#PolicyFactorObject">Policy MFA Factor Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
     <tr>
       <td>okta_otp</td>
       <td>Okta Verify TOTP</td>
       <td><a href="#PolicyFactorObject">Policy MFA Factor Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
     <tr>
       <td>okta_push</td>
       <td>Okta Verify Push</td>
       <td><a href="#PolicyFactorObject">Policy MFA Factor Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
     <tr>
       <td>okta_question</td>
       <td>Okta Security Question</td>
       <td><a href="#PolicyFactorObject">Policy MFA Factor Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
     <tr>
       <td>okta_sms</td>
       <td>Okta SMS</td>
       <td><a href="#PolicyFactorObject">Policy MFA Factor Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
     <tr>
       <td>rsa_token</td>
       <td>RSA Token</td>
       <td><a href="#PolicyFactorObject">Policy MFA Factor Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
     <tr>
       <td>symantec_vip</td>
       <td>Symantic VIP</td>
       <td><a href="#PolicyFactorObject">Policy MFA Factor Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -1501,23 +1526,20 @@ Note that Okta sign on policy is not the same thing as application sign on polic
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>consent</td>
-      <td> </td>
+      <td>Consent requirements for the factor</td>
       <td><a href="#PolicyFactorConsentObject">Policy Factor Consent Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
     <tr>
       <td>enroll</td>
-      <td> </td>
+      <td>Enrollment requirements for the factor</td>
       <td><a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a></td>
       <td>No</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -1537,15 +1559,17 @@ Note that Okta sign on policy is not the same thing as application sign on polic
   <tbody>
     <tr>
       <td>self</td>
-      <td> </td>
+      <td>Requirements for use-initiated enrollment</td>
       <td><code class="highlighter-rouge">NOT_ALLOWED</code>, <code class="highlighter-rouge">OPTIONAL</code> or <code class="highlighter-rouge">REQUIRED</code></td>
-      <td>Yes</td>
-      <td> </td>
+      <td>No</td>
+      <td><code class="highlighter-rouge">NOT_ALLOWED</code></td>
     </tr>
   </tbody>
 </table>
 
 <h4 id="PolicyFactorConsentObject">Policy Factor Consent Object</h4>
+
+<p>The Policy Factor Consent Object is an extensibility point.  In the future, policy may be configureable to require user consent to specified terms when enrolling in a factor.   At present settings other than type = <code class="highlighter-rouge">NONE</code> are ignored.</p>
 
 <table>
   <thead>
@@ -1560,32 +1584,69 @@ Note that Okta sign on policy is not the same thing as application sign on polic
   <tbody>
     <tr>
       <td>terms</td>
-      <td>The format of the consent dialog to be presented.</td>
-      <td><code class="highlighter-rouge">TEXT</code>, <code class="highlighter-rouge">RTF</code>, <code class="highlighter-rouge">MARKDOWN</code> or <code class="highlighter-rouge">URL</code></td>
+      <td>Specifies the consent terms to be offered the user upon enrolling in the factor.</td>
+      <td><a href="#PolicyFactorConsentTerms">Policy Factor Consent Terms</a></td>
       <td>No</td>
       <td> </td>
     </tr>
     <tr>
       <td>type</td>
-      <td>Does the user need to consent to <code class="highlighter-rouge">NONE</code> or <code class="highlighter-rouge">TERMS_OF_SERVICE</code>.</td>
+      <td>User consent type required before enrolling in the factor: <code class="highlighter-rouge">NONE</code> or <code class="highlighter-rouge">TERMS_OF_SERVICE</code>.</td>
       <td>String</td>
       <td>No</td>
       <td>NONE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="PolicyFactorConsentTerms">Policy Factor Consent Terms</h4>
+
+<p>At present the Policy Factor Consent Terms settings are ignored.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>format</td>
+      <td>The format of the consent dialog to be presented.</td>
+      <td><code class="highlighter-rouge">TEXT</code>, <code class="highlighter-rouge">RTF</code>, <code class="highlighter-rouge">MARKDOWN</code> or <code class="highlighter-rouge">URL</code></td>
+      <td>No</td>
+      <td>N/A</td>
     </tr>
     <tr>
       <td>value</td>
       <td>The contents of the consent dialog.</td>
       <td>String</td>
       <td>No</td>
-      <td> </td>
+      <td>N/A</td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="policy-conditions-1">Policy Conditions</h3>
-<p>The following conditions may be applied to Okta MFA Policy</p>
+<p>The following conditions may be applied to Multifactor Policy</p>
 
-<h3 id="rules-action-data">Rules Action Data</h3>
+<p><a href="#PeopleObject">People Condition</a></p>
+
+<h3 id="multifactor-rules-action-data">Multifactor Rules Action Data</h3>
+
+<h4 id="multifactor-enrollment-rules-actions-example">Multifactor Enrollment Rules Actions Example</h4>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="s2">"actions"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"enroll"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHALLENGE"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="err">,</span><span class="w">
+</span></code></pre>
+</div>
 
 <h4 id="RulesActionsEnrollObject">Rules Actions Enroll Object</h4>
 
@@ -1605,13 +1666,17 @@ Note that Okta sign on policy is not the same thing as application sign on polic
       <td>Should the user be enrolled the first time they <code class="highlighter-rouge">LOGIN</code>, the next time they are <code class="highlighter-rouge">CHALLENGE</code>d, or <code class="highlighter-rouge">NEVER</code>?</td>
       <td><code class="highlighter-rouge">CHALLENGE</code>, <code class="highlighter-rouge">LOGIN</code> or <code class="highlighter-rouge">NEVER</code></td>
       <td>Yes</td>
-      <td> </td>
+      <td>N/A</td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="rules-conditions-1">Rules Conditions</h3>
-<p>The following conditions may be applied to the rules associated with Okta MFA Policy</p>
+<p>The following conditions may be applied to the rules associated with MFA Enrollment Policy</p>
+
+<p><a href="#PeopleObject">People Condition</a></p>
+
+<p><a href="#NetworkConditionObject">Network Condition</a></p>
 
 <h2 id="GroupPasswordPolicy">Password Policy</h2>
 
@@ -1621,7 +1686,8 @@ Note that Okta sign on policy is not the same thing as application sign on polic
 
 <p>Password policy controls settings that deterine a user’s password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.</p>
 
-<h4 id="policy-settings-example">Policy Settings Example</h4>
+<h4 id="policy-settings-example-1">Policy Settings Example</h4>
+
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">   </span><span class="s2">"settings"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
      </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
        </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1835,7 +1901,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
       <td>Specifies the minimum time interval (in minutes) between password changes: 0 indicates no limit</td>
       <td>integer</td>
       <td>No</td>
-      <td>-1</td>
+      <td>0</td>
     </tr>
     <tr>
       <td>historyCount</td>
@@ -2298,7 +2364,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
       <div class="Wrap">
         <ul>
           <li>
-            <a href="http://www.okta.com" target="_blank">Okta.com</a>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
             <a href="/blog">Blog</a>
@@ -2316,7 +2382,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="http://okta.com/developer/contact/">Contact Sales</a>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>
