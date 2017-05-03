@@ -130,7 +130,9 @@
   <li>
     <p>Or use the v0.17 KentorIT NuGet assemblies. In this case, if you plan to use the SampleApplication project (not the SampleMvcApplication) for testing purposes, make sure you remove the following line from the web.config file:</p>
 
-    <p><code class="highlighter-rouge">&lt;requestedAuthnContextclassRef="Password" comparison="Minimum" /&gt;</code></p>
+    <div class="language-xml highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;requestedAuthnContextclassRef</span><span class="err">="Password"</span> <span class="na">comparison=</span><span class="s">"Minimum"</span> <span class="nt">/&gt;</span>
+</code></pre>
+    </div>
 
     <p>If you don’t, the SP-initiated login flow will fail because Okta won’t manage to deserialize the SAMLRequest parameter (due to a case issue).</p>
   </li>
@@ -156,7 +158,9 @@
   <li>
     <p>Select the <strong>Show Advanced Settings</strong> link. For the <strong>Signature Algorithm</strong> field, we suggest that you leave the default value, SHA-256. However, if you do, you will need to add the following line of code to the Application_Start() method of your Global.asax.cs file:</p>
 
-    <p><code class="highlighter-rouge">Kentor.AuthServices.Configuration.Options.GlobalEnableSha256XmlSignatures();</code></p>
+    <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Kentor</span><span class="o">.</span><span class="na">AuthServices</span><span class="o">.</span><span class="na">Configuration</span><span class="o">.</span><span class="na">Options</span><span class="o">.</span><span class="na">GlobalEnableSha256XmlSignatures</span><span class="o">();</span>
+</code></pre>
+    </div>
 
     <p>Otherwise, you may switch to RSA-SHA1 though we do not recommend it (as it less secure than SHA-256).</p>
   </li>
