@@ -282,3 +282,12 @@ Please note the following:
 {% endbeta %}
 
 Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
+
+### References
+
+ - [Signup For Okta](https://www.okta.com/developer/signup/)
+ - [Setting Up Authorization Server](/docs/how-to/set-up-auth-server.html)
+ - [Gree/Jose JWK Library](https://github.com/nov/jose-php)
+ - [JWS Spec](https://tools.ietf.org/html/rfc7515)
+ - [JWT Spec](https://tools.ietf.org/html/rfc7519)
+ - [Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-1.3.1)
