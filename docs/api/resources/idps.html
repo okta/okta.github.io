@@ -111,7 +111,7 @@
               <a href="/use_cases/api_access_management">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/promote-oan-integration">Promote Your Integration</a>
+              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -4360,6 +4360,72 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 </span></code></pre>
 </div>
 
+<h3 class="api api-operation" id="social-authentication-token-operation">Social Authentication Token Operation</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/idps/<em>:id</em>/users/<em>:uid</em>/credentials/tokens</span></p>
+
+<p>Fetches the tokens minted by the Social Authentication Provider when the user authenticates with Okta via Social Auth.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-30">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td><code class="highlighter-rouge">id</code> of the IdP</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>uid</td>
+      <td><code class="highlighter-rouge">id</code> of the Okta User</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-30">Response Parameters</h5>
+
+<p>Return a list of the the associated <a href="#identity-provider-social-auth-token-model">Social Auth Tokens</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-36">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="o">}</span><span class="s1">' "https://${org}.okta.com/api/v1/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR/credentials/tokens"
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-36">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dsasdfe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JBTWGV22G4ZGKV3N"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tokenType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:ietf:params:oauth:token-type:access_token"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tokenAuthScheme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expiresAt"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-06T16:56:31.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scopes"</span><span class="w">     </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"openid"</span><span class="p">,</span><span class="w"> </span><span class="s2">"foo"</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+</span></code></pre>
+</div>
+
 <h2 id="identiy-provider-model">Identiy Provider Model</h2>
 
 <h3 id="example">Example</h3>
@@ -7821,6 +7887,108 @@ This object is used for dynamic discovery of related resources and lifecycle ope
   </tbody>
 </table>
 
+<h2 id="identity-provider-social-auth-token-model">Identity Provider Social Auth Token Model</h2>
+
+<p>The Social Auth Token Model provides the tokens and associated metadata provided by Social Providers during Social Auth.</p>
+
+<h3 id="example-5">Example</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;unique token identifier&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JBTWGV22G4ZGKV3N"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tokenType"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"urn:ietf:params:oauth:token-type:access_token"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tokenAuthScheme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expiresAt"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-08-06T16:56:31.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scopes"</span><span class="w">     </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"openid"</span><span class="p">,</span><span class="w"> </span><span class="s2">"foo"</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="identity-provider-social-auth-token-properties">Identity Provider Social Auth Token Properties</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>Unique identifier for the token</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>token</td>
+      <td>The raw token.</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>tokenType</td>
+      <td>The type of token, defined by the <a href="https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-07#section-3">OAuth Token Exchange Spec</a></td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>tokenAuthScheme</td>
+      <td>The token authentication scheme as defined by the Social Provider.</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>expiresAt</td>
+      <td>The date that the token expires</td>
+      <td>Date</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>scopes</td>
+      <td>The scopes which the token is good for</td>
+      <td>Array of Strings</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

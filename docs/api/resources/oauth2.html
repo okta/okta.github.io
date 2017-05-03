@@ -111,7 +111,7 @@
               <a href="/use_cases/api_access_management">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/promote-oan-integration">Promote Your Integration</a>
+              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -1031,10 +1031,6 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/token</span></p>
 
 <p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> and the corresponding credentials and returns back an Access Token. A Refresh Token is returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type returns an ID Token if the <em>openid</em> scope is requested.</p>
-
-<blockquote>
-  <p>Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.</p>
-</blockquote>
 
 <h4 id="request-parameters-1">Request Parameters</h4>
 

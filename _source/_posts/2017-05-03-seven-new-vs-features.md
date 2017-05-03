@@ -25,8 +25,6 @@ The Manage Visual Studio Performance (under the `Help` menu) allows you to view 
 ## 4. Mobile Development
 With Microsoft's acquisition of Xamarin a few years ago, .NET developers have been enjoying the [Xamarin](https://www.xamarin.com/) for free as [a plugin to Visual Studio 2015](https://marketplace.visualstudio.com/items?itemName=Xamarin.Xamarin). In Visual Studio 2017, it’s now one of the install options when installing Visual Studio! This is a signal that cross-platform, mobile development is now a first-class citizen in your Microsoft development toolbelt!
 
-[Image showing the installer window with Xamarin]
-
 ## 5. Live Unit Testing
 Unit testing has been permeating every development stack over the last decade and Microsoft has followed the trend by making Live Unit Testing available. This means as you change your code, Visual Studio will let you know if your changes will break unit tests, or if they will not be covered by unit tests; in real time.
 
