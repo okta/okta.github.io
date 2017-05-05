@@ -532,6 +532,44 @@ invalid_grant           | The *code* or *refresh_token* value was invalid, or th
 unsupported_grant_type  | The grant_type was not *authorization_code* or *refresh_token*. |
 invalid_scope           | The scopes list contains an invalid or unsupported value.    |
 
+#### Request Example: Resource Owner Password Flow
+
+~~~
+curl -X POST \
+  https://westworld.okta.com/oauth2/aus9s3ami4MRoqQR90h7/v1/token \
+  -H 'accept: application/json' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -d 'grant_type=password&username=dolores.abernathy%40westworld.com&
+      password=<password>&scope=openid&client_id=<client_id>
+      & client_secret=<client_secret>'
+~~~
+
+#### Response Example: Resource Owner Password Flow
+
+~~~
+{
+    "access_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOjEsImp0aSI6IkFULkpfUVlIMlJEckI5R
+                      mxDd0hYVVI1WTIzcDg4U1JPS29jajJkd2kwZkhvTVEiLCJpc3MiOiJodHRwczovL3dlc3R3b3JsZC5
+                      va3RhLmNvbS9vYXV0aDIvYXVzOXMzYW1pNE1Sb3FRUjkwaDciLCJhdWQiOiJodHRwczovL2hvc3Qud
+                      2VzdHdvcmxkLmNvbSIsImlhdCI6MTQ5NDAyNjM1MywiZXhwIjoxNDk0MDMwMzM5LCJjaWQiOiJSMWt
+                      yV1NobGZmdUhCbURPZHdZWiIsInVpZCI6IjAwdWFlM3VicDlBSVBTd0JSMGg3Iiwic2NwIjpbIm9wZ
+                      W5pZCJdLCJzdWIiOiJkb2xvcmVzLmFiZXJuYXRoeUB3ZXN0d29ybGQuY29tIn0._tLmV0I4MIXCRaL
+                      2D_M-TQuNM34GoIz1MeKJL_YPqXk",
+    "token_type" : "Bearer",
+    "expires_in" : 1800,
+    "scope" : "openid",
+    "id_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMHVhZTN1YnA5QUlQU3dCUjBoNyIsInZlc
+                  iI6MSwiaXNzIjoiaHR0cHM6Ly93ZXN0d29ybGQub2t0YS5jb20vb2F1dGgyL2F1czlzM2FtaTRNUm9xUVI
+                  5MGg3IiwiYXVkIjoiUjFrcldTaGxmZnVIQm1ET2R3WVoiLCJpYXQiOjE0OTQwMjYzNTMsImV4cCI6MTQ5N
+                  DAzMDI0OSwianRpIjoiSUQuZXVsblJSXzFCWWJQRlZpaWEtYVQtUG4yMVM4R3VqeDJqc21xbGZwTVdvbyI
+                  sImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvODc0MGJzcGhNcEtEWGIwaDciLCJhdXRoX3RpbWUiOjE0OTQwM
+                  jYzNTMsImF0X2hhc2giOiJmZnJRX25OeEpzME9oRDk3aF9XM0F3In0.dg9qhUlGO-1Gg5nnSAaZlBzYSgu
+                  xuEHquhMP9oz8dHQ"
+}
+~~~
+
+<!-- publish when we have the corresponding request
 #### Response Example (Success)
 
 ~~~json
@@ -557,7 +595,7 @@ invalid_scope           | The scopes list contains an invalid or unsupported val
                   T3yZFdWwzkSDc0BGygfiFyNhCezfyT454wbciSZgrA9ROeHkfPCaX7KCFO8GgQEkGRoQntFBNjluFhNLJIUkEFovEDlfuB4tv_M
                   8BM75celdy3jkpOurg"
 }
-~~~
+~~~ -->
 
 #### Response Example (Error)
 
