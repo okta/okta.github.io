@@ -155,7 +155,33 @@ Function  | Return Type | Example | Output
 `isMemberOfGroupNameStartsWith` | Boolean | `isMemberOfGroupNameStartsWith("San Fr")` | **True**, if the user under consideration is a member of any groups with names that starts with *San Fr*; otherwise,  **False**.
 `isMemberOfGroupNameContains` | Boolean | `isMemberOfGroupNameContains("admin")` | **True**, if the user under consideration is a member of any groups with names that contains *admin*; otherwise,  **False**.
 `isMemberOfGroupNameRegex` | Boolean | `isMemberOfGroupNameRegex("/.*admin.*")` | **True**, if the user under consideration is a member of any groups with names that contain *admin*; otherwise,  **False**.
+`getFilteredGroups` | Array | `getFilteredGroups(whitelist, group_expression, limit)` | Array of groups
 
+##### getFilteredGroups
+
+`getFilteredGroups` returns all groups in a specified whitelist of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You can use this function to find both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. You can use this combined, custom-formatted list for customizable claims into access and ID tokens for API access management that drive authorization flows.
+
+Parameter          | Description                                             | DataType | Nullable 
+------------------ | ------------------------------------------------------- | -------- | -------- 
+whitelist | An array of group names | Array   | FALSE    |
+group_expression | Valid Okta EL expression that evaluates to a group | String | FALSE 
+limit | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive | String | False 
+
+The `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups.html), although it is not limited to those attributes and object. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups.html#group-attributes) section of the Groups API are limited to the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes.
+ 
+**Parameter Examples**
+
+* whitelist<br />
+  Array: `{"00gn335BVurvavwEEL0g3", "00gnfg5BVurvavAAEL0g3"}`<br />
+  Array variable: `app.profile.groups.whitelist`
+* group_expression<br />
+  Attribute name: `"groups.profile.groupType"`<br />
+  Okta EL string containing an if condition: `"(group.objectClass == 'okta:windows_security_principal') ? 'AD: ' + group.profile.windowsDomainQualifiedName : 'Okta: ' + group.name"`<br /><br />If *okta:windows_security_principal* is true for 
+  the user, the function returns an array of group names with the prefix `AD:`; otherwise, the function returns an array of group names with the prefix `Okta:`.
+* limit<br />
+   Number between 1 and 100, inclusive in string format: `"50"`.<br />
+   Okta EL string containing a condition that evaluates to a number: `app.profile.maxLimit < 100 ? app.profile.maxLimit : 100`.<br /><br /> If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return 100 groups.
+ 
 ### Time Functions
 
 Function  | Input Parameter Signature | Return Type | Example | Output
