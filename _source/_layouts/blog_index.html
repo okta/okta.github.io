@@ -4,11 +4,15 @@ css: page-blog
 show_bottom_cta: true
 ---
 <section id="blog-index" class="main-container">
-    <div class="wrap blog">{% for post in paginator.posts %}{% capture _post_content %}{{ post.content }}{% endcapture %}{% include blog_post.html post_content=_post_content %}{% endfor %}
-	</div>
+    <div class="wrap blog">
+        {% for post in paginator.posts %}
+            {% capture _post_content %}{{ post.content | strip_html | truncatewords:75 }} <a href="{{post.url}}">Read more</a> {% endcapture %}
+            {% include blog_post.html post_content=_post_content %}
+            <br/>
+        {% endfor %}
+  </div>
 </section>
 
-<!-- Pagination links -->
 {% if paginator.total_pages > 1 %}
 <div class="pagination">
   {% if paginator.previous_page %}
