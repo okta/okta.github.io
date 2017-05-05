@@ -1,21 +1,48 @@
 #!/bin/bash
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+###############################################################################
+# LINT
+###############################################################################
 
-# Where the generated Jekyll site will be placed
-GENERATED_SITE_LOCATION="_site"
+function url_consistency_check() {
+    interject "Checking ${GENERATED_SITE_LOCATION} to make sure documentation uses proper prefixes ('/api/v1', '/oauth2', etc) in example URLs"
+    if [ ! -d "$GENERATED_SITE_LOCATION" ]; then
+       echo "Directory ${GENERATED_SITE_LOCATION} not found";
+       return 1;
+    fi
 
-# Define these ENV vars if they aren't defined already,
-# so these scripts can be run outside of CI
-if [[ -z "${BUILD_FAILURE}" ]]; then
-    export BUILD_FAILURE=1
-fi
+    url_consistency_check_file=`mktemp`
+    # Search the _site directory for all files (-type f) ending in .html (-iname '*.html')
+    find $GENERATED_SITE_LOCATION -type f -iname '*.html' | \
+        # 'grep' all found files for 'api-uri-template', printing line numbers on output
+        xargs grep -n api-uri-template | \
+        # Search for the 'api/v' string, so we match "api/v1", "api/v2", etc
+        grep -v api/v | grep -v oauth2 | grep -v .well-known | \
+        # The 'sed' command below pulls out the filename (\1), the line number (\2) and the URL path (\3)
+        # For example, this:
+        # _site/docs/api/resources/authn.html:2278:<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn</span></p>
+        # becomes this:
+        # _site/docs/api/resources/authn.html:2278:/api/v1/authn
+        sed -e 's/^\([^:]*\):\([^:]*\).*<\/span> \(.*\)<\/span>.*/\1:\2:\3/' | \
+        # Write the results to STDOUT and the $url_consistency_check_file
+        tee $url_consistency_check_file
+    interject "Done checking $GENERATED_SITE_LOCATION for proper prefixes in URLs"
+    # Return "True" if the file is empty
+    return `[ ! -s $url_consistency_check_file ]`
+}
 
-if [[ -z "${SUCCESS}" ]]; then
-    export SUCCESS=0
-fi
+function duplicate_slug_in_url() {
+    interject "Checking ${GENERATED_SITE_LOCATION} to verify duplicate /api/v1 does not exist"
+    output_file=`mktemp`
+    find $GENERATED_SITE_LOCATION -iname '*.html' | xargs grep '/api/v1/api/v1' | tee $output_file
+    interject "Done checking $GENERATED_SITE_LOCATION for duplicate slugs"
+    # Return "True" if the file is empty
+    return `[ ! -s $output_file ]`
+}
 
-source "${0%/*}/import_external_markdown.sh"
+###############################################################################
+# SETUP
+###############################################################################
 
 # Print an easily visible line, useful for log files.
 function interject() {
@@ -32,7 +59,7 @@ function check_for_npm_dependencies() {
 function check_for_jekyll_dependencies() {
     interject 'Checking Jekyll dependencies'
     command -v rvm > /dev/null 2>&1 || { echo "This script requires 'rvm', which is not installed"; exit 1; }
-    
+
     # The file `.ruby-version` has the current ruby version and is used by rbenv
     # https://rvm.io/workflow/projects#project-file-ruby-version
     # For example, this file might contain this line: "ruby-2.0.0-p643"
@@ -59,13 +86,13 @@ function check_for_jekyll_dependencies() {
     interject 'Done installing the gems needed for Jekyll'
     interject 'Done Jekyll checking dependencies'
 }
-    
+
 
 function generate_html() {
     check_for_jekyll_dependencies
-    
+
     interject 'Using Jekyll to generate HTML'
-    
+
     if [ ! -d $GENERATED_SITE_LOCATION ]; then
         check_for_npm_dependencies
         import_external_markdown

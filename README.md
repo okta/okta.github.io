@@ -2,13 +2,13 @@
 # Okta Developer Site
 
 Okta developer site (developer.okta.com) is a custom [Jekyll](http://jekyllrb.com/) site deployed on [GitHub
-pages](https://pages.github.com/)
+pages](https://pages.github.com/).
 
 All API documentation submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a
-[pull request](http://help.github.com/send-pull-requests/)
+[pull request](http://help.github.com/send-pull-requests/).
 
 
-## Setup Environment
+## Set Up Environment
 
 Most of the content of the developer site is written in a format called
 [kramdown](http://kramdown.gettalong.org/syntax.html) which is a flavor of Markdown with some enhanced features like the
@@ -18,7 +18,7 @@ last resort.
 
 Though kramdown gives us benefits of readability it comes at the cost of requiring a build step to preview the changes to
 the site. Jekyll, handles this nicely by detecting changes to the file system and refreshing automatically. To setup
-Jekyll to be able to build and view the site, follow the steps below: 
+Jekyll to be able to build and view the site, follow the steps below:
 
 1. Install RVM if you don't already have it. On OSX [install the stable version](https://rvm.io/rvm/install) or on linux `yum install rvm`. To ensure you have
    rvm installed properly run `rvm list` and ensure that there is a version marked as 'current'.
@@ -78,15 +78,9 @@ If you are making changes in a fork, here is how to make a clean Pull Request ag
 
 Okta uses the
 [GitHub Flow](https://guides.github.com/introduction/flow/)
-workflow for contributions.
+workflow for contributions. At a high level:
 
-Please read the linked
-[GitHub Flow](https://guides.github.com/introduction/flow/)
-document to learn the details of that workflow.
-
-Here is a high-level overview of the GitHub flow:
-
-1.  (Optional) Fork this repository.
+1.  Fork this repository.
 2.  *Create a branch* using the `git checkout -b $BRANCH_NAME` command.
     Replace `$BRANCH_NAME` with your branch name.
 3.  *Add commits* to your branch using the `git add` and `git commit -m ""` commands.
@@ -94,6 +88,8 @@ Here is a high-level overview of the GitHub flow:
     example: `git push origin $BRANCH_NAME`).
 4.  *Open a Pull Request*
     [using the GitHub UI](https://help.github.com/articles/using-pull-requests/).
+    - For most changes, set `base` to the `weekly` branch. Changes merged to this branch are published with our weekly Preview release.
+    - If you need your change to be published on a different cadence (i.e. for blog posts), set `base` to `master`.
 5.  *Discuss and review your code* using the GitHub UI.
 6.  Once your Pull Request has been reviewed and approved, one of the
     project owners for this site will *merge and deploy* your Pull

@@ -4,7 +4,7 @@ DEPLOY_BRANCH="master"
 TARGET_S3_BUCKET="s3://developer.okta.com-staging"
 REGISTRY="https://artifacts.aue1d.saasure.com/artifactory/api/npm/npm-okta"
 
-source "${0%/*}/common.sh"
+source "${0%/*}/setup.sh"
 
 require_env_var "OKTA_HOME"
 require_env_var "BRANCH"
@@ -12,10 +12,11 @@ require_env_var "REPO"
 
 export TEST_SUITE_TYPE="build"
 
+npm install -g @okta/ci-update-package
+npm install -g @okta/ci-pkginfo
 
 # `cd` to the path where Okta's build system has this repository
 cd ${OKTA_HOME}/${REPO}
-
 
 interject "Building HTML in $(pwd)"
 if ! generate_html;
@@ -49,22 +50,17 @@ else
   TARGET_BRANCH=$BRANCH
 fi
 
-if ! npm run ci-update-package -- --branch ${TARGET_BRANCH}; then
+if ! ci-update-package --branch ${TARGET_BRANCH}; then
   echo "ci-update-package failed! Exiting..."
   exit $FAILED_SETUP
 fi
-
-# if ! npm run build -- --branch ${TARGET_BRANCH}; then
-#   echo "run run build failed! Exiting..."
-#   exit $FAILED_SETUP
-# fi
 
 if ! npm publish --registry ${REGISTRY}; then
   echo "npm publish failed! Exiting..."
   exit $PUBLISH_ARTIFACTORY_FAILURE
 fi
 
-DATALOAD=$(npm run ci-pkginfo:dataload --silent)
+DATALOAD=$(ci-pkginfo -t dataload)
 if ! artifactory_curl -X PUT -u ${ARTIFACTORY_CREDS} ${DATALOAD} -v -f; then
   echo "artifactory_curl failed! Exiting..."
   exit $PUBLISH_ARTIFACTORY_FAILURE
