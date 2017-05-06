@@ -45,7 +45,7 @@ The [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) uses this flow.
 
 ## Retrieving a session cookie by visiting a session redirect link
 
-> This pattern is deprecated. Prefer the [OpenID Connect](#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint) flow described above.
+> This pattern is supported, but not encouraged. The [OpenID Connect](#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint) flow described above is the preferred pattern for retrieving a session cookie.
 
 This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. Your web application will solicit and validate the user credentials against your Okta organization by calling the [Authentication API](/docs/api/rest/authn.html) to obtain a [session token](/docs/api/rest/authn.html#session-token).
 
