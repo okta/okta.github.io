@@ -6,12 +6,16 @@
   },
   "description": "NPM dependencies for testing and building developer.okta.com",
   "files": [
-    "_site"
+    "dist"
   ],
   "scripts": {
-    "ci-update-package": "ci-update-package",
-    "ci-pkginfo:dataload": "ci-pkginfo -t dataload",
-    "test": "webdriver-manager update && protractor tests/selenium/conf.js"
+    "build-prod": "rm -rf dist && bundle exec jekyll build && rsync -av ./dist/ ./",
+    "start": "bundle exec jekyll serve",
+    "stop": "if-env CI=true && exit 0 || kill $(lsof -t -i:4000; lsof -t -i:4444)",
+    "driver": "if-env PHANTOMJS=true && (phantomjs --webdriver 4444 & sleep 3) || webdriver-manager update",
+    "pretest": "npm start & wait-on http://localhost:4000 && npm run driver",
+    "test": "protractor tests/selenium/conf.js || (npm stop && exit 1)",
+    "posttest": "npm stop"
   },
   "repository": {
     "type": "git",
@@ -23,12 +27,11 @@
     "url": "https://github.com/okta/okta.github.io/issues"
   },
   "homepage": "https://github.com/okta/okta.github.io#readme",
-  "optionalDependencies": {
-    "@okta/ci-update-package": "1.4.0",
-    "@okta/ci-pkginfo": "1.2.0"
-  },
   "devDependencies": {
+    "if-env": "^1.0.0",
     "jasmine-reporters": "^2.2.0",
-    "protractor": "^4.0.14"
+    "jasmine-spec-reporter": "^4.1.0",
+    "protractor": "^5.1.0",
+    "wait-on": "^2.0.2"
   }
 }

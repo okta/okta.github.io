@@ -185,5 +185,5 @@ performing code:
 
 ### Reference
 
-[^the-knowledge-creating-company]: Ikujiro Nonaka, and Hirotaka Takeuchi. The Knowledge Creating Company. Oxford University Press, 1995. Print. https://books.google.com/books/about/The_Knowledge_creating_Company.html?id=B-qxrPaU1-MC
-[^agile-cost-curve]: Scott Ambler. Examining the Agile Cost of Change Curve. Website. http://www.agilemodeling.com/essays/costOfChange.htm
+[^the-knowledge-creating-company]: Ikujiro Nonaka, and Hirotaka Takeuchi. [The Knowledge Creating Company](https://books.google.com/books/about/The_Knowledge_creating_Company.html?id=B-qxrPaU1-MC). Oxford University Press, 1995. Print. 
+[^agile-cost-curve]: Scott Ambler. [Examining the Agile Cost of Change Curve](http://www.agilemodeling.com/essays/costOfChange.htm).

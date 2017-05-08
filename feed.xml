@@ -8,6 +8,53 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Seven Awesome New Features In Visual Studio 2017</title>
+        <description>&lt;p&gt;Microsoft developers have been using Visual Studio for their IDE since before .NET was even a thing. Visual Studio is twenty years old this year, and on March 7th, 2017 Microsoft released the latest version of it’s flagship developer product, Visual Studio. With this release are a bunch of new features, improvements, and exciting changes for the beloved Microsoft developer environment. Here are seven features in the new IDE that will excite developers using the development environment.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-then-and-now.png&quot; alt=&quot;Visual Studio Then And Now&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-editorconfig-built-in&quot;&gt;1. EditorConfig Built In&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&quot;http://editorconfig.org/&quot;&gt;EditorConfig project&lt;/a&gt; has been available for Visual Studio 2015, but it required you to install a plugin to take advantage of the code-style configuration tool. With the release of 2017, EditorConfig is now built into the IDE. This means you can simply create an &lt;code class=&quot;highlighter-rouge&quot;&gt;.editorconfig&lt;/code&gt; file in the root of your solution and check it into your source control. This will get your whole team using the same code format rules (once you can all agree on what they should be).&lt;/p&gt;
+
+&lt;h2 id=&quot;2-new-visual-studio-installer&quot;&gt;2. New Visual Studio Installer&lt;/h2&gt;
+&lt;p&gt;Visual Studio 2017 also comes with a new installer. The new installer lets you put together an install of Visual Studio customized to the type of development you’re doing. You can install only the features you will need every day and leave out things that you might never need. This is a great way to keep the IDE small and snappy.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-installer.png&quot; alt=&quot;New Visual Studio Installer&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-manage-visual-studio-performance&quot;&gt;3. Manage Visual Studio Performance&lt;/h2&gt;
+&lt;p&gt;The Manage Visual Studio Performance (under the &lt;code class=&quot;highlighter-rouge&quot;&gt;Help&lt;/code&gt; menu) allows you to view the performance of your Visual Studio IDE and can even give you suggestions about extensions that might be impacting the performance of your environment! This includes turning on Lightweight Solution Load, which doesn’t load all the projects in a solution when you open the solution, only when you begin to work in that project. You can still navigate through the code, but the project won’t be loaded until you actually start to work with that project. Awesome!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-perfromance.png&quot; alt=&quot;Manage Visual Studio Performance&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-mobile-development&quot;&gt;4. Mobile Development&lt;/h2&gt;
+&lt;p&gt;With Microsoft’s acquisition of Xamarin a few years ago, .NET developers have been enjoying the &lt;a href=&quot;https://www.xamarin.com/&quot;&gt;Xamarin&lt;/a&gt; for free as &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=Xamarin.Xamarin&quot;&gt;a plugin to Visual Studio 2015&lt;/a&gt;. In Visual Studio 2017, it’s now one of the install options when installing Visual Studio! This is a signal that cross-platform, mobile development is now a first-class citizen in your Microsoft development toolbelt!&lt;/p&gt;
+
+&lt;h2 id=&quot;5-live-unit-testing&quot;&gt;5. Live Unit Testing&lt;/h2&gt;
+&lt;p&gt;Unit testing has been permeating every development stack over the last decade and Microsoft has followed the trend by making Live Unit Testing available. This means as you change your code, Visual Studio will let you know if your changes will break unit tests, or if they will not be covered by unit tests; in real time.&lt;/p&gt;
+
+&lt;p&gt;Running unit tests has almost always been an extra step of your development workflow, but with the Live Unit Testing indicators in your editor popping up as you edit code, it just happens. You can also click on an indicator in the editor and it will show you which tests are exercising that line of code. Unit testing for the win, anyone?&lt;/p&gt;
+
+&lt;h2 id=&quot;6-better-javascript-support&quot;&gt;6. Better Javascript Support&lt;/h2&gt;
+&lt;p&gt;With the proliferation of Javascript and Javascript frameworks like Angular, React, Ember, and Vue, it’s no surprise that VSCode has really gleaned a lot of support from the developer community. VSCode has excellent support for Javascript (ES5 and ES6) as well as framework support for Angular and React, including JSX.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-javascript-support.png&quot; alt=&quot;Visual Studio Javascript Support&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Building on that win, Microsoft used the Javascript engine built into VSCode in Visual Studio 2017. This means that all the great support in VSCode is now available without switching out of your Visual Studio editor!&lt;/p&gt;
+
+&lt;h2 id=&quot;7-docker-support-built-in&quot;&gt;7. Docker Support Built-In&lt;/h2&gt;
+&lt;p&gt;With the adoption of containerization, microservices, and &lt;a href=&quot;https://www.docker.com/microsoft&quot;&gt;Microsoft’s own work with Docker&lt;/a&gt; to help support &lt;a href=&quot;https://hub.docker.com/search/?isAutomated=0&amp;amp;isOfficial=0&amp;amp;page=1&amp;amp;pullCount=0&amp;amp;q=Microsoft+Windows&amp;amp;starCount=0&quot;&gt;Windows Containers&lt;/a&gt;, it’s no surprise that developers are looking for tighter integration with Docker for their development environments. In Visual Studio 2015 (Update 3), you could install the &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=MicrosoftCloudExplorer.VisualStudioToolsforDocker-Preview&quot;&gt;Visual Studio Tools For Docker&lt;/a&gt; and get integrated support for &lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker&lt;/a&gt; containers. Visual Studio 2017, builds this feature in and when choosing the application template from the &lt;code class=&quot;highlighter-rouge&quot;&gt;File -&amp;gt; New&lt;/code&gt; menu, you can choose to turn on Docker support, giving you all the goodness of the plug-in, built in to Visual Studio!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-docker-support.png&quot; alt=&quot;Visual Studio Docker Support&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Visual Studio has always been the editor of choice for those writing .NET applications and tapping into the Microsoft ecosystem. It has always had all the tools developers need to be their best, most productive selves. Now Microsoft has done some outstanding work to include and integrate with non-Microsoft tools that developers love to use, as well as help developers discover problems in their code, and improve the performance of their IDE. With the new additions and improvements in Visual Studio 2017, developers should love it even more!&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 03 May 2017 00:00:00 -0700</pubDate>
+        <link>http://developer.okta.com/blog/2017/05/03/seven-new-vs-features</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2017/05/03/seven-new-vs-features</guid>
+      </item>
+    
+      <item>
         <title>Bootiful Development with Spring Boot and Angular</title>
         <description>&lt;p&gt;To simplify development and deployment, you want everything in the same artifact, so you put your Angular app “inside” your Spring Boot app, right? But what if you could create your Angular app as a standalone app and make cross-origin requests to your API? Hey guess what, you can do both!&lt;/p&gt;
 
@@ -461,7 +508,7 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 
 &lt;p&gt;You can find the source code associated with this article &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-angular-example&quot;&gt;on GitHub&lt;/a&gt;. If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;okta tag&lt;/a&gt;. Of course, you can always &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;ping me on Twitter&lt;/a&gt; too.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 26 Apr 2017 00:00:00 -0400</pubDate>
+        <pubDate>Wed, 26 Apr 2017 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</guid>
       </item>
@@ -1458,7 +1505,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 &lt;/div&gt;
 
 </description>
-        <pubDate>Mon, 17 Apr 2017 00:00:00 -0400</pubDate>
+        <pubDate>Mon, 17 Apr 2017 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</guid>
       </item>
@@ -1633,6 +1680,7 @@ npm start
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;You might have noticed a weird bit of code in that &lt;code class=&quot;highlighter-rouge&quot;&gt;showLogin&lt;/code&gt; method. That first line: &lt;code class=&quot;highlighter-rouge&quot;&gt;Backbone.history.stop()&lt;/code&gt;. The widget itself uses &lt;a href=&quot;http://backbonejs.org/&quot;&gt;Backbone.js&lt;/a&gt; to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the &lt;code class=&quot;highlighter-rouge&quot;&gt;Backbone.history&lt;/code&gt;. Since you’ve now moved it out into a &lt;code class=&quot;highlighter-rouge&quot;&gt;showLogin&lt;/code&gt; function, the widget is going to re-render whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because it’s going to restart when the widget is rendered.&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1724,7 +1772,7 @@ npm start
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;, leave a comment below, or open an issue on GitHub.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 30 Mar 2017 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 30 Mar 2017 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</guid>
       </item>
@@ -2021,7 +2069,7 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;on Twitter&lt;/a&gt;, &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;post a question to Stack Overflow with an “okta” tag&lt;/a&gt;, or &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new&quot;&gt;open a new issue on GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 27 Mar 2017 00:00:00 -0400</pubDate>
+        <pubDate>Mon, 27 Mar 2017 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</guid>
       </item>
@@ -2230,7 +2278,7 @@ brew install springboot
 &lt;p&gt;In a future tutorial, I’ll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that’s secured by Spring Security and does JWT validation.&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 21 Mar 2017 00:00:00 -0400</pubDate>
+        <pubDate>Tue, 21 Mar 2017 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</guid>
       </item>
@@ -2476,7 +2524,7 @@ Hello SAML!
 &lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Thanks to &lt;a href=&quot;https://github.com/AlexeySoshin&quot;&gt;Alexey Soshin&lt;/a&gt; for contributing a &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2&quot;&gt;pull request&lt;/a&gt; to make the code in this blog post more bootiful!&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 16 Mar 2017 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 16 Mar 2017 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2017/03/16/spring-boot-saml</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/16/spring-boot-saml</guid>
       </item>
@@ -2494,7 +2542,9 @@ Hello SAML!
   &lt;li&gt;
     &lt;p&gt;Or use the v0.17 KentorIT NuGet assemblies. In this case, if you plan to use the SampleApplication project (not the SampleMvcApplication) for testing purposes, make sure you remove the following line from the web.config file:&lt;/p&gt;
 
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;requestedAuthnContextclassRef=&quot;Password&quot; comparison=&quot;Minimum&quot; /&amp;gt;&lt;/code&gt;&lt;/p&gt;
+    &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;requestedAuthnContextclassRef&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;=&quot;Password&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;comparison=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Minimum&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
 
     &lt;p&gt;If you don’t, the SP-initiated login flow will fail because Okta won’t manage to deserialize the SAMLRequest parameter (due to a case issue).&lt;/p&gt;
   &lt;/li&gt;
@@ -2520,7 +2570,9 @@ Hello SAML!
   &lt;li&gt;
     &lt;p&gt;Select the &lt;strong&gt;Show Advanced Settings&lt;/strong&gt; link. For the &lt;strong&gt;Signature Algorithm&lt;/strong&gt; field, we suggest that you leave the default value, SHA-256. However, if you do, you will need to add the following line of code to the Application_Start() method of your Global.asax.cs file:&lt;/p&gt;
 
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Kentor.AuthServices.Configuration.Options.GlobalEnableSha256XmlSignatures();&lt;/code&gt;&lt;/p&gt;
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Kentor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;AuthServices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Options&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GlobalEnableSha256XmlSignatures&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
 
     &lt;p&gt;Otherwise, you may switch to RSA-SHA1 though we do not recommend it (as it less secure than SHA-256).&lt;/p&gt;
   &lt;/li&gt;
@@ -2553,7 +2605,7 @@ Hello SAML!
 
 &lt;p&gt;&lt;strong&gt;Happy Okta’ing!&lt;/strong&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 22 Mar 2016 00:00:00 -0400</pubDate>
+        <pubDate>Tue, 22 Mar 2016 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</guid>
       </item>
@@ -2583,7 +2635,7 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/150714428&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Tue, 05 Jan 2016 00:00:00 -0500</pubDate>
+        <pubDate>Tue, 05 Jan 2016 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</guid>
       </item>
@@ -2598,7 +2650,7 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 -0500</pubDate>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2015/12/07/oauth</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/07/oauth</guid>
       </item>
@@ -3015,7 +3067,7 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;https://jersey.java.net/documentation/latest/client.html#d0e5128&quot;&gt;Jersey client documentation&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Wed, 02 Dec 2015 00:00:00 -0500</pubDate>
+        <pubDate>Wed, 02 Dec 2015 00:00:00 -0800</pubDate>
         <link>http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</guid>
       </item>
@@ -3076,7 +3128,7 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Jun 2015 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/06/11/trustpage</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/06/11/trustpage</guid>
       </item>
@@ -3162,7 +3214,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 22 May 2015 00:00:00 -0400</pubDate>
+        <pubDate>Fri, 22 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/22/tcmalloc</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/22/tcmalloc</guid>
       </item>
@@ -3373,15 +3425,15 @@ enforce limits and design for infinity.&lt;/li&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:the-knowledge-creating-company&quot;&gt;
-      &lt;p&gt;Ikujiro Nonaka, and Hirotaka Takeuchi. The Knowledge Creating Company. Oxford University Press, 1995. Print. https://books.google.com/books/about/The_Knowledge_creating_Company.html?id=B-qxrPaU1-MC&amp;nbsp;&lt;a href=&quot;#fnref:the-knowledge-creating-company&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Ikujiro Nonaka, and Hirotaka Takeuchi. &lt;a href=&quot;https://books.google.com/books/about/The_Knowledge_creating_Company.html?id=B-qxrPaU1-MC&quot;&gt;The Knowledge Creating Company&lt;/a&gt;. Oxford University Press, 1995. Print.&amp;nbsp;&lt;a href=&quot;#fnref:the-knowledge-creating-company&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:agile-cost-curve&quot;&gt;
-      &lt;p&gt;Scott Ambler. Examining the Agile Cost of Change Curve. Website. http://www.agilemodeling.com/essays/costOfChange.htm&amp;nbsp;&lt;a href=&quot;#fnref:agile-cost-curve&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;Scott Ambler. &lt;a href=&quot;http://www.agilemodeling.com/essays/costOfChange.htm&quot;&gt;Examining the Agile Cost of Change Curve&lt;/a&gt;.&amp;nbsp;&lt;a href=&quot;#fnref:agile-cost-curve&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 -0400</pubDate>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</guid>
       </item>
@@ -3487,7 +3539,7 @@ where we were last fall, our goal is &lt;strong&gt;zero failover time&lt;/strong
 their hands dirty tackling product issues? Our CTO doesn’t code very often, but when
 he does, he patches the JVM.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 -0400</pubDate>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</guid>
       </item>
@@ -3649,7 +3701,7 @@ steps in writing on our wiki. Thanks guys!&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Thu, 23 Apr 2015 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 23 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</guid>
       </item>
@@ -3808,7 +3860,7 @@ dependency, not a real one.&lt;/p&gt;
 how to make tests isolated. You can also check out the full code at
 &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 14 Apr 2015 00:00:00 -0400</pubDate>
+        <pubDate>Tue, 14 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</guid>
       </item>
@@ -4002,7 +4054,7 @@ because of a bad network connection.&lt;/p&gt;
 to achieve test isolation using dependency injection. You can also
 check out the full code at &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 07 Apr 2015 00:00:00 -0400</pubDate>
+        <pubDate>Tue, 07 Apr 2015 00:00:00 -0700</pubDate>
         <link>http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</guid>
       </item>

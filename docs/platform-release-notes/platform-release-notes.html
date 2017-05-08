@@ -20,7 +20,7 @@
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
   <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.16">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.17">
   <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 
@@ -111,7 +111,7 @@
               <a href="/use_cases/api_access_management">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/promote-oan-integration">Promote Your Integration</a>
+              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -179,7 +179,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201717">Release 2017.17</h2>
+      <h2 id="release-201718">Release 2017.18</h2>
 
 <h3 id="advance-notices">Advance Notices</h3>
 
@@ -205,7 +205,7 @@
  be warned these rate limits will be enforced in the near future.</code></p>
   </li>
   <li>
-    <p>In early May, we’ll enforce these new rate limits for all new preview orgs. For these new orgs, instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+    <p>As of May 2, 2017, we enforce these new rate limits for all new preview orgs. For these new orgs, instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
   </li>
   <li>
     <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
@@ -300,28 +300,20 @@ As outlined in <a href="/docs/api/getting_started/design_principles.html#links-i
 
 <!-- ### Platform New Features -->
 
-<h3 id="platform-feature-improvement-new-default-for-startdate">Platform Feature Improvement: New Default for startDate</h3>
+<h3 id="platform-feature-improvement-view-access-tokens-from-social-authentication">Platform Feature Improvement: View Access Tokens from Social Authentication</h3>
 
-<p>A new default value for <code class="highlighter-rouge">startDate</code> ensures better performance. If the following criteria are met, the default value for <code class="highlighter-rouge">startDate</code> is one hour before the request was sent:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">startDate</code> is omitted AND</li>
-  <li>The filter expression contains no time window AND</li>
-  <li><code class="highlighter-rouge">after</code> is omitted</li>
-</ul>
-
-<p>If your org or integrations depend on the previous behavior, you can request the previous behavior be enabled.</p>
+<p>Using <code class="highlighter-rouge">GET /api/v1/idps/:id/users/:uid/credentials/tokens</code>, you can fetch the Access Tokens minted by a social authentication provider.
+When a user authenticates to Okta via a Social IdP, this request returns the tokens and metadata provided by the Social IdP.
+Clients can use the Access Token against the social provider’s endpoints in order to fetch additional profile attributes that Okta doesn’t support in Universal Directory, for example, nested attributes. 
+For more information, see the <a href="/docs/api/resources/idps.html#social-authentication-token-operation">Identity Providers API</a>. <!-- OKTA-118687 --></p>
 
 <h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
 <ul>
-  <li>Removing the last app target from an <code class="highlighter-rouge">APP_ADMIN</code> role assignment changed the scope of the role assignment to all app targets. Now an exception is thrown. 
- To target all apps, delete the APP_ADMIN role assignment and recreate it. (OKTA-115122)</li>
-  <li>Adding the first app target failed to change the scope of the role assignment from applying to all app targets to only applying to the specified target. 
- See <a href="/docs/api/resources/roles.html#add-app-target-to-app-admin-role">Admin Roles API</a> for details. (OKTA-115122)</li>
-  <li>Application Administrators were incorrectly able to create an OpenID Connect service client even though they weren’t assigned an OpenID Connect client app. (OKTA-115168)</li>
-  <li>Some orgs weren’t able to deprovision a user, receiving an incorrect 403 error: “Operation failed because user profile is mastered under another system.” (OKTA-119549)
-<!-- * Read-only Administrators were incorrectly able to view the Okta user interface for deleting authorization servers. (OKTA-123116) hold for production --></li>
+  <li>Searches on <a href="http://developer.okta.com/docs/api/resources/users.html#list-users-with-search">User</a> incorrectly returned deleted users or out-of-date user status in some cases. (OKTA-116928)</li>
+  <li>Some orgs were unable to add OpenID Connect or OAuth 2.0 clients to an access policy in a custom Authorization Server. (OKTA-117630)</li>
+  <li>When deleting a claim from a custom Authorization Server, the Delete dialog didn’t close after clicking <strong>OK</strong> or <strong>Cancel</strong>. (OKTA-124271)</li>
+  <li>Read-only Administrator user interface didn’t exactly match that role’s access rights. (OKTA-123116)</li>
 </ul>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>

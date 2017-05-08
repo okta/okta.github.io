@@ -2,13 +2,13 @@
 # Okta Developer Site
 
 Okta developer site (developer.okta.com) is a custom [Jekyll](http://jekyllrb.com/) site deployed on [GitHub
-pages](https://pages.github.com/)
+pages](https://pages.github.com/).
 
 All API documentation submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a
-[pull request](http://help.github.com/send-pull-requests/)
+[pull request](http://help.github.com/send-pull-requests/).
 
 
-## Setup Environment
+## Set Up Environment
 
 Most of the content of the developer site is written in a format called
 [kramdown](http://kramdown.gettalong.org/syntax.html) which is a flavor of Markdown with some enhanced features like the
@@ -18,7 +18,7 @@ last resort.
 
 Though kramdown gives us benefits of readability it comes at the cost of requiring a build step to preview the changes to
 the site. Jekyll, handles this nicely by detecting changes to the file system and refreshing automatically. To setup
-Jekyll to be able to build and view the site, follow the steps below: 
+Jekyll to be able to build and view the site, follow the steps below:
 
 1. Install RVM if you don't already have it. On OSX [install the stable version](https://rvm.io/rvm/install) or on linux `yum install rvm`. To ensure you have
    rvm installed properly run `rvm list` and ensure that there is a version marked as 'current'.
@@ -47,7 +47,7 @@ and generate the final site content.
 * **_source** this is where the source files live. If you're editing content, or adding assets like images or CSS, they
   belong in here
 * **docs** The output HTML files live in this directory. Don't edit this content, it'll be overwritten with every build.
-* **_site** this directory is ignored in github. It contains the local version of each of the built files in the site
+* **dist** this directory is ignored in github. It contains the local version of each of the built files in the site
 * **almost everything else** most of the other directories in the root are the checked in versions of the built site.
   These files should not be edited directly. Find the corresponding version of the file in the _source directory, modify
   that and then re-run the build.
@@ -55,14 +55,13 @@ and generate the final site content.
 ### Build Steps
 
 1. Create a topic branch of your work `git checkout -b <branch_name>`
-2. Make changes / additions in _source directory
-3. Compile changes into the _site directory `bundle exec jekyll serve --watch`
+2. Make changes in the **_source** directory
+3. Compile changes into the **dist** directory `bundle exec jekyll serve --watch`
 4. Navigate the site and validate your changes
 5. Stop Jekyll with `ctrl+c`
 6. Discard changed files (they have "localhost:4000" in link URLs instead of "developer.okta.com") with `git checkout .`
-7. Build again with `rm _site/*; bundle exec jekyll build`
-8. Sync the built _site files with the checked-in code with: `rsync -av _site/ ./`
-9. Git commit and push changes to github. When ready for review create a pull request and mention the users you want to
+7. Build a production version with `npm run build-prod`
+8. Commit and push changes to GitHub. When ready for review, create a pull request and mention the users you want to
    review your changes.
 
 ### Resolving conflicts with "upstream"
@@ -78,15 +77,9 @@ If you are making changes in a fork, here is how to make a clean Pull Request ag
 
 Okta uses the
 [GitHub Flow](https://guides.github.com/introduction/flow/)
-workflow for contributions.
+workflow for contributions. At a high level:
 
-Please read the linked
-[GitHub Flow](https://guides.github.com/introduction/flow/)
-document to learn the details of that workflow.
-
-Here is a high-level overview of the GitHub flow:
-
-1.  (Optional) Fork this repository.
+1.  Fork this repository.
 2.  *Create a branch* using the `git checkout -b $BRANCH_NAME` command.
     Replace `$BRANCH_NAME` with your branch name.
 3.  *Add commits* to your branch using the `git add` and `git commit -m ""` commands.
@@ -94,6 +87,8 @@ Here is a high-level overview of the GitHub flow:
     example: `git push origin $BRANCH_NAME`).
 4.  *Open a Pull Request*
     [using the GitHub UI](https://help.github.com/articles/using-pull-requests/).
+    - For most changes, set `base` to the `weekly` branch. Changes merged to this branch are published with our weekly Preview release.
+    - If you need your change to be published on a different cadence (i.e. for blog posts), set `base` to `master`.
 5.  *Discuss and review your code* using the GitHub UI.
 6.  Once your Pull Request has been reviewed and approved, one of the
     project owners for this site will *merge and deploy* your Pull
@@ -104,7 +99,6 @@ Here is a high-level overview of the GitHub flow:
 1. Clone repository using `git clone` - the files are organized in this repository as follows:
     * The root folder `./` contains the files served by GitHub.
     * `_source` folder contains the source files.
-    * `_site` is still ignored.
 2. Create a branch for your changes using `git checkout -b $BRANCH_NAME` to create a branch for your changes.
 3. Make changes under the `_source` directory.
 4. Serve the site locally using the `jekyll serve -w` command.
@@ -115,12 +109,10 @@ Here is a high-level overview of the GitHub flow:
 Do the following after accepting a pull request:
 
 1. Pull down the latest changes using `git pull origin master` to pull down the latest changes.
-2. Compile the site locally using the `jekyll build` command.
-3. rsync files from the `_site` directory to repository root directory `./` with the `rsync -r _site/ ./` command.
-4. Add the updated files using the `git add .` command.
-5. Commit the updated files using the `git commit -m "your message here"` command.
-6. Push to GitHub using `git push origin master` to push to GitHub. Note that GitHub will not compile the site.
-
+2. Run `npm run build-prod` to build and rsync
+3. Add the updated files using the `git add .` command.
+4. Commit the updated files using the `git commit -m "your message here"` command.
+5. Push to GitHub using `git push origin master` to push to GitHub. Note that GitHub will not compile the site.
 
 ## Authoring Guide
 

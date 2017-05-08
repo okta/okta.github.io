@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: API-Name
-excerpt: Pithy phrase describing problem that customer solves with this API 
+excerpt: Pithy phrase describing problem that customer solves with this API
 ---
 
 <!-- Each API may have additional content required to describe it. Feel free to add sections. This template provides the basic pattern. -->
@@ -11,7 +11,7 @@ excerpt: Pithy phrase describing problem that customer solves with this API
 <!-- Be sure to give the API name in both places where API-Name appears -->
 
 The Feebleblitzer API...
- 
+
 ## Endpoints
 
 Explore the API-Name API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
@@ -22,7 +22,7 @@ Explore the API-Name API: [![Run in Postman](https://run.pstmn.io/button.svg)](h
 
 <!-- Phrase that describes what the endpoint does, like "Returns a list of all feebleblitzers" -->
 
-{% api_operation get //api-url %}
+{% api_operation get /api/v1/api-url %}
 <!-- Replace "get" with appropriate HTTP request get, post etc. and "//api-ur" with the full URI after the org name such as /api/v1/my-endpoint -->
 
 #### Request Parameters

@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.16
+excerpt: Summary of changes to the Okta Platform since Release 2017.17
 ---
 
-## Release 2017.17
+## Release 2017.18
 
 ### Advance Notices
 
@@ -25,7 +25,7 @@ We are making org-wide rate limits more granular, and treating authenticated end
     a threshold of <number> requests per <time-duration>. Please 
     be warned these rate limits will be enforced in the near future.`
     
-2. In early May, we’ll enforce these new rate limits for all new preview orgs. For these new orgs, instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.
+2. As of May 2, 2017, we enforce these new rate limits for all new preview orgs. For these new orgs, instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.
 
 3. In mid-May, we'll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.
 
@@ -109,25 +109,19 @@ As noted above, to change user state, the `self` link should be called to retrie
 
 <!-- ### Platform New Features -->
 
-### Platform Feature Improvement: New Default for startDate
+### Platform Feature Improvement: View Access Tokens from Social Authentication
 
-A new default value for `startDate` ensures better performance. If the following criteria are met, the default value for `startDate` is one hour before the request was sent:
-
-* `startDate` is omitted AND
-* The filter expression contains no time window AND
-* `after` is omitted
-
-If your org or integrations depend on the previous behavior, you can request the previous behavior be enabled.
+Using `GET /api/v1/idps/:id/users/:uid/credentials/tokens`, you can fetch the Access Tokens minted by a social authentication provider.
+When a user authenticates to Okta via a Social IdP, this request returns the tokens and metadata provided by the Social IdP.
+Clients can use the Access Token against the social provider's endpoints in order to fetch additional profile attributes that Okta doesn't support in Universal Directory, for example, nested attributes. 
+For more information, see the [Identity Providers API](/docs/api/resources/idps.html#social-authentication-token-operation). <!-- OKTA-118687 -->
 
 ### Platform Bugs Fixed
 
- * Removing the last app target from an `APP_ADMIN` role assignment changed the scope of the role assignment to all app targets. Now an exception is thrown. 
-    To target all apps, delete the APP_ADMIN role assignment and recreate it. (OKTA-115122)
- * Adding the first app target failed to change the scope of the role assignment from applying to all app targets to only applying to the specified target. 
-    See [Admin Roles API](/docs/api/resources/roles.html#add-app-target-to-app-admin-role) for details. (OKTA-115122)
- * Application Administrators were incorrectly able to create an OpenID Connect service client even though they weren't assigned an OpenID Connect client app. (OKTA-115168)
- * Some orgs weren't able to deprovision a user, receiving an incorrect 403 error: "Operation failed because user profile is mastered under another system." (OKTA-119549)
-<!-- * Read-only Administrators were incorrectly able to view the Okta user interface for deleting authorization servers. (OKTA-123116) hold for production -->
+ * Searches on [User](http://developer.okta.com/docs/api/resources/users.html#list-users-with-search) incorrectly returned deleted users or out-of-date user status in some cases. (OKTA-116928)
+ * Some orgs were unable to add OpenID Connect or OAuth 2.0 clients to an access policy in a custom Authorization Server. (OKTA-117630)
+ * When deleting a claim from a custom Authorization Server, the Delete dialog didn't close after clicking **OK** or **Cancel**. (OKTA-124271)
+ * Read-only Administrator user interface didn't exactly match that role's access rights. (OKTA-123116)
 
 ### Does Your Org Have This Change Yet?
 

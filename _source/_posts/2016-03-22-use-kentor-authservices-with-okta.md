@@ -14,7 +14,9 @@ If you're wondering how to configure an ASP.NET application with [KentorIT's Aut
 
 2. Or use the v0.17 KentorIT NuGet assemblies. In this case, if you plan to use the SampleApplication project (not the SampleMvcApplication) for testing purposes, make sure you remove the following line from the web.config file:
 
-    `<requestedAuthnContextclassRef="Password" comparison="Minimum" />`
+    ```xml
+    <requestedAuthnContextclassRef="Password" comparison="Minimum" />
+    ```
 
     If you don't, the SP-initiated login flow will fail because Okta won't manage to deserialize the SAMLRequest parameter (due to a case issue).
 
@@ -36,7 +38,9 @@ Here's how you should configure an app powered by Kentor AuthServices to make it
 10. In the **Name ID format** field, select the default **Unspecified** (or select any other value of your choice).
 11. Select the **Show Advanced Settings** link. For the **Signature Algorithm** field, we suggest that you leave the default value, SHA-256. However, if you do, you will need to add the following line of code to the Application_Start() method of your Global.asax.cs file:
 
-    `Kentor.AuthServices.Configuration.Options.GlobalEnableSha256XmlSignatures();`
+    ```java
+    Kentor.AuthServices.Configuration.Options.GlobalEnableSha256XmlSignatures();
+    ```
 
     Otherwise, you may switch to RSA-SHA1 though we do not recommend it (as it less secure than SHA-256).
 12. In the Attribute Statements section, optionally enter additional attributes, such as in the following screenshot:

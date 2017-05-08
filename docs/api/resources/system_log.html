@@ -111,7 +111,7 @@
               <a href="/use_cases/api_access_management">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/promote-oan-integration">Promote Your Integration</a>
+              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -1234,39 +1234,226 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>ip</td>
-      <td>IP address</td>
-      <td>String</td>
-      <td>TRUE</td>
+      <td style="text-align: left">ip</td>
+      <td style="text-align: left">IP address</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>geographicalContext</td>
-      <td>Geographical context of the IP address</td>
-      <td><a href="#geographicalcontext-object">GeographicalContext Object</a></td>
-      <td>TRUE</td>
+      <td style="text-align: left">geographicalContext</td>
+      <td style="text-align: left">Geographical context of the IP address</td>
+      <td style="text-align: left">  <a href="#geographicalcontext-object">GeographicalContext Object</a></td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>version</td>
-      <td>IP address version</td>
-      <td>V4 or V6</td>
-      <td>TRUE</td>
+      <td style="text-align: left">version</td>
+      <td style="text-align: left">IP address version</td>
+      <td style="text-align: left">V4 or V6</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>source</td>
-      <td>Details regarding the source</td>
-      <td>String</td>
-      <td>TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">source</td>
+      <td style="text-align: left">Details regarding the source</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
+
+<h2 id="event-model">Event Model</h2>
+
+<h3 id="application-event">Application Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Event</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">application.lifecycle.activate</td>
+      <td style="text-align: left">An application was activated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">application.lifecycle.create</td>
+      <td style="text-align: left">An application was created.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">application.lifecycle.deactivate</td>
+      <td style="text-align: left">An application was deactivated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">application.lifecycle.delete</td>
+      <td style="text-align: left">An application was deleted.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">application.lifecycle.update</td>
+      <td style="text-align: left">An application was updated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">application.user_membership.add</td>
+      <td style="text-align: left">A user was assigned to an application.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">application.user_membership.change_username</td>
+      <td style="text-align: left">The name of a user assigned to an application was changed.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">application.user_membership.remove</td>
+      <td style="text-align: left">A user was removed from an application.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="group-event">Group Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Event</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">group.user_membership.add</td>
+      <td style="text-align: left">A user was added to a group.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">group.user_membership.remove</td>
+      <td style="text-align: left">A user was removed from a group.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="policy-events">Policy Events</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Event</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">policy.lifecycle.activate</td>
+      <td style="text-align: left">A rule in a policy was activated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.lifecycle.create</td>
+      <td style="text-align: left">A rule in a policy was created.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.lifecycle.deactivate</td>
+      <td style="text-align: left">A rule in a policy was deactivated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.lifecycle.delete</td>
+      <td style="text-align: left">A rule in a policy was deleted.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.lifecycle.update</td>
+      <td style="text-align: left">A rule in a policy was updated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.rule.activate</td>
+      <td style="text-align: left">A rule in a policy was activated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.rule.add</td>
+      <td style="text-align: left">A rule was added to a policy.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.rule.deactivate</td>
+      <td style="text-align: left">A rule in a policy was deactivated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.rule.delete</td>
+      <td style="text-align: left">A rule was deleted from a policy.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">policy.rule.update</td>
+      <td style="text-align: left">A rule in a policy was updated.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="policy-event-details">Policy Event Details</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">policy.evaluate_sign_on</code> provides context on the values used and evaluated in the context of the Okta sign on policy. For example, you can determine which network zones were matched for this event.</li>
+  <li>For <code class="highlighter-rouge">policy.lifecycle</code> and <code class="highlighter-rouge">policy.rule</code> events, the corresponding policy is listed in the target object.</li>
+</ul>
+
+<h3 id="user-events">User Events</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Event</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">user.authentication.sso</td>
+      <td style="text-align: left">A user attempted to SSO to an application managed in Okta</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">user.lifecycle.activate</td>
+      <td style="text-align: left">A user account was activated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">user.lifecycle.create</td>
+      <td style="text-align: left">A user account was created.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">user.lifecycle.deactivate</td>
+      <td style="text-align: left">A user account was deactivated.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">user.lifecycle.suspend</td>
+      <td style="text-align: left">A user account was suspended.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">user.lifecycle.unsuspend</td>
+      <td style="text-align: left">A user account was moved from suspended status.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">user.session.start</td>
+      <td style="text-align: left">Okta issued a session to a user who is authenticating</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="user-event-details">User Event Details</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">user.authentication.sso</code> doesn’t capture whether the SSO attempt was successful or failed because Okta can’t collect the subsequent authentication attempt status from the third-party service.</li>
+</ul>
 
 <h2 id="response-headers">Response Headers</h2>
 
@@ -1356,6 +1543,21 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000009"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your last request took too long to complete. This is likely due to a load issue on our side. We've logged this and will work to address it. Please either simplify your query or wait a few minutes and try again."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>A free form query that is too long:</p>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Api validation failed: 'q': Freeform search cannot contain items longer than 40 characters. Please shorten the items in your search or use an advanced filter to query by specific fields."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Exceeding</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">rate</span><span class="w"> </span><span class="err">limit</span><span class="w"> </span><span class="err">results</span><span class="w"> </span><span class="err">in:</span><span class="w">
+</span><span class="err">~~~json</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000047"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"API call exceeded rate limit due to too many requests."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
