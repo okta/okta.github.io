@@ -1498,7 +1498,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "123456"
-}' "https://${org}.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate"
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/sms1o51EADOTFXHHBXBP/lifecycle/activate"
 ~~~
 
 ##### Response Example
@@ -1590,7 +1590,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "passCode": "12345"
-}' "https://${org}.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP/lifecycle/activate"
+}' "https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/clf1o51EADOTFXHHBXBP/lifecycle/activate"
 ~~~
 
 ##### Response Example
@@ -1668,7 +1668,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate"
+"https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/lifecycle/activate"
 ~~~
 
 #### Response Example (Waiting)
@@ -2165,7 +2165,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36" \
 -H "X-Forwarded-For: 23.235.46.133" \
-"https://${org}.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify"
+"https://${org}.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/opf3hkfocI4JTLAju0g4/verify"
 ~~~
 
 #### Response Example
