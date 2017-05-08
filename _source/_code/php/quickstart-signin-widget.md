@@ -260,7 +260,8 @@ An Access Token must be validated in the following manner:
 1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
 2. Verify that the `aud` (audience) claim is the requested URL.
 3. Verify `cid` (client id) claim is your client id.
-4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
+4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the 
+algorithm specified in the JWT `alg` header property. Use the public keys provided by Okta via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
 ```php
@@ -278,7 +279,7 @@ if($res->claims['exp'] < time()-300) {
 
 ```
 
-Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
+Step 4 involves downloading the public JWKS from Okta (specified by the `jwks_uri` property in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
 An `id_token` contains a [public key id](https://tools.ietf.org/html/rfc7517#section-4.5) (`kid`). To verify the signature, we use the [Discovery Document](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document) to find the `jwks_uri`, which will return a list of public keys. It is safe to cache or persist these keys for performance, but Okta rotates them periodically. We strongly recommend dynamically retrieving these keys.
 
@@ -321,7 +322,7 @@ $jws = JOSE_JWT::decode($jwt_string);
 $jws->verify($jwk, 'RS256');
 ```
 
-Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
+Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
 
 The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
 However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
