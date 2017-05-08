@@ -195,9 +195,9 @@ And modify `app.component.html` to have a `<div>` with `id="okta-login-container
 
 {% raw %}
 ```html
-<div [hidden]="!user" id="okta-login-container"></div>
+<div *ngIf="!user" id="okta-login-container"></div>
 
-<div [hidden]="user">
+<div *ngIf="user">
   Hello {{user}}
 
   <button (click)="logout()">Logout</button>
