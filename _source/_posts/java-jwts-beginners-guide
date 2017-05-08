@@ -1,0 +1,138 @@
+A Beginner’s Guide to JWTs in Java
+
+New to token authentication, OAuth, or JSON Web Tokens? This is a great place to start!
+
+First, what is a JSON Web Token, or JWT (pronounced “jot”)? In a nutshell, a JWT is a secure and trustworthy standard for token authentication. JWTs allow you to digitally sign information (referred to as claims) with a signature and can be verified at a later time with a secret signing key.
+## What is Token Authentication?
+The process by which an application confirms user identity is called authentication. Traditionally, applications have persisted identity through session cookies which rely on session IDs stored server-side. In this structure, developers are forced to create session storage that is either unique and server-specific, or implemented as a completely separate session storage layer.
+
+Token authentication is a more modern approach, designed solve problems server-side session IDs can’t. Using tokens in place of session IDs can lower your server load, streamline permission management, and provide better tools for supporting a distributed or cloud-based infrastructure. In this method, tokens are generated for your users after they present verifiable credentials. The initial authentication could be by username/password credentials, API keys or even tokens from another service. 
+## Anatomy of a JWT
+If you encounter a JWT in the wild, you’ll notice that it’s separated into three sections, the header, payload, and signature. (Follow along with [an open-source Java JWT tool](https://github.com/jwtk/jjwt) as we dissect the anatomy of a JWT!) Here’s an example of a typical JWT:
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+.
+eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwibmFtZSI6IlJvYmVydCBUb2tlbiBNYW4iLCJzY29wZSI6InNlbGYgZ3JvdXBzL2FkbWlucyIsImV4cCI6IjEzMDA4MTkzODAifQ
+.
+1pVOLQduFWW3muii1LExVBt2TK1-MdRI4QjhKryaDwc
+```
+In this example, Section 1 is a header which describes the token. Section 2 is the payload, which contains the JWT’s claims, and Section 3 is the signature hash that can be used to verify the integrity of the token (if you have the secret key that was used to sign it).
+
+When we decode the payload we get this nice, tidy JSON object containing the claims of the JWS:
+```
+{
+  "sub": "users/TzMUocMF4p",
+  "name": "Robert Token Man",
+  "scope": "self groups/admins",
+  "exp": "1300819380"
+}
+```
+The claims tell you, at minimum:
+
+* Who this person is and the URI to their user resource (the subclaim)
+* What this person can access with this token (the scope claim)
+* When the token expires. Your API should be using this when it verifies the token.
+
+Because the token is signed with a secret key you can verify its signature and implicitly trust what is being claimed.
+### JWE, JWS, and JWT
+Per the [JWT Spec](https://tools.ietf.org/html/rfc7519), “JWTs represent a set of claims as a JSON object that is encoded in a JWS and/or JWE structure.” The term “JWT” technically only describes an unsigned token; what we refer to as a JWT is most often a JWS or JWS + JWE.
+#### JWS — JSON Web Signature
+In the [JWS](https://tools.ietf.org/html/rfc7515) scheme, the server signs the JWT and transmits it to the client with the signature. The signature provides a guarantee that the JWT claims have not been forged or tampered with. However, the JWT is not encrypted (the contents are essentially plaintext).
+#### JWE — JSON Web Encryption
+The [JWE](https://tools.ietf.org/html/rfc7516) scheme, on the other hand, encrypts the contents without signing it. This brings confidentiality to your JWT, but not the security of signing and enclosing the JWE inside a JWS.
+## What the Heck is OAuth 2.0?
+
+[OAuth 2.0](http://oauth.net/2/) (henceforth: OAuth) is a framework for interaction with a service that can delegate authentication or provide authorization. It is widely adopted across many mobile and web applications. OAuth does not specify a token format, but JWT is rapidly becoming a defacto standard in the industry.
+
+Within the OAuth paradigm, there are two token types: Access and Refresh Tokens. When you first authenticate, your application (and thus your user), is typically given both tokens, but the Access Token is set to expire after a short period (this duration is configurable in the application). Once the initial Access Token has expired, the Refresh Token will allow your application to obtain a new Access Token. Refresh Tokens have a set expiration, allowing for unlimited use up until that expiration point is reached. Both Access and Refresh Tokens have built-in security (when signed) to prevent tampering and are only valid for a specific duration.
+
+Okta uses OAuth because it is an industry standard that can be leveraged by any compliant library. We currently support five of OAuth’s grant types:
+
+* Password Grant Type: Provides the ability to get an Access Token based on a username and password
+* Refresh Grant Type: Provides the ability to generate another Access Token based on a special Refresh Token
+* Client Credentials Grant Type: Provides the ability to exchange an API Key Pair for an Access Token. 
+* Authorization Code Grant Type: Provides the ability to obtain both Access and Refresh Tokens in an optimized fashion for confidential clients
+* Implicit Grant Type: Provides the ability to obtain Access Tokens (but not the issuance of Refresh Tokens), and is typically implemented via scripting language in a browser
+## Creating and Validating JWTs in Java
+So, you’re sold on tokens, now, how do you use them in your application?
+
+Well, if you’re a Java developer you should start with [JJWT](https://github.com/jwtk/jjwt). JJWT is a Java library providing end-to-end JSON Web Token creation and verification, developed by our very own [Les Hazlewood](https://www.youtube.com/watch?v=JOvZR4WutyI) and maintained by a community of developers. Forever free and open-source (Apache License, Version 2.0), it was designed with a builder-focused interface hiding most of its complexity.
+### Creating
+Because of JJWT’s <a href="http://en.wikipedia.org/wiki/Fluent_interface">fluent interface</a>, the creation of the JWT is basically a three-step process:
+
+* The definition of the internal claims of the token, like Issuer, Subject, Expiration, and ID.
+* The cryptographic signing the JWT (making it a JWS)
+* The compaction of the JWT to a URL-safe string, according to the [JWT Compact Serialization](https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1) rules
+
+The final JWT will be a three-part Base64 encoded string signed with the specified signature algorithm using the provided key. After this point, the token is ready to be shared with the other party.
+
+Here’s an example of creating the JWT from above using the JJWT library:
+
+```
+String jwt = Jwts.builder()
+  .setSubject("users/TzMUocMF4p")
+  .setExpiration(new Date(1300819380))
+  .claim("name", "Robert Token Man")
+  .claim("scope", "self groups/admins")
+  .signWith(
+    SignatureAlgorithm.HS256,
+    "8MHRTk23iNf+KqoCysMEe6ZRf7m+7Mv9tnNBwaRGp0g".getBytes("UTF-8")
+  )
+  .compact();
+```
+### Validating
+Once you have a JWT, you typically deliver it back to the client that requested it. The client then stores it and passes the Token in requests to your application. This is usually done with either a cookie value or an authorization header in HTTP. For example:
+```
+HTTP/1.1
+
+GET /secure-resource
+
+Host: https://yourapplication.com
+
+Authorization: Bearer eyJraWQiOiIzMUUzRDZaM0xaMVdFSEJGWVRQRksxRzY4IiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiI2a3NjVFMyUjZuYlU3c1RhZ0h0aWFXIiwiaWF0IjoxNDQ1ODU0Njk0LCJpc3MiOiJodHRwczovL2FwaS5zdG9ybXBhdGguY29tL3YxL2FwcGxpY2F0aW9ucy8zUUlNbEpLS04yd2hHQ1l6WFh3MXQ4Iiwic3ViIjoiaHR0cHM6Ly9hcGkuc3Rvcm1wYXRoLmNvbS92MS9hY2NvdW50cy8xeG15U0dLMXB5VVc1c25qOENvcmU1IiwiZXhwIjoxNDQ1ODU4Mjk0LCJydGkiOiI2a3NjVE9pTUNESVZWM05qVTIyUnlTIn0.VJyMOicMOdcOCtytsx4hoPHy3Hl3AfGNfi2ydy8AmG4
+```
+Validating the JWT allows you to verify its authenticity (by checking its digital signature you can check that it is not expired and verify that it hasn’t been tampered with) and get information about the user sending the token.
+
+Here’s an example of validating the JWT that we created above:
+```
+String jwt = <jwt passed in from above>
+Jws<Claims> claims = Jwts.parser()
+  .setSigningKey("8MHRTk23iNf+KqoCysMEe6ZRf7m+7Mv9tnNBwaRGp0g".getBytes("UTF-8"))
+  .parseClaimsJws(jwt)
+String scope = claims.getBody().get("scope")
+assertEquals(scope, "self groups/admins");
+```
+If the signature is incorrect, the call to ```parseClaimsJws``` will throw a ```SignatureException```. Once successfully parsed, individual claims can be obtained and checked as in: ```String scope = claims.getBody().get("scope")```.
+### Exceptions
+JJWT carries out a variety of validations while working with the JWT. All JJWT-related exceptions are ```RuntimeExceptions```, with ```JwtException``` as the base class.
+
+These errors cause specific exceptions to be thrown:
+
+* ```ClaimJwtException```: thrown after a validation of a JWT claim failed
+* ```ExpiredJwtException```: indicating that a JWT was accepted after it expired and must be rejected
+* ```MalformedJwtException```: thrown when a JWT was not correctly constructed and should be rejected
+* ```PrematureJwtException```: indicates that a JWT was accepted before it is allowed to be accessed and must be rejected
+* ```SignatureException```: indicates that either calculating a signature or verifying an existing signature of a JWT failed
+* ```UnsupportedJwtException```: thrown when receiving a JWT in a particular format/configuration that does not match the format expected by the application. For example, this exception would be thrown if parsing an unsigned plaintext JWT when the application requires a cryptographically signed Claims JWS instead
+
+There are a number of other Exception classes that JJWT uses. They all can be found in the ```io.jsonwebtoken``` package in the JJWT source.
+## Are Tokens Secure?
+The real question here is, are you using them securely? At Okta, we follow these best practices, and encourage our clients to do the same:
+
+* Store your JWTs in secure, HttpOnly cookies. This prevents [Cross-Site Scripting (XSS)](https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)) attacks.
+* If you’re using cookies to transmit your JWTs, CSRF protection is super duper important! Your cookies can be used maliciously by other domains that make requests to your website without your user’s consent. If your server blindly authenticates a user, simply because they have a cookie, then you’ve got more problems than your hard drive size. You’re also allowing CSRF attacks, where other websites trigger state-changing actions on your server without your users’ consent. This is possible because the browser will always send the user’s cookies automatically, regardless of how the request was triggered. Use one of the [many available measures](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">CSRF Prevention) to reduce this risk.
+* Sign your tokens with a strong key that is available ONLY to the authentication service. Every time you use a token to authenticate a user, your server MUST verify that the token was signed with your secret key.
+* Do not store any sensitive data in a JWT. These tokens are usually signed to protect against manipulation (not encrypted) so the data in the claims can be easily decoded and read. Encrypt your tokens if you have to put sensitive, non-opaque information in them. The secret signing key should only be accessible by the issuer and the consumer; it should not be accessible outside of these two parties.
+* If you are worried about replay attacks, include a nonce (jti claim), expiration time (exp claim), and creation time (iat claim) in the claims. These are well defined in the [JWT Spec](https://tools.ietf.org/html/rfc7519).
+### Don’t Just Check Your JWTs, Check Your JWT Library
+Make sure you watch out for less-secure JWT libraries. Some libraries treat tokens signed with the `none` algorithm as a valid token with a verified signature, which ultimately allows users account access to some systems, with whatever payload they want. 
+
+Others will neglect to include an `algorithm` parameter to their verification function. In a nutshell, if a server is expecting a token signed with RSA, but instead receives a token signed with HMAC, it can think the public key is actually an HMAC secret key, if using a vulnerable JWT library. This leaves what should be secret keys open to public view, and ultimately open to forgery and exploitation. At Okta we use JJWT, as it was built with these recommendations in mind and has never had the asymmetric key vulnerability!
+## Learn More
+Looking to learn more about JWTs, token authentication, or secure identity management? Here are some further resources from our team:
+
+* Get Started with Spring Boot, OAuth 2.0, and Okta](http://developer.okta.com/blog/2017/03/21/spring-boot-oauth)
+* [Demystifying OAuth](http://developer.okta.com/blog/2015/12/07/oauth)
+* [REST Service Authorization with JWTs](http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt)
+
+
