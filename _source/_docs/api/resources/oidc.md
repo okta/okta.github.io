@@ -78,7 +78,8 @@ to access [the OIDC `userinfo` endpoint](http://developer.okta.com/docs/api/reso
   be a valid OAuth 2.0 request, but it's not an OpenID Connect request.
 * `profile` requests access to these default profile claims: `name`, `family_name`, `given_name`, `middle_name`, `nickname`, `preferred_username`, `profile`,  
 `picture`, `website`, `gender`, `birthdate`, `zoneinfo`,`locale`, and `updated_at`.
-* `offline_access` can only be requested in combination with a `response_type` containing `code`. If the `response_type` does not contain `code`, `offline_access` will be ignored.
+* `groups` is an Okta extension of `Access Token` scopes. It is an array of strings naming the groups the user belongs to.
+* `offline_access` can be requested only in combination with a `response_type` containing `code`. If the `response_type` does not contain `code`, `offline_access` will be ignored.
 * For more information about `offline_access`, see the [OIDC spec](http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
 
 ## ID Token
