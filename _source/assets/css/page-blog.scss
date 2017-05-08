@@ -13,6 +13,29 @@
 .main-container > .blog {
   max-width: 1360px; // result of calculation in _PageContent.scss
   margin: 0 auto;
+
+  .post-content {
+
+    iframe {
+      max-width: 100%;
+    }
+  }
+}
+
+#blog {
+  .pagination {
+    text-align: center;
+    margin: 20px 0;
+
+    a, span, em {
+      margin: 0 5px;
+    }
+
+    em {
+      font-style: normal;
+      font-weight: bold;
+    }
+  }
 }
 
 .wrap {

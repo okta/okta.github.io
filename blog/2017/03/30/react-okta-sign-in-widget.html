@@ -287,6 +287,7 @@ npm start
   <span class="p">}</span>
 </code></pre>
 </div>
+
 <blockquote>
   <p><em>You might have noticed a weird bit of code in that <code class="highlighter-rouge">showLogin</code> method. That first line: <code class="highlighter-rouge">Backbone.history.stop()</code>. The widget itself uses <a href="http://backbonejs.org/">Backbone.js</a> to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the <code class="highlighter-rouge">Backbone.history</code>. Since you’ve now moved it out into a <code class="highlighter-rouge">showLogin</code> function, the widget is going to re-render whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because it’s going to restart when the widget is rendered.</em></p>
 </blockquote>

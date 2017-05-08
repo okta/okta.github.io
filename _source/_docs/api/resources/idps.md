@@ -3601,6 +3601,51 @@ Content-Type: application/json
 }
 ~~~
 
+### Social Authentication Token Operation
+{:.api .api-operation}
+
+{% api_operation GET /api/v1/idps/*:id*/users/*:uid*/credentials/tokens %}
+
+Fetches the tokens minted by the Social Authentication Provider when the user authenticates with Okta via Social Auth.
+
+##### Request Parameters
+{:.api .api-request .api-request-params}
+
+Parameter     | Description                                                                     | Param Type | DataType                                      | Required | Default
+------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
+id            | `id` of the IdP                                                                 | URL        | String                                        | TRUE     |
+uid           | `id` of the Okta User                                                           | URL        | String                                        | TRUE     |
+
+##### Response Parameters
+{:.api .api-response .api-response-params}
+
+Return a list of the the associated [Social Auth Tokens](#identity-provider-social-auth-token-model)
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+}' "https://${org}.okta.com/api/v1/idps/0oa62b57p7c8PaGpU0h7/users/00ub0oNGTSWTBKOLGLNR/credentials/tokens"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+[{
+  "id": "dsasdfe",
+  "token": "JBTWGV22G4ZGKV3N",
+  "tokenType" : "urn:ietf:params:oauth:token-type:access_token",
+  "tokenAuthScheme": "Bearer",
+  "expiresAt" : "2014-08-06T16:56:31.000Z",
+  "scopes"     : [ "openid", "foo" ]
+}]
+~~~
+
 ## Identiy Provider Model
 
 ### Example
@@ -5143,3 +5188,34 @@ The CSR model for IdP defines a certificate signing request for a signature or d
 | _links           | discoverable resources related to the CSR                    | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-05)              | TRUE     | FALSE  | TRUE     |           |           |            |
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
 
+
+
+## Identity Provider Social Auth Token Model
+
+The Social Auth Token Model provides the tokens and associated metadata provided by Social Providers during Social Auth.
+
+### Example
+
+~~~json
+{
+  "id": "<unique token identifier>",
+  "token": "JBTWGV22G4ZGKV3N",
+  "tokenType" : "urn:ietf:params:oauth:token-type:access_token",
+  "tokenAuthScheme": "Bearer",
+  "expiresAt" : "2014-08-06T16:56:31.000Z",
+  "scopes"     : [ "openid", "foo" ]
+}
+~~~
+
+### Identity Provider Social Auth Token Properties
+
+|------------------+----------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|
+| Property         | Description                                                                                                                            | DataType                                                                    | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
+| id               | Unique identifier for the token                                                                                                        | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| token            | The raw token.                                                                                                                         | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
+| tokenType        | The type of token, defined by the [OAuth Token Exchange Spec](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-07#section-3) | String                                                                      | TRUE     | TRUE   | TRUE     |           |           |            |
+| tokenAuthScheme  | The token authentication scheme as defined by the Social Provider.                                                                     | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| expiresAt        | The date that the token expires                                                                                                        | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
+| scopes           | The scopes which the token is good for                                                                                                 | Array of Strings                                                            | FALSE    | FALSE  | TRUE     |                 
+|------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|

@@ -10,12 +10,13 @@ github_username:  oktadeveloper
 
 gems:
   - jekyll-redirect-from
+  - jekyll-paginate
 
 # -- standard exclusions
 exclude: [Gemfile, Gemfile.lock, README.md]
 
 source: _source
-destination: _site
+destination: dist
 
 markdown: kramdown
 markdown_ext: md
@@ -58,6 +59,9 @@ collections:
   docs:
     output: true
     permalink: /:collection/:path:output_ext
+
+paginate: 10
+paginate_path: "/blog/page/:num"
 
 defaults:
   -

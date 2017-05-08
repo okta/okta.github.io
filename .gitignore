@@ -34,7 +34,8 @@ reload_views.rb
 # Ignore the vendor folder.
 vendor/*
 
-_site/*
+
+dist
 
 .sass-cache
 .bundle
