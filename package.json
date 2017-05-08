@@ -6,9 +6,10 @@
   },
   "description": "NPM dependencies for testing and building developer.okta.com",
   "files": [
-    "_site"
+    "dist"
   ],
   "scripts": {
+    "build-prod": "rm -rf dist && bundle exec jekyll build && rsync -av ./dist/ ./",
     "start": "bundle exec jekyll serve",
     "stop": "if-env CI=true && exit 0 || kill $(lsof -t -i:4000; lsof -t -i:4444)",
     "driver": "if-env PHANTOMJS=true && (phantomjs --webdriver 4444 & sleep 3) || webdriver-manager update",

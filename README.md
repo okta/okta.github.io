@@ -47,7 +47,7 @@ and generate the final site content.
 * **_source** this is where the source files live. If you're editing content, or adding assets like images or CSS, they
   belong in here
 * **docs** The output HTML files live in this directory. Don't edit this content, it'll be overwritten with every build.
-* **_site** this directory is ignored in github. It contains the local version of each of the built files in the site
+* **dist** this directory is ignored in github. It contains the local version of each of the built files in the site
 * **almost everything else** most of the other directories in the root are the checked in versions of the built site.
   These files should not be edited directly. Find the corresponding version of the file in the _source directory, modify
   that and then re-run the build.
@@ -55,14 +55,13 @@ and generate the final site content.
 ### Build Steps
 
 1. Create a topic branch of your work `git checkout -b <branch_name>`
-2. Make changes / additions in _source directory
-3. Compile changes into the _site directory `bundle exec jekyll serve --watch`
+2. Make changes in the **_source** directory
+3. Compile changes into the **dist** directory `bundle exec jekyll serve --watch`
 4. Navigate the site and validate your changes
 5. Stop Jekyll with `ctrl+c`
 6. Discard changed files (they have "localhost:4000" in link URLs instead of "developer.okta.com") with `git checkout .`
-7. Build again with `rm _site/*; bundle exec jekyll build`
-8. Sync the built _site files with the checked-in code with: `rsync -av _site/ ./`
-9. Git commit and push changes to github. When ready for review create a pull request and mention the users you want to
+7. Build a production version with `npm run build-prod`
+8. Commit and push changes to GitHub. When ready for review, create a pull request and mention the users you want to
    review your changes.
 
 ### Resolving conflicts with "upstream"
@@ -100,7 +99,6 @@ workflow for contributions. At a high level:
 1. Clone repository using `git clone` - the files are organized in this repository as follows:
     * The root folder `./` contains the files served by GitHub.
     * `_source` folder contains the source files.
-    * `_site` is still ignored.
 2. Create a branch for your changes using `git checkout -b $BRANCH_NAME` to create a branch for your changes.
 3. Make changes under the `_source` directory.
 4. Serve the site locally using the `jekyll serve -w` command.
@@ -111,12 +109,10 @@ workflow for contributions. At a high level:
 Do the following after accepting a pull request:
 
 1. Pull down the latest changes using `git pull origin master` to pull down the latest changes.
-2. Compile the site locally using the `jekyll build` command.
-3. rsync files from the `_site` directory to repository root directory `./` with the `rsync -r _site/ ./` command.
-4. Add the updated files using the `git add .` command.
-5. Commit the updated files using the `git commit -m "your message here"` command.
-6. Push to GitHub using `git push origin master` to push to GitHub. Note that GitHub will not compile the site.
-
+2. Run `npm run build-prod` to build and rsync
+3. Add the updated files using the `git add .` command.
+4. Commit the updated files using the `git commit -m "your message here"` command.
+5. Push to GitHub using `git push origin master` to push to GitHub. Note that GitHub will not compile the site.
 
 ## Authoring Guide
 

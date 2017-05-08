@@ -3,7 +3,7 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Where the generated Jekyll site will be placed
-GENERATED_SITE_LOCATION="_site"
+GENERATED_SITE_LOCATION="dist"
 
 # Define these ENV vars if they aren't defined already,
 # so these scripts can be run outside of CI

@@ -28,7 +28,7 @@ npm install
 npm test
 
 # 4. Run lint
-export GENERATED_SITE_LOCATION="_site"
+export GENERATED_SITE_LOCATION="dist"
 if ! url_consistency_check || ! duplicate_slug_in_url; then
   echo "FAILED LINT CHECK!"
   exit 1;

@@ -35,8 +35,7 @@ then
         exit ${BUILD_FAILURE}
     fi
 fi
-
-# ----- End (Temorary) Deploy to S3 -----
+# ----- End (Temporary) Deploy to S3 -----
 
 
 # Create NPM package

@@ -22,6 +22,22 @@
   }
 }
 
+#blog {
+  .pagination {
+    text-align: center;
+    margin: 20px 0;
+
+    a, span, em {
+      margin: 0 5px;
+    }
+
+    em {
+      font-style: normal;
+      font-weight: bold;
+    }
+  }
+}
+
 .wrap {
   padding: 0 10px;
 }
