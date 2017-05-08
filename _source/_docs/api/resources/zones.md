@@ -1,9 +1,9 @@
 ---
 layout: docs_page
-title: Zones API
+title: Zones
 ---
 
-## Zones API
+# Zones API
 
 Zones are used to group IP Address ranges in a meaningful way such that policy decisions can be made based on the zone a client's IP belongs to.
 
@@ -173,7 +173,9 @@ curl -X POST
 }
 ~~~
 
-#### Update Existing Zone
+### Update IP Zone
+
+#### Update Existing Zone Request
 {:.api .api-request .api-request-example}
 ~~~sh
 curl -X PUT 
@@ -318,7 +320,9 @@ curl -X PUT
 }
 ~~~
 
-#### Get Zones
+### Get IP Zones
+
+#### Get Zones Request
 {:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/"
@@ -362,7 +366,7 @@ curl "https://yourorg.okta.com/api/v1/org/zones/"
 ]
 ~~~
 
-#### Get Zones With Filter Expression
+#### Get Zones With Filter Expression Request
 {:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/?limit=100&filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"
@@ -505,7 +509,7 @@ curl "https://yourorg.okta.com/api/v1/org/zones/?limit=100&filter=%28id+eq+%22nz
  ]
 ~~~
 
-#### Get Zone Where 'name' Attribute Contains Given String
+#### Get Zone Where 'name' Attribute Contains Given String Request
 {:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/?limit=-1&q=First"
