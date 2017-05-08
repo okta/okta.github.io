@@ -195,9 +195,9 @@ And modify `app.component.html` to have a `<div>` with `id="okta-login-container
 
 {% raw %}
 ```html
-<div *ngIf="!user" id="okta-login-container"></div>
+<div [hidden]="!user" id="okta-login-container"></div>
 
-<div *ngIf="user">
+<div [hidden]="user">
   Hello {{user}}
 
   <button (click)="logout()">Logout</button>
@@ -209,7 +209,21 @@ Run `ng serve`, and open your browser to [http://localhost:4200](http://localhos
 
 <img alt="Sign-In Widget" src="/assets/img/blog/angular-sign-in-widget/sign-in-widget.png" style="width: 800px">
 
-Enter an assigned person's credentials to login. You should see a "Hello {email}" message with a logout button.
+However, if you look at your browser's console, you'll likely see an error:
+
+```
+XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to 
+preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is 
+present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
+```
+
+This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard, 
+select **Security** > **API** > **Trusted Origins**. Click the "Add Origin" button and specify `http://localhost:4200`
+as the Origin URL with Type `CORS`. For more specific instructions, see Okta's [Enabling CORS documentation](http://developer.okta.com/docs/api/getting_started/enabling_cors.html).
+
+<img alt="CORS Configuration" src="/assets/img/blog/angular-sign-in-widget/cors-configuration.png" style="width: 800px">
+
+After making this change, enter an assigned person's credentials to login. You should see a "Hello {email}" message with a logout button.
 
 <img alt="Login Success" src="/assets/img/blog/angular-sign-in-widget/login-success.png" style="width: 800px">
 
