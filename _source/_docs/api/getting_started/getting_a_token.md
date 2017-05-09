@@ -39,5 +39,5 @@ If a user account is deactivated in Okta, the API Token is deprovisioned at the 
 
 ## Token Best Practice: Service Account
 
-API tokens inherit the API access of the user who creates them, so we recommend you create a "service account,"
-a user who exists to perform API tasks.
+API tokens inherit the API access of the user who creates them, so we recommend you create a "service account"
+user with only the permission levels you need for the token to perform the API tasks you require.
