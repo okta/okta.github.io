@@ -76,7 +76,7 @@ Fetch a list of events from your Okta organization system log.
 | `until`     | Upper time bound of events to return.                                                                 | [ISO8601 date/time](https://www.w3.org/TR/NOTE-datetime), must be temporally later than `since` | Current time            |
 | `since`     | Lower time bound of events to return.                                                                 | [ISO8601 date/time](https://www.w3.org/TR/NOTE-datetime), max 180 days ago         | 7 days prior to `until` |
 | `filter`    | [SCIM Filter expression](/docs/api/getting_started/design_principles.html#filtering) for events.      | [SCIM Filter expression](/docs/api/getting_started/design_principles.html#filtering) | |
-| `q`         | String search over all fields.                                                                        | String                                                   |                         |         
+| `q`         | String search over all fields.                                                                        | String                                                   |                         |
 | `limit`     | Number of results to return per page.                                                                 | Integer between 0 and 100                                | 100                     |
 | `sortOrder` | Time order in which to return events.                                                                 | "ASCENDING" or "DESCENDING"                              | "ASCENDING"             |
 | `after`     | Opaque identifier used for [Pagination](/docs/api/getting_started/design_principles.html#pagination). |                                                          |                         |
@@ -93,7 +93,7 @@ Filter                                       | Description
 `actor.id eq ":id"`                          | Events published with a specific target id
 
 
-See [Filtering](/docs/getting_started/design_principles.html#filtering) for more information about expressions.
+See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about expressions.
 
 ###### Filter Examples
 
@@ -129,10 +129,10 @@ The query parameter `q` searches string fields.
 
 * Events that mention a specific person: `q=firstName lastName`
 
-##### Response 
+##### Response
 {:.api .api-response .api-response-params}
 
-The response contains a JSON array of [Log objects](#log-model).
+The response contains a JSON array of [Log objects](#log-objects).
 
 
 ## Log objects
@@ -440,7 +440,7 @@ Describes additional context regarding an event
 | debugData  | A map that goes from a String key to a value                   | Map[String->Object] | TRUE  |
 |------------+----------------------------------------------------------------+-----------------+----------|
 
-This object provides a way to store additional text about an event for debugging. For example, when you create an API token, 
+This object provides a way to store additional text about an event for debugging. For example, when you create an API token,
 `debugData` shows the `RequestUri` used to obtain the token, for example `/api/internal/tokens`.
 
 ### AuthenticationContext Object
@@ -573,7 +573,7 @@ Link: <https://${org}.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&unti
 ```
 
 ### Next Link Response Header
-The response may include a `next` `Link` header, which is a link to the next page of results, if there is one. Note that while the `self` `Link` will always exist, the `next` `Link` may not exist. 
+The response may include a `next` `Link` header, which is a link to the next page of results, if there is one. Note that while the `self` `Link` will always exist, the `next` `Link` may not exist.
 
 This header is of the form:
 ```

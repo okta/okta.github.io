@@ -173,7 +173,7 @@ Enumerates groups in your organization with pagination. A subset of groups can b
 - [Search Groups](#search-groups)
 - [List Groups with Type](#list-groups-with-type)
 - [List Groups with Profile Updated after Timestamp](#list-groups-with-profile-updated-after-timestamp)
-- [List Groups with Membership Updated after Timestamp](#list-groups-with-memberships-updated-after-timestamp)
+- [List Groups with Membership Updated after Timestamp](#list-groups-with-membership-updated-after-timestamp)
 - [List Groups Updated after Timestamp](#list-groups-updated-after-timestamp)
 
 ##### Request Parameters
@@ -893,7 +893,7 @@ HTTP/1.1 204 No Content
 
 <span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/groups/*:id*/users</span>
 
-Enumerates all [users](#users.html) that are a member of a group.
+Enumerates all [users](/docs/api/resources/users.html#user-model) that are a member of a group.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1794,7 +1794,7 @@ All groups have the following properties:
 | type                  | determines how a group's profile and memberships are managed | [Group Type](#group-type)                                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | profile               | the group's profile properties                               | [Profile Object](#profile-object)                              | FALSE    | FALSE  | FALSE    |           |           |            |
 | _links                | [discoverable resources](#links-object) related to the group | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded             | [embedded resources](#embedded-object) related to the group  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
+| _embedded             | embedded resources related to the group  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |           |           |            |
 |-----------------------+--------------------------------------------------------------+----------------------------------------------------------------+----------|--------|----------|-----------|-----------+------------|
 
 > `id`, `created`, `lastUpdated`, `lastMembershipUpdated`, `objectClass`, `type`, and `_links` are only available after a group is created

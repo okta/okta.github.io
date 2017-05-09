@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Setting up a SAML application in Okta | Okta Developer</title>
   <meta name="description" content="Setting Up a SAML Application in Okta">
   <link rel="canonical" href="http://developer.okta.com/standards/SAML/setting_up_a_saml_application_in_okta">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -197,25 +202,25 @@ SAML Identity Provider or “SAML IdP”), with the details of your application
   </li>
   <li>
     <p>Click on the blue “Admin” button
-    <img src="/assets/img/okta-admin-ui-button-admin.png" alt="Admin" /></p>
+    <img src="/assets/okta-admin-ui-button-admin-fde86b7da4fe6c58611007a97361ac3c876869ec94ffb2a4093019243b728c39.png" alt="Admin" /></p>
   </li>
   <li>
     <p>Click on the “Add Applications” shortcut
-    <img src="/assets/img/okta-admin-ui-add-applications.png" alt="Add Applications" /></p>
+    <img src="/assets/okta-admin-ui-add-applications-c26bf1ab66282dca1b8ef685ad8b234b88e08ff07270c0401454439ecfd206e4.png" alt="Add Applications" /></p>
   </li>
   <li>
     <p>Click on the green “Create New App” button
-    <img src="/assets/img/okta-admin-ui-button-create-new-app.png" alt="Create New App" /></p>
+    <img src="/assets/okta-admin-ui-button-create-new-app-9a65dd5f6f48440bba64e3704c297fd8be5361d0608979b3d77c4038edf6c15c.png" alt="Create New App" /></p>
   </li>
   <li>
     <p>In the dialog that opens, select the “SAML 2.0” option, then click
     the green “Create” button
-    <img src="/assets/img/okta-admin-ui-create-new-application-integration.png" alt="Create a New Application Integration" /></p>
+    <img src="/assets/okta-admin-ui-create-new-application-integration-6f0c471b53031d1d5a6fc06fd65d1eba8f0135fb6272375f133c4798b9cadb4d.png" alt="Create a New Application Integration" /></p>
   </li>
   <li>
     <p>In Step 1 “General Settings”, enter “Example SAML Application” in the
     “App name” field, then click the green “Next” button.
-    <img src="/assets/img/example-saml-application-okta-general-settings.png" alt="General Settings" /></p>
+    <img src="/assets/example-saml-application-okta-general-settings-2c0e5429b0efa99d9b342c873b9d29da4de8041e30a5579934343ff1f02dc0e6.png" alt="General Settings" /></p>
   </li>
   <li>
     <p>In Step 2 “Configure SAML,” section A “SAML Settings”, paste the URL below into the “Single sign on URL” and “Audience URI (SP Entity ID)” fields:</p>
@@ -224,7 +229,7 @@ SAML Identity Provider or “SAML IdP”), with the details of your application
 </code></pre>
     </div>
 
-    <p><img src="/assets/img/example-saml-application-okta-configure-settings1.png" alt="SAML Settings" /></p>
+    <p><img src="/assets/example-saml-application-okta-configure-settings1-4f666cff1466c58744fc6682571f86288d8aa6266d953569c33737a8f6edcb21.png" alt="SAML Settings" /></p>
   </li>
   <li>In the “Attribute Statements” section, add three attribute statements:
     <ol>
@@ -233,14 +238,14 @@ SAML Identity Provider or “SAML IdP”), with the details of your application
       <li>“Email” set to “user.email”</li>
     </ol>
 
-    <p><img src="/assets/img/example-saml-application-okta-configure-settings2.png" alt="SAML Settings" /></p>
+    <p><img src="/assets/example-saml-application-okta-configure-settings2-89e8eea13412f8a3526b5ec8d572bfce5b9b4b077dd7e0c1220729a5b86d0ef2.png" alt="SAML Settings" /></p>
 
     <p>Click Next to continue.</p>
   </li>
   <li>
     <p>In Step 3 “Feedback”, select “I’m an Okta customer adding an internal app”, and “This is an internal app that we have created,” then click Finish.</p>
 
-    <p><img src="/assets/img/example-saml-application-okta-configure-settings3.png" alt="App type" /></p>
+    <p><img src="/assets/example-saml-application-okta-configure-settings3-e0bf5bbf18be680e4bafe2965e13e5d9b7d0f0928bef3c0732d3d472fd73fe9b.png" alt="App type" /></p>
   </li>
   <li>
     <p>The “Sign On” section of your newly created “Example
@@ -248,7 +253,7 @@ SAML Identity Provider or “SAML IdP”), with the details of your application
     return to this page later in this guide and copy the
     “Identity Provider metadata” link. (To copy that link, right-click
     on the “Identity Provider metadata” link and select “Copy”)
-    <img src="/assets/img/okta-admin-ui-identity-provider-metadata-link.png" alt="Sign on methods" /></p>
+    <img src="/assets/okta-admin-ui-identity-provider-metadata-link-312145eacc4d76d493afd1b054f2dbb3dce120dca79e6b645f1155a88dd1b0f1.png" alt="Sign on methods" /></p>
   </li>
   <li>
     <p>Right-click on the “People” section of the “Example SAML Application”
@@ -256,17 +261,17 @@ application and select “Open Link In New Tab” (so that you can come
 back to the “Sign On” section later).</p>
 
     <p>In the new tab that opens, click on the “Assign Application” button
-<img src="/assets/img/example-saml-application-okta-assign-people-to-application.png" alt="Assign Application" /></p>
+<img src="/assets/example-saml-application-okta-assign-people-to-application-659e5e69c099ff34934ebdb7f4cb29c5c5239824d99af9ce35437d70aa84cc42.png" alt="Assign Application" /></p>
   </li>
   <li>
     <p>A dialog titled “Assign Example SAML Application to up to 500 people”
 will open. Type your username into the search box, select the
 checkbox next to your username, then click the green “Next” button
-<img src="/assets/img/okta-admin-ui-confirm-assignments.png" alt="People search box" /></p>
+<img src="/assets/okta-admin-ui-confirm-assignments-16d648c104dcedd11b4beff3d2e18fba07d65f77021be1d4ab678ac676b97f92.png" alt="People search box" /></p>
   </li>
   <li>You will be prompted to “Enter user-specific attributes”. Just click
 the green “Confirm Assignments” button to keep the defaults.
-<img src="/assets/img/example-saml-application-okta-confirm-assignments.png" alt="Enter user attributes" /></li>
+<img src="/assets/example-saml-application-okta-confirm-assignments-49b3d1b0160b5098e3fd448a43031c639b002763790fab2ac369fbb00a5581ad.png" alt="Enter user attributes" /></li>
 </ol>
 
 <p>You are now ready to configure SAML in your application. The information in the tab you
@@ -329,12 +334,14 @@ opened in step #10 contains the information that you’ll need to configure SAML
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -343,17 +350,22 @@ opened in step #10 contains the information that you’ll need to configure SAML
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

@@ -39,7 +39,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
     * Does not support refresh tokens
     * Assumes Resource Owner and Public Client are on the same device
 
-    ![Browser/Single-Page Application](/assets/img/browser_spa_implicit_flow.png)
+    {% img browser_spa_implicit_flow.png alt:"Browser/Single-Page Application" %}
 
 2. Native Application
 
@@ -47,7 +47,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
     * Uses [Authorization Code Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
     * Can use custom redirect URIs like `myApp://oauth:2.0:native`
 
-    ![Native Application Flow](/assets/img/native_auth_flow.png)
+    {% img native_auth_flow.png alt:"Native Application Flow" %}
 
     > Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret.
         Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
@@ -60,7 +60,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
     * Assumes Resource Owner and Client are on separate devices
     * Most secure flow as tokens never pass through user-agent
 
-    ![Web Application Flow](/assets/img/web_app_flow.png)
+    {% img web_app_flow.png alt:"Web Application Flow" %}
 
 4. Service Application
 
@@ -69,7 +69,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
     * Optimized for [Confidential Clients](https://tools.ietf.org/html/rfc6749#section-2.1) acting on behalf of itself or a user
     * Back-channel only flow to obtain an access token using the Client’s credentials
 
-    ![Service Application Flow](/assets/img/service_app_flow.png).
+    {% img service_app_flow.png alt:"Service Application Flow" %}.
 
 
     > Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints.
@@ -338,7 +338,7 @@ Parameter         | Description                                                 
 [idp](idps.html)  | The Identity provider used to do the authentication. If omitted, use Okta as the identity provider. | Query      | String    | FALSE    | Okta is the IDP. |
 sessionToken      | An Okta one-time session token. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the [Authentication API](authn.html).   | Query | String    | FALSE | |
 response_type     | Can be a combination of ``code``, ``token``, and ``id_token``. The chosen combination determines which flow is used; see this reference from the [OAuth 2.0 specification](https://tools.ietf.org/html/rfc6749#section-3.1.1). The code response type returns an authorization code which can be later exchanged for an Access Token or a Refresh Token. | Query        | String   |   TRUE   |  |
-client_id         | Obtained during either [UI client registration](../../guides/social_authentication.html) or [API client registration](oauth-clients.html). It is the identifier for the client and it must match what has been registered in Okta during client registration. | Query        | String   | TRUE     |
+client_id         | Obtained during either [UI client registration](/docs/api/resources/social_authentication.html) or [API client registration](oauth-clients.html). It is the identifier for the client and it must match what has been registered in Okta during client registration. | Query        | String   | TRUE     |
 redirect_uri      | Specifies the callback location where the authorization code should be sent and it must match what has been registered in Okta during client registration. | Query        | String   |  TRUE    |
 display           | Specifies how to display the authentication and consent UI. Valid values: ``page`` or ``popup``.  | Query        | String   | FALSE     |  |
 max_age           | Specifies the allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta. | Query      | String    | FALSE    | |
@@ -369,7 +369,7 @@ login_hint | A username to prepopulate if prompting for authentication.  | Query
  The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
  Using the *state* parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
 
- * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as *code_verifier* and derives *code_challenge* from it using the method specified in *code_challenge_method*. 
+ * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as *code_verifier* and derives *code_challenge* from it using the method specified in *code_challenge_method*.
     Then the client passes the *code_challenge* and *code_challenge_method* in the authorization request for code flow. When a client tries to redeem the code, it must pass the *code_verifer*. Okta recomputes the challenge and returns the requested token only if it matches the *code_challenge* in the original authorization request. When a client, whose *token_endpoint_auth_method* is ``none``, makes a code flow authorization request, *code_challenge* is required.
     Since *code_challenge_method* only supports S256, this means that the value for *code_challenge* must be: `BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))`. According to the [PKCE spec](https://tools.ietf.org/html/rfc7636), the *code_verifier* must be at least 43 characters and no more than 128 characters.
 
@@ -481,7 +481,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta uses to authorize the creation of the tokens. | String |  
+grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta uses to authorize the creation of the tokens. | String |
 code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String
 refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
 username           | Expected if the grant_type specified *password*. | String |
@@ -1476,32 +1476,32 @@ other tasks for API Access Management, use the following suggestions to resolve 
 
 ### Always Start with the System Log
 
-The system log contains detailed information about why a request was denied and other useful information. 
+The system log contains detailed information about why a request was denied and other useful information.
 
 ### Limits
 
 * Each authorization server can have only one resource. If you have resources that share a common path,
 you can control access to the common path with one authorization server.
 
-* Scopes are unique per authorization server. 
+* Scopes are unique per authorization server.
 
 * The resource URI you specify in an authorization server must be an absolute path.
 
-* Tokens can expire, be explicitly revoked at the endpoint, or implicitly revoked by a change in configuration. 
+* Tokens can expire, be explicitly revoked at the endpoint, or implicitly revoked by a change in configuration.
 
-* Token revocation can be implicit in two ways: token expiration or a change to the source. 
+* Token revocation can be implicit in two ways: token expiration or a change to the source.
     * Expiration happens at different times:
         * ID Token expires after one hour.
         * Access Token expiration is configured in a policy, but is always between five minutes and one day.
-        * Refresh Token expiration depends on two factors: 1) Expiration is configured in an Access Policy, no limits, 
+        * Refresh Token expiration depends on two factors: 1) Expiration is configured in an Access Policy, no limits,
           but must be greater than or equal to the Access Token lifetime, and 2) Revocation if the Refresh Token
           isn't exercised within a specified time. Configure the specified time in an Access Policy, with a minimum of ten minutes.
-    
+
     * Revocation happens when a configuration is changed or deleted:
         * User deactivation or deletion.
         * Configuration in the authorization server is changed or deleted.
         * The [client app](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm#OIDCWizard) is deactivated, changed, unassigned, or deleted.
-        
+
 * If a client requests multiple scopes, but the policy for that client only allows for a subset of the scopes,
 then the token isn't minted and an error is returned. The system log contains the details about the error.
 
@@ -1509,10 +1509,10 @@ then the token isn't minted and an error is returned. The system log contains th
 
 Some behaviors aren't obvious:
 
-* A user must be assigned to the client in Okta for the client to get Access Tokens from that client. 
+* A user must be assigned to the client in Okta for the client to get Access Tokens from that client.
 You can assign the client directly (direct user assignment) or indirectly (group assignment).
 
-* If you haven't created a rule in a policy in the authorization server to allow the client, user, and 
+* If you haven't created a rule in a policy in the authorization server to allow the client, user, and
 scope combination that you want, the request fails.
 To resolve, create at least one rule in a policy in the authorization server for the relevant resource
 that specifies client, user, and scope.

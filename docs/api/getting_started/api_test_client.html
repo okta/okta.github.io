@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Getting Started With the Okta APIs | Okta Developer</title>
   <meta name="description" content="Overview">
   <link rel="canonical" href="http://developer.okta.com/docs/api/getting_started/api_test_client.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -200,7 +205,7 @@
 
 <p>A great way to learn an API is to issue requests and inspect the responses. You can easily access our Postman collections and Example environment to do just that.</p>
 
-<p><img src="/assets/img/okta_postman_logo.png" alt="Postman and an Okta Collection" /></p>
+<p><img src="/assets/okta_postman_logo-4d1b61cd82c3a8f43a0ba958dabd20f4e2a03ef94644ee1a7a8c507b8afbf8b3.png" alt="Postman and an Okta Collection" /></p>
 
 <p>To use these collections, you’ll need to set up your environment, import the collections, send a test request, and verify the results.</p>
 
@@ -211,11 +216,11 @@
   <li><a href="https://www.getpostman.com/apps" target="_blank">Install the Postman App</a>.</li>
   <li>
     <p>Launch Postman and click the ‘import button’. Select import from link, and paste this link into the textbox: <code class="highlighter-rouge">http://developer.okta.com/docs/api/postman/example.oktapreview.com.environment</code>
- <img src="/assets/img/import_enviro.png" alt="Importing the Okta Example Environment" /></p>
+ <img src="/assets/import_enviro-2b7252c95ae06684a175ad8fcf511538b62b846f86ad59d473e69db7e69fb093.png" alt="Importing the Okta Example Environment" /></p>
   </li>
   <li>
     <p>Once you have clicked import, make sure the <code class="highlighter-rouge">example.oktapreview.com</code> environment is selected.
- <img src="/assets/img/postman_example_start.png" alt="Postman app with collections" /></p>
+ <img src="/assets/postman_example_start-2a4afa963ff51fda506bf5b08a85369f81826b7043920504d36e0f74b43cb135.png" alt="Postman app with collections" /></p>
   </li>
   <li>Click the eye icon next to <code class="highlighter-rouge">example.oktapreview.com</code> and select <strong>Edit</strong> to replace or add these values:
     <ul>
@@ -226,7 +231,7 @@
     </ul>
   </li>
   <li>Save your changes by selecting <strong>Update</strong>. Now your environment looks similar to this example:
- <img src="/assets/img/postman_example_enviro.png" alt="Example.okta.com environment with required values" /></li>
+ <img src="/assets/postman_example_enviro-5db5c75404a0fa250206bce5b7fd0c1d192ae52f7570fa3e415a04a2beeda1bb.png" alt="Example.okta.com environment with required values" /></li>
 </ol>
 
 <h2 id="import-a-collection">Import a Collection</h2>
@@ -248,7 +253,7 @@ or use the <a href="#collections-quick-reference">Collections Quick Reference</a
   <li>Make sure you’ve imported the Users API collection and configured your example environment using the instructions in the previous section.</li>
   <li>Select the <strong>Collections</strong> tab in Postman, open the <strong>List Users</strong> folder, and select <strong>GET List Users</strong>.</li>
   <li>Click <strong>Send</strong>. The result pane automatically displays the results of your request:
- <img src="/assets/img/postman_response.png" alt="GET List Users" />
+ <img src="/assets/postman_response-9d1904189fffacf7154b4f4c830ffa866f7a0103ab0ee91beb0691ac5a7b6697.png" alt="GET List Users" />
  If you receive errors, it’s likely that one of the values in the environment isn’t set correctly. Check the values and try again.</li>
 </ol>
 
@@ -333,7 +338,7 @@ Replace URL and body variables with the IDs of the resources you wish to specify
 <ol>
   <li>
     <p>List a resource collection with a search or filter. For example, list the users in your org, as you did in the previous section.
- <img src="/assets/img/postman_response2.png" alt="List Users Response" /></p>
+ <img src="/assets/postman_response2-8101200bfc02aa290b8b773c1452dc9f6042133ba82519225521aa0a03730cbc.png" alt="List Users Response" /></p>
   </li>
   <li>
     <p>Copy the <code class="highlighter-rouge">id</code> of the resource, in this example the <code class="highlighter-rouge">id</code> for Tony Stark, in your next request.</p>
@@ -408,12 +413,14 @@ Replace URL and body variables with the IDs of the resources you wish to specify
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -422,17 +429,22 @@ Replace URL and body variables with the IDs of the resources you wish to specify
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

@@ -28,15 +28,15 @@
  	{% if page.sitemap.exclude == "yes" %}
  		<meta name="robots" content="noindex,nofollow">
  	{% endif %}
-  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">{%
-  if page.css %}
-  <link rel="stylesheet" href="{{ "/assets/css/" | prepend: site.baseurl | append: page.css }}.css">
-  {% endif
-  %}{% if layout.css %}
-  <link rel="stylesheet" href="{{ "/assets/css/" | prepend: site.baseurl | append: layout.css }}.css">{%
-  endif %}
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
+  {% css animate %}
+  {% css okta %}
+  {% if page.css %}
+    {% css '{{page.css}}' %}
+  {% endif %}
+  {% if layout.css %}
+    {% css '{{layout.css}}' %}
+  {% endif %}
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">

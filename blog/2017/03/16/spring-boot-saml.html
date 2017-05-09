@@ -7,37 +7,43 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
+    <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/page-blog.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Get Started with Spring Boot, SAML, and Okta | Okta Developer</title>
   <meta name="description" content="Today I’d like to show you how build a Spring Boot application that leverages Okta’s Platform API for authentication via SAML. SAML (Security Assertion Marku...">
   <link rel="canonical" href="http://developer.okta.com/blog/2017/03/16/spring-boot-saml">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
     <body id="blog">
@@ -101,25 +107,34 @@
 		<section id="blog-post" class="main-container">
 	<div class="wrap blog">
 		<section >
-<div class="wrap">
-	<article class="post-block">
-	  <header class="post-title-block">
-	    <h1><a href="/blog/2017/03/16/spring-boot-saml">Get Started with Spring Boot, SAML, and Okta</a></h1>
-	    <div class="attribution">
-	      <img src="/assets/img/avatar-matt_raible.jpg"
-	           alt="avatar-matt_raible.jpg"
-	           class="author-avatar">
-	      <address>Matt Raible</address>
-	      &nbsp;
-		  <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
-		  <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
-		  <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
-		  <span class="sepr">&middot;</span>
-	      <time datetime="2017-03-16">March 16, 2017</time>
-	    </div>
-	  </header>
-	  <section class="post-content">
-	    <p>Today I’d like to show you how build a Spring Boot application that leverages Okta’s Platform API for authentication via SAML. SAML (Security Assertion Markup Language) is an XML-based standard for securely exchanging authentication and authorization information between entities—specifically between identity providers, service providers, and users. Well-known IdPs include Salesforce, Okta, OneLogin, and Shibboleth.</p>
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2017/03/16/spring-boot-saml">Get Started with Spring Boot, SAML, and Okta</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="author-avatar">
+            
+            <address>Matt Raible</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
+            
+            
+            
+              <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2017-03-16">March 16, 2017</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     <p>Today I’d like to show you how build a Spring Boot application that leverages Okta’s Platform API for authentication via SAML. SAML (Security Assertion Markup Language) is an XML-based standard for securely exchanging authentication and authorization information between entities—specifically between identity providers, service providers, and users. Well-known IdPs include Salesforce, Okta, OneLogin, and Shibboleth.</p>
 
 <p>My Okta developer experience began a couple years ago (in December 2014) when I worked for a client that was adopting it. I was tasked with helping them decide on a web framework to use, so I built prototypes with Node, Ruby, and Spring. I documented my findings in <a href="https://raibledesigns.com/rd/entry/integrating_node_js_ruby_and">a blog post</a>. Along the way, <a href="https://twitter.com/mraible/status/550057304331001856">I tweeted</a> my issues with Spring Boot, and <a href="http://stackoverflow.com/questions/27713524/how-do-i-configure-spring-security-saml-to-work-with-okta?stw=2">asked how to fix it</a> on Stack Overflow. I ended up figuring out the solution through trial-and-error and my findings made it into the <a href="http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816">official Spring documentation</a><a href="http://docs.spring.io/autorepo/docs/spring-security-saml/1.0.x-SNAPSHOT/reference/html/chapter-idp-guide.html#d5e1816">.</a> Things have changed a lot since then and now Spring Security 4.2 has support for auto-loading custom DSLs. And guess what, there’s even a DSL for SAML configuration!</p>
 
@@ -141,23 +156,23 @@
 
 <p>Just like I did, the first thing you’ll need to do is create a developer account at <a href="https://developer.okta.com">https://developer.okta.com</a>. After activating your account, login to it and click on the “Admin” button in the top right.</p>
 
-<p><img alt="Okta UserHome" src="/assets/img/blog/spring-boot-saml/okta-userhome.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/okta-userhome-3e85f9a56b2d8d16d25fdd462d0a7cbf82417bd8fe7adaa3a67c1e7dd4b04a78.png" alt="Okta UserHome" /></p>
 
 <p>On the next screen, click “Add Applications” in the top right.</p>
 
-<p><img alt="Okta Dashboard" src="/assets/img/blog/spring-boot-saml/okta-dashboard.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/okta-dashboard-4bb06c150497597bbe9a2ac85ecf14f90508c2dea8c29a22aa4d4f4ddace94ec.png" alt="Okta Dashboard" /></p>
 
 <p>This will bring you to a screen with a “Create New App” green button on the left.</p>
 
-<p><img alt="Create New App" src="/assets/img/blog/spring-boot-saml/create-new-app.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/create-new-app-42c727730965cd56487420d4efc3fae744ccecbac9100ae834e7f48e90c11ec9.png" alt="Create New App" /></p>
 
 <p>Click the button and choose “Web” for the platform and “SAML 2.0” for the sign on method.</p>
 
-<p><img alt="New App with SAML 2.0" src="/assets/img/blog/spring-boot-saml/new-app-saml-2.0.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/new-app-saml-2.0-db813317bc386621bbaa114e0a8c6896c9a5b10a38a4f1fa71e0e256f1a1224b.png" alt="New App with SAML 2.0" /></p>
 
 <p>Click the “Create” button. The next screen will prompt you for an application name. I used “Spring SAML”, but any name will work.</p>
 
-<p><img alt="Enter App name" src="/assets/img/blog/spring-boot-saml/app-name.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/app-name-86fa4c7f992c8e1e8dfc872cd368864801fbab0b9447e37ae00b201a933f9210.png" alt="Enter App name" /></p>
 
 <p>Click the “Next” button. This brings you to the second step, configuring SAML. Enter the following values:</p>
 
@@ -166,19 +181,19 @@
   <li>Audience URI: <code class="highlighter-rouge">https://localhost:8443/saml/metadata</code></li>
 </ul>
 
-<p><img alt="SAML Integration" src="/assets/img/blog/spring-boot-saml/saml-integration.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/saml-integration-e924706bdfb4c0e0261dc9ea9dc0841fda556b9f12c34fe2704bf34956266a3a.png" alt="SAML Integration" /></p>
 
 <p>Scroll to the bottom of the form and click “Next”. This will bring you to the third step, feedback. Choose “I’m an Okta customer adding an internal app” and optionally select the App type.</p>
 
-<p><img alt="Customer or Partner" src="/assets/img/blog/spring-boot-saml/customer-or-partner.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/customer-or-partner-4c0bbd3973b53f9f40d46527301ecc8592531b7fba18c112d9125581fdb12240.png" alt="Customer or Partner" /></p>
 
 <p>Click the “Finish” button to continue. This will bring you to the application’s “Sign On” tab which has a section with a link to your applications metadata in a yellow box. Copy the <strong>Identity Provider metadata</strong> link as you’ll need it to configure your Spring Boot application.</p>
 
-<p><img alt="SAML Metadata" src="/assets/img/blog/spring-boot-saml/saml-metadata.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/saml-metadata-cd2287ef5b0b1e57d55a6f353908ef5e4c4c639f504e23c7275db04fea9e71d4.png" alt="SAML Metadata" /></p>
 
 <p>The final setup step you’ll need is to assign people to the application. Click on the “People” tab and the “Assign to People” button. You’ll see a list of people with your account in it.</p>
 
-<p><img alt="Assign People" src="/assets/img/blog/spring-boot-saml/assign-people.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/assign-people-dd0a2be0a2727d67fa0637b7a450ecfb26c858e44c78636ec700a536c3773be6.png" alt="Assign People" /></p>
 
 <p>Click the assign button, accept the default username (your email), and click the “Done” button.</p>
 
@@ -186,7 +201,7 @@
 
 <p>Navigate to <a href="https://start.spring.io">https://start.spring.io</a> in your favorite browser and select Security, Web, Thymeleaf, and DevTools as dependencies.</p>
 
-<p><img alt="start.spring.io" src="/assets/img/blog/spring-boot-saml/start.spring.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/start.spring-250ffb33a9cdd45c275b5f7ee0a8d8ee7c0cc2e8a08dd7f1b3cde531e182e8ae.png" alt="start.spring.io" /></p>
 
 <p>Click “Generate Project”, download the generated ZIP file and open it in your favorite editor. Add the <code class="highlighter-rouge">spring-security-saml-dsl</code> dependency to your <code class="highlighter-rouge">pom.xml</code>.</p>
 
@@ -331,19 +346,19 @@ Hello SAML!
 
 <p>Start the app using your IDE or <code class="highlighter-rouge">mvn spring-boot:run</code> and navigate to <a href="https://localhost:8443">https://localhost:8443</a>. If you’re using Chrome, you’ll likely see a privacy error.</p>
 
-<p><img alt="Connection Not Private" src="/assets/img/blog/spring-boot-saml/connection-not-private.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/connection-not-private-4c4dce4ee0839b72abdd94a7cf97ef3610402ea2062bf44a34f59add1c14177d.png" alt="Connection Not Private" /></p>
 
 <p>Click the “ADVANCED” link at the bottom. Then click the “proceed to localhost (unsafe)” link.</p>
 
-<p><img alt="Proceed to localhost" src="/assets/img/blog/spring-boot-saml/connection-not-private-proceed.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/connection-not-private-proceed-fe5ba0fd6308c96fc912453079815090a8781a7ba7025868fc1d632b1bc70aca.png" alt="Proceed to localhost" /></p>
 
 <p>Next, you’ll be redirected to Okta to sign in and redirected back to your app. If you’re already logged in, you won’t see anything from Okta. If you sign out from Okta, you’ll see a login screen such as the one below.</p>
 
-<p><img alt="Okta Login" src="/assets/img/blog/spring-boot-saml/okta-login.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/okta-login-b529f9ea23f41bc85ab4e9a04392eb079a7cca10b94b4cac460134fe3f1cf725.png" alt="Okta Login" /></p>
 
 <p>After you’ve logged in, you should see a screen like the one below.</p>
 
-<p><img alt="Hello SAML" src="/assets/img/blog/spring-boot-saml/hello-saml.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-saml/hello-saml-b02f43bbec741e570382cad20cb0d1d4c824b63597efd072074124c474a1f0a9.png" alt="Hello SAML" /></p>
 
 <h2 id="source-code">Source Code</h2>
 
@@ -358,13 +373,14 @@ Hello SAML!
 <p><strong>Update:</strong> Thanks to <a href="https://github.com/AlexeySoshin">Alexey Soshin</a> for contributing a <a href="https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2">pull request</a> to make the code in this blog post more bootiful!</p>
 
 
-	  </section>
-	</article>
-</div>
+	    </section>
+	  </article>
+  </div>
 </section>
 
 	</div>
 </section>
+
 		
 	</div><footer class="footer">
       <div class="Wrap">
@@ -410,10 +426,12 @@ Hello SAML!
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -422,17 +440,22 @@ Hello SAML!
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
 </body>
 </html>

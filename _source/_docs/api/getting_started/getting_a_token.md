@@ -14,19 +14,19 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
     Developer Edition organization [at this link](https://www.okta.com/developer/signup/){:target="_blank"}.
 
 2.  Click on the blue "Admin" button.
-    ![Admin](/assets/img/okta-admin-ui-button-admin.png)
+    {% img okta-admin-ui-button-admin.png alt:"Admin" %}
 
 3.  Click on "API" in the Security menu.
-	![API](/assets/img/okta-admin-api-link.png)
+	{% img okta-admin-api-link.png alt:"API" %}
 
 4.  Click on the "Create token" button.
-	![Create Token](/assets/img/okta-create-api-token-button.png)
+	{% img okta-create-api-token-button.png alt:"Create Token" %}
 
 5.  Name your token and click "Create token".
 
 6.  Make note of your API token, as you will only see it one time.
 
-![Okta Admin Token UI](/assets/img/okta-admin-ui-token.png "Okta Admin Token UI")
+{% img okta-admin-ui-token.png "Okta Admin Token UI" alt:"Okta Admin Token UI" %}
 
 ## Token Expiration
 

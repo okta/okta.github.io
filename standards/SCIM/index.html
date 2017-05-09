@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>SCIM Provisioning with Lifecycle Management | Okta Developer</title>
   <meta name="description" content="Enable SCIM-based provisioning from Okta to your application.">
   <link rel="canonical" href="http://developer.okta.com/standards/SCIM/">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -180,8 +185,8 @@
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_standards/SCIM/index.md">Edit Page</a>
       <h1 id="scim-provisioning-with-oktas-lifecycle-management">SCIM: Provisioning with Okta’s Lifecycle Management</h1>
-<p>Developers at a software vendor (ISV), Okta customers, and system-integrators (SI) want to facilitate fast, 
-enterprise-wide deployment of their app by integrating with Okta for user provisioning primarily via the SCIM standard. 
+<p>Developers at a software vendor (ISV), Okta customers, and system-integrators (SI) want to facilitate fast,
+enterprise-wide deployment of their app by integrating with Okta for user provisioning primarily via the SCIM standard.
 This article describes:</p>
 
 <ul>
@@ -194,28 +199,28 @@ This article describes:</p>
 
 <h3 id="the-value-of-provisioning">The Value of Provisioning</h3>
 
-<p>With the proliferation of cloud apps, today’s IT organizations are faced with the prospect of managing user accounts 
-in an ever-expanding number of admin consoles for each app. This is not a problem if an enterprise has one or two cloud apps, 
-but as the number grows, the situation quickly becomes unmanageable. Cloud app vendors hoping to sell into enterprises 
+<p>With the proliferation of cloud apps, today’s IT organizations are faced with the prospect of managing user accounts
+in an ever-expanding number of admin consoles for each app. This is not a problem if an enterprise has one or two cloud apps,
+but as the number grows, the situation quickly becomes unmanageable. Cloud app vendors hoping to sell into enterprises
 need to have an answer to this concern.</p>
 
-<p>Thousands of Okta customers have chosen our <a href="https://www.okta.com/products/lifecycle-management/">Lifecycle Management</a> product as the platform solution 
-to address this challenge of managing the lifecycle of user accounts in their cloud apps, 
-and a key feature of this product is integrations for automated provisioning to those apps. 
-Lifecycle Management (Provisioning) automates many of the traditionally manual tasks required to on-board and off-board employees. 
-New employees are automatically provisioned with user accounts in their apps, profile updates like department changes populate automatically, 
-and inactive employees are automatically deactivated from their apps. By making these actions less time-consuming and error-prone, 
+<p>Thousands of Okta customers have chosen our <a href="https://www.okta.com/products/lifecycle-management/">Lifecycle Management</a> product as the platform solution
+to address this challenge of managing the lifecycle of user accounts in their cloud apps,
+and a key feature of this product is integrations for automated provisioning to those apps.
+Lifecycle Management (Provisioning) automates many of the traditionally manual tasks required to on-board and off-board employees.
+New employees are automatically provisioned with user accounts in their apps, profile updates like department changes populate automatically,
+and inactive employees are automatically deactivated from their apps. By making these actions less time-consuming and error-prone,
 companies can cut costs, allow new employees to be immediately productive, and reduce the threat of data leakage.</p>
 
 <h3 id="provisioning-actions">Provisioning Actions</h3>
 
-<p>Provisioning consists of a set of actions between Okta and the cloud app. 
-These actions are building blocks that combine to solve end-to-end use cases. 
-As the developer, you’ll need to define the use cases that your target customer wants 
+<p>Provisioning consists of a set of actions between Okta and the cloud app.
+These actions are building blocks that combine to solve end-to-end use cases.
+As the developer, you’ll need to define the use cases that your target customer wants
 and the corresponding actions to build into your integration.</p>
 
-<p>The set of actions that an integration can do under the Provisioning umbrella 
-are easily described with the acronym CRUD: the common database operations of Create, Read, Update, and Delete. 
+<p>The set of actions that an integration can do under the Provisioning umbrella
+are easily described with the acronym CRUD: the common database operations of Create, Read, Update, and Delete.
 CRUD actions relate to Provisioning in the following ways:</p>
 
 <h4 id="create-users">Create Users</h4>
@@ -228,39 +233,39 @@ CRUD actions relate to Provisioning in the following ways:</p>
 
 <h4 id="update-users">Update Users</h4>
 
-<p>For an application user that is affiliated with an Okta user, 
-update the downstream user’s attributes when the Okta user is updated. 
-Or, update the Okta user attributes if the application functions as the <a href="#mastering-users">master</a> for the full Okta user profile or specific attributes.</p>
+<p>For an application user that is affiliated with an Okta user,
+update the downstream user’s attributes when the Okta user is updated.
+Or, update the Okta user attributes if the application functions as the <a href="#profile-mastering-users">master</a> for the full Okta user profile or specific attributes.</p>
 
 <h4 id="deprovision-deactivate-users">Deprovision (Deactivate) Users</h4>
 
-<p>Deprovisioning the application user removes access to the downstream application. 
-This can take many forms, such as user disabled, user access permissions changed, or user license pulled. 
+<p>Deprovisioning the application user removes access to the downstream application.
+This can take many forms, such as user disabled, user access permissions changed, or user license pulled.
 Each application may choose different methods for deactivating a user’s access.</p>
 
-<p>For audit purposes, Okta users are never deleted; they are deactivated instead. 
+<p>For audit purposes, Okta users are never deleted; they are deactivated instead.
 Because of this, Okta doesn’t make delete requests to the user APIs in downstream applications.</p>
 
 <h4 id="sync-password">Sync Password</h4>
 
-<p>Okta sets the user’s password to either match the Okta password or to be a randomly generated password. 
+<p>Okta sets the user’s password to either match the Okta password or to be a randomly generated password.
 Learn more about the overall use case <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-Sync-Password?retURL=%2Fhelp%2Fapex%2FKnowledgeArticleJson%3Fc%3DOkta_Documentation%253ADirectories%26p%3D101%26inline%3D1&amp;popup=true">here</a>.</p>
 
 <h4 id="profile-mastering-users">Profile Mastering Users</h4>
 
 <blockquote>
-  <p>Profile Mastering Users is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option. 
-<a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback. 
+  <p>Profile Mastering Users is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option.
+<a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback.
 While in Beta, Okta may make breaking changes, so the integration with the feature can’t be published in the Okta Application Network or used by customers in production environments.</p>
 </blockquote>
 
-<p>Mastering is a more sophisticated version of read (import) Users. 
-Mastering defines the flow and maintenance of user-object attributes and their lifecycle state. 
-When a profile is mastered from a given resource (application or directory), 
-the Okta user profile’s attributes and lifecycle state are derived exclusively from that resource. 
-In other words, an Okta user mastered by Active Directory (or HR system) has an Okta profile. 
-However, the profile isn’t editable in Okta by the user or Okta admin, and derives its information exclusively from Active Directory. 
-If the lifecycle state of the user in Active Directory moves to Disabled, 
+<p>Mastering is a more sophisticated version of read (import) Users.
+Mastering defines the flow and maintenance of user-object attributes and their lifecycle state.
+When a profile is mastered from a given resource (application or directory),
+the Okta user profile’s attributes and lifecycle state are derived exclusively from that resource.
+In other words, an Okta user mastered by Active Directory (or HR system) has an Okta profile.
+However, the profile isn’t editable in Okta by the user or Okta admin, and derives its information exclusively from Active Directory.
+If the lifecycle state of the user in Active Directory moves to Disabled,
 the linked Okta user also switches to the corresponding lifecycle state of Deactivated on the next the read (import).</p>
 
 <h3 id="provisioning-use-cases">Provisioning Use Cases</h3>
@@ -271,11 +276,11 @@ the linked Okta user also switches to the corresponding lifecycle state of Deact
 
 <!-- Images for v2: https://oktawiki.atlassian.net/wiki/pages/viewpage.action?pageId=181895852 -->
 
-<p>In many enterprises, Active Directory (or LDAP) is the system of record for employee identities. 
-Okta has developed a powerful, lightweight agent to sync with Active Directory to populate employee and group information. 
+<p>In many enterprises, Active Directory (or LDAP) is the system of record for employee identities.
+Okta has developed a powerful, lightweight agent to sync with Active Directory to populate employee and group information.
 Within Okta, IT admins can leverage features such as <a href="https://support.okta.com/help/articles/Knowledge_Article/About-Universal-Directory">Universal Directory</a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/About-Universal-Directory">group membership rules</a> to map that information when provisioning accounts and permissions in downstream apps.</p>
 
-<p>Subsequently, any updates to an employee’s profile, such as a change in department, in either Active Directory or Okta flow into the downstream app. 
+<p>Subsequently, any updates to an employee’s profile, such as a change in department, in either Active Directory or Okta flow into the downstream app.
 Similarly, removing or deactivating an employee from Active Directory triggers deactivation in the downstream app as well.</p>
 
 <p>Okta supports these common Provisioning use cases:</p>
@@ -290,27 +295,27 @@ Similarly, removing or deactivating an employee from Active Directory triggers d
 <h4 id="app-as-master">App-as-Master</h4>
 
 <blockquote>
-  <p>App-as-Master is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option. 
-<a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback. 
+  <p>App-as-Master is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option.
+<a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback.
 While in Beta, Okta may make breaking changes, so the integration with the feature can’t be published in the Okta Application Network or used by customers in production environments.</p>
 </blockquote>
 
 <p>While most apps fit the category of a downstream app in the directory-as-master use case, some apps can be the master. This is the App-as-Master use case.</p>
 
-<p>The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information. 
-An HR app like Workday or Successfactors Employee Central is the most common example. 
+<p>The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information.
+An HR app like Workday or Successfactors Employee Central is the most common example.
 In this scenario, the HR app, not Active Directory, feeds employee profile details downstream into directories like AD and Okta, and apps like Box.</p>
 
 <!-- More info on configuring app-as-master in Okta is [here](). Note: link was missing from source -->
 
 <blockquote>
-  <p>Note: Integrations for the “App-as-Master” use case are significantly more complex than the Directory-as-Master use case and take more time to build and support. 
+  <p>Note: Integrations for the “App-as-Master” use case are significantly more complex than the Directory-as-Master use case and take more time to build and support.
 This is because these integrations sync a larger number of attributes and lifecycle states, and more directly impact the Okta user profile and downstream apps.</p>
 </blockquote>
 
 <h4 id="advanced-app-as-master-use-cases">Advanced App-as-Master Use Cases</h4>
 
-<p>There are several advanced App-as-Master use cases that aren’t currently supported by the SCIM-Based Provisioning option, but may be added in the future. 
+<p>There are several advanced App-as-Master use cases that aren’t currently supported by the SCIM-Based Provisioning option, but may be added in the future.
 Until then, consider out-of-band processes that work around these use cases.</p>
 
 <ul>
@@ -318,7 +323,7 @@ Until then, consider out-of-band processes that work around these use cases.</p>
     <p>Attribute-level mastering—The app wants to be the master for some employee attributes like phone number, while letting Okta or another app master other attributes. We call this attribute-level mastering.</p>
   </li>
   <li>
-    <p>Pre-hire interval—In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance. 
+    <p>Pre-hire interval—In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance.
 A pre-hire interval configuration would specify how many days before the employee’s hire date Okta should import the employee.</p>
   </li>
   <li>
@@ -326,19 +331,19 @@ A pre-hire interval configuration would specify how many days before the employe
 Involuntary terminations is one scenario where an employee’s access to sensitive apps and content via Okta needs to be cut off within minutes.</p>
   </li>
   <li>
-    <p>Incremental/delta import—Importing a large number of user profiles from an app into Okta can take minutes, even hours. 
+    <p>Incremental/delta import—Importing a large number of user profiles from an app into Okta can take minutes, even hours.
 This can become a major performance and timing issue if frequent updates are needed. Currently, the SCIM-Based Provisioning option doesn’t support the ability to import only those user profiles that have changed since the last import. In the future, we may support this via filtering on <code class="highlighter-rouge">meta.lastModified</code>. (<a href="#filtering-on-metalastmodified">More information</a>)</p>
   </li>
 </ul>
 
 <h2 id="ways-to-build-provisioning">Ways to Build Provisioning</h2>
 
-<p>Now that you understand the most common provisioning actions and use cases, let’s review your options to support provisioning as an app developer. 
+<p>Now that you understand the most common provisioning actions and use cases, let’s review your options to support provisioning as an app developer.
 While we outline a few different methods below, Okta recommends all ISVs support <a href="http://www.simplecloud.info/">the SCIM standard</a>.</p>
 
 <h3 id="provisioning-options-matrix">Provisioning Options Matrix</h3>
 
-<p>Okta has seen broad adoption of the standard in the market amongst our network of app developers over the course of 2016. 
+<p>Okta has seen broad adoption of the standard in the market amongst our network of app developers over the course of 2016.
 Okta has doubled down on our investment in our SCIM client and launched our own SCIM provisioning developer program.</p>
 
 <table>
@@ -370,13 +375,13 @@ Okta has doubled down on our investment in our SCIM client and launched our own 
 
 <h3 id="provisioning-to-on-premise-apps">Provisioning to On-Premise Apps</h3>
 
-<p>The options above are geared towards cloud apps but we have a solution for on-premise applications as well. 
+<p>The options above are geared towards cloud apps but we have a solution for on-premise applications as well.
 See <a href="https://support.okta.com/help/articles/Knowledge_Article/29448976-Configuring-On-Premises-Provisioning">Configuring On-Premise Provisioning</a> for details about Okta’s agent-based provisioning solution.</p>
 
 <h3 id="scim-facade">SCIM Facade</h3>
 
-<p>Sometimes it isn’t feasible for the cloud app to natively support a SCIM Server API. 
-An alternative option is to build and host a SCIM facade middleware that translates 
+<p>Sometimes it isn’t feasible for the cloud app to natively support a SCIM Server API.
+An alternative option is to build and host a SCIM facade middleware that translates
 between the Okta SCIM Client and the cloud app’s proprietary API. The Okta integration would be to this SCIM facade.</p>
 
 <blockquote>
@@ -453,9 +458,9 @@ as your Base URL; for example: <code class="highlighter-rouge">https://example.c
 however, you must support the URL structure described in the
 <a href="https://tools.ietf.org/html/rfc7644#section-3.2">“SCIM Endpoints and HTTP Methods” section of RFC7644</a>.</p>
 
-<p>If you have multiple Okta orgs, you can use the same SCIM server for all of them. 
-Implement a subdomain for the SCIM server and each subdomain, for example: <code class="highlighter-rouge">https://subdomain.example.com/scim/v2</code>, where 
-<code class="highlighter-rouge">subdomain</code> represent one Okta org. Let’s say you have three Okta orgs: company-a.okta.com, company-b.okta.com and company-c.okta.com. 
+<p>If you have multiple Okta orgs, you can use the same SCIM server for all of them.
+Implement a subdomain for the SCIM server and each subdomain, for example: <code class="highlighter-rouge">https://subdomain.example.com/scim/v2</code>, where
+<code class="highlighter-rouge">subdomain</code> represent one Okta org. Let’s say you have three Okta orgs: company-a.okta.com, company-b.okta.com and company-c.okta.com.
 From each org you can pass a base URL containing the name of the org: <code class="highlighter-rouge">https://company-a.example.com/scim/v2</code>, <code class="highlighter-rouge">https://company-b.example.com/scim/v2</code> or  <code class="highlighter-rouge">https://company-c.example.com/scim/v2</code>.
 In your SCIM server, you can read which subdomain the request is coming from and identify the org.</p>
 
@@ -571,7 +576,7 @@ uniquely identifies reach resource, as described in <a href="https://tools.ietf.
 
 <p>Your SCIM API must support the following SCIM API endpoints to work with Okta:</p>
 
-<p><img src="/assets/img/scim_flowchart.png" alt="scim api endpoints required to work with Okta" width="640px" /></p>
+<p><img src="/assets/scim_flowchart-b676222ceafd669b4bf0bba32b7a3741a4c5882f23ad294022b1f222be8787ba.png" alt="scim api endpoints required to work with Okta" width="640px" /></p>
 
 <h5 id="create-account-post-users">Create Account: POST /Users</h5>
 
@@ -802,7 +807,7 @@ of the <a href="https://tools.ietf.org/html/rfc7644">SCIM 2.0 Protocol Specifica
 
 <h5 id="filtering-on-username-eq-required">Filtering on <code class="highlighter-rouge">userName eq</code> (Required)</h5>
 
-<p>Your SCIM API must be able to filter users following the pattern  “userName eq “…” “. 
+<p>Your SCIM API must be able to filter users following the pattern  “userName eq “…” “.
 This is because most provisioning actions, besides Import Users, require the ability
 for Okta to determine if a user resource exists on your system.</p>
 
@@ -1135,7 +1140,7 @@ example:</p>
 
 <h3 id="process">Process</h3>
 
-<p>In order to allow customers to use your SCIM provisioning integration with Okta, 
+<p>In order to allow customers to use your SCIM provisioning integration with Okta,
 you’ll need to get your app published in <a href="https://www.okta.com/resources/find-your-apps/">the Okta Application Network</a>.</p>
 
 <p>Follow the steps below to test and submit your application for Okta review:</p>
@@ -1154,16 +1159,16 @@ you’ll need to get your app published in <a href="https://www.okta.com/resourc
 
 <h3 id="private-app-option">Private App Option</h3>
 
-<p>The OAN is for making an integration publicly discoverable and accessible to all Okta customers. 
-However, you can also just use the integration privately within a few named orgs. 
-This could be the case if you are a system integrator, customer, or Okta PS integrating to a custom app. 
-If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OAN. 
-Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app. 
+<p>The OAN is for making an integration publicly discoverable and accessible to all Okta customers.
+However, you can also just use the integration privately within a few named orgs.
+This could be the case if you are a system integrator, customer, or Okta PS integrating to a custom app.
+If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OAN.
+Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app.
 Note that you cannot use the SCIM template app used for prototyping, as it has limitations that prevent it from being used in production.</p>
 
 <h4 id="review-oktas-scim-docs--prepare-your-app">Review Okta’s SCIM Docs &amp; Prepare Your App</h4>
 
-<p>The first step is to build a compliant SCIM server. 
+<p>The first step is to build a compliant SCIM server.
 Even if you already support SCIM, it is important that you review Okta’s SCIM docs above,
 especially the following sections, to understand the specifics of Okta’s support for the SCIM standard:</p>
 
@@ -1331,25 +1336,25 @@ result with. Here is an example test result from Runscope:
 
 <h4 id="testing-your-scim-server-with-okta">Testing your SCIM server with Okta</h4>
 
-<p>Once you have a SCIM server that passes all of the Runscope tests, 
+<p>Once you have a SCIM server that passes all of the Runscope tests,
 test your SCIM integration directly with Okta. To do so, you will first need to sign up for <a href="https://www.okta.com/developer/signup/">an Okta developer account</a>.</p>
 
-<p>Note: If you are using OAuth Authorization Code Grant flow as your authentication method 
-or need to support the Profile Master action, Okta will need to custom-configure a template app for you. 
+<p>Note: If you are using OAuth Authorization Code Grant flow as your authentication method
+or need to support the Profile Master action, Okta will need to custom-configure a template app for you.
 Please request this in your email to <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
 
 <ol>
   <li>
-    <p>Navigate to the admin interface in your Okta org by clicking <strong>Admin</strong>. 
- <img src="/assets/img/scim-end-user-ui.png" alt="Admin Button" /></p>
+    <p>Navigate to the admin interface in your Okta org by clicking <strong>Admin</strong>.
+ <img src="/assets/scim-end-user-ui-32cadb05aec228479af6e097f4772d36d82e70304da4dfc77d54021951c34248.png" alt="Admin Button" /></p>
   </li>
   <li>
-    <p>Click <strong>Applications</strong>, then <strong>Add Application</strong>. 
- <img src="/assets/img/scim-apps.png" alt="Admin Button" /></p>
+    <p>Click <strong>Applications</strong>, then <strong>Add Application</strong>.
+ <img src="/assets/scim-apps-59a8d7217be20b7bff0afd740dddd93941a4e0ff3e406fdb9eea8f13a672f02f.png" alt="Admin Button" /></p>
   </li>
   <li>
     <p>Search for “SCIM”. You’ll see three different SCIM template applications for each SCIM version (1.1 and 2.0) based off of the various authentication methods you could choose to support (Header Auth, Basic Auth, or Bearer Token).
- <img src="/assets/img/scim-templates.png" alt="Admin Button" /></p>
+ <img src="/assets/scim-templates-fca69c7de7d0b54b2397bfc1038a12ae9ef3a5eb4a54bc040395183178960a5e.png" alt="Admin Button" /></p>
   </li>
 </ol>
 
@@ -1432,7 +1437,7 @@ sure to check both of the following:
 
 <h5 id="run-the-second-set-of-runscope-tests-okta-scim-20-crud-test">Run the Second Set of Runscope Tests: Okta SCIM 2.0 CRUD Test</h5>
 
-<p>This is an important test that needs to be run in order to check if the Application 
+<p>This is an important test that needs to be run in order to check if the Application
 can handle the <strong>CR</strong>eate, <strong>U</strong>pdate and <strong>D</strong>eactivate (CRUD) users functionality from Okta.
 This allows the Application to be tested with actual Okta integration so thereby achieving end to end testing.</p>
 
@@ -1467,8 +1472,8 @@ SCIM server.</p>
 
 <h5 id="prepare-the-customer-facing-configuration-guide">Prepare the Customer-Facing Configuration Guide</h5>
 
-<p>We recommend preparing the customer-facing configuration guide before beginning to work through the submission document. 
-This guide will be exposed externally in Okta’s admin interface to end customers. 
+<p>We recommend preparing the customer-facing configuration guide before beginning to work through the submission document.
+This guide will be exposed externally in Okta’s admin interface to end customers.
 For more details, see the <a href="http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf">configuration guide guidelines</a>.</p>
 
 <p>Note: When you are ready, use <a href="https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform">this form</a> to submit for Okta review.</p>
@@ -1625,38 +1630,38 @@ For more details, see the <a href="http://saml-doc.okta.com/Provisioning_Docs/SC
 
 <p><strong>Our API is similar to SCIM, but is not 100% compliant. Can we still integrate with Okta?</strong></p>
 
-<p>Unfortunately, your app’s SCIM server API must be fully SCIM compliant in order to integrate with Okta. 
-Okta’s SCIM client endpoints are hard coded into a template which adhere directly to <a href="http://www.simplecloud.info/">the SCIM spec</a>. 
+<p>Unfortunately, your app’s SCIM server API must be fully SCIM compliant in order to integrate with Okta.
+Okta’s SCIM client endpoints are hard coded into a template which adhere directly to <a href="http://www.simplecloud.info/">the SCIM spec</a>.
 Not all capabilities of the SCIM spec need to be supported (see <a href="#required-scim-server-capabilities">Required SCIM Server Capabilities</a> in our SCIM Technical Reference) but the core schema and features do need to be supported.</p>
 
 <p><strong>SCIM is a new standard. How broadly is it being adopted by cloud app vendors and how confident can I be in the SCIM standard’s long-term viability?</strong></p>
 
-<p>Okta has seen significant SCIM momentum in the market amongst our network of app developers over the past year. 
-Hot new apps like <a href="https://api.slack.com/scim">Slack</a> 
-and <a href="https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/">Lucidchart</a> 
-are supporting SCIM as well established software companies 
-like <a href="https://github.com/Huddle/huddle-apis/wiki/Integrating%20with%20SCIM">Huddle</a> 
-and <a href="https://developer.citrixonline.com/implementing-scim-apis">Citrix</a>. 
-Okta has doubled down on our investment in our SCIM server 
+<p>Okta has seen significant SCIM momentum in the market amongst our network of app developers over the past year.
+Hot new apps like <a href="https://api.slack.com/scim">Slack</a>
+and <a href="https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/">Lucidchart</a>
+are supporting SCIM as well established software companies
+like <a href="https://github.com/Huddle/huddle-apis/wiki/Integrating%20with%20SCIM">Huddle</a>
+and <a href="https://developer.citrixonline.com/implementing-scim-apis">Citrix</a>.
+Okta has doubled down on our investment in our SCIM server
 and launched our own SCIM provisioning developer program.
 The SCIM standards is strong and is run by Salesforce, Google, and Sailpoint (Okta is also a contributor).</p>
 
 <p><strong>How should I be managing authentication to my SCIM API?</strong></p>
 
-<p>Okta recommends using the OAuth 2.0 Authorization Code Grant Flow (aka “three-legged OAuth). 
-Okta doesn’t support the Client Credentials or Resource Owner Password Credentials Authorization grant flows. 
-The Authorization Code Grant Flow is more common in SaaS/cloud and is also more secure. 
+<p>Okta recommends using the OAuth 2.0 Authorization Code Grant Flow (aka “three-legged OAuth).
+Okta doesn’t support the Client Credentials or Resource Owner Password Credentials Authorization grant flows.
+The Authorization Code Grant Flow is more common in SaaS/cloud and is also more secure.
 In addition to OAuth, Okta also supports basic auth and header token auth options.</p>
 
 <p><strong>I have a multi-tenant app how do I allow my customers to customize their specific tenant in Okta?</strong></p>
 
-<p>Use the three-legged OAuth (Authorization Grant flow), 
-so that you know exactly which token/key the customer is using. 
-Another option is by URL. When the customer configures your app in Okta, we can prompt them to add their unique subdomain for your app  (see Zscaler app below). 
-Okta can use part of this url in the SCIM endpoint for that customer, for example http://www.company.com/tenantA/scim or http://www.company.com/tenantB/scim). 
+<p>Use the three-legged OAuth (Authorization Grant flow),
+so that you know exactly which token/key the customer is using.
+Another option is by URL. When the customer configures your app in Okta, we can prompt them to add their unique subdomain for your app  (see Zscaler app below).
+Okta can use part of this url in the SCIM endpoint for that customer, for example http://www.company.com/tenantA/scim or http://www.company.com/tenantB/scim).
 This subdomain field can be configured with Okta after you submit your app for Okta review.</p>
 
-<p><img src="/assets/img/scim-scalar.png" alt="Example SCIM endpoint with subdomain" /></p>
+<p><img src="/assets/scim-scalar-9512a9e239e9e1ecf99b293b57ebee76fb8d8df4151ded9f07422f81f0ce225b.png" alt="Example SCIM endpoint with subdomain" /></p>
 
 <p><strong>Why do I need to implement the type attribute for attributes such as emails/phoneNumbers/addresses?</strong></p>
 
@@ -1689,7 +1694,7 @@ Therefore, data validation should be handled by your app’s SCIM Server. In oth
 
 <p><strong>How much filtering support is needed?</strong></p>
 
-<p>The filtering capabilities in the SCIM protocol are pretty broad but the common filtering use case with Okta is quite narrow – determine if a newly created Okta user already exists in your app based on a matching identifier . This means the eq (equals) operator is all you really need to support for now. We “might” eventually support other operators but don’t right now. 
+<p>The filtering capabilities in the SCIM protocol are pretty broad but the common filtering use case with Okta is quite narrow – determine if a newly created Okta user already exists in your app based on a matching identifier . This means the eq (equals) operator is all you really need to support for now. We “might” eventually support other operators but don’t right now.
 Note that Okta only supports filtering via the eq operator on the SCIM userName attribute on the SCIM Server side. However, Okta can use any AppUser attribute on the Okta side for passing into the eq operator. Typically this would also be <code class="highlighter-rouge">appuser.userName</code>, but <code class="highlighter-rouge">appuser.email</code> or <code class="highlighter-rouge">appuser.randomAttribute</code> can also work.</p>
 
 <h3 id="publishing-questions">Publishing Questions</h3>
@@ -1731,7 +1736,7 @@ Python, with <a href="http://developer.okta.com/docs/sdk/opp/javadoc/overview-su
 <p>This example SCIM server demonstrates how to implement a basic SCIM
 server that can create, read, update, and deactivate Okta users.</p>
 
-<p>You can find the sample code to handle HTTP requests to this sample application in <a href="#required-scim-server-capabilities">Required SCIM Server Capabilities</a> 
+<p>You can find the sample code to handle HTTP requests to this sample application in <a href="#required-scim-server-capabilities">Required SCIM Server Capabilities</a>
 Use the instructions that follow to set up and run the example SCIM server.</p>
 
 <h3 id="how-to-run">How to run</h3>
@@ -2106,12 +2111,14 @@ only happen if the User table isn’t defined.</p>
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -2120,17 +2127,22 @@ only happen if the User table isn’t defined.</p>
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

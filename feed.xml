@@ -11,7 +11,7 @@
         <title>Seven Awesome New Features In Visual Studio 2017</title>
         <description>&lt;p&gt;Microsoft developers have been using Visual Studio for their IDE since before .NET was even a thing. Visual Studio is twenty years old this year, and on March 7th, 2017 Microsoft released the latest version of it’s flagship developer product, Visual Studio. With this release are a bunch of new features, improvements, and exciting changes for the beloved Microsoft developer environment. Here are seven features in the new IDE that will excite developers using the development environment.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-then-and-now.png&quot; alt=&quot;Visual Studio Then And Now&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/seven-new-vs-features/vs-then-and-now-307b8c680186c918090d28ada7fe322487c87f2b55d69270dcd854f16686283d.png&quot; alt=&quot;Visual Studio Then And Now&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1-editorconfig-built-in&quot;&gt;1. EditorConfig Built In&lt;/h2&gt;
 &lt;p&gt;The &lt;a href=&quot;http://editorconfig.org/&quot;&gt;EditorConfig project&lt;/a&gt; has been available for Visual Studio 2015, but it required you to install a plugin to take advantage of the code-style configuration tool. With the release of 2017, EditorConfig is now built into the IDE. This means you can simply create an &lt;code class=&quot;highlighter-rouge&quot;&gt;.editorconfig&lt;/code&gt; file in the root of your solution and check it into your source control. This will get your whole team using the same code format rules (once you can all agree on what they should be).&lt;/p&gt;
@@ -19,12 +19,12 @@
 &lt;h2 id=&quot;2-new-visual-studio-installer&quot;&gt;2. New Visual Studio Installer&lt;/h2&gt;
 &lt;p&gt;Visual Studio 2017 also comes with a new installer. The new installer lets you put together an install of Visual Studio customized to the type of development you’re doing. You can install only the features you will need every day and leave out things that you might never need. This is a great way to keep the IDE small and snappy.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-installer.png&quot; alt=&quot;New Visual Studio Installer&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/seven-new-vs-features/vs-installer-344f671bae0108cafdc84b3b1631162724fb891d00d82c1494494e834ef54cf2.png&quot; alt=&quot;New Visual Studio Installer&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;3-manage-visual-studio-performance&quot;&gt;3. Manage Visual Studio Performance&lt;/h2&gt;
 &lt;p&gt;The Manage Visual Studio Performance (under the &lt;code class=&quot;highlighter-rouge&quot;&gt;Help&lt;/code&gt; menu) allows you to view the performance of your Visual Studio IDE and can even give you suggestions about extensions that might be impacting the performance of your environment! This includes turning on Lightweight Solution Load, which doesn’t load all the projects in a solution when you open the solution, only when you begin to work in that project. You can still navigate through the code, but the project won’t be loaded until you actually start to work with that project. Awesome!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-perfromance.png&quot; alt=&quot;Manage Visual Studio Performance&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/seven-new-vs-features/vs-perfromance-7c5e3623f9613e165efe2c4f6f1eb32776dca113d3811e9f9f11484db8b6f0e1.png&quot; alt=&quot;Manage Visual Studio Performance&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;4-mobile-development&quot;&gt;4. Mobile Development&lt;/h2&gt;
 &lt;p&gt;With Microsoft’s acquisition of Xamarin a few years ago, .NET developers have been enjoying the &lt;a href=&quot;https://www.xamarin.com/&quot;&gt;Xamarin&lt;/a&gt; for free as &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=Xamarin.Xamarin&quot;&gt;a plugin to Visual Studio 2015&lt;/a&gt;. In Visual Studio 2017, it’s now one of the install options when installing Visual Studio! This is a signal that cross-platform, mobile development is now a first-class citizen in your Microsoft development toolbelt!&lt;/p&gt;
@@ -37,14 +37,14 @@
 &lt;h2 id=&quot;6-better-javascript-support&quot;&gt;6. Better Javascript Support&lt;/h2&gt;
 &lt;p&gt;With the proliferation of Javascript and Javascript frameworks like Angular, React, Ember, and Vue, it’s no surprise that VSCode has really gleaned a lot of support from the developer community. VSCode has excellent support for Javascript (ES5 and ES6) as well as framework support for Angular and React, including JSX.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-javascript-support.png&quot; alt=&quot;Visual Studio Javascript Support&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/seven-new-vs-features/vs-javascript-support-3cad49103120e540c0bd40de199f70ca64843a397ba43082f269dfbadc4e01da.png&quot; alt=&quot;Visual Studio Javascript Support&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Building on that win, Microsoft used the Javascript engine built into VSCode in Visual Studio 2017. This means that all the great support in VSCode is now available without switching out of your Visual Studio editor!&lt;/p&gt;
 
 &lt;h2 id=&quot;7-docker-support-built-in&quot;&gt;7. Docker Support Built-In&lt;/h2&gt;
 &lt;p&gt;With the adoption of containerization, microservices, and &lt;a href=&quot;https://www.docker.com/microsoft&quot;&gt;Microsoft’s own work with Docker&lt;/a&gt; to help support &lt;a href=&quot;https://hub.docker.com/search/?isAutomated=0&amp;amp;isOfficial=0&amp;amp;page=1&amp;amp;pullCount=0&amp;amp;q=Microsoft+Windows&amp;amp;starCount=0&quot;&gt;Windows Containers&lt;/a&gt;, it’s no surprise that developers are looking for tighter integration with Docker for their development environments. In Visual Studio 2015 (Update 3), you could install the &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=MicrosoftCloudExplorer.VisualStudioToolsforDocker-Preview&quot;&gt;Visual Studio Tools For Docker&lt;/a&gt; and get integrated support for &lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker&lt;/a&gt; containers. Visual Studio 2017, builds this feature in and when choosing the application template from the &lt;code class=&quot;highlighter-rouge&quot;&gt;File -&amp;gt; New&lt;/code&gt; menu, you can choose to turn on Docker support, giving you all the goodness of the plug-in, built in to Visual Studio!&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/seven-new-vs-features/vs-docker-support.png&quot; alt=&quot;Visual Studio Docker Support&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/seven-new-vs-features/vs-docker-support-4a95842d59eb47b8d3c7c34c13496c4844e4f0b0e44dbdd15a75d3ff2d7cdbb4.png&quot; alt=&quot;Visual Studio Docker Support&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Visual Studio has always been the editor of choice for those writing .NET applications and tapping into the Microsoft ecosystem. It has always had all the tools developers need to be their best, most productive selves. Now Microsoft has done some outstanding work to include and integrate with non-Microsoft tools that developers love to use, as well as help developers discover problems in their code, and improve the performance of their IDE. With the new additions and improvements in Visual Studio 2017, developers should love it even more!&lt;/p&gt;
 
@@ -80,7 +80,7 @@
   &lt;li&gt;&lt;a href=&quot;https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-web/pom.xml&quot;&gt;Web&lt;/a&gt;: Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img alt=&quot;start.spring.io&quot; src=&quot;/assets/img/blog/angular-spring-boot/start.spring.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-spring-boot/start.spring-40481d4bc64d1e2aed423435516338966ff8be6ef51ee774ac6eef1124d02b0c.png&quot; alt=&quot;start.spring.io&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you like the command-line better, you can use the following command to download a &lt;code class=&quot;highlighter-rouge&quot;&gt;demo.zip&lt;/code&gt; file with &lt;a href=&quot;https://httpie.org/&quot;&gt;HTTPie&lt;/a&gt;.&lt;/p&gt;
 
@@ -174,7 +174,7 @@ dependencies==devtools,h2,data-jpa,data-rest,web -d
     &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;c1&quot;&gt;// Top beers from https://www.beeradvocate.com/lists/top/&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kentucky Brunch Brand Stout&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Good Morning&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Very Hazy&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;King Julius&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kentucky Brunch Brand Stout&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Good Morning&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Very Hazy&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;King Julius&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
                 &lt;span class=&quot;s&quot;&gt;&quot;Budweiser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Coors Light&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;PBR&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
                 &lt;span class=&quot;n&quot;&gt;repository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
         &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
@@ -186,7 +186,7 @@ dependencies==devtools,h2,data-jpa,data-rest,web -d
 
 &lt;p&gt;Rebuild your project and you should see a list of beers printed in your terminal.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Beers printed in terminal&quot; src=&quot;/assets/img/blog/angular-spring-boot/beers-in-terminal.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-spring-boot/beers-in-terminal-7b5dce7b41bc6a05c82d4926ca62561a98cc1e8a4227a3f0773eec7d02fa2342.png&quot; alt=&quot;Beers printed in terminal&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Add a &lt;a href=&quot;http://docs.spring.io/spring-data/rest/docs/current/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@RepositoryRestResource&lt;/code&gt;&lt;/a&gt; annotation to &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerRepository&lt;/code&gt; to expose all its CRUD operations as REST endpoints.&lt;/p&gt;
 
@@ -242,7 +242,7 @@ dependencies==devtools,h2,data-jpa,data-rest,web -d
 
 &lt;p&gt;Re-build your application and navigate to http://localhost:8080/good-beers. You should see the list of good beers in your browser.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Good Beers JSON&quot; src=&quot;/assets/img/blog/angular-spring-boot/good-beers-json.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-spring-boot/good-beers-json-1a0620eb2aba6bd33c1a3b59d600d0ce05dbad8f5fc86dab8e14865114ce50ea.png&quot; alt=&quot;Good Beers JSON&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You should also see this same result in your terminal window when using HTTPie.&lt;/p&gt;
 
@@ -285,7 +285,7 @@ Executed 1 of 1 spec SUCCESS &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;0.7
 
 &lt;p&gt;If you’d rather not use the command line and have &lt;a href=&quot;https://www.jetbrains.com/idea/&quot;&gt;IntelliJ IDEA&lt;/a&gt; (or &lt;a href=&quot;https://www.jetbrains.com/webstorm/&quot;&gt;WebStorm&lt;/a&gt;) installed, you can create a new Static Web Project and select Angular CLI.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;IntelliJ new Static Web project&quot; src=&quot;/assets/img/blog/angular-spring-boot/intellij-new-static-web-project.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-spring-boot/intellij-new-static-web-project-b7ff02752e212d0f02c6ed2b38776a1d62e89b24bad670388cd872e5ae76ab01.png&quot; alt=&quot;IntelliJ new Static Web project&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;create-a-beerlistcomponent-and-beerservice&quot;&gt;Create a BeerListComponent and BeerService&lt;/h3&gt;
 
@@ -392,7 +392,7 @@ mv src/app/beer.service.&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; src/app/s
 &lt;p&gt;Make sure both apps are started (with &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt; in the server directory, and &lt;code class=&quot;highlighter-rouge&quot;&gt;ng serve&lt;/code&gt; in the client directory) and navigate to &lt;a href=&quot;http://localhost:4200&quot;&gt;http://localhost:4200&lt;/a&gt;. You should see an error in your console that you means you have to configure cross-origin resource sharing (CORS) on the server.&lt;/p&gt;
 
 &lt;pre style=&quot;color: red&quot;&gt;
-XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header 
+XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header
 is present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
 &lt;/pre&gt;
 
@@ -412,7 +412,7 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 
 &lt;p&gt;After making these changes, you should be able to see a list of beers from your Spring Boot API.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Beer List in Angular&quot; src=&quot;/assets/img/blog/angular-spring-boot/angular-beer-list.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-spring-boot/angular-beer-list-76c81e12896a4aeb2a3e8c5f0375bafa314c7275128cb22ac8f8e1db60df90cf.png&quot; alt=&quot;Beer List in Angular&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;To make it look a little better, add a &lt;a href=&quot;http://giphy.com&quot;&gt;Giphy&lt;/a&gt; service to fetch images based on the beer’s name. Create &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/shared/giphy/giphy.service.ts&lt;/code&gt; and place the following code inside it.&lt;/p&gt;
 
@@ -491,7 +491,7 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 
 &lt;p&gt;The result should look something like the following list of beer names with images.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Beer list with Giphy images&quot; src=&quot;/assets/img/blog/angular-spring-boot/angular-beer-list-giphy.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-spring-boot/angular-beer-list-giphy-f1d8a4fafe1c7d173a89508c28ab4314047100f0e814869746d2e82b61bb103b.png&quot; alt=&quot;Beer list with Giphy images&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You’ve just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations!&lt;/p&gt;
 
@@ -611,7 +611,7 @@ os: darwin x64
 
 &lt;p&gt;You should see a screen like the one below at &lt;a href=&quot;http://localhost:4200&quot;&gt;http://localhost:4200&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Default Homepage&quot; src=&quot;/assets/img/blog/angular-oidc/default-homepage.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/default-homepage-21ec1ed2afebe3a7e384626a8019479e61b079a939f1c3ed9317e3d7be3331c0.png&quot; alt=&quot;Default Homepage&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can make sure your new project’s tests pass, run &lt;code class=&quot;highlighter-rouge&quot;&gt;ng test&lt;/code&gt;:&lt;/p&gt;
 
@@ -681,7 +681,7 @@ installing component
 
 &lt;p&gt;If you still have &lt;code class=&quot;highlighter-rouge&quot;&gt;ng serve&lt;/code&gt; running, your browser should refresh automatically. If not, navigate to &lt;a href=&quot;http://localhost:4200&quot;&gt;http://localhost:4200&lt;/a&gt;, and you should see the search form.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Search component&quot; src=&quot;/assets/img/blog/angular-oidc/search-without-css.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/search-without-css-664524fe9f5061f8c27851eace27912fa88caa8f999f06b8840ac1b2e21965a2.png&quot; alt=&quot;Search component&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you want to add CSS for this components, open &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/search/search.component.css&lt;/code&gt; and add some CSS. For example:&lt;/p&gt;
 
@@ -888,7 +888,7 @@ and add the service to the list of providers.&lt;/p&gt;
 
 &lt;p&gt;Now the search results look better.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Search Results&quot; src=&quot;/assets/img/blog/angular-oidc/search-results.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/search-results-5564a373ca4b9e85d624289b73d10a486e9ac214ce23d09929fb0dfa42365856.png&quot; alt=&quot;Search Results&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;But wait, you still don’t have search functionality! To add a search feature, add a &lt;code class=&quot;highlighter-rouge&quot;&gt;search()&lt;/code&gt; method to &lt;code class=&quot;highlighter-rouge&quot;&gt;SearchService&lt;/code&gt;.&lt;/p&gt;
 
@@ -1102,7 +1102,7 @@ installing component
 
 &lt;p&gt;At this point, you should be able to search for a person and update their information.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Edit form&quot; src=&quot;/assets/img/blog/angular-oidc/edit-form.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/edit-form-9e8118d51384c2d0f5e20f464da2bad40278f750311e2f002de265cf403edcb9.png&quot; alt=&quot;Edit form&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;form&amp;gt;&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;src/app/edit/edit.component.html&lt;/code&gt; calls a &lt;code class=&quot;highlighter-rouge&quot;&gt;save()&lt;/code&gt; function to update a person’s data. You already implemented this above.
 The function calls a &lt;code class=&quot;highlighter-rouge&quot;&gt;gotoList()&lt;/code&gt; function that appends the person’s name to the URL when sending the user back to the search screen.&lt;/p&gt;
@@ -1173,7 +1173,7 @@ The function calls a &lt;code class=&quot;highlighter-rouge&quot;&gt;gotoList()&
 
 &lt;p&gt;After making these changes, any field with a &lt;code class=&quot;highlighter-rouge&quot;&gt;required&lt;/code&gt; attribute will be required.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Edit form with validation&quot; src=&quot;/assets/img/blog/angular-oidc/edit-form-validation.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/edit-form-validation-8fa28d60c24ace53ee83db37b94d719a9d8c6772d99a07131d43b6bc063b5774.png&quot; alt=&quot;Edit form with validation&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;In this screenshot, you might notice the address fields are blank. This is explained by the error in your console.&lt;/p&gt;
 
@@ -1198,7 +1198,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;p&gt;Now values should display in all fields and &lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt; should be required.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Edit form with names and validation&quot; src=&quot;/assets/img/blog/angular-oidc/edit-form-names.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/edit-form-names-bf02d6ef39bff4a672ff4323df488fa0be1d10e889a1d5dc0e8cba4b5ec74b05.png&quot; alt=&quot;Edit form with names and validation&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;With Angular 2, this is all you’ll need to do. However, with Angular 4+, you need to a little more work to stop the form from submitting.&lt;/p&gt;
 
@@ -1233,7 +1233,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;p&gt;Login to your Okta account, or &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;create one&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; as a Redirect URI and click *Finish**. You should see settings like the following.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;OIDC App Settings&quot; src=&quot;/assets/img/blog/angular-oidc/oidc-settings.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/oidc-settings-ec21ae1ecd7a70f68b887fa6ecf3daeb4f8f82e2f80328a2009272ff8b2c1c02.png&quot; alt=&quot;OIDC App Settings&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on the &lt;strong&gt;People&lt;/strong&gt; tab and the &lt;strong&gt;Assign to People&lt;/strong&gt; button. Assign yourself as a user, or someone else that you know the credentials for.&lt;/p&gt;
 
@@ -1358,15 +1358,15 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;p&gt;After making these changes, you should be able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;ng serve&lt;/code&gt; and see a login button.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Login button&quot; src=&quot;/assets/img/blog/angular-oidc/okta-login-button.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/okta-login-button-6945f18dd8e5eeb22be1d87785578f827769fc3ad2881b94a282a98c87db1363.png&quot; alt=&quot;Login button&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the &lt;strong&gt;Login&lt;/strong&gt; button and sign-in with one of the people that’s configured in your Okta application.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Okta Login form&quot; src=&quot;/assets/img/blog/angular-oidc/okta-login-form.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/okta-login-form-12ee55c95cbbca0f863e611f9d876968e5d5298101ad7b453ef171b8725573fd.png&quot; alt=&quot;Okta Login form&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After logging in, you’ll be able to click &lt;em&gt;Search&lt;/em&gt; and view people’s information.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;View after login&quot; src=&quot;/assets/img/blog/angular-oidc/okta-post-login.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/okta-post-login-638b4111e0d2fb1f04f9db2da3aa5857de970bf0b33c5b54e7854f5a0856c53f.png&quot; alt=&quot;View after login&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If it works - great! If you want to build your own login form in your app, continue reading to learn how to use the &lt;a href=&quot;https://github.com/okta/okta-auth-js&quot;&gt;Okta Auth SDK&lt;/a&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;OAuthService&lt;/code&gt;.&lt;/p&gt;
 
@@ -1442,7 +1442,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;p&gt;After making these changes, the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeComponent&lt;/code&gt; should render as follows.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Custom sign-in form&quot; src=&quot;/assets/img/blog/angular-oidc/sign-in-form.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/sign-in-form-e80bc5e512db14150307ec1395c35b8032288458363afb1acda6bcde3f08ccde.png&quot; alt=&quot;Custom sign-in form&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Import Angular’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Router&lt;/code&gt;, add it as a dependency in the constructor, and add local variables for the username and password fields. Then implement a &lt;code class=&quot;highlighter-rouge&quot;&gt;loginWithPassword()&lt;/code&gt; method in &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeComponent&lt;/code&gt;. This method uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;OktaAuth&lt;/code&gt; library to get a session token and exchange it for ID and access tokens.&lt;/p&gt;
 
@@ -1492,7 +1492,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;p&gt;You should be able to sign in using the form, using one of your app’s registered users. After logging in, you’ll be able to click the &lt;strong&gt;Search&lt;/strong&gt; link and view people’s information.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;View after sign-in&quot; src=&quot;/assets/img/blog/angular-oidc/sign-in-form-success.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/sign-in-form-success-4aab12fc46974aa46a57bfb1eb17da947d7c1b78bda68e18d04c0a5d8e3476cc.png&quot; alt=&quot;View after sign-in&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;angular--okta&quot;&gt;Angular + Okta&lt;/h2&gt;
 
@@ -1526,7 +1526,7 @@ npm start
 &lt;/div&gt;
 &lt;p&gt;When you open &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt;, you should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/react-sign-in-widget/React-Simple-Seed-Screener.png&quot; alt=&quot;Running Seed&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/React-Simple-Seed-Screener-34adf969ca5df9fb4ea332863417ef441ae4525f30a144c002ad23a31594c816.png&quot; alt=&quot;Running Seed&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;When you click on the navigation links, you should see page placeholders for those links.&lt;/p&gt;
 &lt;h2 id=&quot;add-the-okta-sign-in-widget&quot;&gt;Add the Okta Sign-In Widget&lt;/h2&gt;
@@ -1537,7 +1537,7 @@ npm start
 &lt;/div&gt;
 &lt;p&gt;This will add the Okta Sign-In Widget code to your &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; folder.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener.png&quot; alt=&quot;Okta in node_modules&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener-793639e55e4967b968ae363f1af37e4f1ec426d08fb0fe2ea7300459d84d3c87.png&quot; alt=&quot;Okta in node_modules&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then add the styles for the widget in your &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file from the Okta CDN:&lt;/p&gt;
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; 
@@ -1584,7 +1584,7 @@ npm start
 
 &lt;p&gt;So log in to your Okta account, [or create one](http://developer.okta.com] if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;OIDC Application Settings&quot; src=&quot;/assets/img/blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener-757b218884250a613b267c5d2c0b2a01292d96efd85a0c0706cc50e39ac6779d.png&quot; alt=&quot;OIDC Application Settings&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Make note of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Client ID&lt;/code&gt; (yours shouldn’t be blurred out) and make note of your Dev ID (it’s the number part of your subdomain of the URL) So if you are at https://dev-1234-admin.oktapreview.com/… your Dev ID is 1234.&lt;/p&gt;
 
@@ -1760,7 +1760,7 @@ npm start
 &lt;h2 id=&quot;check-it-out&quot;&gt;Check It Out&lt;/h2&gt;
 &lt;p&gt;When you run the app now (with &lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt;), you should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/blog/react-sign-in-widget/Finished-Sample-Screener.gif&quot; alt=&quot;Finished Sample&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/Finished-Sample-Screener-ae69f53d352922d2ecd2a2baaf83b111defd6ce5b025952b7a4bcd9ce11fafae.gif&quot; alt=&quot;Finished Sample&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If it works - congrats! If it doesn’t, please post a question to Stack Overflow with an &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;okta tag&lt;/a&gt;, or hit me up on Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;known-issues&quot;&gt;Known Issues&lt;/h2&gt;
@@ -1841,7 +1841,7 @@ Project &lt;span class=&quot;s1&quot;&gt;'angular-okta-example'&lt;/span&gt; suc
 
 &lt;p&gt;This will create a new &lt;code class=&quot;highlighter-rouge&quot;&gt;angular-okta-example&lt;/code&gt; directory and install all the necessary dependencies. To verify everything works, run &lt;code class=&quot;highlighter-rouge&quot;&gt;ng e2e&lt;/code&gt; in a terminal window. All tests should pass and you should see results like the following.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Running e2e&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/e2e-success.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/e2e-success-035a935c9ccea2ebfb97f06b4a7c44846df05279e3cf246b545cf20e27c34dcb.png&quot; alt=&quot;Running e2e&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;integrate-oktas-sign-in-widget-in-angular&quot;&gt;Integrate Okta’s Sign-In Widget in Angular&lt;/h2&gt;
 
@@ -1912,7 +1912,7 @@ Project &lt;span class=&quot;s1&quot;&gt;'angular-okta-example'&lt;/span&gt; suc
 
 &lt;p&gt;Login to your Okta account, or create one at &lt;a href=&quot;http://developer.okta.com&quot;&gt;http://developer.okta.com&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;strong&gt;http://localhost:4200&lt;/strong&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like the following.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;OIDC App Settings&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/oidc-settings.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/oidc-settings-5e9f630db270b1c886a5cddd3524f6ccca8889efe98e6c04608f0373bb096b91.png&quot; alt=&quot;OIDC App Settings&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click on the &lt;strong&gt;People&lt;/strong&gt; tab and the &lt;strong&gt;Assign to People&lt;/strong&gt; button. Assign yourself as a user, or someone else that you know the credentials for.&lt;/p&gt;
 
@@ -1979,11 +1979,25 @@ Project &lt;span class=&quot;s1&quot;&gt;'angular-okta-example'&lt;/span&gt; suc
 
 &lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;ng serve&lt;/code&gt;, and open your browser to &lt;a href=&quot;http://localhost:4200&quot;&gt;http://localhost:4200&lt;/a&gt;. You should see the sign-in widget.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Sign-In Widget&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/sign-in-widget.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/sign-in-widget-285f593cea19908cff0537c49927c95741eb956697d0501e2ef594054166017e.png&quot; alt=&quot;Sign-In Widget&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Enter an assigned person’s credentials to login. You should see a “Hello {email}” message with a logout button.&lt;/p&gt;
+&lt;p&gt;However, if you look at your browser’s console, you’ll likely see an error:&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Login Success&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/login-success.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to 
+preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is 
+present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard, 
+select &lt;strong&gt;Security&lt;/strong&gt; &amp;gt; &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Trusted Origins&lt;/strong&gt;. Click the “Add Origin” button and specify &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt;
+as the Origin URL with Type &lt;code class=&quot;highlighter-rouge&quot;&gt;CORS&lt;/code&gt;. For more specific instructions, see Okta’s &lt;a href=&quot;http://developer.okta.com/docs/api/getting_started/enabling_cors.html&quot;&gt;Enabling CORS documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/cors-configuration-3ea19bdd525497544ceed789e84628e14586c0d314c8890025671155004a8264.png&quot; alt=&quot;CORS Configuration&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After making this change, enter an assigned person’s credentials to login. You should see a “Hello {email}” message with a logout button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/login-success-08bf3dff5a3f0ed1be087d0d5e2da037d3b52c875027f84764dcea7ab42b18f6.png&quot; alt=&quot;Login Success&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; You may experience an issue where the sign-in process seems to hang. Clicking anywhere in the browser window seems to solve this problem. I’m not sure why.&lt;/p&gt;
 
@@ -2025,7 +2039,7 @@ Project &lt;span class=&quot;s1&quot;&gt;'angular-okta-example'&lt;/span&gt; suc
 
 &lt;p&gt;After making these changes, the sign-in widget will look like the following screenshot.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Custom CSS&quot; src=&quot;/assets/img/blog/angular-sign-in-widget/custom-css.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/custom-css-f5c0f69d07cf9db0d464ba70c5b452f599e9194ab8c4b126d4ba62a26300baac.png&quot; alt=&quot;Custom CSS&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;fix-your-tests&quot;&gt;Fix Your Tests&lt;/h2&gt;
 &lt;p&gt;If you try to run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm test&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ng test&lt;/code&gt;, tests will fail:&lt;/p&gt;
@@ -2135,13 +2149,13 @@ brew install springboot
 
 &lt;p&gt;Navigate to &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; and you’ll be prompted to login with your browser’s basic authentication dialog. Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you’ll see &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello World&lt;/code&gt; in your browser.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Hello World&quot; src=&quot;/assets/img/blog/spring-boot-oauth/0-hello-world.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/0-hello-world-c9f0b9b0afcaed45b245902ea4e5ce68f0c8f1caf85b8c7d69d9d7e7078363dc.png&quot; alt=&quot;Hello World&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;create-an-authorization-server-in-okta&quot;&gt;Create an Authorization Server in Okta&lt;/h2&gt;
 
 &lt;p&gt;To start authenticating against Okta’a API, you have to first create a developer account on &lt;a href=&quot;http://developer.okta.com&quot;&gt;http://developer.okta.com&lt;/a&gt;. After activating your account, sign in and navigate to &lt;strong&gt;Security &amp;gt; API&lt;/strong&gt; and click on the &lt;strong&gt;Add Authorization Server&lt;/strong&gt; button.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Add Authorization Server&quot; src=&quot;/assets/img/blog/spring-boot-oauth/1-add-auth-server.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/1-add-auth-server-a7f86ce0c69a220e33d69e3e83e489f0152c7f29deaa28af6050f90e23c678b8.png&quot; alt=&quot;Add Authorization Server&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Enter the name and Resource URI of your choosing. The names aren’t important at this time. I used the following values:&lt;/p&gt;
 
@@ -2150,7 +2164,7 @@ brew install springboot
   &lt;li&gt;&lt;strong&gt;Resource URI:&lt;/strong&gt; http://authenticat.is.easy/withokta&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Authorization Server Settings&quot; src=&quot;/assets/img/blog/spring-boot-oauth/2-auth-server-settings.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/2-auth-server-settings-3793ada4e1acd8314634d68433d3a9cfa7a5a9e90e8ebaeae4639d22039ab934.png&quot; alt=&quot;Authorization Server Settings&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The Metadata URI you see in this screenshot will come in handy later when you need to specify &lt;code class=&quot;highlighter-rouge&quot;&gt;accessTokenUri&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;userAuthorizationUri&lt;/code&gt; values.&lt;/p&gt;
 
@@ -2158,15 +2172,15 @@ brew install springboot
 
 &lt;p&gt;To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to &lt;strong&gt;Applications &amp;gt; Add Application&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. The application name isn’t important, you can use whatever you like.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;OIDC App Name&quot; src=&quot;/assets/img/blog/spring-boot-oauth/4-oidc-name.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/4-oidc-name-4f222609905faa168bb21796260232ac117dd5bf97ac1da441d5b0d02dced208.png&quot; alt=&quot;OIDC App Name&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click &lt;strong&gt;Next&lt;/strong&gt; to configure OIDC. Add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;OIDC Redirects&quot; src=&quot;/assets/img/blog/spring-boot-oauth/5-redirect-uris.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/5-redirect-uris-ca3574c6ee722c7eb407af08a6da632a9e3c74cdab6a6198144a51047decec16.png&quot; alt=&quot;OIDC Redirects&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The next screen should look similar to the following screenshot.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;OIDC Settings&quot; src=&quot;/assets/img/blog/spring-boot-oauth/6-oidc-settings.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/6-oidc-settings-488caba7757e6fec8ac09f80852d308ecdbc9821973625b897bd167427fface1.png&quot; alt=&quot;OIDC Settings&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Your &lt;code class=&quot;highlighter-rouge&quot;&gt;clientId&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;clientSecret&lt;/code&gt; values for this app will be just below the fold.&lt;/p&gt;
 
@@ -2209,15 +2223,15 @@ brew install springboot
 
 &lt;p&gt;Start your app with &lt;code class=&quot;highlighter-rouge&quot;&gt;spring run helloOAuth.groovy&lt;/code&gt; and navigate to &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt;. You’ll be redirected to Okta, but likely see the following error.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Bad Request, Invalid Redirect&quot; src=&quot;/assets/img/blog/spring-boot-oauth/7-bad-request-invalid-redirect.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/7-bad-request-invalid-redirect-bc2e2d9931345a11e86633cfec15a31da11c1879b06c1ee09942ee0d84e4a87c.png&quot; alt=&quot;Bad Request, Invalid Redirect&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This happens because Spring Security sends a &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect_uri&lt;/code&gt; value of &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080/login&lt;/code&gt;. Navigate to your Okta developer instance and change your OIDC app to have this as a Redirect URI.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Add Redirect URI&quot; src=&quot;/assets/img/blog/spring-boot-oauth/8-add-redirect-uri.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/8-add-redirect-uri-b58a34bd377fbfc8e1a03ff472949f0b270a4df4ab248829ebce820694c7950f.png&quot; alt=&quot;Add Redirect URI&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you hit &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; again, this time you’ll get an error that doesn’t explain as much.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;No Scopes&quot; src=&quot;/assets/img/blog/spring-boot-oauth/9-no-scopes.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/9-no-scopes-316896c625170cad5f43ba46a050c941285251cfae2534c192cb113313dc8e3c.png&quot; alt=&quot;No Scopes&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The whitelabel error page doesn’t tell you anything, but your browser’s address window does: &lt;em&gt;no scopes were requested&lt;/em&gt;. Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;application.yml&lt;/code&gt; to have a &lt;code class=&quot;highlighter-rouge&quot;&gt;scope&lt;/code&gt; property at the same level as &lt;code class=&quot;highlighter-rouge&quot;&gt;clientAuthenticationScheme&lt;/code&gt;. These are some standard OIDC scopes.&lt;/p&gt;
 
@@ -2228,29 +2242,29 @@ brew install springboot
 
 &lt;p&gt;Try &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; again and you’ll get an error that &lt;em&gt;User is not assigned to the client app&lt;/em&gt;. Again, you’ll have to look in the address bar to see it.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;User Not Assigned&quot; src=&quot;/assets/img/blog/spring-boot-oauth/10-user-not-assigned.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/10-user-not-assigned-921bede52e10c0cde398bccc561b5113b2084f59d90717093a763c509c5aaa82.png&quot; alt=&quot;User Not Assigned&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Open your OIDC app in Okta and &lt;strong&gt;Assign People&lt;/strong&gt; to it. Adding your own account is the easiest way to do this.&lt;/p&gt;
 
 &lt;p&gt;The next error you’ll see when trying to authenticate is &lt;em&gt;Policy evaluation failed&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Policy Evaluation Failure&quot; src=&quot;/assets/img/blog/spring-boot-oauth/11-policy-evaluation-failure.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/11-policy-evaluation-failure-06a812246eaae06b2b1d2cf85d7adfd258c52b3fd0ab4e79eb01a67672ac88c6.png&quot; alt=&quot;Policy Evaluation Failure&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;In Okta’s UI, navigate to &lt;strong&gt;Security &amp;gt; API&lt;/strong&gt; and click on your Authorization Server’s name and &lt;strong&gt;Access Policies&lt;/strong&gt;. Click &lt;strong&gt;Add Policy&lt;/strong&gt; to continue.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Access Policies&quot; src=&quot;/assets/img/blog/spring-boot-oauth/12-access-policies.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/12-access-policies-925ff47cd0b74182a070847103c79f692eb882909ad90a13d8619801898ebf4a.png&quot; alt=&quot;Access Policies&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Enter a name and description and set it to apply to all clients.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Add Policy&quot; src=&quot;/assets/img/blog/spring-boot-oauth/13-add-policy.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/13-add-policy-c1ab782f1d1f629468dbf7e30af887fbc85300ea71724478e658796cfbfd71e7.png&quot; alt=&quot;Add Policy&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click &lt;strong&gt;Create Policy&lt;/strong&gt; to continue. Once that completes, click the &lt;strong&gt;Add Rule&lt;/strong&gt; button.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Add Rule&quot; src=&quot;/assets/img/blog/spring-boot-oauth/14-add-rule.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/14-add-rule-454355d16e428ac00c81954f67a7f0a0dc74b9c9ea42c4b687f62c8ea358f58e.png&quot; alt=&quot;Add Rule&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Give the rule a name, accept the default values, and click the &lt;strong&gt;Create Rule&lt;/strong&gt; button.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Default Grant Rules&quot; src=&quot;/assets/img/blog/spring-boot-oauth/15-default-grant-rules.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/15-default-grant-rules-f1fed59c1b99d77b4f7f0781b87a2a3933ee86b7352b9448e23ef438dda7ebcd.png&quot; alt=&quot;Default Grant Rules&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Try &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; again and this time it should work. If it does - congrats!&lt;/p&gt;
 
@@ -2265,7 +2279,7 @@ brew install springboot
 
 &lt;p&gt;This should result in your app showing a result like the following.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Success&quot; src=&quot;/assets/img/blog/spring-boot-oauth/16-success.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/16-success-08647e6415a7576d72869bdf3d091d363a8cff9fc11adbfcd09015a953dd9b35.png&quot; alt=&quot;Success&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;get-the-source-code&quot;&gt;Get the Source Code&lt;/h2&gt;
 
@@ -2307,23 +2321,23 @@ brew install springboot
 
 &lt;p&gt;Just like I did, the first thing you’ll need to do is create a developer account at &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt;. After activating your account, login to it and click on the “Admin” button in the top right.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Okta UserHome&quot; src=&quot;/assets/img/blog/spring-boot-saml/okta-userhome.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/okta-userhome-3e85f9a56b2d8d16d25fdd462d0a7cbf82417bd8fe7adaa3a67c1e7dd4b04a78.png&quot; alt=&quot;Okta UserHome&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;On the next screen, click “Add Applications” in the top right.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Okta Dashboard&quot; src=&quot;/assets/img/blog/spring-boot-saml/okta-dashboard.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/okta-dashboard-4bb06c150497597bbe9a2ac85ecf14f90508c2dea8c29a22aa4d4f4ddace94ec.png&quot; alt=&quot;Okta Dashboard&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This will bring you to a screen with a “Create New App” green button on the left.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Create New App&quot; src=&quot;/assets/img/blog/spring-boot-saml/create-new-app.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/create-new-app-42c727730965cd56487420d4efc3fae744ccecbac9100ae834e7f48e90c11ec9.png&quot; alt=&quot;Create New App&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the button and choose “Web” for the platform and “SAML 2.0” for the sign on method.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;New App with SAML 2.0&quot; src=&quot;/assets/img/blog/spring-boot-saml/new-app-saml-2.0.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/new-app-saml-2.0-db813317bc386621bbaa114e0a8c6896c9a5b10a38a4f1fa71e0e256f1a1224b.png&quot; alt=&quot;New App with SAML 2.0&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the “Create” button. The next screen will prompt you for an application name. I used “Spring SAML”, but any name will work.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Enter App name&quot; src=&quot;/assets/img/blog/spring-boot-saml/app-name.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/app-name-86fa4c7f992c8e1e8dfc872cd368864801fbab0b9447e37ae00b201a933f9210.png&quot; alt=&quot;Enter App name&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the “Next” button. This brings you to the second step, configuring SAML. Enter the following values:&lt;/p&gt;
 
@@ -2332,19 +2346,19 @@ brew install springboot
   &lt;li&gt;Audience URI: &lt;code class=&quot;highlighter-rouge&quot;&gt;https://localhost:8443/saml/metadata&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img alt=&quot;SAML Integration&quot; src=&quot;/assets/img/blog/spring-boot-saml/saml-integration.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/saml-integration-e924706bdfb4c0e0261dc9ea9dc0841fda556b9f12c34fe2704bf34956266a3a.png&quot; alt=&quot;SAML Integration&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Scroll to the bottom of the form and click “Next”. This will bring you to the third step, feedback. Choose “I’m an Okta customer adding an internal app” and optionally select the App type.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Customer or Partner&quot; src=&quot;/assets/img/blog/spring-boot-saml/customer-or-partner.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/customer-or-partner-4c0bbd3973b53f9f40d46527301ecc8592531b7fba18c112d9125581fdb12240.png&quot; alt=&quot;Customer or Partner&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the “Finish” button to continue. This will bring you to the application’s “Sign On” tab which has a section with a link to your applications metadata in a yellow box. Copy the &lt;strong&gt;Identity Provider metadata&lt;/strong&gt; link as you’ll need it to configure your Spring Boot application.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;SAML Metadata&quot; src=&quot;/assets/img/blog/spring-boot-saml/saml-metadata.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/saml-metadata-cd2287ef5b0b1e57d55a6f353908ef5e4c4c639f504e23c7275db04fea9e71d4.png&quot; alt=&quot;SAML Metadata&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The final setup step you’ll need is to assign people to the application. Click on the “People” tab and the “Assign to People” button. You’ll see a list of people with your account in it.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Assign People&quot; src=&quot;/assets/img/blog/spring-boot-saml/assign-people.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/assign-people-dd0a2be0a2727d67fa0637b7a450ecfb26c858e44c78636ec700a536c3773be6.png&quot; alt=&quot;Assign People&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the assign button, accept the default username (your email), and click the “Done” button.&lt;/p&gt;
 
@@ -2352,7 +2366,7 @@ brew install springboot
 
 &lt;p&gt;Navigate to &lt;a href=&quot;https://start.spring.io&quot;&gt;https://start.spring.io&lt;/a&gt; in your favorite browser and select Security, Web, Thymeleaf, and DevTools as dependencies.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;start.spring.io&quot; src=&quot;/assets/img/blog/spring-boot-saml/start.spring.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/start.spring-250ffb33a9cdd45c275b5f7ee0a8d8ee7c0cc2e8a08dd7f1b3cde531e182e8ae.png&quot; alt=&quot;start.spring.io&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click “Generate Project”, download the generated ZIP file and open it in your favorite editor. Add the &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-security-saml-dsl&lt;/code&gt; dependency to your &lt;code class=&quot;highlighter-rouge&quot;&gt;pom.xml&lt;/code&gt;.&lt;/p&gt;
 
@@ -2497,19 +2511,19 @@ Hello SAML!
 
 &lt;p&gt;Start the app using your IDE or &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt; and navigate to &lt;a href=&quot;https://localhost:8443&quot;&gt;https://localhost:8443&lt;/a&gt;. If you’re using Chrome, you’ll likely see a privacy error.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Connection Not Private&quot; src=&quot;/assets/img/blog/spring-boot-saml/connection-not-private.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/connection-not-private-4c4dce4ee0839b72abdd94a7cf97ef3610402ea2062bf44a34f59add1c14177d.png&quot; alt=&quot;Connection Not Private&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Click the “ADVANCED” link at the bottom. Then click the “proceed to localhost (unsafe)” link.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Proceed to localhost&quot; src=&quot;/assets/img/blog/spring-boot-saml/connection-not-private-proceed.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/connection-not-private-proceed-fe5ba0fd6308c96fc912453079815090a8781a7ba7025868fc1d632b1bc70aca.png&quot; alt=&quot;Proceed to localhost&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Next, you’ll be redirected to Okta to sign in and redirected back to your app. If you’re already logged in, you won’t see anything from Okta. If you sign out from Okta, you’ll see a login screen such as the one below.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Okta Login&quot; src=&quot;/assets/img/blog/spring-boot-saml/okta-login.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/okta-login-b529f9ea23f41bc85ab4e9a04392eb079a7cca10b94b4cac460134fe3f1cf725.png&quot; alt=&quot;Okta Login&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After you’ve logged in, you should see a screen like the one below.&lt;/p&gt;
 
-&lt;p&gt;&lt;img alt=&quot;Hello SAML&quot; src=&quot;/assets/img/blog/spring-boot-saml/hello-saml.png&quot; style=&quot;width: 800px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-saml/hello-saml-b02f43bbec741e570382cad20cb0d1d4c824b63597efd072074124c474a1f0a9.png&quot; alt=&quot;Hello SAML&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;source-code&quot;&gt;Source Code&lt;/h2&gt;
 
@@ -2555,14 +2569,14 @@ Hello SAML!
 &lt;ol&gt;
   &lt;li&gt;Download the latest version of KentorIT’s AuthServices from &lt;a href=&quot;https://github.com/KentorIT/authservices&quot;&gt;https://github.com/KentorIT/authservices&lt;/a&gt; and open the Kentor.AuthServices.sln solution in Visual Studio.&lt;/li&gt;
   &lt;li&gt;Identify the SampleApplication project and make a note of its URL property:
-  &lt;img src=&quot;/assets/img/KentorOkta/VSProjectProperties.png&quot; alt=&quot;Visual Studio Project properties&quot; /&gt;&lt;/li&gt;
+  &lt;img src=&quot;/assets/KentorOkta/VSProjectProperties-894b4f35b40452adbda65e396b2f77d6ee54722ddfefb2e8b1b110d21ea14d65.png&quot; alt=&quot;Visual Studio Project properties&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Go to you Okta organization and navigate to Admin =&amp;gt; Applications.&lt;/li&gt;
   &lt;li&gt;Press the &lt;strong&gt;Add Application&lt;/strong&gt; button and the green &lt;strong&gt;Create New App&lt;/strong&gt; button
-  &lt;img src=&quot;/assets/img/KentorOkta/CreateNewAppButton.png&quot; alt=&quot;Press the Create a new Okta app&quot; /&gt;&lt;/li&gt;
+  &lt;img src=&quot;/assets/KentorOkta/CreateNewAppButton-34ce571996f9d3bcb7a56c3b06006e4b3481d687be046c8b67a8210db5c8c381.png&quot; alt=&quot;Press the Create a new Okta app&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Select the &lt;strong&gt;SAML 2.0&lt;/strong&gt; option and press the &lt;strong&gt;Create&lt;/strong&gt; button.
-  &lt;img src=&quot;/assets/img/KentorOkta/SAML2Option.png&quot; alt=&quot;Choose the SAML 2.0 template&quot; /&gt;&lt;/li&gt;
+  &lt;img src=&quot;/assets/KentorOkta/SAML2Option-2f7d8fae80847c3d7becd573c9d8150928c810c98c29d8a6dcc654f3464b9d9d.png&quot; alt=&quot;Choose the SAML 2.0 template&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Give your application a name and optionally upload a custom logo. We’ll call it “&lt;strong&gt;Kentor AuthServices App 1&lt;/strong&gt;”
-  &lt;img src=&quot;/assets/img/KentorOkta/OktaAppName.png&quot; alt=&quot;Give your Okta app a name&quot; /&gt;&lt;/li&gt;
+  &lt;img src=&quot;/assets/KentorOkta/OktaAppName-cd53f2a7c06794e10f57b1d93eab0c0fe3921677fa40994f9d8eb5dfc4650df2.png&quot; alt=&quot;Give your Okta app a name&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Press &lt;strong&gt;Next&lt;/strong&gt;.&lt;/li&gt;
   &lt;li&gt;In the &lt;strong&gt;Single sign on URL&lt;/strong&gt; field, enter the url you retrieved above in step #2 and append “ &lt;strong&gt;/AuthServices/Acs&lt;/strong&gt;”, for instance &lt;strong&gt;http://localhost:18714/SamplePath/AuthServices/Acs&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;For the Audience URI field, enter the Url you retrieved above in step #2 and append “ &lt;strong&gt;/AuthServices&lt;/strong&gt;”, for instance &lt;strong&gt;http://localhost:18714/SamplePath/AuthServices&lt;/strong&gt;&lt;/li&gt;
@@ -2577,9 +2591,9 @@ Hello SAML!
     &lt;p&gt;Otherwise, you may switch to RSA-SHA1 though we do not recommend it (as it less secure than SHA-256).&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;In the Attribute Statements section, optionally enter additional attributes, such as in the following screenshot:
-  &lt;img src=&quot;/assets/img/KentorOkta/OptionalAttributeStatements.png&quot; alt=&quot;Optional Attribute Statements&quot; /&gt;&lt;/li&gt;
+  &lt;img src=&quot;/assets/KentorOkta/OptionalAttributeStatements-fba16e17b56be1e56820bfe4eb115f882e4bf2e58475d07c726c0db8ad766582.png&quot; alt=&quot;Optional Attribute Statements&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Press the &lt;strong&gt;Next&lt;/strong&gt; button. Select the &lt;strong&gt;I’m a software vendor&lt;/strong&gt; option (if you’re indeed a vendor - if you are developing an internal app, select the first option) and press the Finish button.
-  &lt;img src=&quot;/assets/img/KentorOkta/VendorOrCustomerOption.png&quot; alt=&quot;Select the customer or vendor option&quot; /&gt;&lt;/li&gt;
+  &lt;img src=&quot;/assets/KentorOkta/VendorOrCustomerOption-00764161453e0f5de30afb8f79fb255dfd9ff4fe62aad63ac9670128551fc23a.png&quot; alt=&quot;Select the customer or vendor option&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Now edit the web.config file of the SampleApplication project.&lt;/li&gt;
   &lt;li&gt;In the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;kentor.authServices&amp;gt;&lt;/code&gt; section, enter the following values:
     &lt;ul&gt;
@@ -2590,10 +2604,10 @@ Hello SAML!
   &lt;li&gt;In the &lt;identityProviders&gt; section, enter the following values:
 &lt;/identityProviders&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;strong&gt;entityId&lt;/strong&gt; = &lt;strong&gt;Identity Provider Issuer&lt;/strong&gt; from &lt;strong&gt;Sign On&lt;/strong&gt; =&amp;gt; &lt;strong&gt;View Setup Instructions&lt;/strong&gt;
-&lt;img src=&quot;/assets/img/KentorOkta/ViewSetupInstructions.png&quot; alt=&quot;View setup instructions&quot; /&gt;
-&lt;img src=&quot;/assets/img/KentorOkta/IdentityProviderIssuer.png&quot; alt=&quot;Identity Provider Issuer&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;/assets/KentorOkta/ViewSetupInstructions-5b84fcb652fc6dc3480000e73db926367b638e657e9143c5f12361af0ab70be6.png&quot; alt=&quot;View setup instructions&quot; /&gt;
+&lt;img src=&quot;/assets/KentorOkta/IdentityProviderIssuer-6d097c5b8c2e12adf8463887e43200fc1c0fb9d46ed92c84b91b84c5cc090478.png&quot; alt=&quot;Identity Provider Issuer&quot; /&gt;&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;signOnUrl&lt;/strong&gt; = value of the &lt;strong&gt;Identity Provider Single Sign-On URL&lt;/strong&gt; below
-&lt;img src=&quot;/assets/img/KentorOkta/IdPSSOUrl.png&quot; alt=&quot;Identity Provider Single Sign-On URL&quot; /&gt;&lt;/li&gt;
+&lt;img src=&quot;/assets/KentorOkta/IdPSSOUrl-5c5b57ceefc845fb39eff86a39d234e93ea2865156b3e3ab4ce2c3ba9f32b231.png&quot; alt=&quot;Identity Provider Single Sign-On URL&quot; /&gt;&lt;/li&gt;
       &lt;li&gt;In the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;signingCertificate&amp;gt;&lt;/code&gt; section, download the &lt;strong&gt;okta.cert&lt;/strong&gt; X.509 certificate from the instructions page in the Okta app and put it in the &lt;strong&gt;App_Data&lt;/strong&gt; folder of your web application. Then reference it accordingly (such as with &lt;strong&gt;fileName=”~/App_Data/okta.cert&lt;/strong&gt;”) in the web.config file.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
@@ -2677,7 +2691,7 @@ chain without finding a certificate that it trusts, it will reject the
 connection. For an example of what a server might send, see &lt;a href=&quot;https://gist.github.com/jpf/9282d558bcc105ae8e1a&quot;&gt;this
 gist&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/img/2015-10-29-tls-client-authentication-for-services-tls-handshake.png&quot; alt=&quot;TLS handshake&quot; width=&quot;540px&quot; /&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/2015-10-29-tls-client-authentication-for-services-tls-handshake-087ac6491ae2194de533721278abdab3628e8eeab8342e046476917cc34d985f.png&quot; alt=&quot;TLS handshake&quot; width=&quot;540px&quot; /&gt;&lt;/p&gt;
 
 &lt;p style=&quot;text-align: center;font-size: x-small;&quot;&gt;Image reprinted with permission from
 &lt;a href=&quot;https://blog.cloudflare.com/protecting-the-origin-with-tls-authenticated-origin-pulls/&quot;&gt;CloudFlare&lt;/a&gt;&lt;/p&gt;
@@ -2724,7 +2738,7 @@ meant to be complete, so you may need to modify them to fit in your environment.
 
 &lt;h3 id=&quot;certificates-and-key-stores&quot;&gt;Certificates and Key Stores&lt;/h3&gt;
 
-&lt;p style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/img/2015-10-29-tls-client-authentication-for-services-ca-chain.png&quot; alt=&quot;CA heirarchy&quot; width=&quot;540px&quot; /&gt;&lt;/p&gt;
+&lt;p style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;/assets/2015-10-29-tls-client-authentication-for-services-ca-chain-e98aec0e5f0e95b2c26cbf79d19628f3629df2d48203d1aaaf8fa0536e2780c3.png&quot; alt=&quot;CA heirarchy&quot; width=&quot;540px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;First, let’s setup our trust store, which is just a key store that will only
 contain certificates. Let’s assume we have a layered Certificate Authority (CA)
@@ -3143,7 +3157,7 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
 
 &lt;p&gt;As problems go, growing pains are good problems to have. But they usually come at a cost: the increased traffic caused significant CPU contention, as shown in the following image.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;width:55%&quot; src=&quot;/assets/img/Pre-buffer_adjustment.png&quot; alt=&quot;Before tuning the database&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/Pre-buffer_adjustment-58e80e794c7705471c28860e29c13043e7e5ab9f77b701db169e8dce43c38bfc.png&quot; alt=&quot;Before tuning the database&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Those red and yellow spikes in late October, 2014 seized our attention and spurred an aggressive response from Okta’s site operations team. The team took immediate action to prevent this situation from getting worse and potentially causing a issue with our site.&lt;/p&gt;
 
@@ -3152,7 +3166,7 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
 &lt;p&gt;As a first step, we tuned our MySQL database to fully utilize the amount of RAM in our server instances. We had been running with a relatively small buffer pool
 compared to the amount of available RAM, which meant that we were sacrificing both performance and money.  Increasing the size of the buffer pool decreased page response times and nearly eliminated disk reads.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/EliminateDiskReads.png&quot; alt=&quot;Almost eliminated disk reads&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/EliminateDiskReads-0f613b4d1409fc89d2fed4648451ff471b21c2821b8877e6f61b9d6fbdf43094.png&quot; alt=&quot;Almost eliminated disk reads&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;doubling-hardware-resources&quot;&gt;Doubling hardware resources&lt;/h2&gt;
 
@@ -3160,7 +3174,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;p&gt;After the holiday, CPU spikes returned, now worse than ever. Page render time slowed down, queries against the database took longer, and jobs backed up.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/Thanksgiving.png&quot; alt=&quot;Thanksgiving holiday&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/Thanksgiving-e40444ba87a0d54dd1650c36ff1a5a6aaee6167151397260ff01bc531dc380f3.png&quot; alt=&quot;Thanksgiving holiday&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Flat areas in the graph showing no CPU usage indicate periods when we were running on a secondary server.&lt;/p&gt;
 
@@ -3204,7 +3218,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;p&gt;Which is why THP is so wrong for our platform. By late 2014 we were using 95% of the RAM and 58% of the 32 CPU cores in our servers . In order to store all of those tiny transaction IDs, we were rewriting memory so rapidly that THP’s efforts to move pages around couldn’t keep up. Clearly, standard 4kb blocks were much more efficient for us than the larger page size that THP was “helping” us with. So we turned THP off. The following image tells the story.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;width:40%&quot; src=&quot;/assets/img/TCMalloc.png&quot; alt=&quot;TCMalloc&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/TCMalloc-2b21a26c5e5ba8ff9afb958d4d1d38b43c2671b93bf3d31c59f796f54dfa87a0.png&quot; alt=&quot;TCMalloc&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Flat areas in the graph showing no CPU usage indicate periods when we were running on a secondary server.&lt;/p&gt;
 
@@ -3290,7 +3304,7 @@ writing clean code takes practice. At Okta every engineer is constantly honing
 their skills, we rely heavily on code reviews and pair programming to help hone
 each other’s skills.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg&quot; alt=&quot;wtfs per minute&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute-068f133fb5ae6e478037afaa831e8856a28700e08665a9beae3f5ec9d83aa67a.jpg&quot; alt=&quot;wtfs per minute&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;3-know-thy-service-with-data&quot;&gt;3. Know Thy-Service With Data&lt;/h2&gt;
 
@@ -3332,7 +3346,7 @@ further out on the development timeline. Making adjustments
 during requirements gather and design are significantly cheaper than 
 finding issues in production.&lt;sup id=&quot;fnref:agile-cost-curve&quot;&gt;&lt;a href=&quot;#fn:agile-cost-curve&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-agile-cost-curve.png&quot; alt=&quot;cost curve of development&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2015-05-08-software-engineering-design-principles-agile-cost-curve-129b2db3badfee2f2abf19948abe3b40c4f2ce03b5c8ee52e51ce85c188991c0.png&quot; alt=&quot;cost curve of development&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;One fundamental we take from both Agile and XP is to invest in pushing failure
 as early in the development timeline as possible. We mitigate failures from
@@ -3418,7 +3432,7 @@ enforce limits and design for infinity.&lt;/li&gt;
   &lt;li&gt;Slow query and frequent query monitoring to detect poor access patterns&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img style=&quot;max-width:300px&quot; src=&quot;/assets/img/2015-05-08-software-engineering-design-principles-more_is_less.jpg&quot; alt=&quot;if less is more, does that mean more is less?&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2015-05-08-software-engineering-design-principles-more_is_less-596e959adab902d2f9c1c944f622c98d78f7c7a73b66ed35859028b0c0c78d9e.jpg&quot; alt=&quot;if less is more, does that mean more is less?&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
 
@@ -3464,7 +3478,7 @@ enforce limits and design for infinity.&lt;/li&gt;
 
 &lt;p&gt;Unfortunately, no. Within 24 hours, memory usage soared, CPUs spiked, and instability returned. Note the dramatic CPU spikes in the following screenshot.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/2015-05-08-productionalizing-active-mq-cpu-graph-1.png&quot; alt=&quot;Active MQ CPU&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2015-05-08-productionalizing-active-mq-cpu-graph-1-7c11d89865504072d2ce989f2bf07873e874222e93c64c98b2e8b7b9cd1e153c.png&quot; alt=&quot;Active MQ CPU&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;To prevent these issues from impacting customers, we were forced to restart brokers, which is always an option of
 last resort. Restarting brokers is a delicate operation, which can entail a less-than-smooth failover,
@@ -3525,7 +3539,7 @@ we were fairly sure that Hector’s fix would work.&lt;/p&gt;
 &lt;p&gt;We deployed the patch and restarted brokers. It was a success! ActiveMQ no longer ran out of memory
 and the CPU spikes ceased.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;width:50%&quot; src=&quot;/assets/img/2015-05-08-productionalizing-active-mq-cpu-graph-2.png&quot; alt=&quot;Active MQ CPU&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2015-05-08-productionalizing-active-mq-cpu-graph-2-4f5f78ddd3d0b732ad7e8a482233e4dd12beff9fac70a7b4a7657e37d3af198f.png&quot; alt=&quot;Active MQ CPU&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Some minor memory leaks remained, but these were eliminated by upgrading to &lt;strong&gt;java-1.7.0&lt;/strong&gt;.&lt;/p&gt;
 
@@ -3551,7 +3565,7 @@ the last two articles I discussed the &lt;a href=&quot;https://www.okta.com/blog
 good
 tests&lt;/a&gt;
 and the way to &lt;a href=&quot;/blog/2015/04/07/android-unit-testing-part-2&quot;&gt;run Android tests on JVM making them
-fast&lt;/a&gt; and &lt;a href=&quot;/blog/2015/04/14/android-unit-testing-part-3/&quot;&gt;how to make
+fast&lt;/a&gt; and &lt;a href=&quot;/blog/2015/04/14/android-unit-testing-part-3&quot;&gt;how to make
 your code less coupled&lt;/a&gt;.
 This article will explain how to make tests isolated.&lt;/em&gt;&lt;/p&gt;
 

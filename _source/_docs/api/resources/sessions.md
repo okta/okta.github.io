@@ -18,9 +18,9 @@ A [session token](./authn.html#session-token) is a one-time bearer token that pr
 
 Okta provides a very rich [Authentication API](./authn.html) to validate a [user's primary credentials](./authn.html#primary-authentication) and secondary [MFA factor](./authn.html#verify-factor). A session token is returned after successful authentication which can be later exchanged for a session cookie using one of the following flows:
 
-- [Retrieving a session cookie by visiting the OpenID Connect Authorization Endpoint](/docs/examples/session_cookie.html#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint)
-- [Retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-a-session-redirect-link)
-- [Retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-an-application-embed-link)
+- [Retrieving a session cookie by visiting the OpenID Connect Authorization Endpoint](/use_cases/authentication/session_cookie#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint)
+- [Retrieving a session cookie by visiting a session redirect link](/use_cases/authentication/session_cookie#retrieving-a-session-cookie-by-visiting-a-session-redirect-link)
+- [Retrieving a session cookie by visiting an application embed link](/use_cases/authentication/session_cookie#retrieving-a-session-cookie-by-visiting-an-application-embed-link)
 
 > **Session Tokens** are secrets and should be protected at rest as well as during transit. A session token for a user is equivalent to having the user's actual credentials.
 
@@ -39,9 +39,9 @@ Creates a new session for a user with a valid session token. Use this API if, fo
 
 > Don't use this API unless you need a session `id`. Instead, use one of the following flows to obtain a SSO session with a `sessionToken`:
 
-- [Retrieving a session cookie by visiting the OpenID Connect Authorization Endpoint](/docs/examples/session_cookie.html#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint)
-- [Retrieving a session cookie by visiting a session redirect link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-a-session-redirect-link)
-- [Retrieving a session cookie by visiting an application embed link](/docs/examples/session_cookie.html#retrieving-a-session-cookie-by-visiting-an-application-embed-link)
+- [Retrieving a session cookie by visiting the OpenID Connect Authorization Endpoint](/use_cases/authentication/session_cookie#retrieving-a-session-cookie-via-openid-connect-authorization-endpoint)
+- [Retrieving a session cookie by visiting a session redirect link](/use_cases/authentication/session_cookie#retrieving-a-session-cookie-by-visiting-a-session-redirect-link)
+- [Retrieving a session cookie by visiting an application embed link](/use_cases/authentication/session_cookie#retrieving-a-session-cookie-by-visiting-an-application-embed-link)
 
 > This operation can be performed anonymously without an API Token.
 
@@ -671,7 +671,7 @@ Sessions have the following properties:
 
 #### Optional Session Properties
 
-The [Create Session](#create-session) operation can optionally return the following properties when requested.
+The [Create Session](#create-session-with-session-token) operation can optionally return the following properties when requested.
 
 |-----------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Property                                      | Description                                                                                                                                                                        |

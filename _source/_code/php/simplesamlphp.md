@@ -74,7 +74,7 @@ Okta to a sample PHP application using SimpleSAMLphp.
 Start by following the [instructions for installing
 SimpleSAMLphp](https://simplesamlphp.org/docs/stable/simplesamlphp-install).
 
->Note: SimpleSAMLphp is third-party software and is not supported by Okta. 
+>Note: SimpleSAMLphp is third-party software and is not supported by Okta.
 
 Depending on the system you are installing SimpleSAMLphp on, your
 installation might require you to make some custom configuration changes.
@@ -244,7 +244,7 @@ There are two ways to test a SAML application:
 You will use both methods to test your application. In each case, you will know if the
 test worked when you see a screen that looks like the one below:
 
-![Authenticated user](/assets/img/example-application-authenticated-user.png)
+{% img example-application-authenticated-user.png alt:"Authenticated user" %}
 
 
 1.  Login from the Okta SimpleSAMLphp example application (This is
@@ -263,8 +263,7 @@ test worked when you see a screen that looks like the one below:
 
     -   Click the button for the application you created earlier
         "Configuring Okta to work with SimpleSAMLphp" section
-        above:
-        ![SimpleSAMLphp Example](/assets/img/simplesamlphp-example-okta-chiclet.png)
+        above: {% img simplesamlphp-example-okta-chiclet.png alt:"SimpleSAMLphp Example" %}
 
 You will know that your testing was successful if are able to get to the "Logged in"
 page pictured above using both "SP initated" and "IdP initated" login.

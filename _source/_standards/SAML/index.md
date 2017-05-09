@@ -35,7 +35,7 @@ See [Security Assertion Markup Language (SAML) V2.0 Technical Overview](http://d
 
 SAML is mostly used as a web-based authentication mechanism inasmuch as it relies on using the browser agent to broker the authentication flow.  At a high-level, the authentication flow of SAML looks like this:
 
-![SAML Flow](/assets/img/saml_guidance_saml_flow.png "SAML Flow")
+{% img saml_guidance_saml_flow.png "SAML Flow" alt:"SAML Flow" %}
 
 We are now ready to introduce some common SAML terms.  We will go into the technical details of these later – but it is important to understand the high-level concept during the planning stage.
 
@@ -95,15 +95,15 @@ The easiest way to implement SAML is to leverage an OpenSource SAML toolkit.  We
 
 If you are building an internal app and you want to SAML-enable it in order to integrate with your corporate SAML identity provider, then you are looking at supporting only a single IDP.  In this case, your app only needs to deal with a single set of IDP metadata (cert, endpoints, etc).
 
-![Single IDP](/assets/img/saml_guidance_one_idp.png "Single IDP")
+{% img saml_guidance_one_idp.png "Single IDP" alt:"Single IDP" %}
 
 If you are an ISV building an enterprise SaaS product, or if you are building an external facing website/portal/community for your customers and partners, then you need to look at supporting multiple IDPs.  This is the typical use case for many SaaS ISVs needing to integrate with customers’ corporate identity infrastructure.  Depending on the architecture of your application, you need to think about ways to store the SAML configuration (eg. Certificates, IDP login URLs) from each identity provider, as well as how you will provide the necessary SP information for each.
 
-![Many IDPs](/assets/img/saml_guidance_many_idp.png "Many IDPs")
+{% img saml_guidance_many_idp.png "Many IDPs" alt:"Many IDPs" %}
 
 A key consideration involves the ACSurl endpoint on the SP side where SAML responses are posted. It is possible to expose a single endpoint even when dealing with multiple IDPs.  For a single-instance multi-tenant application where the tenancy is not defined in the URL (such as via a subdomain), this might be a simpler way to implement.  However, you must then rely on additional information in the SAML response to determine which IDP is trying to authenticate (for example, using the IssuerID).  If your application is architected in a multi-tenant fashion with domain information in the URL (for example, *https://domain1.myISV.com* or *https://www.myISV.com/domain1*), then having an ACSurl endpoint for each subdomain might be a good option since the URL itself identifies the domain.
 
-![SP with subdomains](/assets/img/saml_guidance_many_idp_subdomain.png "SPs with Subdomains")
+{% img saml_guidance_many_idp_subdomain.png "SPs with Subdomains" alt:"SP with subdomains" %}
 
 ### Understanding SP-initiated Login Flow
 
@@ -119,7 +119,7 @@ A RelayState is an HTTP parameter that can be included as part of the SAML reque
 
 In the case of a deeplink, the SP will set the RelayState of the SAML request with the deep-link value.  When the SAML response comes back, the SP can use the RelayState value and take the authenticated user to the right resource.  Here is an example of the flow.
 
-![SP-initiated Login with Deep Link](/assets/img/saml_guidance_deeplink.png "SP-initiated flow with Deep Link")
+{% img saml_guidance_deeplink.png "SP-initiated flow with Deep Link" alt:"SP-initiated Login with Deep Link" %}
 
 ### Exposing SAML configuration in SP
 
@@ -151,7 +151,7 @@ Use the [Okta SAML validation tool](http://saml.oktadev.com/) to speed up the pr
 
 This tool makes it easy for you to send SAML Requests to your SAML SP. It  allows you to quickly change the contents of the SAML requests and simplifies the process of debugging SAML issues by automatically decoding SAML payloads and displaying server headers for you.
 
-You can also install the [SAML Tracer extension to Firefox](saml_tracer.html) for testing, or similar tools for other browsers. 
+You can also install the [SAML Tracer extension to Firefox](saml_tracer.html) for testing, or similar tools for other browsers.
 
 ## SAML Toolkits
 
@@ -161,9 +161,9 @@ can help you build your applications and integrations:
 - [.NET Framework](https://en.wikipedia.org/wiki/.NET_Framework_version_history) 4.5 or above: [Kentor Authentication Services](https://github.com/KentorIT/authservices#kentor-authentication-services)
 - .NET Framework 4 or below: [ComponentSpace SAML 2.0](http://www.componentspace.com/SAMLv20.aspx) - Paid software, licenses start at $299
 - Java: [OpenSAML](https://shibboleth.net/products/opensaml-java.html)
-- Java/Spring: [Spring Security SAML](/docs/guides/spring_security_saml.html)
-- PHP: [SimpleSAMLphp](/docs/guides/simplesamlphp.html)
-- Python: [PySAML2](/docs/guides/pysaml2.html)
+- Java/Spring: [Spring Security SAML](/code/java/spring_security_saml.html)
+- PHP: [SimpleSAMLphp](/code/php//simplesamlphp.html)
+- Python: [PySAML2](/code/python/pysaml2.html)
 - Ruby: [Ruby-SAML](https://rubygems.org/gems/ruby-saml)
 
 > Note: Okta doesn't own or maintain these toolkits, though we do provide documentation to help you use them with Okta.

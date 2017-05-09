@@ -70,7 +70,7 @@ writing clean code takes practice. At Okta every engineer is constantly honing
 their skills, we rely heavily on code reviews and pair programming to help hone
 each other's skills. 
 
-![wtfs per minute](/assets/img/2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg)
+{% img 2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg alt:"wtfs per minute" %}
 
 
 ## 3. Know Thy-Service With Data 
@@ -109,7 +109,7 @@ further out on the development timeline. Making adjustments
 during requirements gather and design are significantly cheaper than 
 finding issues in production.[^agile-cost-curve] 
 
-![cost curve of development](/assets/img/2015-05-08-software-engineering-design-principles-agile-cost-curve.png)
+{% img 2015-05-08-software-engineering-design-principles-agile-cost-curve.png alt:"cost curve of development" %}
 
 One fundamental we take from both Agile and XP is to invest in pushing failure
 as early in the development timeline as possible. We mitigate failures from
@@ -181,7 +181,7 @@ performing code:
   enforce limits and design for infinity.
 * Slow query and frequent query monitoring to detect poor access patterns
 
-<img style="max-width:300px" src="/assets/img/2015-05-08-software-engineering-design-principles-more_is_less.jpg" alt="if less is more, does that mean more is less?">
+{% img 2015-05-08-software-engineering-design-principles-more_is_less.jpg style:"max-width:300px" alt:"if less is more, does that mean more is less?" %}
 
 ### Reference
 

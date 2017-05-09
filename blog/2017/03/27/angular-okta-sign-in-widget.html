@@ -7,37 +7,43 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
+    <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/page-blog.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Build an Angular App with Okta's Sign-In Widget in 15 Minutes | Okta Developer</title>
   <meta name="description" content="AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibi...">
   <link rel="canonical" href="http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
     <body id="blog">
@@ -101,25 +107,34 @@
 		<section id="blog-post" class="main-container">
 	<div class="wrap blog">
 		<section >
-<div class="wrap">
-	<article class="post-block">
-	  <header class="post-title-block">
-	    <h1><a href="/blog/2017/03/27/angular-okta-sign-in-widget">Build an Angular App with Okta's Sign-In Widget in 15 Minutes</a></h1>
-	    <div class="attribution">
-	      <img src="/assets/img/avatar-matt_raible.jpg"
-	           alt="avatar-matt_raible.jpg"
-	           class="author-avatar">
-	      <address>Matt Raible</address>
-	      &nbsp;
-		  <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
-		  <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
-		  <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
-		  <span class="sepr">&middot;</span>
-	      <time datetime="2017-03-27">March 27, 2017</time>
-	    </div>
-	  </header>
-	  <section class="post-content">
-	    <p>AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibility for their next version, there was a bit of a stir in its community, giving opportunities for frameworks like React and Vue.js to flourish. Fast forward a few years and both Angular 2 and Angular 4 have been released. Many developers are trying its TypeScript and finding the experience a pleasant one. <a href="https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html">According to JAXenter</a>, it’s doing a pretty good job, and holding strong as the third most popular UI framework, behind React and HTML5.</p>
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2017/03/27/angular-okta-sign-in-widget">Build an Angular App with Okta's Sign-In Widget in 15 Minutes</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="author-avatar">
+            
+            <address>Matt Raible</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
+            
+            
+            
+              <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2017-03-27">March 27, 2017</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     <p>AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibility for their next version, there was a bit of a stir in its community, giving opportunities for frameworks like React and Vue.js to flourish. Fast forward a few years and both Angular 2 and Angular 4 have been released. Many developers are trying its TypeScript and finding the experience a pleasant one. <a href="https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html">According to JAXenter</a>, it’s doing a pretty good job, and holding strong as the third most popular UI framework, behind React and HTML5.</p>
 
 <p>In this article, I’ll show you a quick way to get started with Angular, and add user authentication with <a href="http://developer.okta.com/code/javascript/okta_sign-in_widget">Okta’s Sign-In Widget</a>. If you’re just getting started with Angular, you might want to read my <a href="http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc">Angular tutorial</a>. If you’d like to get the source code used in this article, you can <a href="https://github.com/oktadeveloper/okta-angular-sign-in-widget-example">find it on GitHub</a>.</p>
 
@@ -181,7 +196,7 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>This will create a new <code class="highlighter-rouge">angular-okta-example</code> directory and install all the necessary dependencies. To verify everything works, run <code class="highlighter-rouge">ng e2e</code> in a terminal window. All tests should pass and you should see results like the following.</p>
 
-<p><img alt="Running e2e" src="/assets/img/blog/angular-sign-in-widget/e2e-success.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/e2e-success-035a935c9ccea2ebfb97f06b4a7c44846df05279e3cf246b545cf20e27c34dcb.png" alt="Running e2e" /></p>
 
 <h2 id="integrate-oktas-sign-in-widget-in-angular">Integrate Okta’s Sign-In Widget in Angular</h2>
 
@@ -252,7 +267,7 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>Login to your Okta account, or create one at <a href="http://developer.okta.com">http://developer.okta.com</a> if you don’t have one. Navigate to <strong>Admin &gt; Add Applications</strong> and click on the <strong>Create New App</strong> button. Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method. Click the <strong>Create</strong> button and give your application a name. On the next screen, add <strong>http://localhost:4200</strong> as a Redirect URI and click <strong>Finish</strong>. You should see settings like the following.</p>
 
-<p><img alt="OIDC App Settings" src="/assets/img/blog/angular-sign-in-widget/oidc-settings.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/oidc-settings-5e9f630db270b1c886a5cddd3524f6ccca8889efe98e6c04608f0373bb096b91.png" alt="OIDC App Settings" /></p>
 
 <p>Click on the <strong>People</strong> tab and the <strong>Assign to People</strong> button. Assign yourself as a user, or someone else that you know the credentials for.</p>
 
@@ -319,11 +334,25 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>Run <code class="highlighter-rouge">ng serve</code>, and open your browser to <a href="http://localhost:4200">http://localhost:4200</a>. You should see the sign-in widget.</p>
 
-<p><img alt="Sign-In Widget" src="/assets/img/blog/angular-sign-in-widget/sign-in-widget.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/sign-in-widget-285f593cea19908cff0537c49927c95741eb956697d0501e2ef594054166017e.png" alt="Sign-In Widget" /></p>
 
-<p>Enter an assigned person’s credentials to login. You should see a “Hello {email}” message with a logout button.</p>
+<p>However, if you look at your browser’s console, you’ll likely see an error:</p>
 
-<p><img alt="Login Success" src="/assets/img/blog/angular-sign-in-widget/login-success.png" style="width: 800px" /></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to 
+preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is 
+present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
+</code></pre>
+</div>
+
+<p>This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard, 
+select <strong>Security</strong> &gt; <strong>API</strong> &gt; <strong>Trusted Origins</strong>. Click the “Add Origin” button and specify <code class="highlighter-rouge">http://localhost:4200</code>
+as the Origin URL with Type <code class="highlighter-rouge">CORS</code>. For more specific instructions, see Okta’s <a href="http://developer.okta.com/docs/api/getting_started/enabling_cors.html">Enabling CORS documentation</a>.</p>
+
+<p><img src="/assets/blog/angular-sign-in-widget/cors-configuration-3ea19bdd525497544ceed789e84628e14586c0d314c8890025671155004a8264.png" alt="CORS Configuration" /></p>
+
+<p>After making this change, enter an assigned person’s credentials to login. You should see a “Hello {email}” message with a logout button.</p>
+
+<p><img src="/assets/blog/angular-sign-in-widget/login-success-08bf3dff5a3f0ed1be087d0d5e2da037d3b52c875027f84764dcea7ab42b18f6.png" alt="Login Success" /></p>
 
 <p><strong>NOTE:</strong> You may experience an issue where the sign-in process seems to hang. Clicking anywhere in the browser window seems to solve this problem. I’m not sure why.</p>
 
@@ -365,7 +394,7 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>After making these changes, the sign-in widget will look like the following screenshot.</p>
 
-<p><img alt="Custom CSS" src="/assets/img/blog/angular-sign-in-widget/custom-css.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/custom-css-f5c0f69d07cf9db0d464ba70c5b452f599e9194ab8c4b126d4ba62a26300baac.png" alt="Custom CSS" /></p>
 
 <h2 id="fix-your-tests">Fix Your Tests</h2>
 <p>If you try to run <code class="highlighter-rouge">npm test</code> or <code class="highlighter-rouge">ng test</code>, tests will fail:</p>
@@ -409,13 +438,14 @@ Chrome 56.0.2924 <span class="o">(</span>Mac OS X 10.11.6<span class="o">)</span
 
 <p>I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up <a href="https://twitter.com/mraible">on Twitter</a>, <a href="http://stackoverflow.com/questions/tagged/okta">post a question to Stack Overflow with an “okta” tag</a>, or <a href="https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new">open a new issue on GitHub</a>.</p>
 
-	  </section>
-	</article>
-</div>
+	    </section>
+	  </article>
+  </div>
 </section>
 
 	</div>
 </section>
+
 		
 	</div><footer class="footer">
       <div class="Wrap">
@@ -461,10 +491,12 @@ Chrome 56.0.2924 <span class="o">(</span>Mac OS X 10.11.6<span class="o">)</span
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -473,17 +505,22 @@ Chrome 56.0.2924 <span class="o">(</span>Mac OS X 10.11.6<span class="o">)</span
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
 </body>
 </html>

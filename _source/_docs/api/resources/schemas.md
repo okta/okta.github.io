@@ -493,7 +493,7 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-get"><span class="api-label">POST</span> /api/v1/meta/schemas/user/default</span>
 
-Removes one or more [custom user profile properties](#user-profile-schema-property) from the user schema.
+Removes one or more [custom user profile properties](#user-profile-schema-property-object) from the user schema.
 A property cannot be removed if it is being referenced as a [matchAttribute](./idps.html#subject-policy-object) in SAML2 IdPs.
 
 ##### Request Parameters
