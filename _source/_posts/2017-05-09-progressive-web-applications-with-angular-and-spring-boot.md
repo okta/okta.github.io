@@ -449,7 +449,7 @@ public Collection<Map<String, String>> goodBeers() {
 
 Next, build the app and push it to Cloud Foundry. If you run the following commands from the `server` directory, all of this should happen for you.
 
-```java
+```bash
 mvn clean package
 cf push -p target/*jar pwa-server
 ```
