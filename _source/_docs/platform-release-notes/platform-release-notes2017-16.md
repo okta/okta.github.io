@@ -8,8 +8,8 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.15
 
 ### Advance Notices
 
-The items in this section are scheduled for future releases. Although we share our expected release dates, these dates are subject to change. 
- 
+The items in this section are scheduled for future releases. Although we share our expected release dates, these dates are subject to change.
+
 #### API Rate Limit Improvements
 
 We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits will further lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately will lessen the chances of one user's impacting another. We’re also providing a transition period so you can see what these changes will look like in your Okta system log before enforcing them:
@@ -70,10 +70,10 @@ Currently, a user object returned in a collection contains some or all of the fo
 ```
 
 Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
-As outlined in [Design Principles](docs/api/getting_started/design_principles.html/#links-in-collections):
+As outlined in [Design Principles](/docs/api/getting_started/design_principles.html#links-in-collections):
 
 "Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by 'id' using the "self" link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state."
- 
+
 The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the `self` link is returned:
 
 ```
@@ -83,9 +83,9 @@ The Simple HAL Links on User Collections feature ensures that possibly invalid s
     }
 }
 ```
- 
+
 As noted above, to change user state, the `self` link should be called to retrieve a user object with up-to-date links.
- 
+
 >Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality.
 Okta won't enable the feature for these orgs.
 Instead, Okta will send a customer communication explaining the migration path to enable the feature.
@@ -101,12 +101,12 @@ This feature is Generally Available in preview orgs for at least one month befor
     These references caused errors when trying to configure the social or SAML IdP. (OKTA-116909)
  * If the SAML IdP parameter `idp` was specified in the query string for a request to the `oauth2/v1/authorize` endpoint, the request failed in some orgs. (OKTA-120122)
  * Creating or saving access policies for an authorization server failed for some client IDs. (OKTA-121230)
- 
+
 ### Does Your Org Have This Change Yet?
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
-![Release Number in Footer](/assets/img/release_notes/version_footer.png)
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 

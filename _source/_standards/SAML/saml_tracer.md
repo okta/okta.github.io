@@ -7,16 +7,16 @@ title: Testing SAML with SAML tracer
 
 Once you have completed the SAML configuration, you can test your implementation using SAML tracer.
 SAML tracer is an add-on in Firefox and very useful when troubleshooting SAML for service provider-initiated flows (SP-initiated)
-or identity provider-initiated flows (IdP-initiated). 
-When you start an IdP-initiated flow or SP-initiated flow while SAML tracer is enabled, it captures the SAML request and response. 
+or identity provider-initiated flows (IdP-initiated).
+When you start an IdP-initiated flow or SP-initiated flow while SAML tracer is enabled, it captures the SAML request and response.
 
 ## Install SAML tracer or Similar Browser Tool
 
 To install SAML tracer, visit [https://addons.mozilla.org/en-US/firefox/addon/saml-tracer/](https://addons.mozilla.org/en-US/firefox/addon/saml-tracer/) and follow the instructions.
 
-Once you install SAML tracer, open it from the browser menu bar: **Tools** > **SAML tracer**. 
+Once you install SAML tracer, open it from the browser menu bar: **Tools** > **SAML tracer**.
 
->Similar tools exist for other browsers, such as [SAML DevTools](https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio) 
+>Similar tools exist for other browsers, such as [SAML DevTools](https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio)
 and [SAML Chrome Panel](https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio) for Chrome.
 We use SAML Tracer in the following examples.
 
@@ -25,31 +25,31 @@ We use SAML Tracer in the following examples.
 To create a SAML request for an SP-initiated flow and inspect the request and response in SAML tracer:
 
 1. Open SAML tracer and then access your application, which takes you to the Okta login page if you aren't already logged in.
-2. Look at the SAML tracer window and see the SAML request sent from your application to Okta. 
+2. Look at the SAML tracer window and see the SAML request sent from your application to Okta.
 3. Okta returns a SAML Response.
 
-![SAML Request SP Flow](/assets/img/saml-request-sp-flow.png "sample sp request in tracer")
+{% img saml-request-sp-flow.png "sample sp request in tracer" alt:"SAML Request SP Flow" %}
 Figure 1: SP-Initiated Request in SAML tracer
 
-![SAML Response SP Flow](/assets/img/saml-response-sp-flow.png "sample sp response in tracer")
+{% img saml-response-sp-flow.png "sample sp response in tracer" alt:"SAML Response SP Flow" %}
 Figure 2: SP-Initiated Response in SAML tracer
 
-## IDP Initiated Flow 
+## IDP Initiated Flow
 
 To create a SAML request for an IdP-initiated flow and inspect it in SAML tracer:
 
 1. Assign the SAML app to a user.
 2. Navigate to dashboard of that user and click on the app icon.
-3. The application opens in new browser and if successful, sends a SAML response. 
+3. The application opens in new browser and if successful, sends a SAML response.
 
 You can also start an IdP flow by selecting the App Embed link in a browser (**SAML App** > **General** > **App Embed Link**).
 
-![SAML Response IdP](/assets/img/idp-flow-saml-trace.png "sample idp response in tracer")
+{% img idp-flow-saml-trace.png alt:"SAML Response IdP" %}
 Figure 3: IdP-Initiated Response in SAML tracer
 
 When you receive a SAML request and response successfully from Okta, it indicates that your configuration is successfully working with Okta.
 
-As you can see from the SimpleSAMLPhp, Spring Security SAML and PySAML examples, 
+As you can see from the SimpleSAMLPhp, Spring Security SAML and PySAML examples,
 the application can read attributes passed from Okta after a user logs in.
 
 ## Example SAML Request
@@ -73,7 +73,7 @@ the application can read attributes passed from Okta after a user logs in.
 
 ## Example SAML Response
 
-SAML responses are signed. This example contains profile attributes of the person who requested access to the app, as set in the General tab of the Okta Admin user interface.  
+SAML responses are signed. This example contains profile attributes of the person who requested access to the app, as set in the General tab of the Okta Admin user interface.
 
 ~~~xml
 <saml2p:Response xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol"
@@ -234,4 +234,4 @@ RKvwyyTfqfq9pgSmB9xNVJIeVZbbZGTlNGqJti24E0AiIPggtxg5NJ+HHnEQ5RxdSsR4fbMz9i0K
 </saml2p:Response>
 ~~~
 
-SAML responses are signed, and contain the profile attributes of the person who requested access to the app, as set in the General tab of the Okta Admin user interface.  
+SAML responses are signed, and contain the profile attributes of the person who requested access to the app, as set in the General tab of the Okta Admin user interface.

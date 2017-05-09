@@ -831,7 +831,7 @@ curl -v -X POST \
 ##### Response Example (Success - User Without Password)
 {:.api .api-response .api-response-example}
 
-In the case where the user was created without credentials the response will trigger the workflow to [set the user's password](#change-password). After the password is configured, depending on the MFA setting, the workflow continues with MFA enrollment or a successful authentication completes. 
+In the case where the user was created without credentials the response will trigger the workflow to [set the user's password](#change-password). After the password is configured, depending on the MFA setting, the workflow continues with MFA enrollment or a successful authentication completes.
 
 ~~~json
 {
@@ -1109,7 +1109,7 @@ Enrolls a user with a [factor](factors.html#supported-factors-for-providers) ass
 
 - [Enroll Okta Security Question Factor](#enroll-okta-security-question-factor)
 - [Enroll Okta SMS Factor](#enroll-okta-sms-factor)
-- [Enroll Okta Call Factor](#enroll-call-factor)
+- [Enroll Okta Call Factor](#enroll-okta-call-factor)
 - [Enroll Okta Verify TOTP Factor](#enroll-okta-verify-totp-factor)
 - [Enroll Okta Verify Push Factor](#enroll-okta-verify-push-factor)
 - [Enroll Google Authenticator Factor](#enroll-google-authenticator-factor)
@@ -4075,7 +4075,7 @@ Content-Type: application/json
 #### Forgot Password with Email Factor
 
 Starts a new password recovery transaction for the email factor:
- 
+
 * You must specify a user identifier (`username`) but no password in the request.
 * If the request is successful, Okta sends a recovery email asynchronously to the user's primary and secondary email address with a [recovery token](#recovery-token) so the user can complete the transaction.
 
@@ -4084,7 +4084,7 @@ Primary authentication of a user's recovery credential (e.g `EMAIL` or `SMS`) ha
 Okta provides security in the following ways:
 
 * Since the recovery email is distributed out-of-band and may be viewed on a different user agent or device, this operation does not return a [state token](#state-token) and does not have a `next` link.
-* Okta doesn't publish additional metadata about the user until primary authentication has successfully completed. 
+* Okta doesn't publish additional metadata about the user until primary authentication has successfully completed.
 See the Response Example in this section for details.
 
 ##### Request Example
@@ -4328,7 +4328,7 @@ Parameter   | Description                                                       
 ----------- | ---------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------- | -------- | ---------- |
 username    | User's non-qualified short-name (e.g. dade.murphy) or unique fully-qualified login (e.g dade.murphy@example.com) | Body       | String                            | TRUE     |            |
 factorType  | Recovery factor to use for primary authentication                                                                | Body       | `EMAIL` or `SMS`                  | FALSE    |            |
-relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |  2048      | 
+relayState  | Optional state value that is persisted for the lifetime of the recovery transaction                              | Body       | String                            | FALSE    |  2048      |
 
 > A valid `factoryType` is required for requests without an API token with admin privileges. (See [Unlock Account with Trusted Application](#unlock-account-with-trusted-application))
 
@@ -5269,7 +5269,7 @@ curl -v -X POST \
 Moves the current [transaction state](#transaction-state) back to the previous state.
 
 For example, when changing state from the start of primary authentication to MFA_ENROLL > ENROLL_ACTIVATE > OTP,
-the user's phone might stop working. Since the user can't see the QR code, the transaction must return to MFA_ENROLL. 
+the user's phone might stop working. Since the user can't see the QR code, the transaction must return to MFA_ENROLL.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -5397,7 +5397,7 @@ Send a skip link to skip the current [transaction state](#transaction-state) and
 
 If the response returns a skip link, then you can advance to the next state without completing the current state (such as changing the password).
 For example, after being warned that a password will soon expire, the user can skip the change password prompt
-by clicking a skip link. 
+by clicking a skip link.
 
 Another example: a user has enrolled in multiple factors. After enrolling in one the user receives a skip link
 to skip the other factors.
@@ -5540,7 +5540,7 @@ The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft
 
 ### Transaction State
 
-![State Model Diagram](/assets/img/auth-state-model.png "State Model Diagram")
+{% img auth-state-model.png "State Model Diagram" alt:"State Model Diagram" %}
 
 An authentication or recovery transaction has one of the following states:
 
@@ -5839,7 +5839,7 @@ A subset of [factor properties](factors.html#factor-model) published in an authe
 | id             | unique key for factor                                                                    | String                                                         | TRUE     | TRUE   | TRUE     |
 | factorType     | type of factor                                                                           | [Factor Type](factors.html#factor-type)                        | FALSE    | TRUE   | TRUE     |
 | provider       | factor provider                                                                          | [Provider Type](factors.html#provider-type)                    | FALSE    | TRUE   | TRUE     |
-| vendorName     | factor Vendor Name (Same as provider but for On Prem MFA it depends on Admin Settings)   | [Provider Type](factors.html#vendor-name)                      | FALSE    | TRUE   | TRUE     |
+| vendorName     | factor Vendor Name (Same as provider but for On Prem MFA it depends on Admin Settings)   | [Provider Type](/docs/api/resources/factors.html#provider-type)                      | FALSE    | TRUE   | TRUE     |
 | profile        | profile of a [supported factor](factors.html#supported-factors-for-providers)            | [Factor Profile Object](factors.html#factor-profile-object)    | TRUE     | FALSE  | TRUE     |
 | _embedded      | [embedded resources](#factor-embedded-resources) related to the factor                   | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |
 | _links         | [discoverable resources](#factor-links-object) for the factor                            | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) | TRUE     | FALSE  | TRUE     |

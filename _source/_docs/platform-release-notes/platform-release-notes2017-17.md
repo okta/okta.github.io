@@ -133,7 +133,7 @@ If your org or integrations depend on the previous behavior, you can request the
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
-![Release Number in Footer](/assets/img/release_notes/version_footer.png)
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 

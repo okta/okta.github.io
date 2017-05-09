@@ -9,7 +9,7 @@ redirect_from: "/docs/getting_started/api_test_client.html"
 
 A great way to learn an API is to issue requests and inspect the responses. You can easily access our Postman collections and Example environment to do just that.
 
-![Postman and an Okta Collection](/assets/img/okta_postman_logo.png)
+{% img okta_postman_logo.png alt:"Postman and an Okta Collection" %}
 
 To use these collections, you'll need to set up your environment, import the collections, send a test request, and verify the results.
 
@@ -18,10 +18,10 @@ To use these collections, you'll need to set up your environment, import the col
 1. [Create an API token](getting_a_token.html){:target="_blank"}.
 2. [Install the Postman App](https://www.getpostman.com/apps){:target="_blank"}.
 3. Launch Postman and click the 'import button'. Select import from link, and paste this link into the textbox: `http://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
-    ![Importing the Okta Example Environment](/assets/img/import_enviro.png)
+    {% img import_enviro.png alt:"Importing the Okta Example Environment" %}
 
 4. Once you have clicked import, make sure the `example.oktapreview.com` environment is selected.
-    ![Postman app with collections](/assets/img/postman_example_start.png)
+    {% img postman_example_start.png alt:"Postman app with collections" %}
 
 5. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
     * Rename your environment to something you'll recognize, for example **myOrg**.
@@ -30,7 +30,7 @@ To use these collections, you'll need to set up your environment, import the col
     * `email-suffix`: Enter the email suffix for your domain, for example **myOrg.com**.
 
 6. Save your changes by selecting **Update**. Now your environment looks similar to this example:
-    ![Example.okta.com environment with required values](/assets/img/postman_example_enviro.png)
+    {% img postman_example_enviro.png alt:"Example.okta.com environment with required values" %}
 
 ## Import a Collection
 
@@ -48,7 +48,7 @@ To test your configuration, send a request to list all the users in your org:
 1. Make sure you've imported the Users API collection and configured your example environment using the instructions in the previous section.
 2. Select the **Collections** tab in Postman, open the **List Users** folder, and select **GET List Users**.
 3. Click **Send**. The result pane automatically displays the results of your request:
-    ![GET List Users](/assets/img/postman_response.png)
+    {% img postman_response.png alt:"GET List Users" %}
     If you receive errors, it's likely that one of the values in the environment isn't set correctly. Check the values and try again.
 
 Once you have completed this simple request, you are ready to explore the Okta API. 
@@ -86,7 +86,7 @@ Replace URL and body variables with the IDs of the resources you wish to specify
 To find an ID:
 
 1. List a resource collection with a search or filter. For example, list the users in your org, as you did in the previous section.
-    ![List Users Response](/assets/img/postman_response2.png)
+    {% img postman_response2.png alt:"List Users Response" %}
     
 2. Copy the `id` of the resource, in this example the `id` for Tony Stark, in your next request. 
 

@@ -1,35 +1,35 @@
 <section >
-<div class="wrap">
-	<article class="post-block">
-	  <header class="post-title-block">
-	    <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-	    <div class="attribution">{%
-          for post_author in post.author %}{% assign author = site.data.authors[post_author] %}{% if forloop.first %}
-	      <img src="/assets/img/{{ author.avatar }}"
-	           alt="{{ author.avatar }}"
-	           class="author-avatar">{%
-          endif %}
-	      <address>{{ author.full_name }}</address>
-	      &nbsp;{%
-          if author.github %}
-		  <a class="social_link" href="{{ author.github }}"><i class="fa fa-github-square"></i></a>{%
-          endif %}{%
-          if author.twitter %}
-		  <a class="social_link" href="{{ author.twitter }}"><i class="fa fa-twitter-square"></i></a>{%
-          endif %}{%
-          if author.linkedin %}
-	 	  <a class="social_link" href="{{ author.linkedin }}"><i class="fa fa-linkedin-square"></i></a>{%
-          endif %}{% if author.web%}
-		  <a class="social_link" href="{{ author.web }}"><i class="fa fa-external-link-square"></i></a>{%
-          endif %}
-		  <span class="sepr">&middot;</span>{%
-          endfor %}
-	      <time datetime="{{ post.date | date: '%F'}}">{{ post.date | date: "%B %-d, %Y" }}</time>
-	    </div>
-	  </header>
-	  <section class="post-content">
-	    {{ include.post_content }}
-	  </section>
-	</article>
-</div>
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
+        <div class="attribution">
+          {% for post_author in post.author %}
+            {% assign author = site.data.authors[post_author] %}
+            {% if forloop.first %}
+              {% img '{{ author.avatar}}' alt:'{{ author.avatar}}' class:author-avatar %}
+            {% endif %}
+            <address>{{ author.full_name }}</address>&nbsp;
+            {% if author.github %}
+              <a class="social_link" href="{{ author.github }}"><i class="fa fa-github-square"></i></a>
+            {% endif %}
+            {% if author.twitter %}
+              <a class="social_link" href="{{ author.twitter }}"><i class="fa fa-twitter-square"></i></a>
+            {% endif %}
+            {% if author.linkedin %}
+              <a class="social_link" href="{{ author.linkedin }}"><i class="fa fa-linkedin-square"></i></a>
+            {% endif %}
+            {% if author.web%}
+              <a class="social_link" href="{{ author.web }}"><i class="fa fa-external-link-square"></i></a>
+            {% endif %}
+            <span class="sepr">&middot;</span>
+          {% endfor %}
+          <time datetime="{{ post.date | date: '%F'}}">{{ post.date | date: "%B %-d, %Y" }}</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     {{ include.post_content }}
+	    </section>
+	  </article>
+  </div>
 </section>

@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Policy | Okta Developer</title>
   <meta name="description" content="Policy API">
   <link rel="canonical" href="http://developer.okta.com/docs/api/resources/policy.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -233,7 +238,7 @@
 
 <h4 id="request-parameters">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
@@ -247,7 +252,7 @@
 
 <h5 class="api api-response api-response-example" id="response-types">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <a href="#PolicyObject">Policy Object</a></p>
 
 <h3 class="api api-operation" id="get-a-policy-with-rules">Get a Policy with Rules</h3>
@@ -257,7 +262,7 @@
 <h4 id="request-parameters-1">Request Parameters</h4>
 
 <ul>
-  <li>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</li>
+  <li>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</li>
   <li>The <code class="highlighter-rouge">expand=rules</code> query parameter returns up to twenty rules for the specified policy. If the policy has more than 20 rules, this request returns an error.</li>
 </ul>
 
@@ -273,12 +278,10 @@
 
 <h5 class="api api-response api-response-example" id="response-types-1">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <a href="#PolicyObject">Policy Object</a></p>
 
-<p>Included as embedded objects, one or more</p>
-
-<p><a href="#PolicyRule">Policy Rules</a></p>
+<p>Included as embedded objects, one or more <a href="#rules">Policy Rules</a>.</p>
 
 <h3 class="api api-operation" id="get-all-policies-by-type">Get All Policies by Type</h3>
 
@@ -286,7 +289,7 @@
 
 <h4 id="request-parameters-2">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
 
@@ -300,9 +303,9 @@
 
 <h5 class="api api-response api-response-example" id="response-types-2">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
-HTTP 204: 
+HTTP 204:
 <a href="#PolicyObject">Policy Object</a></p>
 
 <h3 class="api api-operation" id="delete-policy">Delete Policy</h3>
@@ -311,7 +314,7 @@ HTTP 204:
 
 <h4 id="request-parameters-3">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
 
@@ -325,7 +328,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-3">Response Types</h5>
 
-<p>HTTP 204: 
+<p>HTTP 204:
 <em>No Content</em></p>
 
 <h3 class="api api-operation" id="update-a-policy">Update a Policy</h3>
@@ -334,7 +337,7 @@ HTTP 204:
 
 <h4 id="request-parameters-4">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
 
@@ -364,7 +367,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-4">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <a href="#PolicyObject">Policy Object</a></p>
 
 <h3 class="api api-operation" id="create-a-policy">Create a Policy</h3>
@@ -373,7 +376,7 @@ HTTP 204:
 
 <h4 id="request-parameters-5">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
 
@@ -401,7 +404,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-5">Response Types</h5>
 
-<p>HTTP 204: 
+<p>HTTP 204:
 <a href="#PolicyObject">Policy Object</a></p>
 
 <h3 class="api api-operation" id="activate-a-policy">Activate a Policy</h3>
@@ -410,7 +413,7 @@ HTTP 204:
 
 <h4 id="request-parameters-6">Request Parameters</h4>
 
-<p>The policy id described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy id described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
@@ -424,7 +427,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-6">Response Types</h5>
 
-<p>HTTP 204: 
+<p>HTTP 204:
 <em>No Content is returned when the activation is successful.</em></p>
 
 <h3 class="api api-operation" id="deactivate-a-policy">Deactivate a Policy</h3>
@@ -433,7 +436,7 @@ HTTP 204:
 
 <h4 id="request-parameters-7">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
 
@@ -447,7 +450,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-7">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <em>No Content is returned when the deactivation is successful.</em></p>
 
 <h2 id="rules-operations">Rules Operations</h2>
@@ -458,7 +461,7 @@ HTTP 204:
 
 <h4 id="request-parameters-8">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
 
@@ -472,7 +475,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-8">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <a href="#RulesObject">Rules Object</a></p>
 
 <h3 class="api api-operation" id="create-a-rule">Create a rule</h3>
@@ -481,7 +484,7 @@ HTTP 204:
 
 <h4 id="request-parameters-9">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
 
@@ -515,7 +518,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-9">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <a href="#RulesObject">Rules Object</a></p>
 
 <h3 class="api api-operation" id="delete-a-rule">Delete a rule</h3>
@@ -524,7 +527,7 @@ HTTP 204:
 
 <h4 id="request-parameters-10">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
 
@@ -538,7 +541,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-10">Response Types</h5>
 
-<p>HTTP 204: 
+<p>HTTP 204:
 <em>No Content</em></p>
 
 <h3 class="api api-operation" id="get-a-rule">Get a rule</h3>
@@ -547,7 +550,7 @@ HTTP 204:
 
 <h4 id="request-parameters-11">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
 
@@ -561,7 +564,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-11">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <a href="#RulesObject">Rules Object</a></p>
 
 <h3 class="api api-operation" id="update-a-rule">Update a rule</h3>
@@ -570,7 +573,7 @@ HTTP 204:
 
 <h4 id="request-parameters-12">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
 
@@ -605,7 +608,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-12">Response Types</h5>
 
-<p>HTTP 200: 
+<p>HTTP 200:
 <a href="#RulesObject">Rules Object</a></p>
 
 <h3 class="api api-operation" id="activate-a-rule">Activate A Rule</h3>
@@ -614,7 +617,7 @@ HTTP 204:
 
 <h4 id="request-parameters-13">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
@@ -628,7 +631,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-13">Response Types</h5>
 
-<p>HTTP 204: 
+<p>HTTP 204:
 <em>No content</em></p>
 
 <h3 class="api api-operation" id="deactivate-a-rule">Deactivate A Rule</h3>
@@ -637,7 +640,7 @@ HTTP 204:
 
 <h4 id="request-parameters-14">Request Parameters</h4>
 
-<p>The policy ID described in the <a href="#policy-object">Policy Object</a> is required.</p>
+<p>The policy ID described in the <a href="#PolicyObject">Policy Object</a> is required.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
 
@@ -651,7 +654,7 @@ HTTP 204:
 
 <h5 class="api api-response api-response-example" id="response-types-14">Response Types</h5>
 
-<p>HTTP 204: 
+<p>HTTP 204:
 <em>No content</em></p>
 
 <h2 id="policies">Policies</h2>
@@ -681,7 +684,7 @@ During policy evaluation each policy of the appropriate type is considered in tu
 <ul>
   <li>A default policy is required and cannot be deleted.</li>
   <li>The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy.</li>
-  <li>The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see <a href="#rules-model-and-defaults">Rules Model and Defaults</a>.</li>
+  <li>The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see <a href="#RulesObject">Rules Model and Defaults</a>.</li>
   <li>The <code class="highlighter-rouge">system</code> attribute determines whether a policy is created by a system or by a user.</li>
 </ul>
 
@@ -2117,7 +2120,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
     <tr>
       <td>recoveryToken</td>
       <td>Recovery token settings</td>
-      <td><a href="EmailFactorPropertiesREcoveryTokenObject ">Email Factor Properties Recovery Token Object</a></td>
+      <td><a href="#EmailFactorPropertiesREcoveryTokenObject">Email Factor Properties Recovery Token Object</a></td>
       <td>No</td>
     </tr>
   </tbody>
@@ -2404,12 +2407,14 @@ Note that Okta sign on policy is not the same thing as application sign on polic
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -2418,17 +2423,22 @@ Note that Okta sign on policy is not the same thing as application sign on polic
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

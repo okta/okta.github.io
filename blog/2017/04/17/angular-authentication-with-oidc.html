@@ -7,37 +7,43 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
+    <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/page-blog.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Angular Authentication with OpenID Connect and Okta in 20 Minutes | Okta Developer</title>
   <meta name="description" content="Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular’s focus...">
   <link rel="canonical" href="http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
     <body id="blog">
@@ -101,25 +107,34 @@
 		<section id="blog-post" class="main-container">
 	<div class="wrap blog">
 		<section >
-<div class="wrap">
-	<article class="post-block">
-	  <header class="post-title-block">
-	    <h1><a href="/blog/2017/04/17/angular-authentication-with-oidc">Angular Authentication with OpenID Connect and Okta in 20 Minutes</a></h1>
-	    <div class="attribution">
-	      <img src="/assets/img/avatar-matt_raible.jpg"
-	           alt="avatar-matt_raible.jpg"
-	           class="author-avatar">
-	      <address>Matt Raible</address>
-	      &nbsp;
-		  <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
-		  <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
-		  <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
-		  <span class="sepr">&middot;</span>
-	      <time datetime="2017-04-17">April 17, 2017</time>
-	    </div>
-	  </header>
-	  <section class="post-content">
-	    <p>Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular’s focus on building reusable components, which help you decouple the various concerns in your application. Take authentication, for example: it can be painful to build, but once you wrap it in a component, the authentication logic can be reused throughout your application.</p>
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2017/04/17/angular-authentication-with-oidc">Angular Authentication with OpenID Connect and Okta in 20 Minutes</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="author-avatar">
+            
+            <address>Matt Raible</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
+            
+            
+            
+              <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2017-04-17">April 17, 2017</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     <p>Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular’s focus on building reusable components, which help you decouple the various concerns in your application. Take authentication, for example: it can be painful to build, but once you wrap it in a component, the authentication logic can be reused throughout your application.</p>
 
 <p>The Angular CLI makes it easy to scaffold new components, and even entire project. If you haven’t used the Angular CLI to quickly generate Angular code, you’re in for a treat!</p>
 
@@ -215,7 +230,7 @@ os: darwin x64
 
 <p>You should see a screen like the one below at <a href="http://localhost:4200">http://localhost:4200</a>.</p>
 
-<p><img alt="Default Homepage" src="/assets/img/blog/angular-oidc/default-homepage.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/default-homepage-21ec1ed2afebe3a7e384626a8019479e61b079a939f1c3ed9317e3d7be3331c0.png" alt="Default Homepage" /></p>
 
 <p>You can make sure your new project’s tests pass, run <code class="highlighter-rouge">ng test</code>:</p>
 
@@ -285,7 +300,7 @@ installing component
 
 <p>If you still have <code class="highlighter-rouge">ng serve</code> running, your browser should refresh automatically. If not, navigate to <a href="http://localhost:4200">http://localhost:4200</a>, and you should see the search form.</p>
 
-<p><img alt="Search component" src="/assets/img/blog/angular-oidc/search-without-css.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/search-without-css-664524fe9f5061f8c27851eace27912fa88caa8f999f06b8840ac1b2e21965a2.png" alt="Search component" /></p>
 
 <p>If you want to add CSS for this components, open <code class="highlighter-rouge">src/app/search/search.component.css</code> and add some CSS. For example:</p>
 
@@ -492,7 +507,7 @@ and add the service to the list of providers.</p>
 
 <p>Now the search results look better.</p>
 
-<p><img alt="Search Results" src="/assets/img/blog/angular-oidc/search-results.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/search-results-5564a373ca4b9e85d624289b73d10a486e9ac214ce23d09929fb0dfa42365856.png" alt="Search Results" /></p>
 
 <p>But wait, you still don’t have search functionality! To add a search feature, add a <code class="highlighter-rouge">search()</code> method to <code class="highlighter-rouge">SearchService</code>.</p>
 
@@ -706,7 +721,7 @@ installing component
 
 <p>At this point, you should be able to search for a person and update their information.</p>
 
-<p><img alt="Edit form" src="/assets/img/blog/angular-oidc/edit-form.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/edit-form-9e8118d51384c2d0f5e20f464da2bad40278f750311e2f002de265cf403edcb9.png" alt="Edit form" /></p>
 
 <p>The <code class="highlighter-rouge">&lt;form&gt;</code> in <code class="highlighter-rouge">src/app/edit/edit.component.html</code> calls a <code class="highlighter-rouge">save()</code> function to update a person’s data. You already implemented this above.
 The function calls a <code class="highlighter-rouge">gotoList()</code> function that appends the person’s name to the URL when sending the user back to the search screen.</p>
@@ -777,7 +792,7 @@ The function calls a <code class="highlighter-rouge">gotoList()</code> function 
 
 <p>After making these changes, any field with a <code class="highlighter-rouge">required</code> attribute will be required.</p>
 
-<p><img alt="Edit form with validation" src="/assets/img/blog/angular-oidc/edit-form-validation.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/edit-form-validation-8fa28d60c24ace53ee83db37b94d719a9d8c6772d99a07131d43b6bc063b5774.png" alt="Edit form with validation" /></p>
 
 <p>In this screenshot, you might notice the address fields are blank. This is explained by the error in your console.</p>
 
@@ -802,7 +817,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>Now values should display in all fields and <code class="highlighter-rouge">name</code> should be required.</p>
 
-<p><img alt="Edit form with names and validation" src="/assets/img/blog/angular-oidc/edit-form-names.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/edit-form-names-bf02d6ef39bff4a672ff4323df488fa0be1d10e889a1d5dc0e8cba4b5ec74b05.png" alt="Edit form with names and validation" /></p>
 
 <p>With Angular 2, this is all you’ll need to do. However, with Angular 4+, you need to a little more work to stop the form from submitting.</p>
 
@@ -837,7 +852,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>Login to your Okta account, or <a href="https://www.okta.com/developer/signup/">create one</a> if you don’t have one. Navigate to <strong>Admin &gt; Add Applications</strong> and click on the <strong>Create New App</strong> button. Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method. Click the <strong>Create</strong> button and give your application a name. On the next screen, add <code class="highlighter-rouge">http://localhost:4200</code> as a Redirect URI and click *Finish**. You should see settings like the following.</p>
 
-<p><img alt="OIDC App Settings" src="/assets/img/blog/angular-oidc/oidc-settings.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/oidc-settings-ec21ae1ecd7a70f68b887fa6ecf3daeb4f8f82e2f80328a2009272ff8b2c1c02.png" alt="OIDC App Settings" /></p>
 
 <p>Click on the <strong>People</strong> tab and the <strong>Assign to People</strong> button. Assign yourself as a user, or someone else that you know the credentials for.</p>
 
@@ -962,15 +977,15 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>After making these changes, you should be able to run <code class="highlighter-rouge">ng serve</code> and see a login button.</p>
 
-<p><img alt="Login button" src="/assets/img/blog/angular-oidc/okta-login-button.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/okta-login-button-6945f18dd8e5eeb22be1d87785578f827769fc3ad2881b94a282a98c87db1363.png" alt="Login button" /></p>
 
 <p>Click the <strong>Login</strong> button and sign-in with one of the people that’s configured in your Okta application.</p>
 
-<p><img alt="Okta Login form" src="/assets/img/blog/angular-oidc/okta-login-form.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/okta-login-form-12ee55c95cbbca0f863e611f9d876968e5d5298101ad7b453ef171b8725573fd.png" alt="Okta Login form" /></p>
 
 <p>After logging in, you’ll be able to click <em>Search</em> and view people’s information.</p>
 
-<p><img alt="View after login" src="/assets/img/blog/angular-oidc/okta-post-login.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/okta-post-login-638b4111e0d2fb1f04f9db2da3aa5857de970bf0b33c5b54e7854f5a0856c53f.png" alt="View after login" /></p>
 
 <p>If it works - great! If you want to build your own login form in your app, continue reading to learn how to use the <a href="https://github.com/okta/okta-auth-js">Okta Auth SDK</a> with <code class="highlighter-rouge">OAuthService</code>.</p>
 
@@ -1046,7 +1061,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>After making these changes, the <code class="highlighter-rouge">HomeComponent</code> should render as follows.</p>
 
-<p><img alt="Custom sign-in form" src="/assets/img/blog/angular-oidc/sign-in-form.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/sign-in-form-e80bc5e512db14150307ec1395c35b8032288458363afb1acda6bcde3f08ccde.png" alt="Custom sign-in form" /></p>
 
 <p>Import Angular’s <code class="highlighter-rouge">Router</code>, add it as a dependency in the constructor, and add local variables for the username and password fields. Then implement a <code class="highlighter-rouge">loginWithPassword()</code> method in <code class="highlighter-rouge">HomeComponent</code>. This method uses the <code class="highlighter-rouge">OktaAuth</code> library to get a session token and exchange it for ID and access tokens.</p>
 
@@ -1096,7 +1111,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>You should be able to sign in using the form, using one of your app’s registered users. After logging in, you’ll be able to click the <strong>Search</strong> link and view people’s information.</p>
 
-<p><img alt="View after sign-in" src="/assets/img/blog/angular-oidc/sign-in-form-success.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-oidc/sign-in-form-success-4aab12fc46974aa46a57bfb1eb17da947d7c1b78bda68e18d04c0a5d8e3476cc.png" alt="View after sign-in" /></p>
 
 <h2 id="angular--okta">Angular + Okta</h2>
 
@@ -1109,13 +1124,14 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 </div>
 
 
-	  </section>
-	</article>
-</div>
+	    </section>
+	  </article>
+  </div>
 </section>
 
 	</div>
 </section>
+
 		
 	</div><footer class="footer">
       <div class="Wrap">
@@ -1161,10 +1177,12 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -1173,17 +1191,22 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
 </body>
 </html>

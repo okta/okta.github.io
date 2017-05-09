@@ -7,37 +7,43 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
+    <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/page-blog.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Get Started with Spring Boot, OAuth 2.0, and Okta | Okta Developer</title>
   <meta name="description" content="If you’re building a Spring Boot application, you’ll eventually need to add user authentication. You can do this with OAuth 2.0 (henceforth: OAuth). OAuth is...">
   <link rel="canonical" href="http://developer.okta.com/blog/2017/03/21/spring-boot-oauth">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
     <body id="blog">
@@ -101,25 +107,34 @@
 		<section id="blog-post" class="main-container">
 	<div class="wrap blog">
 		<section >
-<div class="wrap">
-	<article class="post-block">
-	  <header class="post-title-block">
-	    <h1><a href="/blog/2017/03/21/spring-boot-oauth">Get Started with Spring Boot, OAuth 2.0, and Okta</a></h1>
-	    <div class="attribution">
-	      <img src="/assets/img/avatar-matt_raible.jpg"
-	           alt="avatar-matt_raible.jpg"
-	           class="author-avatar">
-	      <address>Matt Raible</address>
-	      &nbsp;
-		  <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
-		  <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
-		  <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
-		  <span class="sepr">&middot;</span>
-	      <time datetime="2017-03-21">March 21, 2017</time>
-	    </div>
-	  </header>
-	  <section class="post-content">
-	    <p>If you’re building a Spring Boot application, you’ll eventually need to add user authentication. You can do this with OAuth 2.0 (henceforth: OAuth). OAuth is a standard that applications can use to provide client applications with “secure delegated access”. It works over HTTP and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.</p>
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2017/03/21/spring-boot-oauth">Get Started with Spring Boot, OAuth 2.0, and Okta</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="author-avatar">
+            
+            <address>Matt Raible</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
+            
+            
+            
+              <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2017-03-21">March 21, 2017</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     <p>If you’re building a Spring Boot application, you’ll eventually need to add user authentication. You can do this with OAuth 2.0 (henceforth: OAuth). OAuth is a standard that applications can use to provide client applications with “secure delegated access”. It works over HTTP and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.</p>
 
 <p>Very simply, OAuth is a protocol that supports authorization workflows. It gives you a way to ensure that a specific user has specific permission.</p>
 
@@ -178,13 +193,13 @@ brew install springboot
 
 <p>Navigate to <a href="http://localhost:8080">http://localhost:8080</a> and you’ll be prompted to login with your browser’s basic authentication dialog. Enter <code class="highlighter-rouge">user</code> for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you’ll see <code class="highlighter-rouge">Hello World</code> in your browser.</p>
 
-<p><img alt="Hello World" src="/assets/img/blog/spring-boot-oauth/0-hello-world.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/0-hello-world-c9f0b9b0afcaed45b245902ea4e5ce68f0c8f1caf85b8c7d69d9d7e7078363dc.png" alt="Hello World" /></p>
 
 <h2 id="create-an-authorization-server-in-okta">Create an Authorization Server in Okta</h2>
 
 <p>To start authenticating against Okta’a API, you have to first create a developer account on <a href="http://developer.okta.com">http://developer.okta.com</a>. After activating your account, sign in and navigate to <strong>Security &gt; API</strong> and click on the <strong>Add Authorization Server</strong> button.</p>
 
-<p><img alt="Add Authorization Server" src="/assets/img/blog/spring-boot-oauth/1-add-auth-server.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/1-add-auth-server-a7f86ce0c69a220e33d69e3e83e489f0152c7f29deaa28af6050f90e23c678b8.png" alt="Add Authorization Server" /></p>
 
 <p>Enter the name and Resource URI of your choosing. The names aren’t important at this time. I used the following values:</p>
 
@@ -193,7 +208,7 @@ brew install springboot
   <li><strong>Resource URI:</strong> http://authenticat.is.easy/withokta</li>
 </ul>
 
-<p><img alt="Authorization Server Settings" src="/assets/img/blog/spring-boot-oauth/2-auth-server-settings.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/2-auth-server-settings-3793ada4e1acd8314634d68433d3a9cfa7a5a9e90e8ebaeae4639d22039ab934.png" alt="Authorization Server Settings" /></p>
 
 <p>The Metadata URI you see in this screenshot will come in handy later when you need to specify <code class="highlighter-rouge">accessTokenUri</code> and <code class="highlighter-rouge">userAuthorizationUri</code> values.</p>
 
@@ -201,15 +216,15 @@ brew install springboot
 
 <p>To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to <strong>Applications &gt; Add Application</strong> and click on the <strong>Create New App</strong> button. The application name isn’t important, you can use whatever you like.</p>
 
-<p><img alt="OIDC App Name" src="/assets/img/blog/spring-boot-oauth/4-oidc-name.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/4-oidc-name-4f222609905faa168bb21796260232ac117dd5bf97ac1da441d5b0d02dced208.png" alt="OIDC App Name" /></p>
 
 <p>Click <strong>Next</strong> to configure OIDC. Add <code class="highlighter-rouge">http://localhost:8080</code> as a Redirect URI and click <strong>Finish</strong>.</p>
 
-<p><img alt="OIDC Redirects" src="/assets/img/blog/spring-boot-oauth/5-redirect-uris.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/5-redirect-uris-ca3574c6ee722c7eb407af08a6da632a9e3c74cdab6a6198144a51047decec16.png" alt="OIDC Redirects" /></p>
 
 <p>The next screen should look similar to the following screenshot.</p>
 
-<p><img alt="OIDC Settings" src="/assets/img/blog/spring-boot-oauth/6-oidc-settings.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/6-oidc-settings-488caba7757e6fec8ac09f80852d308ecdbc9821973625b897bd167427fface1.png" alt="OIDC Settings" /></p>
 
 <p>Your <code class="highlighter-rouge">clientId</code> and <code class="highlighter-rouge">clientSecret</code> values for this app will be just below the fold.</p>
 
@@ -252,15 +267,15 @@ brew install springboot
 
 <p>Start your app with <code class="highlighter-rouge">spring run helloOAuth.groovy</code> and navigate to <a href="http://localhost:8080">http://localhost:8080</a>. You’ll be redirected to Okta, but likely see the following error.</p>
 
-<p><img alt="Bad Request, Invalid Redirect" src="/assets/img/blog/spring-boot-oauth/7-bad-request-invalid-redirect.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/7-bad-request-invalid-redirect-bc2e2d9931345a11e86633cfec15a31da11c1879b06c1ee09942ee0d84e4a87c.png" alt="Bad Request, Invalid Redirect" /></p>
 
 <p>This happens because Spring Security sends a <code class="highlighter-rouge">redirect_uri</code> value of <code class="highlighter-rouge">http://localhost:8080/login</code>. Navigate to your Okta developer instance and change your OIDC app to have this as a Redirect URI.</p>
 
-<p><img alt="Add Redirect URI" src="/assets/img/blog/spring-boot-oauth/8-add-redirect-uri.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/8-add-redirect-uri-b58a34bd377fbfc8e1a03ff472949f0b270a4df4ab248829ebce820694c7950f.png" alt="Add Redirect URI" /></p>
 
 <p>If you hit <a href="http://localhost:8080">http://localhost:8080</a> again, this time you’ll get an error that doesn’t explain as much.</p>
 
-<p><img alt="No Scopes" src="/assets/img/blog/spring-boot-oauth/9-no-scopes.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/9-no-scopes-316896c625170cad5f43ba46a050c941285251cfae2534c192cb113313dc8e3c.png" alt="No Scopes" /></p>
 
 <p>The whitelabel error page doesn’t tell you anything, but your browser’s address window does: <em>no scopes were requested</em>. Modify <code class="highlighter-rouge">application.yml</code> to have a <code class="highlighter-rouge">scope</code> property at the same level as <code class="highlighter-rouge">clientAuthenticationScheme</code>. These are some standard OIDC scopes.</p>
 
@@ -271,29 +286,29 @@ brew install springboot
 
 <p>Try <a href="http://localhost:8080">http://localhost:8080</a> again and you’ll get an error that <em>User is not assigned to the client app</em>. Again, you’ll have to look in the address bar to see it.</p>
 
-<p><img alt="User Not Assigned" src="/assets/img/blog/spring-boot-oauth/10-user-not-assigned.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/10-user-not-assigned-921bede52e10c0cde398bccc561b5113b2084f59d90717093a763c509c5aaa82.png" alt="User Not Assigned" /></p>
 
 <p>Open your OIDC app in Okta and <strong>Assign People</strong> to it. Adding your own account is the easiest way to do this.</p>
 
 <p>The next error you’ll see when trying to authenticate is <em>Policy evaluation failed</em>.</p>
 
-<p><img alt="Policy Evaluation Failure" src="/assets/img/blog/spring-boot-oauth/11-policy-evaluation-failure.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/11-policy-evaluation-failure-06a812246eaae06b2b1d2cf85d7adfd258c52b3fd0ab4e79eb01a67672ac88c6.png" alt="Policy Evaluation Failure" /></p>
 
 <p>In Okta’s UI, navigate to <strong>Security &gt; API</strong> and click on your Authorization Server’s name and <strong>Access Policies</strong>. Click <strong>Add Policy</strong> to continue.</p>
 
-<p><img alt="Access Policies" src="/assets/img/blog/spring-boot-oauth/12-access-policies.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/12-access-policies-925ff47cd0b74182a070847103c79f692eb882909ad90a13d8619801898ebf4a.png" alt="Access Policies" /></p>
 
 <p>Enter a name and description and set it to apply to all clients.</p>
 
-<p><img alt="Add Policy" src="/assets/img/blog/spring-boot-oauth/13-add-policy.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/13-add-policy-c1ab782f1d1f629468dbf7e30af887fbc85300ea71724478e658796cfbfd71e7.png" alt="Add Policy" /></p>
 
 <p>Click <strong>Create Policy</strong> to continue. Once that completes, click the <strong>Add Rule</strong> button.</p>
 
-<p><img alt="Add Rule" src="/assets/img/blog/spring-boot-oauth/14-add-rule.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/14-add-rule-454355d16e428ac00c81954f67a7f0a0dc74b9c9ea42c4b687f62c8ea358f58e.png" alt="Add Rule" /></p>
 
 <p>Give the rule a name, accept the default values, and click the <strong>Create Rule</strong> button.</p>
 
-<p><img alt="Default Grant Rules" src="/assets/img/blog/spring-boot-oauth/15-default-grant-rules.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/15-default-grant-rules-f1fed59c1b99d77b4f7f0781b87a2a3933ee86b7352b9448e23ef438dda7ebcd.png" alt="Default Grant Rules" /></p>
 
 <p>Try <a href="http://localhost:8080">http://localhost:8080</a> again and this time it should work. If it does - congrats!</p>
 
@@ -308,7 +323,7 @@ brew install springboot
 
 <p>This should result in your app showing a result like the following.</p>
 
-<p><img alt="Success" src="/assets/img/blog/spring-boot-oauth/16-success.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/16-success-08647e6415a7576d72869bdf3d091d363a8cff9fc11adbfcd09015a953dd9b35.png" alt="Success" /></p>
 
 <h2 id="get-the-source-code">Get the Source Code</h2>
 
@@ -321,13 +336,14 @@ brew install springboot
 <p>In a future tutorial, I’ll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that’s secured by Spring Security and does JWT validation.</p>
 
 
-	  </section>
-	</article>
-</div>
+	    </section>
+	  </article>
+  </div>
 </section>
 
 	</div>
 </section>
+
 		
 	</div><footer class="footer">
       <div class="Wrap">
@@ -373,10 +389,12 @@ brew install springboot
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -385,17 +403,22 @@ brew install springboot
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
 </body>
 </html>

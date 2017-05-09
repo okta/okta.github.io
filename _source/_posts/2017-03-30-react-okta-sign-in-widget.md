@@ -19,7 +19,7 @@ npm start
 ```
 When you open `http://localhost:3000`, you should see something like this:
 
- ![Running Seed](/assets/img/blog/react-sign-in-widget/React-Simple-Seed-Screener.png)
+ {% img blog/react-sign-in-widget/React-Simple-Seed-Screener.png alt:"Running Seed" %}
 
 When you click on the navigation links, you should see page placeholders for those links.
 ## Add the Okta Sign-In Widget
@@ -30,7 +30,7 @@ npm install @okta/okta-signin-widget@1.9.0 --save
 ```
 This will add the Okta Sign-In Widget code to your `node_modules` folder.
 
-![Okta in node_modules](/assets/img/blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener.png)
+{% img blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener.png alt:"Okta in node_modules" %}
 
 Then add the styles for the widget in your `index.html` file from the Okta CDN:
 ```html
@@ -77,7 +77,7 @@ In order to *use* Okta as your OpenID Connect provider for authentication, youâ€
 
 So log in to your Okta account, [or create one](http://developer.okta.com] if you havenâ€™t yet. Navigate to Admin > Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add `http://localhost:3000` as a Redirect URI and click Finish. You should see settings like the following.
 
-<img alt="OIDC Application Settings" src="/assets/img/blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener.png" style="width: 800px">
+{% img blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener.png alt:"OIDC Application Settings" style:"width: 800px" %}
 
 Make note of the `Client ID` (yours shouldn't be blurred out) and make note of your Dev ID (it's the number part of your subdomain of the URL) So if you are at https://dev-1234-admin.oktapreview.com/... your Dev ID is 1234. 
 
@@ -251,7 +251,7 @@ export default class LoginPage extends React.Component{
 ## Check It Out
 When you run the app now (with `npm start`), you should see something like this:
 
-![Finished Sample](/assets/img/blog/react-sign-in-widget/Finished-Sample-Screener.gif)
+{% img blog/react-sign-in-widget/Finished-Sample-Screener.gif alt:"Finished Sample" %}
 
 If it works - congrats! If it doesn't, please post a question to Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta), or hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt).
 ## Known Issues

@@ -7,45 +7,45 @@ permalink: /standards/SCIM/
 redirect_from: "/docs/guides/scim_guidance.html"
 ---
 # SCIM: Provisioning with Okta's Lifecycle Management
-Developers at a software vendor (ISV), Okta customers, and system-integrators (SI) want to facilitate fast, 
-enterprise-wide deployment of their app by integrating with Okta for user provisioning primarily via the SCIM standard. 
+Developers at a software vendor (ISV), Okta customers, and system-integrators (SI) want to facilitate fast,
+enterprise-wide deployment of their app by integrating with Okta for user provisioning primarily via the SCIM standard.
 This article describes:
- 
-* The provisioning actions and use cases that your integration should consider supporting. 
+
+* The provisioning actions and use cases that your integration should consider supporting.
 * The technical options for how to build the integration (focusing on SCIM).
-* The process for building, submitting for Okta Review, and publishing in the OAN (if you want the app available for all Okta customers). 
+* The process for building, submitting for Okta Review, and publishing in the OAN (if you want the app available for all Okta customers).
 
 ## Understanding Provisioning Use Cases
 
 ### The Value of Provisioning
 
-With the proliferation of cloud apps, today’s IT organizations are faced with the prospect of managing user accounts 
-in an ever-expanding number of admin consoles for each app. This is not a problem if an enterprise has one or two cloud apps, 
-but as the number grows, the situation quickly becomes unmanageable. Cloud app vendors hoping to sell into enterprises 
+With the proliferation of cloud apps, today’s IT organizations are faced with the prospect of managing user accounts
+in an ever-expanding number of admin consoles for each app. This is not a problem if an enterprise has one or two cloud apps,
+but as the number grows, the situation quickly becomes unmanageable. Cloud app vendors hoping to sell into enterprises
 need to have an answer to this concern.
 
-Thousands of Okta customers have chosen our [Lifecycle Management](https://www.okta.com/products/lifecycle-management/) product as the platform solution 
-to address this challenge of managing the lifecycle of user accounts in their cloud apps, 
-and a key feature of this product is integrations for automated provisioning to those apps. 
-Lifecycle Management (Provisioning) automates many of the traditionally manual tasks required to on-board and off-board employees. 
-New employees are automatically provisioned with user accounts in their apps, profile updates like department changes populate automatically, 
-and inactive employees are automatically deactivated from their apps. By making these actions less time-consuming and error-prone, 
+Thousands of Okta customers have chosen our [Lifecycle Management](https://www.okta.com/products/lifecycle-management/) product as the platform solution
+to address this challenge of managing the lifecycle of user accounts in their cloud apps,
+and a key feature of this product is integrations for automated provisioning to those apps.
+Lifecycle Management (Provisioning) automates many of the traditionally manual tasks required to on-board and off-board employees.
+New employees are automatically provisioned with user accounts in their apps, profile updates like department changes populate automatically,
+and inactive employees are automatically deactivated from their apps. By making these actions less time-consuming and error-prone,
 companies can cut costs, allow new employees to be immediately productive, and reduce the threat of data leakage.
 
 ### Provisioning Actions
 
-Provisioning consists of a set of actions between Okta and the cloud app. 
-These actions are building blocks that combine to solve end-to-end use cases. 
-As the developer, you’ll need to define the use cases that your target customer wants 
-and the corresponding actions to build into your integration. 
+Provisioning consists of a set of actions between Okta and the cloud app.
+These actions are building blocks that combine to solve end-to-end use cases.
+As the developer, you’ll need to define the use cases that your target customer wants
+and the corresponding actions to build into your integration.
 
-The set of actions that an integration can do under the Provisioning umbrella 
-are easily described with the acronym CRUD: the common database operations of Create, Read, Update, and Delete. 
+The set of actions that an integration can do under the Provisioning umbrella
+are easily described with the acronym CRUD: the common database operations of Create, Read, Update, and Delete.
 CRUD actions relate to Provisioning in the following ways:
 
 #### Create Users
 
-Create new users in the downstream application based on values derived from the Okta user profile and Okta group assignment. 
+Create new users in the downstream application based on values derived from the Okta user profile and Okta group assignment.
 
 #### Read (Import) Users and Groups
 
@@ -53,38 +53,38 @@ Import users & groups from the downstream application in order to match them to 
 
 #### Update Users
 
-For an application user that is affiliated with an Okta user, 
-update the downstream user’s attributes when the Okta user is updated. 
-Or, update the Okta user attributes if the application functions as the [master](#mastering-users) for the full Okta user profile or specific attributes.
+For an application user that is affiliated with an Okta user,
+update the downstream user’s attributes when the Okta user is updated.
+Or, update the Okta user attributes if the application functions as the [master](#profile-mastering-users) for the full Okta user profile or specific attributes.
 
 #### Deprovision (Deactivate) Users
 
-Deprovisioning the application user removes access to the downstream application. 
-This can take many forms, such as user disabled, user access permissions changed, or user license pulled. 
+Deprovisioning the application user removes access to the downstream application.
+This can take many forms, such as user disabled, user access permissions changed, or user license pulled.
 Each application may choose different methods for deactivating a user’s access.
 
-For audit purposes, Okta users are never deleted; they are deactivated instead. 
+For audit purposes, Okta users are never deleted; they are deactivated instead.
 Because of this, Okta doesn't make delete requests to the user APIs in downstream applications.
 
 #### Sync Password
 
-Okta sets the user’s password to either match the Okta password or to be a randomly generated password. 
-Learn more about the overall use case [here](https://support.okta.com/help/articles/Knowledge_Article/Using-Sync-Password?retURL=%2Fhelp%2Fapex%2FKnowledgeArticleJson%3Fc%3DOkta_Documentation%253ADirectories%26p%3D101%26inline%3D1&popup=true). 
+Okta sets the user’s password to either match the Okta password or to be a randomly generated password.
+Learn more about the overall use case [here](https://support.okta.com/help/articles/Knowledge_Article/Using-Sync-Password?retURL=%2Fhelp%2Fapex%2FKnowledgeArticleJson%3Fc%3DOkta_Documentation%253ADirectories%26p%3D101%26inline%3D1&popup=true).
 
 #### Profile Mastering Users
 
-> Profile Mastering Users is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option. 
-[Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback. 
-While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Application Network or used by customers in production environments. 
+> Profile Mastering Users is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option.
+[Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback.
+While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Application Network or used by customers in production environments.
 
-Mastering is a more sophisticated version of read (import) Users. 
-Mastering defines the flow and maintenance of user-object attributes and their lifecycle state. 
-When a profile is mastered from a given resource (application or directory), 
-the Okta user profile’s attributes and lifecycle state are derived exclusively from that resource. 
-In other words, an Okta user mastered by Active Directory (or HR system) has an Okta profile. 
-However, the profile isn't editable in Okta by the user or Okta admin, and derives its information exclusively from Active Directory. 
-If the lifecycle state of the user in Active Directory moves to Disabled, 
-the linked Okta user also switches to the corresponding lifecycle state of Deactivated on the next the read (import). 
+Mastering is a more sophisticated version of read (import) Users.
+Mastering defines the flow and maintenance of user-object attributes and their lifecycle state.
+When a profile is mastered from a given resource (application or directory),
+the Okta user profile’s attributes and lifecycle state are derived exclusively from that resource.
+In other words, an Okta user mastered by Active Directory (or HR system) has an Okta profile.
+However, the profile isn't editable in Okta by the user or Okta admin, and derives its information exclusively from Active Directory.
+If the lifecycle state of the user in Active Directory moves to Disabled,
+the linked Okta user also switches to the corresponding lifecycle state of Deactivated on the next the read (import).
 
 ### Provisioning Use Cases
 
@@ -94,11 +94,11 @@ Provisioning actions can be combined to solve for end-to-end use cases.
 
 <!-- Images for v2: https://oktawiki.atlassian.net/wiki/pages/viewpage.action?pageId=181895852 -->
 
-In many enterprises, Active Directory (or LDAP) is the system of record for employee identities. 
-Okta has developed a powerful, lightweight agent to sync with Active Directory to populate employee and group information. 
+In many enterprises, Active Directory (or LDAP) is the system of record for employee identities.
+Okta has developed a powerful, lightweight agent to sync with Active Directory to populate employee and group information.
 Within Okta, IT admins can leverage features such as [Universal Directory](https://support.okta.com/help/articles/Knowledge_Article/About-Universal-Directory) and [group membership rules](https://support.okta.com/help/articles/Knowledge_Article/About-Universal-Directory) to map that information when provisioning accounts and permissions in downstream apps.
 
-Subsequently, any updates to an employee’s profile, such as a change in department, in either Active Directory or Okta flow into the downstream app. 
+Subsequently, any updates to an employee’s profile, such as a change in department, in either Active Directory or Okta flow into the downstream app.
 Similarly, removing or deactivating an employee from Active Directory triggers deactivation in the downstream app as well.
 
 Okta supports these common Provisioning use cases:
@@ -110,45 +110,45 @@ Okta supports these common Provisioning use cases:
 
 #### App-as-Master
 
-> App-as-Master is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option. 
-[Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback. 
-While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Application Network or used by customers in production environments. 
+> App-as-Master is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option.
+[Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback.
+While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Application Network or used by customers in production environments.
 
 While most apps fit the category of a downstream app in the directory-as-master use case, some apps can be the master. This is the App-as-Master use case.
 
-The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information. 
-An HR app like Workday or Successfactors Employee Central is the most common example. 
-In this scenario, the HR app, not Active Directory, feeds employee profile details downstream into directories like AD and Okta, and apps like Box. 
+The app-as-master use case typically applies to apps that can be used as the system of record for all employee profile information.
+An HR app like Workday or Successfactors Employee Central is the most common example.
+In this scenario, the HR app, not Active Directory, feeds employee profile details downstream into directories like AD and Okta, and apps like Box.
 
 <!-- More info on configuring app-as-master in Okta is [here](). Note: link was missing from source -->
 
-> Note: Integrations for the “App-as-Master” use case are significantly more complex than the Directory-as-Master use case and take more time to build and support. 
-This is because these integrations sync a larger number of attributes and lifecycle states, and more directly impact the Okta user profile and downstream apps. 
+> Note: Integrations for the “App-as-Master” use case are significantly more complex than the Directory-as-Master use case and take more time to build and support.
+This is because these integrations sync a larger number of attributes and lifecycle states, and more directly impact the Okta user profile and downstream apps.
 
 #### Advanced App-as-Master Use Cases
 
-There are several advanced App-as-Master use cases that aren't currently supported by the SCIM-Based Provisioning option, but may be added in the future. 
+There are several advanced App-as-Master use cases that aren't currently supported by the SCIM-Based Provisioning option, but may be added in the future.
 Until then, consider out-of-band processes that work around these use cases.
 
-* Attribute-level mastering&mdash;The app wants to be the master for some employee attributes like phone number, while letting Okta or another app master other attributes. We call this attribute-level mastering. 
+* Attribute-level mastering&mdash;The app wants to be the master for some employee attributes like phone number, while letting Okta or another app master other attributes. We call this attribute-level mastering.
 
-* Pre-hire interval&mdash;In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance. 
-A pre-hire interval configuration would specify how many days before the employee’s hire date Okta should import the employee. 
+* Pre-hire interval&mdash;In an HR-as-Master use case, there is sometimes a desire to import the new employee into Okta from the HR app a few days prior to the hire/start date. This gives IT time to set up the employee’s apps in advance.
+A pre-hire interval configuration would specify how many days before the employee’s hire date Okta should import the employee.
 
 * Real-time sync/termination&mdash;In an HR-as-Master use case, a change in employee status within the HR system may need to be immediately reflected in Okta.
 Involuntary terminations is one scenario where an employee’s access to sensitive apps and content via Okta needs to be cut off within minutes.
 
-* Incremental/delta import&mdash;Importing a large number of user profiles from an app into Okta can take minutes, even hours. 
+* Incremental/delta import&mdash;Importing a large number of user profiles from an app into Okta can take minutes, even hours.
 This can become a major performance and timing issue if frequent updates are needed. Currently, the SCIM-Based Provisioning option doesn't support the ability to import only those user profiles that have changed since the last import. In the future, we may support this via filtering on `meta.lastModified`. ([More information](#filtering-on-metalastmodified))
 
 ## Ways to Build Provisioning
 
-Now that you understand the most common provisioning actions and use cases, let’s review your options to support provisioning as an app developer. 
-While we outline a few different methods below, Okta recommends all ISVs support [the SCIM standard](http://www.simplecloud.info/). 
+Now that you understand the most common provisioning actions and use cases, let’s review your options to support provisioning as an app developer.
+While we outline a few different methods below, Okta recommends all ISVs support [the SCIM standard](http://www.simplecloud.info/).
 
 ### Provisioning Options Matrix
 
-Okta has seen broad adoption of the standard in the market amongst our network of app developers over the course of 2016. 
+Okta has seen broad adoption of the standard in the market amongst our network of app developers over the course of 2016.
 Okta has doubled down on our investment in our SCIM client and launched our own SCIM provisioning developer program.
 
 | Standard | Recommendation  |  Summary |
@@ -159,14 +159,14 @@ Okta has doubled down on our investment in our SCIM client and launched our own 
 
 ### Provisioning to On-Premise Apps
 
-The options above are geared towards cloud apps but we have a solution for on-premise applications as well. 
+The options above are geared towards cloud apps but we have a solution for on-premise applications as well.
 See [Configuring On-Premise Provisioning](https://support.okta.com/help/articles/Knowledge_Article/29448976-Configuring-On-Premises-Provisioning) for details about Okta’s agent-based provisioning solution.
 
 ### SCIM Facade
 
-Sometimes it isn't feasible for the cloud app to natively support a SCIM Server API. 
-An alternative option is to build and host a SCIM facade middleware that translates 
-between the Okta SCIM Client and the cloud app’s proprietary API. The Okta integration would be to this SCIM facade. 
+Sometimes it isn't feasible for the cloud app to natively support a SCIM Server API.
+An alternative option is to build and host a SCIM facade middleware that translates
+between the Okta SCIM Client and the cloud app’s proprietary API. The Okta integration would be to this SCIM facade.
 
 > Have questions? Need help? Email us at <developers@okta.com> or post your question on [Stack Overflow](http://stackoverflow.com/search?q=okta,scim).
 
@@ -238,11 +238,11 @@ as your Base URL; for example: `https://example.com/scim/v2` -
 however, you must support the URL structure described in the
 ["SCIM Endpoints and HTTP Methods" section of RFC7644](https://tools.ietf.org/html/rfc7644#section-3.2).
 
-If you have multiple Okta orgs, you can use the same SCIM server for all of them. 
-Implement a subdomain for the SCIM server and each subdomain, for example: `https://subdomain.example.com/scim/v2`, where 
-`subdomain` represent one Okta org. Let's say you have three Okta orgs: company-a.okta.com, company-b.okta.com and company-c.okta.com. 
+If you have multiple Okta orgs, you can use the same SCIM server for all of them.
+Implement a subdomain for the SCIM server and each subdomain, for example: `https://subdomain.example.com/scim/v2`, where
+`subdomain` represent one Okta org. Let's say you have three Okta orgs: company-a.okta.com, company-b.okta.com and company-c.okta.com.
 From each org you can pass a base URL containing the name of the org: `https://company-a.example.com/scim/v2`, `https://company-b.example.com/scim/v2` or  `https://company-c.example.com/scim/v2`.
-In your SCIM server, you can read which subdomain the request is coming from and identify the org. 
+In your SCIM server, you can read which subdomain the request is coming from and identify the org.
 
 #### Authentication
 
@@ -340,7 +340,7 @@ In our sample application, each user resource has a Boolean
 
 Your SCIM API must support the following SCIM API endpoints to work with Okta:
 
-<img src="/assets/img/scim_flowchart.png" alt="scim api endpoints required to work with Okta" width="640px" />
+{% img scim_flowchart.png alt:"scim api endpoints required to work with Okta" width:"640px" %}
 
 ##### Create Account: POST /Users
 
@@ -545,9 +545,9 @@ of the [SCIM 2.0 Protocol Specification](https://tools.ietf.org/html/rfc7644).
 
 ##### Filtering on `userName eq` (Required)
 
-Your SCIM API must be able to filter users following the pattern  "userName eq "..." ". 
+Your SCIM API must be able to filter users following the pattern  "userName eq "..." ".
 This is because most provisioning actions, besides Import Users, require the ability
-for Okta to determine if a user resource exists on your system. 
+for Okta to determine if a user resource exists on your system.
 
 Consider the scenario where an Okta customer with thousands of
 users has a provisioning integration with your system, which also
@@ -559,7 +559,7 @@ system.
 Examples of filters that Okta might send to your SCIM API are as
 follows:
 
-~~~ 
+~~~
 userName eq "jane.doe"
 
 userName eq "jane.doe@example.com"
@@ -861,10 +861,10 @@ example:
 
 ### Process
 
-In order to allow customers to use your SCIM provisioning integration with Okta, 
+In order to allow customers to use your SCIM provisioning integration with Okta,
 you’ll need to get your app published in [the Okta Application Network](https://www.okta.com/resources/find-your-apps/).
 
-Follow the steps below to test and submit your application for Okta review: 
+Follow the steps below to test and submit your application for Okta review:
 
 1. Review Okta’s SCIM Docs & Prepare Your App
 2. Test Your SCIM Server
@@ -876,16 +876,16 @@ Follow the steps below to test and submit your application for Okta review:
 
 ### Private App Option
 
-The OAN is for making an integration publicly discoverable and accessible to all Okta customers. 
-However, you can also just use the integration privately within a few named orgs. 
-This could be the case if you are a system integrator, customer, or Okta PS integrating to a custom app. 
-If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OAN. 
-Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app. 
-Note that you cannot use the SCIM template app used for prototyping, as it has limitations that prevent it from being used in production. 
+The OAN is for making an integration publicly discoverable and accessible to all Okta customers.
+However, you can also just use the integration privately within a few named orgs.
+This could be the case if you are a system integrator, customer, or Okta PS integrating to a custom app.
+If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OAN.
+Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app.
+Note that you cannot use the SCIM template app used for prototyping, as it has limitations that prevent it from being used in production.
 
 #### Review Okta’s SCIM Docs & Prepare Your App
 
-The first step is to build a compliant SCIM server. 
+The first step is to build a compliant SCIM server.
 Even if you already support SCIM, it is important that you review Okta’s SCIM docs above,
 especially the following sections, to understand the specifics of Okta’s support for the SCIM standard:
 
@@ -920,7 +920,7 @@ with [Runscope's free trial plan for Okta](https://www.runscope.com/okta). Here 
  1.  Download the Okta SCIM Spec Test for your version of SCIM:
      * [Okta SCIM 2.0 Spec Test JSON](SCIMFiles/Okta-SCIM-20-SPEC-Test.json)
      * [Okta SCIM 1.1 Spec Test JSON](SCIMFiles/Okta-SCIM-11-SPEC-Test.json)
- 
+
       You will use this file to import Okta's SCIM test suite into Runscope.)
 
  2.  [Sign up for Runscope](http://www.runscope.com/signup).
@@ -1017,25 +1017,25 @@ Here is how to share a test result from Runscope with someone else:
 
 #### Testing your SCIM server with Okta
 
-Once you have a SCIM server that passes all of the Runscope tests, 
+Once you have a SCIM server that passes all of the Runscope tests,
 test your SCIM integration directly with Okta. To do so, you will first need to sign up for [an Okta developer account](https://www.okta.com/developer/signup/).
 
-Note: If you are using OAuth Authorization Code Grant flow as your authentication method 
-or need to support the Profile Master action, Okta will need to custom-configure a template app for you. 
-Please request this in your email to <developers@okta.com>. 
+Note: If you are using OAuth Authorization Code Grant flow as your authentication method
+or need to support the Profile Master action, Okta will need to custom-configure a template app for you.
+Please request this in your email to <developers@okta.com>.
 
-1. Navigate to the admin interface in your Okta org by clicking **Admin**. 
-    ![Admin Button](/assets/img/scim-end-user-ui.png)
+1. Navigate to the admin interface in your Okta org by clicking **Admin**.
+    {% img scim-end-user-ui.png alt:"Admin Button" %}
 
-2. Click **Applications**, then **Add Application**. 
-    ![Admin Button](/assets/img/scim-apps.png)
+2. Click **Applications**, then **Add Application**.
+    {% img scim-apps.png alt:"Admin Button" %}
 
 3. Search for “SCIM”. You’ll see three different SCIM template applications for each SCIM version (1.1 and 2.0) based off of the various authentication methods you could choose to support (Header Auth, Basic Auth, or Bearer Token).
-    ![Admin Button](/assets/img/scim-templates.png)
+    {% img scim-templates.png alt:"Admin Button" %}
 
 #### Submit for Okta Review
 
-Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OAN Manager. 
+Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OAN Manager.
 
 Your submission provides Okta with all the metadata needed to create a customized app for publication in [the Okta Application Network](https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324). Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.
 
@@ -1098,9 +1098,9 @@ following:
 
 ##### Run the Second Set of Runscope Tests: Okta SCIM 2.0 CRUD Test
 
-This is an important test that needs to be run in order to check if the Application 
+This is an important test that needs to be run in order to check if the Application
 can handle the **CR**eate, **U**pdate and **D**eactivate (CRUD) users functionality from Okta.
-This allows the Application to be tested with actual Okta integration so thereby achieving end to end testing. 
+This allows the Application to be tested with actual Okta integration so thereby achieving end to end testing.
 
 The test follows this pattern:
 
@@ -1129,15 +1129,15 @@ SCIM server.
 
 ##### Prepare the Customer-Facing Configuration Guide
 
-We recommend preparing the customer-facing configuration guide before beginning to work through the submission document. 
-This guide will be exposed externally in Okta’s admin interface to end customers. 
+We recommend preparing the customer-facing configuration guide before beginning to work through the submission document.
+This guide will be exposed externally in Okta’s admin interface to end customers.
 For more details, see the [configuration guide guidelines](http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf).
 
 Note: When you are ready, use [this form](https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform) to submit for Okta review.
 
 #### Test with Customers
 
-We require that one joint customer successfully uses and validates the integration in production before making it publicly available in the Okta Application Network. 
+We require that one joint customer successfully uses and validates the integration in production before making it publicly available in the Okta Application Network.
 
 Here’s the process for getting joint customers involved in testing the newly developed SCIM integration:
 
@@ -1198,49 +1198,49 @@ In order for an app to be published in the Okta Application Network, it must mee
     | N/A | Supports reference type pointing to the full URL of another SCIM Resource |
 
 * Query by POST /search
-    
+
     | SCIM 1.1 | SCIM 2.0 |
     | --- | --- |
     | N/A | [Section 3.4.3](https://tools.ietf.org/html/rfc7644#section-3.4.3) |
 
 **Our API is similar to SCIM, but is not 100% compliant. Can we still integrate with Okta?**
 
-Unfortunately, your app’s SCIM server API must be fully SCIM compliant in order to integrate with Okta. 
-Okta’s SCIM client endpoints are hard coded into a template which adhere directly to [the SCIM spec](http://www.simplecloud.info/). 
+Unfortunately, your app’s SCIM server API must be fully SCIM compliant in order to integrate with Okta.
+Okta’s SCIM client endpoints are hard coded into a template which adhere directly to [the SCIM spec](http://www.simplecloud.info/).
 Not all capabilities of the SCIM spec need to be supported (see [Required SCIM Server Capabilities](#required-scim-server-capabilities) in our SCIM Technical Reference) but the core schema and features do need to be supported.
 
 **SCIM is a new standard. How broadly is it being adopted by cloud app vendors and how confident can I be in the SCIM standard’s long-term viability?**
 
-Okta has seen significant SCIM momentum in the market amongst our network of app developers over the past year. 
-Hot new apps like [Slack](https://api.slack.com/scim) 
-and [Lucidchart](https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/) 
-are supporting SCIM as well established software companies 
-like [Huddle](https://github.com/Huddle/huddle-apis/wiki/Integrating%20with%20SCIM) 
-and [Citrix](https://developer.citrixonline.com/implementing-scim-apis). 
-Okta has doubled down on our investment in our SCIM server 
+Okta has seen significant SCIM momentum in the market amongst our network of app developers over the past year.
+Hot new apps like [Slack](https://api.slack.com/scim)
+and [Lucidchart](https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/)
+are supporting SCIM as well established software companies
+like [Huddle](https://github.com/Huddle/huddle-apis/wiki/Integrating%20with%20SCIM)
+and [Citrix](https://developer.citrixonline.com/implementing-scim-apis).
+Okta has doubled down on our investment in our SCIM server
 and launched our own SCIM provisioning developer program.
 The SCIM standards is strong and is run by Salesforce, Google, and Sailpoint (Okta is also a contributor).
 
 **How should I be managing authentication to my SCIM API?**
 
-Okta recommends using the OAuth 2.0 Authorization Code Grant Flow (aka “three-legged OAuth). 
-Okta doesn't support the Client Credentials or Resource Owner Password Credentials Authorization grant flows. 
-The Authorization Code Grant Flow is more common in SaaS/cloud and is also more secure. 
+Okta recommends using the OAuth 2.0 Authorization Code Grant Flow (aka “three-legged OAuth).
+Okta doesn't support the Client Credentials or Resource Owner Password Credentials Authorization grant flows.
+The Authorization Code Grant Flow is more common in SaaS/cloud and is also more secure.
 In addition to OAuth, Okta also supports basic auth and header token auth options.
 
 **I have a multi-tenant app how do I allow my customers to customize their specific tenant in Okta?**
 
-Use the three-legged OAuth (Authorization Grant flow), 
-so that you know exactly which token/key the customer is using. 
-Another option is by URL. When the customer configures your app in Okta, we can prompt them to add their unique subdomain for your app  (see Zscaler app below). 
-Okta can use part of this url in the SCIM endpoint for that customer, for example http://www.company.com/tenantA/scim or http://www.company.com/tenantB/scim). 
+Use the three-legged OAuth (Authorization Grant flow),
+so that you know exactly which token/key the customer is using.
+Another option is by URL. When the customer configures your app in Okta, we can prompt them to add their unique subdomain for your app  (see Zscaler app below).
+Okta can use part of this url in the SCIM endpoint for that customer, for example http://www.company.com/tenantA/scim or http://www.company.com/tenantB/scim).
 This subdomain field can be configured with Okta after you submit your app for Okta review.
 
-![Example SCIM endpoint with subdomain](/assets/img/scim-scalar.png)
+{% img scim-scalar.png alt:"Example SCIM endpoint with subdomain" %}
 
 **Why do I need to implement the type attribute for attributes such as emails/phoneNumbers/addresses?**
 
-The SCIM User Profile allows for an array of emails. The only way to differentiate between emails is to use the `type` sub-attribute. 
+The SCIM User Profile allows for an array of emails. The only way to differentiate between emails is to use the `type` sub-attribute.
 
 * When returning multi-valued attributes, service providers SHOULD canonicalize the value returned (e.g., by returning a value for the sub-attribute “type”, such as “home” or “work”) when appropriate (e.g., for email addresses and URLs).
 * Service providers MAY return element objects with the same “value” sub-attribute more than once with a different `type` sub-attribute (e.g., the same email address may be used for work and home) but SHOULD NOT return the same (type, value) combination more than once per attribute, as this complicates processing by the client.
@@ -1267,7 +1267,7 @@ Therefore, data validation should be handled by your app’s SCIM Server. In oth
 
 **How much filtering support is needed?**
 
-The filtering capabilities in the SCIM protocol are pretty broad but the common filtering use case with Okta is quite narrow -- determine if a newly created Okta user already exists in your app based on a matching identifier . This means the eq (equals) operator is all you really need to support for now. We "might" eventually support other operators but don't right now. 
+The filtering capabilities in the SCIM protocol are pretty broad but the common filtering use case with Okta is quite narrow -- determine if a newly created Okta user already exists in your app based on a matching identifier . This means the eq (equals) operator is all you really need to support for now. We "might" eventually support other operators but don't right now.
 Note that Okta only supports filtering via the eq operator on the SCIM userName attribute on the SCIM Server side. However, Okta can use any AppUser attribute on the Okta side for passing into the eq operator. Typically this would also be `appuser.userName`, but `appuser.email` or `appuser.randomAttribute` can also work.
 
 ### Publishing Questions
@@ -1309,7 +1309,7 @@ Python, with [documentation](http://developer.okta.com/docs/sdk/opp/javadoc/over
 This example SCIM server demonstrates how to implement a basic SCIM
 server that can create, read, update, and deactivate Okta users.
 
-You can find the sample code to handle HTTP requests to this sample application in [Required SCIM Server Capabilities](#required-scim-server-capabilities) 
+You can find the sample code to handle HTTP requests to this sample application in [Required SCIM Server Capabilities](#required-scim-server-capabilities)
 Use the instructions that follow to set up and run the example SCIM server.
 
 ### How to run

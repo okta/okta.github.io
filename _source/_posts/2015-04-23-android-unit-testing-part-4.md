@@ -10,7 +10,7 @@ good
 tests](https://www.okta.com/blog/2015/01/android-unit-testing-part-i-what-makes-strong-test-automation/)
 and the way to [run Android tests on JVM making them
 fast](/blog/2015/04/07/android-unit-testing-part-2) and [how to make
-your code less coupled](/blog/2015/04/14/android-unit-testing-part-3/).
+your code less coupled](/blog/2015/04/14/android-unit-testing-part-3).
 This article will explain how to make tests isolated.*
 
 We need to mock a dependency, inject it, and then modify our test to

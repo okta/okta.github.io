@@ -7,37 +7,43 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
+    <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/page-blog.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>The New Age of Trust | Okta Developer</title>
   <meta name="description" content="I recently read an excellent article about how amazing products shape the trust relationship with customers. I think great products are the first step in bui...">
   <link rel="canonical" href="http://developer.okta.com/blog/2015/06/11/trustpage">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
     <body id="blog">
@@ -101,25 +107,34 @@
 		<section id="blog-post" class="main-container">
 	<div class="wrap blog">
 		<section >
-<div class="wrap">
-	<article class="post-block">
-	  <header class="post-title-block">
-	    <h1><a href="/blog/2015/06/11/trustpage">The New Age of Trust</a></h1>
-	    <div class="attribution">
-	      <img src="/assets/img/avatar-vimarsh_karbhari.jpg"
-	           alt="avatar-vimarsh_karbhari.jpg"
-	           class="author-avatar">
-	      <address>Vimarsh Karbhari</address>
-	      &nbsp;
-		  <a class="social_link" href="https://github.com/vimarshkarbhari-okta"><i class="fa fa-github-square"></i></a>
-		  <a class="social_link" href="https://twitter.com/VimarshApi"><i class="fa fa-twitter-square"></i></a>
-		  <a class="social_link" href="https://medium.com/@vimarshk/"><i class="fa fa-external-link-square"></i></a>
-		  <span class="sepr">&middot;</span>
-	      <time datetime="2015-06-11">June 11, 2015</time>
-	    </div>
-	  </header>
-	  <section class="post-content">
-	    <p>I recently read an excellent <a href="http://www.viabilify.com/blog/trust">article</a> about how amazing products shape the <strong>trust relationship</strong> with customers. I think great products are the <em>first step</em> in building a trust relationship. And like other aspects of the product that are derived from the product but are not physically part of it, the trust relationship is now more important than ever before.</p>
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2015/06/11/trustpage">The New Age of Trust</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-vimarsh_karbhari-a5957ecc34041cf688c7d53d4fb81f39ec713de690cd80433f310d1a6e9cf035.jpg" alt="avatar-vimarsh_karbhari.jpg" class="author-avatar">
+            
+            <address>Vimarsh Karbhari</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/vimarshkarbhari-okta"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/VimarshApi"><i class="fa fa-twitter-square"></i></a>
+            
+            
+            
+              <a class="social_link" href="https://medium.com/@vimarshk/"><i class="fa fa-external-link-square"></i></a>
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2015-06-11">June 11, 2015</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     <p>I recently read an excellent <a href="http://www.viabilify.com/blog/trust">article</a> about how amazing products shape the <strong>trust relationship</strong> with customers. I think great products are the <em>first step</em> in building a trust relationship. And like other aspects of the product that are derived from the product but are not physically part of it, the trust relationship is now more important than ever before.</p>
 
 <hr />
 
@@ -173,13 +188,14 @@
 
 <p><em>The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.</em></p>
 
-	  </section>
-	</article>
-</div>
+	    </section>
+	  </article>
+  </div>
 </section>
 
 	</div>
 </section>
+
 		
 	</div><footer class="footer">
       <div class="Wrap">
@@ -225,10 +241,12 @@
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -237,17 +255,22 @@
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
 </body>
 </html>

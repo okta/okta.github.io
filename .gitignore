@@ -27,6 +27,8 @@ Gemfile.lock
 # ignore Emacs auto-save files
 *~
 
+.vscode
+
 # ignore mac specific files
 .DS_Store
 reload_views.rb
@@ -37,6 +39,7 @@ vendor/*
 
 dist
 
+_source/.asset-cache
 .sass-cache
 .bundle
 bin/*

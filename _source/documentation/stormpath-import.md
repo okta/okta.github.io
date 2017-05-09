@@ -5,7 +5,7 @@ title: Importing Your Stormpath Data Into Okta
 
 # Importing Your Stormpath Data Into Okta
 
-The Stormpath Import tool is a script that takes the data that you exported from Stormpath and imports it into Okta using Okta's REST API. Once you have run the script, you will have to update your Stormpath Integration to use the Okta API. 
+The Stormpath Import tool is a script that takes the data that you exported from Stormpath and imports it into Okta using Okta's REST API. Once you have run the script, you will have to update your Stormpath Integration to use the Okta API.
 
 <a name="prerequisites-and-capacity-planning"></a>
 ## Prerequisites and Capacity Planning
@@ -40,10 +40,10 @@ Account Custom Data will be imported according to the rules explained [below](#s
 <a name="account-links--duplicate-emails"></a>
 #### Account Links & Duplicate Emails
 
-Accounts are identified based on their email address and merged based on their Account Links. If multiple Accounts have the same email address and are linked with Account Links, then the import tool merges these Accounts into a single Okta User. There are two scenarios in which an Account is not imported: 
+Accounts are identified based on their email address and merged based on their Account Links. If multiple Accounts have the same email address and are linked with Account Links, then the import tool merges these Accounts into a single Okta User. There are two scenarios in which an Account is not imported:
 
 - If there are multiple Stormpath Accounts with the same email address that are not linked with AccountLinks
-- If there are multiple Stormpath Accounts with different email addresses that are linked with AccountLinks. 
+- If there are multiple Stormpath Accounts with different email addresses that are linked with AccountLinks.
 
 <a name="unverified-accounts"></a>
 #### Unverified Accounts
@@ -84,7 +84,7 @@ npm install -g @okta/stormpath-migration
 import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://your-org.okta.com --oktaApiToken yourApiToken
 ```
 
- 
+
 > NOTE: The import tool uses the Okta API and respects the API's rate limiting. If your import exceeds the rate limit at any time, the tool will automatically pause. It will then automatically resume once it is able to do so. These actions will be logged to the console.
 
 <a name="required-args"></a>
@@ -120,7 +120,7 @@ import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://y
     - Example: `--concurrencyLimit 200`
 
 - `--maxFiles (-f)`: Max number of files to parse per directory. You can use this to test an import without processing all of your files.
-    - Example: `--maxFiles 500` 
+    - Example: `--maxFiles 500`
 
 - `--logLevel (-l)`: Logging level. Defaults to `info`.
 
@@ -141,10 +141,10 @@ After you run the import tool and check the results, update your application to 
 
 Integration | Version | Documentation
 --- | --- | ---
-Java Spring | 2.0.0-okta | Release candidates currently documented [here](https://github.com/stormpath/stormpath-sdk-java/blob/okta/OktaGettingStarted.md) 
-Java Spring Boot | 2.0.0-okta | Release candidates currently documented [here](https://github.com/stormpath/stormpath-sdk-java/blob/okta/OktaGettingStarted.md) 
-Node Express-Stormpath | 4 | Release candidates currently documented [here](https://github.com/stormpath/express-stormpath/blob/4.0.0/docs/changelog.rst). 
-ASP.NET 4.x | 4 | [Changelog](https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/changelog.md), [Migration Guide](https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/migrating.md) 
+Java Spring | 2.0.0-okta | Release candidates currently documented [here](https://github.com/stormpath/stormpath-sdk-java/blob/okta/OktaGettingStarted.md)
+Java Spring Boot | 2.0.0-okta | Release candidates currently documented [here](https://github.com/stormpath/stormpath-sdk-java/blob/okta/OktaGettingStarted.md)
+Node Express-Stormpath | 4 | Release candidates currently documented [here](https://github.com/stormpath/express-stormpath/blob/4.0.0/docs/changelog.rst).
+ASP.NET 4.x | 4 | [Changelog](https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/changelog.md), [Migration Guide](https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/migrating.md)
 ASP.NET Core | 4 | [Changelog](https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/changelog.md), [Migration Guide](https://github.com/stormpath/stormpath-dotnet-owin-middleware/blob/master/migrating.md)
 
 > NOTE: If you are not using one of these integrations, then you will have to port the SDK functionality to use the Okta REST API.
@@ -155,10 +155,10 @@ Once you have updated your application and read the Changelog, you should try lo
 ### Debugging the tool
 
 If you experience problems with your import, try setting the `logLevel` higher, as documented [above](#optional-args). You can also read the import script's source code [on GitHub](https://github.com/okta/stormpath-migration
-). 
+).
 
 <a name="how-stormpath-maps-to-okta"></a>
-## How Stormpath Maps to Okta 
+## How Stormpath Maps to Okta
 
 <a name="overview"></a>
 ### Overview
@@ -220,7 +220,7 @@ Each of the new Okta entities is named in a way that ties it to the Stormpath en
 
 Stormpath resources are imported in the following order:
 
-1. Accounts (including their Custom Data) 
+1. Accounts (including their Custom Data)
 2. Directories (including Password Policy)
 3. Groups
 4. Organizations
@@ -231,7 +231,7 @@ Stormpath resources are imported in the following order:
 
 Stormpath Accounts are imported first. They are identified and merged based on their email address. If multiple Accounts have the same email address and are linked with AccountLinks, then the import tool will merge these Accounts into a single Okta User.
 
-The information from a Stormpath Account is imported into the [Profile object](http://developer.okta.com/docs/api/resources/users.html#profile-object) found inside an [Okta User](http://developer.okta.com/docs/api/resources/users.html#user-properties). 
+The information from a Stormpath Account is imported into the [Profile object](http://developer.okta.com/docs/api/resources/users.html#profile-object) found inside an [Okta User](http://developer.okta.com/docs/api/resources/users.html#user-properties).
 
 Stormpath Account Attribute | Okta Profile Attribute
 --- | ---
@@ -241,7 +241,7 @@ Stormpath Account Attribute | Okta Profile Attribute
 `middleName` | `middleName`
 `lastName` | `surname`
 `fullName` | `displayName`
-`emailVerificationStatus` | `emailVerificationStatus` * 
+`emailVerificationStatus` | `emailVerificationStatus` *
 
 **This is a [Custom Schema Attribute](http://developer.okta.com/docs/api/resources/schemas.html).*
 
@@ -251,7 +251,7 @@ User API Keys (up to 10) and Custom Data are also imported. API Keys are added a
 "stormpathApiKey_{1-10}": "{apiKeyId}:{apiKeySecret}"
 ```
 
-More information on custom data can be found [below](#custom-data).
+More information on custom data can be found [below](#custom-data-objects).
 
 **Imported User Naming Convention**
 
@@ -300,10 +300,10 @@ Since Okta does not support complex objects in the User Profile, those are impor
 Here is an example of a complex object:
 
 ```
-{ 
-    foo: { 
-        bar: { 
-            baz: 'john' 
+{
+    foo: {
+        bar: {
+            baz: 'john'
         }
     }
 }
@@ -314,7 +314,7 @@ And here it is after the two different migration strategies have been applied:
 - **Flattened:** `"foo_bar_baz": "john"`
 - **Stringified:** `"customData": "{"foo":{"bar":{"baz":"john"}}}"`
 
-**Flattened**  
+**Flattened**
 
 In this case, all properties except the last one are concatenated into the attribute name, and the last value is preserved. This strategy is most likely to preserve the data structure, though two important points should be noted:
 
@@ -346,11 +346,11 @@ Okta Groups made for imported Stormpath Cloud Directories use the `name` propert
 <a name="stormpath-directory-password-strength"></a>
 #### Stormpath Directory Password Strength
 
-The [Stormpath Cloud Directory Password Policy's Strength resource](https://docs.stormpath.com/rest/product-guide/latest/reference.html#password-strength) maps almost entirely to the [Okta Password Policy's Complexity object](http://developer.okta.com/docs/api/resources/policy.html#PasswordComplexityObject), with the `preventReuse` attribute being mapped to the [Okta Password Policy's Age object](http://developer.okta.com/docs/api/resources/policy.html#PasswordAgeObject). 
+The [Stormpath Cloud Directory Password Policy's Strength resource](https://docs.stormpath.com/rest/product-guide/latest/reference.html#password-strength) maps almost entirely to the [Okta Password Policy's Complexity object](http://developer.okta.com/docs/api/resources/policy.html#PasswordComplexityObject), with the `preventReuse` attribute being mapped to the [Okta Password Policy's Age object](http://developer.okta.com/docs/api/resources/policy.html#PasswordAgeObject).
 
-There are a few points to note here: 
+There are a few points to note here:
 
-- First of all, the Stormpath Password Policy attributes `maxLength` and `minDiacritic` are not supported in Okta and will not migrate. Also, the Stormpath attributes `minLowerCase`, `minUpperCase`, `minNumber`, and `minSymbol` all have integer values in Stormpath, specifying an occurrence requirement. Whereas in Okta, the equivalent attributes take 0 or 1, meaning that the value must occur at least once. For more information see [here](http://developer.okta.com/docs/api/resources/policy.html#PasswordComplexityObject). 
+- First of all, the Stormpath Password Policy attributes `maxLength` and `minDiacritic` are not supported in Okta and will not migrate. Also, the Stormpath attributes `minLowerCase`, `minUpperCase`, `minNumber`, and `minSymbol` all have integer values in Stormpath, specifying an occurrence requirement. Whereas in Okta, the equivalent attributes take 0 or 1, meaning that the value must occur at least once. For more information see [here](http://developer.okta.com/docs/api/resources/policy.html#PasswordComplexityObject).
 
 Stormpath Directory Password Strength Attribute | Okta Complexity Attribute
 --- | ---
@@ -378,7 +378,7 @@ Okta Group Password Policies made for imported Stormpath Password Strength polic
 
 Your Social providers Client ID and Secret are also imported into the IdP's `credentials` object.
 
-Any Stormpath Accounts that were associated with your Stormpath Social Directory will have their equivalent Okta Users associated with the new Okta Identity Provider. Custom [Attribute Mappings](https://docs.stormpath.com/rest/product-guide/latest/reference.html#attribute-statement-mapping-rules) from your Stormpath Social Directory are added as [Custom Schema Attributes](http://developer.okta.com/docs/api/resources/schemas.html) to the relevant User Profiles. An Okta Group is also created and associated with the relevant Authorization Server. That Group shares the same `name` as the Identity Provider and is assigned Users as they are created during social login. 
+Any Stormpath Accounts that were associated with your Stormpath Social Directory will have their equivalent Okta Users associated with the new Okta Identity Provider. Custom [Attribute Mappings](https://docs.stormpath.com/rest/product-guide/latest/reference.html#attribute-statement-mapping-rules) from your Stormpath Social Directory are added as [Custom Schema Attributes](http://developer.okta.com/docs/api/resources/schemas.html) to the relevant User Profiles. An Okta Group is also created and associated with the relevant Authorization Server. That Group shares the same `name` as the Identity Provider and is assigned Users as they are created during social login.
 
 Stormpath Directory Attribute | Okta Group Profile Attribute
 --- | ---
@@ -387,7 +387,7 @@ Stormpath Directory Attribute | Okta Group Profile Attribute
 
 **Imported (Social) Identity Provider Naming Convention**
 
-Identity Providers created for imported Stormpath Social Directories have a `name` property that is composed of a `dir:` prefix and the `name` of the Stormpath Directory: 
+Identity Providers created for imported Stormpath Social Directories have a `name` property that is composed of a `dir:` prefix and the `name` of the Stormpath Directory:
 
 ```
 "name": "dir:{SP_directoryName}"
@@ -413,9 +413,9 @@ Identity Providers have a `name` property that is composed of a `dir:` prefix an
 <a name="stormpath-directories-ldap"></a>
 ### Stormpath Directories (LDAP)
 
-As mentioned in [the Caveats section](#things-that-wont-migrate-and-known-caveats), LDAP Directories (including Active Directory) cannot be imported into Okta. You will need to set them up fresh inside Okta, which will re-import the data from your LDAP directory. 
+As mentioned in [the Caveats section](#things-that-wont-migrate-and-known-caveats), LDAP Directories (including Active Directory) cannot be imported into Okta. You will need to set them up fresh inside Okta, which will re-import the data from your LDAP directory.
 
-- For instructions on how to set-up Active Directory, see here: https://help.okta.com/en/prod/Content/Topics/Directory/Okta%20Active%20Directory%20Agent.htm 
+- For instructions on how to set-up Active Directory, see here: https://help.okta.com/en/prod/Content/Topics/Directory/Okta%20Active%20Directory%20Agent.htm
 - For instructions on how to set-up LDAP, see here: https://support.okta.com/help/Documentation/Knowledge_Article/87604166-LDAP-Agent-Deployment-Guide
 
 <a name="stormpath-groups"></a>
@@ -433,13 +433,13 @@ Stormpath Group Attribute | Okta Group Profile Attribute
 Okta Groups that model Stormpath Groups use the `name` property inside the Okta Group's Profile. The Profile `name` is made up of a `group:` prefix, along with the `id` of the Okta Group that models the Stormpath Directory that owned the Stormpath Group, as well as the exact `name` of the Stormpath Group:
 
 ```
-"name": "group:{OKTA_groupId}:{SP_groupName}" 
+"name": "group:{OKTA_groupId}:{SP_groupName}"
 ```
 
 <a name="stormpath-organizations"></a>
 ### Stormpath Organizations
 
-The [Stormpath Organization](https://docs.stormpath.com/rest/product-guide/latest/reference.html#organization) becomes a Group in Okta, and its information is imported to an [Okta Group Profile](http://developer.okta.com/docs/api/resources/groups.html#profile-object) (see table below). The Organization Account Store Mappings are used to find all Accounts associated with that Organization, and the imported Users are associated with this new Organization Group. 
+The [Stormpath Organization](https://docs.stormpath.com/rest/product-guide/latest/reference.html#organization) becomes a Group in Okta, and its information is imported to an [Okta Group Profile](http://developer.okta.com/docs/api/resources/groups.html#profile-object) (see table below). The Organization Account Store Mappings are used to find all Accounts associated with that Organization, and the imported Users are associated with this new Organization Group.
 
 Stormpath Organization Attribute | Okta Group Profile Attribute
 --- | ---
@@ -461,10 +461,10 @@ The Profile `description` is made up of the Stormpath Organization's `nameKey` w
 <a name="stormpath-applications"></a>
 ### Stormpath Applications
 
-Stormpath Applications have OAuth Client Applications created for them in Okta, as well as Authorization Servers. 
+Stormpath Applications have OAuth Client Applications created for them in Okta, as well as Authorization Servers.
 
 - An OAuth Client Application is created with `type` set to `web`
-- An [Authorization Server](http://developer.okta.com/docs/api/resources/oauth2.html#authorization-servers) is also created 
+- An [Authorization Server](http://developer.okta.com/docs/api/resources/oauth2.html#authorization-servers) is also created
 - The Authorization Server and Client Application are associated with one another
 - Any relevant Okta Groups are assigned to the new OAuth Client Application
 - Access and Refresh Token TTL values are imported

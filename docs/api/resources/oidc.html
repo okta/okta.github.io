@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>OpenID Connect | Okta Developer</title>
   <meta name="description" content="OpenID Connect API">
   <link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -226,7 +231,7 @@ OpenID Connect extends OAuth 2.0:</p>
   <li>Provides a standard set of scopes and claims for identities including profile, email, address, and phone.</li>
 </ul>
 
-<p><img src="/assets/img/openID_overview.png" alt="OpenID Architecture Diagram" /></p>
+<p><img src="/assets/openID_overview-631f59c8e4e12ee8806244a23303d9a025476e6116d55d59465c0b0b72b3760c.png" alt="OpenID Architecture Diagram" /></p>
 
 <p>Okta is the identity provider responsible for verifying the identity of users and applications that exist in an organization’s directory,
 and issuing identity tokens upon successful authentication of those users and applications.</p>
@@ -331,7 +336,7 @@ as well as claims about the authenticated user.</p>
 
 <p>ID Tokens should always be <a href="#validating-id-tokens">validated</a> by the client to ensure their integrity.</p>
 
-<p>The ID Token (<em>id_token</em>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#header">a header</a>, <a href="#payload">the payload</a>, and <a href="#signature">the signature</a>.</p>
+<p>The ID Token (<em>id_token</em>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#header">a header</a>, <a href="#id-token-payload">the payload</a>, and <a href="#id-token-signature">the signature</a>.</p>
 
 <h3 id="id-token-header">ID Token Header</h3>
 
@@ -1364,7 +1369,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>client_id</td>
-      <td>Obtained during either <a href="../../guides/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It is the identifier for the client and it must match what is preregistered in Okta.</td>
+      <td>Obtained during either <a href="/docs/api/resources/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It is the identifier for the client and it must match what is preregistered in Okta.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -1952,12 +1957,14 @@ and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-Open
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -1966,17 +1973,22 @@ and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-Open
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

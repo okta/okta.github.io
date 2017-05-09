@@ -5,9 +5,9 @@ author: mraible
 tags: [spring-boot, start.spring.io, java, angular, typescript, angular-cli]
 ---
 
-To simplify development and deployment, you want everything in the same artifact, so you put your Angular app "inside" your Spring Boot app, right? But what if you could create your Angular app as a standalone app and make cross-origin requests to your API? Hey guess what, you can do both! 
+To simplify development and deployment, you want everything in the same artifact, so you put your Angular app "inside" your Spring Boot app, right? But what if you could create your Angular app as a standalone app and make cross-origin requests to your API? Hey guess what, you can do both!
 
-I believe that most frontend developers are used to having their apps standalone and making cross-origin requests to APIs. The beauty of having a client app that can point to a server app is you can point it to *any* server and it makes it easy to test your current client code against other servers (e.g. test, staging, production). 
+I believe that most frontend developers are used to having their apps standalone and making cross-origin requests to APIs. The beauty of having a client app that can point to a server app is you can point it to *any* server and it makes it easy to test your current client code against other servers (e.g. test, staging, production).
 
 This post shows how you can have the best of both worlds where the UI and the API are separate apps. You’ll learn how to create REST endpoints with Spring Data REST, configure Spring Boot to allow CORS, and create an Angular app to display its data. This app will display a list of beers from the API, then fetch a GIF from [https://giphy.com/](http://giphy.com) that matches the beer’s name.
 
@@ -19,15 +19,15 @@ If you don’t want to code along, feel free to grab the [source code from GitHu
 
 ## Build an API with Spring Boot
 
-To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io). In the “Search for dependencies" field, select the following: 
+To get started with Spring Boot, navigate to [start.spring.io](https://start.spring.io). In the “Search for dependencies" field, select the following:
 
 * [DevTools](http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html): Provides auto-reloading of your application when files change
 * [H2](http://www.h2database.com/html/main.html): An in-memory database
 * [JPA](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html): Standard ORM for Java
-* [Rest Repositories](http://projects.spring.io/spring-data-rest/): Allows you to expose your JPA repositories as REST endpoints 
+* [Rest Repositories](http://projects.spring.io/spring-data-rest/): Allows you to expose your JPA repositories as REST endpoints
 * [Web](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-web/pom.xml): Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat
 
-<img alt="start.spring.io" src="/assets/img/blog/angular-spring-boot/start.spring.png" style="width: 800px">
+{% img blog/angular-spring-boot/start.spring.png alt:"start.spring.io" style:"width: 800px" %}
 
 If you like the command-line better, you can use the following command to download a `demo.zip` file with [HTTPie](https://httpie.org/).
 
@@ -36,9 +36,9 @@ http https://start.spring.io/starter.zip \
 dependencies==devtools,h2,data-jpa,data-rest,web -d
 </pre>
 
-Create a directory called `spring-boot-angular-example`, with a `server` directory inside it. Expand the contents of `demo.zip` into the `server` directory. 
+Create a directory called `spring-boot-angular-example`, with a `server` directory inside it. Expand the contents of `demo.zip` into the `server` directory.
 
-Open the “server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`. 
+Open the “server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
 
 Create a `com.example.beer` package and a `Beer.java` file in it. This will be the entity that holds your data.
 
@@ -122,7 +122,7 @@ public class BeerCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         // Top beers from https://www.beeradvocate.com/lists/top/
-        Stream.of("Kentucky Brunch Brand Stout", "Good Morning", "Very Hazy", "King Julius", 
+        Stream.of("Kentucky Brunch Brand Stout", "Good Morning", "Very Hazy", "King Julius",
                 "Budweiser", "Coors Light", "PBR").forEach(name ->
                 repository.save(new Beer(name))
         );
@@ -133,7 +133,7 @@ public class BeerCommandLineRunner implements CommandLineRunner {
 
 Rebuild your project and you should see a list of beers printed in your terminal.
 
-<img alt="Beers printed in terminal" src="/assets/img/blog/angular-spring-boot/beers-in-terminal.png" style="width: 800px">
+{% img blog/angular-spring-boot/beers-in-terminal.png alt:"Beers printed in terminal" style:"width: 800px" %}
 
 Add a [`@RepositoryRestResource`](http://docs.spring.io/spring-data/rest/docs/current/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html) annotation to `BeerRepository` to expose all its CRUD operations as REST endpoints.
 
@@ -189,7 +189,7 @@ public class BeerController {
 
 Re-build your application and navigate to http://localhost:8080/good-beers. You should see the list of good beers in your browser.
 
-<img alt="Good Beers JSON" src="/assets/img/blog/angular-spring-boot/good-beers-json.png" style="width: 800px">
+{% img blog/angular-spring-boot/good-beers-json.png alt:"Good Beers JSON" style:"width: 800px" %}
 
 You should also see this same result in your terminal window when using HTTPie.
 
@@ -232,7 +232,7 @@ Executed 1 of 1 spec SUCCESS in 0.77 sec.
 
 If you’d rather not use the command line and have [IntelliJ IDEA](https://www.jetbrains.com/idea/) (or [WebStorm](https://www.jetbrains.com/webstorm/)) installed, you can create a new Static Web Project and select Angular CLI.
 
-<img alt="IntelliJ new Static Web project" src="/assets/img/blog/angular-spring-boot/intellij-new-static-web-project.png" style="width: 800px">
+{% img blog/angular-spring-boot/intellij-new-static-web-project.png alt:"IntelliJ new Static Web project" style:"width: 800px" %}
 
 ### Create a BeerListComponent and BeerService
 
@@ -332,7 +332,7 @@ Modify `beer-list.component.html` so it renders the list of beers.
 ```
 {% endraw %}
 
-Update `app.component.html` to have the `BeerListComponent` rendered when you’re logged in. 
+Update `app.component.html` to have the `BeerListComponent` rendered when you’re logged in.
 
 ```html
 <app-beer-list></app-beer-list>
@@ -341,13 +341,13 @@ Update `app.component.html` to have the `BeerListComponent` rendered when you’
 Make sure both apps are started (with `mvn spring-boot:run` in the server directory, and `ng serve` in the client directory) and navigate to <http://localhost:4200>. You should see an error in your console that you means you have to configure cross-origin resource sharing (CORS) on the server.
 
 <pre style="color: red">
-XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header 
+XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header
 is present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
 </pre>
 
 To fix this issue, you’ll need to configure Spring Boot to allow cross-domain access from `http://localhost:4200`.
 
-### Configure CORS for Spring Boot 
+### Configure CORS for Spring Boot
 
 In the server project, open `BeerController.java` and add a `@CrossOrigin` annotation to enable cross-origin resource sharing (CORS) from the client (http://localhost:4200).
 
@@ -361,7 +361,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 After making these changes, you should be able to see a list of beers from your Spring Boot API.
 
-<img alt="Beer List in Angular" src="/assets/img/blog/angular-spring-boot/angular-beer-list.png" style="width: 800px">
+{% img blog/angular-spring-boot/angular-beer-list.png alt:"Beer List in Angular" style:"width: 800px" %}
 
 To make it look a little better, add a [Giphy](http://giphy.com) service to fetch images based on the beer’s name. Create `src/app/shared/giphy/giphy.service.ts` and place the following code inside it.
 
@@ -442,9 +442,9 @@ Then update `beer-list.component.html` to include a reference to this image.
 
 The result should look something like the following list of beer names with images.
 
-<img alt="Beer list with Giphy images" src="/assets/img/blog/angular-spring-boot/angular-beer-list-giphy.png" style="width: 800px">
+{% img blog/angular-spring-boot/angular-beer-list-giphy.png alt:"Beer list with Giphy images" style:"width: 800px" %}
 
-You’ve just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations! 
+You’ve just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations!
 
 ## Learn More About Spring Boot and Angular
 

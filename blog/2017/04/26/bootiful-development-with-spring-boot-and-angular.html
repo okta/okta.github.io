@@ -7,37 +7,43 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
+    <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/page-blog.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Bootiful Development with Spring Boot and Angular | Okta Developer</title>
   <meta name="description" content="To simplify development and deployment, you want everything in the same artifact, so you put your Angular app “inside” your Spring Boot app, right? But what ...">
   <link rel="canonical" href="http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
     <body id="blog">
@@ -101,25 +107,34 @@
 		<section id="blog-post" class="main-container">
 	<div class="wrap blog">
 		<section >
-<div class="wrap">
-	<article class="post-block">
-	  <header class="post-title-block">
-	    <h1><a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot and Angular</a></h1>
-	    <div class="attribution">
-	      <img src="/assets/img/avatar-matt_raible.jpg"
-	           alt="avatar-matt_raible.jpg"
-	           class="author-avatar">
-	      <address>Matt Raible</address>
-	      &nbsp;
-		  <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
-		  <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
-		  <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
-		  <span class="sepr">&middot;</span>
-	      <time datetime="2017-04-26">April 26, 2017</time>
-	    </div>
-	  </header>
-	  <section class="post-content">
-	    <p>To simplify development and deployment, you want everything in the same artifact, so you put your Angular app “inside” your Spring Boot app, right? But what if you could create your Angular app as a standalone app and make cross-origin requests to your API? Hey guess what, you can do both!</p>
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot and Angular</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg" alt="avatar-matt_raible.jpg" class="author-avatar">
+            
+            <address>Matt Raible</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/mraible"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/mraible"><i class="fa fa-twitter-square"></i></a>
+            
+            
+            
+              <a class="social_link" href="http://raibledesigns.com"><i class="fa fa-external-link-square"></i></a>
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2017-04-26">April 26, 2017</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     <p>To simplify development and deployment, you want everything in the same artifact, so you put your Angular app “inside” your Spring Boot app, right? But what if you could create your Angular app as a standalone app and make cross-origin requests to your API? Hey guess what, you can do both!</p>
 
 <p>I believe that most frontend developers are used to having their apps standalone and making cross-origin requests to APIs. The beauty of having a client app that can point to a server app is you can point it to <em>any</em> server and it makes it easy to test your current client code against other servers (e.g. test, staging, production).</p>
 
@@ -143,7 +158,7 @@
   <li><a href="https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-web/pom.xml">Web</a>: Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat</li>
 </ul>
 
-<p><img alt="start.spring.io" src="/assets/img/blog/angular-spring-boot/start.spring.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-spring-boot/start.spring-40481d4bc64d1e2aed423435516338966ff8be6ef51ee774ac6eef1124d02b0c.png" alt="start.spring.io" /></p>
 
 <p>If you like the command-line better, you can use the following command to download a <code class="highlighter-rouge">demo.zip</code> file with <a href="https://httpie.org/">HTTPie</a>.</p>
 
@@ -237,7 +252,7 @@ dependencies==devtools,h2,data-jpa,data-rest,web -d
     <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">(</span><span class="n">String</span><span class="o">...</span> <span class="n">strings</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
         <span class="c1">// Top beers from https://www.beeradvocate.com/lists/top/</span>
-        <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Kentucky Brunch Brand Stout"</span><span class="o">,</span> <span class="s">"Good Morning"</span><span class="o">,</span> <span class="s">"Very Hazy"</span><span class="o">,</span> <span class="s">"King Julius"</span><span class="o">,</span> 
+        <span class="n">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"Kentucky Brunch Brand Stout"</span><span class="o">,</span> <span class="s">"Good Morning"</span><span class="o">,</span> <span class="s">"Very Hazy"</span><span class="o">,</span> <span class="s">"King Julius"</span><span class="o">,</span>
                 <span class="s">"Budweiser"</span><span class="o">,</span> <span class="s">"Coors Light"</span><span class="o">,</span> <span class="s">"PBR"</span><span class="o">).</span><span class="na">forEach</span><span class="o">(</span><span class="n">name</span> <span class="o">-&gt;</span>
                 <span class="n">repository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="k">new</span> <span class="n">Beer</span><span class="o">(</span><span class="n">name</span><span class="o">))</span>
         <span class="o">);</span>
@@ -249,7 +264,7 @@ dependencies==devtools,h2,data-jpa,data-rest,web -d
 
 <p>Rebuild your project and you should see a list of beers printed in your terminal.</p>
 
-<p><img alt="Beers printed in terminal" src="/assets/img/blog/angular-spring-boot/beers-in-terminal.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-spring-boot/beers-in-terminal-7b5dce7b41bc6a05c82d4926ca62561a98cc1e8a4227a3f0773eec7d02fa2342.png" alt="Beers printed in terminal" /></p>
 
 <p>Add a <a href="http://docs.spring.io/spring-data/rest/docs/current/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html"><code class="highlighter-rouge">@RepositoryRestResource</code></a> annotation to <code class="highlighter-rouge">BeerRepository</code> to expose all its CRUD operations as REST endpoints.</p>
 
@@ -305,7 +320,7 @@ dependencies==devtools,h2,data-jpa,data-rest,web -d
 
 <p>Re-build your application and navigate to http://localhost:8080/good-beers. You should see the list of good beers in your browser.</p>
 
-<p><img alt="Good Beers JSON" src="/assets/img/blog/angular-spring-boot/good-beers-json.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-spring-boot/good-beers-json-1a0620eb2aba6bd33c1a3b59d600d0ce05dbad8f5fc86dab8e14865114ce50ea.png" alt="Good Beers JSON" /></p>
 
 <p>You should also see this same result in your terminal window when using HTTPie.</p>
 
@@ -348,7 +363,7 @@ Executed 1 of 1 spec SUCCESS <span class="k">in </span>0.77 sec.
 
 <p>If you’d rather not use the command line and have <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> (or <a href="https://www.jetbrains.com/webstorm/">WebStorm</a>) installed, you can create a new Static Web Project and select Angular CLI.</p>
 
-<p><img alt="IntelliJ new Static Web project" src="/assets/img/blog/angular-spring-boot/intellij-new-static-web-project.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-spring-boot/intellij-new-static-web-project-b7ff02752e212d0f02c6ed2b38776a1d62e89b24bad670388cd872e5ae76ab01.png" alt="IntelliJ new Static Web project" /></p>
 
 <h3 id="create-a-beerlistcomponent-and-beerservice">Create a BeerListComponent and BeerService</h3>
 
@@ -455,7 +470,7 @@ mv src/app/beer.service.<span class="k">*</span> src/app/shared/beer/.
 <p>Make sure both apps are started (with <code class="highlighter-rouge">mvn spring-boot:run</code> in the server directory, and <code class="highlighter-rouge">ng serve</code> in the client directory) and navigate to <a href="http://localhost:4200">http://localhost:4200</a>. You should see an error in your console that you means you have to configure cross-origin resource sharing (CORS) on the server.</p>
 
 <pre style="color: red">
-XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header 
+XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header
 is present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
 </pre>
 
@@ -475,7 +490,7 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 
 <p>After making these changes, you should be able to see a list of beers from your Spring Boot API.</p>
 
-<p><img alt="Beer List in Angular" src="/assets/img/blog/angular-spring-boot/angular-beer-list.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-spring-boot/angular-beer-list-76c81e12896a4aeb2a3e8c5f0375bafa314c7275128cb22ac8f8e1db60df90cf.png" alt="Beer List in Angular" /></p>
 
 <p>To make it look a little better, add a <a href="http://giphy.com">Giphy</a> service to fetch images based on the beer’s name. Create <code class="highlighter-rouge">src/app/shared/giphy/giphy.service.ts</code> and place the following code inside it.</p>
 
@@ -554,7 +569,7 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 
 <p>The result should look something like the following list of beer names with images.</p>
 
-<p><img alt="Beer list with Giphy images" src="/assets/img/blog/angular-spring-boot/angular-beer-list-giphy.png" style="width: 800px" /></p>
+<p><img src="/assets/blog/angular-spring-boot/angular-beer-list-giphy-f1d8a4fafe1c7d173a89508c28ab4314047100f0e814869746d2e82b61bb103b.png" alt="Beer list with Giphy images" /></p>
 
 <p>You’ve just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations!</p>
 
@@ -571,13 +586,14 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 
 <p>You can find the source code associated with this article <a href="https://github.com/oktadeveloper/spring-boot-angular-example">on GitHub</a>. If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an <a href="http://stackoverflow.com/questions/tagged/okta">okta tag</a>. Of course, you can always <a href="https://twitter.com/mraible">ping me on Twitter</a> too.</p>
 
-	  </section>
-	</article>
-</div>
+	    </section>
+	  </article>
+  </div>
 </section>
 
 	</div>
 </section>
+
 		
 	</div><footer class="footer">
       <div class="Wrap">
@@ -623,10 +639,12 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -635,17 +653,22 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
 </body>
 </html>
