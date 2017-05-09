@@ -157,17 +157,21 @@ Function  | Return Type | Example | Output
 `isMemberOfGroupNameRegex` | Boolean | `isMemberOfGroupNameRegex("/.*admin.*")` | **True**, if the user under consideration is a member of any groups with names that contain *admin*; otherwise,  **False**.
 `getFilteredGroups` | Array | `getFilteredGroups(whitelist, group_expression, limit)` | Array of groups
 
-##### getFilteredGroups
+##### getFilteredGroups Details
 
-`getFilteredGroups` returns all groups in a specified whitelist of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You can use this function to find both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. You can use this combined, custom-formatted list for customizable claims into access and ID tokens for API access management that drive authorization flows.
+`getFilteredGroups` returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You must specify the maximum number of groups to return.
+
+You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into access and ID tokens for API access management that drive authorization flows.
+
+This function takes Okta EL expressions for two parameters. With these expressions you can create complex definitions for the group format and for the number of groups to return that can include if logic and customized formatting.
 
 Parameter          | Description                                             | DataType | Nullable 
 ------------------ | ------------------------------------------------------- | -------- | -------- 
 whitelist | An array of group names | Array   | FALSE    |
 group_expression | Valid Okta EL expression that evaluates to a group | String | FALSE 
-limit | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive | String | False 
+limit | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return | String | False 
 
-The `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups.html), although it is not limited to those attributes and object. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups.html#group-attributes) section of the Groups API are limited to the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes.
+The `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups.html), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups.html#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes.
  
 **Parameter Examples**
 
