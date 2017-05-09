@@ -99,7 +99,7 @@ ng serve
 
 You should see a screen like the one below at <http://localhost:4200>.
 
-{% img blog/angular-oidc/default-homepage.png alt:"Default Homepage" style:"width: 800px" %}
+{% img blog/angular-oidc/default-homepage.png alt:"Default Homepage" width:"800" %}
 
 You can make sure your new project's tests pass, run `ng test`:
 
@@ -171,7 +171,7 @@ Now that you have routing setup, you can continue writing the search feature.
 
 If you still have `ng serve` running, your browser should refresh automatically. If not, navigate to <http://localhost:4200>, and you should see the search form.
 
-{% img blog/angular-oidc/search-without-css.png alt:"Search component" style:"width: 800px" %}
+{% img blog/angular-oidc/search-without-css.png alt:"Search component" width:"800" %}
 
 If you want to add CSS for this components, open `src/app/search/search.component.css` and add some CSS. For example:
 
@@ -381,7 +381,7 @@ td {
 
 Now the search results look better.
 
-{% img blog/angular-oidc/search-results.png alt:"Search Results" style:"width: 800px" %}
+{% img blog/angular-oidc/search-results.png alt:"Search Results" width:"800" %}
 
 But wait, you still don't have search functionality! To add a search feature, add a `search()` method to `SearchService`.
 
@@ -599,7 +599,7 @@ button {
 
 At this point, you should be able to search for a person and update their information.
 
-{% img blog/angular-oidc/edit-form.png alt:"Edit form" style:"width: 800px" %}
+{% img blog/angular-oidc/edit-form.png alt:"Edit form" width:"800" %}
 
 The `<form>` in `src/app/edit/edit.component.html` calls a `save()` function to update a person's data. You already implemented this above.
 The function calls a `gotoList()` function that appends the person's name to the URL when sending the user back to the search screen.
@@ -672,7 +672,7 @@ You'll also need to wrap everything in a `<form>` element. Add `<form>` after th
 
 After making these changes, any field with a `required` attribute will be required.
 
-{% img blog/angular-oidc/edit-form-validation.png alt:"Edit form with validation" style:"width: 800px" %}
+{% img blog/angular-oidc/edit-form-validation.png alt:"Edit form with validation" width:"800" %}
 
 In this screenshot, you might notice the address fields are blank. This is explained by the error in your console.
 
@@ -697,7 +697,7 @@ To fix, add a `name` attribute to all the address fields. For example:
 
 Now values should display in all fields and `name` should be required.
 
-{% img blog/angular-oidc/edit-form-names.png alt:"Edit form with names and validation" style:"width: 800px" %}
+{% img blog/angular-oidc/edit-form-names.png alt:"Edit form with names and validation" width:"800" %}
 
 With Angular 2, this is all you'll need to do. However, with Angular 4+, you need to a little more work to stop the form from submitting.
 
@@ -725,7 +725,7 @@ To integrate [Okta](http://developer.okta.com) for user authentication, you'll f
 
 Login to your Okta account, or [create one](https://www.okta.com/developer/signup/) if you don’t have one. Navigate to **Admin > Add Applications** and click on the **Create New App** button. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method. Click the **Create** button and give your application a name. On the next screen, add `http://localhost:4200` as a Redirect URI and click *Finish**. You should see settings like the following.
 
-{% img blog/angular-oidc/oidc-settings.png alt:"OIDC App Settings" style:"width: 800px" %}
+{% img blog/angular-oidc/oidc-settings.png alt:"OIDC App Settings" width:"800" %}
 
 Click on the **People** tab and the **Assign to People** button. Assign yourself as a user, or someone else that you know the credentials for.
 
@@ -852,15 +852,15 @@ export class AppModule { }
 
 After making these changes, you should be able to run `ng serve` and see a login button.
 
-{% img blog/angular-oidc/okta-login-button.png alt:"Login button" style:"width: 800px" %}
+{% img blog/angular-oidc/okta-login-button.png alt:"Login button" width:"800" %}
 
 Click the **Login** button and sign-in with one of the people that's configured in your Okta application.
 
-{% img blog/angular-oidc/okta-login-form.png alt:"Okta Login form" style:"width: 800px" %}
+{% img blog/angular-oidc/okta-login-form.png alt:"Okta Login form" width:"800" %}
 
 After logging in, you'll be able to click *Search* and view people's information.
 
-{% img blog/angular-oidc/okta-post-login.png alt:"View after login" style:"width: 800px" %}
+{% img blog/angular-oidc/okta-post-login.png alt:"View after login" width:"800" %}
 
 If it works - great! If you want to build your own login form in your app, continue reading to learn how to use the [Okta Auth SDK](https://github.com/okta/okta-auth-js) with `OAuthService`.
 
@@ -939,7 +939,7 @@ declare let OktaAuth: any;
 
 After making these changes, the `HomeComponent` should render as follows.
 
-{% img blog/angular-oidc/sign-in-form.png alt:"Custom sign-in form" style:"width: 800px" %}
+{% img blog/angular-oidc/sign-in-form.png alt:"Custom sign-in form" width:"800" %}
 
 Import Angular’s `Router`, add it as a dependency in the constructor, and add local variables for the username and password fields. Then implement a `loginWithPassword()` method in `HomeComponent`. This method uses the `OktaAuth` library to get a session token and exchange it for ID and access tokens.
 
@@ -989,7 +989,7 @@ export class HomeComponent {
 
 You should be able to sign in using the form, using one of your app's registered users. After logging in, you'll be able to click the **Search** link and view people's information.
 
-{% img blog/angular-oidc/sign-in-form-success.png alt:"View after sign-in" style:"width: 800px" %}
+{% img blog/angular-oidc/sign-in-form-success.png alt:"View after sign-in" width:"800" %}
 
 ## Angular + Okta
 

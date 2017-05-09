@@ -67,7 +67,7 @@ Project 'angular-okta-example' successfully created.
 
 This will create a new `angular-okta-example` directory and install all the necessary dependencies. To verify everything works, run `ng e2e` in a terminal window. All tests should pass and you should see results like the following.
 
-{% img blog/angular-sign-in-widget/e2e-success.png alt:"Running e2e" style:"width: 800px" %}
+{% img blog/angular-sign-in-widget/e2e-success.png alt:"Running e2e" width:"800" %}
 
 ## Integrate Okta’s Sign-In Widget in Angular
 
@@ -138,7 +138,7 @@ OpenID Connect is built on top of the OAuth 2.0 protocol. It allows clients to v
 
 Login to your Okta account, or create one at [http://developer.okta.com](http://developer.okta.com) if you don't have one. Navigate to **Admin > Add Applications** and click on the **Create New App** button. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method. Click the **Create** button and give your application a name. On the next screen, add **http://localhost:4200** as a Redirect URI and click **Finish**. You should see settings like the following.
 
-{% img blog/angular-sign-in-widget/oidc-settings.png alt:"OIDC App Settings" style:"width: 800px" %}
+{% img blog/angular-sign-in-widget/oidc-settings.png alt:"OIDC App Settings" width:"800" %}
 
 Click on the **People** tab and the **Assign to People** button. Assign yourself as a user, or someone else that you know the credentials for.
 
@@ -207,7 +207,7 @@ And modify `app.component.html` to have a `<div>` with `id="okta-login-container
 
 Run `ng serve`, and open your browser to [http://localhost:4200](http://localhost:4200). You should see the sign-in widget.
 
-{% img blog/angular-sign-in-widget/sign-in-widget.png alt:"Sign-In Widget" style:"width: 800px" %}
+{% img blog/angular-sign-in-widget/sign-in-widget.png alt:"Sign-In Widget" width:"800" %}
 
 However, if you look at your browser's console, you'll likely see an error:
 
@@ -221,11 +221,11 @@ This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable
 select **Security** > **API** > **Trusted Origins**. Click the "Add Origin" button and specify `http://localhost:4200`
 as the Origin URL with Type `CORS`. For more specific instructions, see Okta's [Enabling CORS documentation](http://developer.okta.com/docs/api/getting_started/enabling_cors.html).
 
-{% img blog/angular-sign-in-widget/cors-configuration.png alt:"CORS Configuration" style:"width: 800px" %}
+{% img blog/angular-sign-in-widget/cors-configuration.png alt:"CORS Configuration" width:"800" %}
 
 After making this change, enter an assigned person's credentials to login. You should see a "Hello {email}" message with a logout button.
 
-{% img blog/angular-sign-in-widget/login-success.png alt:"Login Success" style:"width: 800px" %}
+{% img blog/angular-sign-in-widget/login-success.png alt:"Login Success" width:"800" %}
 
 **NOTE:** You may experience an issue where the sign-in process seems to hang. Clicking anywhere in the browser window seems to solve this problem. I’m not sure why.
 
@@ -267,7 +267,7 @@ Remove the CSS `@import` statements to added to `src/styles.css`. Add an `@impor
 
 After making these changes, the sign-in widget will look like the following screenshot.
 
-{% img blog/angular-sign-in-widget/custom-css.png alt:"Custom CSS" style:"width: 800px" %}
+{% img blog/angular-sign-in-widget/custom-css.png alt:"Custom CSS" width:"800" %}
 
 ## Fix Your Tests
 If you try to run `npm test` or `ng test`, tests will fail:

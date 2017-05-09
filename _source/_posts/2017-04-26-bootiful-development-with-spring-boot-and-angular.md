@@ -27,7 +27,7 @@ To get started with Spring Boot, navigate to [start.spring.io](https://start.spr
 * [Rest Repositories](http://projects.spring.io/spring-data-rest/): Allows you to expose your JPA repositories as REST endpoints
 * [Web](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-web/pom.xml): Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat
 
-{% img blog/angular-spring-boot/start.spring.png alt:"start.spring.io" style:"width: 800px" %}
+{% img blog/angular-spring-boot/start.spring.png alt:"start.spring.io" width:"800" %}
 
 If you like the command-line better, you can use the following command to download a `demo.zip` file with [HTTPie](https://httpie.org/).
 
@@ -133,7 +133,7 @@ public class BeerCommandLineRunner implements CommandLineRunner {
 
 Rebuild your project and you should see a list of beers printed in your terminal.
 
-{% img blog/angular-spring-boot/beers-in-terminal.png alt:"Beers printed in terminal" style:"width: 800px" %}
+{% img blog/angular-spring-boot/beers-in-terminal.png alt:"Beers printed in terminal" width:"800" %}
 
 Add a [`@RepositoryRestResource`](http://docs.spring.io/spring-data/rest/docs/current/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html) annotation to `BeerRepository` to expose all its CRUD operations as REST endpoints.
 
@@ -189,7 +189,7 @@ public class BeerController {
 
 Re-build your application and navigate to http://localhost:8080/good-beers. You should see the list of good beers in your browser.
 
-{% img blog/angular-spring-boot/good-beers-json.png alt:"Good Beers JSON" style:"width: 800px" %}
+{% img blog/angular-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}
 
 You should also see this same result in your terminal window when using HTTPie.
 
@@ -232,7 +232,7 @@ Executed 1 of 1 spec SUCCESS in 0.77 sec.
 
 If you’d rather not use the command line and have [IntelliJ IDEA](https://www.jetbrains.com/idea/) (or [WebStorm](https://www.jetbrains.com/webstorm/)) installed, you can create a new Static Web Project and select Angular CLI.
 
-{% img blog/angular-spring-boot/intellij-new-static-web-project.png alt:"IntelliJ new Static Web project" style:"width: 800px" %}
+{% img blog/angular-spring-boot/intellij-new-static-web-project.png alt:"IntelliJ new Static Web project" width:"800" %}
 
 ### Create a BeerListComponent and BeerService
 
@@ -361,7 +361,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 After making these changes, you should be able to see a list of beers from your Spring Boot API.
 
-{% img blog/angular-spring-boot/angular-beer-list.png alt:"Beer List in Angular" style:"width: 800px" %}
+{% img blog/angular-spring-boot/angular-beer-list.png alt:"Beer List in Angular" width:"800" %}
 
 To make it look a little better, add a [Giphy](http://giphy.com) service to fetch images based on the beer’s name. Create `src/app/shared/giphy/giphy.service.ts` and place the following code inside it.
 
@@ -442,7 +442,7 @@ Then update `beer-list.component.html` to include a reference to this image.
 
 The result should look something like the following list of beer names with images.
 
-{% img blog/angular-spring-boot/angular-beer-list-giphy.png alt:"Beer list with Giphy images" style:"width: 800px" %}
+{% img blog/angular-spring-boot/angular-beer-list-giphy.png alt:"Beer list with Giphy images" width:"800" %}
 
 You’ve just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations!
 

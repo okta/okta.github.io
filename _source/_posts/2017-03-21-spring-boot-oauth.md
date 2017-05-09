@@ -64,20 +64,20 @@ spring run helloGroovy.groovy
 
 Navigate to [http://localhost:8080](http://localhost:8080) and you'll be prompted to login with your browser's basic authentication dialog. Enter `user` for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you'll see `Hello World` in your browser.
 
-{% img blog/spring-boot-oauth/0-hello-world.png alt:"Hello World" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/0-hello-world.png alt:"Hello World" width:"800" %}
 
 ## Create an Authorization Server in Okta
 
 To start authenticating against Okta'a API, you have to first create a developer account on [http://developer.okta.com](http://developer.okta.com). After activating your account, sign in and navigate to **Security > API** and click on the **Add Authorization Server** button.
 
-{% img blog/spring-boot-oauth/1-add-auth-server.png alt:"Add Authorization Server" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/1-add-auth-server.png alt:"Add Authorization Server" width:"800" %}
 
 Enter the name and Resource URI of your choosing. The names aren't important at this time. I used the following values:
 
 * **Name:** Oktamus Prime
 * **Resource URI:** http://authenticat.is.easy/withokta
 
-{% img blog/spring-boot-oauth/2-auth-server-settings.png alt:"Authorization Server Settings" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/2-auth-server-settings.png alt:"Authorization Server Settings" width:"800" %}
 
 The Metadata URI you see in this screenshot will come in handy later when you need to specify `accessTokenUri` and `userAuthorizationUri` values.
 
@@ -85,15 +85,15 @@ The Metadata URI you see in this screenshot will come in handy later when you ne
 
 To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to **Applications > Add Application** and click on the **Create New App** button. The application name isn't important, you can use whatever you like. 
 
-{% img blog/spring-boot-oauth/4-oidc-name.png alt:"OIDC App Name" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/4-oidc-name.png alt:"OIDC App Name" width:"800" %}
 
 Click **Next** to configure OIDC. Add `http://localhost:8080` as a Redirect URI and click **Finish**.
 
-{% img blog/spring-boot-oauth/5-redirect-uris.png alt:"OIDC Redirects" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/5-redirect-uris.png alt:"OIDC Redirects" width:"800" %}
 
 The next screen should look similar to the following screenshot.
 
-{% img blog/spring-boot-oauth/6-oidc-settings.png alt:"OIDC Settings" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/6-oidc-settings.png alt:"OIDC Settings" width:"800" %}
 
 Your `clientId` and `clientSecret` values for this app will be just below the fold. 
 
@@ -136,15 +136,15 @@ security:
 
 Start your app with `spring run helloOAuth.groovy` and navigate to [http://localhost:8080](http://localhost:8080). You'll be redirected to Okta, but likely see the following error.
 
-{% img blog/spring-boot-oauth/7-bad-request-invalid-redirect.png alt:"Bad Request, Invalid Redirect" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/7-bad-request-invalid-redirect.png alt:"Bad Request, Invalid Redirect" width:"800" %}
 
 This happens because Spring Security sends a `redirect_uri` value of `http://localhost:8080/login`. Navigate to your Okta developer instance and change your OIDC app to have this as a Redirect URI.
 
-{% img blog/spring-boot-oauth/8-add-redirect-uri.png alt:"Add Redirect URI" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/8-add-redirect-uri.png alt:"Add Redirect URI" width:"800" %}
 
 If you hit [http://localhost:8080](http://localhost:8080) again, this time you'll get an error that doesn't explain as much.
 
-{% img blog/spring-boot-oauth/9-no-scopes.png alt:"No Scopes" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/9-no-scopes.png alt:"No Scopes" width:"800" %}
 
 The whitelabel error page doesn't tell you anything, but your browser's address window does: _no scopes were requested_. Modify `application.yml` to have a `scope` property at the same level as `clientAuthenticationScheme`. These are some standard OIDC scopes. 
 
@@ -155,29 +155,29 @@ The whitelabel error page doesn't tell you anything, but your browser's address 
 
 Try [http://localhost:8080](http://localhost:8080) again and you'll get an error that _User is not assigned to the client app_. Again, you'll have to look in the address bar to see it.
 
-{% img blog/spring-boot-oauth/10-user-not-assigned.png alt:"User Not Assigned" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/10-user-not-assigned.png alt:"User Not Assigned" width:"800" %}
 
 Open your OIDC app in Okta and **Assign People** to it. Adding your own account is the easiest way to do this.
 
 The next error you'll see when trying to authenticate is _Policy evaluation failed_. 
 
-{% img blog/spring-boot-oauth/11-policy-evaluation-failure.png alt:"Policy Evaluation Failure" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/11-policy-evaluation-failure.png alt:"Policy Evaluation Failure" width:"800" %}
 
 In Okta's UI, navigate to **Security > API** and click on your Authorization Server's name and **Access Policies**. Click **Add Policy** to continue.
 
-{% img blog/spring-boot-oauth/12-access-policies.png alt:"Access Policies" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/12-access-policies.png alt:"Access Policies" width:"800" %}
 
 Enter a name and description and set it to apply to all clients.
 
-{% img blog/spring-boot-oauth/13-add-policy.png alt:"Add Policy" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/13-add-policy.png alt:"Add Policy" width:"800" %}
 
 Click **Create Policy** to continue. Once that completes, click the **Add Rule** button.
 
-{% img blog/spring-boot-oauth/14-add-rule.png alt:"Add Rule" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/14-add-rule.png alt:"Add Rule" width:"800" %}
 
 Give the rule a name, accept the default values, and click the **Create Rule** button.
 
-{% img blog/spring-boot-oauth/15-default-grant-rules.png alt:"Default Grant Rules" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/15-default-grant-rules.png alt:"Default Grant Rules" width:"800" %}
 
 Try [http://localhost:8080](http://localhost:8080) again and this time it should work. If it does - congrats!
 
@@ -192,7 +192,7 @@ String home(java.security.Principal user) {
 
 This should result in your app showing a result like the following.
 
-{% img blog/spring-boot-oauth/16-success.png alt:"Success" style:"width: 800px" %}
+{% img blog/spring-boot-oauth/16-success.png alt:"Success" width:"800" %}
 
 ## Get the Source Code
 

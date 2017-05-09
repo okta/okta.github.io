@@ -77,7 +77,7 @@ In order to *use* Okta as your OpenID Connect provider for authentication, youâ€
 
 So log in to your Okta account, [or create one](http://developer.okta.com] if you havenâ€™t yet. Navigate to Admin > Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add `http://localhost:3000` as a Redirect URI and click Finish. You should see settings like the following.
 
-{% img blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener.png alt:"OIDC Application Settings" style:"width: 800px" %}
+{% img blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener.png alt:"OIDC Application Settings" width:"800" %}
 
 Make note of the `Client ID` (yours shouldn't be blurred out) and make note of your Dev ID (it's the number part of your subdomain of the URL) So if you are at https://dev-1234-admin.oktapreview.com/... your Dev ID is 1234. 
 
