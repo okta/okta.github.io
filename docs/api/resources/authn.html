@@ -148,6 +148,7 @@
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
                 <li><a href="/docs/api/resources/templates.html">Templates</a></li>
                 <li><a href="/docs/api/resources/users.html">Users</a></li>
+                <li><a href="/docs/api/resources/zones.html">Zones</a></li>
               </ul>
             </li>
             <li>
@@ -429,7 +430,7 @@
 
 <p><a href="#authentication-transaction-model">Authentication Transaction Object</a> with the current <a href="#transaction-state">state</a> for the authentication transaction.</p>
 
-<p><code class="highlighter-rouge">401 Unauthorized</code> status code is returned for requests with invalid credentials or locked out accounts.</p>
+<p><code class="highlighter-rouge">401 Unauthorized</code> status code is returned for requests with invalid credentials, locked out accounts or access denied by sign-on policy.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -440,25 +441,6 @@
   </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000004"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeuHRrvMnuRga5UzpKIOhKpQ"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<p><code class="highlighter-rouge">403 Forbidden</code> status code is returned for requests with valid credentials but the user is denied access via <strong>Sign-On Policy</strong> or <strong>MFA Policy</strong>.</p>
-
-<blockquote>
-  <p>Ensure the user is assigned to a valid <strong>MFA Policy</strong> if additional verification is required in the user’s <strong>Sign-On Policy</strong>.</p>
-</blockquote>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-    </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000085"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have permission to access your account at this time."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000085"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeLngBsntPSj2IVcrEWcAZSA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -534,7 +516,7 @@
 
 <h5 class="api api-response api-response-example" id="response-example-invalid-credentials">Response Example (Invalid Credentials)</h5>
 
-<p>Primary authentication requests with an invalid <code class="highlighter-rouge">username</code> or <code class="highlighter-rouge">password</code> fail with a <code class="highlighter-rouge">401 Unauthorized</code> error.</p>
+<p><code class="highlighter-rouge">401 Unauthorized</code> status code is returned for requests with invalid credentials or when access is denied based on sign-on policy.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -545,23 +527,6 @@
   </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000004"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeuHRrvMnuRga5UzpKIOhKpQ"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-example-access-denied">Response Example (Access Denied)</h5>
-
-<p>Primary authentication request has valid credentials but the user is denied access via  <strong>Sign-On Policy</strong> or <strong>MFA Policy</strong> with <code class="highlighter-rouge">403 Forbidden</code> error.</p>
-
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">403</span> <span class="ne">Forbidden</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-
-<span class="p">{</span><span class="w">
-    </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000085"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You do not have permission to access your account at this time."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000085"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeLngBsntPSj2IVcrEWcAZSA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>

@@ -205,8 +205,9 @@
 
 <ol>
   <li>
-    <p>Log in to your Okta organization as a user with admin
-privileges.</p>
+    <p>Log in to your Okta organization as a user with <a href="https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators">administrator
+privileges</a>. API tokens have the same permissions as the user who creates them,
+and if the user permissions change, the API token permissions will also change.</p>
 
     <p>If you don’t have an Okta organization, you can create a free Okta
 Developer Edition organization <a href="https://www.okta.com/developer/signup/" target="_blank">at this link</a>.</p>
@@ -241,14 +242,10 @@ Developer Edition organization <a href="https://www.okta.com/developer/signup/" 
 
 <p>If a user account is deactivated in Okta, the API Token is deprovisioned at the same time.</p>
 
-<h2 id="token-permissions">Token Permissions</h2>
+<h2 id="token-best-practice-service-account">Token Best Practice: Service Account</h2>
 
-<p>API tokens inherit the API access of the user who creates them.</p>
-
-<p>Tasks in the UI or API and the role required to perform them have been
-documented:</p>
-
-<p><a href="https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators">Administrator Roles</a></p>
+<p>API tokens inherit the API access of the user who creates them, so we recommend you create a “service account”
+user with only the permission levels you need for the token to perform the API tasks you require.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
