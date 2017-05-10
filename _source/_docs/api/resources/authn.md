@@ -105,7 +105,7 @@ It is recommended that you generate a UUID or GUID for each client and persist t
 
 [Authentication Transaction Object](#authentication-transaction-model) with the current [state](#transaction-state) for the authentication transaction.
 
-`401 Unauthorized` status code is returned for requests with invalid credentials or locked out accounts.
+`401 Unauthorized` status code is returned for requests with invalid credentials, locked out accounts or access denied by sign-on policy.
 
 ~~~http
 HTTP/1.1 401 Unauthorized
@@ -117,23 +117,6 @@ Content-Type: application/json
   "errorLink": "E0000004",
   "errorId": "oaeuHRrvMnuRga5UzpKIOhKpQ",
   "errorCauses": []
-}
-~~~
-
-`403 Forbidden` status code is returned for requests with valid credentials but the user is denied access via **Sign-On Policy** or **MFA Policy**.
-
-> Ensure the user is assigned to a valid **MFA Policy** if additional verification is required in the user's **Sign-On Policy**.
-
-~~~http
-HTTP/1.1 403 Forbidden
-Content-Type: application/json
-
-{
-    "errorCode": "E0000085",
-    "errorSummary": "You do not have permission to access your account at this time.",
-    "errorLink": "E0000085",
-    "errorId": "oaeLngBsntPSj2IVcrEWcAZSA",
-    "errorCauses": []
 }
 ~~~
 
@@ -209,7 +192,7 @@ Users with a valid password not assigned to a **Sign-On Policy** with additional
 ##### Response Example (Invalid Credentials)
 {:.api .api-response .api-response-example}
 
-Primary authentication requests with an invalid `username` or `password` fail with a `401 Unauthorized` error.
+`401 Unauthorized` status code is returned for requests with invalid credentials or when access is denied based on sign-on policy.
 
 ~~~http
 HTTP/1.1 401 Unauthorized
@@ -221,24 +204,6 @@ Content-Type: application/json
   "errorLink": "E0000004",
   "errorId": "oaeuHRrvMnuRga5UzpKIOhKpQ",
   "errorCauses": []
-}
-~~~
-
-##### Response Example (Access Denied)
-{:.api .api-response .api-response-example}
-
-Primary authentication request has valid credentials but the user is denied access via  **Sign-On Policy** or **MFA Policy** with `403 Forbidden` error.
-
-~~~http
-HTTP/1.1 403 Forbidden
-Content-Type: application/json
-
-{
-    "errorCode": "E0000085",
-    "errorSummary": "You do not have permission to access your account at this time.",
-    "errorLink": "E0000085",
-    "errorId": "oaeLngBsntPSj2IVcrEWcAZSA",
-    "errorCauses": []
 }
 ~~~
 
