@@ -59,10 +59,6 @@ Syntax  | Definitions | Examples
 -------- | ---------- | ------------
 `org.$attribute` | `org` reference to Okta org<br>`$attribute` the attribute variable name | org.domain
 
-
-> For a full list of App and Org attributes, contact your Support or Professional Services team.
-
-
 ## Functions
 
 Okta offers a variety of functions to manipulate attributes or properties to generate a desired output.  Functions can be combined and nested inside a single expression.
