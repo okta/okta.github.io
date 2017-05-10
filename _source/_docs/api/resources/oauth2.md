@@ -436,6 +436,17 @@ Error Id           | Details                                                    
 login_required     | The request specified that no prompt should be shown but the user is currently not authenticated.    |
 insufficient_scope | The access token provided does not contain the necessary scopes to access the resource.              |
 
+#### Request Example: Resource Owner Password Flow
+
+~~~
+curl -X POST \
+  https://danger.oktapreview.com/oauth2/aus8tf1sb1BJ7vywW0h7/v1/token \
+  --header "accept: application/json" \
+  --header "cache-control: no-cache" \
+  --header "content-type: application/x-www-form-urlencoded" \
+  -d 'grant_type=password&username=<username>&password=<password>&scope=api%3Aread&client_id=<clientid>&client_secret=<secret>'
+~~~
+
 #### Response Example (Success)
 
 The request is made with a *fragment* response mode.
@@ -482,15 +493,21 @@ The following parameters can be posted as a part of the URL-encoded form values 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
 grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta uses to authorize the creation of the tokens. | String |  
-code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String
-refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
-username           | Expected if the grant_type specified *password*. | String |
-password           | Expected if the grant_type specified *password*. | String |
+code               | Required if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String
+refresh_token      | Required if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
+username           | Required if the grant_type specified *password*. | String |
+password           | Required if the grant_type specified *password*. | String |
 scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
-redirect_uri       | Expected if grant_type specified *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-code_verifier      | Expected if grant_type specified *authorization_code* for native applications. The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
-client_id          | Expected if *code_verifier* is included or client credentials are not provided in the Authorization header. This is used in conjunction with the client_secret parameter to authenticate the client application. | String |
-client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the Authorization header. This is used in conjunction with the client_id parameter to authenticate the client application. | String |
+redirect_uri       | Required if grant_type specified *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
+code_verifier      | Required if grant_type specified *authorization_code* for native applications. The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
+client_id          | Required if *code_verifier* is included or client credentials are not provided in the Authorization header. This is used in conjunction with the client_secret parameter to authenticate the client application. | String |
+client_secret      | Required if *code_verifier* is not included and client credentials are not provided in the Authorization header. This is used in conjunction with the client_id parameter to authenticate the client application. | String |
+
+Parameter Details:
+
+* Configure your client app for the `grant_type` selected. To check the configuration, navigate to the Okta user interface and choose **Admin** > **Applications** > *Application Name* > **General** > **General Settings**.
+* You can use a session token in the authorization header of a token request in the resource owner password flow (`grant_type` = `password`)
+* If client credentials are not provided in the Authorization header, `client_id` and `client_secret` are required. For example, if `grant_type` is `password` (resource owner password flow), `client_id` and `client_secret` are required.
 
 ##### Token Authentication Method
 
@@ -503,7 +520,7 @@ For authentication with Basic auth, an HTTP header with the following format mus
 Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 ~~~
 
-#### Response Parameters
+#### Grant Types and Tokens in the Response
 
 Based on the grant type, the returned JSON can contain a different set of tokens.
 
@@ -531,6 +548,17 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 invalid_grant           | The *code* or *refresh_token* value was invalid, or the *redirect_uri* does not match the one used in the authorization request. |
 unsupported_grant_type  | The grant_type was not *authorization_code* or *refresh_token*. |
 invalid_scope           | The scopes list contains an invalid or unsupported value.    |
+
+#### Request Example: Resource Owner Password Flow
+
+~~~
+curl -X POST \
+  https://danger.oktapreview.com/oauth2/aus8tf1sb1BJ7vywW0h7/v1/token \
+  --header "accept: application/json" \
+  --header "cache-control: no-cache" \
+  --header "content-type: application/x-www-form-urlencoded" \
+  -d 'grant_type=password&username=<username>&password=<password>&scope=api%3Aread&client_id=<clientid>&client_secret=<secret>'
+~~~
 
 #### Response Example (Success)
 
