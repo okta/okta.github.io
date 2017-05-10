@@ -534,15 +534,15 @@ invalid_scope           | The scopes list contains an invalid or unsupported val
 
 #### Request Example: Resource Owner Password Flow
 
-~~~
+~~~sh
 curl -X POST \
-  https://westworld.okta.com/oauth2/aus9s3ami4MRoqQR90h7/v1/token \
-  -H 'accept: application/json' \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: application/x-www-form-urlencoded' \
-  -d 'grant_type=password&username=dolores.abernathy%40westworld.com&
+  "https://westworld.okta.com/oauth2/aus9s3ami4MRoqQR90h7/v1/token" \
+  -H "Accept: application/json" \
+  -H "Cache-Control: no-cache" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=password&username=dolores.abernathy%40westworld.com&
       password=<password>&scope=openid&client_id=<client_id>
-      & client_secret=<client_secret>'
+      & client_secret=<client_secret>"
 ~~~
 
 #### Response Example: Resource Owner Password Flow
