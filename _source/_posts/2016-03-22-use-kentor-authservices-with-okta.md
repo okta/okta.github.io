@@ -24,14 +24,14 @@ Here's how you should configure an app powered by Kentor AuthServices to make it
 
 1. Download the latest version of KentorIT's AuthServices from <https://github.com/KentorIT/authservices> and open the Kentor.AuthServices.sln solution in Visual Studio.
 2. Identify the SampleApplication project and make a note of its URL property:
-  ![Visual Studio Project properties](/assets/img/KentorOkta/VSProjectProperties.png)
+  {% img KentorOkta/VSProjectProperties.png alt:"Visual Studio Project properties" %}
 3. Go to you Okta organization and navigate to Admin => Applications.
 4. Press the **Add Application** button and the green **Create New App** button
-  ![Press the Create a new Okta app](/assets/img/KentorOkta/CreateNewAppButton.png)
+  {% img KentorOkta/CreateNewAppButton.png alt:"Press the Create a new Okta app" %}
 5. Select the **SAML 2.0** option and press the **Create** button.
-  ![Choose the SAML 2.0 template](/assets/img/KentorOkta/SAML2Option.png)
+  {% img KentorOkta/SAML2Option.png alt:"Choose the SAML 2.0 template" %}
 6. Give your application a name and optionally upload a custom logo. We'll call it "**Kentor AuthServices App 1**"
-  ![Give your Okta app a name](/assets/img/KentorOkta/OktaAppName.png)
+  {% img KentorOkta/OktaAppName.png alt:"Give your Okta app a name" %}
 7. Press **Next**.
 8. In the **Single sign on URL** field, enter the url you retrieved above in step #2 and append " **/AuthServices/Acs**", for instance **http://localhost:18714/SamplePath/AuthServices/Acs**
 9. For the Audience URI field, enter the Url you retrieved above in step #2 and append " **/AuthServices**", for instance **http://localhost:18714/SamplePath/AuthServices**
@@ -44,19 +44,19 @@ Here's how you should configure an app powered by Kentor AuthServices to make it
 
     Otherwise, you may switch to RSA-SHA1 though we do not recommend it (as it less secure than SHA-256).
 12. In the Attribute Statements section, optionally enter additional attributes, such as in the following screenshot:
-  ![Optional Attribute Statements](/assets/img/KentorOkta/OptionalAttributeStatements.png)
+  {% img KentorOkta/OptionalAttributeStatements.png alt:"Optional Attribute Statements" %}
 13. Press the **Next** button. Select the **I'm a software vendor** option (if you're indeed a vendor - if you are developing an internal app, select the first option) and press the Finish button.
-  ![Select the customer or vendor option](/assets/img/KentorOkta/VendorOrCustomerOption.png)
+  {% img KentorOkta/VendorOrCustomerOption.png alt:"Select the customer or vendor option" %}
 14. Now edit the web.config file of the SampleApplication project.
 15. In the `<kentor.authServices>` section, enter the following values:
   - **entityId** = same value as the Audience URI for the Okta app, e.g. [http://localhost:18714/SamplePath/AuthServices](http://localhost:18714/SamplePath/AuthServices)
   - **returnUrl** = value of the web application's url, i.e. [http://localhost:18714/SamplePath](http://localhost:18714/SamplePath)
 16. In the <identityProviders> section, enter the following values:
   - **entityId** = **Identity Provider Issuer** from **Sign On** => **View Setup Instructions**
-    ![View setup instructions](/assets/img/KentorOkta/ViewSetupInstructions.png)
-    ![Identity Provider Issuer](/assets/img/KentorOkta/IdentityProviderIssuer.png)
+    {% img KentorOkta/ViewSetupInstructions.png alt:"View setup instructions" %}
+    {% img KentorOkta/IdentityProviderIssuer.png alt:"Identity Provider Issuer" %}
   - **signOnUrl** = value of the **Identity Provider Single Sign-On URL** below
-    ![Identity Provider Single Sign-On URL](/assets/img/KentorOkta/IdPSSOUrl.png)
+    {% img KentorOkta/IdPSSOUrl.png alt:"Identity Provider Single Sign-On URL" %}
   - In the `<signingCertificate>` section, download the **okta.cert** X.509 certificate from the instructions page in the Okta app and put it in the **App\_Data** folder of your web application. Then reference it accordingly (such as with **fileName="~/App\_Data/okta.cert**") in the web.config file.
 
 

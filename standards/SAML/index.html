@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>SAML | Okta Developer</title>
   <meta name="description" content="Enable single sign-on for your web and mobile application">
   <link rel="canonical" href="http://developer.okta.com/standards/SAML/">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -205,7 +210,7 @@
 
 <p>SAML is mostly used as a web-based authentication mechanism inasmuch as it relies on using the browser agent to broker the authentication flow.  At a high-level, the authentication flow of SAML looks like this:</p>
 
-<p><img src="/assets/img/saml_guidance_saml_flow.png" alt="SAML Flow" title="SAML Flow" /></p>
+<p><img src="/assets/saml_guidance_saml_flow-28dd48fbbb9ad2f9ff036ef147088c88a0e2901d3093c2fc6d33618eccd77829.png" saml="" flow="" alt="SAML Flow" /></p>
 
 <p>We are now ready to introduce some common SAML terms.  We will go into the technical details of these later – but it is important to understand the high-level concept during the planning stage.</p>
 
@@ -293,15 +298,15 @@
 
 <p>If you are building an internal app and you want to SAML-enable it in order to integrate with your corporate SAML identity provider, then you are looking at supporting only a single IDP.  In this case, your app only needs to deal with a single set of IDP metadata (cert, endpoints, etc).</p>
 
-<p><img src="/assets/img/saml_guidance_one_idp.png" alt="Single IDP" title="Single IDP" /></p>
+<p><img src="/assets/saml_guidance_one_idp-a608c594e72ee484e731d30d6259dd59d18f527a4750e3c95ce12d43b09f90ec.png" single="" idp="" alt="Single IDP" /></p>
 
 <p>If you are an ISV building an enterprise SaaS product, or if you are building an external facing website/portal/community for your customers and partners, then you need to look at supporting multiple IDPs.  This is the typical use case for many SaaS ISVs needing to integrate with customers’ corporate identity infrastructure.  Depending on the architecture of your application, you need to think about ways to store the SAML configuration (eg. Certificates, IDP login URLs) from each identity provider, as well as how you will provide the necessary SP information for each.</p>
 
-<p><img src="/assets/img/saml_guidance_many_idp.png" alt="Many IDPs" title="Many IDPs" /></p>
+<p><img src="/assets/saml_guidance_many_idp-29aaf3adeabf7aa0cd0be9b3d503e8c85ded5f92163249d43242b2ffeb44cbc9.png" many="" idps="" alt="Many IDPs" /></p>
 
 <p>A key consideration involves the ACSurl endpoint on the SP side where SAML responses are posted. It is possible to expose a single endpoint even when dealing with multiple IDPs.  For a single-instance multi-tenant application where the tenancy is not defined in the URL (such as via a subdomain), this might be a simpler way to implement.  However, you must then rely on additional information in the SAML response to determine which IDP is trying to authenticate (for example, using the IssuerID).  If your application is architected in a multi-tenant fashion with domain information in the URL (for example, <em>https://domain1.myISV.com</em> or <em>https://www.myISV.com/domain1</em>), then having an ACSurl endpoint for each subdomain might be a good option since the URL itself identifies the domain.</p>
 
-<p><img src="/assets/img/saml_guidance_many_idp_subdomain.png" alt="SP with subdomains" title="SPs with Subdomains" /></p>
+<p><img src="/assets/saml_guidance_many_idp_subdomain-7397a578ee616cadcf37ad6eea64b4c2a0fc581fc8b34da400a8b7159a8576cf.png" sps="" with="" subdomains="" alt="SP with subdomains" /></p>
 
 <h3 id="understanding-sp-initiated-login-flow">Understanding SP-initiated Login Flow</h3>
 
@@ -317,7 +322,7 @@
 
 <p>In the case of a deeplink, the SP will set the RelayState of the SAML request with the deep-link value.  When the SAML response comes back, the SP can use the RelayState value and take the authenticated user to the right resource.  Here is an example of the flow.</p>
 
-<p><img src="/assets/img/saml_guidance_deeplink.png" alt="SP-initiated Login with Deep Link" title="SP-initiated flow with Deep Link" /></p>
+<p><img src="/assets/saml_guidance_deeplink-33c4be41a41209d06eacd0d69b8b48fcb61e31fb596bff3747ffc15ff8a6397a.png" sp-initiated="" flow="" with="" deep="" link="" alt="SP-initiated Login with Deep Link" /></p>
 
 <h3 id="exposing-saml-configuration-in-sp">Exposing SAML configuration in SP</h3>
 
@@ -359,9 +364,9 @@ can help you build your applications and integrations:</p>
   <li><a href="https://en.wikipedia.org/wiki/.NET_Framework_version_history">.NET Framework</a> 4.5 or above: <a href="https://github.com/KentorIT/authservices#kentor-authentication-services">Kentor Authentication Services</a></li>
   <li>.NET Framework 4 or below: <a href="http://www.componentspace.com/SAMLv20.aspx">ComponentSpace SAML 2.0</a> - Paid software, licenses start at $299</li>
   <li>Java: <a href="https://shibboleth.net/products/opensaml-java.html">OpenSAML</a></li>
-  <li>Java/Spring: <a href="/docs/guides/spring_security_saml.html">Spring Security SAML</a></li>
-  <li>PHP: <a href="/docs/guides/simplesamlphp.html">SimpleSAMLphp</a></li>
-  <li>Python: <a href="/docs/guides/pysaml2.html">PySAML2</a></li>
+  <li>Java/Spring: <a href="/code/java/spring_security_saml.html">Spring Security SAML</a></li>
+  <li>PHP: <a href="/code/php//simplesamlphp.html">SimpleSAMLphp</a></li>
+  <li>Python: <a href="/code/python/pysaml2.html">PySAML2</a></li>
   <li>Ruby: <a href="https://rubygems.org/gems/ruby-saml">Ruby-SAML</a></li>
 </ul>
 
@@ -435,12 +440,14 @@ can help you build your applications and integrations:</p>
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -449,17 +456,22 @@ can help you build your applications and integrations:</p>
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

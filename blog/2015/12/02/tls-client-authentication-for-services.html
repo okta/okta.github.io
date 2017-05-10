@@ -7,37 +7,43 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
+    <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/page-blog.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>TLS Client Authentication for Internal Services | Okta Developer</title>
   <meta name="description" content="If you’re like me, the most aggravating thing is finding a Stack Overflowquestion that exactly describes the issue you are facing, only to scroll downand see...">
   <link rel="canonical" href="http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
     <body id="blog">
@@ -101,25 +107,34 @@
 		<section id="blog-post" class="main-container">
 	<div class="wrap blog">
 		<section >
-<div class="wrap">
-	<article class="post-block">
-	  <header class="post-title-block">
-	    <h1><a href="/blog/2015/12/02/tls-client-authentication-for-services">TLS Client Authentication for Internal Services</a></h1>
-	    <div class="attribution">
-	      <img src="/assets/img/avatar-william_dawson.jpg"
-	           alt="avatar-william_dawson.jpg"
-	           class="author-avatar">
-	      <address>William Dawson</address>
-	      &nbsp;
-		  <a class="social_link" href="https://github.com/wdawson"><i class="fa fa-github-square"></i></a>
-		  <a class="social_link" href="https://twitter.com/wilsdawson"><i class="fa fa-twitter-square"></i></a>
-	 	  <a class="social_link" href="https://linkedin.com/in/wilsdawson"><i class="fa fa-linkedin-square"></i></a>
-		  <span class="sepr">&middot;</span>
-	      <time datetime="2015-12-02">December 2, 2015</time>
-	    </div>
-	  </header>
-	  <section class="post-content">
-	    <p>If you’re like me, the most aggravating thing is finding a Stack Overflow
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2015/12/02/tls-client-authentication-for-services">TLS Client Authentication for Internal Services</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-william_dawson-4370e92bb436cc9418583c674a589b870200a0a6d2c5de013a3d34486ae6f4bb.jpg" alt="avatar-william_dawson.jpg" class="author-avatar">
+            
+            <address>William Dawson</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/wdawson"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/wilsdawson"><i class="fa fa-twitter-square"></i></a>
+            
+            
+              <a class="social_link" href="https://linkedin.com/in/wilsdawson"><i class="fa fa-linkedin-square"></i></a>
+            
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2015-12-02">December 2, 2015</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     <p>If you’re like me, the most aggravating thing is finding a Stack Overflow
 question that exactly describes the issue you are facing, only to scroll down
 and see that it has remained unanswered since 2011. I was recently trying to
 configure Transport Layer Security (TLS) <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security#Client-authenticated_TLS_handshake">client
@@ -139,7 +154,7 @@ chain without finding a certificate that it trusts, it will reject the
 connection. For an example of what a server might send, see <a href="https://gist.github.com/jpf/9282d558bcc105ae8e1a">this
 gist</a>.</p>
 
-<p style="text-align: center"><img src="/assets/img/2015-10-29-tls-client-authentication-for-services-tls-handshake.png" alt="TLS handshake" width="540px" /></p>
+<p style="text-align: center"><img src="/assets/2015-10-29-tls-client-authentication-for-services-tls-handshake-087ac6491ae2194de533721278abdab3628e8eeab8342e046476917cc34d985f.png" alt="TLS handshake" width="540px" /></p>
 
 <p style="text-align: center;font-size: x-small;">Image reprinted with permission from
 <a href="https://blog.cloudflare.com/protecting-the-origin-with-tls-authenticated-origin-pulls/">CloudFlare</a></p>
@@ -186,7 +201,7 @@ meant to be complete, so you may need to modify them to fit in your environment.
 
 <h3 id="certificates-and-key-stores">Certificates and Key Stores</h3>
 
-<p style="text-align: center"><img src="/assets/img/2015-10-29-tls-client-authentication-for-services-ca-chain.png" alt="CA heirarchy" width="540px" /></p>
+<p style="text-align: center"><img src="/assets/2015-10-29-tls-client-authentication-for-services-ca-chain-e98aec0e5f0e95b2c26cbf79d19628f3629df2d48203d1aaaf8fa0536e2780c3.png" alt="CA heirarchy" width="540px" /></p>
 
 <p>First, let’s setup our trust store, which is just a key store that will only
 contain certificates. Let’s assume we have a layered Certificate Authority (CA)
@@ -529,13 +544,14 @@ you implement these authentication concepts in your applications.</p>
   <li><a href="https://jersey.java.net/documentation/latest/client.html#d0e5128">Jersey client documentation</a></li>
 </ol>
 
-	  </section>
-	</article>
-</div>
+	    </section>
+	  </article>
+  </div>
 </section>
 
 	</div>
 </section>
+
 		
 	</div><footer class="footer">
       <div class="Wrap">
@@ -581,10 +597,12 @@ you implement these authentication concepts in your applications.</p>
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -593,17 +611,22 @@ you implement these authentication concepts in your applications.</p>
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
 </body>
 </html>

@@ -29,7 +29,7 @@ Would this upgrade finally deliver the stability that had eluded us for so long?
 
 Unfortunately, no. Within 24 hours, memory usage soared, CPUs spiked, and instability returned. Note the dramatic CPU spikes in the following screenshot.
 
-<img style="width:50%" src="/assets/img/2015-05-08-productionalizing-active-mq-cpu-graph-1.png" alt="Active MQ CPU">
+{% img 2015-05-08-productionalizing-active-mq-cpu-graph-1.png style:"width:50%" alt:"Active MQ CPU" %}
 
 To prevent these issues from impacting customers, we were forced to restart brokers, which is always an option of
 last resort. Restarting brokers is a delicate operation, which can entail a less-than-smooth failover,
@@ -90,7 +90,7 @@ we were fairly sure that Hector’s fix would work.
 We deployed the patch and restarted brokers. It was a success! ActiveMQ no longer ran out of memory
 and the CPU spikes ceased.
 
-<img style="width:50%" src="/assets/img/2015-05-08-productionalizing-active-mq-cpu-graph-2.png" alt="Active MQ CPU">
+{% img 2015-05-08-productionalizing-active-mq-cpu-graph-2.png style:"width:50%" alt:"Active MQ CPU" %}
 
 Some minor memory leaks remained, but these were eliminated by upgrading to **java-1.7.0**.
 

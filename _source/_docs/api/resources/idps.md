@@ -887,8 +887,8 @@ curl -v -X GET \
 Enumerates IdPs in your organization with pagination. A subset of IdPs can be returned that match a supported filter expression or query.
 
 - [List Identity Providers with Defaults](#list-identity-providers-with-defaults)
-- [List Identity Providers with a Filter](#list-identity-providers-with-a-filter)
-- [List Identity Providers with Type](#list-identity-providers-with-type)
+- [List Identity Providers with Name](#find-identity-providers-by-name)
+- [List Identity Providers with Type](#find-identity-providers-by-type)
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2136,7 +2136,7 @@ tid       | `id` of an IdP transaction | URL        | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [Okta User](users/docs/api/resources/users.html#user-model)
+Array of [Okta User](/docs/api/resources/users.html#user-model)
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -2912,7 +2912,7 @@ curl -v -X GET \
 
 Clones a X.509 certificate for an IdP signing key credential from a source IdP to target IdP
 
-> Important: Sharing certificates is not a recommended security practice. 
+> Important: Sharing certificates is not a recommended security practice.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3000,7 +3000,7 @@ metadata      | Metadata for the CSR                                            
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Return CSR in PKCS#10 format if the ``Accept`` media type is [application/pkcs10](https://tools.ietf.org/html/rfc5967); or a [CSR model](#application-csr-model) if the ``Accept`` media type is ``application/json``.
+Return CSR in PKCS#10 format if the ``Accept`` media type is [application/pkcs10](https://tools.ietf.org/html/rfc5967); or a [CSR model](#identity-provider-csr-model) if the ``Accept`` media type is ``application/json``.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -3211,7 +3211,7 @@ Revoke a CSR and delete the key pair from the IdP
 Parameter | Description                                     | Param Type | DataType | Required | Default
 --------- | ----------------------------------------------- | ---------- | -------- | -------- | -------
 id        | `id` of the IdP                                 | URL        | String   | TRUE     |
-csrid     | `id` of [CSR model](#application-csr-model)     | URL        | String   | TRUE     |
+csrid     | `id` of [CSR model](#identity-provider-csr-model)     | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3646,7 +3646,7 @@ curl -v -X GET \
 }]
 ~~~
 
-## Identiy Provider Model
+## Identity Provider Model
 
 ### Example
 
@@ -4180,7 +4180,7 @@ Protocol settings for authentication using the [OAuth 2.0 Authorization Code Flo
 | type        | [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1)                                            | `OAUTH2`                                                  | FALSE    | TRUE     |           |           |            |
 | endpoints   | Endpoint settings for OAuth 2.0 Authorization Server (AS)                                                                       | [OAuth 2.0 Endpoints Object](#oauth-20-and-openid-connect-endpoints-object)  | TRUE     | TRUE     |           |           |            |
 | scopes      | IdP-defined permission bundles to request delegated access from user                                                            | Array of String                                           | FALSE    | FALSE    | 1         |           |            |
-| credentials | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Credentials Object](#oauth-20-client-credentials-object) | FALSE    | FALSE    |           |           |            |
+| credentials | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Credentials Object](#oauth-20-and-openid-connect-client-credentials-object) | FALSE    | FALSE    |           |           |            |
 |-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 The [OAuth 2.0 Setup Guide](#setup-guides) lists the scopes that are supported [per-IdP provider](#identity-provider-type).
@@ -4223,7 +4223,7 @@ Protocol settings for authentication using the [OpenID Connect Protocol](http://
 | type        | [OpenID Connect Authorization Code Flow](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth)                     | `OIDC`                                                          | FALSE    | TRUE     |           |           |            |
 | endpoints   | Endpoint settings for OAuth 2.0 Authorization Server (AS)                                                                       | [OAuth 2.0 Endpoints Object](#oauth-20-and-openid-connect-endpoints-object)  | TRUE     | TRUE     |           |           |            |
 | scopes      | OpenID Connect and IdP-defined permission bundles to request delegated access from user                                         | Array of String                                                 | FALSE    | FALSE    | 1         |           |            |
-| credentials | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Credentials Object](#openid-connect-client-credentials-object) | FALSE    | FALSE    |           |           |            |
+| credentials | Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](https://tools.ietf.org/html/rfc6749#section-2.3) | [Credentials Object](#oauth-20-and-openid-connect-client-credentials-object) | FALSE    | FALSE    |           |           |            |
 |-------------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 The [IdP setup guides](#setup-guides) list the scopes that are supported [per-IdP provider](#identity-provider-type).  The base `openid` scope is always required.
@@ -5101,11 +5101,11 @@ All linked IdP users have the following properties:
 
 Identity Provider user profiles are IdP-specific but may be customized by the Profile Editor in the Okta Admin UI.
 
-![IdP Profile Editor UI](/assets/img/okta-admin-ui-profile-editor-idp.png)
+{% img okta-admin-ui-profile-editor-idp.png alt:"IdP Profile Editor UI" %}
 
 > Okta variable names have reserved characters that may conflict with the name of an IdP assertion attribute.  You can use the **External name** to define the attribute name as defined in an IdP assertion such as a SAML attribute name.
 
-![IdP Profile Editor Attribute Modal UI](/assets/img/okta-admin-ui-profile-editor-attribute-idp.png)
+{% img okta-admin-ui-profile-editor-attribute-idp.png alt:"IdP Profile Editor Attribute Modal UI" %}
 
 #### Example Profile Object
 
@@ -5217,5 +5217,5 @@ The Social Auth Token Model provides the tokens and associated metadata provided
 | tokenType        | The type of token, defined by the [OAuth Token Exchange Spec](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-07#section-3) | String                                                                      | TRUE     | TRUE   | TRUE     |           |           |            |
 | tokenAuthScheme  | The token authentication scheme as defined by the Social Provider.                                                                     | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | expiresAt        | The date that the token expires                                                                                                        | Date                                                                        | TRUE     | FALSE  | TRUE     |           |           |            |
-| scopes           | The scopes which the token is good for                                                                                                 | Array of Strings                                                            | FALSE    | FALSE  | TRUE     |                 
+| scopes           | The scopes which the token is good for                                                                                                 | Array of Strings                                                            | FALSE    | FALSE  | TRUE     |
 |------------------+--------------------------------------------------------------+-----------------------------------------------------------------------------|----------|--------|----------|-----------|-----------+------------|

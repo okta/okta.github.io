@@ -13,7 +13,7 @@ The Okta Sign-In Widget is a JavaScript widget from Okta that gives
 you a fully featured and customizable login experience which
 can be used to authenticate users on any web site.
 
-![Screenshot of basic Okta Sign-In Widget](/assets/img/okta-signin.png)
+{% img okta-signin.png alt:"Screenshot of basic Okta Sign-In Widget" %}
 
 ### Authentication
 
@@ -37,7 +37,7 @@ of factors and comes with built-in support for all of the factors listed below:
 -   SMS Authentication
 -   Security Question
 
-![Screenshot of Okta Sign-In Widget Multi-Factor Authentication selector](/assets/img/okta-signin-mfa-select.png)
+{% img okta-signin-mfa-select.png alt:"Screenshot of Okta Sign-In Widget Multi-Factor Authentication selector" %}
 
 ### Self service password reset
 
@@ -46,7 +46,7 @@ ability to reset their forgotten passwords, it comes with support
 for sending reset notifications as well as prompting users to verify
 themselves by prompting them to answer a security question.
 
-![Screenshot of Okta Sign-In Widget reset password dialog](/assets/img/okta-signin-reset-password.png)
+{% img okta-signin-reset-password.png alt:"Screenshot of Okta Sign-In Widget reset password dialog" %}
 
 ### Password Expiration
 
@@ -54,7 +54,7 @@ Another feature of the Okta Sign-In Widget is notifying users when their passwor
 and prompting them to update their password before allowing them to
 log in.
 
-![Screenshot of Okta Sign-In Widget password expired dialog](/assets/img/okta-signin-password-expired.png)
+{% img okta-signin-password-expired.png alt:"Screenshot of Okta Sign-In Widget password expired dialog" %}
 
 ### Validation and error handling
 
@@ -62,7 +62,7 @@ Finally, the Okta Sign-In Widget comes with extensive support for validating use
 input as well as handling every imaginable error condition which
 might occur in a user login flow.
 
-![Screenshot of Okta Sign-In Widget displaying validation error ](/assets/img/okta-signin-validation-failure.png)
+{% img okta-signin-validation-failure.png alt:"Screenshot of Okta Sign-In Widget displaying validation error" %}
 
 ## A simple example
 

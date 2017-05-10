@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Spring Security SAML | Okta Developer</title>
   <meta name="description" content="Guidance on how to SAML-enable your application using open source Spring Security library.">
   <link rel="canonical" href="http://developer.okta.com/code/java/spring_security_saml">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -295,9 +300,7 @@ cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
 
     <p>This task compiles, tests, and assembles the code into a <code class="highlighter-rouge">.war</code> file.</p>
 
-    <p>A succesful build should look something like this:</p>
-
-    <p><img src="/assets/img/spring-security-saml-build.png" alt="succesful build" /></p>
+    <p>A successful build should look something like this: <img src="/assets/spring-security-saml-build-bf8c15ab83699043ebba2431b3cef8dc2f13603ae5413215c2aec2cbad2d43a4.png" alt="successful build" /></p>
 
     <ul>
       <li>Your compiled war archive file, <code class="highlighter-rouge">spring-security-SAML2-sample.war</code>, can be found in directory <code class="highlighter-rouge">build/libs/</code></li>
@@ -335,9 +338,7 @@ cp -r okta-SpringSAML/src/main spring-security-saml/sample/src
       <li><strong>Note:</strong> Links on app will not be functional as of yet because we have not yet configured any IDPs. Full app functionality  will be completed after the “Configuring Spring Security SAML to work with Okta” section.</li>
     </ul>
 
-    <p>Here’s what it should look like:</p>
-
-    <p><img src="/assets/img/spring-security-saml-intro.png" alt="App Running" /></p>
+    <p>Here’s what it should look like: <img src="/assets/spring-security-saml-intro-273fa031bb687da6aee67784113e3ea7398e194e706de6ce7553d70be25434b1.png" alt="App Running" /></p>
   </li>
 </ol>
 
@@ -363,26 +364,21 @@ Developer Edition organization here:
 <a href="https://www.okta.com/developer/signup/">https://www.okta.com/developer/signup/</a></p>
   </li>
   <li>
-    <p>Click on the blue “Admin” button
-<img src="/assets/img/okta-admin-ui-button-admin.png" alt="Admin" /></p>
+    <p>Click on the blue “Admin” button <img src="/assets/okta-admin-ui-button-admin-fde86b7da4fe6c58611007a97361ac3c876869ec94ffb2a4093019243b728c39.png" alt="Admin" /></p>
   </li>
   <li>
-    <p>Click on the “Add Applications” shortcut
-<img src="/assets/img/okta-admin-ui-add-applications.png" alt="Add Applications" /></p>
+    <p>Click on the “Add Applications” shortcut <img src="/assets/okta-admin-ui-add-applications-c26bf1ab66282dca1b8ef685ad8b234b88e08ff07270c0401454439ecfd206e4.png" alt="Add Applications" /></p>
   </li>
   <li>
-    <p>Click on the green “Create New App” button
-<img src="/assets/img/okta-admin-ui-button-create-new-app.png" alt="Create New App" /></p>
+    <p>Click on the green “Create New App” button <img src="/assets/okta-admin-ui-button-create-new-app-9a65dd5f6f48440bba64e3704c297fd8be5361d0608979b3d77c4038edf6c15c.png" alt="Create New App" /></p>
   </li>
   <li>
     <p>In the dialog that opens, select the “SAML 2.0” option, then click
-the green “Create” button
-<img src="/assets/img/okta-admin-ui-create-new-application-integration.png" alt="Create a New Application Integration" /></p>
+the green “Create” button <img src="/assets/okta-admin-ui-create-new-application-integration-6f0c471b53031d1d5a6fc06fd65d1eba8f0135fb6272375f133c4798b9cadb4d.png" alt="Create a New Application Integration" /></p>
   </li>
   <li>
     <p>In Step 1 “General Settings”, enter “Spring Security SAML” in the
-“App name” field, then click the green “Next” button.
-<img src="/assets/img/spring-security-saml-okta-general-settings.png" alt="General Settings" /></p>
+“App name” field, then click the green “Next” button. <img src="/assets/spring-security-saml-okta-general-settings-1a2a1485053b86a40c7f9e7c8deca28410b1a2cecf3c1f047677533e90f83ea9.png" alt="General Settings" /></p>
   </li>
   <li>
     <p>In Step 2 “Configure SAML”,
@@ -401,15 +397,12 @@ field:</p>
 
     <p>Attributes of the user to be sent in each SAML assertion can be added under “Attribute Statements” during this step if desired. Theses attribute values can be derived and used from the SP side.</p>
 
-    <p>Then click the green “Next” button</p>
-
-    <p><img src="/assets/img/spring-security-saml-settings.png" alt="SAML Settings" /></p>
+    <p>Then click the green “Next” button <img src="/assets/spring-security-saml-settings-e57ff23f79adf4128c3aec89fdcb1cbfa4edda95cdfe4c3c4df0de6eff94cd3b.png" alt="SAML Settings" /></p>
   </li>
   <li>
     <p>In Step 3 “Feedback”, click the checkbox next to the text “This is
 an internal application that we created”, then click the green
-“Finish” button.
-<img src="/assets/img/okta-admin-ui-new-application-step-3-feedback.png" alt="App type" /></p>
+“Finish” button. <img src="/assets/okta-admin-ui-new-application-step-3-feedback-831346803a6ac5c91d92308b84786541630098c0cbeaec77c3c51a401e1b76d2.png" alt="App type" /></p>
   </li>
   <li>
     <p>You will now see the “Sign On” section of your newly created “Spring
@@ -419,27 +412,23 @@ Security SAML” application.</p>
     <p>Keep this page open it a separate tab or browser window. You will
 need to return to this page later in this guide and copy the
 “Identity Provider metadata” link. (To copy the that link, right
-click on the “Identity Provider metadata” link and select “Copy”)
-<img src="/assets/img/okta-admin-ui-identity-provider-metadata-link.png" alt="Sign on methods" /></p>
+click on the “Identity Provider metadata” link and select “Copy”) <img src="/assets/okta-admin-ui-identity-provider-metadata-link-312145eacc4d76d493afd1b054f2dbb3dce120dca79e6b645f1155a88dd1b0f1.png" alt="Sign on methods" /></p>
   </li>
   <li>
     <p>Right-click on the “People” section of the “Spring Security SAML”
 application and select “Open Link In New Tab” (so that you can come
 back to the “Sign On” section later).</p>
 
-    <p>In the new tab that opens, click on the “Assign Application” button
-<img src="/assets/img/spring-security-saml-okta-assign-people-to-application.png" alt="Assign Application" /></p>
+    <p>In the new tab that opens, click on the “Assign Application” button <img src="/assets/spring-security-saml-okta-assign-people-to-application-08799062da0cb863cdd9cc6f05c95eccb9de352496235e0abe0f649cc15fcf37.png" alt="Assign Application" /></p>
   </li>
   <li>
     <p>A dialog titled “Assign Spring Security SAML to up to 500 people”
 will open. Type your username into the search box, select the
-checkbox next to your username, then click the green “Next” button
-<img src="/assets/img/okta-admin-ui-confirm-assignments.png" alt="People search box" /></p>
+checkbox next to your username, then click the green “Next” button <img src="/assets/okta-admin-ui-confirm-assignments-16d648c104dcedd11b4beff3d2e18fba07d65f77021be1d4ab678ac676b97f92.png" alt="People search box" /></p>
   </li>
   <li>
     <p>You will be prompted to “Enter user-specific attributes”. Just click
-the green “Confirm Assignments” button to keep the defaults.
-<img src="/assets/img/spring-security-saml-okta-confirm-assignments.png" alt="Enter user attributes" /></p>
+the green “Confirm Assignments” button to keep the defaults. <img src="/assets/spring-security-saml-okta-confirm-assignments-435c77a884e5acf6b1a3fba08e238770e86af90557d2a4cc38014f56cf3d338c.png" alt="Enter user attributes" /></p>
   </li>
   <li>
     <p>You are now ready to proceed to the next section. Make sure that the
@@ -516,9 +505,7 @@ to test it out.</p>
 <p>There are two ways to test a SAML application: Starting from the Spring
 application (“SP initiated”) and starting from Okta (“IdP initiated”).
 You will be testing both methods. In both cases, you will know of the
-test worked when you see a screen that looks like the one below:</p>
-
-<p><img src="/assets/img/spring-security-saml-assert.png" alt="Authenticated user" /></p>
+test worked when you see a screen that looks like the one below: <img src="/assets/spring-security-saml-assert-fdb016601f48ea84b5aacef488453d1dbef4edb2b03620cb4ba4c0cd4563bc78.png" alt="Authenticated user" /></p>
 
 <ol>
   <li>
@@ -535,8 +522,7 @@ known as an “SP initiated” login)</p>
 It will be a URL that starts with “http://www.okta.com/”</p>
       </li>
       <li>
-        <p>Click the “Start single sign-on” button.
-<img src="/assets/img/spring-security-saml-selection.png" alt="Start single sign-on" /></p>
+        <p>Click the “Start single sign-on” button. <img src="/assets/spring-security-saml-selection-3d1dad32e9379b80d3521b8f5b33031bcc9097687e029e28ef5218285397be07.png" alt="Start single sign-on" /></p>
       </li>
     </ul>
   </li>
@@ -550,9 +536,7 @@ It will be a URL that starts with “http://www.okta.com/”</p>
       <li>
         <p>Click the button for the application you created in the
 “Configuring Okta to work with Spring Security SAML” section
-above:</p>
-
-        <p><img src="/assets/img/spring-security-saml-okta-chiclet.png" alt="Spring Security SAML" /></p>
+above: %{ img spring-security-saml-okta-chiclet.png alt:”Spring Security SAML” %}</p>
       </li>
     </ul>
   </li>
@@ -627,12 +611,14 @@ methods above, then you’re done.</p>
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -641,17 +627,22 @@ methods above, then you’re done.</p>
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

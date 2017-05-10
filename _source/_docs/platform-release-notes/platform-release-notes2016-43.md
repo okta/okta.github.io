@@ -80,4 +80,4 @@ POST requests to `/api/v1/sessions` failed with an InvalidSessionException if th
 Check the footer of any Admin page in an org to verify the current release for that org. For example,
 scroll to the bottom of the Admin <b>Dashboard</b> page to see the version number:
 
-![Release Number in Footer](/assets/img/release_notes/version_footer.png)
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}

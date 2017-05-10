@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>OAuth 2.0 | Okta Developer</title>
   <meta name="description" content="OAuth 2.0 API">
   <link rel="canonical" href="http://developer.okta.com/docs/api/resources/oauth2.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -243,7 +248,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <li>Assumes Resource Owner and Public Client are on the same device</li>
     </ul>
 
-    <p><img src="/assets/img/browser_spa_implicit_flow.png" alt="Browser/Single-Page Application" /></p>
+    <p><img src="/assets/browser_spa_implicit_flow-aa8b504d81ca3e57be798da01b0d570a92287e1b28f8b6209c16ca500d4f34a6.png" alt="Browser/Single-Page Application" /></p>
   </li>
   <li>
     <p>Native Application</p>
@@ -254,7 +259,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <li>Can use custom redirect URIs like <code class="highlighter-rouge">myApp://oauth:2.0:native</code></li>
     </ul>
 
-    <p><img src="/assets/img/native_auth_flow.png" alt="Native Application Flow" /></p>
+    <p><img src="/assets/native_auth_flow-09c52618479d441df093e9024346a46069e5b7cbd0260290e35dd471fd29c9f0.png" alt="Native Application Flow" /></p>
 
     <blockquote>
       <p>Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn’t treated as a secret.
@@ -272,7 +277,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <li>Most secure flow as tokens never pass through user-agent</li>
     </ul>
 
-    <p><img src="/assets/img/web_app_flow.png" alt="Web Application Flow" /></p>
+    <p><img src="/assets/web_app_flow-6f85087b80a6a05fdd72ebd532a17a9d77c4135b6ce26acb3ecf0e807401073d.png" alt="Web Application Flow" /></p>
   </li>
   <li>
     <p>Service Application</p>
@@ -284,7 +289,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <li>Back-channel only flow to obtain an access token using the Client’s credentials</li>
     </ul>
 
-    <p><img src="/assets/img/service_app_flow.png" alt="Service Application Flow" />.</p>
+    <p><img src="/assets/service_app_flow-f4ae673ed0f1a129670e91190a1f53de21d7461dbfcbacfebc07dfb775b0b899.png" alt="Service Application Flow" />.</p>
 
     <blockquote>
       <p>Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints.
@@ -681,7 +686,7 @@ However, you can also use OpenID Connect with an authorization server specified:
     </tr>
     <tr>
       <td>client_id</td>
-      <td>Obtained during either <a href="../../guides/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It is the identifier for the client and it must match what has been registered in Okta during client registration.</td>
+      <td>Obtained during either <a href="/docs/api/resources/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It is the identifier for the client and it must match what has been registered in Okta during client registration.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -801,7 +806,7 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
  The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state.
  Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
   </li>
-  <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as <em>code_verifier</em> and derives <em>code_challenge</em> from it using the method specified in <em>code_challenge_method</em>. 
+  <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as <em>code_verifier</em> and derives <em>code_challenge</em> from it using the method specified in <em>code_challenge_method</em>.
  Then the client passes the <em>code_challenge</em> and <em>code_challenge_method</em> in the authorization request for code flow. When a client tries to redeem the code, it must pass the <em>code_verifer</em>. Okta recomputes the challenge and returns the requested token only if it matches the <em>code_challenge</em> in the original authorization request. When a client, whose <em>token_endpoint_auth_method</em> is <code class="highlighter-rouge">none</code>, makes a code flow authorization request, <em>code_challenge</em> is required.
  Since <em>code_challenge_method</em> only supports S256, this means that the value for <em>code_challenge</em> must be: <code class="highlighter-rouge">BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))</code>. According to the <a href="https://tools.ietf.org/html/rfc7636">PKCE spec</a>, the <em>code_verifier</em> must be at least 43 characters and no more than 128 characters.</li>
 </ul>
@@ -2372,7 +2377,7 @@ you can control access to the common path with one authorization server.</p>
         <ul>
           <li>ID Token expires after one hour.</li>
           <li>Access Token expiration is configured in a policy, but is always between five minutes and one day.</li>
-          <li>Refresh Token expiration depends on two factors: 1) Expiration is configured in an Access Policy, no limits, 
+          <li>Refresh Token expiration depends on two factors: 1) Expiration is configured in an Access Policy, no limits,
 but must be greater than or equal to the Access Token lifetime, and 2) Revocation if the Refresh Token
 isn’t exercised within a specified time. Configure the specified time in an Access Policy, with a minimum of ten minutes.</li>
         </ul>
@@ -2396,11 +2401,11 @@ then the token isn’t minted and an error is returned. The system log contains 
 
 <ul>
   <li>
-    <p>A user must be assigned to the client in Okta for the client to get Access Tokens from that client. 
+    <p>A user must be assigned to the client in Okta for the client to get Access Tokens from that client.
 You can assign the client directly (direct user assignment) or indirectly (group assignment).</p>
   </li>
   <li>
-    <p>If you haven’t created a rule in a policy in the authorization server to allow the client, user, and 
+    <p>If you haven’t created a rule in a policy in the authorization server to allow the client, user, and
 scope combination that you want, the request fails.
 To resolve, create at least one rule in a policy in the authorization server for the relevant resource
 that specifies client, user, and scope.</p>
@@ -2475,12 +2480,14 @@ Token expiration times depend on how they are defined in the rules, and which po
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -2489,17 +2496,22 @@ Token expiration times depend on how they are defined in the rules, and which po
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

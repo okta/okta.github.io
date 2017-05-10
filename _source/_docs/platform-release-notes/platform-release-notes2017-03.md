@@ -26,7 +26,7 @@ You can now search (exact match) for an authorization server name or resource UR
 To see the new search box, log into your Okta org, and from the Admin Dashboard, visit **Security > API > Authorization Servers**.
 <!-- OKTA-97833 -->
 
-![Search box for authorization servers](/assets/img/release_notes/rn-search-as.png)
+{% img release_notes/rn-search-as.png alt:"Search box for authorization servers" %}
 
 #### Manual Key Rotation (Key Pinning)
 
@@ -65,7 +65,7 @@ but is now 401. (OKTA-111888)
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
-![Release Number in Footer](/assets/img/release_notes/version_footer.png)
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 

@@ -13,7 +13,7 @@ By defining flexible security domains, scopes, claims, and access policies, you 
 With this solution, you can create one or more authorization servers, configure scopes, set access policies and have a fully operational OAuth Authorization Service in minutes. 
 We support the full set of core OAuth and OIDC flows (code, implicit, password, client credential, hybrid, and refresh) and are fully spec compliant.
 
-![Authorization Server page](/assets/img/auth_server2.png)
+{% img auth_server2.png alt:"Authorization Server page" %}
 
 To get started with API Access Management, visit [API Access Management](/use_cases/api_security/).
 
@@ -32,7 +32,7 @@ The Beta endpoint has been removed. <!-- (OKTA-108195) -->
 Check the footer of any Admin page in an org to verify the current release for that org. For example,
 scroll to the bottom of the Admin **Dashboard** page to see the version number:
 
-![Release Number in Footer](/assets/img/release_notes/version_footer.png)
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ## Looking for Product Release Notes?
 

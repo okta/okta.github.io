@@ -34,7 +34,7 @@ include `ID Tokens`, `Access Tokens`, or both.
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
-![Release Number in Footer](/assets/img/release_notes/version_footer.png)
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 

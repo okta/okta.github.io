@@ -23,7 +23,7 @@ css: page-customers
 				{{ content }}
 
 				{% if page.diagram_image %}
-				<img src="{{ page.diagram_image }}" alt="{{ page.title }} architecture diagram" class="responsive--full-width">
+				{% img {{ page.diagram_image }} alt:"{{ page.title }} architecture diagram" class:"responsive--full-width" %}
 				{% endif %}
 
 			</div>

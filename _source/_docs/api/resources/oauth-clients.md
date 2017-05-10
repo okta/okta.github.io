@@ -151,12 +151,12 @@ Adds a new client application to your organization.
 
 Parameter | Description                               | ParamType | DataType                               | Required |
 --------- | ----------------------------------------- | --------- | -------------------------------------- | -------- |
-settings  | OAuth client registration settings        | Body      | [Client Settings](#oauth-client-model) | TRUE     |
+settings  | OAuth client registration settings        | Body      | [Client Settings](#client-application-model) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-The created [OAuth Client](#oauth-client-model).
+The created [OAuth Client](#client-application-model).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -258,7 +258,7 @@ clientId  | `clientId` of a specific client | URL       | String   | TRUE     |
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Fetched [OAuth Client](#oauth-client-model).
+Fetched [OAuth Client](#client-application-model).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -348,7 +348,7 @@ after     | Specifies the pagination cursor for the next page of clients        
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Array of [OAuth Clients](#oauth-client-model)
+Array of [OAuth Clients](#client-application-model)
 
 #### List Client Apps with Defaults
 {:.api .api-operation}
@@ -560,14 +560,14 @@ Updates the settings for a client application from your organization.
 Parameter | Description                        | ParamType | DataType                               | Required |
 --------- | ---------------------------------- | --------- | -------------------------------------- | -------- |
 clientId  | `clientId` of a specific client    | URL       | String                                 | TRUE     |
-settings  | OAuth client registration settings | Body      | [Client Settings](#oauth-client-model) | TRUE     |
+settings  | OAuth client registration settings | Body      | [Client Settings](#client-application-model) | TRUE     |
 
 > All settings must be specified when updating a client application, **partial updates are not supported!** If any settings are missing when updating a client application the update will fail. The one exception to this is the `client_secret`, which will not be changed if omitted from an update.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Updated [OAuth Client](#oauth-client-model).
+Updated [OAuth Client](#client-application-model).
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -671,7 +671,7 @@ clientId  | `clientId` of a specific client    | URL       | String             
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-Updated [OAuth Client](#oauth-client-model) with client_secret shown.
+Updated [OAuth Client](#client-application-model) with client_secret shown.
 
 ##### Request Example
 {:.api .api-request .api-request-example}

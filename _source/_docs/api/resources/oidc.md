@@ -26,7 +26,7 @@ OpenID Connect extends OAuth 2.0:
 * Provides a signed *id_token* for the client and a UserInfo endpoint from which you can fetch user attributes.
 * Provides a standard set of scopes and claims for identities including profile, email, address, and phone.
 
-![OpenID Architecture Diagram](/assets/img/openID_overview.png)
+{% img openID_overview.png alt:"OpenID Architecture Diagram" %}
 
 Okta is the identity provider responsible for verifying the identity of users and applications that exist in an organization’s directory,
 and issuing identity tokens upon successful authentication of those users and applications.
@@ -89,7 +89,7 @@ as well as claims about the authenticated user.
 
 ID Tokens should always be [validated](#validating-id-tokens) by the client to ensure their integrity.
 
-The ID Token (*id_token*) consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#payload), and [the signature](#signature).
+The ID Token (*id_token*) consists of three period-separated, base64URL-encoded JSON segments: [a header](#header), [the payload](#id-token-payload), and [the signature](#id-token-signature).
 
 ### ID Token Header
 
@@ -693,7 +693,7 @@ Parameter         | Description                                                 
 [idp](idps.html)  | The Identity provider used to do the authentication. If omitted, use Okta as the identity provider. | Query      | String    | FALSE    | Okta is the IDP. |
 sessionToken      | An Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the [Authentication API](authn.html).   | Query | String    | FALSE | |
 response_type     | Can be a combination of *code*, *token*, and *id_token*. The chosen combination determines which flow is used; see this reference from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). The code response type returns an authorization code which can be later exchanged for an Access Token or a Refresh Token. | Query        | String   |   TRUE   |  |
-client_id         | Obtained during either [UI client registration](../../guides/social_authentication.html) or [API client registration](oauth-clients.html). It is the identifier for the client and it must match what is preregistered in Okta. | Query        | String   | TRUE     |
+client_id         | Obtained during either [UI client registration](/docs/api/resources/social_authentication.html) or [API client registration](oauth-clients.html). It is the identifier for the client and it must match what is preregistered in Okta. | Query        | String   | TRUE     |
 redirect_uri      | Specifies the callback location where the authorization code should be sent and it must match what is preregistered in Okta as a part of client registration. | Query        | String   |  TRUE    |
 display           | Specifies how to display the authentication and consent UI. Valid values: *page* or *popup*.  | Query        | String   | FALSE     |  |
 max_age           | Specifies the allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta. | Query      | String    | FALSE    | |

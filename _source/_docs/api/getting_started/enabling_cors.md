@@ -32,7 +32,7 @@ Not all browsers supports CORS.  The following table describes which browsers su
 
 You can enable CORS for websites that need cross-origin requests to the Okta API on the Okta Admin Dashboard. Select **Security** and then, **API**. Select the CORS tab and select **Edit** to see the screen shown below.
 
-![CORS Settings UI](/assets/img/okta-admin-ui-cors.png "CORS Settings UI")
+{% img okta-admin-ui-cors.png "CORS Settings UI" alt:"CORS Settings UI" %}
 
 1. Enter the base URL of websites with which you want to allow cross-origin AJAX requests, one per line. Again, only list specific websites that you control.
 2. Check the **Enable CORS…** box to enable CORS.

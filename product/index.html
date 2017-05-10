@@ -2,37 +2,42 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Product | Okta Developer</title>
   <meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.
 ">
   <link rel="canonical" href="http://developer.okta.com/product/">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -97,17 +102,13 @@
     <!-- START Hero -->
 <section class="Hero--product">
 	<div class="Wrap">
-
 		<h1 class="Hero-title">Connect any user to any application with primary and <span>multi-factor</span> authentication</h1>
-
 		<div class="Hero-image">
-			<img src="/assets/img/hero--product.png">
+			<img src="/assets/hero--product-4ccfaec037c14cb9dd0d3109c2158f1c292e8166eae629e213f4597cbf0b1659.png" alt="hero--product.png">
 		</div>
-
 	</div>
 </section>
 <!-- END Hero -->
-
 
 <section class="ProductSection">
 
@@ -145,15 +146,13 @@
 		<div id="feature-1">
 
 			<div style="text-align:center;">
-
 				<h2 class="h5" style="margin-bottom:0;">Okta</h2>
 				<p style="margin-top:0;">Securely store user profiles, manage passwords, and organize users into groups with Okta's Universal Directory.</p>
-
 			</div>
 
 			<div class="Row--wideGutters">
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-onboarding.png);"></div>
+					<div class="column-icon rounded-onboarding"></div>
 					<div>
 						<p><strong>User Onboarding to Okta</strong></p>
 						<ul class="list--with-bullets">
@@ -165,7 +164,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-password.png);"></div>
+					<div class="column-icon rounded-password"></div>
 					<div>
 						<p><strong>Password Management</strong></p>
 						<ul class="list--with-bullets">
@@ -177,7 +176,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-authentication.png);"></div>
+					<div class="column-icon rounded-authentication"></div>
 					<div>
 						<p><strong>Authentication</strong></p>
 						<ul class="list--with-bullets">
@@ -187,7 +186,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-profile.png);"></div>
+					<div class="column-icon rounded-profile"></div>
 					<div>
 						<p><strong>User Profile</strong></p>
 						<ul class="list--with-bullets">
@@ -197,7 +196,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-groups.png);"></div>
+					<div class="column-icon rounded-groups"></div>
 					<div>
 						<p><strong>Groups</strong></p>
 						<ul class="list--with-bullets">
@@ -207,7 +206,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-policy.png);"></div>
+					<div class="column-icon rounded-policy"></div>
 					<div>
 						<p><strong>Session &amp; Policy Management</strong></p>
 						<ul class="list--with-bullets">
@@ -223,15 +222,13 @@
 		<div id="feature-2" style="display:none;">
 
 			<div style="text-align:center;">
-
 				<h2 class="h5" style="margin-bottom:0;text-transform:uppercase;">Active Directory &amp; LDAP</h2>
 				<p style="margin-top:0;">Use your existing LDAP or Active Directory as your user profile master and password store. Deploy the Okta Agent to securely delegate authentication to AD or LDAP and sync user data to and from Okta.</p>
-
 			</div>
 
 			<div class="Row--wideGutters">
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-onboarding.png);"></div>
+					<div class="column-icon rounded-onboarding"></div>
 					<div>
 						<p><strong>User Onboarding to Okta</strong></p>
 						<ul class="list--with-bullets">
@@ -241,7 +238,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-password.png);"></div>
+					<div class="column-icon rounded-password"></div>
 					<div>
 						<p><strong>Password Management</strong></p>
 						<ul class="list--with-bullets">
@@ -251,7 +248,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-authentication.png);"></div>
+					<div class="column-icon rounded-authentication"></div>
 					<div>
 						<p><strong>Authentication</strong></p>
 						<ul class="list--with-bullets">
@@ -261,7 +258,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-profile.png);"></div>
+					<div class="column-icon rounded-profile"></div>
 					<div>
 						<p><strong>User Profile</strong></p>
 						<ul class="list--with-bullets">
@@ -271,7 +268,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-groups.png);"></div>
+					<div class="column-icon rounded-groups"></div>
 					<div>
 						<p><strong>Groups</strong></p>
 						<ul class="list--with-bullets">
@@ -281,7 +278,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-policy.png);"></div>
+					<div class="column-icon rounded-policy"></div>
 					<div>
 						<p><strong>Session &amp; Policy Management</strong></p>
 						<ul class="list--with-bullets">
@@ -298,15 +295,13 @@
 		<div id="feature-3" style="display:none;">
 
 			<div style="text-align:center;">
-
 				<h2 class="h5" style="margin-bottom:0;text-transform:uppercase;">Federated Identity Provider</h2>
 				<p style="margin-top:0;">Connect to any federated identity provider. Okta manages all federation trust relationships, handles diverse SAML implementations, and stores user profile information.</p>
-
 			</div>
 
 			<div class="Row--wideGutters">
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-onboarding.png);"></div>
+					<div class="column-icon rounded-onboarding"></div>
 					<div>
 						<p><strong>User Onboarding to Okta</strong></p>
 						<ul class="list--with-bullets">
@@ -317,7 +312,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-password.png);"></div>
+					<div class="column-icon rounded-password"></div>
 					<div>
 						<p><strong>Password Management</strong></p>
 						<ul class="list--with-bullets">
@@ -327,7 +322,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-authentication.png);"></div>
+					<div class="column-icon rounded-authentication"></div>
 					<div>
 						<p><strong>Authentication</strong></p>
 						<ul class="list--with-bullets">
@@ -337,7 +332,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-profile.png);"></div>
+					<div class="column-icon rounded-profile"></div>
 					<div>
 						<p><strong>User Profile</strong></p>
 						<ul class="list--with-bullets">
@@ -347,7 +342,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-groups.png);"></div>
+					<div class="column-icon rounded-groups"></div>
 					<div>
 						<p><strong>Groups</strong></p>
 						<ul class="list--with-bullets">
@@ -357,7 +352,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-policy.png);"></div>
+					<div class="column-icon rounded-policy"></div>
 					<div>
 						<p><strong>Session &amp; Policy Management</strong></p>
 						<ul class="list--with-bullets">
@@ -373,15 +368,13 @@
 		<div id="feature-4" style="display:none;">
 
 			<div style="text-align:center;">
-
 				<h2 class="h5" style="margin-bottom:0;text-transform:uppercase;">Database</h2>
 				<p style="margin-top:0;">Use an existing database as your user profile master.<br />Deploy the Okta Agent to securely sync user data to and from Okta.</p>
-
 			</div>
 
 			<div class="Row--wideGutters">
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-onboarding.png);"></div>
+					<div class="column-icon rounded-onboarding"></div>
 					<div>
 						<p><strong>User Onboarding to Okta</strong></p>
 						<ul class="list--with-bullets">
@@ -391,7 +384,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-password.png);"></div>
+					<div class="column-icon rounded-password"></div>
 					<div>
 						<p><strong>Password Management</strong></p>
 						<ul class="list--with-bullets">
@@ -403,7 +396,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-authentication.png);"></div>
+					<div class="column-icon rounded-authentication"></div>
 					<div>
 						<p><strong>Authentication</strong></p>
 						<ul class="list--with-bullets">
@@ -413,7 +406,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-profile.png);"></div>
+					<div class="column-icon rounded-profile"></div>
 					<div>
 						<p><strong>User Profile</strong></p>
 						<ul class="list--with-bullets">
@@ -423,7 +416,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-groups.png);"></div>
+					<div class="column-icon rounded-groups"></div>
 					<div>
 						<p><strong>Groups</strong></p>
 						<ul class="list--with-bullets">
@@ -433,7 +426,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-policy.png);"></div>
+					<div class="column-icon rounded-policy"></div>
 					<div>
 						<p><strong>Session &amp; Policy Management</strong></p>
 						<ul class="list--with-bullets">
@@ -449,15 +442,13 @@
 		<div id="feature-5" style="display:none;">
 
 			<div style="text-align:center;">
-
 				<h2 class="h5" style="margin-bottom:0;text-transform:uppercase;">Social Identity Provider</h2>
 				<p style="margin-top:0;">Sync profile attributes and authenticate users from any social identity provider.</p>
-
 			</div>
 
 			<div class="Row--wideGutters">
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-onboarding.png);"></div>
+					<div class="column-icon rounded-onboarding"></div>
 					<div>
 						<p><strong>User Onboarding to Okta</strong></p>
 						<ul class="list--with-bullets">
@@ -467,7 +458,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-password.png);"></div>
+					<div class="column-icon rounded-password"></div>
 					<div>
 						<p><strong>Password Management</strong></p>
 						<ul class="list--with-bullets">
@@ -477,7 +468,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-authentication.png);"></div>
+					<div class="column-icon rounded-authentication"></div>
 					<div>
 						<p><strong>Authentication</strong></p>
 						<ul class="list--with-bullets">
@@ -487,7 +478,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-profile.png);"></div>
+					<div class="column-icon rounded-profile"></div>
 					<div>
 						<p><strong>User Profile</strong></p>
 						<ul class="list--with-bullets">
@@ -497,7 +488,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-groups.png);"></div>
+					<div class="column-icon rounded-groups"></div>
 					<div>
 						<p><strong>Groups</strong></p>
 						<ul class="list--with-bullets">
@@ -507,7 +498,7 @@
 				</div>
 
 				<div class="Column--4 Column--medium-6 Column--small-12">
-					<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-policy.png);"></div>
+					<div class="column-icon rounded-policy"></div>
 					<div>
 						<p><strong>Session &amp; Policy Management</strong></p>
 						<ul class="list--with-bullets">
@@ -526,15 +517,13 @@
 
 <section id="mfa" class="ProductSection--products ProductSection--authentication">
 	<div class="Wrap">
-
 		<header>
 			<h2>Multi-factor Authentication</h2>
 		</header>
-
 		<div class="Row">
 			<div class="Column--4 ColumnOffset--2 Column--medium-12 ColumnOffset--medium-0">
 				<h2 class="h5" style="margin-bottom:0;text-transform:uppercase;">Integrations</h2>
-				<img class="responsive--full-width" src="/assets/img/graphics/rsa-integrations.png">
+				<img src="/assets/graphics/rsa-integrations-0ea388f096be915941c6e4ba4b154db9ffe4e6df3ba474a11caae7dccfb0e7e9.png" class="responsive--full-width" alt="graphics/rsa-integrations.png">
 				<p>
 					<span style="display:inline-block;text-align:right;width:40%;">Duo Security</span>
 					<span style="display:inline-block;text-align:center;width:5%;">|</span>
@@ -546,7 +535,7 @@
 			</div>
 			<div class="Column--4 Column--medium-12">
 				<h2 class="h5" style="margin-bottom:0;text-transform:uppercase;">Native Options</h2>
-				<p><img class="responsive--full-width" src="/assets/img/graphics/native-mfa.png" /></p>
+				<p><img src="/assets/graphics/native-mfa-68836618aec3d3a98fb162e9560b8553c599a82d12970a867994f02ca7ed5957.png" class=responsive--full-width alt="graphics/native-mfa.png"></p>
 				<p>
 					Okta Verify
 					<span style="display:inline-block;text-align:center;width:5%;">|</span>
@@ -554,7 +543,6 @@
 				</p>
 			</div>
 		</div>
-
 	</div>
 </section>
 
@@ -564,9 +552,7 @@
 			<h2>Single Sign-On</h2>
 			<p>Build seamless experiences. Link any set of applications with one username, one password, and one session. No matter how users authenticate, accessing any of your applications takes just one click.</p>
 		</header>
-
-		<p><img class="responsive--full-width" src="/assets/img/graphics/sso-with-bg.png" /></p>
-
+		<p><img src="/assets/graphics/sso-with-bg-58ae7073771c758271af69f676e301b87948f891e07472a22d4ae827934f2541.png" class="responsive--full-width" alt="graphics/sso-with-bg.png"></p>
 	</div>
 </section>
 
@@ -581,7 +567,7 @@
 		<div class="Row--wideGutters">
 			<div class="Column--6 Column--small-12">
 
-				<img src="/assets/img/oauth-badge.png" width="140">
+				<img src="/assets/oauth-badge-5917891ae18e6f12008a6c3c57d979db61b79983968e71fcf2a471e7f183a2aa.png" width="140" alt="oauth-badge.png">
 
 				<ul class="has-bullets">
 					<li>Complete standard-compliant support for OAuth 2.0</li>
@@ -595,23 +581,23 @@
 
 				<ul class="has-icons">
 					<li>
-						<img src="/assets/img/icon--user.png">
+						<img src="/assets/icon--user-8638548ccdf15b33f57548b0d4118f0149c30aa4bf5b99646fde1e2fd15210fe.png" alt="icon--user.png">
 						User profile
 					</li>
 					<li>
-						<img src="/assets/img/icon--group.png">
+						<img src="/assets/icon--group-5f181ede510fc957bdfda2f52031959dc50b1d7aad5388bb70b22f7679c8ff03.png" alt="icon--group.png">
 						Group membership
 					</li>
 					<li>
-						<img src="/assets/img/icon--location.png">
+						<img src="/assets/icon--location-6fd45483ce5712f32de2f9ac9113466b3aff1bb509290999d52f4e55848ceec0.png" alt="icon--location.png">
 						Network zone
 					</li>
 					<li>
-						<img src="/assets/img/icon--client.png">
+						<img src="/assets/icon--client-ede01588781899431e842ce6b8aae683cae714c1e790bcb7c92e981f8d0b319b.png" alt="icon--client.png">
 						Client
 					</li>
 					<li>
-						<img src="/assets/img/icon--administrator.png">
+						<img src="/assets/icon--administrator-f0f098eb3a3358cb5937bed3e5c22476279ae13ffea119e54391f44dcfb9fca4.png" alt="icon--administrator.png">
 						User or administrator consent
 					</li>
 				</ul>
@@ -631,18 +617,18 @@
 			<p>Give users a seamless experience across all parts of your product.</p>
 		</header>
 
-		<p><img src="/assets/img/graphics/oan.png" /></p>
+		<p><img src="/assets/graphics/oan-0c04dda8331edcd8e22efb932dadfbc4f38ecea178c338a86457d0e96eb6d611.png" alt="graphics/oan.png"></p>
 
 		<div class="Row">
 			<div class="Column--6 Column--small-12">
-				<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-user--blue.png);"></div>
+				<div class="column-icon rounded-user--blue"></div>
 				<div>
 					<h3>User Provisioning Connectors</h3>
 					<p>Okta automatically manages user accounts in popular platforms and SaaS apps.</p>
 				</div>
 			</div>
 			<div class="Column--6 Column--small-12">
-				<div class="column-icon" style="background-image:url(/assets/img/icons/rounded-authentication--blue.png);"></div>
+				<div class="column-icon rounded-authentication--blue"></div>
 				<div>
 					<h3>Single Sign-On</h3>
 					<p>Leverage Okta’s pre-built, tested, and maintained integrations to add SSO to any app or platform in minutes.</strong>
@@ -661,91 +647,59 @@
 		</div>
 	</section>
 
-
 	<section class="ProductSection--architecture">
 		<div class="Wrap">
-
 			<header>
 				<h2>Architected for Zero Downtime at Scale</h2>
 				<p>Never taken offline for scheduled maintenance or any other reason. Connecting millions of people to thousands of applications in 185 countries. Trusted by thousands of organizations.</p>
 			</header>
-			<img src="/assets/img/graphics/world.png" />
-
+			<img src="/assets/graphics/world-121f6897f7d1e4a9fb20d6ea2ce365b3ceee4540061271f5df1380b9acb3ddae.png" alt="graphics/world.png">
 			<p><a href="http://trust.okta.com" target="_blank" class="trailing-link">See Okta's Service Stats</a></p>
-
 		</div>
 	</section>
 
 	<section class="ProductSection--security">
 		<div class="Wrap">
-
 			<header class="text-align--center">
 				<h2>Designed, Built, and Maintained by Security Experts</h2>
 				<p class="text--large text-align--center">Protecting user profiles and authentication requires constant attention. Our team is on the job.</p>
 			</header>
-
 			<div class="Row--wideGutters">
 				<div class="Column--4 Column--small-4">
-
-					<img class="responsive--full-width" src="/assets/img/graphics/shield.png" />
-
+					<img src="/assets/graphics/shield-092e6dc3fc7896208f56890b686a65be781f262e29ed39b7a2e1879fb825ebdd.png" class="responsive--full-width" alt="graphics/shield.png">
 				</div>
-
 				<div class="Column--8 Column--small-8">
-
 					<ul class="list--with-bullets text--large">
 						<li>Secure development practices & operations</li>
 						<li>Compute, network, & physical security</li>
 						<li>Independent audit & certification</li>
 					</ul>
-
 				</div>
 			</div>
-
 		</div>
 	</section>
 
 	<section class="ProductSection--customers">
 		<div class="Wrap">
-
 			<header>
 				<h2>Trusted by Developers at Leading Organizations</h2>
 			</header>
-
 			<div class="Row u-Stretch">
 				<div class="Column--3 Column--small-6">
-
-					<a href="https://www.okta.com/customers/adobe-systems/" class="logo-placard">
-						<img src="/assets/img/logos/adobe.png" />
-					</a>
-
+					<a href="https://www.okta.com/customers/adobe-systems/" class="logo-placard"><img src="/assets/logos/adobe-0b502828c9b8dfcfd649843f80046c4e051c290586eaa76b1bad36259069dcce.png" alt="logos/adobe.png"></a>
 				</div>
 				<div class="Column--3 Column--small-6">
-
-					<a href="https://www.okta.com/customers/pitney-bowes/" class="logo-placard">
-						<img src="/assets/img/logos/pitney.png" />
-					</a>
-
+					<a href="https://www.okta.com/customers/pitney-bowes/" class="logo-placard"><img src="/assets/logos/pitney-07d7e2ff2cbe5a517699998fec032d69425a30ca47d3a3863736b896e1e1c33a.png" alt="logos/pitney.png"></a>
 				</div>
 				<div class="Column--3 Column--small-6">
-
-					<a href="https://www.okta.com/customers/advent/" class="logo-placard">
-						<img src="/assets/img/logos/advent.png" />
-					</a>
-
+					<a href="https://www.okta.com/customers/advent/" class="logo-placard"><img src="/assets/logos/advent-5a4b8daafc0792fdf8d4a4e13073fe33314d05766ed4d54608ef99677e028be0.png" alt="logos/advent.png"></a>
 				</div>
 				<div class="Column--3 Column--small-6">
-
-					<a href="https://www.okta.com/customers/rotary-international/" class="logo-placard">
-						<img src="/assets/img/logos/rotary.png" />
-					</a>
-
+					<a href="https://www.okta.com/customers/rotary-international/" class="logo-placard"><img src="/assets/logos/rotary-9e7975aa5f8624b159e01fcc1484fde13cddd152cd1177b8408df1c4f2a42006.png" alt="logos/rotary.png"></a>
 				</div>
 			</div>
-
 		</div>
 	</section>
-
 
 	<section id="bottom-cta" class="ProductSection--bottom-cta">
 		<div class="Wrap">
@@ -802,12 +756,14 @@
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/product.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+      <script type="text/javascript" src="/assets/product-b07c84e7333b403cd5d8038bb0c7fb0e031b12cbb6165cb6bf995da87fd92139.js"></script>
+    
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -816,17 +772,22 @@
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

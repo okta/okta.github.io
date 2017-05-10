@@ -27,7 +27,7 @@ connection. For an example of what a server might send, see [this
 gist](https://gist.github.com/jpf/9282d558bcc105ae8e1a).
 
 {: style="text-align: center"}
-![TLS handshake](/assets/img/2015-10-29-tls-client-authentication-for-services-tls-handshake.png){: width="540px"}
+{% img 2015-10-29-tls-client-authentication-for-services-tls-handshake.png alt:"TLS handshake" width:"540px" %}
 
 {: style="text-align: center;font-size: x-small;"}
 Image reprinted with permission from
@@ -76,7 +76,7 @@ meant to be complete, so you may need to modify them to fit in your environment.
 ### Certificates and Key Stores
 
 {: style="text-align: center"}
-![CA heirarchy](/assets/img/2015-10-29-tls-client-authentication-for-services-ca-chain.png){: width="540px"}
+{% img 2015-10-29-tls-client-authentication-for-services-ca-chain.png alt:"CA heirarchy" width:"540px" %}
 
 First, let's setup our trust store, which is just a key store that will only
 contain certificates. Let's assume we have a layered Certificate Authority (CA)

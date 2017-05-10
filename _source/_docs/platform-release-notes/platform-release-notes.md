@@ -119,7 +119,7 @@ Some queries on `/api/v1/apps` with incorrect filter parameters returned an empt
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
-![Release Number in Footer](/assets/img/release_notes/version_footer.png)
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 

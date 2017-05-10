@@ -827,9 +827,9 @@ after     | Specifies the pagination cursor for the next page of users          
   * If you don't specify any value for `limit` and do specify a query, a maximum of 10 results are returned.
   * The maximum value for `limit` is 200 for most orgs.
   *  Don't write code that depends on the default or maximum value, as it may change.
-  * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/getting_started/design_principles.html#pagination)).
+  * An HTTP 500 status code usually indicates that you have exceeded the request timeout.  Retry your request with a smaller limit and paginate the results. For more information, see [Pagination](/docs/api/getting_started/design_principles.html#pagination).
   * Use `limit` and `after` with all four query types.
-  * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination).
+  * Treat the `after` cursor as an opaque value and obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1854,7 +1854,7 @@ Returns empty object by default. When `sendEmail` is `false`, returns an activat
 }
 ~~~
 
-> If a password was set before the user was activated, then user must login with with their password or the activationToken and not the activation link. 
+> If a password was set before the user was activated, then user must login with with their password or the activationToken and not the activation link.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1882,7 +1882,7 @@ curl -v -X POST \
 
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/reactivate</span>
 
-Reactivates a user.  This operation can only be performed on users with a `PROVISIONED` status.  This operation restarts the activation workflow if for some reason the user activation was not completed when using the activationToken from [Activate User](#activate-user). 
+Reactivates a user.  This operation can only be performed on users with a `PROVISIONED` status.  This operation restarts the activation workflow if for some reason the user activation was not completed when using the activationToken from [Activate User](#activate-user).
 
 > Users that do not have a password must complete the flow by completing [Reset Password](#reset-password) and MFA enrollment steps to transition the user to `ACTIVE` status.
 
@@ -2759,7 +2759,7 @@ Okta does not support uploading images via the Users API.  All operations in thi
 
 The following diagram shows the state model for a user:
 
-![STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, or DEPROVISIONED](/assets/img/okta-user-status.png "Okta User Status Diagram")
+{% img okta-user-status.png "Okta User Status Diagram" alt:"STAGED, PROVISIONED, ACTIVE, RECOVERY, LOCKED_OUT, PASSWORD_EXPIRED, or DEPROVISIONED" %}
 
 ### Understanding User Status Values
 
@@ -2770,7 +2770,7 @@ When running reports, remember that the data is valid as of the last login or li
 
 ### Profile Object
 
-Specifies [standard](#standard-profile-properties) and [custom](#custom-profile-properties) profile properties for a user.
+Specifies [standard](#default-profile-properties) and [custom](#custom-profile-properties) profile properties for a user.
 
 ~~~json
 {
