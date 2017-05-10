@@ -857,7 +857,7 @@ For authentication with Basic auth, an HTTP header with the following format mus
 Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 ~~~
 
-> If the values returned by `token_endpoint_auth_methods_support` don't include the method you wish to use (`client_secret_post` or `client_secret_basic`), you can change the value of a client app's `token_endpoint_authentication` value with the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html#update-client-application).
+>If the value returned by `token_endpoint_authentication` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html#update-client-application) is not what you wish to use, you can change the value of a client app's `token_endpoint_authentication` with any of the values returned by `token_endpoint_auth_methods_support` (`client_secret_post` or `client_secret_basic`).
 You can't change this value in the Okta user interface.
 
 #### Response Parameters
