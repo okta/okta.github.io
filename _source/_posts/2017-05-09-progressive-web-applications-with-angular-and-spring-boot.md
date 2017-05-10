@@ -41,7 +41,7 @@ This article will show you how to build a PWA with a Spring Boot backend and an 
 
 ## Run a Spring Boot API
 
-In [part 1 of this series](TBD), I showed you how to create an API with Spring Boot and display its data in an Angular UI. You'll be using that project as a starting point for this tutorial. You'll adding offline capabilities by turning it into a PWA.
+In [part 1 of this series](http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular), I showed you how to create an API with Spring Boot and display its data in an Angular UI. You'll be using that project as a starting point for this tutorial. You'll adding offline capabilities by turning it into a PWA.
 
 To begin, clone the project from GitHub.
 
@@ -63,7 +63,7 @@ http localhost:8080/good-beers
 
 ## Progressive Web Apps with Angular
 
-I started my PWAs learning journey while sitting in a conference session with [Josh Crowther](https://twitter.com/jshcrowthe) at [The Rich Web Experience](https://stormpath.com/blog/angular-and-microservices-rich-web-experience-2016). His [Progressive Web Apps: The Future of the Web](bit.ly/2haHF1y) presentation taught me everything I needed to know to get started. However, his examples used Polymer and I wanted to create a PWA with Angular.
+I started my PWAs learning journey while sitting in a conference session with [Josh Crowther](https://twitter.com/jshcrowthe) at [The Rich Web Experience](https://stormpath.com/blog/angular-and-microservices-rich-web-experience-2016). His [Progressive Web Apps: The Future of the Web](https://bit.ly/2haHF1y) presentation taught me everything I needed to know to get started. However, his examples used Polymer and I wanted to create a PWA with Angular.
 
 When I first started researching how to build PWAs with Angular, I found [mobile.angular.io](https://mobile.angular.io).
 
@@ -79,7 +79,7 @@ I was disappointed to find the latest version of Angular CLI (1.0.0) does not su
 
 {% img blog/angular-spring-boot-pwa/ng-new-mobile.png alt:"ng new with mobile flag" width:"800" %}
 
-After searching through the project's GitHub issues, I [found a reference](https://github.com/angular/mobile-toolkit/issues/109) to [Maxim Salnikov](https://twitter.com/webmaxru)'s [PWA demo app](https://github.com/webmaxru/pwa-guide-ngpoland/tree/step-dashboard). Maxim created this repo as part of a half-day workshop at [ngPoland](http://ng-poland.pl/) and the project's `README` said to contact him for workshop instructions. I emailed Maxim and he politely shared his [Angular 2 PWA Workshop instructions](bit.ly/pwa-ngpoland) and [slides](http://slides.com/webmax/pwa-ngpoland#/).
+After searching through the project's GitHub issues, I [found a reference](https://github.com/angular/mobile-toolkit/issues/109) to [Maxim Salnikov](https://twitter.com/webmaxru)'s [PWA demo app](https://github.com/webmaxru/pwa-guide-ngpoland/tree/step-dashboard). Maxim created this repo as part of a half-day workshop at [ngPoland](http://ng-poland.pl/) and the project's `README` said to contact him for workshop instructions. I emailed Maxim and he politely shared his [Angular 2 PWA Workshop instructions](https://bit.ly/pwa-ngpoland) and [slides](http://slides.com/webmax/pwa-ngpoland#/).
 
 **NOTE:** Since then, Maxim as created a new guide called [Progressive Web Apps using the Angular Mobile Toolkit](http://bit.ly/pwa-ng-nl).
 
