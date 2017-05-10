@@ -725,7 +725,7 @@ login_hint | A username to prepopulate if prompting for authentication.  | Query
  The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
  Using the *state* parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
 
- * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose token_endpoint_auth_method is 'none', makes a code flow authorization request, the code_challenge parameter is required.
+ * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose `token_endpoint_auth_method` is `none`, makes a code flow authorization request, the `code_challenge parameter` is required.
 
 #### postMessage() Data Model
 
@@ -856,6 +856,9 @@ For authentication with Basic auth, an HTTP header with the following format mus
 ~~~sh
 Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 ~~~
+
+>If the value returned by `token_endpoint_authentication` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html#update-client-application) is not what you wish to use, you can change the value of a client app's `token_endpoint_authentication` with any of the values returned by `token_endpoint_auth_methods_support` (`client_secret_post` or `client_secret_basic`).
+You can't change this value in the Okta user interface.
 
 #### Response Parameters
 
