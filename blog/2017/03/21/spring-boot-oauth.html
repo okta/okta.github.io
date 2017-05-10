@@ -193,13 +193,13 @@ brew install springboot
 
 <p>Navigate to <a href="http://localhost:8080">http://localhost:8080</a> and you’ll be prompted to login with your browser’s basic authentication dialog. Enter <code class="highlighter-rouge">user</code> for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you’ll see <code class="highlighter-rouge">Hello World</code> in your browser.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/0-hello-world-c9f0b9b0afcaed45b245902ea4e5ce68f0c8f1caf85b8c7d69d9d7e7078363dc.png" alt="Hello World" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/0-hello-world-c9f0b9b0afcaed45b245902ea4e5ce68f0c8f1caf85b8c7d69d9d7e7078363dc.png" alt="Hello World" width="800" /></p>
 
 <h2 id="create-an-authorization-server-in-okta">Create an Authorization Server in Okta</h2>
 
 <p>To start authenticating against Okta’a API, you have to first create a developer account on <a href="http://developer.okta.com">http://developer.okta.com</a>. After activating your account, sign in and navigate to <strong>Security &gt; API</strong> and click on the <strong>Add Authorization Server</strong> button.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/1-add-auth-server-a7f86ce0c69a220e33d69e3e83e489f0152c7f29deaa28af6050f90e23c678b8.png" alt="Add Authorization Server" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/1-add-auth-server-a7f86ce0c69a220e33d69e3e83e489f0152c7f29deaa28af6050f90e23c678b8.png" alt="Add Authorization Server" width="800" /></p>
 
 <p>Enter the name and Resource URI of your choosing. The names aren’t important at this time. I used the following values:</p>
 
@@ -208,7 +208,7 @@ brew install springboot
   <li><strong>Resource URI:</strong> http://authenticat.is.easy/withokta</li>
 </ul>
 
-<p><img src="/assets/blog/spring-boot-oauth/2-auth-server-settings-3793ada4e1acd8314634d68433d3a9cfa7a5a9e90e8ebaeae4639d22039ab934.png" alt="Authorization Server Settings" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/2-auth-server-settings-3793ada4e1acd8314634d68433d3a9cfa7a5a9e90e8ebaeae4639d22039ab934.png" alt="Authorization Server Settings" width="800" /></p>
 
 <p>The Metadata URI you see in this screenshot will come in handy later when you need to specify <code class="highlighter-rouge">accessTokenUri</code> and <code class="highlighter-rouge">userAuthorizationUri</code> values.</p>
 
@@ -216,15 +216,15 @@ brew install springboot
 
 <p>To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to <strong>Applications &gt; Add Application</strong> and click on the <strong>Create New App</strong> button. The application name isn’t important, you can use whatever you like.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/4-oidc-name-4f222609905faa168bb21796260232ac117dd5bf97ac1da441d5b0d02dced208.png" alt="OIDC App Name" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/4-oidc-name-4f222609905faa168bb21796260232ac117dd5bf97ac1da441d5b0d02dced208.png" alt="OIDC App Name" width="800" /></p>
 
 <p>Click <strong>Next</strong> to configure OIDC. Add <code class="highlighter-rouge">http://localhost:8080</code> as a Redirect URI and click <strong>Finish</strong>.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/5-redirect-uris-ca3574c6ee722c7eb407af08a6da632a9e3c74cdab6a6198144a51047decec16.png" alt="OIDC Redirects" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/5-redirect-uris-ca3574c6ee722c7eb407af08a6da632a9e3c74cdab6a6198144a51047decec16.png" alt="OIDC Redirects" width="800" /></p>
 
 <p>The next screen should look similar to the following screenshot.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/6-oidc-settings-488caba7757e6fec8ac09f80852d308ecdbc9821973625b897bd167427fface1.png" alt="OIDC Settings" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/6-oidc-settings-488caba7757e6fec8ac09f80852d308ecdbc9821973625b897bd167427fface1.png" alt="OIDC Settings" width="800" /></p>
 
 <p>Your <code class="highlighter-rouge">clientId</code> and <code class="highlighter-rouge">clientSecret</code> values for this app will be just below the fold.</p>
 
@@ -267,15 +267,15 @@ brew install springboot
 
 <p>Start your app with <code class="highlighter-rouge">spring run helloOAuth.groovy</code> and navigate to <a href="http://localhost:8080">http://localhost:8080</a>. You’ll be redirected to Okta, but likely see the following error.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/7-bad-request-invalid-redirect-bc2e2d9931345a11e86633cfec15a31da11c1879b06c1ee09942ee0d84e4a87c.png" alt="Bad Request, Invalid Redirect" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/7-bad-request-invalid-redirect-bc2e2d9931345a11e86633cfec15a31da11c1879b06c1ee09942ee0d84e4a87c.png" alt="Bad Request, Invalid Redirect" width="800" /></p>
 
 <p>This happens because Spring Security sends a <code class="highlighter-rouge">redirect_uri</code> value of <code class="highlighter-rouge">http://localhost:8080/login</code>. Navigate to your Okta developer instance and change your OIDC app to have this as a Redirect URI.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/8-add-redirect-uri-b58a34bd377fbfc8e1a03ff472949f0b270a4df4ab248829ebce820694c7950f.png" alt="Add Redirect URI" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/8-add-redirect-uri-b58a34bd377fbfc8e1a03ff472949f0b270a4df4ab248829ebce820694c7950f.png" alt="Add Redirect URI" width="800" /></p>
 
 <p>If you hit <a href="http://localhost:8080">http://localhost:8080</a> again, this time you’ll get an error that doesn’t explain as much.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/9-no-scopes-316896c625170cad5f43ba46a050c941285251cfae2534c192cb113313dc8e3c.png" alt="No Scopes" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/9-no-scopes-316896c625170cad5f43ba46a050c941285251cfae2534c192cb113313dc8e3c.png" alt="No Scopes" width="800" /></p>
 
 <p>The whitelabel error page doesn’t tell you anything, but your browser’s address window does: <em>no scopes were requested</em>. Modify <code class="highlighter-rouge">application.yml</code> to have a <code class="highlighter-rouge">scope</code> property at the same level as <code class="highlighter-rouge">clientAuthenticationScheme</code>. These are some standard OIDC scopes.</p>
 
@@ -286,29 +286,29 @@ brew install springboot
 
 <p>Try <a href="http://localhost:8080">http://localhost:8080</a> again and you’ll get an error that <em>User is not assigned to the client app</em>. Again, you’ll have to look in the address bar to see it.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/10-user-not-assigned-921bede52e10c0cde398bccc561b5113b2084f59d90717093a763c509c5aaa82.png" alt="User Not Assigned" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/10-user-not-assigned-921bede52e10c0cde398bccc561b5113b2084f59d90717093a763c509c5aaa82.png" alt="User Not Assigned" width="800" /></p>
 
 <p>Open your OIDC app in Okta and <strong>Assign People</strong> to it. Adding your own account is the easiest way to do this.</p>
 
 <p>The next error you’ll see when trying to authenticate is <em>Policy evaluation failed</em>.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/11-policy-evaluation-failure-06a812246eaae06b2b1d2cf85d7adfd258c52b3fd0ab4e79eb01a67672ac88c6.png" alt="Policy Evaluation Failure" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/11-policy-evaluation-failure-06a812246eaae06b2b1d2cf85d7adfd258c52b3fd0ab4e79eb01a67672ac88c6.png" alt="Policy Evaluation Failure" width="800" /></p>
 
 <p>In Okta’s UI, navigate to <strong>Security &gt; API</strong> and click on your Authorization Server’s name and <strong>Access Policies</strong>. Click <strong>Add Policy</strong> to continue.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/12-access-policies-925ff47cd0b74182a070847103c79f692eb882909ad90a13d8619801898ebf4a.png" alt="Access Policies" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/12-access-policies-925ff47cd0b74182a070847103c79f692eb882909ad90a13d8619801898ebf4a.png" alt="Access Policies" width="800" /></p>
 
 <p>Enter a name and description and set it to apply to all clients.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/13-add-policy-c1ab782f1d1f629468dbf7e30af887fbc85300ea71724478e658796cfbfd71e7.png" alt="Add Policy" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/13-add-policy-c1ab782f1d1f629468dbf7e30af887fbc85300ea71724478e658796cfbfd71e7.png" alt="Add Policy" width="800" /></p>
 
 <p>Click <strong>Create Policy</strong> to continue. Once that completes, click the <strong>Add Rule</strong> button.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/14-add-rule-454355d16e428ac00c81954f67a7f0a0dc74b9c9ea42c4b687f62c8ea358f58e.png" alt="Add Rule" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/14-add-rule-454355d16e428ac00c81954f67a7f0a0dc74b9c9ea42c4b687f62c8ea358f58e.png" alt="Add Rule" width="800" /></p>
 
 <p>Give the rule a name, accept the default values, and click the <strong>Create Rule</strong> button.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/15-default-grant-rules-f1fed59c1b99d77b4f7f0781b87a2a3933ee86b7352b9448e23ef438dda7ebcd.png" alt="Default Grant Rules" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/15-default-grant-rules-f1fed59c1b99d77b4f7f0781b87a2a3933ee86b7352b9448e23ef438dda7ebcd.png" alt="Default Grant Rules" width="800" /></p>
 
 <p>Try <a href="http://localhost:8080">http://localhost:8080</a> again and this time it should work. If it does - congrats!</p>
 
@@ -323,7 +323,7 @@ brew install springboot
 
 <p>This should result in your app showing a result like the following.</p>
 
-<p><img src="/assets/blog/spring-boot-oauth/16-success-08647e6415a7576d72869bdf3d091d363a8cff9fc11adbfcd09015a953dd9b35.png" alt="Success" /></p>
+<p><img src="/assets/blog/spring-boot-oauth/16-success-08647e6415a7576d72869bdf3d091d363a8cff9fc11adbfcd09015a953dd9b35.png" alt="Success" width="800" /></p>
 
 <h2 id="get-the-source-code">Get the Source Code</h2>
 

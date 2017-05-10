@@ -196,7 +196,7 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>This will create a new <code class="highlighter-rouge">angular-okta-example</code> directory and install all the necessary dependencies. To verify everything works, run <code class="highlighter-rouge">ng e2e</code> in a terminal window. All tests should pass and you should see results like the following.</p>
 
-<p><img src="/assets/blog/angular-sign-in-widget/e2e-success-035a935c9ccea2ebfb97f06b4a7c44846df05279e3cf246b545cf20e27c34dcb.png" alt="Running e2e" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/e2e-success-035a935c9ccea2ebfb97f06b4a7c44846df05279e3cf246b545cf20e27c34dcb.png" alt="Running e2e" width="800" /></p>
 
 <h2 id="integrate-oktas-sign-in-widget-in-angular">Integrate Okta’s Sign-In Widget in Angular</h2>
 
@@ -267,7 +267,7 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>Login to your Okta account, or create one at <a href="http://developer.okta.com">http://developer.okta.com</a> if you don’t have one. Navigate to <strong>Admin &gt; Add Applications</strong> and click on the <strong>Create New App</strong> button. Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method. Click the <strong>Create</strong> button and give your application a name. On the next screen, add <strong>http://localhost:4200</strong> as a Redirect URI and click <strong>Finish</strong>. You should see settings like the following.</p>
 
-<p><img src="/assets/blog/angular-sign-in-widget/oidc-settings-5e9f630db270b1c886a5cddd3524f6ccca8889efe98e6c04608f0373bb096b91.png" alt="OIDC App Settings" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/oidc-settings-5e9f630db270b1c886a5cddd3524f6ccca8889efe98e6c04608f0373bb096b91.png" alt="OIDC App Settings" width="800" /></p>
 
 <p>Click on the <strong>People</strong> tab and the <strong>Assign to People</strong> button. Assign yourself as a user, or someone else that you know the credentials for.</p>
 
@@ -334,7 +334,7 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>Run <code class="highlighter-rouge">ng serve</code>, and open your browser to <a href="http://localhost:4200">http://localhost:4200</a>. You should see the sign-in widget.</p>
 
-<p><img src="/assets/blog/angular-sign-in-widget/sign-in-widget-285f593cea19908cff0537c49927c95741eb956697d0501e2ef594054166017e.png" alt="Sign-In Widget" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/sign-in-widget-285f593cea19908cff0537c49927c95741eb956697d0501e2ef594054166017e.png" alt="Sign-In Widget" width="800" /></p>
 
 <p>However, if you look at your browser’s console, you’ll likely see an error:</p>
 
@@ -348,11 +348,11 @@ present on the requested resource. Origin 'http://localhost:4200' is therefore n
 select <strong>Security</strong> &gt; <strong>API</strong> &gt; <strong>Trusted Origins</strong>. Click the “Add Origin” button and specify <code class="highlighter-rouge">http://localhost:4200</code>
 as the Origin URL with Type <code class="highlighter-rouge">CORS</code>. For more specific instructions, see Okta’s <a href="http://developer.okta.com/docs/api/getting_started/enabling_cors.html">Enabling CORS documentation</a>.</p>
 
-<p><img src="/assets/blog/angular-sign-in-widget/cors-configuration-3ea19bdd525497544ceed789e84628e14586c0d314c8890025671155004a8264.png" alt="CORS Configuration" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/cors-configuration-3ea19bdd525497544ceed789e84628e14586c0d314c8890025671155004a8264.png" alt="CORS Configuration" width="800" /></p>
 
 <p>After making this change, enter an assigned person’s credentials to login. You should see a “Hello {email}” message with a logout button.</p>
 
-<p><img src="/assets/blog/angular-sign-in-widget/login-success-08bf3dff5a3f0ed1be087d0d5e2da037d3b52c875027f84764dcea7ab42b18f6.png" alt="Login Success" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/login-success-08bf3dff5a3f0ed1be087d0d5e2da037d3b52c875027f84764dcea7ab42b18f6.png" alt="Login Success" width="800" /></p>
 
 <p><strong>NOTE:</strong> You may experience an issue where the sign-in process seems to hang. Clicking anywhere in the browser window seems to solve this problem. I’m not sure why.</p>
 
@@ -394,7 +394,7 @@ as the Origin URL with Type <code class="highlighter-rouge">CORS</code>. For mor
 
 <p>After making these changes, the sign-in widget will look like the following screenshot.</p>
 
-<p><img src="/assets/blog/angular-sign-in-widget/custom-css-f5c0f69d07cf9db0d464ba70c5b452f599e9194ab8c4b126d4ba62a26300baac.png" alt="Custom CSS" /></p>
+<p><img src="/assets/blog/angular-sign-in-widget/custom-css-f5c0f69d07cf9db0d464ba70c5b452f599e9194ab8c4b126d4ba62a26300baac.png" alt="Custom CSS" width="800" /></p>
 
 <h2 id="fix-your-tests">Fix Your Tests</h2>
 <p>If you try to run <code class="highlighter-rouge">npm test</code> or <code class="highlighter-rouge">ng test</code>, tests will fail:</p>
