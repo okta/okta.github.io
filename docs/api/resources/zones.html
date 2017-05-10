@@ -33,14 +33,14 @@
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Zones API | Okta Developer</title>
+  <title>Zones | Okta Developer</title>
   <meta name="description" content="Zones API">
   <link rel="canonical" href="http://developer.okta.com/docs/api/resources/zones.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page zones-api">
+  <div class="Page zones">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -148,6 +148,7 @@
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
                 <li><a href="/docs/api/resources/templates.html">Templates</a></li>
                 <li><a href="/docs/api/resources/users.html">Users</a></li>
+                <li class="is-active"><a href="/docs/api/resources/zones.html">Zones</a></li>
               </ul>
             </li>
             <li>
@@ -204,7 +205,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/zones.md">Edit Page</a>
-      <h2 id="zones-api">Zones API</h2>
+      <h1 id="zones-api">Zones API</h1>
 
 <p>Zones are used to group IP Address ranges in a meaningful way such that policy decisions can be made based on the zone a client’s IP belongs to.</p>
 
@@ -370,7 +371,9 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="update-existing-zone">Update Existing Zone</h4>
+<h3 id="update-ip-zone">Update IP Zone</h3>
+
+<h4 class="api api-request api-request-example" id="update-existing-zone-request">Update Existing Zone Request</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X PUT 
 -H <span class="s2">"Accept: application/json"</span><span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -513,7 +516,9 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="get-zones">Get Zones</h4>
+<h3 id="get-ip-zones">Get IP Zones</h3>
+
+<h4 class="api api-request api-request-example" id="get-zones-request">Get Zones Request</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/"</span>
 </code></pre>
 </div>
@@ -555,7 +560,7 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="get-zones-with-filter-expression">Get Zones With Filter Expression</h4>
+<h4 class="api api-request api-request-example" id="get-zones-with-filter-expression-request">Get Zones With Filter Expression Request</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/?limit=100&amp;filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"</span>
 </code></pre>
 </div>
@@ -696,7 +701,7 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="get-zone-where-name-attribute-contains-given-string">Get Zone Where ‘name’ Attribute Contains Given String</h4>
+<h4 class="api api-request api-request-example" id="get-zone-where-name-attribute-contains-given-string-request">Get Zone Where ‘name’ Attribute Contains Given String Request</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/?limit=-1&amp;q=First"</span>
 </code></pre>
 </div>

@@ -148,6 +148,7 @@
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
                 <li><a href="/docs/api/resources/templates.html">Templates</a></li>
                 <li><a href="/docs/api/resources/users.html">Users</a></li>
+                <li><a href="/docs/api/resources/zones.html">Zones</a></li>
               </ul>
             </li>
             <li>
@@ -1489,7 +1490,7 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
  The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state.
  Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
   </li>
-  <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose token_endpoint_auth_method is ‘none’, makes a code flow authorization request, the code_challenge parameter is required.</li>
+  <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose <code class="highlighter-rouge">token_endpoint_auth_method</code> is <code class="highlighter-rouge">none</code>, makes a code flow authorization request, the <code class="highlighter-rouge">code_challenge parameter</code> is required.</li>
 </ul>
 
 <h4 id="postmessage-data-model">postMessage() Data Model</h4>
@@ -1788,6 +1789,11 @@ and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-Open
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
 </div>
+
+<blockquote>
+  <p>If the value returned by <code class="highlighter-rouge">token_endpoint_authentication</code> in the <a href="/docs/api/resources/oauth-clients.html#update-client-application">OAuth 2.0 Clients API</a> is not what you wish to use, you can change the value of a client app’s <code class="highlighter-rouge">token_endpoint_authentication</code> with any of the values returned by <code class="highlighter-rouge">token_endpoint_auth_methods_support</code> (<code class="highlighter-rouge">client_secret_post</code> or <code class="highlighter-rouge">client_secret_basic</code>).
+You can’t change this value in the Okta user interface.</p>
+</blockquote>
 
 <h4 id="response-parameters-4">Response Parameters</h4>
 

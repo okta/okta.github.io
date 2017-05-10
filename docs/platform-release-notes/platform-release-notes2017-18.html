@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  
+  
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+  <title>Platform Release Notes | Okta Developer</title>
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.17">
+  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-18.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+</head>
+
+<body>
+  <div class="Page platform-release-notes">
+    <!-- START Header -->
+    <header id="header">
+      <div class="Wrap">
+        <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
+        <nav>
+          <div id="top-nav">
+            <a href="#" id="mobile-close" class="mobile-toggle">
+              <span></span>
+              <span></span>
+            </a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
+            <a class="SearchIcon" href="#"></a>
+            <ul>
+              <li>
+                <a href="/product/">Product</a>
+              </li>
+              <li>
+                <a href="/documentation/">Documentation</a>
+              </li>
+              <li>
+                <a href="/code/">Code</a>
+              </li>
+              <li class="has-dropdown">
+                <a href="#">Support</a>
+                <div class="dropdown-window">
+                  <p class="stack-overflow">Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></p>
+                  <p class="email">Email us:<br>
+                  <a href="mailto:developers@okta.com">developers@okta.com</a></p>
+                  <p class="tel">Call us:<br>
+                  <a href="tel:18887227871">1 (888) 722-7871</a></p>
+                </div>
+              </li>
+            </ul>
+            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+              <input type="text" name="q" id="q" autocomplete="off">
+            </form>
+          </div>
+          <div id="mobile-nav">
+            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-open" class="mobile-toggle" href="#top-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+        </nav><!-- END Primary Nav -->
+      </div>
+    </header><!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJ45R6');
+    </script> <!-- End Google Tag Manager -->
+     <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+        <div class="Sidebar-close Sidebar-toggle"></div>
+        <div>
+          <h3 class="Sidebar-title">Use Cases</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/use_cases/authentication">Authentication</a>
+            </li>
+            <li>
+              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+            </li>
+            <li>
+              <a href="/use_cases/api_access_management">API Access Management</a>
+            </li>
+            <li>
+              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+            </li>
+          </ul>
+          <h3 class="Sidebar-title">Reference</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/apps.html">API Reference</a>
+            </li>
+            <li>
+              <a href="/reference/error_codes">Error Codes</a>
+            </li>
+            <li>
+              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+            </li>
+            <li class="is-active">
+              <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+            </li>
+          </ul>
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
+          <script>
+            if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+                document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+            }
+
+            if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+                document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+            }
+          </script>
+        </div>
+      </aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2017-18.md">Edit Page</a>
+      <h2 id="release-201718">Release 2017.18</h2>
+
+<h3 id="advance-notices">Advance Notices</h3>
+
+<p>The items in this section are scheduled for future releases. Although we share our expected release dates, these dates are subject to change.</p>
+
+<ul>
+  <li><a href="#api-rate-limit-improvements">API Rate Limit Improvements</a></li>
+  <li><a href="#simple-hal-links">Simple HAL Links</a></li>
+</ul>
+
+<h4 id="api-rate-limit-improvements">API Rate Limit Improvements</h4>
+
+<p>We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user’s request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:</p>
+
+<h5 id="preview-orgs">Preview Orgs</h5>
+
+<ol>
+  <li>
+    <p>As of last week, we enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
+
+    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
+ a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
+ be warned these rate limits will be enforced in the near future.</code></p>
+  </li>
+  <li>
+    <p>As of May 2, 2017, we enforce these new rate limits for all new preview orgs. For these new orgs, instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+  </li>
+  <li>
+    <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+  </li>
+</ol>
+
+<h5 id="production-orgs">Production Orgs</h5>
+
+<ol>
+  <li>
+    <p>In early May, we’ll enable a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
+
+    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
+ a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
+ be warned these rate limits will be enforced in the near future.</code></p>
+  </li>
+  <li>
+    <p>In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+  </li>
+  <li>
+    <p>In early June, we’ll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+  </li>
+</ol>
+
+<p>For a full description of the new rate limits, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
+
+<h4 id="simple-hal-links">Simple HAL Links</h4>
+
+<p>Okta will enable the Simple HAL Links on User Collections feature for most preview organizations.
+This change is currently scheduled for the 2017.19 release on 5/10/17, to remain in preview for at least one month.</p>
+
+<p>This feature will remove the HAL links that reflect state from user objects returned in collections.</p>
+
+<p>Currently, a user object returned in a collection contains some or all of the following links:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"_links": {
+    "suspend": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/suspend",
+      "method": "POST"
+    },
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/reset_password",
+      "method": "POST"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/expire_password",
+      "method": "POST"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/forgot_password",
+      "method": "POST"
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_recovery_question",
+      "method": "POST"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/deactivate",
+      "method": "POST"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_password",
+      "method": "POST"
+    }
+}
+</code></pre>
+</div>
+
+<p>Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
+As outlined in <a href="/docs/api/getting_started/design_principles.html#links-in-collections">Design Principles</a>:</p>
+
+<p>“Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by ‘id’ using the “self” link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state.”</p>
+
+<p>The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the <code class="highlighter-rouge">self</code> link is returned:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"_links": {
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
+    }
+}
+</code></pre>
+</div>
+
+<p>As noted above, to change user state, the <code class="highlighter-rouge">self</code> link should be called to retrieve a user object with up-to-date links.</p>
+
+<blockquote>
+  <p>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.</p>
+</blockquote>
+
+<!-- ### Platform New Features -->
+
+<h3 id="platform-feature-improvement-view-access-tokens-from-social-authentication">Platform Feature Improvement: View Access Tokens from Social Authentication</h3>
+
+<p>Using <code class="highlighter-rouge">GET /api/v1/idps/:id/users/:uid/credentials/tokens</code>, you can fetch the Access Tokens minted by a social authentication provider.
+When a user authenticates to Okta via a Social IdP, this request returns the tokens and metadata provided by the Social IdP.
+Clients can use the Access Token against the social provider’s endpoints in order to fetch additional profile attributes that Okta doesn’t support in Universal Directory, for example, nested attributes. 
+For more information, see the <a href="/docs/api/resources/idps.html#social-authentication-token-operation">Identity Providers API</a>. <!-- OKTA-118687 --></p>
+
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
+
+<ul>
+  <li>Searches on <a href="http://developer.okta.com/docs/api/resources/users.html#list-users-with-search">User</a> incorrectly returned deleted users or out-of-date user status in some cases. (OKTA-116928)</li>
+  <li>Some orgs were unable to add OpenID Connect or OAuth 2.0 clients to an access policy in a custom Authorization Server. (OKTA-117630)</li>
+  <li>When deleting a claim from a custom Authorization Server, the Delete dialog didn’t close after clicking <strong>OK</strong> or <strong>Cancel</strong>. (OKTA-124271)</li>
+  <li>Read-only Administrator user interface didn’t exactly match that role’s access rights. (OKTA-123116)</li>
+</ul>
+
+<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
+
+<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
+
+<p><img src="/assets/release_notes/version_footer-1ab3b975804fe11152fd81c6e639a796093845153b216733d1dc1891e1a5f446.png" alt="Release Number in Footer" /></p>
+
+<h3 id="looking-for-something-else">Looking for Something Else?</h3>
+
+<ul>
+  <li><a href="platform-release-notes2016-index.html">Platform Release Note Index</a></li>
+  <li>For changes outside the Okta platform, see the <a href="https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm">Product Release Notes</a>.</li>
+</ul>
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="footer">
+      <div class="Wrap">
+        <ul>
+          <li>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
+          </li>
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+          <li>
+            <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+          </li>
+          <li>
+            <a href="/terms/">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="/3rd_party_notices/">3rd Party Notices</a>
+          </li>
+          <li>
+            <a href="/privacy/">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
+          </li>
+          <li>
+            <a href="mailto:developers@okta.com">Contact Support</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a class="icon" href="http://github.com/oktadeveloper" target="_blank"><i class="fa fa-github"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
+          </li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
+        </ul>
+      </div>
+    </footer>
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+    
+    <!-- Remarketing tag -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1006913831;
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+    </script>
+    <div style="display:none;">
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
+    <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+    <!-- End Crazy Egg Tracking -->
+
+     <!-- END Footer -->
+  </div>
+</body>
+</html>

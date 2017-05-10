@@ -34,7 +34,7 @@
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.17">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.18">
   <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -184,67 +184,68 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201718">Release 2017.18</h2>
+      <h2 id="release-201719">Release 2017.19</h2>
 
-<h3 id="advance-notices">Advance Notices</h3>
-
-<p>The items in this section are scheduled for future releases. Although we share our expected release dates, these dates are subject to change.</p>
-
-<ul>
-  <li><a href="#api-rate-limit-improvements">API Rate Limit Improvements</a></li>
-  <li><a href="#simple-hal-links">Simple HAL Links</a></li>
-</ul>
-
-<h4 id="api-rate-limit-improvements">API Rate Limit Improvements</h4>
+<h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
 
 <p>We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user’s request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:</p>
 
-<h5 id="preview-orgs">Preview Orgs</h5>
+<h4 id="preview-orgs">Preview Orgs</h4>
 
 <ol>
   <li>
-    <p>As of last week, we enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
-
-    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
- a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
- be warned these rate limits will be enforced in the near future.</code></p>
+    <p>We enforce new rate limits for new preview orgs. For these new orgs, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
   </li>
   <li>
-    <p>As of May 2, 2017, we enforce these new rate limits for all new preview orgs. For these new orgs, instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
-  </li>
-  <li>
-    <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+    <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
   </li>
 </ol>
 
-<h5 id="production-orgs">Production Orgs</h5>
+<h4 id="production-orgs">Production Orgs</h4>
 
 <ol>
   <li>
-    <p>In early May, we’ll enable a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
+    <p>As of May 8, we have enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
 
     <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
  a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
  be warned these rate limits will be enforced in the near future.</code></p>
   </li>
   <li>
-    <p>In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+    <p>In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
   </li>
   <li>
-    <p>In early June, we’ll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+    <p>In early June, we’ll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
   </li>
 </ol>
 
 <p>For a full description of the new rate limits, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
 
-<h4 id="simple-hal-links">Simple HAL Links</h4>
+<!-- ### Platform New Features -->
 
-<p>Okta will enable the Simple HAL Links on User Collections feature for most preview organizations.
-This change is currently scheduled for the 2017.19 release on 5/10/17, to remain in preview for at least one month.</p>
+<h3 id="platform-feature-improvements">Platform Feature Improvements</h3>
 
-<p>This feature will remove the HAL links that reflect state from user objects returned in collections.</p>
+<ul>
+  <li><a href="#zones-api-is-now-generally-available">Zones API Generally Available in Preview</a></li>
+  <li><a href="#simple-hal-links-generally-available-in-preview">Simple HAL Links Generally Available in Preview</a></li>
+</ul>
 
-<p>Currently, a user object returned in a collection contains some or all of the following links:</p>
+<h4 id="zones-api-is-now-generally-available">Zones API is Now Generally Available</h4>
+
+<p>The Zones API is now Generally Available in preview orgs. It will be at least one month before the Zones API is available in production.</p>
+
+<p>Zones are used to group IP Address ranges so that policy decisions can be made based on the zone a client’s IP belongs to.</p>
+
+<p>For more information, see <a href="/docs/api/resources/zones.html">the Zones API developer documentation</a>.</p>
+
+<h4 id="simple-hal-links-generally-available-in-preview">Simple HAL Links Generally Available in Preview</h4>
+
+<p>Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
+This feature will remain in preview for at least one month.</p>
+
+<p>This feature removes the HAL links that reflect state from user objects returned in collections.</p>
+
+<p>Before release 2017.19, a user object returned in a collection contains some or all of the following links:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>"_links": {
     "suspend": {
@@ -303,23 +304,9 @@ As outlined in <a href="/docs/api/getting_started/design_principles.html#links-i
   <p>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.</p>
 </blockquote>
 
-<!-- ### Platform New Features -->
+<h3 id="platform-bug-fixed">Platform Bug Fixed</h3>
 
-<h3 id="platform-feature-improvement-view-access-tokens-from-social-authentication">Platform Feature Improvement: View Access Tokens from Social Authentication</h3>
-
-<p>Using <code class="highlighter-rouge">GET /api/v1/idps/:id/users/:uid/credentials/tokens</code>, you can fetch the Access Tokens minted by a social authentication provider.
-When a user authenticates to Okta via a Social IdP, this request returns the tokens and metadata provided by the Social IdP.
-Clients can use the Access Token against the social provider’s endpoints in order to fetch additional profile attributes that Okta doesn’t support in Universal Directory, for example, nested attributes. 
-For more information, see the <a href="/docs/api/resources/idps.html#social-authentication-token-operation">Identity Providers API</a>. <!-- OKTA-118687 --></p>
-
-<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
-
-<ul>
-  <li>Searches on <a href="http://developer.okta.com/docs/api/resources/users.html#list-users-with-search">User</a> incorrectly returned deleted users or out-of-date user status in some cases. (OKTA-116928)</li>
-  <li>Some orgs were unable to add OpenID Connect or OAuth 2.0 clients to an access policy in a custom Authorization Server. (OKTA-117630)</li>
-  <li>When deleting a claim from a custom Authorization Server, the Delete dialog didn’t close after clicking <strong>OK</strong> or <strong>Cancel</strong>. (OKTA-124271)</li>
-  <li>Read-only Administrator user interface didn’t exactly match that role’s access rights. (OKTA-123116)</li>
-</ul>
+<p>Some queries on <code class="highlighter-rouge">/api/v1/apps</code> with incorrect filter parameters returned an empty <code class="highlighter-rouge">_embedded node</code> in the response instead of the correct error message. (OKTA-124544)</p>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 
