@@ -788,7 +788,7 @@ access_denied   | The server denied the request.
 Error Id           | Details                                                                |
 -------------------| -----------------------------------------------------------------------|
 login_required     | The request specified that no prompt should be shown but the user is currently not authenticated.    |
-insufficient_scope | The access token provided does not contain the necessary scopes to access the resource.              |
+insufficient_scope | The Access Token provided does not contain the necessary scopes to access the resource.              |
 
 #### Response Example (Success)
 
@@ -824,11 +824,12 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 ### Token Request
 {:.api .api-operation}
 
-{% api_operation post /oauth2/v1/token %}
+{% api_operation post /oauth2/:authorizationServerId/v1/token %}
 
-The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
-
-> Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.
+This API returns Access Tokens, ID Tokens, and Refresh Tokens. To be granted a token, you can present an
+authorization code, a previously obtained Refresh Token, user credentials, or client credentials. What you present
+to obtain tokens and which combination of tokens the request returns depend upon the request.
+parameters.
 
 #### Request Parameters
 
@@ -836,20 +837,33 @@ The following parameters can be posted as a part of the URL-encoded form values 
 
 Parameter          | Description                                                                                         | Type       |
 -------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |
-code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authorization endpoint](#authentication-request). | String |
-refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
-username           | Expected if the grant_type specified *password*. | String |
-password           | Expected if the grant_type specified *password*. | String |
-scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
-redirect_uri       | Expected if grant_type is *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
-
+grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*.
+Determines the mechanism Okta uses to authorize the creation of the tokens. | String |
+code               | Expected if grant_type specified *authorization_code*. The value is what was returned from
+the [authorization endpoint](#authentication-request). | String
+refresh_token      | Expected if the grant_type is *refresh_token*. The value is what was returned from this
+endpoint in a previous request. | String |
+username           | Expected if the grant_type is *password*. | String |
+password           | Expected if the grant_type is *password*. | String |
+scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of
+scopes to be included in the Access Token. For the *refresh_token* grant type, these scopes must be a subset of the
+scopes originally used to generate the Refresh Token. | String |
+redirect_uri       | Expected if grant_type is *authorization_code*. Specifies the callback location where the
+authorization was sent; must match what is preregistered in Okta for this client. | String |
+code_verifier      | Expected if grant_type is *authorization_code* for native applications. The code verifier
+is [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify that it matches the code_
+challenge in the authorization request. | String |
+client_id          | Expected if *code_verifier* is included or client credentials are not provided in the Authorization
+header. Used with the client_secret parameter to authenticate the client application. | String |
+client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the
+Authorization header. Used with the client_id parameter to authenticate the client application. | String |
 
 ##### Token Authentication Method
 
-The client can authenticate by providing the [`client_id`](oidc.html#request-parameters)
-and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) as an Authorization header in the Basic auth scheme (basic authentication).
+For clients authenticating by client credentials, provide the [`client_id`](oidc.html#request-parameters)
+and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) either as an
+Authorization header in the Basic auth scheme (basic authentication) or as additional parameters to the POST body.
+Including credentials in both the headers and the POST body is not allowed.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
 
@@ -862,21 +876,29 @@ You can't change this value in the Okta user interface.
 
 #### Response Parameters
 
-Based on the grant type, the returned JSON can contain a different set of tokens.
+Depending on the grant type, you can obtain only certain kinds of token.
 
-Input grant type   | Output token types                    |
+Grant type         | Available tokens                      |
 -------------------|---------------------------------------|
 authorization_code | Access Token, Refresh Token, ID Token |
+password           | Access Token, Refresh Token, ID Token |
 refresh_token      | Access Token, Refresh Token           |
-password           | Access Token, Refresh Token           |
 client_credentials | Access Token                          |
 
+The specific subset of the available tokens that the request returns depends on other request parameters:
+
+To include      | Requirements                      |
+----------------|-----------------------------------|
+Access Token    | None                              |
+Refresh Token   | *scope* includes *offline_access* |
+ID Token        | *scope* includes *openid*         |
 
 ##### Refresh Tokens for Web and Native Applications
 
 For web and native application types, an additional process is required:
 
-1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
+1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client
+application page.
 2. Pass the *offline_access* scope to your authorize request.
 
 #### List of Errors
@@ -884,9 +906,11 @@ For web and native application types, an additional process is required:
 Error Id                |  Details                                                                                                     |
 ------------------------+--------------------------------------------------------------------------------------------------------------|
 invalid_client          | The specified client id wasn't found. |
-invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
-invalid_grant           | The *code* or *refresh_token* value was invalid, or the *redirect_uri* does not match the one used in the authorization request. |
-unsupported_grant_type  | The grant_type was not *authorization_code* or *refresh_token*. |
+invalid_request         | The request structure is invalid. For example, the basic authentication header is malformed,
+or both header and form parameters were used for authentication or no authentication information was provided. |
+invalid_grant           | The *code* or *refresh_token* value is invalid, or the *redirect_uri* does not match the
+one used in the authorization request. |
+unsupported_grant_type  | The *grant_type* request parameter does not have one of the supported values.
 invalid_scope           | The scopes list contains an invalid or unsupported value.    |
 
 #### Response Example (Success)
