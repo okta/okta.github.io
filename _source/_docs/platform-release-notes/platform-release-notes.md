@@ -115,6 +115,7 @@ As noted above, to change user state, the `self` link should be called to retrie
 
 * Some queries on `/api/v1/apps` with incorrect filter parameters returned an empty `_embedded node` in the response instead of the correct error message. (OKTA-124544)
 * Multifactor authentication with RSA failed for some orgs. (OKTA-125862)
+
 ### Does Your Org Have This Change Yet?
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
