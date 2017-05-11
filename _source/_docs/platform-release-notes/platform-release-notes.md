@@ -113,6 +113,7 @@ As noted above, to change user state, the `self` link should be called to retrie
 
 ### Platform Bugs Fixed
 
+
 * Some queries on `/api/v1/apps` with incorrect filter parameters returned an empty `_embedded node` in the response instead of the correct error message. (OKTA-124544)
 * Multifactor authentication with RSA failed for some orgs. (OKTA-125862)
 
