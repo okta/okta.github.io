@@ -8,6 +8,113 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>A Deloper's Guide To Docker - A Gentle Introduction</title>
+        <description>&lt;h1 id=&quot;a-developers-guide-to-docker-a-gentle-introduction&quot;&gt;A Developer’s Guide To Docker: A Gentle Introduction&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;It works on my machine.&lt;/em&gt; We’ve all heard it. Most of us have said it. It’s been impossible to get around it… until now. Not only can adding Docker to your development environment solve that issue, but it can make it drop-dead simple to onboard new developers, keep a team working forward and allow everyone on the team use their desired tools!&lt;/p&gt;
+
+&lt;h2 id=&quot;why-containers&quot;&gt;Why Containers?&lt;/h2&gt;
+&lt;p&gt;“Aren’t containers just lightweight Virtual Machines?”&lt;/p&gt;
+
+&lt;p&gt;That’s the question I get most often when I start talking to folks about containers. If it helps, you can think of them that way; but containers bring a lot more to the game than just a lightweight VM.&lt;/p&gt;
+
+&lt;h3 id=&quot;before-containerization-with-docker&quot;&gt;Before Containerization with Docker&lt;/h3&gt;
+&lt;p&gt;It used to be, that if you wanted to host an application on your corporate network, it would take &lt;em&gt;weeks&lt;/em&gt;. The operations team would have to make a request for the hardware, it would have to be approved, the finance department would have to make a purchase order, the ops team would have to order the hardware and when it got in, they’d have to put it in the server rack, get it on the network, install the operating system, and any other software needed to run your application. Of course, when ops people order servers, they don’t order the Intel Celeron processor and 512Mb of RAM; they get the 24, quad-core Xeon processor server with 15 bajillion gigabytes of RAM. This means that once your app is installed, the server runs at about 3% utilization. Not ideal from a CapEx and OpEx cost standpoint.&lt;/p&gt;
+
+&lt;h3 id=&quot;enter-the-virtual-machine&quot;&gt;Enter the Virtual Machine&lt;/h3&gt;
+&lt;p&gt;Virtual Machines helped with some of the utilization issues. You could use that monster server to host several VMs and get the utilization much closer to 80 or 90 percent. But you still had to install operating systems, software dependencies and make sure each gets patched with updates. This means logging into each virtual machine and updating and securing each. So if you have a farm of 20 VMs, that’s 20 times of logging in, loading patches, securing, etc. Some automation tools have made this process less labor-intensive, but it’s still not ideal. You’d also have to decide at design time how much resources to set aside for the virtual machine. Those resources are then lost by the host machine while the virtual machine is running.&lt;/p&gt;
+
+&lt;h3 id=&quot;containers-to-the-rescue&quot;&gt;Containers to the Rescue&lt;/h3&gt;
+&lt;p&gt;Containers take the idea of the virtual machine one step farther. Instead of setting up a virtual machine and setting aside resources for it, you could let a container run like an application. It takes only as much resources as it needs to do it’s job. You can limit the amount of resources it can access, but when it’s doing nothing, it takes up almost no resources. When a virtual machine is doing nothing, it is still running a full-blown OS, and all the software that your application needs are still taking up resources.&lt;/p&gt;
+
+&lt;p&gt;Containers share the host operating system’s kernel. They run just like applications. They are given user space, but the underlying processes needed to run the application are owned by the host machine. This make them not only lightweight, but less resource intensive than VMs, because VMs need resources just to run the operating system and base processes. Having their own user space means that they are secured away from the host operating system, but they share kernel processes.&lt;/p&gt;
+
+&lt;p&gt;I am not a network or operations guy, I am just a developer. So it helps for me to think of containers as just applications, that think they’re full machines.&lt;/p&gt;
+
+&lt;p&gt;Assuming you have &lt;a href=&quot;https://docs.docker.com/engine/installation/&quot;&gt;Docker installed&lt;/a&gt;, let’s dive in.&lt;/p&gt;
+
+&lt;h2 id=&quot;some-technical-terminology&quot;&gt;Some Technical Terminology&lt;/h2&gt;
+&lt;p&gt;To get started, it’s important to get your head around two main terms: Images and Containers. Images are saved containers that you can then turn around and use to make other containers. If you’ve done any object-oriented development, you know that a class is a blueprint for creating an object. Images are like blueprints for creating containers.&lt;/p&gt;
+
+&lt;h2 id=&quot;listing-and-getting-images&quot;&gt;Listing and Getting Images&lt;/h2&gt;
+&lt;p&gt;To list the images you have downloaded to your host machine, run a simple command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker image list
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/docker-for-developers/docker-image-list-e3625942b732eef4164c6b16517ef5b556348f21a9b2059e6b7ac6644eb13e1c.png&quot; alt=&quot;Docker Image List&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You should see some headers, but nothing in the listing (unless you have pulled some container images before). I have a few images already on my machine.&lt;/p&gt;
+
+&lt;p&gt;To pull the latest version of the &lt;a href=&quot;https://www.nginx.com/&quot;&gt;NGINX&lt;/a&gt; image from &lt;a href=&quot;https://hub.docker.com&quot;&gt;Docker Hub&lt;/a&gt;, run the command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker pull nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/docker-for-developers/docker-pull-65d41ddcf8e26f6ec0ca7b8f71b7cb691034c09ac42679d65616cf9f57f8ad85.png&quot; alt=&quot;Docker Pull&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can leave off the &lt;code class=&quot;highlighter-rouge&quot;&gt;:latest&lt;/code&gt; and Docker will pull the image tagged with latest, but we’ll be explicit here. Just remember that &lt;code class=&quot;highlighter-rouge&quot;&gt;:latest&lt;/code&gt; changes every time the owner of that image uploads a new version. So it’s not a good idea to use latest in production. Generally, the latest image will also have another tag (1.13.0 at the time of this article) that is much better to use for production. It will still be the same image, even if NGINX uploads a new version of the image tomorrow.&lt;/p&gt;
+
+&lt;h2 id=&quot;running-containers&quot;&gt;Running Containers&lt;/h2&gt;
+
+&lt;p&gt;You can now run a container based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;nginx:latest&lt;/code&gt; image by running:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -it nginx:latest /bin/bash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/docker-for-developers/docker-run-it-52467fb1a4206f5e0ca810b8b3160f2f332013a8c553edbb98b289812f356dde.png&quot; alt=&quot;Docker Run&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This tells Docker that we want to run a container based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;nginx:latest&lt;/code&gt; image, that we want it to be interactive (&lt;code class=&quot;highlighter-rouge&quot;&gt;-i&lt;/code&gt;), that we want a pseudo tty shell (&lt;code class=&quot;highlighter-rouge&quot;&gt;-t&lt;/code&gt;), and finally, we want the main command for this container to be &lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/bash&lt;/code&gt;. This runs the &lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/bash&lt;/code&gt; command at process ID 1 in the container. This means, when the bash shell in the container exits, the container will stop.&lt;/p&gt;
+
+&lt;p&gt;You should be dropped into a shell for the nginx container. We can open a new terminal while that one is running and see it from the host by typing:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker container list
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;this should give is a listing like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/docker-for-developers/docker-ps-dee9d2044bee5fcec3224c96ec1bc8cdf25d4e9116051c108a3a1668f5e1fe39.png&quot; alt=&quot;Docker Container List&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can see the container’s ID is: 511b121137ac and at the command line inside the container, I am logged in as &lt;code class=&quot;highlighter-rouge&quot;&gt;root@511b121137ac&lt;/code&gt;. You can also see the command is &lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/bash&lt;/code&gt; that is running at PID 1 in the container and the container name is &lt;code class=&quot;highlighter-rouge&quot;&gt;determined_banach&lt;/code&gt; (it will be different for you). If you don’t specify a name for the container, Docker will make one from a list of adjectives and famous computer scientist last names (think &lt;code class=&quot;highlighter-rouge&quot;&gt;hungry_babbage&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;slippery_bohr&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Now, if you type &lt;code class=&quot;highlighter-rouge&quot;&gt;exit&lt;/code&gt; at the command line inside the container, we’ll be dropped back into the host machine’s command line. If we go to our other terminal (where we listed running containers) and re-run the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker container list&lt;/code&gt; command, we’ll see an empty list.&lt;/p&gt;
+
+&lt;p&gt;But what if you want to see &lt;strong&gt;all&lt;/strong&gt; the containers whether they’re running or not? You can run the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker container list&lt;/code&gt; command with the &lt;code class=&quot;highlighter-rouge&quot;&gt;-a&lt;/code&gt; switch (for all).&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker container list -a
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/docker-for-developers/docker-ps-a-9fb653f03693fd9f22829b25939695d010b32e000d1f57794c9f11265df625d9.png&quot; alt=&quot;Docker Image List All&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see the nginx-based container is now stopped and it exited with a code ‘0’, meaning it exited normally.&lt;/p&gt;
+
+&lt;h3 id=&quot;cleaning-up-your-docker-environment&quot;&gt;Cleaning Up Your Docker Environment&lt;/h3&gt;
+&lt;p&gt;Just because the container isn’t running, doesn’t mean it’s gone. It’s still there in a stopped state. If you want to actually delete a container from your host machine you use the &lt;code class=&quot;highlighter-rouge&quot;&gt;rm&lt;/code&gt; command like so:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rm determined_banach
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;You could also use the &lt;code class=&quot;highlighter-rouge&quot;&gt;Container ID&lt;/code&gt; to remove a container, but you actually only have to give it as much of the ID as you need to make it unique in the list of containers. So if there are three containers on the host that all start with &lt;code class=&quot;highlighter-rouge&quot;&gt;41...&lt;/code&gt; you would just have to type the first three characters of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Container ID&lt;/code&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;416&lt;/code&gt; for example) to remove it.&lt;/p&gt;
+
+&lt;p&gt;If you decide you don’t want to build any more containers from a particular image, you can remove it with the &lt;code class=&quot;highlighter-rouge&quot;&gt;rmi&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker rmi nginx:latest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You don’t have to specify &lt;code class=&quot;highlighter-rouge&quot;&gt;:latest&lt;/code&gt; for the image tag, Docker will assume you’re referring to &lt;code class=&quot;highlighter-rouge&quot;&gt;:latest&lt;/code&gt; if you don’t specify, but it’s good practice to always use a tagged image. In a production scenario, it’s important to &lt;strong&gt;not&lt;/strong&gt; use &lt;code class=&quot;highlighter-rouge&quot;&gt;:latest&lt;/code&gt;, as the &lt;code class=&quot;highlighter-rouge&quot;&gt;:latest&lt;/code&gt; image is updated whenever a new version of the image is pushed to the repository. So the image you get with the &lt;code class=&quot;highlighter-rouge&quot;&gt;:latest&lt;/code&gt; tag today maybe &lt;strong&gt;very&lt;/strong&gt; different from the one you got yesterday.&lt;/p&gt;
+
+&lt;h3 id=&quot;more-containers-to-come&quot;&gt;More Containers to Come!&lt;/h3&gt;
+&lt;p&gt;Keep an eye out for future posts about Docker where we’ll look at creating images and containers from a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; and how to coordinate an environment of containers (API, database and UI) with Docker-Compose.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 10 May 2017 00:00:00 -0500</pubDate>
+        <link>http://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</link>
+        <guid isPermaLink="true">http://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</guid>
+      </item>
+    
+      <item>
         <title>Build Your First Progressive Web Application with Angular and Spring Boot</title>
         <description>&lt;p&gt;A recent DoubleClick report that found 53% of visits are abandoned if a mobile site takes more than 3 seconds to load. That same report said the average mobile sites load in 19 seconds. According to Alex Russell in his recent talk on the state of mobile development, one of the biggest problems in mobile today is that developers use powerful laptops and desktops to develop their mobile applications, rather than using a $200 device on a 3G connection. Using this environment is “ground truth” to the majority of web users in the world. It’s cool to develop native applications, but people with slow phones and internet don’t want to download a 60MB app, they just want to use the web. Progressive web applications, or PWAs, are one of the easiest ways to make web applications faster and easier to use, allowing developers to build a better internet for everyone.&lt;/p&gt;
 
@@ -506,7 +613,7 @@ cf push -p target/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;jar pwa-server
   &lt;li&gt;&lt;a href=&quot;https://github.com/tastejs/hacker-news-pwas&quot;&gt;Hacker News Readers as Progressive Web Apps&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Tue, 09 May 2017 00:00:00 -0700</pubDate>
+        <pubDate>Tue, 09 May 2017 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</guid>
       </item>
@@ -553,7 +660,7 @@ cf push -p target/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;jar pwa-server
 &lt;p&gt;Visual Studio has always been the editor of choice for those writing .NET applications and tapping into the Microsoft ecosystem. It has always had all the tools developers need to be their best, most productive selves. Now Microsoft has done some outstanding work to include and integrate with non-Microsoft tools that developers love to use, as well as help developers discover problems in their code, and improve the performance of their IDE. With the new additions and improvements in Visual Studio 2017, developers should love it even more!&lt;/p&gt;
 
 </description>
-        <pubDate>Wed, 03 May 2017 00:00:00 -0700</pubDate>
+        <pubDate>Wed, 03 May 2017 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2017/05/03/seven-new-vs-features</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/05/03/seven-new-vs-features</guid>
       </item>
@@ -1012,7 +1119,7 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 
 &lt;p&gt;You can find the source code associated with this article &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-angular-example&quot;&gt;on GitHub&lt;/a&gt;. If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;okta tag&lt;/a&gt;. Of course, you can always &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;ping me on Twitter&lt;/a&gt; too.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 26 Apr 2017 00:00:00 -0700</pubDate>
+        <pubDate>Wed, 26 Apr 2017 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</guid>
       </item>
@@ -2009,7 +2116,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 &lt;/div&gt;
 
 </description>
-        <pubDate>Mon, 17 Apr 2017 00:00:00 -0700</pubDate>
+        <pubDate>Mon, 17 Apr 2017 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</guid>
       </item>
@@ -2276,7 +2383,7 @@ npm start
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;, leave a comment below, or open an issue on GitHub.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 30 Mar 2017 00:00:00 -0700</pubDate>
+        <pubDate>Thu, 30 Mar 2017 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</guid>
       </item>
@@ -2587,7 +2694,7 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;on Twitter&lt;/a&gt;, &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;post a question to Stack Overflow with an “okta” tag&lt;/a&gt;, or &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new&quot;&gt;open a new issue on GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 27 Mar 2017 00:00:00 -0700</pubDate>
+        <pubDate>Mon, 27 Mar 2017 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</guid>
       </item>
@@ -2796,7 +2903,7 @@ brew install springboot
 &lt;p&gt;In a future tutorial, I’ll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that’s secured by Spring Security and does JWT validation.&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 21 Mar 2017 00:00:00 -0700</pubDate>
+        <pubDate>Tue, 21 Mar 2017 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</guid>
       </item>
@@ -3042,7 +3149,7 @@ Hello SAML!
 &lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Thanks to &lt;a href=&quot;https://github.com/AlexeySoshin&quot;&gt;Alexey Soshin&lt;/a&gt; for contributing a &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2&quot;&gt;pull request&lt;/a&gt; to make the code in this blog post more bootiful!&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 16 Mar 2017 00:00:00 -0700</pubDate>
+        <pubDate>Thu, 16 Mar 2017 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2017/03/16/spring-boot-saml</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/16/spring-boot-saml</guid>
       </item>
@@ -3123,7 +3230,7 @@ Hello SAML!
 
 &lt;p&gt;&lt;strong&gt;Happy Okta’ing!&lt;/strong&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 22 Mar 2016 00:00:00 -0700</pubDate>
+        <pubDate>Tue, 22 Mar 2016 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</guid>
       </item>
@@ -3153,7 +3260,7 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/150714428&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Tue, 05 Jan 2016 00:00:00 -0800</pubDate>
+        <pubDate>Tue, 05 Jan 2016 00:00:00 -0600</pubDate>
         <link>http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</guid>
       </item>
@@ -3168,7 +3275,7 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0600</pubDate>
         <link>http://developer.okta.com/blog/2015/12/07/oauth</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/07/oauth</guid>
       </item>
@@ -3585,7 +3692,7 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;https://jersey.java.net/documentation/latest/client.html#d0e5128&quot;&gt;Jersey client documentation&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Wed, 02 Dec 2015 00:00:00 -0800</pubDate>
+        <pubDate>Wed, 02 Dec 2015 00:00:00 -0600</pubDate>
         <link>http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</guid>
       </item>
@@ -3646,7 +3753,7 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Jun 2015 00:00:00 -0700</pubDate>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2015/06/11/trustpage</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/06/11/trustpage</guid>
       </item>
@@ -3732,7 +3839,7 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 22 May 2015 00:00:00 -0700</pubDate>
+        <pubDate>Fri, 22 May 2015 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2015/05/22/tcmalloc</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/22/tcmalloc</guid>
       </item>
@@ -3951,7 +4058,7 @@ enforce limits and design for infinity.&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</guid>
       </item>
@@ -4057,7 +4164,7 @@ where we were last fall, our goal is &lt;strong&gt;zero failover time&lt;/strong
 their hands dirty tackling product issues? Our CTO doesn’t code very often, but when
 he does, he patches the JVM.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</guid>
       </item>
@@ -4219,7 +4326,7 @@ steps in writing on our wiki. Thanks guys!&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Thu, 23 Apr 2015 00:00:00 -0700</pubDate>
+        <pubDate>Thu, 23 Apr 2015 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</guid>
       </item>
@@ -4378,7 +4485,7 @@ dependency, not a real one.&lt;/p&gt;
 how to make tests isolated. You can also check out the full code at
 &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 14 Apr 2015 00:00:00 -0700</pubDate>
+        <pubDate>Tue, 14 Apr 2015 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</guid>
       </item>
@@ -4572,7 +4679,7 @@ because of a bad network connection.&lt;/p&gt;
 to achieve test isolation using dependency injection. You can also
 check out the full code at &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 07 Apr 2015 00:00:00 -0700</pubDate>
+        <pubDate>Tue, 07 Apr 2015 00:00:00 -0500</pubDate>
         <link>http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
         <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</guid>
       </item>
