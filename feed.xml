@@ -8,10 +8,8 @@
     <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>A Deloper's Guide To Docker - A Gentle Introduction</title>
-        <description>&lt;h1 id=&quot;a-developers-guide-to-docker-a-gentle-introduction&quot;&gt;A Developer’s Guide To Docker: A Gentle Introduction&lt;/h1&gt;
-
-&lt;p&gt;&lt;em&gt;It works on my machine.&lt;/em&gt; We’ve all heard it. Most of us have said it. It’s been impossible to get around it… until now. Not only can adding Docker to your development environment solve that issue, but it can make it drop-dead simple to onboard new developers, keep a team working forward and allow everyone on the team use their desired tools!&lt;/p&gt;
+        <title>A Developer's Guide To Docker - A Gentle Introduction</title>
+        <description>&lt;p&gt;&lt;em&gt;It works on my machine.&lt;/em&gt; We’ve all heard it. Most of us have said it. It’s been impossible to get around it… until now. Not only can adding Docker to your development environment solve that issue, but it can make it drop-dead simple to onboard new developers, keep a team working forward and allow everyone on the team use their desired tools!&lt;/p&gt;
 
 &lt;h2 id=&quot;why-containers&quot;&gt;Why Containers?&lt;/h2&gt;
 &lt;p&gt;“Aren’t containers just lightweight Virtual Machines?”&lt;/p&gt;

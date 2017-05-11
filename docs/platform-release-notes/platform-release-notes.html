@@ -304,11 +304,14 @@ As outlined in <a href="/docs/api/getting_started/design_principles.html#links-i
   <p>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.</p>
 </blockquote>
 
-<h3 id="platform-bug-fixed">Platform Bug Fixed</h3>
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
-<p>Some queries on <code class="highlighter-rouge">/api/v1/apps</code> with incorrect filter parameters returned an empty <code class="highlighter-rouge">_embedded node</code> in the response instead of the correct error message. (OKTA-124544)</p>
-
-<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
+<ul>
+  <li>Some queries on <code class="highlighter-rouge">/api/v1/apps</code> with incorrect filter parameters returned an empty <code class="highlighter-rouge">_embedded node</code> in the response instead of the correct error message. (OKTA-124544)</li>
+  <li>Multifactor authentication with RSA failed for some orgs. (OKTA-125862)
+    <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
+  </li>
+</ul>
 
 <p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
 

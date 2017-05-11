@@ -1,10 +1,9 @@
 ---
 layout: blog_post
-title: A Deloper's Guide To Docker - A Gentle Introduction
+title: A Developer's Guide To Docker - A Gentle Introduction
 author: leebrandt
 tags: [docker, devops, developer]
 ---
-# A Developer’s Guide To Docker: A Gentle Introduction
 
 *It works on my machine.* We’ve all heard it. Most of us have said it. It’s been impossible to get around it… until now. Not only can adding Docker to your development environment solve that issue, but it can make it drop-dead simple to onboard new developers, keep a team working forward and allow everyone on the team use their desired tools! 
 
