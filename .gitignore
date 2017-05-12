@@ -36,7 +36,6 @@ reload_views.rb
 # Ignore the vendor folder.
 vendor/*
 
-
 dist
 
 _source/.asset-cache
@@ -44,6 +43,7 @@ _source/.asset-cache
 .bundle
 bin/*
 .jekyll-metadata
+assets/.sprockets-manifest-*.json
 
 # Ignore node packages added for tests added via npm
 node_modules/*

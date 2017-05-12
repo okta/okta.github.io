@@ -1,20 +1,23 @@
-// Remove these tests until the followup PR that introduces page objects and
-// components (and a better way of testing this flow - current method is
-// flaky).
-xdescribe('upstream docs string tests', function() {
-  var baseUrl = 'http://localhost:4000';
+const DocsPage = require('../framework/page-objects/DocsPage');
 
-  it('has authClient.signIn visible in okta-auth-js documentation', function() {
-    browser.ignoreSynchronization = true
-    browser.get(baseUrl + "/code/javascript/okta_auth_sdk.html");
-
-    expect(element(by.css('#docs-body')).getText()).toContain('authClient.signIn');
+describe('upstream docs string tests', function() {
+  beforeEach(function() {
+    browser.ignoreSynchronization = true;
   });
 
-  it('has .renderEl visible in okta-signin-widget documentation', function() {
-    browser.ignoreSynchronization = true
-    browser.get(baseUrl + "/code/javascript/okta_sign-in_widget.html");
+  it('has headers visible in okta-auth-js documentation', function() {
+    let docsPage = new DocsPage('/code/javascript/okta_auth_sdk.html');
+    docsPage.load();
+    expect(docsPage.doesh1HeaderContain(['Overview'])).toBeTruthy();
+    let header2Strings = ['Prerequisites', 'Installation', 'Authentication Flow'];
+    expect(docsPage.doesh2HeaderContain(header2Strings)).toBeTruthy();
+  });
 
-    expect(element(by.css('#docs-body')).getText()).toContain('.renderEl');
+  it('has headers visible in okta-signin-widget documentation', function() {
+    let docsPage = new DocsPage('/code/javascript/okta_sign-in_widget.html');
+    docsPage.load();
+    expect(docsPage.doesh1HeaderContain(['Overview'])).toBeTruthy();
+    let header2Strings = ['A simple example', 'An in-depth example', 'Customization'];
+    expect(docsPage.doesh2HeaderContain(header2Strings)).toBeTruthy();
   });
 });
