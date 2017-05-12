@@ -163,17 +163,19 @@ Function  | Return Type | Example | Output
 
 You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID tokens for API access management that drive authorization flows.
 
-This function takes Okta EL expressions for all parameters that evaluate to the correct data type. With these expressions you can create complex definitions for the group format and for the number of groups to return that can include if logic and customized formatting.
+This function takes Okta EL expressions for all parameters that evaluate to the correct data type. With these expressions you can create complex definitions for the whitelist, the group format, and for the number of groups to return that can include `if` logic and customized formatting.
 
 Parameter          | Description                                             | Nullable 
 ------------------ | ------------------------------------------------------- | -------- 
-whitelist | Valid Okta EL expression that evaluates to an array of group names | FALSE    |
-group_expression | Valid Okta EL expression that evaluates to an array of group ids | FALSE 
+whitelist | Valid Okta EL expression that evaluates to a string array of group ids | FALSE    |
+group_expression | Valid Okta EL expression that evaluates to string to use to evaluate the group. This string must also be a valid Okta EL expression. | FALSE 
 limit | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return | FALSE 
 
 All parameters must be valid Okta EL expressions that evaluate as described above. Okta EL expressions can be comprised of strings, integers, arrays, etc.
 
-The `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups.html), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups.html#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
+The string produced by the `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups.html), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups.html#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
+
+The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](http://developer.okta.com/docs/api/resources/groups.html).
  
 **Parameter Examples**
 
@@ -181,11 +183,11 @@ The `group_expression` parameter usually contains attributes and objects from th
   Array: `{"00gn335BVurvavwEEL0g3", "00gnfg5BVurvavAAEL0g3"}`<br />
   Array variable: `app.profile.groups.whitelist`
 * group_expression<br />
-  Attribute name: `"groups.profile.groupType"`<br />
+  Attribute name: `"group.id"`<br />
   Okta EL string containing an if condition: `"(group.objectClass[0] == 'okta:windows_security_principal') ? 'AD: ' + group.profile.windowsDomainQualifiedName : 'Okta: ' + group.name"`<br /><br />If *okta:windows_security_principal* is true for 
-  a group, the function returns the group name  prefixed with `AD:`; otherwise, the function returns the group name prefixed with `Okta:`.
+  a group, the function returns the `windowsDomainQualifiedName` prefixed with `AD:`; otherwise, the function returns the group name prefixed with `Okta:`.
 * limit<br />
-   Integer between 1 and 100, inclusive: `50`.<br />
+   Integer between 1 and 100, inclusive; for example: `50`.<br />
    Okta EL expression containing a condition that evaluates to an integer: `app.profile.maxLimit < 100 ? app.profile.maxLimit : 100`.<br /><br /> If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return up to 100 groups.
  
 ### Time Functions
