@@ -9,6 +9,11 @@ class NavPage extends BasePage {
     this.topNav = $('#top-nav');
     this.mobileNav = $('#mobile-nav');
     this.header = $('#header');
+    this.searchIcon = $('.SearchIcon');
+    this.searchInput = $('input#q');
+    this.resultsBox = $('.gsc-resultsbox-visible');
+    this.mobileToggle = $('#mobile-open');
+    this.mobileNavActive = $('.mobile-nav-active')
   }
 
   load() {
@@ -30,6 +35,33 @@ class NavPage extends BasePage {
   
   isMobileNavDisplayed() {
     return this.mobileNav.isDisplayed();
+  }
+
+  clickSearchIcon() {
+    util.waitTillClickable(this.searchIcon);
+    return this.searchIcon.click();
+  }
+  
+  enterSearchText(searchText) {
+    util.wait(this.searchInput);
+    return this.searchInput.sendKeys(searchText);
+  }
+
+  submitSearch() {
+    util.wait(this.searchInput);
+    return this.searchInput.sendKeys(protractor.Key.ENTER);
+  }
+  
+  areSearchResultsPresent() {
+    return this.resultsBox.isPresent();
+  }
+  
+  clickMobileToggle() {
+    return this.mobileToggle.click();
+  }
+
+  isMobileNavActive() {
+    return this.mobileNavActive.isPresent();
   }
 }
 
