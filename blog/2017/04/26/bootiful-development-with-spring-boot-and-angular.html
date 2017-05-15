@@ -297,16 +297,11 @@ dependencies==devtools,h2,data-jpa,data-rest,web -d
     <span class="o">}</span>
 
     <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/good-beers"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">goodBeers</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Beer</span><span class="o">&gt;</span> <span class="nf">goodBeers</span><span class="o">()</span> <span class="o">{</span>
 
         <span class="k">return</span> <span class="n">repository</span><span class="o">.</span><span class="na">findAll</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
                 <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">isGreat</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">b</span> <span class="o">-&gt;</span> <span class="o">{</span>
-                    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">m</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-                    <span class="n">m</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"id"</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">getId</span><span class="o">().</span><span class="na">toString</span><span class="o">());</span>
-                    <span class="n">m</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"name"</span><span class="o">,</span> <span class="n">b</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
-                    <span class="k">return</span> <span class="n">m</span><span class="o">;</span>
-                <span class="o">}).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
     <span class="o">}</span>
 
     <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isGreat</span><span class="o">(</span><span class="n">Beer</span> <span class="n">beer</span><span class="o">)</span> <span class="o">{</span>
@@ -408,6 +403,7 @@ mv src/app/beer.service.<span class="k">*</span> src/app/shared/beer/.
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Http</span><span class="p">,</span> <span class="nx">Response</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">'rxjs/add/operator/map'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs'</span><span class="p">;</span>
 
 <span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
@@ -484,7 +480,7 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 <span class="o">...</span>
     <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/good-beers"</span><span class="o">)</span>
     <span class="nd">@CrossOrigin</span><span class="o">(</span><span class="n">origins</span> <span class="o">=</span> <span class="s">"http://localhost:4200"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;&gt;</span> <span class="nf">goodBeers</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Collection</span><span class="o">&lt;</span><span class="n">Beer</span><span class="o">&gt;</span> <span class="nf">goodBeers</span><span class="o">()</span> <span class="o">{</span>
 </code></pre>
 </div>
 
