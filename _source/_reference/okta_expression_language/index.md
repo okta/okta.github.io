@@ -15,7 +15,7 @@ Expressions allow you to reference, transform and combine attributes before you 
 This document details the features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API. This document will be updated over time as new capabilities are added to the language.  Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
 
 ## Referencing User Attributes
-When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
+When you create an Okta expression, you can reference any attribute that lives on an Okta user profile, App user profile, or App  profile.
 
 ### Okta user profile
 Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
@@ -159,7 +159,7 @@ Function  | Return Type | Example | Output
 
 ##### getFilteredGroups Details
 
-`getFilteredGroups` returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You must specify the maximum number of groups to return.
+`getFilteredGroups` returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You must specify the maximum number of groups to return. The format of this EL function is `getFilteredGroups( whitelist , group_expression, limit)`.
 
 You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens for API access management that drive authorization flows.
 
@@ -168,14 +168,14 @@ This function takes Okta EL expressions for all parameters that evaluate to the 
 Parameter          | Description                                             | Nullable 
 ------------------ | ------------------------------------------------------- | -------- 
 whitelist | Valid Okta EL expression that evaluates to a string array of group ids | FALSE    |
-group_expression | Valid Okta EL expression that evaluates to string to use to evaluate the group. This string must also be a valid Okta EL expression. | FALSE 
+group_expression | Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression. | FALSE 
 limit | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return | FALSE 
 
 All parameters must be valid Okta EL expressions that evaluate as described above. Okta EL expressions can be comprised of strings, integers, arrays, etc.
 
 The string produced by the `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups.html), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups.html#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
 
-The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](http://developer.okta.com/docs/api/resources/groups.html).
+The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](http://developer.okta.com/docs/api/resources/groups.html). If the user is not member of a group in the whitelist, the group is ignored.
  
 **Parameter Examples**
 
