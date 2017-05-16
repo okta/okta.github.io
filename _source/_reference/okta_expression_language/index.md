@@ -15,7 +15,7 @@ Expressions allow you to reference, transform and combine attributes before you 
 This document details the features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API. This document will be updated over time as new capabilities are added to the language.  Okta's expression language is based on [SpEL](http://docs.spring.io/spring/docs/3.0.x/reference/expressions.html) and uses a subset of functionalities offered by SpEL.
 
 ## Referencing User Attributes
-When you create an Okta expression, you can reference any attribute that lives on an Okta user profile, App user profile, or App  profile.
+When you create an Okta expression, you can reference any attribute that lives on an Okta user profile or App user profile.
 
 ### Okta user profile
 Every user has an Okta user profile.  The Okta user profile is the central source of truth for a user's core attributes.  To reference an Okta user profile attribute, just reference `user` and specify the attribute variable name.
