@@ -35,6 +35,17 @@ if (process.env.PHANTOMJS) {
   }
 }
 
+// Run chrome headless for pull requests
+if (process.env.CHROMEHEADLESS) {
+  console.log('-- Using headless chrome --');
+  config.capabilities = {
+    browserName: 'chrome',
+    chromeOptions: {
+      args: [ "--headless", "--disable-gpu", "--window-size=2120x1280" ]
+    }
+  }
+}
+
 // Run SauceLabs on master branch and internal topic branches
 else if (process.env.TRAVIS) {
   console.log('-- Using SauceLabs --');

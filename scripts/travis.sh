@@ -4,7 +4,8 @@ set -ex
 source "${0%/*}/helpers.sh"
 
 if [ $TRAVIS_EVENT_TYPE != 'push' ]; then
-  export PHANTOMJS=true
+#  export PHANTOMJS=true
+  export CHROMEHEADLESS=true
 fi
 
 # 1. Install phantomJs if this is a pull request - for external PR's, we can't
@@ -19,6 +20,18 @@ if [ "$PHANTOMJS" == "true" ]; then
   if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi
 
   phantomjs --version
+fi
+
+if [ "$CHROMEHEADLESS" == "true" ]; then
+  cat /etc/*release
+
+  # Install latest stable version of google chrome
+  apt-get install libxss1 libappindicator1 libindicator7
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  dpkg -i google-chrome*.deb
+  apt-get install -f
+
+  google-chrome --version
 fi
 
 # 2. Run the npm install to pull in test dependencies

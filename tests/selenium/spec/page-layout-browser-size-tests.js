@@ -17,8 +17,8 @@ describe('page layout and browser size tests', function() {
     expect(navPage.isMobileNavDisplayed()).toBeFalsy();
   });
 
-  // Phantom does not support the CSS transform we use to hide the top nav
-  util.itNoPhantom('shows mobile navigation with mobile browser sizes', function() {
+  // Chrome headless does not support the CSS transform we use to hide the top nav
+  util.itNoChromeHeadless('shows mobile navigation with mobile browser sizes', function() {
     navPage.setWindowSize(360, 640);
     navPage.waitUntilTopNavOffScreen();
     expect(navPage.isMobileNavDisplayed()).toBeTruthy();

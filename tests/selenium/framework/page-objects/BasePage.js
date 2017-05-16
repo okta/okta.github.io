@@ -20,6 +20,9 @@ class BasePage {
   }
 
   setWindowSize(width, height) {
+    if (process.env.CHROMEHEADLESS) {
+      return;
+    }
     browser.driver.manage().window().setSize(width, height);
   }
 
