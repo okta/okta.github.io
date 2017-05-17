@@ -88,7 +88,7 @@ cp -r spring-boot-angular-example/server ~/spring-boot-ionic-example/.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;You should be able to start the &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt; application by running it in your favorite IDE or from the command line using &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt;. If you don’t have Maven installed, you can use the Maven wrapper that’s included in the project (&lt;code class=&quot;highlighter-rouge&quot;&gt;./mvnw spring-boot:run&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;You should be able to start the &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt; application by running it in your favorite IDE or from the command line using &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt;. You’ll want to do this from the &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt; directory. If you don’t have Maven installed, you can use the Maven wrapper that’s included in the project (&lt;code class=&quot;highlighter-rouge&quot;&gt;./mvnw spring-boot:run&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;After the app has started, navigate to &lt;a href=&quot;http://localhost:8080/good-beers&quot;&gt;http://localhost:8080/good-beers&lt;/a&gt;. You should see the list of good beers in your browser.&lt;/p&gt;
 
@@ -143,7 +143,7 @@ beer.ts
   &lt;span class=&quot;na&quot;&gt;imports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;BrowserModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;IonicModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forRoot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;MyApp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;BeerModule&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;BeerPageModule&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
@@ -193,7 +193,7 @@ beer.ts
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;beer.module.ts&lt;/code&gt; to import &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerService&lt;/code&gt; and add it as a provider. You could add it as a provider in each component, but adding it in the module allows all components to use it.&lt;/p&gt;
+&lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;src/pages/beer/beer.module.ts&lt;/code&gt; to import &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerService&lt;/code&gt; and add it as a provider. You could add it as a provider in each component, but adding it in the module allows all components to use it.&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BeerService&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'../../providers/beer-service'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
@@ -256,7 +256,7 @@ beer.ts
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;You’ll also need to update &lt;code class=&quot;highlighter-rouge&quot;&gt;tabs.html&lt;/code&gt; to have the new tab order and to specify which icon to use.&lt;/p&gt;
+&lt;p&gt;You’ll also need to update &lt;code class=&quot;highlighter-rouge&quot;&gt;src/pages/tabs/tabs.html&lt;/code&gt; to have the new tab order and to specify which icon to use.&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ion-tabs&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;ion-tab&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;tab1Root&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;tabTitle=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Home&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;tabIcon=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;home&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/ion-tab&amp;gt;&lt;/span&gt;
@@ -376,7 +376,7 @@ beer.ts
     &lt;span class=&quot;nx&quot;&gt;BrowserModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;HttpModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;IonicModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;forRoot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;MyApp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;BeerModule&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;BeerPageModule&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -416,6 +416,7 @@ not allowed access. The response had HTTP status code 401.
       &lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ion-buttons&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;/ion-navbar&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ion-header&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -425,7 +426,7 @@ not allowed access. The response had HTTP status code 401.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;ModalController&lt;/code&gt; as a dependency in &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerPage&lt;/code&gt; and add an &lt;code class=&quot;highlighter-rouge&quot;&gt;openModal()&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;ModalController&lt;/code&gt; as a dependency in &lt;code class=&quot;highlighter-rouge&quot;&gt;beer.ts&lt;/code&gt; and add an &lt;code class=&quot;highlighter-rouge&quot;&gt;openModal()&lt;/code&gt; method.&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;IonicPage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ModalController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NavController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NavParams&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ionic-angular'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
@@ -579,7 +580,9 @@ Did you add it to @NgModule.entryComponents?
 
 &lt;p&gt;To fix this problem, add &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerModalPage&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;declarations&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;entryComponent&lt;/code&gt; lists in &lt;code class=&quot;highlighter-rouge&quot;&gt;beer.module.ts&lt;/code&gt;.&lt;/p&gt;
 
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NgModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BeerModalPage&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./beer-modal'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;NgModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
   &lt;span class=&quot;na&quot;&gt;declarations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;BeerPage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;BeerModalPage&lt;/span&gt;
@@ -647,7 +650,7 @@ Did you add it to @NgModule.entryComponents?
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;toastCtrl&lt;/code&gt; as a dependency in the constructor, so everything compiles.&lt;/p&gt;
+&lt;p&gt;Add and import &lt;code class=&quot;highlighter-rouge&quot;&gt;ToastController&lt;/code&gt; as a dependency in the constructor, so everything compiles.&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;navCtrl&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NavController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;navParams&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;NavParams&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
           &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beerService&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BeerService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;giphyService&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GiphyService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -705,7 +708,7 @@ chrome://flags/#enable-add-to-shelf
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;After enabling these flags, you’ll see an error in your browser’s console about &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/imgs/logo.png&lt;/code&gt; not being found. This file is referenced in &lt;code class=&quot;highlighter-rouge&quot;&gt;src/manifest.json&lt;/code&gt;. You can fix this by copying a 512x512 PNG (&lt;a href=&quot;http://www.iconsdb.com/orange-icons/beer-icon.html&quot;&gt;like this one&lt;/a&gt;) into this location or by modifying &lt;code class=&quot;highlighter-rouge&quot;&gt;manifest.json&lt;/code&gt; accordingly. At the very least, you should modify &lt;code class=&quot;highlighter-rouge&quot;&gt;manifest.json&lt;/code&gt; to have your app’s name.&lt;/p&gt;
+&lt;p&gt;After enabling these flags, you’ll see an error in your browser’s console about &lt;code class=&quot;highlighter-rouge&quot;&gt;src/assets/imgs/logo.png&lt;/code&gt; not being found. This file is referenced in &lt;code class=&quot;highlighter-rouge&quot;&gt;src/manifest.json&lt;/code&gt;. You can fix this by copying a 512x512 PNG (&lt;a href=&quot;http://www.iconsdb.com/orange-icons/beer-icon.html&quot;&gt;like this one&lt;/a&gt;) into this location or by modifying &lt;code class=&quot;highlighter-rouge&quot;&gt;src/manifest.json&lt;/code&gt; accordingly. At the very least, you should modify &lt;code class=&quot;highlighter-rouge&quot;&gt;src/manifest.json&lt;/code&gt; to have your app’s name.&lt;/p&gt;
 
 &lt;h2 id=&quot;deploy-to-a-mobile-device&quot;&gt;Deploy to a Mobile Device&lt;/h2&gt;
 
@@ -727,9 +730,10 @@ chrome://flags/#enable-add-to-shelf
 
 &lt;p&gt;To deploy to Cloud Foundry, copy &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-ionic-example/blob/master/deploy.sh&quot;&gt;this deploy.sh script&lt;/a&gt; to your hard drive. It expects to be in a directory above your apps (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-boot-ionic-example&lt;/code&gt;). It also expects your apps to be named &lt;code class=&quot;highlighter-rouge&quot;&gt;ionic-beer&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;If you don’t have a Cloud Foundry account, you’ll need to &lt;a href=&quot;https://account.run.pivotal.io/z/uaa/sign-up&quot;&gt;create one&lt;/a&gt;. Then install its command line tools for this script to work.&lt;/p&gt;
+&lt;p&gt;If you don’t have a Cloud Foundry account, you’ll need to &lt;a href=&quot;https://account.run.pivotal.io/z/uaa/sign-up&quot;&gt;create one&lt;/a&gt;. Then install its command line tools (and login) for this script to work.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew tap cloudfoundry/tap &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; brew install cf-cli
+cf login -a api.run.pivotal.io
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 

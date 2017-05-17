@@ -213,7 +213,7 @@ cp -r spring-boot-angular-example/server ~/spring-boot-ionic-example/.
 </code></pre>
 </div>
 
-<p>You should be able to start the <code class="highlighter-rouge">server</code> application by running it in your favorite IDE or from the command line using <code class="highlighter-rouge">mvn spring-boot:run</code>. If you don’t have Maven installed, you can use the Maven wrapper that’s included in the project (<code class="highlighter-rouge">./mvnw spring-boot:run</code>).</p>
+<p>You should be able to start the <code class="highlighter-rouge">server</code> application by running it in your favorite IDE or from the command line using <code class="highlighter-rouge">mvn spring-boot:run</code>. You’ll want to do this from the <code class="highlighter-rouge">server</code> directory. If you don’t have Maven installed, you can use the Maven wrapper that’s included in the project (<code class="highlighter-rouge">./mvnw spring-boot:run</code>).</p>
 
 <p>After the app has started, navigate to <a href="http://localhost:8080/good-beers">http://localhost:8080/good-beers</a>. You should see the list of good beers in your browser.</p>
 
@@ -268,7 +268,7 @@ beer.ts
   <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
     <span class="nx">BrowserModule</span><span class="p">,</span>
     <span class="nx">IonicModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">MyApp</span><span class="p">),</span>
-    <span class="nx">BeerModule</span>
+    <span class="nx">BeerPageModule</span>
   <span class="p">],</span>
   <span class="p">...</span>
 <span class="p">})</span>
@@ -318,7 +318,7 @@ beer.ts
 </code></pre>
 </div>
 
-<p>Modify <code class="highlighter-rouge">beer.module.ts</code> to import <code class="highlighter-rouge">BeerService</code> and add it as a provider. You could add it as a provider in each component, but adding it in the module allows all components to use it.</p>
+<p>Modify <code class="highlighter-rouge">src/pages/beer/beer.module.ts</code> to import <code class="highlighter-rouge">BeerService</code> and add it as a provider. You could add it as a provider in each component, but adding it in the module allows all components to use it.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BeerService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../../providers/beer-service'</span><span class="p">;</span>
 
@@ -381,7 +381,7 @@ beer.ts
 </code></pre>
 </div>
 
-<p>You’ll also need to update <code class="highlighter-rouge">tabs.html</code> to have the new tab order and to specify which icon to use.</p>
+<p>You’ll also need to update <code class="highlighter-rouge">src/pages/tabs/tabs.html</code> to have the new tab order and to specify which icon to use.</p>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-tabs&gt;</span>
   <span class="nt">&lt;ion-tab</span> <span class="err">[</span><span class="na">root</span><span class="err">]="</span><span class="na">tab1Root</span><span class="err">"</span> <span class="na">tabTitle=</span><span class="s">"Home"</span> <span class="na">tabIcon=</span><span class="s">"home"</span><span class="nt">&gt;&lt;/ion-tab&gt;</span>
@@ -501,7 +501,7 @@ beer.ts
     <span class="nx">BrowserModule</span><span class="p">,</span>
     <span class="nx">HttpModule</span><span class="p">,</span>
     <span class="nx">IonicModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">MyApp</span><span class="p">),</span>
-    <span class="nx">BeerModule</span>
+    <span class="nx">BeerPageModule</span>
   <span class="p">],</span>
 </code></pre>
 </div>
@@ -541,6 +541,7 @@ not allowed access. The response had HTTP status code 401.
       <span class="nt">&lt;/button&gt;</span>
     <span class="nt">&lt;/ion-buttons&gt;</span>
   <span class="nt">&lt;/ion-navbar&gt;</span>
+<span class="nt">&lt;/ion-header&gt;</span>
 </code></pre>
 </div>
 
@@ -550,7 +551,7 @@ not allowed access. The response had HTTP status code 401.
 </code></pre>
 </div>
 
-<p>Add <code class="highlighter-rouge">ModalController</code> as a dependency in <code class="highlighter-rouge">BeerPage</code> and add an <code class="highlighter-rouge">openModal()</code> method.</p>
+<p>Add <code class="highlighter-rouge">ModalController</code> as a dependency in <code class="highlighter-rouge">beer.ts</code> and add an <code class="highlighter-rouge">openModal()</code> method.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">IonicPage</span><span class="p">,</span> <span class="nx">ModalController</span><span class="p">,</span> <span class="nx">NavController</span><span class="p">,</span> <span class="nx">NavParams</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
 
@@ -704,7 +705,9 @@ Did you add it to @NgModule.entryComponents?
 
 <p>To fix this problem, add <code class="highlighter-rouge">BeerModalPage</code> to the <code class="highlighter-rouge">declarations</code> and <code class="highlighter-rouge">entryComponent</code> lists in <code class="highlighter-rouge">beer.module.ts</code>.</p>
 
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">BeerModalPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./beer-modal'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
   <span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
     <span class="nx">BeerPage</span><span class="p">,</span>
     <span class="nx">BeerModalPage</span>
@@ -772,7 +775,7 @@ Did you add it to @NgModule.entryComponents?
 </code></pre>
 </div>
 
-<p>Add <code class="highlighter-rouge">toastCtrl</code> as a dependency in the constructor, so everything compiles.</p>
+<p>Add and import <code class="highlighter-rouge">ToastController</code> as a dependency in the constructor, so everything compiles.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span> <span class="k">public</span> <span class="nx">navParams</span><span class="err">:</span> <span class="nx">NavParams</span><span class="p">,</span>
           <span class="k">public</span> <span class="nx">beerService</span><span class="err">:</span> <span class="nx">BeerService</span><span class="p">,</span> <span class="k">public</span> <span class="nx">giphyService</span><span class="err">:</span> <span class="nx">GiphyService</span><span class="p">,</span>
@@ -830,7 +833,7 @@ chrome://flags/#enable-add-to-shelf
 </code></pre>
 </div>
 
-<p>After enabling these flags, you’ll see an error in your browser’s console about <code class="highlighter-rouge">assets/imgs/logo.png</code> not being found. This file is referenced in <code class="highlighter-rouge">src/manifest.json</code>. You can fix this by copying a 512x512 PNG (<a href="http://www.iconsdb.com/orange-icons/beer-icon.html">like this one</a>) into this location or by modifying <code class="highlighter-rouge">manifest.json</code> accordingly. At the very least, you should modify <code class="highlighter-rouge">manifest.json</code> to have your app’s name.</p>
+<p>After enabling these flags, you’ll see an error in your browser’s console about <code class="highlighter-rouge">src/assets/imgs/logo.png</code> not being found. This file is referenced in <code class="highlighter-rouge">src/manifest.json</code>. You can fix this by copying a 512x512 PNG (<a href="http://www.iconsdb.com/orange-icons/beer-icon.html">like this one</a>) into this location or by modifying <code class="highlighter-rouge">src/manifest.json</code> accordingly. At the very least, you should modify <code class="highlighter-rouge">src/manifest.json</code> to have your app’s name.</p>
 
 <h2 id="deploy-to-a-mobile-device">Deploy to a Mobile Device</h2>
 
@@ -852,9 +855,10 @@ chrome://flags/#enable-add-to-shelf
 
 <p>To deploy to Cloud Foundry, copy <a href="https://github.com/oktadeveloper/spring-boot-ionic-example/blob/master/deploy.sh">this deploy.sh script</a> to your hard drive. It expects to be in a directory above your apps (e.g. <code class="highlighter-rouge">spring-boot-ionic-example</code>). It also expects your apps to be named <code class="highlighter-rouge">ionic-beer</code> and <code class="highlighter-rouge">server</code>.</p>
 
-<p>If you don’t have a Cloud Foundry account, you’ll need to <a href="https://account.run.pivotal.io/z/uaa/sign-up">create one</a>. Then install its command line tools for this script to work.</p>
+<p>If you don’t have a Cloud Foundry account, you’ll need to <a href="https://account.run.pivotal.io/z/uaa/sign-up">create one</a>. Then install its command line tools (and login) for this script to work.</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>brew tap cloudfoundry/tap <span class="o">&amp;&amp;</span> brew install cf-cli
+cf login -a api.run.pivotal.io
 </code></pre>
 </div>
 
