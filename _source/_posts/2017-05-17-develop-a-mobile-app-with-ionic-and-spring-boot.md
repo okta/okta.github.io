@@ -103,7 +103,7 @@ The [Ionic CLI](http://ionicframework.com/docs/cli/) is a command-line tool that
 After installation completes, create a new application using the following command:
 
 ```bash
-ionic start ionic-beer --v2 
+ionic start ionic-beer --type ionic-angular
 ```
 
 You will be prompted to select a starter project and optionally link your app to your Ionic Dashboard. For the purposes of this tutorial, choose the **tabs** starter project and do not link the app to your Ionic Dashboard. 

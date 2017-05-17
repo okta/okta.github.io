@@ -106,7 +106,7 @@ cp -r spring-boot-angular-example/server ~/spring-boot-ionic-example/.
 
 &lt;p&gt;After installation completes, create a new application using the following command:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ionic start ionic-beer --v2 
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ionic start ionic-beer --type ionic-angular
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
