@@ -84,7 +84,7 @@ public class BeerController {
 }
 ```
 
-You should be able to start the `server` application by running it in your favorite IDE or from the command line using `mvn spring-boot:run`. If you don't have Maven installed, you can use the Maven wrapper that's included in the project (`./mvnw spring-boot:run`).
+You should be able to start the `server` application by running it in your favorite IDE or from the command line using `mvn spring-boot:run`. You'll want to do this from the `server` directory. If you don't have Maven installed, you can use the Maven wrapper that's included in the project (`./mvnw spring-boot:run`).
 
 After the app has started, navigate to <http://localhost:8080/good-beers>. You should see the list of good beers in your browser.
 
@@ -140,7 +140,7 @@ import { BeerPageModule } from '../pages/beer/beer.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    BeerModule
+    BeerPageModule
   ],
   ...
 })
@@ -191,7 +191,7 @@ Replace the HTML in `src/pages/beer/beer.html` to show the list of beers.
 ```
 {% endraw %}
 
-Modify `beer.module.ts` to import `BeerService` and add it as a provider. You could add it as a provider in each component, but adding it in the module allows all components to use it. 
+Modify `src/pages/beer/beer.module.ts` to import `BeerService` and add it as a provider. You could add it as a provider in each component, but adding it in the module allows all components to use it. 
 
 ```typescript
 import { BeerService } from '../../providers/beer-service';
@@ -254,7 +254,7 @@ export class TabsPage {
 }
 ```
 
-You'll also need to update `tabs.html` to have the new tab order and to specify which icon to use.
+You'll also need to update `src/pages/tabs/tabs.html` to have the new tab order and to specify which icon to use.
 
 ```html
 <ion-tabs>
@@ -377,7 +377,7 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    BeerModule
+    BeerPageModule
   ],
 ```
 
@@ -417,6 +417,7 @@ Change the header in `beer.html` to have a button that opens a modal to add a ne
       </button>
     </ion-buttons>
   </ion-navbar>
+</ion-header>
 ```
 
 In this same file, change `<ion-item>` to have a click handler for opening the modal for the current item.
@@ -425,7 +426,7 @@ In this same file, change `<ion-item>` to have a click handler for opening the m
 <ion-item *ngFor="let beer of beers" (click)="openModal({id: beer.id})">
 ```
 
-Add `ModalController` as a dependency in `BeerPage` and add an `openModal()` method.
+Add `ModalController` as a dependency in `beer.ts` and add an `openModal()` method.
 
 ```typescript
 import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
@@ -582,6 +583,8 @@ Did you add it to @NgModule.entryComponents?
 To fix this problem, add `BeerModalPage` to the `declarations` and `entryComponent` lists in `beer.module.ts`.
 
 ```typescript
+import { BeerModalPage } from './beer-modal';
+
 @NgModule({
   declarations: [
     BeerPage,
@@ -651,7 +654,7 @@ remove(beer) {
 }
 ```
 
-Add `toastCtrl` as a dependency in the constructor, so everything compiles.
+Add and import `ToastController` as a dependency in the constructor, so everything compiles.
 
 ```typescript
 constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -707,7 +710,7 @@ chrome://flags/#bypass-app-banner-engagement-checks
 chrome://flags/#enable-add-to-shelf
 ```
 
-After enabling these flags, you'll see an error in your browser's console about `assets/imgs/logo.png` not being found. This file is referenced in `src/manifest.json`. You can fix this by copying a 512x512 PNG ([like this one](http://www.iconsdb.com/orange-icons/beer-icon.html)) into this location or by modifying `manifest.json` accordingly. At the very least, you should modify `manifest.json` to have your app's name.
+After enabling these flags, you'll see an error in your browser's console about `src/assets/imgs/logo.png` not being found. This file is referenced in `src/manifest.json`. You can fix this by copying a 512x512 PNG ([like this one](http://www.iconsdb.com/orange-icons/beer-icon.html)) into this location or by modifying `src/manifest.json` accordingly. At the very least, you should modify `src/manifest.json` to have your app's name.
 
 ## Deploy to a Mobile Device
 
@@ -729,10 +732,11 @@ Deploying to your phone will likely fail because it won't be able to connect to 
 
 To deploy to Cloud Foundry, copy [this deploy.sh script](https://github.com/oktadeveloper/spring-boot-ionic-example/blob/master/deploy.sh) to your hard drive. It expects to be in a directory above your apps (e.g. `spring-boot-ionic-example`). It also expects your apps to be named `ionic-beer` and `server`.
 
-If you don't have a Cloud Foundry account, you'll need to [create one](https://account.run.pivotal.io/z/uaa/sign-up). Then install its command line tools for this script to work.
+If you don't have a Cloud Foundry account, you'll need to [create one](https://account.run.pivotal.io/z/uaa/sign-up). Then install its command line tools (and login) for this script to work.
 
 ```bash
 brew tap cloudfoundry/tap && brew install cf-cli
+cf login -a api.run.pivotal.io
 ```
 
 After logging into Cloud Foundry, you should be able to run `./deploy.sh`. This script will deploy the server and modify `beer.service.ts` to point to it. It will also try to deploy to your phone, so you may need to complete the steps below before it will work.
