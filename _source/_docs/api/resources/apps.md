@@ -2525,7 +2525,25 @@ curl -v -X PUT \
 }
 ~~~
 
+#### Set Profile Property for OpenID Connect Apps
+{:.api .api-operation}
 
+Update the [app's `profile` property](#application-properties), a container for any valid JSON schema that can be referenced from a request.
+For example, add an app manager contact email address, 
+or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
+
+To add a `profile` property to an OpenID Connect public client app:
+
+1. Create a [public client app](/docs/api/resources/oauth-clients.html) configured for OpenID Connect, if it doesn't already exist. Creating the public client app creates a corresponding app instance accessible via the Apps API.
+2. List your org's apps and look for the app named `oidc_client` that corresponds to your public client app.
+3. Use the ID of the corresponding app instance to update the app instance properties with a `profile` property.
+4. Once the property is populated, you can refer to it in Okta Expression Language, such as the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
+
+
+Profile Requirements
+
+* The `profile` property is not encrypted, so don't store sensitive data in it.
+* The `profile` property doesn't limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.
 
 ### Delete Application
 {:.api .api-operation}
@@ -4294,28 +4312,32 @@ curl -v -X GET \
 
 #### Application Properties
 
-All applications have the following properties:
+Applications have the following properties:
 
-|----------------+--------------------------------------------+-------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
-| Property       | Description                                | DataType                                                          | Nullable | Unique | Readonly | MinLength | MaxLength | Validation |
-| -------------- | ------------------------------------------ | ----------------------------------------------------------------- | -------- | ------ | -------- | --------- | --------- | ---------- |
-| id             | unique key for app                         | String                                                            | FALSE    | TRUE   | TRUE     |           |           |            |
-| name           | unique key for app definition              | String ([App Names & Settings](#app-names--settings))             | FALSE    | TRUE   | TRUE     | 1         | 255       |            |
-| label          | unique user-defined display name for app   | String                                                            | FALSE    | TRUE   | FALSE    | 1         | 50        |            |
-| created        | timestamp when app was created             | Date                                                              | FALSE    | FALSE  | TRUE     |           |           |            |
-| lastUpdated    | timestamp when app was last updated        | Date                                                              | FALSE    | FALSE  | TRUE     |           |           |            |
-| status         | status of app                              | `ACTIVE` or `INACTIVE`                                            | FALSE    | FALSE  | TRUE     |           |           |            |
-| features       | enabled app features                       | [Features](#features)                                             | TRUE     | FALSE  | FALSE    |           |           |            |
-| signOnMode     | authentication mode of app                 | [SignOn Mode](#signon-modes)                                      | FALSE    | FALSE  | FALSE    |           |           |            |
-| accessibility  | access settings for app                    | [Accessibility Object](#accessibility-object)                     | TRUE     | FALSE  | FALSE    |           |           |            |
-| visibility     | visibility settings for app                | [Visibility Object](#visibility-object)                           | TRUE     | FALSE  | FALSE    |           |           |            |
-| credentials    | credentials for the specified `signOnMode` | [Application Credentials Object](#application-credentials-object) | TRUE     | FALSE  | FALSE    |           |           |            |
-| settings       | settings for app                           | Object ([App Names & Settings](#app-names--settings))             | TRUE     | FALSE  | FALSE    |           |           |            |
-| _links         | discoverable resources related to the app  | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    | TRUE     | FALSE  | TRUE     |           |           |            |
-| _embedded      | embedded resources related to the app      | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)    | TRUE     | FALSE  | TRUE     |           |           |            |
-|----------------+--------------------------------------------+-------------------------------------------------------------------+----------+--------+----------+-----------+-----------+------------|
+| ---------------- | -------------------------------------------- | ------------------------------------------------------------------ | ---------- | -------- | ---------- | ----------- | ----------- |
+| Property         | Description                                  | DataType                                                           | Nullable   | Unique   | Readonly   | MinLength   | MaxLength   |
+|:-----------------|:---------------------------------------------|:-------------------------------------------------------------------|:-----------|:---------|:-----------|:------------|:------------|
+| id               | unique key for app                           | String                                                             | FALSE      | TRUE     | TRUE       |             |             |
+| name             | unique key for app definition                | String ( [App Names & Settings](#app-names--settings))              | FALSE      | TRUE     | TRUE       | 1           | 255         |
+| label            | unique user-defined display name for app     | String                                                             | FALSE      | TRUE     | FALSE      | 1           | 50          |
+| created          | timestamp when app was created               | Date                                                               | FALSE      | FALSE    | TRUE       |             |             |
+| lastUpdated      | timestamp when app was last updated          | Date                                                               | FALSE      | FALSE    | TRUE       |             |             |
+| status           | status of app                                | `ACTIVE` or `INACTIVE`                                             | FALSE      | FALSE    | TRUE       |             |             |
+| features         | enabled app features                         |  [Features](#features)                                              | TRUE       | FALSE    | FALSE      |             |             |
+| signOnMode       | authentication mode of app                   |  [SignOn Mode](#signon-modes)                                       | FALSE      | FALSE    | FALSE      |             |             |
+| accessibility    | access settings for app                      |  [Accessibility Object](#accessibility-object)                      | TRUE       | FALSE    | FALSE      |             |             |
+| visibility       | visibility settings for app                  |  [Visibility Object](#visibility-object)                            | TRUE       | FALSE    | FALSE      |             |             |
+| credentials      | credentials for the specified `signOnMode`   |  [Application Credentials Object](#application-credentials-object)  | TRUE       | FALSE    | FALSE      |             |             |
+| settings         | settings for app                             | Object ( [App Names & Settings](#app-names--settings))              | TRUE       | FALSE    | FALSE      |             |             |
+| profile          | Valid JSON schema for specifying properties  | [JSON](#set-profile-property-for-openid-connect-apps)  | TRUE       | FALSE    | FALSE      |             |             |
+| _links           | discoverable resources related to the app    |  [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)     | TRUE       | FALSE    | TRUE       |             |             |
+| _embedded        | embedded resources related to the app        |  [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)     | TRUE       | FALSE    | TRUE       |             |             |
+| ---------------- | -------------------------------------------- | ------------------------------------------------------------------ | ---------- | -------- | ---------- | ----------- | ----------- |
 
-> `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created
+Property details
+ 
+ * `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created.
+ * `profile` is only available for OpenID Connect apps. See [Set Profile Property for OpenID Connect Apps](#set-profile-property-for-openid-connect-apps).
 
 ##### App Names & Settings
 
