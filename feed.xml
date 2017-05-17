@@ -88,7 +88,7 @@ cp -r spring-boot-angular-example/server ~/spring-boot-ionic-example/.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;You should be able to start the &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt; application by running it in your favorite IDE or from the command line using &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt;. If you don’t have Maven installed, you can use the Maven wrapper that’s included in the project (&lt;code class=&quot;highlighter-rouge&quot;&gt;./mvnw spring-boot:run&lt;/code&gt; on *nix, &lt;code class=&quot;highlighter-rouge&quot;&gt;\mvnw spring-boot:run&lt;/code&gt; on Windows).&lt;/p&gt;
+&lt;p&gt;You should be able to start the &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt; application by running it in your favorite IDE or from the command line using &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt;. If you don’t have Maven installed, you can use the Maven wrapper that’s included in the project (&lt;code class=&quot;highlighter-rouge&quot;&gt;./mvnw spring-boot:run&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;After the app has started, navigate to &lt;a href=&quot;http://localhost:8080/good-beers&quot;&gt;http://localhost:8080/good-beers&lt;/a&gt;. You should see the list of good beers in your browser.&lt;/p&gt;
 
@@ -793,7 +793,7 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/ionic-spring-boot/android-beer-list-89882cfa6fb9f2fc8b34b486be59cbfdac142c12fb3d3f8d691f97e6428060d5.png&quot; alt=&quot;Android Beer List&quot; width=&quot;540&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: If you get an application error that says “The connection to the server was unsuccessful. (file:///android/www/index.html)”, add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;config.xml&lt;/code&gt;. This sets the default timeout to 60 seconds (default is 20). Thanks to &lt;a href=&quot;http://stackoverflow.com/a/31377846&quot;&gt;Stack Overflow&lt;/a&gt; for the answer.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: If you get an application error that says “The connection to the server was unsuccessful. (&lt;code class=&quot;highlighter-rouge&quot;&gt;file:///android/www/index.html&lt;/code&gt;)”, add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;config.xml&lt;/code&gt;. This sets the default timeout to 60 seconds (default is 20). Thanks to &lt;a href=&quot;http://stackoverflow.com/a/31377846&quot;&gt;Stack Overflow&lt;/a&gt; for the answer.&lt;/p&gt;
 
 &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;preference&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;loadUrlTimeoutValue&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;60000&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;

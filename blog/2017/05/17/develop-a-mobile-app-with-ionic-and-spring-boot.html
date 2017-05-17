@@ -213,7 +213,7 @@ cp -r spring-boot-angular-example/server ~/spring-boot-ionic-example/.
 </code></pre>
 </div>
 
-<p>You should be able to start the <code class="highlighter-rouge">server</code> application by running it in your favorite IDE or from the command line using <code class="highlighter-rouge">mvn spring-boot:run</code>. If you don’t have Maven installed, you can use the Maven wrapper that’s included in the project (<code class="highlighter-rouge">./mvnw spring-boot:run</code> on *nix, <code class="highlighter-rouge">\mvnw spring-boot:run</code> on Windows).</p>
+<p>You should be able to start the <code class="highlighter-rouge">server</code> application by running it in your favorite IDE or from the command line using <code class="highlighter-rouge">mvn spring-boot:run</code>. If you don’t have Maven installed, you can use the Maven wrapper that’s included in the project (<code class="highlighter-rouge">./mvnw spring-boot:run</code>).</p>
 
 <p>After the app has started, navigate to <a href="http://localhost:8080/good-beers">http://localhost:8080/good-beers</a>. You should see the list of good beers in your browser.</p>
 
@@ -918,7 +918,7 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 
 <p><img src="/assets/blog/ionic-spring-boot/android-beer-list-89882cfa6fb9f2fc8b34b486be59cbfdac142c12fb3d3f8d691f97e6428060d5.png" alt="Android Beer List" width="540" /></p>
 
-<p><strong>NOTE</strong>: If you get an application error that says “The connection to the server was unsuccessful. (file:///android/www/index.html)”, add the following line to <code class="highlighter-rouge">config.xml</code>. This sets the default timeout to 60 seconds (default is 20). Thanks to <a href="http://stackoverflow.com/a/31377846">Stack Overflow</a> for the answer.</p>
+<p><strong>NOTE</strong>: If you get an application error that says “The connection to the server was unsuccessful. (<code class="highlighter-rouge">file:///android/www/index.html</code>)”, add the following line to <code class="highlighter-rouge">config.xml</code>. This sets the default timeout to 60 seconds (default is 20). Thanks to <a href="http://stackoverflow.com/a/31377846">Stack Overflow</a> for the answer.</p>
 
 <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;preference</span> <span class="na">name=</span><span class="s">"loadUrlTimeoutValue"</span> <span class="na">value=</span><span class="s">"60000"</span><span class="nt">/&gt;</span>
 </code></pre>

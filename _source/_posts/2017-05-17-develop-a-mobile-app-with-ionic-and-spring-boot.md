@@ -84,7 +84,7 @@ public class BeerController {
 }
 ```
 
-You should be able to start the `server` application by running it in your favorite IDE or from the command line using `mvn spring-boot:run`. If you don't have Maven installed, you can use the Maven wrapper that's included in the project (`./mvnw spring-boot:run` on *nix, `\mvnw spring-boot:run` on Windows).
+You should be able to start the `server` application by running it in your favorite IDE or from the command line using `mvn spring-boot:run`. If you don't have Maven installed, you can use the Maven wrapper that's included in the project (`./mvnw spring-boot:run`).
 
 After the app has started, navigate to <http://localhost:8080/good-beers>. You should see the list of good beers in your browser.
 
@@ -795,7 +795,7 @@ After performing these steps, you should be able to run `ionic cordova emulate a
 
 {% img blog/ionic-spring-boot/android-beer-list.png alt:"Android Beer List" width:"540" %}
 
-**NOTE**: If you get an application error that says "The connection to the server was unsuccessful. (file:///android/www/index.html)", add the following line to `config.xml`. This sets the default timeout to 60 seconds (default is 20). Thanks to [Stack Overflow](http://stackoverflow.com/a/31377846) for the answer.
+**NOTE**: If you get an application error that says "The connection to the server was unsuccessful. (`file:///android/www/index.html`)", add the following line to `config.xml`. This sets the default timeout to 60 seconds (default is 20). Thanks to [Stack Overflow](http://stackoverflow.com/a/31377846) for the answer.
 
 ```xml
 <preference name="loadUrlTimeoutValue" value="60000"/>
