@@ -721,8 +721,70 @@ integer type range limitations when converting from a number to an integer with 
       <td><code class="highlighter-rouge">isMemberOfGroupNameRegex("/.*admin.*")</code></td>
       <td><strong>True</strong>, if the user under consideration is a member of any groups with names that contain <em>admin</em>; otherwise,  <strong>False</strong>.</td>
     </tr>
+    <tr>
+      <td><code class="highlighter-rouge">getFilteredGroups</code></td>
+      <td>Array</td>
+      <td><code class="highlighter-rouge">getFilteredGroups({"00gml2xHE3RYRx7cM0g3"}, "group.name", 40)</code></td>
+      <td>Array of groups</td>
+    </tr>
   </tbody>
 </table>
+
+<h5 id="getfilteredgroups-details">getFilteredGroups Details</h5>
+
+<p><code class="highlighter-rouge">getFilteredGroups</code> returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the <code class="highlighter-rouge">group_expression</code> parameter. You must specify the maximum number of groups to return. The format of this EL function is <code class="highlighter-rouge">getFilteredGroups( whitelist, group_expression, limit)</code>.</p>
+
+<p>You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens for API access management that drive authorization flows.</p>
+
+<p>This function takes Okta EL expressions for all parameters that evaluate to the correct data type. With these expressions you can create complex definitions for the whitelist, the group format, and for the number of groups to return that can include <code class="highlighter-rouge">if</code> logic and customized formatting.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>whitelist</td>
+      <td>Valid Okta EL expression that evaluates to a string array of group ids</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>group_expression</td>
+      <td>Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression.</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>limit</td>
+      <td>Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return</td>
+      <td>FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All parameters must be valid Okta EL expressions that evaluate as described above. Okta EL expressions can be comprised of strings, integers, arrays, etc.</p>
+
+<p>The string produced by the <code class="highlighter-rouge">group_expression</code> parameter usually contains attributes and objects from the <a href="/docs/api/resources/groups.html">Groups API</a>, although it is not limited to those attributes and objects. Attributes and objects listed in the <a href="/docs/api/resources/groups.html#group-attributes">Group Attributes</a> section of the Groups API can be any of the following: <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">name</code>, <code class="highlighter-rouge">description</code>, <code class="highlighter-rouge">objectClass</code>, and the <code class="highlighter-rouge">profile</code> object that contains the <code class="highlighter-rouge">groupType</code>, <code class="highlighter-rouge">samAccountName</code>, <code class="highlighter-rouge">objectSid</code>, <code class="highlighter-rouge">groupScope</code>, <code class="highlighter-rouge">windowsDomainQualifiedName</code>, <code class="highlighter-rouge">dn</code>, and <code class="highlighter-rouge">externalID</code> attributes for groups that come from apps such as Active Directory.</p>
+
+<p>The <code class="highlighter-rouge">whitelist</code> parameter must evaluate to a list of group ids that is returned from the <a href="http://developer.okta.com/docs/api/resources/groups.html">Groups API</a>. If the user is not member of a group in the whitelist, the group is ignored.</p>
+
+<p><strong>Parameter Examples</strong></p>
+
+<ul>
+  <li>whitelist<br />
+Array: <code class="highlighter-rouge"><span class="p">{</span><span class="nt">"00gn335BVurvavwEEL0g3"</span><span class="err">,</span><span class="w"> </span><span class="nt">"00gnfg5BVurvavAAEL0g3"</span><span class="err">}</span></code><br />
+Array variable: <code class="highlighter-rouge">app.profile.groups.whitelist</code></li>
+  <li>group_expression<br />
+Attribute name: <code class="highlighter-rouge">"group.id"</code><br />
+Okta EL string containing an if condition: <code class="highlighter-rouge">"(group.objectClass[0] == 'okta:windows_security_principal') ? 'AD: ' + group.profile.windowsDomainQualifiedName : 'Okta: ' + group.name"</code><br /><br />If <em>okta:windows_security_principal</em> is true for 
+a group, the function returns the <code class="highlighter-rouge">windowsDomainQualifiedName</code> prefixed with <code class="highlighter-rouge">AD:</code>; otherwise, the function returns the group name prefixed with <code class="highlighter-rouge">Okta:</code>.</li>
+  <li>limit<br />
+ Integer between 1 and 100, inclusive; for example: <code class="highlighter-rouge">50</code>.<br />
+ Okta EL expression containing a condition that evaluates to an integer: <code class="highlighter-rouge">app.profile.maxLimit &lt; 100 ? app.profile.maxLimit : 100</code>.<br /><br /> If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return a maximum of 100 groups. <code class="highlighter-rouge">Note:</code> If there are more groups returned than the specified limit, an error is returned.</li>
+</ul>
 
 <h3 id="time-functions">Time Functions</h3>
 
