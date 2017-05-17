@@ -308,6 +308,7 @@ import { AppShellModule } from '@angular/app-shell';
 
 Modify `app.component.html` to use app-shell's directives.
 
+{% raw %}
 ```html
 <md-toolbar color="primary">
   <span>{{title}}</span>
@@ -318,6 +319,7 @@ Modify `app.component.html` to use app-shell's directives.
   <app-beer-list></app-beer-list>
 </div>
 ```
+{% endraw %}
 
 ### Add a Manifest to Make it Installable
 
