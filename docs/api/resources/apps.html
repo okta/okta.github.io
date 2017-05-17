@@ -145,10 +145,9 @@
                 <li><a href="/docs/api/resources/policy.html">Policy</a></li>
                 <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
                 <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
-                <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
+                <li><a href="/docs/api/resources/system_log.html">System Log</a></li>
                 <li><a href="/docs/api/resources/templates.html">Templates</a></li>
                 <li><a href="/docs/api/resources/users.html">Users</a></li>
-                <li><a href="/docs/api/resources/zones.html">Zones</a></li>
               </ul>
             </li>
             <li>
@@ -3316,6 +3315,28 @@
 </span></code></pre>
 </div>
 
+<h4 class="api api-operation" id="set-profile-property-for-openid-connect-apps">Set Profile Property for OpenID Connect Apps</h4>
+
+<p>Update the <a href="#application-properties">app’s <code class="highlighter-rouge">profile</code> property</a>, a container for any valid JSON schema that can be referenced from a request.
+For example, add an app manager contact email address, 
+or define a whitelist of groups that you can then reference using the <a href="/reference/okta_expression_language/index.html#group-functions">Okta Expression <code class="highlighter-rouge">getFilteredGroups</code></a>.</p>
+
+<p>To add a <code class="highlighter-rouge">profile</code> property to an OpenID Connect public client app:</p>
+
+<ol>
+  <li>Create a <a href="/docs/api/resources/oauth-clients.html">public client app</a> configured for OpenID Connect, if it doesn’t already exist. Creating the public client app creates a corresponding app instance accessible via the Apps API.</li>
+  <li>List your org’s apps and look for the app named <code class="highlighter-rouge">oidc_client</code> that corresponds to your public client app.</li>
+  <li>Use the ID of the corresponding app instance to update the app instance properties with a <code class="highlighter-rouge">profile</code> property.</li>
+  <li>Once the property is populated, you can refer to it in Okta Expression Language, such as the <a href="/reference/okta_expression_language/index.html#group-functions">Okta Expression <code class="highlighter-rouge">getFilteredGroups</code></a>.</li>
+</ol>
+
+<p>Profile Requirements</p>
+
+<ul>
+  <li>The <code class="highlighter-rouge">profile</code> property is not encrypted, so don’t store sensitive data in it.</li>
+  <li>The <code class="highlighter-rouge">profile</code> property doesn’t limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.</li>
+</ul>
+
 <h3 class="api api-operation" id="delete-application">Delete Application</h3>
 
 <p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/<em>:aid</em></span></p>
@@ -5632,183 +5653,181 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 <h4 id="application-properties">Application Properties</h4>
 
-<p>All applications have the following properties:</p>
+<p>Applications have the following properties:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
+      <th style="text-align: left">MinLength</th>
+      <th style="text-align: left">MaxLength</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>unique key for app</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">unique key for app</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>name</td>
-      <td>unique key for app definition</td>
-      <td>String (<a href="#app-names--settings">App Names &amp; Settings</a>)</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td>1</td>
-      <td>255</td>
-      <td> </td>
+      <td style="text-align: left">name</td>
+      <td style="text-align: left">unique key for app definition</td>
+      <td style="text-align: left">String ( <a href="#app-names--settings">App Names &amp; Settings</a>)</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">255</td>
     </tr>
     <tr>
-      <td>label</td>
-      <td>unique user-defined display name for app</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>1</td>
-      <td>50</td>
-      <td> </td>
+      <td style="text-align: left">label</td>
+      <td style="text-align: left">unique user-defined display name for app</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">50</td>
     </tr>
     <tr>
-      <td>created</td>
-      <td>timestamp when app was created</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">created</td>
+      <td style="text-align: left">timestamp when app was created</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>lastUpdated</td>
-      <td>timestamp when app was last updated</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">lastUpdated</td>
+      <td style="text-align: left">timestamp when app was last updated</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>status</td>
-      <td>status of app</td>
-      <td><code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">INACTIVE</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">status</td>
+      <td style="text-align: left">status of app</td>
+      <td style="text-align: left"><code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">INACTIVE</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>features</td>
-      <td>enabled app features</td>
-      <td><a href="#features">Features</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">features</td>
+      <td style="text-align: left">enabled app features</td>
+      <td style="text-align: left"> <a href="#features">Features</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>signOnMode</td>
-      <td>authentication mode of app</td>
-      <td><a href="#signon-modes">SignOn Mode</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">signOnMode</td>
+      <td style="text-align: left">authentication mode of app</td>
+      <td style="text-align: left"> <a href="#signon-modes">SignOn Mode</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>accessibility</td>
-      <td>access settings for app</td>
-      <td><a href="#accessibility-object">Accessibility Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">accessibility</td>
+      <td style="text-align: left">access settings for app</td>
+      <td style="text-align: left"> <a href="#accessibility-object">Accessibility Object</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>visibility</td>
-      <td>visibility settings for app</td>
-      <td><a href="#visibility-object">Visibility Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">visibility</td>
+      <td style="text-align: left">visibility settings for app</td>
+      <td style="text-align: left"> <a href="#visibility-object">Visibility Object</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>credentials</td>
-      <td>credentials for the specified <code class="highlighter-rouge">signOnMode</code></td>
-      <td><a href="#application-credentials-object">Application Credentials Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">credentials</td>
+      <td style="text-align: left">credentials for the specified <code class="highlighter-rouge">signOnMode</code></td>
+      <td style="text-align: left"> <a href="#application-credentials-object">Application Credentials Object</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>settings</td>
-      <td>settings for app</td>
-      <td>Object (<a href="#app-names--settings">App Names &amp; Settings</a>)</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">settings</td>
+      <td style="text-align: left">settings for app</td>
+      <td style="text-align: left">Object ( <a href="#app-names--settings">App Names &amp; Settings</a>)</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>_links</td>
-      <td>discoverable resources related to the app</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Valid JSON schema for specifying properties</td>
+      <td style="text-align: left"><a href="#set-profile-property-for-openid-connect-apps">JSON</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>_embedded</td>
-      <td>embedded resources related to the app</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">_links</td>
+      <td style="text-align: left">discoverable resources related to the app</td>
+      <td style="text-align: left"> <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_embedded</td>
+      <td style="text-align: left">embedded resources related to the app</td>
+      <td style="text-align: left"> <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p><code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">created</code>, <code class="highlighter-rouge">lastUpdated</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">_links</code>, and <code class="highlighter-rouge">_embedded</code> are only available after an app is created</p>
-</blockquote>
+<p>Property details</p>
+
+<ul>
+  <li><code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">created</code>, <code class="highlighter-rouge">lastUpdated</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">_links</code>, and <code class="highlighter-rouge">_embedded</code> are only available after an app is created.</li>
+  <li><code class="highlighter-rouge">profile</code> is only available for OpenID Connect apps. See <a href="#set-profile-property-for-openid-connect-apps">Set Profile Property for OpenID Connect Apps</a>.</li>
+</ul>
 
 <h5 id="app-names--settings">App Names &amp; Settings</h5>
 

@@ -33,14 +33,14 @@
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Tokens | Okta Developer</title>
-  <meta name="description" content="Overiew">
-  <link rel="canonical" href="http://developer.okta.com/docs/api/resources/tokens.html">
+  <title>Platform Release Notes | Okta Developer</title>
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.18">
+  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-19.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page tokens">
+  <div class="Page platform-release-notes">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -126,29 +126,9 @@
             </li>
             <li>
               <a href="/docs/api/resources/authn.html">Authentication Reference</a>
-              <ul id="Sidebar_References" class="Sidebar-hide">
-                <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
-                <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
-                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
-              </ul>
             </li>
             <li>
               <a href="/docs/api/resources/apps.html">API Reference</a>
-              <ul id="Sidebar_Resources" class="Sidebar-hide">
-                <li><a href="/docs/api/resources/apps.html">Apps</a></li>
-                <li><a href="/docs/api/resources/events.html">Events</a></li>
-                <li><a href="/docs/api/resources/factors.html">Factors</a></li>
-                <li><a href="/docs/api/resources/groups.html">Groups</a></li>
-                <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
-                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
-                <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
-                <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
-                <li><a href="/docs/api/resources/system_log.html">System Log</a></li>
-                <li><a href="/docs/api/resources/templates.html">Templates</a></li>
-                <li><a href="/docs/api/resources/users.html">Users</a></li>
-              </ul>
             </li>
             <li>
               <a href="/reference/error_codes">Error Codes</a>
@@ -156,7 +136,7 @@
             <li>
               <a href="/reference/okta_expression_language">Okta Expression Language</a>
             </li>
-            <li>
+            <li class="is-active">
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
@@ -203,56 +183,151 @@
 <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/tokens.md">Edit Page</a>
-      <h1 id="overiew">Overiew</h1>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2017-19.md">Edit Page</a>
+      <h2 id="release-201719">Release 2017.19</h2>
+
+<h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
+
+<p>We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user’s request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:</p>
+
+<h4 id="preview-orgs">Preview Orgs</h4>
+
+<ol>
+  <li>
+    <p>We enforce new rate limits for new preview orgs. For these new orgs, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
+  </li>
+  <li>
+    <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
+  </li>
+</ol>
+
+<h4 id="production-orgs">Production Orgs</h4>
+
+<ol>
+  <li>
+    <p>As of May 8, we have enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
+
+    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
+ a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
+ be warned these rate limits will be enforced in the near future.</code></p>
+  </li>
+  <li>
+    <p>In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
+  </li>
+  <li>
+    <p>In early June, we’ll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
+  </li>
+</ol>
+
+<p>For a full description of the new rate limits, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
+
+<!-- ### Platform New Features -->
+
+<h3 id="platform-feature-improvements">Platform Feature Improvements</h3>
+
+<ul>
+  <li><a href="#zones-api-is-now-generally-available">Zones API Generally Available in Preview</a></li>
+  <li><a href="#simple-hal-links-generally-available-in-preview">Simple HAL Links Generally Available in Preview</a></li>
+</ul>
+
+<h4 id="zones-api-is-now-generally-available">Zones API is Now Generally Available</h4>
+
+<p>The Zones API is now Generally Available in preview orgs. It will be at least one month before the Zones API is available in production.</p>
+
+<p>Zones are used to group IP Address ranges so that policy decisions can be made based on the zone a client’s IP belongs to.</p>
+
+<p>For more information, see <a href="/docs/api/resources/zones.html">the Zones API developer documentation</a>.</p>
 
 <blockquote>
-  <p>This endpoint is a  <a href="/docs/api/getting_started/releases-at-okta.html#deprecation"> <span class="api-label api-label-deprecated "> <i class="fa fa-fire-extinguisher"></i> Deprecated </span> </a>  feature. Please see <a href="/docs/getting_started/getting_a_token.html">Getting an API Token</a>.</p>
+  <p>Update: Zones API is <a href="/docs/api/getting_started/releases-at-okta.html">a Beta release</a>. This release note is in error.</p>
 </blockquote>
 
-<h2 id="create-tokens">Create tokens</h2>
+<h4 id="simple-hal-links-generally-available-in-preview">Simple HAL Links Generally Available in Preview</h4>
 
-<h3 id="post-tokens">POST /tokens</h3>
+<p>Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
+This feature will remain in preview for at least one month.</p>
 
-<p>Create a token.  This API does not require any token-based authentication to access.</p>
+<p>This feature removes the HAL links that reflect state from user objects returned in collections.</p>
 
-<h4 id="request-example">Request Example</h4>
+<p>Before release 2017.19, a user object returned in a collection contains some or all of the following links:</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Content-type:application/json"</span> <span class="se">\</span>
--H <span class="s2">"Accept:application/json"</span> <span class="se">\</span>
--X POST https://your-subdomain.okta.com/api/v1/tokens/ <span class="se">\</span>
--d <span class="se">\</span>
-<span class="s1">'{
-  "username": "user8u3VOJBREVQHBTAS@asdf.com",
-  "password": "SecretPass",
-  "clientAppId": "capalkhfadflkjh",
-  "deviceName": "Sample Device Name"
-}'</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>"_links": {
+    "suspend": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/suspend",
+      "method": "POST"
+    },
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/reset_password",
+      "method": "POST"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/expire_password",
+      "method": "POST"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/forgot_password",
+      "method": "POST"
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_recovery_question",
+      "method": "POST"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/deactivate",
+      "method": "POST"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_password",
+      "method": "POST"
+    }
+}
 </code></pre>
 </div>
 
-<h4 id="response-example">Response Example</h4>
+<p>Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
+As outlined in <a href="/docs/api/getting_started/design_principles.html#links-in-collections">Design Principles</a>:</p>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+<p>“Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by ‘id’ using the “self” link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state.”</p>
 
-<h2 id="revoke-tokens">Revoke tokens</h2>
+<p>The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the <code class="highlighter-rouge">self</code> link is returned:</p>
 
-<h3 id="delete-tokens">DELETE /tokens</h3>
-
-<p>Revokes the token that is being used to authenticate to the API.</p>
-
-<h4 id="request-example-1">Request Example</h4>
-
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Content-type:application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization:SSWS 00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs"</span> <span class="se">\</span>
--H <span class="s2">"Accept:application/json"</span> <span class="se">\</span>
--X DELETE https://your-subdomain.okta.com/api/v1/tokens/
+<div class="highlighter-rouge"><pre class="highlight"><code>"_links": {
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
+    }
+}
 </code></pre>
 </div>
+
+<p>As noted above, to change user state, the <code class="highlighter-rouge">self</code> link should be called to retrieve a user object with up-to-date links.</p>
+
+<blockquote>
+  <p>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.</p>
+</blockquote>
+
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
+
+<ul>
+  <li>Some queries on <code class="highlighter-rouge">/api/v1/apps</code> with incorrect filter parameters returned an empty <code class="highlighter-rouge">_embedded node</code> in the response instead of the correct error message. (OKTA-124544)</li>
+  <li>Multifactor authentication with RSA failed for some orgs. (OKTA-125862)</li>
+</ul>
+
+<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
+
+<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
+
+<p><img src="/assets/release_notes/version_footer-1ab3b975804fe11152fd81c6e639a796093845153b216733d1dc1891e1a5f446.png" alt="Release Number in Footer" /></p>
+
+<h3 id="looking-for-something-else">Looking for Something Else?</h3>
+
+<ul>
+  <li><a href="platform-release-notes2016-index.html">Platform Release Note Index</a></li>
+  <li>For changes outside the Okta platform, see the <a href="https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm">Product Release Notes</a>.</li>
+</ul>
+
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
