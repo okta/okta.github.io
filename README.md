@@ -34,9 +34,11 @@ Jekyll to be able to build and view the site, follow the steps below:
    gems on your system.
 5. Now install gems needed by this project into the projects gemset with `gem install bundler` and then `bundle install`.
    This will essentially read the Gemfile in the root directory and install all packages required to run the site.
-6. Start the site `npm start`
-7. Visit `http://localhost:4000` in your browser
-8. To stop serving the site hit `ctrl+c` in the terminal
+6. Install NPM if you don't alreayd have it. On OSX, if you are a brew user, `brew install node`, otherwise see this [guide](https://www.dyclassroom.com/howto-mac/how-to-install-nodejs-and-npm-on-mac-using-homebrew).
+7. Run `npm install`
+8. Start the site `npm start`
+9. Visit `http://localhost:4000` in your browser
+10. To stop serving the site hit `ctrl+c` in the terminal
 
 ### Important Directories
 
