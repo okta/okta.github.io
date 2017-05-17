@@ -47,6 +47,8 @@ Zones are used to group IP Address ranges so that policy decisions can be made b
 
 For more information, see [the Zones API developer documentation](/docs/api/resources/zones.html).
 
+> Update: Zones API is [a Beta release](/docs/api/getting_started/releases-at-okta.html). This release note is in error.
+
 #### Simple HAL Links Generally Available in Preview
 
 Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.

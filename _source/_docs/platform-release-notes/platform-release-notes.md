@@ -61,24 +61,12 @@ Use the `login_hint` property on `/oauth2/:authorizationServerId/v1/authorize` o
 ### Platform Bugs Fixed
 
 * Updating the OpenID Connect property `max_age` incorrectly caused a new session to be created, which updated the `createdAt` timestamp. (OKTA-99850)
-* The property `application_type` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html) wasn't read only. (OKTA-120223)
+* The property `application_type` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html) could be edited. (OKTA-120223)
 * User profile attributes could be fetched via the API even though attributes were marked hidden, if the user sending the request was the user being fetched. (OKTA-123882)
 * Reordering Authorization Server policies failed. (OKTA-125156)
+* The Zones API documentation was incorrectly announced as Generally Available in 2017.19. It is [a Beta release](/docs/api/getting_started/releases-at-okta.html).
 
-### Generally Available Features in Preview for May, 2017
-
-These features are Generally Available in Preview Release. The earliest they'll be available in production is June. 
-
-* [Zones API Generally Available in Preview](#zones-api-is-now-generally-available)
-* [Simple HAL Links Generally Available in Preview](#simple-hal-links-generally-available-in-preview)
- 
-#### Zones API is Now Generally Available
-
-Zones are used to group IP Address ranges so that policy decisions can be made based on the zone a client’s IP belongs to.
-
-For more information, see [the Zones API developer documentation](/docs/api/resources/zones.html).
-
-#### Simple HAL Links Generally Available in Preview
+#### Simple HAL Links Generally Available in Preview for May, 2017
 
 Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
 This feature removes the HAL links that reflect state from user objects returned in collections.
