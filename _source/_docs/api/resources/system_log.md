@@ -1,11 +1,11 @@
 ---
 layout: docs_page
-title: System Log
+title: System Log (Beta)
 ---
 
 # System Log API
 
-{% api_lifecycle ea %} This API is [an Early Availability release](/docs/api/getting_started/releases-at-okta.html).
+{% api_lifecycle beta %}
 
 The Okta System Log API provides read access to your organization's system log. This API provides more functionality than the [Events API](/docs/api/resources/events.html):
 
