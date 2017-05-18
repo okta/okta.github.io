@@ -31,19 +31,19 @@ class BlogPage extends BasePage {
   }
 
   clickItem(item) {
-    let itemLink = element(by.linkText(item.toString()));
+    const itemLink = element(by.linkText(item.toString()));
     return itemLink.click();
   }
 
   clickReadMoreOnPost(post) {
-    let blogPost = this.$$blogPost.get(post);
-    let readMoreLink = blogPost.element(by.linkText('Read more'));
+    const blogPost = this.$$blogPost.get(post);
+    const readMoreLink = blogPost.element(by.linkText('Read more'));
     return readMoreLink.click();
   }
   
   getBlogLink(post) {
-    let blogPost = this.$$blogPost.get(post);
-    let title = blogPost.element(by.css('a'));
+    const blogPost = this.$$blogPost.get(post);
+    const title = blogPost.element(by.css('h1 a'));
     return title.getAttribute('href');
   }
 }

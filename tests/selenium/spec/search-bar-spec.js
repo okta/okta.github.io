@@ -1,15 +1,15 @@
 const NavPage = require('../framework/page-objects/NavPage');
 const util = require('../framework/shared/util');
 
-describe('navigation bar search spec', function() {
+describe('navigation bar search spec', () => {
   const navPage = new NavPage();
 
-  beforeEach(function() {
+  beforeEach(() => {
     navPage.load();
   });
 
-  it('does search on desktop browser sizes', function () {
-    navPage.resizeDesktop();
+  it('does search on desktop browser sizes', () => {
+    navPage.resizeXLarge();
     // After resize it's better to call load() which waits for the presence of a page element
     // Sometimes, the searchIcon isn't present immediately after resize
     navPage.load();
@@ -23,8 +23,8 @@ describe('navigation bar search spec', function() {
     expect(navPage.areSearchResultsPresent()).toBe(true);
   });
 
-  util.itNoPhantom('does search on mobile browser sizes', function () {
-    navPage.resizeMobile();
+  util.itNoPhantom('does search on mobile browser sizes', () => {
+    navPage.resizeXsmall();
 
     navPage.clickMobileSearch();
     expect(navPage.areSearchResultsPresent()).toBe(false);

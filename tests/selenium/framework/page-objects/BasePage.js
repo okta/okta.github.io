@@ -1,7 +1,6 @@
 'use strict';
 
 const util = require('../shared/util');
-const _ = require('lodash');
 const EC = protractor.ExpectedConditions;
 const baseUrl = 'http://localhost:4000';
 
@@ -54,6 +53,21 @@ class BasePage {
     })
   }
 
+  elementHasLinks(element, expectedTextArray) {
+    if (!Array.isArray(expectedTextArray)) {
+      expectedTextArray = [expectedTextArray];
+    }
+
+    return element.getText().then((text) => {
+      for(let i = 0; i < expectedTextArray.length; i++) {
+        if (text.indexOf(expectedTextArray[i]) < 0) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
+
   urlContains(str) {
     return EC.urlContains(str)();
   }
@@ -71,12 +85,20 @@ class BasePage {
   // max-width: 767px -> small
   // max-width: 479px -> xSmall
   // max-width: 319px -> xxSmall
-  resizeDesktop() {
+  resizeMedium() {
     browser.driver.manage().window().setSize(1060, 640);
   }
 
-  resizeMobile() {
-    browser.driver.manage().window().setSize(360, 640);
+  resizeXsmall() {
+    browser.driver.manage().window().setSize(480, 640);
+  }
+
+  resizeXLarge() {
+    browser.driver.manage().window().setSize(1560, 840);
+  }
+
+  hasElements(elements) {
+    return elements.then(element => element.length > 0);
   }
 }
 
