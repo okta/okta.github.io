@@ -197,7 +197,7 @@ curl -v -X PUT \
 
 1. In the Okta user interface, select **Applications > Applications** and choose your app. 
 2. Select **Sign-On Options**.
-3. Click **View Setup Instructions**, as shown below. <br />![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
+3. Click **View Setup Instructions**, as shown below. <br />{% img saml_setup_link.png "Accessing SAML Setup Instructions" alt:"Accessing SAML Setup Instructions" %}
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
 
@@ -271,7 +271,7 @@ This step is the same as
 
 1. In the Okta user interface, select **Applications > Applications** and choose your app. 
 2. Select **Sign-On Options**.
-3. Click **View Setup Instructions**, as shown below. <br />![Accessing SAML Setup Instructions](/assets/img/saml_setup_link.png "Accessing SAML Setup Instructions")
+3. Click **View Setup Instructions**, as shown below. <br />{% img saml_setup_link.png "Accessing SAML Setup Instructions" alt:"Accessing SAML Setup Instructions" %}
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
 

@@ -27,6 +27,8 @@ Gemfile.lock
 # ignore Emacs auto-save files
 *~
 
+.vscode
+
 # ignore mac specific files
 .DS_Store
 reload_views.rb
@@ -34,13 +36,14 @@ reload_views.rb
 # Ignore the vendor folder.
 vendor/*
 
-
 dist
 
+_source/.asset-cache
 .sass-cache
 .bundle
 bin/*
 .jekyll-metadata
+assets/.sprockets-manifest-*.json
 
 # Ignore node packages added for tests added via npm
 node_modules/*

@@ -9,7 +9,7 @@ The Okta Administrator Roles API provides operations to manage administrative ro
 
 ## Getting Started with Admin Roles
 
-Explore the Administrator Roles API:  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b) 
+Explore the Administrator Roles API:  [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b)
 
 ## Role Assignment Operations
 
@@ -80,7 +80,7 @@ Assigns a role to a user.
 Parameter    | Description            | Param Type | DataType                 | Required | Default
 ------------ | ---------------------- | ---------- | ------------------------ | -------- | -------
 uid          | `id` of user           | URL        | String                   | TRUE     |
-type         | type of role to assign | Body       | [Role Type](#Role Types) | TRUE     |
+type         | type of role to assign | Body       | [Role Type](#role-types) | TRUE     |
 
 #### Response Parameters
 {:.api .api-response .api-response-params}
@@ -175,7 +175,7 @@ rid          | `id` of role                                                 | UR
 limit        | Specifies the number of results for a page                   | Query      | Number                   | FALSE    | 20
 after        | Specifies the pagination cursor for the next page of targets | Query      | String                   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -338,7 +338,7 @@ rid          | `id` of role                                                 | UR
 limit        | Specifies the number of results for a page                   | Query      | Number                   | FALSE    | 20
 after        | Specifies the pagination cursor for the next page of targets | Query      | String                   | FALSE    |
 
-> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/getting_started/design_principles.html#pagination)
+> The page cursor should treated as an opaque value and obtained through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination)
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}

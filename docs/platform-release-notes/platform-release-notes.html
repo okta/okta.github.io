@@ -2,36 +2,41 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-  (function(d) {
-    var config = {
-      kitId: 'jff5neq',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
 	</script>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-cdb1b544ae0f29a9e4d8c0bcbe55984903ad1378a9da805143cb56984ce2fa57.css">
+  
+  
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/animate.css">
-  <link rel="stylesheet" type="text/css" media="all" href="/assets/css/okta.css">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.17">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.18">
   <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
-
-  <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-15777010-3', 'auto');
-        ga('send', 'pageview');
-  </script>
 </head>
 
 <body>
@@ -179,67 +184,87 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201718">Release 2017.18</h2>
+      <h2 id="release-201720">Release 2017.20</h2>
 
-<h3 id="advance-notices">Advance Notices</h3>
-
-<p>The items in this section are scheduled for future releases. Although we share our expected release dates, these dates are subject to change.</p>
-
-<ul>
-  <li><a href="#api-rate-limit-improvements">API Rate Limit Improvements</a></li>
-  <li><a href="#simple-hal-links">Simple HAL Links</a></li>
-</ul>
-
-<h4 id="api-rate-limit-improvements">API Rate Limit Improvements</h4>
+<h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
 
 <p>We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user’s request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:</p>
 
-<h5 id="preview-orgs">Preview Orgs</h5>
+<h4 id="preview-orgs">Preview Orgs</h4>
 
 <ol>
   <li>
-    <p>As of last week, we enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
-
-    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
- a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
- be warned these rate limits will be enforced in the near future.</code></p>
+    <p>We enforce new rate limits for new preview orgs. For these new orgs, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
   </li>
   <li>
-    <p>As of May 2, 2017, we enforce these new rate limits for all new preview orgs. For these new orgs, instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
-  </li>
-  <li>
-    <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+    <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
   </li>
 </ol>
 
-<h5 id="production-orgs">Production Orgs</h5>
+<h4 id="production-orgs">Production Orgs</h4>
 
 <ol>
   <li>
-    <p>In early May, we’ll enable a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
+    <p>As of May 8, we have enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
 
     <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
  a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
  be warned these rate limits will be enforced in the near future.</code></p>
   </li>
   <li>
-    <p>In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+    <p>In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
   </li>
   <li>
-    <p>In early June, we’ll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate-limits return an HTTP 429 error.</p>
+    <p>In early June, we’ll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
   </li>
 </ol>
 
 <p>For a full description of the new rate limits, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
 
-<h4 id="simple-hal-links">Simple HAL Links</h4>
+<!-- ### Platform New Features -->
 
-<p>Okta will enable the Simple HAL Links on User Collections feature for most preview organizations.
-This change is currently scheduled for the 2017.19 release on 5/10/17, to remain in preview for at least one month.</p>
+<h3 id="platform-feature-improvements">Platform Feature Improvements</h3>
 
-<p>This feature will remove the HAL links that reflect state from user objects returned in collections.</p>
+<h4 id="okta-expression-language-function-for-filtering-groups">Okta Expression Language Function for Filtering Groups</h4>
 
-<p>Currently, a user object returned in a collection contains some or all of the following links:</p>
+<p>Use the Okta Expression Language function <code class="highlighter-rouge">getFilteredGroups</code> to create a list of groups that the current user belongs to.
+With such a list you can, for example, create claims in Access Tokens and ID Tokens based on the groups.
+For more information, see <a href="/reference/okta_expression_language/index.html#group-functions">Group Functions</a>. <!--OKTA-123127--></p>
+
+<h4 id="new-profile-property-for-apps">New Profile Property for Apps</h4>
+
+<p>The <code class="highlighter-rouge">profile</code> property in the Apps API accepts any well-formed JSON schema. You can specify properties in the profile and then access them in API requests.
+For example:</p>
+
+<ul>
+  <li>Add an app manager contact email address.</li>
+  <li>Use the profile to define a whitelist of groups that you can then reference and pass as claims using the <a href="/reference/okta_expression_language/index.html#group-functions">Okta Expression Language function <code class="highlighter-rouge">getFilteredGroups</code></a>.</li>
+</ul>
+
+<p>For more information, see the <a href="/docs/api/resources/apps.html#set-profile-property-for-openid-connect-apps">Apps API</a>.</p>
+
+<p>Note that the status code for service claims errors has changed from 500 to 400 as part of this feature. <!--OKTA-123128--></p>
+
+<h4 id="added-login-hint-to-oauth-20-and-openid-connect-api">Added Login Hint to OAuth 2.0 and OpenID Connect API</h4>
+
+<p>Use the <code class="highlighter-rouge">login_hint</code> property on <code class="highlighter-rouge">/oauth2/:authorizationServerId/v1/authorize</code> or <code class="highlighter-rouge">/oauth2/v1/authorize</code> to populate a username when prompting for authentication. <!-- OKTA-87073--></p>
+
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
+
+<ul>
+  <li>Updating the OpenID Connect property <code class="highlighter-rouge">max_age</code> incorrectly caused a new session to be created, which updated the <code class="highlighter-rouge">createdAt</code> timestamp. (OKTA-99850)</li>
+  <li>The property <code class="highlighter-rouge">application_type</code> in the <a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients API</a> could be edited. (OKTA-120223)</li>
+  <li>User profile attributes could be fetched via the API even though attributes were marked hidden, if the user sending the request was the user being fetched. (OKTA-123882)</li>
+  <li>Reordering Authorization Server policies failed. (OKTA-125156)</li>
+  <li>The Zones API documentation was incorrectly announced as Generally Available in 2017.19. It is <a href="/docs/api/getting_started/releases-at-okta.html">a Beta release</a>.</li>
+</ul>
+
+<h4 id="simple-hal-links-generally-available-in-preview-for-may-2017">Simple HAL Links Generally Available in Preview for May, 2017</h4>
+
+<p>Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
+This feature removes the HAL links that reflect state from user objects returned in collections.</p>
+
+<p>Before release 2017.19, a user object returned in a collection contains some or all of the following links:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>"_links": {
     "suspend": {
@@ -298,29 +323,11 @@ As outlined in <a href="/docs/api/getting_started/design_principles.html#links-i
   <p>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.</p>
 </blockquote>
 
-<!-- ### Platform New Features -->
-
-<h3 id="platform-feature-improvement-view-access-tokens-from-social-authentication">Platform Feature Improvement: View Access Tokens from Social Authentication</h3>
-
-<p>Using <code class="highlighter-rouge">GET /api/v1/idps/:id/users/:uid/credentials/tokens</code>, you can fetch the Access Tokens minted by a social authentication provider.
-When a user authenticates to Okta via a Social IdP, this request returns the tokens and metadata provided by the Social IdP.
-Clients can use the Access Token against the social provider’s endpoints in order to fetch additional profile attributes that Okta doesn’t support in Universal Directory, for example, nested attributes. 
-For more information, see the <a href="/docs/api/resources/idps.html#social-authentication-token-operation">Identity Providers API</a>. <!-- OKTA-118687 --></p>
-
-<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
-
-<ul>
-  <li>Searches on <a href="http://developer.okta.com/docs/api/resources/users.html#list-users-with-search">User</a> incorrectly returned deleted users or out-of-date user status in some cases. (OKTA-116928)</li>
-  <li>Some orgs were unable to add OpenID Connect or OAuth 2.0 clients to an access policy in a custom Authorization Server. (OKTA-117630)</li>
-  <li>When deleting a claim from a custom Authorization Server, the Delete dialog didn’t close after clicking <strong>OK</strong> or <strong>Cancel</strong>. (OKTA-124271)</li>
-  <li>Read-only Administrator user interface didn’t exactly match that role’s access rights. (OKTA-123116)</li>
-</ul>
-
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 
 <p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
 
-<p><img src="/assets/img/release_notes/version_footer.png" alt="Release Number in Footer" /></p>
+<p><img src="/assets/release_notes/version_footer-1ab3b975804fe11152fd81c6e639a796093845153b216733d1dc1891e1a5f446.png" alt="Release Number in Footer" /></p>
 
 <h3 id="looking-for-something-else">Looking for Something Else?</h3>
 
@@ -386,12 +393,14 @@ For more information, see the <a href="/docs/api/resources/idps.html#social-auth
         </ul>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript" defer="defer" src="/assets/js/docs.js">
-    </script>
-    <script src="/assets/js/master.js">
-    </script> <!-- Remarketing tag -->
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
+    
+    <!-- Remarketing tag -->
     <script type="text/javascript">
         /* <![CDATA[ */
         var google_conversion_id = 1006913831;
@@ -400,17 +409,22 @@ For more information, see the <a href="/docs/api/resources/idps.html#social-auth
         /* ]]> */
     </script>
     <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-      </script>
-    </div><noscript>
-    <div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript> <!-- End Remarketing tag -->
-     <!-- Crazy Egg Tracking -->
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
     <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script> <!-- End Crazy Egg Tracking -->
+    </script>
+    <!-- End Crazy Egg Tracking -->
 
      <!-- END Footer -->
   </div>

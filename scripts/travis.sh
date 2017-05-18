@@ -33,3 +33,6 @@ if ! url_consistency_check || ! duplicate_slug_in_url; then
   echo "FAILED LINT CHECK!"
   exit 1;
 fi
+
+# 5. Run htmlproofer to validate links, scripts, and images
+bundle exec htmlproofer ./dist --assume-extension --disable-external --allow-hash-href --empty-alt-ignore --log-level verbose --file-ignore "/3rd_party_notices/","/java_api_sdk/","/python_api_sdk/","/javadoc/","/csharp_api_sdk/"

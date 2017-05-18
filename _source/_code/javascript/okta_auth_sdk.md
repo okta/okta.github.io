@@ -254,7 +254,7 @@ Property              |   Type    | Description
 `activate`            | Function | Verify the OTP or restart the activation process if the activation is expired
 `poll`                | Function | Poll until `factorResult` changes. Throws [AuthPollStopError](#authpollstoperror) when `prev` or `cancel` is called
 `resend`              | Function | Send another OTP if user doesn’t receive the original activation SMS OTP
-`prev`                | Function | End current factor enrollment and return to [MFA_ENROLL](#mfaenroll)
+`prev`                | Function | End current factor enrollment and return to [MFA_ENROLL](#begin-mfa-enrollment)
 `cancel`              | Function | Ends the transaction
 
 ##### Activate Enroll Factor
@@ -329,7 +329,7 @@ Property              |   Type    | Description
 `factor`              | [Challenge Factor](#challenge-factor) | Factor currently being challenged
 `poll`                | Function | Poll until `factorResult` is not `WAITING`. Throws [AuthPollStopError](#authpollstoperror) if `prev`, `resend`, or `cancel` is called
 `resend`              | Function | Takes a `name` parameter that's usually `sms` or `push`
-`prev`                | Function | End current factor enrollment and return to [MFA_ENROLL](#mfaenroll)
+`prev`                | Function | End current factor enrollment and return to [MFA_ENROLL](#begin-mfa-enrollment)
 `cancel`              | Function | Ends the transaction
 
 ##### Challenge Factor
@@ -340,7 +340,7 @@ Property              |   Type    | Description
 `factorType`          | [Factor Type](/docs/api/resources/factors.html#factor-type) | Type of factor
 `provider`            | [Factor Provider](/docs/api/resources/factors.html#provider-type) | Provider of the given `factorType`
 `profile`             | [Factor Profile](/docs/api/resources/factors.html#factor-profile-object) | Details about the factor
-`verification`        | [Verification](#verification)  | Verification properties
+`verification`        | [Verification](/docs/api/resources/authn.html#verify-factor)  | Verification properties
 
 Example:
 
@@ -387,7 +387,7 @@ authClient.tx.resume();
 
 ## Social Authentication and OpenID Connect
 
-If you want to create a token via [OpenID Connect](/docs/api/resources/oidc.html) or [social authentication](/docs/guides/social_authentication.html), it's possible to manage the flow with this SDK. To do so, instantiate your client with a `clientId` and `redirectUri`. If you don't have either of those, [set up OpenID Connect with these instructions](https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw/blob/master/Okta-OIDC_SPA_JS-OSW_DevSetupGuide.pdf).
+If you want to create a token via [OpenID Connect](/docs/api/resources/oidc.html) or [social authentication](/docs/api/resources/social_authentication.html), it's possible to manage the flow with this SDK. To do so, instantiate your client with a `clientId` and `redirectUri`. If you don't have either of those, [set up OpenID Connect with these instructions](https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw/blob/master/Okta-OIDC_SPA_JS-OSW_DevSetupGuide.pdf).
 
 ~~~ javascript
 var authClient = new OktaAuth({
@@ -558,7 +558,7 @@ The SDK allows managing your Okta session. Each of these methods returns a Promi
 
 ### Create a session
 
-To create a session, you must first have a `sessionToken`. This can be created by going through the [Authentication Flow](#authentication-flow) until the [SUCCESS](#success) status. The transaction will contain the `sessionToken`. If a `redirectUri` is not passed, Okta will redirect to the current page.
+To create a session, you must first have a `sessionToken`. This can be created by going through the [Authentication Flow](#authentication-flow) until the [SUCCESS](#successful-sign-in) status. The transaction will contain the `sessionToken`. If a `redirectUri` is not passed, Okta will redirect to the current page.
 
 ~~~ javascript
 authClient.session.setCookieAndRedirect(sessionToken, redirectUri);
@@ -619,7 +619,7 @@ This is thrown when a `poll` has been initiated, but another action is taken bef
 
 #### OAuthError
 
-This is thrown when an [error occurs during the OAuth flow](/docs/api/getting_started/error_codes.html#openid-connect-and-okta-social-authentication).
+This is thrown when an [error occurs during the OAuth flow](/reference/error_codes/index#openid-connect-and-okta-social-authentication).
 
 Property              |   Type    | Description
 --------------------- | --------  | -----------

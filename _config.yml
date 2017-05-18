@@ -11,9 +11,7 @@ github_username:  oktadeveloper
 gems:
   - jekyll-redirect-from
   - jekyll-paginate
-
-# -- standard exclusions
-exclude: [Gemfile, Gemfile.lock, README.md]
+  - jekyll-assets
 
 source: _source
 destination: dist
@@ -41,9 +39,22 @@ production_url: "http://developer.okta.com"
 
 include: [_static]
 
-sass:
-    sass_dir: _sass
-    style: compressed
+assets:
+  compress:
+    css: true
+    js:  true
+  autowrite: true
+  cache: .asset-cache
+  cache_type: filesystem
+  skip_baseurl_with_cdn: false
+  skip_prefix_with_cdn: false
+  prefix: "/assets"
+  digest: true
+  features:
+    liquid: false
+    integrity: false
+    automatic_img_size: false
+    automatic_img_alt : true
 
 collections:
   standards:

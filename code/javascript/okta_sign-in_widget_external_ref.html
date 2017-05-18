@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    const isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-cdb1b544ae0f29a9e4d8c0bcbe55984903ad1378a9da805143cb56984ce2fa57.css">
+  
+  
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+  <title>Okta Sign-In Widget | Okta Developer</title>
+  <meta name="description" content="Reference information for customizing the Okta Sign-In Widget.">
+  <link rel="canonical" href="http://developer.okta.com/code/javascript/okta_sign-in_widget_external_ref">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+</head>
+
+<body>
+  <div class="Page okta-sign-in-widget">
+    <!-- START Header -->
+    <header id="header">
+      <div class="Wrap">
+        <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
+        <nav>
+          <div id="top-nav">
+            <a href="#" id="mobile-close" class="mobile-toggle">
+              <span></span>
+              <span></span>
+            </a>
+            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
+            <a class="SearchIcon" href="#"></a>
+            <ul>
+              <li>
+                <a href="/product/">Product</a>
+              </li>
+              <li>
+                <a href="/documentation/">Documentation</a>
+              </li>
+              <li>
+                <a href="/code/">Code</a>
+              </li>
+              <li class="has-dropdown">
+                <a href="#">Support</a>
+                <div class="dropdown-window">
+                  <p class="stack-overflow">Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></p>
+                  <p class="email">Email us:<br>
+                  <a href="mailto:developers@okta.com">developers@okta.com</a></p>
+                  <p class="tel">Call us:<br>
+                  <a href="tel:18887227871">1 (888) 722-7871</a></p>
+                </div>
+              </li>
+            </ul>
+            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+              <input type="text" name="q" id="q" autocomplete="off">
+            </form>
+          </div>
+          <div id="mobile-nav">
+            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-open" class="mobile-toggle" href="#top-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+        </nav><!-- END Primary Nav -->
+      </div>
+    </header><!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TJ45R6');
+    </script> <!-- End Google Tag Manager -->
+     <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+        <div class="Sidebar-close Sidebar-toggle"></div>
+        <div>
+          <h3 class="Sidebar-title">Use Cases</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/use_cases/authentication">Authentication</a>
+            </li>
+            <li>
+              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+            </li>
+            <li>
+              <a href="/use_cases/api_access_management">API Access Management</a>
+            </li>
+            <li>
+              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+            </li>
+          </ul>
+          <h3 class="Sidebar-title">Reference</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/apps.html">API Reference</a>
+            </li>
+            <li>
+              <a href="/reference/error_codes">Error Codes</a>
+            </li>
+            <li>
+              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+            </li>
+            <li>
+              <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+            </li>
+          </ul>
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
+          <script>
+            if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+                document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+            }
+
+            if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+                document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+            }
+          </script>
+        </div>
+      </aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_code/javascript/okta_sign-in_widget_external_ref.md">Edit Page</a>
+      
+<h1 id="okta-sign-in-widget">Okta Sign-In Widget</h1>
+
+<p>The Okta Sign-In Widget is a Javascript widget that provides a fully featured and customizable login experience which can be used to authenticate users on any website.</p>
+
+<h2 id="install">Install</h2>
+
+<p>You can include the Sign-In Widget in your project either directly from the Okta CDN, or by packaging it with your app via our npm package, <a href="https://www.npmjs.com/package/@okta/okta-signin-widget">@okta/okta-signin-widget</a>.</p>
+
+<h3 id="using-the-okta-cdn">Using the Okta CDN</h3>
+
+<p>Loading our assets directly from the CDN is a good choice if you want an easy way to get started with the widget, and don’t already have an existing build process that leverages <a href="https://www.npmjs.com/">npm</a> for external dependencies.</p>
+
+<p>To use the CDN, include links to the JS and CSS files in your HTML:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- Latest CDN production Javascript and CSS: 1.6.0 --&gt;</span>
+<span class="nt">&lt;script
+  </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.6.0/js/okta-sign-in.min.js"</span>
+  <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;link</span>
+  <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.6.0/css/okta-sign-in.min.css"</span>
+  <span class="na">type=</span><span class="s">"text/css"</span>
+  <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">/&gt;</span>
+
+<span class="c">&lt;!-- Theme file: Customize or replace this file if you want to override our default styles --&gt;</span>
+<span class="nt">&lt;link</span>
+  <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.6.0/css/okta-theme.css"</span>
+  <span class="na">type=</span><span class="s">"text/css"</span>
+  <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">okta-sign-in.min.js</code> file will expose a global <code class="highlighter-rouge">OktaSignIn</code> object which can be used to bootstrap the widget:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">signIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="cm">/* configOptions */</span><span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="using-the-npm-module">Using the npm module</h3>
+
+<p>Using our npm module is a good choice if:</p>
+<ul>
+  <li>You have a build system in place where you manage dependencies with npm</li>
+  <li>You do not want to load scripts directly from third party sites</li>
+</ul>
+
+<p>To install <a href="https://www.npmjs.com/package/@okta/okta-signin-widget">@okta/okta-signin-widget</a>:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># Run this command in your project root folder.</span>
+<span class="gp">[project-root-folder]$ </span>npm install @okta/okta-signin-widget --save
+</code></pre>
+</div>
+
+<p>The widget source files and assets will be installed to <code class="highlighter-rouge">node_modules/@okta/okta-signin-widget/dist</code>, and will have this directory structure:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>node_modules/@okta/okta-signin-widget/dist/
+  css/
+    <span class="c"># Main CSS file for widget styles. Try not to override the classes in this</span>
+    <span class="c"># file when creating a custom theme - the classes/elements are subject to</span>
+    <span class="c"># change between releases</span>
+    okta-sign-in.min.css
+
+    <span class="c"># Example theme that you can use as a template to create your own custom theme</span>
+    okta-theme.css
+
+  <span class="c"># Base font and image files that are used in rendering the widget</span>
+  font/
+  img/
+
+  js/
+    <span class="c"># CDN JS file that exports the OktaSignIn object in UMD format. This is</span>
+    <span class="c"># packaged with everything needed to run the widget, including third party</span>
+    <span class="c"># vendor files.</span>
+    okta-sign-in.min.js
+
+    <span class="c"># Main entry file that is used in the npm require(@okta/okta-signin-widget)</span>
+    <span class="c"># flow. This does not package third party dependencies - these are pulled</span>
+    <span class="c"># down through `npm install` (which allows you to use your own version of</span>
+    <span class="c"># jquery, etc).</span>
+    okta-sign-in.entry.js
+
+  <span class="c"># Localized strings that are used to display all text and labels in the</span>
+  <span class="c"># widget. Three output formats are included - json, jsonp, and properties</span>
+  labels/
+
+  <span class="c"># Sass files that are used to generate the widget css. If you are already</span>
+  <span class="c"># using Sass in your project, you can include these helper files to make</span>
+  <span class="c"># generating your custom theme easier</span>
+  sass/
+</code></pre>
+</div>
+
+<p>After running <code class="highlighter-rouge">npm install</code>:</p>
+
+<ol>
+  <li>
+    <p>Copy the assets to a folder that will be distributed to your publicly hosted site. The folders you’ll need to copy are <code class="highlighter-rouge">css</code>, <code class="highlighter-rouge">font</code>, <code class="highlighter-rouge">img</code>, <code class="highlighter-rouge">js</code> and <code class="highlighter-rouge">labels</code>.</p>
+  </li>
+  <li>
+    <p>Instead of copying <code class="highlighter-rouge">js</code> and including it in your page as a global, you can require the Sign-In Widget in your build if you are using <a href="https://webpack.github.io/">Webpack</a>, <a href="http://browserify.org/">Browserify</a> or another module bundling system that understands the <code class="highlighter-rouge">node_modules</code> format.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code> <span class="c1">// Load the Sign-In Widget module</span>
+ <span class="kd">var</span> <span class="nx">OktaSignIn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'@okta/okta-signin-widget'</span><span class="p">);</span>
+
+ <span class="c1">// Use OktaSignIn</span>
+ <span class="kd">var</span> <span class="nx">signIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">(</span><span class="cm">/* configOptions */</span><span class="p">);</span>
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<h2 id="api">API</h2>
+
+<h3 id="new-oktasignin">new OktaSignIn</h3>
+
+<p>Creates a new instance of the Sign-In Widget with the provided options. The widget has many <a href="#configuration">config options</a>. The only required option to get started is <code class="highlighter-rouge">baseUrl</code>, the base url for your Okta domain.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">config</code> - Options that are used to configure the widget</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">signIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span><span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="renderel">renderEl</h3>
+
+<p>Renders the widget to the DOM, and passes control back to your app through the success and error callback functions when the user has entered a success or error state.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">options</code>
+    <ul>
+      <li><code class="highlighter-rouge">el</code> - CSS selector which identifies the container element that the widget attaches to.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">success</code> - Function that is called when the user has completed an authentication flow.</li>
+  <li><code class="highlighter-rouge">error</code> - Function that is called when the widget has been initialized with invalid config options, or has entered a state it cannot recover from.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
+  <span class="c1">// Assumes there is an empty element on the page with an id of 'osw-container'</span>
+  <span class="p">{</span><span class="na">el</span><span class="p">:</span> <span class="s1">'#osw-container'</span><span class="p">},</span>
+
+  <span class="kd">function</span> <span class="nx">success</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// The properties in the response object depend on two factors:</span>
+    <span class="c1">// 1. The type of authentication flow that has just completed, determined by res.status</span>
+    <span class="c1">// 2. What type of token the widget is returning</span>
+
+    <span class="c1">// The user has started the password recovery flow, and is on the confirmation</span>
+    <span class="c1">// screen letting them know that an email is on the way.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'FORGOT_PASSWORD_EMAIL_SENT'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Any followup action you want to take</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// The user has started the unlock account flow, and is on the confirmation</span>
+    <span class="c1">// screen letting them know that an email is on the way.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'UNLOCK_ACCOUNT_EMAIL_SENT'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Any followup action you want to take</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// The user has successfully completed the authentication flow</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="c1">// If the widget is not configured for OIDC, the response will contain</span>
+      <span class="c1">// user metadata and a sessionToken that can be converted to an Okta</span>
+      <span class="c1">// session cookie:</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="s1">'https://acme.com/app'</span><span class="p">);</span>
+
+      <span class="c1">// If the widget is configured for OIDC with a single responseType, the</span>
+      <span class="c1">// response will be the token.</span>
+      <span class="c1">// i.e. authParams.responseType = 'id_token':</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">claims</span><span class="p">);</span>
+      <span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'my_id_token'</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+
+      <span class="c1">// If the widget is configured for OIDC with multiple responseTypes, the</span>
+      <span class="c1">// response will be an array of tokens:</span>
+      <span class="c1">// i.e. authParams.responseType = ['id_token', 'token']</span>
+      <span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'my_id_token'</span><span class="p">,</span> <span class="nx">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+      <span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'my_access_token'</span><span class="p">,</span> <span class="nx">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  <span class="p">},</span>
+
+  <span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// The widget will handle most types of errors - for example, if the user</span>
+    <span class="c1">// enters an invalid password or there are issues authenticating.</span>
+    <span class="c1">//</span>
+    <span class="c1">// This function is invoked with errors the widget cannot recover from:</span>
+    <span class="c1">// 1. Known errors: CONFIG_ERROR, UNSUPPORTED_BROWSER_ERROR, OAUTH_ERROR</span>
+    <span class="c1">// 2. Uncaught exceptions</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="hide">hide</h3>
+
+<p>Hide the widget, but keep the widget in the DOM.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h3 id="show">show</h3>
+
+<p>Show the widget if hidden.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h3 id="remove">remove</h3>
+
+<p>Remove the widget from the DOM entirely.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h3 id="on">on</h3>
+
+<p>Subscribe to an event published by the widget.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">event</code> - <a href="#events">Event</a> to subscribe to</li>
+  <li><code class="highlighter-rouge">callback</code> - Function to call when the event is triggered</li>
+  <li><code class="highlighter-rouge">context</code> - Optional context to bind the callback to</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'pageRendered'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="off">off</h3>
+
+<p>Unsubscribe from widget events. If no callback is provided, unsubscribes all listeners from the event.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">event</code> - Optional event to unsubscribe from</li>
+  <li><code class="highlighter-rouge">callback</code> - Optional callback that was used to subscribe to the event</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Unsubscribe all listeners from all events</span>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">off</span><span class="p">();</span>
+
+<span class="c1">// Unsubscribe all listeners that have been registered to the 'pageRendered' event</span>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s1">'pageRendered'</span><span class="p">);</span>
+
+<span class="c1">// Unsubscribe the onPageRendered listener from the 'pageRendered' event</span>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s1">'pageRendered'</span><span class="p">,</span> <span class="nx">onPageRendered</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="sessionget">session.get</h3>
+
+<p>Gets the active session, or returns <code class="highlighter-rouge"><span class="p">{</span><span class="err">status:inactive</span><span class="p">}</span></code> on error or no active session.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">callback</code> - Function that is called with the session once the request has completed.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Session exists, show logged in state.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'ACTIVE'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// showApp()</span>
+  <span class="p">}</span>
+  <span class="c1">// No session, or error retrieving the session. Render the Sign-In Widget.</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'INACTIVE'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">signIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
+      <span class="p">{</span><span class="na">el</span><span class="p">:</span> <span class="s1">'#osw-container'</span><span class="p">},</span>
+      <span class="kd">function</span> <span class="nx">success</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// showApp() if res.status === 'SUCCESS'</span>
+      <span class="p">},</span>
+      <span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// handleError(err)</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="sessionrefresh">session.refresh</h3>
+
+<p>Refresh the current session by extending its lifetime. This can be used as a keep-alive operation.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">callback</code> - Function that is called after the refresh request has completed.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'ACTIVE'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// The session now has an extended lifetime</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'INACTIVE'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// There is no current session, render the Sign-In Widget</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="sessionclose">session.close</h3>
+
+<p>Signs the user out of their current Okta session.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">callback</code> - Function that is called once the session has been closed. If there is an error, it will be passed to the callback function.</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// The user has not been logged out, perform some error handling here.</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// The user is now logged out. Render the Sign-In Widget.</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="tokenhastokensinurl">token.hasTokensInUrl</h3>
+
+<p>Synchronous method to check for access or ID Tokens in the url. This is used when <code class="highlighter-rouge">authParams.display = 'page'</code>. Returns <code class="highlighter-rouge">true</code> if there are tokens, and <code class="highlighter-rouge">false</code> if the redirect flow has not taken place yet.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// For an extended example, look at token.parseTokensFromUrl</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">hasTokensInUrl</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// The user has just successfully completed a redirect</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="c1">// There are no tokens in the URL, render the Sign-In Widget.</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="tokenparsetokensfromurl">token.parseTokensFromUrl</h3>
+
+<p>Parses the access or ID Tokens from the url after a successful authentication redirect. This is used when <code class="highlighter-rouge">authParams.display = 'page'</code>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">success</code> - Function that is called after the tokens have been parsed and validated</li>
+  <li><code class="highlighter-rouge">error</code> - Function that is called if an error occurs while trying to parse or validate the tokens</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">signIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+  <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span><span class="p">,</span>
+  <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{{myClientId}}'</span><span class="p">,</span>
+  <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'{{redirectUri configured in OIDC app}}'</span><span class="p">,</span>
+  <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span><span class="p">,</span>
+    <span class="c1">// `display: page` will initiate the OAuth2 page redirect flow</span>
+    <span class="na">display</span><span class="p">:</span> <span class="s1">'page'</span>
+  <span class="p">},</span>
+  <span class="na">idps</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="s1">'FACEBOOK'</span><span class="p">,</span>
+      <span class="na">id</span><span class="p">:</span> <span class="s1">'{{facebook appId}}'</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">});</span>
+
+<span class="c1">// The user has just landed on our login form, and has not yet authenticated</span>
+<span class="c1">// with a Social Auth IDP.</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">signIn</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">hasTokensInUrl</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nx">signIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span><span class="na">el</span><span class="p">:</span> <span class="s1">'#osw-container'</span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// The user has redirected back after authenticating and has their access or</span>
+<span class="c1">// ID Token in the URL.</span>
+<span class="k">else</span> <span class="p">{</span>
+  <span class="nx">signIn</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">parseTokensFromUrl</span><span class="p">(</span>
+    <span class="kd">function</span> <span class="nx">success</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'my_id_token'</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// handleError(err);</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="tokenmanageradd">tokenManager.add</h3>
+
+<p>After receiving an <code class="highlighter-rouge">access_token</code> or <code class="highlighter-rouge">id_token</code>, add it to the <code class="highlighter-rouge">tokenManager</code> to manage token expiration and refresh operations. When a token is added to the <code class="highlighter-rouge">tokenManager</code>, it is automatically refreshed when it expires.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">key</code> - Unique key to store the token in the <code class="highlighter-rouge">tokenManager</code>. This is used later when you want to get, delete, or refresh the token.</li>
+  <li><code class="highlighter-rouge">token</code> - Token object that will be added</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Example showing a success callback when authParams.responseType = 'id_token'</span>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">({</span><span class="na">el</span><span class="p">:</span> <span class="s1">'#osw-container'</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">!==</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// When specifying authParams.responseType as 'id_token' or 'token', the</span>
+  <span class="c1">// response is the token itself</span>
+  <span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'my_id_token'</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+</div>
+
+<h3 id="tokenmanagerget">tokenManager.get</h3>
+
+<p>Get a token that you have previously added to the <code class="highlighter-rouge">tokenManager</code> with the given <code class="highlighter-rouge">key</code>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">key</code> - Key for the token you want to get</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'my_id_token'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="tokenmanagerremove">tokenManager.remove</h3>
+
+<p>Remove a token from the <code class="highlighter-rouge">tokenManager</code> with the given <code class="highlighter-rouge">key</code>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">key</code> - Key for the token you want to remove</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'my_id_token'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="tokenmanagerclear">tokenManager.clear</h3>
+
+<p>Remove all tokens from the <code class="highlighter-rouge">tokenManager</code>.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h3 id="tokenmanagerrefresh">tokenManager.refresh</h3>
+
+<p>Manually refresh a token before it expires.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">key</code> - Key for the token you want to refresh</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Because the refresh() method is async, you can wait for it to complete</span>
+<span class="c1">// by using the returned Promise:</span>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="s1">'my_id_token'</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">newToken</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// doSomethingWith(newToken);</span>
+<span class="p">});</span>
+
+<span class="c1">// Alternatively, you can subscribe to the 'refreshed' event:</span>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'refreshed'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">newToken</span><span class="p">,</span> <span class="nx">oldToken</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// doSomethingWith(newToken);</span>
+<span class="p">});</span>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="s1">'my_id_token'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="tokenmanageron">tokenManager.on</h3>
+
+<p>Subscribe to an event published by the <code class="highlighter-rouge">tokenManager</code>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">event</code> - Event to subscribe to. Possible events are <code class="highlighter-rouge">expired</code>, <code class="highlighter-rouge">error</code>, and <code class="highlighter-rouge">refreshed</code>.</li>
+  <li><code class="highlighter-rouge">callback</code> - Function to call when the event is triggered</li>
+  <li><code class="highlighter-rouge">context</code> - Optional context to bind the callback to</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'expired'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">expiredToken</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Token with key'</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="s1">' has expired:'</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">expiredToken</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'TokenManager error:'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'refreshed'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">newToken</span><span class="p">,</span> <span class="nx">oldToken</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Token with key'</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="s1">'has been refreshed'</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Old token:'</span><span class="p">,</span> <span class="nx">oldToken</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'New token:'</span><span class="p">,</span> <span class="nx">newToken</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="tokenmanageroff">tokenManager.off</h3>
+
+<p>Unsubscribe from <code class="highlighter-rouge">tokenManager</code> events. If no callback is provided, unsubscribes all listeners from the event.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">event</code> - Event to unsubscribe from</li>
+  <li><code class="highlighter-rouge">callback</code> - Optional callback that was used to subscribe to the event</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s1">'refreshed'</span><span class="p">);</span>
+<span class="nx">signIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="s1">'refreshed'</span><span class="p">,</span> <span class="nx">myRefreshedCallback</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>The only required configuration option is <code class="highlighter-rouge">baseUrl</code>. All others are optional.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Basic example</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span><span class="p">,</span>
+  <span class="na">logo</span><span class="p">:</span> <span class="s1">'/path/to/logo.png'</span><span class="p">,</span>
+  <span class="na">helpSupportNumber</span><span class="p">:</span> <span class="s1">'(123) 456-7890'</span><span class="p">,</span>
+  <span class="na">language</span><span class="p">:</span> <span class="s1">'en'</span><span class="p">,</span>
+  <span class="na">i18n</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">en</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'primaryauth.title'</span><span class="p">:</span> <span class="s1">'Sign in to Acme'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">helpLinks</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">help</span><span class="p">:</span> <span class="s1">'https://acme.com/help'</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">signIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="basic-config-options">Basic config options</h3>
+
+<ul>
+  <li>
+    <p><strong>baseUrl:</strong> The base URL for your Okta organization</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Production org with subdomain "acme"</span>
+  <span class="nl">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.okta.com'</span>
+
+  <span class="c1">// Can also target oktapreview and okta-emea, i.e.</span>
+  <span class="nl">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.oktapreview.com'</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>logo:</strong> Local path or URL to a logo image that is displayed at the top of the Sign-In Widget</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Hosted on the same origin</span>
+  <span class="nl">logo</span><span class="p">:</span> <span class="s1">'/img/logo.png'</span>
+
+  <span class="c1">// Can also be a full url</span>
+  <span class="nl">logo</span><span class="p">:</span> <span class="s1">'https://acme.com/img/logo.png'</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>helpSupportNumber:</strong> Support phone number that is displayed in the Password Reset and Unlock Account flows. If no number is provided, no support screen is shown to the user.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Can be any format - there are no formatting checks</span>
+  <span class="nl">helpSupportNumber</span><span class="p">:</span> <span class="s1">'(123) 456-7890'</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<h3 id="username-and-password">Username and password</h3>
+
+<ul>
+  <li>
+    <p><strong>username:</strong> Prefills the username input with the provided username</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">username</span><span class="err">:</span> <span class="s1">'john@acme.com'</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>transformUsername:</strong> Transforms the username before sending requests with the username to Okta. This is useful when you have an internal mapping between what the user enters and their Okta username.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// The callback function is passed two arguments:</span>
+  <span class="c1">// 1) username: The name entered by the user</span>
+  <span class="c1">// 2) operation: The type of operation the user is trying to perform:</span>
+  <span class="c1">//      - PRIMARY_AUTH</span>
+  <span class="c1">//      - FORGOT_PASSWORD</span>
+  <span class="c1">//      - UNLOCK_ACCOUNT</span>
+  <span class="nl">transformUsername</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">operation</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// This example will append the '@acme.com' domain if the user has</span>
+    <span class="c1">// not entered it</span>
+    <span class="k">return</span> <span class="nx">username</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'@acme.com'</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span>
+      <span class="p">?</span> <span class="nx">username</span>
+      <span class="p">:</span> <span class="nx">username</span> <span class="o">+</span> <span class="s1">'@acme.com'</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>processCreds:</strong> Hook to handle the credentials before they are sent to Okta in the Primary Auth, Password Expiration, and Password Reset flows.</p>
+
+    <p>If processCreds takes a single argument it will be executed as a synchronous hook:</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Passed a creds object {username, password}</span>
+  <span class="nl">processCreds</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">creds</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// This example demonstrates a partial integration with ChromeOS</span>
+    <span class="nx">google</span><span class="p">.</span><span class="nx">principal</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+      <span class="na">token</span><span class="p">:</span> <span class="nx">creds</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+      <span class="na">user</span><span class="p">:</span> <span class="nx">creds</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+      <span class="na">passwordBytes</span><span class="p">:</span> <span class="nx">creds</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span>
+      <span class="na">keyType</span><span class="p">:</span> <span class="s1">'KEY_TYPE_PASSWORD_PLAIN'</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+
+    <p>If processCreds takes two arguments it will be executed as an asynchronous hook:</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Passed a creds object {username, password} and a callback for further processing</span>
+  <span class="nl">processCreds</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">creds</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// This example demonstrates optional legacy form-based login</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+      <span class="na">method</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s2">"/logintype"</span><span class="p">,</span>
+      <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">username</span> <span class="p">:</span> <span class="nx">creds</span><span class="p">.</span><span class="nx">username</span>
+      <span class="p">},</span>
+      <span class="na">success</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">logintype</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">logintype</span> <span class="o">==</span> <span class="s2">"LEGACY"</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">$</span><span class="p">(</span><span class="s1">'#legacyUser'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">creds</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
+          <span class="nx">$</span><span class="p">(</span><span class="s1">'#legacyPassword'</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">creds</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+          <span class="nx">$</span><span class="p">(</span><span class="s1">'#legacyLogonForm'</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">callback</span><span class="p">();</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<h3 id="customizing-language-and-text">Customizing language and text</h3>
+
+<ul>
+  <li>
+    <p><strong>language:</strong> Set the language of the widget. If no language is specified, the widget will choose a language based on the user’s browser preferences if it is supported, or defaults to <code class="highlighter-rouge">en</code>.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// You can simply pass the languageCode as a string:</span>
+<span class="nl">language</span><span class="p">:</span> <span class="s1">'ja'</span>
+
+<span class="c1">// Or, if you need to determine it dynamically, you can pass a</span>
+<span class="c1">// callback function:</span>
+<span class="nl">language</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">supportedLanguages</span><span class="p">,</span> <span class="nx">userLanguages</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// supportedLanguages is an array of languageCodes, i.e.:</span>
+  <span class="c1">// ['cs', 'da', ...]</span>
+  <span class="c1">//</span>
+  <span class="c1">// userLanguages is an array of languageCodes that come from the user's</span>
+  <span class="c1">// browser preferences</span>
+  <span class="k">return</span> <span class="nx">supportedLanguages</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre>
+    </div>
+
+    <p>Supported languages:</p>
+    <ul>
+      <li><code class="highlighter-rouge">cs</code> - Czech</li>
+      <li><code class="highlighter-rouge">da</code> - Danish</li>
+      <li><code class="highlighter-rouge">de</code> - German</li>
+      <li><code class="highlighter-rouge">en</code> - English</li>
+      <li><code class="highlighter-rouge">es</code> - Spanish</li>
+      <li><code class="highlighter-rouge">fi</code> - Finnish</li>
+      <li><code class="highlighter-rouge">fr</code> - French</li>
+      <li><code class="highlighter-rouge">hu</code> - Hungarian</li>
+      <li><code class="highlighter-rouge">id</code> - Indonesian</li>
+      <li><code class="highlighter-rouge">it</code> - Italian</li>
+      <li><code class="highlighter-rouge">ja</code> - Japanese</li>
+      <li><code class="highlighter-rouge">ko</code> - Korean</li>
+      <li><code class="highlighter-rouge">ms</code> - Malaysian</li>
+      <li><code class="highlighter-rouge">nl-NL</code> - Dutch</li>
+      <li><code class="highlighter-rouge">pt-BR</code> - Portuguese (Brazil)</li>
+      <li><code class="highlighter-rouge">ro</code> - Romanian</li>
+      <li><code class="highlighter-rouge">ru</code> - Russian</li>
+      <li><code class="highlighter-rouge">sv</code> - Swedish</li>
+      <li><code class="highlighter-rouge">th</code> - Thai</li>
+      <li><code class="highlighter-rouge">uk</code> - Ukrainian</li>
+      <li><code class="highlighter-rouge">zh-CN</code> - Chinese (PRC)</li>
+      <li><code class="highlighter-rouge">zh-TW</code> - Chinese (Taiwan)</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>i18n:</strong> Override the text in the widget. The full list of properties can be found in the login.properties and country.properties files.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// The i18n object maps language codes to a hash of property keys -&gt;</span>
+  <span class="c1">// property values.</span>
+  <span class="nl">i18n</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// Overriding English properties</span>
+    <span class="s1">'en'</span><span class="err">:</span> <span class="p">{</span>
+      <span class="s1">'primaryauth.title'</span><span class="err">:</span> <span class="s1">'Sign in to Acme'</span><span class="p">,</span>
+      <span class="s1">'primaryauth.username.placeholder'</span><span class="err">:</span> <span class="s1">'Your Acme Username'</span>
+    <span class="p">},</span>
+    <span class="c1">// Overriding Japanese properties</span>
+    <span class="s1">'ja'</span><span class="err">:</span> <span class="p">{</span>
+      <span class="s1">'primaryauth.title'</span><span class="err">:</span> <span class="s1">'ACMEにサインイン'</span><span class="p">,</span>
+      <span class="s1">'primaryauth.username.placeholder'</span><span class="err">:</span> <span class="s1">'ACMEのユーザー名'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// If you want to override any properties in the country.properties file,</span>
+  <span class="c1">// you will need to prefix the name with "country.":</span>
+  <span class="nl">i18n</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'en'</span><span class="err">:</span> <span class="p">{</span>
+      <span class="c1">// login.properties keys do not have a special prefix</span>
+      <span class="s1">'primaryAuth.title'</span><span class="err">:</span> <span class="s1">'Sign in to Acme'</span><span class="p">,</span>
+
+      <span class="c1">// country.properties keys are prefixed with 'country.'</span>
+      <span class="s1">'country.AF'</span><span class="err">:</span> <span class="s1">'Afghanistan, edited'</span><span class="p">,</span>
+      <span class="s1">'country.AL'</span><span class="err">:</span> <span class="s1">'Albania, edited'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>assets.baseUrl:</strong> Override the base url the widget pulls its language files from. The widget is only packaged with english text by default, and loads other languages on demand from the Okta CDN. If you want to serve the language files from your own servers, update this setting.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Loading the assets from a path on the current domain</span>
+  <span class="nl">assets</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">baseUrl</span><span class="p">:</span> <span class="s1">'/path/to/dist'</span>
+  <span class="p">},</span>
+
+  <span class="c1">// Full urls work as well</span>
+  <span class="nx">assets</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">baseUrl</span><span class="p">:</span> <span class="s1">'https://acme.com/assets/dist'</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+
+    <p><strong>Note:</strong> The jsonp files can be accessed from the <code class="highlighter-rouge">dist/labels/jsonp</code> folder that is published in the <a href="https://www.npmjs.com/package/@okta/okta-signin-widget">npm module</a>.</p>
+  </li>
+  <li>
+    <p><strong>assets.rewrite:</strong> You can use this function to rewrite the asset path and filename. Use this function if you will host the asset files on your own host, and plan to change the path or filename of the assets. This is useful, for example, if you want to cachebust the files.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">assets</span><span class="err">:</span> <span class="p">{</span>
+    <span class="c1">// Note: baseUrl is still needed to set the base path</span>
+    <span class="nl">baseUrl</span><span class="p">:</span> <span class="s1">'/path/to/dist'</span><span class="p">,</span>
+
+    <span class="nx">rewrite</span><span class="err">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">assetPath</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// assetPath is relative to baseUrl</span>
+      <span class="c1">// Example assetPath to load login for 'ja': "/labels/jsonp/login_ja.jsonp"</span>
+      <span class="k">return</span> <span class="nx">someCacheBustFunction</span><span class="p">(</span><span class="nx">assetPath</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<h3 id="changing-help-links">Changing help links</h3>
+
+<p>You can override the help link urls on the Primary Auth page by setting the following config options. If you’d like to change the help link text, use the <code class="highlighter-rouge">i18n</code> config option.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// An example that overrides all help links, and sets two custom links</span>
+<span class="nl">helpLinks</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">help</span><span class="p">:</span> <span class="s1">'https://acme.com/help'</span><span class="p">,</span>
+  <span class="nx">forgotPassword</span><span class="err">:</span> <span class="s1">'https://acme.com/forgot-password'</span><span class="p">,</span>
+  <span class="nx">unlock</span><span class="err">:</span> <span class="s1">'https://acme.com/unlock-account'</span><span class="p">,</span>
+  <span class="nx">custom</span><span class="err">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">text</span><span class="p">:</span> <span class="s1">'What is Okta?'</span><span class="p">,</span>
+      <span class="na">href</span><span class="p">:</span> <span class="s1">'https://acme.com/what-is-okta'</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">text</span><span class="p">:</span> <span class="s1">'Acme Portal'</span><span class="p">,</span>
+      <span class="na">href</span><span class="p">:</span> <span class="s1">'https://acme.com'</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p><strong>helpLinks.help</strong> - Custom link href for the “Help” link</p>
+  </li>
+  <li>
+    <p><strong>helpLinks.forgotPassword</strong> - Custom link href for the “Forgot Password” link</p>
+  </li>
+  <li>
+    <p><strong>helpLinks.unlock</strong> - Custom link href for the “Unlock Account” link. For this link to display, <code class="highlighter-rouge">features.selfServiceUnlock</code> must be set to <code class="highlighter-rouge">true</code>, and the self service unlock feature must be enabled in your admin settings.</p>
+  </li>
+  <li>
+    <p><strong>helpLinks.custom</strong> - Array of custom link objects <code class="highlighter-rouge"><span class="p">{</span><span class="err">text,</span><span class="w"> </span><span class="err">href</span><span class="p">}</span></code> that will be added to the <em>“Need help signing in?”</em> section.</p>
+  </li>
+</ul>
+
+<h3 id="openid-connect">OpenId Connect</h3>
+
+<p>Options for the <a href="http://developer.okta.com/docs/api/resources/oidc.html">OpenId Connect</a> authentication flow. This flow is required for social authentication, and requires OAuth client registration with Okta. For instructions, see <a href="http://developer.okta.com/docs/api/resources/social_authentication.html">Social Authentication</a>.</p>
+
+<ul>
+  <li>
+    <p><strong>clientId:</strong> Client Id pre-registered with Okta for the OIDC authentication flow</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">clientId</span><span class="err">:</span> <span class="s1">'GHtf9iJdr60A9IYrR0jw'</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>redirectUri:</strong> The url that is redirected to when using <code class="highlighter-rouge">authParams.display:page</code>. This must be pre-registered as part of client registration. If no <code class="highlighter-rouge">redirectUri</code> is provided, defaults to the current origin.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">redirectUri</span><span class="err">:</span> <span class="s1">'https://acme.com/oauth2/callback/home'</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>idps:</strong> External Identity Providers to use in OIDC authentication. Supported IDPs are <code class="highlighter-rouge">GOOGLE</code>, <code class="highlighter-rouge">FACEBOOK</code>, and <code class="highlighter-rouge">LINKEDIN</code>.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">idps</span><span class="err">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="na">type</span><span class="p">:</span> <span class="s1">'GOOGLE'</span><span class="p">,</span> <span class="na">id</span><span class="p">:</span> <span class="s1">'0oaaix1twko0jyKik0g4'</span><span class="p">}</span>
+    <span class="p">{</span><span class="nl">type</span><span class="p">:</span> <span class="s1">'FACEBOOK'</span><span class="p">,</span> <span class="nx">id</span><span class="err">:</span> <span class="s1">'0oar25ZnMM5LrpY1O0g3'</span><span class="p">}</span>
+    <span class="p">{</span><span class="nl">type</span><span class="p">:</span> <span class="s1">'LINKEDIN'</span><span class="p">,</span> <span class="nx">id</span><span class="err">:</span> <span class="s1">'0oaaix1twko0jyKik0g4'</span><span class="p">}</span>
+  <span class="p">]</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>idpDisplay:</strong> Display order for External Identity Providers relative to the Okta login form. Defaults to <code class="highlighter-rouge">SECONDARY</code>.</p>
+
+    <ul>
+      <li><code class="highlighter-rouge">PRIMARY</code> - Display External IDP buttons above the Okta login form</li>
+      <li><code class="highlighter-rouge">SECONDARY</code> - Display External IDP buttons below the Okta login form</li>
+    </ul>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">idpDisplay</span><span class="err">:</span> <span class="s1">'PRIMARY'</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>oAuthTimeout:</strong> Timeout for OIDC authentication flow requests, in milliseconds. If the authentication flow takes longer than this timeout value, an error will be thrown and the flow will be cancelled. Defaults to <code class="highlighter-rouge">12000</code>.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">oAuthTimeout</span><span class="err">:</span> <span class="mi">300000</span> <span class="c1">// 5 minutes</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authParams.display:</strong> Specify how to display the authentication UI for External Identity Providers. Defaults to <code class="highlighter-rouge">popup</code>.</p>
+
+    <ul>
+      <li>
+        <p><code class="highlighter-rouge">popup</code> - Opens a popup to the authorization server when an External Identity Provider button is clicked. <code class="highlighter-rouge">responseMode</code> will be set to <code class="highlighter-rouge">okta_post_message</code> and cannot be overridden.</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">page</code> - Redirect to the authorization server when an External Identity Provider button is clicked. If <code class="highlighter-rouge">responseMode</code> is not specified, it will default to <code class="highlighter-rouge">query</code> if <code class="highlighter-rouge">responseType = 'code'</code>, and <code class="highlighter-rouge">fragment</code> for other values of <code class="highlighter-rouge">responseType</code>.</p>
+      </li>
+    </ul>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Redirects to authorization server when the IDP button is clicked, and</span>
+  <span class="c1">// returns an access_token in the url hash</span>
+  <span class="nl">authParams</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="s1">'page'</span><span class="p">,</span>
+    <span class="nx">responseType</span><span class="err">:</span> <span class="s1">'token'</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authParams.responseMode:</strong> Specify how the authorization response should be returned. You will generally not need to set this unless you want to override the default values for your <code class="highlighter-rouge">authParams.display</code> and <code class="highlighter-rouge">authParams.responseType</code> settings.</p>
+
+    <ul>
+      <li>
+        <p><code class="highlighter-rouge">okta_post_message</code> - Used when <code class="highlighter-rouge">authParams.display = 'popup'</code>. Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage</a> to send the response from the popup to the origin window.</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">fragment</code> - Default value when <code class="highlighter-rouge">authParams.display = 'page'</code> and <code class="highlighter-rouge">authParams.responseType != 'code'</code>. Returns the authorization response in the hash fragment of the URL after the authorization redirect.</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">query</code> - Default value when <code class="highlighter-rouge">authParams.display = 'page'</code> and <code class="highlighter-rouge">authParams.responseType = 'code'</code>. Returns the authorization response in the query string of the URL after the authorization redirect.</p>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">form_post</code> - Returns the authorization response as a form POST after the authorization redirect. Use this when <code class="highlighter-rouge">authParams.display = page</code> and you do not want the response returned in the URL.</p>
+      </li>
+    </ul>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Use form_post instead of query in the Authorization Code flow</span>
+  <span class="nl">authParams</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="s1">'page'</span><span class="p">,</span>
+    <span class="nx">responseType</span><span class="err">:</span> <span class="s1">'code'</span><span class="p">,</span>
+    <span class="nx">responseMode</span><span class="err">:</span> <span class="s1">'form_post'</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authParams.responseType:</strong> Specify the response type for OIDC authentication. Defaults to <code class="highlighter-rouge">id_token</code>.</p>
+
+    <p>Valid response types are <code class="highlighter-rouge">id_token</code>, <code class="highlighter-rouge">access_token</code>, and <code class="highlighter-rouge">code</code>. Note that <code class="highlighter-rouge">code</code> goes through the Authorization Code flow, which requires the server to exchange the Authorization Code for tokens.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Specifying a single responseType</span>
+  <span class="nl">authParams</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">responseType</span><span class="p">:</span> <span class="s1">'token'</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Use an array if specifying multiple response types - in this case,</span>
+  <span class="c1">// the response will contain both an ID Token and an Access Token.</span>
+  <span class="nl">authParams</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'id_token'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">]</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authParams.scopes:</strong> Specify what information to make available in the returned <code class="highlighter-rouge">id_token</code> or <code class="highlighter-rouge">access_token</code>. For OIDC, you must include <code class="highlighter-rouge">openid</code> as one of the scopes. Defaults to <code class="highlighter-rouge">['openid', 'email']</code>.</p>
+
+    <p>Valid OIDC scopes: <code class="highlighter-rouge">openid</code>, <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">profile</code>, <code class="highlighter-rouge">address</code>, <code class="highlighter-rouge">phone</code></p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">authParams</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">scopes</span><span class="p">:</span> <span class="p">[</span><span class="s1">'openid'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">,</span> <span class="s1">'profile'</span><span class="p">,</span> <span class="s1">'address'</span><span class="p">,</span> <span class="s1">'phone'</span><span class="p">]</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authParams.state:</strong> Specify a state that will be validated in an OAuth response. This is usually only provided during redirect flows to obtain an authorization code. Defaults to a random string.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">authParams</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">state</span><span class="p">:</span> <span class="s1">'8rFzn3MH5q'</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authParams.nonce:</strong> Specify a nonce that will be validated in an id_token. This is usually only provided during redirect flows to obtain an authorization code that will be exchanged for an id_token. Defaults to a random string.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">authParams</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">nonce</span><span class="p">:</span> <span class="s1">'51GePTswrm'</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authParams.issuer:</strong> Specify a custom issuer to perform the OIDC flow. Defaults to the baseUrl.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">authParams</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">issuer</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com/oauth2/aus8aus76q8iphupD0h7'</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authParams.authorizeUrl:</strong> Specify a custom authorizeUrl to perform the OIDC flow. Defaults to the issuer plus “/v1/authorize”.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">authParams</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">issuer</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com/oauth2/aus8aus76q8iphupD0h7'</span><span class="p">,</span>
+    <span class="nx">authorizeUrl</span><span class="err">:</span> <span class="s1">'https://your-org.okta.com/oauth2/aus8aus76q8iphupD0h7/v1/authorize'</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>authScheme:</strong> Authentication scheme for OIDC authentication. You will normally not need to override this value. Defaults to <code class="highlighter-rouge">OAUTH2</code>.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">authParams</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">authScheme</span><span class="p">:</span> <span class="s1">'OAUTH2'</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<h3 id="bootstrapping-from-a-recovery-token">Bootstrapping from a recovery token</h3>
+
+<ul>
+  <li>
+    <p><strong>recoveryToken:</strong> Bootstrap the widget into continuing either the Forgot Password or Unlock Account flow after the recovery email has been sent to the user with the <code class="highlighter-rouge">recoveryToken</code>.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">recoveryToken</span><span class="err">:</span> <span class="s1">'x0whAcR02i0leKtWMZVc'</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<h3 id="feature-flags">Feature flags</h3>
+
+<p>Enable or disable widget functionality with the following options. Some of these features require additional configuration in your Okta admin settings.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// An example that enables the autoPush and multiOptionalFactorEnroll features</span>
+<span class="nl">features</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">autoPush</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">multiOptionalFactorEnroll</span><span class="err">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p><strong>features.router</strong> - Set to <code class="highlighter-rouge">true</code> if you want the widget to update the navigation bar when it transitions between pages. This is useful if you want the user to maintain their current state when refreshing the page, but requires that your server can handle the widget url paths. Defaults to <code class="highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>features.rememberMe</strong> - Display a checkbox to enable “Remember me” functionality at login. Defaults to <code class="highlighter-rouge">true</code>.</p>
+  </li>
+  <li>
+    <p><strong>features.autoPush</strong> - Display a checkbox to enable “Send push automatically” functionality in the MFA challenge flow. Defaults to <code class="highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>features.smsRecovery</strong> - Allow users with a configured mobile phone number to recover their password using an SMS message. Defaults to <code class="highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>features.callRecovery</strong> - Allow users with a configured mobile phone number to recover their password using a voice call. Defaults to <code class="highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>features.windowsVerify</strong> - Display instructions for enrolling a windows device with Okta Verify. Defaults to <code class="highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>features.selfServiceUnlock</strong> - Display the “Unlock Account” link to allow users to unlock their accounts. Defaults to <code class="highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>features.multiOptionalFactorEnroll</strong> - Allow users to enroll in multiple optional factors before finishing the authentication flow. Default behavior is to force enrollment of all required factors and skip optional factors. Defaults to <code class="highlighter-rouge">false</code>.</p>
+  </li>
+  <li>
+    <p><strong>features.hideSignOutLinkInMFA</strong> - Hides the sign out link for MFA challenge. Defaults to <code class="highlighter-rouge">false</code>.</p>
+  </li>
+</ul>
+
+<h2 id="events">Events</h2>
+
+<p>Events published by the widget. Subscribe to these events using <a href="#on">on</a>.</p>
+
+<ul>
+  <li>
+    <p><strong>pageRendered</strong> - triggered when the widget transitions to a new page, and animations have finished.</p>
+
+    <div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// Overriding the "Back to Sign In" click action on the Forgot Password page</span>
+  <span class="nx">signIn</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'pageRendered'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">page</span> <span class="o">!==</span> <span class="s1">'forgot-password'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">backLink</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">'js-back'</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">backLink</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+      <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+      <span class="c1">// Custom link behavior</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="footer">
+      <div class="Wrap">
+        <ul>
+          <li>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
+          </li>
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
+          <li>
+            <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+          </li>
+          <li>
+            <a href="/terms/">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="/3rd_party_notices/">3rd Party Notices</a>
+          </li>
+          <li>
+            <a href="/privacy/">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="https://okta.com/developer/contact/">Contact Sales</a>
+          </li>
+          <li>
+            <a href="mailto:developers@okta.com">Contact Support</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a class="icon" href="http://github.com/oktadeveloper" target="_blank"><i class="fa fa-github"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
+          </li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
+        </ul>
+      </div>
+    </footer>
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
+    
+    <!-- Remarketing tag -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1006913831;
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+    </script>
+    <div style="display:none;">
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
+    <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+    <!-- End Crazy Egg Tracking -->
+
+     <!-- END Footer -->
+  </div>
+</body>
+</html>

@@ -7,26 +7,27 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
 
 # Create an API token
 
-1.  Log in to your Okta organization as a user with admin
-    privileges.
+1.  Log in to your Okta organization as a user with [administrator
+    privileges](https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators). API tokens have the same permissions as the user who creates them,
+    and if the user permissions change, the API token permissions will also change.
 	
 	If you don't have an Okta organization, you can create a free Okta
     Developer Edition organization [at this link](https://www.okta.com/developer/signup/){:target="_blank"}.
 
 2.  Click on the blue "Admin" button.
-    ![Admin](/assets/img/okta-admin-ui-button-admin.png)
+    {% img okta-admin-ui-button-admin.png alt:"Admin" %}
 
 3.  Click on "API" in the Security menu.
-	![API](/assets/img/okta-admin-api-link.png)
+	{% img okta-admin-api-link.png alt:"API" %}
 
 4.  Click on the "Create token" button.
-	![Create Token](/assets/img/okta-create-api-token-button.png)
+	{% img okta-create-api-token-button.png alt:"Create Token" %}
 
 5.  Name your token and click "Create token".
 
 6.  Make note of your API token, as you will only see it one time.
 
-![Okta Admin Token UI](/assets/img/okta-admin-ui-token.png "Okta Admin Token UI")
+{% img okta-admin-ui-token.png "Okta Admin Token UI" alt:"Okta Admin Token UI" %}
 
 ## Token Expiration
 
@@ -36,11 +37,7 @@ Okta uses a bearer token for API authentication with a sliding scale expiration.
 
 If a user account is deactivated in Okta, the API Token is deprovisioned at the same time.
 
-## Token Permissions
+## Token Best Practice: Service Account
 
-API tokens inherit the API access of the user who creates them.
-
-Tasks in the UI or API and the role required to perform them have been
-documented:
-
-[Administrator Roles](https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators)
+API tokens inherit the API access of the user who creates them, so we recommend you create a "service account"
+user with only the permission levels you need for the token to perform the API tasks you require.

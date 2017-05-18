@@ -12,6 +12,7 @@ saml_library_url: https://github.com/rohe/pysaml2
 git_url: git@github.com:jpf/okta-pysaml2-example.git
 github_repo_name: okta-pysaml2-example
 redirect_from: "/docs/examples/pysaml2.html"
+weight: 2
 ---
 
 # Overview
@@ -25,7 +26,7 @@ application that demonstrates how to use {{ page.saml_library }} in a {{ page.fr
 After you have Okta working with the example application,
 adapt the example code for your production environment.
 
->Note: The library is not Okta's and is not supported by Okta. 
+>Note: The library is not Okta's and is not supported by Okta.
 
 This guide assumes that you are familiar with the basics of {{ page.programming_language }}
 software development: using the command line, editing text files,
@@ -147,7 +148,7 @@ There are two ways to test a SAML application:
 You will use both methods to test your application. In each case, you will know iff the
 test worked when you see a screen that looks like the one below:
 
-![Authenticated user](/assets/img/pysaml2-authenticated-user.png)
+{% img pysaml2-authenticated-user.png alt:"Authenticated user" %}
 
 
 1.  Login from the Okta {{ page.saml_library }} example application (This is
@@ -179,8 +180,7 @@ test worked when you see a screen that looks like the one below:
 
     -   Click the button for the application you created earlier
         "Configuring Okta to work with {{ page.saml_library }}" section
-        above:
-        ![{{ page.chiclet_name }}](/assets/img/pysaml2-example-okta-chiclet.png)
+        above: {% img pysaml2-example-okta-chiclet.png alt:"{{ page.chiclet_name }}" %}
 
 If you can to get to the "Logged in" page using both of the
 methods above, the test are successful.

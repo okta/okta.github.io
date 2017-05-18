@@ -41,7 +41,7 @@ For a full description of the rate limit changes, see [API Rate Limit Improvemen
  to use multi-factor authentication for a user trying to log in. This log entry includes
  the user's zone.
 
-![Log screen](../../assets/img/graphics/SysLogMFA.png)
+{% img graphics/SysLogMFA.png alt:"Log screen" %}
 <!-- (OKTA-114417) -->
 
 ### Platform Bug Fixed
@@ -54,7 +54,7 @@ returned the user's status as ACTIVE rather than RECOVERY. (OKTA-109772)
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
-![Release Number in Footer](/assets/img/release_notes/version_footer.png)
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 

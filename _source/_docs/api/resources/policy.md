@@ -33,7 +33,7 @@ The policy API supports the following **rule operations**:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -49,7 +49,7 @@ curl -v -X GET \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
 
 ### Get a Policy with Rules
@@ -59,7 +59,7 @@ HTTP 200:
 
 #### Request Parameters
 
-* The policy ID described in the [Policy Object](#policy-object) is required.
+* The policy ID described in the [Policy Object](#PolicyObject) is required.
 * The `expand=rules` query parameter returns up to twenty rules for the specified policy. If the policy has more than 20 rules, this request returns an error.
 
 ##### Request Example
@@ -76,12 +76,10 @@ curl -v -X GET \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
 
-Included as embedded objects, one or more
-
-<a href="#PolicyRule">Policy Rules</a>
+Included as embedded objects, one or more <a href="#rules">Policy Rules</a>.
 
 ### Get All Policies by Type
 {:.api .api-operation}
@@ -90,7 +88,7 @@ Included as embedded objects, one or more
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -106,9 +104,9 @@ curl -v -X GET \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
-HTTP 204: 
+HTTP 204:
 <a href="#PolicyObject">Policy Object</a>
 
 ### Delete Policy
@@ -118,7 +116,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -134,7 +132,7 @@ curl -v -X DELETE \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 204: 
+HTTP 204:
 *No Content*
 
 ### Update a Policy
@@ -144,7 +142,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -176,7 +174,7 @@ curl -v -X PUT \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
 
 ### Create a Policy
@@ -186,7 +184,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -216,7 +214,7 @@ curl -v -X POST \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 204: 
+HTTP 204:
 <a href="#PolicyObject">Policy Object</a>
 
 ### Activate a Policy
@@ -226,7 +224,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy id described in the [Policy Object](#policy-object) is required.
+The policy id described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -242,7 +240,7 @@ curl -v -X POST \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 204: 
+HTTP 204:
 *No Content is returned when the activation is successful.*
 
 ### Deactivate a Policy
@@ -252,7 +250,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -268,7 +266,7 @@ curl -v -X POST \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 *No Content is returned when the deactivation is successful.*
 
 ## Rules Operations
@@ -280,7 +278,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -296,7 +294,7 @@ curl -v -X GET \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 <a href="#RulesObject">Rules Object</a>
 
 ### Create a rule
@@ -306,7 +304,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -342,7 +340,7 @@ curl -v -X POST \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 <a href="#RulesObject">Rules Object</a>
 
 ### Delete a rule
@@ -352,7 +350,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -368,7 +366,7 @@ curl -v -X DELETE \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 204: 
+HTTP 204:
 *No Content*
 
 ### Get a rule
@@ -378,7 +376,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -394,7 +392,7 @@ curl -v -X GET \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 <a href="#RulesObject">Rules Object</a>
 
 ### Update a rule
@@ -404,7 +402,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -441,7 +439,7 @@ curl -v -X PUT \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 200: 
+HTTP 200:
 <a href="#RulesObject">Rules Object</a>
 
 ### Activate A Rule
@@ -451,7 +449,7 @@ HTTP 200:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -467,7 +465,7 @@ curl -v -X POST \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 204: 
+HTTP 204:
 *No content*
 
 ### Deactivate A Rule
@@ -477,7 +475,7 @@ HTTP 204:
 
 #### Request Parameters
 
-The policy ID described in the [Policy Object](#policy-object) is required.
+The policy ID described in the [Policy Object](#PolicyObject) is required.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -493,7 +491,7 @@ curl -v -X POST \
 ##### Response Types
 {:.api .api-response .api-response-example}
 
-HTTP 204: 
+HTTP 204:
 *No content*
 
 ## Policies
@@ -522,7 +520,7 @@ There is always a default policy created for each type of policy. The default po
 
  - A default policy is required and cannot be deleted.
  - The default policy is always the last policy in the priority order. Any added policies of this type have higher priority than the default policy.
- - The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see [Rules Model and Defaults](#rules-model-and-defaults).
+ - The default policy always has one default rule that cannot be deleted. It is always the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule. For information on default rules, see [Rules Model and Defaults](#RulesObject).
  - The `system` attribute determines whether a policy is created by a system or by a user.
 
 ### Policy Priorities
@@ -599,17 +597,17 @@ The Policy model defines several attributes:
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier of the policy | String | No | Assigned
-type | Policy type | Specifies the type of the policy, e.g. `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes | 
-name | Name of the policy | String | Yes | 
+type | Policy type | Specifies the type of the policy, e.g. `OKTA_SIGN_ON` or `MFA_ENROLL` | Yes |
+name | Name of the policy | String | Yes |
 system | This is set to 'true' on system policies, which cannot be deleted. | Boolean | No | false
 description | Description of the policy | String | No | Null
 priority | Priority of the policy | Int | No | Last / Lowest Priority
 status | Status of the policy: ACTIVE or INACTIVE | String | No | "ACTIVE"
-conditions | Conditions for policy | <a href="#PolicyConditionsObject">Conditions Object</a> | No | 
-settings | Settings for policy | <a href="#PolicySettingsObject">Policy Settings Object</a> | No | 
+conditions | Conditions for policy | <a href="#PolicyConditionsObject">Conditions Object</a> | No |
+settings | Settings for policy | <a href="#PolicySettingsObject">Policy Settings Object</a> | No |
 created | Timestamp when the policy was created | Date | No | Assigned
 lastUpdated | Timestamp when the policy was last modified | Date | No | Assigned
-_links | Hyperlinks | <a href="#LinksObject">Links Object</a> | No | 
+_links | Hyperlinks | <a href="#LinksObject">Links Object</a> | No |
 
 
 ### Policy Settings Object
@@ -632,13 +630,13 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-self | The policy or rule | String | Yes | 
-activate | Action to activate a policy or rule (present if the rule is currently inactive) | String | Yes | 
-deactivate | Action to deactivate a policy or rule (present if the rule is currently active) | String | Yes | 
-rules | Action to retrieve the rules objects for the given policy | String | Yes | 
+self | The policy or rule | String | Yes |
+activate | Action to activate a policy or rule (present if the rule is currently inactive) | String | Yes |
+deactivate | Action to deactivate a policy or rule (present if the rule is currently active) | String | Yes |
+rules | Action to retrieve the rules objects for the given policy | String | Yes |
 
 ## Rules
-Each policy may contain one or more rules.  Rules, like policies contain conditions, which must be satisfied in order for the rule to be applied.  
+Each policy may contain one or more rules.  Rules, like policies contain conditions, which must be satisfied in order for the rule to be applied.
 
 ### Rule Priority and Defaults
 
@@ -647,7 +645,7 @@ Each policy may contain one or more rules.  Rules, like policies contain conditi
  - Only the default policy contains a default rule. The default rule cannot be edited or deleted.
  - The default rule is required and always is the last rule in the priority order. If you add rules to the default policy, they have a higher priority than the default rule.
  - The `system` attribute determines whether a rule is created by a system or by a user. The default rule is the only rule that has this attribute.
- 
+
 ### Rule Priority
 
 Like policies, rules have a priority which governs the order in which they are considered during evaluation. The highest priority rule has a `priority` of 1.
@@ -659,7 +657,7 @@ For example if a particular policy had two rules, "A" and "B" as below.
 If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
 the action in Rule A would be taken, and Rule B would not be evaluated.
 
-### Rules Message Example (Password Policy) 
+### Rules Message Example (Password Policy)
 
 ~~~json
   {
@@ -723,15 +721,15 @@ The Rules model defines several attributes:
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 id | Identifier of the rule | String | No | Assigned
-type | Rule type | `OKTA_SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | Yes | 
+type | Rule type | `OKTA_SIGN_ON` or `PASSWORD` or `MFA_ENROLL` | Yes |
 status | Status of the rule: `ACTIVE` or `INACTIVE` | String | No | ACTIVE
 priority | Priority of the rule | Integer | No | Last / Lowest Priority
 system | This is set to 'true' on system rules, which cannot be deleted. | Boolean | No | false
 created | Timestamp when the rule was created | Date | No | Assigned
 lastUpdated | Timestamp when the rule was last modified | Date | No | Assigned
-conditions | Conditions for rule | <a href="#RuleConditionsObject">Conditions Object</a> | No | 
-actions | Actions for rule | <a href="#RulesActionsObject">Rules Actions Objects</a> | No | 
-_links | Hyperlinks | <a href="#RulesLinksObject">Links Object</a> | No | 
+conditions | Conditions for rule | <a href="#RuleConditionsObject">Conditions Object</a> | No |
+actions | Actions for rule | <a href="#RulesActionsObject">Rules Actions Objects</a> | No |
+_links | Hyperlinks | <a href="#RulesLinksObject">Links Object</a> | No |
 
 ### Actions Objects
 {: #RulesActionsObject }
@@ -751,13 +749,13 @@ Specifies link relations (See [Web Linking](http://tools.ietf.org/html/rfc5988))
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-self | The policy or rule | String | Yes | 
-activate | Action to activate the rule (present if the rules is currently inactive) | String | Yes | 
-deactivate | Action to deactivate the rule (present if the rule is currently active) | String | Yes | 
+self | The policy or rule | String | Yes |
+activate | Action to activate the rule (present if the rules is currently inactive) | String | Yes |
+deactivate | Action to deactivate the rule (present if the rule is currently active) | String | Yes |
 
 ### Conditions
 {: #Conditions }
- 
+
 #### People Condition Object
 {: #PeopleObject }
 
@@ -765,8 +763,8 @@ The people condition identifies users and groups that are used together. For pol
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-groups | The group condition | String | Yes | 
-users | The user condition | String | Yes | 
+groups | The group condition | String | Yes |
+users | The user condition | String | Yes |
 
 
 #### User Condition Object
@@ -776,8 +774,8 @@ Specifies a set of users to be included or excluded
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-include | The users to be included | Array | Yes | 
-exclude | The users to be excluded | Array | Yes | 
+include | The users to be included | Array | Yes |
+exclude | The users to be excluded | Array | Yes |
 
 
 #### Group Condition Object
@@ -787,8 +785,8 @@ Specifies a set of groups whose users to be included or excluded
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-include | The groups to be included | Array | Yes | 
-exclude | The groups to be excluded | Array | Yes | 
+include | The groups to be included | Array | Yes |
+exclude | The groups to be excluded | Array | Yes |
 
 #### AuthContext Condition Object
 {: #AuthContextConditionObject }
@@ -797,7 +795,7 @@ Specifies an authentication entry point.
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-authType |  | `ANY` or `RADIUS` | No | 
+authType |  | `ANY` or `RADIUS` | No |
 
 #### Network Condition Object
 {: #NetworkConditionObject }
@@ -806,7 +804,7 @@ Specifies a network segment.
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
-connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No | 
+connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No |
 
 #### Authentication Provider Condition Object
 {: #AuthProviderConditionObject }
@@ -868,7 +866,7 @@ requireFactor | Indicates if multi-factor authentication is required | Boolean |
 factorPromptMode | Indicates if the user should be challenged for second factor authentication (MFA) based on the device being used, a factor session lifetime, or on every sign on attempt. | `DEVICE`, `SESSION` or `ALWAYS` | Yes, if requireFactor is true | N/A
 rememberDeviceByDefault | Indicates if Okta should automatically remember the device  | Boolean | No | false
 factorLifetime | Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is set to 'SESSION' | Integer | Yes, if requireFactor is true | N/A
-session | Properties governing the user's session lifetime | <a href="#SignonSessionObject">Signon Session Object</a> | No | 
+session | Properties governing the user's session lifetime | <a href="#SignonSessionObject">Signon Session Object</a> | No |
 
 
 ##### Signon Session Object
@@ -895,7 +893,7 @@ The following conditions may be applied to the rules associated with Okta Sign O
 
 > The MFA Policy API is a {% api_lifecycle beta %} [release](/docs/api/getting_started/releases-at-okta.html).
 
-Multifactor (MFA) Policy controls which MFA methods are available for a user, as well as when a user may enroll in a particular factor.  
+Multifactor (MFA) Policy controls which MFA methods are available for a user, as well as when a user may enroll in a particular factor.
 
 #### Policy Settings Example
 Note that policy settings are included only for those factors which have been enabled.
@@ -928,23 +926,23 @@ Note that policy settings are included only for those factors which have been en
 #### Policy Factors Configuration Object
 {: #PolicyFactorsConfigurationObject }
 
-Parameter | Description | Data Type | Required 
-| --- | --- | --- | --- 
-google_otp | Google Authenticator | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No  
-okta_otp | Okta Verify TOTP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No   
-okta_push | Okta Verify Push | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No   
-okta_question | Okta Security Question | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No    
-okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No    
-rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No    
-symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No    
+Parameter | Description | Data Type | Required
+| --- | --- | --- | ---
+google_otp | Google Authenticator | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+okta_otp | Okta Verify TOTP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+okta_push | Okta Verify Push | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+okta_question | Okta Security Question | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+okta_sms | Okta SMS | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+rsa_token | RSA Token | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
+symantec_vip | Symantic VIP | <a href="#PolicyFactorObject">Policy MFA Factor Object</a> | No
 
 #### Policy MFA Factor Object
 {: #PolicyFactorObject }
 
-Parameter | Description | Data Type | Required 
-| --- | --- | --- | --- 
-consent | Consent requirements for the factor | <a href="#PolicyFactorConsentObject">Policy Factor Consent Object</a> | No  
-enroll | Enrollment requirements for the factor | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> | No  
+Parameter | Description | Data Type | Required
+| --- | --- | --- | ---
+consent | Consent requirements for the factor | <a href="#PolicyFactorConsentObject">Policy Factor Consent Object</a> | No
+enroll | Enrollment requirements for the factor | <a href="#PolicyFactorEnrollObject">Policy Factor Enroll Object</a> | No
 
 
 #### Policy Factor Enroll Object
@@ -961,7 +959,7 @@ The Policy Factor Consent Object is an extensibility point.  In the future, poli
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- | ---
-terms | Specifies the consent terms to be offered the user upon enrolling in the factor. | <a href="#PolicyFactorConsentTerms">Policy Factor Consent Terms</a> | No | 
+terms | Specifies the consent terms to be offered the user upon enrolling in the factor. | <a href="#PolicyFactorConsentTerms">Policy Factor Consent Terms</a> | No |
 type | User consent type required before enrolling in the factor: `NONE` or `TERMS_OF_SERVICE`. | String | No | NONE
 
 #### Policy Factor Consent Terms
@@ -1000,7 +998,7 @@ Parameter | Description | Data Type | Required | Default
 self | Should the user be enrolled the first time they `LOGIN`, the next time they are `CHALLENGE`d, or `NEVER`? | `CHALLENGE`, `LOGIN` or `NEVER` | Yes | N/A
 
 ### Rules Conditions
-The following conditions may be applied to the rules associated with MFA Enrollment Policy 
+The following conditions may be applied to the rules associated with MFA Enrollment Policy
 
 <a href="#PeopleObject">People Condition</a>
 
@@ -1074,7 +1072,7 @@ Password policy controls settings that deterine a user's password length and com
 
 ### Policy Settings Data
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
 password | Password settings | <a href="#PasswordObject">Password Policy Password Object</a> | No
 recovery | Recovery settings | <a href="#RecoveryObject">Password Policy Recovery Object</a> | No
@@ -1083,7 +1081,7 @@ delegation | Delegation settings | <a href="#DelegationObject">Password Policy D
 #### Password Object
 {: #PasswordObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
 complexity | Complexity settings | <a href="#PasswordComplexityObject">Password Complexity Object</a> | No
 age | Age settings | <a href="#PasswordAgeObject">Password Age Object</a> | No
@@ -1123,14 +1121,14 @@ showLockoutFailures | Inidcates if the user should be informed when their accoun
 #### Recovery Object
 {: #RecoveryObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
 factors | Settings for the factors that may be used for recovery | <a href="#RecoveryFactorsObject">Recovery Factors Object</a> | No
 
 ##### Recovery Factors Object
 {: #RecoveryFactorsObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
 recovery_question | Settings for security question factor | <a href="#RecoveryQuestionFactorObject">Recovery Question Factor Object</a> | No
 okta_email | Settings for email factor | <a href="#EmailFactorObject">Email Factor Object</a> | No
@@ -1139,15 +1137,15 @@ okta_sms | Settings for SMS factor | <a href="#SMSFactorObject">SMS Factor Objec
 ###### Recovery Question Factor Object
 {: #RecoveryQuestionFactorObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
-status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes | 
+status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes |
 properties | Configuration settings for security question factor | <a href="#RecoveryQuestionFactorPropertiesObject">Recovery Question Factor Properties Object</a> | No
 
 ###### Recovery Question Factor Properties Object
 {: #RecoveryQuestionFactorPropertiesObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
 complexity | Complexity settings for recovery question | <a href="#RecoveryQuestionFactorPropertiesComplexityObject">Recovery Question Factor Properties Complexity Object</a> | No
 
@@ -1161,17 +1159,17 @@ minLength | Minimum length of the password recovery question answer | Integer | 
 ###### Email Factor Object
 {: #EmailFactorObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
-status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes | 
+status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes |
 properties | sConfiguration ettings for okta email factor | <a href="#EmailFactorPropertiesObject">Email Factor Properties Object</a> | No
 
 ###### Email Factor Properties Object
 {: #EmailFactorPropertiesObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
-recoveryToken | Recovery token settings | <a href="EmailFactorPropertiesREcoveryTokenObject ">Email Factor Properties Recovery Token Object</a> | No
+recoveryToken | Recovery token settings | <a href="#EmailFactorPropertiesREcoveryTokenObject">Email Factor Properties Recovery Token Object</a> | No
 
 ###### Email Factor Properties Recovery Token Object
 {: #EmailFactorPropertiesREcoveryTokenObject }
@@ -1190,7 +1188,7 @@ status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` | No | 'INAC
 #### Delegation Object
 {: #DelegationObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
 options | Delegation options | <a href="#DelegationOptionsObject">Delegation Options Object</a> | No
 
@@ -1229,11 +1227,11 @@ The following conditions may be applied to Password Policy
 #### Password Action Object
 {: #PaswordActionObject }
 
-Property | Description | Data Type | Required | 
+Property | Description | Data Type | Required |
 | --- | --- | --- | ---
-passwordChange | Properties governing the change password operation | <a href="#PasswordChangeActionObject">Password Change Object</a> | No | 
-selfServicePasswordReset | Properties governing the self-service password reset (forgot password) operation | <a href="#PasswordResetActionObject">Self Service Password Reset Object</a> | No | 
-selfServiceUnlock | Properties governing the self-service unlock operation | <a href="#SelfServiceUnockActionObject">Self Service Unlock Object</a> | No | 
+passwordChange | Properties governing the change password operation | <a href="#PasswordChangeActionObject">Password Change Object</a> | No |
+selfServicePasswordReset | Properties governing the self-service password reset (forgot password) operation | <a href="#PasswordResetActionObject">Self Service Password Reset Object</a> | No |
+selfServiceUnlock | Properties governing the self-service unlock operation | <a href="#SelfServiceUnockActionObject">Self Service Unlock Object</a> | No |
 
 ##### Password Change Action Object
 {: #PasswordChangeActionObject }

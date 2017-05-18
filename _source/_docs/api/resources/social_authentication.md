@@ -32,7 +32,7 @@ Okta Social Authentication allows Okta to integrate with a Social Identity Provi
 
 The following diagram shows a high-level architecture of Okta Social Authentication for your application:
 
-<img src="/assets/img/social_authentication_flow.png" alt="Social Authentication Flow" width="800px" />
+{% img social_authentication_flow.png alt:"Social Authentication Flow" width:"800px" %}
 
 Advantages of using Okta Social Authentication include:
 
@@ -130,4 +130,4 @@ Advantages of using Okta Social Authentication include:
 
 ## Error Codes
 
-See the [OpenID Connect and Okta Social Authentication](/docs/api/getting_started/error_codes.html#openid-connect-and-okta-social-authentication) section of the [Error Codes](/docs/api/getting_started/error_codes.html) API documentation.
+See the [OpenID Connect and Okta Social Authentication](/reference/error_codes/index#openid-connect-and-okta-social-authentication) section of the [Error Codes](/docs/api/getting_started/error_codes.html) API documentation.
