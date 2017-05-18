@@ -14,7 +14,7 @@ function setupOSW() {
   return setup('/code/javascript/okta_sign-in_widget_external_ref');
 }
 
-describe('imported docs string tests', function() {
+describe('imported docs string spec', function() {
 
   beforeEach(() => {
     browser.ignoreSynchronization = true;

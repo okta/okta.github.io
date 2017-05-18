@@ -3,10 +3,11 @@
 const util = require('../shared/util');
 const _ = require('lodash');
 const EC = protractor.ExpectedConditions;
-const baseUrl = 'http://localhost:4000/';
+const baseUrl = 'http://localhost:4000';
 
 class BasePage {
   constructor(relativeURL) {
+    this.$pageLoad = null;
     if(relativeURL) {
       this.url = baseUrl + relativeURL;
     } else {
@@ -14,9 +15,18 @@ class BasePage {
     }
   }
 
-  get() {
+  setPageLoad(element) {
+    this.$pageLoad = element;
+  }
+
+  load() {
     browser.ignoreSynchronization = true;
     browser.get(this.url);
+    return this.waitForPageLoad();
+  }
+
+  waitForPageLoad() {
+    return util.wait(this.$pageLoad);
   }
 
   setWindowSize(width, height) {
@@ -48,6 +58,26 @@ class BasePage {
     return EC.urlContains(str)();
   }
 
+  getCurrentURL() {
+    return browser.getCurrentUrl().then(url => url.replace(baseUrl, ''));
+  }
+  
+  // These are values used in css for managing different browser sizes -
+  // max-width: 1599px -> xxLarge
+  // max-width: 1399px -> xLarge
+  // max-width: 1199px -> large
+  // max-width: 1023px -> medium
+  // max-width: 899px -> mediumSmall
+  // max-width: 767px -> small
+  // max-width: 479px -> xSmall
+  // max-width: 319px -> xxSmall
+  resizeDesktop() {
+    browser.driver.manage().window().setSize(1060, 640);
+  }
+
+  resizeMobile() {
+    browser.driver.manage().window().setSize(360, 640);
+  }
 }
 
 module.exports = BasePage;
