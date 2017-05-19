@@ -814,6 +814,7 @@ Specifies an authentication provider, which masters some or all users.
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 provider | Specifies the required authentication provider  | 'Okta', 'Active Directory' | Yes | 'Okta'
+include | The AD integrations this policy applies to | Array | No | Include all AD integrations
 
 
 
@@ -1025,14 +1026,14 @@ Password policy controls settings that deterine a user's password length and com
          "excludeUsername": true
        },
        "age": {
-         "maxAgeDays": -1,
-         "expireWarnDays": -1,
-         "minAgeMinutes": -1,
-         "historyCount": -1
+         "maxAgeDays": 0,
+         "expireWarnDays": 0,
+         "minAgeMinutes": 0,
+         "historyCount": 0
        },
        "lockout": {
          "maxAttempts": 10,
-         "autoUnlockMinutes": -1,
+         "autoUnlockMinutes": 0,
          "showLockoutFailures": false
        }
      },
