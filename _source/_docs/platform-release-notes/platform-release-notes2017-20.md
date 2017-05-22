@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.20
+excerpt: Summary of changes to the Okta Platform since Release 2017.19
 ---
 
-## Release 2017.21
+## Release 2017.20
 
 ### Advance Notice: API Rate Limit Improvements
 
@@ -31,17 +31,41 @@ We are making org-wide rate limits more granular, and treating authenticated end
 
 For a full description of the new rate limits, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
+
 <!-- ### Platform New Features -->
 
-### Platform Feature Improvement: App Updates in the System Log
+### Platform Feature Improvements
 
-Notifications in the [System Log](docs/api/resources/system_log.html) related to updates to OpenID Connect apps contain more details.
+#### Okta Expression Language Function for Filtering Groups
+
+Use the Okta Expression Language function `getFilteredGroups` to create a list of groups that the current user belongs to.
+With such a list you can, for example, create claims in Access Tokens and ID Tokens based on the groups.
+For more information, see [Group Functions](/reference/okta_expression_language/index.html#group-functions). <!--OKTA-123127-->
+
+#### New Profile Property for Apps
+
+The `profile` property in the Apps API accepts any well-formed JSON schema. You can specify properties in the profile and then access them in API requests.
+For example:
+
+* Add an app manager contact email address.
+* Use the profile to define a whitelist of groups that you can then reference and pass as claims using the [Okta Expression Language function `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
+
+For more information, see the [Apps API](/docs/api/resources/apps.html#set-profile-property-for-openid-connect-apps).
+
+Note that the status code for service claims errors has changed from 500 to 400 as part of this feature. <!--OKTA-123128-->
+
+#### Added Login Hint to OAuth 2.0 and OpenID Connect API
+
+Use the `login_hint` property on `/oauth2/:authorizationServerId/v1/authorize` or `/oauth2/v1/authorize` to populate a username when prompting for authentication. <!-- OKTA-87073-->
 
 ### Platform Bugs Fixed
 
-* SAML Apps containing more than one SAML attribute caused pagination issues on `api/v1/apps`. (OKTA-123220)
-* Native clients now require the `authorization_code` grant type, which was not enforced correctly. (OKTA-123471)
-* Requests on `/api/v1/idps` that included duplicated group IDs in group filter failed. (OKTA-124853)
+* Updating the OpenID Connect property `max_age` incorrectly caused a new session to be created, which updated the `createdAt` timestamp. (OKTA-99850)
+* The property `application_type` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html) could be edited. (OKTA-120223)
+* User profile attributes could be fetched via the API even though attributes were marked hidden, if the user sending the request was the user being fetched. (OKTA-123882)
+* Reordering Authorization Server policies failed. (OKTA-125156)
+* (Preview fix) Fixed issue involving OpenID Connect and OAuth 2.0 requests within SAML IdP configuration. (OKTA-127155)
+* The Zones API documentation was incorrectly announced as Generally Available in 2017.19. It is [a Beta release](/docs/api/getting_started/releases-at-okta.html).
 
 #### Simple HAL Links Generally Available in Preview for May, 2017
 
