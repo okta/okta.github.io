@@ -7,7 +7,7 @@ tags: [angular, authentication, oidc, openid connect, okta, typescript, angular-
 
 Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular’s focus on building reusable components, which help you decouple the various concerns in your application. Take authentication, for example: it can be painful to build, but once you wrap it in a component, the authentication logic can be reused throughout your application.
 
-The Angular CLI makes it easy to scaffold new components, and even entire project. If you haven’t used the Angular CLI to quickly generate Angular code, you’re in for a treat!
+The Angular CLI makes it easy to scaffold new components, and even entire projects. If you haven’t used the Angular CLI to quickly generate Angular code, you’re in for a treat!
 
 In this example, you’ll build a simple web application with Angular CLI, a tool for Angular development. You’ll create an application with search and edit features, then add authentication.
 
