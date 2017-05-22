@@ -1103,14 +1103,26 @@ curl -v -X POST \
         ]
       }
     },
-    "metadata": {
-      "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
+    "metadata": [
+      {
+        "name": "oauth-authorization-server",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      {
+        "name": "openid-configuration",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/openid-configuration",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+    ],
     "rotateKey": {
       "href": "${org}/api/v1/as/ausnsopoM6vBRB3PD0g3/credentials/lifecycle/keyRotate",
       "hints": {
@@ -1205,14 +1217,26 @@ curl -v -X POST \
         ]
       }
     },
-    "metadata": {
-      "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
+    "metadata": [
+      {
+        "name": "oauth-authorization-server",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      {
+        "name": "openid-configuration",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/openid-configuration",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+    ],
     "rotateKey": {
       "href": "${org}/api/v1/as/ausnsopoM6vBRB3PD0g3/credentials/lifecycle/keyRotate",
       "hints": {
@@ -1290,14 +1314,26 @@ curl -v -X GET \
         ]
       }
     },
-    "metadata": {
-      "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
+    "metadata": [
+      {
+        "name": "oauth-authorization-server",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      {
+        "name": "openid-configuration",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/openid-configuration",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+    ],
     "rotateKey": {
       "href": "${org}/api/v1/as/ausnsopoM6vBRB3PD0g3/credentials/lifecycle/keyRotate",
       "hints": {
