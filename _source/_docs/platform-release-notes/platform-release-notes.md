@@ -64,7 +64,7 @@ Use the `login_hint` property on `/oauth2/:authorizationServerId/v1/authorize` o
 * The property `application_type` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html) could be edited. (OKTA-120223)
 * User profile attributes could be fetched via the API even though attributes were marked hidden, if the user sending the request was the user being fetched. (OKTA-123882)
 * Reordering Authorization Server policies failed. (OKTA-125156)
-* (Preview fix) OpenID Connect and OAuth 2.0 requests failed to respect default SAML IdP configuration. (OKTA-127155)
+* (Preview fix) Fixed issue involving OpenID Connect and OAuth 2.0 requests within SAML IdP configuration. (OKTA-127155)
 * The Zones API documentation was incorrectly announced as Generally Available in 2017.19. It is [a Beta release](/docs/api/getting_started/releases-at-okta.html).
 
 #### Simple HAL Links Generally Available in Preview for May, 2017
