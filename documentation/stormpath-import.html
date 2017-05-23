@@ -210,6 +210,10 @@
 <p><a name="things-that-wont-migrate-and-known-caveats"></a></p>
 <h2 id="things-that-wont-migrate-and-known-caveats">Things That Won’t Migrate and Known Caveats</h2>
 
+<h4 id="usernames-must-be-in-email-format">Usernames Must be in Email Format</h4>
+
+<p>The Stormpath Account <code class="highlighter-rouge">username</code> will be imported into the Okta User Profile <code class="highlighter-rouge">login</code> property. However, this value must be in email format: <code class="highlighter-rouge">example@domain.xyz</code>. If your usernames are not in email format, the import tool will throw an error. If you do have usernames that are not in email format, you can process your export JSON to add an email domain to your usernames, or you can get in touch with us at <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
+
 <p><a name="custom-data-for-accounts-only"></a></p>
 <h4 id="custom-data-for-accounts-only">Custom Data For Accounts Only</h4>
 
@@ -469,7 +473,7 @@
     </tr>
     <tr>
       <td>Custom Data</td>
-      <td><a href="http://developer.okta.com/docs/api/resources/schemas.html">Custom Schema Attributes</a></td>
+      <td><a href="http://developer.okta.com/docs/api/resources/schemas.html">Custom Schema Properties</a></td>
     </tr>
   </tbody>
 </table>
@@ -567,13 +571,17 @@
 
 <p><em>*This is a <a href="http://developer.okta.com/docs/api/resources/schemas.html">Custom Schema Attribute</a>.</em></p>
 
-<p>User API Keys (up to 10) and Custom Data are also imported. API Keys are added as Custom Schema Attributes to the Profile using this format:</p>
+<p>User API Keys (up to 10) and Custom Data are also imported. API Keys are added as Custom Schema Properties to the Profile using this format:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>"stormpathApiKey_{1-10}": "{apiKeyId}:{apiKeySecret}"
 </code></pre>
 </div>
 
 <p>More information on custom data can be found <a href="#custom-data-objects">below</a>.</p>
+
+<p><strong>Imported Passwords</strong></p>
+
+<p>Your passwords are exported from Stormpath in a hashed form. On first login, Okta will use the imported password hash and then convert the password to Okta’s secure password store for future logins.</p>
 
 <p><strong>Imported User Naming Convention</strong></p>
 
@@ -586,7 +594,7 @@
 <p><a name="stormpath-custom-data"></a></p>
 <h3 id="stormpath-custom-data">Stormpath Custom Data</h3>
 
-<p>Only Custom Data associated with Accounts will be imported, although it can be skipped entirely if you wish. For more information on this, see <a href="#running-the-import">Running the Import</a>. If you choose to import Custom Data, the Okta import tool will scan all of the Custom Data on every Stormpath Account and create one Custom Profile Schema for all of the Users it is importing. However, Profile attributes will only be returned if they have values. If they are blank, they will not be returned by the API.</p>
+<p>Only Custom Data associated with Accounts will be imported, although it can be skipped entirely if you wish. For more information on this, see <a href="#running-the-import">Running the Import</a>. If you choose to import Custom Data, the Okta import tool will scan all of the Custom Data on every Stormpath Account and create one Custom Profile Schema for all of the Users it is importing. However, Profile properties will only be returned if they have values. If they are blank, they will not be returned by the API.</p>
 
 <p>What your imported Custom Data looks like depends primarily on whether is a simple <code class="highlighter-rouge">key:value</code> pair, or a more complex object.</p>
 
@@ -651,7 +659,7 @@
 
 <p><strong>Stringified</strong></p>
 
-<p>Stringifying serializes the entire object into a single string, which is then added as a value to the Profile attribute “customData”. If there are multiple complex objects, they are all included in that string. Do not use this strategy if you will need to search your custom schema attributes in Okta. If you do not have a consistent schema across all accounts, and one property may have multiple types values, e.g. a number or string, the stringify option may be a better choice (if search is not needed).</p>
+<p>Stringifying serializes the entire object into a single string, which is then added as a value to the Profile attribute “customData”. If there are multiple complex objects, they are all included in that string. Do not use this strategy if you will need to search your custom schema properties in Okta. If you do not have a consistent schema across all accounts, and one property may have multiple types values, e.g. a number or string, the stringify option may be a better choice (if search is not needed).</p>
 
 <p><a name="stormpath-directories-cloud"></a></p>
 <h3 id="stormpath-directories-cloud">Stormpath Directories (Cloud)</h3>
@@ -691,7 +699,7 @@
 <p>There are a few points to note here:</p>
 
 <ul>
-  <li>First of all, the Stormpath Password Policy attributes <code class="highlighter-rouge">maxLength</code> and <code class="highlighter-rouge">minDiacritic</code> are not supported in Okta and will not migrate. Also, the Stormpath attributes <code class="highlighter-rouge">minLowerCase</code>, <code class="highlighter-rouge">minUpperCase</code>, <code class="highlighter-rouge">minNumber</code>, and <code class="highlighter-rouge">minSymbol</code> all have integer values in Stormpath, specifying an occurrence requirement. Whereas in Okta, the equivalent attributes take 0 or 1, meaning that the value must occur at least once. For more information see <a href="http://developer.okta.com/docs/api/resources/policy.html#PasswordComplexityObject">here</a>.</li>
+  <li>First of all, the Stormpath Password Policy attributes <code class="highlighter-rouge">maxLength</code> and <code class="highlighter-rouge">minDiacritic</code> are not supported in Okta and will not migrate. Also, the Stormpath attributes <code class="highlighter-rouge">minLowerCase</code>, <code class="highlighter-rouge">minUpperCase</code>, <code class="highlighter-rouge">minNumber</code>, and <code class="highlighter-rouge">minSymbol</code> all have integer values in Stormpath, specifying an occurrence requirement. Whereas in Okta, the equivalent properties take 0 or 1, meaning that the value must occur at least once. For more information see <a href="http://developer.okta.com/docs/api/resources/policy.html#PasswordComplexityObject">here</a>.</li>
 </ul>
 
 <table>
@@ -752,7 +760,7 @@
 
 <p>Your Social providers Client ID and Secret are also imported into the IdP’s <code class="highlighter-rouge">credentials</code> object.</p>
 
-<p>Any Stormpath Accounts that were associated with your Stormpath Social Directory will have their equivalent Okta Users associated with the new Okta Identity Provider. Custom <a href="https://docs.stormpath.com/rest/product-guide/latest/reference.html#attribute-statement-mapping-rules">Attribute Mappings</a> from your Stormpath Social Directory are added as <a href="http://developer.okta.com/docs/api/resources/schemas.html">Custom Schema Attributes</a> to the relevant User Profiles. An Okta Group is also created and associated with the relevant Authorization Server. That Group shares the same <code class="highlighter-rouge">name</code> as the Identity Provider and is assigned Users as they are created during social login.</p>
+<p>Any Stormpath Accounts that were associated with your Stormpath Social Directory will have their equivalent Okta Users associated with the new Okta Identity Provider. Custom <a href="https://docs.stormpath.com/rest/product-guide/latest/reference.html#attribute-statement-mapping-rules">Attribute Mappings</a> from your Stormpath Social Directory are added as <a href="http://developer.okta.com/docs/api/resources/schemas.html">Custom Schema Properties</a> to the relevant User Profiles. An Okta Group is also created and associated with the relevant Authorization Server. That Group shares the same <code class="highlighter-rouge">name</code> as the Identity Provider and is assigned Users as they are created during social login.</p>
 
 <table>
   <thead>
@@ -786,7 +794,7 @@
 
 <p>Just like Stormpath Social Directories, <a href="https://docs.stormpath.com/rest/product-guide/latest/auth_n.html#social-login-providers">Stormpath SAML Directories</a> are also modeled as <a href="http://developer.okta.com/docs/api/resources/idps.html">Okta Identity Providers</a>. Your SAML signing certificate is also imported over, as well as the SSO Login URL.</p>
 
-<p>Additionally, any attribute mappings that you defined in Stormpath are  imported as <a href="http://developer.okta.com/docs/api/resources/schemas.html">Custom Schema Attributes</a>.</p>
+<p>Additionally, any attribute mappings that you defined in Stormpath are  imported as <a href="http://developer.okta.com/docs/api/resources/schemas.html">Custom Schema Properties</a>.</p>
 
 <p>Users will be associated with this new SAML IdP when they next log in.</p>
 

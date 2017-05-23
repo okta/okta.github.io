@@ -127,6 +127,7 @@ body {
 
 Change the HTML templates to use Material components. For `app.component.html`, you can change the `<h1>` to be an `<md-toolbar>`.
 
+{% raw %}
 ```html
 <md-toolbar color="primary">
   <span>{{title}}</span>
@@ -134,9 +135,11 @@ Change the HTML templates to use Material components. For `app.component.html`, 
 
 <app-beer-list></app-beer-list>
 ```
+{% endraw %}
 
 In `beer-list.component.html`, change it to use `<md-list>` and its related components.
 
+{% raw %}
 ```html
 <h2>Beer List</h2>
 
@@ -149,6 +152,7 @@ In `beer-list.component.html`, change it to use `<md-list>` and its related comp
   </md-list-item>
 </md-list>
 ```
+{% endraw %}
 
 After making these changes, the app should look a little better. Run `ng serve` and you should see how your UI has changed. Below is a screenshot using Chrome's device toolbar.
 
@@ -304,6 +308,7 @@ import { AppShellModule } from '@angular/app-shell';
 
 Modify `app.component.html` to use app-shell's directives.
 
+{% raw %}
 ```html
 <md-toolbar color="primary">
   <span>{{title}}</span>
@@ -314,6 +319,7 @@ Modify `app.component.html` to use app-shell's directives.
   <app-beer-list></app-beer-list>
 </div>
 ```
+{% endraw %}
 
 ### Add a Manifest to Make it Installable
 

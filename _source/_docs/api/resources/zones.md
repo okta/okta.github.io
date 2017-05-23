@@ -5,7 +5,9 @@ title: Zones
 
 # Zones API
 
-Zones are used to group IP Address ranges in a meaningful way such that policy decisions can be made based on the zone a client's IP belongs to.
+{% api_lifecycle beta %} This API is [a Beta release](/docs/api/getting_started/releases-at-okta.html).
+
+Zones are used to group IP Address ranges so that policy decisions can be made based on the client's IP location.
 
 ## Endpoints
 

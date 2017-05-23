@@ -7,21 +7,20 @@ const EC = protractor.ExpectedConditions;
 class DocsPage extends BasePage {
   constructor(url) {
     super(url);
-    this.pageLoadElement = $('.has-tableOfContents');
-    this.h1Elements = $$('h1');
-    this.h2Elements = $$('h2');
-    this.h3Elements = $$('h3');
-    this.h4Elements = $$('h4');
-  }
+    this.$pageLoad = $('.has-tableOfContents');
+    this.$$h1 = $$('h1');
+    this.$$h2 = $$('h2');
+    this.$$h3 = $$('h3');
 
-  load() {
-    this.get();
-    return this.waitForPageLoad();
-  }
+    this.$$deprecatedLabel = $$('.api-label-deprecated');
+    this.$$betaLabel = $$('.api-label-beta');
+    this.$$eaLabel = $$('.api-label-ea');
+    this.$$corsLabel = $$('.api-label-cors');
+    this.$$getLabel = $$('.api-uri-get');
+    this.$$postLabel = $$('.api-uri-post');
+    this.$$deleteLabel = $$('.api-uri-delete');
 
-  waitForPageLoad() {
-    // This waits for the sidebar menu to fully finish rendering
-    return util.wait(this.pageLoadElement);
+    this.setPageLoad(this.$pageLoad);
   }
 
   hasHeader(str) {
@@ -33,19 +32,15 @@ class DocsPage extends BasePage {
   }
 
   h1Contains(strs) {
-    return this.elementsContainText(this.h1Elements, strs);
+    return this.elementsContainText(this.$$h1, strs);
   }
 
   h2Contains(strs) {
-    return this.elementsContainText(this.h2Elements, strs);
+    return this.elementsContainText(this.$$h2, strs);
   }
 
   h3Contains(strs) {
-    return this.elementsContainText(this.h3Elements, strs);
-  }
-
-  h4Contains(strs) {
-    return this.elementsContainText(this.h4Elements, strs);
+    return this.elementsContainText(this.$$h3, strs);
   }
 
   clickLinkHeader(str) {
@@ -53,6 +48,33 @@ class DocsPage extends BasePage {
     return el.click();
   }
 
+  hasDeprecatedTags() {
+    return this.hasElements(this.$$deprecatedLabel);
+  }
+
+  hasBetaTags() {
+    return this.hasElements(this.$$betaLabel);
+  }
+
+  hasEATags() {
+    return this.hasElements(this.$$eaLabel);
+  }
+
+  hasCORSTags() {
+    return this.hasElements(this.$$corsLabel);
+  }
+
+  hasGetTags() {
+    return this.hasElements(this.$$getLabel);
+  }
+
+  hasPostTags() {
+    return this.hasElements(this.$$postLabel);
+  }
+
+  hasDeleteTags() {
+    return this.hasElements(this.$$deleteLabel);
+  }
 }
 
 module.exports = DocsPage;

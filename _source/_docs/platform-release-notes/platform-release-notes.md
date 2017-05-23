@@ -4,7 +4,7 @@ title: Platform Release Notes
 excerpt: Summary of changes to the Okta Platform since Release 2017.18
 ---
 
-## Release 2017.19
+## Release 2017.20
 
 ### Advance Notice: API Rate Limit Improvements
 
@@ -36,22 +36,40 @@ For a full description of the new rate limits, see [API Rate Limit Improvements]
 
 ### Platform Feature Improvements
 
-* [Zones API Generally Available in Preview](#zones-api-is-now-generally-available)
-* [Simple HAL Links Generally Available in Preview](#simple-hal-links-generally-available-in-preview)
- 
-#### Zones API is Now Generally Available
+#### Okta Expression Language Function for Filtering Groups
 
-The Zones API is now Generally Available in preview orgs. It will be at least one month before the Zones API is available in production.
+Use the Okta Expression Language function `getFilteredGroups` to create a list of groups that the current user belongs to.
+With such a list you can, for example, create claims in Access Tokens and ID Tokens based on the groups.
+For more information, see [Group Functions](/reference/okta_expression_language/index.html#group-functions). <!--OKTA-123127-->
 
-Zones are used to group IP Address ranges so that policy decisions can be made based on the zone a client’s IP belongs to.
+#### New Profile Property for Apps
 
-For more information, see [the Zones API developer documentation](/docs/api/resources/zones.html).
+The `profile` property in the Apps API accepts any well-formed JSON schema. You can specify properties in the profile and then access them in API requests.
+For example:
 
-#### Simple HAL Links Generally Available in Preview
+* Add an app manager contact email address.
+* Use the profile to define a whitelist of groups that you can then reference and pass as claims using the [Okta Expression Language function `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
+
+For more information, see the [Apps API](/docs/api/resources/apps.html#set-profile-property-for-openid-connect-apps).
+
+Note that the status code for service claims errors has changed from 500 to 400 as part of this feature. <!--OKTA-123128-->
+
+#### Added Login Hint to OAuth 2.0 and OpenID Connect API
+
+Use the `login_hint` property on `/oauth2/:authorizationServerId/v1/authorize` or `/oauth2/v1/authorize` to populate a username when prompting for authentication. <!-- OKTA-87073-->
+
+### Platform Bugs Fixed
+
+* Updating the OpenID Connect property `max_age` incorrectly caused a new session to be created, which updated the `createdAt` timestamp. (OKTA-99850)
+* The property `application_type` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html) could be edited. (OKTA-120223)
+* User profile attributes could be fetched via the API even though attributes were marked hidden, if the user sending the request was the user being fetched. (OKTA-123882)
+* Reordering Authorization Server policies failed. (OKTA-125156)
+* (Preview fix) Fixed issue involving OpenID Connect and OAuth 2.0 requests within SAML IdP configuration. (OKTA-127155)
+* The Zones API documentation was incorrectly announced as Generally Available in 2017.19. It is [a Beta release](/docs/api/getting_started/releases-at-okta.html).
+
+#### Simple HAL Links Generally Available in Preview for May, 2017
 
 Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
-This feature will remain in preview for at least one month.
-
 This feature removes the HAL links that reflect state from user objects returned in collections.
 
 Before release 2017.19, a user object returned in a collection contains some or all of the following links:
@@ -110,11 +128,6 @@ The Simple HAL Links on User Collections feature ensures that possibly invalid s
 As noted above, to change user state, the `self` link should be called to retrieve a user object with up-to-date links.
  
 >Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.
-
-### Platform Bugs Fixed
-
-* Some queries on `/api/v1/apps` with incorrect filter parameters returned an empty `_embedded node` in the response instead of the correct error message. (OKTA-124544)
-* Multifactor authentication with RSA failed for some orgs. (OKTA-125862)
 
 ### Does Your Org Have This Change Yet?
 

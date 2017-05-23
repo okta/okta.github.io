@@ -5,7 +5,7 @@ title: System Log (Beta)
 
 # System Log API
 
-{% api_lifecycle beta %} This API is still in beta.
+{% api_lifecycle beta %}
 
 The Okta System Log API provides read access to your organization's system log. This API provides more functionality than the [Events API](/docs/api/resources/events.html):
 
