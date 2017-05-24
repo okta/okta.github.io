@@ -3,6 +3,7 @@ layout: blog_post
 title: 'Tutorial: Develop a Mobile App With Ionic and Spring Boot'
 author: mraible
 tags: [spring boot, java, pwa, progressive web app, ionic, typescript, ios, android]
+comments: true
 ---
 
 You already know that building APIs with Spring Boot is incredibly easy. But, your API isn’t complete without a UI, right? Well, building UIs with Ionic is pretty easy too, especially if you know Angular! 

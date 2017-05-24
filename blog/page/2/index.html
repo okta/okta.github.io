@@ -45,6 +45,10 @@
 ">
   <link rel="canonical" href="http://developer.okta.com/blog/page/2/">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <script type="text/javascript">
+    var disqus_shortname = 'oktadevblog';
+  </script>
+  </head>
 </head>
 
     <body id="blog">
@@ -109,7 +113,7 @@
     <div class="wrap blog">
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -139,6 +143,7 @@
 	    <section class="post-content">
 	     If you’re wondering how to configure an ASP.NET application with KentorIT’s AuthServices and Okta, you’ve come to the right place. But before delving into the specifics of how to make Okta work with an SAML-enabled ASP.NET application powered by KentorIT AuthServices, is is worth spending some time going over a critical, but easily fixable issue: Important note : As of March 22nd, 2016, you have 2 choices: Either get the source code of the AuthServices... <a href="/blog/2016/03/22/use-kentor-authservices-with-okta">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -146,7 +151,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -191,6 +196,7 @@
 	    <section class="post-content">
 	     Many companies are adopting micro-services based architectures to promote decoupling and separation of concerns in their applications. One inherent challenge with breaking applications up into small services is that now each service needs to deal with authenticating and authorizing requests made to it. Json Web Tokens (JWTs) offer a clean solution to this problem along with TLS client authentication lower down in the stack. Wils Dawson and I presented these topics to the Java User... <a href="/blog/2016/01/05/rest-service-auth-jwt">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -198,7 +204,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -228,6 +234,7 @@
 	    <section class="post-content">
 	     It seems that OAuth 2.0 is everywhere these days. Whether you are building a hot new single page web application (SPA), a native mobile experience, or just trying to integrate with the API economy, you can’t go far without running into the popular authorization framework for REST/APIs and social authentication. During Oktane15, Karl McGuinness, our Senior Director of Identity, demystified the powerful, yet often misunderstood, world of OAuth 2.0 and shared details on Okta’s growing... <a href="/blog/2015/12/07/oauth">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -235,7 +242,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -265,6 +272,7 @@
 	    <section class="post-content">
 	     If you’re like me, the most aggravating thing is finding a Stack Overflow question that exactly describes the issue you are facing, only to scroll down and see that it has remained unanswered since 2011. I was recently trying to configure Transport Layer Security (TLS) client authentication (also referred to as mutual SSL) between two internal services at Okta and found the lack of complete examples astonishing. I hope that this blog post provides a... <a href="/blog/2015/12/02/tls-client-authentication-for-services">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -272,7 +280,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -302,6 +310,7 @@
 	    <section class="post-content">
 	     I recently read an excellent article about how amazing products shape the trust relationship with customers. I think great products are the first step in building a trust relationship. And like other aspects of the product that are derived from the product but are not physically part of it, the trust relationship is now more important than ever before. When you use a product, every engagement with that product has a direct correlation with your... <a href="/blog/2015/06/11/trustpage">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -309,7 +318,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -333,6 +342,7 @@
 	    <section class="post-content">
 	     Sometimes fixing a problem causes or reveals a new one. And sometimes this sets off a chain reaction of problems and fixes, where each solution exposes a deeper issue. In technology, cascades like these are common, often painful, and occasionally welcome. Our battle against CPU contention last fall is a good example of such a cascade. What began as a buffer pool adjustment triggered a series of issues and fixes that generated plenty of stress,... <a href="/blog/2015/05/22/tcmalloc">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -340,7 +350,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -370,6 +380,7 @@
 	    <section class="post-content">
 	     Okta has been an agile development shop since the beginning. One important aspect of being agile is enabling a mix of bottom-up and top-down decision making. Specifically where high level vision and strategy is clearly communicated enabling teams to autonomously deliver value while also feeding back learnings from the trenches to inform the high level goals.1 Below are the tacit engineering design principles we’ve used to guide development at Okta. They continue to evolve as... <a href="/blog/2015/05/08/software-engineering-design-principles">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -377,7 +388,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -401,6 +412,7 @@
 	    <section class="post-content">
 	     This post describes our odyssey with ActiveMQ, an open-source version of the Java Messaging Service (JMS) API. We use ActiveMQ as the message broker among our app servers. First, a word of thanks. To overcome the challenges we faced with ActiveMQ, we are greatly indebted to a very thorough description of an OpenJDK bug, as well as some other online resources. If you’re having problems with ActiveMQ, read on. Maybe our story can help you.... <a href="/blog/2015/05/08/productionalizing-active-mq">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -408,7 +420,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -436,6 +448,7 @@
 	    <section class="post-content">
 	     This is the third of a four part series on Android Unit Testing. In the last two articles I discussed the general principles of having good tests and the way to run Android tests on JVM making them fast and how to make your code less coupled. This article will explain how to make tests isolated. We need to mock a dependency, inject it, and then modify our test to indicate that we are not... <a href="/blog/2015/04/23/android-unit-testing-part-4">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
@@ -443,7 +456,7 @@
             <br/>
         
             
-            <section >
+            <section>
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
@@ -471,6 +484,7 @@
 	    <section class="post-content">
 	     This is the third of a four part series on Android Unit Testing. In the last two articles I discussed the general principles of having good tests and the way to run Android tests on JVM making them fast. This part will show how to make your Android code less heavily coupled. This is a preparation step to ensure that your tests are isolated from each other. We want to test each unit of work... <a href="/blog/2015/04/14/android-unit-testing-part-3">Read more</a> 
 	    </section>
+      
 	  </article>
   </div>
 </section>
