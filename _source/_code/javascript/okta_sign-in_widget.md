@@ -66,7 +66,7 @@ might occur in a user login flow.
 
 ### Browser Security Settings
 
-Okta requires that browsers have third-party cookies enabled for your Okta org's domain.
+Okta requires that browsers have third-party cookies enabled for your Okta organization's domain.
 
 ## A simple example
 
