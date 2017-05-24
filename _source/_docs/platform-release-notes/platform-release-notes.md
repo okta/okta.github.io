@@ -33,7 +33,7 @@ For a full description of the new rate limits, see [API Rate Limit Improvements]
 
 <!-- ### Platform New Features -->
 
-### Platform Feature Improvement: App Creates and Updates in the System Log
+### Platform Feature Improvement: System Log Notifications for OpenID Connect Apps
 
 Notifications are entered in the [System Log](/docs/api/resources/system_log.html) when OpenID Connect apps are created or updated.
 
@@ -41,7 +41,7 @@ Notifications are entered in the [System Log](/docs/api/resources/system_log.htm
 
 * SAML Apps containing more than one SAML attribute caused pagination issues on `/api/v1/apps`. (OKTA-123220, OKTA-122423, OKTA-115762)
 * Native clients that are OpenID Connect apps require the `authorization_code` grant type. This requirement was not enforced correctly. (OKTA-123471)
-* Requests to configure  inbound SAML IdPs (`/api/v1/idps`) that included duplicated group IDs failed. (OKTA-124853)
+* Requests to configure inbound SAML IdPs (`/api/v1/idps`) that included duplicated group IDs failed. (OKTA-124853)
 
 #### Simple HAL Links Generally Available in Preview for May, 2017
 
