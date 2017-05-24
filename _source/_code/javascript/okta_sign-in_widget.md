@@ -64,6 +64,10 @@ might occur in a user login flow.
 
 {% img okta-signin-validation-failure.png alt:"Screenshot of Okta Sign-In Widget displaying validation error" %}
 
+### Browser Security Settings
+
+Okta requires that browsers have third-party cookies enabled for your Okta org's domain.
+
 ## A simple example
 
 If you are a developer, the best way to understand the Okta
