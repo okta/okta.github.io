@@ -33,15 +33,15 @@ For a full description of the new rate limits, see [API Rate Limit Improvements]
 
 <!-- ### Platform New Features -->
 
-### Platform Feature Improvement: App Updates in the System Log
+### Platform Feature Improvement: App Creates and Updates in the System Log
 
-Notifications in the [System Log](docs/api/resources/system_log.html) related to updates to OpenID Connect apps contain more details.
+Notifications are entered in the [System Log](/docs/api/resources/system_log.html) when OpenID Connect apps are created or updated.
 
 ### Platform Bugs Fixed
 
-* SAML Apps containing more than one SAML attribute caused pagination issues on `api/v1/apps`. (OKTA-123220)
-* Native clients now require the `authorization_code` grant type, which was not enforced correctly. (OKTA-123471)
-* Requests on `/api/v1/idps` that included duplicated group IDs in group filter failed. (OKTA-124853)
+* SAML Apps containing more than one SAML attribute caused pagination issues on `/api/v1/apps`. (OKTA-123220, OKTA-122423, OKTA-115762)
+* Native clients that are OpenID Connect apps require the `authorization_code` grant type. This requirement was not enforced correctly. (OKTA-123471)
+* Requests to configure  inbound SAML IdPs (`/api/v1/idps`) that included duplicated group IDs failed. (OKTA-124853)
 
 #### Simple HAL Links Generally Available in Preview for May, 2017
 
@@ -89,7 +89,7 @@ Before release 2017.19, a user object returned in a collection contains some or 
 Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
 As outlined in [Design Principles](/docs/api/getting_started/design_principles.html#links-in-collections):
 
-"Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by 'id' using the "self" link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state."
+"Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by ID using the `self` link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state."
  
 The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the `self` link is returned:
 
