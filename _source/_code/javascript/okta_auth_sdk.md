@@ -13,7 +13,6 @@ The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/
 
 - An Okta org - Register for [Okta Developer Edition](https://www.okta.com/developer/signup/) if you don't have an existing org
 - A domain that is [CORS enabled for your org](/docs/api/getting_started/enabling_cors.html)
-- Okta requires that browsers have third-party cookies enabled for your Okta org's domain.
 
 ## Installation
 
@@ -530,6 +529,8 @@ authClient.token.getWithoutPrompt({
   // Handle OAuthError
 });
 ~~~
+
+Note: If the Okta cookie is not set and you are using `token.getWithoutPrompt`, try enabling third-party cookies in the browser.
 
 ### Refresh a token
 
