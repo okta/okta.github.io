@@ -530,6 +530,8 @@ authClient.token.getWithoutPrompt({
 });
 ~~~
 
+Note: If the Okta cookie is not set and you are using `token.getWithoutPrompt`, try enabling third-party cookies in the browser.
+
 ### Refresh a token
 
 Returns a new token if the Okta session is still valid.
