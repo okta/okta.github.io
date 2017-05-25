@@ -21,7 +21,7 @@ Explore the Factors API: [![Run in Postman](https://run.pstmn.io/button.svg)](ht
 ### Get Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*</span>
 
 Fetches a factor for the specified user
 
@@ -96,7 +96,7 @@ curl -v -X GET \
 ### List Enrolled Factors
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors</span>
 
 Enumerates all the enrolled factors for the specified user
 
@@ -257,7 +257,7 @@ curl -v -X GET \
 ### List Factors to Enroll
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/catalog
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/catalog</span>
 
 Enumerates all the [supported factors](#supported-factors-for-providers) that can be enrolled for the specified user
 
@@ -415,7 +415,7 @@ curl -v -X GET \
 ### List Security Questions
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/questions
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/questions</span>
 
 Enumerates all available security questions for a user's `question` factor
 
@@ -474,7 +474,7 @@ curl -v -X GET \
 ### Enroll Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/factors
+<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/factors</span>
 
 Enrolls a user with a supported [factor](#list-factors-to-enroll)
 
@@ -1786,7 +1786,7 @@ curl -v -X POST \
 ### Reset Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/factors/*:fid*
+<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/factors/*:fid*</span>
 
 Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.
 
@@ -2199,7 +2199,7 @@ curl -v -X POST \
 #### Poll for Verify Transaction Completion
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid*
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid*</span>
 
 Polls a push verification transaction for completion.  The transaction result is `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
 
