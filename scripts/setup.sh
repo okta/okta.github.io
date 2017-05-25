@@ -16,7 +16,6 @@ if [[ -z "${SUCCESS}" ]]; then
 fi
 
 source "${0%/*}/helpers.sh"
-source "${0%/*}/import_external_markdown.sh"
 
 # Print an easily visible line, useful for log files.
 function interject() {
@@ -69,7 +68,6 @@ function generate_html() {
 
     if [ ! -d $GENERATED_SITE_LOCATION ]; then
         check_for_npm_dependencies
-        import_external_markdown
         bundle exec jekyll build
         local status=$?
         interject 'Done generating HTML'
