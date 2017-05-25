@@ -16,7 +16,7 @@ Explore the Administrator Roles API:  [![Run in Postman](https://run.pstmn.io/bu
 ### List Roles Assigned to User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/:uid/roles</span>
+<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/roles</span>
 
 Lists all roles assigned to a user.
 
