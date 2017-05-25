@@ -1283,6 +1283,13 @@ See <a href="#Conditions">conditions</a></p>
       <td>Yes</td>
       <td>‘Okta’</td>
     </tr>
+    <tr>
+      <td>include</td>
+      <td>The AD integrations this policy applies to</td>
+      <td>Array</td>
+      <td>No</td>
+      <td>Include all AD integrations</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1702,14 +1709,14 @@ Note that Okta sign on policy is not the same thing as application sign on polic
          </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
        </span><span class="p">},</span><span class="w">
        </span><span class="nt">"age"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"maxAgeDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"expireWarnDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+         </span><span class="nt">"maxAgeDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"expireWarnDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
        </span><span class="p">},</span><span class="w">
        </span><span class="nt">"lockout"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
          </span><span class="nt">"maxAttempts"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"autoUnlockMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"autoUnlockMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
          </span><span class="nt">"showLockoutFailures"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
        </span><span class="p">}</span><span class="w">
      </span><span class="p">},</span><span class="w">

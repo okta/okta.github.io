@@ -536,5 +536,9 @@ var oktaSignIn = new OktaSignIn({
               { text: 'Rocket Sled Questions', href: 'http://acme.example.com/questions/rocket-sled' }
             ]
 
+## Troubleshooting
+
+If you are working with a single-page app using the Sign-In Widget and your Okta cookie isn't set, try enabling third-party cookies in the browser. 
+
 ## Reference Documentation
 You can find more reference information in the [Okta Sign-In Widget reference](/code/javascript/okta_sign-in_widget_ref) page.
