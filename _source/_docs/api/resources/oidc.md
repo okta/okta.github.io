@@ -87,7 +87,7 @@ OpenID Connect introduces an [ID Token](http://openid.net/specs/openid-connect-c
 which is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) that contains information about an authentication event
 and claims about the authenticated user that clients can rely on.
 
-Clients can use any of the following sequences of operations to obtain an Access Token:
+Clients can use any of the following sequences of operations to obtain an ID Token:
 * [Authorization code flow](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth) -- the client obtains
 an authorization code from the authorization server's authentication endpoint and uses it to obtain an ID token and an access
 token from the authorization server's Token endpoint.
@@ -967,6 +967,3 @@ Content-Type: application/json;charset=UTF-8
     "error_description" : "No client credentials found."
 }
 ~~~
-
-
-
