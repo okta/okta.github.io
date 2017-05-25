@@ -199,7 +199,8 @@ Create a production build of the `weekly` branch, merge it, then reset `weekly`.
     [okta.github.io master]$ git fetch origin
     
     # Note: The following command overwrites any new changes to the weekly branch! Before running this,
-    # make sure there are no new commits that have been merged in since you merged into master. If there are, you must rebase first.
+    # make sure there are no new commits that have been merged in since you merged into master. 
+    # If there have been merges since step 8, you must rebase before pushing master to weekly.
     [okta.github.io master]$ git push -f origin origin/master:weekly
     ```
 
