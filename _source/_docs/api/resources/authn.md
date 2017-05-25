@@ -4668,7 +4668,7 @@ curl -v -X POST \
 #### Verify Call Recovery Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/recovery/factors/call/verify</span>
+{% api_operation post /api/v1/authn/recovery/factors/call/verify %}
 
 Verifies a Voice Call OTP (`passCode`) sent to the user's device for primary authentication for a recovery transaction with `RECOVERY_CHALLENGE` status.
 
@@ -4764,7 +4764,7 @@ curl -v -X POST \
 ###### Resend Call Recovery Challenge
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/recovery/factors/call/resend</span>
+{% api_operation post /api/v1/authn/recovery/factors/call/resend %}
 
 Resends a Voice Call with OTP (`passCode`) to the user's phone
 

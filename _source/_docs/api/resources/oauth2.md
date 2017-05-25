@@ -326,7 +326,7 @@ Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](
 ### Authentication Request
 {:.api .api-operation}
 
-{% api_operation get /oauth2/:authorizationServerId/v1/authorize %}
+{% api_operation get /oauth2/*:authorizationServerId*/v1/authorize %}
 
 This is a starting point for OAuth 2.0 flows such as implicit and authorization code flows. This request authenticates the user and returns tokens along with an authorization grant to the client application as a part of the response the client might have requested.
 
@@ -470,7 +470,7 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 ### Token Request
 {:.api .api-operation}
 
-{% api_operation post /oauth2/:authorizationServerId/v1/token %}
+{% api_operation post /oauth2/*:authorizationServerId*/v1/token %}
 
 
 The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* and the corresponding credentials and returns back an Access Token. A Refresh Token is returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type returns an ID Token if the *openid* scope is requested.
@@ -612,7 +612,7 @@ Content-Type: application/json;charset=UTF-8
 {:.api .api-operation}
 
 
-{% api_operation post /oauth2/:authorizationServerId/v1/introspect %}
+{% api_operation post /oauth2/*:authorizationServerId*/v1/introspect %}
 
 The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not.
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
@@ -733,7 +733,7 @@ Content-Type: application/json;charset=UTF-8
 ### Revocation Request
 {:.api .api-operation}
 
-{% api_operation post /oauth2/:authorizationServerId/v1/revoke %}
+{% api_operation post /oauth2/*:authorizationServerId*/v1/revoke %}
 
 The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
 
@@ -793,7 +793,7 @@ Content-Type: application/json;charset=UTF-8
 ### Get Keys
 {:.api .api-operation}
 
-{% api_operation get /oauth2/:authorizationServerId/v1/keys %}
+{% api_operation get /oauth2/*:authorizationServerId*/v1/keys %}
 
 #### Response Example
 {:.api .api-response .api-response-example}
@@ -849,7 +849,7 @@ Standard open-source libraries are available for every major language to perform
 ### Authorization Server Metadata
 {:.api .api-operation}
 
-{% api_operation get /oauth2/:authorizationServerId/.well-known/oauth-authorization-server %}
+{% api_operation get /oauth2/*:authorizationServerId*/.well-known/oauth-authorization-server %}
 
 This API endpoint returns metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
 This API doesn't require any authentication and returns a JSON object with the following structure.
@@ -922,7 +922,7 @@ This API doesn't require any authentication and returns a JSON object with the f
 ### Authorization Server OpenID Connect Metadata
 {:.api .api-operation}
 
-{% api_operation get /oauth2/:authorizationServerId/.well-known/openid-configuration %}
+{% api_operation get /oauth2/*:authorizationServerId*/.well-known/openid-configuration %}
 
 This API endpoint returns OpenID Connect metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
 This API doesn't require any authentication and returns a JSON object with the following structure.

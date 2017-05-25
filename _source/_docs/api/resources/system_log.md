@@ -16,7 +16,7 @@ The Okta System Log API provides read access to your organization's system log. 
 
 The System Log API has one endpoint:
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span>
+{% api_operation get /api/v1/logs %}
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8f19fc704561a8b44e27){:target="_blank"}
 
@@ -63,7 +63,7 @@ curl -v -X GET \
 ### List Events
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span>
+{% api_operation get /api/v1/logs %}
 
 Fetch a list of events from your Okta organization system log.
 
