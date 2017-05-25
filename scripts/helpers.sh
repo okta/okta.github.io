@@ -95,7 +95,6 @@ function generate_html() {
 
     if [ ! -d $GENERATED_SITE_LOCATION ]; then
         check_for_npm_dependencies
-        import_external_markdown
         bundle exec jekyll build
         local status=$?
         interject 'Done generating HTML'
