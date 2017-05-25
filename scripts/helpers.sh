@@ -82,7 +82,7 @@ function check_for_jekyll_dependencies() {
         interject 'Bundler is installed at:' `command -v bundler`
     fi
     interject 'Installing the gems needed for Jekyll'
-    bundler install
+    bundle install
     interject 'Done installing the gems needed for Jekyll'
     interject 'Done Jekyll checking dependencies'
 }
