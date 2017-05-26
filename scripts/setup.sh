@@ -49,7 +49,7 @@ function check_for_jekyll_dependencies() {
     source $(rvm `cat .ruby-version` do rvm env --path)
     if ! ((command -v bundler && bundler --version) > /dev/null 2>&1); then
         interject 'Bundler is not installed, installing now'
-        gem install bundler
+        gem install bundler --version '1.14.6'
         interject 'Done installing bundler'
     else
         interject 'Bundler is installed at:' `command -v bundler`
