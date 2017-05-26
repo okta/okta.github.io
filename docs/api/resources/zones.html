@@ -216,7 +216,7 @@
 
 <h3 id="create-ip-zone">Create IP Zone</h3>
 
-<h4 class="api api-request api-request-example" id="successful-create">Successful Create</h4>
+<h4 class="api api-request api-request-example" id="successful-create-example">Successful Create Example</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X POST 
 -H <span class="s2">"Accept: application/json"</span><span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -252,7 +252,7 @@
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="response">Response</h4>
+<h4 class="api api-response api-response-params" id="response-example">Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzouagptWUz5DlLfM0g3"</span><span class="p">,</span><span class="w">
@@ -305,7 +305,7 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="invalid-zone-creation-request">Invalid Zone Creation Request</h4>
+<h4 class="api api-request api-request-example" id="invalid-zone-creation-request-example">Invalid Zone Creation Request Example</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X POST 
 -H <span class="s2">"Accept: application/json"</span><span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -359,7 +359,7 @@
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="response-1">Response</h4>
+<h4 class="api api-response api-response-params" id="response-example-1">Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Api validation failed: name"</span><span class="p">,</span><span class="w">
@@ -376,7 +376,7 @@
 
 <h3 id="update-ip-zone">Update IP Zone</h3>
 
-<h4 class="api api-request api-request-example" id="update-existing-zone-request">Update Existing Zone Request</h4>
+<h4 class="api api-request api-request-example" id="update-existing-zone-request-example">Update Existing Zone Request Example</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X PUT 
 -H <span class="s2">"Accept: application/json"</span><span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
@@ -450,7 +450,7 @@
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="update-response">Update Response</h4>
+<h4 class="api api-response api-response-params" id="update-response-example">Update Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzovw2rFz2YoqmvwZ0g3"</span><span class="p">,</span><span class="w">
@@ -521,12 +521,12 @@
 
 <h3 id="get-ip-zones">Get IP Zones</h3>
 
-<h4 class="api api-request api-request-example" id="get-zones-request">Get Zones Request</h4>
+<h4 class="api api-request api-request-example" id="get-zones-request-example">Get Zones Request Example</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/"</span>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="get-response">Get Response</h4>
+<h4 class="api api-response api-response-params" id="get-response-example">Get Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzou98V1LpPAXPBos0g3"</span><span class="p">,</span><span class="w">
@@ -563,12 +563,12 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="get-zones-with-filter-expression-request">Get Zones With Filter Expression Request</h4>
+<h4 class="api api-request api-request-example" id="get-zones-with-filter-expression-request-example">Get Zones With Filter Expression Request Example</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/?limit=100&amp;filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"</span>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="response-2">Response</h4>
+<h4 class="api api-response api-response-params" id="response-example-2">Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzoul0wf9jyb8xwZm0g3"</span><span class="p">,</span><span class="w">
@@ -704,12 +704,12 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="get-zone-where-name-attribute-contains-given-string-request">Get Zone Where ‘name’ Attribute Contains Given String Request</h4>
+<h4 class="api api-request api-request-example" id="get-zone-where-name-attribute-contains-given-string-request-example">Get Zone Where ‘name’ Attribute Contains Given String Request Example</h4>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/?limit=-1&amp;q=First"</span>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="response-3">Response</h4>
+<h4 class="api api-response api-response-params" id="response-example-3">Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzovhg5R4Gfat7hHE0g3"</span><span class="p">,</span><span class="w">

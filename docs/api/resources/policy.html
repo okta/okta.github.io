@@ -236,7 +236,7 @@
 
 <h3 class="api api-operation" id="get-a-policy">Get a Policy</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em></span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/policies/<em>:policyId</em></span></p>
 
 <h4 id="request-parameters">Request Parameters</h4>
 
@@ -252,14 +252,14 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
 <p>HTTP 200:
 <a href="#PolicyObject">Policy Object</a></p>
 
 <h3 class="api api-operation" id="get-a-policy-with-rules">Get a Policy with Rules</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>?expand=rules</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/policies/<em>:policyId</em>?expand=rules</span></p>
 
 <h4 id="request-parameters-1">Request Parameters</h4>
 
@@ -278,7 +278,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-1">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types">Response Types</h5>
 
 <p>HTTP 200:
 <a href="#PolicyObject">Policy Object</a></p>
@@ -287,7 +287,7 @@
 
 <h3 class="api api-operation" id="get-all-policies-by-type">Get All Policies by Type</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies?type=<em>:type</em></span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/policies?type=<em>:type</em></span></p>
 
 <h4 id="request-parameters-2">Request Parameters</h4>
 
@@ -303,7 +303,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-2">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-1">Response Types</h5>
 
 <p>HTTP 200:
 <a href="#PolicyObject">Policy Object</a>
@@ -312,7 +312,7 @@ HTTP 204:
 
 <h3 class="api api-operation" id="delete-policy">Delete Policy</h3>
 
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em></span></p>
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/policies/<em>:policyId</em></span></p>
 
 <h4 id="request-parameters-3">Request Parameters</h4>
 
@@ -328,14 +328,14 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-3">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-2">Response Types</h5>
 
 <p>HTTP 204:
 <em>No Content</em></p>
 
 <h3 class="api api-operation" id="update-a-policy">Update a Policy</h3>
 
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em></span></p>
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/policies/<em>:policyId</em></span></p>
 
 <h4 id="request-parameters-4">Request Parameters</h4>
 
@@ -367,14 +367,14 @@ HTTP 204:
 </span></code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-4">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-3">Response Types</h5>
 
 <p>HTTP 200:
 <a href="#PolicyObject">Policy Object</a></p>
 
 <h3 class="api api-operation" id="create-a-policy">Create a Policy</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/policies</span></p>
 
 <h4 id="request-parameters-5">Request Parameters</h4>
 
@@ -404,14 +404,14 @@ HTTP 204:
 </span></code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-5">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-4">Response Types</h5>
 
 <p>HTTP 204:
 <a href="#PolicyObject">Policy Object</a></p>
 
 <h3 class="api api-operation" id="activate-a-policy">Activate a Policy</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/activate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/policies/<em>:policyId</em>/lifecycle/activate</span></p>
 
 <h4 id="request-parameters-6">Request Parameters</h4>
 
@@ -427,14 +427,14 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-6">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-5">Response Types</h5>
 
 <p>HTTP 204:
 <em>No Content is returned when the activation is successful.</em></p>
 
 <h3 class="api api-operation" id="deactivate-a-policy">Deactivate a Policy</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/lifecycle/deactivate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/policies/<em>:policyId</em>/lifecycle/deactivate</span></p>
 
 <h4 id="request-parameters-7">Request Parameters</h4>
 
@@ -450,7 +450,7 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-7">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-6">Response Types</h5>
 
 <p>HTTP 200:
 <em>No Content is returned when the deactivation is successful.</em></p>
@@ -459,7 +459,7 @@ HTTP 204:
 
 <h3 class="api api-operation" id="get-policy-rules">Get Policy Rules</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/policies/<em>:policyId</em>/rules</span></p>
 
 <h4 id="request-parameters-8">Request Parameters</h4>
 
@@ -475,14 +475,14 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-8">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-7">Response Types</h5>
 
 <p>HTTP 200:
 <a href="#RulesObject">Rules Object</a></p>
 
 <h3 class="api api-operation" id="create-a-rule">Create a rule</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/policies/<em>:policyId</em>/rules</span></p>
 
 <h4 id="request-parameters-9">Request Parameters</h4>
 
@@ -518,14 +518,14 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-9">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-8">Response Types</h5>
 
 <p>HTTP 200:
 <a href="#RulesObject">Rules Object</a></p>
 
 <h3 class="api api-operation" id="delete-a-rule">Delete a rule</h3>
 
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
 
 <h4 id="request-parameters-10">Request Parameters</h4>
 
@@ -541,14 +541,14 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-10">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-9">Response Types</h5>
 
 <p>HTTP 204:
 <em>No Content</em></p>
 
 <h3 class="api api-operation" id="get-a-rule">Get a rule</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
 
 <h4 id="request-parameters-11">Request Parameters</h4>
 
@@ -564,14 +564,14 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-11">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-10">Response Types</h5>
 
 <p>HTTP 200:
 <a href="#RulesObject">Rules Object</a></p>
 
 <h3 class="api api-operation" id="update-a-rule">Update a rule</h3>
 
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em></span></p>
 
 <h4 id="request-parameters-12">Request Parameters</h4>
 
@@ -608,14 +608,14 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-12">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-11">Response Types</h5>
 
 <p>HTTP 200:
 <a href="#RulesObject">Rules Object</a></p>
 
 <h3 class="api api-operation" id="activate-a-rule">Activate A Rule</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/activate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/activate</span></p>
 
 <h4 id="request-parameters-13">Request Parameters</h4>
 
@@ -631,14 +631,14 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-13">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-12">Response Types</h5>
 
 <p>HTTP 204:
 <em>No content</em></p>
 
 <h3 class="api api-operation" id="deactivate-a-rule">Deactivate A Rule</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST </span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/deactivate</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/policies/<em>:policyId</em>/rules/<em>:ruleId</em>/lifecycle/deactivate</span></p>
 
 <h4 id="request-parameters-14">Request Parameters</h4>
 
@@ -654,7 +654,7 @@ HTTP 204:
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-types-14">Response Types</h5>
+<h5 class="api api-response api-response-example" id="response-types-13">Response Types</h5>
 
 <p>HTTP 204:
 <em>No content</em></p>
