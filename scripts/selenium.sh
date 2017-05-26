@@ -6,11 +6,8 @@
 # Author: Joël Franusic (joel.franusic@okta.com)
 # Copyright 2016 Okta, Inc.
 
-source $OKTA_HOME/okta-core/scripts/common_setup_service.sh
-# setup chrome
-setup_service google-chrome-stable 58.0.3029.81
-# setup xvfb
-setup_service xvfb start
+source $OKTA_HOME/robo-warrior/setupfiles/google-chrome-stable/google-chrome-stable-setup.sh 53.0.2785.143-1
+source $OKTA_HOME/robo-warrior/setupfiles/xvfb/xvfb-entrypoint.sh start
 
 export TEST_SUITE_TYPE="junit"
 export TEST_RESULT_FILE_DIR="${REPO}/build2/reports/junit"
