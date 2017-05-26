@@ -166,7 +166,7 @@ Create a production build of the `weekly` branch, merge it, then reset `weekly`.
 1. Create a new topic branch based off of `weekly`:
 
     ```bash
-    [okta.github.io weekly]$ git fetch origin
+    [okta.github.io master]$ git fetch origin
     [okta.github.io master]$ git checkout -b my-weekly-branch origin/weekly
     ```
     
