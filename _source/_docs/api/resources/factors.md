@@ -21,7 +21,7 @@ Explore the Factors API: [![Run in Postman](https://run.pstmn.io/button.svg)](ht
 ### Get Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*
+{% api_operation get /api/v1/users/*:uid*/factors/*:fid* %}
 
 Fetches a factor for the specified user
 
@@ -96,7 +96,7 @@ curl -v -X GET \
 ### List Enrolled Factors
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors
+{% api_operation get /api/v1/users/*:uid*/factors %}
 
 Enumerates all the enrolled factors for the specified user
 
@@ -257,7 +257,7 @@ curl -v -X GET \
 ### List Factors to Enroll
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/catalog
+{% api_operation get /api/v1/users/*:uid*/factors/catalog %}
 
 Enumerates all the [supported factors](#supported-factors-for-providers) that can be enrolled for the specified user
 
@@ -415,7 +415,7 @@ curl -v -X GET \
 ### List Security Questions
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/questions
+{% api_operation get /api/v1/users/*:uid*/factors/questions %}
 
 Enumerates all available security questions for a user's `question` factor
 
@@ -474,7 +474,7 @@ curl -v -X GET \
 ### Enroll Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/factors
+{% api_operation post /api/v1/users/*:id*/factors %}
 
 Enrolls a user with a supported [factor](#list-factors-to-enroll)
 
@@ -1352,7 +1352,7 @@ curl -v -X POST \
 ### Activate Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/lifecycle/activate</span>
+{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/lifecycle/activate %}
 
 The `sms` and `token:software:totp` [factor types](#factor-type) require activation to complete the enrollment process.
 
@@ -1786,7 +1786,7 @@ curl -v -X POST \
 ### Reset Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/factors/*:fid*
+{% api_operation delete /api/v1/users/*:uid*/factors/*:fid* %}
 
 Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.
 
@@ -1824,7 +1824,7 @@ curl -v -X DELETE \
 ### Verify Security Question Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
+{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
 
 Verifies an answer to a `question` factor.
 
@@ -1886,7 +1886,7 @@ curl -v -X POST \
 ### Verify SMS Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
+{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
 
 Verifies an OTP for a `sms` factor.
 
@@ -1992,7 +1992,7 @@ curl -v -X POST \
 ### Verify Call Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
+{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
 
 Verifies an OTP for a `call` factor
 
@@ -2069,7 +2069,7 @@ curl -v -X POST \
 ### Verify TOTP Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
+{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
 
 Verifies an OTP for a `token:software:totp` factor
 
@@ -2130,7 +2130,7 @@ curl -v -X POST \
 ### Verify Push Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
+{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
 
 Creates a new verification transaction and sends an asynchronous push notification to the device for the user to approve or reject.  You must [poll the transaction](#poll-for-verify-transaction-completion) to determine when it completes or expires.
 
@@ -2199,7 +2199,7 @@ curl -v -X POST \
 #### Poll for Verify Transaction Completion
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid*
+{% api_operation get /api/v1/users/*:uid*/factors/*:fid*/transactions/*:tid* %}
 
 Polls a push verification transaction for completion.  The transaction result is `WAITING`, `SUCCESS`, `REJECTED`, or `TIMEOUT`.
 
@@ -2317,7 +2317,7 @@ factorResult | verification result | Body       | [Factor Verify Result](#factor
 ### Verify Token Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:uid*/factors/*:fid*/verify</span>
+{% api_operation post /api/v1/users/*:uid*/factors/*:fid*/verify %}
 
 Verifies an OTP for a `token` or `token:hardware` factor
 

@@ -17,7 +17,7 @@ Explore the Events API: [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 ### List Events
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/events</span>
+{% api_operation get /api/v1/events %}
 
 Fetch a list of events from your Okta organization system log
 

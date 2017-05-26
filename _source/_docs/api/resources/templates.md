@@ -23,7 +23,7 @@ Explore the Custom Templates API: [![Run in Postman](https://run.pstmn.io/button
 ### Add SMS Template
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/templates/sms</span>
+{% api_operation post /api/v1/templates/sms %}
 
 Adds a new custom SMS template to your organization.
 
@@ -83,7 +83,7 @@ curl -v -X POST \
 ### Get SMS Template
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/templates/sms/*:id*</span>
+{% api_operation get /api/v1/templates/sms/*:id* %}
 
 Fetches a specific template by `id`
 
@@ -132,7 +132,7 @@ curl -v -X GET \
 ### List SMS Templates
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/templates/sms</span>
+{% api_operation get /api/v1/templates/sms %}
 
 Enumerates custom SMS templates in your organization. A subset of templates can be returned that match a template type.
 
@@ -251,7 +251,7 @@ curl -v -X GET \
 ### Update SMS Template
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/templates/sms/*:id*</span>
+{% api_operation put /api/v1/templates/sms/*:id* %}
 
 Updates the SMS template.
 
@@ -310,7 +310,7 @@ curl -v -X PUT \
 ### Partial SMS Template Update
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/templates/sms/*:id*</span>
+{% api_operation post /api/v1/templates/sms/*:id* %}
 
 Updates only some of the SMS template properties:
 
@@ -375,7 +375,7 @@ curl -v -X POST \
 ### Remove SMS Template
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/templates/sms/*:id*</span>
+{% api_operation delete /api/v1/templates/sms/*:id* %}
 
 Removes an SMS template.
 

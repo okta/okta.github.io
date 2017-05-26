@@ -17,7 +17,7 @@ Explore the Apps API: [![Run in Postman](https://run.pstmn.io/button.svg)](https
 ### Add Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps</span>
+{% api_operation post /api/v1/apps %}
 
 Adds a new application to your Okta organization.
 
@@ -969,7 +969,7 @@ curl -v -X POST \
 ### Get Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*</span>
+{% api_operation get /api/v1/apps/*:aid* %}
 
 Fetches an application from your Okta organization by `id`.
 
@@ -1101,7 +1101,7 @@ curl -v -X GET \
 ### List Applications
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps</span>
+{% api_operation get /api/v1/apps %}
 
 Enumerates apps added to your organization with pagination. A subset of apps can be returned that match a supported filter expression or query.
 
@@ -1777,7 +1777,7 @@ curl -v -X GET \
 ### Update Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/apps/*:aid*</span>
+{% api_operation put /api/v1/apps/*:aid* %}
 
 Updates an application in your organization.
 
@@ -2548,7 +2548,7 @@ Profile Requirements
 ### Delete Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/*:aid*</span>
+{% api_operation delete /api/v1/apps/*:aid* %}
 
 Removes an inactive application.
 
@@ -2608,7 +2608,7 @@ Content-Type: application/json
 ### Activate Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/lifecycle/activate</span>
+{% api_operation post /api/v1/apps/*:aid*/lifecycle/activate %}
 
 Activates an inactive application.
 
@@ -2645,7 +2645,7 @@ curl -v -X POST \
 ### Deactivate Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/lifecycle/deactivate</span>
+{% api_operation post /api/v1/apps/*:aid*/lifecycle/deactivate %}
 
 Deactivates an active application.
 
@@ -2684,7 +2684,7 @@ curl -v -X POST \
 ### Assign User to Application for SSO
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/users</span>
+{% api_operation post /api/v1/apps/*:aid*/users %}
 
 Assigns a user without a [profile](#application-user-profile-object) to an application for SSO.
 
@@ -2758,7 +2758,7 @@ curl -v -X POST \
 ### Assign User to Application for SSO & Provisioning
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/users</span>
+{% api_operation post /api/v1/apps/*:aid*/users %}
 
 Assigns an user to an application with [credentials](#application-user-credentials-object) and an app-specific [profile](#application-user-profile-object). Profile mappings defined for the application are first applied before applying any profile properties specified in the request.
 
@@ -2861,7 +2861,7 @@ curl -v -X POST \
 ### Get Assigned User for Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*/users/*:uid*</span>
+{% api_operation get /api/v1/apps/*:aid*/users/*:uid* %}
 
 Fetches a specific user assignment for application by `id`.
 
@@ -2933,7 +2933,7 @@ curl -v -X GET \
 ### List Users Assigned to Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*/users</span>
+{% api_operation get /api/v1/apps/*:aid*/users %}
 
 Enumerates all assigned [application users](#application-user-model) for an application.
 
@@ -3043,7 +3043,7 @@ curl -v -X GET \
 ### Update Application Credentials for Assigned User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/users/*:uid*</span>
+{% api_operation post /api/v1/apps/*:aid*/users/*:uid* %}
 
 Updates a user's [credentials](#application-user-credentials-object) for an assigned application
 
@@ -3129,7 +3129,7 @@ curl -v -X POST \
 ### Update Application Profile for Assigned User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/users/*:uid*</span>
+{% api_operation post /api/v1/apps/*:aid*/users/*:uid* %}
 
 Updates a user's profile for an application
 
@@ -3243,7 +3243,7 @@ curl -v -X POST \
 ### Remove User from Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/*:aid*/users/*:uid*</span>
+{% api_operation delete /api/v1/apps/*:aid*/users/*:uid* %}
 
 Removes an assignment for a user from an application.
 
@@ -3285,7 +3285,7 @@ curl -v -X DELETE \
 ### Assign Group to Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/apps/*:aid*/groups/*:gid*</span>
+{% api_operation put /api/v1/apps/*:aid*/groups/*:gid* %}
 
 Assigns a group to an application
 
@@ -3329,7 +3329,7 @@ curl -v -X PUT \
 ### Get Assigned Group for Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*/groups/*:gid*</span>
+{% api_operation get /api/v1/apps/*:aid*/groups/*:gid* %}
 
 Fetches an application group assignment
 
@@ -3371,7 +3371,7 @@ curl -v -X GET \
 ### List Groups Assigned to Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*/groups</span>
+{% api_operation get /api/v1/apps/*:aid*/groups %}
 
 Enumerates group assignments for an application.
 
@@ -3423,7 +3423,7 @@ curl -v -X GET \
 ### Remove Group from Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/*:aid*/groups/*:gid*</span>
+{% api_operation delete /api/v1/apps/*:aid*/groups/*:gid* %}
 
 Removes a group assignment from an application.
 
@@ -3465,7 +3465,7 @@ curl -v -X DELETE \
 ### Generate New Application Key Credential
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/credentials/keys/generate</span>
+{% api_operation post /api/v1/apps/*:aid*/credentials/keys/generate %}
 
 Generates a new X.509 certificate for an application key credential
 
@@ -3539,7 +3539,7 @@ Content-Type: application/json
 ### Clone Application Key Credential
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/apps/*:aid*/credentials/keys/*:kid*/clone?targetAid=*:targetAid*</span>
+{% api_operation post /api/v1/apps/*:aid*/credentials/keys/*:kid*/clone?targetAid=*:targetAid* %}
 
 Clones a X.509 certificate for an application key credential from a source application to target application.
 
@@ -3616,7 +3616,7 @@ Content-Type: application/json
 ### List Key Credentials for Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*/credentials/keys</span>
+{% api_operation get /api/v1/apps/*:aid*/credentials/keys %}
 
 Enumerates key credentials for an application
 
@@ -3677,7 +3677,7 @@ curl -v -X GET \
 ### Get Key Credential for Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*/credentials/keys/*:kid*</span>
+{% api_operation get /api/v1/apps/*:aid*/credentials/keys/*:kid* %}
 
 Gets a specific [application key credential](#application-key-credential-model) by `kid`
 
@@ -3726,7 +3726,7 @@ curl -v -X GET \
 ### Preview SAML metadata for Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/*:aid*/sso/saml/metadata</span>
+{% api_operation get /api/v1/apps/*:aid*/sso/saml/metadata %}
 
 Preview SAML metadata based on a specific key credential for an application
 
