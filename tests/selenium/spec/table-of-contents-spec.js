@@ -1,3 +1,4 @@
+'use strict';
 const TableOfContentsPage = require('../framework/page-objects/TableOfContentsPage');
 const SideBarPage = require('../framework/page-objects/SideBarPage');
 const util = require('../framework/shared/util');

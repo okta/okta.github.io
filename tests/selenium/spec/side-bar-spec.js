@@ -1,3 +1,4 @@
+'use strict';
 const SideBarPage = require('../framework/page-objects/SideBarPage');
 
 describe('sidebar navigation spec', () => {
