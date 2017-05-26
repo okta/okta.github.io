@@ -7,6 +7,7 @@ baseurl: ""
 url: "https://developer.okta.com"
 twitter_username: okta
 github_username:  oktadeveloper
+discourse_url: "https://devforum.okta.com/"
 
 gems:
   - jekyll-redirect-from

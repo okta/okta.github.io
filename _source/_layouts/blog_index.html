@@ -7,7 +7,7 @@ show_bottom_cta: true
     <div class="wrap blog">
         {% for post in paginator.posts %}
             {% capture _post_content %}{{ post.content | strip_html | truncatewords:75 }} <a href="{{post.url}}">Read more</a> {% endcapture %}
-            {% include blog_post.html post_content=_post_content %}
+            {% include blog_post.html post_content=_post_content fullpost=false %}
             <br/>
         {% endfor %}
   </div>
