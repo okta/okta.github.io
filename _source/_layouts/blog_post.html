@@ -9,6 +9,6 @@ show_bottom_cta: true
 	// will leak as a raw string
 	{% endcomment %}{% assign post = page %}{% capture _post_content %}{{ content }}{% endcapture %}
 	<div class="wrap blog">
-		{% include blog_post.html post_content=_post_content fullpost=true %}
+		{% include blog_post.html post_content=_post_content %}
 	</div>
 </section>
