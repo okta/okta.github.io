@@ -142,7 +142,7 @@ Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/butt
 ### Register New Client
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/clients</span>
+{% api_operation post /oauth2/v1/clients %}
 
 Adds a new client application to your organization.
 
@@ -244,7 +244,7 @@ curl -v -X POST \
 ### Get OAuth Client
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/clients/*:clientId*</span>
+{% api_operation get /oauth2/v1/clients/*:clientId* %}
 
 Fetches a specific client by `clientId` from your organization
 
@@ -328,7 +328,7 @@ curl -v -X GET \
 ### List Client Applications
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/clients</span>
+{% api_operation get /oauth2/v1/clients %}
 
 Enumerates client applications in your organization (with pagination).
 
@@ -550,7 +550,7 @@ curl -v -X GET \
 ### Update Client Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /oauth2/v1/clients/*:clientId*</span>
+{% api_operation put /oauth2/v1/clients/*:clientId* %}
 
 Updates the settings for a client application from your organization.
 
@@ -655,7 +655,7 @@ curl -v -X PUT \
 ### Generate new client secret
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /oauth2/v1/clients/*:clientId*/lifecycle/newSecret</span>
+{% api_operation put /oauth2/v1/clients/*:clientId*/lifecycle/newSecret %}
 
 Generates a new client secret for the specified client application.
 
@@ -743,7 +743,7 @@ curl -v -X POST \
 ### Remove Client Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /oauth2/v1/clients/*:clientId*</span>
+{% api_operation delete /oauth2/v1/clients/*:clientId* %}
 
 Removes a client application from your organization.
 
