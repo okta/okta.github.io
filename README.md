@@ -191,15 +191,16 @@ Create a production build of the `weekly` branch, merge it, then reset `weekly`.
 
 7. After it's been merged into `weekly`, it will be deployed to the [staging site](https://d384qaxymvjmjw.cloudfront.net/) - this usually takes a couple minutes. Verify that all weekly changes show up correctly on the live version of the site. Note - you can know exactly when it's been pushed by looking at the bacon publish task for the okta.github.io artifact.
 
-8. Create a PR for the `weekly` branch to merge into `master`. Once it's been approved, merge it into `master`. The changes are live!
+8. Create a PR for the `weekly` branch to merge into `master`. Once it's been approved, merge it into `master`. The changes are live! Don't merge into `weekly` before the next step!
 
-9. Reset the `weekly` branch with the latest `master` changes
+9. Reset the `weekly` branch with the latest `master` changes.
 
     ```bash
     [okta.github.io master]$ git fetch origin
     
-    # Note: This will overwrite any new changes to the weekly branch! Before running this,
-    # make sure there are no new commits that have been merged in since you merged into master.
+    # Note: The following command overwrites any new changes to the weekly branch! Before running this,
+    # make sure there are no new commits that have been merged in since you merged into master. 
+    # If there have been merges since step 8, you must rebase before pushing master to weekly.
     [okta.github.io master]$ git push -f origin origin/master:weekly
     ```
 

@@ -25,7 +25,7 @@
            assign parts = index.id | split: "/" %}{%
            unless parts[3] contains 'index' %}{% continue %}{% endunless %}{%
            assign language = parts[2] %}{% assign element = index %}
-	       <li{% if element.title == page.title%} class="is-active"{% endif %}><a href="/code/{{ language | prepend: site.baseurl }}">{{ element.title }}</a></li>{%
+	       <li{% if element.title == page.title%} class="is-active"{% endif %}><a href="/code/{{ language | prepend: site.baseurl }}/">{{ element.title }}</a></li>{%
            endfor %}
 	     </ul>
 	   </div>

@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -35,8 +35,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Upgrade SAML Apps to SHA256 | Okta Developer</title>
   <meta name="description" content="Upgrade SAML Apps to SHA256">
-  <link rel="canonical" href="http://developer.okta.com/docs/how-to/updating_saml_cert.html">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/docs/how-to/updating_saml_cert.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
@@ -74,12 +74,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -91,11 +91,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
      <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
@@ -107,16 +109,16 @@
           <h3 class="Sidebar-title">Use Cases</h3>
           <ul class="Sidebar-nav">
             <li>
-              <a href="/use_cases/authentication">Authentication</a>
+              <a href="/use_cases/authentication/">Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/api_access_management">API Access Management</a>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -131,10 +133,10 @@
               <a href="/docs/api/resources/apps.html">API Reference</a>
             </li>
             <li>
-              <a href="/reference/error_codes">Error Codes</a>
+              <a href="/reference/error_codes/">Error Codes</a>
             </li>
             <li>
-              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li>
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -186,7 +188,7 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/how-to/updating_saml_cert.md">Edit Page</a>
       <h1 id="saml-apps-and-sha256-certificates">SAML Apps and SHA256 Certificates</h1>
 
-<p>Certificates with a SHA256 signature are supported for SAML 2.0 applications with Okta. You can create new integrations that use SHA256 certificates and update existing integrations from SHA1 certificates to SHA256 certificates. Existing integrations are not changed automatically. The SHA256 certificates and the SHA1 
+<p>Certificates with a SHA256 signature are supported for SAML 2.0 applications with Okta. You can create new integrations that use SHA256 certificates and update existing integrations from SHA1 certificates to SHA256 certificates. Existing integrations are not changed automatically. The SHA256 certificates and the SHA1
 certificates are self-signed.</p>
 
 <p>This How To contains six sections:</p>
@@ -210,7 +212,7 @@ certificates are self-signed.</p>
 
 <h3 id="new-saml-20-app-integrations">New SAML 2.0 App Integrations</h3>
 
-<p>New SAML 2.0 app integrations automatically use SHA256 certificates when the key rollover feature is enabled. 
+<p>New SAML 2.0 app integrations automatically use SHA256 certificates when the key rollover feature is enabled.
 As instructed, upload the SHA256 certificate to the ISV.</p>
 
 <h3 id="existing-saml-20-app-integrations">Existing SAML 2.0 App Integrations</h3>
@@ -230,11 +232,11 @@ As instructed, upload the SHA256 certificate to the ISV.</p>
 
 <p>Although unlikely, if your ISV does not accept the SHA256 certificate, you can revert the procedure to use a SHA1 certificate.</p>
 
-<p>For information on using the Postman REST API test client for these steps, see <a href="http://developer.okta.com/docs/api/getting_started/api_test_client.html">API Test Client</a>.</p>
+<p>For information on using the Postman REST API test client for these steps, see <a href="/docs/api/getting_started/api_test_client.html">API Test Client</a>.</p>
 
 <h4 id="step-1--list-your-apps-and-get-the-app-id-name-and-label-for-each-app-to-update">Step 1 – List your apps and get the app id, name, and label for each app to update.</h4>
 
-<p>Use the <a href="http://developer.okta.com/docs/api/resources/apps.html#list-applications">List Apps API</a> to return a list of all apps.</p>
+<p>Use the <a href="/docs/api/resources/apps.html#list-applications">List Apps API</a> to return a list of all apps.</p>
 
 <p>For each app to update, collect the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">name</code>, and <code class="highlighter-rouge">label</code> elements.</p>
 
@@ -299,14 +301,14 @@ As instructed, upload the SHA256 certificate to the ISV.</p>
 
 <h4 id="step-2--generate-a-new-application-key-credential">Step 2 – Generate a new application key credential.</h4>
 
-<p>Use the <a href="http://developer.okta.com/docs/api/resources/apps.html#generate-new-application-key-credential">Apps API</a> 
+<p>Use the <a href="/docs/api/resources/apps.html#generate-new-application-key-credential">Apps API</a>
 to generate new credentials. Pass each app ID (<code class="highlighter-rouge">id</code>) that was collected in the previous step as the app ID (<code class="highlighter-rouge">aid</code>) in this API. If you have no company policy for credential expiration, 10 years is suggested.</p>
 
 <p>Request: <code class="highlighter-rouge">POST /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys/generate?validityYears=10</code></p>
 
 <p>Response:</p>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">         
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-30T20:36:15.000Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-30T20:36:15.000Z"</span><span class="p">,</span><span class="w">
@@ -347,7 +349,7 @@ to generate new credentials. Pass each app ID (<code class="highlighter-rouge">i
 
 <h4 id="step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id">Step 3 – Update the key credential for the app to specify the new signing key id.</h4>
 
-<p>Call the <a href="http://developer.okta.com/docs/api/resources/apps.html#app-id">Apps API</a> with the app ID you obtained in step 1. In the body, include
+<p>Call the <a href="/docs/api/resources/apps.html#update-key-credential-for-application">Apps API</a> with the app ID you obtained in step 1. In the body, include
 the app name and the app label that you obtained in step 1, the key ID that you obtained in step 2, and the value <em>SAML_2_0</em> for the sign on mode.</p>
 
 <p>Request:</p>
@@ -386,7 +388,7 @@ the app name and the app label that you obtained in step 1, the key ID that you 
 
 <h3 id="reverting-to-a-sha1-certificate">Reverting to a SHA1 Certificate</h3>
 
-<p>If your ISV does not accept certificates with a SHA256 signature, you can revert the settings to use the previous SHA1 certificate by rolling 
+<p>If your ISV does not accept certificates with a SHA256 signature, you can revert the settings to use the previous SHA1 certificate by rolling
 over the app key to specify the SHA1 certificate you previously associated with your integration.</p>
 
 <h4 id="step-1--list-your-apps-and-get-the-id-name-and-label-for-the-app-to-revert">Step 1 – List your apps and get the id, name, and label for the app to revert.</h4>
@@ -395,11 +397,11 @@ over the app key to specify the SHA1 certificate you previously associated with 
 
 <h4 id="step-2--retrieve-all-certificates-associated-with-the-app-and-locate-the-sha1-certificate">Step 2 – Retrieve all certificates associated with the app and locate the SHA1 certificate.</h4>
 
-<p>Use the <a href="http://developer.okta.com/docs/api/resources/apps#list-key-credentials-for-application">List Key Credentials for an Application API</a> to list all the credentials.
-Pass the app ID (<code class="highlighter-rouge">id</code>) that was collected in the previous step as the app ID (<code class="highlighter-rouge">aid</code>) in this API. Then, determine which certificate is the SHA1 certificate by copying the certificate text for each of the returned certificates, and <a href="#determine-the-signature-algorithm-of-a-certificate">determine the signature algorithm</a> 
+<p>Use the <a href="/docs/api/resources/apps#list-key-credentials-for-application">List Key Credentials for an Application API</a> to list all the credentials.
+Pass the app ID (<code class="highlighter-rouge">id</code>) that was collected in the previous step as the app ID (<code class="highlighter-rouge">aid</code>) in this API. Then, determine which certificate is the SHA1 certificate by copying the certificate text for each of the returned certificates, and <a href="#determine-the-signature-algorithm-of-a-certificate">determine the signature algorithm</a>
 using the method described below. After determining which certificate is the SHA1 certificate, note the signing key id, <code class="highlighter-rouge">kid</code>.</p>
 
-<p>The certificate is contained in the element, <code class="highlighter-rouge">x5c</code> and is not in PEM format; that is, it does not 
+<p>The certificate is contained in the element, <code class="highlighter-rouge">x5c</code> and is not in PEM format; that is, it does not
 contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The certificates shown in this how-to have been altered and are not valid.)</p>
 
 <p>In the sample response shown below, there are two certificates to check to find the SHA1 certificate.</p>
@@ -434,7 +436,7 @@ contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The cer
     </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZcLGUslsdTn3996YYel6KPvOxZOhNWfly5-q36CByH4o"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"kty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RSA"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"x5t#S256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"</span><span class="w"> 
+    </span><span class="nt">"x5t#S256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
@@ -442,10 +444,10 @@ contain <em>Begin Certificate</em> and <em>End Certificate</em> lines.  (The cer
 
 <h4 id="step-3--update-the-key-credential-for-the-application-with-the-sha1-certificate">Step 3 – Update the key credential for the application with the SHA1 certificate.</h4>
 
-<p>Use the <a href="http://developer.okta.com/docs/api/resources/apps#update-key-credential-for-application">Apps API</a> 
+<p>Use the <a href="/docs/api/resources/apps#update-key-credential-for-application">Apps API</a>
 to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.</p>
 
-<p>This step is the same as 
+<p>This step is the same as
 <a href="#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id">Step 3</a>, above.</p>
 
 <h4 id="step-4--upload-the-sha1-certificate-to-the-isv">Step 4 – Upload the SHA1 certificate to the ISV.</h4>
@@ -496,7 +498,7 @@ AQdfoY2fEKn9eFwPxFsKx1WV5nc6+WU5gcSkhmbzF+HohLCjVFMWwsUQNY
 </code></pre>
 </div>
 
-<p>Use a free CSR and Certificate Decoder service and enter the contents of your certificate. These tools are readily found through a web search. Be 
+<p>Use a free CSR and Certificate Decoder service and enter the contents of your certificate. These tools are readily found through a web search. Be
 sure to note the certificate format that the decoder service requires.</p>
 
 <p>The Signature Algorithm is either <em>sha256WithRSAEncryption</em> or <em>sha1WithRSAEncryption</em>.</p>
@@ -534,7 +536,7 @@ sure to note the certificate format that the decoder service requires.</p>
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

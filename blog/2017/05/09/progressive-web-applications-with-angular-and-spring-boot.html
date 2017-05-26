@@ -7,7 +7,7 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -42,8 +42,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Build Your First Progressive Web Application with Angular and Spring Boot | Okta Developer</title>
   <meta name="description" content="A recent DoubleClick report that found 53% of visits are abandoned if a mobile site takes more than 3 seconds to load. That same report said the average mobi...">
-  <link rel="canonical" href="http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
     <body id="blog">
@@ -79,12 +79,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -96,11 +96,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
 
 	<div class="page-content">
@@ -176,7 +178,7 @@
 
 <h2 id="run-a-spring-boot-api">Run a Spring Boot API</h2>
 
-<p>In <a href="http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">part 1 of this series</a>, I showed you how to create an API with Spring Boot and display its data in an Angular UI. You’ll be using that project as a starting point for this tutorial. You’ll adding offline capabilities by turning it into a PWA.</p>
+<p>In <a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">part 1 of this series</a>, I showed you how to create an API with Spring Boot and display its data in an Angular UI. You’ll be using that project as a starting point for this tutorial. You’ll adding offline capabilities by turning it into a PWA.</p>
 
 <p>To begin, clone the project from GitHub.</p>
 
@@ -647,7 +649,7 @@ cf push -p target/<span class="k">*</span>jar pwa-server
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

@@ -6,7 +6,7 @@ excerpt: Upgrade SAML Apps to SHA256
 
 # SAML Apps and SHA256 Certificates
 
-Certificates with a SHA256 signature are supported for SAML 2.0 applications with Okta. You can create new integrations that use SHA256 certificates and update existing integrations from SHA1 certificates to SHA256 certificates. Existing integrations are not changed automatically. The SHA256 certificates and the SHA1 
+Certificates with a SHA256 signature are supported for SAML 2.0 applications with Okta. You can create new integrations that use SHA256 certificates and update existing integrations from SHA1 certificates to SHA256 certificates. Existing integrations are not changed automatically. The SHA256 certificates and the SHA1
 certificates are self-signed.
 
 This How To contains six sections:
@@ -21,21 +21,21 @@ This How To contains six sections:
 
 ### Why Should I Do This?
 
-To take advantage of the additional security features of SHA256 certificates. 
+To take advantage of the additional security features of SHA256 certificates.
 
 ## Prerequisite
 
-SHA256 certificate creation and key rollover are **Early Access** (EA) features; contact Okta support to enable them. 
+SHA256 certificate creation and key rollover are **Early Access** (EA) features; contact Okta support to enable them.
 
 ### New SAML 2.0 App Integrations
 
-New SAML 2.0 app integrations automatically use SHA256 certificates when the key rollover feature is enabled. 
+New SAML 2.0 app integrations automatically use SHA256 certificates when the key rollover feature is enabled.
 As instructed, upload the SHA256 certificate to the ISV.
 
 ### Existing SAML 2.0 App Integrations
 
 
-To update existing app integrations, there are four steps to follow. 
+To update existing app integrations, there are four steps to follow.
 
   1. List your apps and get the app id, name, and label for each app to update.<br />For each app to update, perform the following steps.<br />
   2. Generate a new application key credential.
@@ -47,11 +47,11 @@ To update existing app integrations, there are four steps to follow.
 
 Although unlikely, if your ISV does not accept the SHA256 certificate, you can revert the procedure to use a SHA1 certificate.
 
-For information on using the Postman REST API test client for these steps, see [API Test Client](http://developer.okta.com/docs/api/getting_started/api_test_client.html).
+For information on using the Postman REST API test client for these steps, see [API Test Client](/docs/api/getting_started/api_test_client.html).
 
 #### Step 1 – List your apps and get the app id, name, and label for each app to update.
 
-Use the [List Apps API](http://developer.okta.com/docs/api/resources/apps.html#list-applications) to return a list of all apps.
+Use the [List Apps API](/docs/api/resources/apps.html#list-applications) to return a list of all apps.
 
 For each app to update, collect the `id`, `name`, and `label` elements.
 
@@ -116,7 +116,7 @@ Truncated Response:
 
 #### Step 2 – Generate a new application key credential.
 
-Use the [Apps API](http://developer.okta.com/docs/api/resources/apps.html#generate-new-application-key-credential) 
+Use the [Apps API](/docs/api/resources/apps.html#generate-new-application-key-credential)
 to generate new credentials. Pass each app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. If you have no company policy for credential expiration, 10 years is suggested.
 
 
@@ -125,7 +125,7 @@ Request: `POST /api/v1/apps/0000000000aaaaaBBBBBo/credentials/keys/generate?vali
 Response:
 
 ~~~json
-         
+
 {
   "created": "2016-09-30T20:36:15.000Z",
   "lastUpdated": "2016-09-30T20:36:15.000Z",
@@ -165,7 +165,7 @@ Response:
 
 #### Step 3 – Update the key credential for the app to specify the new signing key id.
 
-Call the [Apps API](http://developer.okta.com/docs/api/resources/apps.html#app-id) with the app ID you obtained in step 1. In the body, include
+Call the [Apps API](/docs/api/resources/apps.html#update-key-credential-for-application) with the app ID you obtained in step 1. In the body, include
 the app name and the app label that you obtained in step 1, the key ID that you obtained in step 2, and the value *SAML_2_0* for the sign on mode.
 
 Request:
@@ -195,7 +195,7 @@ curl -v -X PUT \
 > After completing step 3, your users cannot access the SAML app until you complete this step.
 
 
-1. In the Okta user interface, select **Applications > Applications** and choose your app. 
+1. In the Okta user interface, select **Applications > Applications** and choose your app.
 2. Select **Sign-On Options**.
 3. Click **View Setup Instructions**, as shown below. <br />{% img saml_setup_link.png "Accessing SAML Setup Instructions" alt:"Accessing SAML Setup Instructions" %}
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
@@ -203,7 +203,7 @@ curl -v -X PUT \
 
 ### Reverting to a SHA1 Certificate
 
-If your ISV does not accept certificates with a SHA256 signature, you can revert the settings to use the previous SHA1 certificate by rolling 
+If your ISV does not accept certificates with a SHA256 signature, you can revert the settings to use the previous SHA1 certificate by rolling
 over the app key to specify the SHA1 certificate you previously associated with your integration.
 
 #### Step 1 – List your apps and get the id, name, and label for the app to revert.
@@ -212,11 +212,11 @@ This step is the same as [Step 1](#step-1--list-your-apps-and-get-the-app-id-nam
 
 #### Step 2 – Retrieve all certificates associated with the app and locate the SHA1 certificate.
 
-Use the [List Key Credentials for an Application API](http://developer.okta.com/docs/api/resources/apps#list-key-credentials-for-application) to list all the credentials.
-Pass the app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. Then, determine which certificate is the SHA1 certificate by copying the certificate text for each of the returned certificates, and [determine the signature algorithm](#determine-the-signature-algorithm-of-a-certificate) 
+Use the [List Key Credentials for an Application API](/docs/api/resources/apps#list-key-credentials-for-application) to list all the credentials.
+Pass the app ID (`id`) that was collected in the previous step as the app ID (`aid`) in this API. Then, determine which certificate is the SHA1 certificate by copying the certificate text for each of the returned certificates, and [determine the signature algorithm](#determine-the-signature-algorithm-of-a-certificate)
 using the method described below. After determining which certificate is the SHA1 certificate, note the signing key id, `kid`.
 
-The certificate is contained in the element, `x5c` and is not in PEM format; that is, it does not 
+The certificate is contained in the element, `x5c` and is not in PEM format; that is, it does not
 contain *Begin Certificate* and *End Certificate* lines.  (The certificates shown in this how-to have been altered and are not valid.)
 
 In the sample response shown below, there are two certificates to check to find the SHA1 certificate.
@@ -252,30 +252,30 @@ Response:
     "kid": "ZcLGUslsdTn3996YYel6KPvOxZOhNWfly5-q36CByH4o",
     "kty": "RSA",
     "use": "sig",
-    "x5t#S256": "_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs" 
+    "x5t#S256": "_DXULzisdoprgJ8OhiSN_KUD2rScRDd7pY2HE1ZI_bs"
   }
 
 ~~~
 
 #### Step 3 – Update the key credential for the application with the SHA1 certificate.
 
-Use the [Apps API](http://developer.okta.com/docs/api/resources/apps#update-key-credential-for-application) 
+Use the [Apps API](/docs/api/resources/apps#update-key-credential-for-application)
 to update the key credential for the application to specify the kid of the SHA1 certificate that you retrieved in step 2.
 
-This step is the same as 
+This step is the same as
 [Step 3](#step-3--update-the-key-credential-for-the-app-to-specify-the-new-signing-key-id), above.
 
 #### Step 4 – Upload the SHA1 certificate to the ISV.
 
 > After completing step 3, your users cannot access the SAML app until you complete this step.
 
-1. In the Okta user interface, select **Applications > Applications** and choose your app. 
+1. In the Okta user interface, select **Applications > Applications** and choose your app.
 2. Select **Sign-On Options**.
 3. Click **View Setup Instructions**, as shown below. <br />{% img saml_setup_link.png "Accessing SAML Setup Instructions" alt:"Accessing SAML Setup Instructions" %}
 4. Perform the setup for your app again, using the instructions provided. During this setup, you will upload the certificate in a specified format, the metadata, or the certificate fingerprint.
 
 
-### Determine the Signature Algorithm of a Certificate 
+### Determine the Signature Algorithm of a Certificate
 
 You can find the signature algorithm of a certificate either by using the command line or by uploading your certificate to a free, online certificate decoder service.
 
@@ -310,8 +310,8 @@ AQdfoY2fEKn9eFwPxFsKx1WV5nc6+WU5gcSkhmbzF+HohLCjVFMWwsUQNY
 -----END CERTIFICATE-----
 ~~~~
 
-Use a free CSR and Certificate Decoder service and enter the contents of your certificate. These tools are readily found through a web search. Be 
-sure to note the certificate format that the decoder service requires. 
+Use a free CSR and Certificate Decoder service and enter the contents of your certificate. These tools are readily found through a web search. Be
+sure to note the certificate format that the decoder service requires.
 
 The Signature Algorithm is either *sha256WithRSAEncryption* or *sha1WithRSAEncryption*.
 
@@ -327,4 +327,4 @@ Where:
 
 `<application id>` is the application ID you used in step 1.
 
-**Note:** Certificates downloaded with this method contain the Begin Certificate and End Certificate lines. 
+**Note:** Certificates downloaded with this method contain the Begin Certificate and End Certificate lines.

@@ -7,11 +7,11 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.39
 # Release 2016.40
 
 ### Feature Enhancement: Listing Apps that Share an Application Key Credential
-                         
-Once you have shared a credential between apps, you can list all the applications that are using 
+
+Once you have shared a credential between apps, you can list all the applications that are using
 the same application key credential. <!-- OKTA-100925 -->
-                         
-For more information, see the [Apps API reference](http://developer.okta.com/docs/api/resources/apps.html#list-applications-using-a-key).
+
+For more information, see the [Apps API reference](/docs/api/resources/apps.html#list-applications-using-a-key).
 
 ### Does Your Org Have These Changes Yet?
 

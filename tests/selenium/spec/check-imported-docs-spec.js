@@ -1,4 +1,5 @@
 const DocsPage = require('../framework/page-objects/DocsPage');
+const util = require('../framework/shared/util');
 
 function setup(url) {
   const docsPage = new DocsPage(url);
@@ -94,7 +95,7 @@ describe('imported docs string spec', function() {
         'session.get'
       ])).toBe(true);
     });
-    it('does not break links in headers', () => {
+    util.itNoPhantom('does not break links in headers', () => {
       const page = setupAuthJs();
       page.clickLinkHeader('LOCKED_OUT');
       const authnUrl = '/docs/api/resources/authn';

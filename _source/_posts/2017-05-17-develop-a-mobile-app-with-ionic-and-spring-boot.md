@@ -5,7 +5,7 @@ author: mraible
 tags: [spring boot, java, pwa, progressive web app, ionic, typescript, ios, android]
 ---
 
-You already know that building APIs with Spring Boot is incredibly easy. But, your API isn’t complete without a UI, right? Well, building UIs with Ionic is pretty easy too, especially if you know Angular! 
+You already know that building APIs with Spring Boot is incredibly easy. But, your API isn’t complete without a UI, right? Well, building UIs with Ionic is pretty easy too, especially if you know Angular!
 
 Ionic is an open source framework designed to help you build mobile applications with web technologies. It started out as a framework based on AngularJS. Ionic 3.0 was recently released, with support for Angular 4, TypeScript 2.2, and lazy loading. When developing an Ionic app, you'll use Angular and have access to native APIs via Ionic Native and Apache Cordova. This means you can develop slick-looking UIs using the technologies you know and love: HTML, CSS, and TypeScript.
 
@@ -19,7 +19,7 @@ To begin, create a directory on your hard drive called `spring-boot-ionic-exampl
 
 ## Build a Spring Boot API
 
-I recently wrote about how to build a Spring Boot API in [Bootiful Development with Spring Boot with Angular](http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular). Rather than covering that again, you can clone the existing project and copy the `server` directory into `spring-boot-ionic-example`.
+I recently wrote about how to build a Spring Boot API in [Bootiful Development with Spring Boot with Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular). Rather than covering that again, you can clone the existing project and copy the `server` directory into `spring-boot-ionic-example`.
 
 ```bash
 git clone https://github.com/oktadeveloper/spring-boot-angular-example.git
@@ -89,10 +89,10 @@ You should be able to start the `server` application by running it in your favor
 After the app has started, navigate to <http://localhost:8080/good-beers>. You should see the list of good beers in your browser.
 
 {% img blog/ionic-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}
- 
+
 ## Create an Ionic App
 
-To create an Ionic app to display data from your API, you'll first need to install Ionic CLI and Cordova: 
+To create an Ionic app to display data from your API, you'll first need to install Ionic CLI and Cordova:
 
 ```bash
 npm install -g ionic cordova
@@ -106,7 +106,7 @@ After installation completes, create a new application using the following comma
 ionic start ionic-beer --type ionic-angular
 ```
 
-You will be prompted to select a starter project and optionally link your app to your Ionic Dashboard. For the purposes of this tutorial, choose the **tabs** starter project and do not link the app to your Ionic Dashboard. 
+You will be prompted to select a starter project and optionally link your app to your Ionic Dashboard. For the purposes of this tutorial, choose the **tabs** starter project and do not link the app to your Ionic Dashboard.
 
 ```bash
 cd ionic-beer
@@ -169,7 +169,7 @@ export class BeerService {
 }
 ```
 
-**NOTE:** If you receive TypeScript errors with this code, make sure your imports match. In particular, `Response` needs to be imported for `getGoodBeers()` to compile. 
+**NOTE:** If you receive TypeScript errors with this code, make sure your imports match. In particular, `Response` needs to be imported for `getGoodBeers()` to compile.
 
 Replace the HTML in `src/pages/beer/beer.html` to show the list of beers.
 
@@ -191,7 +191,7 @@ Replace the HTML in `src/pages/beer/beer.html` to show the list of beers.
 ```
 {% endraw %}
 
-Modify `src/pages/beer/beer.module.ts` to import `BeerService` and add it as a provider. You could add it as a provider in each component, but adding it in the module allows all components to use it. 
+Modify `src/pages/beer/beer.module.ts` to import `BeerService` and add it as a provider. You could add it as a provider in each component, but adding it in the module allows all components to use it.
 
 ```typescript
 import { BeerService } from '../../providers/beer-service';
@@ -361,7 +361,7 @@ Update `beer.html` to display the image retrieved:
 Start the Spring Boot app in one terminal window and run `ionic serve` in another. Open <http://localhost:8100> in your browser. Click on the Beer icon, and you'll likely see an error in your browser.
 
 ```
-Uncaught (in promise): Error: No provider for Http! 
+Uncaught (in promise): Error: No provider for Http!
 ```
 
 {% img blog/ionic-spring-boot/no-http-provider.png alt:"No provider for Http!" width:"800" %}
@@ -384,8 +384,8 @@ import { HttpModule } from '@angular/http';
 After making this change, you'll likely see the following error in your browser's console.
 
 ```
-XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' 
-header is present on the requested resource. Origin 'http://localhost:8100' is therefore 
+XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin'
+header is present on the requested resource. Origin 'http://localhost:8100' is therefore
 not allowed access. The response had HTTP status code 401.
 ```
 
@@ -576,7 +576,7 @@ save(beer: any): Observable<any> {
 At this point, if you try to add or edit a beer name, you'll likely see an error in your browser's console.
 
 ```
-Uncaught (in promise): Error: No component factory found for BeerModalPage. 
+Uncaught (in promise): Error: No component factory found for BeerModalPage.
 Did you add it to @NgModule.entryComponents?
 ```
 
@@ -724,11 +724,11 @@ To see how your application will look on different devices you can run `ionic se
 
 To emulate or deploy to an iOS device, you'll need a Mac and a fresh installation of [Xcode](https://developer.apple.com/xcode/). If you'd like to build iOS apps on Windows, Ionic offers an [Ionic Package](http://ionic.io/cloud#packaging) service.
 
-**Make sure to open Xcode to complete the installation.** Then run `ionic cordova emulate ios` to open your app in Simulator. 
+**Make sure to open Xcode to complete the installation.** Then run `ionic cordova emulate ios` to open your app in Simulator.
 
 **TIP:** The biggest problem I found when running the app in Simulator was that it was difficult to get the keyboard to popup. To workaround this, I used **Hardware** > **Keyboard** > **Toggle Software Keyboard** when I needed to type text in a field.
 
-Deploying to your phone will likely fail because it won't be able to connect to `http://localhost:8080`. To fix this, you can deploy your Spring Boot app to a public server, or use your computer's IP address in `beer.service.ts` (if you're on the same wireless network). 
+Deploying to your phone will likely fail because it won't be able to connect to `http://localhost:8080`. To fix this, you can deploy your Spring Boot app to a public server, or use your computer's IP address in `beer.service.ts` (if you're on the same wireless network).
 
 To deploy to Cloud Foundry, copy [this deploy.sh script](https://github.com/oktadeveloper/spring-boot-ionic-example/blob/master/deploy.sh) to your hard drive. It expects to be in a directory above your apps (e.g. `spring-boot-ionic-example`). It also expects your apps to be named `ionic-beer` and `server`.
 
@@ -741,7 +741,7 @@ cf login -a api.run.pivotal.io
 
 After logging into Cloud Foundry, you should be able to run `./deploy.sh`. This script will deploy the server and modify `beer.service.ts` to point to it. It will also try to deploy to your phone, so you may need to complete the steps below before it will work.
 
-To deploy the app to an iPhone, start by plugging it into your computer. Then run the following commands to install ios-deploy/ios-sim, build the app, and run it on your device. 
+To deploy the app to an iPhone, start by plugging it into your computer. Then run the following commands to install ios-deploy/ios-sim, build the app, and run it on your device.
 
 ```
 npm install -g ios-deploy ios-sim
@@ -767,7 +767,7 @@ To deploy to the Android emulator, run `ionic cordova emulate android`. This wil
 
 ```
 Error: No emulator images (avds) found.
-1. Download desired System Image by running: 
+1. Download desired System Image by running:
 /Users/mraible/Library/Android/sdk/tools/android sdk
 2. Create an AVD by running: /Users/mraible/Library/Android/sdk/tools/android avd
 HINT: For a faster emulator, use an Intel System Image and install the HAXM device driver
@@ -793,7 +793,7 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 *************************************************************************
 ```
 
-To solve this problem, open Android Studio, select “Open an existing Android Studio project” and select the `ionic-beer/platforms/android` directory. If prompted to upgrade, choose “OK”, then proceed to create a new AVD as [described in Android Studio’s documentation](https://developer.android.com/studio/run/managing-avds.html#createavd). 
+To solve this problem, open Android Studio, select “Open an existing Android Studio project” and select the `ionic-beer/platforms/android` directory. If prompted to upgrade, choose “OK”, then proceed to create a new AVD as [described in Android Studio’s documentation](https://developer.android.com/studio/run/managing-avds.html#createavd).
 
 After performing these steps, you should be able to run `ionic cordova emulate android` and see your app running in the AVD.
 
@@ -814,9 +814,9 @@ You can find a completed version of the application created in this blog post [o
 To learn more about Ionic and Angular, please see the following resources:
 
 * [Get started with Ionic Framework](http://ionicframework.com/getting-started/)
-* [Build Your First Progressive Web Application with Angular and Spring Boot](http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
-* [Bootiful Development with Spring Boot and Angular](http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
-* [Angular Authentication with OpenID Connect and Okta in 20 Minutes](http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc)
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot)
+* [Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular)
+* [Angular Authentication with OpenID Connect and Okta in 20 Minutes](/blog/2017/04/17/angular-authentication-with-oidc)
 
 
 

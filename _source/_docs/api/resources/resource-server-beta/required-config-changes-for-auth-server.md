@@ -132,8 +132,8 @@ To change the well-known endpoint:
 1. Find the authorization server ID for your new authorization server. It's displayed in the **Metadata URI** field of the
 settings tab ( **Security > API > Authorization Server** ).
 
-2. Use the Discovery Document for [OpenID Connect clients](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document)
-and [OAuth 2.0 clients](http://developer.okta.com/docs/api/resources/oauth2.md#authorization-server-metadata) to identify all endpoints that must be changed, as shown in the example below.
+2. Use the Discovery Document for [OpenID Connect clients](/docs/api/resources/oidc.html#openid-connect-discovery-document)
+and [OAuth 2.0 clients](/docs/api/resources/oauth2.html#authorization-server-metadata) to identify all endpoints that must be changed, as shown in the example below.
 You'll also see the JWKs, introspect and revoke endpoints.
 
 3. Find all the code you've written that references the authorization server in the endpoints returned by the discovery document. For example,

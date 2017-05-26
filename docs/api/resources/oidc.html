@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -35,8 +35,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>OpenID Connect | Okta Developer</title>
   <meta name="description" content="OpenID Connect API">
-  <link rel="canonical" href="http://developer.okta.com/docs/api/resources/oidc.html">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/docs/api/resources/oidc.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
@@ -74,12 +74,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -91,11 +91,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
      <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
@@ -107,16 +109,16 @@
           <h3 class="Sidebar-title">Use Cases</h3>
           <ul class="Sidebar-nav">
             <li>
-              <a href="/use_cases/authentication">Authentication</a>
+              <a href="/use_cases/authentication/">Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/api_access_management">API Access Management</a>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -151,10 +153,10 @@
               </ul>
             </li>
             <li>
-              <a href="/reference/error_codes">Error Codes</a>
+              <a href="/reference/error_codes/">Error Codes</a>
             </li>
             <li>
-              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li>
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -234,7 +236,7 @@ OpenID Connect extends OAuth 2.0:</p>
 <p><img src="/assets/openID_overview-631f59c8e4e12ee8806244a23303d9a025476e6116d55d59465c0b0b72b3760c.png" alt="OpenID Architecture Diagram" /></p>
 
 <p>Okta is the identity provider responsible for verifying the identity of users and applications that exist in an organization’s directory,
-and issuing identity tokens upon successful authentication of those users and applications.</p>
+and issuing ID Tokens upon successful authentication of those users and applications.</p>
 
 <p>The basic authentication flow with Okta as your identity provider:</p>
 
@@ -244,7 +246,7 @@ and issuing identity tokens upon successful authentication of those users and ap
   <li>Okta authenticates the user.</li>
   <li>Okta approves or denies the requested scopes.</li>
   <li>Okta mints a token and sends it in the response.</li>
-  <li>The application validates the identity token’s integrity. For more information, see <a href="#validating-id-tokens">Validating ID Tokens</a>.</li>
+  <li>The application validates the ID Token’s integrity. For more information, see <a href="#validating-id-tokens">Validating ID Tokens</a>.</li>
 </ol>
 
 <blockquote>
@@ -268,7 +270,7 @@ The claims in a security token are dependent upon the type of token, the type of
 
 <p>OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens.
 The scopes associated with Access Tokens determine which claims are available when they are used
-to access <a href="http://developer.okta.com/docs/api/resources/oidc.html#get-user-information">the OIDC <code class="highlighter-rouge">userinfo</code> endpoint</a>. The following scopes are supported:</p>
+to access <a href="/docs/api/resources/oidc.html#get-user-information">the OIDC <code class="highlighter-rouge">userinfo</code> endpoint</a>. The following scopes are supported:</p>
 
 <table>
   <thead>
@@ -311,7 +313,7 @@ to access <a href="http://developer.okta.com/docs/api/resources/oidc.html#get-us
     </tr>
     <tr>
       <td>offline_access</td>
-      <td>Requests a refresh token, used to obtain more access tokens without re-prompting the user for authentication.</td>
+      <td>Requests a Refresh Token, used to obtain more access tokens without re-prompting the user for authentication.</td>
       <td>No</td>
     </tr>
   </tbody>
@@ -332,11 +334,27 @@ be a valid OAuth 2.0 request, but it’s not an OpenID Connect request.</li>
 
 <p>OpenID Connect introduces an <a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a>
 which is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> that contains information about an authentication event
-as well as claims about the authenticated user.</p>
+and claims about the authenticated user that clients can rely on.</p>
 
-<p>ID Tokens should always be <a href="#validating-id-tokens">validated</a> by the client to ensure their integrity.</p>
+<p>Clients can use any of the following sequences of operations to obtain an Access Token:</p>
+<ul>
+  <li><a href="http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth">Authorization code flow</a> – the client obtains
+an authorization code from the authorization server’s authentication endpoint and uses it to obtain an ID token and an access
+token from the authorization server’s Token endpoint.</li>
+  <li><a href="http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth">Implicit flow</a> – the client obtains an ID
+token and optionally an Access Token directly from the authorization server’s authentication endpoint.</li>
+  <li><a href="http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth">Hybrid flow</a> – a combination of the other
+two flows.</li>
+</ul>
 
-<p>The ID Token (<em>id_token</em>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#header">a header</a>, <a href="#id-token-payload">the payload</a>, and <a href="#id-token-signature">the signature</a>.</p>
+<p>Clients should always <a href="#validating-id-tokens">validate ID Tokens</a> to ensure their integrity.</p>
+
+<p>The ID Tokens returned by the authentication endpoint (implicit flow) or the Token endpoint (authorization code flow)
+are identical, except that in the implicit flow, the <em>nonce</em> parameter is required (and hence must have been included
+in the request), and the <em>at_hash</em> parameter is required if the response includes an Access Token but prohibited if the
+response does not include an Access Token.</p>
+
+<p>The ID Token (<em>id_token</em>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#id-token-header">a header</a>, <a href="#id-token-payload">the payload</a>, and <a href="#id-token-signature">the signature</a>.</p>
 
 <h3 id="id-token-header">ID Token Header</h3>
 
@@ -612,14 +630,14 @@ as well as claims about the authenticated user.</p>
     <tr>
       <td>email</td>
       <td>email</td>
-      <td>User’s preferred e-mail address. The resource provider must not rely upon this value being unique.</td>
+      <td>User’s preferred email address. The resource provider must not rely upon this value being unique.</td>
       <td>String</td>
       <td>“john.doe@example.com”</td>
     </tr>
     <tr>
       <td>email_verified</td>
       <td>email</td>
-      <td>True if the user’s e-mail address (Okta primary email) has been verified; otherwise false.</td>
+      <td>True if the user’s email address (Okta primary email) has been verified; otherwise false.</td>
       <td>boolean</td>
       <td>true</td>
     </tr>
@@ -640,7 +658,7 @@ as well as claims about the authenticated user.</p>
     <tr>
       <td>groups</td>
       <td>groups</td>
-      <td>The groups that the user is a member of that also match the ID token group filter of the client app.</td>
+      <td>The groups that the user is a member of that also match the ID Token group filter of the client app.</td>
       <td>List</td>
       <td>[“MyGroup1”, “MyGroup2”, “MyGroup3”]</td>
     </tr>
@@ -821,7 +839,7 @@ and only via POST data or within request headers. If you store them on your serv
 
 <p>The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not.
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
-An implicit client can only introspect its own tokens, while a confidential client may inspect all access tokens.</p>
+An implicit client can only introspect its own tokens, while a confidential client can inspect all Access Tokens.</p>
 
 <blockquote>
   <p>Note; <a href="oidc.html#id-token">ID Tokens</a> are also valid, however, they are usually validated on the service provider or app side of a flow.</p>
@@ -842,7 +860,7 @@ An implicit client can only introspect its own tokens, while a confidential clie
   <tbody>
     <tr>
       <td>token</td>
-      <td>An access token, ID token, or refresh token.</td>
+      <td>An Access Token, ID Token, or Refresh Token.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -890,7 +908,7 @@ Use one authentication mechanism with a given request. Using both returns an err
   <tbody>
     <tr>
       <td>active</td>
-      <td>An access token or refresh token.</td>
+      <td>An Access Token or Refresh Token.</td>
       <td>boolean</td>
     </tr>
     <tr>
@@ -1056,7 +1074,7 @@ Use one authentication mechanism with a given request. Using both returns an err
   <tbody>
     <tr>
       <td>token</td>
-      <td>An access token or refresh token.</td>
+      <td>An Access Token or Refresh Token.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1327,7 +1345,9 @@ This API doesn’t require any authentication and returns a JSON object with the
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/authorize</span></p>
 
-<p>This is a starting point for OpenID Connect flows such as implicit and authorization code flows. This request authenticates the user and returns tokens along with an authorization grant to the client application as a part of the response the client might have requested.</p>
+<p>This is a starting point for OpenID Connect flows such as implicit and authorization code flows. This request
+authenticates the user and returns tokens along with an authorization grant to the client application as a part
+of the response.</p>
 
 <h4 class="api api-request api-request-params" id="request-parameters-3">Request Parameters</h4>
 
@@ -1345,7 +1365,7 @@ This API doesn’t require any authentication and returns a JSON object with the
   <tbody>
     <tr>
       <td><a href="idps.html">idp</a></td>
-      <td>The Identity provider used to do the authentication. If omitted, use Okta as the identity provider.</td>
+      <td>Identity provider (default is Okta)</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1353,7 +1373,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>sessionToken</td>
-      <td>An Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the <a href="authn.html">Authentication API</a>.</td>
+      <td>Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the <a href="authn.html">Authentication API</a>.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1361,7 +1381,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>response_type</td>
-      <td>Can be a combination of <em>code</em>, <em>token</em>, and <em>id_token</em>. The chosen combination determines which flow is used; see this reference from the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">OIDC specification</a>. The code response type returns an authorization code which can be later exchanged for an Access Token or a Refresh Token.</td>
+      <td>Any combination of <em>code</em>, <em>token</em>, and <em>id_token</em>. The combination determines the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">flow</a>. The <code class="highlighter-rouge">code</code> response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -1369,7 +1389,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>client_id</td>
-      <td>Obtained during either <a href="/docs/api/resources/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It is the identifier for the client and it must match what is preregistered in Okta.</td>
+      <td>Obtained during either <a href="/docs/api/resources/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It identifies the client and must match the value preregistered in Okta.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -1377,7 +1397,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>redirect_uri</td>
-      <td>Specifies the callback location where the authorization code should be sent and it must match what is preregistered in Okta as a part of client registration.</td>
+      <td>Callback location where the authorization code should be sent. It must match the value preregistered in Okta during client registration.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -1385,7 +1405,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>display</td>
-      <td>Specifies how to display the authentication and consent UI. Valid values: <em>page</em> or <em>popup</em>.</td>
+      <td>How to display the authentication and consent UI. Valid values: <em>page</em> or <em>popup</em>.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1393,7 +1413,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>max_age</td>
-      <td>Specifies the allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.</td>
+      <td>Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1401,7 +1421,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>response_mode</td>
-      <td>Specifies how the authorization response should be returned. <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
+      <td>How the authorization response should be returned. <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1417,7 +1437,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>state</td>
-      <td>A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.</td>
+      <td>A value to be returned in the token. The client application can use it to remember the state of its interaction with the end user at the time of the authentication call. It can contain alphanumeric, comma, period, underscore and hyphen characters.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -1425,7 +1445,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>prompt</td>
-      <td>Can be either <em>none</em> or <em>login</em>. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there’s an existing Okta session.</td>
+      <td>Either <em>none</em> or <em>login</em>. If <em>none</em>,  do not prompt for authentication, and return an error if the end user is not already authenticated. If <em>login</em> force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1433,7 +1453,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>nonce</td>
-      <td>Specifies a nonce that is reflected back in the ID Token. It is used to mitigate replay attacks.</td>
+      <td>A value that must be returned in the ID Token. It is used to mitigate replay attacks.</td>
       <td>Query</td>
       <td>String</td>
       <td>TRUE</td>
@@ -1441,7 +1461,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>code_challenge</td>
-      <td>Specifies a challenge of <a href="#parameter-details">PKCE</a>. The challenge is verified in the Access Token request.</td>
+      <td>A challenge of <a href="#parameter-details">PKCE</a>. The challenge is verified in the Access Token request.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1449,7 +1469,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </tr>
     <tr>
       <td>code_challenge_method</td>
-      <td>Specifies the method that was used to derive the code challenge. Only S256 is supported.</td>
+      <td>Method used to derive the code challenge. Must be <code class="highlighter-rouge">S256</code>.</td>
       <td>Query</td>
       <td>String</td>
       <td>FALSE</td>
@@ -1477,15 +1497,15 @@ This API doesn’t require any authentication and returns a JSON object with the
       <li><em>query</em> – Parameters are encoded in the query string added to the <em>redirect_uri</em> when redirecting back to the client.</li>
       <li><em>form_post</em> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
 and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.</li>
-      <li><em>okta_post_message</em> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authorization endpoint.
+      <li><em>okta_post_message</em> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authentication endpoint.
 <em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>.
 This value provides a secure way for a single-page application to perform a sign-in flow
-in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
+in a popup window or an iFrame and receive the ID Token and/or access token back in the parent page without leaving the context of that page.
 The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage</a> call is in the next section.</li>
     </ul>
   </li>
   <li>
-    <p>Okta requires the OAuth 2.0 <em>state</em> parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF).
+    <p>Okta requires the OAuth 2.0 <em>state</em> parameter on all requests to the authentication endpoint in order to prevent cross-site request forgery (CSRF).
  The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state.
  Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
   </li>
@@ -1543,8 +1563,8 @@ specified by the client. This is crucial to prevent the sensitive token data fro
 
 <h4 id="response-parameters-3">Response Parameters</h4>
 
-<p>The response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI.
-Irrespective of the response type, the contents of the response is always one of the following.</p>
+<p>The method of returning the response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI.
+Irrespective of the response type, the contents of the response are as described in the table.</p>
 
 <table>
   <thead>
@@ -1557,12 +1577,12 @@ Irrespective of the response type, the contents of the response is always one of
   <tbody>
     <tr>
       <td>id_token</td>
-      <td>The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em>.</td>
+      <td>JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em>.</td>
       <td>String</td>
     </tr>
     <tr>
       <td>access_token</td>
-      <td>The <em>access_token</em> that is used to access the <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <em>response_type</em> included a token. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
+      <td>Used to access the <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if <em>response_type</em> includes <code class="highlighter-rouge">token</code>. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1577,27 +1597,27 @@ Irrespective of the response type, the contents of the response is always one of
     </tr>
     <tr>
       <td>expires_in</td>
-      <td>The number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>.</td>
+      <td>Number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>.</td>
       <td>String</td>
     </tr>
     <tr>
       <td>scope</td>
-      <td>The scopes of the <em>access_token</em>. This is only returned if the response included an <em>access_token</em>.</td>
+      <td>Scopes specified in the <em>access_token</em>. Returned only if the response includes an <em>access_token</em>.</td>
       <td>String</td>
     </tr>
     <tr>
       <td>state</td>
-      <td>The same unmodified value from the request is returned back in the response.</td>
+      <td>The unmodified <code class="highlighter-rouge">state</code> value from the request.</td>
       <td>String</td>
     </tr>
     <tr>
       <td>error</td>
-      <td>The error-code string providing information if anything went wrong.</td>
+      <td>Error-code (if something went wrong).</td>
       <td>String</td>
     </tr>
     <tr>
       <td>error_description</td>
-      <td>Further description of the error.</td>
+      <td>Description of the error.</td>
       <td>String</td>
     </tr>
   </tbody>
@@ -1647,7 +1667,7 @@ Irrespective of the response type, the contents of the response is always one of
     </tr>
     <tr>
       <td>invalid_token</td>
-      <td>The provided access token is invalid.</td>
+      <td>The provided Access Token is invalid.</td>
     </tr>
     <tr>
       <td>invalid_client</td>
@@ -1676,32 +1696,59 @@ Irrespective of the response type, the contents of the response is always one of
     </tr>
     <tr>
       <td>insufficient_scope</td>
-      <td>The access token provided does not contain the necessary scopes to access the resource.</td>
+      <td>The Access Token provided does not contain the necessary scopes to access the resource.</td>
     </tr>
   </tbody>
 </table>
 
+<h4 id="request-examples">Request Examples</h4>
+
+<p>This request initiates the authorization code flow, as signaled by <code class="highlighter-rouge">response_type=code</code>. The request will return an authorization code that you can use as the <code class="highlighter-rouge">code</code> parameter in a token request.</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/</span><span class="k">${</span><span class="nv">authorizationServerId</span><span class="k">}</span><span class="s2">/v1/authorize?
+  client_id=</span><span class="k">${</span><span class="nv">client_id</span><span class="k">}</span><span class="s2">&amp;
+  response_type=code&amp;
+  response_mode=form_post&amp;
+  scope=openid offline_access&amp;
+  redirect_uri=</span><span class="k">${</span><span class="nv">redirect_uri</span><span class="k">}</span><span class="s2">&amp;
+  state=</span><span class="k">${</span><span class="nv">state</span><span class="k">}</span><span class="s2">&amp;
+  nonce=</span><span class="k">${</span><span class="nv">nonce</span><span class="k">}</span><span class="s2">"</span>
+</code></pre>
+</div>
+
+<p>This request initiates the implicit flow, that is, to obtain an ID Token and optionally an Access Token directly from the authorization server, use the same request,
+but with <code class="highlighter-rouge">response_type=id_token</code> or <code class="highlighter-rouge">response_type=id_token token</code>:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/</span><span class="k">${</span><span class="nv">authorizationServerId</span><span class="k">}</span><span class="s2">/v1/authorize?
+  client_id=</span><span class="k">${</span><span class="nv">client_id</span><span class="k">}</span><span class="s2">&amp;
+  response_type=id_token token&amp;
+  response_mode=form_post&amp;
+  scope=openid offline_access&amp;
+  redirect_uri=</span><span class="k">${</span><span class="nv">redirect_uri</span><span class="k">}</span><span class="s2">&amp;
+  state=</span><span class="k">${</span><span class="nv">state</span><span class="k">}</span><span class="s2">&amp;
+  nonce=</span><span class="k">${</span><span class="nv">nonce</span><span class="k">}</span><span class="s2">"</span>
+</code></pre>
+</div>
+
 <h4 id="response-example-success-2">Response Example (Success)</h4>
 
-<p>The request is made with a <em>fragment</em> response mode.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>http://www.example.com/#
-id_token=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZG
-UubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInZlciI6MSwiaXNzIjoiaHR0cDovL3JhaW4ub2t0YTEuY29tOjE4MDIiLCJsb2dpbiI6ImFkbWluaXN
-0cmF0b3IxQGNsb3VkaXR1ZGUubmV0IiwiYXVkIjoidUFhdW5vZldrYURKeHVrQ0ZlQngiLCJpYXQiOjE0NDk2MjQwMjYsImV4cCI6MTQ0OTYyNzYyNiwi
-YW1yIjpbInB3ZCJdLCJqdGkiOiI0ZUFXSk9DTUIzU1g4WGV3RGZWUiIsImF1dGhfdGltZSI6MTQ0OTYyNDAyNiwiYXRfaGFzaCI6ImNwcUtmZFFBNWVIO
-DkxRmY1b0pyX1EifQ.Btw6bUbZhRa89DsBb8KmL9rfhku--_mbNC2pgC8yu8obJnwO12nFBepui9KzbpJhGM91PqJwi_AylE6rp-ehamfnUAO4JL14Pke
-mF45Pn3u_6KKwxJnxcWxLvMuuisnvIs7NScKpOAab6ayZU0VL8W6XAijQmnYTtMWQfSuaaR8rYOaWHrffh3OypvDdrQuYacbkT0csxdrayXfBG3UF5-ZA
-lhfch1fhFT3yZFdWwzkSDc0BGygfiFyNhCezfyT454wbciSZgrA9ROeHkfPCaX7KCFO8GgQEkGRoQntFBNjluFhNLJIUkEFovEDlfuB4tv_M8BM75celd
-y3jkpOurg
-&amp;access_token=eyJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImlzcyI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyIiwiaWF0
-IjoxNDQ5NjI0MDI2LCJleHAiOjE0NDk2Mjc2MjYsImp0aSI6IlVmU0lURzZCVVNfdHA3N21BTjJxIiwic2NvcGVzIjpbIm9wZW5pZCIsImVtYWlsIl0sI
-mNsaWVudF9pZCI6InVBYXVub2ZXa2FESnh1a0NGZUJ4IiwidXNlcl9pZCI6IjAwdWlkNEJ4WHc2STZUVjRtMGczIn0.HaBu5oQxdVCIvea88HPgr2O5ev
-qZlCT4UXH4UKhJnZ5px-ArNRqwhxXWhHJisslswjPpMkx1IgrudQIjzGYbtLFjrrg2ueiU5-YfmKuJuD6O2yPWGTsV7X6i7ABT6P-t8PRz_RNbk-U1GXW
-IEkNnEWbPqYDAm_Ofh7iW0Y8WDA5ez1jbtMvd-oXMvJLctRiACrTMLJQ2e5HkbUFxgXQ_rFPNHJbNSUBDLqdi2rg_ND64DLRlXRY7hupNsvWGo0gF4WEU
-k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNtiw
-&amp;token_type=Bearer&amp;expires_in=3600&amp;scope=openid+email&amp;state=waojafoawjgvbf
-</code></pre>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOjEsImp0aSI6IkFULm43cUkyS2hnbjFSZkUwbllQbFJod0N6UmU5eElIOUQ1cXFQYzNBNTQzbDQiLCJpc3MiOiJodHRwczovL21pbG  xpd2F5cy5va3RhLmNvbS9vYXV0aDIvYXVzOXVnbGRjbTJ0SFpqdjQwaDciLCJhdWQiOiJodHRwczovL21pbGxpd2F5cy5va3RhLmNvbSIsImlhdCI6MTQ4OTY5Nzk0NSwiZXhwIjoxNDk1MjIxMTQ1LCJjaWQiOiJBeD  VYclI0YU5Ea2pDYWNhSzdobiIsInVpZCI6IjAwdTljcDFqY3R3Ymp0a2tiMGg3Iiwic2NwIjpbIm9wZW5pZCIsIm9mZmxpbmVfYWNjZXNzIl0sInN1YiI6ImZvcmQucHJlZmVjdEBtaWxsaXdheXMuY29tIn0.hb3oS9  2Nb7QmLz2R99SfB_qqTP9GsMCtc2umA2sJwe4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openid offline_access"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IJFLydLpLZ7-9spMSePkqgBSTnjBluJIJi6HESG84cE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIwMHU5Y3AxamN0d2JqdGtrYjBoNyIsInZlciI6MSwiaXNzIjoiaHR0cHM6Ly9taWxsaXdheXMub2t0YS5jb20vb2F1dGgyL2F1czl1Z2  xkY20ydEhaanY0MGg3IiwiYXVkIjoiQXg1WHJSNGFORGtqQ2FjYUs3aG4iLCJpYXQiOjE0ODk2OTc5NDUsImV4cCI6MTQ5NTIyMTE3NSwianRpIjoiSUQuNEVvdWx5WnM4MU9aaVdqQWNHQWdadmg0eUFScUdacjIwWF  RLdW1WRDRNMCIsImFtciI6WyJwd2QiXSwiaWRwIjoiMDBvOWNwMWpjNmhjc0dWN2kwaDciLCJub25jZSI6ImNjYmJmNDNkLTc5MTUtNDMwMC05NTZkLWQxYjc1ODk1YWNiNyIsImF1dGhfdGltZSI6MTQ4OTY5NjAzNy  wiYXRfaGFzaCI6IlRoaHNhUFd6bVlKMVlmcm1kNDM1Q0EifQ._uLqItzLzKb6m6G2-Jqs6OmrG_iWMg0P6UKQqzVggPc"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 </div>
 
 <h4 id="response-example-error-4">Response Example (Error)</h4>
@@ -1717,10 +1764,6 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/token</span></p>
 
 <p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
-
-<blockquote>
-  <p>Note:  No errors occur if you use this endpoint, but it isn’t useful until custom scopes or resource servers are available. We recommend you wait until custom scopes and resource servers are available.</p>
-</blockquote>
 
 <h4 id="request-parameters-4">Request Parameters</h4>
 
@@ -1742,7 +1785,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
     </tr>
     <tr>
       <td>code</td>
-      <td>Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the <a href="#authentication-request">authorization endpoint</a>.</td>
+      <td>Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the <a href="#authentication-request">authentication endpoint</a>.</td>
       <td>String</td>
     </tr>
     <tr>
@@ -1925,7 +1968,7 @@ You can’t change this value in the Okta user interface.</p>
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

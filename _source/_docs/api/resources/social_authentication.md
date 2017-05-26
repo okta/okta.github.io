@@ -118,7 +118,7 @@ Advantages of using Okta Social Authentication include:
     https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&client_id=AbcDE0fGHI1jk2LM34no&scope=openid%20email%20profile&response_type=id_token&response_mode=fragment&state=someState&nonce=someNonce&redirect_uri=https://example.okta.com
     ```
 
-     For learn more about Okta's requirements for these parameters, see [Authorize Endpoint Parameter Details](http://developer.okta.com/docs/api/resources/oauth2.html#parameter-details).
+     For learn more about Okta's requirements for these parameters, see [Authorize Endpoint Parameter Details](/docs/api/resources/oauth2.html#parameter-details).
 
 8.  Add the Social Auth Authorize URL to the page where you want to
     enable Social Auth. Using the example URL from step 7, your HTML looks similar to the following:

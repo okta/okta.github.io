@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -35,8 +35,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
   <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.17">
-  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-18.html">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-18.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
@@ -74,12 +74,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -91,11 +91,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
      <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
@@ -107,16 +109,16 @@
           <h3 class="Sidebar-title">Use Cases</h3>
           <ul class="Sidebar-nav">
             <li>
-              <a href="/use_cases/authentication">Authentication</a>
+              <a href="/use_cases/authentication/">Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/api_access_management">API Access Management</a>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -131,10 +133,10 @@
               <a href="/docs/api/resources/apps.html">API Reference</a>
             </li>
             <li>
-              <a href="/reference/error_codes">Error Codes</a>
+              <a href="/reference/error_codes/">Error Codes</a>
             </li>
             <li>
-              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li class="is-active">
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -205,8 +207,8 @@
   <li>
     <p>As of last week, we enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
 
-    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
- a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
+    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached
+ a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please
  be warned these rate limits will be enforced in the near future.</code></p>
   </li>
   <li>
@@ -223,8 +225,8 @@
   <li>
     <p>In early May, we’ll enable a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
 
-    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
- a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
+    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached
+ a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please
  be warned these rate limits will be enforced in the near future.</code></p>
   </li>
   <li>
@@ -309,13 +311,13 @@ As outlined in <a href="/docs/api/getting_started/design_principles.html#links-i
 
 <p>Using <code class="highlighter-rouge">GET /api/v1/idps/:id/users/:uid/credentials/tokens</code>, you can fetch the Access Tokens minted by a social authentication provider.
 When a user authenticates to Okta via a Social IdP, this request returns the tokens and metadata provided by the Social IdP.
-Clients can use the Access Token against the social provider’s endpoints in order to fetch additional profile attributes that Okta doesn’t support in Universal Directory, for example, nested attributes. 
+Clients can use the Access Token against the social provider’s endpoints in order to fetch additional profile attributes that Okta doesn’t support in Universal Directory, for example, nested attributes.
 For more information, see the <a href="/docs/api/resources/idps.html#social-authentication-token-operation">Identity Providers API</a>. <!-- OKTA-118687 --></p>
 
 <h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
 <ul>
-  <li>Searches on <a href="http://developer.okta.com/docs/api/resources/users.html#list-users-with-search">User</a> incorrectly returned deleted users or out-of-date user status in some cases. (OKTA-116928)</li>
+  <li>Searches on <a href="/docs/api/resources/users.html#list-users-with-search">User</a> incorrectly returned deleted users or out-of-date user status in some cases. (OKTA-116928)</li>
   <li>Some orgs were unable to add OpenID Connect or OAuth 2.0 clients to an access policy in a custom Authorization Server. (OKTA-117630)</li>
   <li>When deleting a claim from a custom Authorization Server, the Delete dialog didn’t close after clicking <strong>OK</strong> or <strong>Cancel</strong>. (OKTA-124271)</li>
   <li>Read-only Administrator user interface didn’t exactly match that role’s access rights. (OKTA-123116)</li>
@@ -353,7 +355,7 @@ For more information, see the <a href="/docs/api/resources/idps.html#social-auth
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

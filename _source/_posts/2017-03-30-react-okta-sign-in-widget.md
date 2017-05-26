@@ -7,7 +7,7 @@ tags: [react, sign-in widget, okta, es6]
 
 React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, [according to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html). So it’s no surprise that [developers are learning it](https://www.lynda.com/React-js-training-tutorials/7049-0.html), and [employers are asking for it](https://stackoverflow.com/jobs?sort=i&q=ReactJS).
 
-In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using [Okta’s Sign-In Widget](http://developer.okta.com/code/javascript/okta_sign-in_widget). The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!
+In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using [Okta’s Sign-In Widget](/code/javascript/okta_sign-in_widget). The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!
 ## Get the Simple React Seed Project
 Start by cloning the simple React seed project.
 
@@ -34,7 +34,7 @@ This will add the Okta Sign-In Widget code to your `node_modules` folder.
 
 Then add the styles for the widget in your `index.html` file from the Okta CDN:
 ```html
-    <link 
+    <link
      href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.9.0/css/okta-sign-in.min.css"
       type="text/css"
       rel="stylesheet"/>
@@ -67,19 +67,19 @@ This little component doesn't *do* much but at least you now have a handle to ad
 
 ```js
 import LoginPage from './components/auth/LoginPage';
-``` 
+```
 and then add the route inside the main route (the one with the path of "/")
 ```js
 <Route path="/login" component={LoginPage}/>
 ```
 ## Add the OpenID Connect Application in Okta
-In order to *use* Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the [Okta developer portal](http://developer.okta.com/).
+In order to *use* Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the [Okta developer portal](https://developer.okta.com).
 
-So log in to your Okta account, [or create one](http://developer.okta.com] if you haven’t yet. Navigate to Admin > Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add `http://localhost:3000` as a Redirect URI and click Finish. You should see settings like the following.
+So log in to your Okta account, [or create one](https://developer.okta.com] if you haven’t yet. Navigate to Admin > Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add `http://localhost:3000` as a Redirect URI and click Finish. You should see settings like the following.
 
 {% img blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener.png alt:"OIDC Application Settings" width:"800" %}
 
-Make note of the `Client ID` (yours shouldn't be blurred out) and make note of your Dev ID (it's the number part of your subdomain of the URL) So if you are at https://dev-1234-admin.oktapreview.com/... your Dev ID is 1234. 
+Make note of the `Client ID` (yours shouldn't be blurred out) and make note of your Dev ID (it's the number part of your subdomain of the URL) So if you are at https://dev-1234-admin.oktapreview.com/... your Dev ID is 1234.
 
 Now that you have that, you can set up the widget to talk to your new app!
 ## Add the Widget to Your Component
@@ -147,7 +147,7 @@ export default class LoginPage extends React.Component{
 ```
 You also added state to your component. If you're using a flux implementation, this would naturally come from the app state. But to keep this tutorial simple, let your `LoginPage` keep track of it's own state.
 ## Check Whether the User is Logged In
-We’re almost there, but you don't necessarily want to render the widget right away. You'll need to add a check to make sure the user isn't already logged in, and move your `renderEl` out to a function called `showLogin`. 
+We’re almost there, but you don't necessarily want to render the widget right away. You'll need to add a check to make sure the user isn't already logged in, and move your `renderEl` out to a function called `showLogin`.
 
 ```js
  // ...other stuff removed for brevity's sake
@@ -214,7 +214,7 @@ export default class LoginPage extends React.Component{
 
   showLogin(){
     Backbone.history.stop();
-    this.widget.renderEl({el:this.loginContainer}, 
+    this.widget.renderEl({el:this.loginContainer},
       (response) => {
         this.setState({user: response.claims.email});
       },
@@ -257,8 +257,8 @@ If it works - congrats! If it doesn't, please post a question to Stack Overflow 
 ## Known Issues
 There is one known issue in this tutorial. The widget's CSS takes over the whole page and will override your app's CSS. This is a [documented issue](https://github.com/okta/okta-signin-widget/issues/126) and you can see [Matt Raible's comment on it](https://github.com/okta)
 ## React + Okta
-You can find a completed version of the application created in this blog post [on GitHub](https://github.com/leebrandt/okta-react-widget-sample). 
+You can find a completed version of the application created in this blog post [on GitHub](https://github.com/leebrandt/okta-react-widget-sample).
 
 Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! [Sign up for a forever-free developer account](https://www.okta.com/developer/signup/) and try Okta today!
 
-I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt), leave a comment below, or open an issue on GitHub. 
+I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt), leave a comment below, or open an issue on GitHub.

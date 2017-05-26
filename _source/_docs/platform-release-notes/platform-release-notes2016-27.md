@@ -5,11 +5,11 @@ title: Platform Release Notes July 7, 2016
 
 # Release 2016.27
 
-# Releases are rolled out to organizations in a staggered fashion: first to preview orgs, then to production orgs. 
+# Releases are rolled out to organizations in a staggered fashion: first to preview orgs, then to production orgs.
 Check the [Current Release Status](https://support.okta.com/help/articles/Knowledge_Article/Current-Release-Status) to verify whether the changes in this document have rolled out to your org yet.
 
 ## Feature Enhancements
- 
+
 ### Improvements for OAuth Panels in the Admin Console
 
 <!-- OKTA-93256 -->
@@ -17,16 +17,16 @@ To improve usability, we've moved some of the panels in the Okta user interface 
 
 * The **OAuth** tab has been renamed **Authorization Server**.
 * The **Signing credentials rotation** option was on the **Client Registration** panel, but since it helps you configure tokens, we've
- moved it to the **Authorization Server** tab. 
+ moved it to the **Authorization Server** tab.
 
 {% img changed_tabs.png alt:"New Tab for Managing OAuth-Related Configuration" %}
- 
+
 ### Okta Sign-In Widget Updated
 
 <!-- OKTA-91831, OKTA-93759 -->
-The Okta Sign-In Widget will be updated to version 1.4.0 for Production orgs. 
+The Okta Sign-In Widget will be updated to version 1.4.0 for Production orgs.
 
-See [Okta Sign-In Widget](http://developer.okta.com/docs/guides/okta_sign-in_widget.html) for updated sample code
+See [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) for updated sample code
 after [Release 2016.27](https://support.okta.com/help/articles/Knowledge_Article/Current-Release-Status) is rolled out to production orgs.
 
 The new release includes several enhancements:
@@ -45,7 +45,7 @@ To ensure a successful password recovery lookup if an email address is associate
 ## Bugs Fixed
 
 The following issues are fixed:
- 
+
 * The OIDC Access Token was incorrectly available to Okta endpoints other than `/oauth2/v1/userinfo`. (OKTA-91099)
 * The format of the issuer (`iss`) in the Access Token has changed: it was the client ID. It now takes the form: `https://<your-org>.okta.com/as/<authorization-server-ID>. (OKTA-93628)
 

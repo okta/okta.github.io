@@ -95,7 +95,6 @@ function generate_html() {
 
     if [ ! -d $GENERATED_SITE_LOCATION ]; then
         check_for_npm_dependencies
-        import_external_markdown
         bundle exec jekyll build
         local status=$?
         interject 'Done generating HTML'
@@ -112,5 +111,16 @@ function require_env_var() {
     if [[ -z "${env_var}" ]]; then
         echo "Environment variable '${env_var_name}' must be defined, but isn't.";
         exit 1
+    fi
+}
+
+# Verify for occurences of localhost:4000 have been removed
+function check_for_localhost_links() {
+    local links=$(grep -R "localhost:4000" ../* --exclude-dir={node_modules,scripts,tests,dist} --exclude={README.md,package.json})
+    if [ "$links" ];
+    then
+        echo $links
+        echo "Files contain localhost:4000!"
+        return 1
     fi
 }

@@ -7,7 +7,7 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -42,8 +42,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Tutorial: Develop a Mobile App With Ionic and Spring Boot | Okta Developer</title>
   <meta name="description" content="You already know that building APIs with Spring Boot is incredibly easy. But, your API isn’t complete without a UI, right? Well, building UIs with Ionic is p...">
-  <link rel="canonical" href="http://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
     <body id="blog">
@@ -79,12 +79,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -96,11 +96,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
 
 	<div class="page-content">
@@ -148,7 +150,7 @@
 
 <h2 id="build-a-spring-boot-api">Build a Spring Boot API</h2>
 
-<p>I recently wrote about how to build a Spring Boot API in <a href="http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot with Angular</a>. Rather than covering that again, you can clone the existing project and copy the <code class="highlighter-rouge">server</code> directory into <code class="highlighter-rouge">spring-boot-ionic-example</code>.</p>
+<p>I recently wrote about how to build a Spring Boot API in <a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot with Angular</a>. Rather than covering that again, you can clone the existing project and copy the <code class="highlighter-rouge">server</code> directory into <code class="highlighter-rouge">spring-boot-ionic-example</code>.</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/oktadeveloper/spring-boot-angular-example.git
 cp -r spring-boot-angular-example/server ~/spring-boot-ionic-example/.
@@ -485,7 +487,7 @@ beer.ts
 
 <p>Start the Spring Boot app in one terminal window and run <code class="highlighter-rouge">ionic serve</code> in another. Open <a href="http://localhost:8100">http://localhost:8100</a> in your browser. Click on the Beer icon, and you’ll likely see an error in your browser.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Uncaught (in promise): Error: No provider for Http! 
+<div class="highlighter-rouge"><pre class="highlight"><code>Uncaught (in promise): Error: No provider for Http!
 </code></pre>
 </div>
 
@@ -508,8 +510,8 @@ beer.ts
 
 <p>After making this change, you’ll likely see the following error in your browser’s console.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' 
-header is present on the requested resource. Origin 'http://localhost:8100' is therefore 
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin'
+header is present on the requested resource. Origin 'http://localhost:8100' is therefore
 not allowed access. The response had HTTP status code 401.
 </code></pre>
 </div>
@@ -698,7 +700,7 @@ not allowed access. The response had HTTP status code 401.
 
 <p>At this point, if you try to add or edit a beer name, you’ll likely see an error in your browser’s console.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Uncaught (in promise): Error: No component factory found for BeerModalPage. 
+<div class="highlighter-rouge"><pre class="highlight"><code>Uncaught (in promise): Error: No component factory found for BeerModalPage.
 Did you add it to @NgModule.entryComponents?
 </code></pre>
 </div>
@@ -889,7 +891,7 @@ open platforms/ios/MyApp.xcodeproj
 <p>To deploy to the Android emulator, run <code class="highlighter-rouge">ionic cordova emulate android</code>. This will install Andorid support and print out instructions about how to create an emulator image.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Error: No emulator images (avds) found.
-1. Download desired System Image by running: 
+1. Download desired System Image by running:
 /Users/mraible/Library/Android/sdk/tools/android sdk
 2. Create an AVD by running: /Users/mraible/Library/Android/sdk/tools/android avd
 HINT: For a faster emulator, use an Intel System Image and install the HAXM device driver
@@ -938,9 +940,9 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 
 <ul>
   <li><a href="http://ionicframework.com/getting-started/">Get started with Ionic Framework</a></li>
-  <li><a href="http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a></li>
-  <li><a href="http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot and Angular</a></li>
-  <li><a href="http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc">Angular Authentication with OpenID Connect and Okta in 20 Minutes</a></li>
+  <li><a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a></li>
+  <li><a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot and Angular</a></li>
+  <li><a href="/blog/2017/04/17/angular-authentication-with-oidc">Angular Authentication with OpenID Connect and Okta in 20 Minutes</a></li>
 </ul>
 
 
@@ -960,7 +962,7 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

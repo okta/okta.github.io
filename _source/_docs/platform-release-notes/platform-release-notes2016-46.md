@@ -21,4 +21,4 @@ scroll to the bottom of the Admin <b>Dashboard</b> page to see the version numbe
 
 ## Looking for Product Release Notes?
 
-For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).

@@ -165,18 +165,18 @@ You can use this function anywhere to get a list of groups of which the current 
 
 This function takes Okta EL expressions for all parameters that evaluate to the correct data type. With these expressions you can create complex definitions for the whitelist, the group format, and for the number of groups to return that can include `if` logic and customized formatting.
 
-Parameter          | Description                                             | Nullable 
------------------- | ------------------------------------------------------- | -------- 
+Parameter          | Description                                             | Nullable
+------------------ | ------------------------------------------------------- | --------
 whitelist | Valid Okta EL expression that evaluates to a string array of group ids | FALSE    |
-group_expression | Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression. | FALSE 
-limit | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return | FALSE 
+group_expression | Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression. | FALSE
+limit | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return | FALSE
 
 All parameters must be valid Okta EL expressions that evaluate as described above. Okta EL expressions can be comprised of strings, integers, arrays, etc.
 
 The string produced by the `group_expression` parameter usually contains attributes and objects from the [Groups API](/docs/api/resources/groups.html), although it is not limited to those attributes and objects. Attributes and objects listed in the [Group Attributes](/docs/api/resources/groups.html#group-attributes) section of the Groups API can be any of the following: `id`, `status`, `name`, `description`, `objectClass`, and the `profile` object that contains the `groupType`, `samAccountName`, `objectSid`, `groupScope`, `windowsDomainQualifiedName`, `dn`, and `externalID` attributes for groups that come from apps such as Active Directory.
 
-The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](http://developer.okta.com/docs/api/resources/groups.html). If the user is not member of a group in the whitelist, the group is ignored.
- 
+The `whitelist` parameter must evaluate to a list of group ids that is returned from the [Groups API](/docs/api/resources/groups.html). If the user is not member of a group in the whitelist, the group is ignored.
+
 **Parameter Examples**
 
 * whitelist<br />
@@ -184,12 +184,12 @@ The `whitelist` parameter must evaluate to a list of group ids that is returned 
   Array variable: `app.profile.groups.whitelist`
 * group_expression<br />
   Attribute name: `"group.id"`<br />
-  Okta EL string containing an if condition: `"(group.objectClass[0] == 'okta:windows_security_principal') ? 'AD: ' + group.profile.windowsDomainQualifiedName : 'Okta: ' + group.name"`<br /><br />If *okta:windows_security_principal* is true for 
+  Okta EL string containing an if condition: `"(group.objectClass[0] == 'okta:windows_security_principal') ? 'AD: ' + group.profile.windowsDomainQualifiedName : 'Okta: ' + group.name"`<br /><br />If *okta:windows_security_principal* is true for
   a group, the function returns the `windowsDomainQualifiedName` prefixed with `AD:`; otherwise, the function returns the group name prefixed with `Okta:`.
 * limit<br />
    Integer between 1 and 100, inclusive; for example: `50`.<br />
    Okta EL expression containing a condition that evaluates to an integer: `app.profile.maxLimit < 100 ? app.profile.maxLimit : 100`.<br /><br /> If the maximum group limit in the profile is less than 100, return that number of groups; otherwise, return a maximum of 100 groups. `Note:` If there are more groups returned than the specified limit, an error is returned.
- 
+
 ### Time Functions
 
 Function  | Input Parameter Signature | Return Type | Example | Output

@@ -3,24 +3,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot</loc>
+      <loc>https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot</loc>
       
-        <lastmod>2017-05-17T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</loc>
-      
-        <lastmod>2017-05-10T00:00:00-04:00</lastmod>
+        <lastmod>2017-05-17T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -33,24 +18,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</loc>
+      <loc>https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</loc>
       
-        <lastmod>2017-05-09T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2017/05/03/seven-new-vs-features</loc>
-      
-        <lastmod>2017-05-03T00:00:00-04:00</lastmod>
+        <lastmod>2017-05-10T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -63,24 +33,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</loc>
+      <loc>https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</loc>
       
-        <lastmod>2017-04-26T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</loc>
-      
-        <lastmod>2017-04-17T00:00:00-04:00</lastmod>
+        <lastmod>2017-05-09T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -93,24 +48,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</loc>
+      <loc>https://developer.okta.com/blog/2017/05/03/seven-new-vs-features</loc>
       
-        <lastmod>2017-03-30T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</loc>
-      
-        <lastmod>2017-03-27T00:00:00-04:00</lastmod>
+        <lastmod>2017-05-03T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -123,24 +63,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</loc>
+      <loc>https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</loc>
       
-        <lastmod>2017-03-21T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2017/03/16/spring-boot-saml</loc>
-      
-        <lastmod>2017-03-16T00:00:00-04:00</lastmod>
+        <lastmod>2017-04-26T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -153,24 +78,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</loc>
+      <loc>https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</loc>
       
-        <lastmod>2016-03-22T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</loc>
-      
-        <lastmod>2016-01-05T00:00:00-05:00</lastmod>
+        <lastmod>2017-04-17T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -183,24 +93,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2015/12/07/oauth</loc>
+      <loc>https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</loc>
       
-        <lastmod>2015-12-07T00:00:00-05:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</loc>
-      
-        <lastmod>2015-12-02T00:00:00-05:00</lastmod>
+        <lastmod>2017-03-30T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -213,24 +108,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2015/06/11/trustpage</loc>
+      <loc>https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</loc>
       
-        <lastmod>2015-06-11T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2015/05/22/tcmalloc</loc>
-      
-        <lastmod>2015-05-22T00:00:00-04:00</lastmod>
+        <lastmod>2017-03-27T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -243,24 +123,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</loc>
+      <loc>https://developer.okta.com/blog/2017/03/21/spring-boot-oauth</loc>
       
-        <lastmod>2015-05-08T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</loc>
-      
-        <lastmod>2015-05-08T00:00:00-04:00</lastmod>
+        <lastmod>2017-03-21T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -273,24 +138,9 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</loc>
+      <loc>https://developer.okta.com/blog/2017/03/16/spring-boot-saml</loc>
       
-        <lastmod>2015-04-23T00:00:00-04:00</lastmod>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.5</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</loc>
-      
-        <lastmod>2015-04-14T00:00:00-04:00</lastmod>
+        <lastmod>2017-03-16T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -303,9 +153,159 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</loc>
+      <loc>https://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</loc>
       
-        <lastmod>2015-04-07T00:00:00-04:00</lastmod>
+        <lastmod>2016-03-22T00:00:00-07:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</loc>
+      
+        <lastmod>2016-01-05T00:00:00-08:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/12/07/oauth</loc>
+      
+        <lastmod>2015-12-07T00:00:00-08:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</loc>
+      
+        <lastmod>2015-12-02T00:00:00-08:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/06/11/trustpage</loc>
+      
+        <lastmod>2015-06-11T00:00:00-07:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/05/22/tcmalloc</loc>
+      
+        <lastmod>2015-05-22T00:00:00-07:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</loc>
+      
+        <lastmod>2015-05-08T00:00:00-07:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</loc>
+      
+        <lastmod>2015-05-08T00:00:00-07:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</loc>
+      
+        <lastmod>2015-04-23T00:00:00-07:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</loc>
+      
+        <lastmod>2015-04-14T00:00:00-07:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</loc>
+      
+        <lastmod>2015-04-07T00:00:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -321,7 +321,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/confirm/account</loc>
+      <loc>https://developer.okta.com/confirm/account</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -334,7 +334,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/templates/api-endpoint</loc>
+      <loc>https://developer.okta.com/templates/api-endpoint</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -347,7 +347,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/confirm/contact</loc>
+      <loc>https://developer.okta.com/confirm/contact</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -360,7 +360,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/error</loc>
+      <loc>https://developer.okta.com/error</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -373,7 +373,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/feed.xml</loc>
+      <loc>https://developer.okta.com/feed.xml</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -386,7 +386,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/</loc>
+      <loc>https://developer.okta.com/blog/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -399,7 +399,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/documentation/</loc>
+      <loc>https://developer.okta.com/documentation/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -412,7 +412,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/feed/</loc>
+      <loc>https://developer.okta.com/feed/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -425,7 +425,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/integrate_with_okta/</loc>
+      <loc>https://developer.okta.com/integrate_with_okta/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -438,7 +438,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/discussion/</loc>
+      <loc>https://developer.okta.com/discussion/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -451,7 +451,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/</loc>
+      <loc>https://developer.okta.com/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -464,7 +464,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/privacy/</loc>
+      <loc>https://developer.okta.com/privacy/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -477,7 +477,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/product/</loc>
+      <loc>https://developer.okta.com/product/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -490,74 +490,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/search/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/sitemap/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/terms/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/oidc_playground/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/cla/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>http://developer.okta.com/confirm/</loc>
+      <loc>https://developer.okta.com/search/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -572,7 +505,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/documentation/stormpath-import</loc>
+      <loc>https://developer.okta.com/sitemap/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -585,7 +518,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/2015/10/29/tls-client-authentication-for-services/</loc>
+      <loc>https://developer.okta.com/terms/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -598,7 +531,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/saml_guidance.html</loc>
+      <loc>https://developer.okta.com/oidc_playground/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -611,7 +544,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/guides/saml_guidance.html</loc>
+      <loc>https://developer.okta.com/cla/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -624,7 +557,22 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/guides/setting_up_a_saml_application_in_okta</loc>
+      <loc>https://developer.okta.com/confirm/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/documentation/stormpath-import</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -637,7 +585,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/guides/setting_up_a_saml_application_in_okta.html</loc>
+      <loc>https://developer.okta.com/blog/2015/10/29/tls-client-authentication-for-services/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -650,7 +598,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/examples/configuring_a_saml_application_in_okta</loc>
+      <loc>https://developer.okta.com/docs/getting_started/saml_guidance.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -663,7 +611,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/examples/configuring_a_saml_application_in_okta.html</loc>
+      <loc>https://developer.okta.com/docs/guides/saml_guidance.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -676,7 +624,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/guides/scim_guidance.html</loc>
+      <loc>https://developer.okta.com/docs/guides/setting_up_a_saml_application_in_okta</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -689,7 +637,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/examples/dotnet_sample_application.html</loc>
+      <loc>https://developer.okta.com/docs/guides/setting_up_a_saml_application_in_okta.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -702,7 +650,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/examples/spring_security_saml.html</loc>
+      <loc>https://developer.okta.com/docs/examples/configuring_a_saml_application_in_okta</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -715,7 +663,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/guides/okta_sign-in_widget.html</loc>
+      <loc>https://developer.okta.com/docs/examples/configuring_a_saml_application_in_okta.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -728,7 +676,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/_docs/api/resources/okta_signin_widget.html</loc>
+      <loc>https://developer.okta.com/docs/guides/scim_guidance.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -741,7 +689,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/resources/okta_signin_widget.html</loc>
+      <loc>https://developer.okta.com/docs/examples/dotnet_sample_application.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -754,7 +702,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/examples/pysaml2.html</loc>
+      <loc>https://developer.okta.com/docs/examples/spring_security_saml.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -767,7 +715,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/examples/session_cookie.html</loc>
+      <loc>https://developer.okta.com/docs/guides/okta_sign-in_widget.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -780,7 +728,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/guides/okta_mobile_connect.html</loc>
+      <loc>https://developer.okta.com/_docs/api/resources/okta_signin_widget.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -793,7 +741,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/error_codes.html</loc>
+      <loc>https://developer.okta.com/docs/api/resources/okta_signin_widget.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -806,7 +754,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/getting_started/error_codes.html</loc>
+      <loc>https://developer.okta.com/docs/examples/pysaml2.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -819,7 +767,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/okta_expression_lang.html</loc>
+      <loc>https://developer.okta.com/docs/examples/session_cookie.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -832,7 +780,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/getting_started/okta_expression_lang.html</loc>
+      <loc>https://developer.okta.com/docs/guides/okta_mobile_connect.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -845,7 +793,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/3rd_party_notices/Okta_Rum_Tool</loc>
+      <loc>https://developer.okta.com/docs/getting_started/error_codes.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -858,7 +806,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/api_test_client.html</loc>
+      <loc>https://developer.okta.com/docs/api/getting_started/error_codes.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -871,7 +819,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/design_principles.html</loc>
+      <loc>https://developer.okta.com/docs/getting_started/okta_expression_lang.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -884,7 +832,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/enabling_cors.html</loc>
+      <loc>https://developer.okta.com/docs/api/getting_started/okta_expression_lang.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -897,7 +845,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/getting_a_token.html</loc>
+      <loc>https://developer.okta.com/3rd_party_notices/Okta_Rum_Tool</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -910,7 +858,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/apps.html</loc>
+      <loc>https://developer.okta.com/docs/getting_started/api_test_client.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -923,7 +871,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/authn.html</loc>
+      <loc>https://developer.okta.com/docs/getting_started/design_principles.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -936,7 +884,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/events.html</loc>
+      <loc>https://developer.okta.com/docs/getting_started/enabling_cors.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -949,7 +897,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/factor_admin.html</loc>
+      <loc>https://developer.okta.com/docs/getting_started/getting_a_token.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -962,7 +910,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/factors.html</loc>
+      <loc>https://developer.okta.com/docs/api/rest/apps.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -975,7 +923,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/groups.html</loc>
+      <loc>https://developer.okta.com/docs/api/rest/authn.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -988,7 +936,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/idps.html</loc>
+      <loc>https://developer.okta.com/docs/api/rest/events.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1001,7 +949,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/oauth-clients.html</loc>
+      <loc>https://developer.okta.com/docs/getting_started/factor_admin.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1014,7 +962,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/policy.html</loc>
+      <loc>https://developer.okta.com/docs/api/rest/factors.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1027,7 +975,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/sessions.html</loc>
+      <loc>https://developer.okta.com/docs/api/rest/groups.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1040,7 +988,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/templates.html</loc>
+      <loc>https://developer.okta.com/docs/api/rest/idps.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1053,7 +1001,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/getting_started/tokens.html</loc>
+      <loc>https://developer.okta.com/docs/api/rest/oauth-clients.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1066,7 +1014,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/api/rest/users.html</loc>
+      <loc>https://developer.okta.com/docs/getting_started/policy.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1079,7 +1027,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/examples/</loc>
+      <loc>https://developer.okta.com/docs/api/rest/sessions.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1092,7 +1040,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/examples</loc>
+      <loc>https://developer.okta.com/docs/api/rest/templates.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1105,7 +1053,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/guides/</loc>
+      <loc>https://developer.okta.com/docs/getting_started/tokens.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1118,7 +1066,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/docs/guides</loc>
+      <loc>https://developer.okta.com/docs/api/rest/users.html</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1131,7 +1079,7 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/page/2/</loc>
+      <loc>https://developer.okta.com/docs/examples/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1144,7 +1092,59 @@
   
     
     <url>
-      <loc>http://developer.okta.com/blog/page/3/</loc>
+      <loc>https://developer.okta.com/docs/examples</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/docs/guides/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/docs/guides</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/page/2/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/page/3/</loc>
       
       
         <changefreq>monthly</changefreq>

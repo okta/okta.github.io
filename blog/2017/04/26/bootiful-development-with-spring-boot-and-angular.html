@@ -7,7 +7,7 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -42,8 +42,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Bootiful Development with Spring Boot and Angular | Okta Developer</title>
   <meta name="description" content="To simplify development and deployment, you want everything in the same artifact, so you put your Angular app “inside” your Spring Boot app, right? But what ...">
-  <link rel="canonical" href="http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
     <body id="blog">
@@ -79,12 +79,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -96,11 +96,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
 
 	<div class="page-content">
@@ -574,8 +576,8 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 <p>To learn more about Angular, Spring Boot, or Okta, check out the following resources:</p>
 
 <ul>
-  <li><a href="http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc">Angular with OpenID Connect</a></li>
-  <li><a href="http://developer.okta.com/blog/2017/03/21/spring-boot-oauth">Get Started with Spring Boot, OAuth 2.0, and Okta</a></li>
+  <li><a href="/blog/2017/04/17/angular-authentication-with-oidc">Angular with OpenID Connect</a></li>
+  <li><a href="/blog/2017/03/21/spring-boot-oauth">Get Started with Spring Boot, OAuth 2.0, and Okta</a></li>
   <li><a href="https://youtu.be/sbPSjI4tt10">Getting Started with Spring Boot by Josh Long</a> (SF JUG 2015)</li>
   <li><a href="https://youtu.be/hHNUohOPCCo">Angular Best Practices by Stephen Fluin</a> (ng-conf 2017)</li>
 </ul>
@@ -598,7 +600,7 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

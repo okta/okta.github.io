@@ -44,7 +44,7 @@ You can enable CORS for websites that need cross-origin requests to the Okta API
 
 You can test your CORS configuration with the following test tool
 
-1. Explicitly allowing this website (http://developer.okta.com) on the Okta Admin Dashboard
+1. Explicitly allowing this website (https://developer.okta.com) on the Okta Admin Dashboard
 2. Sign-in to your Okta organization on another browser tab
 3. Enter your Okta organization in the form below and click **Test**
 

@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -35,8 +35,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
   <meta name="description" content="Summary of changes to the Okta Platform since Release 2016.34">
-  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-34.html">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-34.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
@@ -74,12 +74,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -91,11 +91,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
      <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
@@ -107,16 +109,16 @@
           <h3 class="Sidebar-title">Use Cases</h3>
           <ul class="Sidebar-nav">
             <li>
-              <a href="/use_cases/authentication">Authentication</a>
+              <a href="/use_cases/authentication/">Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/api_access_management">API Access Management</a>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -131,10 +133,10 @@
               <a href="/docs/api/resources/apps.html">API Reference</a>
             </li>
             <li>
-              <a href="/reference/error_codes">Error Codes</a>
+              <a href="/reference/error_codes/">Error Codes</a>
             </li>
             <li>
-              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li class="is-active">
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -192,7 +194,7 @@
 <p>Two Session API endpoints, <code class="highlighter-rouge">GET /api/v1/sessions/me</code> and <code class="highlighter-rouge">POST /sessions/me/lifecycle/refresh</code>, return <code class="highlighter-rouge">/me</code> instead of <code class="highlighter-rouge">/:id</code> in response links.
 These links are CORS-enabled, consistent with the original API calls which are also CORS-enabled.</p>
 
-<p>For more information, see <a href="http://developer.okta.com/docs/api/resources/sessions#get-session">Get Session</a> or <a href="http://developer.okta.com/docs/api/resources/sessions#refresh-session">Refresh Session</a>.</p>
+<p>For more information, see <a href="/docs/api/resources/sessions#get-session">Get Session</a> or <a href="/docs/api/resources/sessions#refresh-session">Refresh Session</a>.</p>
 
 <h2 id="bugs-fixed">Bugs Fixed</h2>
 
@@ -200,9 +202,9 @@ These links are CORS-enabled, consistent with the original API calls which are a
 
 <ul>
   <li>IdP keys could be deleted even when referenced by an active or inactive app instance. (OKTA-96139)</li>
-  <li>Properties could be deleted from the <a href="http://developer.okta.com/docs/api/resources/schemas.html#remove-property-from-user-profile-schema">User Profile schema</a>
+  <li>Properties could be deleted from the <a href="/docs/api/resources/schemas.html#remove-property-from-user-profile-schema">User Profile schema</a>
 while still referenced as a <code class="highlighter-rouge">matchAttribute</code> in inbound SAML IdPs. (OKTA-96281)</li>
-  <li>Identity Providers for social authentication configured to look up usernames by Okta username or email failed to return a valid match. 
+  <li>Identity Providers for social authentication configured to look up usernames by Okta username or email failed to return a valid match.
 This failure occurred if the username was in both the username and email and a second user existed with the same email but different username. (OKTA-96335)</li>
 </ul>
 
@@ -233,7 +235,7 @@ This failure occurred if the username was in both the username and email and a s
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

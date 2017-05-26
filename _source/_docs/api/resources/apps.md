@@ -2529,7 +2529,7 @@ curl -v -X PUT \
 {:.api .api-operation}
 
 Update the [app's `profile` property](#application-properties), a container for any valid JSON schema that can be referenced from a request.
-For example, add an app manager contact email address, 
+For example, add an app manager contact email address,
 or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
 
 To add a `profile` property to an OpenID Connect public client app:
@@ -3545,7 +3545,7 @@ Clones a X.509 certificate for an application key credential from a source appli
 
 > Important: Sharing certificates is not a recommended security practice.
 
-For step-by-step instructions to clone a credential, see [Share Application Key Credentials Between Apps](http://developer.okta.com/docs/how-to/sharing-cert.html).
+For step-by-step instructions to clone a credential, see [Share Application Key Credentials Between Apps](/docs/how-to/sharing-cert.html).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -4335,7 +4335,7 @@ Applications have the following properties:
 | ---------------- | -------------------------------------------- | ------------------------------------------------------------------ | ---------- | -------- | ---------- | ----------- | ----------- |
 
 Property details
- 
+
  * `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created.
  * `profile` is only available for OpenID Connect apps. See [Set Profile Property for OpenID Connect Apps](#set-profile-property-for-openid-connect-apps).
 

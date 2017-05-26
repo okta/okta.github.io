@@ -41,7 +41,7 @@ This article will show you how to build a PWA with a Spring Boot backend and an 
 
 ## Run a Spring Boot API
 
-In [part 1 of this series](http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular), I showed you how to create an API with Spring Boot and display its data in an Angular UI. You'll be using that project as a starting point for this tutorial. You'll adding offline capabilities by turning it into a PWA.
+In [part 1 of this series](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular), I showed you how to create an API with Spring Boot and display its data in an Angular UI. You'll be using that project as a starting point for this tutorial. You'll adding offline capabilities by turning it into a PWA.
 
 To begin, clone the project from GitHub.
 

@@ -4,7 +4,7 @@ email: developers@okta.com
 description: > # this means to ignore newlines until "baseurl:"
   Secure, scalable, and highly available authentication and user management for any app.
 baseurl: ""
-url: "http://developer.okta.com"
+url: "https://developer.okta.com"
 twitter_username: okta
 github_username:  oktadeveloper
 
@@ -35,7 +35,7 @@ ga_ua_id: "UA-15777010-3"
 
 # This is different from "url"
 # This variable will prevent user from committing sitemap with local url
-production_url: "http://developer.okta.com"
+production_url: "https://developer.okta.com"
 
 include: [_static]
 

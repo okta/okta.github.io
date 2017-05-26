@@ -7,7 +7,7 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -42,8 +42,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Angular Authentication with OpenID Connect and Okta in 20 Minutes | Okta Developer</title>
   <meta name="description" content="Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular’s focus...">
-  <link rel="canonical" href="http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
     <body id="blog">
@@ -79,12 +79,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -96,11 +96,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
 
 	<div class="page-content">
@@ -796,7 +798,7 @@ The function calls a <code class="highlighter-rouge">gotoList()</code> function 
 
 <p>In this screenshot, you might notice the address fields are blank. This is explained by the error in your console.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>If ngModel is used within a form tag, either the name attribute must be set or the form 
+<div class="highlighter-rouge"><pre class="highlight"><code>If ngModel is used within a form tag, either the name attribute must be set or the form
 control must be defined as 'standalone' in ngModelOptions.
 
 Example 1: &lt;input [(ngModel)]="person.firstName" name="first"&gt;
@@ -848,7 +850,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see <a href="https://openid.net/connect/">https://openid.net/connect/</a>.</p>
 
-<p>To integrate <a href="http://developer.okta.com">Okta</a> for user authentication, you’ll first need to <a href="https://www.okta.com/developer/signup/">register</a> and create an OIDC application.</p>
+<p>To integrate <a href="https://developer.okta.com">Okta</a> for user authentication, you’ll first need to <a href="https://www.okta.com/developer/signup/">register</a> and create an OIDC application.</p>
 
 <p>Login to your Okta account, or <a href="https://www.okta.com/developer/signup/">create one</a> if you don’t have one. Navigate to <strong>Admin &gt; Add Applications</strong> and click on the <strong>Create New App</strong> button. Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method. Click the <strong>Create</strong> button and give your application a name. On the next screen, add <code class="highlighter-rouge">http://localhost:4200</code> as a Redirect URI and click *Finish**. You should see settings like the following.</p>
 
@@ -991,7 +993,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <h3 id="authentication-with-the-okta-auth-sdk">Authentication with the Okta Auth SDK</h3>
 
-<p>The Okta Auth SDK builds on top of Otka’s <a href="http://developer.okta.com/docs/api/resources/authn.html">Authentication API</a> and <a href="http://developer.okta.com/docs/api/resources/oidc.html">OAuth 2.0 API</a> to enable you to create a fully branded sign-in experience using JavaScript.</p>
+<p>The Okta Auth SDK builds on top of Otka’s <a href="/docs/api/resources/authn.html">Authentication API</a> and <a href="/docs/api/resources/oidc.html">OAuth 2.0 API</a> to enable you to create a fully branded sign-in experience using JavaScript.</p>
 
 <p>Install it using npm:</p>
 
@@ -1072,7 +1074,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
   <span class="nx">password</span><span class="p">;</span>
 
   <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{</span>
-  <span class="p">}</span>  
+  <span class="p">}</span>
   <span class="p">...</span>
   <span class="nx">loginWithPassword</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -1140,7 +1142,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

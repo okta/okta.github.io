@@ -7,7 +7,7 @@
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
   <head><head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -42,8 +42,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Build an Angular App with Okta's Sign-In Widget in 15 Minutes | Okta Developer</title>
   <meta name="description" content="AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibi...">
-  <link rel="canonical" href="http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
     <body id="blog">
@@ -79,12 +79,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -96,11 +96,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
 
 	<div class="page-content">
@@ -136,13 +138,13 @@
 	    <section class="post-content">
 	     <p>AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibility for their next version, there was a bit of a stir in its community, giving opportunities for frameworks like React and Vue.js to flourish. Fast forward a few years and both Angular 2 and Angular 4 have been released. Many developers are trying its TypeScript and finding the experience a pleasant one. <a href="https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html">According to JAXenter</a>, it’s doing a pretty good job, and holding strong as the third most popular UI framework, behind React and HTML5.</p>
 
-<p>In this article, I’ll show you a quick way to get started with Angular, and add user authentication with <a href="http://developer.okta.com/code/javascript/okta_sign-in_widget">Okta’s Sign-In Widget</a>. If you’re just getting started with Angular, you might want to read my <a href="http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc">Angular tutorial</a>. If you’d like to get the source code used in this article, you can <a href="https://github.com/oktadeveloper/okta-angular-sign-in-widget-example">find it on GitHub</a>.</p>
+<p>In this article, I’ll show you a quick way to get started with Angular, and add user authentication with <a href="/code/javascript/okta_sign-in_widget">Okta’s Sign-In Widget</a>. If you’re just getting started with Angular, you might want to read my <a href="http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc">Angular tutorial</a>. If you’d like to get the source code used in this article, you can <a href="https://github.com/oktadeveloper/okta-angular-sign-in-widget-example">find it on GitHub</a>.</p>
 
 <h2 id="why-user-authentication-with-okta">Why User Authentication with Okta?</h2>
 
 <p>Okta provides an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. We make user account management easier, more secure, and scalable so you can get to production sooner.</p>
 
-<p>The <a href="http://developer.okta.com/code/javascript/okta_sign-in_widget_ref">Okta Sign-in Widget</a> provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.</p>
+<p>The <a href="/code/javascript/okta_sign-in_widget_ref">Okta Sign-in Widget</a> provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.</p>
 
 <h2 id="create-an-angular-application">Create an Angular Application</h2>
 
@@ -265,7 +267,7 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>OpenID Connect is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see http://openid.net/connect/.</p>
 
-<p>Login to your Okta account, or create one at <a href="http://developer.okta.com">http://developer.okta.com</a> if you don’t have one. Navigate to <strong>Admin &gt; Add Applications</strong> and click on the <strong>Create New App</strong> button. Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method. Click the <strong>Create</strong> button and give your application a name. On the next screen, add <strong>http://localhost:4200</strong> as a Redirect URI and click <strong>Finish</strong>. You should see settings like the following.</p>
+<p>Login to your Okta account, or create one at <a href="https://developer.okta.com">https://developer.okta.com</a> if you don’t have one. Navigate to <strong>Admin &gt; Add Applications</strong> and click on the <strong>Create New App</strong> button. Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method. Click the <strong>Create</strong> button and give your application a name. On the next screen, add <strong>http://localhost:4200</strong> as a Redirect URI and click <strong>Finish</strong>. You should see settings like the following.</p>
 
 <p><img src="/assets/blog/angular-sign-in-widget/oidc-settings-5e9f630db270b1c886a5cddd3524f6ccca8889efe98e6c04608f0373bb096b91.png" alt="OIDC App Settings" width="800" /></p>
 
@@ -338,15 +340,15 @@ Project <span class="s1">'angular-okta-example'</span> successfully created.
 
 <p>However, if you look at your browser’s console, you’ll likely see an error:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to 
-preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is 
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to
+preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is
 present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
 </code></pre>
 </div>
 
-<p>This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard, 
+<p>This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard,
 select <strong>Security</strong> &gt; <strong>API</strong> &gt; <strong>Trusted Origins</strong>. Click the “Add Origin” button and specify <code class="highlighter-rouge">http://localhost:4200</code>
-as the Origin URL with Type <code class="highlighter-rouge">CORS</code>. For more specific instructions, see Okta’s <a href="http://developer.okta.com/docs/api/getting_started/enabling_cors.html">Enabling CORS documentation</a>.</p>
+as the Origin URL with Type <code class="highlighter-rouge">CORS</code>. For more specific instructions, see Okta’s <a href="/docs/api/getting_started/enabling_cors.html">Enabling CORS documentation</a>.</p>
 
 <p><img src="/assets/blog/angular-sign-in-widget/cors-configuration-3ea19bdd525497544ceed789e84628e14586c0d314c8890025671155004a8264.png" alt="CORS Configuration" width="800" /></p>
 
@@ -454,7 +456,7 @@ Chrome 56.0.2924 <span class="o">(</span>Mac OS X 10.11.6<span class="o">)</span
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

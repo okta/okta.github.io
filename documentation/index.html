@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -36,8 +36,8 @@
   <title>Okta Developer</title>
   <meta name="description" content="Secure, scalable, and highly available authentication and user management for any app.
 ">
-  <link rel="canonical" href="http://developer.okta.com/documentation/">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/documentation/">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
@@ -75,12 +75,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -92,11 +92,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
      <!-- END Header -->
     <section class="PageContent">
@@ -121,7 +123,7 @@
         
       
       <div class="Column--4 Column--small-12">
-	<a href="/use_cases/authentication">
+	<a href="/use_cases/authentication/">
 	  <h3 class="h4">Authentication</h3>
 	</a>
 	<p>
@@ -131,7 +133,7 @@
       
       
       <div class="Column--4 Column--small-12">
-	<a href="/use_cases/mfa">
+	<a href="/use_cases/mfa/">
 	  <h3 class="h4">Multi-Factor Authentication</h3>
 	</a>
 	<p>
@@ -145,7 +147,7 @@
         
       
       <div class="Column--4 Column--small-12">
-	<a href="/use_cases/api_access_management">
+	<a href="/use_cases/api_access_management/">
 	  <h3 class="h4">API Access Management</h3>
 	</a>
 	<p>
@@ -155,7 +157,7 @@
       
       
       <div class="Column--4 Column--small-12">
-	<a href="/use_cases/integrate_with_okta">
+	<a href="/use_cases/integrate_with_okta/">
 	  <h3 class="h4">Integrate with Okta</h3>
 	</a>
 	<p>
@@ -198,14 +200,14 @@
       </div>
     
       <div class="Column--4 Column--small-12">
-	<a href="/reference/error_codes">
+	<a href="/reference/error_codes/">
 	  <h3 class="h4">Error Codes</h3>
 	</a>
 	<p>Information about the errors that the Okta API returns.</p>
       </div>
     
       <div class="Column--4 Column--small-12">
-	<a href="/reference/okta_expression_language">
+	<a href="/reference/okta_expression_language/">
 	  <h3 class="h4">Okta Expression Language</h3>
 	</a>
 	<p>The features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API.</p>
@@ -255,7 +257,7 @@
     <!-- END Grid w/Language Tiles -->
 
     
-    
+
   </div>
   <!-- END Page Content -->
 
@@ -269,7 +271,7 @@
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

@@ -11,8 +11,8 @@ OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract de
 
 Note that clients managed via this API are modeled as applications in Okta and appear in the Applications section of the
 Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
-follow the rules described in [Access Token](http://developer.okta.com/docs/api/resources/oauth2.html#access-token)
-and [ID Token](http://developer.okta.com/docs/api/resources/oauth2.html#id-token).
+follow the rules described in [Access Token](/docs/api/resources/oauth2.html#access-token)
+and [ID Token](/docs/api/resources/oauth2.html#id-token).
 
 > This API is a {% api_lifecycle beta%} feature.
 

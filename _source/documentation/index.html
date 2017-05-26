@@ -19,7 +19,7 @@ redirect_from:
         {% continue %}
       {% endunless %}
       <div class="Column--4 Column--small-12">
-	<a href="{{ document.url | remove: '/index' }}">
+	<a href="{{ document.url | remove: '/index' | append: '/' }}">
 	  <h3 class="h4">{{ document.title }}</h3>
 	</a>
 	<p>
@@ -37,7 +37,7 @@ redirect_from:
     {% assign documents = site.reference | sort:'weight' %}
       {% for document in documents %}
       <div class="Column--4 Column--small-12">
-	<a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' }}{% else %}{{ document.link }}{% endif %}">
+	<a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' | append: '/' }}{% else %}{{ document.link }}{% endif %}">
 	  <h3 class="h4">{{ document.title }}</h3>
 	</a>
 	<p>{{ document.excerpt }}</p>
@@ -76,6 +76,6 @@ redirect_from:
     </div>
     <!-- END Grid w/Standards -->
     {% endcomment %}
-    
+
   </div>
   <!-- END Page Content -->

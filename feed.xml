@@ -4,8 +4,8 @@
     <title>Okta Developer</title>
     <description>Secure, scalable, and highly available authentication and user management for any app.
 </description>
-    <link>http://developer.okta.com</link>
-    <atom:link href="http://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://developer.okta.com</link>
+    <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
         <title>Tutorial: Develop a Mobile App With Ionic and Spring Boot</title>
@@ -23,7 +23,7 @@
 
 &lt;h2 id=&quot;build-a-spring-boot-api&quot;&gt;Build a Spring Boot API&lt;/h2&gt;
 
-&lt;p&gt;I recently wrote about how to build a Spring Boot API in &lt;a href=&quot;http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;Bootiful Development with Spring Boot with Angular&lt;/a&gt;. Rather than covering that again, you can clone the existing project and copy the &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt; directory into &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-boot-ionic-example&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I recently wrote about how to build a Spring Boot API in &lt;a href=&quot;/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;Bootiful Development with Spring Boot with Angular&lt;/a&gt;. Rather than covering that again, you can clone the existing project and copy the &lt;code class=&quot;highlighter-rouge&quot;&gt;server&lt;/code&gt; directory into &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-boot-ionic-example&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/oktadeveloper/spring-boot-angular-example.git
 cp -r spring-boot-angular-example/server ~/spring-boot-ionic-example/.
@@ -360,7 +360,7 @@ beer.ts
 
 &lt;p&gt;Start the Spring Boot app in one terminal window and run &lt;code class=&quot;highlighter-rouge&quot;&gt;ionic serve&lt;/code&gt; in another. Open &lt;a href=&quot;http://localhost:8100&quot;&gt;http://localhost:8100&lt;/a&gt; in your browser. Click on the Beer icon, and you’ll likely see an error in your browser.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught (in promise): Error: No provider for Http! 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught (in promise): Error: No provider for Http!
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -383,8 +383,8 @@ beer.ts
 
 &lt;p&gt;After making this change, you’ll likely see the following error in your browser’s console.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' 
-header is present on the requested resource. Origin 'http://localhost:8100' is therefore 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin'
+header is present on the requested resource. Origin 'http://localhost:8100' is therefore
 not allowed access. The response had HTTP status code 401.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -573,7 +573,7 @@ not allowed access. The response had HTTP status code 401.
 
 &lt;p&gt;At this point, if you try to add or edit a beer name, you’ll likely see an error in your browser’s console.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught (in promise): Error: No component factory found for BeerModalPage. 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Uncaught (in promise): Error: No component factory found for BeerModalPage.
 Did you add it to @NgModule.entryComponents?
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -764,7 +764,7 @@ open platforms/ios/MyApp.xcodeproj
 &lt;p&gt;To deploy to the Android emulator, run &lt;code class=&quot;highlighter-rouge&quot;&gt;ionic cordova emulate android&lt;/code&gt;. This will install Andorid support and print out instructions about how to create an emulator image.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: No emulator images (avds) found.
-1. Download desired System Image by running: 
+1. Download desired System Image by running:
 /Users/mraible/Library/Android/sdk/tools/android sdk
 2. Create an AVD by running: /Users/mraible/Library/Android/sdk/tools/android avd
 HINT: For a faster emulator, use an Intel System Image and install the HAXM device driver
@@ -813,15 +813,15 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://ionicframework.com/getting-started/&quot;&gt;Get started with Ionic Framework&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;&gt;Build Your First Progressive Web Application with Angular and Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;Bootiful Development with Spring Boot and Angular&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc&quot;&gt;Angular Authentication with OpenID Connect and Okta in 20 Minutes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;&gt;Build Your First Progressive Web Application with Angular and Spring Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;Bootiful Development with Spring Boot and Angular&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2017/04/17/angular-authentication-with-oidc&quot;&gt;Angular Authentication with OpenID Connect and Okta in 20 Minutes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </description>
-        <pubDate>Wed, 17 May 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot</guid>
+        <pubDate>Wed, 17 May 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot</guid>
       </item>
     
       <item>
@@ -924,9 +924,9 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 &lt;h3 id=&quot;more-containers-to-come&quot;&gt;More Containers to Come!&lt;/h3&gt;
 &lt;p&gt;Keep an eye out for future posts about Docker where we’ll look at creating images and containers from a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; and how to coordinate an environment of containers (API, database and UI) with Docker-Compose.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 10 May 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</guid>
+        <pubDate>Wed, 10 May 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</guid>
       </item>
     
       <item>
@@ -973,7 +973,7 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 
 &lt;h2 id=&quot;run-a-spring-boot-api&quot;&gt;Run a Spring Boot API&lt;/h2&gt;
 
-&lt;p&gt;In &lt;a href=&quot;http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;part 1 of this series&lt;/a&gt;, I showed you how to create an API with Spring Boot and display its data in an Angular UI. You’ll be using that project as a starting point for this tutorial. You’ll adding offline capabilities by turning it into a PWA.&lt;/p&gt;
+&lt;p&gt;In &lt;a href=&quot;/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;part 1 of this series&lt;/a&gt;, I showed you how to create an API with Spring Boot and display its data in an Angular UI. You’ll be using that project as a starting point for this tutorial. You’ll adding offline capabilities by turning it into a PWA.&lt;/p&gt;
 
 &lt;p&gt;To begin, clone the project from GitHub.&lt;/p&gt;
 
@@ -1428,9 +1428,9 @@ cf push -p target/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;jar pwa-server
   &lt;li&gt;&lt;a href=&quot;https://github.com/tastejs/hacker-news-pwas&quot;&gt;Hacker News Readers as Progressive Web Apps&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Tue, 09 May 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</guid>
+        <pubDate>Tue, 09 May 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</guid>
       </item>
     
       <item>
@@ -1475,9 +1475,9 @@ cf push -p target/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;jar pwa-server
 &lt;p&gt;Visual Studio has always been the editor of choice for those writing .NET applications and tapping into the Microsoft ecosystem. It has always had all the tools developers need to be their best, most productive selves. Now Microsoft has done some outstanding work to include and integrate with non-Microsoft tools that developers love to use, as well as help developers discover problems in their code, and improve the performance of their IDE. With the new additions and improvements in Visual Studio 2017, developers should love it even more!&lt;/p&gt;
 
 </description>
-        <pubDate>Wed, 03 May 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/05/03/seven-new-vs-features</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/05/03/seven-new-vs-features</guid>
+        <pubDate>Wed, 03 May 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/05/03/seven-new-vs-features</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/05/03/seven-new-vs-features</guid>
       </item>
     
       <item>
@@ -1922,17 +1922,17 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 &lt;p&gt;To learn more about Angular, Spring Boot, or Okta, check out the following resources:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc&quot;&gt;Angular with OpenID Connect&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.okta.com/blog/2017/03/21/spring-boot-oauth&quot;&gt;Get Started with Spring Boot, OAuth 2.0, and Okta&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2017/04/17/angular-authentication-with-oidc&quot;&gt;Angular with OpenID Connect&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2017/03/21/spring-boot-oauth&quot;&gt;Get Started with Spring Boot, OAuth 2.0, and Okta&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://youtu.be/sbPSjI4tt10&quot;&gt;Getting Started with Spring Boot by Josh Long&lt;/a&gt; (SF JUG 2015)&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://youtu.be/hHNUohOPCCo&quot;&gt;Angular Best Practices by Stephen Fluin&lt;/a&gt; (ng-conf 2017)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;You can find the source code associated with this article &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-angular-example&quot;&gt;on GitHub&lt;/a&gt;. If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;okta tag&lt;/a&gt;. Of course, you can always &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;ping me on Twitter&lt;/a&gt; too.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 26 Apr 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</guid>
+        <pubDate>Wed, 26 Apr 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</guid>
       </item>
     
       <item>
@@ -2599,7 +2599,7 @@ The function calls a &lt;code class=&quot;highlighter-rouge&quot;&gt;gotoList()&
 
 &lt;p&gt;In this screenshot, you might notice the address fields are blank. This is explained by the error in your console.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;If ngModel is used within a form tag, either the name attribute must be set or the form 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;If ngModel is used within a form tag, either the name attribute must be set or the form
 control must be defined as 'standalone' in ngModelOptions.
 
 Example 1: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; name=&quot;first&quot;&amp;gt;
@@ -2651,7 +2651,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;p&gt;OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see &lt;a href=&quot;https://openid.net/connect/&quot;&gt;https://openid.net/connect/&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;To integrate &lt;a href=&quot;http://developer.okta.com&quot;&gt;Okta&lt;/a&gt; for user authentication, you’ll first need to &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;register&lt;/a&gt; and create an OIDC application.&lt;/p&gt;
+&lt;p&gt;To integrate &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt; for user authentication, you’ll first need to &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;register&lt;/a&gt; and create an OIDC application.&lt;/p&gt;
 
 &lt;p&gt;Login to your Okta account, or &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;create one&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; as a Redirect URI and click *Finish**. You should see settings like the following.&lt;/p&gt;
 
@@ -2794,7 +2794,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;h3 id=&quot;authentication-with-the-okta-auth-sdk&quot;&gt;Authentication with the Okta Auth SDK&lt;/h3&gt;
 
-&lt;p&gt;The Okta Auth SDK builds on top of Otka’s &lt;a href=&quot;http://developer.okta.com/docs/api/resources/authn.html&quot;&gt;Authentication API&lt;/a&gt; and &lt;a href=&quot;http://developer.okta.com/docs/api/resources/oidc.html&quot;&gt;OAuth 2.0 API&lt;/a&gt; to enable you to create a fully branded sign-in experience using JavaScript.&lt;/p&gt;
+&lt;p&gt;The Okta Auth SDK builds on top of Otka’s &lt;a href=&quot;/docs/api/resources/authn.html&quot;&gt;Authentication API&lt;/a&gt; and &lt;a href=&quot;/docs/api/resources/oidc.html&quot;&gt;OAuth 2.0 API&lt;/a&gt; to enable you to create a fully branded sign-in experience using JavaScript.&lt;/p&gt;
 
 &lt;p&gt;Install it using npm:&lt;/p&gt;
 
@@ -2875,7 +2875,7 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
   &lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
   &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;oauthService&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;OAuthService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;router&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Router&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
   &lt;span class=&quot;nx&quot;&gt;loginWithPassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oauthService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createAndSaveNonce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nonce&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -2927,16 +2927,16 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 &lt;/div&gt;
 
 </description>
-        <pubDate>Mon, 17 Apr 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</guid>
+        <pubDate>Mon, 17 Apr 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</guid>
       </item>
     
       <item>
         <title>Build a React Application with User Authentication in 15 Minutes</title>
         <description>&lt;p&gt;React has quickly become one of the most favored front-end web frameworks, and is second only to plain old HTML5, &lt;a href=&quot;https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html&quot;&gt;according to JAXenter&lt;/a&gt;. So it’s no surprise that &lt;a href=&quot;https://www.lynda.com/React-js-training-tutorials/7049-0.html&quot;&gt;developers are learning it&lt;/a&gt;, and &lt;a href=&quot;https://stackoverflow.com/jobs?sort=i&amp;amp;q=ReactJS&quot;&gt;employers are asking for it&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using &lt;a href=&quot;http://developer.okta.com/code/javascript/okta_sign-in_widget&quot;&gt;Okta’s Sign-In Widget&lt;/a&gt;. The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!&lt;/p&gt;
+&lt;p&gt;In this tutorial, you’ll start with a very simple React app with a couple of pages and some routing built in, and add authentication using &lt;a href=&quot;/code/javascript/okta_sign-in_widget&quot;&gt;Okta’s Sign-In Widget&lt;/a&gt;. The Sign-In Widget is an embeddable Javascript widget that allows developers to use Okta’s secure, scalable architecture with a minimum of effort from within React applications. Let’s get started!&lt;/p&gt;
 &lt;h2 id=&quot;get-the-simple-react-seed-project&quot;&gt;Get the Simple React Seed Project&lt;/h2&gt;
 &lt;p&gt;Start by cloning the simple React seed project.&lt;/p&gt;
 
@@ -2962,7 +2962,7 @@ npm start
 &lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener-793639e55e4967b968ae363f1af37e4f1ec426d08fb0fe2ea7300459d84d3c87.png&quot; alt=&quot;Okta in node_modules&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then add the styles for the widget in your &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file from the Okta CDN:&lt;/p&gt;
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; 
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt;
      &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.9.0/css/okta-sign-in.min.css&quot;&lt;/span&gt;
       &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/css&quot;&lt;/span&gt;
       &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
@@ -3002,9 +3002,9 @@ npm start
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;h2 id=&quot;add-the-openid-connect-application-in-okta&quot;&gt;Add the OpenID Connect Application in Okta&lt;/h2&gt;
-&lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the &lt;a href=&quot;http://developer.okta.com/&quot;&gt;Okta developer portal&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta developer portal&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;So log in to your Okta account, [or create one](http://developer.okta.com] if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
+&lt;p&gt;So log in to your Okta account, [or create one](https://developer.okta.com] if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener-757b218884250a613b267c5d2c0b2a01292d96efd85a0c0706cc50e39ac6779d.png&quot; alt=&quot;OIDC Application Settings&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
@@ -3144,7 +3144,7 @@ npm start
 
   &lt;span class=&quot;nx&quot;&gt;showLogin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;Backbone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;history&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;renderEl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loginContainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;renderEl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loginContainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
       &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;claims&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
       &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
@@ -3194,22 +3194,22 @@ npm start
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;, leave a comment below, or open an issue on GitHub.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 30 Mar 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</guid>
+        <pubDate>Thu, 30 Mar 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</guid>
       </item>
     
       <item>
         <title>Build an Angular App with Okta's Sign-In Widget in 15 Minutes</title>
         <description>&lt;p&gt;AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibility for their next version, there was a bit of a stir in its community, giving opportunities for frameworks like React and Vue.js to flourish. Fast forward a few years and both Angular 2 and Angular 4 have been released. Many developers are trying its TypeScript and finding the experience a pleasant one. &lt;a href=&quot;https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html&quot;&gt;According to JAXenter&lt;/a&gt;, it’s doing a pretty good job, and holding strong as the third most popular UI framework, behind React and HTML5.&lt;/p&gt;
 
-&lt;p&gt;In this article, I’ll show you a quick way to get started with Angular, and add user authentication with &lt;a href=&quot;http://developer.okta.com/code/javascript/okta_sign-in_widget&quot;&gt;Okta’s Sign-In Widget&lt;/a&gt;. If you’re just getting started with Angular, you might want to read my &lt;a href=&quot;http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc&quot;&gt;Angular tutorial&lt;/a&gt;. If you’d like to get the source code used in this article, you can &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example&quot;&gt;find it on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this article, I’ll show you a quick way to get started with Angular, and add user authentication with &lt;a href=&quot;/code/javascript/okta_sign-in_widget&quot;&gt;Okta’s Sign-In Widget&lt;/a&gt;. If you’re just getting started with Angular, you might want to read my &lt;a href=&quot;http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc&quot;&gt;Angular tutorial&lt;/a&gt;. If you’d like to get the source code used in this article, you can &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example&quot;&gt;find it on GitHub&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;why-user-authentication-with-okta&quot;&gt;Why User Authentication with Okta?&lt;/h2&gt;
 
 &lt;p&gt;Okta provides an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. We make user account management easier, more secure, and scalable so you can get to production sooner.&lt;/p&gt;
 
-&lt;p&gt;The &lt;a href=&quot;http://developer.okta.com/code/javascript/okta_sign-in_widget_ref&quot;&gt;Okta Sign-in Widget&lt;/a&gt; provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;/code/javascript/okta_sign-in_widget_ref&quot;&gt;Okta Sign-in Widget&lt;/a&gt; provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.&lt;/p&gt;
 
 &lt;h2 id=&quot;create-an-angular-application&quot;&gt;Create an Angular Application&lt;/h2&gt;
 
@@ -3332,7 +3332,7 @@ Project &lt;span class=&quot;s1&quot;&gt;'angular-okta-example'&lt;/span&gt; suc
 
 &lt;p&gt;OpenID Connect is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see http://openid.net/connect/.&lt;/p&gt;
 
-&lt;p&gt;Login to your Okta account, or create one at &lt;a href=&quot;http://developer.okta.com&quot;&gt;http://developer.okta.com&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;strong&gt;http://localhost:4200&lt;/strong&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like the following.&lt;/p&gt;
+&lt;p&gt;Login to your Okta account, or create one at &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;strong&gt;http://localhost:4200&lt;/strong&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like the following.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/oidc-settings-5e9f630db270b1c886a5cddd3524f6ccca8889efe98e6c04608f0373bb096b91.png&quot; alt=&quot;OIDC App Settings&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
@@ -3405,15 +3405,15 @@ Project &lt;span class=&quot;s1&quot;&gt;'angular-okta-example'&lt;/span&gt; suc
 
 &lt;p&gt;However, if you look at your browser’s console, you’ll likely see an error:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to 
-preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to
+preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is
 present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard, 
+&lt;p&gt;This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard,
 select &lt;strong&gt;Security&lt;/strong&gt; &amp;gt; &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Trusted Origins&lt;/strong&gt;. Click the “Add Origin” button and specify &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt;
-as the Origin URL with Type &lt;code class=&quot;highlighter-rouge&quot;&gt;CORS&lt;/code&gt;. For more specific instructions, see Okta’s &lt;a href=&quot;http://developer.okta.com/docs/api/getting_started/enabling_cors.html&quot;&gt;Enabling CORS documentation&lt;/a&gt;.&lt;/p&gt;
+as the Origin URL with Type &lt;code class=&quot;highlighter-rouge&quot;&gt;CORS&lt;/code&gt;. For more specific instructions, see Okta’s &lt;a href=&quot;/docs/api/getting_started/enabling_cors.html&quot;&gt;Enabling CORS documentation&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/cors-configuration-3ea19bdd525497544ceed789e84628e14586c0d314c8890025671155004a8264.png&quot; alt=&quot;CORS Configuration&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
@@ -3505,9 +3505,9 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;on Twitter&lt;/a&gt;, &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;post a question to Stack Overflow with an “okta” tag&lt;/a&gt;, or &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new&quot;&gt;open a new issue on GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 27 Mar 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</guid>
+        <pubDate>Mon, 27 Mar 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</guid>
       </item>
     
       <item>
@@ -3575,7 +3575,7 @@ brew install springboot
 
 &lt;h2 id=&quot;create-an-authorization-server-in-okta&quot;&gt;Create an Authorization Server in Okta&lt;/h2&gt;
 
-&lt;p&gt;To start authenticating against Okta’a API, you have to first create a developer account on &lt;a href=&quot;http://developer.okta.com&quot;&gt;http://developer.okta.com&lt;/a&gt;. After activating your account, sign in and navigate to &lt;strong&gt;Security &amp;gt; API&lt;/strong&gt; and click on the &lt;strong&gt;Add Authorization Server&lt;/strong&gt; button.&lt;/p&gt;
+&lt;p&gt;To start authenticating against Okta’a API, you have to first create a developer account on &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt;. After activating your account, sign in and navigate to &lt;strong&gt;Security &amp;gt; API&lt;/strong&gt; and click on the &lt;strong&gt;Add Authorization Server&lt;/strong&gt; button.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/1-add-auth-server-a7f86ce0c69a220e33d69e3e83e489f0152c7f29deaa28af6050f90e23c678b8.png&quot; alt=&quot;Add Authorization Server&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
@@ -3633,10 +3633,10 @@ brew install springboot
       &lt;span class=&quot;s&quot;&gt;clientSecret&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# clientSecret&lt;/span&gt;
       &lt;span class=&quot;c1&quot;&gt;# From Authorization Server's metadata&lt;/span&gt;
       &lt;span class=&quot;s&quot;&gt;accessTokenUri&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# token_endpoint&lt;/span&gt;
-      &lt;span class=&quot;s&quot;&gt;userAuthorizationUri&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# authorization_endpoint &lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;userAuthorizationUri&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# authorization_endpoint&lt;/span&gt;
       &lt;span class=&quot;s&quot;&gt;clientAuthenticationScheme&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;form&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;resource&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;# from your Auth Server's metadata, check .well-known/openid-configuration &lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# from your Auth Server's metadata, check .well-known/openid-configuration&lt;/span&gt;
       &lt;span class=&quot;c1&quot;&gt;# if not in .well-known/oauth-authorization-server&lt;/span&gt;
       &lt;span class=&quot;s&quot;&gt;userInfoUri&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# userinfo_endpoint&lt;/span&gt;
       &lt;span class=&quot;s&quot;&gt;preferTokenInfo&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;false&lt;/span&gt;
@@ -3714,9 +3714,9 @@ brew install springboot
 &lt;p&gt;In a future tutorial, I’ll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that’s secured by Spring Security and does JWT validation.&lt;/p&gt;
 
 </description>
-        <pubDate>Tue, 21 Mar 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/21/spring-boot-oauth</guid>
+        <pubDate>Tue, 21 Mar 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/03/21/spring-boot-oauth</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/03/21/spring-boot-oauth</guid>
       </item>
     
       <item>
@@ -3733,7 +3733,7 @@ brew install springboot
 
 &lt;h2 id=&quot;sign-up-for-an-okta-developer-account&quot;&gt;Sign Up for an Okta Developer Account&lt;/h2&gt;
 
-&lt;p&gt;Fast forward two years, and I find myself as an Okta employee. To start developing with Okta, I created a new developer account at &lt;a href=&quot;http://developer.okta.com&quot;&gt;http://developer.okta.com&lt;/a&gt;. Make sure you take a screenshot or write down your Okta URL after you’ve signed up. You’ll need this URL to get back to the admin console.&lt;/p&gt;
+&lt;p&gt;Fast forward two years, and I find myself as an Okta employee. To start developing with Okta, I created a new developer account at &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt;. Make sure you take a screenshot or write down your Okta URL after you’ve signed up. You’ll need this URL to get back to the admin console.&lt;/p&gt;
 
 &lt;p&gt;You’ll receive an email to activate your account and change your temporary password. After completing these steps, you’ll land on your dashboard with some annotations about “apps”.&lt;/p&gt;
 
@@ -3960,9 +3960,9 @@ Hello SAML!
 &lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Thanks to &lt;a href=&quot;https://github.com/AlexeySoshin&quot;&gt;Alexey Soshin&lt;/a&gt; for contributing a &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2&quot;&gt;pull request&lt;/a&gt; to make the code in this blog post more bootiful!&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 16 Mar 2017 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2017/03/16/spring-boot-saml</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2017/03/16/spring-boot-saml</guid>
+        <pubDate>Thu, 16 Mar 2017 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2017/03/16/spring-boot-saml</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/03/16/spring-boot-saml</guid>
       </item>
     
       <item>
@@ -4041,9 +4041,9 @@ Hello SAML!
 
 &lt;p&gt;&lt;strong&gt;Happy Okta’ing!&lt;/strong&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 22 Mar 2016 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</guid>
+        <pubDate>Tue, 22 Mar 2016 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</guid>
       </item>
     
       <item>
@@ -4071,9 +4071,9 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/150714428&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Tue, 05 Jan 2016 00:00:00 -0500</pubDate>
-        <link>http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</guid>
+        <pubDate>Tue, 05 Jan 2016 00:00:00 -0800</pubDate>
+        <link>https://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</guid>
       </item>
     
       <item>
@@ -4086,9 +4086,9 @@ services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 -0500</pubDate>
-        <link>http://developer.okta.com/blog/2015/12/07/oauth</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/07/oauth</guid>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
+        <link>https://developer.okta.com/blog/2015/12/07/oauth</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/12/07/oauth</guid>
       </item>
     
       <item>
@@ -4503,9 +4503,9 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;https://jersey.java.net/documentation/latest/client.html#d0e5128&quot;&gt;Jersey client documentation&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Wed, 02 Dec 2015 00:00:00 -0500</pubDate>
-        <link>http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</guid>
+        <pubDate>Wed, 02 Dec 2015 00:00:00 -0800</pubDate>
+        <link>https://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</guid>
       </item>
     
       <item>
@@ -4564,9 +4564,9 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.&lt;/em&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Jun 2015 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2015/06/11/trustpage</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/06/11/trustpage</guid>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2015/06/11/trustpage</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/06/11/trustpage</guid>
       </item>
     
       <item>
@@ -4650,9 +4650,9 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 
 &lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 22 May 2015 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2015/05/22/tcmalloc</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/22/tcmalloc</guid>
+        <pubDate>Fri, 22 May 2015 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2015/05/22/tcmalloc</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/05/22/tcmalloc</guid>
       </item>
     
       <item>
@@ -4869,9 +4869,9 @@ enforce limits and design for infinity.&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</guid>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/05/08/software-engineering-design-principles</guid>
       </item>
     
       <item>
@@ -4975,9 +4975,9 @@ where we were last fall, our goal is &lt;strong&gt;zero failover time&lt;/strong
 their hands dirty tackling product issues? Our CTO doesn’t code very often, but when
 he does, he patches the JVM.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 08 May 2015 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</guid>
+        <pubDate>Fri, 08 May 2015 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</guid>
       </item>
     
       <item>
@@ -5137,9 +5137,9 @@ steps in writing on our wiki. Thanks guys!&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Thu, 23 Apr 2015 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</guid>
+        <pubDate>Thu, 23 Apr 2015 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</guid>
       </item>
     
       <item>
@@ -5296,9 +5296,9 @@ dependency, not a real one.&lt;/p&gt;
 how to make tests isolated. You can also check out the full code at
 &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 14 Apr 2015 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</guid>
+        <pubDate>Tue, 14 Apr 2015 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</guid>
       </item>
     
       <item>
@@ -5490,9 +5490,9 @@ because of a bad network connection.&lt;/p&gt;
 to achieve test isolation using dependency injection. You can also
 check out the full code at &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 07 Apr 2015 00:00:00 -0400</pubDate>
-        <link>http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
-        <guid isPermaLink="true">http://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</guid>
+        <pubDate>Tue, 07 Apr 2015 00:00:00 -0700</pubDate>
+        <link>https://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</guid>
       </item>
     
   </channel>

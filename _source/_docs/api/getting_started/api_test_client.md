@@ -17,7 +17,7 @@ To use these collections, you'll need to set up your environment, import the col
 
 1. [Create an API token](getting_a_token.html){:target="_blank"}.
 2. [Install the Postman App](https://www.getpostman.com/apps){:target="_blank"}.
-3. Launch Postman and click the 'import button'. Select import from link, and paste this link into the textbox: `http://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
+3. Launch Postman and click the 'import button'. Select import from link, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
     {% img import_enviro.png alt:"Importing the Okta Example Environment" %}
 
 4. Once you have clicked import, make sure the `example.oktapreview.com` environment is selected.
@@ -34,11 +34,11 @@ To use these collections, you'll need to set up your environment, import the col
 
 ## Import a Collection
 
-Import the collection for the Users API: 
+Import the collection for the Users API:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf){:target="_blank"}
 
-> Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page, 
+> Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page,
 or use the [Collections Quick Reference](#collections-quick-reference). This tutorial only requires the Users collection import.
 
 ## Send a Request
@@ -51,7 +51,7 @@ To test your configuration, send a request to list all the users in your org:
     {% img postman_response.png alt:"GET List Users" %}
     If you receive errors, it's likely that one of the values in the environment isn't set correctly. Check the values and try again.
 
-Once you have completed this simple request, you are ready to explore the Okta API. 
+Once you have completed this simple request, you are ready to explore the Okta API.
 
 ## Collections Quick Reference
 
@@ -87,8 +87,8 @@ To find an ID:
 
 1. List a resource collection with a search or filter. For example, list the users in your org, as you did in the previous section.
     {% img postman_response2.png alt:"List Users Response" %}
-    
-2. Copy the `id` of the resource, in this example the `id` for Tony Stark, in your next request. 
+
+2. Copy the `id` of the resource, in this example the `id` for Tony Stark, in your next request.
 
 ### Retain Headers When Clicking Links
 

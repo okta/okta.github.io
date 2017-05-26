@@ -164,7 +164,7 @@ following steps:
 You can skip this step if you already have an Okta organization and
 have the ability to configure CORS on that Okta organization.
 
-If you do have the ability to [configure CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html) for your Okta
+If you do have the ability to [configure CORS](/docs/api/getting_started/enabling_cors.html) for your Okta
 organization, or do not have an Okta organization, you will need to
 create an [Okta Developer Edition](https://www.okta.com/developer/signup/) account for yourself before
 continuing on the steps below.
@@ -174,7 +174,7 @@ continuing on the steps below.
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
 You can enable CORS by following the steps in our guide for
-[guide for Enabling CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the
+[guide for Enabling CORS](/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the
 web server you are using to host the HTML for the Okta Sign-In Widget (see below for instructions). For example, if you plan to host your Sign-In Widget in a page accessible under `http://localhost:8000`, you need to add `http://localhost:8000` as a trusted CORS endpoint in Okta.
 
 To do so, follow the steps below:
@@ -535,6 +535,10 @@ var oktaSignIn = new OktaSignIn({
               { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
               { text: 'Rocket Sled Questions', href: 'http://acme.example.com/questions/rocket-sled' }
             ]
+
+## Troubleshooting
+
+If you are working with a single-page app using the Sign-In Widget and your Okta cookie isn't set, try enabling third-party cookies in the browser.
 
 ## Reference Documentation
 You can find more reference information in the [Okta Sign-In Widget reference](/code/javascript/okta_sign-in_widget_ref) page.

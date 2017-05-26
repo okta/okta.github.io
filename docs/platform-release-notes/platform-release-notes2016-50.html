@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -35,8 +35,8 @@
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
   <meta name="description" content="Summary of changes to the Okta Platform since Release 2016.49">
-  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-50.html">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-50.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
@@ -74,12 +74,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -91,11 +91,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
      <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
@@ -107,16 +109,16 @@
           <h3 class="Sidebar-title">Use Cases</h3>
           <ul class="Sidebar-nav">
             <li>
-              <a href="/use_cases/authentication">Authentication</a>
+              <a href="/use_cases/authentication/">Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/api_access_management">API Access Management</a>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -131,10 +133,10 @@
               <a href="/docs/api/resources/apps.html">API Reference</a>
             </li>
             <li>
-              <a href="/reference/error_codes">Error Codes</a>
+              <a href="/reference/error_codes/">Error Codes</a>
             </li>
             <li>
-              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li class="is-active">
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -188,9 +190,9 @@
 
 <h2 id="new-feature-api-access-management-in-ea-release">New Feature: API Access Management in EA Release</h2>
 
-<p>Okta’s API Access Management helps enterprises protect their APIs using OAuth 2.0 as a Service. 
+<p>Okta’s API Access Management helps enterprises protect their APIs using OAuth 2.0 as a Service.
 By defining flexible security domains, scopes, claims, and access policies, you can control access as narrowly or as widely as needed for your enterprise.
-With this solution, you can create one or more authorization servers, configure scopes, set access policies and have a fully operational OAuth Authorization Service in minutes. 
+With this solution, you can create one or more authorization servers, configure scopes, set access policies and have a fully operational OAuth Authorization Service in minutes.
 We support the full set of core OAuth and OIDC flows (code, implicit, password, client credential, hybrid, and refresh) and are fully spec compliant.</p>
 
 <p><img src="/assets/auth_server2-839d3486c777b77ca22f2a5d308e5f799deb631d920ca0925d69d3d8ba7dba53.png" alt="Authorization Server page" /></p>
@@ -199,7 +201,7 @@ We support the full set of core OAuth and OIDC flows (code, implicit, password, 
 
 <h2 id="feature-enhancement-delete-user-endpoint">Feature Enhancement: Delete User Endpoint</h2>
 
-<p>The endpoint to delete users changed from the Beta endpoint <code class="highlighter-rouge">POST /api/v1/users/{id}/lifecycle/delete</code> 
+<p>The endpoint to delete users changed from the Beta endpoint <code class="highlighter-rouge">POST /api/v1/users/{id}/lifecycle/delete</code>
 to the more intuitive <a href="/docs/api/resources/users.html#delete-user"><code class="highlighter-rouge">DELETE /api/v1/users/{id}</code></a> for EA.
 The Beta endpoint has been removed. <!-- (OKTA-108195) --></p>
 
@@ -218,7 +220,7 @@ scroll to the bottom of the Admin <strong>Dashboard</strong> page to see the ver
 
 <h2 id="looking-for-product-release-notes">Looking for Product Release Notes?</h2>
 
-<p>For changes outside the Okta platform, see the <a href="http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub">Release Notes Knowledge Hub</a>.</p>
+<p>For changes outside the Okta platform, see the <a href="https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub">Release Notes Knowledge Hub</a>.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
@@ -239,7 +241,7 @@ scroll to the bottom of the Admin <strong>Dashboard</strong> page to see the ver
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>

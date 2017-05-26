@@ -37,13 +37,13 @@ The new version of Okta Auth JS, 1.5.0, is available:
 Learn about these and other improvements in [the GitHub repository](http://github.com/okta/okta-auth-js/releases/latest).
 
 #### Key Store Operations are Available for Identity Providers API
-     
+
 Just as you can in the Apps API, you can perform key store operations in the Identity Providers API:
-     
+
 * Generate an X.509 certificate public key
 * Retrieve and list public keys
 
-For more information, see [Identity Provider Signing Key Store Operations](http://developer.okta.com/docs/api/resources/idps.html#identity-provider-signing-key-store-operations).
+For more information, see [Identity Provider Signing Key Store Operations](/docs/api/resources/idps.html#identity-provider-signing-key-store-operations).
 <!-- OKTA-91498 -->
 
 #### New Function for Replacing Strings
@@ -55,7 +55,7 @@ Example:
 `String.replace("This list includes chores", "is", "at") = "That last includes chores"`
 <!-- * `String.replaceOnce("This list includes chores", "is", "at") = "That list includes chores"` -->
 
-For more information, see [Expression Language: String Functions](http://developer.okta.com/reference/okta_expression_language/#string-functions).
+For more information, see [Expression Language: String Functions](/reference/okta_expression_language/#string-functions).
 
 <!-- OKTA-103057, OKTA-103966 -->
 

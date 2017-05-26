@@ -8,7 +8,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.35
 
 ### System Log Enhancement
 
-The names of [AppUser properties](http://developer.okta.com/docs/api/resources/apps.html#application-user-properties)
+The names of [AppUser properties](/docs/api/resources/apps.html#application-user-properties)
 that have changed during an import are included in the system log. <!-- (OKTA-96525) --><!-- ## Bug Fixed -->
 
 ### Does Your Org Have These Changes Yet?

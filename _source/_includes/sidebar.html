@@ -5,7 +5,7 @@
           <h3 class="Sidebar-title">Use Cases</h3>
           <ul class="Sidebar-nav">{% assign documents = site.use_cases | sort: 'weight' %}{% for document in documents %}{% unless document.id contains '/index' %}{% continue %}{% endunless %}
             <li{% if document.title == page.title%} class="is-active"{% endif %}>
-              <a href="{{ document.url | remove: '/index' }}">{{ document.title }}</a>
+              <a href="{{ document.url | remove: '/index' | append: '/'}}">{{ document.title }}</a>
             </li>{%
             endfor %}
           </ul>
@@ -32,7 +32,7 @@
               </ul>{% endif %}
             </li>{% assign documents = site.reference %}{% for document in documents %}{% if document.id contains "docs/api/getting_started" %}{% continue %}{% endif %}{% if document.id contains "docs/api/resources" %}{% continue %}{% endif %}{% if document.id contains "reference/api_reference" %}{% continue %}{% endif %}{% if document.id contains "reference/getting_started" %}{% continue %}{% endif %}{% if document.id contains "reference/authentication_reference" %}{% continue %}{% endif %}
             <li{% if document.title == page.title or page.title contains document.title %} class="is-active"{% endif %}>
-              <a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' }}{% else %}{{ document.link }}{% endif %}">{{ document.title }}</a>
+              <a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' | append: '/'}}{% else %}{{ document.link }}{% endif %}">{{ document.title }}</a>
             </li>{% endfor %}
           </ul>
 

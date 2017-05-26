@@ -43,7 +43,7 @@ To follow along with this guide, you will need to have your own Okta Developer E
 2.  Setting up the Postman API client
     After you have logged in to your account in your Okta Developer
     Edition org, follow the
-    [instructions on the Okta Developer Documentation page for setting up Postman](http://developer.okta.com/docs/getting_started/api_test_client.html).
+    [instructions on the Okta Developer Documentation page for setting up Postman](/docs/getting_started/api_test_client.html).
 
 # Overview of API calls used for multi-factor authentication
 
@@ -55,7 +55,7 @@ involved in adding MFA to your
 application. How use actually make these calls will depend on the
 programming language and web framework that your application uses.
 
-If you are writing code in .NET or Java, [Okta has helper libraries](http://developer.okta.com/code/index.html)
+If you are writing code in .NET or Java, [Okta has helper libraries](/code/index.html)
 that will make it easy to add support for Okta to your application
 in an idiomatic way.
 
@@ -104,7 +104,7 @@ org:
 ### Set up Postman
 
 If you haven't set up Postman already, you will need to do that
-now. Here are [instructions for setting up Postman to work with Okta](http://developer.okta.com/docs/getting_started/api_test_client.html).
+now. Here are [instructions for setting up Postman to work with Okta](/docs/getting_started/api_test_client.html).
 
 ### Test Postman
 
@@ -233,6 +233,6 @@ Okta MFA API with the following resources.
 
 -   The video in this guide.
     These instructions only cover part of what is covered in the video.
--   The [design principles for the Okta API](http://developer.okta.com/docs/getting_started/design_principles.html).
--   The API documentation for the [Okta Factors API](http://developer.okta.com/docs/api/rest/factors.html).
--   The API documentation for the [Okta Authentication API](http://developer.okta.com/docs/api/rest/authn.html).
+-   The [design principles for the Okta API](/docs/getting_started/design_principles.html).
+-   The API documentation for the [Okta Factors API](/docs/api/rest/factors.html).
+-   The API documentation for the [Okta Authentication API](/docs/api/rest/authn.html).

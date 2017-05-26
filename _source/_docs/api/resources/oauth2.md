@@ -79,7 +79,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
 ## Custom User Experience
 
 By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don't have an existing session.
-If you prefer to use a fully customized user experience, you can instead authenticate the user via the [Authentication API](http://developer.okta.com/docs/api/resources/authn.html).
+If you prefer to use a fully customized user experience, you can instead authenticate the user via the [Authentication API](/docs/api/resources/authn.html).
 This authentication method produces a `sessionToken` which can be passed into the Authorize Endpoint, and the user won't see an Okta login page.
 
 ## Access Token
@@ -1103,14 +1103,26 @@ curl -v -X POST \
         ]
       }
     },
-    "metadata": {
-      "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
+    "metadata": [
+      {
+        "name": "oauth-authorization-server",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      {
+        "name": "openid-configuration",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/openid-configuration",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+    ],
     "rotateKey": {
       "href": "${org}/api/v1/as/ausnsopoM6vBRB3PD0g3/credentials/lifecycle/keyRotate",
       "hints": {
@@ -1205,14 +1217,26 @@ curl -v -X POST \
         ]
       }
     },
-    "metadata": {
-      "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
+    "metadata": [
+      {
+        "name": "oauth-authorization-server",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      {
+        "name": "openid-configuration",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/openid-configuration",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+    ],
     "rotateKey": {
       "href": "${org}/api/v1/as/ausnsopoM6vBRB3PD0g3/credentials/lifecycle/keyRotate",
       "hints": {
@@ -1290,14 +1314,26 @@ curl -v -X GET \
         ]
       }
     },
-    "metadata": {
-      "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
-      "hints": {
-        "allow": [
-          "GET"
-        ]
-      }
-    },
+    "metadata": [
+      {
+        "name": "oauth-authorization-server",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/oauth-authorization-server",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+      {
+        "name": "openid-configuration",
+        "href": "${org}/oauth2/ausnsopoM6vBRB3PD0g3/.well-known/openid-configuration",
+        "hints": {
+          "allow": [
+            "GET"
+          ]
+        }
+      },
+    ],
     "rotateKey": {
       "href": "${org}/api/v1/as/ausnsopoM6vBRB3PD0g3/credentials/lifecycle/keyRotate",
       "hints": {

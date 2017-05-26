@@ -6,26 +6,26 @@ excerpt: How to share application key credentials between apps
 
 # Share Application Key Credentials Between Apps
 
-[Application key credential objects](http://developer.okta.com/docs/api/resources/apps.html#application-key-credential-model) 
+[Application key credential objects](/docs/api/resources/apps.html#application-key-credential-model)
 contain an opaque key ID (`kid`) and corresponding certificate.
-To use the [API](http://developer.okta.com/docs/api/resources/apps.html#clone-key-credential-for-application) 
-to share application key credentials between apps, you need to create and use a new credential in one app, 
+To use the [API](/docs/api/resources/apps.html#clone-application-key-credential)
+to share application key credentials between apps, you need to create and use a new credential in one app,
 then share and update the credential in another app.
 
-Sharing certificates is useful for Okta orgs that have apps with [sign-on modes](http://developer.okta.com/docs/api/resources/apps.html#signon-modes) `SAML_2_0`, SAML 1.1, or `WS_FEDERATION`. 
+Sharing certificates is useful for Okta orgs that have apps with [sign-on modes](/docs/api/resources/apps.html#signon-modes) `SAML_2_0`, SAML 1.1, or `WS_FEDERATION`.
 
 ### Why Should I Do This?
 
-When configuring multiple apps, you might need them to accept the same identity provider (IdP). 
+When configuring multiple apps, you might need them to accept the same identity provider (IdP).
 In that case, the assertions from the two apps must be signed by the same key.
 
 ### Prerequisite
 
 The key rollover feature must be enabled. It's an Early Access feature; contact Support to enable it.
- 
+
 ### How to Share the Certificate
- 
-For this example, assume that you want to share a certificate between two instances of an app: `app1` is the source app, the app from 
+
+For this example, assume that you want to share a certificate between two instances of an app: `app1` is the source app, the app from
 which you wish to share a certificate, and `app2` is the target app, the app that receives the source app's certificate.
 
 This example also works if the apps are two instances of the same app, or two different apps.
@@ -39,7 +39,7 @@ Request: `POST /api/v1/apps/0oa8ae1t5yev2ajDs0h7/credentials/keys/generate?valid
 Response:
 
 ~~~ json
-         
+
 {
   "created": "2016-09-30T20:36:15.000Z",
   "lastUpdated": "2016-09-30T20:36:15.000Z",
@@ -80,11 +80,11 @@ Response:
 
 #### 2. Update the source app to use the new certificate
 
-Update the source app with the application key credential's ID, `kid` so that the source app 
+Update the source app with the application key credential's ID, `kid` so that the source app
 uses the new credential to sign assertions.
 
 Request: `PUT /api/v1/apps/0oa8ae1t5yev2ajDs0h7`
-  
+
 ~~~ json
 {
   "name": "myorg_app1",
@@ -100,7 +100,7 @@ Request: `PUT /api/v1/apps/0oa8ae1t5yev2ajDs0h7`
 Response:
 
 ~~~ json
- 
+
 {
   "id": "0oa8ae1t5yev2ajDs0h7",
   "name": "myorg_app1",
@@ -179,8 +179,8 @@ Response:
 
 > Note: If you try to clone a credential that the target app instance already has, the API responds with a 400 error code.
 
- 
-#### 4. Update the target app to use the new credential that you just shared 
+
+#### 4. Update the target app to use the new credential that you just shared
 
 Update the target app to use the new credential that you just shared.
 When you update the target app with the `kid`, the target app starts
@@ -245,6 +245,6 @@ You may also want to do related tasks:
 
 * List all the keys in an app with a request.
 * Discover which apps are sharing a certificate. Waiting for feature -->
- 
- 
- 
+
+
+
