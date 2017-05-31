@@ -498,7 +498,7 @@ client does not make the token valid again.</p>
 
 <h4 id="custom-claims">Custom claims</h4>
 
-<p>Custom claims are associated with scopes. If one of the associated scopes is granted to the Access Token, the custom claim is added into it. The value of a custom claim can be either an <a href="/reference/okta_expression_language">expression</a> or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn’t added into the Access Token. The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.</p>
+<p>Custom claims are associated with scopes. If one of the associated scopes is granted to the Access Token, the custom claim is added into it. The value of a custom claim can be either an <a href="/reference/okta_expression_language/">expression</a> or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn’t added into the Access Token. The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.</p>
 
 <blockquote>
   <p><em>Note:</em> For the custom claim with group filter, its value has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.</p>

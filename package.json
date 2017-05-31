@@ -18,7 +18,8 @@
     "pretest": "npm start & wait-on http://localhost:4000 && npm run driver",
     "test": "npm run test-only || (npm stop && exit 1)",
     "posttest": "npm stop",
-    "import-external": "node scripts/import-external 2>&1"
+    "import-external": "node scripts/import-external 2>&1",
+    "find-missing-slashes": "node scripts/find-missing-slashes"
   },
   "repository": {
     "type": "git",
@@ -33,10 +34,12 @@
   "devDependencies": {
     "@okta/okta-auth-js": "1.8.0",
     "@okta/okta-signin-widget": "1.11.0",
+    "chalk": "^1.1.3",
     "if-env": "^1.0.0",
     "jasmine-reporters": "^2.2.0",
     "jasmine-spec-reporter": "^4.1.0",
     "protractor": "^5.1.0",
+    "recursive-readdir": "^2.2.1",
     "wait-on": "^2.0.2"
   }
 }

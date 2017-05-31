@@ -219,7 +219,7 @@
 
 <p>For information on using the Postman REST API test client for these steps, see <a href="/docs/api/getting_started/api_test_client.html">API Test Client</a>.</p>
 
-<h4 id="step-1--list-your-apps"><a href="id:step1">Step 1 – List your apps</a></h4>
+<h4 id="step-1--list-your-apps">Step 1 – List your apps</h4>
 
 <ul>
   <li>For Outbound SAML, use the <a href="/docs/api/resources/apps.html#list-applications">/api/v1/apps API</a> to return a list of all apps and collect the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">name</code>, and <code class="highlighter-rouge">label</code> elements for each app to update.</li>
@@ -286,7 +286,7 @@
 </span></code></pre>
 </div>
 
-<h4 id="step-2--generate-a-csr"><a href="id:step2">Step 2 – Generate a CSR</a></h4>
+<h4 id="step-2--generate-a-csr">Step 2 – Generate a CSR</h4>
 
 <ul>
   <li>Use the <a href="#top">/api/v1/apps/credentials/csrs/ API</a> to return a list of all apps to use with Outbound SAML apps.</li>
@@ -352,13 +352,13 @@
 </span></code></pre>
 </div>
 
-<h4 id="step-3--sign-the-csr"><a href="id:step3">Step 3 – Sign the CSR</a></h4>
+<h4 id="step-3--sign-the-csr">Step 3 – Sign the CSR</h4>
 
 <p>Follow the third-party process that your company uses to sign the CSR. <strong>You can’t move to step four until the process is completed</strong>, as the signed CSR is required to continue.</p>
 
 <p><strong>Note:</strong> The CSR is generated in Base64 DER format. If your process requires a different format, convert it using OpenSSL or a third-party decoder. Free, third-party decoders are readily available.</p>
 
-<h4 id="step-4--publish-the-csr"><a href="id:step4">Step 4 – Publish the CSR</a></h4>
+<h4 id="step-4--publish-the-csr">Step 4 – Publish the CSR</h4>
 
 <ul>
   <li>Use the <a href="#top">/api/v1/apps/credentials/csrs/lifecycle/publish API</a> to publish the certificate for Outbound SAML apps.</li>
@@ -410,7 +410,7 @@ Content-Type: application/json;charset=UTF-8
 </code></pre>
 </div>
 
-<h4 id="step-5--update-the-key-credential"><a href="id:step5">Step 5 – Update the key credential</a></h4>
+<h4 id="step-5--update-the-key-credential">Step 5 – Update the key credential</h4>
 
 <p>Update the key credential for the app or IdP to specify the new signing Key ID.</p>
 
@@ -522,7 +522,7 @@ Content-Type: application/json;charset=UTF-8
 </span></code></pre>
 </div>
 
-<h4 id="step-6--clone-the-certificate-optional"><a href="id:step6">Step 6 – Clone the certificate (optional)</a></h4>
+<h4 id="step-6--clone-the-certificate-optional">Step 6 – Clone the certificate (optional)</h4>
 
 <ul>
   <li>
@@ -541,7 +541,7 @@ Content-Type: application/json;charset=UTF-8
 
 <p><strong>Important:</strong> Sharing certificates is not a recommended security practice. This API is provided to support legacy use cases.</p>
 
-<h4 id="step-7--upload-the-new-certificate-to-the-isv"><a href="id:step7">Step 7 – Upload the new certificate to the ISV</a></h4>
+<h4 id="step-7--upload-the-new-certificate-to-the-isv">Step 7 – Upload the new certificate to the ISV</h4>
 
 <blockquote>
   <p>After completing step 5, your users cannot access the SAML app or IdP until you complete this step.</p>
