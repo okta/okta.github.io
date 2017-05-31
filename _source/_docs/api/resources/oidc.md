@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: OpenID Connect
+title: OpenID Connect API
 ---
 
 # OpenID Connect API
