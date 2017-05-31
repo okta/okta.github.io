@@ -60,7 +60,7 @@ Import any Okta API collection for Postman from the following list:
 |  Collections  | click to Run   |
 |:---|:---|
 | Authentication | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71){:target="_blank"} |
-| OAuth 2.0 and OpenID Connect | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6){:target="_blank"} |
+| OAuth 2.0 and OpenID Connect | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/036dc40615651451307d){:target="_blank"} |
 | Apps | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b){:target="_blank"} |
 | Events | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86){:target="_blank"} |
 | Factors | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b055a859dbe24a54814a){:target="_blank"} |
