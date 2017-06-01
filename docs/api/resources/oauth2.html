@@ -234,7 +234,7 @@ The OAuth 2.0 APIs each have several different <a href="#authentication-request"
 <p>If you are new to OAuth 2.0, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>, you may want to experiment with the Postman collection first:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/036dc40615651451307d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="basic-flows">Basic Flows</h2>
 
@@ -640,11 +640,11 @@ However, you can also use OpenID Connect with an authorization server specified:
 
 <h2 id="endpoints">Endpoints</h2>
 
-<p>Explore the OAuth 2.0 API: <a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the OAuth 2.0 API: <a href="https://app.getpostman.com/run-collection/036dc40615651451307d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h3 class="api api-operation" id="authentication-request">Authentication Request</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/:authorizationServerId/v1/authorize</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/<em>:authorizationServerId</em>/v1/authorize</span></p>
 
 <p>This is a starting point for OAuth 2.0 flows such as implicit and authorization code flows. This request authenticates the user and returns tokens along with an authorization grant to the client application as a part of the response the client might have requested.</p>
 
@@ -1035,7 +1035,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <h3 class="api api-operation" id="token-request">Token Request</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/token</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/<em>:authorizationServerId</em>/v1/token</span></p>
 
 <p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> and the corresponding credentials and returns back an Access Token. A Refresh Token is returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type returns an ID Token if the <em>openid</em> scope is requested.</p>
 
@@ -1267,7 +1267,7 @@ and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-Open
 
 <h3 class="api api-operation" id="introspection-request">Introspection Request</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/introspect</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/<em>:authorizationServerId</em>/v1/introspect</span></p>
 
 <p>The API takes an Access Token or Refresh Token, and returns a boolean indicating whether it is active or not.
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
@@ -1493,7 +1493,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h3 class="api api-operation" id="revocation-request">Revocation Request</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/revoke</span></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/<em>:authorizationServerId</em>/v1/revoke</span></p>
 
 <p>The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.</p>
 
@@ -1591,7 +1591,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <h3 class="api api-operation" id="get-keys">Get Keys</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/:authorizationServerId/v1/keys</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/<em>:authorizationServerId</em>/v1/keys</span></p>
 
 <h4 class="api api-response api-response-example" id="response-example">Response Example</h4>
 
@@ -1646,7 +1646,7 @@ It is safe to cache keys for performance.</p>
 
 <h3 class="api api-operation" id="authorization-server-metadata">Authorization Server Metadata</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/:authorizationServerId/.well-known/oauth-authorization-server</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/<em>:authorizationServerId</em>/.well-known/oauth-authorization-server</span></p>
 
 <p>This API endpoint returns metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
 This API doesn’t require any authentication and returns a JSON object with the following structure.</p>
@@ -1718,7 +1718,7 @@ This API doesn’t require any authentication and returns a JSON object with the
 
 <h3 class="api api-operation" id="authorization-server-openid-connect-metadata">Authorization Server OpenID Connect Metadata</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/:authorizationServerId/.well-known/openid-configuration</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/<em>:authorizationServerId</em>/.well-known/openid-configuration</span></p>
 
 <p>This API endpoint returns OpenID Connect metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
 This API doesn’t require any authentication and returns a JSON object with the following structure.</p>

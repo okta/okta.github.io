@@ -221,7 +221,7 @@ and the client obtains an Okta session.</p>
 <p>If you are new to OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with
 <a href="http://openid.net/specs/openid-connect-core-1_0.html">the OpenID Connect spec</a>, you may want to experiment with the Postman collection now:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/036dc40615651451307d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="authentication-basics-with-oauth-20-and-openid-connect">Authentication Basics with OAuth 2.0 and OpenID Connect</h2>
 
@@ -336,7 +336,7 @@ be a valid OAuth 2.0 request, but it’s not an OpenID Connect request.</li>
 which is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> that contains information about an authentication event
 and claims about the authenticated user that clients can rely on.</p>
 
-<p>Clients can use any of the following sequences of operations to obtain an Access Token:</p>
+<p>Clients can use any of the following sequences of operations to obtain an ID Token:</p>
 <ul>
   <li><a href="http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth">Authorization code flow</a> – the client obtains
 an authorization code from the authorization server’s authentication endpoint and uses it to obtain an ID token and an access
@@ -727,7 +727,7 @@ For more information about configuring an app for OpenID Connect, including grou
   <p>The OIDC Access Token is applicable only for the Okta <code class="highlighter-rouge">/oauth2/v1/userinfo</code> endpoint and thus should be treated as opaque by the application. The application does not need to validate it since it should not be used against other resource servers. The format of it and the key used to sign it are subject to change without prior notice.</p>
 </blockquote>
 
-<p>Explore the OpenID Connect API: <a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the OpenID Connect API: <a href="https://app.getpostman.com/run-collection/036dc40615651451307d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h3 class="api api-operation" id="get-user-information">Get User Information</h3>
 
@@ -1947,7 +1947,6 @@ You can’t change this value in the Okta user interface.</p>
 <span class="s">}</span>
 </code></pre>
 </div>
-
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
