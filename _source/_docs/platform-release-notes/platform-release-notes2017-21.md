@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.21
+excerpt: Summary of changes to the Okta Platform since Release 2017.20
 ---
 
-## Release 2017.22
+## Release 2017.21
 
 ### Advance Notice: API Rate Limit Improvements
 
@@ -12,21 +12,20 @@ We are making org-wide rate limits more granular, and treating authenticated end
 
 #### Preview Orgs
 
+
 1. We enforce new rate limits for new preview orgs. For these new orgs, the API calls exceeding the new rate limits return an HTTP 429 error.
 
-2. At the end of May, we'll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.
+2. In mid-May, we'll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.
 
 #### Production Orgs
 
 1. As of May 8, we have enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:
 
-    ```
-    Warning: requests for url pattern <url-pattern> have reached 
+    `Warning: requests for url pattern <url-pattern> have reached 
     a threshold of <number> requests per <time-duration>. Please 
-    be warned these rate limits will be enforced in the near future.
-    ```
+    be warned these rate limits will be enforced in the near future.`
 
-2. As of mid-May, we started enforcing these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.
+2. In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.
 
 3. In early June, we'll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.
 
@@ -34,12 +33,17 @@ For a full description of the new rate limits, see [API Rate Limit Improvements]
 
 <!-- ### Platform New Features -->
 
+### Platform Feature Improvement: System Log Notifications for OpenID Connect Apps
+
+Notifications are entered in the [System Log](/docs/api/resources/system_log.html) when OpenID Connect apps are created or updated.
+
 ### Platform Bugs Fixed
 
-* OpenID Connect and OAuth 2.0 requests failed to respect default SAML IdP configuration. (OKTA-127155)
-* Using the resource owner password credentials flow for an Active Directory user sometimes resulted in a malformed response instead of an Access Token. (OKTA-121082)
+* SAML Apps containing more than one SAML attribute caused pagination issues on `/api/v1/apps`. (OKTA-123220, OKTA-122423, OKTA-115762)
+* Native clients that are OpenID Connect apps require the `authorization_code` grant type. This requirement was not enforced correctly. (OKTA-123471)
+* Requests to configure inbound SAML IdPs (`/api/v1/idps`) that included duplicated group IDs failed. (OKTA-124853)
 
-### Simple HAL Links Generally Available in Preview for May, 2017
+#### Simple HAL Links Generally Available in Preview for May, 2017
 
 Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
 This feature removes the HAL links that reflect state from user objects returned in collections.
