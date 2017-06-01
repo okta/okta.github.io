@@ -100,6 +100,7 @@ The Simple HAL Links on User Collections feature ensures that possibly invalid s
 As noted above, to change user state, the `self` link should be called to retrieve a user object with up-to-date links.
  
 >Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.
+Okta expects to deliver this feature in production orgs (with the same Okta .NET SDK caveats) starting June 12, 2017.
 
 ### Does Your Org Have This Change Yet?
 
