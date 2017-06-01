@@ -33,14 +33,14 @@
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Platform Release Notes Index | Okta Developer</title>
-  <meta name="description" content="List of changes to the Okta Platform">
-  <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-index.html">
+  <title>Platform Release Notes | Okta Developer</title>
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.20">
+  <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-21.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page platform-release-notes-index">
+  <div class="Page platform-release-notes">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -185,52 +185,135 @@
 <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2016-index.md">Edit Page</a>
-      <h2 id="index-of-platform-release-notes">Index of Platform Release Notes</h2>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2017-21.md">Edit Page</a>
+      <h2 id="release-201721">Release 2017.21</h2>
+
+<h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
+
+<p>We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user’s request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:</p>
+
+<h4 id="preview-orgs">Preview Orgs</h4>
+
+<ol>
+  <li>
+    <p>We enforce new rate limits for new preview orgs. For these new orgs, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
+  </li>
+  <li>
+    <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
+  </li>
+</ol>
+
+<h4 id="production-orgs">Production Orgs</h4>
+
+<ol>
+  <li>
+    <p>As of May 8, we have enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
+
+    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
+ a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
+ be warned these rate limits will be enforced in the near future.</code></p>
+  </li>
+  <li>
+    <p>In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
+  </li>
+  <li>
+    <p>In early June, we’ll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
+  </li>
+</ol>
+
+<p>For a full description of the new rate limits, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
+
+<!-- ### Platform New Features -->
+
+<h3 id="platform-feature-improvement-system-log-notifications-for-openid-connect-apps">Platform Feature Improvement: System Log Notifications for OpenID Connect Apps</h3>
+
+<p>Notifications are entered in the <a href="/docs/api/resources/system_log.html">System Log</a> when OpenID Connect apps are created or updated.</p>
+
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
 <ul>
-  <li><a href="platform-release-notes.html">Platform Release Notes for Current Preview Release</a></li>
-  <li><a href="platform-release-notes2017-21.html">Platform Release Notes for Release 2017.21</a></li>
-  <li><a href="platform-release-notes2017-20.html">Platform Release Notes for Release 2017.20</a></li>
-  <li><a href="platform-release-notes2017-19.html">Platform Release Notes for Release 2017.19</a></li>
-  <li><a href="platform-release-notes2017-18.html">Platform Release Notes for Release 2017.18</a></li>
-  <li><a href="platform-release-notes2017-17.html">Platform Release Notes for Release 2017.17</a></li>
-  <li><a href="platform-release-notes2017-16.html">Platform Release Notes for Release 2017.16</a></li>
-  <li><a href="platform-release-notes2017-15.html">Platform Release Notes for Release 2017.15</a></li>
-  <li><a href="platform-release-notes2017-12.html">Platform Release Notes for Release 2017.12</a></li>
-  <li><a href="platform-release-notes2017-11.html">Platform Release Notes for Release 2017.11</a></li>
-  <li><a href="platform-release-notes2017-10.html">Platform Release Notes for Release 2017.10</a></li>
-  <li><a href="platform-release-notes2017-09.html">Platform Release Notes for Release 2017.09</a></li>
-  <li><a href="platform-release-notes2017-05.html">Platform Release Notes for Release 2017.05</a></li>
-  <li><a href="platform-release-notes2017-04.html">Platform Release Notes for Release 2017.04</a></li>
-  <li><a href="platform-release-notes2017-03.html">Platform Release Notes for Release 2017.03</a></li>
-  <li><a href="platform-release-notes2017-02.html">Platform Release Notes for Release 2017.02</a></li>
-  <li><a href="platform-release-notes2016-52.html">Platform Release Notes for Release 2016.52</a></li>
-  <li><a href="platform-release-notes2016-51.html">Platform Release Notes for Release 2016.51</a></li>
-  <li><a href="platform-release-notes2016-50.html">Platform Release Notes for Release 2016.50</a></li>
-  <li><a href="platform-release-notes2016-49.html">Platform Release Notes for Release 2016.49</a></li>
-  <li><a href="platform-release-notes2016-47.html">Platform Release Notes for Release 2016.47</a></li>
-  <li><a href="platform-release-notes2016-46.html">Platform Release Notes for Release 2016.46</a></li>
-  <li><a href="platform-release-notes2016-45.html">Platform Release Notes for Release 2016.45</a></li>
-  <li><a href="platform-release-notes2016-43.html">Platform Release Notes for Release 2016.43</a></li>
-  <li><a href="platform-release-notes2016-41.html">Platform Release Notes for Release 2016.41</a></li>
-  <li><a href="platform-release-notes2016-40.html">Platform Release Notes for Release 2016.40</a></li>
-  <li><a href="platform-release-notes2016-39.html">Platform Release Notes for Release 2016.39</a></li>
-  <li><a href="platform-release-notes2016-37.html">Platform Release Notes for Release 2016.37</a></li>
-  <li><a href="platform-release-notes2016-36.html">Platform Release Notes for Release 2016.36</a></li>
-  <li><a href="platform-release-notes2016-35.html">Platform Release Notes for Release 2016.35</a></li>
-  <li><a href="platform-release-notes2016-34.html">Platform Release Notes for Release 2016.34</a></li>
-  <li><a href="platform-release-notes2016-33.html">Platform Release Notes for Release 2016.33</a></li>
-  <li><a href="platform-release-notes2016-31.html">Platform Release Notes for Release 2016.31</a></li>
-  <li><a href="platform-release-notes2016-30.html">Platform Release Notes for Release 2016.30</a></li>
-  <li><a href="platform-release-notes2016-29.html">Platform Release Notes for Release 2016.29</a></li>
-  <li><a href="platform-release-notes2016-28.html">Platform Release Notes for Release 2016.28</a></li>
-  <li><a href="platform-release-notes2016-27.html">Platform Release Notes for Release 2016.27</a></li>
-  <li><a href="platform-release-notes2016-26.html">Platform Release Notes for Release 2016.26</a></li>
-  <li><a href="platform-release-notes2016-25.html">Platform Release Notes for Release 2016.25</a></li>
-  <li><a href="platform-release-notes2016-24.html">Platform Release Notes for Release 2016.24</a></li>
-  <li><a href="platform-release-notes2016-23.html">Platform Release Notes for Release 2016.23</a></li>
+  <li>SAML Apps containing more than one SAML attribute caused pagination issues on <code class="highlighter-rouge">/api/v1/apps</code>. (OKTA-123220, OKTA-122423, OKTA-115762)</li>
+  <li>Native clients that are OpenID Connect apps require the <code class="highlighter-rouge">authorization_code</code> grant type. This requirement was not enforced correctly. (OKTA-123471)</li>
+  <li>Requests to configure inbound SAML IdPs (<code class="highlighter-rouge">/api/v1/idps</code>) that included duplicated group IDs failed. (OKTA-124853)</li>
 </ul>
+
+<h4 id="simple-hal-links-generally-available-in-preview-for-may-2017">Simple HAL Links Generally Available in Preview for May, 2017</h4>
+
+<p>Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
+This feature removes the HAL links that reflect state from user objects returned in collections.</p>
+
+<p>Before release 2017.19, a user object returned in a collection contains some or all of the following links:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"_links": {
+    "suspend": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/suspend",
+      "method": "POST"
+    },
+    "resetPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/reset_password",
+      "method": "POST"
+    },
+    "expirePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/expire_password",
+      "method": "POST"
+    },
+    "forgotPassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/forgot_password",
+      "method": "POST"
+    },
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
+    },
+    "changeRecoveryQuestion": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_recovery_question",
+      "method": "POST"
+    },
+    "deactivate": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/deactivate",
+      "method": "POST"
+    },
+    "changePassword": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_password",
+      "method": "POST"
+    }
+}
+</code></pre>
+</div>
+
+<p>Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
+As outlined in <a href="/docs/api/getting_started/design_principles.html#links-in-collections">Design Principles</a>:</p>
+
+<p>“Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by ID using the <code class="highlighter-rouge">self</code> link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state.”</p>
+
+<p>The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the <code class="highlighter-rouge">self</code> link is returned:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"_links": {
+    "self": {
+      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
+    }
+}
+</code></pre>
+</div>
+
+<p>As noted above, to change user state, the <code class="highlighter-rouge">self</code> link should be called to retrieve a user object with up-to-date links.</p>
+
+<blockquote>
+  <p>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.</p>
+</blockquote>
+
+<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
+
+<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
+
+<p><img src="/assets/release_notes/version_footer-1ab3b975804fe11152fd81c6e639a796093845153b216733d1dc1891e1a5f446.png" alt="Release Number in Footer" /></p>
+
+<h3 id="looking-for-something-else">Looking for Something Else?</h3>
+
+<ul>
+  <li><a href="platform-release-notes2016-index.html">Platform Release Note Index</a></li>
+  <li>For changes outside the Okta platform, see the <a href="https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm">Product Release Notes</a>.</li>
+</ul>
+
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
