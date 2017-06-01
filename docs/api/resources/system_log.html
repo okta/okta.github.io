@@ -452,7 +452,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"legacyEventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"core.user_auth.login_success"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"authentication_context"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"authenticationContext"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"authenticationStep"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"externalSessionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1013FfF-DKQSvCI4RVXChzX-w"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -593,8 +593,8 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
   </thead>
   <tbody>
     <tr>
-      <td>eventId</td>
-      <td>Unique key for an event</td>
+      <td>uuid</td>
+      <td>Unique identifier for an individual event</td>
       <td>String</td>
       <td>FALSE</td>
       <td>TRUE</td>
@@ -750,7 +750,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
 </blockquote>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">sessionId</code> can identify multiple requests.  A single <code class="highlighter-rouge">requestId</code> can identify multiple events.  Use the <code class="highlighter-rouge">sessionId</code> to link events and requests that occurred in the same session.</p>
+  <p>The <code class="highlighter-rouge">authenticationContext.externalSessionId</code> identifies events that occurred in the same session.  A single <code class="highlighter-rouge">transaction.id</code> identifies events that occurred together as part of an operation (e.g. a request to Okta’s servers). Use <code class="highlighter-rouge">authenticationContext.externalSessionId</code> to link events that occurred in the same session, and the <code class="highlighter-rouge">transaction.id</code> to link events that occurred as part of the same operation.</p>
 </blockquote>
 
 <h3 id="actor-object">Actor Object</h3>
