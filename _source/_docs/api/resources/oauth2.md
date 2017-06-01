@@ -27,7 +27,7 @@ At the very basic level, the main API endpoints are:
 If you are new to OAuth 2.0, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may want to experiment with the Postman collection first:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/036dc40615651451307d)
 
 ## Basic Flows
 
@@ -321,7 +321,7 @@ You can't mix tokens between different authorization servers. By design, authori
 
 ## Endpoints
 
-Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
+Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/036dc40615651451307d)
 
 ### Authentication Request
 {:.api .api-operation}
