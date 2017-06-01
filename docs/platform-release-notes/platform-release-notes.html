@@ -34,7 +34,7 @@
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.20">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.21">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -186,7 +186,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201721">Release 2017.21</h2>
+      <h2 id="release-201722">Release 2017.22</h2>
 
 <h3 id="advance-notice-api-rate-limit-improvements">Advance Notice: API Rate Limit Improvements</h3>
 
@@ -199,7 +199,7 @@
     <p>We enforce new rate limits for new preview orgs. For these new orgs, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
   </li>
   <li>
-    <p>In mid-May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
+    <p>At the end of May, we’ll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
   </li>
 </ol>
 
@@ -209,12 +209,14 @@
   <li>
     <p>As of May 8, we have enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
 
-    <p><code class="highlighter-rouge">Warning: requests for url pattern &lt;url-pattern&gt; have reached 
+    <div class="highlighter-rouge"><pre class="highlight"><code> Warning: requests for url pattern &lt;url-pattern&gt; have reached 
  a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
- be warned these rate limits will be enforced in the near future.</code></p>
+ be warned these rate limits will be enforced in the near future.
+</code></pre>
+    </div>
   </li>
   <li>
-    <p>In mid-May, we’ll enforce these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
+    <p>As of mid-May, we started enforcing these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
   </li>
   <li>
     <p>In early June, we’ll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.</p>
@@ -225,19 +227,14 @@
 
 <!-- ### Platform New Features -->
 
-<h3 id="platform-feature-improvement-system-log-notifications-for-openid-connect-apps">Platform Feature Improvement: System Log Notifications for OpenID Connect Apps</h3>
-
-<p>Notifications are entered in the <a href="/docs/api/resources/system_log.html">System Log</a> when OpenID Connect apps are created or updated.</p>
-
 <h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
 <ul>
-  <li>SAML Apps containing more than one SAML attribute caused pagination issues on <code class="highlighter-rouge">/api/v1/apps</code>. (OKTA-123220, OKTA-122423, OKTA-115762)</li>
-  <li>Native clients that are OpenID Connect apps require the <code class="highlighter-rouge">authorization_code</code> grant type. This requirement was not enforced correctly. (OKTA-123471)</li>
-  <li>Requests to configure inbound SAML IdPs (<code class="highlighter-rouge">/api/v1/idps</code>) that included duplicated group IDs failed. (OKTA-124853)</li>
+  <li>OpenID Connect and OAuth 2.0 requests failed to respect default SAML IdP configuration. (OKTA-127155)</li>
+  <li>Using the resource owner password credentials flow for an Active Directory user sometimes resulted in a malformed response instead of an Access Token. (OKTA-121082)</li>
 </ul>
 
-<h4 id="simple-hal-links-generally-available-in-preview-for-may-2017">Simple HAL Links Generally Available in Preview for May, 2017</h4>
+<h3 id="simple-hal-links-generally-available-in-preview-for-may-2017">Simple HAL Links Generally Available in Preview for May, 2017</h3>
 
 <p>Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
 This feature removes the HAL links that reflect state from user objects returned in collections.</p>
@@ -298,7 +295,8 @@ As outlined in <a href="/docs/api/getting_started/design_principles.html#links-i
 <p>As noted above, to change user state, the <code class="highlighter-rouge">self</code> link should be called to retrieve a user object with up-to-date links.</p>
 
 <blockquote>
-  <p>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.</p>
+  <p>Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.
+Okta expects to deliver this feature in production orgs (with the same Okta .NET SDK caveats) starting June 12, 2017.</p>
 </blockquote>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>

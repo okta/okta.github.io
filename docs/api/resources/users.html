@@ -2192,7 +2192,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <h3 class="api api-operation" id="get-assigned-app-links">Get Assigned App Links</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em>/appLinks</span><span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em>/appLinks</span> <span class="api-label api-label-cors api-uri-template-cors"><i class="fa fa-cloud-download"></i> CORS</span></p>
 
 <p>Fetches appLinks for all direct or indirect (via group membership) assigned applications.</p>
 
@@ -2292,7 +2292,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <h3 class="api api-operation" id="get-member-groups">Get Member Groups</h3>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em>/groups</span><span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em>/groups</span> <span class="api-label api-label-cors api-uri-template-cors"><i class="fa fa-cloud-download"></i> CORS</span></p>
 
 <p>Fetches the groups of which the user is a member.</p>
 
@@ -2702,7 +2702,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <h3 class="api api-operation" id="delete-user">Delete User</h3>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">DELETE</span> /api/v1/users/<em>:id</em></span></p>
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/<em>:id</em></span></p>
 
 <p>Deletes a user permanently.  This operation can only be performed on users that have a <code class="highlighter-rouge">DEPROVISIONED</code> status.  <strong>This action cannot be recovered!</strong></p>
 

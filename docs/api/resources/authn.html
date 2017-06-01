@@ -1284,6 +1284,346 @@
 </span></code></pre>
 </div>
 
+<h3 class="api api-operation" id="step-up-authentication">Step-up Authentication</h3>
+
+<blockquote>
+  <p>This API is  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  and is currently supported only for SAML based apps.
+You must first enable custom login page for the application before using this API.</p>
+</blockquote>
+
+<p>Every step-up transaction starts with user accessing an application. 
+If step-up authentication is required, Okta redirects the user to the custom login page with state token as a request parameter.</p>
+
+<p>For example, if the custom login page is set as <strong>https://login.example.com</strong>
+then Okta will redirect to <strong>https://login.example.com?stateToken=</strong>00BClWr4T-mnIqPV8dHkOQlwEIXxB4LLSfBVt7BxsM.
+To determine the next step, check the <a href="#get-transaction-state">state of the transaction</a>.</p>
+
+<ul>
+  <li><a href="#step-up-authentication-without-okta-session">Step-up Authentication without Okta session</a></li>
+  <li><a href="#step-up-authentication-with-okta-session">Step-up Authentication with Okta session</a></li>
+</ul>
+
+<h4 id="step-up-authentication-without-okta-session">Step-up authentication without Okta session</h4>
+
+<h5 class="api api-request api-request-example" id="request-example-to-get-transaction-state">Request Example (to get transaction state)</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{
+   "stateToken":"00BClWr4T-mnIqPV8dHkOQlwEIXxB4LLSfBVt7BxsM"
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/authn"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00BClWr4T-mnIqPV8dHkOQlwEIXxB4LLSfBVt7BxsM"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"SESSION_STEP_UP"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2017-05-30T22:51:37.000Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"UNAUTHENTICATED"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"target"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"APP"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"salesforce"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"logo"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/assets/img/logos/salesforce_logo.dbd7e0b4de118a1dae1c39d60a3c30e5.png"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"image/png"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"next"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"authenticate"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
+               </span><span class="s2">"POST"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 class="api api-request api-request-example" id="request-example-perform-primary-authentication">Request Example (perform primary authentication)</h5>
+<blockquote>
+  <p>Primary authentication has to be completed by using the value of <strong>stateToken</strong> request parameter passed to custom login page. 
+Okta Sign-On Policy and the related App Sign-On Policy will be evaluated after successful primary authentication.</p>
+</blockquote>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{
+   "stateToken":"00BClWr4T-mnIqPV8dHkOQlwEIXxB4LLSfBVt7BxsM",
+   "username": "dade.murphy@example.com",
+   "password": "correcthorsebatterystaple"
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/authn"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-when-mfa-is-not-required">Response Example (when MFA is not required)</h5>
+
+<blockquote>
+  <p>Sign in to the app by following the next link relation.</p>
+</blockquote>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00quAZYqYjXg9DZhS5UzE1wrJuQ6KKb_kzOeH7OGB5"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"SESSION_STEP_UP"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2017-05-30T23:19:40.000Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="s2">"2017-03-29T21:37:25.000Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"profile"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"target"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"APP"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"salesforce"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"logo"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"http://rain.okta1.com:1802/assets/img/logos/salesforce_logo.dbd7e0b4de118a1dae1c39d60a3c30e5.png"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"image/png"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"next"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"original"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/login/step-up/redirect?stateToken=00quAZYqYjXg9DZhS5UzE1wrJuQ6KKb_kzOeH7OGB5"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
+               </span><span class="s2">"GET"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="step-up-authentication-with-okta-session">Step-up authentication with Okta session</h4>
+
+<h5 class="api api-request api-request-example" id="request-example-to-get-transaction-state-1">Request Example (to get transaction state)</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-d <span class="s1">'{
+   "stateToken":"00BClWr4T-mnIqPV8dHkOQlwEIXxB4LLSfBVt7BxsM"
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/authn"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-factor-enroll-1">Response Example (Factor Enroll)</h5>
+
+<p>User is assigned to a <strong>MFA Policy</strong> that requires enrollment during sign-on and must <a href="#enroll-factor">select a factor to enroll</a> to complete the authentication transaction.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00zEfSRIpELrl87ndYiHNkvOEbyEPrBmTYuf9dsGLl"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"SESSION_STEP_UP"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2017-05-30T22:58:09.000Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"MFA_ENROLL"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="s2">"2017-03-29T21:37:25.000Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"profile"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"factors"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"factorType"</span><span class="p">:</span><span class="s2">"sms"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"enroll"</span><span class="p">:{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
+                     </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
+                        </span><span class="s2">"POST"</span><span class="w">
+                     </span><span class="p">]</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"NOT_SETUP"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"target"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"APP"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"salesforce"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"logo"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/assets/img/logos/salesforce_logo.dbd7e0b4de118a1dae1c39d60a3c30e5.png"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"image/png"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"cancel"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
+               </span><span class="s2">"POST"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-factor-challenge-1">Response Example (Factor Challenge)</h5>
+
+<p>User is assigned to a <strong>Sign-On Policy</strong> or <strong>App Sign-On Policy</strong> that requires additional verification and must <a href="#verify-factor">select and verify</a> a previously enrolled <a href="#factor-object">factor</a> by <code class="highlighter-rouge">id</code> to complete the authentication transaction.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00POAgFjELRueYUC1p7GFAmrm32EQa2HXw0_YssJ5J"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"SESSION_STEP_UP"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2017-05-30T23:07:00.000Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"MFA_REQUIRED"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="s2">"2017-03-29T21:37:25.000Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"profile"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"factors"</span><span class="p">:[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"smsph8F1esz8LlSjo0g3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"factorType"</span><span class="p">:</span><span class="s2">"sms"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"provider"</span><span class="p">:</span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"profile"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"phoneNumber"</span><span class="p">:</span><span class="s2">"+1 XXX-XXX-3161"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"verify"</span><span class="p">:{</span><span class="w">
+                  </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/factors/smsph8F1esz8LlSjo0g3/verify"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
+                     </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
+                        </span><span class="s2">"POST"</span><span class="w">
+                     </span><span class="p">]</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+               </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"policy"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"allowRememberDevice"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"rememberDeviceLifetimeInMinutes"</span><span class="p">:</span><span class="mi">1440</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"rememberDeviceByDefault"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"target"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"APP"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"salesforce"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"logo"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/assets/img/logos/salesforce_logo.dbd7e0b4de118a1dae1c39d60a3c30e5.png"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"image/png"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"cancel"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/api/v1/authn/cancel"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
+               </span><span class="s2">"POST"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-after-authentication--mfa-are-complete">Response Example (after authentication &amp; MFA are complete)</h5>
+
+<blockquote>
+  <p>Sign in to the app by following the next link relation.</p>
+</blockquote>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00quAZYqYjXg9DZhS5UzE1wrJuQ6KKb_kzOeH7OGB5"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"SESSION_STEP_UP"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="s2">"2017-05-30T23:19:40.000Z"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"_embedded"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"user"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="s2">"2017-03-29T21:37:25.000Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"profile"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"login"</span><span class="p">:</span><span class="s2">"dade.murphy@example.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"firstName"</span><span class="p">:</span><span class="s2">"Dade"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"lastName"</span><span class="p">:</span><span class="s2">"Murphy"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en_US"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"timeZone"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"target"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"APP"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"salesforce"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"logo"</span><span class="p">:{</span><span class="w">
+               </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"http://rain.okta1.com:1802/assets/img/logos/salesforce_logo.dbd7e0b4de118a1dae1c39d60a3c30e5.png"</span><span class="p">,</span><span class="w">
+               </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"image/png"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="nt">"_links"</span><span class="p">:{</span><span class="w">
+      </span><span class="nt">"next"</span><span class="p">:{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"original"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"href"</span><span class="p">:</span><span class="s2">"https://your-domain.okta.com/login/step-up/redirect?stateToken=00quAZYqYjXg9DZhS5UzE1wrJuQ6KKb_kzOeH7OGB5"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"hints"</span><span class="p">:{</span><span class="w">
+            </span><span class="nt">"allow"</span><span class="p">:[</span><span class="w">
+               </span><span class="s2">"GET"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h3 class="api api-operation" id="change-password">Change Password</h3>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> api/v1/authn/credentials/change_password</span></p>
@@ -1387,7 +1727,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -1520,7 +1860,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -1564,7 +1904,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
 
 <blockquote>
   <p>Use the <code class="highlighter-rouge">resend</code> link to send another OTP if user doesn’t receive the original activation SMS OTP.</p>
@@ -1658,7 +1998,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
 
 <blockquote>
   <p>Use the <code class="highlighter-rouge">resend</code> link to send another OTP if user doesn’t receive the original activation Voice Call OTP.</p>
@@ -1753,7 +2093,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
@@ -1849,7 +2189,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
@@ -1954,7 +2294,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
@@ -2049,7 +2389,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -2096,7 +2436,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -2138,7 +2478,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -2179,7 +2519,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00BlN4kOtm7wNxuM8nuXsOK1PFXBkvvTH-buJUrgWX"</span><span class="p">,</span><span class="w">
@@ -2350,7 +2690,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00s7Yewe3Z4aujPLpR4qW4y1hMKzAbyXK5LSKJRW2G"</span><span class="p">,</span><span class="w">
@@ -2508,7 +2848,7 @@
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-14">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-15">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -2608,7 +2948,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -2709,7 +3049,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -3125,7 +3465,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 </code></pre>
 </div>
 
-<h6 class="api api-response api-response-example" id="response-example-17">Response Example</h6>
+<h6 class="api api-response api-response-example" id="response-example-18">Response Example</h6>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
@@ -3329,7 +3669,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -3442,7 +3782,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -3546,7 +3886,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 </code></pre>
 </div>
 
-<h6 class="api api-response api-response-example" id="response-example-20">Response Example</h6>
+<h6 class="api api-response api-response-example" id="response-example-21">Response Example</h6>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
@@ -3632,7 +3972,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 </code></pre>
 </div>
 
-<h6 class="api api-response api-response-example" id="response-example-21">Response Example</h6>
+<h6 class="api api-response api-response-example" id="response-example-22">Response Example</h6>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -3735,7 +4075,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 </code></pre>
 </div>
 
-<h6 class="api api-response api-response-example" id="response-example-22">Response Example</h6>
+<h6 class="api api-response api-response-example" id="response-example-23">Response Example</h6>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -4071,7 +4411,7 @@ If for any reason the user can’t scan the QR code, they can use the link provi
 </span></code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00CzoxFVe4R2nv0hTxm32r1kayfrrOkuxcE2rfINwZ"</span><span class="p">,</span><span class="w">
@@ -4291,7 +4631,7 @@ javascript API to get the signed assertion from the U2F token.</p>
 </span></code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
    </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="s2">"00wCfuPA3qX3azDawSdPGFIhHuzbZX72Gv4bu_ew9d"</span><span class="p">,</span><span class="w">
@@ -4508,7 +4848,7 @@ javascript API to get the signed assertion from the U2F token.</p>
 </code></pre>
 </div>
 
-<h6 class="api api-response api-response-example" id="response-example-25">Response Example</h6>
+<h6 class="api api-response api-response-example" id="response-example-26">Response Example</h6>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
@@ -4583,7 +4923,7 @@ javascript API to get the signed assertion from the U2F token.</p>
 </code></pre>
 </div>
 
-<h6 class="api api-response api-response-example" id="response-example-26">Response Example</h6>
+<h6 class="api api-response api-response-example" id="response-example-27">Response Example</h6>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -4733,7 +5073,7 @@ See the Response Example in this section for details.</li>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -4769,7 +5109,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -4834,7 +5174,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -4902,7 +5242,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -5060,7 +5400,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOVERY_CHALLENGE"</span><span class="p">,</span><span class="w">
@@ -5096,7 +5436,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5164,7 +5504,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -5278,7 +5618,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-35">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5368,7 +5708,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-35">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-36">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5480,7 +5820,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-36">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-37">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5570,7 +5910,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-37">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-38">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00xdqXOE5qDXX8-PBR1bYv8AESqIEinDy3yul01tyh"</span><span class="p">,</span><span class="w">
@@ -5674,7 +6014,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-38">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-39">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
@@ -5788,7 +6128,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-39">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-40">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
@@ -5935,7 +6275,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-40">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-41">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -6005,7 +6345,7 @@ Okta will not publish additional metadata about the user until primary authentic
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-41">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-42">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00lMJySRYNz3u_rKQrsLvLrzxiARgivP8FB_1gpmVb"</span><span class="p">,</span><span class="w">
@@ -6111,7 +6451,7 @@ the user’s phone might stop working. Since the user can’t see the QR code, t
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-42">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-43">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"stateToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"007ucIX7PATyn94hsHfOLVaXAmOBkKHWnOOLG43bsb"</span><span class="p">,</span><span class="w">
@@ -6258,7 +6598,7 @@ to skip the other factors.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-43">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-44">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-03T10:15:57.000Z"</span><span class="p">,</span><span class="w">
@@ -6345,7 +6685,7 @@ to skip the other factors.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-44">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-45">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"relayState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/myapp/some/deep/link/i/want/to/return/to"</span><span class="w">
@@ -6377,6 +6717,14 @@ to skip the other factors.</p>
       <td>stateToken</td>
       <td>ephemeral <a href="#state-token">token</a> that encodes the current state of an authentication transaction</td>
       <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>type  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></td>
+      <td>type of authentication transaction. Currently available during step-up authentication</td>
+      <td><a href="#authentication-type">Authentication Type</a></td>
       <td>TRUE</td>
       <td>TRUE</td>
       <td> </td>
@@ -6547,7 +6895,7 @@ to skip the other factors.</p>
 
 <h3 id="transaction-state">Transaction State</h3>
 
-<p><img src="/assets/auth-state-model-afe2d02705bb17305a6271e198a513ec53cac7ab3b7a1f8fd31c3768b602a48b.png" state="" model="" diagram="" alt="State Model Diagram" /></p>
+<p><img src="/assets/auth-state-model-68716d545f9f5f572294d403ccc902d8aca40d12ff9054aa1a026aeb14b82f9b.png" state="" model="" diagram="" alt="State Model Diagram" /></p>
 
 <p>An authentication or recovery transaction has one of the following states:</p>
 
@@ -6560,6 +6908,11 @@ to skip the other factors.</p>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">UNAUTHENTICATED</code>  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></td>
+      <td>User tried to access protected resource (ex: an app) but user is not authenticated</td>
+      <td>POST to the <code class="highlighter-rouge">next</code> link relation to <a href="#step-up-authentication-without-okta-session">authenticate user credentials</a>.</td>
+    </tr>
     <tr>
       <td><code class="highlighter-rouge">PASSWORD_WARN</code></td>
       <td>The user’s password was successfully validated but is about to expire and should be changed.</td>
@@ -6665,6 +7018,10 @@ to skip the other factors.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
+
+<h3 id="authentication-type">Authentication Type</h3>
+<p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a> 
+Represents the type of authentication. Currently available only during <a href="#step-up-authentication">step-up authentication</a>.</p>
 
 <h3 id="tokens">Tokens</h3>
 
@@ -6954,6 +7311,63 @@ to skip the other factors.</p>
       <td>FALSE</td>
       <td>TRUE</td>
       <td><a href="https://tools.ietf.org/html/rfc6557">IANA Time Zone database format</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="target-object">Target Object</h4>
+<p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a> 
+Represents the target resource that user tried accessing. Typically this is the app that user is trying to sign-in.
+Currently this is available only during [step-up authentication] (#step-up-authentication).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>type</td>
+      <td>type of the target resource. Currently only ‘APP’ is the supported type.</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>name of the target resource</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>label</td>
+      <td>label of the target resource</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>_links</td>
+      <td>discoverable resources for the target</td>
+      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
