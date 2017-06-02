@@ -5,6 +5,7 @@ source "${0%/*}/helpers.sh"
 
 if [ $TRAVIS_EVENT_TYPE != 'push' ]; then
   export PHANTOMJS=true
+  export CHROME_HEADLESS=true
 fi
 
 # 1. Install phantomJs if this is a pull request - for external PR's, we can't

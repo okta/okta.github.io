@@ -15,7 +15,7 @@ describe('page layout and browser size spec', () => {
   });
 
   // Phantom does not support the CSS transform we use to hide the top nav
-  util.itNoPhantom('shows mobile navigation with mobile browser sizes', () => {
+  util.itNoHeadless('shows mobile navigation with mobile browser sizes', () => {
     navPage.resizeXsmall();
     navPage.waitUntilTopNavOffScreen();
     expect(navPage.isMobileNavDisplayed()).toBe(true);

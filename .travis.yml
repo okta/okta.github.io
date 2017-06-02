@@ -3,19 +3,22 @@ language: ruby
 rvm:
 - 2.2.4
 
+addons:
+ chrome: stable
+ sauce_connect: true
+
 before_install:
 - nvm install 7.9
 
 script: ./scripts/travis.sh
 
 sudo: false
+dist: trusty
 
 cache:
   directories:
   - travis_phantomjs
-
-addons:
-  sauce_connect: true
+  - /usr/bin
 
 env:
   global:

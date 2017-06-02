@@ -12,7 +12,7 @@ describe('table of contents navigation spec', () => {
     tocPage.resizeXLarge();  // At smaller sizes, table of contents is hidden
   });
 
-  util.itNoPhantom('has basic table of contents in the documentation page', () => {
+  util.itNoHeadless('has basic table of contents in the documentation page', () => {
     expect(tocPage.level1ItemContains('Authentication')).toBe(true);
 
     const expectedLevel2Items = ['Introduction', 'Building apps supporting Single Sign-On',
@@ -22,7 +22,7 @@ describe('table of contents navigation spec', () => {
     expect(tocPage.level2ItemsContain(expectedLevel2Items)).toBe(true);
   });
 
-  util.itNoPhantom('has table of contents with multi level items', () => {
+  util.itNoHeadless('has table of contents with multi level items', () => {
     sideBarPage.clickMFAUseCase();
     expect(sideBarPage.getCurrentURL()).toBe('/use_cases/mfa/');
     expect(tocPage.level1ItemContains('Multi-Factor Authentication')).toBe(true);

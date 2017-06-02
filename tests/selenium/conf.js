@@ -26,8 +26,19 @@ const config = {
   troubleshoot: true
 };
 
-// Run PhantomJS for pull requests
-if (process.env.PHANTOMJS) {
+// Run Chrome Headless for pull requests
+if (process.env.CHROME_HEADLESS) {
+  console.log('-- Using Chrome Headless --');
+  config.capabilities = {
+    'browserName': 'chrome',
+    chromeOptions: {
+      args: ['--headless','--disable-gpu','--window-size=1600x1200']
+    }
+  }
+}
+
+// Run PhantomJS for pull requests (will be deprecated)
+else if (process.env.PHANTOMJS) {
   console.log('-- Using phantom --');
   config.capabilities = {
     browserName: 'phantomjs',

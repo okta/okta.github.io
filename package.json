@@ -13,7 +13,7 @@
     "build-prod": "npm run clean && JEKYLL_ENV=production bundle exec jekyll build --verbose && rsync -av ./dist/ ./",
     "start": "npm run clean && JEKYLL_ENV=production bundle exec jekyll serve --incremental",
     "stop": "if-env CI=true && exit 0 || (pkill -f clean && kill $(lsof -t -i:4000; lsof -t -i:4444))",
-    "driver": "if-env PHANTOMJS=true && (phantomjs --webdriver 4444 & sleep 3) || webdriver-manager update",
+    "driver": "if-env CHROME_HEADLESS=true && webdriver-manager update || if-env PHANTOMJS=true && (phantomjs --webdriver 4444 & sleep 3) || webdriver-manager update",
     "test-only": "protractor tests/selenium/conf.js",
     "pretest": "npm start & wait-on http://localhost:4000 && npm run driver",
     "test": "npm run test-only || (npm stop && exit 1)",
