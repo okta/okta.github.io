@@ -41,7 +41,7 @@ Retrieve the information you need to obtain an authorization grant; obtain, vali
 
 {% api_operation get /oauth2/:authorizationServerId/v1/authorize %}
 
-This is a starting point for OAuth 2.0 flows such as implicit and authorization code flows.This request authenticates the user and returns tokens along with an authorization grant to the client application as part of the response.
+This is a starting point for OAuth 2.0 flows such as implicit and authorization code flows. This request authenticates the user and returns tokens along with an authorization grant to the client application as part of the response.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -264,11 +264,11 @@ For web and native application types, an additional process is required:
 
 ~~~sh
 curl -X POST \
-  "https://westworld.okta.com/oauth2/aus9s3ami4MRoqQR90h7/v1/token" \
+  "https://${org}.okta.com/oauth2/aus9s3ami4MRoqQR90h7/v1/token" \
   -H "Accept: application/json" \
   -H "Cache-Control: no-cache" \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "grant_type=password&username=dolores.abernathy%40westworld.com&
+  -d "grant_type=password&username=dolores.abernathy%40${org}.com&
       password=<password>&scope=openid&client_id=<client_id>
       & client_secret=<client_secret>"
 ~~~
@@ -918,7 +918,7 @@ curl -X PUT \
     "audiences": [
       "https://api.new-resource.com"
     ]
-}   "http://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+}'   "http://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example
@@ -2046,33 +2046,33 @@ Token expiration times depend on how they are defined in the rules, and which po
 
 ~~~json
 {
-	"type": "RESOURCE_ACCESS",
-	"status": "ACTIVE",
-	"name": "Default rule",
-	"system": false,
-	"conditions": {
-		"people": {
-			"users": {
-				"include": [],
-				"exclude": []
-			},
-			"groups": {
-				"include": [
-					"EVERYONE"
-				],
-				"exclude": []
-			}
-		"scopes": {
-			"include": [{
-				"name": "*",
-				"access": "ALLOW"
-			}]
-	},
-	"token": {
-		"accessTokenLifetimeMinutes": 60,
-		"refreshTokenLifetimeMinutes": 0,
-		"refreshTokenWindowMinutes": 10080
-	}
+  "type": "RESOURCE_ACCESS",
+  "status": "ACTIVE",
+  "name": "Default rule",
+  "system": false,
+  "conditions": {
+    "people": {
+      "users": {
+        "include": [],
+        "exclude": []
+      },
+      "groups": {
+        "include": [
+          "EVERYONE"
+        ],
+          "exclude": []
+    }
+    "scopes": {
+      "include": [{
+        "name": "*",
+        "access": "ALLOW"
+      }]
+    },
+  "token": {
+    "accessTokenLifetimeMinutes": 60,
+    "refreshTokenLifetimeMinutes": 0,
+    "refreshTokenWindowMinutes": 10080
+  }
 }
 ~~~
 
@@ -2099,8 +2099,8 @@ Token limits:
 [
   {
     "id": "scpainazg3Ekay92V0h7",
-    "name": "car:order",
-    "description": "Order car",
+    "name": "car:drive",
+    "description": "Drive car",
     "system": false,
     "default": false
   }
@@ -2174,35 +2174,35 @@ More about `alwaysIncludeInToken`:
 
 Example from a Rules Object
 ~~~json
-	"conditions": {
-		"people": {
-			"users": {
-				"include": [],
-				"exclude": []
-			},
-			"groups": {
-				"include": [
-					"EVERYONE"
-				],
-				"exclude": []
-			}
-		"scopes": {
-			"include": [{
-				"name": "*",
-				"access": "ALLOW"
-			}]
-	}
+  "conditions": {
+    "people": {
+      "users": {
+        "include": [],
+        "exclude": []
+      },
+      "groups": {
+        "include": [
+          "EVERYONE"
+        ],
+        "exclude": []
+      }
+    "scopes": {
+      "include": [{
+        "name": "*",
+        "access": "ALLOW"
+      }]
+  }
 ~~~
 
 Example from a Policy Object
 ~~~json
 "conditions": {
-     "clients": {
-       "include": [
-          "ALL_CLIENTS"
-          ]
-       }
-   }
+  "clients": {
+    "include": [
+      "ALL_CLIENTS"
+    ]
+  }
+}
 ~~~
 
 ##### Conditions Properties

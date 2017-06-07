@@ -472,7 +472,7 @@ The Profile `description` is made up of the Stormpath Organization's `nameKey` w
 Stormpath Applications have OAuth Client Applications created for them in Okta, as well as Authorization Servers.
 
 - An OAuth Client Application is created with `type` set to `web`
-- An [Authorization Server](/docs/api/resources/oauth2.html#authorization-servers) is also created
+- An [Authorization Server](/docs/api/resources/oauth2.html#authorization-operations) is also created
 - The Authorization Server and Client Application are associated with one another
 - Any relevant Okta Groups are assigned to the new OAuth Client Application
 - Access and Refresh Token TTL values are imported
