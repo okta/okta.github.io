@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Sessions
+title: Sessions API
 redirect_from: "/docs/api/rest/sessions.html"
 ---
 

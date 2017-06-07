@@ -247,7 +247,7 @@ Explore the OpenID Connect API: [![Run in Postman](https://run.pstmn.io/button.s
 {% api_operation get /oauth2/v1/userinfo %}
 {% api_operation post /oauth2/v1/userinfo %}
 
-You must include the `access_token` returned from the [/oauth2/v1/authorize](oauth2.html#authentication-request) endpoint as an authorization header parameter.
+You must include the `access_token` returned from the [/oauth2/v1/authorize](oauth2.html#obtain-an-authorization-grant-from-a-user) endpoint as an authorization header parameter.
 
 This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 

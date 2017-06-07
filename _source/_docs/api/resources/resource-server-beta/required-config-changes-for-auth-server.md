@@ -133,7 +133,7 @@ To change the well-known endpoint:
 settings tab ( **Security > API > Authorization Server** ).
 
 2. Use the Discovery Document for [OpenID Connect clients](/docs/api/resources/oidc.html#openid-connect-discovery-document)
-and [OAuth 2.0 clients](/docs/api/resources/oauth2.html#authorization-server-metadata) to identify all endpoints that must be changed, as shown in the example below.
+and OAuth 2.0 clients to identify all endpoints that must be changed, as shown in the example below.
 You'll also see the JWKs, introspect and revoke endpoints.
 
 3. Find all the code you've written that references the authorization server in the endpoints returned by the discovery document. For example,
