@@ -276,7 +276,7 @@ Refresh Tokens can be revoked explicitly by making a [Revocation Request](#revoc
 No other modifications affect existing tokens.
 
 ## ID Token
-An Authorization Server can also issue an ID Token to the client, as in [OIDC](oidc#id-token), but with the following differences:
+An Authorization Server can also issue an ID Token to the client, as in OpenID Connect, but with the following differences:
 
 * The ID Token cannot contain a reserved scope or claim called 'groups'. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
 * The custom properties in the app user profile are not included in the Id Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.
@@ -284,7 +284,7 @@ An Authorization Server can also issue an ID Token to the client, as in [OIDC](o
 The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
 immediately and permanently invalidated. Reactivating the client does not make the token valid again.
 
-The same validation steps for [OIDC](oidc.html#validating-id-tokens) can also be applied to and ID Token for
+The same validation steps for [OpenID Connect](oidc.html#validating-id-tokens) can also be applied to and ID Token for
 OAuth2, except the public keys should be retrieved via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 
 ## Access Policies
