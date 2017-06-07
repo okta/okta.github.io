@@ -15,16 +15,19 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.22
  
 #### Data Retention Changes
 
-Okta will soon make system log data available for six months. This data is generated from `/api/v1/events` or Okta SDK `EventsAPIClient`.
+Okta is changing system log data retention. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
 
-This data retention policy starts:
+* For orgs created before July 17th, data will be retained for 6 months.
+* For orgs created on and after July 17th, data will be retained for 3 months.
 
-* June 7 for preview orgs
-* July 17 for production orgs
+The new data retention policy starts:
+
+* June 7 for existing preview orgs
+* July 17 for existing production orgs
 
 Preview and production orgs created on July 17 and later will retain this log data for three months. 
 
-For the full data retention policy, see our [Data Retention Policy](https://help.okta.com).
+For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
 You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API. <!-- OKTA-125424 -->
 
@@ -65,20 +68,21 @@ For a full description of the new rate limits, see [API Rate Limit Improvements]
 You can now use the Authorization Server API to configure components of an Authorization Server:
 
 * Manage Authorization Server policies, policy rules, claims, and scopes with the API.
-* Using either the API or the Okta UI:
-    * Delete authorization servers
-    * Manage dynamic claims
+* Activate or deactivate Authorization Servers, or delete them.
+* Scopes were actions previously, but are now conditions in a policy rule.
+* Control which claims are returned in ID tokens with the `alwaysIncludeInToken` property in claims.
 
 For more information see the [Authorization Server API documentation](/docs/api/resources/oauth2.html#authorization-server-operations).
 <!-- OKTA-127511, OKTA-123638 -->
 
-#### Additional Logging for Invalid OAuth 2.0 Client
+#### Additional Logging for Invalid Use by OAuth 2.0 Client
 
-If we detect five or more consecutive request attempts with the wrong client secret, Okta logs the events as suspicious:
+If Okta detects five or more consecutive request attempts with the wrong client secret, we log the events as suspicious:
 
 * The requests may be to any OAuth 2.0 endpoint that accepts client credentials.
 * The counter resets after 14 days of no invalid authentication attempts, or after a successful authentication.
-* The message is `Multiple requests with invalid client secret for client id.` <!-- OKTA-122503 -->
+
+We log an event when an invalid `client_id` is provided, and when an invalid `client_secret` is provided for a given `client_id`.<!-- OKTA-122503 -->
 
 #### Restrictions on Set Recovery Question Answer and Set Password
 
