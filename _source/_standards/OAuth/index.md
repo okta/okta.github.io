@@ -180,7 +180,7 @@ The header only includes the following reserved claims:
 | Property     | Description                                                                      | DataType     | Example                  |
 |--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
 | alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
-| kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [metadata](#authorization-server-metadata) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
+| kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [metadata](/docs/api/resources/oauth2.html#authorization-server-metadata) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Reserved claims in the payload section
 
@@ -238,7 +238,7 @@ Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_ur
 Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
 
 The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
-However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](#authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
+However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
 
 Please note the following:
 
@@ -248,7 +248,7 @@ Please note the following:
 * Okta always publishes keys to the JWKS.
 * To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.
 {% beta %}
-* The administrator can switch the authorization server key rotation mode to `MANUAL` by [updating the authorization server](/docs/api/resources/oauth2.html#update-authorization-server) and then control when to [rotate the keys](#rotate-authorization-server-keys).
+* The administrator can switch the authorization server key rotation mode to `MANUAL` by [updating the authorization server](/docs/api/resources/oauth2.html#update-authorization-server) and then control when to [rotate the keys](/docs/api/resources/oauth2.html#rotate-authorization-server-keys).
 {% endbeta %}
 
 Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
@@ -267,7 +267,7 @@ The lifetime of a Refresh Token is configured in [Access Policies](#access-polic
 
 ### Refresh Token Revocation
 
-Refresh Tokens can be revoked explicitly by making a [Revocation Request](#revocation-request). Additionally, all Refresh Tokens associated with an entity are revoked when the entity is deactivated, deleted, or otherwise modified in a way that invalidates the associated Refresh Tokens. Such ways includes:
+Refresh Tokens can be revoked explicitly by making a [Revocation Request](/docs/api/resources/oauth2.html#revocation-request). Additionally, all Refresh Tokens associated with an entity are revoked when the entity is deactivated, deleted, or otherwise modified in a way that invalidates the associated Refresh Tokens. Such ways includes:
 
 * The User is Suspended or Deactivated
 * The Client App is Deactivated or Deleted
@@ -284,7 +284,7 @@ An Authorization Server can also issue an ID Token to the client, as in OpenID C
 The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
 immediately and permanently invalidated. Reactivating the client does not make the token valid again.
 
-The same validation steps for [OpenID Connect](oidc.html#validating-id-tokens) can also be applied to and ID Token for
+The same validation steps for [OpenID Connect](/docs/api/resources/oidc.html#validating-id-tokens) can also be applied to ID Token for
 OAuth2, except the public keys should be retrieved via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 
 ## Access Policies
