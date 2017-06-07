@@ -55,7 +55,7 @@ For a full description of the new rate limits, see [API Rate Limit Improvements]
 ### Platform Enhancements
 
 * [Authorization Server API Enhancements](#authorization-server-api-enhancements)
-* [Additional Logging for Invalid Client Credentials](#additional-logging-for-invalid-client-credentials)
+* [Additional Logging for Invalid Use by OAuth 2.0 Client](#additional-logging-for-invalid-use-by-oauth-20-client)
 * [Restrictions on Set Recovery and Set Password Operations](#restrictions-on-set-recovery-question-answer-and-set-password)
 * [Step-up Authentication for SAML Apps in Early Access](#step-up-authentication-for-saml-apps-is-an-early-access-feature)
 * [Simple HAL Links](#simple-hal-links-generally-available-in-preview-for-may-2017)
@@ -72,7 +72,7 @@ You can now use the Authorization Server API to configure components of an Autho
 For more information see the [Authorization Server API documentation](/docs/api/resources/oauth2.html#authorization-server-operations).
 <!-- OKTA-127511, OKTA-123638 -->
 
-#### Additional Logging for Invalid Client Credentials
+#### Additional Logging for Invalid OAuth 2.0 Client
 
 If we detect five or more consecutive request attempts with the wrong client secret, Okta logs the events as suspicious:
 
