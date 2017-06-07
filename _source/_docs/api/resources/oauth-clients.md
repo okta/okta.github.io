@@ -16,14 +16,14 @@ and [ID Token](/docs/api/resources/oauth2.html#id-token).
 
 > This API is a {% api_lifecycle beta%} feature.
 
-Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7a7f9956c58e49996dc8)
+Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5155aa172e3d5e59ee5d){:target="_blank"}
 
 ## Getting Started
 
 If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html), you may want to experiment with the Postman collection first:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/036dc40615651451307d)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5155aa172e3d5e59ee5d){:target="_blank"}
 
 ## Client Application Model
 
