@@ -22,7 +22,7 @@ In addition to the information in this introduction, you can find detailed infor
 
 # Introduction
 
-Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) authorization server and a certified [OpenID Provider](http://openid.net/certification).
+Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) Authorization Server and a certified [OpenID Provider](http://openid.net/certification).
 The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
 
 There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:
@@ -91,7 +91,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
 
     > Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints.
     This is what the `state` parameter is used for in the flows described above; the client should send a state value in on the authorization request,
-    and it must validate that returned "state" parameter from the authorization server matches the original value.
+    and it must validate that returned "state" parameter from the Authorization Server matches the original value.
 
 ## Custom User Experience
 
@@ -156,7 +156,7 @@ This is a digital signature Okta generates using the public key identified by th
 
 Access Tokens include reserved scopes and claims, and can optionally include custom scopes and claims.
 
-Scopes are requested in the request parameter, and the authorization server uses the [Access Policies](#access-policies) to decide if they can be granted or not. If any of the requested scopes are rejected by the Access Policies, the request will be rejected.
+Scopes are requested in the request parameter, and the Authorization Server uses the [Access Policies](#access-policies) to decide if they can be granted or not. If any of the requested scopes are rejected by the Access Policies, the request will be rejected.
 
 Based on the granted scopes, claims are added into the Access Token returned from the request.
 
@@ -227,18 +227,18 @@ Access Tokens are sensitive and can be misused if intercepted. Transmit them onl
 
 An Access Token must be validated in the following manner:
 
-1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
-2. Verify that the `aud` (audience) claim is the requested URL.
+1. Verify that the `iss` (issuer) claim matches the identifier of your Authorization Server.
+2. Verify that the `aud` (audience) claim is the value configured in the Authorization Server.
 3. Verify `cid` (client id) claim is your client id.
 4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
-Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
+Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [Authorization Server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
 Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
 
 The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
-However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
+However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [Authorization Server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
 
 Please note the following:
 
@@ -247,9 +247,7 @@ Please note the following:
 * In case of an emergency, Okta can rotate keys as needed.
 * Okta always publishes keys to the JWKS.
 * To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.
-{% beta %}
-* The administrator can switch the authorization server key rotation mode to `MANUAL` by [updating the authorization server](/docs/api/resources/oauth2.html#update-authorization-server) and then control when to [rotate the keys](/docs/api/resources/oauth2.html#rotate-authorization-server-keys).
-{% endbeta %}
+* The administrator can switch the Authorization Server key rotation mode to `MANUAL` by [updating the Authorization Server](/docs/api/resources/oauth2.html#update-authorization-server) and then control when to [rotate the keys](/docs/api/resources/oauth2.html#rotate-authorization-server-keys).
 
 Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
 
@@ -304,7 +302,7 @@ Because Policy A has a higher priority, the requests coming from client C are ev
 
 ### Rules
 
-In a policy the administrators can define several rules with people conditions. The people condition identifies users and groups that are included or exclueded to match the user the token is requested for. Rules are ordered numerically by priority. This priority determines the order in which they are searched for a user/group match. The highest priority rule has a priorityOrder of 1.
+In a policy the administrators can define several rules with people, scope, and grant type conditions. The people condition identifies users and groups that are included or exclueded to match the user the token is requested for. Rules are ordered numerically by priority. This priority determines the order in which they are searched for a user/group match. The highest priority rule has a priorityOrder of 1.
 
 For example, assume the following conditions are in effect:
 
@@ -313,25 +311,23 @@ For example, assume the following conditions are in effect:
 
 Because Rule A has a higher priority, the requests for user U are evaluated in Rule A, and Rule B is not evaluated.
 
-The requests with `client_credentials` grant type match "no user" condition, which excludes everyone, because there is no user session for the request.
-
 The actions in a rule define the lifetime of the Access Token and Refresh Token.
 
 ## Authorization Servers
 
-API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints. An authorization server defines your security boundary, for example “staging” or “production.” Within each authorization server you can define your own OAuth scopes, claims, and access policies. This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.
+API Access Management allows you to build custom Authorization Servers in Okta which can be used to protect your own API endpoints. An Authorization Server defines your security boundary, for example “staging” or “production.” Within each Authorization Server you can define your own OAuth scopes, claims, and access policies. This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.
 
-At its core, an authorization server is simply an OAuth 2.0 token minting engine.
-Each authorization server has a unique issuer URI and its own signing key for tokens in order to keep proper boundary between security domains.
-The authorization server also acts as an OpenID Connect Provider, which means you can request ID tokens in addition to access tokens from the authorization server endpoints.
-To configure an authorization server, log into your org and navigate to **Security** > **API** > **Add Authorization Server**.
+At its core, an Authorization Server is simply an OAuth 2.0 token minting engine.
+Each Authorization Server has a unique issuer URI and its own signing key for tokens in order to keep proper boundary between security domains.
+The Authorization Server also acts as an OpenID Connect Provider, which means you can request ID tokens in addition to access tokens from the Authorization Server endpoints.
+To configure an Authorization Server, log into your org and navigate to **Security** > **API** > **Add Authorization Server**.
 
 ## OpenID Connect and Authorization Servers
 
 You can use OpenID Connect without the API Access Management feature, using the [OpenID Connect API](/docs/api/resources/oidc.html).
-However, you can also use OpenID Connect with an authorization server specified:
+However, you can also use OpenID Connect with an Authorization Server specified:
 
 * `/oauth2/v1/userinfo` for OpenID Connect without API Access Management
 * `/oauth2/:authorizationServerId/v1/userinfo` for OpenID Connect with API Access Management
 
-You can't mix tokens between different authorization servers. By design, authorization servers don't have trust relationships with each other.
+You can't mix tokens between different Authorization Servers. By design, Authorization Servers don't have trust relationships with each other.
