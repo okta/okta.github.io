@@ -2524,7 +2524,7 @@ Custom scopes and custom claims aren’t returned.</p>
 
 <h4 class="api api-operation" id="get-authorization-server-keys">Get Authorization Server Keys</h4>
 
-<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/authorizationServers/:authorizationServerId/credentials/keys</span>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></p>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/authorizationServers/:authorizationServerId/credentials/keys</span></p>
 
 <p>Returns the current keys in rotation for the Authorization Server.</p>
 
@@ -2643,7 +2643,7 @@ Custom scopes and custom claims aren’t returned.</p>
 
 <h4 class="api api-operation" id="rotate-authorization-server-keys">Rotate Authorization Server Keys</h4>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authorizationServers/:authorizationServerId/credentials/lifecycle/keyRotate</span>  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></p>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authorizationServers/:authorizationServerId/credentials/lifecycle/keyRotate</span></p>
 
 <p>Rotates the current keys for the Authorization Server. If you rotate keys, the <code class="highlighter-rouge">ACTIVE</code> key becomes the <code class="highlighter-rouge">EXPIRED</code> key, the <code class="highlighter-rouge">NEXT</code> key becomes the <code class="highlighter-rouge">ACTIVE</code> key, and the Authorization Server immediately issues tokens signed with the new active key.</p>
 
