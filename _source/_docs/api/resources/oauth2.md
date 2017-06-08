@@ -1588,7 +1588,7 @@ HTTP/1.1 204: No content
 #### Get Authorization Server Keys
 {:.api .api-operation}
 
-{% api_operation get /api/v1/authorizationServers/:authorizationServerId/credentials/keys %} {% api_lifecycle beta %}
+{% api_operation get /api/v1/authorizationServers/:authorizationServerId/credentials/keys %}
 
 Returns the current keys in rotation for the Authorization Server.
 
@@ -1695,7 +1695,7 @@ curl -v -X GET \
 #### Rotate Authorization Server Keys
 {:.api .api-operation}
 
-{% api_operation post /api/v1/authorizationServers/:authorizationServerId/credentials/lifecycle/keyRotate %} {% api_lifecycle beta %}
+{% api_operation post /api/v1/authorizationServers/:authorizationServerId/credentials/lifecycle/keyRotate %}
 
 Rotates the current keys for the Authorization Server. If you rotate keys, the `ACTIVE` key becomes the `EXPIRED` key, the `NEXT` key becomes the `ACTIVE` key, and the Authorization Server immediately issues tokens signed with the new active key.
 
