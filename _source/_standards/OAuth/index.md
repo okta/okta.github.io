@@ -32,12 +32,12 @@ There are several use cases and Okta product features built on top of the OAuth 
 * API Access Management -- {% api_lifecycle ea %}
 
 It's important to understand which use case you are targeting and build your application according to the correct patterns for that use case.
-The OAuth 2.0 APIs each have several different [query params](/docs/api/resources/oauth2.html#authentication-request) which dictate which type of flow you are using and the mechanics of that flow.
+The OAuth 2.0 APIs each have several different [query params](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) which dictate which type of flow you are using and the mechanics of that flow.
 
 At the very basic level, the main API endpoints are:
 
-* [Authorize](/docs/api/resources/oauth2.html#authentication-request) endpoint initiates an OAuth 2.0 request.
-* [Token](/docs/api/resources/oauth2.html#token-request) endpoint redeems an authorization grant (returned by the [Authorize](/docs/api/resources/oauth2.html#authentication-request) endpoint) for an access token.
+* [Authorize](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) endpoint initiates an OAuth 2.0 request.
+* [Token](/docs/api/resources/oauth2.html#token-request) endpoint redeems an authorization grant (returned by the [Authorize](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) endpoint) for an access token.
 
 ## Getting Started
 
@@ -180,7 +180,7 @@ The header only includes the following reserved claims:
 | Property     | Description                                                                      | DataType     | Example                  |
 |--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
 | alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
-| kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [metadata](/docs/api/resources/oauth2.html#authorization-server-metadata) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
+| kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Reserved claims in the payload section
 
@@ -233,12 +233,12 @@ An Access Token must be validated in the following manner:
 4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
-Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [Authorization Server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
+Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [Authorization Server metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
 Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
 
 The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
-However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [Authorization Server metadata](/docs/api/resources/oauth2.html#authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
+However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [Authorization Server metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
 
 Please note the following:
 
@@ -265,7 +265,7 @@ The lifetime of a Refresh Token is configured in [Access Policies](#access-polic
 
 ### Refresh Token Revocation
 
-Refresh Tokens can be revoked explicitly by making a [Revocation Request](/docs/api/resources/oauth2.html#revocation-request). Additionally, all Refresh Tokens associated with an entity are revoked when the entity is deactivated, deleted, or otherwise modified in a way that invalidates the associated Refresh Tokens. Such ways includes:
+Refresh Tokens can be revoked explicitly by making a [Revocation Request](/docs/api/resources/oauth2.html#revoke-a-token). Additionally, all Refresh Tokens associated with an entity are revoked when the entity is deactivated, deleted, or otherwise modified in a way that invalidates the associated Refresh Tokens. Such ways includes:
 
 * The User is Suspended or Deactivated
 * The Client App is Deactivated or Deleted
