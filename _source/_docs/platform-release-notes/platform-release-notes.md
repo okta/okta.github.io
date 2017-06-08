@@ -22,10 +22,10 @@ Okta is changing system log data retention. System log data is available from `/
 
 The new data retention policy starts:
 
-* June 7 for existing preview orgs
-* July 17 for existing production orgs
+* June 7, 2017 for existing preview orgs
+* July 17, 2017 for existing production orgs
 
-Preview and production orgs created on July 17 and later will retain this log data for three months. 
+Preview and production orgs created on July 17,2017 and later will retain this log data for three months. 
 
 For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
