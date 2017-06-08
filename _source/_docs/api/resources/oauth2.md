@@ -11,7 +11,7 @@ Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) 
 
 The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
 
-Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ff6b1f58429d74ff1cfd){:target="_blank"}
+Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ff6b1f58429d74ff1cfd)
 
 ## Endpoints
 
@@ -789,7 +789,7 @@ Creates a new Authorization Server with key rotation mode as `AUTO`
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-[Authorization-Server-Properties](#authorization-server-properties)
+[Authorization Server Properties](#authorization-server-properties)
 
 ##### Response Parameters
 {:.api .api-request .api-response-params}
@@ -918,7 +918,7 @@ curl -X PUT \
     "audiences": [
       "https://api.new-resource.com"
     ]
-}'   "http://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+}'   "https://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example
@@ -953,14 +953,14 @@ curl -X DELETE \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H "Authorization: SSWS ${api_token}" \
-"http://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
+"https://${org}/api/v1/authorizationServers/aus1rqsshhhRoat780g7" \
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~json 
-Status 204: No content
+~~~http 
+HTTP/1.1 204: No content
 ~~~
 
 #### Activate Authorization Server
@@ -996,8 +996,8 @@ curl -v -X POST \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~json 
-Status 204: No content
+~~~http 
+HTTP/1.1 204: No content
 ~~~
 
 #### Deactivate Authorization Server
@@ -1033,8 +1033,8 @@ curl -v -X POST \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~json 
-Status 204: No content
+~~~http 
+HTTP/1.1 204: No content
 ~~~
 
 ### Policy Operations
@@ -1389,8 +1389,8 @@ curl -v -X DELETE \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~json 
-Status 204: No content
+~~~http 
+HTTP/1.1 204: No content
 ~~~
 
 ### Claim Operations
@@ -1484,9 +1484,17 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d `{
-  "description": "Drive car",
-  "name": "car:drive"
-   }' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims"
+     "name": "carDriving",
+     "status": "ACTIVE",
+     "claimType": "RESOURCE",
+     "valueType": "EXPRESSION",
+     "value": "\"driving!\"",
+     "conditions": {
+       "scopes": [
+         "car:drive"
+         ]
+       }
+    }' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims"
 ~~~
 
 ##### Response Example
@@ -1518,16 +1526,18 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d `{
-    	"name": "carDriving",
-    	"status": "ACTIVE",
-    	"claimType": "RESOURCE",
-    	"valueType": "EXPRESSION",
-    	"value": "\"driving!\"",
-    	"conditions": {
-    		"scopes": [
-    			"car:drive"
-    		]
-    	}
+     "name": "carDriving",
+     status": "ACTIVE",
+     "claimType": "RESOURCE",
+     "valueType": "EXPRESSION",
+     "value": "\"driving!\"",
+     "alwaysIncludeInToken": "true",
+     "system": "false",
+     "conditions": {
+       "scopes": [
+         "car:drive"
+         ]
+       }
     }'
 }' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims/oclain6za1HQ0noop0h7"
 ~~~
@@ -1566,8 +1576,8 @@ curl -v -X DELETE \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-~~~json 
-Status 204: No content
+~~~http 
+HTTP/1.1 204: No content
 ~~~
 
 ### Authorization Server Key Store Operations
@@ -1621,7 +1631,7 @@ curl -v -X GET \
       "use": "sig",
       "_links": {
         "self": {
-          "href": "http://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc",
+          "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc",
           "hints": {
             "allow": [
               "GET"
@@ -1643,7 +1653,7 @@ curl -v -X GET \
       "use": "sig",
       "_links": {
         "self": {
-          "href": "http://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo",
+          "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo",
           "hints": {
             "allow": [
               "GET"
@@ -1665,7 +1675,7 @@ curl -v -X GET \
       "use": "sig",
       "_links": {
         "self": {
-          "href": "http://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/h5Sr3LXcpQiQlAUVPdhrdLFoIvkhRTAVs_h39bQnxlU",
+          "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/h5Sr3LXcpQiQlAUVPdhrdLFoIvkhRTAVs_h39bQnxlU",
           "hints": {
             "allow": [
               "GET"
@@ -1755,7 +1765,7 @@ curl -v -X POST \
                "use": "sig",
                "_links": {
                  "self": {
-                 "href": "http://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/T5dZ1dYT-l-I0j-gRQ82XjutSX00TeWiSguuDhW3zdf",
+                 "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/T5dZ1dYT-l-I0j-gRQ82XjutSX00TeWiSguuDhW3zdf",
                  "hints": {
                    "allow": [
                      "GET"
@@ -1820,7 +1830,7 @@ The system log contains detailed information about why a request was denied and 
 
 * Scopes are unique per authorization server.
 
-* The `audiences` value you specify in an authorization server must be an absolute path.
+* The `audiences` value you specify is an array of String. If the string contains ":" it must be a valid URI.
 
 * Tokens can expire, be explicitly revoked at the endpoint, or implicitly revoked by a change in configuration.
 
@@ -1969,7 +1979,7 @@ Token expiration times depend on how they are defined in the rules, and which po
 |:------------|:---------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|:------------------------------|
 | name        | The name of the Authorization Server                                                                                 | String                                                                  | True                          |
 | description | The description of the Authorization Server                                                                          | String                                                                  | True                          |
-| audiences   | The URL of the resource being secured by this Authorization Server. This becomes the `aud` claim in an Access Token. | Array                                                                   | True                          |
+| audiences   | The recipients that the tokens are intended for. This becomes the `aud` claim in an Access Token.                    | Array                                                                   | True                          |
 | issuer      | The complete URL for the Authorization Server. This becomes the `iss` claim in an Access Token.                      | String                                                                  | False                         |
 | status      | Indicates whether the Authorization Server is `ACTIVE` or `INACTIVE`.                                                | Enum                                                                    | False                         |
 | credentials | Keys used to sign tokens.                                                                                            |               [Credentials Object](#authorization-server-credentials-signing-object) | False                         |
@@ -2037,9 +2047,9 @@ Token expiration times depend on how they are defined in the rules, and which po
 | description | Description of the policy                                                                                           | String                                    | True                                     |
 | priority    | Specifies the order in which this policy is evaluated in relation to the other policies in the Authorization Server | Integer                                   | True                                     |
 | system      | Specifies whether Okta created this policy (`true`) or not (`false`).                                               | Boolean                                   | True                                     |
-| conditions  | Specifies client and scope values available in this policy.                                                         |                    [Conditions Object](#conditions-object) | False                                    |
-| created     | Timestamp when the policy was created                                                                               | dateTime                                  | System                                   |
-| lastUpdated | Timestamp when the policy was last updated                                                                          | dateTime                                  | System                                   |
+| conditions  | Specifies the clients that the policy will be applied to.                                                           |                    [Conditions Object](#conditions-object) | False                                    |
+| created     | Timestamp when the policy was created                                                                               | DateTime                                  | System                                   |
+| lastUpdated | Timestamp when the policy was last updated                                                                          | DateTime                                  | System                                   |
 | _links      | List of discoverable resources related to the policy                                                                | Links                                     | System                                   |
 
 #### Rules Object
@@ -2084,12 +2094,12 @@ Token expiration times depend on how they are defined in the rules, and which po
 | name       | Name of the rule                                                                              | String                                   | True                                     |
 | status     | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE`    | Enum                                     | True                                     |
 | system     | Specifies whether the rule was created by Okta or not                                         | Boolean                                  | True                                     |
-| conditions | Specifies the scopes and claims for the rule                                                  |      [Conditions Object](#conditions-object)  | False                                    |
+| conditions | Specifies the people, groups, grant types and scopes the rule will be applied to              |      [Conditions Object](#conditions-object)  | False                                    |
 | token      | Specifies lifetime durations for the token minted                                             | Integer                                  | System generated                         |
 
 Token limits:
 
-* accessTokenLifetimeMinutes: minimum 5 minutes, maximum 1 day
+* accessTokenLifetimeMinutes: minimum 5 minutes, maximum 1 day 
 * refreshTokenLifetimeMinutes: minimum Access Token lifetime
 * refreshTokenWindowMinutes: minimum 10 minutes, maximum 90 days
 
@@ -2109,13 +2119,13 @@ Token limits:
 
 ##### Scopes Properties
 
-| Parameter   | Description                          | Type    | Required |
-|:------------|:-------------------------------------|:--------|:---------|
-| id          | ID of the scope                      | String  | FALSE    |
-| name        | Name of the scope                    | String  | FALSE    |
-| description | Description of the scope             | String  | FALSE    |
-| system      | Whether Okta created the scope       | Enum    | FALSE    |
-| default     | Whether the scope is a default scope | Boolean | FALSE    |
+| Parameter   | Description                          | Type    | Required for create or update |
+|:------------|:-------------------------------------|:--------|:------------------------------|
+| id          | ID of the scope                      | String  | FALSE                         |
+| name        | Name of the scope                    | String  | TRUE                          |
+| description | Description of the scope             | String  | FALSE                         |
+| system      | Whether Okta created the scope       | Enum    | FALSE                         |
+| default     | Whether the scope is a default scope | Boolean | FALSE                         |
 
 #### Claims Object
 
@@ -2141,6 +2151,7 @@ Token limits:
     "claimType": "IDENTITY",
     "valueType": "EXPRESSION",
     "value": "\"drivePlease\"",
+    "alwaysIncludeInToken": "TRUE" 
     "conditions": {
       "scopes": [
         "car:drive"
@@ -2153,17 +2164,17 @@ Token limits:
 
 ##### Claims Properties
 
-| Parameter            | Description                                                                                | Type                                     | Required for create or update            |
-|:---------------------|:-------------------------------------------------------------------------------------------|:-----------------------------------------|:-----------------------------------------|
-| id                   | ID of the claim                                                                            | String                                   | True except for create or get all claims |
-| name                 | Name of the claim                                                                          | String                                   | True                                     |
-| status               | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE` | Enum                                     | True                                     |
-| claimType            | Specifies whether the claim is an Access Token (`RESOURCE`) or ID Token (`IDENTITY`)       | String                                   | True                                     |
-| valueType            | Specifies whether the claim is an Okta EL expression or a set of groups                    | String                                   | True                                     |
-| value                | The value of the claim, including escaped quote marks                                      | String                                   | True                                     |
-| conditions           | Specifies the scopes for this claim                                                        |        [Conditions Object](#conditions-object)  | False                                    |
-| alwaysIncludeInToken | Specifies whether to include claims in tokens                                              | Boolean                                  | False                                    |
-| system               | Specifies whether Okta created this claim                                                  | Boolean                                  | System                                   |
+| Parameter            | Description                                                                                              | Type                                     | Required for create or update            |
+|:---------------------|:---------------------------------------------------------------------------------------------------------|:-----------------------------------------|:-----------------------------------------|
+| id                   | ID of the claim                                                                                          | String                                   | True except for create or get all claims |
+| name                 | Name of the claim                                                                                        | String                                   | True                                     |
+| status               | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE`               | Enum                                     | True                                     |
+| claimType            | Specifies whether the claim is an Access Token (`RESOURCE`) or ID Token (`IDENTITY`)                     | Enum                                     | True                                     |
+| valueType            | Specifies whether the claim is an Okta EL expression or a set of groups                                  | Enum                                     | True                                     |
+| value                | The value of the claim, including escaped quote marks. Can be a string literal or an Okta EL expression. | String                                   | True                                     |
+| conditions           | Specifies the scopes for this claim                                                                      |            [Conditions Object](#conditions-object) | False                                    |
+| alwaysIncludeInToken | Specifies whether to include claims in tokens                                                            | Boolean                                  | False                                    |
+| system               | Specifies whether Okta created this claim                                                                | Boolean                                  | System                                   |
 
 More about `alwaysIncludeInToken`:
 
@@ -2212,7 +2223,7 @@ Example from a Policy Object
 | scopes     | Array of scopes this condition includes or excludes                                                                                                                                  | `include` and `exclude` lists | True                          |
 | clients    | For policies, specifies which clients are included or excluded in the policy                                                                                                         | `include` and `exclude` lists | True                          |
 | people     | For rules, specifies which users and groups are included or excluded in the rule                                                                                                     | `include` and `exclude` lists | True                          |
-| grant_type | Can be one of the following: `authorization_code`, `password`, `refresh_token`, or `client_credentials`. Determines the mechanism Okta uses to authorize the creation of the tokens. | ENUM                          | True                          |
+| grant_type | Can be one of the following: `authorization_code`, `password`, `refresh_token`, or `client_credentials`. Determines the mechanism Okta uses to authorize the creation of the tokens. | Enum                          | True                          |
 
 #### Authorization Server Credentials Signing Object
 
@@ -2223,6 +2234,7 @@ Example from a Policy Object
     "lastRotated": "2017-05-17T22:25:57.000Z",
     "nextRotation": "2017-08-15T22:25:57.000Z",
     "kid": "WYQxoK4XAwGFn5Zw5AzLxFvqEKLP79BbsKmWeuc5TB4"
+    "use": "sig"
   }
 }
 ~~~
@@ -2237,12 +2249,14 @@ Example from a Policy Object
 
 #### Authorization Server Certificate Key Object
 
+This object defines a [JSON Web Key](https://tools.ietf.org/html/rfc7517) for a signature or encryption credential for an application.
+
 | Parameter | Description                                                                      | Type   |
 |:----------|:---------------------------------------------------------------------------------|:-------|
 | alg       | The algorithm used with the key. Valid value: `RS256`                            | String |
-| status    | `ACTIVE`, `NEXT`, or `EXPIRED`                                                   | String |
-| e         | RSA key value (exponent) for key blinding                                        | String |
-| n         | RSA key value (modulus) for key blinding                                         | String |
+| status    | `ACTIVE`, `NEXT`, or `EXPIRED`                                                   | Enum   |
+| e         | RSA key value (exponent) for key binding                                         | String |
+| n         | RSA key value (modulus) for key binding                                          | String |
 | kid       | Unique identifier for the certificate.                                           | String |
 | kty       | Cryptographic algorithm family for the certificate's key pair Valid value: `RSA` | String |
 | use       | How the key is used. Valid value: `sig`                                          | String |
