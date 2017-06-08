@@ -33,14 +33,14 @@
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>OpenID Connect | Okta Developer</title>
+  <title>OpenID Connect API | Okta Developer</title>
   <meta name="description" content="OpenID Connect API">
   <link rel="canonical" href="https://developer.okta.com/docs/api/resources/oidc.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page openid-connect">
+  <div class="Page openid-connect-api">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -130,10 +130,10 @@
               <a href="/docs/api/resources/authn.html">Authentication Reference</a>
               <ul id="Sidebar_References" class="Sidebar-hide">
                 <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
-                <li class="is-active"><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
+                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
+                <li class="is-active"><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
                 <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
+                <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
               </ul>
             </li>
             <li>
@@ -221,7 +221,7 @@ and the client obtains an Okta session.</p>
 <p>If you are new to OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with
 <a href="http://openid.net/specs/openid-connect-core-1_0.html">the OpenID Connect spec</a>, you may want to experiment with the Postman collection now:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/036dc40615651451307d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/57ec0b23a21999f96f2d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="authentication-basics-with-oauth-20-and-openid-connect">Authentication Basics with OAuth 2.0 and OpenID Connect</h2>
 
@@ -727,14 +727,14 @@ For more information about configuring an app for OpenID Connect, including grou
   <p>The OIDC Access Token is applicable only for the Okta <code class="highlighter-rouge">/oauth2/v1/userinfo</code> endpoint and thus should be treated as opaque by the application. The application does not need to validate it since it should not be used against other resource servers. The format of it and the key used to sign it are subject to change without prior notice.</p>
 </blockquote>
 
-<p>Explore the OpenID Connect API: <a href="https://app.getpostman.com/run-collection/036dc40615651451307d"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the OpenID Connect API: <a href="https://app.getpostman.com/run-collection/57ec0b23a21999f96f2d" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h3 class="api api-operation" id="get-user-information">Get User Information</h3>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/userinfo</span>
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/userinfo</span></p>
 
-<p>You must include the <code class="highlighter-rouge">access_token</code> returned from the <a href="oauth2.html#authentication-request">/oauth2/v1/authorize</a> endpoint as an authorization header parameter.</p>
+<p>You must include the <code class="highlighter-rouge">access_token</code> returned from the <a href="oauth2.html#obtain-an-authorization-grant-from-a-user">/oauth2/v1/authorize</a> endpoint as an authorization header parameter.</p>
 
 <p>This endpoint complies with the <a href="http://openid.net/specs/openid-connect-core-1_0.html#UserInfo">OIDC userinfo spec</a>.</p>
 
@@ -1354,134 +1354,134 @@ of the response.</p>
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Default</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="idps.html">idp</a></td>
-      <td>Identity provider (default is Okta)</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>Okta is the IDP.</td>
+      <td style="text-align: left">  <a href="idps.html">idp</a></td>
+      <td style="text-align: left">Identity provider (default is Okta)</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">Okta is the IDP.</td>
     </tr>
     <tr>
-      <td>sessionToken</td>
-      <td>Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the <a href="authn.html">Authentication API</a>.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">sessionToken</td>
+      <td style="text-align: left">Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the   <a href="authn.html">Authentication API</a>.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>response_type</td>
-      <td>Any combination of <em>code</em>, <em>token</em>, and <em>id_token</em>. The combination determines the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">flow</a>. The <code class="highlighter-rouge">code</code> response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">response_type</td>
+      <td style="text-align: left">Any combination of <em>code</em>, <em>token</em>, and <em>id_token</em>. The combination determines the   <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">flow</a>. The <code class="highlighter-rouge">code</code> response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>client_id</td>
-      <td>Obtained during either <a href="/docs/api/resources/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It identifies the client and must match the value preregistered in Okta.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">Obtained during either   UI client registration or   <a href="oauth-clients.html">API client registration</a>. It identifies the client and must match the value preregistered in Okta.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>redirect_uri</td>
-      <td>Callback location where the authorization code should be sent. It must match the value preregistered in Okta during client registration.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">redirect_uri</td>
+      <td style="text-align: left">Callback location where the authorization code should be sent. It must match the value preregistered in Okta during client registration.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>display</td>
-      <td>How to display the authentication and consent UI. Valid values: <em>page</em> or <em>popup</em>.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">display</td>
+      <td style="text-align: left">How to display the authentication and consent UI. Valid values: <em>page</em> or <em>popup</em>.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>max_age</td>
-      <td>Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">max_age</td>
+      <td style="text-align: left">Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>response_mode</td>
-      <td>How the authorization response should be returned. <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>See Description.</td>
+      <td style="text-align: left">response_mode</td>
+      <td style="text-align: left">How the authorization response should be returned.   <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">See Description.</td>
     </tr>
     <tr>
-      <td>scope</td>
-      <td><strong>Required.</strong> Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the access_token and id_token. The openid scope has to be specified to get back an id_token.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">scope</td>
+      <td style="text-align: left"><strong>Required.</strong> Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the access_token and id_token. The openid scope has to be specified to get back an id_token.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>state</td>
-      <td>A value to be returned in the token. The client application can use it to remember the state of its interaction with the end user at the time of the authentication call. It can contain alphanumeric, comma, period, underscore and hyphen characters.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">A value to be returned in the token. The client application can use it to remember the state of its interaction with the end user at the time of the authentication call. It can contain alphanumeric, comma, period, underscore and hyphen characters.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>prompt</td>
-      <td>Either <em>none</em> or <em>login</em>. If <em>none</em>,  do not prompt for authentication, and return an error if the end user is not already authenticated. If <em>login</em> force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>See Description.</td>
+      <td style="text-align: left">prompt</td>
+      <td style="text-align: left">Either <em>none</em> or <em>login</em>. If <em>none</em>,  do not prompt for authentication, and return an error if the end user is not already authenticated. If <em>login</em> force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">See Description.</td>
     </tr>
     <tr>
-      <td>nonce</td>
-      <td>A value that must be returned in the ID Token. It is used to mitigate replay attacks.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">nonce</td>
+      <td style="text-align: left">A value that must be returned in the ID Token. It is used to mitigate replay attacks.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>code_challenge</td>
-      <td>A challenge of <a href="#parameter-details">PKCE</a>. The challenge is verified in the Access Token request.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">code_challenge</td>
+      <td style="text-align: left">A challenge of   <a href="#parameter-details">PKCE</a>. The challenge is verified in the Access Token request.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>code_challenge_method</td>
-      <td>Method used to derive the code challenge. Must be <code class="highlighter-rouge">S256</code>.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">code_challenge_method</td>
+      <td style="text-align: left">Method used to derive the code challenge. Must be <code class="highlighter-rouge">S256</code>.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>login_hint</td>
-      <td>A username to prepopulate if prompting for authentication.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">login_hint</td>
+      <td style="text-align: left">A username to prepopulate if prompting for authentication.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
@@ -1521,36 +1521,36 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>DataType</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id_token</td>
-      <td>The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">id_token</code>.</td>
-      <td>String</td>
+      <td style="text-align: left">id_token</td>
+      <td style="text-align: left">The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">id_token</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>access_token</td>
-      <td>The <em>access_token</em> used to access the <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <em>response_type</em> included a token. <b>Important</b>: Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
-      <td>String</td>
+      <td style="text-align: left">access_token</td>
+      <td style="text-align: left">The <em>access_token</em> used to access the   <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <em>response_type</em> included a token. <b>Important</b>: Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>state</td>
-      <td>If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response.</td>
-      <td>String</td>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>error</td>
-      <td>The error-code string providing information if anything goes wrong.</td>
-      <td>String</td>
+      <td style="text-align: left">error</td>
+      <td style="text-align: left">The error-code string providing information if anything goes wrong.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>error_description</td>
-      <td>Additional description of the error.</td>
-      <td>String</td>
+      <td style="text-align: left">error_description</td>
+      <td style="text-align: left">Additional description of the error.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
@@ -1569,56 +1569,56 @@ Irrespective of the response type, the contents of the response are as described
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>DataType</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id_token</td>
-      <td>JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">id_token</td>
+      <td style="text-align: left">JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>access_token</td>
-      <td>Used to access the <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if <em>response_type</em> includes <code class="highlighter-rouge">token</code>. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
-      <td>String</td>
+      <td style="text-align: left">access_token</td>
+      <td style="text-align: left">Used to access the   <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if <em>response_type</em> includes <code class="highlighter-rouge">token</code>. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>token_type</td>
-      <td>The token type is always <code class="highlighter-rouge">Bearer</code> and is returned only when <em>token</em> is specified as a <em>response_type</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">token_type</td>
+      <td style="text-align: left">The token type is always <code class="highlighter-rouge">Bearer</code> and is returned only when <em>token</em> is specified as a <em>response_type</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>code</td>
-      <td>An opaque value that can be used to redeem tokens from <a href="#token-request">token endpoint</a>.</td>
-      <td>String</td>
+      <td style="text-align: left">code</td>
+      <td style="text-align: left">An opaque value that can be used to redeem tokens from   <a href="#token-request">token endpoint</a>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>expires_in</td>
-      <td>Number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">expires_in</td>
+      <td style="text-align: left">Number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>scope</td>
-      <td>Scopes specified in the <em>access_token</em>. Returned only if the response includes an <em>access_token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">scope</td>
+      <td style="text-align: left">Scopes specified in the <em>access_token</em>. Returned only if the response includes an <em>access_token</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>state</td>
-      <td>The unmodified <code class="highlighter-rouge">state</code> value from the request.</td>
-      <td>String</td>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">The unmodified <code class="highlighter-rouge">state</code> value from the request.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>error</td>
-      <td>Error-code (if something went wrong).</td>
-      <td>String</td>
+      <td style="text-align: left">error</td>
+      <td style="text-align: left">Error-code (if something went wrong).</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>error_description</td>
-      <td>Description of the error.</td>
-      <td>String</td>
+      <td style="text-align: left">error_description</td>
+      <td style="text-align: left">Description of the error.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
@@ -1632,50 +1632,50 @@ Irrespective of the response type, the contents of the response are as described
 <table>
   <thead>
     <tr>
-      <th>Error Id</th>
-      <th>Details</th>
+      <th style="text-align: left">Error Id</th>
+      <th style="text-align: left">Details</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>unsupported_response_type</td>
-      <td>The specified response type is invalid or unsupported.</td>
+      <td style="text-align: left">unsupported_response_type</td>
+      <td style="text-align: left">The specified response type is invalid or unsupported.</td>
     </tr>
     <tr>
-      <td>unsupported_response_mode</td>
-      <td>The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes. For example, if the query response mode is specified for a response type that includes id_token.</td>
+      <td style="text-align: left">unsupported_response_mode</td>
+      <td style="text-align: left">The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes. For example, if the query response mode is specified for a response type that includes id_token.</td>
     </tr>
     <tr>
-      <td>invalid_scope</td>
-      <td>The scopes list contains an invalid or unsupported value.</td>
+      <td style="text-align: left">invalid_scope</td>
+      <td style="text-align: left">The scopes list contains an invalid or unsupported value.</td>
     </tr>
     <tr>
-      <td>server_error</td>
-      <td>The server encountered an internal error.</td>
+      <td style="text-align: left">server_error</td>
+      <td style="text-align: left">The server encountered an internal error.</td>
     </tr>
     <tr>
-      <td>temporarily_unavailable</td>
-      <td>The server is temporarily unavailable, but should be able to process the request at a later time.</td>
+      <td style="text-align: left">temporarily_unavailable</td>
+      <td style="text-align: left">The server is temporarily unavailable, but should be able to process the request at a later time.</td>
     </tr>
     <tr>
-      <td>invalid_request</td>
-      <td>The request is missing a necessary parameter or the parameter has an invalid value.</td>
+      <td style="text-align: left">invalid_request</td>
+      <td style="text-align: left">The request is missing a necessary parameter or the parameter has an invalid value.</td>
     </tr>
     <tr>
-      <td>invalid_grant</td>
-      <td>The specified grant is invalid, expired, revoked, or does not match the redirect URI used in the authorization request.</td>
+      <td style="text-align: left">invalid_grant</td>
+      <td style="text-align: left">The specified grant is invalid, expired, revoked, or does not match the redirect URI used in the authorization request.</td>
     </tr>
     <tr>
-      <td>invalid_token</td>
-      <td>The provided Access Token is invalid.</td>
+      <td style="text-align: left">invalid_token</td>
+      <td style="text-align: left">The provided Access Token is invalid.</td>
     </tr>
     <tr>
-      <td>invalid_client</td>
-      <td>The specified client id is invalid.</td>
+      <td style="text-align: left">invalid_client</td>
+      <td style="text-align: left">The specified client id is invalid.</td>
     </tr>
     <tr>
-      <td>access_denied</td>
-      <td>The server denied the request.</td>
+      <td style="text-align: left">access_denied</td>
+      <td style="text-align: left">The server denied the request.</td>
     </tr>
   </tbody>
 </table>

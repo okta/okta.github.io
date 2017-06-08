@@ -535,7 +535,7 @@ if($res-&gt;claims['exp'] <span class="nt">&lt; time</span><span class="err">()<
 </code></pre>
 </div>
 
-<p>Step 4 involves downloading the public JWKS from Okta (specified by the <code class="highlighter-rouge">jwks_uri</code> property in the <a href="/docs/api/resources/oauth2.html#authorization-server-metadata">authorization server metadata</a>. The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
+<p>Step 4 involves downloading the public JWKS from Okta (specified by the <code class="highlighter-rouge">jwks_uri</code> property in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">authorization server metadata</a>. The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
 
 <p>An <code class="highlighter-rouge">id_token</code> contains a <a href="https://tools.ietf.org/html/rfc7517#section-4.5">public key id</a> (<code class="highlighter-rouge">kid</code>). To verify the signature, we use the <a href="/docs/api/resources/oidc.html#openid-connect-discovery-document">Discovery Document</a> to find the <code class="highlighter-rouge">jwks_uri</code>, which will return a list of public keys. It is safe to cache or persist these keys for performance, but Okta rotates them periodically. We strongly recommend dynamically retrieving these keys.</p>
 
@@ -581,7 +581,7 @@ $jws-&gt;verify($jwk, 'RS256');
 <p>Each public key is identified by a <code class="highlighter-rouge">kid</code> attribute, which corresponds with the <code class="highlighter-rouge">kid</code> claim in the <a href="/docs/api/resources/oauth2.html#token-authentication-method">Access Token header</a>.</p>
 
 <p>The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
-However, in an emergency situation you can still stay in sync with Okta’s key rotation. Have your application check the <code class="highlighter-rouge">kid</code>, and if it has changed and the key is missing from the local cache, check the <code class="highlighter-rouge">jwks_uri</code> value in the <a href="/docs/api/resources/oauth2.html#authorization-server-metadata">authorization server metadata</a> and you can go back to the <a href="/docs/api/resources/oauth2.html#get-keys">jwks uri</a> to get keys again from Okta</p>
+However, in an emergency situation you can still stay in sync with Okta’s key rotation. Have your application check the <code class="highlighter-rouge">kid</code>, and if it has changed and the key is missing from the local cache, check the <code class="highlighter-rouge">jwks_uri</code> value in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">authorization server metadata</a> and you can go back to the <a href="/docs/api/resources/oauth2.html#get-keys">jwks uri</a> to get keys again from Okta</p>
 
 <p>Please note the following:</p>
 

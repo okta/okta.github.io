@@ -195,14 +195,439 @@ OAuth 2.0 focuses on client developer simplicity while providing specific author
 <a href="https://tools.ietf.org/html/rfc6749">The main framework</a> and <a href="https://tools.ietf.org/html/rfc6750">Bearer Token Usage</a> were published in 2012.
 Other documents are still being worked on within the OAuth working group.</p>
 
-<p>For detailed information about Okta’s implementation of OAuth 2.0:</p>
+<p>In addition to the information in this introduction, you can find detailed information about Okta’s implementation of OAuth 2.0:</p>
 
 <ul>
   <li><a href="/use_cases/api_security/">Okta’s API Access Management Introduction</a></li>
-  <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 flows and Okta’s API for OAuth 2.0</a></li>
+  <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
   <li><a href="https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=api%20access%20management">Help for configuring API Access Management in the Okta UI</a></li>
 </ul>
 
+<h1 id="introduction">Introduction</h1>
+
+<p>Okta is a fully standards-compliant <a href="http://oauth.net/documentation">OAuth 2.0</a> Authorization Server and a certified <a href="http://openid.net/certification">OpenID Provider</a>.
+The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.</p>
+
+<p>There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:</p>
+
+<ul>
+  <li>Social Authentication –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
+  <li>OpenID Connect –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
+  <li>API Access Management –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
+</ul>
+
+<p>It’s important to understand which use case you are targeting and build your application according to the correct patterns for that use case.
+The OAuth 2.0 APIs each have several different <a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">query params</a> which dictate which type of flow you are using and the mechanics of that flow.</p>
+
+<p>At the very basic level, the main API endpoints are:</p>
+
+<ul>
+  <li><a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">Authorize</a> endpoint initiates an OAuth 2.0 request.</li>
+  <li><a href="/docs/api/resources/oauth2.html#revoke-a-token">Token</a> endpoint redeems an authorization grant (returned by the <a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">Authorize</a> endpoint) for an access token.</li>
+</ul>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>If you are new to OAuth 2.0, read this topic before experimenting with the Postman collection. If you are familiar with the
+flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>, you may want to experiment with the Postman collection first:</p>
+
+<p><a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<h2 id="basic-flows">Basic Flows</h2>
+
+<ol>
+  <li>
+    <p>Browser/Single-Page Application</p>
+
+    <ul>
+      <li>Optimized for browser-only <a href="https://tools.ietf.org/html/rfc6749#section-2.1">Public Clients</a></li>
+      <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.2">Implicit Flow</a></li>
+      <li>Access token returned directly from authorization request (Front-channel only)</li>
+      <li>Does not support refresh tokens</li>
+      <li>Assumes Resource Owner and Public Client are on the same device</li>
+    </ul>
+
+    <p><img src="/assets/browser_spa_implicit_flow-aa8b504d81ca3e57be798da01b0d570a92287e1b28f8b6209c16ca500d4f34a6.png" alt="Browser/Single-Page Application" /></p>
+  </li>
+  <li>
+    <p>Native Application</p>
+
+    <ul>
+      <li>Installed on a device or computer, such as mobile applications or installed desktop applications</li>
+      <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.1">Authorization Code Grant Flow</a></li>
+      <li>Can use custom redirect URIs like <code class="highlighter-rouge">myApp://oauth:2.0:native</code></li>
+    </ul>
+
+    <p><img src="/assets/native_auth_flow-09c52618479d441df093e9024346a46069e5b7cbd0260290e35dd471fd29c9f0.png" alt="Native Application Flow" /></p>
+
+    <blockquote>
+      <p>Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn’t treated as a secret.
+     Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
+     For more information, see the PKCE note in <a href="/docs/api/resources/oauth2.html#request-parameter-details">Parameter Details</a>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Web Application</p>
+
+    <ul>
+      <li>Server-side app with an end-user</li>
+      <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.1">Authorization Code Grant Flow</a></li>
+      <li>Assumes Resource Owner and Client are on separate devices</li>
+      <li>Most secure flow as tokens never pass through user-agent</li>
+    </ul>
+
+    <p><img src="/assets/web_app_flow-6f85087b80a6a05fdd72ebd532a17a9d77c4135b6ce26acb3ecf0e807401073d.png" alt="Web Application Flow" /></p>
+  </li>
+  <li>
+    <p>Service Application</p>
+
+    <ul>
+      <li>Server-side app with no end-user, such as an on-prem agent</li>
+      <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials Flow</a></li>
+      <li>Optimized for <a href="https://tools.ietf.org/html/rfc6749#section-2.1">Confidential Clients</a> acting on behalf of itself or a user</li>
+      <li>Back-channel only flow to obtain an access token using the Client’s credentials</li>
+    </ul>
+
+    <p><img src="/assets/service_app_flow-f4ae673ed0f1a129670e91190a1f53de21d7461dbfcbacfebc07dfb775b0b899.png" alt="Service Application Flow" />.</p>
+
+    <blockquote>
+      <p>Note: The OAuth 2.0 specification mandates that clients implement CSRF protection for their redirection URI endpoints.
+ This is what the <code class="highlighter-rouge">state</code> parameter is used for in the flows described above; the client should send a state value in on the authorization request,
+ and it must validate that returned “state” parameter from the Authorization Server matches the original value.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h2 id="custom-user-experience">Custom User Experience</h2>
+
+<p>By default, the Authorization Endpoint displays the Okta login page and authenticates users if they don’t have an existing session.
+If you prefer to use a fully customized user experience, you can instead authenticate the user via the <a href="/docs/api/resources/authn.html">Authentication API</a>.
+This authentication method produces a <code class="highlighter-rouge">sessionToken</code> which can be passed into the Authorize Endpoint, and the user won’t see an Okta login page.</p>
+
+<h2 id="access-token">Access Token</h2>
+
+<p>An Access Token is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> encoded in base64URL format that contains <a href="#jwt-header">a header</a>, <a href="#jwt-payload">payload</a>, and <a href="#jwt-signature">signature</a>. A resource server can authorize the client to access particular resources based on the <a href="#scopes-and-claims">scopes and claims</a> in the Access Token.</p>
+
+<p>The lifetime of Access Token can be configured in the <a href="#access-policies">Access Policies</a>. If the client that
+issued the token is deactivated, the token is immediately and permanently invalidated. Reactivating the
+client does not make the token valid again.</p>
+
+<h3 id="jwt-header">JWT Header</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RS256"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45js03w0djwedsw"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="jwt-payload">JWT Payload</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"jti"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.you-company.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ujmkLgagxeRrAg20g3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1467145094</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1467148694</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nmdP1fcyvdVO11AL7ECm"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ujmkLgagxeRrAg20g3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scp"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"openid"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"flights"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"custom"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"number_of_flights"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"flight_number"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"AX102"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"CT508"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"custom_claim"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CustomValue"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="jwt-signature">JWT Signature</h3>
+
+<p>This is a digital signature Okta generates using the public key identified by the <code class="highlighter-rouge">kid</code> property in the header section.</p>
+
+<h2 id="scopes-and-claims">Scopes and claims</h2>
+
+<p>Access Tokens include reserved scopes and claims, and can optionally include custom scopes and claims.</p>
+
+<p>Scopes are requested in the request parameter, and the Authorization Server uses the <a href="#access-policies">Access Policies</a> to decide if they can be granted or not. If any of the requested scopes are rejected by the Access Policies, the request will be rejected.</p>
+
+<p>Based on the granted scopes, claims are added into the Access Token returned from the request.</p>
+
+<h3 id="reserved-scopes-and-claims">Reserved scopes and claims</h3>
+
+<p>The Okta Authorization Server defines a number of reserved scopes and claims which can’t be overridden.</p>
+
+<ul>
+  <li><a href="#reserved-scopes">Reserved scopes</a></li>
+  <li><a href="#reserved-claims-in-the-header-section">Reserved claims in the header section</a></li>
+  <li><a href="#reserved-claims-in-the-payload-section">Reserved claims in the payload section</a></li>
+</ul>
+
+<h4 id="reserved-scopes">Reserved scopes</h4>
+
+<p>Reserved scopes include ‘openid’, ‘profile’, ‘email’, ‘address’, ‘phone’, ‘offline_access’, all defined in OpenID Connect.</p>
+
+<h4 id="reserved-claims-in-the-header-section">Reserved claims in the header section</h4>
+
+<p>The header only includes the following reserved claims:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>alg</td>
+      <td>Identifies the digital signature algorithm used. This is always be RS256.</td>
+      <td>String</td>
+      <td>“RS256”</td>
+    </tr>
+    <tr>
+      <td>kid</td>
+      <td>Identifies the <code class="highlighter-rouge">public-key</code> used to sign the <code class="highlighter-rouge">access_token</code>. The corresponding <code class="highlighter-rouge">public-key</code> can be found as a part of the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">metadata</a> <code class="highlighter-rouge">jwks_uri</code> value.</td>
+      <td>String</td>
+      <td>“a5dfwef1a-0ead3f5223_w1e”</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="reserved-claims-in-the-payload-section">Reserved claims in the payload section</h4>
+
+<p>The payload includes the following reserved claims:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ver</td>
+      <td>The semantic version of the Access Token.</td>
+      <td>Integer</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>jti</td>
+      <td>A unique identifier for this Access Token for debugging and revocation purposes.</td>
+      <td>String</td>
+      <td>“AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE”</td>
+    </tr>
+    <tr>
+      <td>iss</td>
+      <td>The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.</td>
+      <td>String</td>
+      <td>“https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4”</td>
+    </tr>
+    <tr>
+      <td>aud</td>
+      <td>Identifies the audience(resource URI) that this Access Token is intended for.</td>
+      <td>String</td>
+      <td>“http://api.example.com/api”</td>
+    </tr>
+    <tr>
+      <td>sub</td>
+      <td>The subject. A name for the user or a unique identifier for the client.</td>
+      <td>String</td>
+      <td>“john.doe@example.com”</td>
+    </tr>
+    <tr>
+      <td>iat</td>
+      <td>The time the Access Token was issued, represented in Unix time (seconds).</td>
+      <td>Integer</td>
+      <td>1311280970</td>
+    </tr>
+    <tr>
+      <td>exp</td>
+      <td>The time the Access Token expires, represented in Unix time (seconds).</td>
+      <td>Integer</td>
+      <td>1311280970</td>
+    </tr>
+    <tr>
+      <td>cid</td>
+      <td>Client ID of your application that requests the Access Token.</td>
+      <td>String</td>
+      <td>“6joRGIzNCaJfdCPzRjlh”</td>
+    </tr>
+    <tr>
+      <td>uid</td>
+      <td>A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.</td>
+      <td>String</td>
+      <td>“00uk1u7AsAk6dZL3z0g3”</td>
+    </tr>
+    <tr>
+      <td>scp</td>
+      <td>Array of scopes that are granted to this Access Token.</td>
+      <td>Array</td>
+      <td>[ “openid”, “custom” ]</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="custom-scopes-and-claims">Custom scopes and claims</h3>
+
+<p>The admin can configure custom scopes and claims for the Authorization Server.</p>
+
+<h4 id="custom-scopes">Custom scopes</h4>
+
+<p>If the request that generates the access token contains any custom scopes, those scopes will be part of the <em>scp</em> claim together with the scopes provided from the <a href="http://openid.net/specs/openid-connect-core-1_0.html">OIDC specification</a>. The form of these custom scopes must conform to the <a href="https://tools.ietf.org/html/rfc6749#section-3.3">OAuth2 specification</a>.</p>
+
+<blockquote>
+  <p><em>Note:</em> Scope names can contain the characters &lt; (less than) or &gt; (greater than), but not both characters.</p>
+</blockquote>
+
+<h4 id="custom-claims">Custom claims</h4>
+
+<p>Custom claims are associated with scopes. If one of the associated scopes is granted to the Access Token, the custom claim is added into it. The value of a custom claim can be either an <a href="/reference/okta_expression_language/">expression</a> or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn’t added into the Access Token. The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.</p>
+
+<blockquote>
+  <p><em>Note:</em> For the custom claim with group filter, its value has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.</p>
+</blockquote>
+
+<h2 id="validating-access-tokens">Validating Access Tokens</h2>
+
+<p>Okta uses public key cryptography to sign tokens and verify that they are valid.</p>
+
+<p>The resource server must validate the Access Token before allowing the client to access protected resources.</p>
+
+<p>Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.</p>
+
+<p>An Access Token must be validated in the following manner:</p>
+
+<ol>
+  <li>Verify that the <code class="highlighter-rouge">iss</code> (issuer) claim matches the identifier of your Authorization Server.</li>
+  <li>Verify that the <code class="highlighter-rouge">aud</code> (audience) claim is the value configured in the Authorization Server.</li>
+  <li>Verify <code class="highlighter-rouge">cid</code> (client id) claim is your client id.</li>
+  <li>Verify the signature of the Access Token according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <em>alg</em> header property. Use the public keys provided by Okta via the <a href="/docs/api/resources/oauth2.html#get-keys">Get Keys endpoint</a>.</li>
+  <li>Verify that the expiry time (from the <code class="highlighter-rouge">exp</code> claim) has not already passed.</li>
+</ol>
+
+<p>Step 4 involves downloading the public JWKS from Okta (specified by the <em>jwks_uri</em> property in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">Authorization Server metadata</a>. The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
+
+<p>Each public key is identified by a <em>kid</em> attribute, which corresponds with the <em>kid</em> claim in the <a href="/docs/api/resources/oauth2.html#token-authentication-method">Access Token header</a>.</p>
+
+<p>The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
+However, in an emergency situation you can still stay in sync with Okta’s key rotation. Have your application check the <code class="highlighter-rouge">kid</code>, and if it has changed and the key is missing from the local cache, check the <code class="highlighter-rouge">jwks_uri</code> value in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">Authorization Server metadata</a> and you can go back to the <a href="/docs/api/resources/oauth2.html#get-keys">jwks uri</a> to get keys again from Okta</p>
+
+<p>Please note the following:</p>
+
+<ul>
+  <li>For security purposes, Okta automatically rotates keys used to sign the token.</li>
+  <li>The current key rotation schedule is four times a year. This schedule can change without notice.</li>
+  <li>In case of an emergency, Okta can rotate keys as needed.</li>
+  <li>Okta always publishes keys to the JWKS.</li>
+  <li>To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.</li>
+  <li>The administrator can switch the Authorization Server key rotation mode to <code class="highlighter-rouge">MANUAL</code> by <a href="/docs/api/resources/oauth2.html#update-authorization-server">updating the Authorization Server</a> and then control when to <a href="/docs/api/resources/oauth2.html#rotate-authorization-server-keys">rotate the keys</a>.</li>
+</ul>
+
+<p>Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.</p>
+
+<h3 id="alternative-validation">Alternative Validation</h3>
+
+<p>You can use an <a href="/docs/api/resources/oauth2.html#introspection-request">introspection endpoint</a> for validation.</p>
+
+<h2 id="refresh-token">Refresh Token</h2>
+
+<p>A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
+A Refresh Token will be returned if ‘offline_access’ scope is requested using authorization_code, password, or refresh_token grant type.</p>
+
+<p>The lifetime of a Refresh Token is configured in <a href="#access-policies">Access Policies</a>, the minimum value is 24 hours. The refresh token can also expire after a period if no clients redeem it for an Access Token. The period should be equal to or larger than 10 minutes. If the token’s lifetime is set to unlimited, the Authorization Server will not check if clients use it or not.</p>
+
+<h3 id="refresh-token-revocation">Refresh Token Revocation</h3>
+
+<p>Refresh Tokens can be revoked explicitly by making a <a href="/docs/api/resources/oauth2.html#revoke-a-token">Revocation Request</a>. Additionally, all Refresh Tokens associated with an entity are revoked when the entity is deactivated, deleted, or otherwise modified in a way that invalidates the associated Refresh Tokens. Such ways includes:</p>
+
+<ul>
+  <li>The User is Suspended or Deactivated</li>
+  <li>The Client App is Deactivated or Deleted</li>
+  <li>The Authorization Server’s Resource URI is modified, or the Authorization Server is deleted.</li>
+</ul>
+
+<p>No other modifications affect existing tokens.</p>
+
+<h2 id="id-token">ID Token</h2>
+<p>An Authorization Server can also issue an ID Token to the client, as in OpenID Connect, but with the following differences:</p>
+
+<ul>
+  <li>The ID Token cannot contain a reserved scope or claim called ‘groups’. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.</li>
+  <li>The custom properties in the app user profile are not included in the Id Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.</li>
+</ul>
+
+<p>The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
+immediately and permanently invalidated. Reactivating the client does not make the token valid again.</p>
+
+<p>The same validation steps for <a href="/docs/api/resources/oidc.html#validating-id-tokens">OpenID Connect</a> can also be applied to ID Token for
+OAuth2, except the public keys should be retrieved via the <a href="/docs/api/resources/oauth2.html#get-keys">Get Keys endpoint</a>.</p>
+
+<h2 id="access-policies">Access Policies</h2>
+
+<p>Access policies define which scopes and claims can be granted to a request and the lifetime of the granted tokens.</p>
+
+<h3 id="policies">Policies</h3>
+
+<p>The admin defines Policies for the OAuth 2.0 clients which are ordered numerically by priority. This priority determines the order in which they are searched for a client match. The highest priority policy has a priorityOrder of 1.</p>
+
+<p>For example, assume the following conditions are in effect.</p>
+
+<ul>
+  <li>Policy A has priority 1 and applies to client C;</li>
+  <li>Policy B has priority 2 and applies to all the clients;</li>
+</ul>
+
+<p>Because Policy A has a higher priority, the requests coming from client C are evaluted by Policy A first. Policy B will not be evaluated if one of Rules in policy A matches the requests.</p>
+
+<h3 id="rules">Rules</h3>
+
+<p>In a policy the administrators can define several rules with people, scope, and grant type conditions. The people condition identifies users and groups that are included or exclueded to match the user the token is requested for. Rules are ordered numerically by priority. This priority determines the order in which they are searched for a user/group match. The highest priority rule has a priorityOrder of 1.</p>
+
+<p>For example, assume the following conditions are in effect:</p>
+
+<ul>
+  <li>Rule A has priority 1 and one people condition to include user U;</li>
+  <li>Rule B has priority 2 and one people condition to include all the users assigned to the client;</li>
+</ul>
+
+<p>Because Rule A has a higher priority, the requests for user U are evaluated in Rule A, and Rule B is not evaluated.</p>
+
+<p>The actions in a rule define the lifetime of the Access Token and Refresh Token.</p>
+
+<h2 id="authorization-servers">Authorization Servers</h2>
+
+<p>API Access Management allows you to build custom Authorization Servers in Okta which can be used to protect your own API endpoints. An Authorization Server defines your security boundary, for example “staging” or “production.” Within each Authorization Server you can define your own OAuth scopes, claims, and access policies. This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.</p>
+
+<p>At its core, an Authorization Server is simply an OAuth 2.0 token minting engine.
+Each Authorization Server has a unique issuer URI and its own signing key for tokens in order to keep proper boundary between security domains.
+The Authorization Server also acts as an OpenID Connect Provider, which means you can request ID tokens in addition to access tokens from the Authorization Server endpoints.
+To configure an Authorization Server, log into your org and navigate to <strong>Security</strong> &gt; <strong>API</strong> &gt; <strong>Add Authorization Server</strong>.</p>
+
+<h2 id="openid-connect-and-authorization-servers">OpenID Connect and Authorization Servers</h2>
+
+<p>You can use OpenID Connect without the API Access Management feature, using the <a href="/docs/api/resources/oidc.html">OpenID Connect API</a>.
+However, you can also use OpenID Connect with an Authorization Server specified:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">/oauth2/v1/userinfo</code> for OpenID Connect without API Access Management</li>
+  <li><code class="highlighter-rouge">/oauth2/:authorizationServerId/v1/userinfo</code> for OpenID Connect with API Access Management</li>
+</ul>
+
+<p>You can’t mix tokens between different Authorization Servers. By design, Authorization Servers don’t have trust relationships with each other.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
