@@ -58,19 +58,15 @@ For a full description of the new rate limits, see [API Rate Limit Improvements]
 ### Platform Enhancements
 
 * [Authorization Server API Enhancements](#authorization-server-api-enhancements)
-* [API Access Management is an Early Availability Release](#api-access-management-is-an-early-availability-release)
 * [Additional Logging for Invalid Use by OAuth 2.0 Client](#additional-logging-for-invalid-use-by-oauth-20-client)
 * [Restrictions on Set Recovery and Set Password Operations](#restrictions-on-set-recovery-question-answer-and-set-password)
 * [Step-up Authentication for SAML Apps in Early Access](#step-up-authentication-for-saml-apps-is-an-early-access-feature)
 * [Simple HAL Links](#simple-hal-links-generally-available-in-preview-for-may-2017)
 
-#### API Access Management is an Early Availability Release
-
-API Access Management is an {% api_lifecycle ea %} Release.
-
 #### Authorization Server API Enhancements
 
-You can now use the Authorization Server API to configure components of an Authorization Server:
+You can now use the Authorization Server API to configure components of an Authorization Server.
+With the following enhancements, the API Access Management Authorization Servers API is an {% api_lifecycle ea %} Release:
 
 * Manage Authorization Server policies, policy rules, claims, and scopes with the API.
 * Activate or deactivate Authorization Servers, or delete them.
