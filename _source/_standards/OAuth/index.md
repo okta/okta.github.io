@@ -37,7 +37,7 @@ The OAuth 2.0 APIs each have several different [query params](/docs/api/resource
 At the very basic level, the main API endpoints are:
 
 * [Authorize](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) endpoint initiates an OAuth 2.0 request.
-* [Token](/docs/api/resources/oauth2.html#token-request) endpoint redeems an authorization grant (returned by the [Authorize](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) endpoint) for an access token.
+* [Token](/docs/api/resources/oauth2.html#revoke-a-token) endpoint redeems an authorization grant (returned by the [Authorize](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) endpoint) for an access token.
 
 ## Getting Started
 
@@ -68,7 +68,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may w
 
     > Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret.
         Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
-        For more information, see the PKCE note in [Parameter Details](/docs/api/resources/oauth2.html#parameter-details).
+        For more information, see the PKCE note in [Parameter Details](/docs/api/resources/oauth2.html#request-parameter-details).
 
 3. Web Application
 

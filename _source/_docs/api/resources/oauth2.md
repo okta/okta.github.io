@@ -2255,8 +2255,8 @@ This object defines a [JSON Web Key](https://tools.ietf.org/html/rfc7517) for a 
 |:----------|:---------------------------------------------------------------------------------|:-------|
 | alg       | The algorithm used with the key. Valid value: `RS256`                            | String |
 | status    | `ACTIVE`, `NEXT`, or `EXPIRED`                                                   | Enum   |
-| e         | RSA key value (exponent) for key binding                                         | String |
-| n         | RSA key value (modulus) for key binding                                          | String |
+| e         | RSA key value (exponent) for key blinding                                        | String |
+| n         | RSA key value (modulus) for key blinding                                         | String |
 | kid       | Unique identifier for the certificate.                                           | String |
 | kty       | Cryptographic algorithm family for the certificate's key pair Valid value: `RSA` | String |
 | use       | How the key is used. Valid value: `sig`                                          | String |
