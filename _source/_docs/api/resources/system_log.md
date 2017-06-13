@@ -16,7 +16,7 @@ The Okta System Log API provides read access to your organization's system log. 
 
 The System Log API has one endpoint:
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span>
+{% api_operation get /api/v1/logs %}
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8f19fc704561a8b44e27){:target="_blank"}
 
@@ -63,7 +63,7 @@ curl -v -X GET \
 ### List Events
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/logs</span>
+{% api_operation get /api/v1/logs %}
 
 Fetch a list of events from your Okta organization system log.
 
@@ -177,7 +177,7 @@ Each Log object describes a single action performed by a set of actors for a set
     }
   },
   "legacyEventType": "core.user_auth.login_success",
-  "authentication_context": {
+  "authenticationContext": {
     "authenticationStep": 0,
     "externalSessionId": "1013FfF-DKQSvCI4RVXChzX-w"
   }
@@ -305,7 +305,7 @@ Log objects are read-only. The following properties are available:
 |-----------+-----------------------------------------------------------------------+----------------------------------------------------------------+----------+--------+----------+-----------+-----------|
 | Property  | Description                                                           | DataType                                                       | Nullable | Unique | Readonly | MinLength | MaxLength |
 | -------   | --------------------------------------------------------------------- | ---------------------------------------------------------------| -------- | ------ | -------- | --------- | --------- |
-| eventId   | Unique key for an event                                               | String                                                         | FALSE    | TRUE   | TRUE     |           |           |
+| uuid      | Unique identifier for an individual event                             | String                                                         | FALSE    | TRUE   | TRUE     |           |           |
 | published | Timestamp when event was published                                    | Date                                                           | FALSE    | FALSE  | TRUE     | 1         | 255       |
 | eventType | Type of event that was published                                      | String                                                         | FALSE    | FALSE  | TRUE     | 1         | 255       |
 | version   | Versioning indicator                                                  | String                                                         | FALSE    | FALSE  | TRUE     | 1         | 255       |
@@ -324,7 +324,7 @@ Log objects are read-only. The following properties are available:
 
 > The actor and/or target of an event is dependent on the action performed. All events have actors. Not all events have targets.
 
-> The `sessionId` can identify multiple requests.  A single `requestId` can identify multiple events.  Use the `sessionId` to link events and requests that occurred in the same session.
+> The `authenticationContext.externalSessionId` identifies events that occurred in the same session.  A single `transaction.id` identifies events that occurred together as part of an operation (e.g. a request to Okta's servers). Use `authenticationContext.externalSessionId` to link events that occurred in the same session, and the `transaction.id` to link events that occurred as part of the same operation.
 
 ### Actor Object
 

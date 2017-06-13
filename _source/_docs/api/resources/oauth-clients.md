@@ -1,29 +1,28 @@
 ---
 layout: docs_page
-title: OAuth 2.0 Clients
+title: OAuth 2.0 Clients Registration API
 redirect_from: "/docs/api/rest/oauth-clients.html"
 ---
 
-# OAuth 2.0 Clients API
+# OAuth 2.0 Clients Registration API
 
 The OAuth Clients API provides operations to register and manage client applications for use with Okta's
 OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in [RFC7591](https://tools.ietf.org/html/rfc7591).
 
 Note that clients managed via this API are modeled as applications in Okta and appear in the Applications section of the
 Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
-follow the rules described in [Access Token](/docs/api/resources/oauth2.html#access-token)
-and [ID Token](/docs/api/resources/oauth2.html#id-token).
+follow the rules for Access Tokens and ID Tokens.
 
 > This API is a {% api_lifecycle beta%} feature.
 
-Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
+Explore the Client Registration API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5155aa172e3d5e59ee5d){:target="_blank"}
 
 ## Getting Started
 
 If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html), you may want to experiment with the Postman collection first:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5155aa172e3d5e59ee5d){:target="_blank"}
 
 ## Client Application Model
 
@@ -137,12 +136,12 @@ Property Details
 
 ## Client Application Operations
 
-Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
+Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7a7f9956c58e49996dc8)
 
 ### Register New Client
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/clients</span>
+{% api_operation post /oauth2/v1/clients %}
 
 Adds a new client application to your organization.
 
@@ -244,7 +243,7 @@ curl -v -X POST \
 ### Get OAuth Client
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/clients/*:clientId*</span>
+{% api_operation get /oauth2/v1/clients/*:clientId* %}
 
 Fetches a specific client by `clientId` from your organization
 
@@ -328,7 +327,7 @@ curl -v -X GET \
 ### List Client Applications
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/clients</span>
+{% api_operation get /oauth2/v1/clients %}
 
 Enumerates client applications in your organization (with pagination).
 
@@ -550,7 +549,7 @@ curl -v -X GET \
 ### Update Client Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /oauth2/v1/clients/*:clientId*</span>
+{% api_operation put /oauth2/v1/clients/*:clientId* %}
 
 Updates the settings for a client application from your organization.
 
@@ -655,7 +654,7 @@ curl -v -X PUT \
 ### Generate new client secret
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /oauth2/v1/clients/*:clientId*/lifecycle/newSecret</span>
+{% api_operation put /oauth2/v1/clients/*:clientId*/lifecycle/newSecret %}
 
 Generates a new client secret for the specified client application.
 
@@ -743,7 +742,7 @@ curl -v -X POST \
 ### Remove Client Application
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /oauth2/v1/clients/*:clientId*</span>
+{% api_operation delete /oauth2/v1/clients/*:clientId* %}
 
 Removes a client application from your organization.
 

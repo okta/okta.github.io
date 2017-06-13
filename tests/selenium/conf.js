@@ -26,15 +26,17 @@ const config = {
   troubleshoot: true
 };
 
-// Run PhantomJS for pull requests
-if (process.env.PHANTOMJS) {
-  console.log('-- Using phantom --');
+// Run Chrome Headless for pull requests
+if (process.env.CHROME_HEADLESS) {
+  console.log('-- Using Chrome Headless --');
   config.capabilities = {
-    browserName: 'phantomjs',
-    seleniumAddress: 'http://localhost:4444/wd/hub'
+    'browserName': 'chrome',
+    chromeOptions: {
+      args: ['--headless','--disable-gpu','--window-size=1600x1200']
+    }
   }
 }
-
+  
 // Run SauceLabs on master branch and internal topic branches
 else if (process.env.TRAVIS) {
   console.log('-- Using SauceLabs --');

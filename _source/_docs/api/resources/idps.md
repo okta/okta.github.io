@@ -2723,7 +2723,7 @@ HTTP/1.1 204 No Content
 ### Generate New IdP Signing Key Credential
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/idps/*:id*/credentials/keys/generate</span>
+{% api_operation post /api/v1/idps/*:id*/credentials/keys/generate %}
 
 Generates a new X.509 certificate for an IdP signing key credential to be used for signing assertions sent to the IdP
 
@@ -2797,7 +2797,7 @@ Content-Type: application/json
 ### List Signing Key Credentials for IdP
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/idps/*:id*/credentials/keys</span>
+{% api_operation get /api/v1/idps/*:id*/credentials/keys %}
 
 Enumerates signing key credentials for an IdP
 
@@ -2859,7 +2859,7 @@ curl -v -X GET \
 ### Get Signing Key Credential for IdP
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/idps/*:id*/credentials/keys/*:kid*</span>
+{% api_operation get /api/v1/idps/*:id*/credentials/keys/*:kid* %}
 
 Gets a specific [IdP Key Credential](#identity-provider-key-credential-model) by `kid`
 
