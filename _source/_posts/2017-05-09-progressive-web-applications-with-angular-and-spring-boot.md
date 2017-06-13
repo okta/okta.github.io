@@ -488,7 +488,12 @@ I'd like to give a big thanks to all the engineers that've been developing progr
 
 ## Learn More About PWAs
 
-To learn more about progressive web applications, I’d recommend visiting the following websites.
+To learn more about progressive web applications, check out two of my recent posts:
+
+* [The Ultimate Guide to Progressive Web Applications](https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications)
+* [Add Authentication to Your Angular PWA](https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa)
+
+I’d also recommend visiting the following websites:
 
 * [Google Developer’s Progressive Web Apps Homepage](https://developers.google.com/web/progressive-web-apps/)
 * [Progressive Web Apps Training from Google](https://developers.google.com/web/ilt/pwa/)
