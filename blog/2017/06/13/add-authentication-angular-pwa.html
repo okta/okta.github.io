@@ -138,17 +138,17 @@
 	    <section class="post-content">
 	     <p>You’re developing a Progressive Web Application (PWA) and your service worker and web app manifest are working swimmingly. You’ve even taken the time to deploy it to a server with HTTPS and you’re feeling pretty good about  things. But wait, you don’t have any way of knowing who your users are! Don’t you want to provide them with an opportunity to authenticate and tell you who they are? Once you know who they are, you can give them all kinds of personalization options, inspire them to ❤️ your app, and maybe even support your work!</p>
 
-<p>In this article, I’ll show you how you can lock down a Spring Boot app, then use modern authentication protocol, in this case OpenID Connect (OIDC), to authenticate and gain access to its APIs.</p>
+<p>In this article, I’ll show you how you can lock down a Spring Boot app, then use a modern authentication protocol, in this case OpenID Connect (OIDC), to authenticate and gain access to its APIs.</p>
 
 <h2 id="secure-your-spring-boot-app">Secure Your Spring Boot App</h2>
 
 <p>You might’ve heard that <a href="https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/">Stormpath joined forces with Okta</a> a few months ago (February 2017). Since the transition, we’ve been working hard to make the Stormpath SDKs work with Okta’s API. The good news is we’ve made great progress!</p>
 
-<p>In this example, you’ll use a Stormpath’s Spring Boot Starter to add security to a Spring Boot app. I’ll show you how this starter provides functionality such as login, forgot password, and user registration.</p>
+<p>In this example, you’ll use Stormpath’s Spring Boot Starter to add security to a Spring Boot app. I’ll show you how this starter provides functionality such as login, forgot password, and user registration.</p>
 
 <p>Then I’ll show you how you can use OIDC and Okta’s Auth SDK in an Angular app to login and get data from the Spring Boot app. Finally, I’ll show how Stormpath’s Angular SDK has similar functionality to the Spring Boot Starter, providing login, user registration, and forgot password features.</p>
 
-<p>I recently created a Sping Boot app that provides a list of good beers, based on a pre-populated list. It filters out less-than-great beers and displays them in an Angular UI that displays the first animated GIF (from Giphy) that matches the beer name.</p>
+<p>I recently created a Spring Boot app that provides a list of good beers, based on a pre-populated list. It filters out less-than-great beers and displays them in an Angular UI that displays the first animated GIF (from Giphy) that matches the beer name.</p>
 
 <p>Let’s get started!</p>
 
@@ -158,7 +158,7 @@
 </code></pre>
 </div>
 
-<p>If you’d prefer to build this application yourself, please read <a href="https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a>.</p>
+<p>If you’d prefer to build this application yourself, please read <a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a>.</p>
 
 <p>In this project’s <code class="highlighter-rouge">server/pom.xml</code> file, you’ll need to add the following XML:</p>
 
@@ -232,7 +232,7 @@
       <li>Application Name - Spring Boot Awesomesauce</li>
     </ul>
   </li>
-  <li>Use <code class="highlighter-rouge">http://localhost:8080/client/callback</code> for the Redirect URI’s, and click <strong>Finish</strong></li>
+  <li>Use <code class="highlighter-rouge">http://localhost:8080/client/callback</code> for the Redirect URIs, and click <strong>Finish</strong></li>
 </ol>
 
 <p>Your application has been created, but you still have a few settings to change.</p>
@@ -244,7 +244,7 @@
   <li>Select the <em>Use Client Authentication</em> radio button, and click the <strong>Save</strong> button</li>
   <li>Click on the <em>Assignments</em> tab and then select the <em>Assign</em> button and <strong>Assign to Groups</strong></li>
   <li>Select the <em>Assign</em> button in the <em>Everyone</em> column, and click the <strong>Done</strong> button</li>
-  <li>Grab the ID portion of the URL of your browsers current page, for example: if my URL was: <code class="highlighter-rouge">https://dev-123456-admin.oktapreview.com/admin/app/oidc_client/instance/00icu81200icu812/#tab-assignments</code> then <code class="highlighter-rouge">00icu81200icu812</code> is my application’s ID</li>
+  <li>Grab the ID portion of the URL of your browser’s current page. For example, if my URL was: <code class="highlighter-rouge">https://dev-123456-admin.oktapreview.com/admin/app/oidc_client/instance/00icu81200icu812/#tab-assignments</code> then <code class="highlighter-rouge">00icu81200icu812</code> is my application’s ID</li>
 </ol>
 
 <p><strong>Important:</strong> You will need to remember your application’s ID.</p>
@@ -255,12 +255,12 @@
   <li>Navigate to your Admin console</li>
   <li>On the top menu click on <strong>Security</strong> &gt; <strong>API</strong></li>
   <li>Click the <em>Tokens</em> tab and then click <strong>Create Token</strong></li>
-  <li>On the popup, give your new token a name, for example: “Bootiful Token”, and click <strong>Create Token</strong></li>
+  <li>On the popup, give your new token a name like “Bootiful Token”, and click <strong>Create Token</strong></li>
 </ol>
 
 <p><strong>Important:</strong> You will need to remember this token value, so copy/paste it somewhere safe.</p>
 
-<p>For more information take a look at the official <a href="http://developer.okta.com/docs/api/getting_started/getting_a_token.html">Create an API token</a> guide.</p>
+<p>For more information take a look at the official <a href="/docs/api/getting_started/getting_a_token.html">Create an API token</a> guide.</p>
 
 <h3 id="run-the-spring-boot-app">Run the Spring Boot App</h3>
 
@@ -326,10 +326,10 @@ X-XSS-Protection: 1; <span class="nv">mode</span><span class="o">=</span>block
 <p><a name="create-open-id-connect-app"></a></p>
 <h2 id="create-an-openid-connect-app-for-angular">Create an OpenID Connect App for Angular</h2>
 
-<p>OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To get started you’ll need to:</p>
+<p>OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To get started you’ll need to:</p>
 
 <ol>
-  <li>Login to your Okta account and navigate to <strong>Admin &gt; Add Applications</strong> and click on <strong>Create New App</strong></li>
+  <li>Log in to your Okta account and navigate to <strong>Admin &gt; Add Applications</strong> and click on <strong>Create New App</strong></li>
   <li>Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method</li>
   <li>Click <strong>Create</strong> and give your application a name (e.g. Angular PWA)</li>
   <li>On the next screen, add <code class="highlighter-rouge">http://localhost:4200</code> as a Redirect URI and click <strong>Finish</strong>. You should see settings like this:</li>
@@ -367,9 +367,9 @@ your needs, set the request's mode to 'no-cors' to fetch the resource with CORS 
 </code></pre>
 </div>
 
-<p>When you’re using Spring Boot without Stormpath, you can use a <code class="highlighter-rouge">@CrossOrigin</code> annotation to enable cross-origin resource 
-sharing (CORS) on the server. See the <a href="https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular#configure-cors-for-spring-boot">configure CORS for Spring Boot section</a> of 
-<a href="https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot and Angular</a>.</p>
+<p>When you’re using Spring Boot without the Stormpath Spring Boot starter, you can use a <code class="highlighter-rouge">@CrossOrigin</code> annotation to enable cross-origin resource 
+sharing (CORS) on the server. See the <a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular#configure-cors-for-spring-boot">configure CORS for Spring Boot section</a> of 
+<a href="/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular">Bootiful Development with Spring Boot and Angular</a>.</p>
 
 <p>When you’re using the Stormpath Spring Boot Starter, you can enable it by adding the following property to the Spring 
 Boot app’s <code class="highlighter-rouge">src/main/resources/application.properties</code>.</p>
@@ -589,7 +589,7 @@ error loading discovery document
 
 <h3 id="authenticating-with-the-okta-auth-sdk">Authenticating with the Okta Auth SDK</h3>
 
-<p>The Okta Auth SDK builds on top of Otka’s <a href="/docs/api/resources/authn.html">Authentication API</a> and <a href="/docs/api/resources/oidc.html">OAuth 2.0 API</a> to enable you to create a fully branded sign-in experience using JavaScript.</p>
+<p>The Okta Auth SDK builds on top of Okta’s <a href="/docs/api/resources/authn.html">Authentication API</a> and <a href="/docs/api/resources/oidc.html">OAuth 2.0 API</a> to enable you to create a fully branded sign-in experience using JavaScript.</p>
 
 <p>Install it using npm:</p>
 
@@ -922,7 +922,7 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. Or
 
 <p><img src="/assets/blog/angular-pwa-auth/production-beer-list-069b194886b120a85778b16d84dbf6b0ac07898da64444ec57a2006658cadc72.png" alt="Production Beer List" width="800" /></p>
 
-<p>The first time I ran <a href="https://developers.google.com/web/tools/lighthouse/">Lighthouse</a> on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it <a href="https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot#cloud-foundry">received a 98</a>.</p>
+<p>The first time I ran <a href="https://developers.google.com/web/tools/lighthouse/">Lighthouse</a> on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it <a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot#cloud-foundry">received a 98</a>.</p>
 
 <p><img src="/assets/blog/angular-pwa-auth/lighthouse-without-512-53c26aca1ffcb6b6c4f5775a4d6c1594938ad97266322a2d9a575c96e9447c17.png" alt="Lighthouse Score, first attempt" width="800" /></p>
 
@@ -951,8 +951,8 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. Or
 <p>To learn more about PWAs, check out some recent tutorials I wrote:</p>
 
 <ul>
-  <li><a href="http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a></li>
-  <li><a href="http://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">Tutorial: Develop a Mobile App With Ionic and Spring Boot</a></li>
+  <li><a href="/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot">Build Your First Progressive Web Application with Angular and Spring Boot</a></li>
+  <li><a href="/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">Tutorial: Develop a Mobile App With Ionic and Spring Boot</a></li>
   <li><a href="https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications">The Ultimate Guide to Progressive Web Applications</a></li>
 </ul>
 
