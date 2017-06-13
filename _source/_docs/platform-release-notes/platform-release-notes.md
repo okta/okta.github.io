@@ -1,18 +1,26 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.22
+excerpt: Summary of changes to the Okta Platform since Release 2017.23
 ---
 
-## Release 2017.23
+## Release 2017.24
 
 ### Advance Notices
 
-
+* [Key Rollover Change](#key-rollover-changes)
 * [Data Retention Policy Changes](#data-retention-changes)
 * [API Rate Limit Improvements](#api-rate-limit-improvements)
-* [Simple HAL Links in Production Soon](#simple-hal-links-generally-available-in-preview-for-may-2017)
  
+#### Key Rollover Change
+
+Beginning in Release 2017.25, the `kid` property of an app won't be available if the app doesn't support the key rollover feature.
+An app supports key rollover if the app uses one of the following signing mode types: SAML 2.0, SAML 1.1, WS-Fed, or OpenID Connect.
+
+Before this change takes effect, verify that your integration doesn't expect the `kid` property
+if your app doesn't have one of the listed signing mode types. This change is expected in Release 2017.25,
+which is scheduled for preview orgs on June 21, 2017 and in production orgs on June 26, 2017. <!-- OKTA-76439 -->
+
 #### Data Retention Changes
 
 Okta is changing system log data retention. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
@@ -57,112 +65,44 @@ For a full description of the new rate limits, see [API Rate Limit Improvements]
 
 ### Platform Enhancements
 
-* [Authorization Server API Enhancements](#authorization-server-api-enhancements)
-* [Additional Logging for Invalid Use by OAuth 2.0 Client](#additional-logging-for-invalid-use-by-oauth-20-client)
-* [Restrictions on Set Recovery and Set Password Operations](#restrictions-on-set-recovery-question-answer-and-set-password)
-* [Step-up Authentication for SAML Apps in Early Access](#step-up-authentication-for-saml-apps-is-an-early-access-feature)
-* [Simple HAL Links](#simple-hal-links-generally-available-in-preview-for-may-2017)
+* [Key Blinding Parameters Added to Apps API](#key-blinding-parameters-added-to-apps-api)
+* [Default Scopes for OAuth 2.0](#default-scopes-for-oauth-20)
+* [Improved UI for Creating OpenID Connect Apps](#improved-ui-for-creating-openid-connect-apps)
+* [Event Notifications for OpenID Connect Apps](#event-notifications-for-openid-connect-apps)
 
-#### Authorization Server API Enhancements
+#### Key Blinding Parameters Added to Apps API
 
-You can now use the Authorization Server API to configure components of an Authorization Server.
-With the following enhancements, the API Access Management Authorization Servers API is an {% api_lifecycle ea %} Release:
+The key-blinding parameters `e` and `n` from the [JSON Web Key (JWK) spec](https://tools.ietf.org/html/rfc7517#section-4) are now available in the Apps API.
+For more information, see the [Okta Apps API documentation](https://developer.okta.com/docs/api/resources/apps.html#application-key-credential-certificate-properties) <!-- OKTA-77488 -->
 
-* Manage Authorization Server policies, policy rules, claims, and scopes with the API.
-* Activate or deactivate Authorization Servers, or delete them.
-* Scopes were actions previously, but are now conditions in a policy rule.
-* Control which claims are returned in ID tokens with the `alwaysIncludeInToken` property. You can also configure this in the [Okta Admin UI](https://help.okta.com/en/prev/Content/Topics/Security/API_Access.htm#create_claims).
+#### Default Scopes for OAuth 2.0
 
-For more information see the [Authorization Server API documentation](/docs/api/resources/oauth2.html#authorization-server-operations).
-<!-- OKTA-127511, OKTA-123638 -->
+Using either the Okta UI or API, you can configure default scopes for an OAuth 2.0 client.
+If the client omits the scope parameter in an authorization request,
+Okta returns all default scopes in the Access Token that are permitted by the access policy rule. 
 
-#### Additional Logging for Invalid Use by OAuth 2.0 Client
+{% img release_notes/default-scope.png alt:"Default Scope Configuration UI" %}
 
-If Okta detects five or more consecutive request attempts with the wrong client secret, we log the events as suspicious:
+For more information about setting default scopes in the API, see [OAuth 2.0 API](/docs/api/resources/oauth2.html#scopes-properties).
+<!-- OKTA-122185 OKTA-122072 -->
 
-* The requests may be to any OAuth 2.0 endpoint that accepts client credentials.
-* The counter resets after 14 days of no invalid authentication attempts, or after a successful authentication.
+#### Improved UI for Creating OpenID Connect Apps
 
-We log an event when an invalid `client_id` is provided, and when an invalid `client_secret` is provided for a given `client_id`.<!-- OKTA-122503 -->
+The wizard for creating an OpenID Connect app has been improved and consolidated onto a single screen.
 
-#### Restrictions on Set Recovery Question Answer and Set Password
+{% img release_notes/single-oidc-screen.png alt:"New OpenID Connect Create Wizard" %}
 
-The API operations Set Recovery Question Answer and Set Password must be requested with an API token, not a session token. 
-Additionally, the Set Recovery Question Answer operation doesn't validate complexity policies or credential policies. <!-- OKTA-126826, OKTA-126824 -->
+<!-- OKTA-129127 -->
 
-#### Step-up Authentication for SAML Apps is an Early Access Feature
+#### Event Notifications for OpenID Connect Apps
 
-Every step-up transaction starts with a user accessing an application. If step-up authentication is required, Okta redirects the user to the custom login page with state token as a request parameter.
-For more information, see the [Step-up Authentication documentation](/docs/api/resources/authn.html#step-up-authentication).
-
-#### Simple HAL Links Generally Available in Preview for May, 2017
-
-Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
-This feature removes the HAL links that reflect state from user objects returned in collections.
-
->Important: Okta expects to deliver this feature to production orgs (with the same Okta .NET SDK caveats described below) starting June 12, 2017.
-
-Before release 2017.19, a user object returned in a collection contains some or all of the following links:
-
-```
-"_links": {
-    "suspend": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/suspend",
-      "method": "POST"
-    },
-    "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/reset_password",
-      "method": "POST"
-    },
-    "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/expire_password",
-      "method": "POST"
-    },
-    "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/forgot_password",
-      "method": "POST"
-    },
-    "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
-    },
-    "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_recovery_question",
-      "method": "POST"
-    },
-    "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/deactivate",
-      "method": "POST"
-    },
-    "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_password",
-      "method": "POST"
-    }
-}
-```
-
-Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
-As outlined in [Design Principles](/docs/api/getting_started/design_principles.html#links-in-collections):
-
-"Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by ID using the `self` link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state."
- 
-The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the `self` link is returned:
-
-```
-"_links": {
-    "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
-    }
-}
-```
- 
-As noted above, to change user state, the `self` link should be called to retrieve a user object with up-to-date links.
- 
->Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.
+Notifications are entered in the System Log via the Events API (`/api/v1/events`) when OpenID Connect apps are created, modified, deactivated, or deleted.
+Previously these notifications appeared only in the System Log (`/api/v1/logs`).
 
 ### Platform Bugs Fixed
 
-* When completing enrollment for SMS and call factors, the API forced end users to verify the factor that was just enrolled. (OKTA-125923)
-* When using a refresh token, default scope requests sometimes failed. (OKTA-127671)
+* If a query parameter was included in the definition of a Redirect URL (the IDP Login URL field in the Add/Edit Endpoint wizard or the IdP Single Sing-On URL for Inbound SAML), the query parameter was ignored. (OKTA-127771)
+* The dropdown that controls Authorization Server lifecycles failed to display properly if you navigated directly to a tab or refreshed a tab other than Settings. (OKTA-129014)
 
 ### Does Your Org Have This Change Yet?
 
