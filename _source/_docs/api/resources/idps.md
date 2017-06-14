@@ -108,6 +108,11 @@ curl -v -X POST \
           "profileMaster": true,
           "groups": {
             "action": "NONE"
+          },
+          "conditions": {
+            "deprovisioned": {
+              "action": "NONE"
+            }
           }
         },
         "accountLink": {
@@ -183,6 +188,11 @@ curl -v -X POST \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -272,6 +282,11 @@ curl -v -X POST \
           "profileMaster": true,
           "groups": {
             "action": "NONE"
+          },
+          "conditions": {
+            "deprovisioned": {
+              "action": "NONE"
+            }
           }
         },
         "accountLink": {
@@ -331,6 +346,11 @@ curl -v -X POST \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -406,6 +426,11 @@ curl -v -X POST \
           "profileMaster": true,
           "groups": {
             "action": "NONE"
+          },
+          "conditions": {
+            "deprovisioned": {
+              "action": "NONE"
+            }
           }
         },
         "accountLink": {
@@ -466,6 +491,11 @@ curl -v -X POST \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -540,6 +570,11 @@ curl -v -X POST \
           "profileMaster": true,
           "groups": {
             "action": "NONE"
+          },
+          "conditions": {
+            "deprovisioned": {
+              "action": "NONE"
+            }
           }
         },
         "accountLink": {
@@ -599,6 +634,11 @@ curl -v -X POST \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -670,6 +710,11 @@ curl -v -X POST \
                 "profileMaster": true,
                 "groups": {
                     "action": "NONE"
+                },
+                "conditions": {
+                  "deprovisioned": {
+                    "action": "NONE"
+                  }
                 }
             },
             "accountLink": {
@@ -731,6 +776,11 @@ curl -v -X POST \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -840,6 +890,11 @@ curl -v -X GET \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -967,6 +1022,11 @@ curl -v -X GET \
         "profileMaster": true,
         "groups": {
           "action": "NONE"
+        },
+        "conditions": {
+          "deprovisioned": {
+            "action": "NONE"
+          }
         }
       },
       "accountLink": {
@@ -1055,6 +1115,11 @@ curl -v -X GET \
         "profileMaster": true,
         "groups": {
           "action": "NONE"
+        },
+        "conditions": {
+          "deprovisioned": {
+            "action": "NONE"
+          }
         }
       },
       "accountLink": {
@@ -1144,6 +1209,11 @@ curl -v -X GET \
         "profileMaster": true,
         "groups": {
           "action": "NONE"
+        },
+        "conditions": {
+          "deprovisioned": {
+            "action": "NONE"
+          }
         }
       },
       "accountLink": {
@@ -1217,6 +1287,11 @@ curl -v -X GET \
         "profileMaster": true,
         "groups": {
           "action": "NONE"
+        },
+        "conditions": {
+          "deprovisioned": {
+            "action": "NONE"
+          }
         }
       },
       "accountLink": {
@@ -1332,6 +1407,11 @@ curl -v -X GET \
         "profileMaster": true,
         "groups": {
           "action": "NONE"
+        },
+        "conditions": {
+          "deprovisioned": {
+            "action": "NONE"
+          }
         }
       },
       "accountLink": {
@@ -1464,6 +1544,11 @@ Link: <https://your-domain.okta.com/api/v1/idps?after=0oaxdqpA88PtFNmhu0g3&limit
         "profileMaster": true,
         "groups": {
           "action": "NONE"
+        },
+        "conditions": {
+          "deprovisioned": {
+            "action": "NONE"
+          }
         }
       },
       "accountLink": {
@@ -1608,6 +1693,11 @@ curl -v -X PUT \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -1776,6 +1866,11 @@ curl -v -X POST \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -1886,6 +1981,11 @@ curl -v -X POST \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -3460,6 +3560,11 @@ curl -v -X GET \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -3699,6 +3804,11 @@ curl -v -X GET \
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -4368,6 +4478,11 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
       "profileMaster": true,
       "groups": {
         "action": "NONE"
+      },
+      "conditions": {
+        "deprovisioned": {
+          "action": "NONE"
+        }
       }
     },
     "accountLink": {
@@ -4402,14 +4517,15 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
 
 Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a new Okta user and their group memberships.
 
-|---------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
-| Property      | Description                                                                       | DataType                                                              | Nullable | Readonly | MinLength | MaxLength | Validation |
-| --------------| --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
-| action        | Provisioning action for an IdP user during authentication                         | [User Provisioning Action Type](#user-provisioning-action-type)       | FALSE    | FALSE    |           |           |            |
-| profileMaster | Determines if the IdP should act as a source of truth for user profile attributes | Boolean                                                               | FALSE    | FALSE    |           |           |            |
-| callout       | Webhook settings for the `CALLOUT` action                                         | [Callout Object](#callout-object)                                     | TRUE     | FALSE    |           |           |            |
-| groups        | Provisioning settings for a user's group memberships                              | [Group Provisioning Policy Object](#group-provisioning-policy-object) | FALSE    | FALSE    |           |           |            |
-|---------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+|---------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+----------+----------+-----------+-----------+----------------------------------|
+| Property                            | Description                                                                       | DataType                                                              | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ------------------------------------| --------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
+| action                              | Provisioning action for an IdP user during authentication                         | [User Provisioning Action Type](#user-provisioning-action-type)       | FALSE    | FALSE    |           |           |            |
+| profileMaster                       | Determines if the IdP should act as a source of truth for user profile attributes | Boolean                                                               | FALSE    | FALSE    |           |           |            |
+| callout                             | Webhook settings for the `CALLOUT` action                                         | [Callout Object](#callout-object)                                     | TRUE     | FALSE    |           |           |            |
+| groups                              | Provisioning settings for a user's group memberships                              | [Group Provisioning Policy Object](#group-provisioning-policy-object) | FALSE    | FALSE    |           |           |            |
+| conditions {%api_lifecycle beta %}  | Conditional behaviors for an IdP user during authentication                       | [Provisioning Conditions Object](#provisioning-conditions-object)     | FALSE    | FALSE    |           |           |            |
+|---------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------+----------+----------+-----------+-----------+----------------------------------|
 
 ~~~json
 {
@@ -4422,6 +4538,11 @@ Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a n
       "filter": [
         "00gak46y5hydV6NdM0g4"
       ]
+    },
+    "conditions": {
+      "deprovisioned": {
+        "action": "NONE"
+      }
     }
   }
 }
@@ -4558,6 +4679,52 @@ The group provisioning action for an IdP user:
 | `SYNC`   | Groups                |                      | 00glxpsrGUKMnSPss0g3 | **Enterprise IdP Users**, Domain Users, & Everyone              |
 |----------|-----------------------|----------------------|----------------------|-----------------------------------------------------------------|
 
+{% beta %}
+
+##### Provisioning Conditions Object
+
+|---------------------+--------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+| Property      | Description                                                              | DataType                                                          | Nullable | Readonly | MinLength | MaxLength | Validation |
+| ------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
+| deprovisioned | Behavior for a previously deprovisioned IdP user during authentication   | [Deprovisioned Condition Object](#deprovisioned-condition-object) | FALSE    | FALSE    |           |           |            |
+|---------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+
+
+~~~json
+{
+  "deprovisioned": {
+    "action": "NONE"
+  }
+}
+~~~
+
+###### Deprovisioned Condition Object
+
+-----------+------------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+| Property | Description                                                            | DataType                                                          | Nullable | Readonly | MinLength | MaxLength | Validation |
+|--------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
+| action   | Action for a previously deprovisioned IdP user during authentication   | [Deprovisioned Action Type](#deprovisioned-action-type) | FALSE    | FALSE    |           |           |            |
+|----------+------------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+
+
+~~~json
+{
+  "action": "NONE"
+}
+~~~
+
+###### Deprovisioned Action Type
+
+Specifies the action during authentication when an IdP user is linked to a previously deprovisioned Okta user.
+
+|--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action Type  | Description                                                                                                                                                                  |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NONE`       | Take no action. If an IdP user matching a previously deprovisioned Okta user attempts to authenticate, authentication will fail.                                             |
+| `REACTIVATE` | If an IdP user matching a previously deprovisioned Okta user attempts to authenticate, reactivate the matching user in Okta and allow the authentication attempt to proceed. |
+|--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+{% endbeta %}
 
 #### Account Link Policy Object
 

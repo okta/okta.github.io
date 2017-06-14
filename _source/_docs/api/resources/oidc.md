@@ -505,7 +505,7 @@ invalid_request         | The request structure was invalid. E.g. the basic auth
 #### Response Example (Success)
 
 ~~~http
-HTTP/1.1 204 No Content
+HTTP/1.1 200 OK
 ~~~
 
 #### Response Example (Error)
