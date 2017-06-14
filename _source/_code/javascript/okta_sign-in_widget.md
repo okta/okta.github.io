@@ -6,7 +6,7 @@ weight: 1
 redirect_from:
     - "/docs/guides/okta_sign-in_widget.html"
 ---
-
+  
 # Overview
 
 The Okta Sign-In Widget is a JavaScript widget from Okta that gives
@@ -541,4 +541,9 @@ var oktaSignIn = new OktaSignIn({
 If you are working with a single-page app using the Sign-In Widget and your Okta cookie isn't set, try enabling third-party cookies in the browser.
 
 ## Reference Documentation
+
 You can find more reference information in the [Okta Sign-In Widget reference](/code/javascript/okta_sign-in_widget_ref) page.
+
+## GitHub Project
+
+The source code for this project [can be found on GitHub](https://github.com/okta/okta-signin-widget).
