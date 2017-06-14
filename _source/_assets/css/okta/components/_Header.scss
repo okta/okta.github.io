@@ -197,15 +197,9 @@
 }
 
 @include media("<medium") {
-  #blog {
-    #header {
-      margin-top: -75px !important;
-    }
-  }
-  
 	#header {
 		height: 75px;
-  
+
 		#nav {
 			height: 75px;
 			padding: 0;
