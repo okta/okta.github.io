@@ -1,10 +1,10 @@
 ---
 layout: docs_page
-title: Social Authentication
-excerpt: Setting up an Okta Social Authentication provider
+title: Using Social Login 
+excerpt: How to implement social authentication 
 ---
 
-# Social Authentication
+# Using Social Login 
 
 ## Overview
 
@@ -543,7 +543,3 @@ More user profile attributes are available for matching as an Early Access featu
 **Profile Master:** If an authenticated user exists, the user is updated with the information in this SAML assertion when this box is selected. If this box is not selected, the flow continues without updating information. 
 
 **Group Assignments:** Allows you to assign new users to one ore more existing Groups. For example, new Facebook users could be added to a "Facebook" Group.
-
-# Error Codes
-
-See the [OpenID Connect and Okta Social Authentication](/reference/error_codes/index#openid-connect-and-okta-social-authentication) section of the [Error Codes](/docs/api/getting_started/error_codes.html) API documentation.

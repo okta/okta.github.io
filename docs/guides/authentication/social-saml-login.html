@@ -33,14 +33,14 @@
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Social Authentication | Okta Developer</title>
-  <meta name="description" content="Setting up an Okta Social Authentication provider">
-  <link rel="canonical" href="https://developer.okta.com/docs/api/resources/social_authentication.html">
+  <title>Using Social Login | Okta Developer</title>
+  <meta name="description" content="How to implement social authentication">
+  <link rel="canonical" href="https://developer.okta.com/docs/guides/authentication/social-saml-login.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page social-authentication">
+  <div class="Page using-social-login">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -128,29 +128,9 @@
             </li>
             <li>
               <a href="/docs/api/resources/authn.html">Authentication Reference</a>
-              <ul id="Sidebar_References" class="Sidebar-hide">
-                <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
-                <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
-                <li class="is-active"><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-                <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
-              </ul>
             </li>
             <li>
               <a href="/docs/api/resources/apps.html">API Reference</a>
-              <ul id="Sidebar_Resources" class="Sidebar-hide">
-                <li><a href="/docs/api/resources/apps.html">Apps</a></li>
-                <li><a href="/docs/api/resources/events.html">Events</a></li>
-                <li><a href="/docs/api/resources/factors.html">Factors</a></li>
-                <li><a href="/docs/api/resources/groups.html">Groups</a></li>
-                <li><a href="/docs/api/resources/idps.html">Identity Providers</a></li>
-                <li><a href="/docs/api/resources/policy.html">Policy</a></li>
-                <li><a href="/docs/api/resources/roles.html">Admin Roles</a></li>
-                <li><a href="/docs/api/resources/schemas.html">Schemas API</a></li>
-                <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
-                <li><a href="/docs/api/resources/templates.html">Templates</a></li>
-                <li><a href="/docs/api/resources/users.html">Users</a></li>
-              </ul>
             </li>
             <li>
               <a href="/reference/error_codes/">Error Codes</a>
@@ -205,8 +185,8 @@
 <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/social_authentication.md">Edit Page</a>
-      <h1 id="social-authentication">Social Authentication</h1>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/guides/authentication/social-saml-login.md">Edit Page</a>
+      <h1 id="using-social-login">Using Social Login</h1>
 
 <h2 id="overview">Overview</h2>
 
@@ -780,10 +760,6 @@
 <p><strong>Profile Master:</strong> If an authenticated user exists, the user is updated with the information in this SAML assertion when this box is selected. If this box is not selected, the flow continues without updating information.</p>
 
 <p><strong>Group Assignments:</strong> Allows you to assign new users to one ore more existing Groups. For example, new Facebook users could be added to a “Facebook” Group.</p>
-
-<h1 id="error-codes">Error Codes</h1>
-
-<p>See the <a href="/reference/error_codes/index#openid-connect-and-okta-social-authentication">OpenID Connect and Okta Social Authentication</a> section of the <a href="/docs/api/getting_started/error_codes.html">Error Codes</a> API documentation.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
