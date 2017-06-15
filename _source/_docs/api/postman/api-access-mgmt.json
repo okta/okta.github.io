@@ -1,0 +1,1833 @@
+{
+	"id": "39c483fd-fcef-c646-f07e-26ab65678b23",
+	"name": "API Access Management (Okta API)",
+	"description": "",
+	"order": [
+		"716ffa17-395e-1822-4c19-1f557f15dec7",
+		"669aa79c-96c2-d7f7-1863-db5a580ceb9b",
+		"ecd33c0b-c9bb-a406-b67b-8c8f27e66109",
+		"b6e67aab-edaf-3e0b-aa55-19a8aa11bab6",
+		"77fbb55a-86b8-c2c2-f4d6-83c4506444d8",
+		"452634d8-32e5-b767-c50e-77be8d7ed225",
+		"6583cd35-4ea2-96c5-9358-3d37ca104e9c",
+		"fe703113-86ad-9f7c-70ee-90a6cfe3df17",
+		"2b065172-db3b-e243-eb92-de5de4bb1cba",
+		"e54dfdb6-341d-075e-fbbe-ba9f152eb05e",
+		"04499538-281f-3c89-484d-b8efc8469b7f",
+		"c57a4a55-e3a1-cb49-bd7b-1269680f1854",
+		"b2fe3749-c9df-2918-6f61-175fecb8f210",
+		"519911c1-c375-d7e6-23c9-74f6f1467217",
+		"641b7df5-cba0-b704-2b58-a9cc9d50245c",
+		"cfb0cf71-9fbf-01f2-c887-ed565fa14db6",
+		"61583fec-fffc-cb33-8fbd-c9257ce64fdf",
+		"c4b88a82-8e56-dcee-1c32-589a39bf6028",
+		"89e7c2dc-0159-179a-e0ea-b34e71a90a40",
+		"6330647a-5bc7-a226-af38-8781a9eb77ff",
+		"5aee5a21-10dd-6a69-42b9-d936649eee2a",
+		"ec8b7dc7-529b-40ce-309e-0b0b1ad7f534",
+		"13d2b884-5f65-b4c4-1370-2ca7927847f4"
+	],
+	"folders": [
+		{
+			"id": "5451ac4a-2260-5fa1-60bb-e46d1464b6e4",
+			"name": "Authorization Server Operations",
+			"description": "",
+			"order": [
+				"e2ce59c0-e700-b845-f1ca-d6ea13cecaef",
+				"a5cb44aa-f0e1-490d-4d7c-d01979a91f9c",
+				"9d36241d-9e6c-5a2e-6558-3503f9f0bbe7",
+				"df1e2146-3fcc-a5a0-37b2-6c947978684c",
+				"ad3ee22b-106f-c008-5a1b-087a4843ad65",
+				"8caaf52b-915d-51f8-9037-4081ff1cf7e0",
+				"0795da3f-024c-b7ec-b6be-02123f0a4040"
+			],
+			"owner": "20756",
+			"collectionId": "f86123fc-322d-4f18-669a-98d6d6fc7871"
+		},
+		{
+			"id": "3fef6478-b25e-b11f-a3cd-df37eb00d168",
+			"name": "Credentials Operations",
+			"description": "",
+			"order": [
+				"c319dcd0-55b5-f7f2-ce1e-24ec711a1403",
+				"f4cfe6af-2dc2-74c3-f059-3c217bcf11c1",
+				"3284c127-8e17-6eb4-b512-46023fc8b393"
+			],
+			"owner": "20756",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23"
+		},
+		{
+			"id": "14e97af7-381f-a2fa-c618-34c0a437c54a",
+			"name": "OAuth2 Claim Operations",
+			"description": "",
+			"order": [
+				"5964d262-2213-b5de-d286-41046cd0bcac",
+				"67d63c5e-d019-959a-88cd-3734075238ef",
+				"455acfd1-4851-d0e3-68f2-012dd158ef28",
+				"bc97071f-8ed0-fc26-324f-438172150bbc",
+				"662250fd-5d28-5fbd-7e82-c737327616fa"
+			],
+			"owner": "20756"
+		},
+		{
+			"id": "1e2d4d16-9f15-c3dd-2dd6-762bdb3623d6",
+			"name": "OAuth2 Scope Operations",
+			"description": "",
+			"order": [
+				"a87981fe-723c-51bc-24ec-b2a4bc59ec82",
+				"1280522b-0e5c-1969-044f-abb9c79f62dd",
+				"8223ce7e-1baf-d5e9-9df2-2fc647a98d86",
+				"fe8367a8-7baf-2158-ce24-7db8f44139a4",
+				"e17f699c-41d8-04ae-8fc0-bc37ac528de6"
+			],
+			"owner": "20756"
+		},
+		{
+			"id": "b18bd826-3d43-7a67-a1ae-04a94dc9aa88",
+			"name": "Resource Access Policy Operations",
+			"description": "",
+			"order": [
+				"44eca709-1395-4bd5-ed8f-2663b53a5298",
+				"e4f1d118-6282-497e-68d7-6717ba6bd7d7",
+				"4562c5aa-e43e-5f9e-506e-e0389c38f9d7",
+				"c56a453b-58e8-cbf2-b7ad-5274050260ab",
+				"eedc9fbc-52a0-ab93-6274-81911bffd7c4",
+				"95f68eae-f0f0-4f3e-31e4-9f21e990129d",
+				"c82bd805-08a7-0f57-b98f-e84f3683380b"
+			],
+			"owner": "20756"
+		},
+		{
+			"id": "583f3174-db92-2a6c-32cf-889397add334",
+			"name": "Resource Access Policy Rule Operations",
+			"description": "",
+			"order": [
+				"853785c8-43d9-92fb-5479-f0794d755f09",
+				"830e8a18-415c-ff32-0106-2d441ff300b7",
+				"7fae8765-81b8-8998-7baa-dd1be3a942b6",
+				"cea24cb4-1581-5bcb-2b7d-eec0c39887a2",
+				"435abcf0-9ecd-adc6-5dd6-6c8381592eba",
+				"e4e5400f-044c-f341-f424-8c2e871474ef",
+				"70e034ae-aaa8-35eb-82e5-6625c1b2d95b"
+			],
+			"owner": "20756",
+			"collectionId": "f86123fc-322d-4f18-669a-98d6d6fc7871"
+		}
+	],
+	"timestamp": 1496178172680,
+	"owner": "20756",
+	"public": false,
+	"requests": [
+		{
+			"id": "04499538-281f-3c89-484d-b8efc8469b7f",
+			"headers": "",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=code token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193332385,
+			"name": "Get Authorization Code + Access Token (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "0795da3f-024c-b7ec-b6be-02123f0a4040",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/lifecycle/deactivate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496180831888,
+			"name": "Deactivate Authorization Server",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"folder": "5451ac4a-2260-5fa1-60bb-e46d1464b6e4",
+			"rawModeData": ""
+		},
+		{
+			"id": "1280522b-0e5c-1969-044f-abb9c79f62dd",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/scopes",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496271422757,
+			"name": "Create OAuth2 Scope",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n\t\"description\": \"Drive car\",\n\t\"name\": \"car:drive\"\n}",
+			"folder": "1e2d4d16-9f15-c3dd-2dd6-762bdb3623d6"
+		},
+		{
+			"id": "13d2b884-5f65-b4c4-1370-2ca7927847f4",
+			"headers": "Accept: application/json\nAuthorization: Basic\n",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/token",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "client_credentials",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "{{scopes}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "{{clientId}}",
+				"password": "{{clientSecret}}",
+				"saveToRequest": true
+			},
+			"time": 1496193435317,
+			"name": "Get Access Token with Client Credentials",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "2b065172-db3b-e243-eb92-de5de4bb1cba",
+			"headers": "",
+			"headerData": [],
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=code&response_mode=query&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}",
+			"queryParams": [
+				{
+					"key": "client_id",
+					"value": "{{clientId}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "response_type",
+					"value": "code",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "response_mode",
+					"value": "query",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "{{scopes}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "state",
+					"value": "{{state}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "nonce",
+					"value": "{{$guid}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496856189798,
+			"name": "Get Authorization Code (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "3284c127-8e17-6eb4-b512-46023fc8b393",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/credentials/lifecycle/keyRotate",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496864072729,
+			"name": "Rotate Keys",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n\t\"use\": \"sig\"\n}"
+		},
+		{
+			"id": "435abcf0-9ecd-adc6-5dd6-6c8381592eba",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/rules/{{ruleId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190345387,
+			"name": "Delete Resource Access Policy Rule",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "583f3174-db92-2a6c-32cf-889397add334"
+		},
+		{
+			"id": "44eca709-1395-4bd5-ed8f-2663b53a5298",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496189660903,
+			"name": "List Resource Access Policies",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"folder": "b18bd826-3d43-7a67-a1ae-04a94dc9aa88"
+		},
+		{
+			"id": "452634d8-32e5-b767-c50e-77be8d7ed225",
+			"headers": "",
+			"headerData": [],
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=id_token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}",
+			"queryParams": [
+				{
+					"key": "client_id",
+					"value": "{{clientId}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "response_type",
+					"value": "id_token",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "response_mode",
+					"value": "fragment",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "{{scopes}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "state",
+					"value": "{{state}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "nonce",
+					"value": "{{$guid}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496856098359,
+			"name": "Get ID Token (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "455acfd1-4851-d0e3-68f2-012dd158ef28",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/claims/{{claimId}}",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496854701719,
+			"name": "Get OAuth2 Claim",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "14e97af7-381f-a2fa-c618-34c0a437c54a"
+		},
+		{
+			"id": "4562c5aa-e43e-5f9e-506e-e0389c38f9d7",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496189730349,
+			"name": "Get Resource Access Policy",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"folder": "b18bd826-3d43-7a67-a1ae-04a94dc9aa88"
+		},
+		{
+			"id": "519911c1-c375-d7e6-23c9-74f6f1467217",
+			"headers": "",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=code id_token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}&code_challenge_method=S256&code_challenge={{codeChallenge}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193354217,
+			"name": "Get Authorization Code + ID Token with PKCE (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "5964d262-2213-b5de-d286-41046cd0bcac",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/claims",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496854576780,
+			"name": "List OAuth2 Claims",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "14e97af7-381f-a2fa-c618-34c0a437c54a"
+		},
+		{
+			"id": "5aee5a21-10dd-6a69-42b9-d936649eee2a",
+			"headers": "Accept: application/json\nAuthorization: Basic\n",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/token",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "refresh_token",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "{{scopes}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "refresh_token",
+					"value": "{{refreshToken}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "{{clientId}}",
+				"password": "{{clientSecret}}",
+				"saveToRequest": true
+			},
+			"time": 1496193406301,
+			"name": "Get Access Token with Refresh Token",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "61583fec-fffc-cb33-8fbd-c9257ce64fdf",
+			"name": "Get ID Token with Code",
+			"dataMode": "urlencoded",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "authorization_code",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code",
+					"value": "{{authorizationCode}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "Accept: application/json\nAuthorization: Basic\n",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/token",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "{{clientId}}",
+				"password": "{{clientSecret}}",
+				"saveToRequest": true
+			},
+			"responses": [],
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23"
+		},
+		{
+			"id": "6330647a-5bc7-a226-af38-8781a9eb77ff",
+			"name": "Get Access Token with Code and PKCE",
+			"dataMode": "urlencoded",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "authorization_code",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "{{clientId}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code",
+					"value": "{{authorizationCode}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code_verifier",
+					"value": "{{codeVerifier}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "Accept: application/json\n",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/token",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"responses": [],
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23"
+		},
+		{
+			"id": "641b7df5-cba0-b704-2b58-a9cc9d50245c",
+			"headers": "",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=code token id_token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193360429,
+			"name": "Get Authorization Code + ID Token + Access Token (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "6583cd35-4ea2-96c5-9358-3d37ca104e9c",
+			"headers": "",
+			"headerData": [],
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}",
+			"queryParams": [
+				{
+					"key": "client_id",
+					"value": "{{clientId}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "response_type",
+					"value": "token",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "response_mode",
+					"value": "fragment",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "{{scopes}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "state",
+					"value": "{{state}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "nonce",
+					"value": "{{$guid}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496856128910,
+			"name": "Get Access Token (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "662250fd-5d28-5fbd-7e82-c737327616fa",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/claims/{{claimId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496189441096,
+			"name": "Delete OAuth2 Claim",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "14e97af7-381f-a2fa-c618-34c0a437c54a"
+		},
+		{
+			"id": "669aa79c-96c2-d7f7-1863-db5a580ceb9b",
+			"headers": "Accept: application/json\n",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/.well-known/oauth-authorization-server?client_id={{clientId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1480465159971,
+			"name": "Get OAuth2 Metadata",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"isFromCollection": true
+		},
+		{
+			"id": "67d63c5e-d019-959a-88cd-3734075238ef",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/claims",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496271714716,
+			"name": "Create OAuth2 Claim",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"carDriving\",\n\t\"status\": \"ACTIVE\",\n\t\"claimType\": \"RESOURCE\",\n\t\"valueType\": \"EXPRESSION\",\n\t\"value\": \"\\\"driving!\\\"\",\n\t\"conditions\": {\n\t\t\"scopes\": [\n\t\t\t\"car:drive\"\n\t\t]\n\t}\n}",
+			"folder": "14e97af7-381f-a2fa-c618-34c0a437c54a"
+		},
+		{
+			"id": "70e034ae-aaa8-35eb-82e5-6625c1b2d95b",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/rules/{{ruleId}}/lifecycle/deactivate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190356705,
+			"name": "Deactivate Resource Access Policy Rule",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "583f3174-db92-2a6c-32cf-889397add334"
+		},
+		{
+			"id": "716ffa17-395e-1822-4c19-1f557f15dec7",
+			"headers": "Accept: application/json\n",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/.well-known/openid-configuration?client_id={{clientId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193133555,
+			"name": "Get OpenID Provider Metadata",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "77fbb55a-86b8-c2c2-f4d6-83c4506444d8",
+			"headers": "Accept: application/json\nAuthorization: Bearer {{accessToken}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{accessToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/userinfo",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496856262568,
+			"name": "Get UserInfo",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "7fae8765-81b8-8998-7baa-dd1be3a942b6",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/rules/{{ruleId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190336321,
+			"name": "Get Resource Access Policy Rule",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"folder": "583f3174-db92-2a6c-32cf-889397add334"
+		},
+		{
+			"id": "8223ce7e-1baf-d5e9-9df2-2fc647a98d86",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/scopes/{{scopeId}}",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496854644744,
+			"name": "Get OAuth2 Scope",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "1e2d4d16-9f15-c3dd-2dd6-762bdb3623d6"
+		},
+		{
+			"id": "830e8a18-415c-ff32-0106-2d441ff300b7",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/rules",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496271463297,
+			"name": "Create Resource Access Policy Rule",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n    \"type\": \"RESOURCE_ACCESS\",\n    \"status\": \"ACTIVE\",\n    \"name\": \"Default Policy Rule\",\n    \"priority\": 1,\n    \"conditions\": {\n      \"people\": {\n        \"groups\": {\n          \"include\": [\n            \"EVERYONE\"\n          ]\n        }\n      },\n      \"grantTypes\": {\n        \"include\": [\n          \"implicit\",\n          \"client_credentials\",\n          \"authorization_code\",\n          \"password\"\n        ]\n      },\n      \"scopes\": {\n        \"include\": [\n          \"car:drive\"\n        ]\n      }\n    },\n    \"actions\": {\n      \"token\": {\n        \"accessTokenLifetimeMinutes\": 60,\n        \"refreshTokenLifetimeMinutes\": 0,\n        \"refreshTokenWindowMinutes\": 10080\n      }\n    }\n}",
+			"folder": "583f3174-db92-2a6c-32cf-889397add334"
+		},
+		{
+			"id": "853785c8-43d9-92fb-5479-f0794d755f09",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/rules",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190241310,
+			"name": "List Resource Access Policy Rules",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"folder": "583f3174-db92-2a6c-32cf-889397add334"
+		},
+		{
+			"id": "89e7c2dc-0159-179a-e0ea-b34e71a90a40",
+			"name": "Get Access Token with Code",
+			"dataMode": "urlencoded",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "authorization_code",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code",
+					"value": "{{authorizationCode}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "Accept: application/json\nAuthorization: Basic\n",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/token",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "{{clientId}}",
+				"password": "{{clientSecret}}",
+				"saveToRequest": true
+			},
+			"responses": [],
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"isFromCollection": true
+		},
+		{
+			"id": "8caaf52b-915d-51f8-9037-4081ff1cf7e0",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/lifecycle/activate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496180788875,
+			"name": "Activate Authorization Server",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"isFromCollection": true,
+			"folder": "5451ac4a-2260-5fa1-60bb-e46d1464b6e4",
+			"rawModeData": ""
+		},
+		{
+			"id": "95f68eae-f0f0-4f3e-31e4-9f21e990129d",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/lifecycle/activate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190131268,
+			"name": "Activate Resource Access Policy",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "b18bd826-3d43-7a67-a1ae-04a94dc9aa88"
+		},
+		{
+			"id": "9d36241d-9e6c-5a2e-6558-3503f9f0bbe7",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496854673568,
+			"name": "Get Authorization Server",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "5451ac4a-2260-5fa1-60bb-e46d1464b6e4"
+		},
+		{
+			"id": "a5cb44aa-f0e1-490d-4d7c-d01979a91f9c",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496180267568,
+			"name": "Create Authorization Server",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"isFromCollection": true,
+			"folder": "5451ac4a-2260-5fa1-60bb-e46d1464b6e4",
+			"rawModeData": "{\n    \"name\": \"Authorization Server\",\n    \"description\": \"Authorization Server Description\",\n    \"audiences\": [\n      \"https://api.resource.com\"\n    ]\n}"
+		},
+		{
+			"id": "a87981fe-723c-51bc-24ec-b2a4bc59ec82",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/scopes",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496854616789,
+			"name": "List OAuth2 Scopes",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "1e2d4d16-9f15-c3dd-2dd6-762bdb3623d6"
+		},
+		{
+			"id": "ad3ee22b-106f-c008-5a1b-087a4843ad65",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496180612569,
+			"name": "Delete Authorization Server",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "5451ac4a-2260-5fa1-60bb-e46d1464b6e4"
+		},
+		{
+			"id": "b2fe3749-c9df-2918-6f61-175fecb8f210",
+			"headers": "",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=code id_token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193347805,
+			"name": "Get Authorization Code + ID Token (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "b6e67aab-edaf-3e0b-aa55-19a8aa11bab6",
+			"name": "Revoke Token",
+			"dataMode": "urlencoded",
+			"data": [
+				{
+					"key": "token",
+					"value": "{{accessToken}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "token_type_hint",
+					"value": "access_token",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": "html",
+			"description": "",
+			"headers": "Accept: application/json\nAuthorization: Basic\n",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/revoke",
+			"preRequestScript": "",
+			"tests": null,
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "{{clientId}}",
+				"password": "{{clientSecret}}",
+				"saveToRequest": true
+			},
+			"responses": [],
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"isFromCollection": true
+		},
+		{
+			"id": "bc97071f-8ed0-fc26-324f-438172150bbc",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/claims/{{claimId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496271720732,
+			"name": "Update OAuth2 Claim",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"carDriving\",\n\t\"status\": \"ACTIVE\",\n\t\"claimType\": \"RESOURCE\",\n\t\"valueType\": \"EXPRESSION\",\n\t\"value\": \"\\\"driving!\\\"\",\n\t\"conditions\": {\n\t\t\"scopes\": [\n\t\t\t\"car:drive\"\n\t\t]\n\t}\n}",
+			"folder": "14e97af7-381f-a2fa-c618-34c0a437c54a"
+		},
+		{
+			"id": "c319dcd0-55b5-f7f2-ce1e-24ec711a1403",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/credentials/keys",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496861319530,
+			"name": "List Keys",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "c4b88a82-8e56-dcee-1c32-589a39bf6028",
+			"name": "Get ID Token with Code and PKCE",
+			"dataMode": "urlencoded",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "authorization_code",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "client_id",
+					"value": "{{clientId}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code",
+					"value": "{{authorizationCode}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "code_verifier",
+					"value": "{{codeVerifier}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "Accept: application/json\n",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/token",
+			"preRequestScript": null,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"responses": [],
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23"
+		},
+		{
+			"id": "c56a453b-58e8-cbf2-b7ad-5274050260ab",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190041986,
+			"name": "Update Resource Access Policy",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n\t\"type\": \"OAUTH_AUTHORIZATION_POLICY\",\n\t\"status\": \"ACTIVE\",\n\t\"name\": \"Default Policy\",\n\t\"description\": \"Default policy description\",\n\t\"priority\": 1,\n\t\"conditions\": {\n\t\t\"clients\": {\n\t\t\t\"include\": [\n\t\t\t\t\"ALL_CLIENTS\"\n\t\t\t]\n\t\t}\n\t}\n}",
+			"folder": "b18bd826-3d43-7a67-a1ae-04a94dc9aa88"
+		},
+		{
+			"id": "c57a4a55-e3a1-cb49-bd7b-1269680f1854",
+			"headers": "",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=code token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}&code_challenge_method=S256&code_challenge={{codeChallenge}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193340964,
+			"name": "Get Authorization Code + Access Token with PKCE (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "c82bd805-08a7-0f57-b98f-e84f3683380b",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/lifecycle/deactivate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190144400,
+			"name": "Deactivate Resource Access Policy",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "b18bd826-3d43-7a67-a1ae-04a94dc9aa88"
+		},
+		{
+			"id": "cea24cb4-1581-5bcb-2b7d-eec0c39887a2",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/rules/{{ruleId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496271470745,
+			"name": "Update Resource Access Policy Rule",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n    \"type\": \"RESOURCE_ACCESS\",\n    \"status\": \"ACTIVE\",\n    \"name\": \"Default Policy Rule\",\n    \"priority\": 1,\n    \"conditions\": {\n      \"people\": {\n        \"groups\": {\n          \"include\": [\n            \"EVERYONE\"\n          ]\n        }\n      },\n      \"grantTypes\": {\n        \"include\": [\n          \"implicit\",\n          \"client_credentials\",\n          \"authorization_code\",\n          \"password\"\n        ]\n      },\n      \"scopes\": {\n        \"include\": [\n          \"car:drive\"\n        ]\n      }\n    },\n    \"actions\": {\n      \"token\": {\n        \"accessTokenLifetimeMinutes\": 60,\n        \"refreshTokenLifetimeMinutes\": 0,\n        \"refreshTokenWindowMinutes\": 10080\n      }\n    }\n}",
+			"folder": "583f3174-db92-2a6c-32cf-889397add334"
+		},
+		{
+			"id": "cfb0cf71-9fbf-01f2-c887-ed565fa14db6",
+			"headers": "",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=code token id_token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}&code_challenge_method=S256&code_challenge={{codeChallenge}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193366652,
+			"name": "Get Authorization Code + ID Token + Access Token with PKCE (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "df1e2146-3fcc-a5a0-37b2-6c947978684c",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496180604356,
+			"name": "Update Authorization Server",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n    \"name\": \"Authorization Server\",\n    \"description\": \"Authorization Server Description\",\n    \"audiences\": [\n      \"https://api.resource.com\"\n    ]\n}",
+			"folder": "5451ac4a-2260-5fa1-60bb-e46d1464b6e4"
+		},
+		{
+			"id": "e17f699c-41d8-04ae-8fc0-bc37ac528de6",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/scopes/{{scopeId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496189093307,
+			"name": "Delete OAuth2 Scope",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "1e2d4d16-9f15-c3dd-2dd6-762bdb3623d6"
+		},
+		{
+			"id": "e2ce59c0-e700-b845-f1ca-d6ea13cecaef",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496854529019,
+			"name": "List Authorization Servers",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "5451ac4a-2260-5fa1-60bb-e46d1464b6e4"
+		},
+		{
+			"id": "e4e5400f-044c-f341-f424-8c2e871474ef",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}/rules/{{ruleId}}/lifecycle/activate",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190351542,
+			"name": "Activate Resource Access Policy Rule",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "583f3174-db92-2a6c-32cf-889397add334"
+		},
+		{
+			"id": "e4f1d118-6282-497e-68d7-6717ba6bd7d7",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496190021731,
+			"name": "Create Resource Access Policy",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n\t\"type\": \"OAUTH_AUTHORIZATION_POLICY\",\n\t\"status\": \"ACTIVE\",\n\t\"name\": \"Default Policy\",\n\t\"description\": \"Default policy description\",\n\t\"priority\": 1,\n\t\"conditions\": {\n\t\t\"clients\": {\n\t\t\t\"include\": [\n\t\t\t\t\"ALL_CLIENTS\"\n\t\t\t]\n\t\t}\n\t}\n}",
+			"folder": "b18bd826-3d43-7a67-a1ae-04a94dc9aa88"
+		},
+		{
+			"id": "e54dfdb6-341d-075e-fbbe-ba9f152eb05e",
+			"headers": "",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=code&response_mode=query&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}&code_challenge_method=S256&code_challenge={{codeChallenge}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193325110,
+			"name": "Get Authorization Code with PKCE  (Requires Inteceptor)",
+			"description": "```js\nconst base64url = require('base64url');\nvar crypto = require('crypto');\ncrypto.createHash('sha256').update('at83hsVcajT5nfc2FVnKSxI6bsuU2Tq2aoVhEFhEO1A').digest();\nvar buffer = crypto.createHash('sha256').update('at83hsVcajT5nfc2FVnKSxI6bsuU2Tq2aoVhEFhEO1A').digest();\nbase64url.encode(buffer)\n```",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "ec8b7dc7-529b-40ce-309e-0b0b1ad7f534",
+			"headers": "Accept: application/json\nAuthorization: Basic\n",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/token",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "grant_type",
+					"value": "password",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "redirect_uri",
+					"value": "{{redirectUri}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "{{username}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "{{password}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "{{scopes}}",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "{{clientId}}",
+				"password": "{{clientSecret}}",
+				"saveToRequest": true
+			},
+			"time": 1496193419844,
+			"name": "Get Access Token with Resource Owner Password Credentials",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "ecd33c0b-c9bb-a406-b67b-8c8f27e66109",
+			"name": "Introspect Token",
+			"dataMode": "urlencoded",
+			"data": [
+				{
+					"key": "token",
+					"value": "{{accessToken}}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "token_type_hint",
+					"value": "access_token",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"rawModeData": null,
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "Accept: application/json\nAuthorization: Basic\n",
+			"method": "POST",
+			"pathVariables": {},
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/introspect",
+			"preRequestScript": "",
+			"tests": null,
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "{{clientId}}",
+				"password": "{{clientSecret}}",
+				"saveToRequest": true
+			},
+			"responses": [],
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"isFromCollection": true
+		},
+		{
+			"id": "eedc9fbc-52a0-ab93-6274-81911bffd7c4",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/policies/{{policyId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496189737468,
+			"name": "Delete Resource Access Policy",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "b18bd826-3d43-7a67-a1ae-04a94dc9aa88"
+		},
+		{
+			"id": "f4cfe6af-2dc2-74c3-f059-3c217bcf11c1",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/credentials/keys/{{keyId}}",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496861360611,
+			"name": "Get Key",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "fe703113-86ad-9f7c-70ee-90a6cfe3df17",
+			"headers": "",
+			"url": "{{url}}/oauth2/{{authorizationServerId}}/v1/authorize?client_id={{clientId}}&response_type=id_token token&response_mode=fragment&scope={{scopes}}&redirect_uri={{redirectUri}}&state={{state}}&nonce={{$guid}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496193305359,
+			"name": "Get ID Token + Access Token (Requires Inteceptor)",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": []
+		},
+		{
+			"id": "fe8367a8-7baf-2158-ce24-7db8f44139a4",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"url": "{{url}}/api/v1/authorizationServers/{{authorizationServerId}}/scopes/{{scopeId}}",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496271410822,
+			"name": "Update OAuth2 Scope",
+			"description": "",
+			"collectionId": "39c483fd-fcef-c646-f07e-26ab65678b23",
+			"responses": [],
+			"rawModeData": "{\n\t\"description\": \"Drive car\",\n\t\"name\": \"car:drive\"\n}",
+			"folder": "1e2d4d16-9f15-c3dd-2dd6-762bdb3623d6"
+		}
+	]
+}

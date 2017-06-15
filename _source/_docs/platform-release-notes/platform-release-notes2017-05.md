@@ -28,7 +28,7 @@ include `ID Tokens`, `Access Tokens`, or both.
 
  * In API Access Management, where an `Access Token` contains claims that evaluate to an
  array, we did not send the claims as a JSON array and did not ensure that the values were of
- the correct types. For an example of the output format, see [JWT Payload](/docs/api/resources/oauth2.html#jwt-payload) (OKTA-113034)
+ the correct types. (OKTA-113034)
 
 ### Does Your Org Have This Change Yet?
 

@@ -1,24 +1,94 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.21
+excerpt: Summary of changes to the Okta Platform since Release 2017.23
 ---
 
-## Release 2017.22
+## Release 2017.24
 
-### Advance Notice: API Rate Limit Improvements
+### Advance Notices
+
+* [Key Rollover Change](#key-rollover-change)
+* [Data Retention Policy Changes](#data-retention-changes)
+ 
+#### Key Rollover Change
+
+Beginning in Release 2017.25, the `credentials.signing.kid` property of an app won't be available if the app doesn't support the key rollover feature.
+An app supports key rollover if the app uses one of the following signing mode types: SAML 2.0, SAML 1.1, WS-Fed, or OpenID Connect.
+
+Before this change takes effect, verify that your integration doesn't expect the `credentials.signing.kid` property
+if your app doesn't have one of the listed signing mode types. This change is expected in Release 2017.25,
+which is scheduled for preview orgs on June 21, 2017 and in production orgs on June 26, 2017. <!-- OKTA-76439 -->
+
+#### Data Retention Changes
+
+Okta is changing system log data retention. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
+
+* For orgs created before July 17th, data will be retained for 6 months.
+* For orgs created on and after July 17th, data will be retained for 3 months.
+
+The new data retention policy starts:
+
+* June 7, 2017 for existing preview orgs
+* July 17, 2017 for existing production orgs
+
+Preview and production orgs created on July 17,2017 and later will retain this log data for three months. 
+
+For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
+
+You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API. <!-- OKTA-125424 -->
+
+### Platform Enhancements
+
+* [Default Scopes for OAuth 2.0](#default-scopes-for-oauth-20)
+* [Improved UI for Creating OpenID Connect Apps](#improved-ui-for-creating-openid-connect-apps)
+* [Event Notifications for OpenID Connect Apps](#event-notifications-for-openid-connect-apps)
+* [Query String Support in IdP Redirect URLs](#query-string-support-in-idp-redirect-urls)
+* [API Rate Limit Improvements](#api-rate-limit-improvements)
+
+
+#### Default Scopes for OAuth 2.0
+
+Using either the Okta UI or API, you can configure default scopes for an OAuth 2.0 client.
+If the client omits the scope parameter in an authorization request,
+Okta returns all default scopes in the Access Token that are permitted by the access policy rule. 
+
+{% img release_notes/default-scope.png alt:"Default Scope Configuration UI" %}
+
+For more information about setting default scopes in the API, see [OAuth 2.0 API](/docs/api/resources/oauth2.html#scopes-properties).
+<!-- OKTA-122185 OKTA-122072 -->
+
+#### Improved UI for Creating OpenID Connect Apps
+
+The wizard for creating an OpenID Connect app has been improved and consolidated onto a single screen.
+
+{% img release_notes/single-oidc-screen.png alt:"New OpenID Connect Create Wizard" %}
+
+<!-- OKTA-129127 -->
+
+#### Event Notifications for OpenID Connect Apps
+
+Notifications are entered in the System Log via the Events API (`/api/v1/events`) when OpenID Connect apps are created, modified, deactivated, or deleted.
+Previously these notifications appeared only in the System Log (`/api/v1/logs`).
+
+#### Query String Support in IdP Redirect URLs
+
+Query strings are now supported in the definition of IdP Login URLs:
+ 
+* The **IDP Login URL** field in the Add/Edit Endpoint wizard.
+* The **IdP Single Sign-On URL** field for Inbound SAML. Reserved SAML parameters (SAMLRequest, RelayState, SigAlg, Signature) in a query string are ignored.<!-- OKTA-127771 -->
+
+#### API Rate Limit Improvements
 
 We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user's request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:
 
-#### Preview Orgs
+##### Preview Orgs
 
-1. We enforce new rate limits for new preview orgs. For these new orgs, the API calls exceeding the new rate limits return an HTTP 429 error.
+We enforce new rate limits for all preview orgs. API calls exceeding the new rate limits return an HTTP 429 error.
 
-2. At the end of May, we'll enforce these new rate limits for all preview orgs. Instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.
+##### Production Orgs
 
-#### Production Orgs
-
-1. As of May 8, we have enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:
+1. As of May 8, we enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:
 
     ```
     Warning: requests for url pattern <url-pattern> have reached 
@@ -28,78 +98,14 @@ We are making org-wide rate limits more granular, and treating authenticated end
 
 2. As of mid-May, we started enforcing these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.
 
-3. In early June, we'll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.
+3. We are rolling out the enforcement of these new rate limits to all orgs this week. Once your org has the new limits, you'll see HTTP 429 errors instead of rate-limit warnings in the System Log if the new limits are exceeded.
 
-For a full description of the new rate limits, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
+For a full description of the new rate limits, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 --> 
 
-<!-- ### Platform New Features -->
 
-### Platform Bugs Fixed
+### Platform Bug Fixed
 
-* OpenID Connect and OAuth 2.0 requests failed to respect default SAML IdP configuration. (OKTA-127155)
-* Using the resource owner password credentials flow for an Active Directory user sometimes resulted in a malformed response instead of an Access Token. (OKTA-121082)
-
-### Simple HAL Links Generally Available in Preview for May, 2017
-
-Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
-This feature removes the HAL links that reflect state from user objects returned in collections.
-
-Before release 2017.19, a user object returned in a collection contains some or all of the following links:
-
-```
-"_links": {
-    "suspend": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/suspend",
-      "method": "POST"
-    },
-    "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/reset_password",
-      "method": "POST"
-    },
-    "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/expire_password",
-      "method": "POST"
-    },
-    "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/forgot_password",
-      "method": "POST"
-    },
-    "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
-    },
-    "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_recovery_question",
-      "method": "POST"
-    },
-    "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/deactivate",
-      "method": "POST"
-    },
-    "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_password",
-      "method": "POST"
-    }
-}
-```
-
-Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
-As outlined in [Design Principles](/docs/api/getting_started/design_principles.html#links-in-collections):
-
-"Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by ID using the `self` link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state."
- 
-The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the `self` link is returned:
-
-```
-"_links": {
-    "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
-    }
-}
-```
- 
-As noted above, to change user state, the `self` link should be called to retrieve a user object with up-to-date links.
- 
->Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.
+* The dropdown that controls Authorization Server lifecycle operations failed to display properly if you navigated directly to a tab or refreshed a tab other than Settings. (OKTA-129014)
 
 ### Does Your Org Have This Change Yet?
 

@@ -76,7 +76,7 @@ deactivate         | Denies use of this factor for MFA
 ### Get Org Factor
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/org/factors
+{% api_operation get /api/v1/org/factors %}
 
 Fetches a factor for the specified user.
 
@@ -255,7 +255,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Activate SMS
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/org/factors/okta_sms/lifecycle/activate
+{% api_operation post /api/v1/org/factors/okta_sms/lifecycle/activate %}
 
 Allows multi-factor authentication to use an SMS factor.
 
@@ -307,7 +307,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Deactivate SMS
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/org/factors/okta_sms/lifecycle/deactivate
+{% api_operation post /api/v1/org/factors/okta_sms/lifecycle/deactivate %}
 
 Denies use of an SMS factor for multi-factor authentication.
 
@@ -359,7 +359,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Activate Okta Verify
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/org/factors/okta_otp/lifecycle/activate
+{% api_operation post /api/v1/org/factors/okta_otp/lifecycle/activate %}
 
 Allows multi-factor authentication to use Okta Verify as a factor.
 
@@ -411,7 +411,7 @@ curl -v -H "Authorization: SSWS yourtoken" \
 ### Deactivate Okta Verify
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/org/factors/okta_otp/lifecycle/deactivate
+{% api_operation post /api/v1/org/factors/okta_otp/lifecycle/deactivate %}
 
 Denies use of Okta Verify for multi-factor authentication.
 

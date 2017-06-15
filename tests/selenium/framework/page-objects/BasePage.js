@@ -85,16 +85,23 @@ class BasePage {
   // max-width: 767px -> small
   // max-width: 479px -> xSmall
   // max-width: 319px -> xxSmall
+  // setSize() calls fail on headless chrome due to chromedriver issue
   resizeMedium() {
-    browser.driver.manage().window().setSize(1060, 640);
+    if (!process.env.CHROME_HEADLESS) {
+      browser.driver.manage().window().setSize(1060, 640);
+    }
   }
 
   resizeXsmall() {
-    browser.driver.manage().window().setSize(480, 640);
+    if (!process.env.CHROME_HEADLESS) {
+      browser.driver.manage().window().setSize(480, 640);
+    }
   }
 
   resizeXLarge() {
-    browser.driver.manage().window().setSize(1560, 840);
+    if (!process.env.CHROME_HEADLESS) {
+      browser.driver.manage().window().setSize(1560, 840);
+    }
   }
 
   hasElements(elements) {

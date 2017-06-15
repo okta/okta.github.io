@@ -24,9 +24,22 @@ Once you have collected all these, start [the import process](#running-the-impor
 <a name="things-that-wont-migrate-and-known-caveats"></a>
 ## Things That Won't Migrate and Known Caveats
 
+<a name="usernames-must-be-in-email-format"></a>
 #### Usernames Must be in Email Format
 
-The Stormpath Account `username` will be imported into the Okta User Profile `login` property. However, this value must be in email format: `example@domain.xyz`. If your usernames are not in email format, the import tool will throw an error. If you do have usernames that are not in email format, you can process your export JSON to add an email domain to your usernames, or you can get in touch with us at [developers@okta.com](mailto:developers@okta.com).
+The Stormpath Account `username` will be imported into the Okta User Profile `login` property. However, this value must be in email format: `example@domain.xyz`. If an Account's `username` is not in email format, the import tool will convert it into email format by appending `@emailnotprovided.local`. For example, a Stormpath `username` value of `susan` will become `susan@emailnotprovided.local` after the import into Okta. 
+
+<a name="email-prefixes-must-be-unique"></a>
+#### Email Prefixes Must be Unique
+
+Username prefixes must be unique in order for Stormpath Accounts to be successfully imported. This is because users in Okta may sign in with either  their username prefix, or their full username (in email format). This means that from Okta's perspective `susan@example.com` and `susan` can both be used for sign in. 
+
+This means that if a Stormpath Account shares an email prefix with one or more other Accounts, these Accounts will be imported, but the import tool will also log a warning to the console. Technically both users will still be able to log in, though they would only be able to do it with their full username (for example `susan@emailnotprovided.local`). The recommended options for this situation are:
+
+- Let affected users know that they need to sign in with the email suffix, and after they sign in they should update their username to use their real email address
+- Pre-process the Stormpath Accounts to use a different email suffix of your choosing
+- Contact [developers@okta.com](mailto:developers@okta.com) to disable the requirement that usernames must be in the form of an email address.
+
 
 <a name="custom-data-for-accounts-only"></a>
 #### Custom Data For Accounts Only
@@ -176,7 +189,7 @@ The import tool works by iterating over your Stormpath data and then uses the Ok
 Stormpath Resource | Okta Equivalent
 --- | ---
 Account | [User](/docs/api/resources/users.html#user-properties)
-Application | [OAuth 2.0 Client Application](/docs/api/resources/oauth-clients.html) acting as a client for an [OAuth 2.0 Authorization Server](/docs/api/resources/oauth2.html#authorization-servers)
+Application | [OAuth 2.0 Client Application](/docs/api/resources/oauth-clients.html) acting as a client for an [OAuth 2.0 Authorization Server](/docs/api/resources/oauth2.html#authorization-operations)
 Directory (Cloud) | [Group](/docs/api/resources/groups.html)
 Directory (Social) | [Identity Provider](/docs/api/resources/idps.html) + [Group](/docs/api/resources/groups.html)
 Directory (SAML) | [Identity Provider](/docs/api/resources/idps.html)
@@ -472,7 +485,7 @@ The Profile `description` is made up of the Stormpath Organization's `nameKey` w
 Stormpath Applications have OAuth Client Applications created for them in Okta, as well as Authorization Servers.
 
 - An OAuth Client Application is created with `type` set to `web`
-- An [Authorization Server](/docs/api/resources/oauth2.html#authorization-servers) is also created
+- An [Authorization Server](/docs/api/resources/oauth2.html#authorization-operations) is also created
 - The Authorization Server and Client Application are associated with one another
 - Any relevant Okta Groups are assigned to the new OAuth Client Application
 - Access and Refresh Token TTL values are imported

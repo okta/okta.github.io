@@ -29,7 +29,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-cdb1b544ae0f29a9e4d8c0bcbe55984903ad1378a9da805143cb56984ce2fa57.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -52,7 +52,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
+            <a class="Button--green" href="https://developer.okta.com/signup/" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -67,7 +67,7 @@
               <li class="has-dropdown">
                 <a href="#">Support</a>
                 <div class="dropdown-window">
-                  <p class="stack-overflow">Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></p>
+                  <p class="devforum">Post your question on <a href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank">Okta Developer Forums</a></p>
                   <p class="email">Email us:<br>
                   <a href="mailto:developers@okta.com">developers@okta.com</a></p>
                   <p class="tel">Call us:<br>
@@ -212,9 +212,23 @@
 <p><a name="things-that-wont-migrate-and-known-caveats"></a></p>
 <h2 id="things-that-wont-migrate-and-known-caveats">Things That Won’t Migrate and Known Caveats</h2>
 
+<p><a name="usernames-must-be-in-email-format"></a></p>
 <h4 id="usernames-must-be-in-email-format">Usernames Must be in Email Format</h4>
 
-<p>The Stormpath Account <code class="highlighter-rouge">username</code> will be imported into the Okta User Profile <code class="highlighter-rouge">login</code> property. However, this value must be in email format: <code class="highlighter-rouge">example@domain.xyz</code>. If your usernames are not in email format, the import tool will throw an error. If you do have usernames that are not in email format, you can process your export JSON to add an email domain to your usernames, or you can get in touch with us at <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
+<p>The Stormpath Account <code class="highlighter-rouge">username</code> will be imported into the Okta User Profile <code class="highlighter-rouge">login</code> property. However, this value must be in email format: <code class="highlighter-rouge">example@domain.xyz</code>. If an Account’s <code class="highlighter-rouge">username</code> is not in email format, the import tool will convert it into email format by appending <code class="highlighter-rouge">@emailnotprovided.local</code>. For example, a Stormpath <code class="highlighter-rouge">username</code> value of <code class="highlighter-rouge">susan</code> will become <code class="highlighter-rouge">susan@emailnotprovided.local</code> after the import into Okta.</p>
+
+<p><a name="email-prefixes-must-be-unique"></a></p>
+<h4 id="email-prefixes-must-be-unique">Email Prefixes Must be Unique</h4>
+
+<p>Username prefixes must be unique in order for Stormpath Accounts to be successfully imported. This is because users in Okta may sign in with either  their username prefix, or their full username (in email format). This means that from Okta’s perspective <code class="highlighter-rouge">susan@example.com</code> and <code class="highlighter-rouge">susan</code> can both be used for sign in.</p>
+
+<p>This means that if a Stormpath Account shares an email prefix with one or more other Accounts, these Accounts will be imported, but the import tool will also log a warning to the console. Technically both users will still be able to log in, though they would only be able to do it with their full username (for example <code class="highlighter-rouge">susan@emailnotprovided.local</code>). The recommended options for this situation are:</p>
+
+<ul>
+  <li>Let affected users know that they need to sign in with the email suffix, and after they sign in they should update their username to use their real email address</li>
+  <li>Pre-process the Stormpath Accounts to use a different email suffix of your choosing</li>
+  <li>Contact <a href="mailto:developers@okta.com">developers@okta.com</a> to disable the requirement that usernames must be in the form of an email address.</li>
+</ul>
 
 <p><a name="custom-data-for-accounts-only"></a></p>
 <h4 id="custom-data-for-accounts-only">Custom Data For Accounts Only</h4>
@@ -443,7 +457,7 @@
     </tr>
     <tr>
       <td>Application</td>
-      <td><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Client Application</a> acting as a client for an <a href="/docs/api/resources/oauth2.html#authorization-servers">OAuth 2.0 Authorization Server</a></td>
+      <td><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Client Application</a> acting as a client for an <a href="/docs/api/resources/oauth2.html#authorization-operations">OAuth 2.0 Authorization Server</a></td>
     </tr>
     <tr>
       <td>Directory (Cloud)</td>
@@ -893,7 +907,7 @@
 
 <ul>
   <li>An OAuth Client Application is created with <code class="highlighter-rouge">type</code> set to <code class="highlighter-rouge">web</code></li>
-  <li>An <a href="/docs/api/resources/oauth2.html#authorization-servers">Authorization Server</a> is also created</li>
+  <li>An <a href="/docs/api/resources/oauth2.html#authorization-operations">Authorization Server</a> is also created</li>
   <li>The Authorization Server and Client Application are associated with one another</li>
   <li>Any relevant Okta Groups are assigned to the new OAuth Client Application</li>
   <li>Access and Refresh Token TTL values are imported</li>
@@ -941,7 +955,7 @@
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="https://okta.com/developer/contact/">Contact Sales</a>
+            <a href="/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>
@@ -955,7 +969,7 @@
             <a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a>
           </li>
           <li>
-            <a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a>
+            <a class="icon" href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank"><i class="fa fa-comments"></i></a>
           </li>
           <li>
             <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>

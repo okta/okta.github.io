@@ -19,7 +19,7 @@ Explore the Users API: [![Run in Postman](https://run.pstmn.io/button.svg)](http
 ### Create User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users</span>
+{% api_operation post /api/v1/users %}
 
 Creates a new user in your Okta organization with or without credentials.
 
@@ -801,7 +801,7 @@ curl -v -X GET \
 ### List Users
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users</span>
+{% api_operation get /api/v1/users %}
 
 Lists users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria.
 
@@ -1329,7 +1329,7 @@ curl -v -X GET \
 
 > Use the `POST` method to make a partial update and the `PUT` method to delete unspecified properties.
 
-<span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/users/*:id*</span>
+{% api_operation put /api/v1/users/*:id* %}
 
 Update a user's profile and/or credentials using strict-update semantics.
 
@@ -1430,7 +1430,7 @@ curl -v -X PUT \
 }
 ~~~
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*</span>
+{% api_operation post /api/v1/users/*:id* %}
 
 Update a user's profile or credentials with partial update semantics.
 
@@ -1686,7 +1686,7 @@ curl -v -X POST \
 ### Get Assigned App Links
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:id*/appLinks</span><span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
+{% api_operation get /api/v1/users/*:id*/appLinks %} {% api_cors %}
 
 Fetches appLinks for all direct or indirect (via group membership) assigned applications.
 
@@ -1772,7 +1772,7 @@ curl -v -X GET \
 ### Get Member Groups
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/*:id*/groups</span><span class="api-label api-label-cors pull-right"><i class="fa fa-cloud-download"></i> CORS</span>
+{% api_operation get /api/v1/users/*:id*/groups %} {% api_cors %}
 
 Fetches the groups of which the user is a member.
 
@@ -1828,7 +1828,7 @@ Lifecycle operations are non-idempotent operations that initiate a state transit
 ### Activate User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/activate</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/activate %}
 
 Activates a user.  This operation can only be performed on users with a `STAGED` status.  Activation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of `ACTIVE` during activation to indicate that the user hasn't completed the asynchronous operation.  The user will have a status of `ACTIVE` when the activation process is complete.
 
@@ -1880,7 +1880,7 @@ curl -v -X POST \
 ### Reactivate User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/reactivate</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/reactivate %}
 
 Reactivates a user.  This operation can only be performed on users with a `PROVISIONED` status.  This operation restarts the activation workflow if for some reason the user activation was not completed when using the activationToken from [Activate User](#activate-user).
 
@@ -1946,7 +1946,7 @@ Content-Type: application/json
 ### Deactivate User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/deactivate</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/deactivate %}
 
 Deactivates a user.  This operation can only be performed on users that do not have a `DEPROVISIONED` status.  Deactivation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of `DEPROVISIONED` during deactivation to indicate that the user hasn't completed the asynchronous operation.  The user will have a status of `DEPROVISIONED` when the deactivation process is complete.
 
@@ -1986,7 +1986,7 @@ Content-Type: application/json
 ### Suspend User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/suspend</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/suspend %}
 
 Suspends a user.  This operation can only be performed on users with an `ACTIVE` status.  The user will have a status of `SUSPENDED` when the process is complete.
 
@@ -2030,7 +2030,7 @@ Content-Type: application/json
 ### Unsuspend User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/unsuspend</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/unsuspend %}
 
 Unsuspends a user and returns them to the `ACTIVE` state.  This operation can only be performed on users that have a `SUSPENDED` status.
 
@@ -2074,7 +2074,7 @@ Content-Type: application/json
 ### Delete User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">DELETE</span> /api/v1/users/*:id*</span>
+{% api_operation delete /api/v1/users/*:id* %}
 
 Deletes a user permanently.  This operation can only be performed on users that have a `DEPROVISIONED` status.  **This action cannot be recovered!**
 
@@ -2119,7 +2119,7 @@ Content-Type: application/json
 ### Unlock User
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/unlock</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/unlock %}
 
 Unlocks a user with a `LOCKED_OUT` status and returns them to `ACTIVE` status.  Users will be able to login with their current password.
 
@@ -2159,7 +2159,7 @@ Content-Type: application/json
 ### Reset Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/reset_password</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/reset_password %}
 
 Generates a one-time token (OTT) that can be used to reset a user's password.  The OTT link can be automatically emailed to the user or returned to the API caller and distributed using a custom flow.
 
@@ -2235,7 +2235,7 @@ curl -v -X POST \
 ### Expire Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/expire_password</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/expire_password %}
 
 This operation transitions the user to the status of `PASSWORD_EXPIRED` so that the user is required to change their password at their next login.
 If `tempPassword` is passed, the user's password is reset to a temporary password that is returned, and then the temporary password is expired.
@@ -2333,7 +2333,7 @@ curl -v -X POST \
 ### Reset Factors
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/lifecycle/reset_factors</span>
+{% api_operation post /api/v1/users/*:id*/lifecycle/reset_factors %}
 
 This operation resets all factors for the specified user. All MFA factor enrollments returned to the unenrolled state. The user's status remains ACTIVE. This link is present only if the user is currently enrolled in one or more MFA factors.
 
@@ -2373,7 +2373,7 @@ Content-Type: application/json
 ### Clear User Sessions
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/*:uid*/sessions
+{% api_operation delete /api/v1/users/*:uid*/sessions %}
 
 Removes all active identity provider sessions. This forces the user to authenticate on the next operation. Optionally revokes OpenID Connect and OAuth refresh and access tokens issued to the user.
 
@@ -2415,7 +2415,7 @@ curl -v -X DELETE \
 ### Forgot Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/credentials/forgot_password</span>
+{% api_operation post /api/v1/users/*:id*/credentials/forgot_password %}
 
 Generates a one-time token (OTT) that can be used to reset a user's password.  The user will be required to validate their security question's answer when visiting the reset link.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an `ACTIVE` status.
 
@@ -2465,7 +2465,7 @@ curl -v -X POST \
 }
 ~~~
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/credentials/forgot_password</span>
+{% api_operation post /api/v1/users/*:id*/credentials/forgot_password %}
 
 Sets a new password for a user by validating the user's answer to their current recovery question.  This operation can only be performed on users with a valid [recovery question credential](#recovery-question-object) and have an `ACTIVE` status.
 
@@ -2522,7 +2522,7 @@ curl -v -X POST \
 ### Change Password
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/credentials/change_password</span>
+{% api_operation post /api/v1/users/*:id*/credentials/change_password %}
 
 Changes a user's password by validating the user's current password.  This operation can only be performed on users in `STAGED`, `ACTIVE`, `PASSWORD_EXPIRED`, or `RECOVERY` status that have a valid [password credential](#password-object)
 
@@ -2577,7 +2577,7 @@ curl -v -X POST \
 ### Change Recovery Question
 {:.api .api-operation}
 
-<span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/*:id*/credentials/change_recovery_question</span>
+{% api_operation post /api/v1/users/*:id*/credentials/change_recovery_question %}
 
 Changes a user's recovery question & answer credential by validating the user's current password.  This operation can only be performed on users in **STAGED**, **ACTIVE** or **RECOVERY** `status` that have a valid [password credential](#password-object)
 
