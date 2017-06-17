@@ -1702,8 +1702,8 @@ curl -v -X GET \
         "template": "${fn:substringBefore(source.login, \"@\")}",
         "type": "BUILT_IN"
       },
-       "signing": {
-      "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
+      "signing": {
+        "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
       }
     },
     "settings": {
@@ -4563,6 +4563,8 @@ Determines the [key](#application-key-credential-model) used for signing asserti
 |------------+----------------------------------------------------------------------------------+----------+----------|
 
 > You must enable the key rollover feature to view `kid`. Key rollover is an {% api_lifecycle ea %} feature.
+
+> Only apps with `SAML_2_0`, `SAML_1_1`, `WS_FEDERATION` or `OPENID_CONNECT` `signOnMode` support the key rollover feature.
 
 ~~~json
 {
