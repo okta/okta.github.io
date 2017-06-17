@@ -8,20 +8,640 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Build a Microservices Architecture for Microbrews with Spring Boot</title>
+        <description>&lt;p&gt;Adopting a microservice architecture provides unique opportunities to add failover and resiliency to your systems, so 
+your components can handle load spikes and errors gracefully. Microservices make change less expensive too. It can also 
+be a good idea when you have a large team working on a single product. Your project can likely be broken up into components 
+that can function independently of one another. Once components can function independently, they can be built, tested, 
+and deployed independently. This gives an organization and its teams the agility to develop and deploy very quickly.&lt;/p&gt;
+
+&lt;p&gt;In a &lt;a href=&quot;/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;previous article&lt;/a&gt;, I showed you how to build 
+a Spring Boot API with an Angular client. I then showed you how to 
+&lt;a href=&quot;/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;&gt;convert the Angular app into a progressive web application that works offline&lt;/a&gt;. 
+The Angular PWA is a good example of a resilient application because it still works when connectivity fails. Did you know 
+you can develop similar resiliency in your API with Spring Boot, Spring Cloud, and a microservices architecture? This 
+article shows you how to convert the previously created Spring Boot application to use microservices. You’ll create a 
+beer catalog service, an edge service (for filter and displaying good beers), and a Eureka service that registers the 
+services and allows them to communicate with one another.&lt;/p&gt;
+
+&lt;p&gt;Before we dive into the code tutorial, I’d like to talk a bit about microservices, their history, and why you should 
+(or should not) consider a microservices architecture for your next project.&lt;/p&gt;
+
+&lt;h2 id=&quot;history-of-microservices&quot;&gt;History of Microservices&lt;/h2&gt;
+
+&lt;p&gt;According to &lt;a href=&quot;https://en.wikipedia.org/wiki/Microservices#History&quot;&gt;Wikipedia&lt;/a&gt;, the term “microservice” was first used as 
+a common architecture style at a workshop of software architects near Venice in May 2011. In May 2012, the same group 
+decided “microservices” was a more appropriate name.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.linkedin.com/in/adriancockcroft&quot;&gt;Adrian Cockcroft&lt;/a&gt;, who was at Netflix at the time, described this architecture 
+as “fine-grained SOA”. Martin Fowler and James Lewis wrote an article titled simply 
+&lt;a href=&quot;http://martinfowler.com/articles/microservices.html&quot;&gt;Microservices&lt;/a&gt; on March 25, 2014. Years later, this is still 
+considered the definitive article for microservices.&lt;/p&gt;
+
+&lt;h3 id=&quot;organizations-and-conways-law&quot;&gt;Organizations and Conway’s Law&lt;/h3&gt;
+
+&lt;p&gt;Technology has traditionally been organized into technology layers: UI team, database team, operations team. When teams 
+are separated along these lines, even simple changes can lead to a cross-team project sucking down huge chunks of time 
+and budget.&lt;/p&gt;
+
+&lt;p&gt;A smart team will optimize around this and choose the lesser of two evils; forcing the logic into whichever application 
+they have access to. This is an example of &lt;a href=&quot;http://www.melconway.com/Home/Committees_Paper.html&quot;&gt;Conway’s Law&lt;/a&gt; in action.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/conways-law-56c3557dd259e3eca55e0d0fc700df235fbaacf9af9dc53dc00af78dd625d951.png&quot; alt=&quot;Conway's Law&quot; width=&quot;560&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the 
+organization’s communication structure.&lt;/p&gt;
+
+  &lt;p&gt;— Melvyn Conway, 1967&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;microservices-architecture-philosophy&quot;&gt;Microservices Architecture Philosophy&lt;/h3&gt;
+
+&lt;p&gt;The philosophy of a microservices architecture is essentially equal to the Unix philosophy of “Do one thing and do it well”. 
+The characteristics of a microservices architecture are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Componentization via services&lt;/li&gt;
+  &lt;li&gt;Organized around business capabilities&lt;/li&gt;
+  &lt;li&gt;Products not projects&lt;/li&gt;
+  &lt;li&gt;Smart endpoints and dumb pipes&lt;/li&gt;
+  &lt;li&gt;Decentralized governance&lt;/li&gt;
+  &lt;li&gt;Decentralized data management&lt;/li&gt;
+  &lt;li&gt;Infrastructure automation&lt;/li&gt;
+  &lt;li&gt;Design for failure&lt;/li&gt;
+  &lt;li&gt;Evolutionary design&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;why-microservices&quot;&gt;Why Microservices?&lt;/h2&gt;
+
+&lt;p&gt;For most developers, dev teams, and organizations, it’s easier to work on small “do one thing well” services. No single 
+program represents the whole application, so services can change frameworks (or even languages) without a massive cost. 
+As long as the services use a language agnostic protocol (HTTP or lightweight messaging), applications can be written 
+in several different platforms - Java, Ruby, Node, Go, .NET, etc. - without issue.&lt;/p&gt;
+
+&lt;p&gt;Platform-as-a-Service (PaaS) providers and containers have made it easy to deploy microservices. All the technologies 
+needed to support a monolith (e.g. load balancing, discovery, process monitoring) are provided by the PaaS, outside of 
+your container. Deployment effort comes close to zero.&lt;/p&gt;
+
+&lt;h3 id=&quot;are-microservices-the-future&quot;&gt;Are Microservices the Future?&lt;/h3&gt;
+
+&lt;p&gt;Architecture decisions, like adopting microservices, are usually only evident several years after you make them. 
+Microservices have been successful at companies like LinkedIn, Twitter, Facebook, Amazon, and Netflix. But that doesn’t 
+mean they’ll be successful for your organization. Component boundaries are hard to define. If you’re not able to create 
+your components cleanly, you’re just shifting complexity from inside a component to the connections between the components. 
+Also, team capabilities are something to consider. A weak team will always create a weak system.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You shouldn’t start with a microservices architecture. Instead, begin with a monolith, keep it modular, and split it 
+into microservices once the monolith becomes a problem.&lt;/p&gt;
+
+  &lt;p&gt;— Martin Fowler&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;build-a-microservices-architecture-with-spring-boot-spring-cloud-and-netflix-eureka&quot;&gt;Build a Microservices Architecture with Spring Boot, Spring Cloud, and Netflix Eureka&lt;/h2&gt;
+
+&lt;p&gt;Netflix Eureka is a REST-based service that is primarily used in the AWS cloud for locating services for the purpose of 
+load balancing and failover of middle-tier servers.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://projects.spring.io/spring-cloud/&quot;&gt;Spring Cloud&lt;/a&gt; is a developer’s dream when it comes to implementing and 
+deploying a microservices architecture.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Spring Cloud provides tools for developers to quickly build some of the common patterns in distributed systems 
+(e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, etc.). 
+Coordination of distributed systems leads to boilerplate patterns. Using Spring Cloud, developers can quickly stand up 
+services and applications that implement those patterns. They will work well in any distributed environment, including 
+the developer’s own laptop, bare metal data centers, and managed platforms such as Cloud Foundry.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cloud.spring.io/spring-cloud-netflix/&quot;&gt;Spring Cloud Netflix&lt;/a&gt; provides Netflix OSS integrations for Spring Boot 
+applications. Patterns provided include Service Discovery (Eureka), Circuit Breaker (Hystrix), Intelligent Routing (Zuul) 
+and Client Side Load Balancing (Ribbon).&lt;/p&gt;
+
+&lt;p&gt;To learn more about service discovery and resolution with Eureka, watch Josh Long’s 
+&lt;a href=&quot;https://spring.io/blog/2015/01/20/microservice-registration-and-discovery-with-spring-cloud-and-netflix-s-eureka&quot;&gt;Microservice Registration and Discovery with Spring Cloud and Netflix’s Eureka&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-a-eureka-service&quot;&gt;Create a Eureka Service&lt;/h3&gt;
+
+&lt;p&gt;To begin, create a &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-boot-microservices-example&lt;/code&gt; directory. Navigate to &lt;a href=&quot;https://start.spring.io&quot;&gt;start.spring.io&lt;/a&gt;. 
+Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;eureka-service&lt;/code&gt; as an artifact name and select &lt;code class=&quot;highlighter-rouge&quot;&gt;Eureka Server&lt;/code&gt; as a dependency.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/eureka-service-a4a7139d34d39919709bfdbf50bd2d1f173282aa29061c9f3bf06fcd79119e2b.png&quot; alt=&quot;Eureka Server&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the &lt;strong&gt;Generate Project&lt;/strong&gt; button and expand &lt;code class=&quot;highlighter-rouge&quot;&gt;eureka-service.zip&lt;/code&gt; into the &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-boot-microservices-example&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;src/main/resources/application.properties&lt;/code&gt; to add a port number and disable registration.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server.port=8761
+eureka.client.register-with-eureka=false
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;src/main/java/com/example/EurekaServiceApplication.java&lt;/code&gt; and add &lt;code class=&quot;highlighter-rouge&quot;&gt;@EnableEurekaServer&lt;/code&gt; above &lt;code class=&quot;highlighter-rouge&quot;&gt;@SpringBootApplication&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.netflix.eureka.server.EnableEurekaServer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@EnableEurekaServer&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This annotation, and the aforementioned properties, configures a registry that other applications can talk to.&lt;/p&gt;
+
+&lt;p&gt;Start the application from the command line using:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./mvnw spring-boot:run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Or if you’re using Windows:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mvnw.bat spring-boot:run
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After it starts, you should be able to open &lt;a href=&quot;http://localhost:8761&quot;&gt;http://localhost:8761&lt;/a&gt; and see there are no services available.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/eureka-service-ui-4227ed9e91b45dffccc3c4820a31932d68d1d503a8f16e06f412796ac2852615.png&quot; alt=&quot;Eureka Server&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;create-a-beer-catalog-service&quot;&gt;Create a Beer Catalog Service&lt;/h3&gt;
+
+&lt;p&gt;Refresh &lt;a href=&quot;https://start.spring.io&quot;&gt;start.spring.io&lt;/a&gt; to start creating a new project. Use &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service&lt;/code&gt; for the 
+artifact name and add the following dependencies:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Actuator: features to help you monitor and manage your application&lt;/li&gt;
+  &lt;li&gt;Eureka Discovery: for service registration&lt;/li&gt;
+  &lt;li&gt;JPA: to save/retrieve data&lt;/li&gt;
+  &lt;li&gt;H2: an in-memory database&lt;/li&gt;
+  &lt;li&gt;Rest Repositories: to expose JPA repositories as REST endpoints&lt;/li&gt;
+  &lt;li&gt;Web: Spring MVC and embedded Tomcat&lt;/li&gt;
+  &lt;li&gt;DevTools: to auto-reload the application when files change&lt;/li&gt;
+  &lt;li&gt;Lombok: to reduce boilerplate code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/beer-catalog-service-c6d487b9ff257b82a5e8683e4400b0b577653c013a1648b7007db2fc12095e4e.png&quot; alt=&quot;Beer Catalog Service&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the &lt;strong&gt;Generate Project&lt;/strong&gt; button and expand &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service.zip&lt;/code&gt; into &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-boot-microservices-example&lt;/code&gt; and 
+open the project in your favorite IDE. I recommend &lt;a href=&quot;https://www.jetbrains.com/idea/&quot;&gt;IntelliJ IDEA&lt;/a&gt; because it’s great for 
+Java and web development.&lt;/p&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;Beer&lt;/code&gt; entity, a &lt;code class=&quot;highlighter-rouge&quot;&gt;JpaRepository&lt;/code&gt; for it, and a &lt;code class=&quot;highlighter-rouge&quot;&gt;CommandLineRunner&lt;/code&gt; to populate the database with default data. 
+You can add this code to &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerCatalogServiceApplication.java&lt;/code&gt;, or create separate files for each class. The code below 
+assumes you’re putting all classes in the same file.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Data&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@AllArgsConstructor&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@NoArgsConstructor&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ToString&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Entity&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Beer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Id&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@GeneratedValue&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@RepositoryRestResource&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeerRepository&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JpaRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeerInitializer&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CommandLineRunner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeerRepository&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beerRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;BeerInitializer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BeerRepository&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beerRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;beerRepository&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beerRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kentucky Brunch Brand Stout&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Good Morning&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Very Hazy&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;King Julius&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;&quot;Budweiser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Coors Light&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;PBR&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beerRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)));&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;beerRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you’re using an editor that doesn’t auto-import classes, here’s the list of imports needed at the top of &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerCatalogServiceApplication.java&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.AllArgsConstructor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.Data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.NoArgsConstructor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.ToString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.CommandLineRunner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.boot.autoconfigure.SpringBootApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.client.discovery.EnableDiscoveryClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.data.jpa.repository.JpaRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.data.rest.core.annotation.RepositoryRestResource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Entity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.GeneratedValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.persistence.Id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.stream.Stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Add an application name in &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service/src/main/resources/application.properties&lt;/code&gt; to display in the Eureka 
+service, and set the port to 8080.&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;server.port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8080&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.application.name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;beer-catalog-service&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Start the beer-catalog-service with Maven (&lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt;) or your IDE.&lt;/p&gt;
+
+&lt;p&gt;At this point, you should be able to use &lt;a href=&quot;https://httpie.org/&quot;&gt;HTTPie&lt;/a&gt; to see the list of beers from the catalog service.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http localhost:8080/beers
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/httpie-beers-55c9dd1ccc635e94d87126b68e1c6c7d2842922bada596895d6366b372b1af77.png&quot; alt=&quot;HTTPie Beers&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;However, if you open the Eureka Service at &lt;a href=&quot;http://localhost:8761&quot;&gt;http://localhost:8761&lt;/a&gt;, you will not see the service registered. To register 
+the beer-catalog-service, you need to add &lt;code class=&quot;highlighter-rouge&quot;&gt;@EnableDiscoveryClient&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerCatalogServiceApplication.java&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.client.discovery.EnableDiscoveryClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@EnableDiscoveryClient&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeerCatalogServiceApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BeerCatalogServiceApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Re-compile this class, watch devtools restart your application, and return to &lt;a href=&quot;http://localhost:8761&quot;&gt;http://localhost:8761&lt;/a&gt;. If you’re not 
+using an IDE, it might be easiest to cancel and restart &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt;. Now the service should show up.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/eureka-instances-registered-bec9bf9b85ba26b71cc28298fe1965a17bd615e5b78977ee435d36e3d89172a7.png&quot; alt=&quot;Eureka instances registered&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;intellij-auto-compile&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div style=&quot;padding: 12px 12px 2px 25px; border: 1px solid silver; border-left: 5px solid #ddd&quot;&gt;
+&lt;strong&gt;Compile on Save in IntelliJ&lt;/strong&gt;&lt;br /&gt;
+
+&lt;p&gt;By default IntelliJ IDEA does not automatically compile files when the application is running. 
+To enable the &quot;Compile on save&quot; feature:&lt;/p&gt;
+
+&lt;ul&gt;       
+    &lt;li&gt;Go to &lt;strong&gt;Preferences &amp;gt; Build, Execution, Deployment -&amp;gt; Compiler&lt;/strong&gt; and enable &quot;Build project automatically&quot;&lt;/li&gt;
+    &lt;li&gt;Open the Action window:
+        &lt;ul&gt;
+            &lt;li&gt;Linux: CTRL+SHIFT+A&lt;/li&gt;
+            &lt;li&gt;Mac: SHIFT+COMMAND+A&lt;/li&gt;
+            &lt;li&gt;Windows: CTRL+ALT+SHIFT+/&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Enter &lt;strong&gt;Registry...&lt;/strong&gt; and enable &lt;code&gt;compiler.automake.allow.when.app.running&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+
+&lt;h3 id=&quot;create-an-edge-service&quot;&gt;Create an Edge Service&lt;/h3&gt;
+
+&lt;p&gt;The edge service will be similar to the standalone beer service created in 
+&lt;a href=&quot;/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;Bootiful Development with Spring Boot and Angular&lt;/a&gt;. 
+However, it will have fallback capabilities which prevent the client from receiving an HTTP error when the service is 
+not available.&lt;/p&gt;
+
+&lt;p&gt;Navigate to &lt;a href=&quot;https://start.spring.io&quot;&gt;start.spring.io&lt;/a&gt; and create an “edge-service” application with the following dependencies:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Eureka Discovery: for service registration&lt;/li&gt;
+  &lt;li&gt;Feign: a declarative web service client&lt;/li&gt;
+  &lt;li&gt;Zuul: provides intelligent routing&lt;/li&gt;
+  &lt;li&gt;Rest Repositories: to expose JPA repositories as REST endpoints&lt;/li&gt;
+  &lt;li&gt;Web: Spring MVC and embedded Tomcat&lt;/li&gt;
+  &lt;li&gt;Hystrix: a circuit breaker to stop cascading failure and enable resilience&lt;/li&gt;
+  &lt;li&gt;Lombok: to reduce boilerplate code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/edge-service-c7e8714c119427b1c95b0264182bf4b964d8b023b49f5bd008f1e6a3086c79c0.png&quot; alt=&quot;Edge Service&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click the &lt;strong&gt;Generate Project&lt;/strong&gt; button and expand &lt;code class=&quot;highlighter-rouge&quot;&gt;edge-service.zip&lt;/code&gt; into &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-boot-microservices-example&lt;/code&gt; and open 
+the project in your favorite IDE.&lt;/p&gt;
+
+&lt;p&gt;Since the &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service&lt;/code&gt; is running on port 8080, you’ll need to configure this application to run on a different 
+port. Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;edge-service/src/main/resources/application.properties&lt;/code&gt; to set the port to 8081 and set an application name.&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;server.port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8081&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;spring.application.name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;edge-service&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To enable Feign, Hystrix, and registration with the Eureka server, add the appropriate annotations to 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EdgeServiceApplication.java&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.client.discovery.EnableDiscoveryClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.netflix.feign.EnableFeignClients&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.cloud.netflix.zuul.EnableZuulProxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@EnableFeignClients&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableCircuitBreaker&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableDiscoveryClient&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableZuulProxy&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EdgeServiceApplication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EdgeServiceApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;Beer&lt;/code&gt; DTO (Data Transfer Object) in this same file. Lombok’s 
+&lt;a href=&quot;https://projectlombok.org/features/Data.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@Data&lt;/code&gt;&lt;/a&gt; will generate a &lt;code class=&quot;highlighter-rouge&quot;&gt;toString()&lt;/code&gt; methods, getters, setters, and 
+appropriate constructors.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Data&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Beer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerClient&lt;/code&gt; that uses Feign to talk to the &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@FeignClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;beer-catalog-service&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BeerClient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/beers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;readBeers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;RestController&lt;/code&gt; that filters out less-than-great beers and exposes a &lt;code class=&quot;highlighter-rouge&quot;&gt;/good-beers&lt;/code&gt; endpoint.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; To get &lt;code class=&quot;highlighter-rouge&quot;&gt;beer.getName()&lt;/code&gt; to work in your IDE, you may need to install the Lombok plugin. In Intellij, you can 
+install it by going to Preferences -&amp;gt; Plugins -&amp;gt; Browse Plugins. Search for “lombok plugin” and click to install it. 
+Restart Intellij for the changes to take effect.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GoodBeerApiAdapterRestController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeerClient&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beerClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GoodBeerApiAdapterRestController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BeerClient&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beerClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;beerClient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beerClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/good-beers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;goodBeers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beerClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readBeers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getContent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isGreat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;collect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collectors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isGreat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Budweiser&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Coors Light&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;PBR&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Start the &lt;code class=&quot;highlighter-rouge&quot;&gt;edge-service&lt;/code&gt; application with Maven or your IDE and verify it registers successfully with the Eureka server.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/edge-service-registered-95cc2264a08cfce06dc2e700178c2b54885d59b7f9966c8a6de67ec72a65de56.png&quot; alt=&quot;Edge Service Registered&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You should be able to invoke the &lt;code class=&quot;highlighter-rouge&quot;&gt;/good-beers&lt;/code&gt; endpoint as well.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;http localhost:8081/good-beers
+HTTP/1.1 200
+Content-Type: application/json;charset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;UTF-8
+Date: Tue, 25 Apr 2017 17:37:50 GMT
+Transfer-Encoding: chunked
+X-Application-Context: edge-service:8081
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Kentucky Brunch Brand Stout&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Good Morning&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Very Hazy&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;King Julius&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This is cool, but if you shut down the &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service&lt;/code&gt; application, you’ll get a 500 internal server error.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;http localhost:8081/good-beers
+HTTP/1.1 500
+Connection: close
+Content-Type: application/json;charset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;UTF-8
+Date: Tue, 25 Apr 2017 17:40:32 GMT
+Transfer-Encoding: chunked
+X-Application-Context: edge-service:8081
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Internal Server Error&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;exception&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;java.lang.RuntimeException&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;message&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;com.netflix.client.ClientException: Load balancer does not have available server for client: beer-catalog-service&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/good-beers&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;status&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;timestamp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1493142032310&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To fix this, you can use Hystrix to create a fallback method and tell the &lt;code class=&quot;highlighter-rouge&quot;&gt;goodBeers()&lt;/code&gt; method to use it.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fallback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@HystrixCommand&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fallbackMethod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fallback&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/good-beers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;goodBeers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt; 
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Restart the &lt;code class=&quot;highlighter-rouge&quot;&gt;edge-service&lt;/code&gt; and you should see an empty list returned.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;http localhost:8081/good-beers
+HTTP/1.1 200
+Content-Type: application/json;charset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;UTF-8
+Date: Tue, 25 Apr 2017 17:44:18 GMT
+Transfer-Encoding: chunked
+X-Application-Context: edge-service:8081
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Start the &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service&lt;/code&gt; again and this list should eventually return the full list of good beer names.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-an-angular-pwa-client&quot;&gt;Add an Angular PWA Client&lt;/h3&gt;
+
+&lt;p&gt;You can copy the Angular PWA client I created in a &lt;a href=&quot;/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;&gt;previous tutorial&lt;/a&gt; and install its dependencies.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone git@github.com:oktadeveloper/spring-boot-angular-pwa-example.git
+cp -r spring-boot-angular-pwa-example/client ~/spring-boot-microservices-example/.
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/spring-boot-microservices-example/client
+npm install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then modify the &lt;code class=&quot;highlighter-rouge&quot;&gt;BeerService&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;client/src/app/shared/beer/beer.service.ts&lt;/code&gt; to &lt;strong&gt;use port 8081&lt;/strong&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;getAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://localhost:8081/good-beers'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;GoodBeerApiAdapterRestController&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;EdgeServiceApplication.java&lt;/code&gt; to allow cross-origin requests from any client.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/good-beers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@CrossOrigin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;origins&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Beer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;goodBeers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Restart the &lt;code class=&quot;highlighter-rouge&quot;&gt;edge-service&lt;/code&gt; and start the Angular client by running &lt;code class=&quot;highlighter-rouge&quot;&gt;npm start&lt;/code&gt; in the client directory.&lt;/p&gt;
+
+&lt;p&gt;Open &lt;a href=&quot;http://localhost:4200&quot;&gt;http://localhost:4200&lt;/a&gt; in your browser and verify that network calls to &lt;code class=&quot;highlighter-rouge&quot;&gt;/good-beers&lt;/code&gt; go over port &lt;code class=&quot;highlighter-rouge&quot;&gt;8081&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-spring-boot/angular-pwa-800a8d50d995e9d877af0410d8bfb997ed8834ad035278ab6373ea3f10b94c6d.png&quot; alt=&quot;Angular PWA Client&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;deploy-to-cloud-foundry&quot;&gt;Deploy to Cloud Foundry&lt;/h3&gt;
+
+&lt;p&gt;In order to deploy the &lt;code class=&quot;highlighter-rouge&quot;&gt;edge-service&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service&lt;/code&gt; to Cloud Foundry, you need to add configuration files 
+so they work with Cloud Foundry’s Eureka service.&lt;/p&gt;
+
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;edge-service/src/main/resources/application-cloud.properties&lt;/code&gt; and populate it with the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;eureka.instance.hostname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${vcap.application.uris[0]:localhost}&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.instance.nonSecurePort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.instance.metadataMap.instanceId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.instance.leaseRenewalIntervalInSeconds&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;5&lt;/span&gt;
+
+&lt;span class=&quot;py&quot;&gt;eureka.client.region&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;default&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.client.registryFetchIntervalSeconds&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.client.serviceUrl.defaultZone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${vcap.services.pwa-eureka-service.credentials.uri}/eureka/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service/src/main/resources/application-cloud.properties&lt;/code&gt; and populate it with similar properties.&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;eureka.instance.hostname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${vcap.application.uris[0]:localhost}&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.instance.nonSecurePort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.instance.metadataMap.instanceId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.instance.leaseRenewalIntervalInSeconds&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;5&lt;/span&gt;
+
+&lt;span class=&quot;py&quot;&gt;eureka.client.region&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;default&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.client.registryFetchIntervalSeconds&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;eureka.client.serviceUrl.defaultZone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;${vcap.services.pwa-eureka-service.credentials.uri}/eureka/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In the properties above, &lt;code class=&quot;highlighter-rouge&quot;&gt;pwa-eureka-service&lt;/code&gt; is the name you’ll give to the Eureka service when you deploy it to 
+Cloud Foundry.&lt;/p&gt;
+
+&lt;p&gt;To deploy it on Cloud Foundry with &lt;a href=&quot;http://run.pivotal.io/&quot;&gt;Pivotal Web Services&lt;/a&gt;, you’ll need to create an account, 
+download/install the &lt;a href=&quot;https://github.com/cloudfoundry/cli#downloads&quot;&gt;Cloud Foundry CLI&lt;/a&gt;, and sign-in 
+(using &lt;code class=&quot;highlighter-rouge&quot;&gt;cf login -a api.run.pivotal.io&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;There are quite a few steps involved to deploy all the services and the Angular client for production. For that reason, 
+I wrote a &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-microservices-example/blob/master/deploy.sh&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;deploy.sh&lt;/code&gt;&lt;/a&gt; script 
+that automates everything. Note that it uses a 
+&lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-microservices-example/blob/master/sw.py&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sw.py&lt;/code&gt;&lt;/a&gt; Python script to change 
+the names of Angular’s generated JavaScript files.&lt;/p&gt;
+
+&lt;h2 id=&quot;when-to-use-microservices&quot;&gt;When to Use Microservices&lt;/h2&gt;
+
+&lt;p&gt;Building a microservices architecture is something you should consider when you’re having difficulty scaling development 
+in a large team. From a development standpoint, moving to microservices will not reduce complexity, but will likely 
+increase it you move to a distributed system. Automation and orchestration are key for deployment. You should make sure 
+to define your exit criteria (e.g. maximum time for a request to execute) before implementing your microservices 
+infrastructure. You’re likely going to have to custom build some things, so be prepared for that. Trial a few different 
+platforms and then pick the one that meets your criteria and is the easiest to develop with. Don’t develop half of your 
+system on one platform and then try moving to another. Another tip is to make sure and record the request ID in all 
+logging events for traceability.&lt;/p&gt;
+
+&lt;p&gt;If you have fewer than 20 developers, start with a monolith, but build in async messaging as soon as possible. Use it 
+for things like mail, notifications, logging, and archiving. Debugging, deployment, and logging are much easier with a 
+monolith because everything is contained in one application.&lt;/p&gt;
+
+&lt;p&gt;Also, consider using async messaging or other non-blocking communication methods with automatic back pressure. HTTP is a 
+synchronous protocol and can be a limiting factor in high-traffic systems.&lt;/p&gt;
+
+&lt;h2 id=&quot;learn-more-about-microservice-architectures&quot;&gt;Learn More about Microservice Architectures&lt;/h2&gt;
+
+&lt;p&gt;Spring Boot isn’t the only framework to implement embedded servlet containers or make it easy to develop microservices. 
+In Javaland, there’s &lt;a href=&quot;http://www.dropwizard.io/&quot;&gt;Dropwizard&lt;/a&gt;, &lt;a href=&quot;https://microprofile.io/&quot;&gt;MicroProfile&lt;/a&gt; for Java EE, 
+&lt;a href=&quot;https://www.lightbend.com/platform/development/lagom-framework&quot;&gt;Lagom&lt;/a&gt;, &lt;a href=&quot;http://vertx.io/&quot;&gt;Vert.x&lt;/a&gt;, and 
+&lt;a href=&quot;http://www.tomitribe.com/products/&quot;&gt;Tribestream&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can find the source code for this article’s applications on GitHub at &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-microservices-example&quot;&gt;https://github.com/oktadeveloper/spring-boot-microservices-example&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can also watch a video of me and &lt;a href=&quot;https://twitter.com/starbuxman&quot;&gt;Josh Long&lt;/a&gt; developing these applications in a YouTube recording of our Cloud Native PWAs presentation at Devoxx France, 2017.&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center&quot;&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; style=&quot;max-width: 100%&quot; src=&quot;https://www.youtube.com/embed/0MBsfdQiS64&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you have any questions about this article, you can email me at matt.raible@okta.com, post a question to Stack Overflow 
+&lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;with the Okta tag&lt;/a&gt;, post to our &lt;a href=&quot;https://devforum.okta.com/&quot;&gt;Developer Forums&lt;/a&gt;, 
+or &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-microservices-example/issues/new&quot;&gt;create an issue on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 15 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/15/build-microservices-architecture-spring-boot</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/15/build-microservices-architecture-spring-boot</guid>
+      </item>
+    
+      <item>
         <title>Add Authentication to Your Angular PWA</title>
         <description>&lt;p&gt;You’re developing a Progressive Web Application (PWA) and your service worker and web app manifest are working swimmingly. You’ve even taken the time to deploy it to a server with HTTPS and you’re feeling pretty good about  things. But wait, you don’t have any way of knowing who your users are! Don’t you want to provide them with an opportunity to authenticate and tell you who they are? Once you know who they are, you can give them all kinds of personalization options, inspire them to ❤️ your app, and maybe even support your work!&lt;/p&gt;
 
-&lt;p&gt;In this article, I’ll show you how you can lock down a Spring Boot app, then use modern authentication protocol, in this case OpenID Connect (OIDC), to authenticate and gain access to its APIs.&lt;/p&gt;
+&lt;p&gt;In this article, I’ll show you how you can lock down a Spring Boot app, then use a modern authentication protocol, in this case OpenID Connect (OIDC), to authenticate and gain access to its APIs.&lt;/p&gt;
 
 &lt;h2 id=&quot;secure-your-spring-boot-app&quot;&gt;Secure Your Spring Boot App&lt;/h2&gt;
 
 &lt;p&gt;You might’ve heard that &lt;a href=&quot;https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/&quot;&gt;Stormpath joined forces with Okta&lt;/a&gt; a few months ago (February 2017). Since the transition, we’ve been working hard to make the Stormpath SDKs work with Okta’s API. The good news is we’ve made great progress!&lt;/p&gt;
 
-&lt;p&gt;In this example, you’ll use a Stormpath’s Spring Boot Starter to add security to a Spring Boot app. I’ll show you how this starter provides functionality such as login, forgot password, and user registration.&lt;/p&gt;
+&lt;p&gt;In this example, you’ll use Stormpath’s Spring Boot Starter to add security to a Spring Boot app. I’ll show you how this starter provides functionality such as login, forgot password, and user registration.&lt;/p&gt;
 
 &lt;p&gt;Then I’ll show you how you can use OIDC and Okta’s Auth SDK in an Angular app to login and get data from the Spring Boot app. Finally, I’ll show how Stormpath’s Angular SDK has similar functionality to the Spring Boot Starter, providing login, user registration, and forgot password features.&lt;/p&gt;
 
-&lt;p&gt;I recently created a Sping Boot app that provides a list of good beers, based on a pre-populated list. It filters out less-than-great beers and displays them in an Angular UI that displays the first animated GIF (from Giphy) that matches the beer name.&lt;/p&gt;
+&lt;p&gt;I recently created a Spring Boot app that provides a list of good beers, based on a pre-populated list. It filters out less-than-great beers and displays them in an Angular UI that displays the first animated GIF (from Giphy) that matches the beer name.&lt;/p&gt;
 
 &lt;p&gt;Let’s get started!&lt;/p&gt;
 
@@ -31,7 +651,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;If you’d prefer to build this application yourself, please read &lt;a href=&quot;https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;&gt;Build Your First Progressive Web Application with Angular and Spring Boot&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you’d prefer to build this application yourself, please read &lt;a href=&quot;/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;&gt;Build Your First Progressive Web Application with Angular and Spring Boot&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;In this project’s &lt;code class=&quot;highlighter-rouge&quot;&gt;server/pom.xml&lt;/code&gt; file, you’ll need to add the following XML:&lt;/p&gt;
 
@@ -105,7 +725,7 @@
       &lt;li&gt;Application Name - Spring Boot Awesomesauce&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080/client/callback&lt;/code&gt; for the Redirect URI’s, and click &lt;strong&gt;Finish&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Use &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080/client/callback&lt;/code&gt; for the Redirect URIs, and click &lt;strong&gt;Finish&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Your application has been created, but you still have a few settings to change.&lt;/p&gt;
@@ -117,7 +737,7 @@
   &lt;li&gt;Select the &lt;em&gt;Use Client Authentication&lt;/em&gt; radio button, and click the &lt;strong&gt;Save&lt;/strong&gt; button&lt;/li&gt;
   &lt;li&gt;Click on the &lt;em&gt;Assignments&lt;/em&gt; tab and then select the &lt;em&gt;Assign&lt;/em&gt; button and &lt;strong&gt;Assign to Groups&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Select the &lt;em&gt;Assign&lt;/em&gt; button in the &lt;em&gt;Everyone&lt;/em&gt; column, and click the &lt;strong&gt;Done&lt;/strong&gt; button&lt;/li&gt;
-  &lt;li&gt;Grab the ID portion of the URL of your browsers current page, for example: if my URL was: &lt;code class=&quot;highlighter-rouge&quot;&gt;https://dev-123456-admin.oktapreview.com/admin/app/oidc_client/instance/00icu81200icu812/#tab-assignments&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;00icu81200icu812&lt;/code&gt; is my application’s ID&lt;/li&gt;
+  &lt;li&gt;Grab the ID portion of the URL of your browser’s current page. For example, if my URL was: &lt;code class=&quot;highlighter-rouge&quot;&gt;https://dev-123456-admin.oktapreview.com/admin/app/oidc_client/instance/00icu81200icu812/#tab-assignments&lt;/code&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;00icu81200icu812&lt;/code&gt; is my application’s ID&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; You will need to remember your application’s ID.&lt;/p&gt;
@@ -128,12 +748,12 @@
   &lt;li&gt;Navigate to your Admin console&lt;/li&gt;
   &lt;li&gt;On the top menu click on &lt;strong&gt;Security&lt;/strong&gt; &amp;gt; &lt;strong&gt;API&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Click the &lt;em&gt;Tokens&lt;/em&gt; tab and then click &lt;strong&gt;Create Token&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;On the popup, give your new token a name, for example: “Bootiful Token”, and click &lt;strong&gt;Create Token&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;On the popup, give your new token a name like “Bootiful Token”, and click &lt;strong&gt;Create Token&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; You will need to remember this token value, so copy/paste it somewhere safe.&lt;/p&gt;
 
-&lt;p&gt;For more information take a look at the official &lt;a href=&quot;http://developer.okta.com/docs/api/getting_started/getting_a_token.html&quot;&gt;Create an API token&lt;/a&gt; guide.&lt;/p&gt;
+&lt;p&gt;For more information take a look at the official &lt;a href=&quot;/docs/api/getting_started/getting_a_token.html&quot;&gt;Create an API token&lt;/a&gt; guide.&lt;/p&gt;
 
 &lt;h3 id=&quot;run-the-spring-boot-app&quot;&gt;Run the Spring Boot App&lt;/h3&gt;
 
@@ -199,10 +819,10 @@ X-XSS-Protection: 1; &lt;span class=&quot;nv&quot;&gt;mode&lt;/span&gt;&lt;span 
 &lt;p&gt;&lt;a name=&quot;create-open-id-connect-app&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;create-an-openid-connect-app-for-angular&quot;&gt;Create an OpenID Connect App for Angular&lt;/h2&gt;
 
-&lt;p&gt;OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To get started you’ll need to:&lt;/p&gt;
+&lt;p&gt;OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To get started you’ll need to:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Login to your Okta account and navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on &lt;strong&gt;Create New App&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Log in to your Okta account and navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on &lt;strong&gt;Create New App&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method&lt;/li&gt;
   &lt;li&gt;Click &lt;strong&gt;Create&lt;/strong&gt; and give your application a name (e.g. Angular PWA)&lt;/li&gt;
   &lt;li&gt;On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like this:&lt;/li&gt;
@@ -240,9 +860,9 @@ your needs, set the request's mode to 'no-cors' to fetch the resource with CORS 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;When you’re using Spring Boot without Stormpath, you can use a &lt;code class=&quot;highlighter-rouge&quot;&gt;@CrossOrigin&lt;/code&gt; annotation to enable cross-origin resource 
-sharing (CORS) on the server. See the &lt;a href=&quot;https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular#configure-cors-for-spring-boot&quot;&gt;configure CORS for Spring Boot section&lt;/a&gt; of 
-&lt;a href=&quot;https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;Bootiful Development with Spring Boot and Angular&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When you’re using Spring Boot without the Stormpath Spring Boot starter, you can use a &lt;code class=&quot;highlighter-rouge&quot;&gt;@CrossOrigin&lt;/code&gt; annotation to enable cross-origin resource 
+sharing (CORS) on the server. See the &lt;a href=&quot;/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular#configure-cors-for-spring-boot&quot;&gt;configure CORS for Spring Boot section&lt;/a&gt; of 
+&lt;a href=&quot;/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;&gt;Bootiful Development with Spring Boot and Angular&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;When you’re using the Stormpath Spring Boot Starter, you can enable it by adding the following property to the Spring 
 Boot app’s &lt;code class=&quot;highlighter-rouge&quot;&gt;src/main/resources/application.properties&lt;/code&gt;.&lt;/p&gt;
@@ -462,7 +1082,7 @@ error loading discovery document
 
 &lt;h3 id=&quot;authenticating-with-the-okta-auth-sdk&quot;&gt;Authenticating with the Okta Auth SDK&lt;/h3&gt;
 
-&lt;p&gt;The Okta Auth SDK builds on top of Otka’s &lt;a href=&quot;/docs/api/resources/authn.html&quot;&gt;Authentication API&lt;/a&gt; and &lt;a href=&quot;/docs/api/resources/oidc.html&quot;&gt;OAuth 2.0 API&lt;/a&gt; to enable you to create a fully branded sign-in experience using JavaScript.&lt;/p&gt;
+&lt;p&gt;The Okta Auth SDK builds on top of Okta’s &lt;a href=&quot;/docs/api/resources/authn.html&quot;&gt;Authentication API&lt;/a&gt; and &lt;a href=&quot;/docs/api/resources/oidc.html&quot;&gt;OAuth 2.0 API&lt;/a&gt; to enable you to create a fully branded sign-in experience using JavaScript.&lt;/p&gt;
 
 &lt;p&gt;Install it using npm:&lt;/p&gt;
 
@@ -795,7 +1415,7 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. Or
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/angular-pwa-auth/production-beer-list-069b194886b120a85778b16d84dbf6b0ac07898da64444ec57a2006658cadc72.png&quot; alt=&quot;Production Beer List&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The first time I ran &lt;a href=&quot;https://developers.google.com/web/tools/lighthouse/&quot;&gt;Lighthouse&lt;/a&gt; on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it &lt;a href=&quot;https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot#cloud-foundry&quot;&gt;received a 98&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The first time I ran &lt;a href=&quot;https://developers.google.com/web/tools/lighthouse/&quot;&gt;Lighthouse&lt;/a&gt; on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it &lt;a href=&quot;/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot#cloud-foundry&quot;&gt;received a 98&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/angular-pwa-auth/lighthouse-without-512-53c26aca1ffcb6b6c4f5775a4d6c1594938ad97266322a2d9a575c96e9447c17.png&quot; alt=&quot;Lighthouse Score, first attempt&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
@@ -824,8 +1444,8 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. Or
 &lt;p&gt;To learn more about PWAs, check out some recent tutorials I wrote:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;&gt;Build Your First Progressive Web Application with Angular and Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot&quot;&gt;Tutorial: Develop a Mobile App With Ionic and Spring Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;&gt;Build Your First Progressive Web Application with Angular and Spring Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot&quot;&gt;Tutorial: Develop a Mobile App With Ionic and Spring Boot&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications&quot;&gt;The Ultimate Guide to Progressive Web Applications&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
