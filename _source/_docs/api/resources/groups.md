@@ -1079,6 +1079,10 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
+## Group Rule Operations
+
+The Group Rules API is currently a {% api_lifecycle beta %} [release](/docs/api/getting_started/releases-at-okta.html).
+
 ### Create Group Rule
 {:.api .api-operation}
 
