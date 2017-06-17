@@ -882,11 +882,18 @@ code               | Required if `grant_type` is `authorization_code`. The value
 refresh_token      | Required if `grant_type` is `refresh_token`. The value is what was returned from this endpoint via a previous invocation. | String |
 username           | Required if the grant_type is `password`. | String |
 password           | Required if the grant_type is `password`. | String |
-scope              | Required if `refresh_token`, or if `password` is the `grant_type`. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
-redirect_uri       | Required if `grant_type` is `authorization_code`. Specifies the callback location where the authorization was sent; must match what is registered in Okta for this client. | String |
-code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request. | String |
-client_id          | Expected if *code_verifier* is included or client credentials are not provided in the Authorization header. Used with `client_secret` to authenticate the client application. | String |
-client_secret      | Expected if *code_verifier* is not included and client credentials are not provided in the Authorization header. Used with `client_id` to authenticate the client application. | String |
+scope              | Required if `password` is the `grant_type`. This is a list of scopes that the client wants to be included in the Access Token. For the `refresh_token` grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
+redirect_uri       | Required if `grant_type` is `authorization_code`. Specifies the callback location where the authorization was sent. This value must match the `redirect_uri` used to generate the original `authorization_code`. | String |
+code_verifier      | Required if `grant_type` is `authorization_code`  and `code_challenge` was specified in the original `/authorize` request. The code verifier of               [PKCE](#parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request. | String |
+client_id          | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application. | String |
+client_secret      | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application. | String |
+
+##### Refresh Tokens for Web and Native Applications
+
+For web and native application types, an additional process is required:
+
+1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
+2. Pass the `offline_access` scope to your `/authorize` request.
 
 ##### Token Authentication Method
 
@@ -910,24 +917,18 @@ You can't change this value in the Okta user interface.
 #### Response Parameters
 
 Based on the `grant_type` and sometimes `scope`, the response contains different token sets.
+Generally speaking, the scopes specified in a request are included in the tokens in the response. 
 
-| Requested grant type | Requested scope                               | Response tokens                       |
-|:---------------------|:----------------------------------------------|:--------------------------------------|
-| authorization_code   | Any scope except `offline_access` or `openid` | Access Token, Refresh Token, ID Token |
-| authorization_code   | `offline_access`                              | Refresh Token                         |
-| authorization_code   | `openid`                                      | ID Token                              |
-| refresh_token        | Any scope except `offline_access`             | Access Token, Refresh Token           |
-| refresh_token        | `offline_access`                              | Refresh Token                         |
-| password             | Any scope except `offline_access`             | Access Token, Refresh Token           |
-| password             | `offline_access`                              | Refresh Token                         |
-
-
-##### Refresh Tokens for Web and Native Applications
-
-For web and native application types, an additional process is required:
-
-1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
-2. Pass the `offline_access` scope to your authorize request.
+| Requested grant type | Requested scope                                | Response tokens                                                   |
+|:---------------------|:-----------------------------------------------|:------------------------------------------------------------------|
+| authorization_code   | No scope                                       | Access Token. Contains scopes requested in `/authorize` endpoint. |
+| authorization_code   | Any scopes except `offline_access` or `openid` | Access Token                                                      |
+| authorization_code   | Any or no scopes plus `offline_access`         | Access Token, Refresh Token                                       |
+| authorization_code   | Any or no scopes plus `openid`                 | Access Token, ID Token                                            |
+| refresh_token        | Any scopes except `offline_access`             | Access Token                                                      |
+| refresh_token        | Any or no scopes plus `offline_access`         | Access Token, Refresh Token                                       |
+| password             | Any or no scopes except `offline_access`       | Access Token                                                      |
+| password             | Any or no scopes plus `offline_access`         | Access Token, Refresh Token                                       |
 
 #### List of Errors
 
@@ -936,7 +937,7 @@ Error Id                |  Details                                              
 invalid_client          | The specified client id wasn't found. |
 invalid_request         | The request structure was invalid. For example: the basic authentication header is malformed; both header and form parameters were used for authentication; or no authentication information was provided. |
 invalid_grant           | The `code` or `refresh_token` value is invalid, or the `redirect_uri` does not match the one used in the authorization request. |
-unsupported_grant_type  | The `grant_type` isn't `authorization_code` or `refresh_token`. |
+unsupported_grant_type  | The `grant_type` isn't `authorization_code`, `refresh_token`, or `password`. |
 invalid_scope           | The scopes list contains an invalid or unsupported value.    |
 
 #### Response Example (Success)
