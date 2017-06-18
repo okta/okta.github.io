@@ -94,7 +94,7 @@ Use the postMessage() data model to help you when working with the *okta_post_me
 Parameter         | Description                                                                                        | DataType  |
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------|
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`. | String   |
-access_token      | The *access_token* used to access the [`/oauth2/:authorizationServerId/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the *response_type* included a token. <b>Important</b>: Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change. | String    |
+access_token      | The *access_token* used to access `/oauth2/:authorizationServerId/v1/userinfo`. This is returned if the *response_type* included a token. <b>Important</b>: Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change. | String    |
 state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response. | String    |
 error             | The error-code string providing information if anything goes wrong.                                | String    |
 error_description | Additional description of the error.                                                               | String    |
@@ -216,7 +216,7 @@ For web and native application types, an additional process is required:
 
 ##### Token Authentication Method
 
-For clients authenticating by client credentials, provide the [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+For clients authenticating by client credentials, provide the [`client_id`](oauth2.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
 either as an Authorization header in the Basic auth scheme (basic authentication) or as additional parameters to the POST body. 
 Including credentials in both the headers and the POST body is not allowed.
 
@@ -346,7 +346,7 @@ The API takes an Access Token or Refresh Token, and returns a boolean indicating
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
 An implicit client can only introspect its own tokens, while a confidential client may inspect all tokens.
 
->Note: [ID Tokens](oidc.html#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
+>Note: ID Tokens are also valid, however, they are usually validated on the service provider or app side of a flow.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}

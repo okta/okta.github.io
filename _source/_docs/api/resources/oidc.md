@@ -235,11 +235,9 @@ For more information about configuring an app for OpenID Connect, including grou
 
 ## Endpoints
 
-Both the Access Token and the ID Token are acquired via [OAuth 2.0](oauth2.html) endpoints.
+Explore the OpenID Connect API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/57ec0b23a21999f96f2d){:target="_blank"}
 
 >The OIDC Access Token is applicable only for the Okta `/oauth2/v1/userinfo` endpoint and thus should be treated as opaque by the application. The application does not need to validate it since it should not be used against other resource servers. The format of it and the key used to sign it are subject to change without prior notice.
-
-Explore the OpenID Connect API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/57ec0b23a21999f96f2d){:target="_blank"}
 
 ### Get User Information
 {:.api .api-operation}
@@ -247,7 +245,7 @@ Explore the OpenID Connect API: [![Run in Postman](https://run.pstmn.io/button.s
 {% api_operation get /oauth2/v1/userinfo %}
 {% api_operation post /oauth2/v1/userinfo %}
 
-You must include the `access_token` returned from the [/oauth2/v1/authorize](oauth2.html#obtain-an-authorization-grant-from-a-user) endpoint as an authorization header parameter.
+You must include the `access_token` returned from the [/oauth2/v1/authorize](oidc.html#authentication-request) endpoint as an authorization header parameter.
 
 This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
