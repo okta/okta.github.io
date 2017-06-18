@@ -203,11 +203,18 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | password      | Required if the *grant_type* is `password`.                                                                                                                                                                                                                                                                               | String |
 | scope         | Optional.            [ Different scopes and tokens](#response-parameters) are returned depending on the values of `scope` and `grant_type`.                                                                                                                                                                                          | String |
 | redirect_uri  | Required if *grant_type* is `authorization_code`. Specifies the callback location where the authorization was sent. This value must match the `redirect_uri` used to generate the original `authorization_code`.                                                                                                          | String |
-| code_verifier | Required if *grant_type* is `authorization_code`  and `code_challenge` was specified in the original `/authorize` request. The code verifier of                 [PKCE](#request-parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request. | String |
+| code_verifier | Required if *grant_type* is `authorization_code`  and `code_challenge` was specified in the original `/authorize` request. This value is the `code_verifier` for                 [PKCE](#request-parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request. | String |
 | client_id     | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret` to authenticate the client application.                                                                                                               | String |
 | client_secret | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.                                                                                                                 | String |
 
 >Note: You can't provide a `client_id` in both the Authorization header and as a request parameter.
+
+##### Refresh Tokens for Web and Native Applications
+
+For web and native application types, an additional process is required:
+
+1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
+2. Pass the `offline_access` scope to your `/authorize` or `/token` request if you're using the `password` grant type.
 
 ##### Token Authentication Method
 
@@ -221,41 +228,36 @@ For authentication with Basic auth, an HTTP header with the following format mus
 Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 ~~~
 
-##### Refresh Tokens for Web and Native Applications
-
-For web and native application types, an additional process is required:
-
-1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
-2. Pass the *offline_access* scope to your authorize request.
-
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
 Based on the grant type and in some cases scope specified in the request, the response contains different token sets.
-Generally speaking, the scopes specified in a request are included in the tokens in the response. 
+Generally speaking, the scopes specified in a request are included in the Access Tokens in the response. 
 
-| Requested grant type | Requested scope                                                            | Tokens in the response                                                |
-|:---------------------|:---------------------------------------------------------------------------|:----------------------------------------------------------------------|
-| authorization_code   | None                                                                       | Access Token. Contains scopes requested in the `/authorize` endpoint. |
-| authorization_code   | `offline_scope`                                                            | Access Token, Refresh Token                                           |
-| authorization_code   | `openid`                                                                   | Access Token, ID Token                                                |
-| refresh_token        | None                                                                       | Access Token. Contains scopes used to generate the Refresh Token.     |
-| refresh_token        | Subset of scopes used to generate Refresh Token                            | Access Token. Contains specified scopes.                              |
-| refresh_token        | `offline_scope`                                                            | Access Token, Refresh Token                                           |
-| password             | None                                                                       | Access Token. Contains default scopes granted by policy.              |
-| password             | `offline_scope`                                                            | Access Token, Refresh Token. Contains specified scopes.               |
-| password             | `openid`                                                                   | Access Token, ID Token                                                |
-| client_credentials   | Any or no scope                                                            | Access Token. Contains default scopes granted by policy.              |
+| Requested grant type | Requested scope                                                            | Tokens in the response                                                                   |
+|:---------------------|:---------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------|
+| authorization_code   | None                                                                       | Access Token. Contains scopes requested in the `/authorize` endpoint.                    |
+| authorization_code   | Any or no scopes plus `offline_scope`                                      | Access Token, Refresh Token                                                              |
+| authorization_code   | Any or no scopes plus `openid`                                             | Access Token, ID Token                                                                   |
+| authorization_code   | Any or no scopes plus `openid` and `offline_scope`                         | Access Token, ID Token, Refresh Token                                                    |
+| refresh_token        | None                                                                       | Access Token, Refresh Token. Contains scopes used to generate the Refresh Token.         |
+| refresh_token        | Subset of scopes used to generate Refresh Token excluding `offline_access` | Access Token. Contains specified scopes.                                                 |
+| refresh_token        | Subset of scopes used to generate Refresh Token including `offline_scope`  | Access Token, Refresh Token                                                              |
+| password             | None                                                                       | Access Token. Contains default scopes granted by policy.                                 |
+| password             | Any or no scopes plus `offline_scope`                                      | Access Token, Refresh Token. Contains specified scopes.                                  |
+| password             | Any or no scopes plus `openid`                                             | Access Token, ID Token                                                                   |
+| password             | Any or no scopes plus `openid` and `offline_scope`                         | Access Token, ID Token, Refresh Token                                                    |
+| client_credentials   | Any or no scope                                                            | Access Token. Contains default scopes granted by policy in addition to requested scopes. |
 
 ##### List of Errors
 
-| Error Id                | Details                                                                                                                                                                                               |
-|:------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| invalid_client          | The specified client ID wasn't found or authentication failed.                                                                                                                                                                 |
-| invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
-| invalid_grant           | The *code* or *refresh_token* are invalid, or the *redirect_uri* does not match the one used in the authorization request, or the resource owner password is wrong.                                                                      |
-| unsupported_grant_type  | The grant_type is not supported.                                                                                                                                       |
-| invalid_scope           | The scopes list contains an invalid value.                                                                                                                                             |
+| Error Id               | Details                                                                                                                                                                                                    |
+|:-----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| invalid_client         | The specified client ID wasn't found or authentication failed.                                                                                                                                             |
+| invalid_request        | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.      |
+| invalid_grant          | The `code`, `refresh_token`, or `username` and `password` combination is invalid, or the `redirect_uri` does not match the one used in the authorization request, or the resource owner password is wrong. |
+| unsupported_grant_type | The grant_type is not supported.                                                                                                                                                                           |
+| invalid_scope          | The scopes list contains an invalid value.                                                                                                                                                                 |
 
 
 ##### Request Example: Resource Owner Password Credentials Flow
@@ -353,12 +355,12 @@ An implicit client can only introspect its own tokens, while a confidential clie
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-Parameter       | Description                                                                                         | Type       |
---------------- | --------------------------------------------------------------------------------------------------- | -----------|
-token           | An access token or refresh token.                                                                   | String     |
-token_type_hint | A hint of the type of *token*.                                                                      | String     |
-client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
-client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
+| Parameter       | Description                                                                                                                                                                                    | Type   |
+|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| token           | An Access Token or Refresh Token.                                                                                                                                                              | String |
+| token_type_hint | A hint of the type of `token`.                                                                                                                                                                 | String |
+| client_id       | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application. | String |
+| client_secret   | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.  | String |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
