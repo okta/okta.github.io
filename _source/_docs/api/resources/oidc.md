@@ -815,7 +815,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/${authorizationServerId}/v1/authorize?
+"https://${org}.okta.com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=code&
   response_mode=form_post&
@@ -833,7 +833,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/${authorizationServerId}/v1/authorize?
+"https://${org}.okta.com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=id_token token&
   response_mode=form_post&

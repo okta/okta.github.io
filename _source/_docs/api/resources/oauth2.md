@@ -94,7 +94,7 @@ Use the postMessage() data model to help you when working with the *okta_post_me
 Parameter         | Description                                                                                        | DataType  |
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------|
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`. | String   |
-access_token      | The *access_token* used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the *response_type* included a token. <b>Important</b>: Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change. | String    |
+access_token      | The *access_token* used to access the [`/oauth2/:authorizationServerId/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the *response_type* included a token. <b>Important</b>: Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change. | String    |
 state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response. | String    |
 error             | The error-code string providing information if anything goes wrong.                                | String    |
 error_description | Additional description of the error.                                                               | String    |
