@@ -207,8 +207,6 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | client_id     | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret` to authenticate the client application.                                                                                                               | String |
 | client_secret | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.                                                                                                                 | String |
 
->Note: You can't provide a `client_id` in both the Authorization header and as a request parameter.
-
 ##### Refresh Tokens for Web and Native Applications
 
 For web and native application types, an additional process is required:
