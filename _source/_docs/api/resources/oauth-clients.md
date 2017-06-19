@@ -13,7 +13,7 @@ Note that clients managed via this API are modeled as applications in Okta and a
 Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
 follow the rules for Access Tokens and ID Tokens.
 
-> This API is a {% api_lifecycle beta%} feature.
+> This API is a {% api_lifecycle ea%} feature.
 
 Explore the Client Registration API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5155aa172e3d5e59ee5d){:target="_blank"}
 
@@ -31,7 +31,9 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
 ~~~json
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
+  "client_secret": "5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe",
   "client_id_issued_at": 1453913425,
+  "client_secret_expires_at": 0,
   "client_name": "Example OAuth Client",
   "client_uri": "http://www.example-application.com",
   "logo_uri": "http://www.example-application.com/logo.png",
@@ -50,35 +52,7 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
-  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
-  "urn:okta:client_status": "active",
-  "_links": {
-    "newSecret": {
-      "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    },
-    "app": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
-      "hints": {
-        "allow": [
-	  "GET",
-          "POST"
-         ]
-      }
-    },
-    "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    }
-  }
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
 }
 ~~~
 
@@ -90,29 +64,27 @@ Client applications have the following properties:
 | Property                   | Description                                                       | DataType                                                                                     | Nullable | Unique | Readonly |
 | -------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------- | ------ | -------- |
 | client_id                  | unique key for the client application                             | String                                                                                       | FALSE    | TRUE   | TRUE     |
-| client_id_issued_at        | time at which the client_id was issued (measured in unix seconds) | Number                                                                                       | FALSE    | FALSE  | TRUE     |
+| client_id_issued_at        | time at which the client_id was issued (measured in unix seconds) | Number                                                                                       | TRUE     | FALSE  | TRUE     |
 | client_name                | human-readable string name of the client application              | String                                                                                       | FALSE    | TRUE   | FALSE    |
-| client_secret              | OAuth 2.0 client secret string (used for confidential clients)    | String                                                                                       | TRUE     | FALSE  | FALSE    |
+| client_secret              | OAuth 2.0 client secret string (used for confidential clients)    | String                                                                                       | TRUE     | FALSE  | TRUE     |
+| client_secret_expires_at   | time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds) | Number                                                        | TRUE     | FALSE  | TRUE     |
 | logo_uri                   | URL string that references a logo for the client                  | String                                                                                       | TRUE     | FALSE  | FALSE    |
-| application_type           | The type of client application                                    | `web`, `native`, `browser`, or `service`                                                     | TRUE     | TRUE   | TRUE     |
+| application_type           | The type of client application                                    | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE     |
 | redirect_uris              | array of redirection URI strings for use in redirect-based flows  | Array                                                                                        | TRUE     | FALSE  | FALSE    |
 | post_logout_redirect_uris  | array of redirection URI strings for use for relying party initiated logouts  | Array                                                                                        | TRUE     | FALSE  | FALSE    |
 | response_types             | array of OAuth 2.0 response type strings                          | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE    |
 | grant_types                | array of OAuth 2.0 grant type strings                             | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE    |
 | token_endpoint_auth_method | requested authentication method for the token endpoint            | `none`, `client_secret_post`, or `client_secret_basic`                                       | FALSE    | FALSE  | FALSE    |
 | initiate_login_uri         | URL that a third party can use to initiate a login by the client  | String                                                                                       | TRUE     | FALSE  | FALSE    |
-| urn:okta:client_status     | the status of the client application                              | `active` or `inactive`                                                                       | FALSE    | FALSE  | TRUE     |
-| _links                     | discoverable resources related to the app                         | [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                               | TRUE     | FALSE  | TRUE     |
 |----------------------------+-------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------+--------+----------|
 
 Property Details
 
-* When creating a client application, you can specify the `client_id` or let Okta generate a value for it. Thereafter, the `client_id` is immutable.
+* The `client_id` is immutable. And when creating a client application, you cannot specify the `client_id`, Okta uses application ID for it.
 
-* The `client_secret` is only shown on the initial creation of a client application (and only if the `token_endpoint_auth_method` is one that requires a client secret).
-  It is never returned in a GET call. If a `client_secret` is not provided on creation and the `token_endpoint_auth_method` requires one Okta will generate a random `client_secret` for the client application.
+* The `client_secret` is only shown on the response of the creation or update of a client application (and only if the `token_endpoint_auth_method` is one that requires a client secret). You cannot specify the `client_secret` and if the `token_endpoint_auth_method` requires one Okta will generate a random `client_secret` for the client application.
 
-* The `client_id` must consist of alphanumeric characters, the following special characters `$-_.+!*'(),`, must contain between 6 and 100 characters, inclusive, and must not be the reserved word `ALL_CLIENTS`. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
+* If you want to specify the `client_id` or `client_secret`, you can use [Apps API](/docs/api/resources/apps#add-oauth-20-client-application) to create or update a client application.
 
 * At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
   [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
@@ -199,7 +171,9 @@ curl -v -X POST \
 ~~~json
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
+  "client_secret": "5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe",
   "client_id_issued_at": 1453913425,
+  "client_secret_expires_at": 0,
   "client_name": "Example OAuth Client",
   "client_uri": "http://www.example-application.com",
   "logo_uri": "http://www.example-application.com/logo.png",
@@ -218,35 +192,7 @@ curl -v -X POST \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
-  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
-  "urn:okta:client_status": "active",
-  "_links": {
-    "newSecret": {
-      "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "app": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
-      "hints": {
-        "allow": [
-	  "GET",
-          "POST"
-         ]
-      }
-    },
-    "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    }
-  }
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
 }
 ~~~
 
@@ -305,35 +251,7 @@ curl -v -X GET \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
-  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
-  "urn:okta:client_status": "active",
-  "_links": {
-    "newSecret": {
-      "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    },
-    "app": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
-      "hints": {
-        "allow": [
-	  "GET",
-          "POST"
-         ]
-      }
-    },
-    "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    }
-  }
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
 }
 ~~~
 
@@ -409,34 +327,7 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
       "authorization_code"
     ],
     "token_endpoint_auth_method": "client_secret_post",
-    "initiate_login_uri": "https://www.example-application.com/oauth2/login",
-    "urn:okta:client_status": "active",
-    "_links": {
-      "newSecret": {
-        "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
-        "hints": {
-          "allow": [
-            "POST"
-          ]
-        }
-      },
-    "app": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
-      "hints": {
-        "allow": [
-	  "GET",
-          "POST"
-         ]
-      }
-    },
-    "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    }
+    "initiate_login_uri": "https://www.example-application.com/oauth2/login"
   },
   {
     "client_id": "F10CaazJPQ5Zpyu1Ojko",
@@ -459,34 +350,7 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
       "implicit"
     ],
     "token_endpoint_auth_method": "none",
-    "initiate_login_uri": null,
-    "urn:okta:client_status": "active",
-    "_links": {
-      "newSecret": {
-        "href": "https://example.okta.com/oauth2/v1/clients/F10CaazJPQ5Zpyu1Ojko/lifecycle/newSecret",
-        "hints": {
-          "allow": [
-            "POST"
-          ]
-        }
-      },
-    "app": {
-      "href": "https://example.okta.com/api/v1/apps/0oaprd4QHjJYCIGrp0g3",
-      "hints": {
-        "allow": [
-	  "GET",
-          "POST"
-         ]
-      }
-    },
-    "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    }
+    "initiate_login_uri": null
   }
 ]
 ~~~
@@ -535,35 +399,7 @@ curl -v -X GET \
       "authorization_code"
     ],
     "token_endpoint_auth_method": "client_secret_post",
-    "initiate_login_uri": "https://www.example-application.com/oauth2/login",
-    "urn:okta:client_status": "active",
-    "_links": {
-      "newSecret": {
-        "href": "https://payroll.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
-        "hints": {
-          "allow": [
-            "POST"
-          ]
-        }
-      },
-      "app": {
-        "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
-	"hints": {
-          "allow": [
-	    "GET",
-            "POST"
-           ]
-        }
-      },
-      "deactivate": {
-        "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
-        "hints": {
-          "allow": [
-            "POST"
-           ]
-        }
-      }
-    }
+    "initiate_login_uri": "https://www.example-application.com/oauth2/login"
   }
 ]
 ~~~
@@ -583,7 +419,7 @@ Parameter | Description                        | ParamType | DataType           
 clientId  | `clientId` of a specific client    | URL       | String                                 | TRUE     |
 settings  | OAuth client registration settings | Body      | [Client Settings](#client-application-model) | TRUE     |
 
-> All settings must be specified when updating a client application, **partial updates are not supported!** If any settings are missing when updating a client application the update will fail. The one exception to this is the `client_secret`, which will not be changed if omitted from an update.
+> All settings must be specified when updating a client application, **partial updates are not supported!** If any settings are missing when updating a client application the update will fail. The exceptions are: `client_secret_expires_at`, or `client_id_issued_at` must not be included in the request, and the `client_secret` can be omitted.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -599,6 +435,7 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
+      "client_id": "0jrabyQWm4B9zVJPbotY",
       "client_name": "Updated OAuth Client",
       "client_uri": "http://www.example-application.com",
       "logo_uri": "http://www.example-application.com/logo.png",
@@ -628,7 +465,9 @@ curl -v -X PUT \
 
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
+  "client_secret": "5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe",
   "client_id_issued_at": 1453913425,
+  "client_secret_expires_at": 0,
   "client_name": "Updated OAuth Client",
   "client_uri": "http://www.example-application.com",
   "logo_uri": "http://www.example-application.com/logo.png",
@@ -647,35 +486,7 @@ curl -v -X PUT \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
-  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
-  "urn:okta:client_status": "active",
-  "_links": {
-    "newSecret": {
-      "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    },
-    "app": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
-      "hints": {
-        "allow": [
-	  "GET",
-          "POST"
-         ]
-      }
-    },
-    "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    }
-  }
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
 }
 ~~~
 
@@ -718,7 +529,9 @@ curl -v -X POST \
 
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
+  "client_secret": "t1hgVNl06UiMTzlsVVj0UywSDDuNdG529lm0bpy8",
   "client_id_issued_at": 1453913425,
+  "client_secret_expires_at": 0,
   "client_name": "Updated OAuth Client",
   "client_uri": "http://www.example-application.com",
   "client_secret": "cdUQIFvE61wGI5P51H33ORC4SRB1RXfX",
@@ -738,35 +551,7 @@ curl -v -X POST \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
-  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
-  "urn:okta:client_status": "active",
-  "_links": {
-    "newSecret": {
-      "href": "https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    },
-    "app": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3",
-      "hints": {
-        "allow": [
-	  "GET",
-          "POST"
-         ]
-      }
-    },
-    "deactivate": {
-      "href": "https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-         ]
-      }
-    }
-  }
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
 }
 ~~~
 

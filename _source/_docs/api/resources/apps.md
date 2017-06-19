@@ -966,6 +966,200 @@ curl -v -X POST \
 }' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
+#### Add OAuth 2.0 Client Application
+{:.api .api-operation}
+
+Adds an OAuth 2.0 client application. This application is only available to the org that creates it.
+
+> You must enable the OpenID Connect feature to create an OAuth 2.0 client. OpenId Connect is an {% api_lifecycle ea %} feature.
+
+##### Credentials
+{:.api .api-request .api-request-params}
+
+Parameter             | Description                                                                                                       | DataType                                             | Nullable | Unique | Validation
+--------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- --| -------- | ----- | ----------------------------------------
+ client_id                  | Unique identifier for the client application                                                                | String                                                 | TRUE     | TRUE  | TRUE     |
+ client_secret              | OAuth 2.0 client secret string (used for confidential clients)                                              | String                                                 | TRUE     | FALSE | TRUE     |
+ token_endpoint_auth_method | Requested authentication method for the token endpoint                                                      | `none`, `client_secret_post`, or `client_secret_basic` | FALSE    | FALSE | FALSE    |
+
+##### Settings
+{:.api .api-request .api-request-params}
+
+Parameter             | Description                                                      | DataType                                                                                     | Nullable | Unique | Validation
+--------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------- | ------ | ----------------------------------------
+ client_uri           | URL string of a web page providing information about the client  | String                                                                                       | TRUE     | FALSE  | FALSE |
+ logo_uri             | URL string that references a logo for the client                 | String                                                                                       | TRUE     | FALSE  | FALSE |
+ application_type     | The type of client application                                   | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE  |
+ redirect_uris        | Array of redirection URI strings for use in redirect-based flows | Array                                                                                        | TRUE     | FALSE  | TRUE  |
+ response_types       | Array of OAuth 2.0 response type strings                         | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE  |
+ grant_types          | Array of OAuth 2.0 grant type strings                            | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE  |
+ initiate_login_uri   | URL that a third party can use to initiate a login by the client | String                                                                                       | TRUE     | FALSE  | TRUE  |
+
+* At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
+  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
+  or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
+  then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
+
+* All redirect URIs must be absolute URIs and must not include a fragment compontent.
+
+* Different application types have different valid values for the corresponding grant type:
+
+    |-------------------+---------------------------------------------------------------+-----------------------------------------------------------------------------------|
+    | Application Type  | Valid Grant Type                                              | Requirements                                                                      |
+    | ----------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+    | `web`             | `authorization_code`, `implicit`, `refresh_token`             | Must have at least `authorization_code`                                           |
+    | `native`          | `authorization_code`, `implicit`, `password`, `refresh_token` | Must have at least `authorization_code`                                           |
+    | `browser`         | `implicit`                                                    |                                                                                   |
+    | `service`         | `client_credentials`                                          | Works with OAuth 2.0 flow (not OpenID Connect)                                    |
+
+* The `grant_types` and `response_types` values described above are partially orthogonal, as they refer to arguments passed to different
+    endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the `grant_types`
+    available to a client influence the `response_types` that the client is allowed to use, and vice versa. For instance, a `grant_types`
+    value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
+    the OAuth 2.0 authorization code grant.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+> [Application](#application-model)'s `signOnMode` must be set to OPENID_CONNECT, the `name` field must be "oidc_client", and `label` field must be defined.
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+    "name": "oidc_client",
+    "label": "Sample Client",
+    "signOnMode": "OPENID_CONNECT",
+    "credentials": {
+      "oauthClient": {
+        "token_endpoint_auth_method": "client_secret_post"
+      }
+    },
+    "settings": {
+      "oauthClient": {
+        "client_uri": "http://example.com/client",
+        "logo_uri": "http://example.com/assets/images/logo-new.png",
+        "redirect_uris": [
+          "https://example.com/oauth2/callback",
+          "myapp://callback"
+        ],
+        "response_types": [
+          "token",
+          "id_token",
+          "code"
+        ],
+        "grant_types": [
+          "implicit",
+          "authorization_code"
+        ],
+        "application_type": "native"
+      }
+    }
+    }' "https://${org}.okta.com/api/v1/apps"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "0oa1hm4POxgJM6CPu0g4",
+  "name": "oidc_client",
+  "label": "Sample Client",
+  "status": "ACTIVE",
+  "lastUpdated": "2017-06-12T09:17:24.000Z",
+  "created": "2017-06-12T09:17:23.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": true,
+      "web": true
+    },
+    "appLinks": {
+      "oidc_client_link": true
+    }
+  },
+  "features": [],
+  "signOnMode": "OPENID_CONNECT",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "signing": {
+      "kid": "cg4-_A_ifCK7fsKIKjHP27P0JGeuhnHHKEID1yXy42M"
+    },
+    "oauthClient": {
+      "client_id": "0oa1hm4POxgJM6CPu0g4",
+      "client_secret": "5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z",
+      "token_endpoint_auth_method": "client_secret_post"
+    }
+  },
+  "settings": {
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "DISABLED"
+        },
+        "message": null,
+        "helpUrl": null
+      }
+    },
+    "oauthClient": {
+      "client_uri": "http://example.com/client",
+      "logo_uri": "http://example.com/assets/images/logo-new.png",
+      "redirect_uris": [
+        "https://example.com/oauth2/callback",
+        "myapp://callback"
+      ],
+      "response_types": [
+        "token",
+        "id_token",
+        "code"
+      ],
+      "grant_types": [
+        "implicit",
+        "authorization_code"
+      ],
+      "application_type": "native"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "http://rain.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "type": "image/png"
+      }
+    ],
+    "appLinks": [
+      {
+        "name": "oidc_client_link",
+        "href": "http://rain.okta1.com:1802/home/oidc_client/0oa1hm4POxgJM6CPu0g4/alnivcK7lCqtQ1jOE0g3",
+        "type": "text/html"
+      }
+    ],
+    "users": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/users"
+    },
+    "deactivate": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/groups"
+    }
+  }
+}
+~~~
+
 ### Get Application
 {:.api .api-operation}
 
@@ -2524,26 +2718,6 @@ curl -v -X PUT \
   }
 }
 ~~~
-
-#### Set Profile Property for OpenID Connect Apps
-{:.api .api-operation}
-
-Update the [app's `profile` property](#application-properties), a container for any valid JSON schema that can be referenced from a request.
-For example, add an app manager contact email address,
-or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
-
-To add a `profile` property to an OpenID Connect public client app:
-
-1. Create a [public client app](/docs/api/resources/oauth-clients.html) configured for OpenID Connect, if it doesn't already exist. Creating the public client app creates a corresponding app instance accessible via the Apps API.
-2. List your org's apps and look for the app named `oidc_client` that corresponds to your public client app.
-3. Use the ID of the corresponding app instance to update the app instance properties with a `profile` property.
-4. Once the property is populated, you can refer to it in Okta Expression Language, such as the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
-
-
-Profile Requirements
-
-* The `profile` property is not encrypted, so don't store sensitive data in it.
-* The `profile` property doesn't limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.
 
 ### Delete Application
 {:.api .api-operation}
@@ -4339,7 +4513,7 @@ Applications have the following properties:
 | visibility       | visibility settings for app                  |  [Visibility Object](#visibility-object)                            | TRUE       | FALSE    | FALSE      |             |             |
 | credentials      | credentials for the specified `signOnMode`   |  [Application Credentials Object](#application-credentials-object)  | TRUE       | FALSE    | FALSE      |             |             |
 | settings         | settings for app                             | Object ( [App Names & Settings](#app-names--settings))              | TRUE       | FALSE    | FALSE      |             |             |
-| profile          | Valid JSON schema for specifying properties  | [JSON](#set-profile-property-for-openid-connect-apps)  | TRUE       | FALSE    | FALSE      |             |             |
+| profile          | Valid JSON schema for specifying properties  | [JSON](#profile-object)                                             | TRUE       | FALSE    | FALSE      |             |             |
 | _links           | discoverable resources related to the app    |  [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)     | TRUE       | FALSE    | TRUE       |             |             |
 | _embedded        | embedded resources related to the app        |  [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)     | TRUE       | FALSE    | TRUE       |             |             |
 | ---------------- | -------------------------------------------- | ------------------------------------------------------------------ | ---------- | -------- | ---------- | ----------- | ----------- |
@@ -4347,7 +4521,7 @@ Applications have the following properties:
 Property details
 
  * `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created.
- * `profile` is only available for OpenID Connect apps. See [Set Profile Property for OpenID Connect Apps](#set-profile-property-for-openid-connect-apps).
+ * `profile` is only available for OAuth 2.0 client apps. See [Profile Object](#profile-object).
 
 ##### App Names & Settings
 
@@ -4364,6 +4538,7 @@ The catalog is currently not exposed via an API.  While additional apps may be a
 | template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)   |
 | tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)             |
 | template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)               |
+| oidc_client         | [Add OAuth 2.0 client Application](#add-oauth-20-client-application)          |
 | Custom SAML 2.0     | [Add Custom SAML 2.0 Application](#add-custom-saml-application)               |
 | Custom SWA          | [Add Custom SWA Application](#add-custom-swa-application)                     |
 |---------------------+-------------------------------------------------------------------------------|
@@ -4411,6 +4586,7 @@ The list of possible modes an app may support are:
 | SAML_2_0              | Federated Authentication with SAML 2.0 WebSSO                           |
 | WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requestor Profile   |
 | AUTO_LOGIN            | Secure Web Authentication (SWA)
+| OPENID_CONNECT        | Federated Authentication with OpenID Connect
 | Custom                | App-Specific SignOn Mode                                                |
 |-----------------------+-------------------------------------------------------------------------|
 
@@ -4494,6 +4670,7 @@ Specifies credentials and scheme for the application's `signOnMode`.
 | signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | False    |                 |           |           |            |
 | userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
 | password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |
+| oauthClient      | Credential for OAuth 2.0 client                                                                                | [OAuth Credential Object](#oauth-credential-object)   | False    |                 |           |           |            |
 |------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
 
 ~~~json
@@ -4570,6 +4747,34 @@ Determines the [key](#application-key-credential-model) used for signing asserti
 {
   "signing": {
     "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
+  }
+}
+~~~
+
+#### OAuth Credential Object
+
+Determines how to authenticate the OAuth 2.0 client
+
+|----------------------------+----------------------------------------------------------------------------------+----------+----------|
+| Property                   | Description                                                                      | DataType | Nullable |
+| -------------------------- | ------------------------------------------------------------------------------------------- | -------- |
+| client_id                  | Unique identifier for the OAuth 2.0 client application                           | String   | TRUE     |
+| client_secret              | OAuth 2.0 client secret string                                                   | String   | TRUE     |
+| token_endpoint_auth_method | Requested authentication method for the token endpoint                           | String   | FALSE    |
+|----------------------------+----------------------------------------------------------------------------------+----------+----------|
+
+* When creating an OAuth 2.0 client application, you can specify the `client_id`, or Okta will set it the same value as the application ID. Thereafter, the client_id is immutable.
+
+* If a `client_secret` is not provided on creation, and the `token_endpoint_auth_method` requires one Okta will generate a random `client_secret` for the client application.  The `client_secret` is only shown on the creation or update of an OAuth 2.0 client application (and only if the `token_endpoint_auth_method` is one that requires a client secret).
+
+* The `client_id` must consist of alphanumeric characters or the following special characters `$-_.+!*'(),`. It must contain between 6 and 100 characters, inclusive, and must not be the reserved word `ALL_CLIENTS`. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
+
+~~~json
+{
+  "oauthClient": {
+    "client_id": "0oa1hm4POxgJM6CPu0g4",
+    "client_secret": "5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z",
+    "token_endpoint_auth_method": "client_secret_post"
   }
 }
 ~~~
@@ -4721,6 +4926,18 @@ Basic           | urn:oasis:names:tc:SAML:2.0:attrname-format:basic
   }
 }
 ~~~
+
+### Profile Object
+{:.api .api-operation}
+
+Profile object is a container for any valid JSON schema that can be referenced from a request. For example, add an app manager contact email address, or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
+
+Profile Requirements
+
+* The `profile` property is not encrypted, so don't store sensitive data in it.
+* The `profile` property doesn't limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.
+
+> Profile Object is only avialible to OAuth 2.0 client applications.
 
 ### Application User Model
 
