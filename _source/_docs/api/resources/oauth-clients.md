@@ -41,6 +41,9 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
   ],
+  "post_logout_redirect_uris": [
+    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
+  ],
   "response_types": [
     "id_token",
     "code"
@@ -68,6 +71,7 @@ Client applications have the following properties:
 | logo_uri                   | URL string that references a logo for the client                  | String                                                                                       | TRUE     | FALSE  | FALSE    |
 | application_type           | The type of client application                                    | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE     |
 | redirect_uris              | array of redirection URI strings for use in redirect-based flows  | Array                                                                                        | TRUE     | FALSE  | FALSE    |
+| post_logout_redirect_uris  | array of redirection URI strings for use for relying party initiated logouts  | Array                                                                                        | TRUE     | FALSE  | FALSE    |
 | response_types             | array of OAuth 2.0 response type strings                          | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE    |
 | grant_types                | array of OAuth 2.0 grant type strings                             | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE    |
 | token_endpoint_auth_method | requested authentication method for the token endpoint            | `none`, `client_secret_post`, or `client_secret_basic`                                       | FALSE    | FALSE  | FALSE    |
@@ -145,6 +149,9 @@ curl -v -X POST \
       "redirect_uris": [
          "https://www.example-application.com/oauth2/redirectUri"
       ],
+      "post_logout_redirect_uris": [
+        "https://www.example-application.com/oauth2/postLogoutRedirectUri"
+      ],
       "response_types": [
          "code",
          "id_token"
@@ -173,6 +180,9 @@ curl -v -X POST \
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
+  ],
+  "post_logout_redirect_uris": [
+    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
   ],
   "response_types": [
     "id_token",
@@ -229,6 +239,9 @@ curl -v -X GET \
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
+  ],
+  "post_logout_redirect_uris": [
+    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
   ],
   "response_types": [
     "id_token",
@@ -303,6 +316,9 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "redirect_uris": [
       "https://www.example-application.com/oauth2/redirectUri"
     ],
+    "post_logout_redirect_uris": [
+      "https://www.example-application.com/oauth2/postLogoutRedirectUri"
+    ],
     "response_types": [
       "id_token",
       "code"
@@ -322,6 +338,9 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "application_type": "browser",
     "redirect_uris": [
       "https://www.another-application.com/oauth2/redirectUri"
+    ],
+    "post_logout_redirect_uris": [
+      "https://www.example-application.com/oauth2/postLogoutRedirectUri"
     ],
     "response_types": [
       "id_token",
@@ -368,6 +387,9 @@ curl -v -X GET \
     "application_type": "web",
     "redirect_uris": [
       "https://www.payroll-application.com/oauth2/redirectUri"
+    ],
+    "post_logout_redirect_uris": [
+      "https://www.example-application.com/oauth2/postLogoutRedirectUri"
     ],
     "response_types": [
       "id_token",
@@ -421,6 +443,9 @@ curl -v -X PUT \
       "redirect_uris": [
         "https://www.example-application.com/oauth2/redirectUri"
       ],
+      "post_logout_redirect_uris": [
+        "https://www.example-application.com/oauth2/postLogoutRedirectUri"
+      ],
       "response_types": [
         "id_token",
         "code"
@@ -449,6 +474,9 @@ curl -v -X PUT \
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
+  ],
+  "post_logout_redirect_uris": [
+    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
   ],
   "response_types": [
     "id_token",
@@ -511,6 +539,9 @@ curl -v -X POST \
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
+  ],
+  "post_logout_redirect_uris": [
+    "https://www.example-application.com/oauth2/postLogoutRedirectUri"
   ],
   "response_types": [
     "id_token",

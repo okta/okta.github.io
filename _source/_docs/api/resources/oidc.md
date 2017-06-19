@@ -127,7 +127,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
   "amr": [
     "pwd"
   ],
-  "jti": "4eAWJOCMB3SX8XewDfVR",
+  "jti": "ID.4eAWJOCMB3SX8XewDfVR",
   "auth_time": 1449624026,
   "at_hash": "cpqKfdQA5eH891Ff5oJr_Q",
   "name" :"John Doe",
@@ -688,7 +688,8 @@ This API doesn't require any authentication and returns a JSON object with the f
         "client_secret_basic",
         "client_secret_post",
         "none"
-    ]
+    ],
+    "end_session_endpoint": "https://${org}.okta.com/oauth2/v1/logout"
 }
 ~~~
 
@@ -812,10 +813,7 @@ This request initiates the authorization code flow, as signaled by `response_typ
 
 ~~~sh
 curl -v -X GET \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/${authorizationServerId}/v1/authorize?
+"https://${org}.okta.com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=code&
   response_mode=form_post&
@@ -830,10 +828,7 @@ but with `response_type=id_token` or `response_type=id_token token`:
 
 ~~~sh
 curl -v -X GET \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/${authorizationServerId}/v1/authorize?
+"https://${org}.okta.com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=id_token token&
   response_mode=form_post&
@@ -967,3 +962,41 @@ Content-Type: application/json;charset=UTF-8
     "error_description" : "No client credentials found."
 }
 ~~~
+
+### Logout Request
+{:.api .api-operation}
+
+{% api_operation post /oauth2/v1/logout %}
+
+The API takes an ID Token and logs the user out of Okta if the subject matches the current Okta session. A `post_logout_redirect_uri` may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.
+
+#### Request Parameters
+
+The following parameters can be posted as a part of the URL-encoded form values to the API.
+
+Parameter                | Description                                                                            | Type    | Required  |
+-------------------------+----------------------------------------------------------------------------------------+---------+-----------|
+id_token_hint            | A valid ID token with a subject matching the current session. | String | TRUE |
+post_logout_redirect_uri | Callback location to redirect to after the logout has been performed. It must match the value preregistered in Okta during client registration. | String | FALSE |
+state      | If the request contained a `state` parameter, then the same unmodified value is returned back in the response. | String | FALSE |                                                                             
+#### Request Examples
+
+This request initiates a logout and will redirect to the Okta login page on success.
+
+~~~sh
+curl -v -X GET \
+"https://${org}.okta.com/oauth2/v1/logout?
+  id_token_hint=${id_token_hint}
+~~~
+
+This request initiates a logout and will redirect to the `post_logout_redirect_uri` on success.
+
+~~~sh
+curl -v -X GET \
+"https://${org}.okta.com/oauth2/v1/logout?
+  id_token_hint=${id_token_hint}&
+  post_logout_redirect_uri=${post_logout_redirect_uri}&
+  state=${state}
+~~~
+
+
