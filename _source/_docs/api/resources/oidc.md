@@ -61,16 +61,16 @@ OpenID Connect uses scope values to specify what access privileges are being req
 The scopes associated with Access Tokens determine which claims are available when they are used
 to access [the OIDC `userinfo` endpoint](/docs/api/resources/oidc.html#get-user-information). The following scopes are supported:
 
-|--------------+--------------------------------------------------------------------------------|--------------|
-| Property     | Description                                                                    | Required     |
-|--------------+---------+----------------------------------------------------------------------|--------------|
-| openid       | Identifies the request as an OpenID Connect request.                           | Yes          |
-| profile      | Requests access to the end-user's default profile claims.                      | No           |
-| email        | Requests access to the `email` and `email_verified` claims.                    | No           |
-| phone        | Requests access to the `phone_number` and `phone_number_verified` claims.      | No           |
-| address      | Requests access to the `address` claim.                                        | No           |
-| groups       | Requests access to the `groups` claim.                                         | No           |
-| offline_access | Requests a Refresh Token, used to obtain more access tokens without re-prompting the user for authentication. | No           |
+| -------------  | -------------------------------------------------------------------------------                               | -------------- |
+| Property       | Description                                                                                                   | Required       |
+|:---------------|:--------------------------------------------------------------------------------------------------------------|:---------------|
+| openid         | Identifies the request as an OpenID Connect request.                                                          | Yes            |
+| profile        | Requests access to the end-user's default profile claims.                                                     | No             |
+| email          | Requests access to the `email` and `email_verified` claims.                                                   | No             |
+| phone          | Requests access to the `phone_number` and `phone_number_verified` claims.                                     | No             |
+| address        | Requests access to the `address` claim.                                                                       | No             |
+| groups         | Requests access to the `groups` claim.                                                                        | No             |
+| offline_access | Requests a Refresh Token, used to obtain more access tokens without re-prompting the user for authentication. | No             |
 
 ### Scope Values
 
@@ -164,11 +164,11 @@ The header and payload sections contain claims.
 
 Claims in the header are always returned.
 
-|--------------+-----------------------------------------------------------------------------------------------------+--------------|--------------------------|
-| Property     | Description                                                                      | DataType     | Example                  |
-|--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
-| alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
-| kid          | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the [well-known configuration's](#openid-connect-discovery-document) *jwks_uri* value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------- | -------------------------- |
+| Property      | Description                                                                                                                                                                                                  | DataType      | Example                    |
+|:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|:---------------------------|
+| alg           | Identifies the digital signature algorithm used. This is always be RS256.                                                                                                                                    | String        | "RS256"                    |
+| kid           | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the   [well-known configuration's](#openid-connect-discovery-document) *jwks_uri* value.   | String        | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Claims in the payload section
 
@@ -176,44 +176,44 @@ Claims in the payload are either base claims, independent of scope (always retur
 
 ##### Base claims (always present)
 
-|--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
-| Property     |  Description                                                                      | DataType     | Example                  |
-|--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
-| ver     | The semantic version of the ID Token.   |  Integer   |  1    |
-| jti     | A unique identifier for this ID Token for debugging and revocation purposes.   | String    |  "Tlenfse93dgkaksginv"  |
-| iss     | The Issuer Identifier of the response.    | String    | "https://your-org.okta.com"     |
-| sub     | The subject. A unique identifier for the user.   | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
-| aud     | Identifies the audience that this ID Token is intended for. It must be one of the OAuth 2.0 client IDs of your application.   | String    | "6joRGIzNCaJfdCPzRjlh"     |
-| iat     | The time the ID Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| exp     | The time the ID Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| auth_time | The time the end-user was authenticated, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| amr     | JSON array of strings that are identifiers for [authentication methods](http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html) used in the authentication.   | Array    | [ "pwd", "mfa", "otp", "kba", "sms", "swk", "hwk" ]     |
-| idp     | The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If it was Okta, the value would be the OrgId.  | String    | "00ok1u7AsAkrwdZL3z0g3"    |
-| nonce     |  Value used to associate a Client session with an ID Token, and to mitigate replay attacks. |  String   | "n-0S6_WzA2Mj"  |
-| at_hash     | The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"     |
-| c_hash  | The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the ID Token. | String | "DE5MzQ1TIzlr30gokT2UDN"   |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------   | --------- | --------------------------------------------------- |
+| Property      | Description                                                                                                                                                                | DataType  | Example                                             |
+|:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|:----------------------------------------------------|
+| ver           | The semantic version of the ID Token.                                                                                                                                      | Integer   | 1                                                   |
+| jti           | A unique identifier for this ID Token for debugging and revocation purposes.                                                                                               | String    | "Tlenfse93dgkaksginv"                               |
+| iss           | The Issuer Identifier of the response.                                                                                                                                     | String    | "https://your-org.okta.com"                         |
+| sub           | The subject. A unique identifier for the user.                                                                                                                             | String    | "00uk1u7AsAk6dZL3z0g3"                              |
+| aud           | Identifies the audience that this ID Token is intended for. It must be one of the OAuth 2.0 client IDs of your application.                                                | String    | "6joRGIzNCaJfdCPzRjlh"                              |
+| iat           | The time the ID Token was issued, represented in Unix time (seconds).                                                                                                      | Integer   | 1311280970                                          |
+| exp           | The time the ID Token expires, represented in Unix time (seconds).                                                                                                         | Integer   | 1311280970                                          |
+| auth_time     | The time the end-user was authenticated, represented in Unix time (seconds).                                                                                               | Integer   | 1311280970                                          |
+| amr           | JSON array of strings that are identifiers for     [authentication methods](http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html) used in the authentication.     | Array     | [ "pwd", "mfa", "otp", "kba", "sms", "swk", "hwk" ] |
+| idp           | The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If it was Okta, the value would be the OrgId.           | String    | "00ok1u7AsAkrwdZL3z0g3"                             |
+| nonce         | Value used to associate a Client session with an ID Token, and to mitigate replay attacks.                                                                                 | String    | "n-0S6_WzA2Mj"                                      |
+| at_hash       | The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.                  | String    | "MTIzNDU2Nzg5MDEyMzQ1Ng"                            |
+| c_hash        | The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the ID Token.     | String    | "DE5MzQ1TIzlr30gokT2UDN"                            |
 
 ##### Scope-dependent claims (not always returned)
 
-|--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
-| Property     | Required Scope | Description                                                                      | DataType     | Example                  |
-|--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
-| name     |  profile  | User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user's locale and preferences.   | String    | "John Doe"     |
-| preferred_username | profile | The Okta login (username) for the end-user. | String | "john.doe@example.com" |
-| nickname     |  profile   | Casual name of the user that may or may not be the same as the given_name.   | String    | "Jimmy"    |
-| preferred_username  |  profile  |  The chosen login (username) for the end-user. By default this is the Okta username.  | String    | 	"john.doe@example.com"     |
-| given_name     |  profile   | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.   | String    | "John"     |
-| middle_name     |  profile    | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used.   | String    | "James"   |
-| family_name     |  profile   | Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.   | String    |  "Doe"    |
-| profile     |  profile   | URL of the user's profile page.   | String    | "http://profile.wordpress.com/john.doe"     |
-| zoneinfo     |  profile  | String representing the user's time zone.   |  String   |  	"America/Los_Angeles"    |
-| locale     |  profile   | Language and [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.   | String    | "en-US"     |
-| updated_at     | profile    | Time the user's information was last updated, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| email     |  email   | User's preferred email address. The resource provider must not rely upon this value being unique.   | String    | "john.doe@example.com"     |
-| email_verified     |  email   | True if the user's email address (Okta primary email) has been verified; otherwise false.   | boolean    | true     |
-| address     | address    | User's preferred postal address. The value of the address member is a JSON structure containing *street_address*, *locality*, *region*, *postal_code*, and *country*.   | JSON structure    | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" }     |
-| phone_number     |  phone   | User's preferred telephone number in E.164 format.   | String    | 	"+1 (425) 555-1212"     |
-| groups    | groups    | The groups that the user is a member of that also match the ID Token group filter of the client app. | List | ["MyGroup1", "MyGroup2", "MyGroup3"] |
+| ------------------ | ----------------- | --------------------------------------------------------------------------------                                                                                                                                                   | -------------  | --------------------------                                                                                                      |
+| Property           | Required Scope    | Description                                                                                                                                                                                                                        | DataType       | Example                                                                                                                         |
+|:-------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------|:--|
+| name               | profile           | User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user's locale and preferences.                                                                     | String         | "John Doe"                                                                                                                      |
+| preferred_username | profile           | The Okta login (username) for the end-user.                                                                                                                                                                                        | String         | "john.doe@example.com"                                                                                                          |
+| nickname           | profile           | Casual name of the user that may or may not be the same as the given_name.                                                                                                                                                         | String         | "Jimmy"                                                                                                                         |
+| preferred_username | profile           | The chosen login (username) for the end-user. By default this is the Okta username.                                                                                                                                                | String         | "john.doe@example.com"                                                                                                          |
+| given_name         | profile           | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.                                              | String         | "John"                                                                                                                          |
+| middle_name        | profile           | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used. | String         | "James"                                                                                                                         |
+| family_name        | profile           | Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.                               | String         | "Doe"                                                                                                                           |
+| profile            | profile           | URL of the user's profile page.                                                                                                                                                                                                    | String         | "http://profile.wordpress.com/john.doe"                                                                                         |
+| zoneinfo           | profile           | String representing the user's time zone.                                                                                                                                                                                          | String         | "America/Los_Angeles"                                                                                                           |
+| locale             | profile           | Language and   [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.                                                                                                                   | String         | "en-US"                                                                                                                         |
+| updated_at         | profile           | Time the user's information was last updated, represented in Unix time (seconds).                                                                                                                                                  | Integer        | 1311280970                                                                                                                      |
+| email              | email             | User's preferred email address. The resource provider must not rely upon this value being unique.                                                                                                                                  | String         | "john.doe@example.com"                                                                                                          |
+| email_verified     | email             | True if the user's email address (Okta primary email) has been verified; otherwise false.                                                                                                                                          | boolean        | true                                                                                                                            |
+| address            | address           | User's preferred postal address. The value of the address member is a JSON structure containing *street_address*, *locality*, *region*, *postal_code*, and *country*.                                                              | JSON structure | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" } |
+| phone_number       | phone             | User's preferred telephone number in E.164 format.                                                                                                                                                                                 | String         | "+1 (425) 555-1212"                                                                                                             |
+| groups             | groups            | The groups that the user is a member of that also match the ID Token group filter of the client app.                                                                                                                               | List           | ["MyGroup1", "MyGroup2", "MyGroup3"]                                                                                            |
 
 Be aware of the following before you work with scope-dependent claims:
 
@@ -222,24 +222,22 @@ If more than 100 groups match the filter, then the request fails. Expect that th
 For more information about configuring an app for OpenID Connect, including group claims, see [Using OpenID Connect](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect).
 * **Important:** Scope-dependent claims are returned differently depending on the values in `response_type` and the scopes requested:
 
-    | Response Type      | Claims Returned in ID Token    | Claims Returned from the Userinfo Endpoint |
-    |:-------------------|:-------------------|:-------------------------------------------------|
-    | `code `            |  N/A               | N/A                                              |
-    | `token`            |  N/A               | N/A                                              |
-    | `id_token`         |  Claims associated with requested scopes. | N/A                       |
-    | `id_token` `code ` |  Claims associated with requested scopes. | N/A                       |
-    | `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
+    | Response Type             | Claims Returned in ID Token                                                                        | Claims Returned from the Userinfo Endpoint  |
+    |:--------------------------|:---------------------------------------------------------------------------------------------------|:--------------------------------------------|
+    | `code `                   | N/A                                                                                                | N/A                                         |
+    | `token`                   | N/A                                                                                                | N/A                                         |
+    | `id_token`                | Claims associated with requested scopes.                                                           | N/A                                         |
+    | `id_token` `code `        | Claims associated with requested scopes.                                                           | N/A                                         |
+    | `id_token` `token`        | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
     | `code` `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
 
 * The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
 
 ## Endpoints
 
-Both the Access Token and the ID Token are acquired via [OAuth 2.0](oauth2.html) endpoints.
+Explore the OpenID Connect API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/57ec0b23a21999f96f2d){:target="_blank"}
 
 >The OIDC Access Token is applicable only for the Okta `/oauth2/v1/userinfo` endpoint and thus should be treated as opaque by the application. The application does not need to validate it since it should not be used against other resource servers. The format of it and the key used to sign it are subject to change without prior notice.
-
-Explore the OpenID Connect API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/57ec0b23a21999f96f2d){:target="_blank"}
 
 ### Get User Information
 {:.api .api-operation}
@@ -247,7 +245,7 @@ Explore the OpenID Connect API: [![Run in Postman](https://run.pstmn.io/button.s
 {% api_operation get /oauth2/v1/userinfo %}
 {% api_operation post /oauth2/v1/userinfo %}
 
-You must include the `access_token` returned from the [/oauth2/v1/authorize](oauth2.html#obtain-an-authorization-grant-from-a-user) endpoint as an authorization header parameter.
+You must include the `access_token` returned from the [/oauth2/v1/authorize](oidc.html#authentication-request) endpoint as an authorization header parameter.
 
 This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
@@ -358,12 +356,12 @@ An implicit client can only introspect its own tokens, while a confidential clie
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-Parameter       | Description                                                                                         | Type       |
-----------------+-----------------------------------------------------------------------------------------------------+------------|
-token           | An Access Token, ID Token, or Refresh Token.                                                                   | String     |
-token_type_hint | A hint of the type of *token*.                                                               | String     |
-client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
-client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
+| Parameter       | Description                                                                                                                                                                                    | Type   |
+|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| token           | An Access Token, ID Token, or Refresh Token.                                                                                                                                                   | String |
+| token_type_hint | A hint of the type of *token*.                                                                                                                                                                 | String |
+| client_id       | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application. | String |
+| client_secret   | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.  | String |
 
 ##### Token Authentication Methods
 
@@ -381,29 +379,29 @@ Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 
 Based on the type of token and whether it is active or not, the returned JSON contains a different set of information. Besides the claims in the token, the possible top-level members include:
 
-Parameter   | Description                                                                                         | Type       |
-------------+-----------------------------------------------------------------------------------------------------+------------|
-active      | An Access Token or Refresh Token.                                                                   | boolean    |
-token_type  | The type of the token. The value is always `Bearer`.                                                | String     |
-scope       | A space-delimited list of scopes.                                                                   | String     |
-client_id   | The ID of the client associated with the token.                                                     | String     |
-username    | The username associated with the token.                                                             | String     |
-exp         | The expiration time of the token in seconds since January 1, 1970 UTC.                              | long       |
-iat         | The issuing time of the token in seconds since January 1, 1970 UTC.                                 | long       |
-nbf         | A timestamp in seconds since January 1, 1970 UTC when this token is not be used before.             | long       |
-sub         | The subject of the token.                                                                           | String     |
-aud         | The audience of the token.                                                                          | String     |
-iss         | The issuer of the token.                                                                            | String     |
-jti         | The identifier of the token.                                                                        | String     |
-device_id   | The ID of the device associated with the token                                                      | String     |
-uid         | The user ID. This parameter is returned only if the token is an access token and the subject is an end user.     | String     |
+| Parameter  | Description                                                                                                  | Type    |
+|:-----------|:-------------------------------------------------------------------------------------------------------------|:--------|
+| active     | An Access Token or Refresh Token.                                                                            | boolean |
+| token_type | The type of the token. The value is always `Bearer`.                                                         | String  |
+| scope      | A space-delimited list of scopes.                                                                            | String  |
+| client_id  | The ID of the client associated with the token.                                                              | String  |
+| username   | The username associated with the token.                                                                      | String  |
+| exp        | The expiration time of the token in seconds since January 1, 1970 UTC.                                       | Long    |
+| iat        | The issuing time of the token in seconds since January 1, 1970 UTC.                                          | Long    |
+| nbf        | A timestamp in seconds since January 1, 1970 UTC when this token is not be used before.                      | Long    |
+| sub        | The subject of the token.                                                                                    | String  |
+| aud        | The audience of the token.                                                                                   | String  |
+| iss        | The issuer of the token.                                                                                     | String  |
+| jti        | The identifier of the token.                                                                                 | String  |
+| device_id  | The ID of the device associated with the token                                                               | String  |
+| uid        | The user ID. This parameter is returned only if the token is an access token and the subject is an end user. | String  |
 
 #### List of Errors
 
-Error Id                |  Details                                                                                                     |
-------------------------+--------------------------------------------------------------------------------------------------------------|
-invalid_client          | The specified client id wasn't found. |
-invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
+| Error Id        | Details                                                                                                                                                                                                       |
+|:----------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| invalid_client  | The specified `client_id` wasn't found.                                                                                                                                                                       |
+| invalid_request | The request structure was invalid. For example, the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
 
 #### Response Example (Success, Access Token)
 
@@ -470,12 +468,12 @@ The API takes an Access Token or Refresh Token and revokes it. Revoked tokens ar
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-Parameter       | Description                                                                                         | Type       |
-----------------+-----------------------------------------------------------------------------------------------------+------------|
-token           | An Access Token or Refresh Token.                                                                   | String     |
-token_type_hint | A hint of the type of *token*.                                                               | String     |
-client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
-client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
+| Parameter       | Description                                                                                                                                                      | Type   |
+|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| token           | An Access Token or Refresh Token.                                                                                                                                | String |
+| token_type_hint | A hint of the type of `token`.                                                                                                                                   | String |
+| client_id       | The client ID generated as a part of client registration. This is used in conjunction with the `client_secret` parameter to authenticate the client application. | String |
+| client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the `client_id` parameter to authenticate the client application. | String |
 
 ##### Token Authentication Methods
 
@@ -497,10 +495,10 @@ A successful revocation is denoted by an empty response with an HTTP 200. Note t
 
 #### List of Errors
 
-Error Id                |  Details                                                                                                     |
-------------------------+--------------------------------------------------------------------------------------------------------------|
-invalid_client          | The specified client id wasn't found. |
-invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
+| Error Id        | Details                                                                                                                                                                                               |
+|:----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| invalid_client  | The specified `client_id` wasn't found.                                                                                                                                                               |
+| invalid_request | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
 
 #### Response Example (Success)
 
@@ -529,9 +527,9 @@ If automatic key rotation is disabled, provide the *client_id* to fetch public k
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter         | Description                                                                                        | Param Type | DataType  | Required | Default         |
------------------ | -------------------------------------------------------------------------------------------------- | ---------- | --------- | -------- | --------------- |
-client_id         | Your app's client ID. | Query      | String    | FALSE    | null |
+| Parameter | Description           | Param Type | DataType | Required | Default |
+|:----------|:----------------------|:-----------|:---------|:---------|:--------|
+| client_id | Your app's client ID. | Query      | String   | FALSE    | null    |
 
 #### Response Example
 {:.api .api-response .api-response-example}
@@ -742,7 +740,7 @@ of the response.
  The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
  Using the *state* parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
 
- * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose `token_endpoint_auth_method` is `none`, makes a code flow authorization request, the `code_challenge parameter` is required.
+ * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose `token_endpoint_auth_method` is `none`, makes a code flow authorization request, the `code_challenge` parameter is required.
 
 #### postMessage() Data Model
 
@@ -772,9 +770,9 @@ Irrespective of the response type, the contents of the response are as described
 | Parameter         | Description                                                                                                                                                                                                                                                          | DataType |
 |:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|
 | id_token          | JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the *response_type* includes *id_token*.                                                                                         | String   |
-| access_token      | Used to access the   [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if *response_type* includes `token`. Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change. | String   |
+| access_token      | Used to access the   [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if *response_type* includes `token`. Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change.  | String   |
 | token_type        | The token type is always `Bearer` and is returned only when *token* is specified as a *response_type*.                                                                                                                                                               | String   |
-| code              | An opaque value that can be used to redeem tokens from   [token endpoint](#token-request).                                                                                                                                                                            | String   |
+| code              | An opaque value that can be used to redeem tokens from   [token endpoint](#token-request).                                                                                                                                                                             | String   |
 | expires_in        | Number of seconds until the *access_token* expires. This is only returned if the response included an *access_token*.                                                                                                                                                | String   |
 | scope             | Scopes specified in the *access_token*. Returned only if the response includes an *access_token*.                                                                                                                                                                    | String   |
 | state             | The unmodified `state` value from the request.                                                                                                                                                                                                                       | String   |
@@ -802,10 +800,10 @@ These APIs are compliant with the OpenID Connect and OAuth 2.0 spec with some Ok
 
 [Open-ID Spec error codes](http://openid.net/specs/openid-connect-core-1_0.html#AuthError)
 
-Error Id           | Details                                                                |
--------------------| -----------------------------------------------------------------------|
-login_required     | The request specified that no prompt should be shown but the user is currently not authenticated.    |
-insufficient_scope | The Access Token provided does not contain the necessary scopes to access the resource.              |
+| Error Id           | Details                                                                                           |
+|:-------------------|:--------------------------------------------------------------------------------------------------|
+| login_required     | The request specified that no prompt should be shown but the user is currently not authenticated. |
+| insufficient_scope | The Access Token provided does not contain the necessary scopes to access the resource.           |
 
 #### Request Examples
 
@@ -813,6 +811,9 @@ This request initiates the authorization code flow, as signaled by `response_typ
 
 ~~~sh
 curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
 "https://${org}.okta.com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=code&
@@ -828,6 +829,9 @@ but with `response_type=id_token` or `response_type=id_token token`:
 
 ~~~sh
 curl -v -X GET \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
 "https://${org}.okta.com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=id_token token&
@@ -864,28 +868,41 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/v1/token %}
 
-The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the *openid* scope is requested.
+The API  returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters. 
 
 #### Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-Parameter          | Description                                                                                         | Type       |
--------------------+-----------------------------------------------------------------------------------------------------+------------|
-grant_type         | Can be one of the following: *authorization_code*, *password*, *refresh_token*, or *client_credentials*. Determines the mechanism Okta will use to authorize the creation of the tokens. | String |
-code               | Expected if grant_type specified *authorization_code*. The value is what was returned from the [authentication endpoint](#authentication-request). | String |
-refresh_token      | Expected if the grant_type specified *refresh_token*. The value is what was returned from this endpoint via a previous invocation. | String |
-username           | Expected if the grant_type specified *password*. | String |
-password           | Expected if the grant_type specified *password*. | String |
-scope              | Optional if *refresh_token*, or *password* is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the *refresh_token* grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place. | String |
-redirect_uri       | Expected if grant_type is *authorization_code*. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client. | String |
-code_verifier      | The code verifier of [PKCE](#parameter-details). Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request. | String |
+| Parameter     | Description                                                                                                                                                                                                                                                                                                                       | Type   |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| grant_type    | Can be one of the following: `authorization_code`, `password`, or `refresh_token`. Determines the mechanism Okta uses to authorize the creation of the tokens.                                                                                                                                                                    | String |
+| code          | Required if `grant_type` is `authorization_code`. The value is what was returned from the   [authentication endpoint](#authentication-request).                                                                                                                                                                                     | String |
+| refresh_token | Required if `grant_type` is `refresh_token`. The value is what was returned from this endpoint via a previous invocation.                                                                                                                                                                                                         | String |
+| username      | Required if the grant_type is `password`.                                                                                                                                                                                                                                                                                         | String |
+| password      | Required if the grant_type is `password`.                                                                                                                                                                                                                                                                                         | String |
+| scope         | Required if `password` is the `grant_type`. This is a list of scopes that the client wants to be included in the Access Token. For the `refresh_token` grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.                                                            | String |
+| redirect_uri  | Required if `grant_type` is `authorization_code`. Specifies the callback location where the authorization was sent. This value must match the `redirect_uri` used to generate the original `authorization_code`.                                                                                                                  | String |
+| code_verifier | Required if `grant_type` is `authorization_code`  and `code_challenge` was specified in the original `/authorize` request. This value is the code verifier for                 [PKCE](#parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request.         | String |
+| client_id     | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application.                                                                                                                                    | String |
+| client_secret | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.                                                                                                                                     | String |
 
+##### Refresh Tokens for Web and Native Applications
+
+For web and native application types, an additional process is required:
+
+1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
+2. Pass the `offline_access` scope to your `/authorize` or `/token` request if you're using the `password` grant type.
 
 ##### Token Authentication Method
 
-The client can authenticate by providing the [`client_id`](oidc.html#request-parameters)
-and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) as an Authorization header in the Basic auth scheme (basic authentication).
+If you authenticate a client with client credentials, provide the [`client_id`](oidc.html#request-parameters)
+and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) using either of the following methods:
+
+* In an Authorization header in the Basic auth scheme (basic authentication)
+* As additional parameters to the POST body.
+
+Including these credentials in both the Authorization header and POST body is not allowed.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
 
@@ -898,32 +915,33 @@ You can't change this value in the Okta user interface.
 
 #### Response Parameters
 
-Based on the grant type, the returned JSON can contain a different set of tokens.
+Based on the `grant_type` and sometimes `scope`, the response contains different token sets.
+Generally speaking, the scopes specified in a request are included in the Access Tokens in the response. 
 
-Input grant type   | Output token types                    |
--------------------|---------------------------------------|
-authorization_code | Access Token, Refresh Token, ID Token |
-refresh_token      | Access Token, Refresh Token           |
-password           | Access Token, Refresh Token           |
-client_credentials | Access Token                          |
-
-
-##### Refresh Tokens for Web and Native Applications
-
-For web and native application types, an additional process is required:
-
-1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
-2. Pass the *offline_access* scope to your authorize request.
+| Requested grant type | Requested scope                                     | Response tokens                                                   |
+|:---------------------|:----------------------------------------------------|:------------------------------------------------------------------|
+| authorization_code   | No scope                                            | Access Token. Contains scopes requested in `/authorize` endpoint. |
+| authorization_code   | Any scopes except `offline_access` or `openid`      | Access Token                                                      |
+| authorization_code   | Any or no scopes plus `offline_access`              | Access Token, Refresh Token                                       |
+| authorization_code   | Any or no scopes plus `openid`                      | Access Token, ID Token                                            |
+| authorization_code   | Any or no scopes plus `offline_access` and `openid` | Access Token, Refresh Token, ID Token                             |
+| refresh_token        | None                                                | Access Token, Refresh Token. Contains scopes used to generate the Refresh Token.     |
+| refresh_token        | Any scopes except `offline_access`                  | Access Token                                                      |
+| refresh_token        | Any or no scopes plus `offline_access`              | Access Token, Refresh Token                                       |
+| password             | Any or no scopes except `offline_access`            | Access Token                                                      |
+| password             | Any or no scopes plus `offline_access`              | Access Token, Refresh Token                                       |
+| password             | Any or no scopes plus `openid`                      | Access Token, ID Token                                            |
+| password             | Any or no scopes plus `offline_access` and `openid` | Access Token, Refresh Token, ID Token                             |
 
 #### List of Errors
 
-Error Id                |  Details                                                                                                     |
-------------------------+--------------------------------------------------------------------------------------------------------------|
-invalid_client          | The specified client id wasn't found. |
-invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
-invalid_grant           | The *code* or *refresh_token* value was invalid, or the *redirect_uri* does not match the one used in the authorization request. |
-unsupported_grant_type  | The grant_type was not *authorization_code* or *refresh_token*. |
-invalid_scope           | The scopes list contains an invalid or unsupported value.    |
+| Error Id               | Details                                                                                                                                                                                                    |
+|:-----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| invalid_client         | The specified client id wasn't found.                                                                                                                                                                      |
+| invalid_request        | The request structure was invalid. For example: the basic authentication header is malformed; both header and form parameters were used for authentication; or no authentication information was provided. |
+| invalid_grant          | The `code`, `refresh_token`, or `username` and `password` combination is invalid, or the `redirect_uri` does not match the one used in the authorization request.                                          |
+| unsupported_grant_type | The `grant_type` isn't `authorization_code`, `refresh_token`, or `password`.                                                                                                                               |
+| invalid_scope          | The scopes list contains an invalid or unsupported value.                                                                                                                                                  |
 
 #### Response Example (Success)
 

@@ -60,7 +60,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
 | state                 | A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.                                                                                                                                                                                                                                              | Query | String   | TRUE     |                  |
 | prompt                | Can be either ``none`` or ``login``. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there's an existing Okta session.                                                                                                                                                                       | Query | String   | FALSE    | See Description. |
 | nonce                 | Specifies a nonce that is reflected back in the ID Token. It is used to mitigate replay attacks.                                                                                                                                                                                                                                                                                                                                            | Query | String   | TRUE     |                  |
-| code_challenge        | Specifies a challenge of     PKCE](#request-parameter-details). The challenge is verified in the Token request.                                                                                                                                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
+| code_challenge        | Specifies a challenge of     [PKCE](#request-parameter-details). The challenge is verified in the Token request.                                                                                                                                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
 | code_challenge_method | Specifies the method that was used to derive the code challenge. Only S256 is supported.                                                                                                                                                                                                                                                                                                                                                    | Query | String   | FALSE    |                  |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                                                                  | Query | String   | FALSE    |                  |
 
@@ -79,9 +79,8 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
       in a popup window or an iFrame and receive the ID token and/or access token back in the parent page without leaving the context of that page.
       The data model for the [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) call is in the next section.
  * Okta requires the OAuth 2.0 *state* parameter on all requests to the authorization endpoint in order to prevent cross-site request forgery (CSRF).
- The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
- Using the *state* parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
-
+    The OAuth 2.0 specification [requires](https://tools.ietf.org/html/rfc6749#section-10.12) that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent's authenticated state.
+    Using the *state* parameter is also a countermeasure to several other known attacks as outlined in [OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819).
  * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as *code_verifier* and derives *code_challenge* from it using the method specified in *code_challenge_method*.
     Then the client passes the *code_challenge* and *code_challenge_method* in the authorization request for code flow. When a client tries to redeem the code, it must pass the *code_verifer*. Okta recomputes the challenge and returns the requested token only if it matches the *code_challenge* in the original authorization request. When a client, whose *token_endpoint_auth_method* is ``none``, makes a code flow authorization request, *code_challenge* is required.
     Since *code_challenge_method* only supports S256, this means that the value for *code_challenge* must be: `BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))`. According to the [PKCE spec](https://tools.ietf.org/html/rfc7636), the *code_verifier* must be at least 43 characters and no more than 128 characters.
@@ -95,7 +94,7 @@ Use the postMessage() data model to help you when working with the *okta_post_me
 Parameter         | Description                                                                                        | DataType  |
 ----------------- | -------------------------------------------------------------------------------------------------- | ----------|
 id_token          | The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the `response_type` includes `id_token`. | String   |
-access_token      | The *access_token* used to access the [`/oauth2/v1/userinfo`](/docs/api/resources/oidc.html#get-user-information) endpoint. This is returned if the *response_type* included a token. <b>Important</b>: Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change. | String    |
+access_token      | The *access_token* used to access `/oauth2/:authorizationServerId/v1/userinfo`. This is returned if the *response_type* included a token. <b>Important</b>: Unlike the ID Token JWT, the *access_token* structure is specific to Okta, and is subject to change. | String    |
 state             | If the request contained a `state` parameter, then the same unmodified value is returned back in the response. | String    |
 error             | The error-code string providing information if anything goes wrong.                                | String    |
 error_description | Additional description of the error.                                                               | String    |
@@ -188,50 +187,36 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/:authorizationServerId/v1/token %}
 
-The API takes a grant type of either *authorization_code*, *password*, *refresh_token*, or *client_credentials* and the corresponding credentials and returns back an Access Token. A Refresh Token is returned if *offline_access* scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type returns an ID Token if the *openid* scope is requested.
+This API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-| Parameter     | Description                                                                                                                                                                                                                                                                                                            | Type   |
-|:--------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
-| grant_type    | Can be one of the following: `authorization_code`, `password`, `refresh_token`, or `client_credentials`. Determines the mechanism Okta uses to authorize the creation of the tokens.                                                                                                                                   | String |
-| code          | Required if *grant_type* specified `authorization_code`. The value is what was returned from the             [authorization endpoint](#obtain-an-authorization-grant-from-a-user).                                                                                                                                                                    | String |
-| refresh_token | Required if the *grant_type* specified `refresh_token`. The value is what was returned from this endpoint via a previous invocation.                                                                                                                                                                                   | String |
-| username      | Required if the *grant_type* specified `password`.                                                                                                                                                                                                                                                                     | String |
-| password      | Required if the *grant_type* specified `password`.                                                                                                                                                                                                                                                                     | String |
-| scope         | Optional.         [List of scopes](#scope-and-grant-type-parameter-details) that the client wants included in the Token.                                                                                                                                                                                                                      | String |
-| redirect_uri  | Required if *grant_type* specified `authorization_code`. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client.                                                                                                                                   | String |
-| code_verifier | Required if *grant_type* specified `authorization_code`  and `code_challenge` is passed in the Authorize request to get the code. The code verifier of             [PKCE](#request-parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request. | String |
-| client_id     | Required if client credentials are not provided in the Authorization header. This is used in conjunction with the *client_secret* parameter to authenticate the client application.                                                                                                                                    | String |
-| client_secret | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with the client_id parameter to authenticate the client application.                                                                                                      | String |
+| Parameter     | Description                                                                                                                                                                                                                                                                                                               | Type   |
+|:--------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| grant_type    | Can be one of the following: `authorization_code`, `password`, `refresh_token`, or `client_credentials`. Determines the mechanism Okta uses to authorize the creation of the tokens.                                                                                                                                      | String |
+| code          | Required if *grant_type* is `authorization_code`. The value is what was returned from the                 [authorization endpoint](#obtain-an-authorization-grant-from-a-user).                                                                                                                                                         | String |
+| refresh_token | Required if the *grant_type* is `refresh_token`. The value is what was returned from this endpoint via a previous invocation.                                                                                                                                                                                             | String |
+| username      | Required if the *grant_type* is `password`.                                                                                                                                                                                                                                                                               | String |
+| password      | Required if the *grant_type* is `password`.                                                                                                                                                                                                                                                                               | String |
+| scope         | Optional.            [ Different scopes and tokens](#response-parameters) are returned depending on the values of `scope` and `grant_type`.                                                                                                                                                                                          | String |
+| redirect_uri  | Required if *grant_type* is `authorization_code`. Specifies the callback location where the authorization was sent. This value must match the `redirect_uri` used to generate the original `authorization_code`.                                                                                                          | String |
+| code_verifier | Required if *grant_type* is `authorization_code`  and `code_challenge` was specified in the original `/authorize` request. This value is the `code_verifier` for                 [PKCE](#request-parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request. | String |
+| client_id     | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret` to authenticate the client application.                                                                                                               | String |
+| client_secret | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.                                                                                                                 | String |
 
->Note: You can't provide a `client_id` in both the Authorization header and as a parameter.
+##### Refresh Tokens for Web and Native Applications
 
-##### Scope and Grant Type Parameter Details
+For web and native application types, an additional process is required:
 
-* If the *grant_type* is `refresh_token` and *scope* is specified, you must specify a subset of the scopes used to generate the Refresh Token in the first place.
-* If the *grant_type* is `refresh_token` and *scope* is omitted, the default value is the scopes used to generate the Refresh Token. 
-* If the *grant_type* is `password` or `client_credentials`, and *scope* is omitted, the default value is the default scopes that are granted by policy.
-* If the *grant_type* is `authorization_code`, *scope* is not needed.
-
-##### Response Parameters
-{:.api .api-response .api-response-params}
-
-Based on the grant type, the returned JSON can contain a different set of tokens.
-
-| Input grant type   | Possible output token types           |
-|:-------------------|:--------------------------------------|
-| authorization_code | Access Token, Refresh Token, ID Token |
-| refresh_token      | Access Token, Refresh Token           |
-| password           | Access Token, Refresh Token, ID Token |
-| client_credentials | Access Token                          |
+1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
+2. Pass the `offline_access` scope to your `/authorize` or `/token` request if you're using the `password` grant type.
 
 ##### Token Authentication Method
 
-For clients authenticating by client credentials, provide the [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+For clients authenticating by client credentials, provide the [`client_id`](oauth2.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
 either as an Authorization header in the Basic auth scheme (basic authentication) or as additional parameters to the POST body. 
 Including credentials in both the headers and the POST body is not allowed.
 
@@ -241,22 +226,36 @@ For authentication with Basic auth, an HTTP header with the following format mus
 Authorization: Basic ${Base64(<client_id>:<client_secret>)}
 ~~~
 
-##### Refresh Tokens for Web and Native Applications
+##### Response Parameters
+{:.api .api-response .api-response-params}
 
-For web and native application types, an additional process is required:
+Based on the grant type and in some cases scope specified in the request, the response contains different token sets.
+Generally speaking, the scopes specified in a request are included in the Access Tokens in the response. 
 
-1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
-2. Pass the *offline_access* scope to your authorize request.
+| Requested grant type | Requested scope                                                            | Tokens in the response                                                                   |
+|:---------------------|:---------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------|
+| authorization_code   | None                                                                       | Access Token. Contains scopes requested in the `/authorize` endpoint.                    |
+| authorization_code   | Any or no scopes plus `offline_scope`                                      | Access Token, Refresh Token                                                              |
+| authorization_code   | Any or no scopes plus `openid`                                             | Access Token, ID Token                                                                   |
+| authorization_code   | Any or no scopes plus `openid` and `offline_scope`                         | Access Token, ID Token, Refresh Token                                                    |
+| refresh_token        | None                                                                       | Access Token, Refresh Token. Contains scopes used to generate the Refresh Token.         |
+| refresh_token        | Subset of scopes used to generate Refresh Token excluding `offline_access` | Access Token. Contains specified scopes.                                                 |
+| refresh_token        | Subset of scopes used to generate Refresh Token including `offline_scope`  | Access Token, Refresh Token                                                              |
+| password             | None                                                                       | Access Token. Contains default scopes granted by policy.                                 |
+| password             | Any or no scopes plus `offline_scope`                                      | Access Token, Refresh Token. Contains specified scopes.                                  |
+| password             | Any or no scopes plus `openid`                                             | Access Token, ID Token                                                                   |
+| password             | Any or no scopes plus `openid` and `offline_scope`                         | Access Token, ID Token, Refresh Token                                                    |
+| client_credentials   | Any or no scope                                                            | Access Token. Contains default scopes granted by policy in addition to requested scopes. |
 
 ##### List of Errors
 
-| Error Id                | Details                                                                                                                                                                                               |
-|:------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| invalid_client          | The specified client ID wasn't found or authentication failed.                                                                                                                                                                 |
-| invalid_request         | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided. |
-| invalid_grant           | The *code* or *refresh_token* value was invalid, or the *redirect_uri* does not match the one used in the authorization request, or the resource owner password is wrong.                                                                      |
-| unsupported_grant_type  | The grant_type is not supported.                                                                                                                                       |
-| invalid_scope           | The scopes list contains an invalid value.                                                                                                                                             |
+| Error Id               | Details                                                                                                                                                                                                    |
+|:-----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| invalid_client         | The specified client ID wasn't found or authentication failed.                                                                                                                                             |
+| invalid_request        | The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.      |
+| invalid_grant          | The `code`, `refresh_token`, or `username` and `password` combination is invalid, or the `redirect_uri` does not match the one used in the authorization request, or the resource owner password is wrong. |
+| unsupported_grant_type | The grant_type is not supported.                                                                                                                                                                           |
+| invalid_scope          | The scopes list contains an invalid value.                                                                                                                                                                 |
 
 
 ##### Request Example: Resource Owner Password Credentials Flow
@@ -347,19 +346,19 @@ The API takes an Access Token or Refresh Token, and returns a boolean indicating
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
 An implicit client can only introspect its own tokens, while a confidential client may inspect all tokens.
 
->Note: [ID Tokens](oidc.html#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
+>Note: ID Tokens are also valid, however, they are usually validated on the service provider or app side of a flow.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-Parameter       | Description                                                                                         | Type       |
---------------- | --------------------------------------------------------------------------------------------------- | -----------|
-token           | An access token or refresh token.                                                                   | String     |
-token_type_hint | A hint of the type of *token*.                                                                      | String     |
-client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
-client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
+| Parameter       | Description                                                                                                                                                                                    | Type   |
+|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| token           | An Access Token or Refresh Token.                                                                                                                                                              | String |
+| token_type_hint | A hint of the type of `token`.                                                                                                                                                                 | String |
+| client_id       | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application. | String |
+| client_secret   | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.  | String |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -1859,7 +1858,7 @@ curl -v -X POST \
 If you run into trouble setting up an authorization server or performing
 other tasks for API Access Management, use the following suggestions to resolve your issues.
 
-### Always Start with the System Log
+### Start with the System Log
 
 The system log contains detailed information about why a request was denied and other useful information.
 
