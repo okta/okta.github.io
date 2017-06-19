@@ -4538,7 +4538,7 @@ The catalog is currently not exposed via an API.  While additional apps may be a
 | template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)   |
 | tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)             |
 | template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)               |
-| oidc_client         | [Add OAuth 2.0 client Application](#add-oauth2-client-application)               |
+| oidc_client         | [Add OAuth 2.0 client Application](#add-oauth-20-client-application)          |
 | Custom SAML 2.0     | [Add Custom SAML 2.0 Application](#add-custom-saml-application)               |
 | Custom SWA          | [Add Custom SWA Application](#add-custom-swa-application)                     |
 |---------------------+-------------------------------------------------------------------------------|
