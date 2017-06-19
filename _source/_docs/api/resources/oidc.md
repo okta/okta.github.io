@@ -601,6 +601,7 @@ This API doesn't require any authentication and returns a JSON object with the f
     "authorization_endpoint": "https://${org}.okta.com/oauth2/v1/authorize",
     "token_endpoint": "https://${org}.okta.com/oauth2/v1/token",
     "userinfo_endpoint": "https://${org}.okta.com/oauth2/v1/userinfo",
+    "registration_endpoint": "https://${org}.okta.com/oauth2/v1/clients",
     "jwks_uri": "https://${org}.okta.com/oauth2/v1/keys",
     "response_types_supported": [
         "code",
