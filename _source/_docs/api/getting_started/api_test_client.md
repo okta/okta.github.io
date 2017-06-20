@@ -17,7 +17,7 @@ To use these collections, you'll need to set up your local environment and impor
 
 1. [Sign up](https://www.okta.com/developer/signup/){:target="_blank"} for a free Okta developer organization, if you don't have one already.
 1. [Create an API token](getting_a_token.html){:target="_blank"} for your org.
-1. [Install the Postman App](https://www.getpostman.com/apps){:target="_blank"}.
+1. [Install the Postman app](https://www.getpostman.com/apps){:target="_blank"}.
 1. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
     {% img import_enviro.png alt:"Importing the Okta Example Environment" %}
 
@@ -39,7 +39,7 @@ Import the collection for the Users API:
 
 If you have Postman installed, clicking the button above gives you the option of importing the collection into Postman.
 
-You can also import the collection  by following the Web View link and downloading the collection as a JSON file, and importing that file into Postman by clicking the **Import** button.
+You can also import the collection by following the Web View link and downloading the collection as a JSON file. Import that file into Postman by clicking the **Import** button and browsing to your download location.
 
 > Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page,
 or use the [Collections Quick Reference](#collections-quick-reference). This tutorial only requires the Users API collection.
@@ -50,7 +50,7 @@ Once you've imported the Users API collection, and added your Okta org informati
 
 To make sure everything works, send a request to list all the users in your org:
 
-1. Select the **Collections** tab in Postman and open the **Users (Okta API)** collection. Open the **List Users** folder, and select **(GET) List Users**. This loads the sample request into Postman, ready to send.
+1. Select the **Collections** tab in Postman and open the **Users (Okta API)** collection. Open the **List Users** folder, and select **(GET) List Users**. This loads the List Users request into Postman, ready to send.
 1. Click **Send**. The result pane automatically displays the results of your request:
     {% img postman_response.png alt:"GET List Users" %}
 
