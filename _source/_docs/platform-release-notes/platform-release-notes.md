@@ -29,49 +29,49 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 ### Platform Enhancements
 
-* [Key rollover](#key-rollover)
-* [System logs track key rotation and generation](#system-logs-track-key-rotation-and-generation)
-* [Client app updates available in system log](#client-app-updates-available-in-system-log)
-* [Support for RP-initiated logout](#support-for-rp-initiated-logout)
-* [Create OAuth 2.0 and OpenID Connect clients with the Apps API](#create-oauth-20-and-openid-connect-clients-with-apps-api)
-* [HTTP 401 response includes scheme in WWW-Authenticate header](#http-401-response-includes-scheme-in-www-authenticate-header)
-* [Return registration endpoint in response to .well-known request](#return-registration-endpoint-in-response-to-well-known-request)
+* [Key Rollover](#key-rollover)
+* [System Logs Track Key Rotation and Generation](#system-logs-track-key-rotation-and-generation)
+* [Client App Updates Available in System Log](#client-app-updates-available-in-system-log)
+* [Support for RP-Initiated Logout](#support-for-rp-initiated-logout)
+* [Create OAuth 2.0 and OpenID Connect Clients with the Apps API](#create-oauth-20-and-openid-connect-clients-with-apps-api)
+* [HTTP 401 Response Includes Scheme in WWW-Authenticate Header](#http-401-response-includes-scheme-in-www-authenticate-header)
+* [Return Registration Endpoint in Response to .well-known Request](#return-registration-endpoint-in-response-to-well-known-request)
 
-#### Key rollover
+#### Key Rollover
 The `credentials.signing.kid` property of an app is available only if the app supports the key rollover feature,
 that is, if it uses one of the following signing mode types: SAML 2.0, SAML 1.1, WS-Fed, or OpenID Connect.
 <!-- OKTA-76439 -->
 
-#### System logs track key rotation and generation
+#### System Logs Track Key Rotation and Generation
 Logged information about key rotation and generation for identity provider and application instances
 is available by using GET requests to either of the following endpoints: `/api/v1/events` or `/api/v1/logs`.
 <!-- (OKTA-76607) -->
 
-#### Client app updates available in system log
+#### Client App Updates Available in System Log
 Logged information about OAuth 2.0 client updates is now available by using GET requests to
 either log endpoint: `/api/v1/events` or `/api/v1/logs` {% api_lifecycle beta %}.
 <!-- (OKTA-86738, OKTA-127445) -->
 
-#### Support for RP-initiated logout
+#### Support for RP-Initiated Logout
 Okta supports [RP-intiated logout](http://openid.net/specs/openid-connect-session-1_0.html#RPLogout)
 from OpenID Connect client apps in both the Okta UI and Okta API. You can specify a logout redirect URI,
 or accept the default behavior of returning to the Okta Login page. You can access this feature on the
 Create OpenID Connect Integration page (under Applications) in the UI.
 <!-- (OKTA-94106) -->
 
-#### Create OAuth 2.0 and OpenID Connect clients with Apps API
+#### Create OAuth 2.0 and OpenID Connect Clients with Apps API
 You can use the [Apps API](https://developer.okta.com/docs/api/resources/apps.html) to create and configure
 OAuth 2.0 or OpenID Connect clients.
 Previously this was available only in the
 [Client Registration API] (https://developer.okta.com/docs/api/resources/oauth-clients.html) {% api_lifecycle beta %}.
 <!-- (OKTA-78223) -->
 
-#### HTTP 401 response includes scheme in WWW-Authenticate header
+#### HTTP 401 Response Includes Scheme in WWW-Authenticate Header
 When Okta returns an invalid_client error it returns the WWW-Authenticate header with the value of
 the supported authentication scheme in the HTTP 401 response.
 <!-- (OKTA-127653) -->
 
-#### Return registration endpoint in response to .well-known request
+#### Return Registration Endpoint in Response to .well-known Request
 Okta returns the `registration_endpoint` in OAuth 2.0 and OpenID Connect `.well-known` responses.
 <!-- (OKTA-127457) -->
 
