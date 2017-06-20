@@ -21,15 +21,15 @@ To use these collections, you'll need to set up your local environment and impor
 1. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
     {% img import_enviro.png alt:"Importing the Okta Example Environment" %}
 
-1. Once you have clicked import, make sure the `example.oktapreview.com` environment is selected.
+1. Once it's imported, make sure the `example.oktapreview.com` environment is selected.
     {% img postman_example_start.png alt:"Postman app with collections" %}
 
 1. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
-    * Rename your environment to something you'll recognize, for example `My Org`.
+    * Rename your environment to something you'll recognize. For example, `My Org`.
     * `url`: Replace the example value with your org's URL. For example, `https://dev-123456.oktapreview.com`. (Don't include '-admin' in the subdomain!)
     * `apikey`: Enter the API token you created earlier, for example `00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS`.
 
-1. Save your changes by clicking **Update**. Now your environment should look similar to this example:
+1. Save your changes by clicking **Update**. Now your environment should look like this:
     {% img postman_example_enviro.png alt:"Example.okta.com environment with required values" %}
 
 ## Import a Collection
@@ -47,7 +47,7 @@ or use the [Collections Quick Reference](#collections-quick-reference) below. Th
 
 ## Send a Request
 
-Once you've imported the Users API collection, and configured your environment with your Okta org information, you're ready to send a request.
+Once you've imported the Users API collection, and added your Okta org information to your environment, you're ready to send a request.
 
 To make sure everything works, try sending a request to list all the users in your org:
 
