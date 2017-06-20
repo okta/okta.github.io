@@ -10,7 +10,7 @@ The Okta Event API provides read access to your organization's system log. Expor
 
 ## Getting Started
 
-Explore the Events API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86)
+Explore the Events API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf)
 
 ## Event Operations
 

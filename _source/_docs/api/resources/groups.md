@@ -10,7 +10,7 @@ The Okta Groups API provides operations to manage Okta groups and their user mem
 
 ## Getting Started with the Groups API
 
-Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f)
+Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0bb414f9594ed93672a0)
 
 ## Group Operations
 

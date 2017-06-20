@@ -39,7 +39,7 @@ Trusted applications are backend applications that act as authentication broker 
 2. For more advanced use cases, learn [the Okta API basics](/docs/api/getting_started/api_test_client.html).
 3. Explore the Authentication API:
 
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71)
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f9684487e584101f25a3)
 
 ## Authentication Operations
 
