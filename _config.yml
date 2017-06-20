@@ -9,6 +9,7 @@ twitter_username: okta
 github_username:  oktadeveloper
 
 gems:
+  - jekyll-extlinks
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
@@ -91,6 +92,9 @@ defaults:
       collection: reference
     values:
       layout: documentation
+
+extlinks:
+  attributes: {target: _blank}
 
 signup_error_email_address: "BD-ISV@okta.com"
 

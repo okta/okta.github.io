@@ -5,7 +5,7 @@
   <div class="Page {{ page.title | slugify: 'pretty' }}">
     <!-- START Header -->
     {% include header.html %}     <!-- END Header -->
-    {{ content }}
+    {{ content | extlinks }}
     <!-- START Footer -->
     {% include footer.html %}
      <!-- END Footer -->
