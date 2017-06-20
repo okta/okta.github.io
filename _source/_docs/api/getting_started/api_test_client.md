@@ -29,8 +29,7 @@ To use these collections, you'll need to set up your local environment and impor
     * `url`: Replace the example value with your org's URL. For example, `https://dev-123456.oktapreview.com`. (Don't include '-admin' in the subdomain!)
     * `apikey`: Enter the API token you created earlier, for example `00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS`.
 
-1. Save your changes by clicking **Update**. Now your environment should look like this:
-    {% img postman_example_enviro.png alt:"Example.okta.com environment with required values" %}
+1. Click **Update** to save your changes.
 
 ## Import a Collection
 
@@ -38,18 +37,18 @@ Import the collection for the Users API:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf){:target="_blank"}
 
-If you have Postman installed, clicking the button above will give you the option of importing the collection into Postman.
+If you have Postman installed, clicking the button above gives you the option of importing the collection into Postman.
 
-You can also import the collection manually by following the Web View link and downloading the collection as a JSON file, and importing that file into Postman by clicking the **Import** button.
+You can also import the collection  by following the Web View link and downloading the collection as a JSON file, and importing that file into Postman by clicking the **Import** button.
 
 > Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page,
-or use the [Collections Quick Reference](#collections-quick-reference) below. This tutorial only requires the Users API collection.
+or use the [Collections Quick Reference](#collections-quick-reference). This tutorial only requires the Users API collection.
 
 ## Send a Request
 
 Once you've imported the Users API collection, and added your Okta org information to your environment, you're ready to send a request.
 
-To make sure everything works, try sending a request to list all the users in your org:
+To make sure everything works, send a request to list all the users in your org:
 
 1. Select the **Collections** tab in Postman and open the **Users (Okta API)** collection. Open the **List Users** folder, and select **(GET) List Users**. This loads the sample request into Postman, ready to send.
 1. Click **Send**. The result pane automatically displays the results of your request:
