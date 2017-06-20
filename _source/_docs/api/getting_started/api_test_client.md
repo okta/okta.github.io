@@ -15,20 +15,21 @@ To use these collections, you'll need to set up your local environment and impor
 
 ## Set Up Your Environment
 
-1. [Create an API token](getting_a_token.html){:target="_blank"}.
-2. [Install the Postman App](https://www.getpostman.com/apps){:target="_blank"}.
-3. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
+1. [Sign up](https://www.okta.com/developer/signup/){:target="_blank"} for a free Okta developer organization, if you don't have one already.
+1. [Create an API token](getting_a_token.html){:target="_blank"} for your org.
+1. [Install the Postman App](https://www.getpostman.com/apps){:target="_blank"}.
+1. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
     {% img import_enviro.png alt:"Importing the Okta Example Environment" %}
 
-4. Once you have clicked import, make sure the `example.oktapreview.com` environment is selected.
+1. Once you have clicked import, make sure the `example.oktapreview.com` environment is selected.
     {% img postman_example_start.png alt:"Postman app with collections" %}
 
-5. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
+1. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
     * Rename your environment to something you'll recognize, for example `My Org`.
     * `url`: Replace the example value with your org's URL. For example, `https://dev-123456.oktapreview.com`. (Don't include '-admin' in the subdomain!)
     * `apikey`: Enter the API token you created earlier, for example `00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS`.
 
-6. Save your changes by clicking **Update**. Now your environment should look similar to this example:
+1. Save your changes by clicking **Update**. Now your environment should look similar to this example:
     {% img postman_example_enviro.png alt:"Example.okta.com environment with required values" %}
 
 ## Import a Collection
