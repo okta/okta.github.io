@@ -55,6 +55,8 @@ to create and manage clients.
 #### OAuth 2.0 and OpenID Connect Client App Updates Available in System Log
 Logged information about OAuth 2.0 client updates is now available by using GET requests to
 either log endpoint: `/api/v1/events` or `/api/v1/logs`.
+
+{% img release_notes/DeactClientLog.png alt:"Logged Key Rotation Event" %}
 <!-- (OKTA-86738, OKTA-127445) -->
 
 #### Support for RP-Initiated Logout
