@@ -7,30 +7,29 @@ redirect_from: "/docs/getting_started/api_test_client.html"
 
 # Overview
 
-A great way to learn an API is to issue requests and inspect the responses. You can easily access our Postman collections and Example environment to do just that.
+A great way to learn an API is to issue requests and inspect the responses. You can easily use our Postman collections to do just that.
 
 {% img okta_postman_logo.png alt:"Postman and an Okta Collection" %}
 
-To use these collections, you'll need to set up your environment, import the collections, send a test request, and verify the results.
+To use these collections, you'll need to set up your local environment and import the collections. Then, you can send a test request and verify the results.
 
 ## Set Up Your Environment
 
-1. [Create an API token](getting_a_token.html){:target="_blank"}.
-2. [Install the Postman App](https://www.getpostman.com/apps){:target="_blank"}.
-3. Launch Postman and click the 'import button'. Select import from link, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
+1. [Sign up](https://www.okta.com/developer/signup/){:target="_blank"} for a free Okta developer organization, if you don't have one already.
+1. [Create an API token](getting_a_token.html){:target="_blank"} for your org.
+1. [Install the Postman app](https://www.getpostman.com/apps){:target="_blank"}.
+1. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
     {% img import_enviro.png alt:"Importing the Okta Example Environment" %}
 
-4. Once you have clicked import, make sure the `example.oktapreview.com` environment is selected.
+1. Once it's imported, make sure the `example.oktapreview.com` environment is selected.
     {% img postman_example_start.png alt:"Postman app with collections" %}
 
-5. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
-    * Rename your environment to something you'll recognize, for example **myOrg**.
-    * `url`: Replace the example value with your org's URL, for example **https://myOrg.oktapreview.com**. This becomes the new name of your environment. Do **not** include '-admin' in the subdomain.
-    * `apikey`: Enter the API token you created in your org, for example **00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS**.
-    * `email-suffix`: Enter the email suffix for your domain, for example **myOrg.com**.
+1. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
+    * Rename your environment to something you'll recognize. For example, `My Org`.
+    * `url`: Replace the example value with your org's URL. For example, `https://dev-123456.oktapreview.com`. (Don't include '-admin' in the subdomain!)
+    * `apikey`: Enter the API token you created earlier, for example `00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS`.
 
-6. Save your changes by selecting **Update**. Now your environment looks similar to this example:
-    {% img postman_example_enviro.png alt:"Example.okta.com environment with required values" %}
+1. Click **Update** to save your changes.
 
 ## Import a Collection
 
@@ -38,26 +37,32 @@ Import the collection for the Users API:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf){:target="_blank"}
 
+If you have Postman installed, clicking the button above gives you the option of importing the collection into Postman.
+
+You can also import the collection by following the Web View link and downloading the collection as a JSON file. Import that file into Postman by clicking the **Import** button and browsing to your download location.
+
 > Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page,
-or use the [Collections Quick Reference](#collections-quick-reference). This tutorial only requires the Users collection import.
+or use the [Collections Quick Reference](#collections-quick-reference). This tutorial only requires the Users API collection.
 
 ## Send a Request
 
-To test your configuration, send a request to list all the users in your org:
+Once you've imported the Users API collection, and added your Okta org information to your environment, you're ready to send a request.
 
-1. Make sure you've imported the Users API collection and configured your example environment using the instructions in the previous section.
-2. Select the **Collections** tab in Postman, open the **List Users** folder, and select **GET List Users**.
-3. Click **Send**. The result pane automatically displays the results of your request:
+To make sure everything works, send a request to list all the users in your org:
+
+1. Select the **Collections** tab in Postman and open the **Users (Okta API)** collection. Open the **List Users** folder, and select **(GET) List Users**. This loads the List Users request into Postman, ready to send.
+1. Click **Send**. The result pane automatically displays the results of your request:
     {% img postman_response.png alt:"GET List Users" %}
-    If you receive errors, it's likely that one of the values in the environment isn't set correctly. Check the values and try again.
 
-Once you have completed this simple request, you are ready to explore the Okta API.
+If you receive an error, it's likely that one of the values in the environment isn't set correctly. Check the values and try again.
+
+Once you have completed this simple request, you're ready to explore the Okta API!
 
 ## Collections Quick Reference
 
 Import any Okta API collection for Postman from the following list:
 
-| Collections              | click to Run                                                                                                                            |
+| Collections              | Click to Run                                                                                                                            |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
 | Authentication           |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71){:target="_blank"} |
 | OAuth 2.0                |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ff6b1f58429d74ff1cfd){:target="_blank"} |
