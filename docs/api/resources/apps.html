@@ -132,8 +132,9 @@
                 <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
                 <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
                 <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
-                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
                 <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
+                <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
               </ul>
             </li>
             <li>
@@ -212,7 +213,7 @@
 
 <h2 id="getting-started">Getting Started</h2>
 
-<p>Explore the Apps API: <a href="https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the Apps API: <a href="https://app.getpostman.com/run-collection/4857222012c11cf5e8cd"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="application-operations">Application Operations</h2>
 
@@ -1642,6 +1643,324 @@
 </code></pre>
 </div>
 
+<h4 class="api api-operation" id="add-oauth-20-client-application">Add OAuth 2.0 Client Application</h4>
+
+<p>Adds an OAuth 2.0 client application. This application is only available to the org that creates it.</p>
+
+<blockquote>
+  <p>You must enable the OpenID Connect feature to create an OAuth 2.0 client. OpenId Connect is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="credentials">Credentials</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>client_id</td>
+      <td>Unique identifier for the client application</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>client_secret</td>
+      <td>OAuth 2.0 client secret string (used for confidential clients)</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>token_endpoint_auth_method</td>
+      <td>Requested authentication method for the token endpoint</td>
+      <td><code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">client_secret_post</code>, or <code class="highlighter-rouge">client_secret_basic</code></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-request api-request-params" id="settings-7">Settings</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>client_uri</td>
+      <td>URL string of a web page providing information about the client</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>logo_uri</td>
+      <td>URL string that references a logo for the client</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>application_type</td>
+      <td>The type of client application</td>
+      <td><code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">native</code>, <code class="highlighter-rouge">browser</code>, or <code class="highlighter-rouge">service</code></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>redirect_uris</td>
+      <td>Array of redirection URI strings for use in redirect-based flows</td>
+      <td>Array</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>response_types</td>
+      <td>Array of OAuth 2.0 response type strings</td>
+      <td>Array of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, <code class="highlighter-rouge">id_token</code></td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>grant_types</td>
+      <td>Array of OAuth 2.0 grant type strings</td>
+      <td>Array of <code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code>, <code class="highlighter-rouge">client_credentials</code></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>initiate_login_uri</td>
+      <td>URL that a third party can use to initiate a login by the client</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
+<a href="https://tools.ietf.org/html/rfc6749#section-4.3">Resource Owner Password</a> flow (if <code class="highlighter-rouge">grant_types</code> contains the value <code class="highlighter-rouge">password</code>)
+or <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials</a> flow (if <code class="highlighter-rouge">grant_types</code> contains the value <code class="highlighter-rouge">client_credentials</code>)
+then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.</p>
+  </li>
+  <li>
+    <p>All redirect URIs must be absolute URIs and must not include a fragment compontent.</p>
+  </li>
+  <li>
+    <p>Different application types have different valid values for the corresponding grant type:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Application Type</th>
+          <th>Valid Grant Type</th>
+          <th>Requirements</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">web</code></td>
+          <td><code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">refresh_token</code></td>
+          <td>Must have at least <code class="highlighter-rouge">authorization_code</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">native</code></td>
+          <td><code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code></td>
+          <td>Must have at least <code class="highlighter-rouge">authorization_code</code></td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">browser</code></td>
+          <td><code class="highlighter-rouge">implicit</code></td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">service</code></td>
+          <td><code class="highlighter-rouge">client_credentials</code></td>
+          <td>Works with OAuth 2.0 flow (not OpenID Connect)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>The <code class="highlighter-rouge">grant_types</code> and <code class="highlighter-rouge">response_types</code> values described above are partially orthogonal, as they refer to arguments passed to different
+  endpoints in the <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 protocol</a>. However, they are related in that the <code class="highlighter-rouge">grant_types</code>
+  available to a client influence the <code class="highlighter-rouge">response_types</code> that the client is allowed to use, and vice versa. For instance, a <code class="highlighter-rouge">grant_types</code>
+  value that includes <code class="highlighter-rouge">authorization_code</code> implies a <code class="highlighter-rouge">response_types</code> value that includes <code class="highlighter-rouge">code</code>, as both values are defined as part of
+  the OAuth 2.0 authorization code grant.</p>
+  </li>
+</ul>
+
+<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
+
+<blockquote>
+  <p><a href="#application-model">Application</a>’s <code class="highlighter-rouge">signOnMode</code> must be set to OPENID_CONNECT, the <code class="highlighter-rouge">name</code> field must be “oidc_client”, and <code class="highlighter-rouge">label</code> field must be defined.</p>
+</blockquote>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "name": "oidc_client",
+    "label": "Sample Client",
+    "signOnMode": "OPENID_CONNECT",
+    "credentials": {
+      "oauthClient": {
+        "token_endpoint_auth_method": "client_secret_post"
+      }
+    },
+    "settings": {
+      "oauthClient": {
+        "client_uri": "http://example.com/client",
+        "logo_uri": "http://example.com/assets/images/logo-new.png",
+        "redirect_uris": [
+          "https://example.com/oauth2/callback",
+          "myapp://callback"
+        ],
+        "response_types": [
+          "token",
+          "id_token",
+          "code"
+        ],
+        "grant_types": [
+          "implicit",
+          "authorization_code"
+        ],
+        "application_type": "native"
+      }
+    }
+    }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/apps"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa1hm4POxgJM6CPu0g4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oidc_client"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Client"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-06-12T09:17:24.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-06-12T09:17:23.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"accessibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"selfService"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorRedirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"loginRedirectUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"visibility"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"autoSubmitToolbar"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"hide"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"iOS"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"web"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"appLinks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"oidc_client_link"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"signOnMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPENID_CONNECT"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"userNameTemplate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${source.login}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUILT_IN"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cg4-_A_ifCK7fsKIKjHP27P0JGeuhnHHKEID1yXy42M"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"oauthClient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa1hm4POxgJM6CPu0g4"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nt">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"vpn"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"network"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DISABLED"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"helpUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"oauthClient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/client"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/assets/images/logo-new.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"https://example.com/oauth2/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"myapp://callback"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"token"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"grant_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"implicit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"authorization_code"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"native"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"appLinks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oidc_client_link"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802/home/oidc_client/0oa1hm4POxgJM6CPu0g4/alnivcK7lCqtQ1jOE0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/html"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/users"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/lifecycle/deactivate"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/groups"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h3 class="api api-operation" id="get-application">Get Application</h3>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/apps/<em>:aid</em></span></p>
@@ -1677,7 +1996,7 @@
 
 <p>Fetched <a href="#application-model">Application</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1687,7 +2006,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa1gjh63g214q0Hq0g4"</span><span class="p">,</span><span class="w">
@@ -1928,7 +2247,7 @@
 
 <p>Enumerates all apps added to your organization</p>
 
-<h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1938,7 +2257,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-8">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2105,7 +2424,7 @@
 
 <p>Enumerates all applications assigned to a user and optionally embeds their <a href="#application-user-model">Application User</a> in a single response.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2119,7 +2438,7 @@
   <p>The <code class="highlighter-rouge">expand=user/:uid</code> query parameter optionally return the user’s <a href="#application-user-model">Application User</a> information  in the response body’s <code class="highlighter-rouge">_embedded</code> property.</p>
 </blockquote>
 
-<h5 class="api api-response api-response-example" id="response-example-9">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2337,7 +2656,7 @@
 
 <p>Enumerates all applications assigned to a group</p>
 
-<h5 class="api api-request api-request-example" id="request-example-11">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2347,7 +2666,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-10">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2418,7 +2737,7 @@
 
 <p>Enumerates all applications using a key.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-12">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2428,7 +2747,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-11">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2460,8 +2779,8 @@
         </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${fn:substringBefore(source.login, \"@\")}"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUILT_IN"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-       </span><span class="nt">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"</span><span class="w">
+      </span><span class="nt">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2584,7 +2903,7 @@
 
 <p>Configures the <code class="highlighter-rouge">EDIT_USERNAME_AND_PASSWORD</code> scheme for a SWA application with a username template</p>
 
-<h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2629,7 +2948,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-12">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -2698,7 +3017,7 @@
 
 <p>Configures the <code class="highlighter-rouge">ADMIN_SETS_CREDENTIALS</code> scheme for a SWA application with a username template</p>
 
-<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2743,7 +3062,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -2812,7 +3131,7 @@
 
 <p>Configures the <code class="highlighter-rouge">EDIT_PASSWORD_ONLY</code> scheme for a SWA application with a username template</p>
 
-<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2857,7 +3176,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -2926,7 +3245,7 @@
 
 <p>Configures the <code class="highlighter-rouge">EXTERNAL_PASSWORD_SYNC</code> scheme for a SWA application with a username template</p>
 
-<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2971,7 +3290,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -3040,7 +3359,7 @@
 
 <p>Configures the <code class="highlighter-rouge">SHARED_USERNAME_AND_PASSWORD</code> scheme for a SWA application with a username and password</p>
 
-<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3089,7 +3408,7 @@
 </code></pre>
 </div>
 
-<h5 class="api reponse" id="response-example-16">Response Example</h5>
+<h5 class="api reponse" id="response-example-17">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oabkvBLDEKCNXBGYUAS"</span><span class="p">,</span><span class="w">
@@ -3201,7 +3520,7 @@
 
 <p><a href="#application-model">Application</a> with updated <code class="highlighter-rouge">kid</code>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3224,7 +3543,7 @@
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oainmLkOL329Jcju0g3"</span><span class="p">,</span><span class="w">
@@ -3317,28 +3636,6 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-operation" id="set-profile-property-for-openid-connect-apps">Set Profile Property for OpenID Connect Apps</h4>
-
-<p>Update the <a href="#application-properties">app’s <code class="highlighter-rouge">profile</code> property</a>, a container for any valid JSON schema that can be referenced from a request.
-For example, add an app manager contact email address,
-or define a whitelist of groups that you can then reference using the <a href="/reference/okta_expression_language/index.html#group-functions">Okta Expression <code class="highlighter-rouge">getFilteredGroups</code></a>.</p>
-
-<p>To add a <code class="highlighter-rouge">profile</code> property to an OpenID Connect public client app:</p>
-
-<ol>
-  <li>Create a <a href="/docs/api/resources/oauth-clients.html">public client app</a> configured for OpenID Connect, if it doesn’t already exist. Creating the public client app creates a corresponding app instance accessible via the Apps API.</li>
-  <li>List your org’s apps and look for the app named <code class="highlighter-rouge">oidc_client</code> that corresponds to your public client app.</li>
-  <li>Use the ID of the corresponding app instance to update the app instance properties with a <code class="highlighter-rouge">profile</code> property.</li>
-  <li>Once the property is populated, you can refer to it in Okta Expression Language, such as the <a href="/reference/okta_expression_language/index.html#group-functions">Okta Expression <code class="highlighter-rouge">getFilteredGroups</code></a>.</li>
-</ol>
-
-<p>Profile Requirements</p>
-
-<ul>
-  <li>The <code class="highlighter-rouge">profile</code> property is not encrypted, so don’t store sensitive data in it.</li>
-  <li>The <code class="highlighter-rouge">profile</code> property doesn’t limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.</li>
-</ul>
-
 <h3 class="api api-operation" id="delete-application">Delete Application</h3>
 
 <p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/apps/<em>:aid</em></span></p>
@@ -3378,7 +3675,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3388,7 +3685,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
 </code></pre>
@@ -3450,7 +3747,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3460,7 +3757,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -3501,7 +3798,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3511,7 +3808,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -3570,7 +3867,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 
 <p><a href="#application-user-model">Application User</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3589,7 +3886,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u15s1KDETTQMQYABRL"</span><span class="p">,</span><span class="w">
@@ -3681,7 +3978,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3704,7 +4001,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u13okQOVWZJGDOAUVR"</span><span class="p">,</span><span class="w">
@@ -3787,7 +4084,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 
 <p><a href="#application-user-model">Application User</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3797,7 +4094,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00u13okQOVWZJGDOAUVR"</span><span class="p">,</span><span class="w">
@@ -3892,7 +4189,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 
 <p>Array of <a href="#application-user-model">Application Users</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3902,7 +4199,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -4044,7 +4341,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4061,7 +4358,7 @@ or define a whitelist of groups that you can then reference using the <a href="/
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ud4tVDDXYVKPXKVLCO"</span><span class="p">,</span><span class="w">
@@ -4176,7 +4473,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4194,7 +4491,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ujsgVNDRESKKXERBUJ"</span><span class="p">,</span><span class="w">
@@ -4281,7 +4578,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4291,7 +4588,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -4350,7 +4647,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>All responses return the assigned <a href="#application-group-model">Application Group</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4361,7 +4658,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00gbkkGFFWZDLCNTAGQR"</span><span class="p">,</span><span class="w">
@@ -4414,7 +4711,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>Fetched <a href="#application-group-model">Application Group</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4424,7 +4721,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00gbkkGFFWZDLCNTAGQR"</span><span class="p">,</span><span class="w">
@@ -4489,7 +4786,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>Array of <a href="#application-group-model">Application Groups</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4499,7 +4796,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -4559,7 +4856,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>An empty JSON object <code class="highlighter-rouge"><span class="p">{}</span></code></p>
 
-<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-33">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4569,7 +4866,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -4628,7 +4925,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>Return the generated <a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-33">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-34">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4639,7 +4936,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -4741,7 +5038,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>Returns the cloned <a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-34">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-35">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4752,7 +5049,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -4828,7 +5125,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>Array of <a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-35">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-36">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4839,7 +5136,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-35">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -4915,7 +5212,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p><a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-36">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-37">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -4926,7 +5223,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-35">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-36">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-10T18:56:23.000Z"</span><span class="p">,</span><span class="w">
@@ -4987,7 +5284,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 
 <p>SAML metadata in XML</p>
 
-<h5 class="api api-request api-request-example" id="request-example-37">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-38">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/xml"</span> <span class="se">\</span>
@@ -4998,7 +5295,7 @@ When a user’s app profile is retrieved via the API, however, the value is a UR
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-36">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-37">Response Example</h5>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;md:EntityDescriptor</span> <span class="na">xmlns:md=</span><span class="s">"urn:oasis:names:tc:SAML:2.0:metadata"</span> <span class="na">entityID=</span><span class="s">"exk39sivhuytV2D8H0h7"</span><span class="nt">&gt;</span>
@@ -5082,7 +5379,7 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
 
 <p>Return CSR in PKCS#10 format if the <code class="highlighter-rouge">Accept</code> media type is <a href="https://tools.ietf.org/html/rfc5967">application/pkcs10</a>; or a <a href="#application-csr-model">CSR model</a> if the <code class="highlighter-rouge">Accept</code> media type is <code class="highlighter-rouge">application/json</code>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-38">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-39">Request Example</h5>
 
 <p>Generate a new key pair and return the CSR in PKCS#10 format:</p>
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
@@ -5125,7 +5422,7 @@ YoEdncuy+GQGzE9yLOhC4HNfHQXpqp2tMPdRlw==<span class="nt">&lt;/ds:X509Certificate
 }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/"</span>
 </code></pre>
 </div>
-<h5 class="api api-response api-response-example" id="response-example-37">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-38">Response Example</h5>
 
 <p>Return CSR in PKCS#10 format:</p>
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
@@ -5228,7 +5525,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 <p>Returns the new <a href="#application-key-credential-model">Application Key Credential</a>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-39">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-40">Request Example</h5>
 
 <p>Publish with X.509 certificate in base64 encoded <code class="highlighter-rouge">DER</code>:</p>
 
@@ -5264,7 +5561,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-38">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-39">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -5349,7 +5646,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 <p>Empty response.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-40">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-41">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5359,7 +5656,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-39">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-40">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
 </code></pre>
@@ -5400,7 +5697,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 <p>Array of <a href="#application-csr-model">CSR models</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-41">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-42">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5411,7 +5708,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-40">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-41">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -5511,7 +5808,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 <p>Return base64 encoded CSR in DER format if the <code class="highlighter-rouge">Accept</code> media type is <code class="highlighter-rouge">application/pkcs10</code>; or a CSR model if the <code class="highlighter-rouge">Accept</code> media type is <code class="highlighter-rouge">application/json</code>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-42">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-43">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -5522,7 +5819,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-41">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-42">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50"</span><span class="p">,</span><span class="w">
@@ -5804,7 +6101,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
     <tr>
       <td style="text-align: left">profile</td>
       <td style="text-align: left">Valid JSON schema for specifying properties</td>
-      <td style="text-align: left"><a href="#set-profile-property-for-openid-connect-apps">JSON</a></td>
+      <td style="text-align: left"><a href="#profile-object">JSON</a></td>
       <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left">FALSE</td>
@@ -5838,7 +6135,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 <ul>
   <li><code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">created</code>, <code class="highlighter-rouge">lastUpdated</code>, <code class="highlighter-rouge">status</code>, <code class="highlighter-rouge">_links</code>, and <code class="highlighter-rouge">_embedded</code> are only available after an app is created.</li>
-  <li><code class="highlighter-rouge">profile</code> is only available for OpenID Connect apps. See <a href="#set-profile-property-for-openid-connect-apps">Set Profile Property for OpenID Connect Apps</a>.</li>
+  <li><code class="highlighter-rouge">profile</code> is only available for OAuth 2.0 client apps. See <a href="#profile-object">Profile Object</a>.</li>
 </ul>
 
 <h5 id="app-names--settings">App Names &amp; Settings</h5>
@@ -5878,6 +6175,10 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
     <tr>
       <td>template_wsfed</td>
       <td><a href="#add-ws-federation-application">Add WS-Federation Application</a></td>
+    </tr>
+    <tr>
+      <td>oidc_client</td>
+      <td><a href="#add-oauth-20-client-application">Add OAuth 2.0 client Application</a></td>
     </tr>
     <tr>
       <td>Custom SAML 2.0</td>
@@ -6009,6 +6310,10 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
     <tr>
       <td>AUTO_LOGIN</td>
       <td>Secure Web Authentication (SWA)</td>
+    </tr>
+    <tr>
+      <td>OPENID_CONNECT</td>
+      <td>Federated Authentication with OpenID Connect</td>
     </tr>
     <tr>
       <td>Custom</td>
@@ -6264,6 +6569,16 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
       <td> </td>
       <td> </td>
     </tr>
+    <tr>
+      <td>oauthClient</td>
+      <td>Credential for OAuth 2.0 client</td>
+      <td><a href="#oauth-credential-object">OAuth Credential Object</a></td>
+      <td>False</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
 
@@ -6438,9 +6753,70 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
   <p>You must enable the key rollover feature to view <code class="highlighter-rouge">kid</code>. Key rollover is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
 </blockquote>
 
+<blockquote>
+  <p>Only apps with <code class="highlighter-rouge">SAML_2_0</code>, <code class="highlighter-rouge">SAML_1_1</code>, <code class="highlighter-rouge">WS_FEDERATION</code> or <code class="highlighter-rouge">OPENID_CONNECT</code> <code class="highlighter-rouge">signOnMode</code> support the key rollover feature.</p>
+</blockquote>
+
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="oauth-credential-object">OAuth Credential Object</h4>
+
+<p>Determines how to authenticate the OAuth 2.0 client</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>client_id</td>
+      <td>Unique identifier for the OAuth 2.0 client application</td>
+      <td>String</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>client_secret</td>
+      <td>OAuth 2.0 client secret string</td>
+      <td>String</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>token_endpoint_auth_method</td>
+      <td>Requested authentication method for the token endpoint</td>
+      <td>String</td>
+      <td>FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>When creating an OAuth 2.0 client application, you can specify the <code class="highlighter-rouge">client_id</code>, or Okta will set it the same value as the application ID. Thereafter, the client_id is immutable.</p>
+  </li>
+  <li>
+    <p>If a <code class="highlighter-rouge">client_secret</code> is not provided on creation, and the <code class="highlighter-rouge">token_endpoint_auth_method</code> requires one Okta will generate a random <code class="highlighter-rouge">client_secret</code> for the client application.  The <code class="highlighter-rouge">client_secret</code> is only shown on the creation or update of an OAuth 2.0 client application (and only if the <code class="highlighter-rouge">token_endpoint_auth_method</code> is one that requires a client secret).</p>
+  </li>
+  <li>
+    <p>The <code class="highlighter-rouge">client_id</code> must consist of alphanumeric characters or the following special characters <code class="highlighter-rouge">$-_.+!*'(),</code>. It must contain between 6 and 100 characters, inclusive, and must not be the reserved word <code class="highlighter-rouge">ALL_CLIENTS</code>. The <code class="highlighter-rouge">client_secret</code> must consist of printable characters, which are defined in <a href="https://tools.ietf.org/html/rfc6749#appendix-A">the OAuth 2.0 Spec</a>, and must contain between 14 and 100 characters, inclusive.</p>
+  </li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"oauthClient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa1hm4POxgJM6CPu0g4"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -6805,6 +7181,21 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
+
+<h3 class="api api-operation" id="profile-object">Profile Object</h3>
+
+<p>Profile object is a container for any valid JSON schema that can be referenced from a request. For example, add an app manager contact email address, or define a whitelist of groups that you can then reference using the <a href="/reference/okta_expression_language/index.html#group-functions">Okta Expression <code class="highlighter-rouge">getFilteredGroups</code></a>.</p>
+
+<p>Profile Requirements</p>
+
+<ul>
+  <li>The <code class="highlighter-rouge">profile</code> property is not encrypted, so don’t store sensitive data in it.</li>
+  <li>The <code class="highlighter-rouge">profile</code> property doesn’t limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.</li>
+</ul>
+
+<blockquote>
+  <p>Profile Object is only avialible to OAuth 2.0 client applications.</p>
+</blockquote>
 
 <h3 id="application-user-model">Application User Model</h3>
 

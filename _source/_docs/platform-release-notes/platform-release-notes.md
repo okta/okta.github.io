@@ -1,28 +1,15 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.23
+excerpt: Summary of changes to the Okta Platform since Release 2017.24
 ---
 
-## Release 2017.24
+## Release 2017.25
 
-### Advance Notices
+### Advance Notice: Data Retention Changes
 
-* [Key Rollover Change](#key-rollover-change)
-* [Data Retention Policy Changes](#data-retention-changes)
- 
-#### Key Rollover Change
-
-Beginning in Release 2017.25, the `credentials.signing.kid` property of an app won't be available if the app doesn't support the key rollover feature.
-An app supports key rollover if the app uses one of the following signing mode types: SAML 2.0, SAML 1.1, WS-Fed, or OpenID Connect.
-
-Before this change takes effect, verify that your integration doesn't expect the `credentials.signing.kid` property
-if your app doesn't have one of the listed signing mode types. This change is expected in Release 2017.25,
-which is scheduled for preview orgs on June 21, 2017 and in production orgs on June 26, 2017. <!-- OKTA-76439 -->
-
-#### Data Retention Changes
-
-Okta is changing system log data retention. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
+Okta is changing system log data retention. System log data is available from `/api/v1/events` or
+Okta SDK `EventsAPIClient`.
 
 * For orgs created before July 17th, data will be retained for 6 months.
 * For orgs created on and after July 17th, data will be retained for 3 months.
@@ -32,80 +19,79 @@ The new data retention policy starts:
 * June 7, 2017 for existing preview orgs
 * July 17, 2017 for existing production orgs
 
-Preview and production orgs created on July 17,2017 and later will retain this log data for three months. 
+Preview and production orgs created on July 17, 2017 and later will retain this log data for three months.
 
 For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
 You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API. <!-- OKTA-125424 -->
 
+ <!-- OKTA-125424 -->
+
 ### Platform Enhancements
 
-* [Default Scopes for OAuth 2.0](#default-scopes-for-oauth-20)
-* [Improved UI for Creating OpenID Connect Apps](#improved-ui-for-creating-openid-connect-apps)
-* [Event Notifications for OpenID Connect Apps](#event-notifications-for-openid-connect-apps)
-* [Query String Support in IdP Redirect URLs](#query-string-support-in-idp-redirect-urls)
-* [API Rate Limit Improvements](#api-rate-limit-improvements)
+* [System Logs Track Key Rotation and Generation](#system-logs-track-key-rotation-and-generation)
+* [Client Registration API Is an Early Access Feature](#client-registration-api-is-an-early-access-feature)
+* [Create OAuth 2.0 and OpenID Connect Clients with the Apps API](#create-oauth-20-and-openid-connect-clients-with-apps-api)
+* [OAuth 2.0 and OpenID Connect Client App Updates Available in System Log](#oauth-20-and-openid-connect-client-app-updates-available-in-system-log)
+* [Support for RP-Initiated Logout](#support-for-rp-initiated-logout)
+* [OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint](#oauth-20-and-openid-connect-well-known-response-includes-registration-endpoint)
 
 
-#### Default Scopes for OAuth 2.0
+#### System Logs Track Key Rotation and Generation
+Logged information about key rotation and generation for apps and identity providers is available by using GET requests to either of the following endpoints: `/api/v1/events` or `/api/v1/logs`.
+For more information, see [Identity Provider Signing Key Store Operations](https://developer.okta.com/docs/api/resources/idps.html#identity-provider-signing-key-store-operations)
+or [Update Key Credential for Application](https://developer.okta.com/docs/api/resources/apps.html#update-key-credential-for-application).
 
-Using either the Okta UI or API, you can configure default scopes for an OAuth 2.0 client.
-If the client omits the scope parameter in an authorization request,
-Okta returns all default scopes in the Access Token that are permitted by the access policy rule. 
+Here is a response from `/api/v1/logs`
+{% img release_notes/KeyRotateLog.png alt:"Logged Key Rotation Event" %}
+<!-- (OKTA-76607) -->
 
-{% img release_notes/default-scope.png alt:"Default Scope Configuration UI" %}
+#### Client Registration API Is an Early Access Feature
+The [Auth Clients API](/docs/api/resources/oauth-clients.html) provides operations to register and manage client applications for use with Okta’s
+OAuth 2.0 and OpenID Connect endpoints.
 
-For more information about setting default scopes in the API, see [OAuth 2.0 API](/docs/api/resources/oauth2.html#scopes-properties).
-<!-- OKTA-122185 OKTA-122072 -->
+#### Create OAuth 2.0 and OpenID Connect Clients with Apps API
+The [Apps API](https://developer.okta.com/docs/api/resources/apps.html) supports creating and configuring
+OAuth 2.0 or OpenID Connect clients. Alternatively, you can use
+[Client Registration API](https://developer.okta.com/docs/api/resources/oauth-clients.html) (RFC 7591 and RFC 7592)
+to create and manage clients.
+<!-- (OKTA-78223) -->
 
-#### Improved UI for Creating OpenID Connect Apps
+#### OAuth 2.0 and OpenID Connect Client App Updates Available in System Log
+Logged information about OAuth 2.0 client updates is now available by using GET requests to
+either log endpoint: `/api/v1/events` or `/api/v1/logs`.
 
-The wizard for creating an OpenID Connect app has been improved and consolidated onto a single screen.
+{% img release_notes/DeactClientLog.png alt:"Logged Key Rotation Event" %}
+<!-- (OKTA-86738, OKTA-127445) -->
 
-{% img release_notes/single-oidc-screen.png alt:"New OpenID Connect Create Wizard" %}
+#### Support for RP-Initiated Logout
+Okta supports [RP-intiated logout](http://openid.net/specs/openid-connect-session-1_0.html#RPLogout)
+from OpenID Connect client apps in both the Okta UI and Okta API. You can specify a logout redirect URI,
+or accept the default behavior of returning to the Okta Login page. You can access this feature on the
+Create OpenID Connect Integration page (under Applications) in the UI.
+<!-- (OKTA-94106) -->
 
-<!-- OKTA-129127 -->
-
-#### Event Notifications for OpenID Connect Apps
-
-Notifications are entered in the System Log via the Events API (`/api/v1/events`) when OpenID Connect apps are created, modified, deactivated, or deleted.
-Previously these notifications appeared only in the System Log (`/api/v1/logs`).
-
-#### Query String Support in IdP Redirect URLs
-
-Query strings are now supported in the definition of IdP Login URLs:
- 
-* The **IDP Login URL** field in the Add/Edit Endpoint wizard.
-* The **IdP Single Sign-On URL** field for Inbound SAML. Reserved SAML parameters (SAMLRequest, RelayState, SigAlg, Signature) in a query string are ignored.<!-- OKTA-127771 -->
-
-#### API Rate Limit Improvements
-
-We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user's request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:
-
-##### Preview Orgs
-
-We enforce new rate limits for all preview orgs. API calls exceeding the new rate limits return an HTTP 429 error.
-
-##### Production Orgs
-
-1. As of May 8, we enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:
-
-    ```
-    Warning: requests for url pattern <url-pattern> have reached 
-    a threshold of <number> requests per <time-duration>. Please 
-    be warned these rate limits will be enforced in the near future.
-    ```
-
-2. As of mid-May, we started enforcing these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.
-
-3. We are rolling out the enforcement of these new rate limits to all orgs this week. Once your org has the new limits, you'll see HTTP 429 errors instead of rate-limit warnings in the System Log if the new limits are exceeded.
-
-For a full description of the new rate limits, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 --> 
+#### OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint
+Okta returns the `registration_endpoint` in OAuth 2.0 and OpenID Connect `.well-known` responses.
+<!-- (OKTA-127457) -->
 
 
-### Platform Bug Fixed
+### Platform Bugs Fixed
 
-* The dropdown that controls Authorization Server lifecycle operations failed to display properly if you navigated directly to a tab or refreshed a tab other than Settings. (OKTA-129014)
+* [Invalid Availability of credentials.signing.kid](#invalid-availability-of-credentialssigningkid)
+* [WWW-Authenticate Header in HTTP 401 Response](#www-authenticate-header-in-http-401-response)
+
+
+#### Invalid Availability of credentials.signing.kid
+The `credentials.signing.kid` property of an app was available even if its sign-on mode does not support
+certificates. Only apps using the following sign-on mode types support certificates: SAML 2.0, SAML 1.1,
+WS-Fed, or OpenID Connect. For more information,
+see: [Application Key Store Operations](https://developer.okta.com/docs/api/resources/apps.html#application-key-store-operations) (OKTA-76439)
+
+#### WWW-Authenticate Header in HTTP 401 Response
+When a call to the token, introspect, or revocation endpoint of OpenID Connect or API Access Management
+encountered an invalid_client error, the response did not include the WWW­Authenticate header. (OKTA-127653)
+
 
 ### Does Your Org Have This Change Yet?
 
