@@ -29,27 +29,32 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 ### Platform Enhancements
 
-* [Key Rollover](#key-rollover)
 * [System Logs Track Key Rotation and Generation](#system-logs-track-key-rotation-and-generation)
-* [Client App Updates Available in System Log](#client-app-updates-available-in-system-log)
-* [Support for RP-Initiated Logout](#support-for-rp-initiated-logout)
 * [Create OAuth 2.0 and OpenID Connect Clients with the Apps API](#create-oauth-20-and-openid-connect-clients-with-apps-api)
-* [HTTP 401 Response Includes Scheme in WWW-Authenticate Header](#http-401-response-includes-scheme-in-www-authenticate-header)
-* [Return Registration Endpoint in Response to .well-known Request](#return-registration-endpoint-in-response-to-well-known-request)
+* [OAuth 2.0 and OpenID Connect Client App Updates Available in System Log](#oauth-20-and-openid-connect-client-app-updates-available-in-system-log)
+* [Support for RP-Initiated Logout](#support-for-rp-initiated-logout)
+* [OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint](#oauth-20-and-openid-connect-well-known-response-includes-registration-endpoint)
 
-#### Key Rollover
-The `credentials.signing.kid` property of an app is available only if the app supports the key rollover feature,
-that is, if it uses one of the following signing mode types: SAML 2.0, SAML 1.1, WS-Fed, or OpenID Connect.
-<!-- OKTA-76439 -->
 
 #### System Logs Track Key Rotation and Generation
-Logged information about key rotation and generation for identity provider and application instances
-is available by using GET requests to either of the following endpoints: `/api/v1/events` or `/api/v1/logs`.
+Logged information about key rotation and generation for apps and identity providers is available by using GET requests to either of the following endpoints: `/api/v1/events` or `/api/v1/logs`.
+For more information, see [Identity Provider Signing Key Store Operations](https://developer.okta.com/docs/api/resources/idps.html#identity-provider-signing-key-store-operations)
+or [Update Key Credential for Application](https://developer.okta.com/docs/api/resources/apps.html#update-key-credential-for-application).
+
+Here is a response from `/api/v1/logs`
+{% img release_notes/KeyRotateLog.png alt:"Logged Key Rotation Event" %}
 <!-- (OKTA-76607) -->
 
-#### Client App Updates Available in System Log
+#### Create OAuth 2.0 and OpenID Connect Clients with Apps API
+The [Apps API](https://developer.okta.com/docs/api/resources/apps.html) supports creating and configuring
+OAuth 2.0 or OpenID Connect clients. Alternatively, you can use
+[Client Registration API](https://developer.okta.com/docs/api/resources/oauth-clients.html) (RFC 7591 and RFC 7592)
+to create and manage clients.
+<!-- (OKTA-78223) -->
+
+#### OAuth 2.0 and OpenID Connect Client App Updates Available in System Log
 Logged information about OAuth 2.0 client updates is now available by using GET requests to
-either log endpoint: `/api/v1/events` or `/api/v1/logs` {% api_lifecycle beta %}.
+either log endpoint: `/api/v1/events` or `/api/v1/logs`.
 <!-- (OKTA-86738, OKTA-127445) -->
 
 #### Support for RP-Initiated Logout
@@ -59,27 +64,26 @@ or accept the default behavior of returning to the Okta Login page. You can acce
 Create OpenID Connect Integration page (under Applications) in the UI.
 <!-- (OKTA-94106) -->
 
-#### Create OAuth 2.0 and OpenID Connect Clients with Apps API
-You can use the [Apps API](https://developer.okta.com/docs/api/resources/apps.html) to create and configure
-OAuth 2.0 or OpenID Connect clients.
-Previously this was available only in the
-[Client Registration API] (https://developer.okta.com/docs/api/resources/oauth-clients.html) {% api_lifecycle beta %}.
-<!-- (OKTA-78223) -->
-
-#### HTTP 401 Response Includes Scheme in WWW-Authenticate Header
-When Okta returns an invalid_client error it returns the WWW-Authenticate header with the value of
-the supported authentication scheme in the HTTP 401 response.
-<!-- (OKTA-127653) -->
-
-#### Return Registration Endpoint in Response to .well-known Request
+#### OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint
 Okta returns the `registration_endpoint` in OAuth 2.0 and OpenID Connect `.well-known` responses.
 <!-- (OKTA-127457) -->
 
 
-
-<!--
 ### Platform Bugs Fixed
--->
+
+* [Invalid Availability of credentials.signing.kid](#nvalid-availability-of-credentialssigningkid)
+* [WWW-Authenticate Header in HTTP 401 Response](#www-authenticate-header-in-http-401-response)
+
+
+#### Invalid Availability of credentials.signing.kid
+The `credentials.signing.kid` property of an app was available even if its sign-on mode does not support
+certificates. Only apps using the following sign-on mode types support certificates: SAML 2.0, SAML 1.1,
+WS-Fed, or OpenID Connect. For more information,
+see: [Application Key Store Operations](https://developer.okta.com/docs/api/resources/apps.html#application-key-store-operations) (OKTA-76439)
+
+#### WWW-Authenticate Header in HTTP 401 Response
+When a call to the token, introspect, or revocation endpoint of OpenID Connect or API Access Management
+encountered an invalid_client error, the response did not include the WWW­Authenticate header. (OKTA-127653)
 
 
 ### Does Your Org Have This Change Yet?
