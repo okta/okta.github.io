@@ -10,7 +10,7 @@ The Okta User API provides operations to manage users in your organization.
 
 ## Getting Started
 
-Explore the Users API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf)
+Explore the Users API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1755573c5cf5fbf7968b)
 
 
 

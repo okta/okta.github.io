@@ -35,7 +35,7 @@ To use these collections, you'll need to set up your local environment and impor
 
 Import the collection for the Users API:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf){:target="_blank"}
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1755573c5cf5fbf7968b){:target="_blank"}
 
 If you have Postman installed, clicking the button above gives you the option of importing the collection into Postman.
 
@@ -62,21 +62,23 @@ Once you have completed this simple request, you're ready to explore the Okta AP
 
 Import any Okta API collection for Postman from the following list:
 
-| Collections              | Click to Run                                                                                                                            |
-|:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
-| Authentication           | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71){:target="_blank"} |
-| OAuth 2.0                | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ff6b1f58429d74ff1cfd){:target="_blank"} |
-| OpenID Connect           | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/57ec0b23a21999f96f2d){:target="_blank"} |
-| Apps                     | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b){:target="_blank"} |
-| Events                   | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86){:target="_blank"} |
-| Factors                  | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b055a859dbe24a54814a){:target="_blank"} |
-| Groups                   | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f){:target="_blank"} |
-| Identity Providers (IdP) | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8438ef3445415386b407){:target="_blank"} |
-| Logs                     | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8f19fc704561a8b44e27){:target="_blank"} |
-| Admin Roles              | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b){:target="_blank"} |
-| Schemas                  | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/443242e60287fb4b8d6d){:target="_blank"} |
-| Users                    | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/78060451b3ba309f5bcf){:target="_blank"} |
-| Custom SMS Templates     | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06){:target="_blank"} |
+| Collections                               | Click to Run                                                                                                                            |
+|:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
+| Authentication                            |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f9684487e584101f25a3){:target="_blank"} |
+| OAuth 2.0                                 |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3d132ba7f1fb21d9a2b8){:target="_blank"} |
+| OpenID Connect                            |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/98b408c69b64c5de583e){:target="_blank"} |
+| Client Registration {% api_lifecycle ea%} |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7){:target="_blank"} |
+| Sessions                                  |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7){:target="_blank"} |
+| Apps                                      |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4857222012c11cf5e8cd){:target="_blank"} |
+| Events                                    |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf){:target="_blank"} |
+| Factors                                   |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e07dd59803f9eae8add7){:target="_blank"} |
+| Groups                                    |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0bb414f9594ed93672a0){:target="_blank"} |
+| Identity Providers (IdP)                  |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e67463599312db1413cb){:target="_blank"} |
+| Logs                                      |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6){:target="_blank"} |
+| Admin Roles                               |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b){:target="_blank"} |
+| Schemas                                   |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/443242e60287fb4b8d6d){:target="_blank"} |
+| Users                                     |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1755573c5cf5fbf7968b){:target="_blank"} |
+| Custom SMS Templates                      |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06){:target="_blank"} |
 
 These buttons are also available at the top of each API reference page in [developer.okta.com](/docs/api/resources/apps.html).
 

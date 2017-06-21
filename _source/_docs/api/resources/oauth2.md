@@ -11,7 +11,7 @@ Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) 
 
 The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
 
-Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ff6b1f58429d74ff1cfd)
+Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3d132ba7f1fb21d9a2b8)
 
 ## Endpoints
 
