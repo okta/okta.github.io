@@ -71,7 +71,7 @@ Okta returns the `registration_endpoint` in OAuth 2.0 and OpenID Connect `.well-
 
 ### Platform Bugs Fixed
 
-* [Invalid Availability of credentials.signing.kid](#nvalid-availability-of-credentialssigningkid)
+* [Invalid Availability of credentials.signing.kid](#invalid-availability-of-credentialssigningkid)
 * [WWW-Authenticate Header in HTTP 401 Response](#www-authenticate-header-in-http-401-response)
 
 
