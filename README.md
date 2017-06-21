@@ -154,7 +154,7 @@ An example of a correct PR is [here](https://github.com/okta/okta.github.io/pull
 
 ## Deploying the Site
 
-Only approved Okta employees can deploy the site. In most cases this will be the DevEx EEP. 
+Only approved Okta employees can deploy the site. In most cases this will be the DevEx EEP.
 
 - [You are deploying the weekly branch](#you-are-deploying-the-weekly-branch)
 - [You are deploying a hotfix change](#you-are-making-a-hotfix-change)
@@ -163,44 +163,44 @@ Only approved Okta employees can deploy the site. In most cases this will be the
 
 Create a production build of the `weekly` branch, merge it, then reset `weekly`.
 
-1. Create a new topic branch based off of `weekly`:
+1. Create a new topic branch based off of `weekly`. Name it `weekly-{year}.{release}`, i.e. `weekly-2017.25`
 
     ```bash
     [okta.github.io master]$ git fetch origin
-    [okta.github.io master]$ git checkout -b my-weekly-branch origin/weekly
+    [okta.github.io master]$ git checkout -b weekly-2017.25 origin/weekly
     ```
-    
+
 2. Rebase to pull in any commits that have been merged to `master` directly
 
     ```bash
-    [okta.github.io my-weekly-branch] git rebase -i origin/master
+    [okta.github.io weekly-2017.25] git rebase -i origin/master
     ```
 
 3. Run the command to build the production files:
 
     ```bash
     # Important! You must use this command to generate the build version.
-    [okta.github.io my-weekly-branch]$ npm run build-prod
+    [okta.github.io weekly-2017.25]$ npm run build-prod
     ```
 
 4. Verify that only the intended files were copied over. If this is correct, create a new commit to your branch with the message "Production build".
 
-5. Push the branch, and create a new Pull Request. Set the base branch to `weekly`. If the rebase included changes, you will need to force push.
+5. Push the branch to `weekly-{year}.{release}`, and create a new Pull Request. The base branch should be set to `master`.
 
-6. After it's been approved and passes the Travis tests, merge it into `weekly`.
+    ```bash
+    [okta.github.io weekly-2017.25] git push origin weekly-2017.25:weekly-2017.25
+    ```
 
-7. After it's been merged into `weekly`, it will be deployed to the [staging site](https://d384qaxymvjmjw.cloudfront.net/) - this usually takes a couple minutes. Verify that all weekly changes show up correctly on the live version of the site. Note - you can know exactly when it's been pushed by looking at the bacon publish task for the okta.github.io artifact.
+6. After it's been approved and passes the Travis tests, merge it into `master`. The changes are live! Don't merge into `weekly` before the next step!
 
-8. Create a PR for the `weekly` branch to merge into `master`. Once it's been approved, merge it into `master`. The changes are live! Don't merge into `weekly` before the next step!
-
-9. Reset the `weekly` branch with the latest `master` changes.
+7. Reset the `weekly` branch with the latest `master` changes.
 
     ```bash
     [okta.github.io master]$ git fetch origin
-    
+
     # Note: The following command overwrites any new changes to the weekly branch! Before running this,
-    # make sure there are no new commits that have been merged in since you merged into master. 
-    # If there have been merges since step 8, you must rebase before pushing master to weekly.
+    # make sure there are no new commits that have been merged in since you merged into master.
+    # If there have been merges since step 6, you must rebase before pushing master to weekly.
     [okta.github.io master]$ git push -f origin origin/master:weekly
     ```
 
