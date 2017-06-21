@@ -62,7 +62,7 @@ Once you have completed this simple request, you're ready to explore the Okta AP
 
 Import any Okta API collection for Postman from the following list:
 
-| Collections                               | click to Run                                                                                                                            |
+| Collections                               | Click to Run                                                                                                                            |
 |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
 | Authentication                            |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f9684487e584101f25a3){:target="_blank"} |
 | OAuth 2.0                                 |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3d132ba7f1fb21d9a2b8){:target="_blank"} |
