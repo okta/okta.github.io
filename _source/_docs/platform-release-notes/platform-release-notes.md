@@ -30,6 +30,7 @@ You can export data before Okta deletes it. We recommend using Security Informat
 ### Platform Enhancements
 
 * [System Logs Track Key Rotation and Generation](#system-logs-track-key-rotation-and-generation)
+* [Client Registration API Is an Early Access Feature](#client-registration-api-is-an-early-access-feature)
 * [Create OAuth 2.0 and OpenID Connect Clients with the Apps API](#create-oauth-20-and-openid-connect-clients-with-apps-api)
 * [OAuth 2.0 and OpenID Connect Client App Updates Available in System Log](#oauth-20-and-openid-connect-client-app-updates-available-in-system-log)
 * [Support for RP-Initiated Logout](#support-for-rp-initiated-logout)
@@ -44,6 +45,10 @@ or [Update Key Credential for Application](https://developer.okta.com/docs/api/r
 Here is a response from `/api/v1/logs`
 {% img release_notes/KeyRotateLog.png alt:"Logged Key Rotation Event" %}
 <!-- (OKTA-76607) -->
+
+#### Client Registration API Is an Early Access Feature
+The [Auth Clients API](/docs/api/resources/oauth-clients.html) provides operations to register and manage client applications for use with Okta’s
+OAuth 2.0 and OpenID Connect endpoints.
 
 #### Create OAuth 2.0 and OpenID Connect Clients with Apps API
 The [Apps API](https://developer.okta.com/docs/api/resources/apps.html) supports creating and configuring
