@@ -757,19 +757,19 @@ The [User Model](./users.html#user-model) schema is defined using [JSON Schema D
 
 The user schema is a valid [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) document with the following properties :
 
-|---------------+------------------------------------------+-----------------------------------------------------+-----------+-------+----------+-----------+-----------+------------ |
-| Property      | Description                              | DataType                                            | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
-| ------------- | ---------------------------------------- | --------------------------------------------------- |--------- | ------ | -------- | --------- | --------- | ----------  |
-| id            | URI of user schema                       | String                                              | FALSE    | TRUE   | TRUE     |           |           |             |
-| $schema       | JSON Schema version identifier           | String                                              | FALSE    | FALSE  | TRUE     |           |           |             |
-| name          | name for the schema                      | `user`                                              | FALSE    | TRUE   | TRUE     |           |           |             |
-| title         | user-defined display name for the schema | String                                              | FALSE    | FALSE  | FALSE    |           |           |             |
-| created       | timestamp when schema was created        | Date                                                | FALSE    | FALSE  | TRUE     |           |           |             |
-| lastUpdated   | timestamp when schema was last updated   | Date                                                | FALSE    | FALSE  | TRUE     |           |           |             |
-| definitions   | user profile subschemas                  | [User Profile Subschemas](#user-profile-subschemas) | FALSE    | FALSE  | FALSE    |           |           | JSON Schema |
-| type          | type of root schema                      | `object`                                            | FALSE    | FALSE  | TRUE     |           |           |             |
-| properties    | user model properties                    | [User Model](./users.html#user-model) property set  | FALSE    | FALSE  | TRUE     |           |           |             |
-|---------------+------------------------------------------+-----------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
+|---------------+------------------------------------------+--------------------------------------------------------+-----------+-------+----------+-----------+-----------+------------ |
+| Property      | Description                              | DataType                                               | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
+| ------------- | ---------------------------------------- | ------------------------------------------------------ |--------- | ------ | -------- | --------- | --------- | ----------  |
+| id            | URI of user schema                       | String                                                 | FALSE    | TRUE   | TRUE     |           |           |             |
+| $schema       | JSON Schema version identifier           | String                                                 | FALSE    | FALSE  | TRUE     |           |           |             |
+| name          | name for the schema                      | `user`                                                 | FALSE    | TRUE   | TRUE     |           |           |             |
+| title         | user-defined display name for the schema | String                                                 | FALSE    | FALSE  | FALSE    |           |           |             |
+| created       | timestamp when schema was created        | [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |           |           |             |
+| lastUpdated   | timestamp when schema was last updated   | [ISO 8601 String](https://tools.ietf.org/html/rfc3339) | FALSE    | FALSE  | TRUE     |           |           |             |
+| definitions   | user profile subschemas                  | [User Profile Subschemas](#user-profile-subschemas)    | FALSE    | FALSE  | FALSE    |           |           | JSON Schema |
+| type          | type of root schema                      | `object`                                               | FALSE    | FALSE  | TRUE     |           |           |             |
+| properties    | user model properties                    | [User Model](./users.html#user-model) property set     | FALSE    | FALSE  | TRUE     |           |           |             |
+|---------------+------------------------------------------+--------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
 
 ### User Profile Subschemas
 
@@ -894,7 +894,7 @@ User profile schema properties have the following standard [JSON Schema Draft 4]
 | ------------- | ----------------------------------------------- | ------------------------------------------------------------------ |--------- | ------ | -------- | --------- | --------- | ----------  |
 | title         | user-defined display name for the property      | String                                                             | FALSE    | FALSE  | FALSE    |           |           |             |
 | description   | description of the property                     | String                                                             | TRUE     | FALSE  | FALSE    |           |           |             |
-| type          | type of property                                | `string`, `boolean`, `date`, `number`, `integer`, `array`          | FALSE    | FALSE  | FALSE    |           |           |             |
+| type          | type of property                                | `string`, `boolean`, `number`, `integer`, `array`          | FALSE    | FALSE  | FALSE    |           |           |             |
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
 
 Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) with the following keywords:
@@ -945,7 +945,6 @@ Specific property types support a **subset** of [JSON Schema validations](https:
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
 | `string`      | [JSON String](https://tools.ietf.org/html/rfc7159#section-7)                                                                        | `minLength` and `maxLength` |
 | `boolean`     | `false`, `true`, or `null`                                                                                                          |                             |
-| `date`        | [ISO 8601 String](https://tools.ietf.org/html/rfc3339)                                                                              |                             |
 | `number`      | [JSON Number](https://tools.ietf.org/html/rfc7159#section-6) with double-precision 64-bit IEEE 754 floating point number constraint | `minimum` and `maximum`     |
 | `integer`     | [JSON Number](https://tools.ietf.org/html/rfc7159#section-6) with 32-bit signed two's complement integer constraint                 | `minimum` and `maximum`     |
 | `array`       | [JSON Array](https://tools.ietf.org/html/rfc7159#section-5)                                                                         |                             |
