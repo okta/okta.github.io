@@ -33,14 +33,14 @@
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Social Authentication | Okta Developer</title>
-  <meta name="description" content="Setting up an Okta Social Authentication provider">
+  <title>Social Login | Okta Developer</title>
+  <meta name="description" content="Setting up an Okta Social Login provider">
   <link rel="canonical" href="https://developer.okta.com/docs/api/resources/social_authentication.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page social-authentication">
+  <div class="Page social-login">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -132,8 +132,9 @@
                 <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
                 <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
                 <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
-                <li class="is-active"><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                <li class="is-active"><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
                 <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
+                <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
               </ul>
             </li>
             <li>
@@ -206,163 +207,595 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/social_authentication.md">Edit Page</a>
-      <h1 id="social-authentication">Social Authentication</h1>
+      <h1 id="social-login">Social Login</h1>
 
-<p>Okta Social Authentication allows Okta to integrate with a Social Identity Provider such as Facebook, Google, LinkedIn, and Microsoft. These integrations support the following features:</p>
+<h2 id="overview">Overview</h2>
 
-<p><em>User Registration leveraging the user profile from a Social Provider</em></p>
+<p>Okta allows your users to sign in to your app using their Facebook, Google, LinkedIn, and Microsoft credentials. Once the user has successfully authenticated, they are returned to your app, and their social profile information is pulled into your Okta directory.</p>
 
-<ul>
-  <li>Onboarding new users through a Social Provider.</li>
-  <li>Capturing the Social Profile attributes from a Social Provider user and storing those attributes in Okta’s Universal Directory.</li>
-</ul>
+<h3 id="features">Features</h3>
 
-<p><em>User Authentication delegated to a Social Provider</em></p>
+<p>Configuring social login with Okta allows you to use the following features:</p>
 
 <ul>
-  <li>Leveraging Social Identity provider for user authentication, thus eliminating the need to store an additional username and password for that user</li>
+  <li>
+    <p><strong>User Registration:</strong> Capture the Profile attributes from a Social Identity Provider user and store those attributes in Okta’s Universal Directory.</p>
+  </li>
+  <li>
+    <p><strong>User Authentication:</strong> After a user is registered, continue to use that Social Identity Provider for user authentication, thus eliminating the need to store an additional username and password for that user.</p>
+  </li>
+  <li>
+    <p><strong>Social Profile Sync:</strong> If a user updates their Social Profile, those changes can be reflected inside Okta the next time they use social login.</p>
+  </li>
+  <li>
+    <p><strong>Support for Multiple Social Profiles</strong> Multiple Social Profiles can all be linked to one Okta user.</p>
+  </li>
+  <li>
+    <p><strong>Support for Webhooks:</strong> Make callouts to your application during user registration and/or account linking. For example: prompt a user for additional attributes before linking their account, or enable a customized validation or confirmation flow.</p>
+  </li>
+  <li>
+    <p><strong>OAuth 2.0 Scope Configuration:</strong> Specify OAuth 2.0 scopes to fully control which Social Profile attributes are linked to Okta.</p>
+  </li>
 </ul>
 
-<p><em>Ongoing profile update from the Social Provider</em></p>
+<h3 id="the-social-login-process">The Social Login Process</h3>
 
-<ul>
-  <li>Enable user profile updates from the linked Social Provider when user profile changes on the Social Provider</li>
-</ul>
-
-<p><em>Linking of existing Okta account to a Social Provider identity</em></p>
-
-<ul>
-  <li>Provide a flow for users with an existing local account to</li>
-</ul>
-
-<p><em>Call-out during registration/linking for custom logic</em></p>
-
-<ul>
-  <li>Support common use cases where additional logic is required during registration or linking. For example: prompting a user for additional attributes before linking their account, or enabling a customized validation or confirmation flow</li>
-  <li>OAuth scope configuration to control which Social Provider profile attributes are linked to Okta</li>
-</ul>
-
-<p>The following diagram shows a high-level architecture of Okta Social Authentication for your application:</p>
-
-<p><img src="/assets/social_authentication_flow-3f46b3e5b458fd9e2b473088cffd0c61937f26aeba3e70b38ff648221a5c5b70.png" alt="Social Authentication Flow" width="800px" /></p>
-
-<p>Advantages of using Okta Social Authentication include:</p>
-
-<ul>
-  <li>Easy configuration of providers in the Okta Admin UI.</li>
-  <li>Simplified integration with Social Providers through Okta, no need to register your own application directly with the provider.</li>
-  <li>Consistent user management, users from social providers reside in same Okta Universal Directory as all of your other users.</li>
-</ul>
-
-<h2 id="setting-up-a-social-authentication-provider-in-okta">Setting up a Social Authentication provider in Okta</h2>
+<p>The social login process starts at the auth point, then goes out to the provider and back:</p>
 
 <ol>
-  <li>
-    <p>Click the blue “Admin” button to get into the Okta Administrator view.</p>
-  </li>
-  <li>
-    <p>From the “Security” menu, select “Identity Providers”.</p>
-  </li>
-  <li>
-    <p>Use the “Add Identity Provider” drop-down menu to select the
-Identity Provider that you want to configure.</p>
-
-    <p>The options for social authentication providers are:</p>
-    <ul>
-      <li><a href="http://saml-doc.okta.com/IdentityProvider_Docs/Facebook_Identity_Provider_Setup.html">Facebook</a></li>
-      <li><a href="http://saml-doc.okta.com/IdentityProvider_Docs/Google_Identity_Provider_Setup.html">Google</a></li>
-      <li><a href="http://saml-doc.okta.com/IdentityProvider_Docs/LinkedIn_Identity_Provider_Setup.html">LinkedIn</a></li>
-      <li><a href="http://saml-doc.okta.com/IdentityProvider_Docs/Microsoft_Identity_Provider_Setup.html">Microsoft</a></li>
-    </ul>
-  </li>
-  <li>
-    <p>Configure your Social Authentication provider:</p>
-
-    <ul>
-      <li><strong>Name</strong>: We suggest using the name you would
-expect to see on a button, something like “Log in to Facebook”.</li>
-      <li><strong>IdP Username</strong>: Set to “<code class="highlighter-rouge">idpuser.email</code>”.</li>
-      <li><strong>Match against</strong>: Leave set to the default.</li>
-      <li><strong>Account Link Policy</strong>: Leave set to “Automatic” for now.</li>
-      <li><strong>Auto-Link Restrictions</strong>: Leave set to the default.</li>
-      <li><strong>Provisioning Policy</strong>: Leave set to “Automatic” for now.</li>
-      <li><strong>Profile Master</strong>: Leave unchecked.</li>
-      <li><strong>Group Assignments</strong>: Leave set to the default.</li>
-      <li><strong>Client Id</strong>: Set this to appropriate value for the Social
-Authentication provider that you are configuring.</li>
-      <li><strong>Client Secret</strong>: Set this to appropriate value for the Social
-Authentication provider that you are configuring.</li>
-      <li><strong>Scopes</strong>: Leave set to the default.</li>
-    </ul>
-  </li>
-  <li>
-    <p>Make note of the “Login URL” from the “Identity Providers” page.</p>
-
-    <p>Copy this URL somewhere you can refer to it later. You will be
-using this URL to create an HTTP link that will allow users to
-log in to your Okta org or custom application using their social credentials.</p>
-
-    <p><strong>Note:</strong> This URL will look similar to this one:
-<code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id={clientId}&amp;response_type={responseType}&amp;response_mode={responseMode}&amp;scope={scopes}&amp;redirect_uri={redirectUri}&amp;state={state}&amp;nonce={nonce}</code></p>
-  </li>
-  <li>
-    <p>Register an OAuth client using the App Integration Wizard.</p>
-
-    <ol>
-      <li>
-        <p>Navigate to the Administrator Dashboard.</p>
-      </li>
-      <li>
-        <p>Select <em>Applications</em>.</p>
-      </li>
-      <li>
-        <p>Select <em>Add Application</em>.</p>
-      </li>
-      <li>
-        <p>Select <em>Create New App</em> to launch the App Integration Wizard. It guides you through the necessary configuration
-steps and give you back a <code class="highlighter-rouge">client_id</code> which you use in Step 7. For social authentication, choose the following:</p>
-      </li>
-      <li>In the <strong>Create a New Application Integration</strong> page of the wizard, select <strong>OpenID Connect</strong> in the <strong>Sign on method</strong> section.</li>
-      <li>In the <strong>General Settings</strong> tab, check the <strong>Implicit</strong> checkbox for allowed grant types.</li>
-    </ol>
-  </li>
-  <li>
-    <p>Create a Social Auth login (Authorize) URL by replacing the value of the following parameters in the Social Auth “Authorize URL.”</p>
-
-    <ul>
-      <li><code class="highlighter-rouge">client_id</code>: use the <code class="highlighter-rouge">client_id</code> value you copied in step 6.</li>
-      <li><code class="highlighter-rouge">scope</code>: Determines the claims that are returned in the ID token.</li>
-      <li><code class="highlighter-rouge">response_type</code>: Determines which flow is used.</li>
-      <li><code class="highlighter-rouge">response_mode</code>: Determines how the authorization response should be returned.</li>
-      <li><code class="highlighter-rouge">state</code>: Protects against cross-site request forgery (CSRF).</li>
-      <li><code class="highlighter-rouge">nonce</code>: A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.</li>
-      <li><code class="highlighter-rouge">redirect_url</code>: The location where Okta returns a user after the user has finished authenticating against their Social Authentication provider.
-This URL <strong>must</strong> start with “https” and <strong>must</strong> match one of the URLs in the <code class="highlighter-rouge">redirect_uris</code> array that you configured previously.</li>
-    </ul>
-
-    <p>When complete, your Authorize URL looks something like this:</p>
-
-    <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="err">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;response_mode=fragment&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://app.example.com/social_auth
-</span></code></pre>
-    </div>
-
-    <p>If you log users into Okta, the Authorize URL looks something like this:</p>
-
-    <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="err">https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;response_mode=fragment&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://example.okta.com
-</span></code></pre>
-    </div>
-
-    <p>For learn more about Okta’s requirements for these parameters, see <a href="/docs/api/resources/oauth2.html#request-parameter-details">Authorize Endpoint Parameter Details</a>.</p>
-  </li>
-  <li>
-    <p>Add the Social Auth Authorize URL to the page where you want to
-enable Social Auth. Using the example URL from step 7, your HTML looks similar to the following:</p>
-
-    <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://example.okta.com/oauth2/v1/authorize?idp=0oa0bcde12fghiJkl3m4&amp;client_id=AbcDE0fGHI1jk2LM34no&amp;scope=openid%20email%20profile&amp;response_type=id_token&amp;response_mode=fragment&amp;state=someState&amp;nonce=someNonce&amp;redirect_uri=https://app.example.com/social_auth"</span><span class="nt">&gt;</span>Log in<span class="nt">&lt;/a&gt;</span>
-</code></pre>
-    </div>
-  </li>
+  <li>The user who wishes to authenticate clicks a “Log in with x” link.</li>
+  <li>The user authenticates and is asked by the Provider to accept the permissions required by your app.</li>
+  <li>Once the user accepts the permissions, Okta handles the authentication and redirects the user back to your specified redirect URI.</li>
 </ol>
+
+<p><img src="/assets/social_login_flow-02a8aff29c7ab39260b8b09e76eed9dd050c41331833b6ca6a8a45daaca90651.png" alt="Social Login Flow" width="800px" /></p>
+
+<!-- Source for image. Generated using http://www.plantuml.com/plantuml/uml/
+
+@startuml
+skinparam monochrome true
+
+participant "Okta" as ok
+participant "User Agent" as ua
+participant "Social Identity Provider" as idp
+
+ua -> ok: Get /oauth2/v1/authorize
+ok -> ua: 302 to IdP's Authorize Endpoint + state
+ua -> idp: GET IdP's Authorize Endpoint + state
+ua <-> idp: User authenticates
+idp -> ua: 302 to /oauth2/v1/authorize/callback + state  + code
+ua -> ok: GET /oauth2/v1/authorize/callback + state  + code
+ok -> ua: 302 to redirect_uri
+@enduml
+-->
+
+<h3 id="the-set-up-process">The Set-up Process</h3>
+
+<p>To set-up social login, you configure the following:</p>
+
+<ol>
+  <li>An OAuth 2.0 client in your social provider</li>
+  <li>An Identity Provider in Okta</li>
+  <li>An OpenID Connect Application in Okta</li>
+</ol>
+
+<p>Every Identity Provider in Okta is linked to an Application, and every time a user signs in with a Social Identity Provider for the first time, an Application User is created for them. The Application User represents the external user at the Social Identity Provider and can be used to map attributes to the Okta User. For more information about how to configure this behavior see <a href="#social-idp-settings">Social Identity Provider Settings</a> below.</p>
+
+<h2 id="facebook">Facebook</h2>
+
+<h5 id="1-set-up-a-facebook-app">1. Set Up a Facebook App</h5>
+
+<p>1.1. Go to <a href="https://developers.facebook.com">https://developers.facebook.com</a> and register for a developer account if you haven’t already done so.</p>
+
+<p>1.2. Head over to the Facebook App Dashboard: <a href="https://developers.facebook.com/apps">https://developers.facebook.com/apps</a>.</p>
+
+<p>1.3. Create a Facebook app. Instructions for creating a Facebook application can be found here: <a href="https://developers.facebook.com/docs/apps/register">https://developers.facebook.com/docs/apps/register</a>.</p>
+
+<p>1.4. On the “Product Setup” page, click the <strong>Dashboard</strong> link on the left-hand side.</p>
+
+<p>1.5. Save the App ID and App Secret values so you can add them to the Okta configuration in the next section.</p>
+
+<h5 id="2-configure-facebook-as-an-identity-provider-in-okta">2. Configure Facebook as an Identity Provider in Okta</h5>
+
+<p>2.1. Sign in to your Okta org.</p>
+
+<p>2.2. On the main page, click on the <strong>Admin</strong> button in the upper right.</p>
+
+<p>2.3. Hover your cursor over <strong>Security</strong> until the menu opens, then click on <strong>Identity Providers</strong>.</p>
+
+<p>2.4. On the Identity Providers page, click on <strong>Add Identity Provider</strong> &gt; <strong>Add Facebook</strong>.</p>
+
+<ul>
+  <li><strong>Name:</strong> We suggest using the name you would expect to see on a button, something like “Log in to Facebook”.</li>
+  <li><strong>IdP Username:</strong> Set to “idpuser.email”.</li>
+  <li><strong>Match against:</strong> Leave set to “Okta Username”.</li>
+  <li><strong>Account Link Policy:</strong> Leave set to “Automatic”.</li>
+  <li><strong>Auto-Link Restrictions:</strong> Leave set to “None”.</li>
+  <li><strong>Provisioning Policy:</strong> Leave set to “Automatic”.</li>
+  <li><strong>Profile Master:</strong> Leave unchecked if you want to be able to edit your user information in Okta, rather than having Facebook be the only source for all user updates.</li>
+  <li><strong>Group Assignments:</strong> Leave set to “None”, or specify a Group that you would like Facebook users to be added to.</li>
+  <li><strong>Client Id:</strong> Paste in the App ID that you got from Facebook in step 1.5 above.</li>
+  <li><strong>Client Secret:</strong> Paste in the App Secret that you got from Facebook in step 1.5 above.</li>
+  <li><strong>Scopes:</strong> Leave set to the default.</li>
+</ul>
+
+<blockquote>
+  <p>For more information about these, see <a href="#social-idp-settings">Social Identity Provider Settings</a> below.</p>
+</blockquote>
+
+<p>2.5. Once you have completed all the fields, click on <strong>Add Identity Provider</strong>. You will be returned to the main “Identity Providers” page.</p>
+
+<p>2.6. Find the Facebook Identity Provider that you just added. Once you have found the entry, copy both the “Authorize URL” and “Redirect URI” (ending in <code class="highlighter-rouge">/authorize/callback</code>).</p>
+
+<h5 id="3-add-the-okta-redirect-uri-to-facebook">3. Add the Okta Redirect URI to Facebook</h5>
+
+<p>3.1. In your Facebook app configuration, select <strong>Settings</strong> in the left pane.</p>
+
+<p>3.2. Choose <strong>Add Platform</strong>.</p>
+
+<p>3.3. Choose <strong>Website</strong>.</p>
+
+<p>3.4. In the Site URL field, enter the Okta “Redirect URI” that you copied in step 2.6.</p>
+
+<p>3.5. Click <strong>Save Changes</strong>.</p>
+
+<h5 id="4-register-an-openid-connect-application-in-okta">4. Register an OpenID Connect Application in Okta</h5>
+
+<p>4.1. Back on the Okta Admin site, click on <strong>Applications</strong>.</p>
+
+<p>4.2. Click <strong>Add Application</strong>.</p>
+
+<p>4.3. On the “Add Application” page, click <strong>Create New App</strong>.</p>
+
+<p>4.4. In the modal that pops up, select the appropriate platform for your use case and choose <strong>OpenID Connect</strong> as your sign-on method.</p>
+
+<p>4.5. Add a name of your choosing, and optionally a logo.</p>
+
+<p>4.6. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Facebook.</p>
+
+<p>4.7. Click <strong>Finish</strong> and you will arrive on the page for your new application.</p>
+
+<p>4.8. Under “General Settings”, check if the “Implicit (Hybrid)” grant type is enabled. If it is not already enabled, click <strong>Edit</strong>, enable it, and click <strong>Save</strong>.</p>
+
+<p>4.9. In the “Client Credentials” section, copy your “Client ID”, which you will use to complete your Authorize URL in the next step.</p>
+
+<p>4.10. Click on the <strong>Assignments</strong> tab.</p>
+
+<p>4.11. Click <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>.</p>
+
+<p>4.12. Assign the group that you chose under “Group Assignments” in Step 2.4 above. If you did not choose a Group, assign “Everyone”, then click <strong>Done</strong>.</p>
+
+<h5 id="5-complete-your-authorize-url">5. Complete Your Authorize URL</h5>
+
+<p>The Okta Identity Provider that you created in section 2 above generated an Authorize URL with a number of blank parameters that you must now fill-in:</p>
+
+<ul>
+  <li><strong>client_id:</strong> use the client_id value you copied in step 4.10.</li>
+  <li><strong>scope:</strong> Determines the claims that are returned in the ID token. This should have at least <code class="highlighter-rouge">openid</code>.</li>
+  <li><strong>response_type:</strong> Determines which flow is used. This should be <code class="highlighter-rouge">id_token</code>.</li>
+  <li><strong>response_mode:</strong> Determines how the authorization response should be returned. This should be <code class="highlighter-rouge">fragment</code>.</li>
+  <li><strong>state:</strong> Protects against cross-site request forgery (CSRF).</li>
+  <li><strong>nonce:</strong> A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.</li>
+  <li><strong>redirect_uri:</strong> The location where Okta returns a browser after the user has finished authenticating against their social login provider. This URL must start with “https” and must match one of the Redirect URIs that you configured previously in step 4.6.</li>
+</ul>
+
+<p>For a full explanation of all these parameters, see here: <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
+
+<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+
+<h4 id="using-facebook-for-login">Using Facebook for Login</h4>
+
+<p>There are three primary ways to kick off the sign-in with Facebook flow.</p>
+
+<p><strong>HTML Link</strong></p>
+
+<p>One option is to create a link that the user clicks in order to log in. The HREF for that link would be the Authorize URL that you created previously:</p>
+
+<p><code class="highlighter-rouge">&lt;a href=“https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Facebook&lt;/a&gt;</code></p>
+
+<p>After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified <code class="highlighter-rouge">redirect_uri</code> along with an ID Token in JWT format.</p>
+
+<p><strong>Okta Sign-in Widget</strong></p>
+
+<p>Okta also offers an easily embeddable JavaScript widget that reproduces the look and behavior of the standard Okta sign-in page. Adding a “Login with Facebook” button is as simple as adding the following code to your configuration:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">idps</span><span class="err">:</span> <span class="p">[</span>
+  <span class="p">{</span><span class="na">type</span><span class="p">:</span> <span class="s1">'FACEBOOK'</span><span class="p">,</span> <span class="na">id</span><span class="p">:</span> <span class="s1">'$Your_FB_IDP_ID_Here'</span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre>
+</div>
+
+<p>You can find out more about it <a href="https://github.com/okta/okta-signin-widget#okta-sign-in-widget">on GitHub</a>. Implementing login with Facebook would use the Widget’s <a href="https://github.com/okta/okta-signin-widget#openid-connect">OpenID Connect authentication flow</a>.</p>
+
+<p><strong>Auth.js</strong></p>
+
+<p>If you don’t want pre-built views, or need deeper levels of customization, then you can use the same AuthJS SDK that the Sign-in Widget is built with. For further information see <a href="https://github.com/okta/okta-auth-js#install">the AuthJS GitHub repo</a>. Implementing login with Facebook would use the SDK’s <a href="https://github.com/okta/okta-auth-js#openid-connect-options">OpenID Connect authentication flow</a>.</p>
+
+<h2 id="google">Google</h2>
+
+<h5 id="1-set-up-a-google-app">1. Set Up a Google App</h5>
+
+<p>1.1. Go to <a href="https://console.developers.google.com/">https://console.developers.google.com/</a> and register for a developer account if you haven’t already done so.</p>
+
+<p>1.2. Create a Google API Console project. Instructions for creating a project can be found here: <a href="https://developers.google.com/identity/sign-in/web/devconsole-project">https://developers.google.com/identity/sign-in/web/devconsole-project</a>. You can leave the “Authorized redirect URIs” section blank for now, you will return to it later.</p>
+
+<p>1.3. Save the OAuth client ID and secret values so you can add them to the Okta configuration in the next section.</p>
+
+<p>1.4. Click on “Dashboard” on the left-hand side and click <strong>Enable API</strong>.</p>
+
+<p>1.5. Search for “Google+” and then click on <strong>Google+ API</strong>.</p>
+
+<p>1.6. On the “Google+ API” page, click <strong>Enable</strong> at the top.</p>
+
+<h5 id="2-configure-google-as-an-identity-provider-in-okta">2. Configure Google as an Identity Provider in Okta</h5>
+
+<p>2.1. Sign in to your Okta org.</p>
+
+<p>2.2. On the main page, click on the <strong>Admin</strong> button in the upper right.</p>
+
+<p>2.3. Hover your cursor over <strong>Security</strong> until the menu opens, then click on <strong>Identity Providers</strong>.</p>
+
+<p>2.4. On the Identity Providers page, click on <strong>Add Identity Provider</strong> &gt; <strong>Add Google</strong>.</p>
+
+<ul>
+  <li><strong>Name:</strong> We suggest using the name you would expect to see on a button, something like “Log in to Google”.</li>
+  <li><strong>IdP Username:</strong> Set to “idpuser.email”.</li>
+  <li><strong>Match against:</strong> Leave set to “Okta Username”.</li>
+  <li><strong>Account Link Policy:</strong> Leave set to “Automatic”.</li>
+  <li><strong>Auto-Link Restrictions:</strong> Leave set to “None”.</li>
+  <li><strong>Provisioning Policy:</strong> Leave set to “Automatic”.</li>
+  <li><strong>Profile Master:</strong> Leave unchecked if you want to be able to edit your user information in Okta, rather than having Google be the only source for all user updates.</li>
+  <li><strong>Group Assignments:</strong> Leave set to “None”, or specify a Group that you would like Google users to be added to.</li>
+  <li><strong>Client Id:</strong> Paste in the App ID that you got from Google in step 1.3 above.</li>
+  <li><strong>Client Secret:</strong> Paste in the App Secret that you got from Google in step 1.3 above.</li>
+  <li><strong>Scopes:</strong> Leave set to the default.</li>
+</ul>
+
+<blockquote>
+  <p>For more information about these, see <a href="#social-idp-settings">Social Identity Provider Settings</a> below.</p>
+</blockquote>
+
+<p>2.5. Once you have completed all the fields, click on <strong>Add Identity Provider</strong>. You will be returned to the main “Identity Providers” page.</p>
+
+<p>2.6. On the “Identity Providers” page, you should find the Google Identity Provider that you just added. Once you have found the entry, copy both the “Authorize URL” and “Redirect URI” (ending in <code class="highlighter-rouge">/authorize/callback</code>).</p>
+
+<h5 id="3-add-the-okta-redirect-uri-to-google">3. Add the Okta Redirect URI to Google</h5>
+
+<p>3.1. In your Google API Manager Credentials page, select the OAuth client you just created.</p>
+
+<p>3.2. In the “Restrictions” section, find the “Authorized redirect URIs”.</p>
+
+<p>3.3. Paste in the Redirect URI from step 2.6 above.</p>
+
+<p>3.5. Click <strong>Save</strong>.</p>
+
+<h5 id="4-register-an-openid-connect-application-in-okta-1">4. Register an OpenID Connect Application in Okta</h5>
+
+<p>4.1. Back on the Okta Admin site, click on <strong>Applications</strong>.</p>
+
+<p>4.2. Click <strong>Add Application</strong>.</p>
+
+<p>4.3. On the “Add Application” page, click <strong>Create New App</strong>.</p>
+
+<p>4.4. In the modal that pops up, select the appropriate platform for your use case and choose <strong>OpenID Connect</strong> as your sign-on method.</p>
+
+<p>4.5. Add a name of your choosing, and optionally a logo.</p>
+
+<p>4.6. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Google.</p>
+
+<p>4.7. Click <strong>Finish</strong> and you will arrive on the page for your new application.</p>
+
+<p>4.8. Under “General Settings”, check if the “Implicit (Hybrid)” grant type is enabled. If it is not already enabled, click <strong>Edit</strong>, enable it, and click <strong>Save</strong>.</p>
+
+<p>4.9. In the “Client Credentials” section, copy your “Client ID”, which you will use to complete your Authorize URL in the next step.</p>
+
+<p>4.10. Click on the <strong>Assignments</strong> tab.</p>
+
+<p>4.11. Click <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>.</p>
+
+<p>4.12. Assign the group that you chose under “Group Assignments” in Step 2.4 above. If you did not choose a Group, assign “Everyone”, then click <strong>Done</strong>.</p>
+
+<h5 id="5-complete-your-authorize-url-1">5. Complete Your Authorize URL</h5>
+
+<p>The Okta Identity Provider that you created in section 2 above generated an Authorize URL with a number of blank parameters that you must now fill-in:</p>
+
+<ul>
+  <li><strong>client_id:</strong> use the client_id value you copied in step 4.10.</li>
+  <li><strong>scope:</strong> Determines the claims that are returned in the ID token. This should have at least <code class="highlighter-rouge">openid</code>.</li>
+  <li><strong>response_type:</strong> Determines which flow is used. This should be <code class="highlighter-rouge">id_token</code>.</li>
+  <li><strong>response_mode:</strong> Determines how the authorization response should be returned. This should be <code class="highlighter-rouge">fragment</code>.</li>
+  <li><strong>state:</strong> Protects against cross-site request forgery (CSRF).</li>
+  <li><strong>nonce:</strong> A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.</li>
+  <li><strong>redirect_uri:</strong> The location where Okta returns a browser after the user has finished authenticating against their social login provider. This URL must start with “https” and must match one of the Redirect URIs that you configured previously in step 4.6.</li>
+</ul>
+
+<p>For a full explanation of all these parameters, see here: <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
+
+<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+
+<h4 id="using-google-for-login">Using Google for Login</h4>
+
+<p>There are three primary ways to kick off the sign-in with Google flow.</p>
+
+<p><strong>HTML Link</strong></p>
+
+<p>One option is to create a link that the user clicks in order to log in. The HREF for that link would be the Authorize URL that you created previously:</p>
+
+<p><code class="highlighter-rouge">&lt;a href=“https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Google&lt;/a&gt;</code></p>
+
+<p>After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified <code class="highlighter-rouge">redirect_uri</code> along with an ID Token in JWT format.</p>
+
+<p><strong>Okta Sign-in Widget</strong></p>
+
+<p>Okta also offers an easily embeddable JavaScript widget that reproduces the look and behavior of the standard Okta sign-in page. You can find out more about it <a href="https://github.com/okta/okta-signin-widget#okta-sign-in-widget">on GitHub</a>. Implementing login with Google would use the Widget’s <a href="https://github.com/okta/okta-signin-widget#openid-connect">OpenID Connect authentication flow</a>.</p>
+
+<p><strong>Auth.js</strong></p>
+
+<p>If you don’t want pre-built views, or need deeper levels of customization, then you can use the same AuthJS SDK that the Sign-in Widget is built with. For further information see <a href="https://github.com/okta/okta-auth-js#install">the AuthJS GitHub repo</a>. Implementing login with Google would use the SDK’s <a href="https://github.com/okta/okta-auth-js#openid-connect-options">OpenID Connect authentication flow</a>.</p>
+
+<h2 id="linkedin">LinkedIn</h2>
+
+<h5 id="1-set-up-a-linkedin-app">1. Set Up a LinkedIn App</h5>
+
+<p>1.1. Go to <a href="https://developer.linkedin.com/">https://developer.linkedin.com/</a> and register for a developer account if you haven’t already done so.</p>
+
+<p>1.2. Create a LinkedIn app here: <a href="https://www.linkedin.com/developer/apps">https://www.linkedin.com/developer/apps</a>.</p>
+
+<p>1.3. Save the OAuth client ID and secret values so you can add them to the Okta configuration in the next section.</p>
+
+<p>1.4. Select <code class="highlighter-rouge">r_basicprofile</code> and <code class="highlighter-rouge">r_emailaddress</code> as the “Default Application Permissions”. You can leave the “Authorized redirect URLs” section blank for now, you will return to it later.</p>
+
+<h5 id="2-configure-linkedin-as-an-identity-provider-in-okta">2. Configure LinkedIn as an Identity Provider in Okta</h5>
+
+<p>2.1. Sign in to your Okta org.</p>
+
+<p>2.2. On the main page, click on the <strong>Admin</strong> button in the upper right.</p>
+
+<p>2.3. Hover your cursor over <strong>Security</strong> until the menu opens, then click on <strong>Identity Providers</strong>.</p>
+
+<p>2.4. On the Identity Providers page, click on <strong>Add Identity Provider</strong> &gt; <strong>Add LinkedIn</strong></p>
+
+<ul>
+  <li><strong>Name:</strong> We suggest using the name you would expect to see on a button, something like “Log in to LinkedIn”.</li>
+  <li><strong>IdP Username:</strong> Set to “idpuser.email”.</li>
+  <li><strong>Match against:</strong> Leave set to “Okta Username”.</li>
+  <li><strong>Account Link Policy:</strong> Leave set to “Automatic”.</li>
+  <li><strong>Auto-Link Restrictions:</strong> Leave set to “None”.</li>
+  <li><strong>Provisioning Policy:</strong> Leave set to “Automatic”.</li>
+  <li><strong>Profile Master:</strong> Leave unchecked if you want to be able to edit your user information in Okta, rather than having LinkedIn be the only source for all user updates.</li>
+  <li><strong>Group Assignments:</strong> Leave set to “None”, or specify a Group that you would like Facebook users to be added to.</li>
+  <li><strong>Client Id:</strong> Paste in the App ID that you got from LinkedIn in step 1.3 above.</li>
+  <li><strong>Client Secret:</strong> Paste in the App Secret that you got from LinkedIn in step 1.3 above.</li>
+  <li><strong>Scopes:</strong> Leave set to the default.</li>
+</ul>
+
+<blockquote>
+  <p>For more information about these, see <a href="#social-idp-settings">Social Identity Provider Settings</a> below.</p>
+</blockquote>
+
+<p>2.5. Once you have completed all the fields, click on <strong>Add Identity Provider</strong>. You will be returned to the main “Identity Providers” page.</p>
+
+<p>2.6. On the “Identity Providers” page, you should find the LinkedIn Identity Provider that you just added. Once you have found the entry, copy both the “Authorize URL” and “Redirect URI” (ending in <code class="highlighter-rouge">/authorize/callback</code>).</p>
+
+<h5 id="3-add-the-okta-redirect-uri-to-linkedin">3. Add the Okta Redirect URI to LinkedIn</h5>
+
+<p>3.1. In your LinkedIn app’s page, find the “OAuth 2.0” section under “Authorized Redirect URLs” paste in the Redirect URI from step 2.6 above.</p>
+
+<p>3.2. Click <strong>Update</strong>.</p>
+
+<h5 id="4-register-an-openid-connect-application-in-okta-2">4. Register an OpenID Connect Application in Okta</h5>
+
+<p>4.1. Back on the Okta Admin site, click on <strong>Applications</strong>.</p>
+
+<p>4.2. Click <strong>Add Application</strong>.</p>
+
+<p>4.3. On the “Add Application” page, click <strong>Create New App</strong>.</p>
+
+<p>4.4. In the modal that pops up, select the appropriate platform for your use case and choose <strong>OpenID Connect</strong> as your sign-on method.</p>
+
+<p>4.5. Add a name of your choosing, and optionally a logo.</p>
+
+<p>4.6. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with LinkedIn.</p>
+
+<p>4.7. Click <strong>Finish</strong> and you will arrive on the page for your new application.</p>
+
+<p>4.8. Under “General Settings”, check if the “Implicit (Hybrid)” grant type is enabled. If it is not already enabled, click <strong>Edit</strong>, enable it, and click <strong>Save</strong>.</p>
+
+<p>4.9. In the “Client Credentials” section, copy your “Client ID”, which you will use to complete your Authorize URL in the next step.</p>
+
+<p>4.10. Click on the <strong>Assignments</strong> tab.</p>
+
+<p>4.11. Click <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>.</p>
+
+<p>4.12. Assign the group that you chose under “Group Assignments” in Step 2.4 above. If you did not choose a Group, assign “Everyone”, then click <strong>Done</strong>.</p>
+
+<h5 id="5-complete-your-authorize-url-2">5. Complete Your Authorize URL</h5>
+
+<p>The Okta Identity Provider that you created in section 2 above generated an Authorize URL with a number of blank parameters that you must now fill-in:</p>
+
+<ul>
+  <li><strong>client_id:</strong> use the client_id value you copied in step 4.10.</li>
+  <li><strong>scope:</strong> Determines the claims that are returned in the ID token. This should have at least <code class="highlighter-rouge">openid</code>.</li>
+  <li><strong>response_type:</strong> Determines which flow is used. This should be <code class="highlighter-rouge">id_token</code>.</li>
+  <li><strong>response_mode:</strong> Determines how the authorization response should be returned. This should be <code class="highlighter-rouge">fragment</code>.</li>
+  <li><strong>state:</strong> Protects against cross-site request forgery (CSRF).</li>
+  <li><strong>nonce:</strong> A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.</li>
+  <li><strong>redirect_uri:</strong> The location where Okta returns a browser after the user has finished authenticating against their social login provider. This URL must start with “https” and must match one of the Redirect URIs that you configured previously in step 4.6.</li>
+</ul>
+
+<p>For a full explanation of all these parameters, see here: <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
+
+<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+
+<h4 id="using-linkedin-for-login">Using LinkedIn for Login</h4>
+
+<p>There are three primary ways to kick off the flow to sign-in with LinkedIn.</p>
+
+<p><strong>HTML Link</strong></p>
+
+<p>One option is to create a link that the user clicks in order to log in. The HREF for that link would be the Authorize URL that you created previously:</p>
+
+<p><code class="highlighter-rouge">&lt;a href=“https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With LinkedIn&lt;/a&gt;</code></p>
+
+<p>After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified <code class="highlighter-rouge">redirect_uri</code> along with an ID Token in JWT format.</p>
+
+<p><strong>Okta Sign-in Widget</strong></p>
+
+<p>Okta also offers an easily embeddable JavaScript widget that reproduces the look and behavior of the standard Okta sign-in page. You can find out more about it <a href="https://github.com/okta/okta-signin-widget#okta-sign-in-widget">on GitHub</a>. Implementing login with LinkedIn would use the Widget’s <a href="https://github.com/okta/okta-signin-widget#openid-connect">OpenID Connect authentication flow</a>.</p>
+
+<p><strong>Auth.js</strong></p>
+
+<p>If you don’t want pre-built views, or need deeper levels of customization, then you can use the same AuthJS SDK that the Sign-in Widget is built with. For further information see <a href="https://github.com/okta/okta-auth-js#install">the AuthJS GitHub repo</a>. Implementing login with LinkedIn would use the SDK’s <a href="https://github.com/okta/okta-auth-js#openid-connect-options">OpenID Connect authentication flow</a>.</p>
+
+<h2 id="microsoft">Microsoft</h2>
+
+<h5 id="1-set-up-a-microsoft-app">1. Set Up a Microsoft App</h5>
+
+<p>1.1. Create a Microsoft app here: <a href="https://apps.dev.microsoft.com/#/appList">https://apps.dev.microsoft.com/#/appList</a>. Instructions can be found here: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-app-registration. You can pause once you get to the Redirect URI section, we will come back to this.</p>
+
+<p>1.3. Save the Application ID for later.</p>
+
+<p>1.4. Under “Application Secrets”, click on <strong>Generate New Password</strong> and save the value that comes up. This is the Secret that corresponds to your Application ID.</p>
+
+<h5 id="2-configure-microsoft-as-an-identity-provider-in-okta">2. Configure Microsoft as an Identity Provider in Okta</h5>
+
+<p>2.1. Sign in to your Okta org.</p>
+
+<p>2.2. On the main page, click on the <strong>Admin</strong> button in the upper right.</p>
+
+<p>2.3. Hover your cursor over <strong>Security</strong> until the menu opens, then click on <strong>Identity Providers</strong>.</p>
+
+<p>2.4. On the Identity Providers page, click on <strong>Add Identity Provider</strong> &gt; <strong>Add Microsoft</strong>.</p>
+
+<ul>
+  <li><strong>Name:</strong> We suggest using the name you would expect to see on a button, something like “Log in to Microsoft”.</li>
+  <li><strong>IdP Username:</strong> Set to “idpuser.email”.</li>
+  <li><strong>Match against:</strong> Leave set to “Okta Username”.</li>
+  <li><strong>Account Link Policy:</strong> Leave set to “Automatic”.</li>
+  <li><strong>Auto-Link Restrictions:</strong> Leave set to “None”.</li>
+  <li><strong>Provisioning Policy:</strong> Leave set to “Automatic”.</li>
+  <li><strong>Profile Master:</strong> Leave unchecked if you want to be able to edit your user information in Okta, rather than having Microsoft be the only source for all user updates.</li>
+  <li><strong>Group Assignments:</strong> Leave set to “None”, or specify a Group that you would like Microsoft users to be added to.</li>
+  <li><strong>Client Id:</strong> Paste in the App ID that you got from Microsoft in step 1.3 above.</li>
+  <li><strong>Client Secret:</strong> Paste in the App Secret that you got from Microsoft in step 1.4 above.</li>
+  <li><strong>Scopes:</strong> Leave set to the default.</li>
+</ul>
+
+<blockquote>
+  <p>For more information about these, see <a href="#social-idp-settings">Social Identity Provider Settings</a> below.</p>
+</blockquote>
+
+<p>2.5. Once you have completed all the fields, click on <strong>Add Identity Provider</strong>. You will be returned to the main “Identity Providers” page.</p>
+
+<p>2.6. On the “Identity Providers” page, you should find the Microsoft Identity Provider that you just added. Once you have found the entry, copy both the “Authorize URL” and “Redirect URI” (ending in <code class="highlighter-rouge">/authorize/callback</code>).</p>
+
+<h5 id="3-add-the-okta-redirect-uri-to-microsoft">3. Add the Okta Redirect URI to Microsoft</h5>
+
+<p>3.1. Back on your Microsoft app’s registration page, if you haven’t already, click <strong>Add Platform</strong>.</p>
+
+<p>3.2. Select <strong>Web</strong>.</p>
+
+<p>3.3. Paste in the Redirect URI from step 2.6. into the “Redirect URLs” box then click <strong>Add URL</strong>.</p>
+
+<p>3.2. Click <strong>Save</strong>.</p>
+
+<h5 id="4-register-an-openid-connect-application-in-okta-3">4. Register an OpenID Connect Application in Okta</h5>
+
+<p>4.1. Back on the Okta Admin site, click on <strong>Applications</strong>.</p>
+
+<p>4.2. Click <strong>Add Application</strong>.</p>
+
+<p>4.3. On the “Add Application” page, click <strong>Create New App</strong>.</p>
+
+<p>4.4. In the modal that pops up, select the appropriate platform for your use case and choose <strong>OpenID Connect</strong> as your sign-on method.</p>
+
+<p>4.5. Add a name of your choosing, and optionally a logo.</p>
+
+<p>4.6. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Microsoft.</p>
+
+<p>4.7. Click <strong>Finish</strong> and you will arrive on the page for your new application.</p>
+
+<p>4.8. Under “General Settings”, check if the “Implicit (Hybrid)” grant type is enabled. If it is not already enabled, click <strong>Edit</strong>, enable it, and click <strong>Save</strong>.</p>
+
+<p>4.9. In the “Client Credentials” section, copy your “Client ID”, which you will use to complete your Authorize URL in the next step.</p>
+
+<p>4.10. Click on the <strong>Assignments</strong> tab.</p>
+
+<p>4.11. Click <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>.</p>
+
+<p>4.12. Assign the group that you chose under “Group Assignments” in Step 2.4 above. If you did not choose a Group, assign “Everyone”, then click <strong>Done</strong>.</p>
+
+<h5 id="5-complete-your-authorize-url-3">5. Complete Your Authorize URL</h5>
+
+<p>The Okta Identity Provider that you created in section 2 above generated an Authorize URL with a number of blank parameters that you must now fill-in:</p>
+
+<ul>
+  <li><strong>client_id:</strong> use the client_id value you copied in step 4.10.</li>
+  <li><strong>scope:</strong> Determines the claims that are returned in the ID token. This should have at least <code class="highlighter-rouge">openid</code>.</li>
+  <li><strong>response_type:</strong> Determines which flow is used. This should be <code class="highlighter-rouge">id_token</code>.</li>
+  <li><strong>response_mode:</strong> Determines how the authorization response should be returned. This should be <code class="highlighter-rouge">fragment</code>.</li>
+  <li><strong>state:</strong> Protects against cross-site request forgery (CSRF).</li>
+  <li><strong>nonce:</strong> A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.</li>
+  <li><strong>redirect_uri:</strong> The location where Okta returns a browser after the user has finished authenticating against their social login provider. This URL must start with “https” and must match one of the Redirect URIs that you configured previously in step 4.6.</li>
+</ul>
+
+<p>For a full explanation of all these parameters, see here: <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
+
+<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+
+<h4 id="using-microsoft-for-login">Using Microsoft for Login</h4>
+
+<p>There are three primary ways to actually kick off the sign-in with Microsoft flow.</p>
+
+<p><strong>HTML Link</strong></p>
+
+<p>One option is to create a link that the user clicks in order to log in. The HREF for that link would be the Authorize URL that you created previously:</p>
+
+<p><code class="highlighter-rouge">&lt;a href=“https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Microsoft&lt;/a&gt;</code></p>
+
+<p>After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified <code class="highlighter-rouge">redirect_uri</code> along with an ID Token in JWT format.</p>
+
+<p><strong>Okta Sign-in Widget</strong></p>
+
+<p>Okta also offers an easily embeddable JavaScript widget that reproduces the look and behavior of the standard Okta sign-in page. You can find out more about it <a href="https://github.com/okta/okta-signin-widget#okta-sign-in-widget">on GitHub</a>. Implementing login with Microsoft would use the Widget’s <a href="https://github.com/okta/okta-signin-widget#openid-connect">OpenID Connect authentication flow</a>.</p>
+
+<p><strong>Auth.js</strong></p>
+
+<p>If you don’t want pre-built views, or need deeper levels of customization, then you can use the same AuthJS SDK that the Sign-in Widget is built with. For further information see <a href="https://github.com/okta/okta-auth-js#install">the AuthJS GitHub repo</a>. Implementing login with Microsoft would use the SDK’s <a href="https://github.com/okta/okta-auth-js#openid-connect-options">OpenID Connect authentication flow</a>.</p>
+
+<h1 id="social-identity-provider-settings-">Social Identity Provider Settings <a name="social-idp-settings"></a></h1>
+
+<p>When you are setting up your social Identity Provider (IdP) in Okta, there are a number of settings that allow you to finely control the social login behavior. While the provider-specific instructions show one possible configuration, this section explains each of these in more detail so that you can choose the right configuration for your use case.</p>
+
+<h3 id="authentication-settings">Authentication Settings</h3>
+
+<p><strong>IdP username:</strong> This is the expression (written in the Okta Expression Language) that will be used to convert an IdP attribute to the Application User’s <code class="highlighter-rouge">username</code>. This IdP username will be used for matching an Application User to an Okta User.</p>
+
+<p>For example, the value <code class="highlighter-rouge">idpuser.email</code> means that it takes the <code class="highlighter-rouge">email</code> attribute passed by the social IdP and maps it to the Okta Application User’s <code class="highlighter-rouge">username</code> property.</p>
+
+<p>You can enter an expression to reformat the value, if desired. For example, if the social username is <code class="highlighter-rouge">john.doe@mycompany.com</code>, you could specify the replacement of <code class="highlighter-rouge">mycompany</code> with <code class="highlighter-rouge">endpointA.mycompany</code> to make the transformed username <code class="highlighter-rouge">john.doe@endpointA.mycompany.com</code>. See here for more information about the <a href="http://developer.okta.com/docs/getting_started/okta_expression_lang.html">Okta Expression Language</a>.</p>
+
+<p><strong>Match against:</strong> The Okta user property against which the IdP username is compared.</p>
+
+<p>More user profile attributes are available for matching as an Early Access feature. To enable more choices, contact Support.</p>
+
+<p><strong>Account Link Policy:</strong> Determines whether your Application User should be linked to an Okta user.</p>
+
+<ul>
+  <li>Automatic: Link user accounts automatically according to the “Auto-Link Restrictions” and “Match against” settings.</li>
+  <li>Callout: Account linking decisions should be delegated to an external application.</li>
+  <li>Disabled: Do not link existing User accounts. Unless User is already linked, login will fail.</li>
+</ul>
+
+<p><strong>Auto-Link Restrictions:</strong> Allows you to restrict auto-linking to members of specified groups.</p>
+
+<p><strong>Provisioning Policy:</strong> Determines whether just-in-time provisioning of users should be automatic, disabled, or delegated to an external application via a callout.</p>
+
+<h3 id="jit-settings">JIT Settings</h3>
+
+<p><strong>Profile Master:</strong> If selected, the Social Identity Provider will be the source of truth for a user’s profile attributes. This means that next time the user signs in using the Social Identity Provider, Okta will update the user profile attributes for this user. If a user is assigned multiple applications with profile mastering enabled, a prioritization in Directory -&gt; Profile Masters will decide whether this provider will be mastering the user’s attributes. For more information about this, see <a href="https://help.okta.com/en/prod/Content/Topics/Directory/Attribute_Level_Mastering.htm?Highlight=Attribute%20Level%20Mastering">Attribute Level Master</a></p>
+
+<p><strong>Group Assignments:</strong> Allows you to assign new users to one or more existing Groups. For example, new Facebook users could be added to a “Facebook” Group.</p>
 
 <h2 id="error-codes">Error Codes</h2>
 

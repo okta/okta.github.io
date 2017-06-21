@@ -3,6 +3,36 @@
   
     
     <url>
+      <loc>https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster</loc>
+      
+        <lastmod>2017-06-20T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/06/15/build-microservices-architecture-spring-boot</loc>
+      
+        <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa</loc>
       
         <lastmod>2017-06-13T00:00:00+00:00</lastmod>
