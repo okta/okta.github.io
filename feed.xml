@@ -8,6 +8,413 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>What the Heck is OAuth?</title>
+        <description>&lt;p&gt;There’s a &lt;em&gt;lot&lt;/em&gt; of confusion around what OAuth &lt;em&gt;actually is&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some people think OAuth is a login flow (like when you sign into an application with Google Login), and some people think of OAuth as a &lt;em&gt;“security thing”&lt;/em&gt;, and don’t really know much more than that.&lt;/p&gt;
+
+&lt;p&gt;I’m going to show you what OAuth is, explain how it works, and hopefully leave you with a sense of how and where OAuth can benefit your application.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-oauth&quot;&gt;What Is OAuth?&lt;/h2&gt;
+
+&lt;p&gt;To begin at a high level, OAuth is &lt;em&gt;not&lt;/em&gt; an API or a service: it’s an open standard for authorization and anyone can implement it.&lt;/p&gt;
+
+&lt;p&gt;More specifically, OAuth is a standard that apps can use to provide client applications with “secure delegated access”. OAuth works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.&lt;/p&gt;
+
+&lt;p&gt;There are two versions of OAuth: &lt;a href=&quot;https://tools.ietf.org/html/rfc5849&quot;&gt;OAuth 1.0a&lt;/a&gt; and &lt;a href=&quot;https://tools.ietf.org/html/rfc6749&quot;&gt;OAuth 2.0&lt;/a&gt;. These specifications are &lt;em&gt;completely different&lt;/em&gt; from one another, and cannot be used together: there is &lt;em&gt;no&lt;/em&gt; backwards compatibility between them.&lt;/p&gt;
+
+&lt;p&gt;Which one is more popular? &lt;em&gt;Great question!&lt;/em&gt; Nowadays, OAuth 2.0 is the most widely used form of OAuth. So from now on, whenever I say &lt;em&gt;“OAuth”&lt;/em&gt;, I’m talking about OAuth 2.0 – as it’s most likely what you’ll be using.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-oauth&quot;&gt;Why OAuth?&lt;/h2&gt;
+
+&lt;p&gt;OAuth was created as response to the direct authentication pattern. This pattern was made famous by HTTP Basic Authentication, where the user is prompted for a username and password. Basic Authentication is still used as a primitive form of API authentication for server side applications: instead of sending a username and password to the server with each request, the user sends an API key ID and secret. Before OAuth, sites would prompt you to enter your username and password directly into a form and they would login to your data (e.g. your Gmail account) as you. This is often called &lt;a href=&quot;https://arstechnica.com/information-technology/2010/01/oauth-and-oauth-wrap-defeating-the-password-anti-pattern/&quot;&gt;the password anti-pattern&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To create a better system for the web, federated identity was created for single sign-on (SSO). In this scenario, an end user talks to their identity provider, and the identity provider generates a  cryptographically signed token which it hands off to the application to authenticate the user. The application trusts the identity provider. As long as that trust relationship works with the signed assertion, you’re good to go. The diagram below (from &lt;a href=&quot;https://developer.okta.com/standards/OAuth/&quot;&gt;Okta’s OAuth docs&lt;/a&gt;) show how this works.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/browser_spa_implicit_flow-aa8b504d81ca3e57be798da01b0d570a92287e1b28f8b6209c16ca500d4f34a6.png&quot; alt=&quot;Browser Implicit Flow&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It’s a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chicklets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
+
+&lt;h3 id=&quot;saml&quot;&gt;SAML&lt;/h3&gt;
+
+&lt;p&gt;SAML is basically a session cookie in your browser that gives you access to webapps. It’s limited in the kinds of device profiles and scenarios you might want to do outside of a web browser.&lt;/p&gt;
+
+&lt;p&gt;When SAML 2.0 was launched in 2005, it made sense. However, a lot has changed since then. Now we have modern web and native application development platforms. There’s Single Page Applications (SPAs) like Gmail/Google Inbox, Facebook, and Twitter. They have different behaviors than your traditional web application, because they make AJAX (background HTTP calls) to APIs. Mobile phones make API calls too, as do TVs, gaming consoles, and IoT devices. SAML SSO isn’t particularly good at any of this.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-and-apis&quot;&gt;OAuth and APIs&lt;/h3&gt;
+
+&lt;p&gt;A lot has changed with the way we build APIs too. In 2005, people were invested in WS-* for building web services. Now, most developers have moved to REST and stateless APIs. REST is, in a nutshell, HTTP commands pushing JSON packets over the network.&lt;/p&gt;
+
+&lt;p&gt;Developers build a lot of APIs. The API Economy is a common buzzword you might hear in boardrooms today. Companies need to protect their REST APIs in a way that allows many devices to access them. In the old days, you’d enter your username/password directory and the app would login directly as you. This gave rise to the delegated authorization problem.&lt;/p&gt;
+
+&lt;p&gt;“How can I allow an app to access my data without necessarily giving it my password?”&lt;/p&gt;
+
+&lt;p&gt;If you’ve ever seen one of the dialogs below, that’s what we’re talking about. This is an application asking if it can access data on your behalf.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/biketoworkday-fb-login-f00e39aabbf3e44bc3570333643cbf5d966fc27367dbffd2623ff4a3694831c3.png&quot; alt=&quot;Facebook OAuth&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is OAuth.&lt;/p&gt;
+
+&lt;p&gt;OAuth is a delegated authorization framework for REST/APIs. It enables apps to obtain limited access (scopes) to a user’s data without giving away a user’s password. It decouples authentication from authorization and supports multiple use cases addressing different device capabilities. It supports server-to-server apps, browser-based apps, mobile/native apps, and consoles/TVs.&lt;/p&gt;
+
+&lt;p&gt;You can think of this like hotel key cards, but for apps. If you have a hotel key card, you can get access to your room. How do you get a hotel key card? You have to do an authentication process at the front desk to get it. After authenticating and obtaining the key card, you can access resources across the hotel.&lt;/p&gt;
+
+&lt;p&gt;To break it down simply, OAuth is where:&lt;/p&gt;
+
+&lt;p&gt;App requests authorization from User
+User authorizes App and delivers proof
+App presents proof of authorization to server to get a Token
+Token is restricted to only access what the User authorized for the specific App&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth-central-components&quot;&gt;OAuth Central Components&lt;/h2&gt;
+
+&lt;p&gt;OAuth is built on the following central components:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Scopes and Consent&lt;/li&gt;
+  &lt;li&gt;Actors&lt;/li&gt;
+  &lt;li&gt;Clients&lt;/li&gt;
+  &lt;li&gt;Tokens&lt;/li&gt;
+  &lt;li&gt;Authorization Server&lt;/li&gt;
+  &lt;li&gt;Flows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;oauth-scopes&quot;&gt;OAuth Scopes&lt;/h3&gt;
+
+&lt;p&gt;Scopes are what you see on the authorization screens when an app requests permissions. They’re bundles of permissions asked for by the client when requesting a token. These are coded by the application developer when writing the application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-scopes-7ea53a0efe6c05a8113671297f641baae7486dfb6ab8b8357c74cb6e6f8371ce.png&quot; alt=&quot;OAuth Scopes&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Scopes decouple authorization policy decisions from enforcement. This is the first key aspect of OAuth. The permissions are front and center. They’re not hidden behind the app layer that you have to reverse engineer. They’re often listed in the API docs: here are the scopes that this app requires.&lt;/p&gt;
+
+&lt;p&gt;You have to capture this consent. This is called trusting on first use. It’s a pretty significant user experience change on the web. Most people before OAuth were just used to name and password dialog boxes. Now you have this new screen that comes up and you have to train users to use. Retraining the internet population is difficult. There’s all kinds of users from the tech-savvy young folk to grandparents that aren’t familiar with this flow. It’s a new concept on the web that’s now front and center. Now you have to authorize and bring consent.&lt;/p&gt;
+
+&lt;p&gt;The consent can vary based on the application. It can be a time-sensitive range (day, weeks, months), but not all platforms allow you to choose the duration. One thing to watch for when you consent is that the app can do stuff on your behalf - e.g. LinkedIn spamming everyone in your network.&lt;/p&gt;
+
+&lt;p&gt;OAuth is an internet-scale solution because it’s per application. You often have the ability to log in to a dashboard to see what applications you’ve given access to and to revoke consent.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-actors&quot;&gt;OAuth Actors&lt;/h3&gt;
+
+&lt;p&gt;The actors in OAuth flows are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Resource Owner&lt;/strong&gt;: owns the data in the resource server. For example, I’m the Resource Owner of my Facebook profile.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Resource Server&lt;/strong&gt;: The API which stores data the application wants to access&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Client&lt;/strong&gt;: the application that wants to access your data&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Authorization Server&lt;/strong&gt;: The main engine of OAuth&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-actors-cd8b4861e839037400d8521e97c5d8cf0cb029add65d1036488991c7e85dcb72.png&quot; alt=&quot;OAuth Actors&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The resource owner is a role that can change with different credentials. It can be an end user, but it can also be a company.&lt;/p&gt;
+
+&lt;p&gt;Clients can be public and confidential. There is a significant distinction between the two in OAuth nomenclature. Confidential clients can be trusted to store a secret. They’re not running on a desktop or distributed through an app store. People can’t reverse engineer them and get the secret key. They’re running in a protected area where end users can’t access them.&lt;/p&gt;
+
+&lt;p&gt;Public clients are browsers, mobile apps, and IoT devices.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-clients-93fc6cc8e83fa7d885c9daa0ed88007fc44780b99682dcfa580af319894870c7.png&quot; alt=&quot;OAuth Clients&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Client registration also a key component of OAuth. It’s like the DMV of OAuth. You need to get a license plate for your application. This is how your app’s logo shows up in an authorization dialog.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-tokens&quot;&gt;OAuth Tokens&lt;/h3&gt;
+
+&lt;p&gt;Access tokens are the token the client uses to access the Resource Server (API). They’re meant to be short-lived. Think of them in hours and minutes, not days and month. You don’t need a confidential client to get an access token. You can get access tokens with public clients. They’re designed to optimize for internet scale problems. Because these tokens can be short lived and scale out, they can’t be revoked, you just have to wait for them to time out.&lt;/p&gt;
+
+&lt;p&gt;The other token is the refresh token. This is much longer-lived; days, months, years. This can be used to get new tokens. To get a refresh token, applications typically require confidential clients with authentication.&lt;/p&gt;
+
+&lt;p&gt;Refresh tokens can be revoked. When revoking an application’s access in a dashboard, you’re killing its refresh token. This gives you the ability to force the clients to rotate secrets.  What you’re doing is you’re using your refresh token to get new access tokens and the access tokens are going over the wire to hit all the API resources. Each time you refresh your access token you get a new cryptographically signed token.. Key rotation is built into the system.&lt;/p&gt;
+
+&lt;p&gt;The OAuth spec doesn’t define what a token is. It can be in whatever format you want. Usually though, you want these tokens to be JSON Web Tokens (a &lt;a href=&quot;https://tools.ietf.org/html/rfc7519&quot;&gt;standard&lt;/a&gt;). In a nutshell, a JWT (pronounced “jot”) is a secure and trustworthy standard for token authentication. JWTs allow you to digitally sign information (referred to as claims) with a signature and can be verified at a later time with a secret signing key. To learn more about JWTs, see &lt;a href=&quot;https://stormpath.com/blog/beginners-guide-jwts-in-java&quot;&gt;A Beginner’s Guide to JWTs in Java&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Tokens are retrieved from endpoints on the authorization server. The two main endpoints are the authorize endpoint and the token endpoint. They’re separated for different use cases. The authorize endpoint is where you go to get consent and authorization from the user. This returns an authorization grant that says the user has consented to it. Then the authorization is passed to the token endpoint. The token endpoint processes the grant and says “great, here’s your refresh token and your access token”.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/authorization-server-99a4ad01368a4c8e407917358d4394d573a6c0e3c9fa10c01a59d1a54c4938cf.png&quot; alt=&quot;Authorization Server&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can use the access token to get access to APIs. Once it expires, you’ll have to go back to the token endpoint with the refresh token to get a new access token.&lt;/p&gt;
+
+&lt;p&gt;The downside is this causes a lot of developer friction. One of the biggest pain points of OAuth for developers is you having to manage the refresh tokens. You push state management onto each client developer. You get the benefits of key rotation, but you’ve just created a lot of pain for developers. That’s why developers love API keys. They can just copy/paste them, slap them in a text file, and be done with them. API keys are very convenient for the developer, but very bad for security.&lt;/p&gt;
+
+&lt;p&gt;There’s a pay to play problem here. Getting developers to do OAuth flows increases security, but there’s more friction. There’s opportunities for toolkits and platforms to simplify things and help with token management. Luckily, OAuth is pretty mature these days, and chances are your favorite language or framework has tools available to simplify things.&lt;/p&gt;
+
+&lt;p&gt;We’ve talked a bit about the client types, the token types, and the endpoints of the authorization server and how we can pass that to a resource server. I mentioned two different flows: getting the authorization and getting the tokens. Those don’t have to happen on the same channel. The front channel is what goes over the browser. The browser redirected the user to the authorization server, the user gave consent. This happens on the user’s browser. Once the user takes that authorization grant and hands that to the application, the client application no longer needs to use the browser to complete the OAuth flow to get the tokens.&lt;/p&gt;
+
+&lt;p&gt;The tokens are meant to be consumed by the client application so it can access resources on your behalf. We call that the back channel. The back channel is a direct HTTP call directly from the client application to the resource server to exchange the authorization grant for tokens. These channels are used for different flows depending on what device capabilities you have.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/flow-channels-5d8996b3706cab1e4ac8f9ed716d6529d3970f91cbc3cb5ff5a21a94389d0e1d.png&quot; alt=&quot;Flow Channels&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, a Front Channel Flow where you authorize via user agent might look as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Resource Owner starts flow to delegate access to protected resource&lt;/li&gt;
+  &lt;li&gt;Client sends authorization request with desired scopes via browser redirect to the Authorize Endpoint on the Authorization Server&lt;/li&gt;
+  &lt;li&gt;Authorization Server returns a consent dialog saying “do you allow this application to have access to these scopes?” Of course, you’ll need to authenticate to the application, so if you’re not authenticated to your Resource Server, it’ll ask you to login. If you already have a cached session cookie, you’ll just see the consent dialog box. View the the consent dialog, and agree.&lt;/li&gt;
+  &lt;li&gt;The authorization grant is passed back to the application via browser redirect. This all happens on the front channel.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/front-channel-flow-4eb727aa0e67884935dd1642749fac60a7194815b8a1724aa11a0ce9adb80fa1.png&quot; alt=&quot;Front Channel Flow&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There’s also a variance in this flow called the implicit flow. We’ll get to that in a minute.&lt;/p&gt;
+
+&lt;p&gt;This is what it looks like on the wire.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+GET https://accounts.google.com/o/oauth2/auth?scope=gmail.insert gmail.send
+&amp;amp;redirect_uri=https://app.example.com/oauth2/callback
+&amp;amp;response_type=code&amp;amp;client_id=812741506391
+&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+This is a GET request with a bunch of query params (not URL-encoded for example purposes). Scopes are from Gmail's API. The redirect_uri is the URL of the client application that the authorization grant should be returned to. This should match the value from the client registration process (at the DMV). You don't want the authorization being bounced back to a foreign application. Response type varies the OAuth flows. Client ID is also from the registration process. State is a security flag, similar to XRSF. To learn more about XRSF, see &lt;a href=&quot;https://dzone.com/articles/cross-site-request-forgery&quot;&gt;DZone's &quot;Cross-Site Request Forgery explained&quot;&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+HTTP/1.1 302 Found
+Location: https://app.example.com/oauth2/callback?
+code=MsCeLvIaQm6bTrgtp7&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+The &lt;code&gt;code&lt;/code&gt; returned is the authorization grant and &lt;code&gt;state&lt;/code&gt; is to ensure it's not forged and it's from the same request.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;After the Front Channel is done, a Back Channel Flow happens, exchanging the authorization code for an access token.&lt;/p&gt;
+
+&lt;p&gt;The Client application sends an access token request to the token endpoint on the Authorization Server with confidential client credentials and client id. This process exchanges an Authorization Code Grant for an Access Token and (optionally) a Refresh Token.
+Client accesses a protected resource with Access Token.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/back-channel-flow-7a2fb837d1950d5718ee788c2d904247edc5b06b9e3f399253da78636197cbbc.png&quot; alt=&quot;Back Channel Flow&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Below is how this looks in raw HTTP.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+POST /oauth2/v3/token HTTP/1.1
+Host: www.googleapis.com
+Content-Type: application/x-www-form-urlencoded
+
+code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;client_secret={client_secret}&amp;amp;redirect_uri=https://app.example.com/oauth2/callback&amp;amp;grant_type=authorization_code
+&lt;/pre&gt;
+&lt;p&gt;The grant_type is the extensibility part of OAuth. It's an authorization code from a precomputed perspective. It opens up the flexibility to have different ways to describe these grants. This is the most common type of OAuth flow.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+{
+  &quot;access_token&quot;: &quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+  &quot;token_type&quot;: &quot;Bearer&quot;,
+  &quot;expires_in&quot;: 3600,
+  &quot;refresh_token&quot;: &quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;
+}
+&lt;/pre&gt;
+&lt;p&gt;
+The response is JSON. You can be reactive or proactive in using tokens. Proactive is to have a timer in your client. Reactive is to catch an error and attempt to get a new token then.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Once you have an access token, you can use the access token in an Authentication header (using the &lt;code class=&quot;highlighter-rouge&quot;&gt;token_type&lt;/code&gt; as a prefix) to make protected resource requests.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -H &quot;Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA&quot; \
+  https://www.googleapis.com/gmail/v1/users/1444587525/messages
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;So now you have a front channel, a back channel, different endpoints, and different clients. You have to mix and match these for different use cases. This up-levels the complexity of OAuth and it can get confusing.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-flows&quot;&gt;OAuth Flows&lt;/h3&gt;
+
+&lt;p&gt;The very first flow is what we call the &lt;strong&gt;Implicit Flow&lt;/strong&gt;. The reason it’s called the implicit flow is because all the communication is happening through the browser. There is no backend server redeeming the authorization grant for an access token. An SPA is a good example of this flow’s use case. This flow is also called 2 Legged OAuth.&lt;/p&gt;
+
+&lt;p&gt;Implicit flow is optimized for browser-only public clients. An access token is returned directly from the authorization request (front channel only). It typically does not support refresh tokens. It assumes the Resource Owner and Public Client are on the same device. Since everything happens on the browser, it’s the most vulnerable to security threats.&lt;/p&gt;
+
+&lt;p&gt;The gold standard is the &lt;strong&gt;Authorization Code Flow&lt;/strong&gt;, aka 3 Legged, that uses both the front channel and the back channel. This is what we’ve been talking about the most in this article. The front channel flow is used by the client application to obtain an authorization code grant. The back channel is used by the client application to exchange the authorization code grant for an access token (and optionally a refresh token). It assumes the Resource Owner and Client Application are on separate devices. It’s the most secure flow because you can authenticate the client to redeem the authorization grant, and tokens are never passed through a user-agent.
+There’s not just Implicit and Authorization Code flows, there’s additional flows you can do with OAuth. Again, OAuth is more of a framework.&lt;/p&gt;
+
+&lt;p&gt;For server-to-server scenarios, you might want to use a &lt;strong&gt;Client Credential Flow&lt;/strong&gt;. In this scenario, the client application is a confidential client that’s acting on its own, not on behalf of the user. It’s more of a service account type of scenario. All you need is the client’s credentials to do the whole flow. It’s a back channel only flow to obtain an access token using the client’s credentials. It supports shared secrets or assertions as client credentials signed with either symmetric or asymmetric keys.&lt;/p&gt;
+
+&lt;p&gt;Symmetric-key algorithms are cryptographic algorithms that allow you to decrypt anything, as long as you have the password. This is often found when securing PDFs or .zip files.&lt;/p&gt;
+
+&lt;p&gt;Public key cryptography, or asymmetric cryptography, is any cryptographic system that uses pairs of keys: public keys and private keys. Public keys can be read by anyone, private keys are sacred to the owner. This allows data to be secure without the need to share a password.&lt;/p&gt;
+
+&lt;p&gt;There’s also a legacy mode called &lt;strong&gt;Resource Owner Password Flow&lt;/strong&gt;. This is very similar to the direct authentication with username and password scenario and is not recommended. It’s a legacy grant type for native username/password apps such as desktop applications. In this flow, you send the client application a username and password and it returns an access token from the Authorization Server. It typically does not support refresh tokens and it assumes the Resource Owner and Public Client are on the same device. For when you have an API that only wants to speak OAuth, but you have old-school clients to deal with.&lt;/p&gt;
+
+&lt;p&gt;A more recent addition to OAuth is the &lt;strong&gt;Assertion Flow&lt;/strong&gt;, which is similar to the client credential flow. This was added to open up the idea of federation. This flow allows an Authorization Server to trust authorization grants from third parties such as SAML IdP. The Authorization Server trusts the Identity Provider. The assertion is used to obtain an access token from the token endpoint. This is great for companies that have invested in SAML or SAML-related technologies and allow them to integrate with OAuth. Because SAML assertions are short-lived, there are no refresh tokens in this flow and you have to keep retrieving access tokens every time the assertion expires.&lt;/p&gt;
+
+&lt;p&gt;Not in the OAuth spec, is a &lt;strong&gt;Device Flow&lt;/strong&gt;. There’s no web browser, just a controller for something like a TV. A user code is returned from an authorization request that must be redeemed by visiting a URL on a device with a browser to authorize. A back channel flow is used by the client application to poll for authorization approval for an access token and optionally a refresh token. Also popular for CLI clients.&lt;/p&gt;
+
+&lt;p&gt;We’ve covered six different flows using the different actors and token types. They’re necessary because of the capabilities of the clients, how we needed to get consent from the client, who is making consent, and that adds a lot of complexity to OAuth.&lt;/p&gt;
+
+&lt;p&gt;When people ask if you support OAuth, you have to clarify what they’re asking for. Are they asking if you support all six flows, or just the main ones? There’s a lot of granularity available between all the different flows.&lt;/p&gt;
+
+&lt;h2 id=&quot;security-and-the-enterprise&quot;&gt;Security and the Enterprise&lt;/h2&gt;
+
+&lt;p&gt;There’s a large surface area with OAuth. With Implicit Flow, there’s lots of redirects and lots of room for errors. There’s been a lot of people trying to exploit OAuth between applications and it’s easy to do if you don’t follow recommended Web Security 101 guidelines. For example:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html&quot;&gt;Always use CSRF token with the &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt; parameter to ensure flow integrity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Always whitelist redirect URIs to ensure proper URI validations&lt;/li&gt;
+  &lt;li&gt;Bind the same client to authorization grants and token requests with a client ID&lt;/li&gt;
+  &lt;li&gt;For confidential clients, make sure the client secrets aren’t leaked. Don’t put a client secret in your app that’s distributed through an App Store!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The biggest complaint about OAuth in general comes from Security people. It’s regarding the Bearer tokens and that they can be passed just like session cookies. You can pass it around and you’re good to go, it’s not cryptographically bound to the user. Using JWTs helps because they can’t be tampered with. However, in the end, a JWT is just a string of characters so they can easily be copied and used in an &lt;code class=&quot;highlighter-rouge&quot;&gt;Authorization&lt;/code&gt; header.&lt;/p&gt;
+
+&lt;h3 id=&quot;enterprise-oauth-20-use-cases&quot;&gt;Enterprise OAuth 2.0 Use Cases&lt;/h3&gt;
+
+&lt;p&gt;OAuth decouples your authorization policy decisions from authentication. It enables the right blend of fine and coarse grained authorization. It can replace traditional Web Access Management (WAM) Policies. It’s also great for restricting and revoking permissions when building apps that can access specific APIs. It ensures only managed and/or compliant devices can access specific APIs. It has deep integration with identity deprovisioning workflows to revoke all tokens from a user or device. Finally, it supports federation with an identity provider.&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth-is-not-an-authentication-protocol&quot;&gt;OAuth is not an Authentication Protocol&lt;/h2&gt;
+
+&lt;p&gt;To summarize some of the misconceptions of OAuth 2.0: it’s not backwards compatible with OAuth 1.0. It replaces signatures with HTTPS for all communication. When people talk about OAuth today, they’re talking about OAuth 2.0.&lt;/p&gt;
+
+&lt;p&gt;Because OAuth is an authorization framework and not a protocol, you may have interoperability issues. There are lots of variances in how teams implement OAuth and you might need custom code to integrate with vendors.&lt;/p&gt;
+
+&lt;p&gt;OAuth 2.0 is not an authentication protocol. It even says so in &lt;a href=&quot;https://oauth.net/articles/authentication/&quot;&gt;its documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-not-authentication-highlighted-b20b0ee8790740e1c354643e770dcd394ed9c6079812e5a85440e6dcbe14085a.png&quot; alt=&quot;OAuth 2.0 is not an authentication protocol&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We’ve been talking about delegated authorization this whole time. It’s not about authenticating the user, and this is key. OAuth 2.0 alone says absolutely nothing about the user. You just have a token to get access to a resource.&lt;/p&gt;
+
+&lt;p&gt;There’s a huge number of additions that’ve happened to OAuth in the last several years. These add complexity back on top of OAuth to complete a variety of enterprise scenarios. For example, JWTs can be used as interoperable tokens that can be signed and encrypted.&lt;/p&gt;
+
+&lt;h2 id=&quot;pseudo-authentication-with-oauth-20&quot;&gt;Pseudo-Authentication with OAuth 2.0&lt;/h2&gt;
+
+&lt;p&gt;Login with OAuth was made famous by Facebook Connect and Twitter. In this flow, a client accesses a &lt;code class=&quot;highlighter-rouge&quot;&gt;/me&lt;/code&gt; endpoint with an access token. All it says is that the client has access to the resource with a token. People invented this fake endpoint as a way of getting back a user profile with an access token. It’s a non-standard way to get information about the user. There’s nothing in the standards that say everyone has to implement this endpoint. Access tokens are meant to be opaque. They’re meant for the API, they’re not designed to contain user information.&lt;/p&gt;
+
+&lt;p&gt;What you’re really trying to answer with authentication is &lt;em&gt;who&lt;/em&gt; the user is, &lt;em&gt;when&lt;/em&gt; did the user authenticate, and &lt;em&gt;how&lt;/em&gt; did the user authenticate. You can answer typically answer these questions with SAML assertions, not with access tokens and authorization grants. That’s why we call this pseudo authentication.&lt;/p&gt;
+
+&lt;h2 id=&quot;enter-openid-connect&quot;&gt;Enter OpenID Connect&lt;/h2&gt;
+
+&lt;p&gt;To solve the pseudo authentication problem, the best parts of OAuth 2.0, Facebook Connect, and SAML 2.0 were combined to create &lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt;. OpenID Connect (OIDC) extends OAuth 2.0 with a new signed &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; for the client and a &lt;code class=&quot;highlighter-rouge&quot;&gt;UserInfo&lt;/code&gt; endpoint to fetch user attributes. Unlike SAML, OIDC provides a standard set of scopes and claims for identities. Examples include: &lt;code class=&quot;highlighter-rouge&quot;&gt;profile&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;email&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;address&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;phone&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;OIDC was created to be internet scalable by making things completely dynamic. There’s no longer downloading metadata and federation like SAML requires. There’s built-in registration, discovery, and metadata for dynamic federations. You can type in your email address, then it dynamically discovers your OIDC provider, dynamically downloads the metadata, dynamically know what certs it’s going to use, and allows BYOI (Bring Your Own Identity). It supports high assurance levels and key SAML use cases for enterprises.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/openid-connect-protocol-suite-7e1d4655fc5f66461dc78fcb069fb54e3eb2eabf412a244c6617f49af747b3ba.png&quot; alt=&quot;OpenID Connect Protocol Suite&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OIDC was made famous by Google and Microsoft, both big early adopters. Okta has made a big investment in OIDC as well.&lt;/p&gt;
+
+&lt;p&gt;All that changes in the initial request is it contains standard scopes (like &lt;code class=&quot;highlighter-rouge&quot;&gt;openid&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;email&lt;/code&gt;):&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+GET https://accounts.google.com/o/oauth2/auth?
+scope=&lt;strong&gt;openid email&lt;/strong&gt;&amp;amp;
+redirect_uri=https://app.example.com/oauth2/callback&amp;amp;
+response_type=code&amp;amp;
+client_id=812741506391&amp;amp;
+state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+HTTP/1.1 302 Found
+Location: https://app.example.com/oauth2/callback?
+code=MsCeLvIaQm6bTrgtp7&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+The &lt;code&gt;code&lt;/code&gt; returned is the authorization grant and &lt;code&gt;state&lt;/code&gt; is to ensure it's not forged and it's from the same request.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;And the authorization grant for tokens response contains an ID token.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+POST /oauth2/v3/token HTTP/1.1
+Host: www.googleapis.com
+Content-Type: application/x-www-form-urlencoded
+
+code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;
+  client_secret={client_secret}&amp;amp;
+  redirect_uri=https://app.example.com/oauth2/callback&amp;amp;
+  grant_type=authorization_code
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+{
+  &quot;access_token&quot;: &quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+  &quot;token_type&quot;: &quot;Bearer&quot;,
+  &quot;expires_in&quot;: 3600,
+  &quot;refresh_token&quot;: &quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,
+  &lt;strong&gt;&quot;id_token&quot;: &quot;eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkazcifQ...&quot;&lt;/strong&gt;
+}
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;You can see this is layered nicely on top of OAuth to give back an ID token as a structured token. An ID token is a JSON Web Token (JWT). A JWT (aka “jot”) is much smaller than a giant XML-based SAML assertion and can be efficiently passed around between different devices. A JWT has three parts: a header, a body, and a signature. The header says what algorithm was used to sign it, the claims are in the body, and its signed in the signature.&lt;/p&gt;
+
+&lt;p&gt;An Open ID Connect flow involves the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Discover OIDC metadata&lt;/li&gt;
+  &lt;li&gt;Perform OAuth flow to obtain id token and access token&lt;/li&gt;
+  &lt;li&gt;Get JWT signature keys and optionally dynamically register the Client application&lt;/li&gt;
+  &lt;li&gt;Validate JWT ID token locally based on built-in dates and signature&lt;/li&gt;
+  &lt;li&gt;Get additional user attributes as needed with access token&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oidc-flow-d93872818e8d040a5b7f1d02ac6b0a2d2961a91de72727f64ba47635dce5f2a1.png&quot; alt=&quot;OIDF Flow&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth--okta&quot;&gt;OAuth + Okta&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.okta.com&quot;&gt;Okta&lt;/a&gt; is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta’s Developer Platform straight from the source, you should attend &lt;a href=&quot;https://www.okta.com/oktane17/&quot;&gt;Oktane17&lt;/a&gt; in late August. There’s a &lt;a href=&quot;https://www.okta.com/oktane17/agenda/#AppDev&quot;&gt;track dedicated to app development&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&quot;http://developer.okta.com/docs/api/resources/oauth2.html&quot;&gt;Okta’s OAuth 2.0 API&lt;/a&gt; for specific information on how we support OAuth.&lt;/p&gt;
+
+&lt;p&gt;SAML is implement by Okta with its SSO chicklets. If you’re an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chicklet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
+
+&lt;p&gt;If you’d rather watch a video to learn about OAuth, please see the presentation below from &lt;a href=&quot;https://twitter.com/jankytweet&quot;&gt;Karl McGuinness&lt;/a&gt;, Senior Director of Identity at Okta.&lt;/p&gt;
+
+&lt;div style=&quot;max-width: 560px; margin: 0 auto&quot;&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/NnNha_p-iq0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;OAuth 2.0 is an authorization framework for delegated access to APIs. It involves clients that request scopes that Resource Owners authorize/give consent to. Authorization grants are exchanged for access tokens and refresh tokens (depending on flow). There are multiple flows to address varying client and authorization scenarios. JWTs can be used for structured tokens between Authorization Servers and Resource Servers.&lt;/p&gt;
+
+&lt;p&gt;OAuth has a very large security surface area. Make sure to use a secure toolkit and validate all inputs!&lt;/p&gt;
+
+&lt;p&gt;OAuth is not an authentication protocol. OpenID Connect extends OAuth 2.0 for authentication scenarios and is often called “SAML with curly-braces”. If you’re looking to dive even deeper into OAuth 2.0, I recommend you check out &lt;a href=&quot;https://www.oauth.com/&quot;&gt;OAuth.com&lt;/a&gt;, take Okta’s Auth SDK for a spin, and try out the OAuth flows for yourself.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</guid>
+      </item>
+    
+      <item>
         <title>Build a Microservices Architecture for Microbrews with Spring Boot</title>
         <description>&lt;p&gt;Adopting a microservice architecture provides unique opportunities to add failover and resiliency to your systems, so 
 your components can handle load spikes and errors gracefully. Microservices make change less expensive too. It can also 
