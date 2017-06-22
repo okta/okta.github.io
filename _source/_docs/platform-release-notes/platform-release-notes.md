@@ -47,7 +47,7 @@ Here is a response from `/api/v1/logs`
 <!-- (OKTA-76607) -->
 
 #### Client Registration API Is an Early Access Feature
-The [Auth Clients API](/docs/api/resources/oauth-clients.html) provides operations to register and manage client applications for use with Okta’s
+The [Client Registration API](/docs/api/resources/oauth-clients.html) provides operations to register and manage client applications for use with Okta’s
 OAuth 2.0 and OpenID Connect endpoints.
 
 #### Create OAuth 2.0 and OpenID Connect Clients with Apps API
@@ -61,7 +61,7 @@ to create and manage clients.
 Logged information about OAuth 2.0 client updates is now available by using GET requests to
 either log endpoint: `/api/v1/events` or `/api/v1/logs`.
 
-{% img release_notes/DeactClientLog.png alt:"Logged Key Rotation Event" %}
+{% img release_notes/DeactClientLog.png alt:"Logged Client Update Event" %}
 <!-- (OKTA-86738, OKTA-127445) -->
 
 #### Support for RP-Initiated Logout
