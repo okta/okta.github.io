@@ -484,8 +484,9 @@ token_type_hint | A hint of the type of *token*.                                
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
 
-> Native applications do not store and should not provide `client_secret` (see [Section 5.3.1 of the OAuth 2.0 spec](https://tools.ietf.org/html/rfc6819#section-5.3.1)). They can revoke a token
-by supplying `client_id`.
+> Native applications do not store and should not provide `client_secret`
+(see [Section 5.3.1 of the OAuth 2.0 spec](https://tools.ietf.org/html/rfc6819#section-5.3.1)).
+They can omit `client_secret` from the above request parameters when revoking a token.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
