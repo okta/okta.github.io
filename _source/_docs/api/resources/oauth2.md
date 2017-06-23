@@ -484,14 +484,14 @@ token_type_hint | A hint of the type of *token*.                                
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
 
-> Native applications do not store and should not providee `client_secret`. They can revoke a token
+> Native applications do not store and should not provide `client_secret` (see [Section 5.3.1 of the OAuth 2.0 spec](https://tools.ietf.org/html/rfc6819#section-5.3.1)). They can revoke a token
 by supplying `client_id`.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-A successful revocation produces an empty response with an HTTP response code of 200. To avoid leaking information, Okta
-produces a success response if asked to revoke an invalid, expired, or revoked token.
+A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid,
+expired, or revoked token is a success so information isn’t leaked.
 
 ##### Token Authentication Methods
 
