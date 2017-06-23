@@ -11,7 +11,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 ## Getting Started
 
-Explore the Identity Providers API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8438ef3445415386b407)
+Explore the Identity Providers API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e67463599312db1413cb)
 
 ## Setup Guides
 
