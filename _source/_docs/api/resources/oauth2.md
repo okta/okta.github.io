@@ -491,7 +491,7 @@ They can omit `client_secret` from the above request parameters when revoking a 
 {:.api .api-response .api-response-params}
 
 A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid,
-expired, or revoked token is a success so information isn’t leaked.
+expired, or revoked token is a success so information isn't leaked.
 
 ##### Token Authentication Methods
 
