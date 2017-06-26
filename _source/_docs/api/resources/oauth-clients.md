@@ -22,7 +22,7 @@ Explore the Client Registration API: [![Run in Postman](https://run.pstmn.io/but
 If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html), you may want to experiment with the Postman collection first:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7){:target="_blank"}
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7)
 
 ## Client Application Model
 
@@ -35,8 +35,8 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
   "client_id_issued_at": 1453913425,
   "client_secret_expires_at": 0,
   "client_name": "Example OAuth Client",
-  "client_uri": "http://www.example-application.com",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
@@ -142,8 +142,8 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
       "client_name": "Example OAuth Client",
-      "client_uri": "http://www.example-application.com",
-      "logo_uri": "http://www.example-application.com/logo.png",
+      "client_uri": "https://www.example-application.com",
+      "logo_uri": "https://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
          "https://www.example-application.com/oauth2/redirectUri"
@@ -174,8 +174,8 @@ curl -v -X POST \
   "client_id_issued_at": 1453913425,
   "client_secret_expires_at": 0,
   "client_name": "Example OAuth Client",
-  "client_uri": "http://www.example-application.com",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
@@ -233,8 +233,8 @@ curl -v -X GET \
   "client_id": "0jrabyQWm4B9zVJPbotY",
   "client_id_issued_at": 1453913425,
   "client_name": "Example OAuth Client",
-  "client_uri": "http://www.example-application.com",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
@@ -309,8 +309,8 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "client_id": "0jrabyQWm4B9zVJPbotY",
     "client_id_issued_at": 1453913425,
     "client_name": "Example OAuth Client",
-    "client_uri": "http://www.example-application.com",
-    "logo_uri": "http://www.example-application.com/logo.png",
+    "client_uri": "https://www.example-application.com",
+    "logo_uri": "https://www.example-application.com/logo.png",
     "application_type": "web",
     "redirect_uris": [
       "https://www.example-application.com/oauth2/redirectUri"
@@ -332,8 +332,8 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "client_id": "F10CaazJPQ5Zpyu1Ojko",
     "client_id_issued_at": 1453913425,
     "client_name": "Another OAuth Client",
-    "client_uri": "http://www.another-application.com",
-    "logo_uri": "http://www.another-application.com/logo.png",
+    "client_uri": "https://www.another-application.com",
+    "logo_uri": "https://www.another-application.com/logo.png",
     "application_type": "browser",
     "redirect_uris": [
       "https://www.another-application.com/oauth2/redirectUri"
@@ -381,8 +381,8 @@ curl -v -X GET \
     "client_id": "JoLxQvMz6u0kEkHFSnC8",
     "client_id_issued_at": 1453913425,
     "client_name": "Payroll Application",
-    "client_uri": "http://www.payroll-application.com",
-    "logo_uri": "http://www.payroll-application.com/logo.png",
+    "client_uri": "https://www.payroll-application.com",
+    "logo_uri": "https://www.payroll-application.com/logo.png",
     "application_type": "web",
     "redirect_uris": [
       "https://www.payroll-application.com/oauth2/redirectUri"
@@ -436,8 +436,8 @@ curl -v -X PUT \
 -d '{
       "client_id": "0jrabyQWm4B9zVJPbotY",
       "client_name": "Updated OAuth Client",
-      "client_uri": "http://www.example-application.com",
-      "logo_uri": "http://www.example-application.com/logo.png",
+      "client_uri": "https://www.example-application.com",
+      "logo_uri": "https://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
         "https://www.example-application.com/oauth2/redirectUri"
@@ -468,8 +468,8 @@ curl -v -X PUT \
   "client_id_issued_at": 1453913425,
   "client_secret_expires_at": 0,
   "client_name": "Updated OAuth Client",
-  "client_uri": "http://www.example-application.com",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
@@ -532,9 +532,9 @@ curl -v -X POST \
   "client_id_issued_at": 1453913425,
   "client_secret_expires_at": 0,
   "client_name": "Updated OAuth Client",
-  "client_uri": "http://www.example-application.com",
+  "client_uri": "https://www.example-application.com",
   "client_secret": "cdUQIFvE61wGI5P51H33ORC4SRB1RXfX",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
