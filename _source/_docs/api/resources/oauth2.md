@@ -705,7 +705,8 @@ This API doesn't require any authentication and returns a JSON object with the f
 {% api_operation get /oauth2/*:authorizationServerId*/.well-known/openid-configuration %}
 
 This API endpoint returns OpenID Connect metadata that can be used by clients to programmatically configure their interactions with Okta.
-Custom scopes and custom claims aren't returned.
+
+> Note: Custom scopes and claims aren't returned. To see your Authorization Server's custom scopes, use the [Get All Scopes API](#get-all-scopes), and to see its custom claims use [Get All Claims API](#get-all-claims).
 
 This API doesn't require any authentication and returns a JSON object with the following structure.
 
