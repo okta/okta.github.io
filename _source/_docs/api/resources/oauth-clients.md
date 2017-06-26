@@ -60,23 +60,24 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
 
 Client applications have the following properties:
 
-|----------------------------+-------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------+--------+----------|
-| Property                   | Description                                                       | DataType                                                                                     | Nullable | Unique | Readonly |
-| -------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------- | ------ | -------- |
-| client_id                  | unique key for the client application                             | String                                                                                       | FALSE    | TRUE   | TRUE     |
-| client_id_issued_at        | time at which the client_id was issued (measured in unix seconds) | Number                                                                                       | TRUE     | FALSE  | TRUE     |
-| client_name                | human-readable string name of the client application              | String                                                                                       | FALSE    | TRUE   | FALSE    |
-| client_secret              | OAuth 2.0 client secret string (used for confidential clients)    | String                                                                                       | TRUE     | FALSE  | TRUE     |
-| client_secret_expires_at   | time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds) | Number                                                        | TRUE     | FALSE  | TRUE     |
-| logo_uri                   | URL string that references a logo for the client                  | String                                                                                       | TRUE     | FALSE  | FALSE    |
-| application_type           | The type of client application                                    | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE     |
-| redirect_uris              | array of redirection URI strings for use in redirect-based flows  | Array                                                                                        | TRUE     | FALSE  | FALSE    |
-| post_logout_redirect_uris  | array of redirection URI strings for use for relying party initiated logouts  | Array                                                                                        | TRUE     | FALSE  | FALSE    |
-| response_types             | array of OAuth 2.0 response type strings                          | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE    |
-| grant_types                | array of OAuth 2.0 grant type strings                             | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE    |
-| token_endpoint_auth_method | requested authentication method for the token endpoint            | `none`, `client_secret_post`, or `client_secret_basic`                                       | FALSE    | FALSE  | FALSE    |
-| initiate_login_uri         | URL that a third party can use to initiate a login by the client  | String                                                                                       | TRUE     | FALSE  | FALSE    |
-|----------------------------+-------------------------------------------------------------------+----------------------------------------------------------------------------------------------+----------+--------+----------|
+| --------------------------- | ------------------------------------------------------------------------------------------------                                                                                                                                                                    | -------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
+| Property                    | Description                                                                                                                                                                                                                                                         | DataType                                                                                     | Nullable | Unique | Readonly  |
+|:----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:----------|
+| client_id                   | unique key for the client application                                                                                                                                                                                                                               | String                                                                                       | FALSE    | TRUE   | TRUE      |
+| client_id_issued_at         | time at which the client_id was issued (measured in unix seconds)                                                                                                                                                                                                   | Number                                                                                       | TRUE     | FALSE  | TRUE      |
+| client_name                 | human-readable string name of the client application                                                                                                                                                                                                                | String                                                                                       | FALSE    | TRUE   | FALSE     |
+| client_secret               | OAuth 2.0 client secret string (used for confidential clients)                                                                                                                                                                                                      | String                                                                                       | TRUE     | FALSE  | TRUE      |
+| client_secret_expires_at    | time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)                                                                                                                                                                    | Number                                                                                       | TRUE     | FALSE  | TRUE      |
+| client_assertion            | Required if the client uses a JWT signed with a `client_secret` instead of passing in the client secret. Contains the JWT signed with the `client_secret`.                                                                                                          | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| client_assertion_type       | Required if a JWT was specified for `client_assertion`. As indicated in the   [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.   | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| logo_uri                    | URL string that references a logo for the client                                                                                                                                                                                                                    | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| application_type            | The type of client application                                                                                                                                                                                                                                      | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE      |
+| redirect_uris               | array of redirection URI strings for use in redirect-based flows                                                                                                                                                                                                    | Array                                                                                        | TRUE     | FALSE  | FALSE     |
+| post_logout_redirect_uris   | array of redirection URI strings for use for relying party initiated logouts                                                                                                                                                                                        | Array                                                                                        | TRUE     | FALSE  | FALSE     |
+| response_types              | array of OAuth 2.0 response type strings                                                                                                                                                                                                                            | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE     |
+| grant_types                 | array of OAuth 2.0 grant type strings                                                                                                                                                                                                                               | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE     |
+| token_endpoint_auth_method  | requested authentication method for the token endpoint                                                                                                                                                                                                              | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | FALSE    | FALSE  | FALSE     |
+| initiate_login_uri          | URL that a third party can use to initiate a login by the client                                                                                                                                                                                                    | String                                                                                       | TRUE     | FALSE  | FALSE     |
 
 Property Details
 
@@ -206,9 +207,9 @@ Fetches a specific client by `clientId` from your organization
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                     | ParamType | DataType | Required |
---------- | ------------------------------- | --------- | -------- | -------- |
-clientId  | `clientId` of a specific client | URL       | String   | TRUE     |
+| Parameter | Description                      | ParamType | DataType | Required |
+|:----------|:---------------------------------|:----------|:---------|:---------|
+| client_id | `client_id` of a specific client | URL       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -416,7 +417,7 @@ Updates the settings for a client application from your organization.
 
 Parameter | Description                        | ParamType | DataType                               | Required |
 --------- | ---------------------------------- | --------- | -------------------------------------- | -------- |
-clientId  | `clientId` of a specific client    | URL       | String                                 | TRUE     |
+client_id  | `client_id` of a specific client    | URL       | String                                 | TRUE     |
 settings  | OAuth client registration settings | Body      | [Client Settings](#client-application-model) | TRUE     |
 
 > All settings must be specified when updating a client application, **partial updates are not supported!** If any settings are missing when updating a client application the update will fail. The exceptions are: `client_secret_expires_at`, or `client_id_issued_at` must not be included in the request, and the `client_secret` can be omitted.
@@ -493,7 +494,7 @@ curl -v -X PUT \
 ### Generate new client secret
 {:.api .api-operation}
 
-{% api_operation put /oauth2/v1/clients/*:clientId*/lifecycle/newSecret %}
+{% api_operation put /oauth2/v1/clients/*:client_id*/lifecycle/newSecret %}
 
 Generates a new client secret for the specified client application.
 
@@ -502,7 +503,7 @@ Generates a new client secret for the specified client application.
 
 Parameter | Description                        | ParamType | DataType                               | Required |
 --------- | ---------------------------------- | --------- | -------------------------------------- | -------- |
-clientId  | `clientId` of a specific client    | URL       | String                                 | TRUE     |
+client_id  | `client_id` of a specific client    | URL       | String                                 | TRUE     |
 
 > This operation only applies to client applications which use the `client_secret_post` or `client_secret_basic` method for token endpoint authorization.
 
@@ -558,16 +559,16 @@ curl -v -X POST \
 ### Remove Client Application
 {:.api .api-operation}
 
-{% api_operation delete /oauth2/v1/clients/*:clientId* %}
+{% api_operation delete /oauth2/v1/clients/*:client_id* %}
 
 Removes a client application from your organization.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                        | ParamType | DataType | Required |
---------- | ---------------------------------- | --------- | -------- | -------- |
-clientId  | `clientId` of a specific client    | URL       | String   | TRUE     |
+| Parameter | Description                      | ParamType | DataType | Required |
+|:----------|:---------------------------------|:----------|:---------|:---------|
+| client_id | `client_id` of a specific client | URL       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}

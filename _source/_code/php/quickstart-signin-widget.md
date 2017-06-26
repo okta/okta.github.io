@@ -327,7 +327,7 @@ $jws = JOSE_JWT::decode($jwt_string);
 $jws->verify($jwk, 'RS256');
 ```
 
-Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
+Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-methods).
 
 The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
 However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
