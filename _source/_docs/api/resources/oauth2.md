@@ -469,8 +469,7 @@ Content-Type: application/json;charset=UTF-8
 
 {% api_operation post /oauth2/:authorizationServerId/v1/revoke %}
 
-This API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the
-introspection endpoint. A client may revoke only its own tokens.
+This API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client can revoke only its own tokens.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -484,7 +483,7 @@ token_type_hint | A hint of the type of *token*.                                
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
 
-> Native applications do not store and should not provide `client_secret`
+> Native applications should not provide -- and by default do not store -- `client_secret`
 (see [Section 5.3.1 of the OAuth 2.0 spec](https://tools.ietf.org/html/rfc6819#section-5.3.1)).
 They can omit `client_secret` from the above request parameters when revoking a token.
 
