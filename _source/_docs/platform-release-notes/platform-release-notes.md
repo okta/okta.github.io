@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.24
+excerpt: Summary of changes to the Okta Platform since Release 2017.25
 ---
 
-## Release 2017.25
+## Release 2017.26
 
 ### Advance Notice: Data Retention Changes
 
@@ -29,68 +29,43 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 ### Platform Enhancements
 
-* [System Logs Track Key Rotation and Generation](#system-logs-track-key-rotation-and-generation)
-* [Client Registration API Is an Early Access Feature](#client-registration-api-is-an-early-access-feature)
-* [Create OAuth 2.0 and OpenID Connect Clients with the Apps API](#create-oauth-20-and-openid-connect-clients-with-apps-api)
-* [OAuth 2.0 and OpenID Connect Client App Updates Available in System Log](#oauth-20-and-openid-connect-client-app-updates-available-in-system-log)
-* [Support for RP-Initiated Logout](#support-for-rp-initiated-logout)
-* [OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint](#oauth-20-and-openid-connect-well-known-response-includes-registration-endpoint)
+* [Mask Client Secret](#mask-client-secret)
+* [Support client_secret_jwt](#support-client_secret_jwt)
+* [Sign-In Widget](#sign-in-widget)
 
 
-#### System Logs Track Key Rotation and Generation
-Logged information about key rotation and generation for apps and identity providers is available by using GET requests to either of the following endpoints: `/api/v1/events` or `/api/v1/logs`.
-For more information, see [Identity Provider Signing Key Store Operations](https://developer.okta.com/docs/api/resources/idps.html#identity-provider-signing-key-store-operations)
-or [Update Key Credential for Application](https://developer.okta.com/docs/api/resources/apps.html#update-key-credential-for-application).
+#### Mask Client Secret
+When an Oauth 2.0 client fails multiple times within a specified period to log in successfully, the system log contains a masked representation of the client secret. The representation is always ten characters in length and accurately represents up to five initial characters of the secret.
+The remaining characters are asterisks.
+{% img release_notes/MaskedClientSecret.png alt:"Masked Client Secret Event" %}
+<!-- (OKTA-129694) -->
 
-Here is a response from `/api/v1/logs`
-{% img release_notes/KeyRotateLog.png alt:"Logged Key Rotation Event" %}
-<!-- (OKTA-76607) -->
+#### Support client_secret_jwt
+Okta now supports the `client_secret_jwt` method for token endpoint authentication (`token_endpoint_auth_method`).
+This method is specified in the [OpenID Connect specification](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), and allows you to use JWT and HMAC to authenticate a client for OAuth/OIDC requests.
+<!-- (OKTA-101074) -->
 
-#### Client Registration API Is an Early Access Feature
-The [Auth Clients API](/docs/api/resources/oauth-clients.html) provides operations to register and manage client applications for use with Okta’s
-OAuth 2.0 and OpenID Connect endpoints.
+#### Sign-In Widget
+Version 1.11.0 of the Okta Sign-In Widget is now available. This release includes new features,
+enhanced support for 408/WCAG accessibility, and bug fixes. In addition, the Okta Auth SDK release is now 1.8.0.
 
-#### Create OAuth 2.0 and OpenID Connect Clients with Apps API
-The [Apps API](https://developer.okta.com/docs/api/resources/apps.html) supports creating and configuring
-OAuth 2.0 or OpenID Connect clients. Alternatively, you can use
-[Client Registration API](https://developer.okta.com/docs/api/resources/oauth-clients.html) (RFC 7591 and RFC 7592)
-to create and manage clients.
-<!-- (OKTA-78223) -->
-
-#### OAuth 2.0 and OpenID Connect Client App Updates Available in System Log
-Logged information about OAuth 2.0 client updates is now available by using GET requests to
-either log endpoint: `/api/v1/events` or `/api/v1/logs`.
-
-{% img release_notes/DeactClientLog.png alt:"Logged Key Rotation Event" %}
-<!-- (OKTA-86738, OKTA-127445) -->
-
-#### Support for RP-Initiated Logout
-Okta supports [RP-intiated logout](http://openid.net/specs/openid-connect-session-1_0.html#RPLogout)
-from OpenID Connect client apps in both the Okta UI and Okta API. You can specify a logout redirect URI,
-or accept the default behavior of returning to the Okta Login page. You can access this feature on the
-Create OpenID Connect Integration page (under Applications) in the UI.
-<!-- (OKTA-94106) -->
-
-#### OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint
-Okta returns the `registration_endpoint` in OAuth 2.0 and OpenID Connect `.well-known` responses.
-<!-- (OKTA-127457) -->
+For full details, see the
+[release documentation](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.11.0).
+<!-- (OKTA-131204) -->
 
 
 ### Platform Bugs Fixed
 
-* [Invalid Availability of credentials.signing.kid](#invalid-availability-of-credentialssigningkid)
-* [WWW-Authenticate Header in HTTP 401 Response](#www-authenticate-header-in-http-401-response)
+* [Validate Scope Names](#validate-scope-names)
+* [Duplicate Create User Calls](#duplicate-create-user-calls)
 
 
-#### Invalid Availability of credentials.signing.kid
-The `credentials.signing.kid` property of an app was available even if its sign-on mode does not support
-certificates. Only apps using the following sign-on mode types support certificates: SAML 2.0, SAML 1.1,
-WS-Fed, or OpenID Connect. For more information,
-see: [Application Key Store Operations](https://developer.okta.com/docs/api/resources/apps.html#application-key-store-operations) (OKTA-76439)
+#### Validate Scope Names
+When validating the names of scopes for social identity providers,
+Okta did not adhere to the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#section-3.3). (OKTA-117352)
 
-#### WWW-Authenticate Header in HTTP 401 Response
-When a call to the token, introspect, or revocation endpoint of OpenID Connect or API Access Management
-encountered an invalid_client error, the response did not include the WWW­Authenticate header. (OKTA-127653)
+#### Duplicate Create User Calls
+When the same user was created multiple times in parallel and added to a group, the HTTP error response code was 500 rather than 400. (OKTA-126223)
 
 
 ### Does Your Org Have This Change Yet?
