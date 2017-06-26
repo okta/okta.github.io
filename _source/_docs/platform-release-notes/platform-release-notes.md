@@ -58,6 +58,7 @@ For full details, see the
 
 * [Validate Scope Names](#validate-scope-names)
 * [Duplicate Create User Calls](#duplicate-create-user-calls)
+* [Groups for Inactive App](#groups-for-inactive-app)
 
 
 #### Validate Scope Names
@@ -67,6 +68,8 @@ Okta did not adhere to the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#
 #### Duplicate Create User Calls
 When the same user was created multiple times in parallel and added to a group, the HTTP error response code was 500 rather than 400. (OKTA-126223)
 
+#### Groups for Inactive App
+`/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
 
 ### Does Your Org Have This Change Yet?
 
