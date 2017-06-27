@@ -34,13 +34,13 @@ organization will be `dev-123456.oktapreview.com`. For your application, you'll 
 ## Enable CORS for your Domain
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
-You can enable CORS by following the steps in our guide for [guide for Enabling CORS](/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the web server you are
+You can enable CORS by following the steps in our [guide for Enabling CORS](/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base URL as the web server you are
 using to host the HTML for the Okta Sign-In Widget (see below for instructions). For our example, we'll be setting
 our example to be hosted on `http://localhost:8000`. We'll need to add `http://localhost:8000` as a trusted CORS
 endpoint in Okta.
 
 To do so, follow the steps below:
-1. Navigate to **Admin -> Security -> API** page of your Okta dashboard.
+1. Navigate to **Admin -> Security -> API** on your Okta dashboard.
 2. In the **Trusted Origins** tab, click on **Add Origin**. This will open a modal window with a form to fill out.
 3. Give your new origin a name, we will use **PHP Sign-In Widget Example** as ours.
 4. In the Origin URL field, fill in your web server that you are hosting on, we'll use `http://localhost:8000`.
@@ -48,17 +48,15 @@ To do so, follow the steps below:
 
 ## Create an Authorization Server
 An authorization server defines your security boundary, for example "staging" or "production". Within each
-authorization server you can define your own OAuth scopes, claims, and access policies. This allows your apps and
-your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as
-Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it
- out to the API economy.
+authorization server you can define your own OAuth scopes, claims, and access policies. This allows your apps and APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as
+Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log.
 
 We will need to set up our own authorization server for our example. This is what the Sign-In Widget will communicate
 with to handle the user authentication services. To set this up, follow the steps below:
 1. Navigate to **Admin -> Security -> API** page of your Okta dashboard.
 2. Select the Authorization Servers tab if not already selected.
 3. Click on **Add Authorization Server**. This will open a modal window with a form to fill out.
-4. Fill in the form with your informtaion. For our example, we will be using the following:
+4. Fill in the form with your information. For our example, we will be using the following:
    - Name: PHP Sign-In Widget Example - Develop
    - Resource URI: http://localhost:8000
      - This is the URI for the OAuth resource that consumes the Access Tokens.
@@ -115,11 +113,11 @@ App** instead of selecting a pre-defined one. This will open a modal window and 
    - Application Name: PHP Sign-In Widget
    - Application Logo: none
 4. Click **Next** and then we will be configuring OpenID connect:
-   - Redirect URIs: http://localhost:8000/oauth2-callback.php
+   - Redirect URIs: `http://localhost:8000/oauth2-callback.php`
 5. Click **Finish**
 6. In the **General** tab of the application you just created, we need to add a few **Allowed grant types**. Click **Edit**
  of the **General Settings** area and make sure you select **Implicit (Hybrid)** which will give you the option to select
-  **Allow Access Token with implicit grant type**.  Select that and then click **Save**.
+  **Allow Access Token with implicit grant type**. Select that and then click **Save**.
 
 Make note of the Client ID from the **Client Credentials** section as we will need this when we set up the widget in
 our application.
@@ -135,7 +133,7 @@ groups instead of **Everyone**.
 5. Click **Done**
 
 # PHP Application Set-up
-Now that we have all the configuration at Okta done, we can now begin setting up our PHP application. There are a
+Now that we have all the configuration at Okta done, we can begin setting up our PHP application. There are a
 couple of different ways to include the sign-in widget in your application. You can use the NPM module by installing
 `@okta/okta-signin-widget` in your project, or by using the Okta CDN, which is what we'll be using. Once you have the
  sign-in widget, there's a little bit of configuration you have to do to talk with your new authentication server.
@@ -196,14 +194,14 @@ We also need to add a script block to initialize and configure the widget.
 
 | Key                     | Description                                                                                                                                          |
 |-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| baseUrl                 | This is your Organization url in Okta. It will be the url of the admin pages without the **-admin** for example `https://dev-123456.oktapreview.com`   |
+| baseUrl                 | This is your Organization URL in Okta. It will be the URL of the admin pages without the **-admin** for example `https://dev-123456.oktapreview.com`   |
 | clientId                | The client ID of the Okta application.                                                                                                               |
 | redirectUri             | Where we will send the user to once they attempt a login.                                                                                            |
 | authParams.responseType | What we want back from a successful login                                                                                                            |
 | authParams.issuer       | The issuer of the authentication server. Can be retrieved from **Admin -> Security -> API -> {Auth Server}**                                           |
 | authParams.display      | Redirect to the authorization server when an External Identity Provider button is clicked                                                            |
 
-Now we can visit the `login.php` page and see the Sign In Widget. You should be able to log into your main account.
+Now we can visit the `login.php` page and see the Sign-In Widget. You should be able to log into your main account.
 If you have a successful login, you will be redirected to our `oauth2-callback.php` page which is where we will go
 through the [Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-1.3.1) to get our `access_token`.
 
@@ -246,7 +244,8 @@ if(curl_error($ch))
 }
 $decodedOutput = json_decode($output);
 ```
-Now we have the access_token which we can use in our cookie to validate the user on future requests.
+
+Now we have the `access_token` which we can use in our cookie to validate the user on future requests.
 
 ```php
 setcookie('access_token', $decodedOutput->access_token, time() + $decodedOutput->expires_in, '/', "", false, true);
@@ -256,16 +255,16 @@ setcookie('access_token', $decodedOutput->access_token, time() + $decodedOutput-
 
 Okta uses public key cryptography to sign tokens and verify that they are valid.
 
-The resource server must validate the Access Token before allowing the client to access protected resources.
+The resource server must validate the access token before allowing the client to access protected resources.
 
-Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.
+Access tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.
 
-An Access Token must be validated in the following manner:
+An access token must be validated in the following manner:
 
 1. Verify that the `iss` (issuer) claim matches the identifier of your authorization server.
 2. Verify that the `aud` (audience) claim is the requested URL.
 3. Verify `cid` (client id) claim is your client id.
-4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the
+4. Verify the signature of the access token according to [JWS](https://tools.ietf.org/html/rfc7515) using the
 algorithm specified in the JWT `alg` header property. Use the public keys provided by Okta via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
@@ -329,7 +328,7 @@ $jws->verify($jwk, 'RS256');
 
 Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-method).
 
-The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
+The access token is signed by an RSA private key, and we publish the future signing key well in advance.
 However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
 
 Please note the following:
