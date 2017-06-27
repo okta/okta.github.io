@@ -40,5 +40,8 @@
     "protractor": "^5.1.0",
     "recursive-readdir": "^2.2.1",
     "wait-on": "^2.0.2"
+  },
+  "dependencies": {
+    "bundler": "^0.8.0"
   }
 }
