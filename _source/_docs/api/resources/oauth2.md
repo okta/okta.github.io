@@ -490,15 +490,13 @@ They can omit `client_secret` from the above request parameters when revoking a 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid,
-expired, or revoked token is a success so information isn't leaked.
+A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid expired, or revoked token is a success so information isn't leaked.
 
 ##### Token Authentication Methods
 
-A client can revoke only tokens generated for that client.
+A client can only revoke tokens generated for that client.
 
-The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
+The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above), or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
 Use one authentication mechanism with a given request. Using both returns an error.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
