@@ -469,7 +469,7 @@ Content-Type: application/json;charset=UTF-8
 
 {% api_operation post /oauth2/:authorizationServerId/v1/revoke %}
 
-The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
+This API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client can revoke only its own tokens.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -483,17 +483,20 @@ token_type_hint | A hint of the type of *token*.                                
 client_id       | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
 client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
 
+> Native applications should not provide -- and by default do not store -- `client_secret`
+(see [Section 5.3.1 of the OAuth 2.0 spec](https://tools.ietf.org/html/rfc6819#section-5.3.1)).
+They can omit `client_secret` from the above request parameters when revoking a token.
+
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid, expired, or revoked token is a success so information isn't leaked.
+A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid expired, or revoked token is a success so information isn't leaked.
 
 ##### Token Authentication Methods
 
-A client may only revoke a token generated for that client.
+A client can only revoke tokens generated for that client.
 
-The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
+The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above), or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
 Use one authentication mechanism with a given request. Using both returns an error.
 
 For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
