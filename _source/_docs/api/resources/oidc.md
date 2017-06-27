@@ -556,7 +556,6 @@ If automatic key rotation is disabled, provide the *client_id* to fetch public k
 ~~~http
 HTTP/1.1 200 OK
 Cache-Control → max-age=3832304, must-revalidate
-. . .
 Content-Type: application/json;charset=UTF-8
 ~~~
 ~~~json
@@ -601,9 +600,7 @@ Content-Type: application/json;charset=UTF-8
 
 >Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document.
 
->Okta also recommends cacheing or persisting downloaded keys for performance.
-However, if the client application is pinned to a signing key, the verification might fail because Okta rotates the key automatically.
-Pinned client applications must periodically check the Okta signing keys.
+>Okta also recommends caching or persisting downloaded keys to improve performance by eliminating multiple API requests. If the client application is pinned to a signing key, the verification fails when Okta rotates the key automatically. Pinned client applications must periodically check the cached Okta signing keys.
 
 Any of the two or three keys listed are used to sign tokens. The order of keys in the result doesn't indicate which keys are used.
 
