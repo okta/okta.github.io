@@ -492,7 +492,7 @@ Content-Type: application/json;charset=UTF-8
 
 {% api_operation post /oauth2/:authorizationServerId/v1/revoke %}
 
-The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
+This API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client can revoke only its own tokens.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -508,10 +508,14 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.   [JWT Details](#token-authentication-methods)                                                                                                  | String |
 | client_assertion_type | Indicates a JWT is being used to authenticate a token. Per the   [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.  | String |
 
+> Native applications should not provide -- and by default do not store -- `client_secret`
+(see [Section 5.3.1 of the OAuth 2.0 spec](https://tools.ietf.org/html/rfc6819#section-5.3.1)).
+They can omit `client_secret` from the above request parameters when revoking a token.
+
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
-A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid, expired, or revoked token is a success so information isn't leaked.
+A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid expired, or revoked token is a success so information isn't leaked.
 
 A client may only revoke a token generated for that client.
 
