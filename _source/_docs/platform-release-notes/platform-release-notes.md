@@ -8,18 +8,18 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.25
 
 ### Advance Notice: Data Retention Changes
 
-Okta is changing system log data retention. System log data is available from `/api/v1/events` or
+Okta is changing system log data retention windows. System log data is available from `/api/v1/events` or
 Okta SDK `EventsAPIClient`.
 
-* For orgs created before July 17th, data will be retained for 6 months.
-* For orgs created on and after July 17th, data will be retained for 3 months.
+* For orgs created before July 17th, data older than six months will be removed.
+* For orgs created on or after July 17th, data older than three months will be removed.
 
 The new data retention policy starts:
 
 * June 7, 2017 for existing preview orgs
 * July 17, 2017 for existing production orgs
 
-Preview and production orgs created on July 17, 2017 and later will retain this log data for three months.
+Preview and production orgs created on or after July 17, 2017, will retain log data for three months.
 
 For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
