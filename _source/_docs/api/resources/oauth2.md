@@ -206,8 +206,8 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | code_verifier    | Required if *grant_type* is `authorization_code`  and `code_challenge` was specified in the original `/authorize` request. This value is the `code_verifier` for                   [PKCE](#request-parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request.   | String |
 | client_id        | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret` to authenticate the client application.                                                                                                                                              | String |
 | client_secret    | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.                                                                                                                                              | String |
-| client_assertion      | Required if the client uses a JWT signed with a `client_secret` instead of passing in the client secret. Contains the JWT signed with the `client_secret`.                                     | String |
-| client_assertion_type | Required if a JWT was specified for `client_assertion`. As indicated in the [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. | String |
+| client_assertion | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.                                                                                       | String |
+| client_assertion_type | Indicates a JWT is being used to authenticate a token. Per the [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. | String |
 
 ##### Refresh Tokens for Web and Native Applications
 
@@ -390,8 +390,8 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | token_type_hint | A hint of the type of `token`.                                                                                                                                                                 | String |
 | client_id       | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application. | String |
 | client_secret   | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.  | String |
-| client_assertion      | Required if the client uses a JWT signed with a `client_secret` instead of passing in the client secret. Contains the JWT signed with the `client_secret`.                                     | String |
-| client_assertion_type | Required if a JWT was specified for `client_assertion`. As indicated in the [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. | String |
+| client_assertion | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.                                                                                       | String |
+| client_assertion_type | Indicates a JWT is being used to authenticate a token. Per the [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. | String |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -505,8 +505,8 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | token_type_hint  | A hint of the type of *token*.                                                                                                                                   | String |
 | client_id        | The client ID generated as a part of client registration. This is used in conjunction with the *client_secret* parameter to authenticate the client application. | String |
 | client_secret    | The client secret generated as a part of client registration. This is used in conjunction with the *client_id* parameter to authenticate the client application. | String |
-| client_assertion      | Required if the client uses a JWT signed with a `client_secret` instead of passing in the client secret. Contains the JWT signed with the `client_secret`.                                     | String |
-| client_assertion_type | Required if a JWT was specified for `client_assertion`. As indicated in the [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. | String |
+| client_assertion | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.                                                                                       | String |
+| client_assertion_type | Indicates a JWT is being used to authenticate a token. Per the [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. | String |
 
 > Native applications should not provide -- and by default do not store -- `client_secret`
 (see [Section 5.3.1 of the OAuth 2.0 spec](https://tools.ietf.org/html/rfc6819#section-5.3.1)).
