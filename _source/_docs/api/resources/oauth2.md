@@ -235,6 +235,7 @@ and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/U
 Use only one of these methods in a single request or an error will occur.
 
 >If the value returned by `token_endpoint_auth_method` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html#update-client-application) is not what you wish to use, you can change the value of a client app's `token_endpoint_auth_method` with any of the values returned by `token_endpoint_auth_methods_support` (`client_secret_post`, `client_secret_basic`, or `client_secret_jwt`).
+
 You can't change this value in the Okta user interface.
 
 ##### Request Parameters for Client Authentication with Client Secret JWT
