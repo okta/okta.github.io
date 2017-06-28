@@ -828,7 +828,6 @@ This API doesn't require any authentication and returns a JSON object with the f
         "client_secret_basic",
         "client_secret_post",
         "client_secret_jwt",
-        "client_secret_jwt",
         "none"
     ]
 }
