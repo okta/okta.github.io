@@ -27,24 +27,16 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
  <!-- OKTA-125424 -->
 
-### Platform Enhancements
+### Platform Enhancement
 
-* [Client Secret Masking](#client-secret-masking)
 * [Support for client_secret_jwt](#support-for-client_secret_jwt)
 <!--  * [New Release of Sign-In Widget](#new-release-of-sign-in-widget)  -->
 
 
-#### Client Secret Masking
-When an Oauth 2.0 client fails to log in after multiple tries within a specified period,
-the system log contains a masked representation of the client secret. The representation is always ten
-characters in length and accurately represents up to five initial characters of the secret. The remaining characters are asterisks.
-{% img release_notes/MaskedClientSecret.png alt:"Masked Client Secret Event" %}
-<!-- (OKTA-129694) -->
-
 #### Support for client_secret_jwt
-Okta supports the `client_secret_jwt` method for token endpoint authentication (`token_endpoint_auth_method`).
+For OpenID Connect and API Access Management, Okta supports the `client_secret_jwt` method for token endpoint authentication (`token_endpoint_auth_method`).
 This method is specified in the [OpenID Connect specification](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication)
-and allows you to use JWT and HMAC to authenticate a client for OAuth 2.0 or OpenID Connect requests.
+and allows you to use JWT and HMAC to authenticate a client for [OAuth 2.0](https://developer.okta.com/docs/api/resources/oauth2.html/#token-authentication-methods) or [OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html/#token-authentication-methods) requests.
 <!-- (OKTA-101074) -->
 
 <!--
@@ -59,6 +51,9 @@ For details, see the
 
 
 ### Platform Bugs Fixed
+
+* When suspicious activity was logged for OAuth 2.0 clients, the system log often contained the client secret. Now, a masked representation of the secret is logged instead. This is always ten characters in length and accurately represents up to five initial characters of the secret. The remaining characters are asterisks. (OKTA-129694)
+  {% img release_notes/MaskedClientSecret.png alt:"Masked Client Secret Event" %}
 
 * When validating the names of scopes for social identity providers, Okta didn't enforce the restrictions
 specified in the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#section-3.3). (OKTA-117352)
