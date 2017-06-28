@@ -222,7 +222,7 @@ and the client obtains an Okta session.</p>
 <p>If you are new to OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with
 <a href="http://openid.net/specs/openid-connect-core-1_0.html">the OpenID Connect spec</a>, you may want to experiment with the Postman collection now:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/98b408c69b64c5de583e"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="authentication-basics-with-oauth-20-and-openid-connect">Authentication Basics with OAuth 2.0 and OpenID Connect</h2>
 
@@ -722,7 +722,7 @@ For more information about configuring an app for OpenID Connect, including grou
 
 <h2 id="endpoints">Endpoints</h2>
 
-<p>Explore the OpenID Connect API: <a href="https://app.getpostman.com/run-collection/98b408c69b64c5de583e" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the OpenID Connect API: <a href="https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <blockquote>
   <p>The OIDC Access Token is applicable only for the Okta <code class="highlighter-rouge">/oauth2/v1/userinfo</code> endpoint and thus should be treated as opaque by the application. The application does not need to validate it since it should not be used against other resource servers. The format of it and the key used to sign it are subject to change without prior notice.</p>
@@ -874,25 +874,99 @@ An implicit client can only introspect its own tokens, while a confidential clie
     </tr>
     <tr>
       <td style="text-align: left">client_secret</td>
-      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.     <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the     <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
 
 <h5 id="token-authentication-methods">Token Authentication Methods</h5>
+<!--If you change this section, change the section in oauth2.md as well -->
 
-<p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.</p>
+<p>If you authenticate a client with client credentials, provide the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a>
+and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> using either of the following methods:</p>
 
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
+<ul>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+in an Authorization header in the Basic auth scheme (<code class="highlighter-rouge">client_secret_basic</code>). For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request:
+    <div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
-</div>
+    </div>
+  </li>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+as additional parameters to the POST body (<code class="highlighter-rouge">client_secret_post</code>)</li>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> in a JWT that you sign with the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in <code class="highlighter-rouge">client_assertion</code> and the type, <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>, in <code class="highlighter-rouge">client_assertion_type</code> in the request.</li>
+</ul>
 
-<h4 id="response-parameters-1">Response Parameters</h4>
+<p>Use only one of these methods in a single request or an error will occur.</p>
+
+<h5 id="token-claims-for-client-authentication-with-client-secret-jwt">Token Claims for Client Authentication with Client Secret JWT</h5>
+
+<p>If you use a JWT for client authentication (<code class="highlighter-rouge">client_secret_jwt</code>), use the following token claims:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Token Claims</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">exp</td>
+      <td style="text-align: left">Required. The expiration time of the token in seconds since January 1, 1970 UTC.</td>
+      <td style="text-align: left">Long</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iat</td>
+      <td style="text-align: left">Optional. The issuing time of the token in seconds since January 1, 1970 UTC.</td>
+      <td style="text-align: left">Long</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">sub</td>
+      <td style="text-align: left">Required. The subject of the token. This value must be the same as the <code class="highlighter-rouge">client_id</code>.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">aud</td>
+      <td style="text-align: left">Required. The full URL of the resource you’re using the JWT to authenticate to.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iss</td>
+      <td style="text-align: left">Required. The issuer of the token. This value must be the same as the <code class="highlighter-rouge">client_id</code>.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">jti</td>
+      <td style="text-align: left">Optional. The identifier of the token.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Parameter Details</p>
+
+<ul>
+  <li>If <code class="highlighter-rouge">jti</code> is specified, the token can only be used once. So, for example, subsequent token requests won’t succeed.</li>
+  <li>The <code class="highlighter-rouge">exp</code> claim will fail the request if the expiration time is more than one hour in the future or has already expired.</li>
+  <li>If <code class="highlighter-rouge">iat</code> is specified, then it must be a time before the request is received.</li>
+  <li>
+    <h4 id="response-parameters-1">Response Parameters</h4>
+  </li>
+</ul>
 
 <p>Based on the type of token and whether it is active or not, the returned JSON contains a different set of information. Besides the claims in the token, the possible top-level members include:</p>
 
@@ -1088,25 +1162,25 @@ Use one authentication mechanism with a given request. Using both returns an err
     </tr>
     <tr>
       <td style="text-align: left">client_secret</td>
-      <td style="text-align: left">The client secret generated as a part of client registration. This is used in conjunction with the <code class="highlighter-rouge">client_id</code> parameter to authenticate the client application.</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with the <code class="highlighter-rouge">client_id</code> parameter to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.          <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the           <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
 
-<h5 id="token-authentication-methods-1">Token Authentication Methods</h5>
-
 <p>A client may only revoke a token generated for that client.</p>
 
-<p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.</p>
-
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
-</code></pre>
-</div>
+<p>For more information about token authentication, see <a href="#token-authentication-methods">Token Authentication Methods</a>.</p>
 
 <h4 id="response-parameters-2">Response Parameters</h4>
 
@@ -1290,6 +1364,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </span><span class="nt">"token_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"claims_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1329,12 +1404,14 @@ This API doesn’t require any authentication and returns a JSON object with the
     </span><span class="nt">"introspection_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"revocation_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/revoke"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"revocation_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"end_session_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/logout"</span><span class="w">
@@ -1764,7 +1841,7 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/token</span></p>
 
-<p>The API  returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters.</p>
+<p>The API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters.</p>
 
 <h4 id="request-parameters-4">Request Parameters</h4>
 
@@ -1786,7 +1863,7 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
     </tr>
     <tr>
       <td style="text-align: left">code</td>
-      <td style="text-align: left">Required if <code class="highlighter-rouge">grant_type</code> is <code class="highlighter-rouge">authorization_code</code>. The value is what was returned from the   <a href="#authentication-request">authentication endpoint</a>.</td>
+      <td style="text-align: left">Required if <code class="highlighter-rouge">grant_type</code> is <code class="highlighter-rouge">authorization_code</code>. The value is what was returned from the           <a href="#authentication-request">authentication endpoint</a>.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
@@ -1816,7 +1893,7 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
     </tr>
     <tr>
       <td style="text-align: left">code_verifier</td>
-      <td style="text-align: left">Required if <code class="highlighter-rouge">grant_type</code> is <code class="highlighter-rouge">authorization_code</code>  and <code class="highlighter-rouge">code_challenge</code> was specified in the original <code class="highlighter-rouge">/authorize</code> request. This value is the code verifier for                 <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the <code class="highlighter-rouge">code_challenge</code> and verify if it matches the original <code class="highlighter-rouge">code_challenge</code> in the authorization request.</td>
+      <td style="text-align: left">Required if <code class="highlighter-rouge">grant_type</code> is <code class="highlighter-rouge">authorization_code</code>  and <code class="highlighter-rouge">code_challenge</code> was specified in the original <code class="highlighter-rouge">/authorize</code> request. This value is the code verifier for                         <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the <code class="highlighter-rouge">code_challenge</code> and verify if it matches the original <code class="highlighter-rouge">code_challenge</code> in the authorization request.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
@@ -1826,7 +1903,17 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
     </tr>
     <tr>
       <td style="text-align: left">client_secret</td>
-      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.    <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the   <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
   </tbody>
@@ -1841,28 +1928,7 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
   <li>Pass the <code class="highlighter-rouge">offline_access</code> scope to your <code class="highlighter-rouge">/authorize</code> or <code class="highlighter-rouge">/token</code> request if you’re using the <code class="highlighter-rouge">password</code> grant type.</li>
 </ol>
 
-<h5 id="token-authentication-method">Token Authentication Method</h5>
-
-<p>If you authenticate a client with client credentials, provide the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a>
-and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> using either of the following methods:</p>
-
-<ul>
-  <li>In an Authorization header in the Basic auth scheme (basic authentication)</li>
-  <li>As additional parameters to the POST body.</li>
-</ul>
-
-<p>Including these credentials in both the Authorization header and POST body is not allowed.</p>
-
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
-</code></pre>
-</div>
-
-<blockquote>
-  <p>If the value returned by <code class="highlighter-rouge">token_endpoint_authentication</code> in the <a href="/docs/api/resources/oauth-clients.html#update-client-application">OAuth 2.0 Clients API</a> is not what you wish to use, you can change the value of a client app’s <code class="highlighter-rouge">token_endpoint_authentication</code> with any of the values returned by <code class="highlighter-rouge">token_endpoint_auth_methods_support</code> (<code class="highlighter-rouge">client_secret_post</code> or <code class="highlighter-rouge">client_secret_basic</code>).
-You can’t change this value in the Okta user interface.</p>
-</blockquote>
+<p>For more information about token authentication, see <a href="#token-authentication-methods">Token Authentication Methods</a>.</p>
 
 <h4 id="response-parameters-4">Response Parameters</h4>
 
@@ -2022,11 +2088,37 @@ Generally speaking, the scopes specified in a request are included in the Access
 
 <p>The following parameters can be posted as a part of the URL-encoded form values to the API.</p>
 
-<p>Parameter                | Description                                                                            | Type    | Required  |
-————————-+—————————————————————————————-+———+———–|
-id_token_hint            | A valid ID token with a subject matching the current session. | String | TRUE |
-post_logout_redirect_uri | Callback location to redirect to after the logout has been performed. It must match the value preregistered in Okta during client registration. | String | FALSE |
-state      | If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response. | String | FALSE |</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id_token_hint</td>
+      <td style="text-align: left">A valid ID token with a subject matching the current session.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">post_logout_redirect_uri</td>
+      <td style="text-align: left">Callback location to redirect to after the logout has been performed. It must match the value preregistered in Okta during client registration.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
 <h4 id="request-examples-1">Request Examples</h4>
 
 <p>This request initiates a logout and will redirect to the Okta login page on success.</p>

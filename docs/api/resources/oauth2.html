@@ -215,7 +215,7 @@
 
 <p>The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.</p>
 
-<p>Explore the OAuth 2.0 API: <a href="https://app.getpostman.com/run-collection/3d132ba7f1fb21d9a2b8"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the OAuth 2.0 API: <a href="https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="endpoints">Endpoints</h2>
 
@@ -659,7 +659,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
     </tr>
     <tr>
       <td style="text-align: left">code</td>
-      <td style="text-align: left">Required if <em>grant_type</em> is <code class="highlighter-rouge">authorization_code</code>. The value is what was returned from the                 <a href="#obtain-an-authorization-grant-from-a-user">authorization endpoint</a>.</td>
+      <td style="text-align: left">Required if <em>grant_type</em> is <code class="highlighter-rouge">authorization_code</code>. The value is what was returned from the                       <a href="#obtain-an-authorization-grant-from-a-user">authorization endpoint</a>.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
@@ -679,7 +679,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
     </tr>
     <tr>
       <td style="text-align: left">scope</td>
-      <td style="text-align: left">Optional.            <a href="#response-parameters"> Different scopes and tokens</a> are returned depending on the values of <code class="highlighter-rouge">scope</code> and <code class="highlighter-rouge">grant_type</code>.</td>
+      <td style="text-align: left">Optional.                  <a href="#response-parameters"> Different scopes and tokens</a> are returned depending on the values of <code class="highlighter-rouge">scope</code> and <code class="highlighter-rouge">grant_type</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
@@ -689,7 +689,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
     </tr>
     <tr>
       <td style="text-align: left">code_verifier</td>
-      <td style="text-align: left">Required if <em>grant_type</em> is <code class="highlighter-rouge">authorization_code</code>  and <code class="highlighter-rouge">code_challenge</code> was specified in the original <code class="highlighter-rouge">/authorize</code> request. This value is the <code class="highlighter-rouge">code_verifier</code> for                 <a href="#request-parameter-details">PKCE</a>. Okta uses it to recompute the <code class="highlighter-rouge">code_challenge</code> and verify if it matches the original <code class="highlighter-rouge">code_challenge</code> in the authorization request.</td>
+      <td style="text-align: left">Required if <em>grant_type</em> is <code class="highlighter-rouge">authorization_code</code>  and <code class="highlighter-rouge">code_challenge</code> was specified in the original <code class="highlighter-rouge">/authorize</code> request. This value is the <code class="highlighter-rouge">code_verifier</code> for                       <a href="#request-parameter-details">PKCE</a>. Okta uses it to recompute the <code class="highlighter-rouge">code_challenge</code> and verify if it matches the original <code class="highlighter-rouge">code_challenge</code> in the authorization request.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
@@ -699,7 +699,17 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
     </tr>
     <tr>
       <td style="text-align: left">client_secret</td>
-      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.     <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the     <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
   </tbody>
@@ -714,17 +724,86 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
   <li>Pass the <code class="highlighter-rouge">offline_access</code> scope to your <code class="highlighter-rouge">/authorize</code> or <code class="highlighter-rouge">/token</code> request if you’re using the <code class="highlighter-rouge">password</code> grant type.</li>
 </ol>
 
-<h5 id="token-authentication-method">Token Authentication Method</h5>
+<h5 id="token-authentication-methods">Token Authentication Methods</h5>
+<!--If you change this section, change the section in oidc.md as well -->
 
-<p>For clients authenticating by client credentials, provide the <a href="oauth2.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
-either as an Authorization header in the Basic auth scheme (basic authentication) or as additional parameters to the POST body. 
-Including credentials in both the headers and the POST body is not allowed.</p>
+<p>If you authenticate a client with client credentials, provide the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a>
+and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> using either of the following methods:</p>
 
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
+<ul>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+in an Authorization header in the Basic auth scheme (<code class="highlighter-rouge">client_secret_basic</code>). For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request:
+    <div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
-</div>
+    </div>
+  </li>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+as additional parameters to the POST body (<code class="highlighter-rouge">client_secret_post</code>)</li>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> in a JWT that you sign with the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in <code class="highlighter-rouge">client_assertion</code> and the type, <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>, in <code class="highlighter-rouge">client_assertion_type</code> in the request.</li>
+</ul>
+
+<p>Use only one of these methods in a single request or an error will occur.</p>
+
+<blockquote>
+  <p>If the value returned by <code class="highlighter-rouge">token_endpoint_auth_method</code> in the <a href="/docs/api/resources/oauth-clients.html#update-client-application">OAuth 2.0 Clients API</a> is not what you wish to use, you can change the value of a client app’s <code class="highlighter-rouge">token_endpoint_auth_method</code> with any of the values returned by <code class="highlighter-rouge">token_endpoint_auth_methods_support</code> (<code class="highlighter-rouge">client_secret_post</code>, <code class="highlighter-rouge">client_secret_basic</code>, or <code class="highlighter-rouge">client_secret_jwt</code>).</p>
+</blockquote>
+
+<p>You can’t change this value in the Okta user interface.</p>
+
+<h5 id="token-claims-for-client-authentication-with-client-secret-jwt">Token Claims for Client Authentication with Client Secret JWT</h5>
+
+<p>If you use a JWT for client authentication (<code class="highlighter-rouge">client_secret_jwt</code>), use the following token claims:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Token Claim</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">exp</td>
+      <td style="text-align: left">Required. The expiration time of the token in seconds since January 1, 1970 UTC.</td>
+      <td style="text-align: left">Long</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iat</td>
+      <td style="text-align: left">Optional. The issuing time of the token in seconds since January 1, 1970 UTC.</td>
+      <td style="text-align: left">Long</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">sub</td>
+      <td style="text-align: left">Required. The subject of the token. This value must be the same as the <code class="highlighter-rouge">client_id</code>.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">aud</td>
+      <td style="text-align: left">Required. The full URL of the endpoint you’re using the JWT to authenticate to.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iss</td>
+      <td style="text-align: left">Required. The issuer of the token. This value must be the same as the <code class="highlighter-rouge">client_id</code>.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">jti</td>
+      <td style="text-align: left">Optional. The identifier of the token.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Parameter Details</p>
+
+<ul>
+  <li>If <code class="highlighter-rouge">jti</code> is specified, the token can only be used once. So, for example, subsequent token requests won’t succeed.</li>
+  <li>The <code class="highlighter-rouge">exp</code> claim will fail the request if the expiration time is more than one hour in the future or has already expired.</li>
+  <li>If <code class="highlighter-rouge">iat</code> is specified, then it must be a time before the request is received.</li>
+</ul>
 
 <h5 class="api api-response api-response-params" id="response-parameters-1">Response Parameters</h5>
 
@@ -953,7 +1032,17 @@ An implicit client can only introspect its own tokens, while a confidential clie
     </tr>
     <tr>
       <td style="text-align: left">client_secret</td>
-      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.     <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the     <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
   </tbody>
@@ -1045,17 +1134,7 @@ An implicit client can only introspect its own tokens, while a confidential clie
   </tbody>
 </table>
 
-<h5 id="token-authentication-methods">Token Authentication Methods</h5>
-
-<p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in the Request Parameters table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.</p>
-
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
-</code></pre>
-</div>
+<p>For more information about token authentication, see <a href="#token-authentication-methods">Token Authentication Methods</a>.</p>
 
 <h5 id="list-of-errors-1">List of Errors</h5>
 
@@ -1141,7 +1220,7 @@ Use one authentication mechanism with a given request. Using both returns an err
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/:authorizationServerId/v1/revoke</span></p>
 
-<p>The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.</p>
+<p>This API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client can revoke only its own tokens.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-3">Request Parameters</h5>
 
@@ -1150,70 +1229,76 @@ Use one authentication mechanism with a given request. Using both returns an err
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Type</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>token</td>
-      <td>An access token or refresh token.</td>
-      <td>String</td>
+      <td style="text-align: left">token</td>
+      <td style="text-align: left">An access token or refresh token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>token_type_hint</td>
-      <td>A hint of the type of <em>token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">token_type_hint</td>
+      <td style="text-align: left">A hint of the type of <em>token</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>client_id</td>
-      <td>The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
-      <td>String</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>client_secret</td>
-      <td>The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application.</td>
-      <td>String</td>
+      <td style="text-align: left">client_secret</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.     <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the     <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
 
+<blockquote>
+  <p>Native applications should not provide – and by default do not store – <code class="highlighter-rouge">client_secret</code>
+(see <a href="https://tools.ietf.org/html/rfc6819#section-5.3.1">Section 5.3.1 of the OAuth 2.0 spec</a>).
+They can omit <code class="highlighter-rouge">client_secret</code> from the above request parameters when revoking a token.</p>
+</blockquote>
+
 <h5 class="api api-response api-response-params" id="response-parameters-3">Response Parameters</h5>
 
-<p>A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid, expired, or revoked token is a success so information isn’t leaked.</p>
-
-<h5 id="token-authentication-methods-1">Token Authentication Methods</h5>
+<p>A successful revocation is denoted by an empty response with an HTTP 200. Note that revoking an invalid expired, or revoked token is a success so information isn’t leaked.</p>
 
 <p>A client may only revoke a token generated for that client.</p>
 
-<p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.</p>
-
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
-</code></pre>
-</div>
+<p>For more information about token authentication, see <a href="#token-authentication-methods">Token Authentication Methods</a>.</p>
 
 <h5 id="list-of-errors-2">List of Errors</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Error Id</th>
-      <th>Details</th>
+      <th style="text-align: left">Error Id</th>
+      <th style="text-align: left">Details</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>invalid_client</td>
-      <td>The specified client id wasn’t found or client authentication failed.</td>
+      <td style="text-align: left">invalid_client</td>
+      <td style="text-align: left">The specified client id wasn’t found or client authentication failed.</td>
     </tr>
     <tr>
-      <td>invalid_request</td>
-      <td>The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.</td>
+      <td style="text-align: left">invalid_request</td>
+      <td style="text-align: left">The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.</td>
     </tr>
   </tbody>
 </table>
@@ -1394,6 +1479,7 @@ Custom scopes and custom claims aren’t returned.</p>
     </span><span class="nt">"token_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"claims_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1415,12 +1501,14 @@ Custom scopes and custom claims aren’t returned.</p>
     </span><span class="nt">"introspection_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"revocation_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/{authorizationServerId}/v1/revoke"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"revocation_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1431,8 +1519,11 @@ Custom scopes and custom claims aren’t returned.</p>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/<em>:authorizationServerId</em>/.well-known/openid-configuration</span></p>
 
-<p>This API endpoint returns OpenID Connect metadata that can be used by clients to programmatically configure their interactions with Okta.
-Custom scopes and custom claims aren’t returned.</p>
+<p>This API endpoint returns OpenID Connect metadata that can be used by clients to programmatically configure their interactions with Okta.</p>
+
+<blockquote>
+  <p>Note: Custom scopes and claims aren’t returned. To see your Authorization Server’s custom scopes, use the <a href="#get-all-scopes">Get All Scopes API</a>, and to see its custom claims use <a href="#get-all-claims">Get All Claims API</a>.</p>
+</blockquote>
 
 <p>This API doesn’t require any authentication and returns a JSON object with the following structure.</p>
 
@@ -1480,6 +1571,7 @@ Custom scopes and custom claims aren’t returned.</p>
     </span><span class="nt">"token_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">],</span><span class="w">
    </span><span class="nt">"claims_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1528,6 +1620,7 @@ Custom scopes and custom claims aren’t returned.</p>
     </span><span class="nt">"revocation_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">

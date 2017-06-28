@@ -1656,38 +1656,38 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Validation</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>client_id</td>
-      <td>Unique identifier for the client application</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">Unique identifier for the client application</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>client_secret</td>
-      <td>OAuth 2.0 client secret string (used for confidential clients)</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">client_secret</td>
+      <td style="text-align: left">OAuth 2.0 client secret string (used for confidential clients)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>token_endpoint_auth_method</td>
-      <td>Requested authentication method for the token endpoint</td>
-      <td><code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">client_secret_post</code>, or <code class="highlighter-rouge">client_secret_basic</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">token_endpoint_auth_method</td>
+      <td style="text-align: left">Requested authentication method for the token endpoint</td>
+      <td style="text-align: left"><code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">client_secret_post</code>, <code class="highlighter-rouge">client_secret_basic</code>, or <code class="highlighter-rouge">client_secret_jwt</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -1697,70 +1697,70 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Validation</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>client_uri</td>
-      <td>URL string of a web page providing information about the client</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">client_uri</td>
+      <td style="text-align: left">URL string of a web page providing information about the client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>logo_uri</td>
-      <td>URL string that references a logo for the client</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">logo_uri</td>
+      <td style="text-align: left">URL string that references a logo for the client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>application_type</td>
-      <td>The type of client application</td>
-      <td><code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">native</code>, <code class="highlighter-rouge">browser</code>, or <code class="highlighter-rouge">service</code></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">application_type</td>
+      <td style="text-align: left">The type of client application</td>
+      <td style="text-align: left"><code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">native</code>, <code class="highlighter-rouge">browser</code>, or <code class="highlighter-rouge">service</code></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>redirect_uris</td>
-      <td>Array of redirection URI strings for use in redirect-based flows</td>
-      <td>Array</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">redirect_uris</td>
+      <td style="text-align: left">Array of redirection URI strings for use in redirect-based flows</td>
+      <td style="text-align: left">Array</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>response_types</td>
-      <td>Array of OAuth 2.0 response type strings</td>
-      <td>Array of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, <code class="highlighter-rouge">id_token</code></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">response_types</td>
+      <td style="text-align: left">Array of OAuth 2.0 response type strings</td>
+      <td style="text-align: left">Array of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, <code class="highlighter-rouge">id_token</code></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>grant_types</td>
-      <td>Array of OAuth 2.0 grant type strings</td>
-      <td>Array of <code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code>, <code class="highlighter-rouge">client_credentials</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">grant_types</td>
+      <td style="text-align: left">Array of OAuth 2.0 grant type strings</td>
+      <td style="text-align: left">Array of <code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code>, <code class="highlighter-rouge">client_credentials</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>initiate_login_uri</td>
-      <td>URL that a third party can use to initiate a login by the client</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">initiate_login_uri</td>
+      <td style="text-align: left">URL that a third party can use to initiate a login by the client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
