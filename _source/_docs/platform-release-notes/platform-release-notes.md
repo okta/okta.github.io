@@ -29,11 +29,11 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 ### Platform Enhancement
 
-* [Support for client_secret_jwt](#support-for-client_secret_jwt)
+* [New Authentication Method for OpenID Connect and API Access Management](#new-authentication-method-for-openid-connect-and-api-access-management)
 <!--  * [New Release of Sign-In Widget](#new-release-of-sign-in-widget)  -->
 
 
-#### Support for client_secret_jwt
+#### New Authentication Method for OpenID Connect and API Access Management
 For OpenID Connect and API Access Management, Okta supports the `client_secret_jwt` method for token endpoint authentication (`token_endpoint_auth_method`).
 This method is specified in the [OpenID Connect specification](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication)
 and allows you to use JWT and HMAC to authenticate a client for [OAuth 2.0](https://developer.okta.com/docs/api/resources/oauth2.html/#token-authentication-methods) or [OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html/#token-authentication-methods) requests.
@@ -52,8 +52,7 @@ For details, see the
 
 ### Platform Bugs Fixed
 
-* When suspicious activity was logged for OAuth 2.0 clients, the system log often contained the client secret. Now, a masked representation of the secret is logged instead. This is always ten characters in length and accurately represents up to five initial characters of the secret. The remaining characters are asterisks. (OKTA-129694)
-  {% img release_notes/MaskedClientSecret.png alt:"Masked Client Secret Event" %}
+* When suspicious activity was logged for OAuth 2.0 clients the invalid secret was not masked. (OKTA-129694)
 
 * When validating the names of scopes for social identity providers, Okta didn't enforce the restrictions
 specified in the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#section-3.3). (OKTA-117352)
