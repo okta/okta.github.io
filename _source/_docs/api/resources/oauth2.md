@@ -240,16 +240,16 @@ You can't change this value in the Okta user interface.
 
 ##### Token Claims for Client Authentication with Client Secret JWT
 
-If you use a JWT for token authentication (`client_secret_jwt`), use the following token claims:
+If you use a JWT for client authentication (`client_secret_jwt`), use the following token claims:
 
-| Token Claim | Description                                                                      | Type   |
-|:------------|:---------------------------------------------------------------------------------|:-------|
-| exp         | Required. The expiration time of the token in seconds since January 1, 1970 UTC. | Long   |
-| iat         | Optional. The issuing time of the token in seconds since January 1, 1970 UTC.    | Long   |
-| sub         | Required. The subject of the token. This value is the same as the `client_id`.   | String |
-| aud         | Required. The full URL of the endpoint you're using the JWT to authenticate to.  | String |
-| iss         | Required. The issuer of the token. This value is the same as the `client_id`.    | String |
-| jti         | Optional. The identifier of the token.                                           | String |
+| Token Claim | Description                                                                         | Type   |
+|:------------|:------------------------------------------------------------------------------------|:-------|
+| exp         | Required. The expiration time of the token in seconds since January 1, 1970 UTC.    | Long   |
+| iat         | Optional. The issuing time of the token in seconds since January 1, 1970 UTC.       | Long   |
+| sub         | Required. The subject of the token. This value must be the same as the `client_id`. | String |
+| aud         | Required. The full URL of the endpoint you're using the JWT to authenticate to.     | String |
+| iss         | Required. The issuer of the token. This value must be the same as the `client_id`.  | String |
+| jti         | Optional. The identifier of the token.                                              | String |
 
 Parameter Details
 
