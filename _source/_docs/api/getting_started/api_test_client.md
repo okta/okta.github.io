@@ -68,6 +68,7 @@ Import any Okta API collection for Postman from the following list:
 | API Access Management (OAuth 2.0)         |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0){:target="_blank"} |
 | OpenID Connect                            |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2){:target="_blank"} |
 | Client Registration {% api_lifecycle ea%} |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7){:target="_blank"} |
+| Sessions                                  |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b2e06a22c396bcc94530){:target="_blank"} |
 | Apps                                      |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4857222012c11cf5e8cd){:target="_blank"} |
 | Events                                    |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf){:target="_blank"} |
 | Factors                                   |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e07dd59803f9eae8add7){:target="_blank"} |
