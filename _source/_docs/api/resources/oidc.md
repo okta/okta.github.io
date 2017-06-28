@@ -356,25 +356,52 @@ An implicit client can only introspect its own tokens, while a confidential clie
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-| Parameter       | Description                                                                                                                                                                                    | Type   |
-|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
-| token           | An Access Token, ID Token, or Refresh Token.                                                                                                                                                   | String |
-| token_type_hint | A hint of the type of *token*.                                                                                                                                                                 | String |
-| client_id       | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application. | String |
-| client_secret   | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.  | String |
+| Parameter             | Description                                                                                                                                                                                                                                                 | Type   |
+|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| token                 | An Access Token, ID Token, or Refresh Token.                                                                                                                                                                                                                | String |
+| token_type_hint       | A hint of the type of *token*.                                                                                                                                                                                                                              | String |
+| client_id             | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application.                                                              | String |
+| client_secret         | Required if the client has a secret and client credentials are not provided in the Authorization header, and if `client_assertion_type` isn't specified. This client secret is used in conjunction with `client_id` to authenticate the client application. | String |
+| client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.     [JWT Details](#token-authentication-methods)                                                                                                        | String |
+| client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the     [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.        | String |
 
 ##### Token Authentication Methods
+<!--If you change this section, change the section in oauth2.md as well -->
 
-The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.
+If you authenticate a client with client credentials, provide the [`client_id`](oidc.html#request-parameters)
+and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) using either of the following methods:
 
-For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
+* Provide [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+  in an Authorization header in the Basic auth scheme (`client_secret_basic`). For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request:
+  ~~~sh
+  Authorization: Basic ${Base64(<client_id>:<client_secret>)}
+  ~~~
+* Provide [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+  as additional parameters to the POST body (`client_secret_post`)
+* Provide [`client_id`](oidc.html#request-parameters) in a JWT that you sign with the [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+  using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request. 
 
-~~~sh
-Authorization: Basic ${Base64(<client_id>:<client_secret>)}
-~~~
+Use only one of these methods in a single request or an error will occur.
 
+##### Token Claims for Client Authentication with Client Secret JWT
+
+If you use a JWT for client authentication (`client_secret_jwt`), use the following token claims:
+
+| Token Claims | Description                                                                         | Type   |
+|:-------------|:------------------------------------------------------------------------------------|:-------|
+| exp          | Required. The expiration time of the token in seconds since January 1, 1970 UTC.    | Long   |
+| iat          | Optional. The issuing time of the token in seconds since January 1, 1970 UTC.       | Long   |
+| sub          | Required. The subject of the token. This value must be the same as the `client_id`. | String |
+| aud          | Required. The full URL of the resource you're using the JWT to authenticate to.     | String |
+| iss          | Required. The issuer of the token. This value must be the same as the `client_id`.  | String |
+| jti          | Optional. The identifier of the token.                                              | String |
+
+Parameter Details
+
+* If `jti` is specified, the token can only be used once. So, for example, subsequent token requests won't succeed.
+* The `exp` claim will fail the request if the expiration time is more than one hour in the future or has already expired.
+* If `iat` is specified, then it must be a time before the request is received.
+* 
 #### Response Parameters
 
 Based on the type of token and whether it is active or not, the returned JSON contains a different set of information. Besides the claims in the token, the possible top-level members include:
@@ -468,26 +495,18 @@ The API takes an Access Token or Refresh Token and revokes it. Revoked tokens ar
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-| Parameter       | Description                                                                                                                                                      | Type   |
-|:----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
-| token           | An Access Token or Refresh Token.                                                                                                                                | String |
-| token_type_hint | A hint of the type of `token`.                                                                                                                                   | String |
-| client_id       | The client ID generated as a part of client registration. This is used in conjunction with the `client_secret` parameter to authenticate the client application. | String |
-| client_secret   | The client secret generated as a part of client registration. This is used in conjunction with the `client_id` parameter to authenticate the client application. | String |
-
-##### Token Authentication Methods
+| Parameter             | Description                                                                                                                                                                                                                                                               | Type   |
+|:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| token                 | An Access Token or Refresh Token.                                                                                                                                                                                                                                         | String |
+| token_type_hint       | A hint of the type of `token`.                                                                                                                                                                                                                                            | String |
+| client_id             | The client ID generated as a part of client registration. This is used in conjunction with the `client_secret` parameter to authenticate the client application.                                                                                                          | String |
+| client_secret         | Required if the client has a secret and client credentials are not provided in the Authorization header, and if `client_assertion_type` isn't specified. This client secret is used in conjunction with the `client_id` parameter to authenticate the client application. | String |
+| client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.          [JWT Details](#token-authentication-methods)                                                                                                                     | String |
+| client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the           [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.                      | String |
 
 A client may only revoke a token generated for that client.
 
-The client can authenticate by providing *client_id* and *client_secret* as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the *client_id* and *client_secret* as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.
-
-For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
-
-~~~sh
-Authorization: Basic ${Base64(<client_id>:<client_secret>)}
-~~~
+For more information about token authentication, see [Token Authentication Methods](#token-authentication-methods).
 
 #### Response Parameters
 
@@ -641,6 +660,7 @@ This API doesn't require any authentication and returns a JSON object with the f
     "token_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
+        "client_secret_jwt",
         "none"
     ],
     "claims_supported": [
@@ -680,12 +700,14 @@ This API doesn't require any authentication and returns a JSON object with the f
     "introspection_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
+        "client_secret_jwt",
         "none"
     ],
     "revocation_endpoint": "https://${org}.okta.com/oauth2/v1/revoke",
     "revocation_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
+        "client_secret_jwt",
         "none"
     ],
     "end_session_endpoint": "https://${org}.okta.com/oauth2/v1/logout"
@@ -869,24 +891,26 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 
 {% api_operation post /oauth2/v1/token %}
 
-The API  returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters. 
+The API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters. 
 
 #### Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-| Parameter     | Description                                                                                                                                                                                                                                                                                                                       | Type   |
-|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
-| grant_type    | Can be one of the following: `authorization_code`, `password`, or `refresh_token`. Determines the mechanism Okta uses to authorize the creation of the tokens.                                                                                                                                                                    | String |
-| code          | Required if `grant_type` is `authorization_code`. The value is what was returned from the   [authentication endpoint](#authentication-request).                                                                                                                                                                                     | String |
-| refresh_token | Required if `grant_type` is `refresh_token`. The value is what was returned from this endpoint via a previous invocation.                                                                                                                                                                                                         | String |
-| username      | Required if the grant_type is `password`.                                                                                                                                                                                                                                                                                         | String |
-| password      | Required if the grant_type is `password`.                                                                                                                                                                                                                                                                                         | String |
-| scope         | Required if `password` is the `grant_type`. This is a list of scopes that the client wants to be included in the Access Token. For the `refresh_token` grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.                                                            | String |
-| redirect_uri  | Required if `grant_type` is `authorization_code`. Specifies the callback location where the authorization was sent. This value must match the `redirect_uri` used to generate the original `authorization_code`.                                                                                                                  | String |
-| code_verifier | Required if `grant_type` is `authorization_code`  and `code_challenge` was specified in the original `/authorize` request. This value is the code verifier for                 [PKCE](#parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request.         | String |
-| client_id     | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application.                                                                                                                                    | String |
-| client_secret | Required if the client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_id` to authenticate the client application.                                                                                                                                     | String |
+| Parameter             | Description                                                                                                                                                                                                                                                                                                                      | Type   |
+|:----------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| grant_type            | Can be one of the following: `authorization_code`, `password`, or `refresh_token`. Determines the mechanism Okta uses to authorize the creation of the tokens.                                                                                                                                                                   | String |
+| code                  | Required if `grant_type` is `authorization_code`. The value is what was returned from the           [authentication endpoint](#authentication-request).                                                                                                                                                                                   | String |
+| refresh_token         | Required if `grant_type` is `refresh_token`. The value is what was returned from this endpoint via a previous invocation.                                                                                                                                                                                                        | String |
+| username              | Required if the grant_type is `password`.                                                                                                                                                                                                                                                                                        | String |
+| password              | Required if the grant_type is `password`.                                                                                                                                                                                                                                                                                        | String |
+| scope                 | Required if `password` is the `grant_type`. This is a list of scopes that the client wants to be included in the Access Token. For the `refresh_token` grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.                                                           | String |
+| redirect_uri          | Required if `grant_type` is `authorization_code`. Specifies the callback location where the authorization was sent. This value must match the `redirect_uri` used to generate the original `authorization_code`.                                                                                                                 | String |
+| code_verifier         | Required if `grant_type` is `authorization_code`  and `code_challenge` was specified in the original `/authorize` request. This value is the code verifier for                         [PKCE](#parameter-details). Okta uses it to recompute the `code_challenge` and verify if it matches the original `code_challenge` in the authorization request.   | String |
+| client_id             | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application.                                                                                                                                   | String |
+| client_secret         | Required if the client has a secret and client credentials are not provided in the Authorization header, and if `client_assertion_type` isn't specified. This client secret is used in conjunction with `client_id` to authenticate the client application.                                                                      | String |
+| client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.    [JWT Details](#token-authentication-methods)                                                                                                                                                                            | String |
+| client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the   [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.                                                                             | String |
 
 ##### Refresh Tokens for Web and Native Applications
 
@@ -895,24 +919,8 @@ For web and native application types, an additional process is required:
 1. Use the Okta Administration UI and check the **Refresh Token** checkbox under **Allowed Grant Types** on the client application page.
 2. Pass the `offline_access` scope to your `/authorize` or `/token` request if you're using the `password` grant type.
 
-##### Token Authentication Method
+For more information about token authentication, see [Token Authentication Methods](#token-authentication-methods).
 
-If you authenticate a client with client credentials, provide the [`client_id`](oidc.html#request-parameters)
-and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) using either of the following methods:
-
-* In an Authorization header in the Basic auth scheme (basic authentication)
-* As additional parameters to the POST body.
-
-Including these credentials in both the Authorization header and POST body is not allowed.
-
-For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.
-
-~~~sh
-Authorization: Basic ${Base64(<client_id>:<client_secret>)}
-~~~
-
->If the value returned by `token_endpoint_authentication` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html#update-client-application) is not what you wish to use, you can change the value of a client app's `token_endpoint_authentication` with any of the values returned by `token_endpoint_auth_methods_support` (`client_secret_post` or `client_secret_basic`).
-You can't change this value in the Okta user interface.
 
 #### Response Parameters
 
@@ -993,11 +1001,12 @@ The API takes an ID Token and logs the user out of Okta if the subject matches t
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
 
-Parameter                | Description                                                                            | Type    | Required  |
--------------------------+----------------------------------------------------------------------------------------+---------+-----------|
-id_token_hint            | A valid ID token with a subject matching the current session. | String | TRUE |
-post_logout_redirect_uri | Callback location to redirect to after the logout has been performed. It must match the value preregistered in Okta during client registration. | String | FALSE |
-state      | If the request contained a `state` parameter, then the same unmodified value is returned back in the response. | String | FALSE |                                                                             
+| Parameter                | Description                                                                                                                                     | Type   | Required |
+|:-------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------|:-------|:---------|
+| id_token_hint            | A valid ID token with a subject matching the current session.                                                                                   | String | TRUE     |
+| post_logout_redirect_uri | Callback location to redirect to after the logout has been performed. It must match the value preregistered in Okta during client registration. | String | FALSE    |
+| state                    | If the request contained a `state` parameter, then the same unmodified value is returned back in the response.                                  | String | FALSE    |
+
 #### Request Examples
 
 This request initiates a logout and will redirect to the Okta login page on success.
