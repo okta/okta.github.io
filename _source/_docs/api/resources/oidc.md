@@ -383,18 +383,18 @@ and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/U
 
 Use only one of these methods in a single request or an error will occur.
 
-##### Request Parameters for Client Authentication with Client Secret JWT
+##### Token Claims for Client Authentication with Client Secret JWT
 
-If you use a JWT for token authentication (`client_secret_jwt`), use the following request parameters:
+If you use a JWT for token authentication (`client_secret_jwt`), use the following token claims:
 
-| Parameter | Description                                                                      | Type   |
-|:----------|:---------------------------------------------------------------------------------|:-------|
-| exp       | Required. The expiration time of the token in seconds since January 1, 1970 UTC. | Long   |
-| iat       | Optional. The issuing time of the token in seconds since January 1, 1970 UTC.    | Long   |
-| sub       | Required. The subject of the token.                                              | String |
-| aud       | Required. The full URL of the resource you're using the JWT to access.           | String |
-| iss       | Required. The issuer of the token.                                               | String |
-| jti       | Optional. The identifier of the token.                                           | String |
+| Token Claims | Description                                                                      | Type   |
+|:-------------|:---------------------------------------------------------------------------------|:-------|
+| exp          | Required. The expiration time of the token in seconds since January 1, 1970 UTC. | Long   |
+| iat          | Optional. The issuing time of the token in seconds since January 1, 1970 UTC.    | Long   |
+| sub          | Required. The subject of the token. This value is the same as the `client_id`.   | String |
+| aud          | Required. The full URL of the resource you're using the JWT to authenticate to.  | String |
+| iss          | Required. The issuer of the token. This value is the same as the `client_id`.    | String |
+| jti          | Optional. The identifier of the token.                                           | String |
 
 Parameter Details
 
