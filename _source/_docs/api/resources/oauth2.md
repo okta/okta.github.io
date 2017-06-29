@@ -2228,19 +2228,28 @@ Token limits:
 
 ##### Claims Properties
 
-| Parameter            | Description                                                                                        | Type                                      | Required for create or update            |
-|:---------------------|:---------------------------------------------------------------------------------------------------|:------------------------------------------|:-----------------------------------------|
-| id                   | ID of the claim                                                                                    | String                                    | True except for create or get all claims |
-| name                 | Name of the claim                                                                                  | String                                    | True                                     |
-| status               | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE`         | Enum                                      | True                                     |
-| claimType            | Specifies whether the claim is an Access Token (`RESOURCE`) or ID Token (`IDENTITY`)               | Enum                                      | True                                     |
-| valueType            | Specifies whether the claim is an Okta EL expression (`EXPRESSION`) or a set of groups (`SYSTEM`)  | Enum                                      | True                                     |
-| value                | The value of the claim. Can be a string literal or an Okta EL expression.                          | String                                    | True                                     |
-| conditions           | Specifies the scopes for this claim                                                                |                  [Conditions Object](#conditions-object)   | False                                    |
-| alwaysIncludeInToken | Specifies whether to include claims in tokens                                                      | Boolean                                   | False                                    |
-| system               | Specifies whether Okta created this claim                                                          | Boolean                                   | System                                   |
+| Parameter            | Description                                                                                                                                                                                                                        | Type                                    | Required for create or update            |
+|:---------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|:-----------------------------------------|
+| id                   | ID of the claim                                                                                                                                                                                                                    | String                                  | True except for create or get all claims |
+| name                 | Name of the claim                                                                                                                                                                                                                  | String                                  | True                                     |
+| status               | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE`                                                                                                                                         | Enum                                    | True                                     |
+| claimType            | Specifies whether the claim is for an Access Token (`RESOURCE`) or ID Token (`IDENTITY`)                                                                                                                                           | Enum                                    | True                                     |
+| valueType            | Specifies whether the claim is an Okta EL expression (`EXPRESSION`), a set of groups (`GROUPS`), or a system claim (`SYSTEM`)                                                                                                      | Enum                                    | True                                     |
+| value                | Specifies the value of the claim. This value must be a string literal if `valueType` is `GROUPS`, and the string literal is matched with the selected `groupFilterType`. The value must be an Okta EL expression if `valueType` is `EXPRESSION`.  | String                                  | True                                     |
+| groupFilterType      | Specifies the type of group filter if `valueType` is `GROUPS`. [Details](#details-for-groupfiltertype)                                                                                                                                   | Enum                                    | False                                    |                                          |
+| conditions           | Specifies the scopes for this claim                                                                                                                                                                                                |                         [Conditions Object](#conditions-object) | False                                    |
+| alwaysIncludeInToken | Specifies whether to include claims in tokens  [Details](#details-for-alwaysincludeintoken)                                                                                                                                                                                    | Boolean                                 | False                                    |
+| system               | Specifies whether Okta created this claim                                                                                                                                                                                          | Boolean                                 | System                                   |
 
-More about `alwaysIncludeInToken`:
+##### Details for `groupFilterType`
+
+If `valueType` is `GROUPS`, then the groups returned are filtered according to the value of `groupFilterType`:
+
+* `STARTS_WITH`: Group names start with `value` (not case sensitive). For example, if `value` is `group1`, then `group123` and `Group123` are included.
+* `EQUALS`: Group name is the same as `value` (not case sensitive). For example, if `value` is `group1`, then `group1` and `Group1` are included, but `group123` isn't.
+* `CONTAINS`: Group names contain `value` (not case sensitive). For example, if `value` is `group1`, then `MyGroup123` and `group1` are included.
+
+##### Details for `alwaysIncludeInToken`
 
 * Always `TRUE` for Access Token
 * If `FALSE` for an ID Token claim, the claim won't be included in the ID Token if ID token is requested with Access Token or `authorization_code`, instead the client has to use Access Token to get the claims from the UserInfo endpoint.
