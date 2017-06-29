@@ -311,7 +311,8 @@ Scopes are not ordered.
 
 #### Grant Type Condition
 
-The grant type condition identifies ????
+The grant type condition identifies how the authorization grant is presented to Okta: 
+via an authorization code, password credentials, refresh token, or client credentials.
 
 #### People Condition
  
