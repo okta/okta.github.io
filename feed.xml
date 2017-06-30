@@ -6089,7 +6089,7 @@ npm start
 &lt;h2 id=&quot;add-the-openid-connect-application-in-okta&quot;&gt;Add the OpenID Connect Application in Okta&lt;/h2&gt;
 &lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta developer portal&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;So log in to your Okta account, [or create one](https://developer.okta.com] if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
+&lt;p&gt;So log in to your Okta account, &lt;a href=&quot;https://developer.okta.com&quot;&gt;or create one&lt;/a&gt; if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener-757b218884250a613b267c5d2c0b2a01292d96efd85a0c0706cc50e39ac6779d.png&quot; alt=&quot;OIDC Application Settings&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
