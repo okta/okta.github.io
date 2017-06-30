@@ -39,14 +39,14 @@ redirect_from:
     <!-- START Subpages Grid -->
     <div class="Row">
     {% assign documents = site.reference | sort:'weight' %}
-        {% for document in documents %}
-        {% unless document.id contains '/index' %}
+      {% for document in documents %}
+      {% unless document.id contains '/index' %}
         {% continue %}
-        {% endunless %}
+      {% endunless %}
       <div class="Column--4 Column--small-12">
-	<a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' | append: '/' }}{% else %}{{ document.link }}{% endif %}">
-	  <h3 class="h4">{{ document.title }}</h3>
-	</a>
+         <a href="{{ document.url | remove: '/index' | append: '/' }}">
+            <h3 class="h4">{{ document.title }}</h3>
+         </a>
 	<p>{{ document.excerpt }}</p>
       </div>
     {% endfor %}
@@ -57,13 +57,13 @@ redirect_from:
       <!-- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
       <!-- START Subpages Grid -->
       <div class="Row">
-          {% assign documents = site.standards | sort:'weight' %}
-          {% for document in documents %}
-          {% unless document.id contains '/index' %}
+      {% assign documents = site.standards | sort:'weight' %}
+      {% for document in documents %}
+        {% unless document.id contains '/index' %}
           {% continue %}
-          {% endunless %}
+        {% endunless %}
           <div class="Column--4 Column--small-12">
-              <a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' | append: '/' }}{% else %}{{ document.link }}{% endif %}">
+              <a href="{{ document.url | remove: '/index' | append: '/' }}">
                   <h3 class="h4">{{ document.title }}</h3>
               </a>
               <p>{{ document.excerpt }}</p>
@@ -71,7 +71,6 @@ redirect_from:
           {% endfor %}
       </div>
       <!-- END Subpages Grid -->
-
 
     <!-- START Grid w/Language Tiles -->
     <h1>Code</h1>
