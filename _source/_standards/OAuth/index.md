@@ -302,7 +302,23 @@ Because Policy A has a higher priority, the requests coming from client C are ev
 
 ### Rules
 
-In a policy the administrators can define several rules with people, scope, and grant type conditions. The people condition identifies users and groups that are included or exclueded to match the user the token is requested for. Rules are ordered numerically by priority. This priority determines the order in which they are searched for a user/group match. The highest priority rule has a priorityOrder of 1.
+In a policy the administrators can define several rules with people, scope, and grant type conditions. 
+
+#### Scope Condition
+
+The scope condition identifies scopes that are included or excluded to match the claims the token will contain.
+Scopes are not ordered. 
+
+#### Grant Type Condition
+
+The grant type condition identifies how the authorization grant is presented to Okta: 
+via an authorization code, password credentials, refresh token, or client credentials.
+
+#### People Condition
+ 
+The people condition identifies users and groups that are included or excluded to match the user the token is requested for.
+Rules are ordered numerically by priority. This priority determines the order in which they are searched for a user/group match.
+The highest priority rule has a priorityOrder of 1.
 
 For example, assume the following conditions are in effect:
 

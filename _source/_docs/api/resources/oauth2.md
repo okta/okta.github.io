@@ -155,7 +155,7 @@ These APIs are compliant with the OpenID Connect and OAuth 2.0 spec with some Ok
 The request is made with a *fragment* response mode.
 
 ~~~
-http://www.example.com/#
+https://www.example.com/#
 id_token=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZG
 UubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInZlciI6MSwiaXNzIjoiaHR0cDovL3JhaW4ub2t0YTEuY29tOjE4MDIiLCJsb2dpbiI6ImFkbWluaXN
 0cmF0b3IxQGNsb3VkaXR1ZGUubmV0IiwiYXVkIjoidUFhdW5vZldrYURKeHVrQ0ZlQngiLCJpYXQiOjE0NDk2MjQwMjYsImV4cCI6MTQ0OTYyNzYyNiwi
@@ -179,7 +179,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 The requested scope is invalid:
 
 ~~~
-http://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
+https://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
 ~~~
 
 #### Request a Token
@@ -360,7 +360,7 @@ curl -X POST \
 ##### Response Example (Error)
 {:.api .api-response .api-response-example}
 
-~~~http
+~~~sh
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
 {
@@ -438,7 +438,7 @@ For more information about token authentication, see [Token Authentication Metho
     "exp" : 1451606400,
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
-    "aud" : "http://api.example.com",
+    "aud" : "https://api.example.com",
     "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3",
@@ -871,7 +871,7 @@ curl -v -X POST \
 -d '{ "name": "Sample Authorization Server",
       "description": "Sample Authorization Server description",
       "audiences": [
-        "http://test.com"
+        "https://test.com"
       ]
 }' "https://${org}.okta.com/api/v1/authorizationServers"
 ~~~
@@ -1807,7 +1807,7 @@ curl -v -X POST \
                "use": "sig",
                "_links": {
                  "self": {
-                   "href": "http://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo",
+                   "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo",
                    "hints": {
                      "allow": [
                        "GET"
@@ -1851,7 +1851,7 @@ curl -v -X POST \
                "use": "sig",
                "_links": {
                  "self": {
-                 "href": "http://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc",
+                 "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc",
                  "hints": {
                    "allow": [
                      "GET"
@@ -2188,7 +2188,7 @@ Token limits:
 | id          | ID of the scope                      | String  | FALSE                         |
 | name        | Name of the scope                    | String  | TRUE                          |
 | description | Description of the scope             | String  | FALSE                         |
-| system      | Whether Okta created the scope       | Enum    | FALSE                         |
+| system      | Whether Okta created the scope       | Boolean | FALSE                         |
 | default     | Whether the scope is a default scope | Boolean | FALSE                         |
 
 #### Claims Object
@@ -2228,19 +2228,29 @@ Token limits:
 
 ##### Claims Properties
 
-| Parameter            | Description                                                                                              | Type                                     | Required for create or update            |
-|:---------------------|:---------------------------------------------------------------------------------------------------------|:-----------------------------------------|:-----------------------------------------|
-| id                   | ID of the claim                                                                                          | String                                   | True except for create or get all claims |
-| name                 | Name of the claim                                                                                        | String                                   | True                                     |
-| status               | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE`               | Enum                                     | True                                     |
-| claimType            | Specifies whether the claim is an Access Token (`RESOURCE`) or ID Token (`IDENTITY`)                     | Enum                                     | True                                     |
-| valueType            | Specifies whether the claim is an Okta EL expression or a set of groups                                  | Enum                                     | True                                     |
-| value                | The value of the claim, including escaped quote marks. Can be a string literal or an Okta EL expression. | String                                   | True                                     |
-| conditions           | Specifies the scopes for this claim                                                                      |            [Conditions Object](#conditions-object) | False                                    |
-| alwaysIncludeInToken | Specifies whether to include claims in tokens                                                            | Boolean                                  | False                                    |
-| system               | Specifies whether Okta created this claim                                                                | Boolean                                  | System                                   |
+| Parameter            | Description                                                                                                                                                                                                                                      | Type                                                 | Required for create or update            |
+|:---------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------|:-----------------------------------------|
+| id                   | ID of the claim                                                                                                                                                                                                                                  | String                                               | True except for create or get all claims |
+| name                 | Name of the claim                                                                                                                                                                                                                                | String                                               | True                                     |
+| status               | Specifies whether requests have access to this claim. Valid values: `ACTIVE` or `INACTIVE`                                                                                                                                                       | Enum                                                 | True                                     |
+| claimType            | Specifies whether the claim is for an Access Token (`RESOURCE`) or ID Token (`IDENTITY`)                                                                                                                                                         | Enum                                                 | True                                     |
+| valueType            | Specifies whether the claim is an Okta EL expression (`EXPRESSION`), a set of groups (`GROUPS`), or a system claim (`SYSTEM`)                                                                                                                    | Enum                                                 | True                                     |
+| value                | Specifies the value of the claim. This value must be a string literal if `valueType` is `GROUPS`, and the string literal is matched with the selected `groupFilterType`. The value must be an Okta EL expression if `valueType` is `EXPRESSION`. | String                                               | True                                     |
+| groupFilterType      | Specifies the type of group filter if `valueType` is `GROUPS`.   [Details](#details-for-groupfiltertype)                                                                                                                                           | Enum                                                 | False                                    |
+| conditions           | Specifies the scopes for this claim                                                                                                                                                                                                              |                           [Conditions Object](#conditions-object)              | False                                    |
+| alwaysIncludeInToken | Specifies whether to include claims in tokens    [Details](#details-for-alwaysincludeintoken)                                                                                                                                                      | Boolean                                              | False                                    |
+| system               | Specifies whether Okta created this claim                                                                                                                                                                                                        | Boolean                                              | System                                   |
 
-More about `alwaysIncludeInToken`:
+##### Details for `groupFilterType`
+
+If `valueType` is `GROUPS`, then the groups returned are filtered according to the value of `groupFilterType`:
+
+* `STARTS_WITH`: Group names start with `value` (not case sensitive). For example, if `value` is `group1`, then `group123` and `Group123` are included.
+* `EQUALS`: Group name is the same as `value` (not case sensitive). For example, if `value` is `group1`, then `group1` and `Group1` are included, but `group123` isn't.
+* `CONTAINS`: Group names contain `value` (not case sensitive). For example, if `value` is `group1`, then `MyGroup123` and `group1` are included.
+* `REGEX`: Group names match the REGEX expression in `value` (case sensitive). For example if `value` is `/^[a-z0-9_-]{3,16}$/`, then any group name that has at least 3 letters, no more than 16, and contains lower case letters, a hyphen, or numbers. 
+
+##### Details for `alwaysIncludeInToken`
 
 * Always `TRUE` for Access Token
 * If `FALSE` for an ID Token claim, the claim won't be included in the ID Token if ID token is requested with Access Token or `authorization_code`, instead the client has to use Access Token to get the claims from the UserInfo endpoint.
@@ -2292,14 +2302,16 @@ Example from a Policy Object
 #### Authorization Server Credentials Signing Object
 
 ~~~json
-"credentials": {
-  "signing": {
-    "rotationMode": "AUTO",
-    "lastRotated": "2017-05-17T22:25:57.000Z",
-    "nextRotation": "2017-08-15T22:25:57.000Z",
-    "kid": "WYQxoK4XAwGFn5Zw5AzLxFvqEKLP79BbsKmWeuc5TB4"
-    "use": "sig"
-  }
+{
+    "credentials": {
+      "signing": {
+        "rotationMode": "AUTO",
+        "lastRotated": "2017-05-17T22:25:57.000Z",
+        "nextRotation": "2017-08-15T22:25:57.000Z",
+        "kid": "WYQxoK4XAwGFn5Zw5AzLxFvqEKLP79BbsKmWeuc5TB4"
+        "use": "sig"
+      }
+    }
 }
 ~~~
 
@@ -2309,7 +2321,7 @@ Example from a Policy Object
 | kid           | The ID of the key used for signing tokens issued by the authorization server                                             | String     | FALSE      | FALSE      |
 | lastRotated   | The timestamp when the authorization server started to use the `kid` for signing tokens                                  | String     | FALSE      | FALSE      |
 | nextRotation  | The timestamp when authorization server will change key for signing tokens. Only returned when `rotationMode` is `AUTO`  | String     | FALSE      | FALSE      |
-| rotationMode  | The key rotation mode for the authorization server. Can be `AUTO` or `MANUAL`                                            | String     | FALSE      | TRUE       |
+| rotationMode  | The key rotation mode for the authorization server. Can be `AUTO` or `MANUAL`                                            | Enum       | FALSE      | TRUE       |
 
 #### Authorization Server Certificate Key Object
 

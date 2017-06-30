@@ -120,7 +120,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
 {
   "ver": 1,
   "sub": "00uid4BxXw6I6TV4m0g3",
-  "iss": "http://rain.okta1.com:1802",
+  "iss": "https://rain.okta1.com:1802",
   "aud": "uAaunofWkaDJxukCFeBx",
   "iat": 1449624026,
   "exp": 1449627626,
@@ -136,7 +136,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
   "given_name":"John",
   "middle_name":"James",
   "family_name":"Doe",
-  "profile":"http://profile.wordpress.com/john.doe",
+  "profile":"https://profile.wordpress.com/john.doe",
   "zoneinfo":"America/Los_Angeles",
   "locale":"en-US",
   "updated_at":1311280970,
@@ -205,7 +205,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 | given_name         | profile           | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.                                              | String         | "John"                                                                                                                          |
 | middle_name        | profile           | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used. | String         | "James"                                                                                                                         |
 | family_name        | profile           | Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.                               | String         | "Doe"                                                                                                                           |
-| profile            | profile           | URL of the user's profile page.                                                                                                                                                                                                    | String         | "http://profile.wordpress.com/john.doe"                                                                                         |
+| profile            | profile           | URL of the user's profile page.                                                                                                                                                                                                    | String         | "https://profile.wordpress.com/john.doe"                                                                                         |
 | zoneinfo           | profile           | String representing the user's time zone.                                                                                                                                                                                          | String         | "America/Los_Angeles"                                                                                                           |
 | locale             | profile           | Language and   [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.                                                                                                                   | String         | "en-US"                                                                                                                         |
 | updated_at         | profile           | Time the user's information was last updated, represented in Unix time (seconds).                                                                                                                                                  | Integer        | 1311280970                                                                                                                      |
@@ -273,7 +273,7 @@ Returns a JSON document with information requested in the scopes list of the tok
   "given_name":"John",
   "middle_name":"James",
   "family_name":"Doe",
-  "profile":"http://profile.wordpress.com/john.doe",
+  "profile":"https://profile.wordpress.com/john.doe",
   "zoneinfo":"America/Los_Angeles",
   "locale":"en-US",
   "updated_at":1311280970,
@@ -442,7 +442,7 @@ Based on the type of token and whether it is active or not, the returned JSON co
     "exp" : 1451606400,
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
-    "aud" : "http://api.example.com",
+    "aud" : "https://api.example.com",
     "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3"
@@ -883,7 +883,7 @@ curl -v -X GET \
 The requested scope is invalid:
 
 ~~~
-http://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
+https://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
 ~~~
 
 ### Token Request
