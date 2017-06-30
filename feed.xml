@@ -8,6 +8,169 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>OpenID Connect for User Authentication in ASP.NET Core</title>
+        <description>&lt;p&gt;In the age of the “personalized web experience”, authentication and user management is a given, and it’s easier than ever to tap into third-party authentication providers like Facebook, Twitter, and Google. And it’s not just the wild, wild web that needs it. Businesses need ways to secure their APIs, and identify users logged into their apps.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt; is a protocol for authenticating users. It is a specification by the OpenID Foundation describing the best way for the authentication “handshake” to happen. It lays out what an Identity Provider needs to provide in order to be considered “OpenID Connect Certified” which makes it easier than ever to consume authentication as a service.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-not-use-oauth&quot;&gt;Why Not Use OAuth?&lt;/h2&gt;
+&lt;p&gt;First, &lt;a href=&quot;https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth&quot;&gt;OAuth is NOT an authentication protocol&lt;/a&gt;. I know what you’re thinking: “What?!!?” But it’s not. It &lt;em&gt;is&lt;/em&gt; an delegated authorization framework, which many modern authentication protocols are built on.&lt;/p&gt;
+
+&lt;p&gt;Second, while OAuth does a great job of providing the necessary information for consumers to make authorization decisions, it says nothing about how that information will be exchanged securely. This has led to every authentication provider having their own way of exchanging the OAuth information, which has led to a few well-publicized hacks. OpenID Connect fixes these problems by providing an authentication protocol that describes exactly how the exchange of authorization information happens between a subscriber and their provider.&lt;/p&gt;
+
+&lt;p&gt;So let’s see how this works.&lt;/p&gt;
+
+&lt;h3 id=&quot;nothing-up-my-sleeve&quot;&gt;Nothing Up My Sleeve&lt;/h3&gt;
+&lt;p&gt;You’ll be using &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; and the command line. You can also use Visual Studio, but Visual Studio Code is cross-platform and lightweight, so it won’t matter what operating system you are using.&lt;/p&gt;
+
+&lt;p&gt;First, get the &lt;a href=&quot;https://dot.net/core&quot;&gt;dotnet command-line program&lt;/a&gt;. Once you have the dotnet-cli installed, run the &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet new mvc --auth None&lt;/code&gt; command. This will create a new MVC application without the built-in authentication. You’re going to do that yourself.&lt;/p&gt;
+
+&lt;p&gt;In just a few seconds you’ll have a simple ASP.NET Core app ready to go. You may need to run a &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; command to install the dependencies for the base application.&lt;/p&gt;
+
+&lt;h2 id=&quot;add-an-identity-provider&quot;&gt;Add an Identity Provider&lt;/h2&gt;
+&lt;p&gt;Now you need an Identity Provider. For this tutorial you’ll  use &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt;. Once you’ve created an account and logged in, click &lt;em&gt;Admin&lt;/em&gt; on the top menu.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/admin_button-10c629ae4f749f3b0851d3206f3069876fd193d3e9696e7e1a17b150239e11dd.png&quot; alt=&quot;Admin Button&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then choose the &lt;em&gt;Applications&lt;/em&gt; menu item from the admin dashboard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/applications_button-08fcd59c5ce94e306dd52a8ca933fafe2ece4d84d66b6840b3bc627b39b1179f.png&quot; alt=&quot;Applications Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the Applications page, click the &lt;em&gt;Add Application&lt;/em&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/add_application_button-e917c5ac29a95532285ea60c1853c4b849aaaa520add0ee3dd1b5c0cc6d26488.png&quot; alt=&quot;Add Application Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On the Add Application page, click on the &lt;em&gt;Create New Application&lt;/em&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/create_app_button-bd24015c3fac20e164679b100d846be1967927cf6f99b635493b31878769a617.png&quot; alt=&quot;Create Application Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When the New Application Integration window pops up, set up the new application. We’ll choose &lt;em&gt;Web&lt;/em&gt; from the Platform dropdown, and OpenID Connect from the Sign On Method.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/create_application_page-9a0ce95a392e87da357853b7733323fa27af824e4c02115c6b12ee8e51b7f9d1.png&quot; alt=&quot;Create Application Page&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you’ve created the application, choose it from the list of applications. In the General Settings tab, click the &lt;em&gt;Edit&lt;/em&gt; button and make sure to add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/signin-oidc&lt;/code&gt; to the Redirect URIs.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/redirect_uri-564499ce3721350c6a82855e9f425c4bdef9ca4ad856183a3c667c8e0cf3b5a8.png&quot; alt=&quot;Redirect URI Setting&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;While you are on the General Settings tab, scroll down and copy your Client ID and Client Secret somewhere. You’ll use this later when configuring the middleware in your application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/client_id_secret-b8d9e3ceaa9398eb3ec4b4f3b568bab2b0a1f3960a53bda84fdb719d70ffd72e.png&quot; alt=&quot;Client ID and Secret&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, you’ll need to make sure that you can use the API by adding the localhost URI to your CORS settings. First, choose the &lt;em&gt;Security&lt;/em&gt; menu item from the dashboard and the choose &lt;em&gt;API&lt;/em&gt; from the drop down menu.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/security_drop_down-e7b02e973ce3098c8e540b3dc1afbdd3d83ce8baf934cbc662d2747f90cc9a2c.png&quot; alt=&quot;Security Drop Down Menu&quot; width=&quot;200&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then select the &lt;em&gt;Trusted Origins&lt;/em&gt; tab.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/trusted_origins_tab-9997990aaf27d68a30f73c99e28f22bc4038d1502f4157de4dcf7b067dcd16ba.png&quot; alt=&quot;Trusted Origins Tab&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on &lt;em&gt;Add Origin&lt;/em&gt; and add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000&lt;/code&gt; as a trusted origin. Make sure that CORS and Redirect are selected. Enter “ASP.NET web app (debug)” as the redirect name (or any other name that makes sense to you).&lt;/p&gt;
+
+&lt;p&gt;Now you’re ready to set up authentication!&lt;/p&gt;
+
+&lt;h2 id=&quot;add-authentication&quot;&gt;Add Authentication&lt;/h2&gt;
+&lt;p&gt;When you open your application in Visual Studio or Visual Studio Code, you’ll notice that there’s a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ProjectName&amp;gt;.csproj&lt;/code&gt; file. You’ll need to make some quick changes to that to get some dependencies you’ll need to make this work. In the &lt;code class=&quot;highlighter-rouge&quot;&gt;ItemGroup&lt;/code&gt; section of the &lt;code class=&quot;highlighter-rouge&quot;&gt;csproj&lt;/code&gt; document add:&lt;/p&gt;
+
+&lt;PackageReference Include=&quot;Microsoft.AspNetCore.Authentication.JwtBearer&quot; Version=&quot;1.1.2&quot; /&gt;
+
+&lt;PackageReference Include=&quot;Microsoft.AspNetCore.Authentication.OpenIdConnect&quot; Version=&quot;1.1.2&quot; /&gt;
+
+&lt;PackageReference Include=&quot;Microsoft.AspNetCore.Authentication.Cookies&quot; Version=&quot;1.1.2&quot; /&gt;
+
+&lt;p&gt;This will allow you to use &lt;a href=&quot;https://www.jsonwebtoken.io/&quot;&gt;JSON Web Tokens&lt;/a&gt; for authorization information, get the tokens from the OpenID Connect provider (Okta in this case) and store them in cookies for session management. You’ll need to run a quick &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; command, but don’t worry, once you save the file, VS Code will give you an option to return to the command line.&lt;/p&gt;
+
+&lt;p&gt;Now, open the Startup.cs file, and on the first line of the Configure method add:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.IdentityModel.Protocols.OpenIdConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System.IdentityModel.Tokens.Jwt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then, between the app.UseStaticFiles(); and app.UseMvc(…); add:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseCookieAuthentication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CookieAuthenticationOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AuthenticationScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Cookies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AutomaticAuthenticate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This tells the application that you want to store your session tokens in cookies. Then, you just need to add the authentication instructions.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseOpenIdConnectAuthentication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OpenIdConnectOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AuthenticationScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;oidc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SignInScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Cookies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Authority&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://&amp;lt;your Okta dev subdomain&amp;gt;.oktapreview.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ResponseType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpenIdConnectResponseType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ClientId&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Your Client ID from Okta}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ClientSecret&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Your Client Secret from Okta}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GetClaimsFromUserInfoEndpoint&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SaveTokens&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This is the important part, so let’s go through it line by line:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationScheme&lt;/code&gt; gives out scheme a name, and will be used to build the default callback url (~/signin-oidc)&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;SignInScheme&lt;/code&gt; is used to set the sign-in middleware&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Authority&lt;/code&gt; identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ResponseType&lt;/code&gt; is also specified in that document under “response_types_supported”. This tells the application you want to start an OIDC code flow from from the provider.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientId&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientSecret&lt;/code&gt; are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest &lt;a href=&quot;https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core&quot;&gt;storing these in a secure way&lt;/a&gt;  and referencing them here. They’re in line here for demonstration purposes.&lt;/li&gt;
+  &lt;li&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;GetClaimsFromUserInfoEndpoint = true&lt;/code&gt; tells the provider that if you’re successful authenticating, go ahead and make a call to the &lt;code class=&quot;highlighter-rouge&quot;&gt;userinfo_endpoint&lt;/code&gt; (specified in the configuration document at the same URL you got the &lt;code class=&quot;highlighter-rouge&quot;&gt;authorization_endpoint&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;response_types_supported&lt;/code&gt; from). This will go ahead and get the claims that we’re going to display from Okta once the authentication has completed.&lt;/li&gt;
+  &lt;li&gt;Finally, we tell the application to save the token once it comes back from the provider&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s all there is to it, but how do you know it’s working? Well, you &lt;em&gt;could&lt;/em&gt; hook up a login form but there is an easier way!&lt;/p&gt;
+
+&lt;h2 id=&quot;check-your-work&quot;&gt;Check Your Work&lt;/h2&gt;
+&lt;p&gt;All you really need to do is add an [Authorize] attribute to a controller method. That will simply and quickly show us that it’s going to the login page on the provider, but it won’t show us what the provider is sending back. Let’s create a page that will show that information so you can make sure you’re getting what you &lt;em&gt;think&lt;/em&gt; you should be getting from the provider.&lt;/p&gt;
+
+&lt;p&gt;First, add a using statement to the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; for the &lt;code class=&quot;highlighter-rouge&quot;&gt;Authorize&lt;/code&gt; attribute.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.AspNetCore.Authorization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then add a “Secure” method to the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; controller.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;[Authorize]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IActionResult&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Secure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then create a view to return in &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Views/Home&lt;/code&gt; called &lt;code class=&quot;highlighter-rouge&quot;&gt;Security.cshtml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@{
+    ViewData[&quot;Title&quot;] = &quot;Security&quot;;
+}
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Secure&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dl&amp;gt;&lt;/span&gt;
+    @foreach (var claim in User.Claims)
+    {
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dt&amp;gt;&lt;/span&gt;@claim.Type&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dt&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dd&amp;gt;&lt;/span&gt;@claim.Value&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dd&amp;gt;&lt;/span&gt;
+    }
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dl&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This will just loop through the claims and output them. When you navigate to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/Home/Secure&lt;/code&gt;, you should be redirected to a login page. Once you’re logged in (with a user that is assigned to your app), you should now see a list of the claims on the secure page.
+If you do, congratulations! You just set up OpenID Connect for authenticating in your ASP.NET Core app!&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</guid>
+      </item>
+    
+      <item>
         <title>7 Essential .NET Developer Tools for 2017</title>
         <description>&lt;p&gt;Every good dev knows that time spent setting up the perfect environment and searching out the latest tools is time well spent. Little things make a huge difference — upgrade your IDE plugins, automate a task or two, or look for new tools and libraries that can increase your efficiency. We’ve taken a crack at an updated list of our favorite .NET developer tools, that can simplify your life and amplify your work.&lt;/p&gt;
 &lt;h2 id=&quot;1-jsonnet&quot;&gt;1. JSON.NET&lt;/h2&gt;
