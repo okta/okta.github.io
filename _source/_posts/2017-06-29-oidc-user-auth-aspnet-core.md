@@ -9,8 +9,8 @@ In the age of the “personalized web experience”, authentication and user man
 
 [OpenID Connect](http://openid.net/connect/) is a protocol for authenticating users. It is a specification by the OpenID Foundation describing the best way for the authentication “handshake” to happen. It lays out what an Identity Provider needs to provide in order to be considered “OpenID Connect Certified” which makes it easier than ever to consume authentication as a service.
 
-## Why Not Use OAuth?
-First, [OAuth is NOT an authentication protocol](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth). I know what you’re thinking: “What?!!?” But it’s not. It *is* an delegated authorization framework, which many modern authentication protocols are built on. 
+## Why Not Use OAuth 2.0?
+First, [OAuth 2.0 is NOT an authentication protocol](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth). I know what you’re thinking: “What?!!?” But it’s not. It *is* an delegated authorization framework, which many modern authentication protocols are built on. 
 
 Second, while OAuth does a great job of providing the necessary information for consumers to make authorization decisions, it says nothing about how that information will be exchanged securely. This has led to every authentication provider having their own way of exchanging the OAuth information, which has led to a few well-publicized hacks. OpenID Connect fixes these problems by providing an authentication protocol that describes exactly how the exchange of authorization information happens between a subscriber and their provider. 
 
@@ -107,13 +107,13 @@ app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions()
 ```
 This is the important part, so let’s go through it line by line:
 
-* The `AuthenticationScheme` gives out scheme a name, and will be used to build the default callback url (~/signin-oidc)
-* The `SignInScheme` is used to set the sign-in middleware
+* The `AuthenticationScheme` gives out scheme a name, and will be used to build the default callback url (~/signin-oidc).
+* The `SignInScheme` is used to set the sign-in middleware.
 * The `Authority` identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.
-* The `ResponseType` is also specified in that document under “response_types_supported”. This tells the application you want to start an OIDC code flow from from the provider.
-* The `ClientId`, and `ClientSecret` are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest [storing these in a secure way](https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core)  and referencing them here. They’re in line here for demonstration purposes.
+* The `ResponseType` is also specified in that document under “response_types_supported”. This tells the application you want to start an authorization code flow from from the provider.
+* The `ClientId`, and `ClientSecret` are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest [storing these in a secure way](https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core) and referencing them here. They’re in line here for demonstration purposes.
 * Setting `GetClaimsFromUserInfoEndpoint = true` tells the provider that if you’re successful authenticating, go ahead and make a call to the `userinfo_endpoint` (specified in the configuration document at the same URL you got the `authorization_endpoint` and the `response_types_supported` from). This will go ahead and get the claims that we’re going to display from Okta once the authentication has completed.
-* Finally, we tell the application to save the token once it comes back from the provider
+* Finally, we tell the application to save the token once it comes back from the provider.
 
 That’s all there is to it, but how do you know it’s working? Well, you *could* hook up a login form but there is an easier way!
 
