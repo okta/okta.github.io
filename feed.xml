@@ -13,8 +13,8 @@
 
 &lt;p&gt;&lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt; is a protocol for authenticating users. It is a specification by the OpenID Foundation describing the best way for the authentication “handshake” to happen. It lays out what an Identity Provider needs to provide in order to be considered “OpenID Connect Certified” which makes it easier than ever to consume authentication as a service.&lt;/p&gt;
 
-&lt;h2 id=&quot;why-not-use-oauth&quot;&gt;Why Not Use OAuth?&lt;/h2&gt;
-&lt;p&gt;First, &lt;a href=&quot;https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth&quot;&gt;OAuth is NOT an authentication protocol&lt;/a&gt;. I know what you’re thinking: “What?!!?” But it’s not. It &lt;em&gt;is&lt;/em&gt; an delegated authorization framework, which many modern authentication protocols are built on.&lt;/p&gt;
+&lt;h2 id=&quot;why-not-use-oauth-20&quot;&gt;Why Not Use OAuth 2.0?&lt;/h2&gt;
+&lt;p&gt;First, &lt;a href=&quot;https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth&quot;&gt;OAuth 2.0 is NOT an authentication protocol&lt;/a&gt;. I know what you’re thinking: “What?!!?” But it’s not. It &lt;em&gt;is&lt;/em&gt; an delegated authorization framework, which many modern authentication protocols are built on.&lt;/p&gt;
 
 &lt;p&gt;Second, while OAuth does a great job of providing the necessary information for consumers to make authorization decisions, it says nothing about how that information will be exchanged securely. This has led to every authentication provider having their own way of exchanging the OAuth information, which has led to a few well-publicized hacks. OpenID Connect fixes these problems by providing an authentication protocol that describes exactly how the exchange of authorization information happens between a subscriber and their provider.&lt;/p&gt;
 
@@ -113,13 +113,13 @@
 &lt;p&gt;This is the important part, so let’s go through it line by line:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationScheme&lt;/code&gt; gives out scheme a name, and will be used to build the default callback url (~/signin-oidc)&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;SignInScheme&lt;/code&gt; is used to set the sign-in middleware&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationScheme&lt;/code&gt; gives out scheme a name, and will be used to build the default callback url (~/signin-oidc).&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;SignInScheme&lt;/code&gt; is used to set the sign-in middleware.&lt;/li&gt;
   &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Authority&lt;/code&gt; identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ResponseType&lt;/code&gt; is also specified in that document under “response_types_supported”. This tells the application you want to start an OIDC code flow from from the provider.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientId&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientSecret&lt;/code&gt; are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest &lt;a href=&quot;https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core&quot;&gt;storing these in a secure way&lt;/a&gt;  and referencing them here. They’re in line here for demonstration purposes.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ResponseType&lt;/code&gt; is also specified in that document under “response_types_supported”. This tells the application you want to start an authorization code flow from from the provider.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientId&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientSecret&lt;/code&gt; are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest &lt;a href=&quot;https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core&quot;&gt;storing these in a secure way&lt;/a&gt; and referencing them here. They’re in line here for demonstration purposes.&lt;/li&gt;
   &lt;li&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;GetClaimsFromUserInfoEndpoint = true&lt;/code&gt; tells the provider that if you’re successful authenticating, go ahead and make a call to the &lt;code class=&quot;highlighter-rouge&quot;&gt;userinfo_endpoint&lt;/code&gt; (specified in the configuration document at the same URL you got the &lt;code class=&quot;highlighter-rouge&quot;&gt;authorization_endpoint&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;response_types_supported&lt;/code&gt; from). This will go ahead and get the claims that we’re going to display from Okta once the authentication has completed.&lt;/li&gt;
-  &lt;li&gt;Finally, we tell the application to save the token once it comes back from the provider&lt;/li&gt;
+  &lt;li&gt;Finally, we tell the application to save the token once it comes back from the provider.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;That’s all there is to it, but how do you know it’s working? Well, you &lt;em&gt;could&lt;/em&gt; hook up a login form but there is an easier way!&lt;/p&gt;
