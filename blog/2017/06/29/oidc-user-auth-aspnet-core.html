@@ -143,7 +143,7 @@
 <h2 id="why-not-use-oauth-20">Why Not Use OAuth 2.0?</h2>
 <p>First, <a href="https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth">OAuth 2.0 is NOT an authentication protocol</a>. I know what you’re thinking: “What?!!?” But it’s not. It <em>is</em> an delegated authorization framework, which many modern authentication protocols are built on.</p>
 
-<p>Second, while OAuth does a great job of providing the necessary information for consumers to make authorization decisions, it says nothing about how that information will be exchanged securely. This has led to every authentication provider having their own way of exchanging the OAuth information, which has led to a few well-publicized hacks. OpenID Connect fixes these problems by providing an authentication protocol that describes exactly how the exchange of authorization information happens between a subscriber and their provider.</p>
+<p>Second, while OAuth 2.0 does a great job of providing the necessary information for consumers to make authorization decisions, it says nothing about how that information will be exchanged securely. This has led to every authentication provider having their own way of exchanging the OAuth 2.0 information, which has led to a few well-publicized hacks. OpenID Connect fixes these problems by providing an authentication protocol that describes exactly how the exchange of authorization information happens between a subscriber and their provider.</p>
 
 <p>So let’s see how this works.</p>
 
@@ -210,6 +210,7 @@
 
 <div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">Microsoft.IdentityModel.Protocols.OpenIdConnect</span><span class="p">;</span>
 <span class="k">using</span> <span class="nn">System.IdentityModel.Tokens.Jwt</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.IdentityModel.Tokens</span><span class="p">;</span>
 </code></pre>
 </div>
 
@@ -233,7 +234,8 @@
   <span class="n">ClientId</span> <span class="p">=</span> <span class="s">"{Your Client ID from Okta}"</span><span class="p">,</span>
   <span class="n">ClientSecret</span> <span class="p">=</span> <span class="s">"{Your Client Secret from Okta}"</span><span class="p">,</span>
   <span class="n">GetClaimsFromUserInfoEndpoint</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
-  <span class="n">SaveTokens</span> <span class="p">=</span> <span class="k">true</span>
+  <span class="n">SaveTokens</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
+  
 <span class="p">});</span>
 </code></pre>
 </div>
@@ -245,7 +247,7 @@
   <li>The <code class="highlighter-rouge">Authority</code> identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.</li>
   <li>The <code class="highlighter-rouge">ResponseType</code> is also specified in that document under “response_types_supported”. This tells the application you want to start an authorization code flow from from the provider.</li>
   <li>The <code class="highlighter-rouge">ClientId</code>, and <code class="highlighter-rouge">ClientSecret</code> are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest <a href="https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core">storing these in a secure way</a> and referencing them here. They’re in line here for demonstration purposes.</li>
-  <li>Setting <code class="highlighter-rouge">GetClaimsFromUserInfoEndpoint = true</code> tells the provider that if you’re successful authenticating, go ahead and make a call to the <code class="highlighter-rouge">userinfo_endpoint</code> (specified in the configuration document at the same URL you got the <code class="highlighter-rouge">authorization_endpoint</code> and the <code class="highlighter-rouge">response_types_supported</code> from). This will go ahead and get the claims that we’re going to display from Okta once the authentication has completed.</li>
+  <li>Setting <code class="highlighter-rouge">GetClaimsFromUserInfoEndpoint = true</code> tells the provider that if you’re successful authenticating, go ahead and make a call to the <code class="highlighter-rouge">userinfo_endpoint</code> (specified in the configuration document at the same URL you got the <code class="highlighter-rouge">authorization_endpoint</code> and the <code class="highlighter-rouge">response_types_supported</code> from). This will validate the token using the signing key from the <code class="highlighter-rouge">jwks_uri</code> and get the claims that we’re going to display from Okta once the authentication has completed.</li>
   <li>Finally, we tell the application to save the token once it comes back from the provider.</li>
 </ul>
 
@@ -263,7 +265,6 @@
 <p>Then add a “Secure” method to the <code class="highlighter-rouge">HomeController.cs</code> controller.</p>
 
 <div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="na">[Authorize]</span>
-
 <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Secure</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="nf">View</span><span class="p">();</span>
