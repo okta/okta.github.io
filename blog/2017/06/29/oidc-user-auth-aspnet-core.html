@@ -206,7 +206,7 @@
 
 <p>This will allow you to use <a href="https://www.jsonwebtoken.io/">JSON Web Tokens</a> for authorization information, get the tokens from the OpenID Connect provider (Okta in this case) and store them in cookies for session management. You’ll need to run a quick <code class="highlighter-rouge">dotnet restore</code> command, but don’t worry, once you save the file, VS Code will give you an option to return to the command line.</p>
 
-<p>Now, open the Startup.cs file, and on the first line of the Configure method add:</p>
+<p>Now, open the <code class="highlighter-rouge">Startup.cs</code> file, and on the first line of the Configure method add:</p>
 
 <div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">Microsoft.IdentityModel.Protocols.OpenIdConnect</span><span class="p">;</span>
 <span class="k">using</span> <span class="nn">System.IdentityModel.Tokens.Jwt</span><span class="p">;</span>
@@ -214,7 +214,7 @@
 </code></pre>
 </div>
 
-<p>Then, between the app.UseStaticFiles(); and app.UseMvc(…); add:</p>
+<p>Then, between the <code class="highlighter-rouge">app.UseStaticFiles();</code> and <code class="highlighter-rouge">app.UseMvc(…);</code> add:</p>
 
 <div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="n">app</span><span class="p">.</span><span class="nf">UseCookieAuthentication</span><span class="p">(</span><span class="k">new</span> <span class="nf">CookieAuthenticationOptions</span><span class="p">(){</span>
   <span class="n">AuthenticationScheme</span> <span class="p">=</span> <span class="s">"Cookies"</span><span class="p">,</span>
@@ -234,8 +234,11 @@
   <span class="n">ClientId</span> <span class="p">=</span> <span class="s">"{Your Client ID from Okta}"</span><span class="p">,</span>
   <span class="n">ClientSecret</span> <span class="p">=</span> <span class="s">"{Your Client Secret from Okta}"</span><span class="p">,</span>
   <span class="n">GetClaimsFromUserInfoEndpoint</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
-  <span class="n">SaveTokens</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
-  
+  <span class="n">TokenValidationParameters</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TokenValidationParameters</span>
+  <span class="p">{</span>
+    <span class="n">ValidateIssuer</span> <span class="p">=</span> <span class="k">true</span>
+  <span class="p">},</span>
+  <span class="n">SaveTokens</span> <span class="p">=</span> <span class="k">true</span>  
 <span class="p">});</span>
 </code></pre>
 </div>
@@ -247,7 +250,8 @@
   <li>The <code class="highlighter-rouge">Authority</code> identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.</li>
   <li>The <code class="highlighter-rouge">ResponseType</code> is also specified in that document under “response_types_supported”. This tells the application you want to start an authorization code flow from from the provider.</li>
   <li>The <code class="highlighter-rouge">ClientId</code>, and <code class="highlighter-rouge">ClientSecret</code> are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest <a href="https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core">storing these in a secure way</a> and referencing them here. They’re in line here for demonstration purposes.</li>
-  <li>Setting <code class="highlighter-rouge">GetClaimsFromUserInfoEndpoint = true</code> tells the provider that if you’re successful authenticating, go ahead and make a call to the <code class="highlighter-rouge">userinfo_endpoint</code> (specified in the configuration document at the same URL you got the <code class="highlighter-rouge">authorization_endpoint</code> and the <code class="highlighter-rouge">response_types_supported</code> from). This will validate the token using the signing key from the <code class="highlighter-rouge">jwks_uri</code> and get the claims that we’re going to display from Okta once the authentication has completed.</li>
+  <li>Setting <code class="highlighter-rouge">GetClaimsFromUserInfoEndpoint = true</code> tells the provider that if you’re successful authenticating, go ahead and make a call to the <code class="highlighter-rouge">userinfo_endpoint</code> (specified in the configuration document at the same URL you got the <code class="highlighter-rouge">authorization_endpoint</code> and the <code class="highlighter-rouge">response_types_supported</code> from). This will get the claims that we’re going to display from Okta once the authentication has completed.</li>
+  <li>The TokenValidationParameters tells the middleware that we want to validate that the issuer is who we expect it to be by getting the signing key from the <code class="highlighter-rouge">jwks_uri</code> endpoint in the <code class="highlighter-rouge">.well-known/openid_configuration</code> document.</li>
   <li>Finally, we tell the application to save the token once it comes back from the provider.</li>
 </ul>
 
