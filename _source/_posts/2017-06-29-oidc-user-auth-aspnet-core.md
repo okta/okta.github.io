@@ -74,7 +74,7 @@ When you open your application in Visual Studio or Visual Studio Code, you’ll 
 
 This will allow you to use [JSON Web Tokens](https://www.jsonwebtoken.io/) for authorization information, get the tokens from the OpenID Connect provider (Okta in this case) and store them in cookies for session management. You’ll need to run a quick `dotnet restore` command, but don’t worry, once you save the file, VS Code will give you an option to return to the command line. 
 
-Now, open the Startup.cs file, and on the first line of the Configure method add: 
+Now, open the `Startup.cs` file, and on the first line of the Configure method add: 
 
 ``` csharp
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
@@ -82,7 +82,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 ```
 
-Then, between the app.UseStaticFiles(); and app.UseMvc(…); add:
+Then, between the `app.UseStaticFiles();` and `app.UseMvc(…);` add:
 
 ``` csharp
 app.UseCookieAuthentication(new CookieAuthenticationOptions(){
@@ -103,8 +103,11 @@ app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions()
   ClientId = "{Your Client ID from Okta}",
   ClientSecret = "{Your Client Secret from Okta}",
   GetClaimsFromUserInfoEndpoint = true,
-  SaveTokens = true,
-  
+  TokenValidationParameters = new TokenValidationParameters
+  {
+    ValidateIssuer = true
+  },
+  SaveTokens = true  
 });
 ```
 This is the important part, so let’s go through it line by line:
@@ -114,7 +117,8 @@ This is the important part, so let’s go through it line by line:
 * The `Authority` identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.
 * The `ResponseType` is also specified in that document under “response_types_supported”. This tells the application you want to start an authorization code flow from from the provider.
 * The `ClientId`, and `ClientSecret` are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest [storing these in a secure way](https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core) and referencing them here. They’re in line here for demonstration purposes.
-* Setting `GetClaimsFromUserInfoEndpoint = true` tells the provider that if you’re successful authenticating, go ahead and make a call to the `userinfo_endpoint` (specified in the configuration document at the same URL you got the `authorization_endpoint` and the `response_types_supported` from). This will validate the token using the signing key from the `jwks_uri` and get the claims that we’re going to display from Okta once the authentication has completed.
+* Setting `GetClaimsFromUserInfoEndpoint = true` tells the provider that if you’re successful authenticating, go ahead and make a call to the `userinfo_endpoint` (specified in the configuration document at the same URL you got the `authorization_endpoint` and the `response_types_supported` from). This will get the claims that we’re going to display from Okta once the authentication has completed.
+* The TokenValidationParameters tells the middleware that we want to validate that the issuer is who we expect it to be by getting the signing key from the `jwks_uri` endpoint in the `.well-known/openid_configuration` document.
 * Finally, we tell the application to save the token once it comes back from the provider.
 
 That’s all there is to it, but how do you know it’s working? Well, you *could* hook up a login form but there is an easier way!
