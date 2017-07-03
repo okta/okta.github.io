@@ -27,14 +27,19 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
  <!-- OKTA-125424 -->
 
-### Platform Enhancement: Mysti will provide title
+### Platform Enhancements:
+
+#### Mysti will provide title
 
 Mysti will provide description of enhancement based on OKTA-117521.
 <!-- (OKTA-117521) -->
 
-### Platform Bugs Fixed
+#### Sign-in Widget and 
 
-* Description of corrected behavior  (OKTA-117352)
+Mysti will provide description of enhancement based on OKTA-117521.
+<!-- (OKTA-131204) -->
+
+### Platform Bugs Fixed
 
 * Description of corrected behavior  (OKTA-129094)
 
@@ -44,9 +49,9 @@ Mysti will provide description of enhancement based on OKTA-117521.
 
 * Description of corrected behavior  (OKTA-131608)
 
-* Description of corrected behavior  (OKTA-131647)
+* PUTs to /oauth2/v1/clients using data obtained from a GET to that endpoint received an error response if they contained values for `client_id_issued_at` or `client_secret_expires_at`.  (OKTA-131647)
 
-* Description of corrected behavior  (OKTA-131885)
+* Okta allowed Open ID Connect Access Tokens to be signed with a client's key rather than Okta's key.  (OKTA-131885)
 
 ### Looking for Something Else?
 
