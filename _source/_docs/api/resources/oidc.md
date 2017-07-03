@@ -747,10 +747,11 @@ of the response.
 | code_challenge        | A challenge of   [PKCE](#parameter-details). The challenge is verified in the Access Token request.                                                                                                                                                                                                                                                                                                       | Query      | String   | FALSE    |
 | code_challenge_method | Method used to derive the code challenge. Must be `S256`.                                                                                                                                                                                                                                                                                                                                                | Query      | String   | FALSE    |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                               | Query      | String   | FALSE    |
+| idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                 | Query      | String   | FALSE    |
 
 #### Parameter Details
 
- * *idp* and *sessionToken* are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
+ * *idp*, *sessionToken* and *idp_scope* are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
     All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.
  * Each value for *response_mode* delivers different behavior:
     * *fragment* -- Parameters are encoded in the URL fragment added to the *redirect_uri* when redirecting back to the client.
