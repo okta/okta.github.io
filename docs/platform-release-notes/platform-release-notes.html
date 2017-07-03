@@ -34,7 +34,7 @@
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.23">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.25">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -186,31 +186,16 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201724">Release 2017.24</h2>
+      <h2 id="release-201726">Release 2017.26</h2>
 
-<h3 id="advance-notices">Advance Notices</h3>
+<h3 id="advance-notice-data-retention-changes">Advance Notice: Data Retention Changes</h3>
 
-<ul>
-  <li><a href="#key-rollover-change">Key Rollover Change</a></li>
-  <li><a href="#data-retention-changes">Data Retention Policy Changes</a></li>
-</ul>
-
-<h4 id="key-rollover-change">Key Rollover Change</h4>
-
-<p>Beginning in Release 2017.25, the <code class="highlighter-rouge">credentials.signing.kid</code> property of an app won’t be available if the app doesn’t support the key rollover feature.
-An app supports key rollover if the app uses one of the following signing mode types: SAML 2.0, SAML 1.1, WS-Fed, or OpenID Connect.</p>
-
-<p>Before this change takes effect, verify that your integration doesn’t expect the <code class="highlighter-rouge">credentials.signing.kid</code> property
-if your app doesn’t have one of the listed signing mode types. This change is expected in Release 2017.25,
-which is scheduled for preview orgs on June 21, 2017 and in production orgs on June 26, 2017. <!-- OKTA-76439 --></p>
-
-<h4 id="data-retention-changes">Data Retention Changes</h4>
-
-<p>Okta is changing system log data retention. System log data is available from <code class="highlighter-rouge">/api/v1/events</code> or Okta SDK <code class="highlighter-rouge">EventsAPIClient</code>.</p>
+<p>Okta is changing system log data retention windows. System log data is available from <code class="highlighter-rouge">/api/v1/events</code> or
+Okta SDK <code class="highlighter-rouge">EventsAPIClient</code>.</p>
 
 <ul>
-  <li>For orgs created before July 17th, data will be retained for 6 months.</li>
-  <li>For orgs created on and after July 17th, data will be retained for 3 months.</li>
+  <li>For orgs created before July 17th, data older than six months will be removed.</li>
+  <li>For orgs created on or after July 17th, data older than three months will be removed.</li>
 </ul>
 
 <p>The new data retention policy starts:</p>
@@ -220,89 +205,37 @@ which is scheduled for preview orgs on June 21, 2017 and in production orgs on J
   <li>July 17, 2017 for existing production orgs</li>
 </ul>
 
-<p>Preview and production orgs created on July 17,2017 and later will retain this log data for three months.</p>
+<p>Preview and production orgs created on or after July 17, 2017, will retain log data for three months.</p>
 
 <p>For the full data retention policy, see our <a href="https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy">Data Retention Policy</a>.</p>
 
 <p>You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta’s API. <!-- OKTA-125424 --></p>
 
-<h3 id="platform-enhancements">Platform Enhancements</h3>
+<p><!-- OKTA-125424 --></p>
+
+<h3 id="platform-enhancement-new-authentication-method-for-openid-connect-and-api-access-management">Platform Enhancement: New Authentication Method for OpenID Connect and API Access Management</h3>
+<p>For OpenID Connect and API Access Management, Okta supports the <code class="highlighter-rouge">client_secret_jwt</code> method for token endpoint authentication (<code class="highlighter-rouge">token_endpoint_auth_method</code>).
+This method is specified in the <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">OpenID Connect specification</a>
+and allows you to use JWT and HMAC to authenticate a client for <a href="https://developer.okta.com/docs/api/resources/oauth2.html#token-authentication-methods">OAuth 2.0</a> or <a href="https://developer.okta.com/docs/api/resources/oidc.html#token-authentication-methods">OpenID Connect</a> requests.
+<!-- (OKTA-101074) --></p>
+
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
 <ul>
-  <li><a href="#default-scopes-for-oauth-20">Default Scopes for OAuth 2.0</a></li>
-  <li><a href="#improved-ui-for-creating-openid-connect-apps">Improved UI for Creating OpenID Connect Apps</a></li>
-  <li><a href="#event-notifications-for-openid-connect-apps">Event Notifications for OpenID Connect Apps</a></li>
-  <li><a href="#query-string-support-in-idp-redirect-urls">Query String Support in IdP Redirect URLs</a></li>
-  <li><a href="#api-rate-limit-improvements">API Rate Limit Improvements</a></li>
-</ul>
-
-<h4 id="default-scopes-for-oauth-20">Default Scopes for OAuth 2.0</h4>
-
-<p>Using either the Okta UI or API, you can configure default scopes for an OAuth 2.0 client.
-If the client omits the scope parameter in an authorization request,
-Okta returns all default scopes in the Access Token that are permitted by the access policy rule.</p>
-
-<p><img src="/assets/release_notes/default-scope-ec7ebe52d591823bf7eaea76c9082558c682ffcbcaffe7147cb56f1e7a7e859f.png" alt="Default Scope Configuration UI" /></p>
-
-<p>For more information about setting default scopes in the API, see <a href="/docs/api/resources/oauth2.html#scopes-properties">OAuth 2.0 API</a>.
-<!-- OKTA-122185 OKTA-122072 --></p>
-
-<h4 id="improved-ui-for-creating-openid-connect-apps">Improved UI for Creating OpenID Connect Apps</h4>
-
-<p>The wizard for creating an OpenID Connect app has been improved and consolidated onto a single screen.</p>
-
-<p><img src="/assets/release_notes/single-oidc-screen-2d595bf95b872ea29f6b914ad7cac4c4741bc20efb9ce1509d49e8b20a8d78ef.png" alt="New OpenID Connect Create Wizard" /></p>
-
-<!-- OKTA-129127 -->
-
-<h4 id="event-notifications-for-openid-connect-apps">Event Notifications for OpenID Connect Apps</h4>
-
-<p>Notifications are entered in the System Log via the Events API (<code class="highlighter-rouge">/api/v1/events</code>) when OpenID Connect apps are created, modified, deactivated, or deleted.
-Previously these notifications appeared only in the System Log (<code class="highlighter-rouge">/api/v1/logs</code>).</p>
-
-<h4 id="query-string-support-in-idp-redirect-urls">Query String Support in IdP Redirect URLs</h4>
-
-<p>Query strings are now supported in the definition of IdP Login URLs:</p>
-
-<ul>
-  <li>The <strong>IDP Login URL</strong> field in the Add/Edit Endpoint wizard.</li>
-  <li>The <strong>IdP Single Sign-On URL</strong> field for Inbound SAML. Reserved SAML parameters (SAMLRequest, RelayState, SigAlg, Signature) in a query string are ignored.<!-- OKTA-127771 --></li>
-</ul>
-
-<h4 id="api-rate-limit-improvements">API Rate Limit Improvements</h4>
-
-<p>We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user’s request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:</p>
-
-<h5 id="preview-orgs">Preview Orgs</h5>
-
-<p>We enforce new rate limits for all preview orgs. API calls exceeding the new rate limits return an HTTP 429 error.</p>
-
-<h5 id="production-orgs">Production Orgs</h5>
-
-<ol>
   <li>
-    <p>As of May 8, we enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> Warning: requests for url pattern &lt;url-pattern&gt; have reached 
- a threshold of &lt;number&gt; requests per &lt;time-duration&gt;. Please 
- be warned these rate limits will be enforced in the near future.
-</code></pre>
-    </div>
+    <p>When suspicious activity was logged for OAuth 2.0 clients the invalid secret was not masked. (OKTA-129694)</p>
   </li>
   <li>
-    <p>As of mid-May, we started enforcing these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.</p>
+    <p>When validating the names of scopes for social identity providers, Okta didn’t enforce the restrictions
+specified in the <a href="https://tools.ietf.org/html/rfc6749#section-3.3">OAuth 2.0 spec</a>. (OKTA-117352)</p>
   </li>
   <li>
-    <p>We are rolling out the enforcement of these new rate limits to all orgs this week. Once your org has the new limits, you’ll see HTTP 429 errors instead of rate-limit warnings in the System Log if the new limits are exceeded.</p>
+    <p>When the same user was created multiple times simultaneously and added to a group, the HTTP error
+response code was 500 rather than 400. (OKTA-126223)</p>
   </li>
-</ol>
-
-<p>For a full description of the new rate limits, see <a href="https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements">API Rate Limit Improvements</a>.<!-- OKTA-110472 --></p>
-
-<h3 id="platform-bug-fixed">Platform Bug Fixed</h3>
-
-<ul>
-  <li>The dropdown that controls Authorization Server lifecycle operations failed to display properly if you navigated directly to a tab or refreshed a tab other than Settings. (OKTA-129014)</li>
+  <li>
+    <p><code class="highlighter-rouge">/api/v1/apps/:appId/groups</code> didn’t return groups if the specified app is inactive. (OKTA-123695)</p>
+  </li>
 </ul>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>

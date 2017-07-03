@@ -132,8 +132,9 @@
                 <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
                 <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
                 <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
-                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
                 <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
+                <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
               </ul>
             </li>
             <li>
@@ -212,7 +213,7 @@
 
 <h2 id="getting-started">Getting Started</h2>
 
-<p>Explore the Events API: <a href="https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the Events API: <a href="https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="event-operations">Event Operations</h2>
 
@@ -220,68 +221,64 @@
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/events</span></p>
 
-<p>Fetch a list of events from your Okta organization system log</p>
+<p>Fetches a list of events from your Okta organization system log</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters">Request Parameters</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Default</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>limit</td>
-      <td>Specifies the number of results to page</td>
-      <td>Query</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>1000</td>
+      <td style="text-align: left">limit</td>
+      <td style="text-align: left">Specifies the number of results to page</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Number</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">1000</td>
     </tr>
     <tr>
-      <td>startDate</td>
-      <td>Specifies the timestamp to list events after</td>
-      <td>Query</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">startDate</td>
+      <td style="text-align: left">Specifies the timestamp to list events after</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>filter</td>
-      <td><a href="/docs/api/getting_started/design_principles.html#filtering">Filter expression</a> for events</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">filter</td>
+      <td style="text-align: left">  <a href="/docs/api/getting_started/design_principles.html#filtering">Filter expression</a> for events</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>after</td>
-      <td>Specifies the pagination cursor for the next page of events</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">after</td>
+      <td style="text-align: left">Specifies the pagination cursor for the next page of events</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>The <code class="highlighter-rouge">after</code> cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a></p>
-</blockquote>
+<p>Parameter Details</p>
 
-<blockquote>
-  <p><code class="highlighter-rouge">startDate</code> and <code class="highlighter-rouge">filter</code> query parameters are mutually exclusive and cannot be used together in the same request</p>
-</blockquote>
-
-<blockquote>
-  <p><code class="highlighter-rouge">startDate</code> defaults to 1 hour ago when <code class="highlighter-rouge">filter</code>, <code class="highlighter-rouge">after</code> and <code class="highlighter-rouge">startDate</code> query parameters are omitted.</p>
-</blockquote>
+<ul>
+  <li>Treat the <code class="highlighter-rouge">after</code> cursor as an opaque value. Obtain it through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a>.</li>
+  <li><code class="highlighter-rouge">startDate</code> and <code class="highlighter-rouge">filter</code> query parameters are mutually exclusive and cannot be used together in the same request.</li>
+  <li><code class="highlighter-rouge">startDate</code> defaults to 1 hour ago when <code class="highlighter-rouge">filter</code>, <code class="highlighter-rouge">after</code> and <code class="highlighter-rouge">startDate</code> query parameters are omitted.</li>
+</ul>
 
 <h6 id="filters">Filters</h6>
 
@@ -290,42 +287,42 @@
 <table>
   <thead>
     <tr>
-      <th>Filter</th>
-      <th>Description</th>
+      <th style="text-align: left">Filter</th>
+      <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">action.objectType eq ":actionType"</code></td>
-      <td>Events that have a specific <a href="#action-objecttypes">action objectType</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">action.objectType eq ":actionType"</code></td>
+      <td style="text-align: left">Events that have a specific   <a href="#action-objecttypes">action objectType</a></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">target.objectType eq ":objectType"</code></td>
-      <td>Events published with a specific <a href="#actor-and-target-objecttypes">target objectType</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">target.objectType eq ":objectType"</code></td>
+      <td style="text-align: left">Events published with a specific   <a href="#actor-and-target-objecttypes">target objectType</a></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">target.id eq ":id"</code></td>
-      <td>Events published with a specific target id</td>
+      <td style="text-align: left"><code class="highlighter-rouge">target.id eq ":id"</code></td>
+      <td style="text-align: left">Events published with a specific target id</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Events published before a specific datetime</td>
+      <td style="text-align: left"><code class="highlighter-rouge">published lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Events published before a specific datetime</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Events published updated at a specific datetime</td>
+      <td style="text-align: left"><code class="highlighter-rouge">published eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Events published updated at a specific datetime</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Events published updated after a specific datetime</td>
+      <td style="text-align: left"><code class="highlighter-rouge">published gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Events published updated after a specific datetime</td>
     </tr>
   </tbody>
 </table>
 
-<p>See <a href="/docs/api/getting_started/design_principles.html#filtering">Filtering</a> for more information on expressions</p>
+<p>See <a href="/docs/api/getting_started/design_principles.html#filtering">Filtering</a> for more information on expressions.</p>
 
 <blockquote>
-  <p>All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code class="highlighter-rouge">filter=published gt "2013-06-01T00:00:00.000Z"</code> is encoded as <code class="highlighter-rouge">filter=published%20gt%20%222013-06-01T00:00:00.000Z%22</code></p>
+  <p>Note: All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code class="highlighter-rouge">filter=published gt "2013-06-01T00:00:00.000Z"</code> is encoded as <code class="highlighter-rouge">filter=published%20gt%20%222013-06-01T00:00:00.000Z%22</code>.</p>
 </blockquote>
 
 <p><strong>Filter Examples</strong></p>
@@ -543,162 +540,159 @@
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
+      <th style="text-align: left">MinLength</th>
+      <th style="text-align: left">MaxLength</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>eventId</td>
-      <td>Unique key for event</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">eventId</td>
+      <td style="text-align: left">Unique key for event</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>published</td>
-      <td>Timestamp when event was published</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td>1</td>
-      <td>255</td>
+      <td style="text-align: left">published</td>
+      <td style="text-align: left">Timestamp when event was published</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">255</td>
     </tr>
     <tr>
-      <td>requestId</td>
-      <td>Identifies the request</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>1</td>
-      <td>50</td>
+      <td style="text-align: left">requestId</td>
+      <td style="text-align: left">Identifies the request</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">50</td>
     </tr>
     <tr>
-      <td>sessionId</td>
-      <td>Session in which the event occurred</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">sessionId</td>
+      <td style="text-align: left">Session in which the event occurred</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>action</td>
-      <td>Identifies the action that the event describes</td>
-      <td><a href="#action-object">Action Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">action</td>
+      <td style="text-align: left">Identifies the action that the event describes</td>
+      <td style="text-align: left">  <a href="#action-object">Action Object</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>actors</td>
-      <td>Describes zero or more entities that performed the action</td>
-      <td>Array of <a href="#actor-object">Actor Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">actors</td>
+      <td style="text-align: left">Describes zero or more entities that performed the action</td>
+      <td style="text-align: left">Array of   <a href="#actor-object">Actor Object</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>targets</td>
-      <td>Describes zero or more entities that the action was performed against</td>
-      <td>Array of <a href="#target-object">Target Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">targets</td>
+      <td style="text-align: left">Describes zero or more entities that the action was performed against</td>
+      <td style="text-align: left">Array of   <a href="#target-object">Target Object</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>_links</td>
-      <td>discoverable resources related to the event</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">_links</td>
+      <td style="text-align: left">discoverable resources related to the event</td>
+      <td style="text-align: left">  <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>_embedded</td>
-      <td>embedded resources related to the event</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">_embedded</td>
+      <td style="text-align: left">embedded resources related to the event</td>
+      <td style="text-align: left">  <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.</p>
-</blockquote>
+<p>Property Details</p>
 
-<blockquote>
-  <p>The <code class="highlighter-rouge">sessionId</code> can identify multiple requests.  A single <code class="highlighter-rouge">requestId</code> can identify multiple events.  Use the <code class="highlighter-rouge">sessionId</code> to link events and requests that occurred in the same session.</p>
-</blockquote>
+<ul>
+  <li>The actor and/or target of an event is dependent on the action performed. Not all events have an actor or target.</li>
+  <li>The <code class="highlighter-rouge">sessionId</code> can identify multiple requests.  A single <code class="highlighter-rouge">requestId</code> can identify multiple events.  Use the <code class="highlighter-rouge">sessionId</code> to link events and requests that occurred in the same session.</li>
+</ul>
 
 <h3 id="action-object">Action Object</h3>
 
-<p>Describes an activity performed by a user, app, client, or other entity (actor) on a target</p>
+<p>Describes an activity performed by a user, app, client, or other entity (actor) on a target:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>message</td>
-      <td>Description of an action</td>
-      <td>String</td>
-      <td>FALSE</td>
+      <td style="text-align: left">message</td>
+      <td style="text-align: left">Description of an action</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>categories</td>
-      <td><a href="#action-categories">Categories</a> for an action</td>
-      <td>Array of String</td>
-      <td>FALSE</td>
+      <td style="text-align: left">categories</td>
+      <td style="text-align: left">  <a href="#action-categories">Categories</a> for an action</td>
+      <td style="text-align: left">Array of String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>objectType</td>
-      <td>Identifies the <a href="#action-objecttypes">unique type</a> of an action</td>
-      <td>String</td>
-      <td>FALSE</td>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">Identifies the   <a href="#action-objecttypes">unique type</a> of an action</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>requestUri</td>
-      <td>Uri of the request that generated the event.</td>
-      <td>String</td>
-      <td>TRUE</td>
+      <td style="text-align: left">requestUri</td>
+      <td style="text-align: left">Uri of the request that generated the event.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>Actions that do not define any categories will have a zero element array value.</p>
-</blockquote>
+<p>Actions that do not define any categories will have a zero element array value.</p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User performed single sign on to app"</span><span class="p">,</span><span class="w">
@@ -732,30 +726,30 @@
 </ul>
 
 <blockquote>
-  <p>Additional categories may be added in the future without versioning</p>
+  <p>Note: Additional categories may be added in the future without versioning.</p>
 </blockquote>
 
 <h4 id="action-objecttypes">Action ObjectTypes</h4>
 
-<p>Action <code class="highlighter-rouge">objectType</code> identifies the unique action performed.</p>
+<p>The action <code class="highlighter-rouge">objectType</code> identifies the unique action performed.</p>
 
 <h5 id="application-authentication">Application Authentication</h5>
 
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.auth.sso</td>
-      <td>Event occurred during single sign on</td>
+      <td style="text-align: left">app.auth.sso</td>
+      <td style="text-align: left">Event occurred during single sign on</td>
     </tr>
     <tr>
-      <td>app.auth.delegated.outbound</td>
-      <td>Event occurred during outbound delegated authentication</td>
+      <td style="text-align: left">app.auth.delegated.outbound</td>
+      <td style="text-align: left">Event occurred during outbound delegated authentication</td>
     </tr>
   </tbody>
 </table>
@@ -765,78 +759,78 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.user_management.push_password_update</td>
-      <td>Update user’s password in application</td>
+      <td style="text-align: left">app.user_management.push_password_update</td>
+      <td style="text-align: left">Update user’s password in application</td>
     </tr>
     <tr>
-      <td>app.user_management.push_profile_success</td>
-      <td>Successfully created or updated user’s profile in application</td>
+      <td style="text-align: left">app.user_management.push_profile_success</td>
+      <td style="text-align: left">Successfully created or updated user’s profile in application</td>
     </tr>
     <tr>
-      <td>app.user_management.push_profile_failure</td>
-      <td>Failed to create or update user’s profile in application</td>
+      <td style="text-align: left">app.user_management.push_profile_failure</td>
+      <td style="text-align: left">Failed to create or update user’s profile in application</td>
     </tr>
     <tr>
-      <td>app.user_management.push_new_user</td>
-      <td>Create new user in application</td>
+      <td style="text-align: left">app.user_management.push_new_user</td>
+      <td style="text-align: left">Create new user in application</td>
     </tr>
     <tr>
-      <td>app.user_management.push_pending_user</td>
-      <td>Queue update of user for application</td>
+      <td style="text-align: left">app.user_management.push_pending_user</td>
+      <td style="text-align: left">Queue update of user for application</td>
     </tr>
     <tr>
-      <td>app.user_management.provision_user</td>
-      <td>Created or updated user from application</td>
+      <td style="text-align: left">app.user_management.provision_user</td>
+      <td style="text-align: left">Created or updated user from application</td>
     </tr>
     <tr>
-      <td>app.user_management.provision_user_failed</td>
-      <td>Failed to create or update user from application</td>
+      <td style="text-align: left">app.user_management.provision_user_failed</td>
+      <td style="text-align: left">Failed to create or update user from application</td>
     </tr>
     <tr>
-      <td>app.user_management.importing_profile</td>
-      <td>Create or update user’s profile from application</td>
+      <td style="text-align: left">app.user_management.importing_profile</td>
+      <td style="text-align: left">Create or update user’s profile from application</td>
     </tr>
     <tr>
-      <td>app.user_management.update_from_master_failed</td>
-      <td>Failed to master user’s profile from application</td>
+      <td style="text-align: left">app.user_management.update_from_master_failed</td>
+      <td style="text-align: left">Failed to master user’s profile from application</td>
     </tr>
     <tr>
-      <td>app.user_management.verified_user_with_thirdparty</td>
-      <td>Verified user against application</td>
+      <td style="text-align: left">app.user_management.verified_user_with_thirdparty</td>
+      <td style="text-align: left">Verified user against application</td>
     </tr>
     <tr>
-      <td>app.user_management.updating_api_credentials_for_password_change</td>
-      <td>Updating API credentials due to  API admin user password change</td>
+      <td style="text-align: left">app.user_management.updating_api_credentials_for_password_change</td>
+      <td style="text-align: left">Updating API credentials due to  API admin user password change</td>
     </tr>
     <tr>
-      <td>app.user_management.activate_user</td>
-      <td>Activate user in application</td>
+      <td style="text-align: left">app.user_management.activate_user</td>
+      <td style="text-align: left">Activate user in application</td>
     </tr>
     <tr>
-      <td>app.user_management.deactivate_user</td>
-      <td>Deactivate user in application</td>
+      <td style="text-align: left">app.user_management.deactivate_user</td>
+      <td style="text-align: left">Deactivate user in application</td>
     </tr>
     <tr>
-      <td>app.user_management.reactivate_user</td>
-      <td>Reactivate user in application</td>
+      <td style="text-align: left">app.user_management.reactivate_user</td>
+      <td style="text-align: left">Reactivate user in application</td>
     </tr>
     <tr>
-      <td>app.user_management.provision_user.user_inactive</td>
-      <td>Attempt to provision a user to an inactive account, and cannot reactivate</td>
+      <td style="text-align: left">app.user_management.provision_user.user_inactive</td>
+      <td style="text-align: left">Attempt to provision a user to an inactive account, and cannot reactivate</td>
     </tr>
     <tr>
-      <td>app.user_management.deactivate_user.api_account</td>
-      <td>Deactivate API user in application</td>
+      <td style="text-align: left">app.user_management.deactivate_user.api_account</td>
+      <td style="text-align: left">Deactivate API user in application</td>
     </tr>
     <tr>
-      <td>app.user_management.deprovision_task_complete</td>
-      <td>Deprovisioning task has been marked complete (automatically or manually)</td>
+      <td style="text-align: left">app.user_management.deprovision_task_complete</td>
+      <td style="text-align: left">Deprovisioning task has been marked complete (automatically or manually)</td>
     </tr>
   </tbody>
 </table>
@@ -846,82 +840,82 @@
 <table class="table table-word-break">
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.user_management.user_group_import.upsert_success</td>
-      <td>Successfully created or updated group from application</td>
+      <td style="text-align: left">app.user_management.user_group_import.upsert_success</td>
+      <td style="text-align: left">Successfully created or updated group from application</td>
     </tr>
     <tr>
-      <td>app.user_management.user_group_import.delete_success</td>
-      <td>Successfully removed imported group that was deleted from application</td>
+      <td style="text-align: left">app.user_management.user_group_import.delete_success</td>
+      <td style="text-align: left">Successfully removed imported group that was deleted from application</td>
     </tr>
     <tr>
-      <td>app.user_management.app_group_member_import.insert_success</td>
-      <td>Update group memmbership  an AppGroupUserMember from an import succeeded</td>
+      <td style="text-align: left">app.user_management.app_group_member_import.insert_success</td>
+      <td style="text-align: left">Update group memmbership  an AppGroupUserMember from an import succeeded</td>
     </tr>
     <tr>
-      <td>app.user_management.app_group_member_import.delete_success</td>
-      <td>Deleting an AppGroupUserMember from an import succeeded</td>
+      <td style="text-align: left">app.user_management.app_group_member_import.delete_success</td>
+      <td style="text-align: left">Deleting an AppGroupUserMember from an import succeeded</td>
     </tr>
     <tr>
-      <td>app.user_management.app_group_group_member_import.insert_success</td>
-      <td>Upserting an ResolvedAppGroupMember from an import succeeded</td>
+      <td style="text-align: left">app.user_management.app_group_group_member_import.insert_success</td>
+      <td style="text-align: left">Upserting an ResolvedAppGroupMember from an import succeeded</td>
     </tr>
     <tr>
-      <td>app.user_management.app_group_group_member_import.delete_success</td>
-      <td>Deleting an ResolvedAppGroupMember from an import succeeded</td>
+      <td style="text-align: left">app.user_management.app_group_group_member_import.delete_success</td>
+      <td style="text-align: left">Deleting an ResolvedAppGroupMember from an import succeeded</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.created.from.rule</td>
-      <td>A new mapping has been created from a rule</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule</td>
+      <td style="text-align: left">A new mapping has been created from a rule</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.created.from.rule.error.duplicate</td>
-      <td>A new mapping from a rule was attempted to be created, but it turned out to be a dupe</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.error.duplicate</td>
+      <td style="text-align: left">A new mapping from a rule was attempted to be created, but it turned out to be a dupe</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.created.from.rule.warning.duplicate.name</td>
-      <td>A new mapping from a rule was not created due to a duplicate group name</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.warning.duplicate.name</td>
+      <td style="text-align: left">A new mapping from a rule was not created due to a duplicate group name</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.created.from.rule.warning.duplicate.name.tobecreated</td>
-      <td>A new mapping from a rule was not created due to another mapping will be created that has the same user group name</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.warning.duplicate.name.tobecreated</td>
+      <td style="text-align: left">A new mapping from a rule was not created due to another mapping will be created that has the same user group name</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.created.from.rule.warning.upsertGroup.duplicate.name</td>
-      <td>Create or update of source group triggered mapping rule re-evaluation preventing a new application group mapping due to a duplicate group name</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.warning.upsertGroup.duplicate.name</td>
+      <td style="text-align: left">Create or update of source group triggered mapping rule re-evaluation preventing a new application group mapping due to a duplicate group name</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.created.from.rule.error.validation</td>
-      <td>Failed to create new application group mapping due to a validation error</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.error.validation</td>
+      <td style="text-align: left">Failed to create new application group mapping due to a validation error</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.created.from.rule.errors</td>
-      <td>Failed to create new application group mapping due to an error</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.created.from.rule.errors</td>
+      <td style="text-align: left">Failed to create new application group mapping due to an error</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.deactivated.source.group.renamed</td>
-      <td>Successfully deactivate target application group when source group was renamed</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.deactivated.source.group.renamed</td>
+      <td style="text-align: left">Successfully deactivate target application group when source group was renamed</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.deactivated.source.group.renamed.failed</td>
-      <td>Failed to deactivate target application group when source group was renamed</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.deactivated.source.group.renamed.failed</td>
+      <td style="text-align: left">Failed to deactivate target application group when source group was renamed</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.app.group.renamed</td>
-      <td>Successfully renamed target application group when source group was renamed</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.app.group.renamed</td>
+      <td style="text-align: left">Successfully renamed target application group when source group was renamed</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.app.group.renamed.failed</td>
-      <td>Failed to rename target application group when source group was renamed</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.app.group.renamed.failed</td>
+      <td style="text-align: left">Failed to rename target application group when source group was renamed</td>
     </tr>
     <tr>
-      <td>app.user_management.grouppush.mapping.and.groups.deleted.rule.deleted</td>
-      <td>An existing mapping and its target groups have been deleted because a mapping rule was deleted</td>
+      <td style="text-align: left">app.user_management.grouppush.mapping.and.groups.deleted.rule.deleted</td>
+      <td style="text-align: left">An existing mapping and its target groups have been deleted because a mapping rule was deleted</td>
     </tr>
   </tbody>
 </table>
@@ -931,34 +925,34 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.inbound_del_auth.failure.not_supported</td>
-      <td>Application doesn’t support delauth</td>
+      <td style="text-align: left">app.inbound_del_auth.failure.not_supported</td>
+      <td style="text-align: left">Application doesn’t support delauth</td>
     </tr>
     <tr>
-      <td>app.inbound_del_auth.failure.instance_not_found</td>
-      <td>Couldn’t find delauth app instance</td>
+      <td style="text-align: left">app.inbound_del_auth.failure.instance_not_found</td>
+      <td style="text-align: left">Couldn’t find delauth app instance</td>
     </tr>
     <tr>
-      <td>app.inbound_del_auth.failure.invalid_request.could_not_parse_credentials</td>
-      <td>Couldn’t parse credentials in delauth request</td>
+      <td style="text-align: left">app.inbound_del_auth.failure.invalid_request.could_not_parse_credentials</td>
+      <td style="text-align: left">Couldn’t parse credentials in delauth request</td>
     </tr>
     <tr>
-      <td>app.inbound_del_auth.failure.account_not_found</td>
-      <td>Inbound delauth account not found</td>
+      <td style="text-align: left">app.inbound_del_auth.failure.account_not_found</td>
+      <td style="text-align: left">Inbound delauth account not found</td>
     </tr>
     <tr>
-      <td>app.inbound_del_auth.failure.invalid_login_credentials</td>
-      <td>Inbound delauth, invalid login credentials</td>
+      <td style="text-align: left">app.inbound_del_auth.failure.invalid_login_credentials</td>
+      <td style="text-align: left">Inbound delauth, invalid login credentials</td>
     </tr>
     <tr>
-      <td>app.inbound_del_auth.login_success</td>
-      <td>Successful delauth login</td>
+      <td style="text-align: left">app.inbound_del_auth.login_success</td>
+      <td style="text-align: left">Successful delauth login</td>
     </tr>
   </tbody>
 </table>
@@ -968,30 +962,24 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.rich_client.instance_not_found</td>
-      <td> </td>
+      <td style="text-align: left">app.rich_client.instance_not_found</td>
     </tr>
     <tr>
-      <td>app.rich_client.account_not_found</td>
-      <td> </td>
+      <td style="text-align: left">app.rich_client.account_not_found</td>
     </tr>
     <tr>
-      <td>app.rich_client.multiple_accounts_found</td>
-      <td> </td>
+      <td style="text-align: left">app.rich_client.multiple_accounts_found</td>
     </tr>
     <tr>
-      <td>app.rich_client.login_failure</td>
-      <td> </td>
+      <td style="text-align: left">app.rich_client.login_failure</td>
     </tr>
     <tr>
-      <td>app.rich_client.login_success</td>
-      <td> </td>
+      <td style="text-align: left">app.rich_client.login_success</td>
     </tr>
   </tbody>
 </table>
@@ -1001,22 +989,18 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.admin.sso.no_response</td>
-      <td> </td>
+      <td style="text-align: left">app.admin.sso.no_response</td>
     </tr>
     <tr>
-      <td>app.admin.sso.bad_response</td>
-      <td> </td>
+      <td style="text-align: left">app.admin.sso.bad_response</td>
     </tr>
     <tr>
-      <td>app.admin.sso.orgapp.notfound</td>
-      <td> </td>
+      <td style="text-align: left">app.admin.sso.orgapp.notfound</td>
     </tr>
   </tbody>
 </table>
@@ -1026,122 +1010,122 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
+      <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.generic.provision.assign_user_to_app</td>
-      <td>Assign external user to internal Okta user</td>
+      <td style="text-align: left">app.generic.provision.assign_user_to_app</td>
+      <td style="text-align: left">Assign external user to internal Okta user</td>
     </tr>
     <tr>
-      <td>app.generic.provision.deactivate_user_from_app</td>
-      <td>Deactivate external user to internal Okta user</td>
+      <td style="text-align: left">app.generic.provision.deactivate_user_from_app</td>
+      <td style="text-align: left">Deactivate external user to internal Okta user</td>
     </tr>
     <tr>
-      <td>app.generic.config.app_activated</td>
-      <td>Application has been activated</td>
+      <td style="text-align: left">app.generic.config.app_activated</td>
+      <td style="text-align: left">Application has been activated</td>
     </tr>
     <tr>
-      <td>app.generic.config.app_deactivated</td>
-      <td>Application has been deactivated</td>
+      <td style="text-align: left">app.generic.config.app_deactivated</td>
+      <td style="text-align: left">Application has been deactivated</td>
     </tr>
     <tr>
-      <td>app.generic.import.provisioning_data</td>
-      <td>Imported data used for provisioning</td>
+      <td style="text-align: left">app.generic.import.provisioning_data</td>
+      <td style="text-align: left">Imported data used for provisioning</td>
     </tr>
     <tr>
-      <td>app.generic.import.import_user</td>
-      <td>Started user import</td>
+      <td style="text-align: left">app.generic.import.import_user</td>
+      <td style="text-align: left">Started user import</td>
     </tr>
     <tr>
-      <td>app.generic.config.app_updated</td>
-      <td>Application config has been updated</td>
+      <td style="text-align: left">app.generic.config.app_updated</td>
+      <td style="text-align: left">Application config has been updated</td>
     </tr>
     <tr>
-      <td>app.generic.import.new_user</td>
-      <td>Application has imported a new user</td>
+      <td style="text-align: left">app.generic.import.new_user</td>
+      <td style="text-align: left">Application has imported a new user</td>
     </tr>
     <tr>
-      <td>app.generic.import.user_update</td>
-      <td>Application has updated an exsiting user</td>
+      <td style="text-align: left">app.generic.import.user_update</td>
+      <td style="text-align: left">Application has updated an exsiting user</td>
     </tr>
     <tr>
-      <td>app.generic.config.app_username_update</td>
-      <td>User credentials for an application have been updated</td>
+      <td style="text-align: left">app.generic.config.app_username_update</td>
+      <td style="text-align: left">User credentials for an application have been updated</td>
     </tr>
     <tr>
-      <td>app.generic.config.app_password_update</td>
-      <td>User credentials for an application have been updated</td>
+      <td style="text-align: left">app.generic.config.app_password_update</td>
+      <td style="text-align: left">User credentials for an application have been updated</td>
     </tr>
     <tr>
-      <td>app.generic.import.user_delete</td>
-      <td>Application has deleted user</td>
+      <td style="text-align: left">app.generic.import.user_delete</td>
+      <td style="text-align: left">Application has deleted user</td>
     </tr>
     <tr>
-      <td>app.generic.import.started</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.started</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.complete</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.complete</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.user_match.complete</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.user_match.complete</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.add_custom_object</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.add_custom_object</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.update_custom_object</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.update_custom_object</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.delete_custom_object</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.delete_custom_object</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.add_user</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.add_user</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.update_user</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.update_user</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.delete_user</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.delete_user</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.add_group</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.add_group</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.update_group</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.update_group</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.details.delete_group</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.details.delete_group</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.summary.custom_object</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.summary.custom_object</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.summary.user</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.summary.user</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.summary.group</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.summary.group</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>app.generic.import.summary.group_membership</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.import.summary.group_membership</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
@@ -1151,22 +1135,18 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.generic.reversibility.credentials.recover</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.reversibility.credentials.recover</td>
     </tr>
     <tr>
-      <td>app.generic.reversibility.personal.app.recovery</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.reversibility.personal.app.recovery</td>
     </tr>
     <tr>
-      <td>app.generic.reversibility.individual.app.recovery</td>
-      <td> </td>
+      <td style="text-align: left">app.generic.reversibility.individual.app.recovery</td>
     </tr>
   </tbody>
 </table>
@@ -1176,34 +1156,27 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>app.app_instance.change</td>
-      <td> </td>
+      <td style="text-align: left">app.app_instance.change</td>
     </tr>
     <tr>
-      <td>app.app_instance.logo_update</td>
-      <td> </td>
+      <td style="text-align: left">app.app_instance.logo_update</td>
     </tr>
     <tr>
-      <td>app.app_instance.logo_reset</td>
-      <td> </td>
+      <td style="text-align: left">app.app_instance.logo_reset</td>
     </tr>
     <tr>
-      <td>app.app_instance.outbound_delauth_enabled</td>
-      <td> </td>
+      <td style="text-align: left">app.app_instance.outbound_delauth_enabled</td>
     </tr>
     <tr>
-      <td>app.app_instance.outbound_delauth_disabled</td>
-      <td> </td>
+      <td style="text-align: left">app.app_instance.outbound_delauth_disabled</td>
     </tr>
     <tr>
-      <td>app.app_instance.config-error</td>
-      <td> </td>
+      <td style="text-align: left">app.app_instance.config-error</td>
     </tr>
   </tbody>
 </table>
@@ -1213,34 +1186,27 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>core.user_auth.login_failed</td>
-      <td> </td>
+      <td style="text-align: left">core.user_auth.login_failed</td>
     </tr>
     <tr>
-      <td>core.user_auth.login_success</td>
-      <td> </td>
+      <td style="text-align: left">core.user_auth.login_success</td>
     </tr>
     <tr>
-      <td>core.user_auth.logout_success</td>
-      <td> </td>
+      <td style="text-align: left">core.user_auth.logout_success</td>
     </tr>
     <tr>
-      <td>core.user_auth.account_locked</td>
-      <td> </td>
+      <td style="text-align: left">core.user_auth.account_locked</td>
     </tr>
     <tr>
-      <td>core.user_auth.session_expired</td>
-      <td> </td>
+      <td style="text-align: left">core.user_auth.session_expired</td>
     </tr>
     <tr>
-      <td>core.user_auth.mfa_bypass_attempted</td>
-      <td> </td>
+      <td style="text-align: left">core.user_auth.mfa_bypass_attempted</td>
     </tr>
   </tbody>
 </table>
@@ -1250,22 +1216,18 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>core.user.sms.message_sent.factor</td>
-      <td> </td>
+      <td style="text-align: left">core.user.sms.message_sent.factor</td>
     </tr>
     <tr>
-      <td>core.user.sms.message_sent.verify</td>
-      <td> </td>
+      <td style="text-align: left">core.user.sms.message_sent.verify</td>
     </tr>
     <tr>
-      <td>core.user.sms.message_sent.forgotpw</td>
-      <td> </td>
+      <td style="text-align: left">core.user.sms.message_sent.forgotpw</td>
     </tr>
   </tbody>
 </table>
@@ -1275,18 +1237,15 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>core.user_auth.radius.login.succeeded</td>
-      <td> </td>
+      <td style="text-align: left">core.user_auth.radius.login.succeeded</td>
     </tr>
     <tr>
-      <td>core.user_auth.radius.login.failed</td>
-      <td> </td>
+      <td style="text-align: left">core.user_auth.radius.login.failed</td>
     </tr>
   </tbody>
 </table>
@@ -1296,38 +1255,30 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>core.user.config.password_update.success</td>
-      <td> </td>
+      <td style="text-align: left">core.user.config.password_update.success</td>
     </tr>
     <tr>
-      <td>core.user.config.password_update.failure</td>
-      <td> </td>
+      <td style="text-align: left">core.user.config.password_update.failure</td>
     </tr>
     <tr>
-      <td>core.user.config.user_activated</td>
-      <td> </td>
+      <td style="text-align: left">core.user.config.user_activated</td>
     </tr>
     <tr>
-      <td>core.user.config.user_deactivated”</td>
-      <td> </td>
+      <td style="text-align: left">core.user.config.user_deactivated”</td>
     </tr>
     <tr>
-      <td>core.user.config.user_status.password_reset</td>
-      <td> </td>
+      <td style="text-align: left">core.user.config.user_status.password_reset</td>
     </tr>
     <tr>
-      <td>core.user.config.user_creation.success</td>
-      <td> </td>
+      <td style="text-align: left">core.user.config.user_creation.success</td>
     </tr>
     <tr>
-      <td>core.user.config.user_creation.failure</td>
-      <td> </td>
+      <td style="text-align: left">core.user.config.user_creation.failure</td>
     </tr>
   </tbody>
 </table>
@@ -1337,224 +1288,159 @@
 <table>
   <thead>
     <tr>
-      <th>ObjectType</th>
-      <th>Description</th>
+      <th style="text-align: left">ObjectType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>core.user.impersonation.session.initiated</td>
-      <td> </td>
+      <td style="text-align: left">core.user.impersonation.session.initiated</td>
     </tr>
     <tr>
-      <td>core.user.impersonation.session.ended</td>
-      <td> </td>
+      <td style="text-align: left">core.user.impersonation.session.ended</td>
     </tr>
     <tr>
-      <td>core.user.impersonation.grant.enabled</td>
-      <td> </td>
+      <td style="text-align: left">core.user.impersonation.grant.enabled</td>
     </tr>
     <tr>
-      <td>core.user.impersonation.grant.extended</td>
-      <td> </td>
+      <td style="text-align: left">core.user.impersonation.grant.extended</td>
     </tr>
     <tr>
-      <td>core.user.impersonation.grant.revoked</td>
-      <td> </td>
+      <td style="text-align: left">core.user.impersonation.grant.revoked</td>
     </tr>
   </tbody>
 </table>
 
-<h5 id="user-administrator-roles">User Administrator Roles</h5>
+<h5 id="group-administrator-roles">Group Administrator Roles</h5>
 
 <table>
   <thead>
     <tr>
       <th>ObjectType</th>
-      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>core.user.admin_privilege.granted</td>
-      <td> </td>
     </tr>
     <tr>
       <td>core.user.admin_privilege.revoked</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h3 id="actor-object">Actor Object</h3>
 
-<p>Describes the user, app, client, or other entity (actor) who performed an action on a target</p>
+<p>Describes the user, app, client, or other entity (actor) who performed an action on a target:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>Unique key for actor</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for actor</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>displayName</td>
-      <td>Name of actor used for display purposes</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">Name of actor used for display purposes</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>objectType</td>
-      <td><a href="#user-objecttype">User</a> or <a href="#client-objecttype">Client</a></td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">      <a href="#user-objecttype">User</a> or       <a href="#client-objecttype">Client</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>The schema of an actor is dependent on the actor’s <code class="highlighter-rouge">objectType</code></p>
-</blockquote>
+<p>The schema of an actor is dependent on the actor’s <code class="highlighter-rouge">objectType</code>.</p>
 
 <h3 id="target-object">Target Object</h3>
 
-<p>The entity upon which an actor performs an action. Targets may be anything, even a login token.</p>
+<p>The entity upon which an actor performs an action. Targets may be anything, even a login token:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>Unique key for target</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for target</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>displayName</td>
-      <td>Name of target used for display purposes</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">Name of target used for display purposes</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>objectType</td>
-      <td><a href="#user-objecttype">User</a> or <a href="#appinstance-objecttype">AppInstance</a></td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">    <a href="#user-objecttype">User</a> or     <a href="#appinstance-objecttype">AppInstance</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>The schema of a target is dependent on the actor’s <code class="highlighter-rouge">objectType</code></p>
-</blockquote>
+<p>The schema of a target is dependent on the actor’s <code class="highlighter-rouge">objectType</code></p>
 
 <h3 id="actor-and-target-objecttypes">Actor and Target ObjectTypes</h3>
 
 <h4 id="user-objecttype">User ObjectType</h4>
 
-<p>A denormalized reference to a <a href="users.html#user-model">User</a>.</p>
+<p>A denormalized reference to a <a href="users.html#user-model">User</a>:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>Unique key for <a href="users.html#user-model">user</a></td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for     <a href="users.html#user-model">user</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>displayName</td>
-      <td><a href="users.html#profile-object">User’s</a> first and last name</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">    <a href="users.html#profile-object">User’s</a> first and last name</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>login</td>
-      <td>Unique login for <a href="users.html#user-model">user</a></td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">login</td>
+      <td style="text-align: left">Unique login for     <a href="users.html#user-model">user</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>objectType</td>
-      <td>Type of object</td>
-      <td><code class="highlighter-rouge">User</code></td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">Type of object</td>
+      <td style="text-align: left"><code class="highlighter-rouge">User</code></td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -1568,53 +1454,39 @@
 </span></code></pre>
 </div>
 
-<blockquote>
-  <p>The user can be retrieved by <code class="highlighter-rouge">id</code> with the <a href="users.html#get-user-with-id">User API</a>.</p>
-</blockquote>
+<p>The user can be retrieved by <code class="highlighter-rouge">id</code> with the <a href="users.html#get-user-with-id">User API</a>.</p>
 
 <h4 id="appinstance-objecttype">AppInstance ObjectType</h4>
 
-<p>Describes an application</p>
+<p>Describes an application:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>Unique key for <a href="apps.html#application-model">app</a></td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for    <a href="apps.html#application-model">app</a></td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>displayName</td>
-      <td><a href="apps.html#application-model">App’s</a> label</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">   <a href="apps.html#application-model">App’s</a> label</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>objectType</td>
-      <td>Type of object</td>
-      <td><code class="highlighter-rouge">AppInstance</code></td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">Type of object</td>
+      <td style="text-align: left"><code class="highlighter-rouge">AppInstance</code></td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -1627,62 +1499,45 @@
 </span></code></pre>
 </div>
 
-<blockquote>
-  <p>The app can be retrieved by <code class="highlighter-rouge">id</code> with the <a href="apps.html#get-application">Apps API</a>.</p>
-</blockquote>
+<p>The app can be retrieved by <code class="highlighter-rouge">id</code> with the <a href="apps.html#get-application">Apps API</a>.</p>
 
 <h4 id="client-objecttype">Client ObjectType</h4>
 
-<p>Describes a client such as a browser</p>
+<p>Describes a client such as a browser:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Default</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>User agent of client</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">User agent of client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>displayName</td>
-      <td>Name of client</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">Name of client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>ipAddress</td>
-      <td>IP Address of client</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">ipAddress</td>
+      <td style="text-align: left">IP Address of client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>objectType</td>
-      <td>Type of object</td>
-      <td><code class="highlighter-rouge">Client</code></td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">objectType</td>
+      <td style="text-align: left">Type of object</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Client</code></td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>

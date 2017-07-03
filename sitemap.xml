@@ -3,6 +3,51 @@
   
     
     <url>
+      <loc>https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</loc>
+      
+        <lastmod>2017-06-29T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/06/27/seven-tools-net-developers</loc>
+      
+        <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</loc>
+      
+        <lastmod>2017-06-21T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster</loc>
       
         <lastmod>2017-06-20T00:00:00+00:00</lastmod>

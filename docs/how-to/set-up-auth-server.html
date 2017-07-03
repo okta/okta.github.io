@@ -188,9 +188,9 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/how-to/set-up-auth-server.md">Edit Page</a>
       <h1 id="overview">Overview</h1>
 
-<blockquote>
-  <p>API Access Management is EA.</p>
-</blockquote>
+<p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
+
+<p>API Access Management is an <strong>Early Access</strong> (EA) feature; contact Okta support to enable it.</p>
 
 <p>API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints.
 An authorization server defines your security boundary, for example “staging” or “production.”
@@ -205,7 +205,7 @@ The authorization server also acts as an <a href="http://openid.net/connect/">Op
 which means you can request <a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID tokens</a>
 in addition to <a href="https://tools.ietf.org/html/rfc6749#section-1.4">access tokens</a> from the authorization server endpoints.</p>
 
-<p>How do you know if you need to use Okta’s authorization server instead of the authorization service that is
+<p>How do you know if you need to use Okta’s Authorization Server instead of the authorization service that is
 built in to your Okta app?</p>
 
 <ul>
@@ -221,27 +221,26 @@ try <a href="https://support.okta.com/help/articles/Knowledge_Article/Single-Sig
 
 <h2 id="set-up-an-authorization-server">Set Up an Authorization Server</h2>
 
-<p>Create and configure an authorization server to manage authorization between clients and Okta:</p>
+<p>Create and configure an Okta Authorization Server to manage authorization between clients and Okta:</p>
 
 <ul>
-  <li>Identify the scopes and claims in your client app and register it with Okta.</li>
-  <li>Create one or more authorization servers and define the scopes and claims to match those expected by your app.</li>
+  <li>Identify the scopes and claims needed by your client app and register it with Okta.</li>
+  <li>Create one or more Authorization Servers and (optionally) define the scopes and claims to match those expected by your app.</li>
 </ul>
 
-<p>It doesn’t matter which task you do first, but the client app must recognize the scope names and be expecting the
-claims as defined in the authorization server.</p>
+<p>It doesn’t matter which of these two you do first, but the client app must recognize the scope names and be expecting the claims as defined in the Authorization Server.</p>
 
-<p>This document provides step-by-step instructions for creating and configuring the authorization server:</p>
+<p>This document provides step-by-step instructions for creating and configuring the Authorization Server:</p>
 
 <ol>
-  <li><a href="#create-the-authorization-server">Create the Authorization Server</a>.</li>
-  <li><a href="#create-scopes">Create scopes</a>.</li>
-  <li><a href="#create-claims">Create claims</a>.</li>
-  <li><a href="#create-access-policies">Create access policies and rules</a>.</li>
-  <li><a href="#test-your-authorization-server-configuration">Test the ID Tokens or Access Tokens</a>.</li>
+  <li><a href="#create-an-authorization-server">Create an Authorization Server</a></li>
+  <li><a href="#create-access-policies">Create access policies and rules</a></li>
+  <li>(Optional) <a href="#create-scopes-optional">Create scopes</a></li>
+  <li>(Optional) <a href="#create-claims-optional">Create claims</a></li>
+  <li><a href="#test-your-authorization-server-configuration">Test the Authorization Server</a></li>
 </ol>
 
-<h3 id="create-the-authorization-server">Create the Authorization Server</h3>
+<h3 id="create-an-authorization-server">Create an Authorization Server</h3>
 
 <ol>
   <li>
@@ -253,17 +252,82 @@ claims as defined in the authorization server.</p>
 
     <ul>
       <li><strong>Name</strong></li>
-      <li><strong>Resource URI</strong>—URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as <code class="highlighter-rouge">http://api.example.com/pets</code>.
+      <li><strong>Audience:</strong> URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as <code class="highlighter-rouge">http://api.example.com/pets</code>.
 This value is used as the default <a href="https://tools.ietf.org/html/rfc7519#section-4.1.3">audience</a> for Access Tokens.</li>
       <li><strong>Description</strong></li>
     </ul>
   </li>
 </ol>
 
-<p>When complete, your authorization server <strong>Settings</strong> tab displays the information that you provided and allows you to edit it.
+<p>When complete, your Authorization Server’s <strong>Settings</strong> tab displays the information that you provided and allows you to edit it.
 <img src="/assets/auth_server2-839d3486c777b77ca22f2a5d308e5f799deb631d920ca0925d69d3d8ba7dba53.png" alt="Add Authorization Server" width="640px" /></p>
 
-<h3 id="create-scopes">Create Scopes</h3>
+<h3 id="create-access-policies">Create Access Policies</h3>
+
+<p>Create access policies and rules for a client or set of clients.</p>
+
+<ol>
+  <li>In the Okta user interface, navigate to <strong>Security &gt; API</strong>.</li>
+  <li>Choose the name of an Authorization Server.</li>
+  <li>Choose <strong>Access Policies &gt; Add New Access Policy</strong>
+ <img src="/assets/access_policy1-7bad7daa819a2904caacb41ef8f0e69fe54a83943331bbe4e6dad9175b322a4c.png" alt="Add Access Policy" width="640px" /></li>
+  <li>Provide the requested information:
+    <ul>
+      <li><strong>Name</strong></li>
+      <li><strong>Description</strong></li>
+      <li>Assign to <strong>All clients</strong>, or select <strong>The following clients:</strong> and enter the name of the clients covered by this access policy.
+ <img src="/assets/access_policy2-f92d5d54db0a5020bf674529ead8a4328c50a14498897ff235c5e09e21a07245.png" alt="Access Policy Configuration" width="640px" /></li>
+    </ul>
+  </li>
+</ol>
+
+<p>While in the Access Policy list, you can:</p>
+<ul>
+  <li>Set access policies to be active or deactivate them for testing or debugging purposes.</li>
+  <li>Reorder any policies you create using drag-n-drop.
+  <img src="/assets/access_policy3-5d8ee78d2b36b0217a4817df198f2f5fa4a047cf41bb1a561a44000f00fbff53.png" alt="Access Policy List" width="640px" /></li>
+</ul>
+
+<p>Polices are evaluated in priority order, as are the rules in a policy.
+The first policy and rule that matches the client request is applied and no further rule or policy processing occurs. If a client matches no policies, the authentication attempt will fail and an error will be returned.</p>
+
+<h3 id="create-rules-for-each-access-policy">Create Rules for Each Access Policy</h3>
+
+<p>Rules control the mapping of client, user, and custom scope. For example, you can specify a rule for an access policy so that if the user is assigned to a client, then custom scope <code class="highlighter-rouge">scope1</code> is valid.</p>
+
+<ol>
+  <li>In the Okta user interface, navigate to <strong>Security &gt; API</strong>.</li>
+  <li>Choose the name of an authorization server, and select <strong>Access Policies</strong>.</li>
+  <li>Choose the name of an access policy, and select <strong>Add Rule</strong>
+ <img src="/assets/rule1-67f591048027abffc3b2a50646b2871393c9f0e99981bfc9e36f31277f563492.png" alt="Add Rule" width="640px" /></li>
+  <li>Enter the requested information:
+    <ul>
+      <li><strong>Rule Name</strong></li>
+      <li><strong>IF Grant type is:</strong> Select one or more OAuth 2.0 grant types.</li>
+      <li><strong>AND User is:</strong> Select whether there’s no user (client credentials flow), or a user assigned to a client that’s assigned to this rule’s policy, or a user assigned to one or more groups that you specify or a list of users that you specify.</li>
+      <li><strong>AND Requested these scopes:</strong> Choose the scopes (any scopes, or a list that you specify) that can be requested by the user as part of the rule conditions.</li>
+      <li><strong>THEN Access token lifetime is:</strong> Choose the length of time before an access token expires.</li>
+      <li><strong>THEN Refresh token lifetime is:</strong> Choose the length of time before a refresh token expires.</li>
+    </ul>
+  </li>
+  <li>Choose <strong>Create Rule</strong> to save the rule.
+ <img src="/assets/rule2-f49350a1eac09284c9a26e376596991e0d5cb88eac59a6f84accdd7234f3aa13.png" alt="Rules List" width="640px" /></li>
+</ol>
+
+<p>While in the Rules list for an access policy, you can:</p>
+
+<ul>
+  <li>Set a rule to be inactive for testing or debugging.</li>
+  <li>Reorder rules. Rules are evaluated in priority order, so the first rule in the first policy that matches the client request is applied and no further processing occurs.</li>
+</ul>
+
+<blockquote>
+  <p>Note: Service applications (client credentials flow) have no user. If you use this flow, make sure you have at least one rule that specifies the condition <strong>No user</strong>.</p>
+</blockquote>
+
+<p>At this point you can keep reading to find out how to create custom scopes and claims, or proceed immediately to <a href="#test-your-authorization-server-configuration">Testing your Authorization Server</a>.</p>
+
+<h3 id="create-scopes-optional">Create Scopes (Optional)</h3>
 
 <p>Scopes represent high-level operations that can be performed on your API endpoints.
 These are coded into applications, which then ask for them from the authorization server,
@@ -274,7 +338,7 @@ and the access policy decides which ones to grant and which ones to deny.</p>
 <ol>
   <li>In the Okta user interface, navigate to <strong>Security &gt; API</strong>.</li>
   <li>
-    <p>Choose the name of the authorization server to display it, and then select <strong>Scopes</strong>.
+    <p>Choose the name of the Authorization Server to display, and then select <strong>Scopes</strong>.
 <img src="/assets/scope1-6dc3ae8c21e3b8b770dd23f9393ab24e729163d7f965d89560b9013832d5f420.png" alt="Add Scopes" width="800px" /></p>
   </li>
   <li>Choose <strong>Scopes &gt; Add Scope</strong>, and provide a name and description, then choose <strong>Create</strong> to save the scope.
@@ -283,7 +347,7 @@ and the access policy decides which ones to grant and which ones to deny.</p>
 
 <p>These scopes are referenced by the <strong>Claims</strong> dialog.</p>
 
-<h3 id="create-claims">Create Claims</h3>
+<h3 id="create-claims-optional">Create Claims (Optional)</h3>
 
 <p>Tokens contain claims that are statements about the subject or another subject, for example name, role, or email address.</p>
 
@@ -291,7 +355,7 @@ and the access policy decides which ones to grant and which ones to deny.</p>
 
 <ol>
   <li>In the Okta user interface, navigate to <strong>Security &gt; API</strong>.</li>
-  <li>Choose the name of the authorization server to display it, and choose <strong>Claims</strong>.
+  <li>Choose the name of the Authorization Server to display, and choose <strong>Claims</strong>.
 <img src="/assets/claims1-a1bd8fc8c14a13018cfaddef2e7f0d87820edc3785f1605b005addf648f32c9d.png" alt="Choose Claims" width="800px" />
  Okta provides a default subject claim. You can edit the mapping, or create your own claims.</li>
   <li>
@@ -325,78 +389,113 @@ Be sure to check that your expression returns the results expected–the express
   </li>
 </ul>
 
-<h3 id="create-access-policies">Create Access Policies</h3>
+<h2 id="test-your-authorization-server-configuration">Test Your Authorization Server Configuration</h2>
 
-<p>Create access policies and rules for a client or set of clients.</p>
+<p>Once you have followed the above instructions to set-up an Authorization Server, you can test it by sending any one of the API calls that returns OAuth 2.0 and/or OpenID Connect tokens. A full description of Okta’s relevant APIs can be found here: <a href="/docs/api/resources/oauth2.html#authorization-operations">OAuth 2.0 Authorization Operations</a>.</p>
 
-<ol>
-  <li>In the Okta user interface, navigate to <strong>Security &gt; API</strong>.</li>
-  <li>Choose the name of an authorization server.</li>
-  <li>Choose <strong>Access Policies &gt; Add New Access Policy</strong>
- <img src="/assets/access_policy1-7bad7daa819a2904caacb41ef8f0e69fe54a83943331bbe4e6dad9175b322a4c.png" alt="Add Access Policy" width="640px" /></li>
-  <li>Provide the requested information:
-    <ul>
-      <li><strong>Name</strong></li>
-      <li><strong>Description</strong></li>
-      <li>Assign to <strong>All clients</strong>, or select <strong>The following clients:</strong> and enter the name of the clients covered by this access policy.
- <img src="/assets/access_policy2-f92d5d54db0a5020bf674529ead8a4328c50a14498897ff235c5e09e21a07245.png" alt="Access Policy Configuration" width="640px" /></li>
-    </ul>
-  </li>
-</ol>
-
-<p>While in the Access Policy list, you can:</p>
-<ul>
-  <li>Set access policies to be active or deactivate them for testing or debugging purposes.</li>
-  <li>Reorder any policies you create using drag-n-drop.
-  <img src="/assets/access_policy3-5d8ee78d2b36b0217a4817df198f2f5fa4a047cf41bb1a561a44000f00fbff53.png" alt="Access Policy List" width="640px" /></li>
-</ul>
-
-<p>Polices are evaluated in priority order, as are the rules in a policy.
-The first policy and rule that matches the client request is applied and no further rule or policy processing occurs.</p>
-
-<h3 id="create-rules-for-each-access-policy">Create Rules for Each Access Policy</h3>
-
-<p>Rules control the mapping of client, user, and custom scope. For example, you can specify
-a rule for an access policy so that if the user is assigned to a client, then custom scope <code class="highlighter-rouge">Scope1</code>
-is valid.</p>
-
-<ol>
-  <li>In the Okta user interface, navigate to <strong>Security &gt; API</strong>.</li>
-  <li>Choose the name of an authorization server, and select <strong>Access Policies</strong>.</li>
-  <li>Choose the name of an access policy, and select <strong>Add Rule</strong>
- <img src="/assets/rule1-67f591048027abffc3b2a50646b2871393c9f0e99981bfc9e36f31277f563492.png" alt="Add Rule" width="640px" /></li>
-  <li>Enter the requested information:
-    <ul>
-      <li><strong>Rule Name</strong></li>
-      <li><strong>IF User is</strong>—Select whether there’s no user (client credentials flow), or a user assigned to a client that’s assigned to this rule’s policy,
-or a user assigned to one or more groups that you specify or a list of users that you specify.</li>
-      <li><strong>THEN Grant these scopes</strong>—Choose the scopes (all scopes, or a list that you specify) that are granted if the user meets any of the conditions.</li>
-      <li><strong>AND Access token lifetime is</strong>—Choose the length of time before an access token expires.</li>
-      <li><strong>AND Refresh token lifetime is</strong>—Choose the length of time before a refresh token expires.</li>
-    </ul>
-  </li>
-  <li>Choose <strong>Create Rule</strong> to save the rule.
- <img src="/assets/rule2-f49350a1eac09284c9a26e376596991e0d5cb88eac59a6f84accdd7234f3aa13.png" alt="Rules List" width="640px" /></li>
-</ol>
-
-<p>While in the Rules list for an access policy, you can:</p>
-
-<ul>
-  <li>Set a rule to be inactive for testing or debugging.</li>
-  <li>Reorder rules, except for the default rule in the default policy. Rules are evaluated in priority order,
-so the first rule in the first policy that matches the client request is applied and no further processing occurs.</li>
-</ul>
+<p>We have included here a few things that you can try to ensure that your Authorization Server is functioning as expected.</p>
 
 <blockquote>
-  <p>Note: Service applications (client credentials flow) have no user. If you use this flow, make sure you have at least one rule
-that specifies the condition <strong>No user</strong>.</p>
+  <p>Note: This is not meant to be an exhaustive testing reference, but only to show some examples.</p>
 </blockquote>
 
-<h3 id="test-your-authorization-server-configuration">Test Your Authorization Server Configuration</h3>
+<h3 id="openid-connect-configuration">OpenID Connect Configuration</h3>
 
-<p>For each combination of authorization server and scopes and claims, issue an API call and check that the contents
-of the ID Token or Access Token are as expected.</p>
+<p>To verify that your server was created and has the expected configuration values, you can send an API request to the Server’s OpenID Connect Metadata URI: <code class="highlighter-rouge">/oauth2/:authorizationServerId/.well-known/openid-configuration</code> using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.</p>
 
+<p>For more information on this endpoint, see here: <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-openid-connect-metadata">Retrieve Authorization Server OpenID Connect Metadata</a>.</p>
+
+<h3 id="custom-scopes-and-claims">Custom Scopes and Claims</h3>
+
+<p>You can retrieve a list of all scopes for your Authorization Server, including custom ones, using this endpoint:</p>
+
+<p><code class="highlighter-rouge">/api/v1/authorizationServers/:authorizationServerId/scopes</code></p>
+
+<p>For more information on this endpoint, see here: <a href="/docs/api/resources/oauth2.html#get-all-scopes">Get all scopes</a>.</p>
+
+<p>If you created any custom claims, the easiest way to confirm that they have been successfully added is to use this endpoint:</p>
+
+<p><code class="highlighter-rouge">/api/v1/authorizationServers/:authorizationServerId/claims</code></p>
+
+<p>For more information on this endpoint, see here: <a href="/docs/api/resources/oauth2.html#get-all-claims">Get all claims</a>.</p>
+
+<h3 id="testing-an-openid-connect-flow">Testing an OpenID Connect Flow</h3>
+
+<p>To test your Authorization Server more thoroughly, you can try a full authentication flow which returns an ID Token. To do this, you will need a client Application in Okta with at least one User assigned to it.</p>
+
+<p>For more information you can read about:</p>
+<ul>
+  <li><a href="https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm">The OpenID Connect Application Wizard</a></li>
+  <li><a href="https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning">How to assign a User to an Application</a></li>
+</ul>
+
+<p>You will need the following values from your Application:</p>
+
+<ul>
+  <li>Client ID</li>
+  <li>A valid Redirect URI</li>
+</ul>
+
+<p>Once you have an OpenID Connect Application set-up, and a User assigned to it you can try the authentication flow.</p>
+
+<p>First, you will need your Authorization Server’s Authorization Endpoint, which you can retrieve using the Server’s Metadata URI: <code class="highlighter-rouge">/oauth2/:authorizationServerId/.well-known/openid-configuration</code>. It will look like this:</p>
+
+<p><code class="highlighter-rouge">https://example.okta.com/oauth2/:authorizationServerId/v1/authorize</code></p>
+
+<p>To this you will need to add the following URL query parameters:</p>
+
+<ul>
+  <li>Your OpenID Connect Application’s <code class="highlighter-rouge">client_id</code> and <code class="highlighter-rouge">redirect_uri</code></li>
+  <li>A <code class="highlighter-rouge">scope</code>, which for the purposes of this test will be <code class="highlighter-rouge">openid</code> and <code class="highlighter-rouge">profile</code></li>
+  <li>A <code class="highlighter-rouge">response_mode</code> which you can set to <code class="highlighter-rouge">fragment</code></li>
+  <li>(Optionally) <code class="highlighter-rouge">state</code> and <code class="highlighter-rouge">nonce</code> values</li>
+</ul>
+
+<p>All of the values are fully documented here: <a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">Obtain an Authorization Grant from a User</a>.</p>
+
+<p>The resulting URL would look like this:</p>
+
+<p><code class="highlighter-rouge">https://example.okta.com/oauth2/:authorizationServerId/v1/authorize?client_id=examplefa39J4jXdcCwWA&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid%20profile&amp;redirect_uri=https%3A%2F%2FyourRedirectUriHere.com&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+
+<p>If you paste this into your browser you are redirected to the sign-in page for your Okta org, with a URL that looks like this:</p>
+
+<p><code class="highlighter-rouge">https://example.okta.com/login/login.htm?fromURI=%2Foauth2%2Fv1%2Fauthorize%2Fredirect%3Fokta_key%aKeyValueWillBeHere</code></p>
+
+<p>Here you enter in the credentials for a user who is mapped to your Open ID Connect Application and you will be directed to the <code class="highlighter-rouge">redirect_uri</code> that you specified along with an ID Token, and any state that you included as well:</p>
+
+<p><code class="highlighter-rouge">https://yourRedirectUriHere.com/#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImluZUdjZVQ4SzB1SnZyWGVUX082WnZLQlB2RFowO[...]z7UvPoMEIjuBTH-zNkTS5T8mGbY8y7532VeWKA&amp;state=WM6D</code></p>
+
+<p>To check the returned ID Token you can copy the value and paste it into your JWT decoder of choice (for example <a href="https://jsonwebtoken.io">https://jsonwebtoken.io</a>). There you can check the payload to confirm that it contains all of the claims that you are expecting, including custom ones. If you specified a <code class="highlighter-rouge">nonce</code> you will also find it there:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uawpa4r4Zybz9On0h7"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jakub Vulcan"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en-US"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/:authorizationServerId"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fa39J40exampleXdcCwWA"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498328175</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498331912</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"jti"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID.fL39TTtvfBQoyHVkrbaqy9hWooqGOOgWau1W_y-KNyY"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"amr"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"pwd"</span><span class="w">
+ </span><span class="p">],</span><span class="w">
+ </span><span class="nt">"idp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"examplefz3q4Yd3Zk70h7"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YsG76jo"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"preferred_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@mailinator.com"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"given_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"family_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smith"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"zoneinfo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498155598</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"auth_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498328174</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"preferred_honorific"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Commodore"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>In this example we see the <code class="highlighter-rouge">nonce</code> with value <code class="highlighter-rouge">YsG76jo</code> and the custom claim <code class="highlighter-rouge">preferred_honorific</code> with value <code class="highlighter-rouge">Commodore</code>.</p>
+
+<p>At this point you have set-up your Authorization Server and confirmed that it is working!</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

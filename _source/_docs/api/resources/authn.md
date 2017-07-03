@@ -39,7 +39,7 @@ Trusted applications are backend applications that act as authentication broker 
 2. For more advanced use cases, learn [the Okta API basics](/docs/api/getting_started/api_test_client.html).
 3. Explore the Authentication API:
 
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/07df454531c56cb5fe71)
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f9684487e584101f25a3)
 
 ## Authentication Operations
 
@@ -3220,6 +3220,8 @@ Verifies an enrolled factor for an authentication transaction with the `MFA_REQU
 - [Verify U2F Factor](#verify-u2f-factor)
 - [Verify Call Factor](#verify-call-factor)
 
+> If the sign-on (or app sign-on) [policy](#remember-device-policy-object) allows remembering the device, then the end user should be prompted to choose whether the current device should be remembered. This helps reduce the number of times the user is prompted for MFA on the current device. The user's choice should be passed to Okta using the request parameter `rememberDevice` to the verify endpoint. The default value of `rememberDevice` parameter is `false`.
+
 #### Verify Security Question Factor
 {:.api .api-operation}
 
@@ -3230,11 +3232,12 @@ Verifies an answer to a `question` factor.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required |
------------- | --------------------------------------------------- | ---------- | -------- | -------- |
-fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
-stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
-answer       | answer to security question                         | Body       | String   | TRUE     |
+Parameter      | Description                                         | Param Type | DataType | Required |
+-------------- | --------------------------------------------------- | ---------- | -------- | -------- |
+fid            | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+stateToken     | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+answer         | answer to security question                         | Body       | String   | TRUE     |
+rememberDevice | user's decision to remember device                  | URL        | Boolean  | FALSE    |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3303,11 +3306,12 @@ curl -v -X POST \
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required |
------------- | --------------------------------------------------- | ---------- | -------- | -------- |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
-passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
+Parameter      | Description                                         | Param Type | DataType | Required |
+-------------- | --------------------------------------------------- | ---------- | -------- | -------- |
+fid            | `id` of factor                                      | URL        | String   | TRUE     |
+stateToken     | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+passCode       | OTP sent to device                                  | Body       | String   | FALSE    |
+rememberDevice | user's decision to remember device                  | URL        | Boolean  | FALSE    |
 
 > If you omit `passCode` in the request a new OTP will be sent to the device, otherwise the request will attempt to verify the `passCode`
 
@@ -3473,11 +3477,12 @@ Verifies an OTP for a `token:software:totp` factor.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required |
------------- | --------------------------------------------------- | ---------- | -------- | -------- |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
-passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
+Parameter      | Description                                         | Param Type | DataType | Required |
+-------------- | --------------------------------------------------- | ---------- | -------- | -------- |
+fid            | `id` of factor                                      | URL        | String   | TRUE     |
+stateToken     | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+passCode       | OTP sent to device                                  | Body       | String   | FALSE    |
+rememberDevice | user's decision to remember device                  | URL        | Boolean  | FALSE    |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3548,10 +3553,11 @@ Sends an asynchronous push notification (challenge) to the device for the user t
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required |
------------- | --------------------------------------------------- | ---------- | -------- | -------- |
-fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
-stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+Parameter      | Description                                         | Param Type | DataType | Required |
+-------------- | --------------------------------------------------- | ---------- | -------- | -------- |
+fid            | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+stateToken     | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+rememberDevice | user's decision to remember device                  | URL        | Boolean  | FALSE    |
 
 
 ##### Request Example
@@ -4001,12 +4007,13 @@ curl -v -X POST \
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required |
------------- | --------------------------------------------------- | ---------- | -------- | -------- |
-fid          | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
-stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
-clientData   | base64 encoded client data from the U2F token       | Body       | String   | TRUE     |
-signatureData| base64 encoded signature data from the U2F token    | Body       | String   | TRUE     |
+Parameter      | Description                                         | Param Type | DataType | Required |
+-------------- | --------------------------------------------------- | ---------- | -------- | -------- |
+fid            | `id` of factor returned from enrollment             | URL        | String   | TRUE     |
+stateToken     | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+clientData     | base64 encoded client data from the U2F token       | Body       | String   | TRUE     |
+signatureData  | base64 encoded signature data from the U2F token    | Body       | String   | TRUE     |
+rememberDevice | user's decision to remember device                  | URL        | Boolean  | FALSE    |
 
 ##### Start verification to get challenge nonce
 
@@ -4176,11 +4183,12 @@ curl -v -X POST \
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter    | Description                                         | Param Type | DataType | Required |
------------- | --------------------------------------------------- | ---------- | -------- | -------- |
-fid          | `id` of factor                                      | URL        | String   | TRUE     |
-stateToken   | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
-passCode     | OTP sent to device                                  | Body       | String   | FALSE    |
+Parameter      | Description                                         | Param Type | DataType | Required |
+-------------- | --------------------------------------------------- | ---------- | -------- | -------- |
+fid            | `id` of factor                                      | URL        | String   | TRUE     |
+stateToken     | [state token](#state-token) for current transaction | Body       | String   | TRUE     |
+passCode       | OTP sent to device                                  | Body       | String   | FALSE    |
+rememberDevice | user's decision to remember device                  | URL        | Boolean  | FALSE    |
 
 > If you omit `passCode` in the request a new OTP will be sent to the device, otherwise the request will attempt to verify the `passCode`
 
@@ -6062,6 +6070,45 @@ Subset of [profile properties](users.html#profile-object) for a user
 | locale    | user's default location for purposes of localizing items such as currency, date time format, numerical representations, etc. | String   | TRUE     | FALSE  | TRUE     | [RFC 5646](https://tools.ietf.org/html/rfc5646)                       |
 | timeZone  | user's time zone                                                                                                             | String   | TRUE     | FALSE  | TRUE     | [IANA Time Zone database format](https://tools.ietf.org/html/rfc6557) |
 |-----------+------------------------------------------------------------------------------------------------------------------------------+----------+----------+--------+----------+-----------------------------------------------------------------------|
+
+#### Remember Device Policy Object
+
+A subset of policy settings of the Sign-on or App Sign-on policy published during `MFA_REQUIRED`, `MFA_CHALLENGE` states
+
+|---------------------------------+----------------------------------------------------------------------------------+-----------+----------+--------+----------|
+| Property                        | Description                                                                      | DataType  | Nullable | Unique | Readonly |
+| ------------------------------- | -------------------------------------------------------------------------------- | --------- | -------- | ------ | -------- |
+| allowRememberDevice             | indicates whether remember device is allowed based on the policy                 | Boolean   | FALSE    | FALSE  | TRUE     |
+| rememberDeviceByDefault         | indicates whether user previously opted to remember the current device           | Boolean   | FALSE    | FALSE  | TRUE     |
+| rememberDeviceLifetimeInMinutes | indicates how long the current verification would be valid (based on the policy) | Number    | FALSE    | FALSE  | TRUE     |
+|---------------------------------+----------------------------------------------------------------------------------+-----------+----------+--------+----------|
+
+##### When sign-on policy is device based
+~~~json
+{  
+   "allowRememberDevice":true,
+   "rememberDeviceByDefault":false,
+   "rememberDeviceLifetimeInMinutes":0
+}
+~~~
+
+##### When sign-on policy is time based
+~~~json
+{  
+   "allowRememberDevice":true,
+   "rememberDeviceByDefault":false, //true if user has chosen to remember the current device
+   "rememberDeviceLifetimeInMinutes":5 //this value depends on the factor lifetime value configured in the sign-on policy rule
+}
+~~~
+
+##### When policy is not based on time or device
+~~~json
+{  
+   "allowRememberDevice":false,
+   "rememberDeviceByDefault":false,
+   "rememberDeviceLifetimeInMinutes":0
+}
+~~~
 
 #### Target Object
 {% api_lifecycle ea %}

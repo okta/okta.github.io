@@ -50,7 +50,7 @@ For example:
 * Add an app manager contact email address.
 * Use the profile to define a whitelist of groups that you can then reference and pass as claims using the [Okta Expression Language function `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
 
-For more information, see the [Apps API](/docs/api/resources/apps.html#set-profile-property-for-openid-connect-apps).
+For more information, see the [Apps API](/docs/api/resources/apps.html#profile-object).
 
 Note that the status code for service claims errors has changed from 500 to 400 as part of this feature. <!--OKTA-123128-->
 
