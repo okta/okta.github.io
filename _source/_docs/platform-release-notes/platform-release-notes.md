@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.25
+excerpt: Summary of changes to the Okta Platform since Release 2017.26
 ---
 
-## Release 2017.26
+## Release 2017.27
 
 ### Advance Notice: Data Retention Changes
 
@@ -27,29 +27,26 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
  <!-- OKTA-125424 -->
 
-### Platform Enhancement: New Authentication Method for OpenID Connect and API Access Management
-For OpenID Connect and API Access Management, Okta supports the `client_secret_jwt` method for token endpoint authentication (`token_endpoint_auth_method`).
-This method is specified in the [OpenID Connect specification](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication)
-and allows you to use JWT and HMAC to authenticate a client for [OAuth 2.0](https://developer.okta.com/docs/api/resources/oauth2.html#token-authentication-methods) or [OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html#token-authentication-methods) requests.
-<!-- (OKTA-101074) -->
+### Platform Enhancement: Mysti will provide title
+
+Mysti will provide description of enhancement based on OKTA-117521.
+<!-- (OKTA-117521) -->
 
 ### Platform Bugs Fixed
 
-* When suspicious activity was logged for OAuth 2.0 clients the invalid secret was not masked. (OKTA-129694)
+* Description of corrected behavior  (OKTA-117352)
 
-* When validating the names of scopes for social identity providers, Okta didn't enforce the restrictions
-specified in the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#section-3.3). (OKTA-117352)
+* Description of corrected behavior  (OKTA-129094)
 
-* When the same user was created multiple times simultaneously and added to a group, the HTTP error
-response code was 500 rather than 400. (OKTA-126223)
+* Description of corrected behavior  (OKTA-130764)
 
-* `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
+* Description of corrected behavior  (OKTA-131294)
 
-### Does Your Org Have This Change Yet?
+* Description of corrected behavior  (OKTA-131608)
 
-To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
+* Description of corrected behavior  (OKTA-131647)
 
-{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
+* Description of corrected behavior  (OKTA-131885)
 
 ### Looking for Something Else?
 
