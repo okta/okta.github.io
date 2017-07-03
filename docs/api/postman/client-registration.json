@@ -1,83 +1,37 @@
 {
-	"id": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
+	"id": "247ee64f-bf86-7004-699c-9619c4431dcc",
 	"name": "Client Registration (Okta API)",
 	"description": "",
 	"order": [
-		"0868812a-4301-86f3-1831-72063a7bc6e2",
-		"90af69b0-4241-81e1-d9b9-f60a8260db61",
-		"31b658c0-9b89-219d-d359-5dfdb10c6635",
-		"51a4297b-142a-4d5f-76a1-7d231e08a6ea",
-		"79ad10e9-da9a-1ea9-3a66-d0e6cba66f77",
-		"04027cec-58b5-e547-445a-2a94efa20fef",
-		"997280f4-98ee-30d7-3b65-f4dc0a36befb"
+		"43825a0a-7d08-1912-cf88-24f08ddde8bc",
+		"f1f69ce0-9314-0ac2-048d-9e5ead99d0fd",
+		"03e5fb07-249a-f3cf-b2c2-68daa90827ea",
+		"bd75b235-27bc-7c95-7cc0-c7ea9c521347",
+		"2eca73ba-1e25-0b3e-c337-da856edaae26",
+		"e44bb904-06be-103b-983b-7a858ce4ff94",
+		"ad4b0210-bad9-7040-d0d8-3f5d37c47d67"
 	],
 	"folders": [
 		{
-			"id": "35ead9e3-5d9d-d93e-f7bc-1628a6bd1684",
+			"id": "d72a2486-60a8-2af8-9c51-064044be1e83",
 			"name": "Apps API",
 			"description": "",
 			"order": [
-				"937a05f2-625a-db21-6e4c-b33b87f4cbca",
-				"f08d9a8b-e26a-44cc-5cb1-041d4bc472c2"
+				"4ac8b861-0c78-49be-7b53-02ab2f10f80d",
+				"25c13535-f8a5-be79-5337-c78d8de73e5f",
+				"8d59cc68-88c1-c3c2-bd4d-d35832e5dfb4"
 			],
-			"owner": "20756"
+			"owner": 0,
+			"collectionId": "fe22ea63-8402-f933-8348-8e6d2a2ba3a2"
 		}
 	],
 	"timestamp": 1496191784412,
-	"owner": "20756",
+	"owner": 0,
 	"public": false,
 	"hasRequests": true,
 	"requests": [
 		{
-			"id": "04027cec-58b5-e547-445a-2a94efa20fef",
-			"name": "Delete Client",
-			"dataMode": "raw",
-			"data": [],
-			"rawModeData": "",
-			"descriptionFormat": null,
-			"description": "",
-			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
-			"method": "DELETE",
-			"pathVariables": {},
-			"url": "{{url}}/oauth2/v1/clients/{{clientId}}",
-			"preRequestScript": "",
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": "[]",
-			"responses": [],
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6"
-		},
-		{
-			"id": "0868812a-4301-86f3-1831-72063a7bc6e2",
-			"headers": "Accept: application/json\n",
-			"headerData": [
-				{
-					"key": "Accept",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{url}}/.well-known/logo",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1496856750071,
-			"name": "Get Logo",
-			"description": "",
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "31b658c0-9b89-219d-d359-5dfdb10c6635",
+			"id": "03e5fb07-249a-f3cf-b2c2-68daa90827ea",
 			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
 			"url": "{{url}}/oauth2/v1/clients",
 			"preRequestScript": "",
@@ -91,113 +45,12 @@
 			"time": 1496191982173,
 			"name": "Create Client",
 			"description": "",
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
 			"responses": [],
 			"rawModeData": "  {\n    \"client_name\": \"Web client\",\n    \"redirect_uris\": [\n      \"https://httpbin.org/get\"\n    ],\n    \"response_types\": [\n      \"code\",\n      \"token\",\n      \"id_token\"\n    ],\n    \"grant_types\": [\n      \"refresh_token\",\n      \"authorization_code\",\n      \"implicit\"\n    ],\n    \"token_endpoint_auth_method\": \"client_secret_basic\",\n    \"application_type\": \"web\"\n  }"
 		},
 		{
-			"id": "51a4297b-142a-4d5f-76a1-7d231e08a6ea",
-			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
-			"headerData": [
-				{
-					"key": "Accept",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Authorization",
-					"value": "SSWS {{apikey}}",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{url}}/oauth2/v1/clients/{{clientId}}",
-			"queryParams": [],
-			"preRequestScript": "",
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1496856843255,
-			"name": "Get Client",
-			"description": "",
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "79ad10e9-da9a-1ea9-3a66-d0e6cba66f77",
-			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
-			"url": "{{url}}/oauth2/v1/clients/{{clientId}}",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "PUT",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1496192014098,
-			"name": "Update Client",
-			"description": "",
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
-			"responses": [],
-			"rawModeData": "{\n\t\"client_name\": \"Web client\",\n\t\"redirect_uris\": [\n\t\t\"https://httpbin.org/get\"\n\t],\n\t\"response_types\": [\n\t\t\"code\",\n\t\t\"token\",\n\t\t\"id_token\"\n\t],\n\t\"grant_types\": [\n\t\t\"refresh_token\",\n\t\t\"authorization_code\",\n\t\t\"implicit\"\n\t],\n\t\"token_endpoint_auth_method\": \"client_secret_basic\",\n\t\"application_type\": \"web\"\n}"
-		},
-		{
-			"id": "90af69b0-4241-81e1-d9b9-f60a8260db61",
-			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
-			"headerData": [
-				{
-					"key": "Accept",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Authorization",
-					"value": "SSWS {{apikey}}",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{url}}/oauth2/v1/clients",
-			"queryParams": [],
-			"preRequestScript": "",
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1496856795315,
-			"name": "List Clients",
-			"description": "",
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "937a05f2-625a-db21-6e4c-b33b87f4cbca",
+			"id": "25c13535-f8a5-be79-5337-c78d8de73e5f",
 			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
 			"headerData": [
 				{
@@ -234,12 +87,170 @@
 			"time": 1496856648691,
 			"name": "List Apps",
 			"description": "",
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
+			"responses": [],
+			"rawModeData": "",
+			"folder": "d72a2486-60a8-2af8-9c51-064044be1e83"
+		},
+		{
+			"id": "2eca73ba-1e25-0b3e-c337-da856edaae26",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/oauth2/v1/clients/{{clientId}}",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497494493380,
+			"name": "Update Client",
+			"description": "",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
+			"responses": [],
+			"rawModeData": "{\n\t\"client_id\": \"{{clientId}}\",\n\t\"client_name\": \"Web client\",\n\t\"redirect_uris\": [\n\t\t\"https://httpbin.org/get\"\n\t],\n\t\"response_types\": [\n\t\t\"code\",\n\t\t\"token\",\n\t\t\"id_token\"\n\t],\n\t\"grant_types\": [\n\t\t\"refresh_token\",\n\t\t\"authorization_code\",\n\t\t\"implicit\"\n\t],\n\t\"token_endpoint_auth_method\": \"client_secret_basic\",\n\t\"application_type\": \"web\"\n}"
+		},
+		{
+			"id": "43825a0a-7d08-1912-cf88-24f08ddde8bc",
+			"headers": "Accept: application/json\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/.well-known/logo",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496856750071,
+			"name": "Get Logo",
+			"description": "",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
 			"responses": [],
 			"rawModeData": ""
 		},
 		{
-			"id": "997280f4-98ee-30d7-3b65-f4dc0a36befb",
+			"id": "4ac8b861-0c78-49be-7b53-02ab2f10f80d",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/apps",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": "",
+			"method": "POST",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Create App",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1497443028132,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "d72a2486-60a8-2af8-9c51-064044be1e83",
+			"isFromCollection": true,
+			"rawModeData": "{\n    \"name\": \"oidc_client\",\n    \"label\": \"Sample Client\",\n    \"signOnMode\": \"OPENID_CONNECT\",\n    \"credentials\": {\n      \"oauthClient\": {\n        \"token_endpoint_auth_method\": \"client_secret_post\"\n      }\n    },\n    \"settings\": {\n      \"oauthClient\": {\n        \"client_uri\": \"http://localhost:8080\",\n        \"logo_uri\": \"http://developer.okta.com/assets/images/logo-new.png\",\n        \"redirect_uris\": [\n          \"https://example.com/oauth2/callback\",\n          \"myapp://callback\"\n        ],\n        \"response_types\": [\n          \"token\",\n          \"id_token\",\n          \"code\"\n        ],\n        \"grant_types\": [\n          \"implicit\",\n          \"authorization_code\"\n        ],\n        \"application_type\": \"native\"\n      }\n    }\n}"
+		},
+		{
+			"id": "8d59cc68-88c1-c3c2-bd4d-d35832e5dfb4",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/api/v1/apps/{{appId}}",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497494572469,
+			"name": "Update App",
+			"description": "",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
+			"responses": [],
+			"rawModeData": "{\n  \"id\": \"{{appId}}\",\n  \"name\": \"oidc_client\",\n  \"label\": \"Sample Client\",\n  \"signOnMode\": \"OPENID_CONNECT\",\n  \"credentials\": {\n    \"signing\": {\n      \"kid\": \"cg4-_A_ifCK7fsKIKjHP27P0JGeuhnHHKEID1yXy42M\"\n    },\n    \"oauthClient\": {\n      \"client_id\": \"0oa1hm4POxgJM6CPu0g4\",\n      \"client_secret\": \"5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z\",\n      \"token_endpoint_auth_method\": \"client_secret_post\"\n    }\n  },\n  \"settings\": {\n    \"oauthClient\": {\n      \"client_uri\": \"http://localhost:8080\",\n      \"logo_uri\": \"http://developer.okta.com/assets/images/logo-new.png\",\n      \"redirect_uris\": [\n        \"https://example.com/oauth2/callback\",\n        \"myapp://callback\"\n      ],\n      \"response_types\": [\n        \"token\",\n        \"id_token\",\n        \"code\"\n      ],\n      \"grant_types\": [\n        \"implicit\",\n        \"authorization_code\"\n      ],\n      \"application_type\": \"native\"\n    }\n  },\n  \"profile\": {\n    \"whitelist\": [\n      \"{{groupId}}\"\n    ]\n  }\n}"
+		},
+		{
+			"id": "ad4b0210-bad9-7040-d0d8-3f5d37c47d67",
 			"name": "Generate New Client Secret",
 			"dataMode": "raw",
 			"data": [],
@@ -255,28 +266,109 @@
 			"currentHelper": "normal",
 			"helperAttributes": "[]",
 			"responses": [],
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
 			"isFromCollection": true
 		},
 		{
-			"id": "f08d9a8b-e26a-44cc-5cb1-041d4bc472c2",
+			"id": "bd75b235-27bc-7c95-7cc0-c7ea9c521347",
 			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
-			"url": "{{url}}/api/v1/apps/{{appId}}",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/oauth2/v1/clients/{{clientId}}",
+			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
-			"method": "PUT",
+			"pathVariableData": [],
+			"method": "GET",
 			"data": [],
 			"dataMode": "raw",
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1496194017894,
-			"name": "Update App",
+			"time": 1496856843255,
+			"name": "Get Client",
 			"description": "",
-			"collectionId": "6517a2b6-c5f1-b0f9-e099-0dbad7ab40a6",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
 			"responses": [],
-			"rawModeData": "{\n    \"name\": \"oidc_client\",\n    \"label\": \"Web client\",\n    \"status\": \"ACTIVE\",\n    \"signOnMode\": \"OPENID_CONNECT\",\n    \"profile\": {\n        \"whitelist\": [\n        \t\"{{groupId}}\"\n        ]\n    }\n}",
-			"folder": "35ead9e3-5d9d-d93e-f7bc-1628a6bd1684"
+			"rawModeData": ""
+		},
+		{
+			"id": "e44bb904-06be-103b-983b-7a858ce4ff94",
+			"name": "Delete Client",
+			"dataMode": "raw",
+			"data": [],
+			"rawModeData": "",
+			"descriptionFormat": null,
+			"description": "",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"method": "DELETE",
+			"pathVariables": {},
+			"url": "{{url}}/oauth2/v1/clients/{{clientId}}",
+			"preRequestScript": "",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": "[]",
+			"responses": [],
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc"
+		},
+		{
+			"id": "f1f69ce0-9314-0ac2-048d-9e5ead99d0fd",
+			"headers": "Accept: application/json\nContent-Type: application/json\nAuthorization: SSWS {{apikey}}\n",
+			"headerData": [
+				{
+					"key": "Accept",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "SSWS {{apikey}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{url}}/oauth2/v1/clients",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496856795315,
+			"name": "List Clients",
+			"description": "",
+			"collectionId": "247ee64f-bf86-7004-699c-9619c4431dcc",
+			"responses": [],
+			"rawModeData": ""
 		}
 	]
 }

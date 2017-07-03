@@ -205,61 +205,66 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/getting_started/api_test_client.md">Edit Page</a>
       <h1 id="overview">Overview</h1>
 
-<p>A great way to learn an API is to issue requests and inspect the responses. You can easily access our Postman collections and Example environment to do just that.</p>
+<p>A great way to learn an API is to issue requests and inspect the responses. You can easily use our Postman collections to do just that.</p>
 
 <p><img src="/assets/okta_postman_logo-4d1b61cd82c3a8f43a0ba958dabd20f4e2a03ef94644ee1a7a8c507b8afbf8b3.png" alt="Postman and an Okta Collection" /></p>
 
-<p>To use these collections, you’ll need to set up your environment, import the collections, send a test request, and verify the results.</p>
+<p>To use these collections, you’ll need to set up your local environment and import the collections. Then, you can send a test request and verify the results.</p>
 
 <h2 id="set-up-your-environment">Set Up Your Environment</h2>
 
 <ol>
-  <li><a href="getting_a_token.html" target="_blank">Create an API token</a>.</li>
-  <li><a href="https://www.getpostman.com/apps" target="_blank">Install the Postman App</a>.</li>
+  <li><a href="https://www.okta.com/developer/signup/" target="_blank">Sign up</a> for a free Okta developer organization, if you don’t have one already.</li>
+  <li><a href="getting_a_token.html" target="_blank">Create an API token</a> for your org.</li>
+  <li><a href="https://www.getpostman.com/apps" target="_blank">Install the Postman app</a>.</li>
   <li>
-    <p>Launch Postman and click the ‘import button’. Select import from link, and paste this link into the textbox: <code class="highlighter-rouge">https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment</code>
+    <p>Launch Postman and click the <strong>Import</strong> button. Select <strong>Import From Link</strong>, and paste this link into the textbox: <code class="highlighter-rouge">https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment</code>
  <img src="/assets/import_enviro-2b7252c95ae06684a175ad8fcf511538b62b846f86ad59d473e69db7e69fb093.png" alt="Importing the Okta Example Environment" /></p>
   </li>
   <li>
-    <p>Once you have clicked import, make sure the <code class="highlighter-rouge">example.oktapreview.com</code> environment is selected.
+    <p>Once it’s imported, make sure the <code class="highlighter-rouge">example.oktapreview.com</code> environment is selected.
  <img src="/assets/postman_example_start-2a4afa963ff51fda506bf5b08a85369f81826b7043920504d36e0f74b43cb135.png" alt="Postman app with collections" /></p>
   </li>
   <li>Click the eye icon next to <code class="highlighter-rouge">example.oktapreview.com</code> and select <strong>Edit</strong> to replace or add these values:
     <ul>
-      <li>Rename your environment to something you’ll recognize, for example <strong>myOrg</strong>.</li>
-      <li><code class="highlighter-rouge">url</code>: Replace the example value with your org’s URL, for example <strong>https://myOrg.oktapreview.com</strong>. This becomes the new name of your environment. Do <strong>not</strong> include ‘-admin’ in the subdomain.</li>
-      <li><code class="highlighter-rouge">apikey</code>: Enter the API token you created in your org, for example <strong>00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS</strong>.</li>
-      <li><code class="highlighter-rouge">email-suffix</code>: Enter the email suffix for your domain, for example <strong>myOrg.com</strong>.</li>
+      <li>Rename your environment to something you’ll recognize. For example, <code class="highlighter-rouge">My Org</code>.</li>
+      <li><code class="highlighter-rouge">url</code>: Replace the example value with your org’s URL. For example, <code class="highlighter-rouge">https://dev-123456.oktapreview.com</code>. (Don’t include ‘-admin’ in the subdomain!)</li>
+      <li><code class="highlighter-rouge">apikey</code>: Enter the API token you created earlier, for example <code class="highlighter-rouge">00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS</code>.</li>
     </ul>
   </li>
-  <li>Save your changes by selecting <strong>Update</strong>. Now your environment looks similar to this example:
- <img src="/assets/postman_example_enviro-5db5c75404a0fa250206bce5b7fd0c1d192ae52f7570fa3e415a04a2beeda1bb.png" alt="Example.okta.com environment with required values" /></li>
+  <li>Click <strong>Update</strong> to save your changes.</li>
 </ol>
 
 <h2 id="import-a-collection">Import a Collection</h2>
 
 <p>Import the collection for the Users API:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/78060451b3ba309f5bcf" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/1755573c5cf5fbf7968b" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+
+<p>If you have Postman installed, clicking the button above gives you the option of importing the collection into Postman.</p>
+
+<p>You can also import the collection by following the Web View link and downloading the collection as a JSON file. Import that file into Postman by clicking the <strong>Import</strong> button and browsing to your download location.</p>
 
 <blockquote>
   <p>Note: You can import and work with the rest of the Okta API using the link at the top of each API reference page,
-or use the <a href="#collections-quick-reference">Collections Quick Reference</a>. This tutorial only requires the Users collection import.</p>
+or use the <a href="#collections-quick-reference">Collections Quick Reference</a>. This tutorial only requires the Users API collection.</p>
 </blockquote>
 
 <h2 id="send-a-request">Send a Request</h2>
 
-<p>To test your configuration, send a request to list all the users in your org:</p>
+<p>Once you’ve imported the Users API collection, and added your Okta org information to your environment, you’re ready to send a request.</p>
+
+<p>To make sure everything works, send a request to list all the users in your org:</p>
 
 <ol>
-  <li>Make sure you’ve imported the Users API collection and configured your example environment using the instructions in the previous section.</li>
-  <li>Select the <strong>Collections</strong> tab in Postman, open the <strong>List Users</strong> folder, and select <strong>GET List Users</strong>.</li>
+  <li>Select the <strong>Collections</strong> tab in Postman and open the <strong>Users (Okta API)</strong> collection. Open the <strong>List Users</strong> folder, and select <strong>(GET) List Users</strong>. This loads the List Users request into Postman, ready to send.</li>
   <li>Click <strong>Send</strong>. The result pane automatically displays the results of your request:
- <img src="/assets/postman_response-9d1904189fffacf7154b4f4c830ffa866f7a0103ab0ee91beb0691ac5a7b6697.png" alt="GET List Users" />
- If you receive errors, it’s likely that one of the values in the environment isn’t set correctly. Check the values and try again.</li>
+ <img src="/assets/postman_response-9d1904189fffacf7154b4f4c830ffa866f7a0103ab0ee91beb0691ac5a7b6697.png" alt="GET List Users" /></li>
 </ol>
 
-<p>Once you have completed this simple request, you are ready to explore the Okta API.</p>
+<p>If you receive an error, it’s likely that one of the values in the environment isn’t set correctly. Check the values and try again.</p>
+
+<p>Once you have completed this simple request, you’re ready to explore the Okta API!</p>
 
 <h2 id="collections-quick-reference">Collections Quick Reference</h2>
 
@@ -269,61 +274,69 @@ or use the <a href="#collections-quick-reference">Collections Quick Reference</a
   <thead>
     <tr>
       <th style="text-align: left">Collections</th>
-      <th style="text-align: left">click to Run</th>
+      <th style="text-align: left">Click to Run</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: left">Authentication</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/07df454531c56cb5fe71" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/f9684487e584101f25a3" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
-      <td style="text-align: left">OAuth 2.0</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/ff6b1f58429d74ff1cfd" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left">API Access Management (OAuth 2.0)</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">OpenID Connect</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/57ec0b23a21999f96f2d" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Client Registration  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/291ba43cde74844dd4a7" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Sessions</td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/b2e06a22c396bcc94530" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Apps</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/4857222012c11cf5e8cd" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Events</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/44d6b3bbbbf674035a86" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Factors</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/b055a859dbe24a54814a" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/e07dd59803f9eae8add7" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Groups</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/0bb414f9594ed93672a0" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Identity Providers (IdP)</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/8438ef3445415386b407" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/e67463599312db1413cb" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Logs</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/8f19fc704561a8b44e27" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Admin Roles</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/5f91aaea133fe6c9cb8b" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Schemas</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/443242e60287fb4b8d6d" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/443242e60287fb4b8d6d" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Users</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/78060451b3ba309f5bcf" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/1755573c5cf5fbf7968b" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Custom SMS Templates</td>
-      <td style="text-align: left">  <a href="https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
+      <td style="text-align: left"><a href="https://app.getpostman.com/run-collection/d71f7946d8d56ccdaa06" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></td>
     </tr>
   </tbody>
 </table>

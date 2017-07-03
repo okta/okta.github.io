@@ -154,7 +154,7 @@ At a minimum, you should log in to your Okta Admin Console and check to make sur
 
 After you run the import tool and check the results, update your application to use the latest version of the Stormpath integration. It is very important that you read the changelog for your integration to understand how the upgrade will affect your application.
 
-> NOTE: These integrations will not be supported after 2017-08-17.
+> NOTE: These integrations will not be supported after 2017-08-17. They will continue to work with the Okta API, but we are not planning any new feature development on these packages.
 
 Integration | Version | Documentation
 --- | --- | ---

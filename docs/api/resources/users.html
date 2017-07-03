@@ -132,8 +132,9 @@
                 <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
                 <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
                 <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
-                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
                 <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
+                <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
               </ul>
             </li>
             <li>
@@ -212,7 +213,7 @@
 
 <h2 id="getting-started">Getting Started</h2>
 
-<p>Explore the Users API: <a href="https://app.getpostman.com/run-collection/78060451b3ba309f5bcf"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the Users API: <a href="https://app.getpostman.com/run-collection/1755573c5cf5fbf7968b"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="user-operations">User Operations</h2>
 
@@ -220,7 +221,7 @@
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users</span></p>
 
-<p>Creates a new user in your Okta organization with or without credentials.</p>
+<p>Creates a new user in your Okta organization with or without credentials</p>
 
 <ul>
   <li><a href="#create-user-without-credentials">Create User without Credentials</a></li>
@@ -236,68 +237,71 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Default</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>activate</td>
-      <td>Executes <a href="#activate-user">activation lifecycle</a> operation when creating the user</td>
-      <td>Query</td>
-      <td>Boolean</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">activate</td>
+      <td style="text-align: left">Executes     <a href="#activate-user">activation lifecycle</a> operation when creating the user</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Boolean</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>provider</td>
-      <td>Indicates whether to create a user with a specified authentication provider</td>
-      <td>Query</td>
-      <td>Boolean</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">provider</td>
+      <td style="text-align: left">Indicates whether to create a user with a specified authentication provider</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Boolean</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>profile</td>
-      <td>Profile properties for user</td>
-      <td>Body</td>
-      <td><a href="#profile-object">Profile Object</a></td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Profile properties for user</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">    <a href="#profile-object">Profile Object</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>credentials</td>
-      <td>Credentials for user</td>
-      <td>Body</td>
-      <td><a href="#credentials-object">Credentials Object</a></td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">credentials</td>
+      <td style="text-align: left">Credentials for user</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">    <a href="#credentials-object">Credentials Object</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>groupIds</td>
-      <td>Ids of groups that user will be immediately added to at time of creation</td>
-      <td>Body</td>
-      <td>Array of Group Ids</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">groupIds</td>
+      <td style="text-align: left">Ids of groups that user will be immediately added to at time of creation</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">Array of Group Ids</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
 
 <h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
 
-<p>All responses return the created <a href="#user-model">User</a>.  Activation of a user is an asynchronous operation.  The system performs group reconciliation during activation and assign the user to all applications via direct or indirect relationships (group memberships).  The user will have the <code class="highlighter-rouge">transitioningToStatus</code> property with a value of <code class="highlighter-rouge">ACTIVE</code> during activation to indicate that the user hasn’t completed the asynchronous operation.  The user will have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">ACTIVE</code> when the activation process is complete.</p>
+<p>All responses return the created <a href="#user-model">User</a>.  Activation of a user is an asynchronous operation.  The system performs group reconciliation during activation and assigns the user to all applications via direct or indirect relationships (group memberships).</p>
+
+<ul>
+  <li>The user’s <code class="highlighter-rouge">transitioningToStatus</code> property is <code class="highlighter-rouge">ACTIVE</code> during activation to indicate that the user hasn’t completed the asynchronous operation.</li>
+  <li>The user’s <code class="highlighter-rouge">status</code> is <code class="highlighter-rouge">ACTIVE</code> when the activation process is complete.</li>
+</ul>
+
+<p>The user is emailed a one-time activation token if activated without a password.</p>
 
 <blockquote>
-  <p>The user will be emailed a one-time activation token if activated without a password</p>
-</blockquote>
-
-<blockquote>
-  <p>If the user is assigned to an application that is also configured for provisioning, the activation process will also trigger downstream provisioning to the application.  It is possible for a user to login before these applications have been successfully provisioned for the user</p>
+  <p>Note: If the user is assigned to an application that is configured for provisioning, the activation process triggers downstream provisioning to the application.  It is possible for a user to login before these applications have been successfully provisioned for the user.</p>
 </blockquote>
 
 <table>
@@ -379,13 +383,14 @@
   </tbody>
 </table>
 
-<blockquote>
-  <p>Creating users with <code class="highlighter-rouge">FEDERATION</code> or <code class="highlighter-rouge">SOCIAL</code> provider will be either <code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">STAGED</code> based on the <code class="highlighter-rouge">activate</code> query parameter since they do not support a <code class="highlighter-rouge">password</code> or <code class="highlighter-rouge">recovery_question</code> credential.</p>
-</blockquote>
+<p>Creating users with <code class="highlighter-rouge">FEDERATION</code> or <code class="highlighter-rouge">SOCIAL</code> provider will be either <code class="highlighter-rouge">ACTIVE</code> or <code class="highlighter-rouge">STAGED</code> based on the <code class="highlighter-rouge">activate</code> query parameter since they do not support a <code class="highlighter-rouge">password</code> or <code class="highlighter-rouge">recovery_question</code> credential.</p>
 
 <h4 class="api api-operation" id="create-user-without-credentials">Create User without Credentials</h4>
 
-<p>Creates a user without a <a href="#password-object">password</a> or <a href="#recovery-question-object">recovery question &amp; answer</a>.  When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.  This is the default flow for new user registration with the Okta Admin UI.</p>
+<p>Creates a user without a <a href="#password-object">password</a> or <a href="#recovery-question-object">recovery question &amp; answer</a></p>
+
+<p>When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.
+This is the default flow for new user registration with the Okta Admin UI.</p>
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
 
@@ -440,7 +445,10 @@
 
 <h4 class="api api-operation" id="create-user-with-recovery-question">Create User with Recovery Question</h4>
 
-<p>Creates a user without a <a href="#password-object">password</a>.  When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.  This flow is not common but might be useful if migrating users from an existing user store.</p>
+<p>Creates a user without a <a href="#password-object">password</a></p>
+
+<p>When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.
+This flow is useful if migrating users from an existing user store.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
 
@@ -504,10 +512,13 @@
 
 <h4 class="api api-operation" id="create-user-with-password">Create User with Password</h4>
 
-<p>Creates a user without a <a href="#recovery-question-object">recovery question &amp; answer</a>.  The new user will immediately be able to login after activation with the assigned password.  This flow is common when developing a custom user registration experience.</p>
+<p>Creates a user without a <a href="#recovery-question-object">recovery question &amp; answer</a></p>
+
+<p>The new user is able to login immediately after activation with the assigned password.
+This flow is common when developing a custom user registration experience.</p>
 
 <blockquote>
-  <p>Do not generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.</p>
+  <p>Important: Do not generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
@@ -567,10 +578,13 @@
 
 <h4 class="api api-operation" id="create-user-with-password--recovery-question">Create User with Password &amp; Recovery Question</h4>
 
-<p>Creates a new user with a <a href="#password-object">password</a> and <a href="#recovery-question-object">recovery question &amp; answer</a>.  The new user will immediately be able to login after activation with the assigned password.  This flow is common when developing a custom user registration experience.</p>
+<p>Creates a new user with a <a href="#password-object">password</a> and <a href="#recovery-question-object">recovery question &amp; answer</a></p>
+
+<p>The new user is able to log in with the assigned password immediately after activation.
+This flow is common when developing a custom user-registration experience.</p>
 
 <blockquote>
-  <p>Do not generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.</p>
+  <p>Important: Don’t generate or send a one-time activation token when activating users with an assigned password.  Users should login with their assigned password.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
@@ -637,7 +651,7 @@
 
 <h4 class="api api-operation" id="create-user-with-authentication-provider">Create User with Authentication Provider</h4>
 
-<p>Creates a new passwordless user with a <code class="highlighter-rouge">SOCIAL</code> or <code class="highlighter-rouge">FEDERATION</code> <a href="#provider-object">authentication provider</a> that must be authenticated via a trusted Identity Provider.</p>
+<p>Creates a new passwordless user with a <code class="highlighter-rouge">SOCIAL</code> or <code class="highlighter-rouge">FEDERATION</code> <a href="#provider-object">authentication provider</a> that must be authenticated via a trusted Identity Provider</p>
 
 <h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
 
@@ -708,7 +722,9 @@
 
 <h4 class="api api-operation" id="create-user-in-group">Create User in Group</h4>
 
-<p>Creates a user that is immediately added to the specified groups upon creation.  This supplemental function can be used in conjunction with the other create operations.  This function is necessary for a User Admin that is scoped to only create users in specified groups.</p>
+<p>Creates a user that is immediately added to the specified groups upon creation</p>
+
+<p>Use this in conjunction with other create operations for a Group Admin that is scoped to only create users in specified groups.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
 
@@ -769,7 +785,7 @@
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em></span> <span class="api-label api-label-cors api-uri-template-cors"><i class="fa fa-cloud-download"></i> CORS</span></p>
 
-<p>Fetches a user from your Okta organization.</p>
+<p>Fetches a user from your Okta organization</p>
 
 <ul>
   <li><a href="#get-current-user">Get Current User</a></li>
@@ -780,7 +796,7 @@
 
 <h5 class="api api-request api-request-params" id="request-parameters-1">Request Parameters</h5>
 
-<p>Fetch a specific user by <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">login</code>, or login shortname <em>(as long as it is unambiguous)</em>.</p>
+<p>Fetch a user by <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">login</code>, or <code class="highlighter-rouge">login shortname</code> if the short name is unambiguous.</p>
 
 <table>
   <thead>
@@ -790,7 +806,6 @@
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -800,24 +815,22 @@
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>When fetching a user by <code class="highlighter-rouge">login</code> or <code class="highlighter-rouge">login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
-</blockquote>
+<p>When fetching a user by <code class="highlighter-rouge">login</code> or <code class="highlighter-rouge">login shortname</code>, <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.
+Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
 
 <blockquote>
-  <p>You can substitute <em>me</em> for the id to fetch the current user linked to API token or session cookie.</p>
+  <p>Hint: you can substitute <code class="highlighter-rouge">me</code> for the <code class="highlighter-rouge">id</code> to fetch the current user linked to an API token or session cookie.</p>
 </blockquote>
 
 <h5 class="api api-response api-response-params" id="response-parameters-1">Response Parameters</h5>
 
 <p>Fetched <a href="#user-model">User</a></p>
 
-<p>Invalid <code class="highlighter-rouge">id</code> will return a <code class="highlighter-rouge">404 Not Found</code> status code.</p>
+<p>An invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">404</span> <span class="ne">Not Found</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -834,7 +847,7 @@
 
 <h4 class="api api-operation" id="get-current-user">Get Current User</h4>
 
-<p>Fetches the current user linked to API token or session cookie.</p>
+<p>Fetches the current user linked to API token or session cookie</p>
 
 <h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
@@ -903,7 +916,11 @@
 
 <h4 class="api api-operation" id="get-user-with-id">Get User with ID</h4>
 
-<p>Fetches a specific user when you know the user’s <code class="highlighter-rouge">id</code>. See the filters section below for an example of fetching multiple ids.</p>
+<p>Fetches a specific user when you know the user’s <code class="highlighter-rouge">id</code></p>
+
+<blockquote>
+  <p>Hint: If you don’t know the user <code class="highlighter-rouge">id</code>, <a href="#list-users">list the users</a> to find the correct ID.</p>
+</blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
 
@@ -972,11 +989,10 @@
 
 <h4 class="api api-operation" id="get-user-with-login">Get User with Login</h4>
 
-<p>Fetches a specific user when you know the user’s <code class="highlighter-rouge">login</code>.</p>
+<p>Fetches a specific user when you know the user’s <code class="highlighter-rouge">login</code></p>
 
-<blockquote>
-  <p>When fetching a user by <code class="highlighter-rouge">login</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
-</blockquote>
+<p>When fetching a user by <code class="highlighter-rouge">login</code>, <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.
+Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-8">Request Example</h5>
 
@@ -1045,11 +1061,10 @@
 
 <h4 class="api api-operation" id="get-user-with-login-shortname">Get User with Login Shortname</h4>
 
-<p>Fetches a specific user when you know the user’s <code class="highlighter-rouge">login shortname</code> and the shortname is unique within the organization.</p>
+<p>Fetches a specific user when you know the user’s <code class="highlighter-rouge">login shortname</code> and the shortname is unique within the organization</p>
 
-<blockquote>
-  <p>When fetching a user by <code class="highlighter-rouge">login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by ‘id’ due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
-</blockquote>
+<p>When fetching a user by <code class="highlighter-rouge">login shortname</code>, <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.
+Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by ‘id’ due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-9">Request Example</h5>
 
@@ -1120,7 +1135,9 @@
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users</span></p>
 
-<p>Lists users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria.</p>
+<p>Lists users in your organization with pagination in most cases</p>
+
+<p>A subset of users can be returned that match a supported filter expression or search criteria.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-2">Request Parameters</h5>
 
@@ -1136,54 +1153,48 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>q</td>
-      <td>Finds a user that matches <code class="highlighter-rouge">firstName</code>, <code class="highlighter-rouge">lastName</code>, and <code class="highlighter-rouge">email</code> properties</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">q</td>
+      <td style="text-align: left">Finds a user that matches <code class="highlighter-rouge">firstName</code>, <code class="highlighter-rouge">lastName</code>, and <code class="highlighter-rouge">email</code> properties</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>filter</td>
-      <td><a href="/docs/api/getting_started/design_principles.html#filtering">Filters</a> users with a supported expression for a subset of properties</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">filter</td>
+      <td style="text-align: left">  <a href="/docs/api/getting_started/design_principles.html#filtering">Filters</a> users with a supported expression for a subset of properties</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>search</td>
-      <td>Searches for users with a supported <a href="/docs/api/getting_started/design_principles.html#filtering">filtering</a>  expression for most properties</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">search</td>
+      <td style="text-align: left">Searches for users with a supported   <a href="/docs/api/getting_started/design_principles.html#filtering">filtering</a>  expression for most properties</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>limit</td>
-      <td>Specifies the number of results returned</td>
-      <td>Query</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>200</td>
+      <td style="text-align: left">limit</td>
+      <td style="text-align: left">Specifies the number of results returned</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Number</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>after</td>
-      <td>Specifies the pagination cursor for the next page of users</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">after</td>
+      <td style="text-align: left">Specifies the pagination cursor for the next page of users (default is 200)</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -1204,7 +1215,9 @@
 
 <h4 class="api api-operation" id="list-all-users">List All Users</h4>
 
-<p>If you don’t specify any query, returns a list of all users that do not have a status of <code class="highlighter-rouge">DEPROVISIONED</code>, up to the maximum (200 for most orgs).</p>
+<p>Returns a list of all users that do not have a status of <code class="highlighter-rouge">DEPROVISIONED</code>, up to the maximum (200 for most orgs)</p>
+
+<p>Different results are returned depending on specified queries in the request.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-10">Request Example</h5>
 
@@ -1291,6 +1304,8 @@
 
 <h4 class="api api-operation" id="find-users">Find Users</h4>
 
+<p>Finds users who match the specified query</p>
+
 <p>Use the <code class="highlighter-rouge">q</code> parameter for a simple lookup of users by name, for example when creating a people picker.
 The value of <code class="highlighter-rouge">q</code> is matched against <code class="highlighter-rouge">firstName</code>, <code class="highlighter-rouge">lastName</code>, or <code class="highlighter-rouge">email</code>.</p>
 
@@ -1354,7 +1369,7 @@ The value of <code class="highlighter-rouge">q</code> is matched against <code c
 
 <h4 class="api api-operation" id="list-users-with-a-filter">List Users with a Filter</h4>
 
-<p>Lists all users that match the filter criteria.</p>
+<p>Lists all users that match the filter criteria</p>
 
 <p>This operation:</p>
 
@@ -1370,79 +1385,81 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 <table>
   <thead>
     <tr>
-      <th>Filter</th>
-      <th>Description</th>
+      <th style="text-align: left">Filter</th>
+      <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">status eq "STAGED"</code></td>
-      <td>Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">STAGED</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">status eq "STAGED"</code></td>
+      <td style="text-align: left">Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">STAGED</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">status eq "PROVISIONED"</code></td>
-      <td>Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">PROVISIONED</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">status eq "PROVISIONED"</code></td>
+      <td style="text-align: left">Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">PROVISIONED</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">status eq "ACTIVE"</code></td>
-      <td>Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">ACTIVE</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">status eq "ACTIVE"</code></td>
+      <td style="text-align: left">Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">ACTIVE</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">status eq "RECOVERY"</code></td>
-      <td>Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">RECOVERY</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">status eq "RECOVERY"</code></td>
+      <td style="text-align: left">Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">RECOVERY</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">status eq "PASSWORD_EXPIRED"</code></td>
-      <td>Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">PASSWORD_EXPIRED</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">status eq "PASSWORD_EXPIRED"</code></td>
+      <td style="text-align: left">Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">PASSWORD_EXPIRED</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">status eq "LOCKED_OUT"</code></td>
-      <td>Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">LOCKED_OUT</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">status eq "LOCKED_OUT"</code></td>
+      <td style="text-align: left">Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">LOCKED_OUT</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">status eq "DEPROVISIONED"</code></td>
-      <td>Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">DEPROVISIONED</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">status eq "DEPROVISIONED"</code></td>
+      <td style="text-align: left">Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">DEPROVISIONED</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Users last updated before a specific timestamp</td>
+      <td style="text-align: left"><code class="highlighter-rouge">lastUpdated lt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Users last updated before a specific timestamp</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Users last updated at a specific timestamp</td>
+      <td style="text-align: left"><code class="highlighter-rouge">lastUpdated eq "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Users last updated at a specific timestamp</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-      <td>Users last updated after a specific timestamp</td>
+      <td style="text-align: left"><code class="highlighter-rouge">lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+      <td style="text-align: left">Users last updated after a specific timestamp</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">id eq "00u1ero7vZFVEIYLWPBN"</code></td>
-      <td>Users with a specified <code class="highlighter-rouge">id</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">id eq "00u1ero7vZFVEIYLWPBN"</code></td>
+      <td style="text-align: left">Users with a specified <code class="highlighter-rouge">id</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">profile.login eq "login@example.com"</code></td>
-      <td>Users with a specified <code class="highlighter-rouge">login</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">profile.login eq "login@example.com"</code></td>
+      <td style="text-align: left">Users with a specified <code class="highlighter-rouge">login</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">profile.email eq "email@example.com"</code></td>
-      <td>Users with a specified <code class="highlighter-rouge">email</code>*</td>
+      <td style="text-align: left"><code class="highlighter-rouge">profile.email eq "email@example.com"</code></td>
+      <td style="text-align: left">Users with a specified <code class="highlighter-rouge">email</code>*</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">profile.firstName eq "John"</code></td>
-      <td>Users with a specified <code class="highlighter-rouge">firstName</code>*</td>
+      <td style="text-align: left"><code class="highlighter-rouge">profile.firstName eq "John"</code></td>
+      <td style="text-align: left">Users with a specified <code class="highlighter-rouge">firstName</code>*</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">profile.lastName eq "Smith" </code></td>
-      <td>Users with a specified <code class="highlighter-rouge">lastName</code>*</td>
+      <td style="text-align: left"><code class="highlighter-rouge">profile.lastName eq "Smith" </code></td>
+      <td style="text-align: left">Users with a specified <code class="highlighter-rouge">lastName</code>*</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">profile.lastName sw "Sm" </code></td>
-      <td>Users whose <code class="highlighter-rouge">lastName</code> starts with “Sm”</td>
+      <td style="text-align: left"><code class="highlighter-rouge">profile.lastName sw "Sm" </code></td>
+      <td style="text-align: left">Users whose <code class="highlighter-rouge">lastName</code> starts with “Sm”</td>
     </tr>
   </tbody>
 </table>
 
-<p>* If filtering by <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">lastName</code>, or <code class="highlighter-rouge">firstName</code>, it may be easier to use <code class="highlighter-rouge">q</code> instead of <code class="highlighter-rouge">filter</code>.</p>
+<blockquote>
+  <p>Hint: If filtering by <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">lastName</code>, or <code class="highlighter-rouge">firstName</code>, it may be easier to use <code class="highlighter-rouge">q</code> instead of <code class="highlighter-rouge">filter</code>.</p>
+</blockquote>
 
 <p>See <a href="/docs/api/getting_started/design_principles.html#filtering">Filtering</a> for more information about the expressions used in filtering.</p>
 
@@ -1524,7 +1541,9 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 
 <h5 class="api api-request api-request-example" id="request-example-timestamp">Request Example: Timestamp</h5>
 
-<p>Lists all users that have been updated since a specific timestamp.  Use this operation when implementing a background synchronization job and you want to poll for changes.</p>
+<p>Lists all users that have been updated since a specific timestamp</p>
+
+<p>Use this operation when implementing a background synchronization job and you want to poll for changes.</p>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1580,7 +1599,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
   <p>Listing users with search is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
 </blockquote>
 
-<p>Searches for user by the properties specified in the search parameter (case insensitive).</p>
+<p>Searches for user by the properties specified in the search parameter (case insensitive)</p>
 
 <p>This operation:</p>
 
@@ -1601,34 +1620,34 @@ Use an Id lookup for records that you update to ensure your results contain the 
     <table>
       <thead>
         <tr>
-          <th>Search Term Example</th>
-          <th>Description</th>
+          <th style="text-align: left">Search Term Example</th>
+          <th style="text-align: left">Description</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><code class="highlighter-rouge">status eq "STAGED"</code></td>
-          <td>Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">STAGED</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">status eq "STAGED"</code></td>
+          <td style="text-align: left">Users that have a <code class="highlighter-rouge">status</code> of <code class="highlighter-rouge">STAGED</code></td>
         </tr>
         <tr>
-          <td><code class="highlighter-rouge">lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
-          <td>Users last updated after a specific timestamp</td>
+          <td style="text-align: left"><code class="highlighter-rouge">lastUpdated gt "yyyy-MM-dd'T'HH:mm:ss.SSSZ"</code></td>
+          <td style="text-align: left">Users last updated after a specific timestamp</td>
         </tr>
         <tr>
-          <td><code class="highlighter-rouge">id eq "00u1ero7vZFVEIYLWPBN"</code></td>
-          <td>Users with a specified <code class="highlighter-rouge">id</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">id eq "00u1ero7vZFVEIYLWPBN"</code></td>
+          <td style="text-align: left">Users with a specified <code class="highlighter-rouge">id</code></td>
         </tr>
         <tr>
-          <td><code class="highlighter-rouge">profile.department eq "Engineering"</code></td>
-          <td>Users that have a <code class="highlighter-rouge">department</code> of <code class="highlighter-rouge">Engineering</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">profile.department eq "Engineering"</code></td>
+          <td style="text-align: left">Users that have a <code class="highlighter-rouge">department</code> of <code class="highlighter-rouge">Engineering</code></td>
         </tr>
         <tr>
-          <td><code class="highlighter-rouge">profile.occupation eq "Leader"</code></td>
-          <td>Users that have an <code class="highlighter-rouge">occupation</code> of <code class="highlighter-rouge">Leader</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">profile.occupation eq "Leader"</code></td>
+          <td style="text-align: left">Users that have an <code class="highlighter-rouge">occupation</code> of <code class="highlighter-rouge">Leader</code></td>
         </tr>
         <tr>
-          <td><code class="highlighter-rouge">profile.lastName sw "Sm" </code></td>
-          <td>Users whose <code class="highlighter-rouge">lastName</code> starts with “Sm”</td>
+          <td style="text-align: left"><code class="highlighter-rouge">profile.lastName sw "Sm" </code></td>
+          <td style="text-align: left">Users whose <code class="highlighter-rouge">lastName</code> starts with “Sm”</td>
         </tr>
       </tbody>
     </table>
@@ -1637,7 +1656,7 @@ Use an Id lookup for records that you update to ensure your results contain the 
 
 <h5 id="search-examples">Search Examples</h5>
 
-<p>List users with an occupation of <code class="highlighter-rouge">Leader</code>.</p>
+<p>List users with an occupation of <code class="highlighter-rouge">Leader</code></p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>search=profile.occupation eq "Leader"
 </code></pre>
@@ -1705,7 +1724,7 @@ For examples, see <a href="#request-example-for-array">Request Example for Array
 
 <ul>
   <li>We follow the <a href="https://tools.ietf.org/html/rfc7644#section-3.4.2.2">SCIM Protocol Specification</a> for searching arrays.</li>
-  <li>Search for one value at a time when searching arrays. For example, you can’t search for users where a string is equal to an attriubte in two different arrays.</li>
+  <li>Search for one value at a time when searching arrays. For example, you can’t search for users where a string is equal to an attribute in two different arrays.</li>
 </ul>
 
 <h5 class="api api-request api-request-example" id="request-example-for-array">Request Example for Array</h5>
@@ -1779,16 +1798,18 @@ For examples, see <a href="#request-example-for-array">Request Example for Array
 <h3 class="api api-operation" id="update-user">Update User</h3>
 
 <blockquote>
-  <p>Use the <code class="highlighter-rouge">POST</code> method to make a partial update and the <code class="highlighter-rouge">PUT</code> method to delete unspecified properties.</p>
+  <p>Note: Use the <code class="highlighter-rouge">POST</code> method to make a partial update and the <code class="highlighter-rouge">PUT</code> method to delete unspecified properties.</p>
 </blockquote>
 
 <p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/users/<em>:id</em></span></p>
 
-<p>Update a user’s profile and/or credentials using strict-update semantics.</p>
+<p>Updates a user’s profile and/or credentials using strict-update semantics</p>
+
+<p>All profile properties must be specified when updating a user’s profile with a <code class="highlighter-rouge">PUT</code> method. Any property not specified
+in the request is deleted.</p>
 
 <blockquote>
-  <p>All profile properties must be specified when updating a user’s profile with a <code class="highlighter-rouge">PUT</code> method. Any property not specified
-in the request will be deleted. <strong>Don’t use <code class="highlighter-rouge">PUT</code> method for partial updates.</strong></p>
+  <p>Important: Don’t use <code class="highlighter-rouge">PUT</code> method for partial updates.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-3">Request Parameters</h5>
@@ -1796,38 +1817,34 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td><code class="highlighter-rouge">id</code> of user to update</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user to update</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>profile</td>
-      <td>Updated profile for user</td>
-      <td>Body</td>
-      <td><a href="#profile-object">Profile Object</a></td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Updated profile for user</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">  <a href="#profile-object">Profile Object</a></td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>credentials</td>
-      <td>Update credentials for user</td>
-      <td>Body</td>
-      <td><a href="#credentials-object">Credentials Object</a></td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">credentials</td>
+      <td style="text-align: left">Update credentials for user</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">  <a href="#credentials-object">Credentials Object</a></td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -1839,6 +1856,57 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 <p>Updated <a href="#user-model">User</a></p>
 
 <h4 class="api api-operation" id="update-profile">Update Profile</h4>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em></span></p>
+
+<p>Updates a user’s profile or credentials with partial update semantics</p>
+
+<blockquote>
+  <p>Important: Use the <code class="highlighter-rouge">POST</code> method for partial updates, because unspecified properties aren’t changed with <code class="highlighter-rouge">POST</code>.</p>
+</blockquote>
+
+<h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user to update</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Updated profile for user</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">  <a href="#profile-object">Profile Object</a></td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">credentials</td>
+      <td style="text-align: left">Update credentials for user</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">  <a href="#credentials-object">Credentials Object</a></td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">profile</code> and <code class="highlighter-rouge">credentials</code> can be updated independently or with a single request.</p>
+
+<h5 class="api api-response api-response-params" id="response-parameters-4">Response Parameters</h5>
+
+<p>Updated <a href="#user-model">User</a></p>
 
 <h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
@@ -1913,137 +1981,13 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </span></code></pre>
 </div>
 
-<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em></span></p>
-
-<p>Update a user’s profile or credentials with partial update semantics.</p>
-
-<blockquote>
-  <p>Use the <code class="highlighter-rouge">POST</code> method for partial updates, because unspecified properties aren’t changed with <code class="highlighter-rouge">POST</code>.</p>
-</blockquote>
-
-<h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td><code class="highlighter-rouge">id</code> of user to update</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>profile</td>
-      <td>Updated profile for user</td>
-      <td>Body</td>
-      <td><a href="#profile-object">Profile Object</a></td>
-      <td>FALSE</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>credentials</td>
-      <td>Update credentials for user</td>
-      <td>Body</td>
-      <td><a href="#credentials-object">Credentials Object</a></td>
-      <td>FALSE</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p><code class="highlighter-rouge">profile</code> and <code class="highlighter-rouge">credentials</code> can be updated independently or with a single request.</p>
-
-<h5 class="api api-response api-response-params" id="response-parameters-4">Response Parameters</h5>
-
-<p>Updated <a href="#user-model">User</a></p>
-
-<h4 class="api api-operation" id="update-profile-1">Update Profile</h4>
-
-<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
--H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
--d <span class="s1">'{
-  "profile": {
-    "email": "isaac.brock@update.example.com"
-  }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
-</code></pre>
-</div>
-
-<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
-
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:18.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"activated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:19.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"statusChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T16:39:19.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastLogin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-06-24T17:39:19.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-07-02T21:36:25.344Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"passwordChanged"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-07-02T21:36:25.344Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isaac"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brock"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@update.example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isaac.brock@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"mobilePhone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"555-415-1337"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-    </span><span class="nt">"recovery_question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Who's a major player in the cowboy scene?"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
 <h4 class="api api-operation" id="set-password">Set Password</h4>
 
-<p>This is an administrative operation and does not validate existing user credentials.  For operations that validate credentials refer to <a href="#reset-password">Reset Password</a>, <a href="#forgot-password">Forgot Password</a>, and <a href="#change-password">Change Password</a>.</p>
+<p>Sets passwords without validating existing user credentials</p>
 
-<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
+<p>This is an administrative operation.  For operations that validate credentials refer to <a href="#reset-password">Reset Password</a>, <a href="#forgot-password">Forgot Password</a>, and <a href="#change-password">Change Password</a>.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-14">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2057,7 +2001,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -2114,9 +2058,11 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <h4 class="api api-operation" id="set-recovery-question--answer">Set Recovery Question &amp; Answer</h4>
 
-<p>This is an administrative operation and doesn’t validate existing user credentials. See <a href="#change-recovery-question">Change Recovery Question</a> for an operation that requires validation.</p>
+<p>Sets recovery question and answer without validating existing user credentials</p>
 
-<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
+<p>This is an administrative operation. For an operation that requires validation, see <a href="#change-recovery-question">Change Recovery Question</a>.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-15">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2133,7 +2079,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-17">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -2194,7 +2140,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em>/appLinks</span> <span class="api-label api-label-cors api-uri-template-cors"><i class="fa fa-cloud-download"></i> CORS</span></p>
 
-<p>Fetches appLinks for all direct or indirect (via group membership) assigned applications.</p>
+<p>Fetches appLinks for all direct or indirect (via group membership) assigned applications</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-5">Request Parameters</h5>
 
@@ -2206,7 +2152,6 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2216,7 +2161,6 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2225,7 +2169,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p>Array of App Links</p>
 
-<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-16">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2235,7 +2179,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-18">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2294,7 +2238,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:id</em>/groups</span> <span class="api-label api-label-cors api-uri-template-cors"><i class="fa fa-cloud-download"></i> CORS</span></p>
 
-<p>Fetches the groups of which the user is a member.</p>
+<p>Fetches the groups of which the user is a member</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-6">Request Parameters</h5>
 
@@ -2306,7 +2250,6 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2316,7 +2259,6 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2325,7 +2267,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p>Array of <a href="groups.html">Groups</a></p>
 
-<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2335,7 +2277,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-19">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2358,17 +2300,24 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <h2 id="lifecycle-operations">Lifecycle Operations</h2>
 
-<p>Lifecycle operations are non-idempotent operations that initiate a state transition for a user’s status.  Some operations are asynchronous while others are synchronous.  The user’s current status limits what operations are allowed.  For example, you can’t unlock a user that is <code class="highlighter-rouge">ACTIVE</code>.</p>
+<p>Lifecycle operations are non-idempotent operations that initiate a state transition for a user’s status.
+Some operations are asynchronous while others are synchronous. The user’s current status limits what operations are allowed.
+For example, you can’t unlock a user that is <code class="highlighter-rouge">ACTIVE</code>.</p>
 
 <h3 class="api api-operation" id="activate-user">Activate User</h3>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/activate</span></p>
 
-<p>Activates a user.  This operation can only be performed on users with a <code class="highlighter-rouge">STAGED</code> status.  Activation of a user is an asynchronous operation.  The user will have the <code class="highlighter-rouge">transitioningToStatus</code> property with a value of <code class="highlighter-rouge">ACTIVE</code> during activation to indicate that the user hasn’t completed the asynchronous operation.  The user will have a status of <code class="highlighter-rouge">ACTIVE</code> when the activation process is complete.</p>
+<p>Activates a user</p>
 
-<blockquote>
-  <p>Users that do not have a password must complete the welcome flow by visiting the activation link to complete the transition to <code class="highlighter-rouge">ACTIVE</code> status.</p>
-</blockquote>
+<p>This operation can only be performed on users with a <code class="highlighter-rouge">STAGED</code> status.  Activation of a user is an asynchronous operation.</p>
+
+<ul>
+  <li>The user’s <code class="highlighter-rouge">transitioningToStatus</code> property has a value of <code class="highlighter-rouge">ACTIVE</code> during activation to indicate that the user hasn’t completed the asynchronous operation.</li>
+  <li>The user’s status is <code class="highlighter-rouge">ACTIVE</code> when the activation process is complete.</li>
+</ul>
+
+<p>Users who don’t have a password must complete the welcome flow by visiting the activation link to complete the transition to <code class="highlighter-rouge">ACTIVE</code> status.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-7">Request Parameters</h5>
 
@@ -2405,7 +2354,10 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <h5 class="api api-response api-response-params" id="response-parameters-7">Response Parameters</h5>
 
-<p>Returns empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.</p>
+<ul>
+  <li>Returns empty object by default.</li>
+  <li>If <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.</li>
+</ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
@@ -2414,11 +2366,9 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </span></code></pre>
 </div>
 
-<blockquote>
-  <p>If a password was set before the user was activated, then user must login with with their password or the activationToken and not the activation link.</p>
-</blockquote>
+<p>If a password was set before the user was activated, then user must login with with their password or the <code class="highlighter-rouge">activationToken</code> and not the activation link.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2428,7 +2378,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
@@ -2441,11 +2391,11 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/reactivate</span></p>
 
-<p>Reactivates a user.  This operation can only be performed on users with a <code class="highlighter-rouge">PROVISIONED</code> status.  This operation restarts the activation workflow if for some reason the user activation was not completed when using the activationToken from <a href="#activate-user">Activate User</a>.</p>
+<p>Reactivates a user</p>
 
-<blockquote>
-  <p>Users that do not have a password must complete the flow by completing <a href="#reset-password">Reset Password</a> and MFA enrollment steps to transition the user to <code class="highlighter-rouge">ACTIVE</code> status.</p>
-</blockquote>
+<p>This operation can only be performed on users with a <code class="highlighter-rouge">PROVISIONED</code> status.  This operation restarts the activation workflow if for some reason the user activation was not completed when using the activationToken from <a href="#activate-user">Activate User</a>.</p>
+
+<p>Users that don’t have a password must complete the flow by completing <a href="#reset-password">Reset Password</a> and MFA enrollment steps to transition the user to <code class="highlighter-rouge">ACTIVE</code> status.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-8">Request Parameters</h5>
 
@@ -2482,7 +2432,10 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <h5 class="api api-response api-response-params" id="response-parameters-8">Response Parameters</h5>
 
-<p>Returns empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.</p>
+<ul>
+  <li>Returns empty object by default.</li>
+  <li>If <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns an activation link for the user to set up their account. The activation token can be used to create a custom activation link.</li>
+</ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
@@ -2491,7 +2444,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2529,10 +2482,17 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/deactivate</span></p>
 
-<p>Deactivates a user.  This operation can only be performed on users that do not have a <code class="highlighter-rouge">DEPROVISIONED</code> status.  Deactivation of a user is an asynchronous operation.  The user will have the <code class="highlighter-rouge">transitioningToStatus</code> property with a value of <code class="highlighter-rouge">DEPROVISIONED</code> during deactivation to indicate that the user hasn’t completed the asynchronous operation.  The user will have a status of <code class="highlighter-rouge">DEPROVISIONED</code> when the deactivation process is complete.</p>
+<p>Deactivates a user</p>
+
+<p>This operation can only be performed on users that do not have a <code class="highlighter-rouge">DEPROVISIONED</code> status.  Deactivation of a user is an asynchronous operation.</p>
+
+<ul>
+  <li>The user’s <code class="highlighter-rouge">transitioningToStatus</code> property is <code class="highlighter-rouge">DEPROVISIONED</code> during deactivation to indicate that the user hasn’t completed the asynchronous operation.</li>
+  <li>The user’s status is <code class="highlighter-rouge">DEPROVISIONED</code> when the deactivation process is complete.</li>
+</ul>
 
 <blockquote>
-  <p>Deactivating a user is a <strong>destructive</strong> operation.  The user will be deprovisioned from all assigned applications which may destroy their data such as email or files.  <strong>This action cannot be recovered!</strong></p>
+  <p>Important: Deactivating a user is a <strong>destructive</strong> operation.  The user is deprovisioned from all assigned applications which may destroy their data such as email or files.  <strong>This action cannot be recovered!</strong></p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-9">Request Parameters</h5>
@@ -2545,7 +2505,6 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2555,7 +2514,6 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2564,7 +2522,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p>Returns an empty object.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2574,7 +2532,7 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-21">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2585,12 +2543,16 @@ in the request will be deleted. <strong>Don’t use <code class="highlighter-rou
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/suspend</span></p>
 
-<p>Suspends a user.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user will have a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete.</p>
+<p>Suspends a user</p>
 
-<blockquote>
-  <p>Suspended users cannot log in to Okta. Their group and app assignments are retained.
-Suspended users can only be unsuspended or deactivated.</p>
-</blockquote>
+<p>This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status.  The user has a status of <code class="highlighter-rouge">SUSPENDED</code> when the process is complete.</p>
+
+<p>Suspended users:</p>
+
+<ul>
+  <li>Can’t log in to Okta. Their group and app assignments are retained.</li>
+  <li>Can only be unsuspended or deactivated.</li>
+</ul>
 
 <h5 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h5>
 
@@ -2602,7 +2564,6 @@ Suspended users can only be unsuspended or deactivated.</p>
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2612,19 +2573,20 @@ Suspended users can only be unsuspended or deactivated.</p>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
 
 <h5 class="api api-response api-response-params" id="response-parameters-10">Response Parameters</h5>
 
-<p>Returns an empty object.</p>
+<p>Returns an empty object</p>
 
-<p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
-Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">ACTIVE</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
+<ul>
+  <li>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.</li>
+  <li>Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">ACTIVE</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</li>
+</ul>
 
-<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-21">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2634,7 +2596,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-22">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2645,7 +2607,9 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/unsuspend</span></p>
 
-<p>Unsuspends a user and returns them to the <code class="highlighter-rouge">ACTIVE</code> state.  This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.</p>
+<p>Unsuspends a user and returns them to the <code class="highlighter-rouge">ACTIVE</code> state</p>
+
+<p>This operation can only be performed on users that have a <code class="highlighter-rouge">SUSPENDED</code> status.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-11">Request Parameters</h5>
 
@@ -2657,7 +2621,6 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -2667,7 +2630,6 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2679,7 +2641,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.
 Passing an <code class="highlighter-rouge">id</code> that is not in the <code class="highlighter-rouge">SUSPENDED</code> state returns a <code class="highlighter-rouge">400 Bad Request</code> status code with error code <code class="highlighter-rouge">E0000001</code>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-22">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2689,7 +2651,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-23">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2706,8 +2668,8 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 
 <p>Deletes a user permanently.  This operation can only be performed on users that have a <code class="highlighter-rouge">DEPROVISIONED</code> status.  <strong>This action cannot be recovered!</strong></p>
 
-<p>This operation on a user entity that has not been deactivated will cause that user to be deactivated.  A second DELETE
-would be required to effect the full deletion.</p>
+<p>This operation on a user that hasn’t been deactivated causes that user to be deactivated.  A second delete operation
+is required to delete the user.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-12">Request Parameters</h5>
 
@@ -2740,7 +2702,7 @@ would be required to effect the full deletion.</p>
 
 <p>Passing an invalid <code class="highlighter-rouge">id</code> returns a <code class="highlighter-rouge">404 Not Found</code> status code with error code <code class="highlighter-rouge">E0000007</code>.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-23">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2750,7 +2712,7 @@ would be required to effect the full deletion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-24">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">ACCEPTED</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2766,7 +2728,7 @@ would be required to effect the full deletion.</p>
 <p>Unlocks a user with a <code class="highlighter-rouge">LOCKED_OUT</code> status and returns them to <code class="highlighter-rouge">ACTIVE</code> status.  Users will be able to login with their current password.</p>
 
 <blockquote>
-  <p>This operation currently only works with Okta-mastered users and does not support directory-mastered accounts such as Active Directory.</p>
+  <p>Note: This operation works with Okta-mastered users. It doesn’t support directory-mastered accounts such as Active Directory.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h5>
@@ -2798,7 +2760,7 @@ would be required to effect the full deletion.</p>
 
 <p>Returns an empty object</p>
 
-<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-24">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2808,7 +2770,7 @@ would be required to effect the full deletion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-25">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -2867,7 +2829,10 @@ would be required to effect the full deletion.</p>
 
 <h5 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h5>
 
-<p>Returns an empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns a link for the user to reset their password.</p>
+<ul>
+  <li>Returns an empty object by default.</li>
+  <li>If<code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns a link for the user to reset their password.</li>
+</ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -2875,7 +2840,7 @@ would be required to effect the full deletion.</p>
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-25">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2885,7 +2850,7 @@ would be required to effect the full deletion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -2895,7 +2860,7 @@ would be required to effect the full deletion.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-convert-a-user-to-a-federated-user">Request Example (Convert a User to a Federated User)</h5>
 
-<p>To convert a user to a federated user, pass <code class="highlighter-rouge">FEDERATED</code> as the <strong><em>provider</em></strong> in the <a href="#provider-object">Provider Object</a>. The <code class="highlighter-rouge">sendEmail</code>
+<p>To convert a user to a federated user, pass <code class="highlighter-rouge">FEDERATED</code> as the <code class="highlighter-rouge">provider</code> in the <a href="#provider-object">Provider Object</a>. The <code class="highlighter-rouge">sendEmail</code>
 parameter must be false or omitted for this type of conversion.</p>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
@@ -2906,7 +2871,7 @@ parameter must be false or omitted for this type of conversion.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-27">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
@@ -2916,8 +2881,8 @@ parameter must be false or omitted for this type of conversion.</p>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/lifecycle/expire_password</span></p>
 
-<p>This operation transitions the user to the status of <code class="highlighter-rouge">PASSWORD_EXPIRED</code> so that the user is required to change their password at their next login.
-If <code class="highlighter-rouge">tempPassword</code> is passed, the user’s password is reset to a temporary password that is returned, and then the temporary password is expired.</p>
+<p>This operation transitions the user status to <code class="highlighter-rouge">PASSWORD_EXPIRED</code> so that the user is required to change their password at their next login.
+If <code class="highlighter-rouge">tempPassword</code> is included in the request, the user’s password is reset to a temporary password that is returned, and then the temporary password is expired.</p>
 
 <p>If you have integrated Okta with your on-premise Active Directory (AD), then setting a user’s password as expired in Okta also expires the password in Active Directory.
 When the user tries to log in to Okta, delegated authentication finds the password-expired status in the Active Directory,
@@ -2958,7 +2923,10 @@ and the user is presented with the password-expired page where he or she can cha
 
 <h5 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h5>
 
-<p>Returns the complete user object by default. When <code class="highlighter-rouge">tempPassword</code> is <code class="highlighter-rouge">true</code>, returns the temporary password.</p>
+<ul>
+  <li>Returns the complete user object by default</li>
+  <li>If <code class="highlighter-rouge">tempPassword</code> is <code class="highlighter-rouge">true</code>, returns the temporary password</li>
+</ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"tempPassword"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HR076gb6"</span><span class="w">
@@ -2966,7 +2934,7 @@ and the user is presented with the password-expired page where he or she can cha
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-26">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2976,7 +2944,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-28">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
@@ -3066,7 +3034,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p>Returns an empty object by default.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-28">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-27">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3076,7 +3044,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-30">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-29">Response Example</h5>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -3091,7 +3059,9 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p>Removes all active identity provider sessions. This forces the user to authenticate on the next operation. Optionally revokes OpenID Connect and OAuth refresh and access tokens issued to the user.</p>
 
-<p><strong>Note:</strong> This does not clear the sessions created for web sign-in or native applications.</p>
+<blockquote>
+  <p>Note: This operation doesn’t clear the sessions created for web sign in or native applications.</p>
+</blockquote>
 
 <h4 class="api api-request api-request-params" id="request-parameters-17">Request Parameters</h4>
 
@@ -3130,7 +3100,7 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><code class="highlighter-rouge">204 No Content</code></p>
 
-<h4 class="api api-request api-request-example" id="request-example-29">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-28">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3140,7 +3110,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-31">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-30">Response Example</h4>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="err">`204 No Content`
 </span></code></pre>
@@ -3152,7 +3122,9 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/credentials/forgot_password</span></p>
 
-<p>Generates a one-time token (OTT) that can be used to reset a user’s password.  The user will be required to validate their security question’s answer when visiting the reset link.  This operation can only be performed on users with a valid <a href="#recovery-question-object">recovery question credential</a> and have an <code class="highlighter-rouge">ACTIVE</code> status.</p>
+<p>Generates a one-time token (OTT) that can be used to reset a user’s password</p>
+
+<p>The user will be required to validate their security question’s answer when visiting the reset link.  This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status and a valid <a href="#recovery-question-object">recovery question credential</a>.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-18">Request Parameters</h5>
 
@@ -3196,7 +3168,10 @@ and the user is presented with the password-expired page where he or she can cha
 
 <h5 class="api api-response api-response-params" id="response-parameters-18">Response Parameters</h5>
 
-<p>Returns an empty object by default. When <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns a link for the user to reset their password.</p>
+<ul>
+  <li>Returns an empty object by default</li>
+  <li>If <code class="highlighter-rouge">sendEmail</code> is <code class="highlighter-rouge">false</code>, returns a link for the user to reset their password.</li>
+</ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3204,11 +3179,9 @@ and the user is presented with the password-expired page where he or she can cha
 </span></code></pre>
 </div>
 
-<blockquote>
-  <p>This operation does not affect the status of the user.</p>
-</blockquote>
+<p>This operation does not affect the status of the user.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-29">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3218,7 +3191,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
@@ -3228,10 +3201,12 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/credentials/forgot_password</span></p>
 
-<p>Sets a new password for a user by validating the user’s answer to their current recovery question.  This operation can only be performed on users with a valid <a href="#recovery-question-object">recovery question credential</a> and have an <code class="highlighter-rouge">ACTIVE</code> status.</p>
+<p>Sets a new password for a user by validating the user’s answer to their current recovery question</p>
+
+<p>This operation can only be performed on users with an <code class="highlighter-rouge">ACTIVE</code> status and a valid <a href="#recovery-question-object">recovery question credential</a>.</p>
 
 <blockquote>
-  <p>This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  Best-practice is to generate a short-lived one-time token (OTT) that is sent to a verified email account.</p>
+  <p>Important: This operation is intended for applications that need to implement their own forgot password flow.  You are responsible for mitigation of all security risks such as phishing and replay attacks.  The best practice is to generate a short-lived, one-time token (OTT) that is sent to a verified email account.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-19">Request Parameters</h5>
@@ -3244,7 +3219,6 @@ and the user is presented with the password-expired page where he or she can cha
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -3254,7 +3228,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>password</td>
@@ -3262,7 +3235,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>Body</td>
       <td><a href="#password-object">Password Object</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>recovery_question</td>
@@ -3270,7 +3242,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>Body</td>
       <td><a href="#recovery-question-object">Recovery Question Object</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -3279,11 +3250,9 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><a href="#credentials-object">Credentials</a> of the user</p>
 
-<blockquote>
-  <p>This operation does not affect the status of the user.</p>
-</blockquote>
+<p>This operation does not affect the status of the user.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-30">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3296,7 +3265,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-32">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3317,7 +3286,9 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/credentials/change_password</span></p>
 
-<p>Changes a user’s password by validating the user’s current password.  This operation can only be performed on users in <code class="highlighter-rouge">STAGED</code>, <code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">PASSWORD_EXPIRED</code>, or <code class="highlighter-rouge">RECOVERY</code> status that have a valid <a href="#password-object">password credential</a></p>
+<p>Changes a user’s password by validating the user’s current password</p>
+
+<p>This operation can only be performed on users in <code class="highlighter-rouge">STAGED</code>, <code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">PASSWORD_EXPIRED</code>, or <code class="highlighter-rouge">RECOVERY</code> status that have a valid <a href="#password-object">password credential</a></p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-20">Request Parameters</h5>
 
@@ -3329,7 +3300,6 @@ and the user is presented with the password-expired page where he or she can cha
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -3339,7 +3309,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>oldPassword</td>
@@ -3347,7 +3316,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>Body</td>
       <td><a href="#password-object">Password Object</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>newPassword</td>
@@ -3355,7 +3323,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>Body</td>
       <td><a href="#password-object">Password Object</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -3364,11 +3331,9 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><a href="#credentials-object">Credentials</a> of the user</p>
 
-<blockquote>
-  <p>The user will transition to <code class="highlighter-rouge">ACTIVE</code> status when successfully invoked in <code class="highlighter-rouge">RECOVERY</code> status</p>
-</blockquote>
+<p>The user transitions to <code class="highlighter-rouge">ACTIVE</code> status when successfully invoked in <code class="highlighter-rouge">RECOVERY</code> status.</p>
 
-<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-31">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3381,7 +3346,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-33">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3402,7 +3367,9 @@ and the user is presented with the password-expired page where he or she can cha
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:id</em>/credentials/change_recovery_question</span></p>
 
-<p>Changes a user’s recovery question &amp; answer credential by validating the user’s current password.  This operation can only be performed on users in <strong>STAGED</strong>, <strong>ACTIVE</strong> or <strong>RECOVERY</strong> <code class="highlighter-rouge">status</code> that have a valid <a href="#password-object">password credential</a></p>
+<p>Changes a user’s recovery question &amp; answer credential by validating the user’s current password</p>
+
+<p>This operation can only be performed on users in <strong>STAGED</strong>, <strong>ACTIVE</strong> or <strong>RECOVERY</strong> <code class="highlighter-rouge">status</code> that have a valid <a href="#password-object">password credential</a></p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-21">Request Parameters</h5>
 
@@ -3414,7 +3381,6 @@ and the user is presented with the password-expired page where he or she can cha
       <th>Param Type</th>
       <th>DataType</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
@@ -3424,7 +3390,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>password</td>
@@ -3432,7 +3397,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>Body</td>
       <td><a href="#password-object">Password Object</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
     <tr>
       <td>recovery_question</td>
@@ -3440,7 +3404,6 @@ and the user is presented with the password-expired page where he or she can cha
       <td>Body</td>
       <td><a href="#recovery-question-object">Recovery Question Object</a></td>
       <td>TRUE</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -3453,7 +3416,7 @@ and the user is presented with the password-expired page where he or she can cha
   <p>This operation does not affect the status of the user.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-example" id="request-example-33">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-32">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3469,7 +3432,7 @@ and the user is presented with the password-expired page where he or she can cha
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-35">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-34">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3568,160 +3531,118 @@ and the user is presented with the password-expired page where he or she can cha
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>unique key for user</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">unique key for user</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>status</td>
-      <td>current <a href="#user-status">status</a> of user</td>
-      <td><code class="highlighter-rouge">STAGED</code>, <code class="highlighter-rouge">PROVISIONED</code>, <code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">RECOVERY</code>, <code class="highlighter-rouge">LOCKED_OUT</code>, <code class="highlighter-rouge">PASSWORD_EXPIRED</code>, <code class="highlighter-rouge">SUSPENDED</code>, or <code class="highlighter-rouge">DEPROVISIONED</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">status</td>
+      <td style="text-align: left">current    <a href="#user-status">status</a> of user</td>
+      <td style="text-align: left"><code class="highlighter-rouge">STAGED</code>, <code class="highlighter-rouge">PROVISIONED</code>, <code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">RECOVERY</code>, <code class="highlighter-rouge">LOCKED_OUT</code>, <code class="highlighter-rouge">PASSWORD_EXPIRED</code>, <code class="highlighter-rouge">SUSPENDED</code>, or <code class="highlighter-rouge">DEPROVISIONED</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>created</td>
-      <td>timestamp when user was created</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">created</td>
+      <td style="text-align: left">timestamp when user was created</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>activated</td>
-      <td>timestamp when transition to <code class="highlighter-rouge">ACTIVE</code> status completed</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">activated</td>
+      <td style="text-align: left">timestamp when transition to <code class="highlighter-rouge">ACTIVE</code> status completed</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>statusChanged</td>
-      <td>timestamp when status last changed</td>
-      <td>Date</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">statusChanged</td>
+      <td style="text-align: left">timestamp when status last changed</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>lastLogin</td>
-      <td>timestamp of last login</td>
-      <td>Date</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">lastLogin</td>
+      <td style="text-align: left">timestamp of last login</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>lastUpdated</td>
-      <td>timestamp when user was last updated</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">lastUpdated</td>
+      <td style="text-align: left">timestamp when user was last updated</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>passwordChanged</td>
-      <td>timestamp when password last changed</td>
-      <td>Date</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">passwordChanged</td>
+      <td style="text-align: left">timestamp when password last changed</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>transitioningToStatus</td>
-      <td>target status of an in-progress asynchronous status transition</td>
-      <td><code class="highlighter-rouge">PROVISIONED</code>, <code class="highlighter-rouge">ACTIVE</code>, or <code class="highlighter-rouge">DEPROVISIONED</code></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">transitioningToStatus</td>
+      <td style="text-align: left">target status of an in-progress asynchronous status transition</td>
+      <td style="text-align: left"><code class="highlighter-rouge">PROVISIONED</code>, <code class="highlighter-rouge">ACTIVE</code>, or <code class="highlighter-rouge">DEPROVISIONED</code></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>profile</td>
-      <td>user profile properties</td>
-      <td><a href="#profile-object">Profile Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">user profile properties</td>
+      <td style="text-align: left">   <a href="#profile-object">Profile Object</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>credentials</td>
-      <td>user’s primary authentication and recovery credentials</td>
-      <td><a href="#credentials-object">Credentials Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">credentials</td>
+      <td style="text-align: left">user’s primary authentication and recovery credentials</td>
+      <td style="text-align: left">   <a href="#credentials-object">Credentials Object</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>_embedded</td>
-      <td>embedded resources related to the user</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">_embedded</td>
+      <td style="text-align: left">embedded resources related to the user</td>
+      <td style="text-align: left">   <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>_links</td>
-      <td><a href="#links-object">link relations</a> for the user’s current <code class="highlighter-rouge">status</code></td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">_links</td>
+      <td style="text-align: left">   <a href="#links-object">link relations</a> for the user’s current <code class="highlighter-rouge">status</code></td>
+      <td style="text-align: left">   <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -3748,14 +3669,12 @@ When a user is retrieved via the API, however, the value will be a URL (represen
 
 </div>
 
-<blockquote>
-  <p>Metadata properties such as <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">status</code>, timestamps, <code class="highlighter-rouge">_links</code>, and <code class="highlighter-rouge">_embedded</code> are only available after a user is created.</p>
-</blockquote>
+<p>Metadata properties such as <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">status</code>, timestamps, <code class="highlighter-rouge">_links</code>, and <code class="highlighter-rouge">_embedded</code> are only available after a user is created.</p>
 
-<blockquote>
-  <p><code class="highlighter-rouge">activated</code> timestamp will only be available for users activated after <em>06/30/2013</em>.<br />
-<code class="highlighter-rouge">statusChanged</code> and <code class="highlighter-rouge">lastLogin</code> timestamps will be missing for users created before <em>06/30/2013</em> and updated on next status change or login.</p>
-</blockquote>
+<ul>
+  <li>The <code class="highlighter-rouge">activated</code> timestamp will only be available for users activated after 06/30/2013.</li>
+  <li>The<code class="highlighter-rouge">statusChanged</code> and <code class="highlighter-rouge">lastLogin</code> timestamps will be missing for users created before 06/30/2013 and updated on next status change or login.</li>
+</ul>
 
 <h3 id="user-status">User Status</h3>
 
@@ -3811,374 +3730,375 @@ When running reports, remember that the data is valid as of the last login or li
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
+      <th style="text-align: left">MinLength</th>
+      <th style="text-align: left">MaxLength</th>
+      <th style="text-align: left">Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>login</td>
-      <td>unique identifier for the user (<code class="highlighter-rouge">username</code>)</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>5</td>
-      <td>100</td>
-      <td><a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 Section 3.3</a></td>
+      <td style="text-align: left">login</td>
+      <td style="text-align: left">unique identifier for the user (<code class="highlighter-rouge">username</code>)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">5</td>
+      <td style="text-align: left">100</td>
+      <td style="text-align: left">  <a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 Section 3.3</a></td>
     </tr>
     <tr>
-      <td>email</td>
-      <td>primary email address of user</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>5</td>
-      <td>100</td>
-      <td><a href="http://tools.ietf.org/html/rfc5322#section-3.2.3">RFC 5322 Section 3.2.3</a></td>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">primary email address of user</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">5</td>
+      <td style="text-align: left">100</td>
+      <td style="text-align: left">  <a href="http://tools.ietf.org/html/rfc5322#section-3.2.3">RFC 5322 Section 3.2.3</a></td>
     </tr>
     <tr>
-      <td>secondEmail</td>
-      <td>secondary email address of user typically used for account recovery</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>5</td>
-      <td>100</td>
-      <td><a href="http://tools.ietf.org/html/rfc5322#section-3.2.3">RFC 5322 Section 3.2.3</a></td>
+      <td style="text-align: left">secondEmail</td>
+      <td style="text-align: left">secondary email address of user typically used for account recovery</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">5</td>
+      <td style="text-align: left">100</td>
+      <td style="text-align: left">  <a href="http://tools.ietf.org/html/rfc5322#section-3.2.3">RFC 5322 Section 3.2.3</a></td>
     </tr>
     <tr>
-      <td>firstName</td>
-      <td>given name of the user (<code class="highlighter-rouge">givenName</code>)</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>1</td>
-      <td>50</td>
-      <td> </td>
+      <td style="text-align: left">firstName</td>
+      <td style="text-align: left">given name of the user (<code class="highlighter-rouge">givenName</code>)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">50</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>lastName</td>
-      <td>family name of the user (<code class="highlighter-rouge">familyName</code>)</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>1</td>
-      <td>50</td>
-      <td> </td>
+      <td style="text-align: left">lastName</td>
+      <td style="text-align: left">family name of the user (<code class="highlighter-rouge">familyName</code>)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">50</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>middleName</td>
-      <td>middle name(s) of the user</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">middleName</td>
+      <td style="text-align: left">middle name(s) of the user</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>honorificPrefix</td>
-      <td>honorific prefix(es) of the user, or title in most Western languages</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">honorificPrefix</td>
+      <td style="text-align: left">honorific prefix(es) of the user, or title in most Western languages</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>honorificSuffix</td>
-      <td>honorific suffix(es) of the user</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">honorificSuffix</td>
+      <td style="text-align: left">honorific suffix(es) of the user</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>title</td>
-      <td>user’s title, such as “Vice President”</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">title</td>
+      <td style="text-align: left">user’s title, such as “Vice President”</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>displayName</td>
-      <td>name of the user, suitable for display to end-users</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">displayName</td>
+      <td style="text-align: left">name of the user, suitable for display to end-users</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>nickName</td>
-      <td>casual way to address the user in real life</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">nickName</td>
+      <td style="text-align: left">casual way to address the user in real life</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>profileUrl</td>
-      <td>url of user’s online profile (e.g. a web page)</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td><a href="https://tools.ietf.org/html/rfc1808">URL</a></td>
+      <td style="text-align: left">profileUrl</td>
+      <td style="text-align: left">url of user’s online profile (e.g. a web page)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">  <a href="https://tools.ietf.org/html/rfc1808">URL</a></td>
     </tr>
     <tr>
-      <td>primaryPhone</td>
-      <td>primary phone number of user such as home number</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>0</td>
-      <td>100</td>
-      <td> </td>
+      <td style="text-align: left">primaryPhone</td>
+      <td style="text-align: left">primary phone number of user such as home number</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">100</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>mobilePhone</td>
-      <td>mobile phone number of user</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>0</td>
-      <td>100</td>
-      <td> </td>
+      <td style="text-align: left">mobilePhone</td>
+      <td style="text-align: left">mobile phone number of user</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">0</td>
+      <td style="text-align: left">100</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>streetAddress</td>
-      <td>full street address component of user’s address</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">streetAddress</td>
+      <td style="text-align: left">full street address component of user’s address</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>city</td>
-      <td>city or locality component of user’s address (<code class="highlighter-rouge">locality</code>)</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">city</td>
+      <td style="text-align: left">city or locality component of user’s address (<code class="highlighter-rouge">locality</code>)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>state</td>
-      <td>state or region component of user’s address (<code class="highlighter-rouge">region</code>)</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">state or region component of user’s address (<code class="highlighter-rouge">region</code>)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>zipCode</td>
-      <td>zipcode or postal code component of user’s address (<code class="highlighter-rouge">postalCode</code>)</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">zipCode</td>
+      <td style="text-align: left">zipcode or postal code component of user’s address (<code class="highlighter-rouge">postalCode</code>)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>countryCode</td>
-      <td>country name component of user’s address (<code class="highlighter-rouge">country</code>)</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td><a href="https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#ref-ISO3166">ISO 3166-1 alpha 2 “short” code format</a></td>
+      <td style="text-align: left">countryCode</td>
+      <td style="text-align: left">country name component of user’s address (<code class="highlighter-rouge">country</code>)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">  <a href="https://tools.ietf.org/html/draft-ietf-scim-core-schema-22#ref-ISO3166">ISO 3166-1 alpha 2 “short” code format</a></td>
     </tr>
     <tr>
-      <td>postalAddress</td>
-      <td>mailing address component of user’s address</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">postalAddress</td>
+      <td style="text-align: left">mailing address component of user’s address</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>preferredLanguage</td>
-      <td>user’s preferred written or spoken languages</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td><a href="https://tools.ietf.org/html/rfc7231#section-5.3.5">RFC 7231 Section 5.3.5</a></td>
+      <td style="text-align: left">preferredLanguage</td>
+      <td style="text-align: left">user’s preferred written or spoken languages</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">  <a href="https://tools.ietf.org/html/rfc7231#section-5.3.5">RFC 7231 Section 5.3.5</a></td>
     </tr>
     <tr>
-      <td>locale</td>
-      <td>user’s default location for purposes of localizing items such as currency, date time format, numerical representations, etc.</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td>See Note for more details.</td>
+      <td style="text-align: left">locale</td>
+      <td style="text-align: left">user’s default location for purposes of localizing items such as currency, date time format, numerical representations, etc.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">See Note for more details.</td>
     </tr>
     <tr>
-      <td>timezone</td>
-      <td>user’s time zone</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td><a href="https://tools.ietf.org/html/rfc6557">IANA Time Zone database format</a></td>
+      <td style="text-align: left">timezone</td>
+      <td style="text-align: left">user’s time zone</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">  <a href="https://tools.ietf.org/html/rfc6557">IANA Time Zone database format</a></td>
     </tr>
     <tr>
-      <td>userType</td>
-      <td>used to identify the organization to user relationship such as “Employee” or “Contractor”</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">userType</td>
+      <td style="text-align: left">used to identify the organization to user relationship such as “Employee” or “Contractor”</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>employeeNumber</td>
-      <td>organization or company assigned unique identifier for the user</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">employeeNumber</td>
+      <td style="text-align: left">organization or company assigned unique identifier for the user</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>costCenter</td>
-      <td>name of a cost center assigned to user</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">costCenter</td>
+      <td style="text-align: left">name of a cost center assigned to user</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>organization</td>
-      <td>name of user’s organization</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">organization</td>
+      <td style="text-align: left">name of user’s organization</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>division</td>
-      <td>name of user’s division</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">division</td>
+      <td style="text-align: left">name of user’s division</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>department</td>
-      <td>name of user’s department</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">department</td>
+      <td style="text-align: left">name of user’s department</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>managerId</td>
-      <td><code class="highlighter-rouge">id</code> of a user’s manager</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">managerId</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of a user’s manager</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>manager</td>
-      <td>displayName of the user’s manager</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">manager</td>
+      <td style="text-align: left">displayName of the user’s manager</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
 
 <blockquote>
-  <p>Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code; e.g., ‘en_US’ specifies the language English and country US. <a href="https://support.okta.com/help/articles/Knowledge_Article/Universal-Directory-enforcement-of-ISO-compliant-Locale-values">Okta Support Doc for ISO compliant Locale values</a></p>
+  <p>Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code. For example, ‘en_US’ specifies the language English and country US. <a href="https://support.okta.com/help/articles/Knowledge_Article/Universal-Directory-enforcement-of-ISO-compliant-Locale-values">Okta Support Doc for ISO compliant Locale values</a></p>
 </blockquote>
 
 <h5 id="okta-login">Okta Login</h5>
 
 <p>Every user within your Okta organization must have a unique identifier for a login.  This constraint applies to all users you import from other systems or applications such as Active Directory.  Your organization is the top-level namespace to mix and match logins from all your connected applications or directories.  Careful consideration of naming conventions for your login identifier will make it easier to onboard new applications in the future.</p>
 
-<p>Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified shortname (e.g. <code class="highlighter-rouge">isaac.brock</code> with login <em>isaac.brock@example.com</em>) as long as the shortname is still unique within the organization.</p>
+<p>Okta has a default ambiguous name resolution policy for logins.  Users can login with their non-qualified short name (e.g. <code class="highlighter-rouge">isaac.brock</code> with login <em>isaac.brock@example.com</em>) as long as the shortname is still unique within the organization.</p>
 
 <blockquote>
-  <p>Avoid using a <code class="highlighter-rouge">login</code> with a <code class="highlighter-rouge">/</code> character.  Although <code class="highlighter-rouge">/</code> is a valid character according to <a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 section 3.3</a>, a user with this character in their <code class="highlighter-rouge">login</code> cannot be fetched by <code class="highlighter-rouge">login</code> (<a href="#get-user-with-id">see Get User by ID</a>) due to security risks with escaping this character in URI paths.</p>
+  <p>Hint: Don’t use a <code class="highlighter-rouge">login</code> with a <code class="highlighter-rouge">/</code> character.  Although <code class="highlighter-rouge">/</code> is a valid character according to <a href="http://tools.ietf.org/html/rfc6531#section-3.3">RFC 6531 section 3.3</a>, a user with this character in their <code class="highlighter-rouge">login</code> can’t be fetched by <code class="highlighter-rouge">login</code> due to security risks with escaping this character in URI paths.
+For more information about <code class="highlighter-rouge">login</code>, see <a href="#get-user-with-id">Get User by ID</a>.</p>
 </blockquote>
 
 <h4 id="custom-profile-properties">Custom Profile Properties</h4>
@@ -4194,46 +4114,34 @@ When running reports, remember that the data is valid as of the last login or li
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>password</td>
-      <td><a href="#password-object">Password Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">password</td>
+      <td style="text-align: left">  <a href="#password-object">Password Object</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>recovery_question</td>
-      <td><a href="#recovery-question-object">Recovery Question Object</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">recovery_question</td>
+      <td style="text-align: left">  <a href="#recovery-question-object">Recovery Question Object</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>provider</td>
-      <td><a href="#provider-object">Provider Object</a></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">provider</td>
+      <td style="text-align: left">  <a href="#provider-object">Provider Object</a></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -4258,31 +4166,33 @@ When running reports, remember that the data is valid as of the last login or li
 
 <h4 id="password-object">Password Object</h4>
 
-<p>Specifies a password for a user.  A password value is a <strong>write-only</strong> property.  When a user has a valid password and a response object contains a password credential, then the Password Object will be a bare object without the <code class="highlighter-rouge">value</code> property defined (e.g. <code class="highlighter-rouge">password: {}</code>) to indicate that a password value exists.</p>
+<p>Specifies a password for a user</p>
+
+<p>A password value is a <strong>write-only</strong> property.  When a user has a valid password and a response object contains a password credential, then the Password Object is a bare object without the <code class="highlighter-rouge">value</code> property defined (e.g. <code class="highlighter-rouge">password: {}</code>) to indicate that a password value exists.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
+      <th style="text-align: left">MinLength</th>
+      <th style="text-align: left">MaxLength</th>
+      <th style="text-align: left">Validation</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>value</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td><em>Password Policy</em></td>
-      <td>40</td>
-      <td><em>Password Policy</em></td>
+      <td style="text-align: left">value</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">Password Policy</td>
+      <td style="text-align: left">40</td>
+      <td style="text-align: left">Password Policy</td>
     </tr>
   </tbody>
 </table>
@@ -4323,7 +4233,6 @@ When running reports, remember that the data is valid as of the last login or li
       <th>Readonly</th>
       <th>MinLength</th>
       <th>MaxLength</th>
-      <th>Validation</th>
     </tr>
   </thead>
   <tbody>
@@ -4335,7 +4244,6 @@ When running reports, remember that the data is valid as of the last login or li
       <td>FALSE</td>
       <td>1</td>
       <td>100</td>
-      <td> </td>
     </tr>
     <tr>
       <td>answer</td>
@@ -4345,7 +4253,6 @@ When running reports, remember that the data is valid as of the last login or li
       <td>FALSE</td>
       <td>1</td>
       <td>100</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -4357,36 +4264,27 @@ When running reports, remember that the data is valid as of the last login or li
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>type</td>
-      <td><code class="highlighter-rouge">OKTA</code>, <code class="highlighter-rouge">ACTIVE_DIRECTORY</code>,<code class="highlighter-rouge">LDAP</code>, <code class="highlighter-rouge">FEDERATION</code>, or <code class="highlighter-rouge">SOCIAL</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">type</td>
+      <td style="text-align: left"><code class="highlighter-rouge">OKTA</code>, <code class="highlighter-rouge">ACTIVE_DIRECTORY</code>,<code class="highlighter-rouge">LDAP</code>, <code class="highlighter-rouge">FEDERATION</code>, or <code class="highlighter-rouge">SOCIAL</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>name</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">name</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -4410,58 +4308,58 @@ When running reports, remember that the data is valid as of the last login or li
 <table>
   <thead>
     <tr>
-      <th>Link Relation Type</th>
-      <th>Description</th>
+      <th style="text-align: left">Link Relation Type</th>
+      <th style="text-align: left">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>self</td>
-      <td>The actual user</td>
+      <td style="text-align: left">self</td>
+      <td style="text-align: left">The actual user</td>
     </tr>
     <tr>
-      <td>activate</td>
-      <td><a href="#activate-user">Lifecycle action</a> to transition user to <code class="highlighter-rouge">ACTIVE</code> status</td>
+      <td style="text-align: left">activate</td>
+      <td style="text-align: left">  <a href="#activate-user">Lifecycle action</a> to transition user to <code class="highlighter-rouge">ACTIVE</code> status</td>
     </tr>
     <tr>
-      <td>deactivate</td>
-      <td><a href="#deactivate-user">Lifecycle action</a> to transition user to <code class="highlighter-rouge">DEPROVISIONED</code> status</td>
+      <td style="text-align: left">deactivate</td>
+      <td style="text-align: left">  <a href="#deactivate-user">Lifecycle action</a> to transition user to <code class="highlighter-rouge">DEPROVISIONED</code> status</td>
     </tr>
     <tr>
-      <td>suspend</td>
-      <td><a href="#suspend-user">Lifecycle action</a> to transition user to <code class="highlighter-rouge">SUSPENDED</code> status</td>
+      <td style="text-align: left">suspend</td>
+      <td style="text-align: left">  <a href="#suspend-user">Lifecycle action</a> to transition user to <code class="highlighter-rouge">SUSPENDED</code> status</td>
     </tr>
     <tr>
-      <td>unsuspend</td>
-      <td><a href="#unsuspend-user">Lifecycle action</a> to return a user to <code class="highlighter-rouge">ACTIVE</code> status when their current status is <code class="highlighter-rouge">SUSPENDED</code></td>
+      <td style="text-align: left">unsuspend</td>
+      <td style="text-align: left">  <a href="#unsuspend-user">Lifecycle action</a> to return a user to <code class="highlighter-rouge">ACTIVE</code> status when their current status is <code class="highlighter-rouge">SUSPENDED</code></td>
     </tr>
     <tr>
-      <td>resetPassword</td>
-      <td><a href="#reset-password">Lifecycle action</a> to transition user to <code class="highlighter-rouge">RECOVERY</code> status</td>
+      <td style="text-align: left">resetPassword</td>
+      <td style="text-align: left">  <a href="#reset-password">Lifecycle action</a> to transition user to <code class="highlighter-rouge">RECOVERY</code> status</td>
     </tr>
     <tr>
-      <td>expirePassword</td>
-      <td><a href="#expire-password">Lifecycle action</a> to transition user to <code class="highlighter-rouge">PASSWORD_EXPIRED</code> status</td>
+      <td style="text-align: left">expirePassword</td>
+      <td style="text-align: left">  <a href="#expire-password">Lifecycle action</a> to transition user to <code class="highlighter-rouge">PASSWORD_EXPIRED</code> status</td>
     </tr>
     <tr>
-      <td>resetFactors</td>
-      <td><a href="#reset-factors">Lifecycle action</a> to reset all the MFA factors for the user</td>
+      <td style="text-align: left">resetFactors</td>
+      <td style="text-align: left">  <a href="#reset-factors">Lifecycle action</a> to reset all the MFA factors for the user</td>
     </tr>
     <tr>
-      <td>unlock</td>
-      <td><a href="#unlock-user">Lifecycle action</a> to return a user to <code class="highlighter-rouge">ACTIVE</code> status when their current status is <code class="highlighter-rouge">LOCKED_OUT</code> due to exceeding failed login attempts</td>
+      <td style="text-align: left">unlock</td>
+      <td style="text-align: left">  <a href="#unlock-user">Lifecycle action</a> to return a user to <code class="highlighter-rouge">ACTIVE</code> status when their current status is <code class="highlighter-rouge">LOCKED_OUT</code> due to exceeding failed login attempts</td>
     </tr>
     <tr>
-      <td>forgotPassword</td>
-      <td><a href="#forgot-password">Resets a user’s password</a> by validating the user’s recovery credential.</td>
+      <td style="text-align: left">forgotPassword</td>
+      <td style="text-align: left">  <a href="#forgot-password">Resets a user’s password</a> by validating the user’s recovery credential.</td>
     </tr>
     <tr>
-      <td>changePassword</td>
-      <td><a href="#change-password">Changes a user’s password</a> validating the user’s current password</td>
+      <td style="text-align: left">changePassword</td>
+      <td style="text-align: left">  <a href="#change-password">Changes a user’s password</a> validating the user’s current password</td>
     </tr>
     <tr>
-      <td>changeRecoveryQuestion</td>
-      <td><a href="#change-recovery-question">Changes a user’s recovery credential</a> by validating the user’s current password</td>
+      <td style="text-align: left">changeRecoveryQuestion</td>
+      <td style="text-align: left">  <a href="#change-recovery-question">Changes a user’s recovery credential</a> by validating the user’s current password</td>
     </tr>
   </tbody>
 </table>

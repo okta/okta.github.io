@@ -132,8 +132,9 @@
                 <li class="is-active"><a href="/docs/api/resources/authn.html">Authentication API</a></li>
                 <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
                 <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
-                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
                 <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
+                <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
               </ul>
             </li>
             <li>
@@ -252,7 +253,7 @@
   <li>
     <p>Explore the Authentication API:</p>
 
-    <p><a href="https://app.getpostman.com/run-collection/07df454531c56cb5fe71"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+    <p><a href="https://app.getpostman.com/run-collection/f9684487e584101f25a3"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
   </li>
 </ol>
 
@@ -3707,6 +3708,10 @@ If for any reason the user can’t scan the QR code, they can use the link provi
   <li><a href="#verify-call-factor">Verify Call Factor</a></li>
 </ul>
 
+<blockquote>
+  <p>If the sign-on (or app sign-on) <a href="#remember-device-policy-object">policy</a> allows remembering the device, then the end user should be prompted to choose whether the current device should be remembered. This helps reduce the number of times the user is prompted for MFA on the current device. The user’s choice should be passed to Okta using the request parameter <code class="highlighter-rouge">rememberDevice</code> to the verify endpoint. The default value of <code class="highlighter-rouge">rememberDevice</code> parameter is <code class="highlighter-rouge">false</code>.</p>
+</blockquote>
+
 <h4 class="api api-operation" id="verify-security-question-factor">Verify Security Question Factor</h4>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/authn/factors/<em>:fid</em>/verify</span></p>
@@ -3746,6 +3751,13 @@ If for any reason the user can’t scan the QR code, they can use the link provi
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>rememberDevice</td>
+      <td>user’s decision to remember device</td>
+      <td>URL</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -3842,6 +3854,13 @@ If for any reason the user can’t scan the QR code, they can use the link provi
       <td>OTP sent to device</td>
       <td>Body</td>
       <td>String</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>rememberDevice</td>
+      <td>user’s decision to remember device</td>
+      <td>URL</td>
+      <td>Boolean</td>
       <td>FALSE</td>
     </tr>
   </tbody>
@@ -4040,6 +4059,13 @@ If for any reason the user can’t scan the QR code, they can use the link provi
       <td>String</td>
       <td>FALSE</td>
     </tr>
+    <tr>
+      <td>rememberDevice</td>
+      <td>user’s decision to remember device</td>
+      <td>URL</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+    </tr>
   </tbody>
 </table>
 
@@ -4131,6 +4157,13 @@ If for any reason the user can’t scan the QR code, they can use the link provi
       <td>Body</td>
       <td>String</td>
       <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>rememberDevice</td>
+      <td>user’s decision to remember device</td>
+      <td>URL</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -4612,6 +4645,13 @@ If for any reason the user can’t scan the QR code, they can use the link provi
       <td>String</td>
       <td>TRUE</td>
     </tr>
+    <tr>
+      <td>rememberDevice</td>
+      <td>user’s decision to remember device</td>
+      <td>URL</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+    </tr>
   </tbody>
 </table>
 
@@ -4804,6 +4844,13 @@ javascript API to get the signed assertion from the U2F token.</p>
       <td>OTP sent to device</td>
       <td>Body</td>
       <td>String</td>
+      <td>FALSE</td>
+    </tr>
+    <tr>
+      <td>rememberDevice</td>
+      <td>user’s decision to remember device</td>
+      <td>URL</td>
+      <td>Boolean</td>
       <td>FALSE</td>
     </tr>
   </tbody>
@@ -7314,6 +7361,76 @@ Represents the type of authentication. Currently available only during <a href="
     </tr>
   </tbody>
 </table>
+
+<h4 id="remember-device-policy-object">Remember Device Policy Object</h4>
+
+<p>A subset of policy settings of the Sign-on or App Sign-on policy published during <code class="highlighter-rouge">MFA_REQUIRED</code>, <code class="highlighter-rouge">MFA_CHALLENGE</code> states</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>allowRememberDevice</td>
+      <td>indicates whether remember device is allowed based on the policy</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>rememberDeviceByDefault</td>
+      <td>indicates whether user previously opted to remember the current device</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>rememberDeviceLifetimeInMinutes</td>
+      <td>indicates how long the current verification would be valid (based on the policy)</td>
+      <td>Number</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="when-sign-on-policy-is-device-based">When sign-on policy is device based</h5>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"allowRememberDevice"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"rememberDeviceByDefault"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"rememberDeviceLifetimeInMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 id="when-sign-on-policy-is-time-based">When sign-on policy is time based</h5>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"allowRememberDevice"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"rememberDeviceByDefault"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="err">//true</span><span class="w"> </span><span class="err">if</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">has</span><span class="w"> </span><span class="err">chosen</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">remember</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">current</span><span class="w"> </span><span class="err">device</span><span class="w">
+   </span><span class="nt">"rememberDeviceLifetimeInMinutes"</span><span class="p">:</span><span class="mi">5</span><span class="w"> </span><span class="err">//this</span><span class="w"> </span><span class="err">value</span><span class="w"> </span><span class="err">depends</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">factor</span><span class="w"> </span><span class="err">lifetime</span><span class="w"> </span><span class="err">value</span><span class="w"> </span><span class="err">configured</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">sign-on</span><span class="w"> </span><span class="err">policy</span><span class="w"> </span><span class="err">rule</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 id="when-policy-is-not-based-on-time-or-device">When policy is not based on time or device</h5>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">  
+   </span><span class="nt">"allowRememberDevice"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"rememberDeviceByDefault"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"rememberDeviceLifetimeInMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h4 id="target-object">Target Object</h4>
 <p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a> 

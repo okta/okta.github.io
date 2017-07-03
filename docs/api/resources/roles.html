@@ -132,8 +132,9 @@
                 <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
                 <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
                 <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
-                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
                 <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
+                <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
               </ul>
             </li>
             <li>
@@ -208,7 +209,7 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/roles.md">Edit Page</a>
       <h1 id="admin-roles-api">Admin Roles API</h1>
 
-<p>The Okta Administrator Roles API provides operations to manage administrative role assignments for a user.</p>
+<p>The Okta Admin Roles API provides operations to manage administrative role assignments for a user.</p>
 
 <h2 id="getting-started-with-admin-roles">Getting Started with Admin Roles</h2>
 
@@ -227,22 +228,20 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -295,30 +294,27 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>type</td>
-      <td>type of role to assign</td>
-      <td>Body</td>
-      <td><a href="#role-types">Role Type</a></td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">type</td>
+      <td style="text-align: left">type of role to assign</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">  <a href="#role-types">Role Type</a></td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -363,30 +359,27 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>rid</td>
-      <td><code class="highlighter-rouge">id</code> of role</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">rid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of role</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -415,9 +408,9 @@
 
 <h2 id="role-target-operations">Role Target Operations</h2>
 
-<h3 id="user-admin-role-group-targets">User Admin Role Group Targets</h3>
+<h3 id="group-admin-role-group-targets">Group Admin Role Group Targets</h3>
 
-<h4 class="api api-operation" id="list-group-targets-for-user-admin-role">List Group Targets for User Admin Role</h4>
+<h4 class="api api-operation" id="list-group-targets-for-group-admin-role">List Group Targets for Group Admin Role</h4>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:uid</em>/roles/<em>:rid</em>/targets/groups</span></p>
 
@@ -428,61 +421,52 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>rid</td>
-      <td><code class="highlighter-rouge">id</code> of role</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">rid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of role</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>limit</td>
-      <td>Specifies the number of results for a page</td>
-      <td>Query</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>20</td>
+      <td style="text-align: left">limit</td>
+      <td style="text-align: left">Specifies the number of results for a page (default is 20)</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Number</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>after</td>
-      <td>Specifies the pagination cursor for the next page of targets</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">after</td>
+      <td style="text-align: left">Specifies the pagination cursor for the next page of targets</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a></p>
-</blockquote>
+<p>Treat the page cursor as an opaque value: obtain it through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a>.</p>
 
 <h5 class="api api-response api-response-params" id="response-parameters-3">Response Parameters</h5>
 
 <p>Array of <a href="./groups.html">Groups</a></p>
 
-<blockquote>
-  <p>If the role is not scoped to specific group targets, an empty array <code class="highlighter-rouge">[]</code> is returned.</p>
-</blockquote>
+<p>If the role isn’t scoped to specific group targets, an empty array <code class="highlighter-rouge">[]</code> is returned.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-3">Request Example</h5>
 
@@ -527,57 +511,51 @@
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">]</span><span class="w"> 
 </span></code></pre>
 </div>
 
-<h4 class="api api-operation" id="add-group-target-to-user-admin-role">Add Group Target to User Admin Role</h4>
+<h4 class="api api-operation" id="add-group-target-to-group-admin-role">Add Group Target to Group Admin Role</h4>
 
 <p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/users/<em>:uid</em>/roles/<em>:rid</em>/targets/groups/<em>:gid</em></span></p>
 
 <p>Adds a group target for a <code class="highlighter-rouge">USER_ADMIN</code> role assignment.</p>
 
-<blockquote>
-  <p>Adding the first group target changes the scope of the role assignment from applying to all targets to only applying to the specified target.</p>
-</blockquote>
+<p>Adding the first group target changes the scope of the role assignment from applying to all targets to only applying to the specified target.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>rid</td>
-      <td><code class="highlighter-rouge">id</code> of role</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">rid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of role</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>gid</td>
-      <td><code class="highlighter-rouge">id</code> of group target to scope role assignment</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">gid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of group target to scope role assignment</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -604,53 +582,47 @@
 </code></pre>
 </div>
 
-<h4 class="api api-operation" id="remove-group-target-from-user-admin-role">Remove Group Target from User Admin Role</h4>
+<h4 class="api api-operation" id="remove-group-target-from-group-admin-role">Remove Group Target from Group Admin Role</h4>
 
 <p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/<em>:uid</em>/roles/<em>:rid</em>/targets/groups/<em>:gid</em></span></p>
 
 <p>Removes a group target from a <code class="highlighter-rouge">USER_ADMIN</code> role assignment.</p>
 
-<blockquote>
-  <p>Don’t remove the last group target from a role assignment, as this causes an exception.  If you need a role assignment that applies to all groups, the API consumer should delete the <code class="highlighter-rouge">USER_ADMIN</code> role assignment and recreate it.</p>
-</blockquote>
+<p>Don’t remove the last group target from a role assignment, as this causes an exception.  If you need a role assignment that applies to all groups, the API consumer should delete the <code class="highlighter-rouge">USER_ADMIN</code> role assignment and recreate it.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-5">Request Parameters</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>rid</td>
-      <td><code class="highlighter-rouge">id</code> of role</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">rid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of role</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>gid</td>
-      <td><code class="highlighter-rouge">id</code> of group target for role assignment</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">gid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of group target for role assignment</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -690,61 +662,52 @@
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>rid</td>
-      <td><code class="highlighter-rouge">id</code> of role</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">rid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of role</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>limit</td>
-      <td>Specifies the number of results for a page</td>
-      <td>Query</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>20</td>
+      <td style="text-align: left">limit</td>
+      <td style="text-align: left">Specifies the number of results for a page (default is 20)</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Number</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>after</td>
-      <td>Specifies the pagination cursor for the next page of targets</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">after</td>
+      <td style="text-align: left">Specifies the pagination cursor for the next page of targets</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
 
-<blockquote>
-  <p>The page cursor should treated as an opaque value and obtained through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a></p>
-</blockquote>
+<p>Treat the page cursor as an opaque value: obtain it through the next link relation. See <a href="/docs/api/getting_started/design_principles.html#pagination">Pagination</a></p>
 
 <h5 class="api api-response api-response-params" id="response-parameters-6">Response Parameters</h5>
 
 <p>Array of Catalog Apps</p>
 
-<blockquote>
-  <p>If the role is not scoped to specific apps in the catalog, an empty array <code class="highlighter-rouge">[]</code> is returned.</p>
-</blockquote>
+<p>If the role is not scoped to specific apps in the catalog, an empty array <code class="highlighter-rouge">[]</code> is returned.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
 
@@ -786,7 +749,7 @@
       </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802/img/logos/salesforce_logo.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.okta.com:1802/img/logos/salesforce_logo.png"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
@@ -817,7 +780,7 @@
       </span><span class="nt">"logo"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802/img/logos/box.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.okta.com:1802/img/logos/box.png"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
@@ -833,47 +796,41 @@
 
 <p>Adds an app target for an <code class="highlighter-rouge">APP_ADMIN</code> role assignment.</p>
 
-<blockquote>
-  <p>Adding the first app target changes the scope of the role assignment from applying to all app targets to only applying to the specified target.</p>
-</blockquote>
+<p>Adding the first app target changes the scope of the role assignment from applying to all app targets to applying to the specified target.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-7">Request Parameters</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>rid</td>
-      <td><code class="highlighter-rouge">id</code> of role</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">rid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of role</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>appName</td>
-      <td><code class="highlighter-rouge">name</code> of app target from catalog to scope role assignment</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">appName</td>
+      <td style="text-align: left"><code class="highlighter-rouge">name</code> of app target from catalog to scope role assignment</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -906,47 +863,41 @@
 
 <p>Removes an app target from an <code class="highlighter-rouge">APP_ADMIN</code> role assignment.</p>
 
-<blockquote>
-  <p>Don’t remove the last app target from a role assignment, as this causes an exception.  If you need a role assignment that applies to all apps, the API consumer should delete the <code class="highlighter-rouge">APP_ADMIN</code> role assignment and recreate it.</p>
-</blockquote>
+<p>Don’t remove the last app target from a role assignment, as this causes an exception.  If you need a role assignment that applies to all apps, the API consumer should delete the <code class="highlighter-rouge">APP_ADMIN</code> role assignment and recreate it.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-8">Request Parameters</h5>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>uid</td>
-      <td><code class="highlighter-rouge">id</code> of user</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of user</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>rid</td>
-      <td><code class="highlighter-rouge">id</code> of role</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">rid</td>
+      <td style="text-align: left"><code class="highlighter-rouge">id</code> of role</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>appName</td>
-      <td><code class="highlighter-rouge">name</code> of app target for role assignment</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">appName</td>
+      <td style="text-align: left"><code class="highlighter-rouge">name</code> of app target for role assignment</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -995,105 +946,78 @@
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
-      <th>MinLength</th>
-      <th>MaxLength</th>
-      <th>Validation</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Read Only</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id</td>
-      <td>unique key for the role assignment</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique key for the role assignment</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>label</td>
-      <td>display name of role</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">label</td>
+      <td style="text-align: left">Display name of role</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>type</td>
-      <td>type of role</td>
-      <td><code class="highlighter-rouge">SUPER_ADMIN</code>, <code class="highlighter-rouge">ORG_ADMIN</code>, <code class="highlighter-rouge">APP_ADMIN</code>, <code class="highlighter-rouge">USER_ADMIN</code>, <code class="highlighter-rouge">MOBILE_ADMIN</code>, <code class="highlighter-rouge">READ_ONLY_ADMIN</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">type</td>
+      <td style="text-align: left">Type of role</td>
+      <td style="text-align: left"><code class="highlighter-rouge">SUPER_ADMIN</code>, <code class="highlighter-rouge">ORG_ADMIN</code>, <code class="highlighter-rouge">APP_ADMIN</code>, <code class="highlighter-rouge">USER_ADMIN</code>, <code class="highlighter-rouge">MOBILE_ADMIN</code>, <code class="highlighter-rouge">READ_ONLY_ADMIN</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>status</td>
-      <td>status of role assignment</td>
-      <td><code class="highlighter-rouge">ACTIVE</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">status</td>
+      <td style="text-align: left">Status of role assignment</td>
+      <td style="text-align: left"><code class="highlighter-rouge">ACTIVE</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>created</td>
-      <td>timestamp when app user was created</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">created</td>
+      <td style="text-align: left">Timestamp when app user was created</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>lastUpdated</td>
-      <td>timestamp when app user was last updated</td>
-      <td>Date</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">lastUpdated</td>
+      <td style="text-align: left">Timestamp when app user was last updated</td>
+      <td style="text-align: left">Date</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>_embedded</td>
-      <td>embedded resources related to the role assignment</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">_embedded</td>
+      <td style="text-align: left">Embedded resources related to the role assignment</td>
+      <td style="text-align: left">       <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>_links</td>
-      <td>discoverable resources related to the role assignment</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">_links</td>
+      <td style="text-align: left">Discoverable resources related to the role assignment</td>
+      <td style="text-align: left">       <a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -1102,53 +1026,49 @@
 
 <p>Some roles support optional targets that constrain the role to a specific set of groups or apps.  If an optional target is not specified, then the role assignment is unbounded (e.g applies to all groups or apps).</p>
 
-<p>Refer to the <a href="https://support.okta.com/articles/Knowledge_Article/99850906-Administrator-Roles">product documentation</a> for a complete definition of permissions granted to each role.</p>
+<p>Refer to the <a href="https://help.okta.com/en/prod/Content/Topics/Security/Administrators.htm?cshid=Security_Administrators#Security_Administrators">product documentation</a> for a complete definition of permissions granted to each role.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Role Type</th>
-      <th>Label</th>
-      <th>Optional Targets</th>
+      <th style="text-align: left">Role Type</th>
+      <th style="text-align: left">Label</th>
+      <th style="text-align: left">Optional Targets</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">SUPER_ADMIN</code></td>
-      <td>Super Administrator</td>
-      <td> </td>
+      <td style="text-align: left"><code class="highlighter-rouge">SUPER_ADMIN</code></td>
+      <td style="text-align: left">Super Administrator</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">ORG_ADMIN</code></td>
-      <td>Organizational Administrator</td>
-      <td> </td>
+      <td style="text-align: left"><code class="highlighter-rouge">ORG_ADMIN</code></td>
+      <td style="text-align: left">Organizational Administrator</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">APP_ADMIN</code></td>
-      <td>Application Administrator</td>
-      <td>Apps</td>
+      <td style="text-align: left"><code class="highlighter-rouge">APP_ADMIN</code></td>
+      <td style="text-align: left">Application Administrator</td>
+      <td style="text-align: left">Apps</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">USER_ADMIN</code></td>
-      <td>User Administrator</td>
-      <td><a href="./groups.html">Groups</a></td>
+      <td style="text-align: left"><code class="highlighter-rouge">USER_ADMIN</code></td>
+      <td style="text-align: left">Group Administrator</td>
+      <td style="text-align: left"><a href="./groups.html">Groups</a></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">MOBILE_ADMIN</code></td>
-      <td>Mobile Administrator</td>
-      <td> </td>
+      <td style="text-align: left"><code class="highlighter-rouge">MOBILE_ADMIN</code></td>
+      <td style="text-align: left">Mobile Administrator</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">READ_ONLY_ADMIN</code></td>
-      <td>Read-only Administrator</td>
-      <td> </td>
+      <td style="text-align: left"><code class="highlighter-rouge">READ_ONLY_ADMIN</code></td>
+      <td style="text-align: left">Read-only Administrator</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
-
-<blockquote>
-  <p>The <code class="highlighter-rouge">USER_ADMIN</code> role is <a href="https://support.okta.com/articles/Knowledge_Article/The-User-Admin-Role">Early Access</a></p>
-</blockquote>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

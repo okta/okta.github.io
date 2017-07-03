@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  
+  
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+  <title>Platform Release Notes | Okta Developer</title>
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.24">
+  <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-25.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+</head>
+
+<body>
+  <div class="Page platform-release-notes">
+    <!-- START Header -->
+    <header id="header">
+      <div class="Wrap">
+        <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
+        <nav>
+          <div id="top-nav">
+            <a href="#" id="mobile-close" class="mobile-toggle">
+              <span></span>
+              <span></span>
+            </a>
+            <a class="Button--green" href="https://developer.okta.com/signup/" id="top-nav-cta">Get Started</a>
+            <a class="SearchIcon" href="#"></a>
+            <ul>
+              <li>
+                <a href="/product/">Product</a>
+              </li>
+              <li>
+                <a href="/documentation/">Documentation</a>
+              </li>
+              <li>
+                <a href="/code/">Code</a>
+              </li>
+              <li class="has-dropdown">
+                <a href="#">Support</a>
+                <div class="dropdown-window">
+                  <p class="devforum">Post your question on <a href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank">Okta Developer Forums</a></p>
+                  <p class="email">Email us:<br>
+                  <a href="mailto:developers@okta.com">developers@okta.com</a></p>
+                  <p class="tel">Call us:<br>
+                  <a href="tel:18887227871">1 (888) 722-7871</a></p>
+                </div>
+              </li>
+            </ul>
+            <form id="form_search" method="get" action="/search/" name="form_search">
+              <input type="text" name="q" id="q" autocomplete="off">
+            </form>
+          </div>
+          <div id="mobile-nav">
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-open" class="mobile-toggle" href="#top-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+        </nav><!-- END Primary Nav -->
+      </div>
+    </header><!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
+    </script> <!-- End Google Tag Manager -->
+     <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+        <div class="Sidebar-close Sidebar-toggle"></div>
+        <div>
+          <h3 class="Sidebar-title">Use Cases</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/use_cases/authentication/">Authentication</a>
+            </li>
+            <li>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
+            </li>
+            <li>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
+            </li>
+            <li>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
+            </li>
+          </ul>
+          <h3 class="Sidebar-title">Reference</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/apps.html">API Reference</a>
+            </li>
+            <li>
+              <a href="/reference/error_codes/">Error Codes</a>
+            </li>
+            <li>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
+            </li>
+            <li class="is-active">
+              <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+            </li>
+          </ul>
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
+          <script>
+            if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+                document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+            }
+
+            if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+                document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+            }
+          </script>
+        </div>
+      </aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2017-25.md">Edit Page</a>
+      <h2 id="release-201725">Release 2017.25</h2>
+
+<h3 id="advance-notice-data-retention-changes">Advance Notice: Data Retention Changes</h3>
+
+<p>Okta is changing system log data retention. System log data is available from <code class="highlighter-rouge">/api/v1/events</code> or
+Okta SDK <code class="highlighter-rouge">EventsAPIClient</code>.</p>
+
+<ul>
+  <li>For orgs created before July 17th, data will be retained for 6 months.</li>
+  <li>For orgs created on and after July 17th, data will be retained for 3 months.</li>
+</ul>
+
+<p>The new data retention policy starts:</p>
+
+<ul>
+  <li>June 7, 2017 for existing preview orgs</li>
+  <li>July 17, 2017 for existing production orgs</li>
+</ul>
+
+<p>Preview and production orgs created on July 17, 2017 and later will retain this log data for three months.</p>
+
+<p>For the full data retention policy, see our <a href="https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy">Data Retention Policy</a>.</p>
+
+<p>You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta’s API. <!-- OKTA-125424 --></p>
+
+<p><!-- OKTA-125424 --></p>
+
+<h3 id="platform-enhancements">Platform Enhancements</h3>
+
+<ul>
+  <li><a href="#system-logs-track-key-rotation-and-generation">System Logs Track Key Rotation and Generation</a></li>
+  <li><a href="#client-registration-api-is-an-early-access-feature">Client Registration API Is an Early Access Feature</a></li>
+  <li><a href="#create-oauth-20-and-openid-connect-clients-with-apps-api">Create OAuth 2.0 and OpenID Connect Clients with the Apps API</a></li>
+  <li><a href="#oauth-20-and-openid-connect-client-app-updates-available-in-system-log">OAuth 2.0 and OpenID Connect Client App Updates Available in System Log</a></li>
+  <li><a href="#support-for-rp-initiated-logout">Support for RP-Initiated Logout</a></li>
+  <li><a href="#oauth-20-and-openid-connect-well-known-response-includes-registration-endpoint">OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint</a></li>
+</ul>
+
+<h4 id="system-logs-track-key-rotation-and-generation">System Logs Track Key Rotation and Generation</h4>
+<p>Logged information about key rotation and generation for apps and identity providers is available by using GET requests to either of the following endpoints: <code class="highlighter-rouge">/api/v1/events</code> or <code class="highlighter-rouge">/api/v1/logs</code>.
+For more information, see <a href="https://developer.okta.com/docs/api/resources/idps.html#identity-provider-signing-key-store-operations">Identity Provider Signing Key Store Operations</a>
+or <a href="https://developer.okta.com/docs/api/resources/apps.html#update-key-credential-for-application">Update Key Credential for Application</a>.</p>
+
+<p>Here is a response from <code class="highlighter-rouge">/api/v1/logs</code>
+<img src="/assets/release_notes/KeyRotateLog-62d168f71a42a70795b4d68358ade3cacb4fa87d369d7bb4e1693b957f9da9ef.png" alt="Logged Key Rotation Event" />
+<!-- (OKTA-76607) --></p>
+
+<h4 id="client-registration-api-is-an-early-access-feature">Client Registration API Is an Early Access Feature</h4>
+<p>The <a href="/docs/api/resources/oauth-clients.html">Auth Clients API</a> provides operations to register and manage client applications for use with Okta’s
+OAuth 2.0 and OpenID Connect endpoints.</p>
+
+<h4 id="create-oauth-20-and-openid-connect-clients-with-apps-api">Create OAuth 2.0 and OpenID Connect Clients with Apps API</h4>
+<p>The <a href="https://developer.okta.com/docs/api/resources/apps.html">Apps API</a> supports creating and configuring
+OAuth 2.0 or OpenID Connect clients. Alternatively, you can use
+<a href="https://developer.okta.com/docs/api/resources/oauth-clients.html">Client Registration API</a> (RFC 7591 and RFC 7592)
+to create and manage clients.
+<!-- (OKTA-78223) --></p>
+
+<h4 id="oauth-20-and-openid-connect-client-app-updates-available-in-system-log">OAuth 2.0 and OpenID Connect Client App Updates Available in System Log</h4>
+<p>Logged information about OAuth 2.0 client updates is now available by using GET requests to
+either log endpoint: <code class="highlighter-rouge">/api/v1/events</code> or <code class="highlighter-rouge">/api/v1/logs</code>.</p>
+
+<p><img src="/assets/release_notes/DeactClientLog-642a2ec7334f4365f33130c8a279c12ebc03e6389147ab61a82bd0b97315bdb2.png" alt="Logged Key Rotation Event" />
+<!-- (OKTA-86738, OKTA-127445) --></p>
+
+<h4 id="support-for-rp-initiated-logout">Support for RP-Initiated Logout</h4>
+<p>Okta supports <a href="http://openid.net/specs/openid-connect-session-1_0.html#RPLogout">RP-intiated logout</a>
+from OpenID Connect client apps in both the Okta UI and Okta API. You can specify a logout redirect URI,
+or accept the default behavior of returning to the Okta Login page. You can access this feature on the
+Create OpenID Connect Integration page (under Applications) in the UI.
+<!-- (OKTA-94106) --></p>
+
+<h4 id="oauth-20-and-openid-connect-well-known-response-includes-registration-endpoint">OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint</h4>
+<p>Okta returns the <code class="highlighter-rouge">registration_endpoint</code> in OAuth 2.0 and OpenID Connect <code class="highlighter-rouge">.well-known</code> responses.
+<!-- (OKTA-127457) --></p>
+
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
+
+<ul>
+  <li><a href="#invalid-availability-of-credentialssigningkid">Invalid Availability of credentials.signing.kid</a></li>
+  <li><a href="#www-authenticate-header-in-http-401-response">WWW-Authenticate Header in HTTP 401 Response</a></li>
+</ul>
+
+<h4 id="invalid-availability-of-credentialssigningkid">Invalid Availability of credentials.signing.kid</h4>
+<p>The <code class="highlighter-rouge">credentials.signing.kid</code> property of an app was available even if its sign-on mode does not support
+certificates. Only apps using the following sign-on mode types support certificates: SAML 2.0, SAML 1.1,
+WS-Fed, or OpenID Connect. For more information,
+see: <a href="https://developer.okta.com/docs/api/resources/apps.html#application-key-store-operations">Application Key Store Operations</a> (OKTA-76439)</p>
+
+<h4 id="www-authenticate-header-in-http-401-response">WWW-Authenticate Header in HTTP 401 Response</h4>
+<p>When a call to the token, introspect, or revocation endpoint of OpenID Connect or API Access Management
+encountered an invalid_client error, the response did not include the WWW­Authenticate header. (OKTA-127653)</p>
+
+<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
+
+<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
+
+<p><img src="/assets/release_notes/version_footer-6199e00ca76969eed4036e964a53b5598571c5cafe797a4890f152ce68dce49b.png" alt="Release Number in Footer" /></p>
+
+<h3 id="looking-for-something-else">Looking for Something Else?</h3>
+
+<ul>
+  <li><a href="platform-release-notes2016-index.html">Platform Release Note Index</a></li>
+  <li>For changes outside the Okta platform, see the <a href="https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm">Product Release Notes</a>.</li>
+</ul>
+
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="footer">
+      <div class="Wrap">
+        <ul>
+          <li>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
+          </li>
+          <li>
+            <a href="/blog/">Blog</a>
+          </li>
+          <li>
+            <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+          </li>
+          <li>
+            <a href="/terms/">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="/3rd_party_notices/">3rd Party Notices</a>
+          </li>
+          <li>
+            <a href="/privacy/">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/contact/">Contact Sales</a>
+          </li>
+          <li>
+            <a href="mailto:developers@okta.com">Contact Support</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a class="icon" href="http://github.com/oktadeveloper" target="_blank"><i class="fa fa-github"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank"><i class="fa fa-comments"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
+          </li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
+        </ul>
+      </div>
+    </footer>
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
+    
+    <!-- Remarketing tag -->
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 1006913831;
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+    </script>
+    <div style="display:none;">
+      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+    </div>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
+      </div>
+    </noscript>
+    <!-- End Remarketing tag -->
+    <!-- Crazy Egg Tracking -->
+    <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+    <!-- End Crazy Egg Tracking -->
+
+     <!-- END Footer -->
+  </div>
+</body>
+</html>

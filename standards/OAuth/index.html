@@ -521,7 +521,7 @@ client does not make the token valid again.</p>
 
 <p>Step 4 involves downloading the public JWKS from Okta (specified by the <em>jwks_uri</em> property in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">Authorization Server metadata</a>. The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
 
-<p>Each public key is identified by a <em>kid</em> attribute, which corresponds with the <em>kid</em> claim in the <a href="/docs/api/resources/oauth2.html#token-authentication-method">Access Token header</a>.</p>
+<p>Each public key is identified by a <em>kid</em> attribute, which corresponds with the <em>kid</em> claim in the <a href="/docs/api/resources/oauth2.html#token-authentication-methods">Access Token header</a>.</p>
 
 <p>The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
 However, in an emergency situation you can still stay in sync with Okta’s key rotation. Have your application check the <code class="highlighter-rouge">kid</code>, and if it has changed and the key is missing from the local cache, check the <code class="highlighter-rouge">jwks_uri</code> value in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">Authorization Server metadata</a> and you can go back to the <a href="/docs/api/resources/oauth2.html#get-keys">jwks uri</a> to get keys again from Okta</p>

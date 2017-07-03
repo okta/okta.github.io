@@ -26,7 +26,7 @@ Okta provides a very rich [Authentication API](./authn.html) to validate a [user
 
 ## Getting Started
 
-Explore the Sessions API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/17d9f7e4f331c1d3c858)
+Explore the Sessions API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b2e06a22c396bcc94530)
 
 ## Session Operations
 

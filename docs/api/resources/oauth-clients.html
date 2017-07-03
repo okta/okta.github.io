@@ -132,8 +132,9 @@
                 <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
                 <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
                 <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
-                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
+                <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
                 <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
+                <li class="is-active"><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
               </ul>
             </li>
             <li>
@@ -216,17 +217,17 @@ Administrator dashboard. Changes made via the API appear in the UI and vice vers
 follow the rules for Access Tokens and ID Tokens.</p>
 
 <blockquote>
-  <p>This API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature.</p>
+  <p>This API is a  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
 </blockquote>
 
-<p>Explore the Client Registration API: <a href="https://app.getpostman.com/run-collection/5155aa172e3d5e59ee5d" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the Client Registration API: <a href="https://app.getpostman.com/run-collection/291ba43cde74844dd4a7" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="getting-started">Getting Started</h2>
 
 <p>If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a> or <a href="http://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect spec</a>, you may want to experiment with the Postman collection first:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/5155aa172e3d5e59ee5d" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/291ba43cde74844dd4a7" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="client-application-model">Client Application Model</h2>
 
@@ -234,13 +235,18 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"post_logout_redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://www.example-application.com/oauth2/postLogoutRedirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
@@ -250,36 +256,8 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate: {
-      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
-      "</span><span class="err">hints</span><span class="s2">": {
-        "</span><span class="err">allow</span><span class="s2">": [
-          "</span><span class="err">POST"</span><span class="w">
-         </span><span class="err">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="err">}</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -290,118 +268,118 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Nullable</th>
-      <th>Unique</th>
-      <th>Readonly</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Nullable</th>
+      <th style="text-align: left">Unique</th>
+      <th style="text-align: left">Readonly</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>client_id</td>
-      <td>unique key for the client application</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">unique key for the client application</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>client_id_issued_at</td>
-      <td>time at which the client_id was issued (measured in unix seconds)</td>
-      <td>Number</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">client_id_issued_at</td>
+      <td style="text-align: left">time at which the client_id was issued (measured in unix seconds)</td>
+      <td style="text-align: left">Number</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>client_name</td>
-      <td>human-readable string name of the client application</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">client_name</td>
+      <td style="text-align: left">human-readable string name of the client application</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>client_secret</td>
-      <td>OAuth 2.0 client secret string (used for confidential clients)</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">client_secret</td>
+      <td style="text-align: left">OAuth 2.0 client secret string (used for confidential clients)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>logo_uri</td>
-      <td>URL string that references a logo for the client</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">client_secret_expires_at</td>
+      <td style="text-align: left">time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)</td>
+      <td style="text-align: left">Number</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>application_type</td>
-      <td>The type of client application</td>
-      <td><code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">native</code>, <code class="highlighter-rouge">browser</code>, or <code class="highlighter-rouge">service</code></td>
-      <td>TRUE</td>
-      <td>TRUE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">logo_uri</td>
+      <td style="text-align: left">URL string that references a logo for the client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>redirect_uris</td>
-      <td>array of redirection URI strings for use in redirect-based flows</td>
-      <td>Array</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">application_type</td>
+      <td style="text-align: left">The type of client application</td>
+      <td style="text-align: left"><code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">native</code>, <code class="highlighter-rouge">browser</code>, or <code class="highlighter-rouge">service</code></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
-      <td>response_types</td>
-      <td>array of OAuth 2.0 response type strings</td>
-      <td>Array of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, <code class="highlighter-rouge">id_token</code></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">redirect_uris</td>
+      <td style="text-align: left">array of redirection URI strings for use in redirect-based flows</td>
+      <td style="text-align: left">Array</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>grant_types</td>
-      <td>array of OAuth 2.0 grant type strings</td>
-      <td>Array of <code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code>, <code class="highlighter-rouge">client_credentials</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">post_logout_redirect_uris</td>
+      <td style="text-align: left">array of redirection URI strings for use for relying party initiated logouts</td>
+      <td style="text-align: left">Array</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>token_endpoint_auth_method</td>
-      <td>requested authentication method for the token endpoint</td>
-      <td><code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">client_secret_post</code>, or <code class="highlighter-rouge">client_secret_basic</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">response_types</td>
+      <td style="text-align: left">array of OAuth 2.0 response type strings</td>
+      <td style="text-align: left">Array of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, <code class="highlighter-rouge">id_token</code></td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>initiate_login_uri</td>
-      <td>URL that a third party can use to initiate a login by the client</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>FALSE</td>
+      <td style="text-align: left">grant_types</td>
+      <td style="text-align: left">array of OAuth 2.0 grant type strings</td>
+      <td style="text-align: left">Array of <code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code>, <code class="highlighter-rouge">client_credentials</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>urn:okta:client_status</td>
-      <td>the status of the client application</td>
-      <td><code class="highlighter-rouge">active</code> or <code class="highlighter-rouge">inactive</code></td>
-      <td>FALSE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">token_endpoint_auth_method</td>
+      <td style="text-align: left">requested authentication method for the token endpoint</td>
+      <td style="text-align: left"><code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">client_secret_post</code>, <code class="highlighter-rouge">client_secret_basic</code>, or <code class="highlighter-rouge">client_secret_jwt</code></td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>_links</td>
-      <td>discoverable resources related to the app</td>
-      <td><a href="http://tools.ietf.org/html/draft-kelly-json-hal-06">JSON HAL</a></td>
-      <td>TRUE</td>
-      <td>FALSE</td>
-      <td>TRUE</td>
+      <td style="text-align: left">initiate_login_uri</td>
+      <td style="text-align: left">URL that a third party can use to initiate a login by the client</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -410,14 +388,13 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
 
 <ul>
   <li>
-    <p>When creating a client application, you can specify the <code class="highlighter-rouge">client_id</code> or let Okta generate a value for it. Thereafter, the <code class="highlighter-rouge">client_id</code> is immutable.</p>
+    <p>The <code class="highlighter-rouge">client_id</code> is immutable. And when creating a client application, you cannot specify the <code class="highlighter-rouge">client_id</code>, Okta uses application ID for it.</p>
   </li>
   <li>
-    <p>The <code class="highlighter-rouge">client_secret</code> is only shown on the initial creation of a client application (and only if the <code class="highlighter-rouge">token_endpoint_auth_method</code> is one that requires a client secret).
-It is never returned in a GET call. If a <code class="highlighter-rouge">client_secret</code> is not provided on creation and the <code class="highlighter-rouge">token_endpoint_auth_method</code> requires one Okta will generate a random <code class="highlighter-rouge">client_secret</code> for the client application.</p>
+    <p>The <code class="highlighter-rouge">client_secret</code> is only shown on the response of the creation or update of a client application (and only if the <code class="highlighter-rouge">token_endpoint_auth_method</code> is one that requires a client secret). You cannot specify the <code class="highlighter-rouge">client_secret</code> and if the <code class="highlighter-rouge">token_endpoint_auth_method</code> requires one Okta will generate a random <code class="highlighter-rouge">client_secret</code> for the client application.</p>
   </li>
   <li>
-    <p>The <code class="highlighter-rouge">client_id</code> must consist of alphanumeric characters, the following special characters <code class="highlighter-rouge">$-_.+!*'(),</code>, must contain between 6 and 100 characters, inclusive, and must not be the reserved word <code class="highlighter-rouge">ALL_CLIENTS</code>. The <code class="highlighter-rouge">client_secret</code> must consist of printable characters, which are defined in <a href="https://tools.ietf.org/html/rfc6749#appendix-A">the OAuth 2.0 Spec</a>, and must contain between 14 and 100 characters, inclusive.</p>
+    <p>If you want to specify the <code class="highlighter-rouge">client_id</code> or <code class="highlighter-rouge">client_secret</code>, you can use <a href="/docs/api/resources/apps#add-oauth-20-client-application">Apps API</a> to create or update a client application.</p>
   </li>
   <li>
     <p>At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
@@ -523,6 +500,9 @@ then no redirect URI or response type is necessary. In these cases you can pass 
       "redirect_uris": [
          "https://www.example-application.com/oauth2/redirectUri"
       ],
+      "post_logout_redirect_uris": [
+        "https://www.example-application.com/oauth2/postLogoutRedirectUri"
+      ],
       "response_types": [
          "code",
          "id_token"
@@ -541,13 +521,18 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"post_logout_redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://www.example-application.com/oauth2/postLogoutRedirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
@@ -557,36 +542,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate: {
-      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
-      "</span><span class="err">hints</span><span class="s2">": {
-        "</span><span class="err">allow</span><span class="s2">": [
-          "</span><span class="err">POST"</span><span class="w">
-         </span><span class="err">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="err">}</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -601,20 +558,20 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>ParamType</th>
-      <th>DataType</th>
-      <th>Required</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">ParamType</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>clientId</td>
-      <td><code class="highlighter-rouge">clientId</code> of a specific client</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left"><code class="highlighter-rouge">client_id</code> of a specific client</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -645,6 +602,9 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"post_logout_redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://www.example-application.com/oauth2/postLogoutRedirectUri"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
   </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"code"</span><span class="w">
@@ -653,36 +613,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate: {
-      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
-      "</span><span class="err">hints</span><span class="s2">": {
-        "</span><span class="err">allow</span><span class="s2">": [
-          "</span><span class="err">POST"</span><span class="w">
-         </span><span class="err">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="err">}</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -777,6 +709,9 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
     </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"post_logout_redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"https://www.example-application.com/oauth2/postLogoutRedirectUri"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"code"</span><span class="w">
@@ -785,83 +720,32 @@ then no redirect URI or response type is necessary. In these cases you can pass 
       </span><span class="s2">"authorization_code"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"POST"</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate: {
-      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
-      "</span><span class="err">hints</span><span class="s2">": {
-        "</span><span class="err">allow</span><span class="s2">": [
-          "</span><span class="err">POST</span><span class="s2">"
-         ]
-      }
-    }
-  },
-  {
-    "</span><span class="err">client_id</span><span class="s2">": "</span><span class="err">F</span><span class="mi">10</span><span class="err">CaazJPQ</span><span class="mi">5</span><span class="err">Zpyu</span><span class="mi">1</span><span class="err">Ojko</span><span class="s2">",
-    "</span><span class="err">client_id_issued_at</span><span class="s2">": 1453913425,
-    "</span><span class="err">client_name</span><span class="s2">": "</span><span class="err">Another</span><span class="w"> </span><span class="err">OAuth</span><span class="w"> </span><span class="err">Client</span><span class="s2">",
-    "</span><span class="err">client_uri</span><span class="s2">": "</span><span class="err">http://www.another-application.com</span><span class="s2">",
-    "</span><span class="err">logo_uri</span><span class="s2">": "</span><span class="err">http://www.another-application.com/logo.png</span><span class="s2">",
-    "</span><span class="err">application_type</span><span class="s2">": "</span><span class="err">browser</span><span class="s2">",
-    "</span><span class="err">redirect_uris</span><span class="s2">": [
-      "</span><span class="err">https://www.another-application.com/oauth</span><span class="mi">2</span><span class="err">/redirectUri</span><span class="s2">"
-    ],
-    "</span><span class="err">response_types</span><span class="s2">": [
-      "</span><span class="err">id_token</span><span class="s2">",
-      "</span><span class="err">token</span><span class="s2">"
-    ],
-    "</span><span class="err">grant_types</span><span class="s2">": [
-      "</span><span class="err">implicit</span><span class="s2">"
-    ],
-    "</span><span class="err">token_endpoint_auth_method</span><span class="s2">": "</span><span class="err">none</span><span class="s2">",
-    "</span><span class="err">initiate_login_uri</span><span class="s2">": null,
-    "</span><span class="err">urn:okta:client_status</span><span class="s2">": "</span><span class="err">active</span><span class="s2">",
-    "</span><span class="err">_links</span><span class="s2">": {
-      "</span><span class="err">newSecret</span><span class="s2">": {
-        "</span><span class="err">href</span><span class="s2">": "</span><span class="err">https://example.okta.com/oauth</span><span class="mi">2</span><span class="err">/v</span><span class="mi">1</span><span class="err">/clients/F</span><span class="mi">10</span><span class="err">CaazJPQ</span><span class="mi">5</span><span class="err">Zpyu</span><span class="mi">1</span><span class="err">Ojko/lifecycle/newSecret</span><span class="s2">",
-        "</span><span class="err">hints</span><span class="s2">": {
-          "</span><span class="err">allow</span><span class="s2">": [
-            "</span><span class="err">POST</span><span class="s2">"
-          ]
-        }
-      },
-    "</span><span class="err">app</span><span class="s2">": {
-      "</span><span class="err">href</span><span class="s2">": "</span><span class="err">https://example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oaprd</span><span class="mi">4</span><span class="err">QHjJYCIGrp</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="s2">",
-      "</span><span class="err">hints</span><span class="s2">": {
-        "</span><span class="err">allow</span><span class="s2">": [
-	  "</span><span class="err">GET</span><span class="s2">",
-          "</span><span class="err">POST</span><span class="s2">"
-         ]
-      }
-    },
-    "</span><span class="err">deactivate:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F10CaazJPQ5Zpyu1Ojko"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Another OAuth Client"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"browser"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"https://www.another-application.com/oauth2/redirectUri"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"post_logout_redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"https://www.example-application.com/oauth2/postLogoutRedirectUri"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"token"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"grant_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"implicit"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="err">]</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 </div>
 
@@ -896,6 +780,9 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.payroll-application.com/oauth2/redirectUri"</span><span class="w">
     </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"post_logout_redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"https://www.example-application.com/oauth2/postLogoutRedirectUri"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"code"</span><span class="w">
@@ -904,36 +791,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
       </span><span class="s2">"authorization_code"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://payroll.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"POST"</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
-	</span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-	    </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"POST"</span><span class="w">
-           </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"deactivate: {
-        "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
-        "</span><span class="err">hints</span><span class="s2">": {
-          "</span><span class="err">allow</span><span class="s2">": [
-            "</span><span class="err">POST"</span><span class="w">
-           </span><span class="err">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="err">}</span><span class="w">
-  </span><span class="err">}</span><span class="w">
+    </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 </div>
@@ -958,8 +817,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </thead>
   <tbody>
     <tr>
-      <td>clientId</td>
-      <td><code class="highlighter-rouge">clientId</code> of a specific client</td>
+      <td>client_id</td>
+      <td><code class="highlighter-rouge">client_id</code> of a specific client</td>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
@@ -975,7 +834,7 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 </table>
 
 <blockquote>
-  <p>All settings must be specified when updating a client application, <strong>partial updates are not supported!</strong> If any settings are missing when updating a client application the update will fail. The one exception to this is the <code class="highlighter-rouge">client_secret</code>, which will not be changed if omitted from an update.</p>
+  <p>All settings must be specified when updating a client application, <strong>partial updates are not supported!</strong> If any settings are missing when updating a client application the update will fail. The exceptions are: <code class="highlighter-rouge">client_secret_expires_at</code>, or <code class="highlighter-rouge">client_id_issued_at</code> must not be included in the request, and the <code class="highlighter-rouge">client_secret</code> can be omitted.</p>
 </blockquote>
 
 <h5 class="api api-response api-response-params" id="response-parameters-3">Response Parameters</h5>
@@ -989,12 +848,16 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
+      "client_id": "0jrabyQWm4B9zVJPbotY",
       "client_name": "Updated OAuth Client",
       "client_uri": "http://www.example-application.com",
       "logo_uri": "http://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
         "https://www.example-application.com/oauth2/redirectUri"
+      ],
+      "post_logout_redirect_uris": [
+        "https://www.example-application.com/oauth2/postLogoutRedirectUri"
       ],
       "response_types": [
         "id_token",
@@ -1014,13 +877,18 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated OAuth Client"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"post_logout_redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://www.example-application.com/oauth2/postLogoutRedirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
@@ -1030,42 +898,14 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate: {
-      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
-      "</span><span class="err">hints</span><span class="s2">": {
-        "</span><span class="err">allow</span><span class="s2">": [
-          "</span><span class="err">POST"</span><span class="w">
-         </span><span class="err">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="err">}</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
 <h3 class="api api-operation" id="generate-new-client-secret">Generate new client secret</h3>
 
-<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /oauth2/v1/clients/<em>:clientId</em>/lifecycle/newSecret</span></p>
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /oauth2/v1/clients/<em>:client_id</em>/lifecycle/newSecret</span></p>
 
 <p>Generates a new client secret for the specified client application.</p>
 
@@ -1083,8 +923,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </thead>
   <tbody>
     <tr>
-      <td>clientId</td>
-      <td><code class="highlighter-rouge">clientId</code> of a specific client</td>
+      <td>client_id</td>
+      <td><code class="highlighter-rouge">client_id</code> of a specific client</td>
       <td>URL</td>
       <td>String</td>
       <td>TRUE</td>
@@ -1115,7 +955,9 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t1hgVNl06UiMTzlsVVj0UywSDDuNdG529lm0bpy8"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated OAuth Client"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cdUQIFvE61wGI5P51H33ORC4SRB1RXfX"</span><span class="p">,</span><span class="w">
@@ -1123,6 +965,9 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"post_logout_redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://www.example-application.com/oauth2/postLogoutRedirectUri"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"response_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"id_token"</span><span class="p">,</span><span class="w">
@@ -1132,42 +977,14 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="s2">"authorization_code"</span><span class="w">
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"urn:okta:client_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"newSecret"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/api/v1/apps/0oamvqmXCqhomG8sX0g3"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-	  </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-         </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate: {
-      "</span><span class="err">href</span><span class="nt">": "</span><span class="err">https</span><span class="p">:</span><span class="err">//example.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">0</span><span class="err">oamvqmXCqhomG</span><span class="mi">8</span><span class="err">sX</span><span class="mi">0</span><span class="err">g</span><span class="mi">3</span><span class="err">/lifecycle/deactivate</span><span class="s2">",
-      "</span><span class="err">hints</span><span class="s2">": {
-        "</span><span class="err">allow</span><span class="s2">": [
-          "</span><span class="err">POST"</span><span class="w">
-         </span><span class="err">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="err">}</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="nt">"initiate_login_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/oauth2/login"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
 <h3 class="api api-operation" id="remove-client-application">Remove Client Application</h3>
 
-<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /oauth2/v1/clients/<em>:clientId</em></span></p>
+<p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /oauth2/v1/clients/<em>:client_id</em></span></p>
 
 <p>Removes a client application from your organization.</p>
 
@@ -1176,20 +993,20 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>ParamType</th>
-      <th>DataType</th>
-      <th>Required</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">ParamType</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>clientId</td>
-      <td><code class="highlighter-rouge">clientId</code> of a specific client</td>
-      <td>URL</td>
-      <td>String</td>
-      <td>TRUE</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left"><code class="highlighter-rouge">client_id</code> of a specific client</td>
+      <td style="text-align: left">URL</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>

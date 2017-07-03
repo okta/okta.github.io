@@ -8,6 +8,1629 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>OpenID Connect for User Authentication in ASP.NET Core</title>
+        <description>&lt;p&gt;In the age of the “personalized web experience”, authentication and user management is a given, and it’s easier than ever to tap into third-party authentication providers like Facebook, Twitter, and Google. And it’s not just the wild, wild web that needs it. Businesses need ways to secure their APIs, and identify users logged into their apps.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt; is a protocol for authenticating users. It is a specification by the OpenID Foundation describing the best way for the authentication “handshake” to happen. It lays out what an Identity Provider needs to provide in order to be considered “OpenID Connect Certified” which makes it easier than ever to consume authentication as a service.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-not-use-oauth-20&quot;&gt;Why Not Use OAuth 2.0?&lt;/h2&gt;
+&lt;p&gt;First, &lt;a href=&quot;https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth&quot;&gt;OAuth 2.0 is NOT an authentication protocol&lt;/a&gt;. I know what you’re thinking: “What?!!?” But it’s not. It &lt;em&gt;is&lt;/em&gt; an delegated authorization framework, which many modern authentication protocols are built on.&lt;/p&gt;
+
+&lt;p&gt;Second, while OAuth 2.0 does a great job of providing the necessary information for consumers to make authorization decisions, it says nothing about how that information will be exchanged securely. This has led to every authentication provider having their own way of exchanging the OAuth 2.0 information, which has led to a few well-publicized hacks. OpenID Connect fixes these problems by providing an authentication protocol that describes exactly how the exchange of authorization information happens between a subscriber and their provider.&lt;/p&gt;
+
+&lt;p&gt;So let’s see how this works.&lt;/p&gt;
+
+&lt;h3 id=&quot;nothing-up-my-sleeve&quot;&gt;Nothing Up My Sleeve&lt;/h3&gt;
+&lt;p&gt;You’ll be using &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; and the command line. You can also use Visual Studio, but Visual Studio Code is cross-platform and lightweight, so it won’t matter what operating system you are using.&lt;/p&gt;
+
+&lt;p&gt;First, get the &lt;a href=&quot;https://dot.net/core&quot;&gt;dotnet command-line program&lt;/a&gt;. Once you have the dotnet-cli installed, run the &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet new mvc --auth None&lt;/code&gt; command. This will create a new MVC application without the built-in authentication. You’re going to do that yourself.&lt;/p&gt;
+
+&lt;p&gt;In just a few seconds you’ll have a simple ASP.NET Core app ready to go. You may need to run a &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; command to install the dependencies for the base application.&lt;/p&gt;
+
+&lt;h2 id=&quot;add-an-identity-provider&quot;&gt;Add an Identity Provider&lt;/h2&gt;
+&lt;p&gt;Now you need an Identity Provider. For this tutorial you’ll  use &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt;. Once you’ve created an account and logged in, click &lt;em&gt;Admin&lt;/em&gt; on the top menu.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/admin_button-10c629ae4f749f3b0851d3206f3069876fd193d3e9696e7e1a17b150239e11dd.png&quot; alt=&quot;Admin Button&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then choose the &lt;em&gt;Applications&lt;/em&gt; menu item from the admin dashboard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/applications_button-08fcd59c5ce94e306dd52a8ca933fafe2ece4d84d66b6840b3bc627b39b1179f.png&quot; alt=&quot;Applications Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the Applications page, click the &lt;em&gt;Add Application&lt;/em&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/add_application_button-e917c5ac29a95532285ea60c1853c4b849aaaa520add0ee3dd1b5c0cc6d26488.png&quot; alt=&quot;Add Application Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On the Add Application page, click on the &lt;em&gt;Create New Application&lt;/em&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/create_app_button-bd24015c3fac20e164679b100d846be1967927cf6f99b635493b31878769a617.png&quot; alt=&quot;Create Application Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When the New Application Integration window pops up, set up the new application. We’ll choose &lt;em&gt;Web&lt;/em&gt; from the Platform dropdown, and OpenID Connect from the Sign On Method.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/create_application_page-9a0ce95a392e87da357853b7733323fa27af824e4c02115c6b12ee8e51b7f9d1.png&quot; alt=&quot;Create Application Page&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you’ve created the application, choose it from the list of applications. In the General Settings tab, click the &lt;em&gt;Edit&lt;/em&gt; button and make sure to add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/signin-oidc&lt;/code&gt; to the Redirect URIs.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/redirect_uri-564499ce3721350c6a82855e9f425c4bdef9ca4ad856183a3c667c8e0cf3b5a8.png&quot; alt=&quot;Redirect URI Setting&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;While you are on the General Settings tab, scroll down and copy your Client ID and Client Secret somewhere. You’ll use this later when configuring the middleware in your application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/client_id_secret-b8d9e3ceaa9398eb3ec4b4f3b568bab2b0a1f3960a53bda84fdb719d70ffd72e.png&quot; alt=&quot;Client ID and Secret&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, you’ll need to make sure that you can use the API by adding the localhost URI to your CORS settings. First, choose the &lt;em&gt;Security&lt;/em&gt; menu item from the dashboard and the choose &lt;em&gt;API&lt;/em&gt; from the drop down menu.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/security_drop_down-e7b02e973ce3098c8e540b3dc1afbdd3d83ce8baf934cbc662d2747f90cc9a2c.png&quot; alt=&quot;Security Drop Down Menu&quot; width=&quot;200&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then select the &lt;em&gt;Trusted Origins&lt;/em&gt; tab.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/trusted_origins_tab-9997990aaf27d68a30f73c99e28f22bc4038d1502f4157de4dcf7b067dcd16ba.png&quot; alt=&quot;Trusted Origins Tab&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on &lt;em&gt;Add Origin&lt;/em&gt; and add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000&lt;/code&gt; as a trusted origin. Make sure that CORS and Redirect are selected. Enter “ASP.NET web app (debug)” as the redirect name (or any other name that makes sense to you).&lt;/p&gt;
+
+&lt;p&gt;Now you’re ready to set up authentication!&lt;/p&gt;
+
+&lt;h2 id=&quot;add-authentication&quot;&gt;Add Authentication&lt;/h2&gt;
+&lt;p&gt;When you open your application in Visual Studio or Visual Studio Code, you’ll notice that there’s a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ProjectName&amp;gt;.csproj&lt;/code&gt; file. You’ll need to make some quick changes to that to get some dependencies you’ll need to make this work. In the &lt;code class=&quot;highlighter-rouge&quot;&gt;ItemGroup&lt;/code&gt; section of the &lt;code class=&quot;highlighter-rouge&quot;&gt;csproj&lt;/code&gt; document add:&lt;/p&gt;
+
+&lt;PackageReference Include=&quot;Microsoft.AspNetCore.Authentication.JwtBearer&quot; Version=&quot;1.1.2&quot; /&gt;
+
+&lt;PackageReference Include=&quot;Microsoft.AspNetCore.Authentication.OpenIdConnect&quot; Version=&quot;1.1.2&quot; /&gt;
+
+&lt;PackageReference Include=&quot;Microsoft.AspNetCore.Authentication.Cookies&quot; Version=&quot;1.1.2&quot; /&gt;
+
+&lt;p&gt;This will allow you to use &lt;a href=&quot;https://www.jsonwebtoken.io/&quot;&gt;JSON Web Tokens&lt;/a&gt; for authorization information, get the tokens from the OpenID Connect provider (Okta in this case) and store them in cookies for session management. You’ll need to run a quick &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; command, but don’t worry, once you save the file, VS Code will give you an option to return to the command line.&lt;/p&gt;
+
+&lt;p&gt;Now, open the &lt;code class=&quot;highlighter-rouge&quot;&gt;Startup.cs&lt;/code&gt; file, and on the first line of the Configure method add:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.IdentityModel.Protocols.OpenIdConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System.IdentityModel.Tokens.Jwt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.IdentityModel.Tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then, between the &lt;code class=&quot;highlighter-rouge&quot;&gt;app.UseStaticFiles();&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;app.UseMvc(…);&lt;/code&gt; add:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseCookieAuthentication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CookieAuthenticationOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AuthenticationScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Cookies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AutomaticAuthenticate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This tells the application that you want to store your session tokens in cookies. Then, you just need to add the authentication instructions.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseOpenIdConnectAuthentication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OpenIdConnectOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AuthenticationScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;oidc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SignInScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Cookies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Authority&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://&amp;lt;your Okta dev subdomain&amp;gt;.oktapreview.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ResponseType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpenIdConnectResponseType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ClientId&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Your Client ID from Okta}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ClientSecret&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Your Client Secret from Okta}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GetClaimsFromUserInfoEndpoint&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;TokenValidationParameters&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TokenValidationParameters&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ValidateIssuer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SaveTokens&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This is the important part, so let’s go through it line by line:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationScheme&lt;/code&gt; gives out scheme a name, and will be used to build the default callback url (~/signin-oidc).&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;SignInScheme&lt;/code&gt; is used to set the sign-in middleware.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Authority&lt;/code&gt; identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ResponseType&lt;/code&gt; is also specified in that document under “response_types_supported”. This tells the application you want to start an authorization code flow from from the provider.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientId&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientSecret&lt;/code&gt; are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest &lt;a href=&quot;https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core&quot;&gt;storing these in a secure way&lt;/a&gt; and referencing them here. They’re in line here for demonstration purposes.&lt;/li&gt;
+  &lt;li&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;GetClaimsFromUserInfoEndpoint = true&lt;/code&gt; tells the provider that if you’re successful authenticating, go ahead and make a call to the &lt;code class=&quot;highlighter-rouge&quot;&gt;userinfo_endpoint&lt;/code&gt; (specified in the configuration document at the same URL you got the &lt;code class=&quot;highlighter-rouge&quot;&gt;authorization_endpoint&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;response_types_supported&lt;/code&gt; from). This will get the claims that we’re going to display from Okta once the authentication has completed.&lt;/li&gt;
+  &lt;li&gt;The TokenValidationParameters tells the middleware that we want to validate that the issuer is who we expect it to be by getting the signing key from the &lt;code class=&quot;highlighter-rouge&quot;&gt;jwks_uri&lt;/code&gt; endpoint in the &lt;code class=&quot;highlighter-rouge&quot;&gt;.well-known/openid_configuration&lt;/code&gt; document.&lt;/li&gt;
+  &lt;li&gt;Finally, we tell the application to save the token once it comes back from the provider.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s all there is to it, but how do you know it’s working? Well, you &lt;em&gt;could&lt;/em&gt; hook up a login form but there is an easier way!&lt;/p&gt;
+
+&lt;h2 id=&quot;check-your-work&quot;&gt;Check Your Work&lt;/h2&gt;
+&lt;p&gt;All you really need to do is add an [Authorize] attribute to a controller method. That will simply and quickly show us that it’s going to the login page on the provider, but it won’t show us what the provider is sending back. Let’s create a page that will show that information so you can make sure you’re getting what you &lt;em&gt;think&lt;/em&gt; you should be getting from the provider.&lt;/p&gt;
+
+&lt;p&gt;First, add a using statement to the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; for the &lt;code class=&quot;highlighter-rouge&quot;&gt;Authorize&lt;/code&gt; attribute.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.AspNetCore.Authorization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then add a “Secure” method to the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; controller.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;[Authorize]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IActionResult&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Secure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then create a view to return in &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Views/Home&lt;/code&gt; called &lt;code class=&quot;highlighter-rouge&quot;&gt;Security.cshtml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@{
+    ViewData[&quot;Title&quot;] = &quot;Security&quot;;
+}
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Secure&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dl&amp;gt;&lt;/span&gt;
+    @foreach (var claim in User.Claims)
+    {
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dt&amp;gt;&lt;/span&gt;@claim.Type&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dt&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dd&amp;gt;&lt;/span&gt;@claim.Value&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dd&amp;gt;&lt;/span&gt;
+    }
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dl&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This will just loop through the claims and output them. When you navigate to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/Home/Secure&lt;/code&gt;, you should be redirected to a login page. Once you’re logged in (with a user that is assigned to your app), you should now see a list of the claims on the secure page.
+If you do, congratulations! You just set up OpenID Connect for authenticating in your ASP.NET Core app!&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</guid>
+      </item>
+    
+      <item>
+        <title>7 Essential .NET Developer Tools for 2017</title>
+        <description>&lt;p&gt;Every good dev knows that time spent setting up the perfect environment and searching out the latest tools is time well spent. Little things make a huge difference — upgrade your IDE plugins, automate a task or two, or look for new tools and libraries that can increase your efficiency. We’ve taken a crack at an updated list of our favorite .NET developer tools, that can simplify your life and amplify your work.&lt;/p&gt;
+&lt;h2 id=&quot;1-jsonnet&quot;&gt;1. JSON.NET&lt;/h2&gt;
+&lt;p&gt;Chances are that for any given project these days, you’ll be consuming a RESTful JSON API, producing one, or both. And even if you’re not, you may still be using JSON to serialize data or configuration on disk. Sure, you could get it done using System.Runtime.Serialization.Json, but &lt;a href=&quot;http://json.net/&quot;&gt;JSON.NET&lt;/a&gt; is faster and has tons of nice features to make your life easier. Built-in &lt;a href=&quot;http://www.newtonsoft.com/json/help/html/LINQtoJSON.htm&quot;&gt;LINQ-to-JSON&lt;/a&gt; support, plus the ability to query JSON using &lt;a href=&quot;http://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenJsonPath.htm&quot;&gt;XPath-like syntax&lt;/a&gt; has earned this library the reputation as the de facto JSON implementation for .NET.&lt;/p&gt;
+&lt;h2 id=&quot;2-net-api-browser-and-reverse-package-search&quot;&gt;2. .NET API Browser (and Reverse Package Search)&lt;/h2&gt;
+&lt;p&gt;Here’s a two-for-one for our second tool suggestion: the .NET API Browser and Reverse Package Search. As classes get moved around when their packages are refactored and reshuffled between versions, these two services are invaluable for tracking everything down.&lt;/p&gt;
+
+&lt;p&gt;Microsoft’s &lt;a href=&quot;https://docs.microsoft.com/en-us/dotnet/api&quot;&gt;.NET API Browser&lt;/a&gt; is a comprehensive reference for all classes and methods in the .NET API. The best part is that it autocompletes while you type, making it easy to locate APIs even when you can’t remember exactly where they exist in the package hierarchy.&lt;/p&gt;
+
+&lt;p&gt;Similarly, the &lt;a href=&quot;https://packagesearch.azurewebsites.net&quot;&gt;Reverse Package Search&lt;/a&gt; lets you quickly search a vast collection of third party libraries, tagged with their respective supported versions of .NET Framework or .NET Core. It’s a little less curated than Microsoft’s official API browser, but the breadth makes up for it.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-stylecopanalyzers&quot;&gt;3. StyleCop.Analyzers&lt;/h2&gt;
+&lt;p&gt;If there’s one thing that can really get a team of developers fussed up, it’s adhering to a consistent code formatting style. The only real solution is to adopt a formatting tool like StyleCop, and then share the configuration throughout the team. StyleCop can detect and fix a broad range of style offences, and can even be set up in some IDEs to work real-time as you type.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/DotNetAnalyzers/StyleCopAnalyzers&quot;&gt;StyleCop.Analyzers&lt;/a&gt; is the latest incarnation of this project. Okta’s very own .NET evangelist &lt;a href=&quot;https://github.com/nbarbettini&quot;&gt;Nate&lt;/a&gt; is a dedicated contributor.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-visual-studio-code&quot;&gt;4. Visual Studio Code&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://code.visualstudio.com&quot;&gt;Visual Studio Code&lt;/a&gt; is Microsoft’s open source text editor and IDE. It’s beautiful and featureful and a joy to use. Not just for .NET, it works well with lots of language ecosystems and runs on Mac, Linux, and Windows. It’s got some similarities to Atom, but comes with IntelliSense, debugger, git integration, and can be extended even further with plugins.&lt;/p&gt;
+
+&lt;h2 id=&quot;5-posh-git&quot;&gt;5. Posh-git&lt;/h2&gt;
+&lt;p&gt;Been working for days on a major feature branch when a critical issue pops up in production? No worries: just commit to your feature branch, switch to the stable branch to push a fix, and switch back. Git (and modern version control in general) has really enabled this sort of multitasking on a codebase—but it can get confusing quickly.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/dahlbyk/posh-git&quot;&gt;Posh-git&lt;/a&gt; (and its equivalent for &lt;a href=&quot;https://github.com/JeremySkinner/posh-svn&quot;&gt;Subversion&lt;/a&gt;, &lt;a href=&quot;https://github.com/JeremySkinner/posh-hg&quot;&gt;Mercurial&lt;/a&gt;, and &lt;a href=&quot;https://github.com/Zougi/posh-p4&quot;&gt;Perforce&lt;/a&gt;) modifies your shell prompt to include the current branch and other status information. It also provides tab-completion for your SCM commands and branch names, which results in a very nice git experience.&lt;/p&gt;
+
+&lt;h2 id=&quot;6-resharper&quot;&gt;6. ReSharper&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.jetbrains.com/resharper/&quot;&gt;ReSharper&lt;/a&gt; is the premier code analysis tool for Visual Studio. It provides analysis, linting, and refactoring assistance. From on-the-fly “quick fixes” to project-wide symbol renaming, this tool is like having your own co-pilot. It costs a few hundred bucks per year, but it should quickly pay for itself in increased productivity, and it comes with a 30-day trial so you can take it for a test drive. Combine it with the &lt;a href=&quot;https://github.com/StyleCop/StyleCop.ReSharper&quot;&gt;StyleCop plugin&lt;/a&gt; and get the benefits of code format evaluation as you type.&lt;/p&gt;
+
+&lt;h2 id=&quot;7-xunitnet&quot;&gt;7. xUnit.net&lt;/h2&gt;
+&lt;p&gt;If you’ve invested in good unit test coverage, then you’re undoubtedly pretty committed to a testing framework already. But if you’re starting a new project, or just haven’t got around to writing any tests yet (we won’t judge) then look no further than &lt;a href=&quot;https://xunit.github.io&quot;&gt;xUnit.net&lt;/a&gt;. It is the successor to NUnit, and builds on the long lineage of similarly-named testing frameworks in other languages such as JUnit, CPPUnit, PHPUnit, and dozens more. However, xUnit has made some opinionated deviations to promote clearer more isolated tests that are easier to maintain, and a focus on data-driven testing using theories.&lt;/p&gt;
+
+&lt;p&gt;xUnit.net makes writing unit tests more approachable by providing the scaffolding to put them on. It supplies the infrastructure for basic fixturing and test running (including in parallel), and combines nicely with &lt;a href=&quot;https://github.com/AutoFixture/AutoFixture&quot;&gt;AutoFixture&lt;/a&gt; and &lt;a href=&quot;https://github.com/moq/moq&quot;&gt;Moq&lt;/a&gt; for writing concise and effective unit tests.&lt;/p&gt;
+
+&lt;h2 id=&quot;bonus--fluentassertions&quot;&gt;Bonus – FluentAssertions&lt;/h2&gt;
+&lt;p&gt;On the topic of writing concise and effective unit tests, &lt;a href=&quot;http://www.fluentassertions.com&quot;&gt;Fluent Assertions&lt;/a&gt; is a library that enables expressive assertions. When a test fails, it’s important to be able to know why without reaching for the debugger.&lt;/p&gt;
+
+&lt;p&gt;The possibilities for tweaking and refining your development workflow go on and on. While shiny new tools have the potential to dramatically increase productivity, it’s easy to go down the rabbit hole of research and not actually get any work done. So now that you’ve got some new tricks, you can stop reading and go put them to work.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/27/seven-tools-net-developers</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/27/seven-tools-net-developers</guid>
+      </item>
+    
+      <item>
+        <title>What the Heck is OAuth?</title>
+        <description>&lt;p&gt;There’s a &lt;em&gt;lot&lt;/em&gt; of confusion around what OAuth &lt;em&gt;actually is&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some people think OAuth is a login flow (like when you sign into an application with Google Login), and some people think of OAuth as a &lt;em&gt;“security thing”&lt;/em&gt;, and don’t really know much more than that.&lt;/p&gt;
+
+&lt;p&gt;I’m going to show you what OAuth is, explain how it works, and hopefully leave you with a sense of how and where OAuth can benefit your application.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-oauth&quot;&gt;What Is OAuth?&lt;/h2&gt;
+
+&lt;p&gt;To begin at a high level, OAuth is &lt;em&gt;not&lt;/em&gt; an API or a service: it’s an open standard for authorization and anyone can implement it.&lt;/p&gt;
+
+&lt;p&gt;More specifically, OAuth is a standard that apps can use to provide client applications with “secure delegated access”. OAuth works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.&lt;/p&gt;
+
+&lt;p&gt;There are two versions of OAuth: &lt;a href=&quot;https://tools.ietf.org/html/rfc5849&quot;&gt;OAuth 1.0a&lt;/a&gt; and &lt;a href=&quot;https://tools.ietf.org/html/rfc6749&quot;&gt;OAuth 2.0&lt;/a&gt;. These specifications are &lt;em&gt;completely different&lt;/em&gt; from one another, and cannot be used together: there is &lt;em&gt;no&lt;/em&gt; backwards compatibility between them.&lt;/p&gt;
+
+&lt;p&gt;Which one is more popular? &lt;em&gt;Great question!&lt;/em&gt; Nowadays, OAuth 2.0 is the most widely used form of OAuth. So from now on, whenever I say &lt;em&gt;“OAuth”&lt;/em&gt;, I’m talking about OAuth 2.0 – as it’s most likely what you’ll be using.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-oauth&quot;&gt;Why OAuth?&lt;/h2&gt;
+
+&lt;p&gt;OAuth was created as response to the direct authentication pattern. This pattern was made famous by HTTP Basic Authentication, where the user is prompted for a username and password. Basic Authentication is still used as a primitive form of API authentication for server side applications: instead of sending a username and password to the server with each request, the user sends an API key ID and secret. Before OAuth, sites would prompt you to enter your username and password directly into a form and they would login to your data (e.g. your Gmail account) as you. This is often called &lt;a href=&quot;https://arstechnica.com/information-technology/2010/01/oauth-and-oauth-wrap-defeating-the-password-anti-pattern/&quot;&gt;the password anti-pattern&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To create a better system for the web, federated identity was created for single sign-on (SSO). In this scenario, an end user talks to their identity provider, and the identity provider generates a  cryptographically signed token which it hands off to the application to authenticate the user. The application trusts the identity provider. As long as that trust relationship works with the signed assertion, you’re good to go. The diagram below (from &lt;a href=&quot;https://developer.okta.com/standards/OAuth/&quot;&gt;Okta’s OAuth docs&lt;/a&gt;) show how this works.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/browser_spa_implicit_flow-aa8b504d81ca3e57be798da01b0d570a92287e1b28f8b6209c16ca500d4f34a6.png&quot; alt=&quot;Browser Implicit Flow&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It’s a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chicklets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
+
+&lt;h3 id=&quot;saml&quot;&gt;SAML&lt;/h3&gt;
+
+&lt;p&gt;SAML is basically a session cookie in your browser that gives you access to webapps. It’s limited in the kinds of device profiles and scenarios you might want to do outside of a web browser.&lt;/p&gt;
+
+&lt;p&gt;When SAML 2.0 was launched in 2005, it made sense. However, a lot has changed since then. Now we have modern web and native application development platforms. There’s Single Page Applications (SPAs) like Gmail/Google Inbox, Facebook, and Twitter. They have different behaviors than your traditional web application, because they make AJAX (background HTTP calls) to APIs. Mobile phones make API calls too, as do TVs, gaming consoles, and IoT devices. SAML SSO isn’t particularly good at any of this.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-and-apis&quot;&gt;OAuth and APIs&lt;/h3&gt;
+
+&lt;p&gt;A lot has changed with the way we build APIs too. In 2005, people were invested in WS-* for building web services. Now, most developers have moved to REST and stateless APIs. REST is, in a nutshell, HTTP commands pushing JSON packets over the network.&lt;/p&gt;
+
+&lt;p&gt;Developers build a lot of APIs. The API Economy is a common buzzword you might hear in boardrooms today. Companies need to protect their REST APIs in a way that allows many devices to access them. In the old days, you’d enter your username/password directory and the app would login directly as you. This gave rise to the delegated authorization problem.&lt;/p&gt;
+
+&lt;p&gt;“How can I allow an app to access my data without necessarily giving it my password?”&lt;/p&gt;
+
+&lt;p&gt;If you’ve ever seen one of the dialogs below, that’s what we’re talking about. This is an application asking if it can access data on your behalf.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/biketoworkday-fb-login-f00e39aabbf3e44bc3570333643cbf5d966fc27367dbffd2623ff4a3694831c3.png&quot; alt=&quot;Facebook OAuth&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is OAuth.&lt;/p&gt;
+
+&lt;p&gt;OAuth is a delegated authorization framework for REST/APIs. It enables apps to obtain limited access (scopes) to a user’s data without giving away a user’s password. It decouples authentication from authorization and supports multiple use cases addressing different device capabilities. It supports server-to-server apps, browser-based apps, mobile/native apps, and consoles/TVs.&lt;/p&gt;
+
+&lt;p&gt;You can think of this like hotel key cards, but for apps. If you have a hotel key card, you can get access to your room. How do you get a hotel key card? You have to do an authentication process at the front desk to get it. After authenticating and obtaining the key card, you can access resources across the hotel.&lt;/p&gt;
+
+&lt;p&gt;To break it down simply, OAuth is where:&lt;/p&gt;
+
+&lt;p&gt;App requests authorization from User
+User authorizes App and delivers proof
+App presents proof of authorization to server to get a Token
+Token is restricted to only access what the User authorized for the specific App&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth-central-components&quot;&gt;OAuth Central Components&lt;/h2&gt;
+
+&lt;p&gt;OAuth is built on the following central components:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Scopes and Consent&lt;/li&gt;
+  &lt;li&gt;Actors&lt;/li&gt;
+  &lt;li&gt;Clients&lt;/li&gt;
+  &lt;li&gt;Tokens&lt;/li&gt;
+  &lt;li&gt;Authorization Server&lt;/li&gt;
+  &lt;li&gt;Flows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;oauth-scopes&quot;&gt;OAuth Scopes&lt;/h3&gt;
+
+&lt;p&gt;Scopes are what you see on the authorization screens when an app requests permissions. They’re bundles of permissions asked for by the client when requesting a token. These are coded by the application developer when writing the application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-scopes-7ea53a0efe6c05a8113671297f641baae7486dfb6ab8b8357c74cb6e6f8371ce.png&quot; alt=&quot;OAuth Scopes&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Scopes decouple authorization policy decisions from enforcement. This is the first key aspect of OAuth. The permissions are front and center. They’re not hidden behind the app layer that you have to reverse engineer. They’re often listed in the API docs: here are the scopes that this app requires.&lt;/p&gt;
+
+&lt;p&gt;You have to capture this consent. This is called trusting on first use. It’s a pretty significant user experience change on the web. Most people before OAuth were just used to name and password dialog boxes. Now you have this new screen that comes up and you have to train users to use. Retraining the internet population is difficult. There’s all kinds of users from the tech-savvy young folk to grandparents that aren’t familiar with this flow. It’s a new concept on the web that’s now front and center. Now you have to authorize and bring consent.&lt;/p&gt;
+
+&lt;p&gt;The consent can vary based on the application. It can be a time-sensitive range (day, weeks, months), but not all platforms allow you to choose the duration. One thing to watch for when you consent is that the app can do stuff on your behalf - e.g. LinkedIn spamming everyone in your network.&lt;/p&gt;
+
+&lt;p&gt;OAuth is an internet-scale solution because it’s per application. You often have the ability to log in to a dashboard to see what applications you’ve given access to and to revoke consent.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-actors&quot;&gt;OAuth Actors&lt;/h3&gt;
+
+&lt;p&gt;The actors in OAuth flows are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Resource Owner&lt;/strong&gt;: owns the data in the resource server. For example, I’m the Resource Owner of my Facebook profile.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Resource Server&lt;/strong&gt;: The API which stores data the application wants to access&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Client&lt;/strong&gt;: the application that wants to access your data&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Authorization Server&lt;/strong&gt;: The main engine of OAuth&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-actors-cd8b4861e839037400d8521e97c5d8cf0cb029add65d1036488991c7e85dcb72.png&quot; alt=&quot;OAuth Actors&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The resource owner is a role that can change with different credentials. It can be an end user, but it can also be a company.&lt;/p&gt;
+
+&lt;p&gt;Clients can be public and confidential. There is a significant distinction between the two in OAuth nomenclature. Confidential clients can be trusted to store a secret. They’re not running on a desktop or distributed through an app store. People can’t reverse engineer them and get the secret key. They’re running in a protected area where end users can’t access them.&lt;/p&gt;
+
+&lt;p&gt;Public clients are browsers, mobile apps, and IoT devices.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-clients-93fc6cc8e83fa7d885c9daa0ed88007fc44780b99682dcfa580af319894870c7.png&quot; alt=&quot;OAuth Clients&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Client registration also a key component of OAuth. It’s like the DMV of OAuth. You need to get a license plate for your application. This is how your app’s logo shows up in an authorization dialog.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-tokens&quot;&gt;OAuth Tokens&lt;/h3&gt;
+
+&lt;p&gt;Access tokens are the token the client uses to access the Resource Server (API). They’re meant to be short-lived. Think of them in hours and minutes, not days and month. You don’t need a confidential client to get an access token. You can get access tokens with public clients. They’re designed to optimize for internet scale problems. Because these tokens can be short lived and scale out, they can’t be revoked, you just have to wait for them to time out.&lt;/p&gt;
+
+&lt;p&gt;The other token is the refresh token. This is much longer-lived; days, months, years. This can be used to get new tokens. To get a refresh token, applications typically require confidential clients with authentication.&lt;/p&gt;
+
+&lt;p&gt;Refresh tokens can be revoked. When revoking an application’s access in a dashboard, you’re killing its refresh token. This gives you the ability to force the clients to rotate secrets.  What you’re doing is you’re using your refresh token to get new access tokens and the access tokens are going over the wire to hit all the API resources. Each time you refresh your access token you get a new cryptographically signed token.. Key rotation is built into the system.&lt;/p&gt;
+
+&lt;p&gt;The OAuth spec doesn’t define what a token is. It can be in whatever format you want. Usually though, you want these tokens to be JSON Web Tokens (a &lt;a href=&quot;https://tools.ietf.org/html/rfc7519&quot;&gt;standard&lt;/a&gt;). In a nutshell, a JWT (pronounced “jot”) is a secure and trustworthy standard for token authentication. JWTs allow you to digitally sign information (referred to as claims) with a signature and can be verified at a later time with a secret signing key. To learn more about JWTs, see &lt;a href=&quot;https://stormpath.com/blog/beginners-guide-jwts-in-java&quot;&gt;A Beginner’s Guide to JWTs in Java&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Tokens are retrieved from endpoints on the authorization server. The two main endpoints are the authorize endpoint and the token endpoint. They’re separated for different use cases. The authorize endpoint is where you go to get consent and authorization from the user. This returns an authorization grant that says the user has consented to it. Then the authorization is passed to the token endpoint. The token endpoint processes the grant and says “great, here’s your refresh token and your access token”.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/authorization-server-99a4ad01368a4c8e407917358d4394d573a6c0e3c9fa10c01a59d1a54c4938cf.png&quot; alt=&quot;Authorization Server&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can use the access token to get access to APIs. Once it expires, you’ll have to go back to the token endpoint with the refresh token to get a new access token.&lt;/p&gt;
+
+&lt;p&gt;The downside is this causes a lot of developer friction. One of the biggest pain points of OAuth for developers is you having to manage the refresh tokens. You push state management onto each client developer. You get the benefits of key rotation, but you’ve just created a lot of pain for developers. That’s why developers love API keys. They can just copy/paste them, slap them in a text file, and be done with them. API keys are very convenient for the developer, but very bad for security.&lt;/p&gt;
+
+&lt;p&gt;There’s a pay to play problem here. Getting developers to do OAuth flows increases security, but there’s more friction. There’s opportunities for toolkits and platforms to simplify things and help with token management. Luckily, OAuth is pretty mature these days, and chances are your favorite language or framework has tools available to simplify things.&lt;/p&gt;
+
+&lt;p&gt;We’ve talked a bit about the client types, the token types, and the endpoints of the authorization server and how we can pass that to a resource server. I mentioned two different flows: getting the authorization and getting the tokens. Those don’t have to happen on the same channel. The front channel is what goes over the browser. The browser redirected the user to the authorization server, the user gave consent. This happens on the user’s browser. Once the user takes that authorization grant and hands that to the application, the client application no longer needs to use the browser to complete the OAuth flow to get the tokens.&lt;/p&gt;
+
+&lt;p&gt;The tokens are meant to be consumed by the client application so it can access resources on your behalf. We call that the back channel. The back channel is a direct HTTP call directly from the client application to the resource server to exchange the authorization grant for tokens. These channels are used for different flows depending on what device capabilities you have.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/flow-channels-5d8996b3706cab1e4ac8f9ed716d6529d3970f91cbc3cb5ff5a21a94389d0e1d.png&quot; alt=&quot;Flow Channels&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, a Front Channel Flow where you authorize via user agent might look as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Resource Owner starts flow to delegate access to protected resource&lt;/li&gt;
+  &lt;li&gt;Client sends authorization request with desired scopes via browser redirect to the Authorize Endpoint on the Authorization Server&lt;/li&gt;
+  &lt;li&gt;Authorization Server returns a consent dialog saying “do you allow this application to have access to these scopes?” Of course, you’ll need to authenticate to the application, so if you’re not authenticated to your Resource Server, it’ll ask you to login. If you already have a cached session cookie, you’ll just see the consent dialog box. View the the consent dialog, and agree.&lt;/li&gt;
+  &lt;li&gt;The authorization grant is passed back to the application via browser redirect. This all happens on the front channel.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/front-channel-flow-4eb727aa0e67884935dd1642749fac60a7194815b8a1724aa11a0ce9adb80fa1.png&quot; alt=&quot;Front Channel Flow&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There’s also a variance in this flow called the implicit flow. We’ll get to that in a minute.&lt;/p&gt;
+
+&lt;p&gt;This is what it looks like on the wire.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+GET https://accounts.google.com/o/oauth2/auth?scope=gmail.insert gmail.send
+&amp;amp;redirect_uri=https://app.example.com/oauth2/callback
+&amp;amp;response_type=code&amp;amp;client_id=812741506391
+&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+This is a GET request with a bunch of query params (not URL-encoded for example purposes). Scopes are from Gmail's API. The redirect_uri is the URL of the client application that the authorization grant should be returned to. This should match the value from the client registration process (at the DMV). You don't want the authorization being bounced back to a foreign application. Response type varies the OAuth flows. Client ID is also from the registration process. State is a security flag, similar to XRSF. To learn more about XRSF, see &lt;a href=&quot;https://dzone.com/articles/cross-site-request-forgery&quot;&gt;DZone's &quot;Cross-Site Request Forgery explained&quot;&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+HTTP/1.1 302 Found
+Location: https://app.example.com/oauth2/callback?
+code=MsCeLvIaQm6bTrgtp7&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+The &lt;code&gt;code&lt;/code&gt; returned is the authorization grant and &lt;code&gt;state&lt;/code&gt; is to ensure it's not forged and it's from the same request.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;After the Front Channel is done, a Back Channel Flow happens, exchanging the authorization code for an access token.&lt;/p&gt;
+
+&lt;p&gt;The Client application sends an access token request to the token endpoint on the Authorization Server with confidential client credentials and client id. This process exchanges an Authorization Code Grant for an Access Token and (optionally) a Refresh Token.
+Client accesses a protected resource with Access Token.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/back-channel-flow-7a2fb837d1950d5718ee788c2d904247edc5b06b9e3f399253da78636197cbbc.png&quot; alt=&quot;Back Channel Flow&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Below is how this looks in raw HTTP.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+POST /oauth2/v3/token HTTP/1.1
+Host: www.googleapis.com
+Content-Type: application/x-www-form-urlencoded
+
+code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;client_secret={client_secret}&amp;amp;redirect_uri=https://app.example.com/oauth2/callback&amp;amp;grant_type=authorization_code
+&lt;/pre&gt;
+&lt;p&gt;The grant_type is the extensibility part of OAuth. It's an authorization code from a precomputed perspective. It opens up the flexibility to have different ways to describe these grants. This is the most common type of OAuth flow.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+{
+  &quot;access_token&quot;: &quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+  &quot;token_type&quot;: &quot;Bearer&quot;,
+  &quot;expires_in&quot;: 3600,
+  &quot;refresh_token&quot;: &quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;
+}
+&lt;/pre&gt;
+&lt;p&gt;
+The response is JSON. You can be reactive or proactive in using tokens. Proactive is to have a timer in your client. Reactive is to catch an error and attempt to get a new token then.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Once you have an access token, you can use the access token in an Authentication header (using the &lt;code class=&quot;highlighter-rouge&quot;&gt;token_type&lt;/code&gt; as a prefix) to make protected resource requests.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -H &quot;Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA&quot; \
+  https://www.googleapis.com/gmail/v1/users/1444587525/messages
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;So now you have a front channel, a back channel, different endpoints, and different clients. You have to mix and match these for different use cases. This up-levels the complexity of OAuth and it can get confusing.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-flows&quot;&gt;OAuth Flows&lt;/h3&gt;
+
+&lt;p&gt;The very first flow is what we call the &lt;strong&gt;Implicit Flow&lt;/strong&gt;. The reason it’s called the implicit flow is because all the communication is happening through the browser. There is no backend server redeeming the authorization grant for an access token. An SPA is a good example of this flow’s use case. This flow is also called 2 Legged OAuth.&lt;/p&gt;
+
+&lt;p&gt;Implicit flow is optimized for browser-only public clients. An access token is returned directly from the authorization request (front channel only). It typically does not support refresh tokens. It assumes the Resource Owner and Public Client are on the same device. Since everything happens on the browser, it’s the most vulnerable to security threats.&lt;/p&gt;
+
+&lt;p&gt;The gold standard is the &lt;strong&gt;Authorization Code Flow&lt;/strong&gt;, aka 3 Legged, that uses both the front channel and the back channel. This is what we’ve been talking about the most in this article. The front channel flow is used by the client application to obtain an authorization code grant. The back channel is used by the client application to exchange the authorization code grant for an access token (and optionally a refresh token). It assumes the Resource Owner and Client Application are on separate devices. It’s the most secure flow because you can authenticate the client to redeem the authorization grant, and tokens are never passed through a user-agent.
+There’s not just Implicit and Authorization Code flows, there’s additional flows you can do with OAuth. Again, OAuth is more of a framework.&lt;/p&gt;
+
+&lt;p&gt;For server-to-server scenarios, you might want to use a &lt;strong&gt;Client Credential Flow&lt;/strong&gt;. In this scenario, the client application is a confidential client that’s acting on its own, not on behalf of the user. It’s more of a service account type of scenario. All you need is the client’s credentials to do the whole flow. It’s a back channel only flow to obtain an access token using the client’s credentials. It supports shared secrets or assertions as client credentials signed with either symmetric or asymmetric keys.&lt;/p&gt;
+
+&lt;p&gt;Symmetric-key algorithms are cryptographic algorithms that allow you to decrypt anything, as long as you have the password. This is often found when securing PDFs or .zip files.&lt;/p&gt;
+
+&lt;p&gt;Public key cryptography, or asymmetric cryptography, is any cryptographic system that uses pairs of keys: public keys and private keys. Public keys can be read by anyone, private keys are sacred to the owner. This allows data to be secure without the need to share a password.&lt;/p&gt;
+
+&lt;p&gt;There’s also a legacy mode called &lt;strong&gt;Resource Owner Password Flow&lt;/strong&gt;. This is very similar to the direct authentication with username and password scenario and is not recommended. It’s a legacy grant type for native username/password apps such as desktop applications. In this flow, you send the client application a username and password and it returns an access token from the Authorization Server. It typically does not support refresh tokens and it assumes the Resource Owner and Public Client are on the same device. For when you have an API that only wants to speak OAuth, but you have old-school clients to deal with.&lt;/p&gt;
+
+&lt;p&gt;A more recent addition to OAuth is the &lt;strong&gt;Assertion Flow&lt;/strong&gt;, which is similar to the client credential flow. This was added to open up the idea of federation. This flow allows an Authorization Server to trust authorization grants from third parties such as SAML IdP. The Authorization Server trusts the Identity Provider. The assertion is used to obtain an access token from the token endpoint. This is great for companies that have invested in SAML or SAML-related technologies and allow them to integrate with OAuth. Because SAML assertions are short-lived, there are no refresh tokens in this flow and you have to keep retrieving access tokens every time the assertion expires.&lt;/p&gt;
+
+&lt;p&gt;Not in the OAuth spec, is a &lt;strong&gt;Device Flow&lt;/strong&gt;. There’s no web browser, just a controller for something like a TV. A user code is returned from an authorization request that must be redeemed by visiting a URL on a device with a browser to authorize. A back channel flow is used by the client application to poll for authorization approval for an access token and optionally a refresh token. Also popular for CLI clients.&lt;/p&gt;
+
+&lt;p&gt;We’ve covered six different flows using the different actors and token types. They’re necessary because of the capabilities of the clients, how we needed to get consent from the client, who is making consent, and that adds a lot of complexity to OAuth.&lt;/p&gt;
+
+&lt;p&gt;When people ask if you support OAuth, you have to clarify what they’re asking for. Are they asking if you support all six flows, or just the main ones? There’s a lot of granularity available between all the different flows.&lt;/p&gt;
+
+&lt;h2 id=&quot;security-and-the-enterprise&quot;&gt;Security and the Enterprise&lt;/h2&gt;
+
+&lt;p&gt;There’s a large surface area with OAuth. With Implicit Flow, there’s lots of redirects and lots of room for errors. There’s been a lot of people trying to exploit OAuth between applications and it’s easy to do if you don’t follow recommended Web Security 101 guidelines. For example:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html&quot;&gt;Always use CSRF token with the &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt; parameter to ensure flow integrity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Always whitelist redirect URIs to ensure proper URI validations&lt;/li&gt;
+  &lt;li&gt;Bind the same client to authorization grants and token requests with a client ID&lt;/li&gt;
+  &lt;li&gt;For confidential clients, make sure the client secrets aren’t leaked. Don’t put a client secret in your app that’s distributed through an App Store!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The biggest complaint about OAuth in general comes from Security people. It’s regarding the Bearer tokens and that they can be passed just like session cookies. You can pass it around and you’re good to go, it’s not cryptographically bound to the user. Using JWTs helps because they can’t be tampered with. However, in the end, a JWT is just a string of characters so they can easily be copied and used in an &lt;code class=&quot;highlighter-rouge&quot;&gt;Authorization&lt;/code&gt; header.&lt;/p&gt;
+
+&lt;h3 id=&quot;enterprise-oauth-20-use-cases&quot;&gt;Enterprise OAuth 2.0 Use Cases&lt;/h3&gt;
+
+&lt;p&gt;OAuth decouples your authorization policy decisions from authentication. It enables the right blend of fine and coarse grained authorization. It can replace traditional Web Access Management (WAM) Policies. It’s also great for restricting and revoking permissions when building apps that can access specific APIs. It ensures only managed and/or compliant devices can access specific APIs. It has deep integration with identity deprovisioning workflows to revoke all tokens from a user or device. Finally, it supports federation with an identity provider.&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth-is-not-an-authentication-protocol&quot;&gt;OAuth is not an Authentication Protocol&lt;/h2&gt;
+
+&lt;p&gt;To summarize some of the misconceptions of OAuth 2.0: it’s not backwards compatible with OAuth 1.0. It replaces signatures with HTTPS for all communication. When people talk about OAuth today, they’re talking about OAuth 2.0.&lt;/p&gt;
+
+&lt;p&gt;Because OAuth is an authorization framework and not a protocol, you may have interoperability issues. There are lots of variances in how teams implement OAuth and you might need custom code to integrate with vendors.&lt;/p&gt;
+
+&lt;p&gt;OAuth 2.0 is not an authentication protocol. It even says so in &lt;a href=&quot;https://oauth.net/articles/authentication/&quot;&gt;its documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-not-authentication-highlighted-b20b0ee8790740e1c354643e770dcd394ed9c6079812e5a85440e6dcbe14085a.png&quot; alt=&quot;OAuth 2.0 is not an authentication protocol&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We’ve been talking about delegated authorization this whole time. It’s not about authenticating the user, and this is key. OAuth 2.0 alone says absolutely nothing about the user. You just have a token to get access to a resource.&lt;/p&gt;
+
+&lt;p&gt;There’s a huge number of additions that’ve happened to OAuth in the last several years. These add complexity back on top of OAuth to complete a variety of enterprise scenarios. For example, JWTs can be used as interoperable tokens that can be signed and encrypted.&lt;/p&gt;
+
+&lt;h2 id=&quot;pseudo-authentication-with-oauth-20&quot;&gt;Pseudo-Authentication with OAuth 2.0&lt;/h2&gt;
+
+&lt;p&gt;Login with OAuth was made famous by Facebook Connect and Twitter. In this flow, a client accesses a &lt;code class=&quot;highlighter-rouge&quot;&gt;/me&lt;/code&gt; endpoint with an access token. All it says is that the client has access to the resource with a token. People invented this fake endpoint as a way of getting back a user profile with an access token. It’s a non-standard way to get information about the user. There’s nothing in the standards that say everyone has to implement this endpoint. Access tokens are meant to be opaque. They’re meant for the API, they’re not designed to contain user information.&lt;/p&gt;
+
+&lt;p&gt;What you’re really trying to answer with authentication is &lt;em&gt;who&lt;/em&gt; the user is, &lt;em&gt;when&lt;/em&gt; did the user authenticate, and &lt;em&gt;how&lt;/em&gt; did the user authenticate. You can answer typically answer these questions with SAML assertions, not with access tokens and authorization grants. That’s why we call this pseudo authentication.&lt;/p&gt;
+
+&lt;h2 id=&quot;enter-openid-connect&quot;&gt;Enter OpenID Connect&lt;/h2&gt;
+
+&lt;p&gt;To solve the pseudo authentication problem, the best parts of OAuth 2.0, Facebook Connect, and SAML 2.0 were combined to create &lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt;. OpenID Connect (OIDC) extends OAuth 2.0 with a new signed &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; for the client and a &lt;code class=&quot;highlighter-rouge&quot;&gt;UserInfo&lt;/code&gt; endpoint to fetch user attributes. Unlike SAML, OIDC provides a standard set of scopes and claims for identities. Examples include: &lt;code class=&quot;highlighter-rouge&quot;&gt;profile&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;email&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;address&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;phone&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;OIDC was created to be internet scalable by making things completely dynamic. There’s no longer downloading metadata and federation like SAML requires. There’s built-in registration, discovery, and metadata for dynamic federations. You can type in your email address, then it dynamically discovers your OIDC provider, dynamically downloads the metadata, dynamically know what certs it’s going to use, and allows BYOI (Bring Your Own Identity). It supports high assurance levels and key SAML use cases for enterprises.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/openid-connect-protocol-suite-7e1d4655fc5f66461dc78fcb069fb54e3eb2eabf412a244c6617f49af747b3ba.png&quot; alt=&quot;OpenID Connect Protocol Suite&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OIDC was made famous by Google and Microsoft, both big early adopters. Okta has made a big investment in OIDC as well.&lt;/p&gt;
+
+&lt;p&gt;All that changes in the initial request is it contains standard scopes (like &lt;code class=&quot;highlighter-rouge&quot;&gt;openid&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;email&lt;/code&gt;):&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+GET https://accounts.google.com/o/oauth2/auth?
+scope=&lt;strong&gt;openid email&lt;/strong&gt;&amp;amp;
+redirect_uri=https://app.example.com/oauth2/callback&amp;amp;
+response_type=code&amp;amp;
+client_id=812741506391&amp;amp;
+state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+HTTP/1.1 302 Found
+Location: https://app.example.com/oauth2/callback?
+code=MsCeLvIaQm6bTrgtp7&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+The &lt;code&gt;code&lt;/code&gt; returned is the authorization grant and &lt;code&gt;state&lt;/code&gt; is to ensure it's not forged and it's from the same request.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;And the authorization grant for tokens response contains an ID token.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+POST /oauth2/v3/token HTTP/1.1
+Host: www.googleapis.com
+Content-Type: application/x-www-form-urlencoded
+
+code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;
+  client_secret={client_secret}&amp;amp;
+  redirect_uri=https://app.example.com/oauth2/callback&amp;amp;
+  grant_type=authorization_code
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+{
+  &quot;access_token&quot;: &quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+  &quot;token_type&quot;: &quot;Bearer&quot;,
+  &quot;expires_in&quot;: 3600,
+  &quot;refresh_token&quot;: &quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,
+  &lt;strong&gt;&quot;id_token&quot;: &quot;eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkazcifQ...&quot;&lt;/strong&gt;
+}
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;You can see this is layered nicely on top of OAuth to give back an ID token as a structured token. An ID token is a JSON Web Token (JWT). A JWT (aka “jot”) is much smaller than a giant XML-based SAML assertion and can be efficiently passed around between different devices. A JWT has three parts: a header, a body, and a signature. The header says what algorithm was used to sign it, the claims are in the body, and its signed in the signature.&lt;/p&gt;
+
+&lt;p&gt;An Open ID Connect flow involves the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Discover OIDC metadata&lt;/li&gt;
+  &lt;li&gt;Perform OAuth flow to obtain id token and access token&lt;/li&gt;
+  &lt;li&gt;Get JWT signature keys and optionally dynamically register the Client application&lt;/li&gt;
+  &lt;li&gt;Validate JWT ID token locally based on built-in dates and signature&lt;/li&gt;
+  &lt;li&gt;Get additional user attributes as needed with access token&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oidc-flow-d93872818e8d040a5b7f1d02ac6b0a2d2961a91de72727f64ba47635dce5f2a1.png&quot; alt=&quot;OIDF Flow&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth--okta&quot;&gt;OAuth + Okta&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.okta.com&quot;&gt;Okta&lt;/a&gt; is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta’s Developer Platform straight from the source, you should attend &lt;a href=&quot;https://www.okta.com/oktane17/&quot;&gt;Oktane17&lt;/a&gt; in late August. There’s a &lt;a href=&quot;https://www.okta.com/oktane17/agenda/#AppDev&quot;&gt;track dedicated to app development&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&quot;http://developer.okta.com/docs/api/resources/oauth2.html&quot;&gt;Okta’s OAuth 2.0 API&lt;/a&gt; for specific information on how we support OAuth.&lt;/p&gt;
+
+&lt;p&gt;SAML is implement by Okta with its SSO chicklets. If you’re an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chicklet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
+
+&lt;p&gt;If you’d rather watch a video to learn about OAuth, please see the presentation below from &lt;a href=&quot;https://twitter.com/jankytweet&quot;&gt;Karl McGuinness&lt;/a&gt;, Senior Director of Identity at Okta.&lt;/p&gt;
+
+&lt;div style=&quot;max-width: 560px; margin: 0 auto&quot;&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/NnNha_p-iq0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;OAuth 2.0 is an authorization framework for delegated access to APIs. It involves clients that request scopes that Resource Owners authorize/give consent to. Authorization grants are exchanged for access tokens and refresh tokens (depending on flow). There are multiple flows to address varying client and authorization scenarios. JWTs can be used for structured tokens between Authorization Servers and Resource Servers.&lt;/p&gt;
+
+&lt;p&gt;OAuth has a very large security surface area. Make sure to use a secure toolkit and validate all inputs!&lt;/p&gt;
+
+&lt;p&gt;OAuth is not an authentication protocol. OpenID Connect extends OAuth 2.0 for authentication scenarios and is often called “SAML with curly-braces”. If you’re looking to dive even deeper into OAuth 2.0, I recommend you check out &lt;a href=&quot;https://www.oauth.com/&quot;&gt;OAuth.com&lt;/a&gt;, take Okta’s Auth SDK for a spin, and try out the OAuth flows for yourself.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</guid>
+      </item>
+    
+      <item>
+        <title>Develop and Deploy Microservices with JHipster</title>
+        <description>&lt;p&gt;JHipster is one of those open-source projects you stumble upon and immediately think, “&lt;code class=&quot;highlighter-rouge&quot;&gt;Of course!&lt;/code&gt;” It combines three 
+very successful frameworks in web development: Bootstrap, Angular, and Spring Boot. Bootstrap was one of the first dominant 
+web-component frameworks. Its largest appeal was that it only required a bit of HTML and it worked! Bootstrap showed many 
+in the Java community how to develop components for the web. It leveled the playing field in HTML/CSS development, much 
+like Apple’s Human Interface Guidelines did for iOS apps.&lt;/p&gt;
+
+&lt;p&gt;At its core, JHipster is a &lt;a href=&quot;http://yeoman.io/&quot;&gt;Yeoman&lt;/a&gt; generator. Yeoman is a code generator that you run with a &lt;code class=&quot;highlighter-rouge&quot;&gt;yo&lt;/code&gt; 
+command to generate complete applications or useful pieces of an application. Yeoman generators promote what the Yeoman 
+team calls the “&lt;code class=&quot;highlighter-rouge&quot;&gt;Yeoman workflow&lt;/code&gt;”. This is an opinionated client-side stack of tools that can help developers quickly 
+build beautiful web applications. It takes care of providing everything needed to get working without the normal pains 
+associated with a manual setup.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Learn more about JHipster, including its origin, at &lt;a href=&quot;http://jhipster.github.io&quot;&gt;http://jhipster.github.io&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;This tutorial shows you how to build a microservices architecture with &lt;a href=&quot;https://jhipster.github.io/2017/06/16/jhipster-release-4.5.4.html&quot;&gt;JHipster 4.5.4&lt;/a&gt;. You’ll generate a gateway (powered by Netflix Zuul and the JHipster Gateway), a microservice (that talks to MongoDB), and use Docker Compose to make sure it all runs locally. Then you’ll deploy it to Minikube and Google Cloud using Kubernetes.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-jhipster-4&quot;&gt;Install JHipster 4&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://jhipster.github.io/installation/&quot;&gt;Installing JHipster&lt;/a&gt; instructions show you all the tools you’ll need to 
+use a released version of JHipster.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Install Java 8 &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/index.html&quot;&gt;from Oracle&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Install Git from &lt;a href=&quot;https://git-scm.com&quot;&gt;https://git-scm.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Install Node.js from &lt;a href=&quot;http://nodejs.org&quot;&gt;http://nodejs.org&lt;/a&gt; (I used Node 6.11.0 to write this article)&lt;/li&gt;
+  &lt;li&gt;Install Yarn using the &lt;a href=&quot;https://yarnpkg.com/en/docs/install&quot;&gt;Yarn installation instructions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the following command to install &lt;a href=&quot;http://yeoman.io/&quot;&gt;Yeoman&lt;/a&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; yarn global add yo
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the following command to install JHipster&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; yarn global add generator-jhipster
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;microservices-with-jhipster&quot;&gt;Microservices with JHipster&lt;/h2&gt;
+
+&lt;p&gt;To build a microservices architecture with JHipster, you’ll need to generate two applications and clone another.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Generate a gateway&lt;/li&gt;
+  &lt;li&gt;Generate a microservice&lt;/li&gt;
+  &lt;li&gt;Clone the JHipster Registry&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can see how these components fit in the diagram below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/jhipster-microservices-architecture-1e6c15cf88acb3e263caa575b1e5ebfa49ef0ad49c880d6d80de3a377ab363e5.png&quot; alt=&quot;JHipster Microservices Architecture&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To see what’s happening inside your applications, you can use the &lt;a href=&quot;https://jhipster.github.io/monitoring/#jhipster-console&quot;&gt;JHipster Console&lt;/a&gt;, 
+a monitoring tool based on the &lt;a href=&quot;https://www.elastic.co/products&quot;&gt;ELK Stack&lt;/a&gt;. I’ll cover JHipster Console in the Docker Compose section.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-an-api-gateway&quot;&gt;Create an API Gateway&lt;/h2&gt;
+
+&lt;p&gt;To create a microservices project, open a terminal window and create a &lt;code class=&quot;highlighter-rouge&quot;&gt;jhipster-microservices-example&lt;/code&gt; directory. Then 
+create a &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; directory for the gateway application.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir -p jhipster-microservices-example/blog
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In JHipster terms, a &lt;strong&gt;gateway&lt;/strong&gt; is a normal JHipster application. This means you can develop 
+it like a monolith, but it also acts as the entrance to your microservices. More specifically, it provides HTTP 
+routing and load balancing, quality of service, security, and API documentation for all microservices.&lt;/p&gt;
+
+&lt;p&gt;In a terminal, navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; directory and run &lt;code class=&quot;highlighter-rouge&quot;&gt;jhipster&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;jhipster-microservices-example/blog
+jhipster
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;JHipster prompts you with many questions about the type of application you want to generate and what features you’d like 
+to include. Create the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; application with the following settings:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Application type: &lt;code class=&quot;highlighter-rouge&quot;&gt;Microservice gateway&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Base name of the application: &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Port: &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Default package name: &lt;code class=&quot;highlighter-rouge&quot;&gt;org.jhipster.blog&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;JHipster Registry: &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Type of authentication: &lt;code class=&quot;highlighter-rouge&quot;&gt;JWT&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Type of database: &lt;code class=&quot;highlighter-rouge&quot;&gt;SQL&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Production database: &lt;code class=&quot;highlighter-rouge&quot;&gt;PostgreSQL&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Development database: &lt;code class=&quot;highlighter-rouge&quot;&gt;H2 with disk-based persistence&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Maven or Gradle: &lt;code class=&quot;highlighter-rouge&quot;&gt;Maven&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Other technologies: &lt;code class=&quot;highlighter-rouge&quot;&gt;Elasticsearch&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Client framework: &lt;code class=&quot;highlighter-rouge&quot;&gt;Angular 4&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Sass for CSS: &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Internationalization support: &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Native language: &lt;code class=&quot;highlighter-rouge&quot;&gt;English&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Additional languages: &lt;code class=&quot;highlighter-rouge&quot;&gt;Spanish&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Testing frameworks: &lt;code class=&quot;highlighter-rouge&quot;&gt;Gatling, Protractor&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Install other generators from the JHipster Marketplace: &lt;code class=&quot;highlighter-rouge&quot;&gt;No&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/generate-blog-be1d1eb278e4f8507f0dc188d6dca9633a723c9b10b95cc62f3971ee14bb59d2.png&quot; alt=&quot;Generating the gateway&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you’d like to use the same settings I did, you can place the following &lt;code class=&quot;highlighter-rouge&quot;&gt;.yo-rc.json&lt;/code&gt; file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; directory and 
+run &lt;code class=&quot;highlighter-rouge&quot;&gt;jhipster&lt;/code&gt; in it. You won’t be prompted to answer any questions because the answers are already in &lt;code class=&quot;highlighter-rouge&quot;&gt;.yo-rc.json&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;generator-jhipster&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;promptValues&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;packageName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org.jhipster.blog&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;nativeLanguage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;jhipsterVersion&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4.5.4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;baseName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blog&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;packageName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org.jhipster.blog&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;packageFolder&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org/jhipster/blog&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;serverPort&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;authenticationType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;jwt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;hibernateCache&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;hazelcast&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;clusteredHttpSession&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;websocket&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;databaseType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sql&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;devDatabaseType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;h2Disk&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;prodDatabaseType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;postgresql&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;searchEngine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;elasticsearch&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;messageBroker&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;serviceDiscoveryType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;eureka&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;buildTool&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;maven&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;enableSocialSignIn&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;jwtSecretKey&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;f7450a034a7251b3d201cf5139852f9adf69c2d1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;clientFramework&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;angular2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;useSass&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;clientPackageManager&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;yarn&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;applicationType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gateway&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;testFrameworks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gatling&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;protractor&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;jhiPrefix&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;jhi&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;enableTranslation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;nativeLanguage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;languages&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;es&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The project creation process will take a couple of minutes to run, depending on your internet connection speed. When it’s 
+finished, you should see output like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/generation-success-fc29cd14ce05f64f4807082784ddf096868bcc37855156a150e5d0080a82945f.png&quot; alt=&quot;Generation success&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Before you can run this project, you’ll need to download and start an instance of the &lt;a href=&quot;https://github.com/jhipster/jhipster-registry&quot;&gt;JHipster Registry&lt;/a&gt;. 
+Run the following commands in the &lt;code class=&quot;highlighter-rouge&quot;&gt;jhipster-microservices-example&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone git@github.com:jhipster/jhipster-registry.git registry
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;registry &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; yarn &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./mvnw
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://jhipster.github.io/jhipster-registry/&quot;&gt;JHipster Registry&lt;/a&gt; is built on Spring Cloud Netflix and Spring Cloud Config. 
+Patterns provided by Spring Cloud Netflix include Service Discovery (Eureka), Circuit Breaker (Hystrix), Intelligent Routing (Zuul), 
+and Client Side Load Balancing (Ribbon).&lt;/p&gt;
+
+&lt;p&gt;In a &lt;a href=&quot;/blog/2017/06/15/build-microservices-architecture-spring-boot&quot;&gt;previous post&lt;/a&gt;, I showed you how you can use Eureka for 
+service discovery. JHipster Registry is a Eureka server, a Spring Cloud Config server, as well as an administration server. 
+It includes dashboards to monitor and manage your JHipster applications.&lt;/p&gt;
+
+&lt;p&gt;JHipster Registry starts on port 8761 by default.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/jhipster-registry-6211c7c7d4a74b675f578e0f24837502ea8a53995330efc1749a265448d2ed5c.png&quot; alt=&quot;JHipster Registry&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In a new terminal window, navigate to &lt;code class=&quot;highlighter-rouge&quot;&gt;jhipster-microservices-example/blog&lt;/code&gt; and run &lt;code class=&quot;highlighter-rouge&quot;&gt;./mvnw&lt;/code&gt; to start the blog application 
+and open &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt; in your favorite browser. The first thing you’ll notice is a dapper-looking fellow 
+explaining how you can sign in or register.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/default-homepage-59cff05fbc224e96a69c3ae3f1479cc89027ef25a09565e0d008181604679f28.png&quot; alt=&quot;Default homepage&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sign in with username &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; and password &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; and you’ll have access to navigate through the Administration section. 
+This section offers nice looking UIs on top of some Spring Boot’s many monitoring and configuration features. It also 
+allows you to administer users:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/user-management-d9b7bdeec457183bb302d1567f2768870976c1a982bb20c8f7fab8d8b6ea0aef.png&quot; alt=&quot;User management&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It gives you insights into Application and JVM metrics:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/app-metrics-6d55958cb4cef8848932f7cb500b24f43e6f5c4ead4ec270ee50d550f1ca6846.png&quot; alt=&quot;Application and JVM Metrics&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And it allows you to see the Swagger docs associated with its API.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/swagger-docs-1c4ab470f66d53215a00b1a7b084b6ddeb02191641f2cc6692a44e47be84c6c0.png&quot; alt=&quot;Swagger docs&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can run the following command (in a separate terminal window) to start the Protractor tests and confirm everything is 
+working properly.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn e2e
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;At this point, it’s a good idea to check your project into Git so you can easily see what changes are made going forward.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git init
+git add .
+git commit -m &lt;span class=&quot;s2&quot;&gt;&quot;Gateway created&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Shut down your &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; application before proceeding to the next section.&lt;/p&gt;
+
+&lt;h3 id=&quot;generate-entities&quot;&gt;Generate Entities&lt;/h3&gt;
+
+&lt;p&gt;For each entity you want to create, you will need:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A database table&lt;/li&gt;
+  &lt;li&gt;A Liquibase change set&lt;/li&gt;
+  &lt;li&gt;A JPA entity class&lt;/li&gt;
+  &lt;li&gt;A Spring Data &lt;code class=&quot;highlighter-rouge&quot;&gt;JpaRepository&lt;/code&gt; interface&lt;/li&gt;
+  &lt;li&gt;A Spring MVC &lt;code class=&quot;highlighter-rouge&quot;&gt;RestController&lt;/code&gt; class&lt;/li&gt;
+  &lt;li&gt;An Angular model, state, component, dialog components, service&lt;/li&gt;
+  &lt;li&gt;Several HTML pages for each component&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Also, you should have integration tests to verify that everything works and performance tests to verify that it runs fast. In an ideal world, you’d also have unit tests and integration tests for your Angular code.&lt;/p&gt;
+
+&lt;p&gt;The good news is JHipster can generate all of this code for you, including integration tests and performance tests. In addition, if you have entities with relationships, it will generate the necessary schema to support them (with foreign keys), and the TypeScript and HTML code to manage them. You can also set up validation to require certain fields, as well as control their length.&lt;/p&gt;
+
+&lt;p&gt;JHipster supports several methods of code generation. The first uses its &lt;a href=&quot;https://jhipster.github.io/creating-an-entity/&quot;&gt;entity sub-generator&lt;/a&gt;. The entity sub-generator is a command-line tool that prompts you with questions which you answer. &lt;a href=&quot;https://jhipster.github.io/jdl-studio/&quot;&gt;JDL-Studio&lt;/a&gt; is a browser-based tool for defining your domain model with JHipster Domain Language (JDL). Finally, &lt;a href=&quot;https://jhipster.github.io/jhipster-uml/&quot;&gt;JHipster-UML&lt;/a&gt; is an option for those that like UML. Supported UML editors include &lt;a href=&quot;https://www.modeliosoft.com/&quot;&gt;Modelio&lt;/a&gt;, &lt;a href=&quot;http://www.umldesigner.org/&quot;&gt;UML Designer&lt;/a&gt;, &lt;a href=&quot;https://www.genmymodel.com/&quot;&gt;GenMyModel&lt;/a&gt;, and &lt;a href=&quot;http://www.visual-paradigm.com/&quot;&gt;Visual Paradigm&lt;/a&gt;. I like the visual nature of JDL-Studio, so I’ll use it for this project.&lt;/p&gt;
+
+&lt;p&gt;Below is the entity diagram and JDL code needed to generate a simple blog with blogs, entries, and tags.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/jdl-studio-blog-f6c10171bf61bd3f26fda6786baec6bba50377c32fc824f9bf17a6723d38d203.png&quot; alt=&quot;Blog entity diagram&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can &lt;a href=&quot;http://bit.ly/jhipster4-blog-jdl&quot;&gt;click on this URL&lt;/a&gt;, or copy/paste the contents of the file below to your hard 
+drive if you’d like to follow along.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;entity Blog {
+    name String required minlength(3),
+    handle String required minlength(2)
+}
+
+entity Entry {
+    title String required,
+    content TextBlob required,
+    date ZonedDateTime required
+}
+
+entity Tag {
+    name String required minlength(2)
+}
+
+relationship ManyToOne {
+    Blog{user(login)} to User,
+    Entry{blog(name)} to Blog
+}
+
+relationship ManyToMany {
+    Entry{tag(name)} to Tag{entry}
+}
+
+paginate Entry, Tag with infinite-scroll
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Run the following command (in the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; directory) to import this file. Running this command will generate entities, tests, and a UI.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jhipster import-jdl ~/Downloads/jhipster-jdl.jh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You’ll be prompted to overwrite &lt;code class=&quot;highlighter-rouge&quot;&gt;src/main/resources/config/liquibase/master.xml&lt;/code&gt;. Type &lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt; to overwrite this 
+file, as well as others.&lt;/p&gt;
+
+&lt;p&gt;Start the application with &lt;code class=&quot;highlighter-rouge&quot;&gt;/.mvnw&lt;/code&gt; and run &lt;code class=&quot;highlighter-rouge&quot;&gt;yarn start&lt;/code&gt; (in another window) to view the UI for the generated entities. 
+Create a couple of blogs for the existing &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; users, as well as a few blog entries.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/blogs-43eec411c0f7683d90a3bf378f06364f23115b37b6510e10d81e730b80ca3da2.png&quot; alt=&quot;Blogs&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/entries-b2f637fafe4f414ebc37da264070b1c8d1540ace9d283835dd0d675bd4994027.png&quot; alt=&quot;Entries&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From these screenshots, you can see that users can see each other’s data, and modify it.&lt;/p&gt;
+
+&lt;p&gt;Now, check your generated entities into Git.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git init
+git add .
+git commit -m &lt;span class=&quot;s2&quot;&gt;&quot;Entities generated&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;add-business-logic&quot;&gt;Add Business Logic&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;TIP:&lt;/strong&gt; To configure an IDE with your JHipster project, see &lt;a href=&quot;https://jhipster.github.io/configuring-ide/&quot;&gt;Configuring your IDE&lt;/a&gt;. 
+Instructions exist for Eclipse, IntelliJ IDEA, Visual Studio Code, and NetBeans.&lt;/p&gt;
+
+&lt;p&gt;To add more security around blogs and entries, open &lt;code class=&quot;highlighter-rouge&quot;&gt;BlogResource.java&lt;/code&gt; and find the &lt;code class=&quot;highlighter-rouge&quot;&gt;getAllBlogs()&lt;/code&gt; method. Change the 
+following line:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blogs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blogRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blogs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blogRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findByUserIsCurrentUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;findByUserIsCurrentUser()&lt;/code&gt; method is generated by JHipster in the &lt;code class=&quot;highlighter-rouge&quot;&gt;BlogRepository&lt;/code&gt; class and allows limiting results 
+by the current user.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BlogRepository&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JpaRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;select blog from Blog blog where blog.user.login = ?#{principal.username}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findByUserIsCurrentUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After making this change, re-compiling &lt;code class=&quot;highlighter-rouge&quot;&gt;BlogResource&lt;/code&gt; should trigger a restart of the application thanks to 
+&lt;a href=&quot;http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html&quot;&gt;Spring Boot’s Developer tools&lt;/a&gt;. 
+If you navigate to &lt;a href=&quot;http://localhost:9000/blogs&quot;&gt;http://localhost:9000/blogs&lt;/a&gt;, you should only see the blog for the current user.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/blogs-admin-5f2d635ead2b39744676fe3c6d413969c40596eadf41110d36f4eff6a6c932fd.png&quot; alt=&quot;Admin's blog&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To add this same logic for entries, open &lt;code class=&quot;highlighter-rouge&quot;&gt;EntryResource.java&lt;/code&gt; and find the &lt;code class=&quot;highlighter-rouge&quot;&gt;getAllEntries()&lt;/code&gt; method. Change the following line:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Page&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;entryRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pageable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Page&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;entryRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findByBlogUserLoginOrderByDateDesc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SecurityUtils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getCurrentUserLogin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pageable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Using your IDE, create this method in the &lt;code class=&quot;highlighter-rouge&quot;&gt;EntryRepository&lt;/code&gt; class. It should look as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Page&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;findByBlogUserLoginOrderByDateDesc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentUserLogin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Pageable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pageable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Recompile both changed classes and verify that the &lt;code class=&quot;highlighter-rouge&quot;&gt;user&lt;/code&gt; user only sees the entries you created for them.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/entries-user-6174c5f4b653864af7c6ae5b12739a1fab5f7c2d8ba62bd731c166b994f45503.png&quot; alt=&quot;User's entries&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After making this changes, commit them to Git.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .
+git commit -m &quot;Add business logic&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You might notice that this application doesn’t look like a blog and it doesn’t allow HTML in the content field.&lt;/p&gt;
+
+&lt;h3 id=&quot;make-ui-enhancements&quot;&gt;Make UI Enhancements&lt;/h3&gt;
+
+&lt;p&gt;When doing UI development on a JHipster-generated application, it’s nice to see your changes as soon as you save a file. 
+JHipster 4 uses &lt;a href=&quot;https://www.browsersync.io/&quot;&gt;Browsersync&lt;/a&gt; and &lt;a href=&quot;https://webpack.github.io/&quot;&gt;webpack&lt;/a&gt; to power this feature. 
+You enable this previously by running the following command in the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yarn start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In this section, you’ll change the following:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Change the rendered content field to display HTML&lt;/li&gt;
+  &lt;li&gt;Change the list of entries to look like a blog&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;allow-html&quot;&gt;Allow HTML&lt;/h4&gt;
+
+&lt;p&gt;If you enter HTML in the &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt; field of a blog entry, you’ll notice it’s escaped on the list screen.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/entries-with-html-escaped-0eacff4f524fafd5776e7a205e97e7ba486838a86ffd6b23d135dc3644300660.png&quot; alt=&quot;Escaped HTML&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To change this behavior, open &lt;code class=&quot;highlighter-rouge&quot;&gt;entry.component.html&lt;/code&gt; and change the following line:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;{{entry.content}}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;td&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;innerHTML&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After making this change, you’ll see that the HTML is no longer escaped.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/entries-with-html-4252d480bda493a261178c4f793c37283abded4f745a4770c57f821e29183ae9.png&quot; alt=&quot;HTML in entries&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;improve-the-layout&quot;&gt;Improve the layout&lt;/h4&gt;
+
+&lt;p&gt;To make the list of entries look like a blog, replace &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div class=&quot;table-responsive&quot;&amp;gt;&lt;/code&gt; with HTML, so it uses a stacked layout in a single column.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;table-responsive&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ngIf=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;entries&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;infinite-scroll&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scrolled&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loadPage&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;infiniteScrollDisabled&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;= links['last']&quot;
+         [infiniteScrollDistance]=&quot;0&quot;&amp;gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ngFor=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;let entry of entries; trackBy: trackId&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;{{entry.title}}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;small&amp;gt;&lt;/span&gt;Posted on {{entry.date | date: 'short'}} by {{entry.blog.user.login}}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/small&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;innerHTML&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn-group mb-4 mt-1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;submit&quot;&lt;/span&gt;
+                        &lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routerLink&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;['/',&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;outlets:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;popup:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/'+&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;edit&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'}&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;}]&quot;&lt;/span&gt;
+                        &lt;span class=&quot;na&quot;&gt;replaceUrl=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+                        &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-primary btn-sm&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fa fa-pencil&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hidden-md-down&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;jhiTranslate=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;entity.action.edit&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Edit&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;submit&quot;&lt;/span&gt;
+                        &lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;routerLink&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;['/',&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;outlets:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;popup:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/'+&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'/&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'}&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;}]&quot;&lt;/span&gt;
+                        &lt;span class=&quot;na&quot;&gt;replaceUrl=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+                        &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;btn btn-danger btn-sm&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fa fa-remove&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hidden-md-down&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;jhiTranslate=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;entity.action.delete&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Delete&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now it looks more like a regular blog!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/blog-entries-bd7c3d17bd49c9c75b2bab46afe39c1210ea03b58daaf72309d38e27ef80aaad.png&quot; alt=&quot;Blog entries&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Commit all your changes to Git.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .
+git commit -m &quot;UI enhancements&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;create-a-microservice&quot;&gt;Create a Microservice&lt;/h2&gt;
+
+&lt;p&gt;To generate a &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt; microservice, open a terminal window and navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;jhipster-microservices-example&lt;/code&gt; directory.
+Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt; directory and run &lt;code class=&quot;highlighter-rouge&quot;&gt;jhipster&lt;/code&gt; in it.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/jhipster-microservices-example
+mkdir store
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;store
+jhipster
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Use the following settings to generate a microservice that uses MongoDB for its database.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Application type: &lt;code class=&quot;highlighter-rouge&quot;&gt;Microservice application&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Base name of the application: &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Port: &lt;code class=&quot;highlighter-rouge&quot;&gt;8081&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Default package name: &lt;code class=&quot;highlighter-rouge&quot;&gt;org.jhipster.store&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Type of authentication: &lt;code class=&quot;highlighter-rouge&quot;&gt;JWT&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Use JHipster Registry: &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Type of database: &lt;code class=&quot;highlighter-rouge&quot;&gt;MongoDB&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Maven or Gradle: &lt;code class=&quot;highlighter-rouge&quot;&gt;Maven&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Other technologies: &lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Internationalization support: &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Native language: &lt;code class=&quot;highlighter-rouge&quot;&gt;English&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Additional languages: &lt;code class=&quot;highlighter-rouge&quot;&gt;Spanish&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Testing frameworks: &lt;code class=&quot;highlighter-rouge&quot;&gt;Gatling&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Install other generators from the JHipster Marketplace: &lt;code class=&quot;highlighter-rouge&quot;&gt;No&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/generate-store-7d46b818244e8df9ddb269238388e88e685ba22e37fd396807172444257b280d.png&quot; alt=&quot;Generating the microservice&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;.yo-rc.json&lt;/code&gt; created by this process is as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;generator-jhipster&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;promptValues&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;packageName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org.jhipster.store&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;nativeLanguage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;jhipsterVersion&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;4.5.4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;baseName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;store&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;packageName&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org.jhipster.store&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;packageFolder&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;org/jhipster/store&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;serverPort&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;8081&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;authenticationType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;jwt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;hibernateCache&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;no&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;clusteredHttpSession&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;websocket&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;databaseType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;mongodb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;devDatabaseType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;mongodb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;prodDatabaseType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;mongodb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;searchEngine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;messageBroker&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;serviceDiscoveryType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;eureka&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;buildTool&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;maven&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;enableSocialSignIn&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;jwtSecretKey&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ea21b5b635606be4d7937e29926166e0ee56abb1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;enableTranslation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;applicationType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;microservice&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;testFrameworks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gatling&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;jhiPrefix&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;jhi&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;skipClient&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;skipUserManagement&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;nativeLanguage&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;languages&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;es&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;clientPackageManager&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;yarn&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Commit your changes to Git. It’s always a good idea to do this before generating entities.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/jhipster-microservices-example/
+git add store
+git commit -m &lt;span class=&quot;s2&quot;&gt;&quot;Generate store application&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;generate-product-entity&quot;&gt;Generate Product Entity&lt;/h3&gt;
+
+&lt;p&gt;Create a product entity by running the following command in the &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jhipster entity product
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Use the following answers for the questions asked:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Do you want to add a field to your entity? &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;What is the name of your field? &lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;What is the type of your field? &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Do you want to add validation rules to your field? &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Which validation rules do you want to add? &lt;code class=&quot;highlighter-rouge&quot;&gt;Required&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Do you want to add a field to your entity? &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;What is the name of your field? &lt;code class=&quot;highlighter-rouge&quot;&gt;price&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;What is the type of your field? &lt;code class=&quot;highlighter-rouge&quot;&gt;BigDecimal&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Do you want to add validation rules to your field? &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Which validation rules do you want to add? &lt;code class=&quot;highlighter-rouge&quot;&gt;Required&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Do you want to add a field to your entity? &lt;code class=&quot;highlighter-rouge&quot;&gt;No&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Do you want to use a Data Transfer Object (DTO)? &lt;code class=&quot;highlighter-rouge&quot;&gt;No&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Do you want to use separate service class for your business logic? &lt;code class=&quot;highlighter-rouge&quot;&gt;No&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Do you want pagination on your entity? &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes, with pagination links&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Your terminal should look similar to the following after you’ve answered all these questions.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/generate-product-8cf735f9735afc28f198341841cb7429c0eef36f36ae8a1c9309d13a556b3d4a.png&quot; alt=&quot;Generating product entity&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;generate-ui-for-product-entity&quot;&gt;Generate UI for Product Entity&lt;/h3&gt;
+
+&lt;p&gt;A microservice only contains the server-side code for the entities it contains. To generate
+an Angular UI for the product, navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; directory and run the same command.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jhipster entity product
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Use the following answers to the questions asked:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Do you want to generate this entity from an existing microservice? &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Enter the path to the microservice root directory: &lt;code class=&quot;highlighter-rouge&quot;&gt;../store&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Do you want to update the entity? &lt;code class=&quot;highlighter-rouge&quot;&gt;Yes&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A visual of these questions and answers is in the screenshot below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/generate-product-ui-041dc6e22426ac438b0502a99eabbfbfcd850c26946e4b64666682bee29d5d77.png&quot; alt=&quot;Generating product entity UI&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Commit your changes to Git.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd ~/jhipster-microservices-example
+git add .
+git commit -m &quot;Add product entity&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;At this point, you should be able to verify everything works by starting the registry, blog, store, and MongoDB.
+You can run MongoDB using Docker Compose with the following command in the &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt; directory. You’ll need to have Docker installed and running for this command to work.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker-compose -f src/main/docker/mongodb.yml up
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;#docker-compose&quot;&gt;Docker Compose&lt;/a&gt; section shows how you can run all your services using Docker.&lt;/p&gt;
+
+&lt;p&gt;Navigate to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt;, log in with admin/admin, and go to Entities &amp;gt; Product. You should be able to
+add a product and see that it has a MongoDB identifier.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/add-product-db7144bffa4902e715b63e8c7d7eec82cafcd15047f33c81b14f4eb0ff9e4266.png&quot; alt=&quot;Add Product&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;build-for-production&quot;&gt;Build for Production&lt;/h2&gt;
+
+&lt;p&gt;A JHipster application can be deployed anywhere a Spring Boot application can be deployed. Its Angular client is
+bundled inside its JAR files. JHipster ships with support for deploying to &lt;a href=&quot;https://jhipster.github.io/cloudfoundry/&quot;&gt;Cloud Foundry&lt;/a&gt;, &lt;a href=&quot;https://jhipster.github.io/heroku/&quot;&gt;Heroku&lt;/a&gt;, &lt;a href=&quot;https://jhipster.github.io/kubernetes/&quot;&gt;Kubernetes&lt;/a&gt;, &lt;a href=&quot;https://jhipster.github.io/aws/&quot;&gt;AWS&lt;/a&gt;, and &lt;a href=&quot;https://jhipster.github.io/boxfuse/&quot;&gt;AWS with Boxfuse&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When you prepare a JHipster application for production, it’s recommended to use the pre-configured “&lt;code class=&quot;highlighter-rouge&quot;&gt;production&lt;/code&gt;” profile. 
+With Maven, you can package your application by specifying the &lt;code class=&quot;highlighter-rouge&quot;&gt;prod&lt;/code&gt; profile when building.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./mvnw -Pprod package
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The production profile is used to build an optimized JavaScript client. You can invoke this using webpack by running 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;yarn run webpack:prod&lt;/code&gt;. The production profile also configures gzip compression with a servlet filter, cache headers, 
+and monitoring via &lt;a href=&quot;https://github.com/dropwizard/metrics&quot;&gt;Metrics&lt;/a&gt;. If you have a &lt;a href=&quot;http://graphite.wikidot.com/&quot;&gt;Graphite&lt;/a&gt; 
+server configured in your &lt;code class=&quot;highlighter-rouge&quot;&gt;application-prod.yml&lt;/code&gt; file, your application will automatically send metrics data to it.&lt;/p&gt;
+
+&lt;p&gt;When you run this command in the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; application, you’ll likely get a test failure.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Results :
+
+Failed tests:
+  BlogResourceIntTest.getAllBlogs:184 Status expected:&amp;lt;200&amp;gt; but was:&amp;lt;500&amp;gt;
+
+Tests run: 157, Failures: 1, Errors: 0, Skipped: 0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The reason this happens is shown in a stack trace in your terminal.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Running org.jhipster.blog.web.rest.BlogResourceIntTest
+2017-06-19 10:29:17.288 ERROR 4168 --- [           main] o.j.b.w.rest.errors.ExceptionTranslator  
+: An unexpected error occured: Authentication object cannot be null; nested exception is 
+java.lang.IllegalArgumentException: Authentication object cannot be null
+2017-06-19 10:29:17.472 ERROR 4168 --- [           main] o.j.blog.web.rest.util.HeaderUtil        
+: Entity processing failed, A new blog cannot already have an ID
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To fix this, you can use Spring Security Test’s &lt;a href=&quot;http://docs.spring.io/spring-security/site/docs/current/reference/html/test-method.html#test-method-withmockuser&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@WithMockUser&lt;/code&gt;&lt;/a&gt;. Open &lt;code class=&quot;highlighter-rouge&quot;&gt;BlogResourceIntTest.java&lt;/code&gt; and inject  &lt;code class=&quot;highlighter-rouge&quot;&gt;UserRepository&lt;/code&gt; as a dependency.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UserRepository&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Change the &lt;code class=&quot;highlighter-rouge&quot;&gt;createEntity()&lt;/code&gt; method, so it’s not &lt;code class=&quot;highlighter-rouge&quot;&gt;static&lt;/code&gt; and uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;userRepository&lt;/code&gt; to set a user on the blog entity.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EntityManager&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;em&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DEFAULT_NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;handle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DEFAULT_HANDLE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findOneByLogin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;@WithMockUser&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;getAllBlogs()&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Test&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Transactional&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@WithMockUser&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getAllBlogs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Commit your changes to Git.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .
+git commit -m &quot;Fix tests&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After fixing this test, you should be able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;./mvnw -Pprod package&lt;/code&gt; without any failures. You might notice that
+this does take quite some time, mostly due to the Webpack build and optimizations. Below is the output from a Mid 2015
+MacBook Pro with 16GB of RAM and JAVA_OPTS set to &lt;code class=&quot;highlighter-rouge&quot;&gt;-Xmx2048m&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;INFO] ------------------------------------------------------------------------
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;INFO] BUILD SUCCESS
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;INFO] ------------------------------------------------------------------------
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;INFO] Total &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;: 04:38 min
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;INFO] Finished at: 2017-06-19T10:39:09-06:00
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;INFO] Final Memory: 75M/747M
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;INFO] ------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;deploy-to-the-cloud&quot;&gt;Deploy to the Cloud&lt;/h2&gt;
+
+&lt;p&gt;What good is a microservices architecture if it’s not deployed to a PaaS (Platform as a Service)?! PaaS providers
+are also known as “the cloud”, and allow you to deploy and scale microservices as needed. Docker provides
+a mechanism to “package” your applications as an entire bundle. A Docker container includes the operating system and 
+services needed to run your application. Often, Docker containers are used for the individual components of your 
+architecture. For example, you’ll have a Docker container for each app, as well as one for PostgreSQL, MongoDB, and
+Elasticsearch.&lt;/p&gt;
+
+&lt;p&gt;To complete this section, you’ll need to &lt;a href=&quot;https://docs.docker.com/engine/installation/&quot;&gt;install Docker&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you’re not on Mac or Windows, you may need to &lt;a href=&quot;https://docs.docker.com/compose/install/&quot;&gt;install Docker Compose&lt;/a&gt; as well.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;docker-compose&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;run-with-docker-compose&quot;&gt;Run with Docker Compose&lt;/h3&gt;
+
+&lt;p&gt;Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you can create and 
+start all the components of your application with a single command.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Make sure Docker is running&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Build Docker images for the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt; applications by running the following command in both directories:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ./mvnw package -Pprod docker:build
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using your terminal, navigate to the root directory of your project, and create a &lt;code class=&quot;highlighter-rouge&quot;&gt;docker&lt;/code&gt; directory. Then run the 
+&lt;a href=&quot;https://jhipster.github.io/docker-compose/#docker-compose-subgen&quot;&gt;JHipster Docker Compose sub-generator&lt;/a&gt; in it.&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; jhipster docker-compose
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Application type: &lt;code class=&quot;highlighter-rouge&quot;&gt;Microservice application&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Root directory of your microservices: &lt;code class=&quot;highlighter-rouge&quot;&gt;../&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Applications to include: &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Applications with clustered databases: &lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Set up monitoring: &lt;code class=&quot;highlighter-rouge&quot;&gt;JHipster Console with ELK/Zipkin&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;The admin password for the JHipster Registry: &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/generate-docker-26cd718e7905a8ef0ba2db98e709d55853c7996d0d9a62ea6801ff6f60a03c31.png&quot; alt=&quot;Generating Docker&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose up&lt;/code&gt; to run all your services and see the logs in the same window. Add &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; if you want to run 
+them as a daemon&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Use &lt;a href=&quot;https://kitematic.com/&quot;&gt;Kitematic&lt;/a&gt; to view the ports and logs for the services deployed&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/kitematic-65f047ba2eb8c2639427d1f1de19a7a99910d4cf4c08c2d0a20039498a2e90b7.png&quot; alt=&quot;Kitematic&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can view the JHipster Registry at &lt;a href=&quot;http://localhost:8761&quot;&gt;http://localhost:8761&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To produce data for the JHipster Console to display, run some Gatling tests in the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; app.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./mvnw gatling:execute
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;These simulations can take a while (&amp;gt; 10m) to complete. When they’re finished, you can view their pretty reports.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/gatling-results-54f71d5b276eafec96b92d8bf21835da1902483234435b3b082079c0ffc89292.png&quot; alt=&quot;Gatling Results&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can see the JHipster Console at &lt;a href=&quot;http://localhost:5601&quot;&gt;http://localhost:5601&lt;/a&gt;. Navigate to Dashboards &amp;gt; Open to display some pre-built 
+dashboards for the JVM, logs, metrics, microservices, and performance. The screenshots below show you what some of 
+these look like.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/dashboard-jvm-0766e6ff164824b015749b9a629d7b4f8da5e156f04bd57b90546339a6eedad9.png&quot; alt=&quot;JVM Dashboard&quot; width=&quot;400&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/dashboard-metrics-2eba4f6630767553d254e1d3b4b982e4d13526b54f8c71989c049082df968462.png&quot; alt=&quot;Metrics Dashboard&quot; width=&quot;400&quot; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/dashboard-microservices-79e53faa736cc3f705176bed733746caae51bfbeba89dac759d36d2da9d884d8.png&quot; alt=&quot;Microservices Dashboard&quot; width=&quot;400&quot; /&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/dashboard-performance-1181616ed0fb6d676acee0dd76b31f2cdfb5df83670918908f6f2be93f44d17e.png&quot; alt=&quot;Performance Dashboard&quot; width=&quot;400&quot; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;To save your changes for Docker Compose, commit your changes to Git.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .
+git commit -m &quot;Add Docker Compose&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;run-with-kubernetes-and-minikube&quot;&gt;Run with Kubernetes and Minikube&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://kubernetes.io/&quot;&gt;Kubernetes&lt;/a&gt; is an open-source system for automating deployment, scaling, and management of 
+containerized applications. It was developed at Google over the last 16 years and was internally called Borg. To deploy
+Docker containers with Kubernetes, you set up a cluster, then deploy to it. The context can be local (with Minikube), or 
+remote (e.g. a Raspberry Pi cluster, Google Cloud, AWS, OpenShift, etc.).&lt;/p&gt;
+
+&lt;p&gt;Follow the steps below to use Kubernetes to deploy to a local cluster.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Install &lt;a href=&quot;https://kubernetes.io/docs/tasks/kubectl/install/&quot;&gt;kubectl&lt;/a&gt;, &lt;a href=&quot;https://www.virtualbox.org/wiki/Downloads&quot;&gt;VirtualBox&lt;/a&gt;
+and &lt;a href=&quot;https://github.com/kubernetes/minikube/releases&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Start Minikube using &lt;code class=&quot;highlighter-rouge&quot;&gt;minikube start&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;To be able to work with the docker daemon, run the following command in your terminal:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;minikube docker-env&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create Docker images of the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt; applications:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; ./mvnw package -Pprod docker:build
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Using your terminal, navigate to the root directory of your project, and create a &lt;code class=&quot;highlighter-rouge&quot;&gt;kubernetes&lt;/code&gt; directory. Then run the 
+&lt;a href=&quot;https://jhipster.github.io/kubernetes/&quot;&gt;JHipster Kubernetes sub-generator&lt;/a&gt; in it.&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; jhipster kubernetes
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Application type: &lt;code class=&quot;highlighter-rouge&quot;&gt;Microservice application&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Root directory of your microservices: &lt;code class=&quot;highlighter-rouge&quot;&gt;../&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Applications to include: &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;The admin password for the JHipster Registry: &lt;code class=&quot;highlighter-rouge&quot;&gt;admin&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Kubernetes namespace: &lt;code class=&quot;highlighter-rouge&quot;&gt;default&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Base Docker repository name (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;mraible&lt;/code&gt;): &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;your-docker-hub-username&amp;gt;&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Command to push Docker image to repository: &lt;code class=&quot;highlighter-rouge&quot;&gt;docker push&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/generate-kubernetes-a51a2e3815d481f09a3afc98fa422accb30907eae16b3ab6e1955d278fa1046b.png&quot; alt=&quot;Generating Kubernetes&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the following commands to tag your Docker images. The Kubernetes sub-generator says to run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker push&lt;/code&gt; as well, 
+but you don’t need that for a Minikube deployment.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker image tag blog mraible/blog
+ docker image tag store mraible/store
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the following commands in the &lt;code class=&quot;highlighter-rouge&quot;&gt;kubernetes&lt;/code&gt; directory to deploy to Minikube.&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; kubectl apply -f registry
+ kubectl apply -f blog
+ kubectl apply -f store
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;The deployment process can take several minutes to complete. Run &lt;code class=&quot;highlighter-rouge&quot;&gt;minikube dashboard&lt;/code&gt; to see the deployed containers.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/blog/microservices-jhipster/minikube-dashboard-bebf1cae76f8f73fcc54aa86363b2098008a7fd24859a202ac70493113892aa0.png&quot; alt=&quot;Minikube Dashboard&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;You can also run &lt;code class=&quot;highlighter-rouge&quot;&gt;kubectl get po -o wide --watch&lt;/code&gt; to see the status of each pod.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;minikube service blog&lt;/code&gt; to view the blog application. You should be able to login and add blogs, entries, and products.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To remove all deployed containers, run the following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl delete deployment --all
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To stop Minikube, run &lt;code class=&quot;highlighter-rouge&quot;&gt;minikube stop&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To save your changes for Kubernetes, commit your changes to Git from the top-level directory.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git add .
+git commit -m &quot;Kubernetes&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;deploy-to-google-cloud&quot;&gt;Deploy to Google Cloud&lt;/h3&gt;
+
+&lt;p&gt;Google Cloud is a PaaS that’s built on Google’s core infrastructure. It’s one of the easiest providers to support Kubernetes. 
+Complete the steps below to deploy your hip microservices to Google Cloud. If you completed the Minikube section above, open 
+a new terminal window to reset things.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create a Google Cloud project at &lt;a href=&quot;https://console.cloud.google.com/&quot;&gt;console.cloud.google.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Navigate to &lt;a href=&quot;https://console.cloud.google.com/kubernetes/list&quot;&gt;https://console.cloud.google.com/kubernetes/list&lt;/a&gt; to initialize the Container Engine for your project&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Install &lt;a href=&quot;https://cloud.google.com/sdk/&quot;&gt;Google Cloud SDK&lt;/a&gt; and set project using:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcloud config set project &amp;lt;project-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a cluster:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcloud container clusters create &amp;lt;cluster-name&amp;gt; --machine-type=n1-standard-2 --scopes cloud-platform --zone us-west1-a
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;To see a list of possible zones, run &lt;code class=&quot;highlighter-rouge&quot;&gt;gcloud compute zones list&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Push the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;store&lt;/code&gt; docker images to &lt;a href=&quot;https://hub.docker.com/&quot;&gt;Docker Hub&lt;/a&gt;. You will need to create an account 
+and run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker login&lt;/code&gt; to push your images. The images can be run from any directory.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; docker image tag blog mraible/blog
+ docker push mraible/blog
+ docker image tag store mraible/store
+ docker push mraible/store
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;kubectl&lt;/code&gt; commands to deploy&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; kubectl apply -f registry
+ kubectl apply -f blog
+ kubectl apply -f store
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use port-forwarding to see the registry app locally&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl port-forward jhipster-registry-0 8761:8761
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;kubectl get service blog&lt;/code&gt; to get the external IP of the blog application on Google Cloud. Open 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;http://&amp;lt;external-ip&amp;gt;:8080&lt;/code&gt; to view your running application and verify everything works.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Scale microservice apps as needed with &lt;code class=&quot;highlighter-rouge&quot;&gt;kubectl&lt;/code&gt;:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl scale --replicas=3 deployment/store
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Did you get everything working? If so, you rock! You’ve built a production-ready microservices scaffold for your application with JHipster!&lt;/p&gt;
+
+&lt;h2 id=&quot;issues-found&quot;&gt;Issues Found&lt;/h2&gt;
+
+&lt;p&gt;While creating this example, I ran into a few issues.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Alert translations not resolved in the gateway for microservice entities. The workaround is to open the &lt;code class=&quot;highlighter-rouge&quot;&gt;src/main/webapp/i18n/*/product.json&lt;/code&gt; files and move the keys from &lt;code class=&quot;highlighter-rouge&quot;&gt;storeApp&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;blogApp&lt;/code&gt;. See &lt;a href=&quot;https://github.com/jhipster/generator-jhipster/issues/5960&quot;&gt;issue #5960&lt;/a&gt; for more information.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In production mode, new entries don’t show in the list. The logs have an error like the following:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 2017-06-19 18:08:06.930 ERROR 17597 --- [ XNIO-2 task-62] o.j.b.w.rest.errors.ExceptionTranslator  : 
+ An unexpected error occured: Unable to access lob stream; nested exception is org.hibernate.HibernateException: 
+ Unable to access lob stream
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+
+    &lt;p&gt;This is a &lt;a href=&quot;https://github.com/hipster-labs/generator-jhipster-entity-audit/issues/32&quot;&gt;known issue with PostgreSQL&lt;/a&gt;.
+ Adding &lt;code class=&quot;highlighter-rouge&quot;&gt;@Transactional&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;EntryResource.java&lt;/code&gt; class definition solved this problem.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;When running everything in Minikube, adding new products fails. Upgrading to JHipster Registry 3.0.2 solved this issue. See &lt;a href=&quot;https://github.com/oktadeveloper/jhipster-microservices-example/commit/5bed36131353aea148f5fee1cd8d3c4ed2ae00a8&quot;&gt;this commit&lt;/a&gt; to see how to upgrade.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;source-code-and-screencast&quot;&gt;Source Code and Screencast&lt;/h2&gt;
+
+&lt;p&gt;The source code for this tutorial is &lt;a href=&quot;https://github.com/oktadeveloper/jhipster-microservices-example&quot;&gt;available on GitHub&lt;/a&gt;. 
+See its &lt;a href=&quot;https://github.com/oktadeveloper/jhipster-microservices-example&quot;&gt;README&lt;/a&gt; if you simply want to clone the project
+and run it. Or, you can &lt;a href=&quot;https://youtu.be/dgVQOYEwleA&quot;&gt;watch a screencast of building microservices with JHipster and deploying to Google Cloud&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div style=&quot;max-width: 560px; margin: 0 auto&quot;&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/dgVQOYEwleA?ecver=1&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;learn-more-about-jhipster-and-microservices&quot;&gt;Learn More about JHipster and Microservices&lt;/h2&gt;
+
+&lt;p&gt;I hope you’ve enjoyed learning how JHipster can help you develop hip microservice architectures! It’s a nifty project, with an easy-to-use entity generator, a beautiful UI, and many Spring Boot best-practice patterns. If you have features you’d 
+like to add or if you’d like to refine existing features, you can &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;watch the project on GitHub&lt;/a&gt; and &lt;a href=&quot;https://github.com/jhipster/generator-jhipster/blob/master/CONTRIBUTING.md&quot;&gt;help with its development&lt;/a&gt; and support. We’re always looking for help!&lt;/p&gt;
+
+&lt;p&gt;If you have questions about JHipster, please &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;hit me up on Twitter&lt;/a&gt; or post a question to 
+Stack Overflow with the &lt;a href=&quot;http://stackoverflow.com/questions/tagged/jhipster&quot;&gt;“jhipster” tag&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you’re interested in learning more about microservices, you might also find the following resources useful:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jhipster.github.io/microservices-architecture/&quot;&gt;Doing Microservices with JHipster&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/blog/2017/06/15/build-microservices-architecture-spring-boot&quot;&gt;Build a Microservices Architecture for Microbrews&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.heroku.com/bootstrapping_your_microservices_architecture_with_jhipster_and_spring&quot;&gt;Bootstrapping Your Microservices Architecture with JHipster and Spring&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://microservices.io/resources/index.html&quot;&gt;Microservice Resources from Chris Richardson&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 20 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster</guid>
+      </item>
+    
+      <item>
         <title>Build a Microservices Architecture for Microbrews with Spring Boot</title>
         <description>&lt;p&gt;Adopting a microservice architecture provides unique opportunities to add failover and resiliency to your systems, so 
 your components can handle load spikes and errors gracefully. Microservices make change less expensive too. It can also 
@@ -4466,7 +6089,7 @@ npm start
 &lt;h2 id=&quot;add-the-openid-connect-application-in-okta&quot;&gt;Add the OpenID Connect Application in Okta&lt;/h2&gt;
 &lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta developer portal&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;So log in to your Okta account, [or create one](https://developer.okta.com] if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
+&lt;p&gt;So log in to your Okta account, &lt;a href=&quot;https://developer.okta.com&quot;&gt;or create one&lt;/a&gt; if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener-757b218884250a613b267c5d2c0b2a01292d96efd85a0c0706cc50e39ac6779d.png&quot; alt=&quot;OIDC Application Settings&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
