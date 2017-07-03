@@ -29,18 +29,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-cdb1b544ae0f29a9e4d8c0bcbe55984903ad1378a9da805143cb56984ce2fa57.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>OpenID Connect | Okta Developer</title>
+  <title>OpenID Connect API | Okta Developer</title>
   <meta name="description" content="OpenID Connect API">
   <link rel="canonical" href="https://developer.okta.com/docs/api/resources/oidc.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page openid-connect">
+  <div class="Page openid-connect-api">
     <!-- START Header -->
     <header id="header">
       <div class="Wrap">
@@ -51,7 +51,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
+            <a class="Button--green" href="https://developer.okta.com/signup/" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -66,7 +66,7 @@
               <li class="has-dropdown">
                 <a href="#">Support</a>
                 <div class="dropdown-window">
-                  <p class="stack-overflow">Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></p>
+                  <p class="devforum">Post your question on <a href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank">Okta Developer Forums</a></p>
                   <p class="email">Email us:<br>
                   <a href="mailto:developers@okta.com">developers@okta.com</a></p>
                   <p class="tel">Call us:<br>
@@ -130,10 +130,11 @@
               <a href="/docs/api/resources/authn.html">Authentication Reference</a>
               <ul id="Sidebar_References" class="Sidebar-hide">
                 <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
-                <li class="is-active"><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
-                <li><a href="/docs/api/resources/social_authentication.html">Social Authentication</a></li>
-                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
+                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
+                <li class="is-active"><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
+                <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
+                <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
+                <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
               </ul>
             </li>
             <li>
@@ -221,7 +222,7 @@ and the client obtains an Okta session.</p>
 <p>If you are new to OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with
 <a href="http://openid.net/specs/openid-connect-core-1_0.html">the OpenID Connect spec</a>, you may want to experiment with the Postman collection now:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="authentication-basics-with-oauth-20-and-openid-connect">Authentication Basics with OAuth 2.0 and OpenID Connect</h2>
 
@@ -275,46 +276,46 @@ to access <a href="/docs/api/resources/oidc.html#get-user-information">the OIDC 
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>Required</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>openid</td>
-      <td>Identifies the request as an OpenID Connect request.</td>
-      <td>Yes</td>
+      <td style="text-align: left">openid</td>
+      <td style="text-align: left">Identifies the request as an OpenID Connect request.</td>
+      <td style="text-align: left">Yes</td>
     </tr>
     <tr>
-      <td>profile</td>
-      <td>Requests access to the end-user’s default profile claims.</td>
-      <td>No</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Requests access to the end-user’s default profile claims.</td>
+      <td style="text-align: left">No</td>
     </tr>
     <tr>
-      <td>email</td>
-      <td>Requests access to the <code class="highlighter-rouge">email</code> and <code class="highlighter-rouge">email_verified</code> claims.</td>
-      <td>No</td>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">Requests access to the <code class="highlighter-rouge">email</code> and <code class="highlighter-rouge">email_verified</code> claims.</td>
+      <td style="text-align: left">No</td>
     </tr>
     <tr>
-      <td>phone</td>
-      <td>Requests access to the <code class="highlighter-rouge">phone_number</code> and <code class="highlighter-rouge">phone_number_verified</code> claims.</td>
-      <td>No</td>
+      <td style="text-align: left">phone</td>
+      <td style="text-align: left">Requests access to the <code class="highlighter-rouge">phone_number</code> and <code class="highlighter-rouge">phone_number_verified</code> claims.</td>
+      <td style="text-align: left">No</td>
     </tr>
     <tr>
-      <td>address</td>
-      <td>Requests access to the <code class="highlighter-rouge">address</code> claim.</td>
-      <td>No</td>
+      <td style="text-align: left">address</td>
+      <td style="text-align: left">Requests access to the <code class="highlighter-rouge">address</code> claim.</td>
+      <td style="text-align: left">No</td>
     </tr>
     <tr>
-      <td>groups</td>
-      <td>Requests access to the <code class="highlighter-rouge">groups</code> claim.</td>
-      <td>No</td>
+      <td style="text-align: left">groups</td>
+      <td style="text-align: left">Requests access to the <code class="highlighter-rouge">groups</code> claim.</td>
+      <td style="text-align: left">No</td>
     </tr>
     <tr>
-      <td>offline_access</td>
-      <td>Requests a Refresh Token, used to obtain more access tokens without re-prompting the user for authentication.</td>
-      <td>No</td>
+      <td style="text-align: left">offline_access</td>
+      <td style="text-align: left">Requests a Refresh Token, used to obtain more access tokens without re-prompting the user for authentication.</td>
+      <td style="text-align: left">No</td>
     </tr>
   </tbody>
 </table>
@@ -336,7 +337,7 @@ be a valid OAuth 2.0 request, but it’s not an OpenID Connect request.</li>
 which is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> that contains information about an authentication event
 and claims about the authenticated user that clients can rely on.</p>
 
-<p>Clients can use any of the following sequences of operations to obtain an Access Token:</p>
+<p>Clients can use any of the following sequences of operations to obtain an ID Token:</p>
 <ul>
   <li><a href="http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth">Authorization code flow</a> – the client obtains
 an authorization code from the authorization server’s authentication endpoint and uses it to obtain an ID token and an access
@@ -377,7 +378,7 @@ response does not include an Access Token.</p>
   </span><span class="nt">"amr"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"pwd"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"jti"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4eAWJOCMB3SX8XewDfVR"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"jti"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID.4eAWJOCMB3SX8XewDfVR"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"auth_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449624026</span><span class="p">,</span><span class="w">
   </span><span class="nt">"at_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpqKfdQA5eH891Ff5oJr_Q"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
@@ -418,24 +419,24 @@ response does not include an Access Token.</p>
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Example</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Example</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>alg</td>
-      <td>Identifies the digital signature algorithm used. This is always be RS256.</td>
-      <td>String</td>
-      <td>“RS256”</td>
+      <td style="text-align: left">alg</td>
+      <td style="text-align: left">Identifies the digital signature algorithm used. This is always be RS256.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“RS256”</td>
     </tr>
     <tr>
-      <td>kid</td>
-      <td>Identifies the <em>public-key</em> used to verify the <em>id_token</em>. The corresponding <em>public-key</em> can be found as a part of the <a href="#openid-connect-discovery-document">well-known configuration’s</a> <em>jwks_uri</em> value.</td>
-      <td>String</td>
-      <td>“a5dfwef1a-0ead3f5223_w1e”</td>
+      <td style="text-align: left">kid</td>
+      <td style="text-align: left">Identifies the <em>public-key</em> used to verify the <em>id_token</em>. The corresponding <em>public-key</em> can be found as a part of the   <a href="#openid-connect-discovery-document">well-known configuration’s</a> <em>jwks_uri</em> value.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“a5dfwef1a-0ead3f5223_w1e”</td>
     </tr>
   </tbody>
 </table>
@@ -449,90 +450,90 @@ response does not include an Access Token.</p>
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Example</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Example</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>ver</td>
-      <td>The semantic version of the ID Token.</td>
-      <td>Integer</td>
-      <td>1</td>
+      <td style="text-align: left">ver</td>
+      <td style="text-align: left">The semantic version of the ID Token.</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1</td>
     </tr>
     <tr>
-      <td>jti</td>
-      <td>A unique identifier for this ID Token for debugging and revocation purposes.</td>
-      <td>String</td>
-      <td>“Tlenfse93dgkaksginv”</td>
+      <td style="text-align: left">jti</td>
+      <td style="text-align: left">A unique identifier for this ID Token for debugging and revocation purposes.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“Tlenfse93dgkaksginv”</td>
     </tr>
     <tr>
-      <td>iss</td>
-      <td>The Issuer Identifier of the response.</td>
-      <td>String</td>
-      <td>“https://your-org.okta.com”</td>
+      <td style="text-align: left">iss</td>
+      <td style="text-align: left">The Issuer Identifier of the response.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“https://your-org.okta.com”</td>
     </tr>
     <tr>
-      <td>sub</td>
-      <td>The subject. A unique identifier for the user.</td>
-      <td>String</td>
-      <td>“00uk1u7AsAk6dZL3z0g3”</td>
+      <td style="text-align: left">sub</td>
+      <td style="text-align: left">The subject. A unique identifier for the user.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“00uk1u7AsAk6dZL3z0g3”</td>
     </tr>
     <tr>
-      <td>aud</td>
-      <td>Identifies the audience that this ID Token is intended for. It must be one of the OAuth 2.0 client IDs of your application.</td>
-      <td>String</td>
-      <td>“6joRGIzNCaJfdCPzRjlh”</td>
+      <td style="text-align: left">aud</td>
+      <td style="text-align: left">Identifies the audience that this ID Token is intended for. It must be one of the OAuth 2.0 client IDs of your application.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“6joRGIzNCaJfdCPzRjlh”</td>
     </tr>
     <tr>
-      <td>iat</td>
-      <td>The time the ID Token was issued, represented in Unix time (seconds).</td>
-      <td>Integer</td>
-      <td>1311280970</td>
+      <td style="text-align: left">iat</td>
+      <td style="text-align: left">The time the ID Token was issued, represented in Unix time (seconds).</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1311280970</td>
     </tr>
     <tr>
-      <td>exp</td>
-      <td>The time the ID Token expires, represented in Unix time (seconds).</td>
-      <td>Integer</td>
-      <td>1311280970</td>
+      <td style="text-align: left">exp</td>
+      <td style="text-align: left">The time the ID Token expires, represented in Unix time (seconds).</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1311280970</td>
     </tr>
     <tr>
-      <td>auth_time</td>
-      <td>The time the end-user was authenticated, represented in Unix time (seconds).</td>
-      <td>Integer</td>
-      <td>1311280970</td>
+      <td style="text-align: left">auth_time</td>
+      <td style="text-align: left">The time the end-user was authenticated, represented in Unix time (seconds).</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1311280970</td>
     </tr>
     <tr>
-      <td>amr</td>
-      <td>JSON array of strings that are identifiers for <a href="http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html">authentication methods</a> used in the authentication.</td>
-      <td>Array</td>
-      <td>[ “pwd”, “mfa”, “otp”, “kba”, “sms”, “swk”, “hwk” ]</td>
+      <td style="text-align: left">amr</td>
+      <td style="text-align: left">JSON array of strings that are identifiers for     <a href="http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html">authentication methods</a> used in the authentication.</td>
+      <td style="text-align: left">Array</td>
+      <td style="text-align: left">[ “pwd”, “mfa”, “otp”, “kba”, “sms”, “swk”, “hwk” ]</td>
     </tr>
     <tr>
-      <td>idp</td>
-      <td>The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If it was Okta, the value would be the OrgId.</td>
-      <td>String</td>
-      <td>“00ok1u7AsAkrwdZL3z0g3”</td>
+      <td style="text-align: left">idp</td>
+      <td style="text-align: left">The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If it was Okta, the value would be the OrgId.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“00ok1u7AsAkrwdZL3z0g3”</td>
     </tr>
     <tr>
-      <td>nonce</td>
-      <td>Value used to associate a Client session with an ID Token, and to mitigate replay attacks.</td>
-      <td>String</td>
-      <td>“n-0S6_WzA2Mj”</td>
+      <td style="text-align: left">nonce</td>
+      <td style="text-align: left">Value used to associate a Client session with an ID Token, and to mitigate replay attacks.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“n-0S6_WzA2Mj”</td>
     </tr>
     <tr>
-      <td>at_hash</td>
-      <td>The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.</td>
-      <td>String</td>
-      <td>“MTIzNDU2Nzg5MDEyMzQ1Ng”</td>
+      <td style="text-align: left">at_hash</td>
+      <td style="text-align: left">The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“MTIzNDU2Nzg5MDEyMzQ1Ng”</td>
     </tr>
     <tr>
-      <td>c_hash</td>
-      <td>The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the ID Token.</td>
-      <td>String</td>
-      <td>“DE5MzQ1TIzlr30gokT2UDN”</td>
+      <td style="text-align: left">c_hash</td>
+      <td style="text-align: left">The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the ID Token.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“DE5MzQ1TIzlr30gokT2UDN”</td>
     </tr>
   </tbody>
 </table>
@@ -542,125 +543,125 @@ response does not include an Access Token.</p>
 <table>
   <thead>
     <tr>
-      <th>Property</th>
-      <th>Required Scope</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Example</th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Required Scope</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Example</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>name</td>
-      <td>profile</td>
-      <td>User’s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user’s locale and preferences.</td>
-      <td>String</td>
-      <td>“John Doe”</td>
+      <td style="text-align: left">name</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">User’s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user’s locale and preferences.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“John Doe”</td>
     </tr>
     <tr>
-      <td>preferred_username</td>
-      <td>profile</td>
-      <td>The Okta login (username) for the end-user.</td>
-      <td>String</td>
-      <td>“john.doe@example.com”</td>
+      <td style="text-align: left">preferred_username</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">The Okta login (username) for the end-user.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“john.doe@example.com”</td>
     </tr>
     <tr>
-      <td>nickname</td>
-      <td>profile</td>
-      <td>Casual name of the user that may or may not be the same as the given_name.</td>
-      <td>String</td>
-      <td>“Jimmy”</td>
+      <td style="text-align: left">nickname</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Casual name of the user that may or may not be the same as the given_name.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“Jimmy”</td>
     </tr>
     <tr>
-      <td>preferred_username</td>
-      <td>profile</td>
-      <td>The chosen login (username) for the end-user. By default this is the Okta username.</td>
-      <td>String</td>
-      <td>“john.doe@example.com”</td>
+      <td style="text-align: left">preferred_username</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">The chosen login (username) for the end-user. By default this is the Okta username.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“john.doe@example.com”</td>
     </tr>
     <tr>
-      <td>given_name</td>
-      <td>profile</td>
-      <td>Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.</td>
-      <td>String</td>
-      <td>“John”</td>
+      <td style="text-align: left">given_name</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“John”</td>
     </tr>
     <tr>
-      <td>middle_name</td>
-      <td>profile</td>
-      <td>Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used.</td>
-      <td>String</td>
-      <td>“James”</td>
+      <td style="text-align: left">middle_name</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“James”</td>
     </tr>
     <tr>
-      <td>family_name</td>
-      <td>profile</td>
-      <td>Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.</td>
-      <td>String</td>
-      <td>“Doe”</td>
+      <td style="text-align: left">family_name</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“Doe”</td>
     </tr>
     <tr>
-      <td>profile</td>
-      <td>profile</td>
-      <td>URL of the user’s profile page.</td>
-      <td>String</td>
-      <td>“http://profile.wordpress.com/john.doe”</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">URL of the user’s profile page.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“http://profile.wordpress.com/john.doe”</td>
     </tr>
     <tr>
-      <td>zoneinfo</td>
-      <td>profile</td>
-      <td>String representing the user’s time zone.</td>
-      <td>String</td>
-      <td>“America/Los_Angeles”</td>
+      <td style="text-align: left">zoneinfo</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">String representing the user’s time zone.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“America/Los_Angeles”</td>
     </tr>
     <tr>
-      <td>locale</td>
-      <td>profile</td>
-      <td>Language and <a href="http://www.iso.org/iso/country_codes">ISO3166‑1</a> country code in uppercase, separated by a dash.</td>
-      <td>String</td>
-      <td>“en-US”</td>
+      <td style="text-align: left">locale</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Language and   <a href="http://www.iso.org/iso/country_codes">ISO3166‑1</a> country code in uppercase, separated by a dash.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“en-US”</td>
     </tr>
     <tr>
-      <td>updated_at</td>
-      <td>profile</td>
-      <td>Time the user’s information was last updated, represented in Unix time (seconds).</td>
-      <td>Integer</td>
-      <td>1311280970</td>
+      <td style="text-align: left">updated_at</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Time the user’s information was last updated, represented in Unix time (seconds).</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1311280970</td>
     </tr>
     <tr>
-      <td>email</td>
-      <td>email</td>
-      <td>User’s preferred email address. The resource provider must not rely upon this value being unique.</td>
-      <td>String</td>
-      <td>“john.doe@example.com”</td>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">User’s preferred email address. The resource provider must not rely upon this value being unique.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“john.doe@example.com”</td>
     </tr>
     <tr>
-      <td>email_verified</td>
-      <td>email</td>
-      <td>True if the user’s email address (Okta primary email) has been verified; otherwise false.</td>
-      <td>boolean</td>
-      <td>true</td>
+      <td style="text-align: left">email_verified</td>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">True if the user’s email address (Okta primary email) has been verified; otherwise false.</td>
+      <td style="text-align: left">boolean</td>
+      <td style="text-align: left">true</td>
     </tr>
     <tr>
-      <td>address</td>
-      <td>address</td>
-      <td>User’s preferred postal address. The value of the address member is a JSON structure containing <em>street_address</em>, <em>locality</em>, <em>region</em>, <em>postal_code</em>, and <em>country</em>.</td>
-      <td>JSON structure</td>
-      <td>{ “street_address”: “123 Hollywood Blvd.”, “locality”: “Los Angeles”, “region”: “CA”, “postal_code”: “90210”, “country”: “US” }</td>
+      <td style="text-align: left">address</td>
+      <td style="text-align: left">address</td>
+      <td style="text-align: left">User’s preferred postal address. The value of the address member is a JSON structure containing <em>street_address</em>, <em>locality</em>, <em>region</em>, <em>postal_code</em>, and <em>country</em>.</td>
+      <td style="text-align: left">JSON structure</td>
+      <td style="text-align: left">{ “street_address”: “123 Hollywood Blvd.”, “locality”: “Los Angeles”, “region”: “CA”, “postal_code”: “90210”, “country”: “US” }</td>
     </tr>
     <tr>
-      <td>phone_number</td>
-      <td>phone</td>
-      <td>User’s preferred telephone number in E.164 format.</td>
-      <td>String</td>
-      <td>“+1 (425) 555-1212”</td>
+      <td style="text-align: left">phone_number</td>
+      <td style="text-align: left">phone</td>
+      <td style="text-align: left">User’s preferred telephone number in E.164 format.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“+1 (425) 555-1212”</td>
     </tr>
     <tr>
-      <td>groups</td>
-      <td>groups</td>
-      <td>The groups that the user is a member of that also match the ID Token group filter of the client app.</td>
-      <td>List</td>
-      <td>[“MyGroup1”, “MyGroup2”, “MyGroup3”]</td>
+      <td style="text-align: left">groups</td>
+      <td style="text-align: left">groups</td>
+      <td style="text-align: left">The groups that the user is a member of that also match the ID Token group filter of the client app.</td>
+      <td style="text-align: left">List</td>
+      <td style="text-align: left">[“MyGroup1”, “MyGroup2”, “MyGroup3”]</td>
     </tr>
   </tbody>
 </table>
@@ -721,20 +722,18 @@ For more information about configuring an app for OpenID Connect, including grou
 
 <h2 id="endpoints">Endpoints</h2>
 
-<p>Both the Access Token and the ID Token are acquired via <a href="oauth2.html">OAuth 2.0</a> endpoints.</p>
+<p>Explore the OpenID Connect API: <a href="https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <blockquote>
   <p>The OIDC Access Token is applicable only for the Okta <code class="highlighter-rouge">/oauth2/v1/userinfo</code> endpoint and thus should be treated as opaque by the application. The application does not need to validate it since it should not be used against other resource servers. The format of it and the key used to sign it are subject to change without prior notice.</p>
 </blockquote>
-
-<p>Explore the OpenID Connect API: <a href="https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h3 class="api api-operation" id="get-user-information">Get User Information</h3>
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/userinfo</span>
 <span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/userinfo</span></p>
 
-<p>You must include the <code class="highlighter-rouge">access_token</code> returned from the <a href="oauth2.html#authentication-request">/oauth2/v1/authorize</a> endpoint as an authorization header parameter.</p>
+<p>You must include the <code class="highlighter-rouge">access_token</code> returned from the <a href="oidc.html#authentication-request">/oauth2/v1/authorize</a> endpoint as an authorization header parameter.</p>
 
 <p>This endpoint complies with the <a href="http://openid.net/specs/openid-connect-core-1_0.html#UserInfo">OIDC userinfo spec</a>.</p>
 
@@ -852,129 +851,203 @@ An implicit client can only introspect its own tokens, while a confidential clie
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Type</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>token</td>
-      <td>An Access Token, ID Token, or Refresh Token.</td>
-      <td>String</td>
+      <td style="text-align: left">token</td>
+      <td style="text-align: left">An Access Token, ID Token, or Refresh Token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>token_type_hint</td>
-      <td>A hint of the type of <em>token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">token_type_hint</td>
+      <td style="text-align: left">A hint of the type of <em>token</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>client_id</td>
-      <td>The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
-      <td>String</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with <code class="highlighter-rouge">client_secret</code>  to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>client_secret</td>
-      <td>The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application.</td>
-      <td>String</td>
+      <td style="text-align: left">client_secret</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.     <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the     <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
 
 <h5 id="token-authentication-methods">Token Authentication Methods</h5>
+<!--If you change this section, change the section in oauth2.md as well -->
 
-<p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.</p>
+<p>If you authenticate a client with client credentials, provide the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a>
+and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> using either of the following methods:</p>
 
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
+<ul>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+in an Authorization header in the Basic auth scheme (<code class="highlighter-rouge">client_secret_basic</code>). For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request:
+    <div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
 </code></pre>
-</div>
+    </div>
+  </li>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+as additional parameters to the POST body (<code class="highlighter-rouge">client_secret_post</code>)</li>
+  <li>Provide <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a> in a JWT that you sign with the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a>
+using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in <code class="highlighter-rouge">client_assertion</code> and the type, <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>, in <code class="highlighter-rouge">client_assertion_type</code> in the request.</li>
+</ul>
 
-<h4 id="response-parameters-1">Response Parameters</h4>
+<p>Use only one of these methods in a single request or an error will occur.</p>
+
+<h5 id="token-claims-for-client-authentication-with-client-secret-jwt">Token Claims for Client Authentication with Client Secret JWT</h5>
+
+<p>If you use a JWT for client authentication (<code class="highlighter-rouge">client_secret_jwt</code>), use the following token claims:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Token Claims</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">exp</td>
+      <td style="text-align: left">Required. The expiration time of the token in seconds since January 1, 1970 UTC.</td>
+      <td style="text-align: left">Long</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iat</td>
+      <td style="text-align: left">Optional. The issuing time of the token in seconds since January 1, 1970 UTC.</td>
+      <td style="text-align: left">Long</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">sub</td>
+      <td style="text-align: left">Required. The subject of the token. This value must be the same as the <code class="highlighter-rouge">client_id</code>.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">aud</td>
+      <td style="text-align: left">Required. The full URL of the resource you’re using the JWT to authenticate to.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iss</td>
+      <td style="text-align: left">Required. The issuer of the token. This value must be the same as the <code class="highlighter-rouge">client_id</code>.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">jti</td>
+      <td style="text-align: left">Optional. The identifier of the token.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Parameter Details</p>
+
+<ul>
+  <li>If <code class="highlighter-rouge">jti</code> is specified, the token can only be used once. So, for example, subsequent token requests won’t succeed.</li>
+  <li>The <code class="highlighter-rouge">exp</code> claim will fail the request if the expiration time is more than one hour in the future or has already expired.</li>
+  <li>If <code class="highlighter-rouge">iat</code> is specified, then it must be a time before the request is received.</li>
+  <li>
+    <h4 id="response-parameters-1">Response Parameters</h4>
+  </li>
+</ul>
 
 <p>Based on the type of token and whether it is active or not, the returned JSON contains a different set of information. Besides the claims in the token, the possible top-level members include:</p>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Type</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>active</td>
-      <td>An Access Token or Refresh Token.</td>
-      <td>boolean</td>
+      <td style="text-align: left">active</td>
+      <td style="text-align: left">An Access Token or Refresh Token.</td>
+      <td style="text-align: left">boolean</td>
     </tr>
     <tr>
-      <td>token_type</td>
-      <td>The type of the token. The value is always <code class="highlighter-rouge">Bearer</code>.</td>
-      <td>String</td>
+      <td style="text-align: left">token_type</td>
+      <td style="text-align: left">The type of the token. The value is always <code class="highlighter-rouge">Bearer</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>scope</td>
-      <td>A space-delimited list of scopes.</td>
-      <td>String</td>
+      <td style="text-align: left">scope</td>
+      <td style="text-align: left">A space-delimited list of scopes.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>client_id</td>
-      <td>The ID of the client associated with the token.</td>
-      <td>String</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">The ID of the client associated with the token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>username</td>
-      <td>The username associated with the token.</td>
-      <td>String</td>
+      <td style="text-align: left">username</td>
+      <td style="text-align: left">The username associated with the token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>exp</td>
-      <td>The expiration time of the token in seconds since January 1, 1970 UTC.</td>
-      <td>long</td>
+      <td style="text-align: left">exp</td>
+      <td style="text-align: left">The expiration time of the token in seconds since January 1, 1970 UTC.</td>
+      <td style="text-align: left">Long</td>
     </tr>
     <tr>
-      <td>iat</td>
-      <td>The issuing time of the token in seconds since January 1, 1970 UTC.</td>
-      <td>long</td>
+      <td style="text-align: left">iat</td>
+      <td style="text-align: left">The issuing time of the token in seconds since January 1, 1970 UTC.</td>
+      <td style="text-align: left">Long</td>
     </tr>
     <tr>
-      <td>nbf</td>
-      <td>A timestamp in seconds since January 1, 1970 UTC when this token is not be used before.</td>
-      <td>long</td>
+      <td style="text-align: left">nbf</td>
+      <td style="text-align: left">A timestamp in seconds since January 1, 1970 UTC when this token is not be used before.</td>
+      <td style="text-align: left">Long</td>
     </tr>
     <tr>
-      <td>sub</td>
-      <td>The subject of the token.</td>
-      <td>String</td>
+      <td style="text-align: left">sub</td>
+      <td style="text-align: left">The subject of the token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>aud</td>
-      <td>The audience of the token.</td>
-      <td>String</td>
+      <td style="text-align: left">aud</td>
+      <td style="text-align: left">The audience of the token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>iss</td>
-      <td>The issuer of the token.</td>
-      <td>String</td>
+      <td style="text-align: left">iss</td>
+      <td style="text-align: left">The issuer of the token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>jti</td>
-      <td>The identifier of the token.</td>
-      <td>String</td>
+      <td style="text-align: left">jti</td>
+      <td style="text-align: left">The identifier of the token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>device_id</td>
-      <td>The ID of the device associated with the token</td>
-      <td>String</td>
+      <td style="text-align: left">device_id</td>
+      <td style="text-align: left">The ID of the device associated with the token</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>uid</td>
-      <td>The user ID. This parameter is returned only if the token is an access token and the subject is an end user.</td>
-      <td>String</td>
+      <td style="text-align: left">uid</td>
+      <td style="text-align: left">The user ID. This parameter is returned only if the token is an access token and the subject is an end user.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
@@ -984,18 +1057,18 @@ Use one authentication mechanism with a given request. Using both returns an err
 <table>
   <thead>
     <tr>
-      <th>Error Id</th>
-      <th>Details</th>
+      <th style="text-align: left">Error Id</th>
+      <th style="text-align: left">Details</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>invalid_client</td>
-      <td>The specified client id wasn’t found.</td>
+      <td style="text-align: left">invalid_client</td>
+      <td style="text-align: left">The specified <code class="highlighter-rouge">client_id</code> wasn’t found.</td>
     </tr>
     <tr>
-      <td>invalid_request</td>
-      <td>The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.</td>
+      <td style="text-align: left">invalid_request</td>
+      <td style="text-align: left">The request structure was invalid. For example, the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.</td>
     </tr>
   </tbody>
 </table>
@@ -1066,48 +1139,48 @@ Use one authentication mechanism with a given request. Using both returns an err
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Type</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>token</td>
-      <td>An Access Token or Refresh Token.</td>
-      <td>String</td>
+      <td style="text-align: left">token</td>
+      <td style="text-align: left">An Access Token or Refresh Token.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>token_type_hint</td>
-      <td>A hint of the type of <em>token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">token_type_hint</td>
+      <td style="text-align: left">A hint of the type of <code class="highlighter-rouge">token</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>client_id</td>
-      <td>The client ID generated as a part of client registration. This is used in conjunction with the <em>client_secret</em> parameter to authenticate the client application.</td>
-      <td>String</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">The client ID generated as a part of client registration. This is used in conjunction with the <code class="highlighter-rouge">client_secret</code> parameter to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>client_secret</td>
-      <td>The client secret generated as a part of client registration. This is used in conjunction with the <em>client_id</em> parameter to authenticate the client application.</td>
-      <td>String</td>
+      <td style="text-align: left">client_secret</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with the <code class="highlighter-rouge">client_id</code> parameter to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.          <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the           <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
 
-<h5 id="token-authentication-methods-1">Token Authentication Methods</h5>
-
 <p>A client may only revoke a token generated for that client.</p>
 
-<p>The client can authenticate by providing <em>client_id</em> and <em>client_secret</em> as a part of the URL-encoded form parameters (as described in table above),
-or it can use basic authentication by providing the <em>client_id</em> and <em>client_secret</em> as an Authorization header using the Basic auth scheme.
-Use one authentication mechanism with a given request. Using both returns an error.</p>
-
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
-</code></pre>
-</div>
+<p>For more information about token authentication, see <a href="#token-authentication-methods">Token Authentication Methods</a>.</p>
 
 <h4 id="response-parameters-2">Response Parameters</h4>
 
@@ -1118,25 +1191,25 @@ Use one authentication mechanism with a given request. Using both returns an err
 <table>
   <thead>
     <tr>
-      <th>Error Id</th>
-      <th>Details</th>
+      <th style="text-align: left">Error Id</th>
+      <th style="text-align: left">Details</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>invalid_client</td>
-      <td>The specified client id wasn’t found.</td>
+      <td style="text-align: left">invalid_client</td>
+      <td style="text-align: left">The specified <code class="highlighter-rouge">client_id</code> wasn’t found.</td>
     </tr>
     <tr>
-      <td>invalid_request</td>
-      <td>The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.</td>
+      <td style="text-align: left">invalid_request</td>
+      <td style="text-align: left">The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.</td>
     </tr>
   </tbody>
 </table>
 
 <h4 id="response-example-success-1">Response Example (Success)</h4>
 
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">204</span> <span class="ne">No Content</span>
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 </code></pre>
 </div>
 
@@ -1162,22 +1235,22 @@ Use one authentication mechanism with a given request. Using both returns an err
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Default</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>client_id</td>
-      <td>Your app’s client ID.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>null</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">Your app’s client ID.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">null</td>
     </tr>
   </tbody>
 </table>
@@ -1251,6 +1324,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </span><span class="nt">"authorization_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/authorize"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"token_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/token"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"userinfo_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/userinfo"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"registration_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/clients"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"jwks_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/keys"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"response_types_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"code"</span><span class="p">,</span><span class="w">
@@ -1290,6 +1364,7 @@ This API doesn’t require any authentication and returns a JSON object with the
     </span><span class="nt">"token_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"claims_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1329,14 +1404,17 @@ This API doesn’t require any authentication and returns a JSON object with the
     </span><span class="nt">"introspection_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"revocation_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/revoke"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"revocation_endpoint_auth_methods_supported"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"client_secret_basic"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"client_secret_post"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"client_secret_jwt"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"none"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"end_session_endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/oauth2/v1/logout"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -1354,134 +1432,134 @@ of the response.</p>
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Param Type</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>Default</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Default</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="idps.html">idp</a></td>
-      <td>Identity provider (default is Okta)</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>Okta is the IDP.</td>
+      <td style="text-align: left">  <a href="idps.html">idp</a></td>
+      <td style="text-align: left">Identity provider (default is Okta)</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">Okta is the IDP.</td>
     </tr>
     <tr>
-      <td>sessionToken</td>
-      <td>Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the <a href="authn.html">Authentication API</a>.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">sessionToken</td>
+      <td style="text-align: left">Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the   <a href="authn.html">Authentication API</a>.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>response_type</td>
-      <td>Any combination of <em>code</em>, <em>token</em>, and <em>id_token</em>. The combination determines the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">flow</a>. The <code class="highlighter-rouge">code</code> response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">response_type</td>
+      <td style="text-align: left">Any combination of <em>code</em>, <em>token</em>, and <em>id_token</em>. The combination determines the   <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">flow</a>. The <code class="highlighter-rouge">code</code> response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>client_id</td>
-      <td>Obtained during either <a href="/docs/api/resources/social_authentication.html">UI client registration</a> or <a href="oauth-clients.html">API client registration</a>. It identifies the client and must match the value preregistered in Okta.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">Obtained during either   UI client registration or   <a href="oauth-clients.html">API client registration</a>. It identifies the client and must match the value preregistered in Okta.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>redirect_uri</td>
-      <td>Callback location where the authorization code should be sent. It must match the value preregistered in Okta during client registration.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">redirect_uri</td>
+      <td style="text-align: left">Callback location where the authorization code should be sent. It must match the value preregistered in Okta during client registration.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>display</td>
-      <td>How to display the authentication and consent UI. Valid values: <em>page</em> or <em>popup</em>.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">display</td>
+      <td style="text-align: left">How to display the authentication and consent UI. Valid values: <em>page</em> or <em>popup</em>.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>max_age</td>
-      <td>Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">max_age</td>
+      <td style="text-align: left">Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>response_mode</td>
-      <td>How the authorization response should be returned. <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>See Description.</td>
+      <td style="text-align: left">response_mode</td>
+      <td style="text-align: left">How the authorization response should be returned.   <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">See Description.</td>
     </tr>
     <tr>
-      <td>scope</td>
-      <td><strong>Required.</strong> Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the access_token and id_token. The openid scope has to be specified to get back an id_token.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">scope</td>
+      <td style="text-align: left"><strong>Required.</strong> Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the access_token and id_token. The openid scope has to be specified to get back an id_token.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>state</td>
-      <td>A value to be returned in the token. The client application can use it to remember the state of its interaction with the end user at the time of the authentication call. It can contain alphanumeric, comma, period, underscore and hyphen characters.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">A value to be returned in the token. The client application can use it to remember the state of its interaction with the end user at the time of the authentication call. It can contain alphanumeric, comma, period, underscore and hyphen characters.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>prompt</td>
-      <td>Either <em>none</em> or <em>login</em>. If <em>none</em>,  do not prompt for authentication, and return an error if the end user is not already authenticated. If <em>login</em> force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td>See Description.</td>
+      <td style="text-align: left">prompt</td>
+      <td style="text-align: left">Either <em>none</em> or <em>login</em>. If <em>none</em>,  do not prompt for authentication, and return an error if the end user is not already authenticated. If <em>login</em> force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">See Description.</td>
     </tr>
     <tr>
-      <td>nonce</td>
-      <td>A value that must be returned in the ID Token. It is used to mitigate replay attacks.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>TRUE</td>
-      <td> </td>
+      <td style="text-align: left">nonce</td>
+      <td style="text-align: left">A value that must be returned in the ID Token. It is used to mitigate replay attacks.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>code_challenge</td>
-      <td>A challenge of <a href="#parameter-details">PKCE</a>. The challenge is verified in the Access Token request.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">code_challenge</td>
+      <td style="text-align: left">A challenge of   <a href="#parameter-details">PKCE</a>. The challenge is verified in the Access Token request.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>code_challenge_method</td>
-      <td>Method used to derive the code challenge. Must be <code class="highlighter-rouge">S256</code>.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">code_challenge_method</td>
+      <td style="text-align: left">Method used to derive the code challenge. Must be <code class="highlighter-rouge">S256</code>.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td>login_hint</td>
-      <td>A username to prepopulate if prompting for authentication.</td>
-      <td>Query</td>
-      <td>String</td>
-      <td>FALSE</td>
-      <td> </td>
+      <td style="text-align: left">login_hint</td>
+      <td style="text-align: left">A username to prepopulate if prompting for authentication.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
@@ -1509,7 +1587,7 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
  The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state.
  Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
   </li>
-  <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose <code class="highlighter-rouge">token_endpoint_auth_method</code> is <code class="highlighter-rouge">none</code>, makes a code flow authorization request, the <code class="highlighter-rouge">code_challenge parameter</code> is required.</li>
+  <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose <code class="highlighter-rouge">token_endpoint_auth_method</code> is <code class="highlighter-rouge">none</code>, makes a code flow authorization request, the <code class="highlighter-rouge">code_challenge</code> parameter is required.</li>
 </ul>
 
 <h4 id="postmessage-data-model">postMessage() Data Model</h4>
@@ -1521,36 +1599,36 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>DataType</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id_token</td>
-      <td>The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">id_token</code>.</td>
-      <td>String</td>
+      <td style="text-align: left">id_token</td>
+      <td style="text-align: left">The ID Token JWT contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">id_token</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>access_token</td>
-      <td>The <em>access_token</em> used to access the <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <em>response_type</em> included a token. <b>Important</b>: Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
-      <td>String</td>
+      <td style="text-align: left">access_token</td>
+      <td style="text-align: left">The <em>access_token</em> used to access the   <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <em>response_type</em> included a token. <b>Important</b>: Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>state</td>
-      <td>If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response.</td>
-      <td>String</td>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>error</td>
-      <td>The error-code string providing information if anything goes wrong.</td>
-      <td>String</td>
+      <td style="text-align: left">error</td>
+      <td style="text-align: left">The error-code string providing information if anything goes wrong.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>error_description</td>
-      <td>Additional description of the error.</td>
-      <td>String</td>
+      <td style="text-align: left">error_description</td>
+      <td style="text-align: left">Additional description of the error.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
@@ -1569,56 +1647,56 @@ Irrespective of the response type, the contents of the response are as described
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>DataType</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>id_token</td>
-      <td>JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">id_token</td>
+      <td style="text-align: left">JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>access_token</td>
-      <td>Used to access the <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if <em>response_type</em> includes <code class="highlighter-rouge">token</code>. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
-      <td>String</td>
+      <td style="text-align: left">access_token</td>
+      <td style="text-align: left">Used to access the   <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if <em>response_type</em> includes <code class="highlighter-rouge">token</code>. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>token_type</td>
-      <td>The token type is always <code class="highlighter-rouge">Bearer</code> and is returned only when <em>token</em> is specified as a <em>response_type</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">token_type</td>
+      <td style="text-align: left">The token type is always <code class="highlighter-rouge">Bearer</code> and is returned only when <em>token</em> is specified as a <em>response_type</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>code</td>
-      <td>An opaque value that can be used to redeem tokens from <a href="#token-request">token endpoint</a>.</td>
-      <td>String</td>
+      <td style="text-align: left">code</td>
+      <td style="text-align: left">An opaque value that can be used to redeem tokens from   <a href="#token-request">token endpoint</a>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>expires_in</td>
-      <td>Number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">expires_in</td>
+      <td style="text-align: left">Number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>scope</td>
-      <td>Scopes specified in the <em>access_token</em>. Returned only if the response includes an <em>access_token</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">scope</td>
+      <td style="text-align: left">Scopes specified in the <em>access_token</em>. Returned only if the response includes an <em>access_token</em>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>state</td>
-      <td>The unmodified <code class="highlighter-rouge">state</code> value from the request.</td>
-      <td>String</td>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">The unmodified <code class="highlighter-rouge">state</code> value from the request.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>error</td>
-      <td>Error-code (if something went wrong).</td>
-      <td>String</td>
+      <td style="text-align: left">error</td>
+      <td style="text-align: left">Error-code (if something went wrong).</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>error_description</td>
-      <td>Description of the error.</td>
-      <td>String</td>
+      <td style="text-align: left">error_description</td>
+      <td style="text-align: left">Description of the error.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
@@ -1632,50 +1710,50 @@ Irrespective of the response type, the contents of the response are as described
 <table>
   <thead>
     <tr>
-      <th>Error Id</th>
-      <th>Details</th>
+      <th style="text-align: left">Error Id</th>
+      <th style="text-align: left">Details</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>unsupported_response_type</td>
-      <td>The specified response type is invalid or unsupported.</td>
+      <td style="text-align: left">unsupported_response_type</td>
+      <td style="text-align: left">The specified response type is invalid or unsupported.</td>
     </tr>
     <tr>
-      <td>unsupported_response_mode</td>
-      <td>The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes. For example, if the query response mode is specified for a response type that includes id_token.</td>
+      <td style="text-align: left">unsupported_response_mode</td>
+      <td style="text-align: left">The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes. For example, if the query response mode is specified for a response type that includes id_token.</td>
     </tr>
     <tr>
-      <td>invalid_scope</td>
-      <td>The scopes list contains an invalid or unsupported value.</td>
+      <td style="text-align: left">invalid_scope</td>
+      <td style="text-align: left">The scopes list contains an invalid or unsupported value.</td>
     </tr>
     <tr>
-      <td>server_error</td>
-      <td>The server encountered an internal error.</td>
+      <td style="text-align: left">server_error</td>
+      <td style="text-align: left">The server encountered an internal error.</td>
     </tr>
     <tr>
-      <td>temporarily_unavailable</td>
-      <td>The server is temporarily unavailable, but should be able to process the request at a later time.</td>
+      <td style="text-align: left">temporarily_unavailable</td>
+      <td style="text-align: left">The server is temporarily unavailable, but should be able to process the request at a later time.</td>
     </tr>
     <tr>
-      <td>invalid_request</td>
-      <td>The request is missing a necessary parameter or the parameter has an invalid value.</td>
+      <td style="text-align: left">invalid_request</td>
+      <td style="text-align: left">The request is missing a necessary parameter or the parameter has an invalid value.</td>
     </tr>
     <tr>
-      <td>invalid_grant</td>
-      <td>The specified grant is invalid, expired, revoked, or does not match the redirect URI used in the authorization request.</td>
+      <td style="text-align: left">invalid_grant</td>
+      <td style="text-align: left">The specified grant is invalid, expired, revoked, or does not match the redirect URI used in the authorization request.</td>
     </tr>
     <tr>
-      <td>invalid_token</td>
-      <td>The provided Access Token is invalid.</td>
+      <td style="text-align: left">invalid_token</td>
+      <td style="text-align: left">The provided Access Token is invalid.</td>
     </tr>
     <tr>
-      <td>invalid_client</td>
-      <td>The specified client id is invalid.</td>
+      <td style="text-align: left">invalid_client</td>
+      <td style="text-align: left">The specified client id is invalid.</td>
     </tr>
     <tr>
-      <td>access_denied</td>
-      <td>The server denied the request.</td>
+      <td style="text-align: left">access_denied</td>
+      <td style="text-align: left">The server denied the request.</td>
     </tr>
   </tbody>
 </table>
@@ -1685,18 +1763,18 @@ Irrespective of the response type, the contents of the response are as described
 <table>
   <thead>
     <tr>
-      <th>Error Id</th>
-      <th>Details</th>
+      <th style="text-align: left">Error Id</th>
+      <th style="text-align: left">Details</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>login_required</td>
-      <td>The request specified that no prompt should be shown but the user is currently not authenticated.</td>
+      <td style="text-align: left">login_required</td>
+      <td style="text-align: left">The request specified that no prompt should be shown but the user is currently not authenticated.</td>
     </tr>
     <tr>
-      <td>insufficient_scope</td>
-      <td>The Access Token provided does not contain the necessary scopes to access the resource.</td>
+      <td style="text-align: left">insufficient_scope</td>
+      <td style="text-align: left">The Access Token provided does not contain the necessary scopes to access the resource.</td>
     </tr>
   </tbody>
 </table>
@@ -1709,7 +1787,7 @@ Irrespective of the response type, the contents of the response are as described
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/</span><span class="k">${</span><span class="nv">authorizationServerId</span><span class="k">}</span><span class="s2">/v1/authorize?
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/authorize?
   client_id=</span><span class="k">${</span><span class="nv">client_id</span><span class="k">}</span><span class="s2">&amp;
   response_type=code&amp;
   response_mode=form_post&amp;
@@ -1727,7 +1805,7 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/</span><span class="k">${</span><span class="nv">authorizationServerId</span><span class="k">}</span><span class="s2">/v1/authorize?
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/authorize?
   client_id=</span><span class="k">${</span><span class="nv">client_id</span><span class="k">}</span><span class="s2">&amp;
   response_type=id_token token&amp;
   response_mode=form_post&amp;
@@ -1763,7 +1841,7 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/token</span></p>
 
-<p>The API takes a grant type of either <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em> and the corresponding credentials and returns back an Access Token. A Refresh Token will be returned if <em>offline_access</em> scope is requested using authorization_code, password, or refresh_token grant type. Additionally, using the authorization_code grant type will return an ID Token if the <em>openid</em> scope is requested.</p>
+<p>The API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters.</p>
 
 <h4 id="request-parameters-4">Request Parameters</h4>
 
@@ -1772,98 +1850,71 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Type</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>grant_type</td>
-      <td>Can be one of the following: <em>authorization_code</em>, <em>password</em>, <em>refresh_token</em>, or <em>client_credentials</em>. Determines the mechanism Okta will use to authorize the creation of the tokens.</td>
-      <td>String</td>
+      <td style="text-align: left">grant_type</td>
+      <td style="text-align: left">Can be one of the following: <code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">password</code>, or <code class="highlighter-rouge">refresh_token</code>. Determines the mechanism Okta uses to authorize the creation of the tokens.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>code</td>
-      <td>Expected if grant_type specified <em>authorization_code</em>. The value is what was returned from the <a href="#authentication-request">authentication endpoint</a>.</td>
-      <td>String</td>
+      <td style="text-align: left">code</td>
+      <td style="text-align: left">Required if <code class="highlighter-rouge">grant_type</code> is <code class="highlighter-rouge">authorization_code</code>. The value is what was returned from the           <a href="#authentication-request">authentication endpoint</a>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>refresh_token</td>
-      <td>Expected if the grant_type specified <em>refresh_token</em>. The value is what was returned from this endpoint via a previous invocation.</td>
-      <td>String</td>
+      <td style="text-align: left">refresh_token</td>
+      <td style="text-align: left">Required if <code class="highlighter-rouge">grant_type</code> is <code class="highlighter-rouge">refresh_token</code>. The value is what was returned from this endpoint via a previous invocation.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>username</td>
-      <td>Expected if the grant_type specified <em>password</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">username</td>
+      <td style="text-align: left">Required if the grant_type is <code class="highlighter-rouge">password</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>password</td>
-      <td>Expected if the grant_type specified <em>password</em>.</td>
-      <td>String</td>
+      <td style="text-align: left">password</td>
+      <td style="text-align: left">Required if the grant_type is <code class="highlighter-rouge">password</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>scope</td>
-      <td>Optional if <em>refresh_token</em>, or <em>password</em> is specified as the grant type. This is a list of scopes that the client wants to be included in the Access Token. For the <em>refresh_token</em> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.</td>
-      <td>String</td>
+      <td style="text-align: left">scope</td>
+      <td style="text-align: left">Required if <code class="highlighter-rouge">password</code> is the <code class="highlighter-rouge">grant_type</code>. This is a list of scopes that the client wants to be included in the Access Token. For the <code class="highlighter-rouge">refresh_token</code> grant type, these scopes have to be subset of the scopes used to generate the Refresh Token in the first place.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>redirect_uri</td>
-      <td>Expected if grant_type is <em>authorization_code</em>. Specifies the callback location where the authorization was sent; must match what is preregistered in Okta for this client.</td>
-      <td>String</td>
+      <td style="text-align: left">redirect_uri</td>
+      <td style="text-align: left">Required if <code class="highlighter-rouge">grant_type</code> is <code class="highlighter-rouge">authorization_code</code>. Specifies the callback location where the authorization was sent. This value must match the <code class="highlighter-rouge">redirect_uri</code> used to generate the original <code class="highlighter-rouge">authorization_code</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>code_verifier</td>
-      <td>The code verifier of <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the code_challenge and verify if it matches the original code_challenge in the authorization request.</td>
-      <td>String</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="token-authentication-method">Token Authentication Method</h5>
-
-<p>The client can authenticate by providing the <a href="oidc.html#request-parameters"><code class="highlighter-rouge">client_id</code></a>
-and <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect"><code class="highlighter-rouge">client_secret</code></a> as an Authorization header in the Basic auth scheme (basic authentication).</p>
-
-<p>For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request.</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Authorization: Basic <span class="k">${</span><span class="nv">Base64</span><span class="p">(&lt;client_id&gt;</span>:<span class="p">&lt;client_secret&gt;)</span><span class="k">}</span>
-</code></pre>
-</div>
-
-<blockquote>
-  <p>If the value returned by <code class="highlighter-rouge">token_endpoint_authentication</code> in the <a href="/docs/api/resources/oauth-clients.html#update-client-application">OAuth 2.0 Clients API</a> is not what you wish to use, you can change the value of a client app’s <code class="highlighter-rouge">token_endpoint_authentication</code> with any of the values returned by <code class="highlighter-rouge">token_endpoint_auth_methods_support</code> (<code class="highlighter-rouge">client_secret_post</code> or <code class="highlighter-rouge">client_secret_basic</code>).
-You can’t change this value in the Okta user interface.</p>
-</blockquote>
-
-<h4 id="response-parameters-4">Response Parameters</h4>
-
-<p>Based on the grant type, the returned JSON can contain a different set of tokens.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Input grant type</th>
-      <th>Output token types</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>authorization_code</td>
-      <td>Access Token, Refresh Token, ID Token</td>
+      <td style="text-align: left">code_verifier</td>
+      <td style="text-align: left">Required if <code class="highlighter-rouge">grant_type</code> is <code class="highlighter-rouge">authorization_code</code>  and <code class="highlighter-rouge">code_challenge</code> was specified in the original <code class="highlighter-rouge">/authorize</code> request. This value is the code verifier for                         <a href="#parameter-details">PKCE</a>. Okta uses it to recompute the <code class="highlighter-rouge">code_challenge</code> and verify if it matches the original <code class="highlighter-rouge">code_challenge</code> in the authorization request.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>refresh_token</td>
-      <td>Access Token, Refresh Token</td>
+      <td style="text-align: left">client_id</td>
+      <td style="text-align: left">Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with <code class="highlighter-rouge">client_secret</code>  to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>password</td>
-      <td>Access Token, Refresh Token</td>
+      <td style="text-align: left">client_secret</td>
+      <td style="text-align: left">Required if the client has a secret and client credentials are not provided in the Authorization header, and if <code class="highlighter-rouge">client_assertion_type</code> isn’t specified. This client secret is used in conjunction with <code class="highlighter-rouge">client_id</code> to authenticate the client application.</td>
+      <td style="text-align: left">String</td>
     </tr>
     <tr>
-      <td>client_credentials</td>
-      <td>Access Token</td>
+      <td style="text-align: left">client_assertion</td>
+      <td style="text-align: left">Required if the <code class="highlighter-rouge">client_assertion_type</code> is specified. Contains the JWT signed with the <code class="highlighter-rouge">client_secret</code>.    <a href="#token-authentication-methods">JWT Details</a></td>
+      <td style="text-align: left">String</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">client_assertion_type</td>
+      <td style="text-align: left">Indicates a JWT is being used to authenticate the client. Per the   <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">Client Authentication spec</a>, the valid value is <code class="highlighter-rouge">urn:ietf:params:oauth:client-assertion-type:jwt-bearer</code>.</td>
+      <td style="text-align: left">String</td>
     </tr>
   </tbody>
 </table>
@@ -1874,38 +1925,117 @@ You can’t change this value in the Okta user interface.</p>
 
 <ol>
   <li>Use the Okta Administration UI and check the <strong>Refresh Token</strong> checkbox under <strong>Allowed Grant Types</strong> on the client application page.</li>
-  <li>Pass the <em>offline_access</em> scope to your authorize request.</li>
+  <li>Pass the <code class="highlighter-rouge">offline_access</code> scope to your <code class="highlighter-rouge">/authorize</code> or <code class="highlighter-rouge">/token</code> request if you’re using the <code class="highlighter-rouge">password</code> grant type.</li>
 </ol>
+
+<p>For more information about token authentication, see <a href="#token-authentication-methods">Token Authentication Methods</a>.</p>
+
+<h4 id="response-parameters-4">Response Parameters</h4>
+
+<p>Based on the <code class="highlighter-rouge">grant_type</code> and sometimes <code class="highlighter-rouge">scope</code>, the response contains different token sets.
+Generally speaking, the scopes specified in a request are included in the Access Tokens in the response.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Requested grant type</th>
+      <th style="text-align: left">Requested scope</th>
+      <th style="text-align: left">Response tokens</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">authorization_code</td>
+      <td style="text-align: left">No scope</td>
+      <td style="text-align: left">Access Token. Contains scopes requested in <code class="highlighter-rouge">/authorize</code> endpoint.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">authorization_code</td>
+      <td style="text-align: left">Any scopes except <code class="highlighter-rouge">offline_access</code> or <code class="highlighter-rouge">openid</code></td>
+      <td style="text-align: left">Access Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">authorization_code</td>
+      <td style="text-align: left">Any or no scopes plus <code class="highlighter-rouge">offline_access</code></td>
+      <td style="text-align: left">Access Token, Refresh Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">authorization_code</td>
+      <td style="text-align: left">Any or no scopes plus <code class="highlighter-rouge">openid</code></td>
+      <td style="text-align: left">Access Token, ID Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">authorization_code</td>
+      <td style="text-align: left">Any or no scopes plus <code class="highlighter-rouge">offline_access</code> and <code class="highlighter-rouge">openid</code></td>
+      <td style="text-align: left">Access Token, Refresh Token, ID Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">refresh_token</td>
+      <td style="text-align: left">None</td>
+      <td style="text-align: left">Access Token, Refresh Token. Contains scopes used to generate the Refresh Token.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">refresh_token</td>
+      <td style="text-align: left">Any scopes except <code class="highlighter-rouge">offline_access</code></td>
+      <td style="text-align: left">Access Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">refresh_token</td>
+      <td style="text-align: left">Any or no scopes plus <code class="highlighter-rouge">offline_access</code></td>
+      <td style="text-align: left">Access Token, Refresh Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">password</td>
+      <td style="text-align: left">Any or no scopes except <code class="highlighter-rouge">offline_access</code></td>
+      <td style="text-align: left">Access Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">password</td>
+      <td style="text-align: left">Any or no scopes plus <code class="highlighter-rouge">offline_access</code></td>
+      <td style="text-align: left">Access Token, Refresh Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">password</td>
+      <td style="text-align: left">Any or no scopes plus <code class="highlighter-rouge">openid</code></td>
+      <td style="text-align: left">Access Token, ID Token</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">password</td>
+      <td style="text-align: left">Any or no scopes plus <code class="highlighter-rouge">offline_access</code> and <code class="highlighter-rouge">openid</code></td>
+      <td style="text-align: left">Access Token, Refresh Token, ID Token</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="list-of-errors-2">List of Errors</h4>
 
 <table>
   <thead>
     <tr>
-      <th>Error Id</th>
-      <th>Details</th>
+      <th style="text-align: left">Error Id</th>
+      <th style="text-align: left">Details</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>invalid_client</td>
-      <td>The specified client id wasn’t found.</td>
+      <td style="text-align: left">invalid_client</td>
+      <td style="text-align: left">The specified client id wasn’t found.</td>
     </tr>
     <tr>
-      <td>invalid_request</td>
-      <td>The request structure was invalid. E.g. the basic authentication header was malformed, or both header and form parameters were used for authentication or no authentication information was provided.</td>
+      <td style="text-align: left">invalid_request</td>
+      <td style="text-align: left">The request structure was invalid. For example: the basic authentication header is malformed; both header and form parameters were used for authentication; or no authentication information was provided.</td>
     </tr>
     <tr>
-      <td>invalid_grant</td>
-      <td>The <em>code</em> or <em>refresh_token</em> value was invalid, or the <em>redirect_uri</em> does not match the one used in the authorization request.</td>
+      <td style="text-align: left">invalid_grant</td>
+      <td style="text-align: left">The <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">refresh_token</code>, or <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> combination is invalid, or the <code class="highlighter-rouge">redirect_uri</code> does not match the one used in the authorization request.</td>
     </tr>
     <tr>
-      <td>unsupported_grant_type</td>
-      <td>The grant_type was not <em>authorization_code</em> or <em>refresh_token</em>.</td>
+      <td style="text-align: left">unsupported_grant_type</td>
+      <td style="text-align: left">The <code class="highlighter-rouge">grant_type</code> isn’t <code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">refresh_token</code>, or <code class="highlighter-rouge">password</code>.</td>
     </tr>
     <tr>
-      <td>invalid_scope</td>
-      <td>The scopes list contains an invalid or unsupported value.</td>
+      <td style="text-align: left">invalid_scope</td>
+      <td style="text-align: left">The scopes list contains an invalid or unsupported value.</td>
     </tr>
   </tbody>
 </table>
@@ -1948,6 +2078,67 @@ You can’t change this value in the Okta user interface.</p>
 </code></pre>
 </div>
 
+<h3 class="api api-operation" id="logout-request">Logout Request</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /oauth2/v1/logout</span></p>
+
+<p>The API takes an ID Token and logs the user out of Okta if the subject matches the current Okta session. A <code class="highlighter-rouge">post_logout_redirect_uri</code> may be specified to redirect the User after the logout has been performed. Otherwise, the user is redirected to the Okta login page.</p>
+
+<h4 id="request-parameters-5">Request Parameters</h4>
+
+<p>The following parameters can be posted as a part of the URL-encoded form values to the API.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id_token_hint</td>
+      <td style="text-align: left">A valid ID token with a subject matching the current session.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">TRUE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">post_logout_redirect_uri</td>
+      <td style="text-align: left">Callback location to redirect to after the logout has been performed. It must match the value preregistered in Okta during client registration.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">state</td>
+      <td style="text-align: left">If the request contained a <code class="highlighter-rouge">state</code> parameter, then the same unmodified value is returned back in the response.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="request-examples-1">Request Examples</h4>
+
+<p>This request initiates a logout and will redirect to the Okta login page on success.</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/logout?
+  id_token_hint=</span><span class="k">${</span><span class="nv">id_token_hint</span><span class="k">}</span><span class="s2">
+</span></code></pre>
+</div>
+
+<p>This request initiates a logout and will redirect to the <code class="highlighter-rouge">post_logout_redirect_uri</code> on success.</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/logout?
+  id_token_hint=</span><span class="k">${</span><span class="nv">id_token_hint</span><span class="k">}</span><span class="s2">&amp;
+  post_logout_redirect_uri=</span><span class="k">${</span><span class="nv">post_logout_redirect_uri</span><span class="k">}</span><span class="s2">&amp;
+  state=</span><span class="k">${</span><span class="nv">state</span><span class="k">}</span><span class="s2">
+</span></code></pre>
+</div>
+
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
@@ -1983,7 +2174,7 @@ You can’t change this value in the Okta user interface.</p>
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="https://okta.com/developer/contact/">Contact Sales</a>
+            <a href="/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>
@@ -1997,7 +2188,7 @@ You can’t change this value in the Okta user interface.</p>
             <a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a>
           </li>
           <li>
-            <a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a>
+            <a class="icon" href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank"><i class="fa fa-comments"></i></a>
           </li>
           <li>
             <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>

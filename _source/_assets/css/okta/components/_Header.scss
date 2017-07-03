@@ -82,6 +82,10 @@
 					.tel {
 						background-image: image_url("rounded-mobile--small-blue.png");
 					}
+
+					.devforum {
+						background-image: image_url("rounded-devforum--small-blue.png");
+					}
 				}
 
 				.has-dropdown > a::after {
@@ -351,15 +355,19 @@
 					}
 
 					.stack-overflow {
-						background-image: url(#{$asset-path}/img/rounded-stackoverflow--small-white.png);
+						background-image: image_url("rounded-stackoverflow--small-white.png");
 					}
 
 					.email {
-						background-image: url(#{$asset-path}/img/rounded-email--small-white.png);
+						background-image: image_url("rounded-email--small-white.png");
 					}
 
 					.tel {
-						background-image: url(#{$asset-path}/img/rounded-mobile--small-white.png);
+						background-image: image_url("rounded-mobile--small-white.png");
+					}
+
+					.devforum {
+						background-image: image_url("rounded-devforum--small-white.png");
 					}
 				}
 			}

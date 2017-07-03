@@ -8,7 +8,8 @@ describe('navigation bar search spec', () => {
     navPage.load();
   });
 
-  it('does search on desktop browser sizes', () => {
+  // Disabled in chrome headless due to chromedriver bug - https://bugs.chromium.org/p/chromedriver/issues/detail?id=1772
+  util.itNoHeadless('does search on desktop browser sizes', () => {
     navPage.resizeXLarge();
     // After resize it's better to call load() which waits for the presence of a page element
     // Sometimes, the searchIcon isn't present immediately after resize
@@ -25,7 +26,7 @@ describe('navigation bar search spec', () => {
     expect(navPage.areSearchResultsPresent()).toBe(true);
   });
 
-  util.itNoPhantom('does search on mobile browser sizes', () => {
+  util.itNoHeadless('does search on mobile browser sizes', () => {
     navPage.resizeXsmall();
 
     navPage.clickMobileSearch();

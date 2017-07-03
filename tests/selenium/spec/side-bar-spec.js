@@ -1,3 +1,4 @@
+'use strict';
 const SideBarPage = require('../framework/page-objects/SideBarPage');
 
 describe('sidebar navigation spec', () => {
@@ -45,7 +46,7 @@ describe('sidebar navigation spec', () => {
     sideBarPage.clickAuthenticationReferenceLink();
     expect(sideBarPage.getCurrentURL()).toBe('/docs/api/resources/authn.html');
     expectedSubLinks = ['Authentication API', 'OAuth 2.0',
-        'OpenID Connect', 'Social Authentication',
+        'OpenID Connect', 'Social Login',
         'Sessions'];
     expect(sideBarPage.doesReferenceHaveLinks(expectedSubLinks)).toBe(true);
 
