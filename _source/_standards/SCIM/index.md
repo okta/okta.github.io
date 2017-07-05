@@ -3,7 +3,6 @@ layout: docs_page
 title: SCIM Provisioning with Lifecycle Management
 excerpt: Enable SCIM-based provisioning from Okta to your application.
 icon: /assets/img/icons/scim.svg
-permalink: /standards/SCIM/
 redirect_from: "/docs/guides/scim_guidance.html"
 ---
 # SCIM: Provisioning with Okta's Lifecycle Management
