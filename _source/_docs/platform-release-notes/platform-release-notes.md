@@ -27,11 +27,11 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
  <!-- OKTA-125424 -->
 
-### Platform Enhancements:
+### Platform Enhancements
 
 * [Additional Scopes Available for Social Authentication](#additional-scopes-available-for-social-authentication)
 
-* [Updates to Sign-In Widget and Auth SDK for JS](#updates-to-sign-in-widget-and-auth-sdk-for-js)
+* [New Versions of Sign-In Widget and Auth SDK for JS](#new-versions-of-sign-in-widget-and-auth-sdk-for-js)
 
 #### Additional Scopes Available for Social Authentication
 
@@ -39,16 +39,16 @@ When using a Social Identity Provider, you can request information in stages. Th
 
 <!-- (OKTA-117521) -->
 
-#### Updates to Sign-In Widget and Auth SDK for JS
+#### New Versions of Sign-In Widget and Auth SDK for JS
 
-Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.11.0) and version 1.8 of the [Okta Auth SDK for Javascript](https://github.com/okta/okta-auth-js) are available.
+Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.11.0) and version 1.8 of the [Okta Auth SDK for Javascript](https://github.com/okta/okta-auth-js) are available. Check out the new features and bug fixes!
 
 <!-- (OKTA-131642) -->
 
 
 ### Platform Bugs Fixed
 
-* The Open ID Connect reauthentication flow redirected to multi-factor authentication (MFA) by default if any sign-in policy using MFA existed for that application.  (OKTA-129094)
+* If any sign-in policy using MFA existed for an application, the Open ID Connect reauthentication flow redirected to multi-factor authentication (MFA) by default.  (OKTA-129094)
 
 * Clients with `token_endpoint_auth_method` set to `client_secret_post` did not have a selected radio button on the Client Credentials UI (**Applications > _application name_ > General**).  (OKTA-130764)
 
