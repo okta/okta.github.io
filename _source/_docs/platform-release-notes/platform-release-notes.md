@@ -35,7 +35,7 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 #### Additional Scopes Available for Social Authentication
 
-When using a Social Identity Provider, you can request information in stages. The initial request to '/oauth2/v1/authorize' can ask for a minimal set of scopes, and you can add scopes to collect additional user data in a subsequent request to the Social Identity Provider. This reduces friction during sign-in when users don't yet trust your app. For more information, see the descriptions of `idp_scope` in the [OAuth 2.0 API](https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters ) and [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3) parameter tables.
+When using a Social Identity Provider, you can request information in stages. The initial request to `/oauth2/v1/authorize` can ask for a minimal set of scopes, and you can add scopes to collect additional user data in a subsequent request to the Social Identity Provider. This reduces friction during sign-in when users don't yet trust your app. For more information, see the descriptions of `idp_scope` in the [OAuth 2.0 API](https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters ) and [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3) parameter tables.
 
 <!-- (OKTA-117521) -->
 
@@ -52,7 +52,7 @@ Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-wi
 
 * Clients with `token_endpoint_auth_method` set to `client_secret_post` did not have a selected radio button on the Client Credentials UI (**Applications > _application name_ > General**).  (OKTA-130764)
 
-* If you created a SAML 2.0 Identity Provider with just a name and an IdP username, Okta reported an internal server error.  (OKTA-131294)
+* If you created a SAML 2.0 Identity Provider but omitted some fields, Okta reported an error.  (OKTA-131294)
 
 * Okta Sign-In Widget failed to run when installed with `npm`.  (OKTA-131608)
 
