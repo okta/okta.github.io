@@ -35,7 +35,7 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 #### Additional Scopes Available for Social Authentication
 
-You can request additional scopes from your app flows to collect additional user data instead of using just the set of scopes defined on the Social Identity Provider. This reduces friction during sign-in when users don't yet trust your app. For more information, see the descriptions of `idp_scope` in the [OAuth 2.0 API](https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters ) and [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3) parameter tables.
+When using a Social Identity Provider, you can request information in stages. The initial request to '/oauth2/v1/authorize' can ask for a minimal set of scopes, and you can add scopes to collect additional user data in a subsequent request to the Social Identity Provider. This reduces friction during sign-in when users don't yet trust your app. For more information, see the descriptions of `idp_scope` in the [OAuth 2.0 API](https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters ) and [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3) parameter tables.
 
 <!-- (OKTA-117521) -->
 
