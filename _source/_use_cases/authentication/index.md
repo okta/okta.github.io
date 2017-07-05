@@ -68,7 +68,7 @@ Okta provides a number of tools in addition to rigorous specification compliance
 * [Authentication API](#authentication-api)
 * [Social Login](#social-login)
 
-## Sign-in Widget
+## Sign-In Widget
 
 The [Okta Sign-in Widget](/code/javascript/okta_sign-in_widget.html)
 provides an embeddable Javascript sign-in implementation that can
