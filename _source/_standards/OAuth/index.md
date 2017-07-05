@@ -1,9 +1,8 @@
 ---
 layout: docs_page
 title: OAuth 2.0 and Okta
-excerpt: The next evolution of the OAuth protocol focuses on client developer simplicity
+excerpt: The next evolution of the OAuth protocol focuses on client developer simplicity.
 icon: /assets/img/icons/oauth.svg
-permalink: /standards/OAuth/
 ---
 # OAuth 2.0 and Okta
 
