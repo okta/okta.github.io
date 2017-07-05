@@ -50,13 +50,13 @@ Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-wi
 
 * The Open ID Connect reauthentication flow redirected to multi-factor authentication (MFA) by default if any sign-in policy using MFA existed for that application.  (OKTA-129094)
 
-* Clients with a client secret and with `token_endpoint_auth_method` set to `client_secret_post` did not have a selected radio button on the Client Credentials display (**Applications > _application name_ > General**).  (OKTA-130764)
+* Clients with `token_endpoint_auth_method` set to `client_secret_post` did not have a selected radio button on the Client Credentials UI (**Applications > _application name_ > General**).  (OKTA-130764)
 
 * If you created a SAML 2.0 Identity Provider with just a name and an IdP username, Okta reported an internal server error.  (OKTA-131294)
 
 * Okta Sign-In Widget failed to run when installed with `npm`.  (OKTA-131608)
 
-* PUTs to /oauth2/v1/clients using data obtained from a GET to that endpoint received an error response if they contained values for `client_id_issued_at` or `client_secret_expires_at`.  (OKTA-131647)
+* Updates to clients sometimes received an error response if they contained values for `client_id_issued_at` or `client_secret_expires_at`.  (OKTA-131647)
 
 * For API Access Management customers, Okta Access Tokens were signed by an external key, rather than by Okta's internal key.  (OKTA-131885)
 
