@@ -371,7 +371,7 @@ response does not include an Access Token.</p>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://rain.okta1.com:1802"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rain.okta1.com:1802"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uAaunofWkaDJxukCFeBx"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449624026</span><span class="p">,</span><span class="w">
   </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449627626</span><span class="p">,</span><span class="w">
@@ -387,7 +387,7 @@ response does not include an Access Token.</p>
   </span><span class="nt">"given_name"</span><span class="p">:</span><span class="s2">"John"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"middle_name"</span><span class="p">:</span><span class="s2">"James"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"family_name"</span><span class="p">:</span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"profile"</span><span class="p">:</span><span class="s2">"http://profile.wordpress.com/john.doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile"</span><span class="p">:</span><span class="s2">"https://profile.wordpress.com/john.doe"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"zoneinfo"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en-US"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="mi">1311280970</span><span class="p">,</span><span class="w">
@@ -605,7 +605,7 @@ response does not include an Access Token.</p>
       <td style="text-align: left">profile</td>
       <td style="text-align: left">URL of the user’s profile page.</td>
       <td style="text-align: left">String</td>
-      <td style="text-align: left">“http://profile.wordpress.com/john.doe”</td>
+      <td style="text-align: left">“https://profile.wordpress.com/john.doe”</td>
     </tr>
     <tr>
       <td style="text-align: left">zoneinfo</td>
@@ -757,7 +757,7 @@ For more information about configuring an app for OpenID Connect, including grou
   </span><span class="nt">"given_name"</span><span class="p">:</span><span class="s2">"John"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"middle_name"</span><span class="p">:</span><span class="s2">"James"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"family_name"</span><span class="p">:</span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"profile"</span><span class="p">:</span><span class="s2">"http://profile.wordpress.com/john.doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile"</span><span class="p">:</span><span class="s2">"https://profile.wordpress.com/john.doe"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"zoneinfo"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en-US"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="mi">1311280970</span><span class="p">,</span><span class="w">
@@ -1084,7 +1084,7 @@ using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in <code class="hi
     </span><span class="nt">"exp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1451606400</span><span class="p">,</span><span class="w">
     </span><span class="nt">"iat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1451602800</span><span class="p">,</span><span class="w">
     </span><span class="nt">"sub"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"aud"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"aud"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.example.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"iss"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"jti"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"uid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="w">
@@ -1257,6 +1257,11 @@ using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in <code class="hi
 
 <h4 class="api api-response api-response-example" id="response-example">Response Example</h4>
 
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="s">Cache-Control → max-age=3832304, must-revalidate</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
+</code></pre>
+</div>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"keys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1298,10 +1303,11 @@ using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in <code class="hi
 </div>
 
 <blockquote>
-  <p>Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document.
-It is safe to cache or persist downloaded keys for performance.
-However, if the client application is pinned to a signing key, the verification might fail since Okta rotates the key automatically.
-Pinned client applications must periodically check the Okta signing keys.</p>
+  <p>Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document.</p>
+</blockquote>
+
+<blockquote>
+  <p>Okta also recommends caching or persisting downloaded keys to improve performance by eliminating multiple API requests. If the client application is pinned to a signing key, the verification fails when Okta rotates the key automatically. Pinned client applications must periodically check the cached Okta signing keys.</p>
 </blockquote>
 
 <p>Any of the two or three keys listed are used to sign tokens. The order of keys in the result doesn’t indicate which keys are used.</p>
@@ -1561,13 +1567,21 @@ of the response.</p>
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left"> </td>
     </tr>
+    <tr>
+      <td style="text-align: left">idp_scope</td>
+      <td style="text-align: left">A space delimited list of scopes to be provided to the Social Identity Provider when performing <a href="social_authentication.html">Social Login</a>. These scopes are used in addition to the scopes already configured on the Identity Provider.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+    </tr>
   </tbody>
 </table>
 
 <h4 id="parameter-details">Parameter Details</h4>
 
 <ul>
-  <li><em>idp</em> and <em>sessionToken</em> are Okta extensions to <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">the OpenID specification</a>.
+  <li><em>idp</em>, <em>sessionToken</em> and <em>idp_scope</em> are Okta extensions to <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">the OpenID specification</a>.
  All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.</li>
   <li>Each value for <em>response_mode</em> delivers different behavior:
     <ul>
@@ -1833,7 +1847,7 @@ but with <code class="highlighter-rouge">response_type=id_token</code> or <code 
 
 <p>The requested scope is invalid:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://www.example.com/#error=invalid_scope&amp;error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
+<div class="highlighter-rouge"><pre class="highlight"><code>https://www.example.com/#error=invalid_scope&amp;error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
 </code></pre>
 </div>
 

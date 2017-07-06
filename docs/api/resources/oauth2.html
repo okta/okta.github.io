@@ -215,7 +215,12 @@
 
 <p>The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.</p>
 
-<p>Explore the OAuth 2.0 API: <a href="https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>To understand more about OAuth 2.0 and Okta:</p>
+
+<ul>
+  <li><a href="/standards/OAuth/index.html">Learn about how Okta implemented the OAuth 2.0 standards</a></li>
+  <li>Explore the OAuth 2.0 API: <a href="https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></li>
+</ul>
 
 <h2 id="endpoints">Endpoints</h2>
 
@@ -384,13 +389,21 @@
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left"> </td>
     </tr>
+    <tr>
+      <td style="text-align: left">idp_scope</td>
+      <td style="text-align: left">A space delimited list of scopes to be provided to the Social Identity Provider when performing <a href="social_authentication.html">Social Login</a>. These scopes are used in addition to the scopes already configured on the Identity Provider.</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left"> </td>
+    </tr>
   </tbody>
 </table>
 
 <h5 id="request-parameter-details">Request Parameter Details</h5>
 
 <ul>
-  <li><em>idp</em> and <em>sessionToken</em> are Okta extensions to the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">OIDC specification</a>.
+  <li><em>idp</em>, <em>sessionToken</em> and <em>idp_scope</em> are Okta extensions to the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">OIDC specification</a>.
  All other parameters comply with the <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">OIDC specification</a> or <a href="https://tools.ietf.org/html/rfc6749">OAuth 2.0 specification</a> and their behavior is consistent with the specification.</li>
   <li>Each value for <em>response_mode</em> delivers different behavior:
     <ul>
@@ -606,7 +619,7 @@ Irrespective of the response mode, the contents of the response contains some of
 
 <p>The request is made with a <em>fragment</em> response mode.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://www.example.com/#
+<div class="highlighter-rouge"><pre class="highlight"><code>https://www.example.com/#
 id_token=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIwMHVpZDRCeFh3Nkk2VFY0bTBnMyIsImVtYWlsIjoid2VibWFzdGVyQGNsb3VkaXR1ZG
 UubmV0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInZlciI6MSwiaXNzIjoiaHR0cDovL3JhaW4ub2t0YTEuY29tOjE4MDIiLCJsb2dpbiI6ImFkbWluaXN
 0cmF0b3IxQGNsb3VkaXR1ZGUubmV0IiwiYXVkIjoidUFhdW5vZldrYURKeHVrQ0ZlQngiLCJpYXQiOjE0NDk2MjQwMjYsImV4cCI6MTQ0OTYyNzYyNiwi
@@ -629,7 +642,7 @@ k8IZeaLjKw8UoIs-ETEwJlAMcvkhoVVOsN5dPAaEKvbyvPC1hUGXb4uuThlwdD3ECJrtwgKqLqcWonNt
 
 <p>The requested scope is invalid:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>http://www.example.com/#error=invalid_scope&amp;error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
+<div class="highlighter-rouge"><pre class="highlight"><code>https://www.example.com/#error=invalid_scope&amp;error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
 </code></pre>
 </div>
 
@@ -981,12 +994,12 @@ Generally speaking, the scopes specified in a request are included in the Access
 
 <h5 class="api api-response api-response-example" id="response-example-error-1">Response Example (Error)</h5>
 
-<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">401</span> <span class="ne">Unauthorized</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
-<span class="s">{</span>
-<span class="s">    "error" : "invalid_client",</span>
-<span class="s">    "error_description" : "No client credentials found."</span>
-<span class="s">}</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset<span class="o">=</span>UTF-8
+<span class="o">{</span>
+    <span class="s2">"error"</span> : <span class="s2">"invalid_client"</span>,
+    <span class="s2">"error_description"</span> : <span class="s2">"No client credentials found."</span>
+<span class="o">}</span>
 </code></pre>
 </div>
 
@@ -1168,7 +1181,7 @@ An implicit client can only introspect its own tokens, while a confidential clie
     </span><span class="nt">"exp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1451606400</span><span class="p">,</span><span class="w">
     </span><span class="nt">"iat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1451602800</span><span class="p">,</span><span class="w">
     </span><span class="nt">"sub"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"aud"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"aud"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.example.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"iss"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"jti"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"uid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="p">,</span><span class="w">
@@ -1662,7 +1675,7 @@ Custom scopes and custom claims aren’t returned.</p>
 -d <span class="s1">'{ "name": "Sample Authorization Server",
       "description": "Sample Authorization Server description",
       "audiences": [
-        "http://test.com"
+        "https://test.com"
       ]
 }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/authorizationServers"</span>
 </code></pre>
@@ -2891,7 +2904,7 @@ If keys are rotated manually, any intermediate cache should be invalidated and k
                </span><span class="nt">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="p">,</span><span class="w">
                </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                  </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                   </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo"</span><span class="p">,</span><span class="w">
+                   </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo"</span><span class="p">,</span><span class="w">
                    </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                      </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                        </span><span class="s2">"GET"</span><span class="w">
@@ -2935,7 +2948,7 @@ If keys are rotated manually, any intermediate cache should be invalidated and k
                </span><span class="nt">"use"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="p">,</span><span class="w">
                </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                  </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                 </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc"</span><span class="p">,</span><span class="w">
+                 </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc"</span><span class="p">,</span><span class="w">
                  </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                      </span><span class="s2">"GET"</span><span class="w">
@@ -3474,7 +3487,7 @@ Token expiration times depend on how they are defined in the rules, and which po
     <tr>
       <td style="text-align: left">system</td>
       <td style="text-align: left">Whether Okta created the scope</td>
-      <td style="text-align: left">Enum</td>
+      <td style="text-align: left">Boolean</td>
       <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
@@ -3553,31 +3566,37 @@ Token expiration times depend on how they are defined in the rules, and which po
     </tr>
     <tr>
       <td style="text-align: left">claimType</td>
-      <td style="text-align: left">Specifies whether the claim is an Access Token (<code class="highlighter-rouge">RESOURCE</code>) or ID Token (<code class="highlighter-rouge">IDENTITY</code>)</td>
+      <td style="text-align: left">Specifies whether the claim is for an Access Token (<code class="highlighter-rouge">RESOURCE</code>) or ID Token (<code class="highlighter-rouge">IDENTITY</code>)</td>
       <td style="text-align: left">Enum</td>
       <td style="text-align: left">True</td>
     </tr>
     <tr>
       <td style="text-align: left">valueType</td>
-      <td style="text-align: left">Specifies whether the claim is an Okta EL expression or a set of groups</td>
+      <td style="text-align: left">Specifies whether the claim is an Okta EL expression (<code class="highlighter-rouge">EXPRESSION</code>), a set of groups (<code class="highlighter-rouge">GROUPS</code>), or a system claim (<code class="highlighter-rouge">SYSTEM</code>)</td>
       <td style="text-align: left">Enum</td>
       <td style="text-align: left">True</td>
     </tr>
     <tr>
       <td style="text-align: left">value</td>
-      <td style="text-align: left">The value of the claim, including escaped quote marks. Can be a string literal or an Okta EL expression.</td>
+      <td style="text-align: left">Specifies the value of the claim. This value must be a string literal if <code class="highlighter-rouge">valueType</code> is <code class="highlighter-rouge">GROUPS</code>, and the string literal is matched with the selected <code class="highlighter-rouge">groupFilterType</code>. The value must be an Okta EL expression if <code class="highlighter-rouge">valueType</code> is <code class="highlighter-rouge">EXPRESSION</code>.</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">True</td>
     </tr>
     <tr>
+      <td style="text-align: left">groupFilterType</td>
+      <td style="text-align: left">Specifies the type of group filter if <code class="highlighter-rouge">valueType</code> is <code class="highlighter-rouge">GROUPS</code>.   <a href="#details-for-groupfiltertype">Details</a></td>
+      <td style="text-align: left">Enum</td>
+      <td style="text-align: left">False</td>
+    </tr>
+    <tr>
       <td style="text-align: left">conditions</td>
       <td style="text-align: left">Specifies the scopes for this claim</td>
-      <td style="text-align: left">           <a href="#conditions-object">Conditions Object</a></td>
+      <td style="text-align: left">                          <a href="#conditions-object">Conditions Object</a></td>
       <td style="text-align: left">False</td>
     </tr>
     <tr>
       <td style="text-align: left">alwaysIncludeInToken</td>
-      <td style="text-align: left">Specifies whether to include claims in tokens</td>
+      <td style="text-align: left">Specifies whether to include claims in tokens    <a href="#details-for-alwaysincludeintoken">Details</a></td>
       <td style="text-align: left">Boolean</td>
       <td style="text-align: left">False</td>
     </tr>
@@ -3590,7 +3609,18 @@ Token expiration times depend on how they are defined in the rules, and which po
   </tbody>
 </table>
 
-<p>More about <code class="highlighter-rouge">alwaysIncludeInToken</code>:</p>
+<h5 id="details-for-groupfiltertype">Details for <code class="highlighter-rouge">groupFilterType</code></h5>
+
+<p>If <code class="highlighter-rouge">valueType</code> is <code class="highlighter-rouge">GROUPS</code>, then the groups returned are filtered according to the value of <code class="highlighter-rouge">groupFilterType</code>:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">STARTS_WITH</code>: Group names start with <code class="highlighter-rouge">value</code> (not case sensitive). For example, if <code class="highlighter-rouge">value</code> is <code class="highlighter-rouge">group1</code>, then <code class="highlighter-rouge">group123</code> and <code class="highlighter-rouge">Group123</code> are included.</li>
+  <li><code class="highlighter-rouge">EQUALS</code>: Group name is the same as <code class="highlighter-rouge">value</code> (not case sensitive). For example, if <code class="highlighter-rouge">value</code> is <code class="highlighter-rouge">group1</code>, then <code class="highlighter-rouge">group1</code> and <code class="highlighter-rouge">Group1</code> are included, but <code class="highlighter-rouge">group123</code> isn’t.</li>
+  <li><code class="highlighter-rouge">CONTAINS</code>: Group names contain <code class="highlighter-rouge">value</code> (not case sensitive). For example, if <code class="highlighter-rouge">value</code> is <code class="highlighter-rouge">group1</code>, then <code class="highlighter-rouge">MyGroup123</code> and <code class="highlighter-rouge">group1</code> are included.</li>
+  <li><code class="highlighter-rouge">REGEX</code>: Group names match the REGEX expression in <code class="highlighter-rouge">value</code> (case sensitive). For example if <code class="highlighter-rouge">value</code> is <code class="highlighter-rouge">/^[a-z0-9_-]{3,16}$/</code>, then any group name that has at least 3 letters, no more than 16, and contains lower case letters, a hyphen, or numbers.</li>
+</ul>
+
+<h5 id="details-for-alwaysincludeintoken">Details for <code class="highlighter-rouge">alwaysIncludeInToken</code></h5>
 
 <ul>
   <li>Always <code class="highlighter-rouge">TRUE</code> for Access Token</li>
@@ -3673,14 +3703,16 @@ Token expiration times depend on how they are defined in the rules, and which po
 
 <h4 id="authorization-server-credentials-signing-object">Authorization Server Credentials Signing Object</h4>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="s2">"credentials"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"rotationMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUTO"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lastRotated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-17T22:25:57.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"nextRotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-15T22:25:57.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WYQxoK4XAwGFn5Zw5AzLxFvqEKLP79BbsKmWeuc5TB4"</span><span class="w">
-    </span><span class="s2">"use"</span><span class="err">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"credentials"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"rotationMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUTO"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastRotated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-17T22:25:57.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"nextRotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-15T22:25:57.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WYQxoK4XAwGFn5Zw5AzLxFvqEKLP79BbsKmWeuc5TB4"</span><span class="w">
+        </span><span class="s2">"use"</span><span class="err">:</span><span class="w"> </span><span class="s2">"sig"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -3720,7 +3752,7 @@ Token expiration times depend on how they are defined in the rules, and which po
     <tr>
       <td style="text-align: left">rotationMode</td>
       <td style="text-align: left">The key rotation mode for the authorization server. Can be <code class="highlighter-rouge">AUTO</code> or <code class="highlighter-rouge">MANUAL</code></td>
-      <td style="text-align: left">String</td>
+      <td style="text-align: left">Enum</td>
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left">TRUE</td>
     </tr>

@@ -227,7 +227,7 @@ follow the rules for Access Tokens and ID Tokens.</p>
 <p>If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a> or <a href="http://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect spec</a>, you may want to experiment with the Postman collection first:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/291ba43cde74844dd4a7" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/291ba43cde74844dd4a7"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="client-application-model">Client Application Model</h2>
 
@@ -239,8 +239,8 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -494,8 +494,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
       "client_name": "Example OAuth Client",
-      "client_uri": "http://www.example-application.com",
-      "logo_uri": "http://www.example-application.com/logo.png",
+      "client_uri": "https://www.example-application.com",
+      "logo_uri": "https://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
          "https://www.example-application.com/oauth2/redirectUri"
@@ -525,8 +525,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -596,8 +596,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -703,8 +703,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -726,8 +726,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F10CaazJPQ5Zpyu1Ojko"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Another OAuth Client"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.another-application.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.another-application.com/logo.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"browser"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.another-application.com/oauth2/redirectUri"</span><span class="w">
@@ -774,8 +774,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JoLxQvMz6u0kEkHFSnC8"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payroll Application"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.payroll-application.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.payroll-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.payroll-application.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.payroll-application.com/logo.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.payroll-application.com/oauth2/redirectUri"</span><span class="w">
@@ -850,8 +850,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -d <span class="s1">'{
       "client_id": "0jrabyQWm4B9zVJPbotY",
       "client_name": "Updated OAuth Client",
-      "client_uri": "http://www.example-application.com",
-      "logo_uri": "http://www.example-application.com/logo.png",
+      "client_uri": "https://www.example-application.com",
+      "logo_uri": "https://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
         "https://www.example-application.com/oauth2/redirectUri"
@@ -881,8 +881,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -959,9 +959,9 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cdUQIFvE61wGI5P51H33ORC4SRB1RXfX"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
