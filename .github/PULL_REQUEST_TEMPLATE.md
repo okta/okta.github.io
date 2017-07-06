@@ -4,5 +4,6 @@
 
 ### Resolves:
 * [Issue #X](#X)
-* [OKTA-XXXXXX](https://oktainc.atlassian.net/browse/OKTA-XXXXXX) <!-- Required for Okta-generated PRs -->
+<!-- Required for Okta-generated PRs -->
+* [OKTA-XXXXXX](https://oktainc.atlassian.net/browse/OKTA-XXXXXX)
 
