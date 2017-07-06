@@ -60,6 +60,7 @@ Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-wi
 
 * API Access Management customers can no longer self-validate the Okta Access Token.  (OKTA-131885)
 
+
 ### Looking for Something Else?
 
 * [Platform Release Note Index](platform-release-notes2016-index.html)

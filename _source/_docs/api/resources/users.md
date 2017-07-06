@@ -497,8 +497,7 @@ Parameter | Description                                                        |
 --------- | ------------------------------------------------------------------ | ---------- | -------- | -------- |
 id        | `id`, `login`, or *login shortname* (as long as it is unambiguous) | URL        | String   | TRUE     |
 
-When fetching a user by `login` or `login shortname`, [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.
-Logins with a `/` character can only be fetched by `id` due to URL issues with escaping the `/` character.
+> When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` or '?'  character can only be fetched by `id` due to URL issues with escaping the `/` and '?' characters.
 
 >Hint: you can substitute `me` for the `id` to fetch the current user linked to an API token or session cookie.
 

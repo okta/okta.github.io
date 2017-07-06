@@ -42,7 +42,7 @@
             {% for element in elements %}
             {% unless element.id contains '/index' %}{% continue %}{% endunless %}
             <li{% if element.title == page.title%} class="is-active"{% endif %}>
-              <a href="{{ element.url | remove: '/index' }}">{{ element.title }}</a>
+              <a href="{{ element.url | remove: '/index' | append: '/' }}">{{ element.title }}</a>
             </li>
             {% endfor %}
           </ul>

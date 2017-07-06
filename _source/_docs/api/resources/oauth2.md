@@ -11,7 +11,10 @@ Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) 
 
 The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
 
-Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0)
+To understand more about OAuth 2.0 and Okta:
+
+* [Learn about how Okta implemented the OAuth 2.0 standards](/standards/OAuth/index.html)
+* Explore the OAuth 2.0 API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e4d286b1af2294bb14a0)
 
 ## Endpoints
 
@@ -63,10 +66,11 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
 | code_challenge        | Specifies a challenge of     [PKCE](#request-parameter-details). The challenge is verified in the Token request.                                                                                                                                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
 | code_challenge_method | Specifies the method that was used to derive the code challenge. Only S256 is supported.                                                                                                                                                                                                                                                                                                                                                    | Query | String   | FALSE    |                  |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                                                                  | Query | String   | FALSE    |                  |
+| idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                                                    | Query      | String   | FALSE    |
 
 ##### Request Parameter Details
 
- * *idp* and *sessionToken* are Okta extensions to the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
+ * *idp*, *sessionToken* and *idp_scope* are Okta extensions to the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
     All other parameters comply with the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication) or [OAuth 2.0 specification](https://tools.ietf.org/html/rfc6749) and their behavior is consistent with the specification.
  * Each value for *response_mode* delivers different behavior:
     * ``fragment`` -- Parameters are encoded in the URL fragment added to the *redirect_uri* when redirecting back to the client.
