@@ -164,7 +164,7 @@ following steps:
 You can skip this step if you already have an Okta organization and
 have the ability to configure CORS on that Okta organization.
 
-If you do have the ability to [configure CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html) for your Okta
+If you do not have the ability to [configure CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html) for your Okta
 organization, or do not have an Okta organization, you will need to
 create an [Okta Developer Edition](https://www.okta.com/developer/signup/) account for yourself before
 continuing on the steps below.
