@@ -58,7 +58,8 @@ Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-wi
 
 * Updates to clients sometimes received an error response if they contained values for `client_id_issued_at` or `client_secret_expires_at`.  (OKTA-131647)
 
-* For API Access Management customers who use Okta OpenID Connect Access Tokens, we have changed the way those Access Tokens are signed. You can no longer self-validate them.  (OKTA-131885)
+* API Access Management customers can no longer self-validate the Okta Access Token.  (OKTA-131885)
+
 
 ### Looking for Something Else?
 
