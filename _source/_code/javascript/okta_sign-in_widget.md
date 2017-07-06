@@ -269,7 +269,7 @@ There is just one line you will need to modify in
        var redirectUrl = 'http://localhost:8000/signed-in.html';
 
 Replace `example.okta.com` in the `orgUrl` variable with the fully qualified domain name of your organization.
-Replace also `http://localhost:8000/signed-in.html` in the `redirectUrl` variable with the url of the page in your own web application where you would like to redirect the user after a successful login.
+Replace `http://localhost:8000/signed-in.html` in the `redirectUrl` variable with the url of the page in your own web application where you would like to redirect the user after a successful login.
 
 ### Copy the HTML to a web server
 
