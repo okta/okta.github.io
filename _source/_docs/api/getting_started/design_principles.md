@@ -293,7 +293,7 @@ If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current
 
 ## Request Debugging
 
-The request ID will always be present in every API response and can be used for debugging. This value can be used to correlate events from the [Events API](http://developer.okta.com/docs/api/resources/events.html) as well as the System Log events.
+The request ID will always be present in every API response and can be used for debugging. This value can be used to correlate events from the [Events API](/docs/api/resources/events.html) as well as the System Log events.
 
 The following header is set in each response:
 

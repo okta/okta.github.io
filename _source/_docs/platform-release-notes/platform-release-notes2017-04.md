@@ -10,7 +10,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.03
 
 We are making rate limits more granular and will roll the changes out over the next few months:
 
-1. Shortly after February 8, 2017, we'll provide system log alerts to let you know that you would have exceeded any of these new API rate limits. 
+1. Shortly after February 8, 2017, we'll provide system log alerts to let you know that you would have exceeded any of these new API rate limits.
 2. Sometime in February, 2017, we’ll treat authenticated end-user interactions on a per-user basis. Interactions like SSO after login won't apply to your org-wide API rate limits.
 3. Shortly after March 8, 2017, the new, more granular rate limits will be enforced. At that point, the warnings in the System Log will change to error notifications.
 
@@ -35,5 +35,5 @@ To verify the current release for an org, click the **Admin** button and check t
 ### Looking for Something Else?
 
 * [Platform Release Note Index](platform-release-notes2016-index.html)
-* For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+* For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 

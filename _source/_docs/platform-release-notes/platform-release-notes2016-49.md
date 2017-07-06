@@ -10,7 +10,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.47
 
 ### Delete User API in EA
 
-API access to [delete users](/docs/api/resources/users.html#delete-user) is now in EA. To request the feature, contact Support. 
+API access to [delete users](/docs/api/resources/users.html#delete-user) is now in EA. To request the feature, contact Support.
 <!-- OKTA-109291 -->
 
 ### System Query Log Change
@@ -22,7 +22,7 @@ Because the system keeps less data in memory, it responds faster.
 
 ## Platform Bugs Fixed
 
-* Two users created simultaneously with the same login returned an HTTP 500 error. 
+* Two users created simultaneously with the same login returned an HTTP 500 error.
     Now, a validation error is returned. (OKTA-105484)
 * If an Admin was reassigned to a UserAdmin role that was scoped to a group, requests to the Users API returned fewer records than indicated by the limit parameter. (OKTA-107410)
 * Creating users with the Users API failed if a bookmark app was assigned to a group. (OKTA-108185)
@@ -37,4 +37,4 @@ scroll to the bottom of the Admin **Dashboard** page to see the version number:
 
 ## Looking for Product Release Notes?
 
-For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).

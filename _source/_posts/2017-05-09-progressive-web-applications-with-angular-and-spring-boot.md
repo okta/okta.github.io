@@ -41,7 +41,7 @@ This article will show you how to build a PWA with a Spring Boot backend and an 
 
 ## Run a Spring Boot API
 
-In [part 1 of this series](http://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular), I showed you how to create an API with Spring Boot and display its data in an Angular UI. You'll be using that project as a starting point for this tutorial. You'll adding offline capabilities by turning it into a PWA.
+In [part 1 of this series](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular), I showed you how to create an API with Spring Boot and display its data in an Angular UI. You'll be using that project as a starting point for this tutorial. You'll adding offline capabilities by turning it into a PWA.
 
 To begin, clone the project from GitHub.
 
@@ -127,6 +127,7 @@ body {
 
 Change the HTML templates to use Material components. For `app.component.html`, you can change the `<h1>` to be an `<md-toolbar>`.
 
+{% raw %}
 ```html
 <md-toolbar color="primary">
   <span>{{title}}</span>
@@ -134,9 +135,11 @@ Change the HTML templates to use Material components. For `app.component.html`, 
 
 <app-beer-list></app-beer-list>
 ```
+{% endraw %}
 
 In `beer-list.component.html`, change it to use `<md-list>` and its related components.
 
+{% raw %}
 ```html
 <h2>Beer List</h2>
 
@@ -149,6 +152,7 @@ In `beer-list.component.html`, change it to use `<md-list>` and its related comp
   </md-list-item>
 </md-list>
 ```
+{% endraw %}
 
 After making these changes, the app should look a little better. Run `ng serve` and you should see how your UI has changed. Below is a screenshot using Chrome's device toolbar.
 
@@ -304,6 +308,7 @@ import { AppShellModule } from '@angular/app-shell';
 
 Modify `app.component.html` to use app-shell's directives.
 
+{% raw %}
 ```html
 <md-toolbar color="primary">
   <span>{{title}}</span>
@@ -314,6 +319,7 @@ Modify `app.component.html` to use app-shell's directives.
   <app-beer-list></app-beer-list>
 </div>
 ```
+{% endraw %}
 
 ### Add a Manifest to Make it Installable
 
@@ -482,7 +488,12 @@ I'd like to give a big thanks to all the engineers that've been developing progr
 
 ## Learn More About PWAs
 
-To learn more about progressive web applications, I’d recommend visiting the following websites.
+To learn more about progressive web applications, check out two of my recent posts:
+
+* [The Ultimate Guide to Progressive Web Applications](https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications)
+* [Add Authentication to Your Angular PWA](https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa)
+
+I’d also recommend visiting the following websites:
 
 * [Google Developer’s Progressive Web Apps Homepage](https://developers.google.com/web/progressive-web-apps/)
 * [Progressive Web Apps Training from Google](https://developers.google.com/web/ilt/pwa/)

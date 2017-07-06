@@ -12,6 +12,7 @@ saml_library_url: https://github.com/rohe/pysaml2
 git_url: git@github.com:jpf/okta-pysaml2-example.git
 github_repo_name: okta-pysaml2-example
 redirect_from: "/docs/examples/pysaml2.html"
+weight: 2
 ---
 
 # Overview
@@ -201,7 +202,7 @@ example, on a production system, the contents of the
 from a dynamic datastore.
 
 If you want to learn more about SAML and what to consider when writing a SAML implementation, Okta's
-in-depth [SAML guidance](http://developer.okta.com/docs/getting_started/saml_guidance.html)
+in-depth [SAML guidance](/docs/getting_started/saml_guidance.html)
 is a great place to learn more.
 
 Finally, if you got this far in this guide and still have questions,

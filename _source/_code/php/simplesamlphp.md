@@ -3,6 +3,7 @@ layout: docs_page
 title: SimpleSAMLphp
 excerpt: How to use SimpleSAMLphp to add support for Okta via SAML.
 support_email: developers@okta.com
+weight: 2
 ---
 
 # Overview
@@ -311,7 +312,7 @@ array should not be hard coded, but should come from a dynamic datastore.
 
 If you want to learn more about SAML and what to consider when writing a
 SAML implementation, Okta's in-depth
-[SAML guidance](http://developer.okta.com/docs/getting_started/saml_guidance.html)
+[SAML guidance](/docs/getting_started/saml_guidance.html)
 is a great place to learn more.
 
 Finally, if you got this far in this guide and still have questions,

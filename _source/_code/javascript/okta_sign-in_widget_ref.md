@@ -18,7 +18,7 @@ Prerequisites from the basic guide include:
 
 * Use [a supported browser](https://support.okta.com/help/articles/Knowledge_Article/24532952-Platforms---Browser-and-OS-Support).
 * [Create an Okta Developer Edition org](./okta_sign-in_widget.html#creating-an-okta-organization) if you don't already have one.
-* [Configure your Okta org to support CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html) before testing the Okta Sign-In Widget.
+* [Configure your Okta org to support CORS](/docs/api/getting_started/enabling_cors.html) before testing the Okta Sign-In Widget.
 
 ### Example of a Customized Sign-In Widget
 

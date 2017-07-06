@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -29,14 +29,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Authentication | Okta Developer</title>
   <meta name="description" content="Overview of the various ways Okta can be used to authenticate users depending on your needs.">
-  <link rel="canonical" href="http://developer.okta.com/use_cases/authentication/index">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/use_cases/authentication/index">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
@@ -51,7 +51,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
+            <a class="Button--green" href="https://developer.okta.com/signup/" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -66,7 +66,7 @@
               <li class="has-dropdown">
                 <a href="#">Support</a>
                 <div class="dropdown-window">
-                  <p class="stack-overflow">Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></p>
+                  <p class="devforum">Post your question on <a href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank">Okta Developer Forums</a></p>
                   <p class="email">Email us:<br>
                   <a href="mailto:developers@okta.com">developers@okta.com</a></p>
                   <p class="tel">Call us:<br>
@@ -74,12 +74,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -91,11 +91,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
      <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
@@ -107,16 +109,16 @@
           <h3 class="Sidebar-title">Use Cases</h3>
           <ul class="Sidebar-nav">
             <li class="is-active">
-              <a href="/use_cases/authentication">Authentication</a>
+              <a href="/use_cases/authentication/">Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/api_access_management">API Access Management</a>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -131,10 +133,10 @@
               <a href="/docs/api/resources/apps.html">API Reference</a>
             </li>
             <li>
-              <a href="/reference/error_codes">Error Codes</a>
+              <a href="/reference/error_codes/">Error Codes</a>
             </li>
             <li>
-              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li>
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -292,7 +294,7 @@ accounts on social identity providers.</p>
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -307,7 +309,7 @@ accounts on social identity providers.</p>
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="https://okta.com/developer/contact/">Contact Sales</a>
+            <a href="/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>
@@ -321,7 +323,7 @@ accounts on social identity providers.</p>
             <a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a>
           </li>
           <li>
-            <a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a>
+            <a class="icon" href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank"><i class="fa fa-comments"></i></a>
           </li>
           <li>
             <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
@@ -334,7 +336,7 @@ accounts on social identity providers.</p>
     
     
     
-      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+      <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
     <!-- Remarketing tag -->
     <script type="text/javascript">

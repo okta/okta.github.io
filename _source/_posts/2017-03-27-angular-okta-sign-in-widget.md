@@ -7,13 +7,13 @@ tags: [angular, sign-in widget, okta, typescript, angular-cli]
 
 AngularJS reigned as king of JavaScript MVC frameworks for several years. However, when the Angular team announced they would not provide backwards compatibility for their next version, there was a bit of a stir in its community, giving opportunities for frameworks like React and Vue.js to flourish. Fast forward a few years and both Angular 2 and Angular 4 have been released. Many developers are trying its TypeScript and finding the experience a pleasant one. [According to JAXenter](https://jaxenter.com/technology-trends-2017-top-frameworks-131993.html), it’s doing a pretty good job, and holding strong as the third most popular UI framework, behind React and HTML5.
 
-In this article, I’ll show you a quick way to get started with Angular, and add user authentication with [Okta's Sign-In Widget](http://developer.okta.com/code/javascript/okta_sign-in_widget). If you’re just getting started with Angular, you might want to read my [Angular tutorial](http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc). If you’d like to get the source code used in this article, you can [find it on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example).
+In this article, I’ll show you a quick way to get started with Angular, and add user authentication with [Okta's Sign-In Widget](/code/javascript/okta_sign-in_widget). If you’re just getting started with Angular, you might want to read my [Angular tutorial](http://gist.asciidoctor.org/?github-mraible/ng-demo//README.adoc). If you’d like to get the source code used in this article, you can [find it on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example).
 
 ## Why User Authentication with Okta?
 
 Okta provides an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. We make user account management easier, more secure, and scalable so you can get to production sooner.
 
-The [Okta Sign-in Widget](http://developer.okta.com/code/javascript/okta_sign-in_widget_ref) provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.
+The [Okta Sign-in Widget](/code/javascript/okta_sign-in_widget_ref) provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.
 
 ## Create an Angular Application
 
@@ -136,7 +136,7 @@ Before this will work, you'll need to create an OpenID Connect (OIDC) applicatio
 
 OpenID Connect is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see http://openid.net/connect/.
 
-Login to your Okta account, or create one at [http://developer.okta.com](http://developer.okta.com) if you don't have one. Navigate to **Admin > Add Applications** and click on the **Create New App** button. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method. Click the **Create** button and give your application a name. On the next screen, add **http://localhost:4200** as a Redirect URI and click **Finish**. You should see settings like the following.
+Login to your Okta account, or create one at [https://developer.okta.com](https://developer.okta.com) if you don't have one. Navigate to **Admin > Add Applications** and click on the **Create New App** button. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method. Click the **Create** button and give your application a name. On the next screen, add **http://localhost:4200** as a Redirect URI and click **Finish**. You should see settings like the following.
 
 {% img blog/angular-sign-in-widget/oidc-settings.png alt:"OIDC App Settings" width:"800" %}
 
@@ -212,14 +212,14 @@ Run `ng serve`, and open your browser to [http://localhost:4200](http://localhos
 However, if you look at your browser's console, you'll likely see an error:
 
 ```
-XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to 
-preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is 
+XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/sessions/me. Response to
+preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is
 present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
 ```
 
-This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard, 
+This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard,
 select **Security** > **API** > **Trusted Origins**. Click the "Add Origin" button and specify `http://localhost:4200`
-as the Origin URL with Type `CORS`. For more specific instructions, see Okta's [Enabling CORS documentation](http://developer.okta.com/docs/api/getting_started/enabling_cors.html).
+as the Origin URL with Type `CORS`. For more specific instructions, see Okta's [Enabling CORS documentation](/docs/api/getting_started/enabling_cors.html).
 
 {% img blog/angular-sign-in-widget/cors-configuration.png alt:"CORS Configuration" width:"800" %}
 

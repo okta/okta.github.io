@@ -1,3 +1,3 @@
 ---
-redirect_to: "/documentation"
+redirect_to: "/documentation/"
 ---

@@ -21,7 +21,7 @@ then
     exit $BUILD_FAILURE;
 fi
 
-if ! url_consistency_check || ! duplicate_slug_in_url;
+if ! url_consistency_check || ! duplicate_slug_in_url || ! check_for_localhost_links ;
 then
     echo "FAILURE!"
     exit $BUILD_FAILURE;

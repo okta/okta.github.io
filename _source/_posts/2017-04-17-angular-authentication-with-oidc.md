@@ -7,7 +7,7 @@ tags: [angular, authentication, oidc, openid connect, okta, typescript, angular-
 
 Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular’s focus on building reusable components, which help you decouple the various concerns in your application. Take authentication, for example: it can be painful to build, but once you wrap it in a component, the authentication logic can be reused throughout your application.
 
-The Angular CLI makes it easy to scaffold new components, and even entire project. If you haven’t used the Angular CLI to quickly generate Angular code, you’re in for a treat!
+The Angular CLI makes it easy to scaffold new components, and even entire projects. If you haven’t used the Angular CLI to quickly generate Angular code, you’re in for a treat!
 
 In this example, you’ll build a simple web application with Angular CLI, a tool for Angular development. You’ll create an application with search and edit features, then add authentication.
 
@@ -677,7 +677,7 @@ After making these changes, any field with a `required` attribute will be requir
 In this screenshot, you might notice the address fields are blank. This is explained by the error in your console.
 
 ```
-If ngModel is used within a form tag, either the name attribute must be set or the form 
+If ngModel is used within a form tag, either the name attribute must be set or the form
 control must be defined as 'standalone' in ngModelOptions.
 
 Example 1: <input [(ngModel)]="person.firstName" name="first">
@@ -721,9 +721,9 @@ To learn more about forms and validation, see [Angular forms documentation](http
 
 OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see [https://openid.net/connect/](https://openid.net/connect/).
 
-To integrate [Okta](http://developer.okta.com) for user authentication, you'll first need to [register](https://www.okta.com/developer/signup/) and create an OIDC application.
+To integrate [Okta](https://developer.okta.com) for user authentication, you'll first need to [register](https://www.okta.com/developer/signup/) and create an OIDC application.
 
-Login to your Okta account, or [create one](https://www.okta.com/developer/signup/) if you don’t have one. Navigate to **Admin > Add Applications** and click on the **Create New App** button. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method. Click the **Create** button and give your application a name. On the next screen, add `http://localhost:4200` as a Redirect URI and click *Finish**. You should see settings like the following.
+Login to your Okta account, or [create one](https://www.okta.com/developer/signup/) if you don’t have one. Navigate to **Admin > Add Applications** and click on the **Create New App** button. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method. Click the **Create** button and give your application a name. On the next screen, add `http://localhost:4200` as a Redirect URI and click **Finish**. You should see settings like the following.
 
 {% img blog/angular-oidc/oidc-settings.png alt:"OIDC App Settings" width:"800" %}
 
@@ -866,7 +866,7 @@ If it works - great! If you want to build your own login form in your app, conti
 
 ### Authentication with the Okta Auth SDK
 
-The Okta Auth SDK builds on top of Otka's [Authentication API](http://developer.okta.com/docs/api/resources/authn.html) and [OAuth 2.0 API](http://developer.okta.com/docs/api/resources/oidc.html) to enable you to create a fully branded sign-in experience using JavaScript.
+The Okta Auth SDK builds on top of Otka's [Authentication API](/docs/api/resources/authn.html) and [OAuth 2.0 API](/docs/api/resources/oidc.html) to enable you to create a fully branded sign-in experience using JavaScript.
 
 Install it using npm:
 
@@ -951,7 +951,7 @@ export class HomeComponent {
   password;
 
   constructor(private oauthService: OAuthService, private router: Router) {
-  }  
+  }
   ...
   loginWithPassword() {
     this.oauthService.createAndSaveNonce().then(nonce => {

@@ -74,10 +74,10 @@ and easily set up a fully featured login experience:
 ~~~ html
 <head>
 	<!-- Core widget js and css -->
-	<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/js/okta-sign-in.min.js" type="text/javascript"></script>
-	<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
+	<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js" type="text/javascript"></script>
+	<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
 	<!-- Customizable css theme options. Link your own customized copy of this file or override styles in-line -->
-	<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css" type="text/css" rel="stylesheet">
+	<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<div id="okta-login-container"></div>
@@ -164,7 +164,7 @@ following steps:
 You can skip this step if you already have an Okta organization and
 have the ability to configure CORS on that Okta organization.
 
-If you do have the ability to [configure CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html) for your Okta
+If you do have the ability to [configure CORS](/docs/api/getting_started/enabling_cors.html) for your Okta
 organization, or do not have an Okta organization, you will need to
 create an [Okta Developer Edition](https://www.okta.com/developer/signup/) account for yourself before
 continuing on the steps below.
@@ -174,7 +174,7 @@ continuing on the steps below.
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
 You can enable CORS by following the steps in our guide for
-[guide for Enabling CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the
+[guide for Enabling CORS](/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the
 web server you are using to host the HTML for the Okta Sign-In Widget (see below for instructions). For example, if you plan to host your Sign-In Widget in a page accessible under `http://localhost:8000`, you need to add `http://localhost:8000` as a trusted CORS endpoint in Okta.
 
 To do so, follow the steps below:
@@ -215,10 +215,10 @@ Copy this to a file named `login-to-okta.html`:
           <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
       <![endif]-->
 
-      <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/js/okta-sign-in.min.js" type="text/javascript"></script>
-      <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
+      <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js" type="text/javascript"></script>
+      <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
       <!-- Optional, customizable css theme options. Link your own customized copy of this file or override styles in-line -->
-      <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css" type="text/css" rel="stylesheet">
+      <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css" type="text/css" rel="stylesheet">
     </head>
     <body>
       <!-- Render the login widget here -->
@@ -356,9 +356,9 @@ is up to you. Customization of the widget itself will be done on
 the `#okta-login-container` selector and its child elements.
 
 A full list of the CSS selectors that you can use to style the
-Okta Sign-In Widget are in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css) file. We strongly
+Okta Sign-In Widget are in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css) file. We strongly
 urge you to style your widget using only the selectors that are
-present in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css) file as other stylistic elements in the widget may be subject to change and may cause your styling to break in
+present in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css) file as other stylistic elements in the widget may be subject to change and may cause your styling to break in
 future versions of the Okta Sign-In Widget.
 
 #### Example CSS styling for the Okta Sign-In Widget
@@ -535,6 +535,10 @@ var oktaSignIn = new OktaSignIn({
               { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
               { text: 'Rocket Sled Questions', href: 'http://acme.example.com/questions/rocket-sled' }
             ]
+
+## Troubleshooting
+
+If you are working with a single-page app using the Sign-In Widget and your Okta cookie isn't set, try enabling third-party cookies in the browser.
 
 ## Reference Documentation
 You can find more reference information in the [Okta Sign-In Widget reference](/code/javascript/okta_sign-in_widget_ref) page.

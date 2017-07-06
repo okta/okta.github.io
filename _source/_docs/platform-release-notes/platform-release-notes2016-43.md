@@ -19,7 +19,7 @@ Learn about these and other improvements in [the GitHub repository](https://gith
 
 ### Enhanced Well-Known Endpoint for OpenID Connect
 
-The [OpenID Connect discovery endpoint](http://developer.okta.com/docs/api/resources/oidc.html#openid-connect-discovery-document) `.well-known` includes the introspection and revocation endpoints.
+The [OpenID Connect discovery endpoint](/docs/api/resources/oidc.html#openid-connect-discovery-document) `.well-known` includes the introspection and revocation endpoints.
 
 Request Example:
 
@@ -72,7 +72,7 @@ In release 2016.41 we introduced the string replacement function `String.replace
 
 ### Platform Bug Fixed
 
-POST requests to `/api/v1/sessions` failed with an InvalidSessionException if the request specified a 
+POST requests to `/api/v1/sessions` failed with an InvalidSessionException if the request specified a
 `sessionToken` but no API token was included. (OKTA-104965)
 
 ### Does Your Org Have These Changes Yet?

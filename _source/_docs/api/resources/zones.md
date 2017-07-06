@@ -1,17 +1,19 @@
 ---
 layout: docs_page
-title: Zones API
+title: Zones
 ---
 
-## Zones API
+# Zones API
 
-Zones are used to group IP Address ranges in a meaningful way such that policy decisions can be made based on the zone a client's IP belongs to.
+{% api_lifecycle beta %} This API is [a Beta release](/docs/api/getting_started/releases-at-okta.html).
+
+Zones are used to group IP Address ranges so that policy decisions can be made based on the client's IP location.
 
 ## Endpoints
 
 ### Create IP Zone
 
-#### Successful Create
+#### Successful Create Example
 {:.api .api-request .api-request-example}
 ~~~sh
 curl -X POST 
@@ -48,7 +50,7 @@ curl -X POST
 }' "https://yourorg.okta.com/api/v1/org/zones/"
 ~~~
 
-#### Response
+#### Response Example
 {:.api .api-response .api-response-params}
 ~~~json
 {
@@ -102,7 +104,7 @@ curl -X POST
 }
 ~~~
 
-#### Invalid Zone Creation Request
+#### Invalid Zone Creation Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
 curl -X POST 
@@ -157,7 +159,7 @@ curl -X POST
 ' "https://yourorg.okta.com/api/v1/org/zones/"
 ~~~
 
-#### Response
+#### Response Example
 {:.api .api-response .api-response-params}
 ~~~json
 {
@@ -173,7 +175,9 @@ curl -X POST
 }
 ~~~
 
-#### Update Existing Zone
+### Update IP Zone
+
+#### Update Existing Zone Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
 curl -X PUT 
@@ -248,7 +252,7 @@ curl -X PUT
 ' "https://yourorg.okta.com/api/v1/org/zones/nzovw2rFz2YoqmvwZ0g3"
 ~~~
 
-#### Update Response
+#### Update Response Example
 {:.api .api-response .api-response-params}
 ~~~json
 {
@@ -318,13 +322,15 @@ curl -X PUT
 }
 ~~~
 
-#### Get Zones
+### Get IP Zones
+
+#### Get Zones Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/"
 ~~~
 
-#### Get Response
+#### Get Response Example
 {:.api .api-response .api-response-params}
 ~~~json
 [
@@ -362,13 +368,13 @@ curl "https://yourorg.okta.com/api/v1/org/zones/"
 ]
 ~~~
 
-#### Get Zones With Filter Expression
+#### Get Zones With Filter Expression Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/?limit=100&filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"
 ~~~
 
-#### Response
+#### Response Example
 {:.api .api-response .api-response-params}
 ~~~json
 [
@@ -505,13 +511,13 @@ curl "https://yourorg.okta.com/api/v1/org/zones/?limit=100&filter=%28id+eq+%22nz
  ]
 ~~~
 
-#### Get Zone Where 'name' Attribute Contains Given String
+#### Get Zone Where 'name' Attribute Contains Given String Request Example
 {:.api .api-request .api-request-example}
 ~~~sh
 curl "https://yourorg.okta.com/api/v1/org/zones/?limit=-1&q=First"
 ~~~
 
-#### Response
+#### Response Example
 {:.api .api-response .api-response-params}
 ~~~json
 [

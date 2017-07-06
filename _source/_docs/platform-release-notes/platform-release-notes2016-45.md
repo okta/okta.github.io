@@ -19,8 +19,8 @@ The new version of Okta Sign-In Widget, 1.8.0, is available:
 Learn about these and other improvements in [the GitHub repository](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.8.0).
 
 ### Improved Error Message for OpenID Connect
- 
-OpenID Connect error messages related to invalid scopes now return more information. 
+
+OpenID Connect error messages related to invalid scopes now return more information.
 <!-- OKTA-94798 -->
 
 
@@ -35,9 +35,9 @@ This enhancement applies to all new preview and productions orgs. Existing orgs 
 ## Platform Bugs Fixed
 
 * Blank or empty passwords were allowed when users reset their passwords via the API following a reset password action.
-Following the login with a temporary password the user would be prompted to enter their new password. 
+Following the login with a temporary password the user would be prompted to enter their new password.
 At that time, the user could enter an empty password without generating an error. (OKTA-100802)
-* Validation of the security answer length in accordance with password policy wasn't performed 
+* Validation of the security answer length in accordance with password policy wasn't performed
 when creating a user via the API with the group password policy feature enabled.
 Before the fix, the minimum security answer length was assumed to always be 4, regardless of the policy settings. (OKTA-103407)
 * Improved the error message returned by an HTTP 429 error to remind the user to wait 30 seconds before re-issuing the request for an SMS message. (OKTA-104738)
@@ -55,4 +55,4 @@ scroll to the bottom of the Admin <b>Dashboard</b> page to see the version numbe
 
 ## Looking for Product Release Notes?
 
-For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).

@@ -1,6 +1,6 @@
 #!/bin/bash -vx
 
-DEPLOY_BRANCH="master"
+DEPLOY_BRANCH="weekly"
 TARGET_S3_BUCKET="s3://developer.okta.com-staging"
 REGISTRY="https://artifacts.aue1d.saasure.com/artifactory/api/npm/npm-okta"
 

@@ -16,7 +16,6 @@ if [[ -z "${SUCCESS}" ]]; then
 fi
 
 source "${0%/*}/helpers.sh"
-source "${0%/*}/import_external_markdown.sh"
 
 # Print an easily visible line, useful for log files.
 function interject() {
@@ -50,13 +49,13 @@ function check_for_jekyll_dependencies() {
     source $(rvm `cat .ruby-version` do rvm env --path)
     if ! ((command -v bundler && bundler --version) > /dev/null 2>&1); then
         interject 'Bundler is not installed, installing now'
-        gem install bundler
+        gem install bundler --version '1.14.6'
         interject 'Done installing bundler'
     else
         interject 'Bundler is installed at:' `command -v bundler`
     fi
     interject 'Installing the gems needed for Jekyll'
-    bundler install
+    bundle install
     interject 'Done installing the gems needed for Jekyll'
     interject 'Done Jekyll checking dependencies'
 }
@@ -69,7 +68,6 @@ function generate_html() {
 
     if [ ! -d $GENERATED_SITE_LOCATION ]; then
         check_for_npm_dependencies
-        import_external_markdown
         bundle exec jekyll build
         local status=$?
         interject 'Done generating HTML'

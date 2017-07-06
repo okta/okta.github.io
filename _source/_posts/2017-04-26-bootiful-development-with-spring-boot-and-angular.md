@@ -167,16 +167,11 @@ public class BeerController {
     }
 
     @GetMapping("/good-beers")
-    public Collection<Map<String, String>> goodBeers() {
+    public Collection<Beer> goodBeers() {
 
         return repository.findAll().stream()
                 .filter(this::isGreat)
-                .map(b -> {
-                    Map<String, String> m = new HashMap<>();
-                    m.put("id", b.getId().toString());
-                    m.put("name", b.getName());
-                    return m;
-                }).collect(Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     private boolean isGreat(Beer beer) {
@@ -278,6 +273,7 @@ Modify `beer.service.ts` to call the “good-beers" API service.
 ```typescript
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -356,7 +352,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 ...
     @GetMapping("/good-beers")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Collection<Map<String, String>> goodBeers() {
+    public Collection<Beer> goodBeers() {
 ```
 
 After making these changes, you should be able to see a list of beers from your Spring Boot API.
@@ -450,8 +446,8 @@ You’ve just created an Angular app that talks to a Spring Boot API using cross
 
 To learn more about Angular, Spring Boot, or Okta, check out the following resources:
 
-* [Angular with OpenID Connect](http://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc)
-* [Get Started with Spring Boot, OAuth 2.0, and Okta](http://developer.okta.com/blog/2017/03/21/spring-boot-oauth)
+* [Angular with OpenID Connect](/blog/2017/04/17/angular-authentication-with-oidc)
+* [Get Started with Spring Boot, OAuth 2.0, and Okta](/blog/2017/03/21/spring-boot-oauth)
 * [Getting Started with Spring Boot by Josh Long](https://youtu.be/sbPSjI4tt10) (SF JUG 2015)
 * [Angular Best Practices by Stephen Fluin](https://youtu.be/hHNUohOPCCo) (ng-conf 2017)
 

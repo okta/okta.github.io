@@ -2,7 +2,7 @@
 <html class="no-js" lang="en" dir="ltr">
 <head>
   <script>
-    const isProduction = window.location.hostname === 'developer.okta.com';
+    var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
       (function(d) {
@@ -29,14 +29,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-7ba0c6f4670577e791b2a931dada7741664c53d4927212f812be25574398be2b.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes July 13, 2016 | Okta Developer</title>
   <meta name="description" content="Release 2016.28">
-  <link rel="canonical" href="http://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-28.html">
-  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="http://developer.okta.com/feed.xml"><!-- GA -->
+  <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes2016-28.html">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
@@ -51,7 +51,7 @@
               <span></span>
               <span></span>
             </a>
-            <a class="Button--green" href="https://www.okta.com/developer/signup" id="top-nav-cta">Get Started</a>
+            <a class="Button--green" href="https://developer.okta.com/signup/" id="top-nav-cta">Get Started</a>
             <a class="SearchIcon" href="#"></a>
             <ul>
               <li>
@@ -66,7 +66,7 @@
               <li class="has-dropdown">
                 <a href="#">Support</a>
                 <div class="dropdown-window">
-                  <p class="stack-overflow">Post your question on <a href="http://stackoverflow.com/search?q=okta" target="_blank">Stack Overflow</a></p>
+                  <p class="devforum">Post your question on <a href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank">Okta Developer Forums</a></p>
                   <p class="email">Email us:<br>
                   <a href="mailto:developers@okta.com">developers@okta.com</a></p>
                   <p class="tel">Call us:<br>
@@ -74,12 +74,12 @@
                 </div>
               </li>
             </ul>
-            <form id="form_search" method="get" action="http://developer.okta.com/search/" name="form_search">
+            <form id="form_search" method="get" action="/search/" name="form_search">
               <input type="text" name="q" id="q" autocomplete="off">
             </form>
           </div>
           <div id="mobile-nav">
-            <a id="mobile-search" href="http://developer.okta.com/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
             <a id="mobile-open" class="mobile-toggle" href="#top-nav">
               <span></span>
               <span></span>
@@ -91,11 +91,13 @@
     </header><!-- Google Tag Manager -->
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-TJ45R6');
+      if (isProduction) {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TJ45R6');
+      }
     </script> <!-- End Google Tag Manager -->
      <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
@@ -107,16 +109,16 @@
           <h3 class="Sidebar-title">Use Cases</h3>
           <ul class="Sidebar-nav">
             <li>
-              <a href="/use_cases/authentication">Authentication</a>
+              <a href="/use_cases/authentication/">Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/mfa">Multi-Factor Authentication</a>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
             </li>
             <li>
-              <a href="/use_cases/api_access_management">API Access Management</a>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
             </li>
             <li>
-              <a href="/use_cases/integrate_with_okta">Integrate with Okta</a>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
             </li>
           </ul>
           <h3 class="Sidebar-title">Reference</h3>
@@ -131,10 +133,10 @@
               <a href="/docs/api/resources/apps.html">API Reference</a>
             </li>
             <li>
-              <a href="/reference/error_codes">Error Codes</a>
+              <a href="/reference/error_codes/">Error Codes</a>
             </li>
             <li>
-              <a href="/reference/okta_expression_language">Okta Expression Language</a>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li class="is-active">
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -195,19 +197,19 @@ complexity requirements to the user, we’ve enhanced the PasswordComplexity obj
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiration"</span><span class="p">:{</span><span class="w">
     </span><span class="nt">"passwordExpireDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-  </span><span class="p">},</span><span class="w"> 
+  </span><span class="p">},</span><span class="w">
   </span><span class="nt">"complexity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minLowerCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minUpperCase"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minNumber"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"minSymbol"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nt">"excludeUsername"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> 
+    </span><span class="p">},</span><span class="w">
    </span><span class="nt">"age"</span><span class="p">:{</span><span class="w">
-     </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w"> 
-     </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w"> 
-    </span><span class="p">}</span><span class="w"> 
+     </span><span class="nt">"minAgeMinutes"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"historyCount"</span><span class="p">:</span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -249,7 +251,7 @@ complexity requirements to the user, we’ve enhanced the PasswordComplexity obj
        </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -257,8 +259,8 @@ complexity requirements to the user, we’ve enhanced the PasswordComplexity obj
 </div>
 
 <p>When performing a self-service password reset (forgot password), the request for an answer recovery question is made in response to the security question challenge.
-For more information, see <a href="http://developer.okta.com/docs/api/resources/authn#password-complexity-object">Password Complexity Object</a>
-and <a href="http://developer.okta.com/docs/api/resources/authn#answer-recovery-question">Answer Recovery Question</a>.</p>
+For more information, see <a href="/docs/api/resources/authn#password-complexity-object">Password Complexity Object</a>
+and <a href="/docs/api/resources/authn#answer-recovery-question">Answer Recovery Question</a>.</p>
 
 <!-- ## Bugs Fixed -->
 
@@ -289,7 +291,7 @@ and <a href="http://developer.okta.com/docs/api/resources/authn#answer-recovery-
             <a href="https://www.okta.com" target="_blank">Okta.com</a>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
           </li>
           <li>
             <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
@@ -304,7 +306,7 @@ and <a href="http://developer.okta.com/docs/api/resources/authn#answer-recovery-
             <a href="/privacy/">Privacy Policy</a>
           </li>
           <li>
-            <a href="https://okta.com/developer/contact/">Contact Sales</a>
+            <a href="/contact/">Contact Sales</a>
           </li>
           <li>
             <a href="mailto:developers@okta.com">Contact Support</a>
@@ -318,7 +320,7 @@ and <a href="http://developer.okta.com/docs/api/resources/authn#answer-recovery-
             <a class="icon" href="http://twitter.com/okta" target="_blank"><i class="fa fa-twitter"></i></a>
           </li>
           <li>
-            <a class="icon" href="http://stackoverflow.com/search?q=okta" target="_blank"><i class="fa fa-stack-overflow"></i></a>
+            <a class="icon" href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank"><i class="fa fa-comments"></i></a>
           </li>
           <li>
             <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
@@ -331,7 +333,7 @@ and <a href="http://developer.okta.com/docs/api/resources/authn#answer-recovery-
     
     
     
-      <script type="text/javascript" src="/assets/docs-90350b0604443165124fbc5295a75ae4a1bc4ced9fea14aed5ee75157fe02273.js"></script>
+      <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
     <!-- Remarketing tag -->
     <script type="text/javascript">

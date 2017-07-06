@@ -46,6 +46,7 @@ $font-weight:   (
                 'h3':               500,
                 'h2':               500,
                 'h1':               500,
+                'light':            300,
                 'semibold':         500,
                 'mediumbold':       600,
                 'bold':             700,
@@ -90,6 +91,9 @@ $colors:        (
                 'blue-light':             #a9e6fd,
                 'blue-light-hover':       #5dd2fc,
 
+                'green':                  #4cbf9d,
+                'green-hover':            #5ce5bc,
+
                 'green-dark':             #4cbf9c,
                 'green-dark-hover':       #5ce5bc,
 
@@ -116,7 +120,9 @@ $colors:        (
 
                 'blue-products':          #E0EEF6,
 
-                'new-gray-dark':          #3d3d3d
+                'new-gray-dark':          #3d3d3d,
+
+                'red':                    #f57f7f
 );
 
 
@@ -124,16 +130,16 @@ $colors:        (
 // Layout
 //-----------------------------------------------------------------------
 
-$site-width:                    1280px;
+$site-width:    1280px;
 $new-site-width:                1120px;
 $new-narrow-site-width:         760px;
-$grid-width:                    12;
+$grid-width:    12;
 
 $border-radius:                 3px;
 $border-size:                   2px;
 
-$line-break:    	20px;
-$gutter-width:  	20px;
+$line-break:    20px;
+$gutter-width:  20px;
 
 $breakpoints:   (
                 'xx-small':               320px,

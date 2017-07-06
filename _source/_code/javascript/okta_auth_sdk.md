@@ -19,7 +19,7 @@ The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/
 Include the following script tag in your target web page:
 
 ~~~ html
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.5.0/OktaAuth.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/OktaAuth.min.js" type="text/javascript"></script>
 ~~~
 
 ## Authentication Flow
@@ -357,7 +357,7 @@ Property              |   Type    | Description
 `status`              | String    | `SUCCESS`
 `expiresAt`           | [Date String](https://tools.ietf.org/html/rfc3339) | Time the sessionToken will expire
 `sessionToken`        | [Session Token](/docs/api/resources/authn.html#session-token) | Token that can be exchanged for a cookie
-`user`                | [User](http://localhost:4000/docs/api/resources/authn.html#user-object) | Subset of user properties
+`user`                | [User](/docs/api/resources/authn.html#user-object) | Subset of user properties
 
 Example:
 
@@ -529,6 +529,8 @@ authClient.token.getWithoutPrompt({
   // Handle OAuthError
 });
 ~~~
+
+Note: If the Okta cookie is not set and you are using `token.getWithoutPrompt`, try enabling third-party cookies in the browser.
 
 ### Refresh a token
 

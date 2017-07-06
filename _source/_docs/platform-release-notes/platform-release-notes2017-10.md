@@ -32,7 +32,7 @@ xxx.  -->
 
 ### Platform Bugs Fixed
 
- * Request to [`/api/v1/authn/factors/<factorId>/verify`](http://developer.okta.com/docs/api/resources/authn.html#enroll-factor) responded with a valid `stateToken` after user status
+ * Request to [`/api/v1/authn/factors/<factorId>/verify`](/docs/api/resources/authn.html#enroll-factor) responded with a valid `stateToken` after user status
  became `LOCKED_OUT`, causing user interface errors. (OKTA-115153)
  * The AuthSJ SDK produced a debug log message with some browsers. (OKTA-115460)
 
@@ -45,5 +45,5 @@ To verify the current release for an org, click the **Admin** button and check t
 ### Looking for Something Else?
 
 * [Platform Release Note Index](platform-release-notes2016-index.html)
-* For changes outside the Okta platform, see the [Release Notes Knowledge Hub](http://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
+* For changes outside the Okta platform, see the [Release Notes Knowledge Hub](https://support.okta.com/help/articles/Knowledge_Article/Release-Notes-Knowledge-Hub).
 

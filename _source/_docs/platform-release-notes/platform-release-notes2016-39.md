@@ -19,8 +19,8 @@ To share a certificate among app instances:
 3. Share the credential (`kid`) with one or more target apps.
 4. Use the new credential in the target app.
 
-For more detailed instructions, see ["Clone Key Credential for Application"](http://developer.okta.com/docs/api/resources/apps.html#clone-key-credential-for-application)
-and ["Update Key Credential for Application"](http://developer.okta.com/docs/api/resources/apps.html#update-key-credential-for-application).
+For more detailed instructions, see ["Clone Key Credential for Application"](/docs/api/resources/apps.html#clone-application-key-credential)
+and ["Update Key Credential for Application"](/docs/api/resources/apps.html#update-key-credential-for-application).
 
 ### Bug Fixed
 

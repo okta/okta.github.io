@@ -4,7 +4,7 @@ email: developers@okta.com
 description: > # this means to ignore newlines until "baseurl:"
   Secure, scalable, and highly available authentication and user management for any app.
 baseurl: ""
-url: "http://developer.okta.com"
+url: "https://developer.okta.com"
 twitter_username: okta
 github_username:  oktadeveloper
 
@@ -28,20 +28,34 @@ permalink: /blog/:year/:month/:day/:title
 support_phone_number: "1-888-722-7871"
 github_base_url: "https://github.com/okta/okta.github.io/tree/master/_source/"
 github_edit_url: "https://github.com/okta/okta.github.io/edit/master/_source/"
-get_started_url: "https://www.okta.com/developer/signup"
+get_started_url: "https://developer.okta.com/signup/"
 stack_overflow_forum_url: "http://stackoverflow.com/search?q=okta"
 
+timezone: UTC
 ga_ua_id: "UA-15777010-3"
 
 # This is different from "url"
 # This variable will prevent user from committing sitemap with local url
-production_url: "http://developer.okta.com"
+production_url: "https://developer.okta.com"
 
 include: [_static]
 
 assets:
+  compress:
+    css: true
+    js:  true
+  autowrite: true
+  cache: .asset-cache
+  cache_type: filesystem
+  skip_baseurl_with_cdn: false
+  skip_prefix_with_cdn: false
+  prefix: "/assets"
+  digest: true
   features:
+    liquid: false
+    integrity: false
     automatic_img_size: false
+    automatic_img_alt : true
 
 collections:
   standards:
@@ -77,3 +91,9 @@ defaults:
       collection: reference
     values:
       layout: documentation
+
+signup_error_email_address: "BD-ISV@okta.com"
+
+# Bug: 37458
+# Add Discourse link
+dev_forum:  https://devforum.okta.com/

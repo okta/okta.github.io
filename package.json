@@ -9,13 +9,16 @@
     "dist"
   ],
   "scripts": {
-    "build-prod": "JEKYLL_ENV=production bundle exec jekyll build --verbose && rsync -av ./dist/ ./",
-    "start": "rm -rf dist && rm -rf _source/.asset-cache && JEKYLL_ENV=production bundle exec jekyll serve --incremental",
-    "stop": "if-env CI=true && exit 0 || kill $(lsof -t -i:4000; lsof -t -i:4444)",
-    "driver": "if-env PHANTOMJS=true && (phantomjs --webdriver 4444 & sleep 3) || webdriver-manager update",
-    "pretest": "npm start & wait-on http://localhost:4000 && npm run driver",
-    "test": "protractor tests/selenium/conf.js || (npm stop && exit 1)",
-    "posttest": "npm stop"
+    "clean": "rm -rf dist && rm -rf _source/.asset-cache",
+    "build-prod": "npm run clean && JEKYLL_ENV=production bundle exec jekyll build --verbose && rsync -av ./dist/ ./",
+    "start": "npm run clean && JEKYLL_ENV=production bundle exec jekyll serve --incremental",
+    "stop": "if-env CI=true && exit 0 || (pkill -f clean && kill $(lsof -t -i:4000; lsof -t -i:4444))",
+    "test-only": "protractor tests/selenium/conf.js",
+    "pretest": "npm start & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
+    "test": "npm run test-only || (npm stop && exit 1)",
+    "posttest": "npm stop",
+    "import-external": "node scripts/import-external 2>&1",
+    "find-missing-slashes": "node scripts/find-missing-slashes"
   },
   "repository": {
     "type": "git",
@@ -28,10 +31,14 @@
   },
   "homepage": "https://github.com/okta/okta.github.io#readme",
   "devDependencies": {
+    "@okta/okta-auth-js": "1.8.0",
+    "@okta/okta-signin-widget": "1.11.0",
+    "chalk": "^1.1.3",
     "if-env": "^1.0.0",
     "jasmine-reporters": "^2.2.0",
     "jasmine-spec-reporter": "^4.1.0",
     "protractor": "^5.1.0",
+    "recursive-readdir": "^2.2.1",
     "wait-on": "^2.0.2"
   }
 }
