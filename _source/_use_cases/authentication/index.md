@@ -48,7 +48,7 @@ strong and adaptive authentication policies, password reset workflow, and more
 can all be configured easily in the Okta Admin console.
 Many of these policies can also be controlled through Okta's API.
 
-Okta provides a number of tools in addition to rigorous specification compliance:
+Okta provides an API, the Sign-in Widget and Auth JS SDK, and built-in support for social login:
 
 * [Sign-In Widget](#sign-in-widget)
 * [Auth SDK](#auth-sdk)
