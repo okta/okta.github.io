@@ -28,6 +28,7 @@ an Okta feature that helps you secure access to your API.
 
 Okta provides [dynamic client registration](/docs/api/resources/oauth-clients.html), operations to register and manage
 client applications for use with Okta's OAuth 2.0 and OpenID Connect endpoints.
+You can also perform these operations in the [Apps API](/docs/api/resources/apps.html).
 
 ## More Information
  

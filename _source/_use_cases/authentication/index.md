@@ -113,4 +113,4 @@ In this case, OpenID Connect with Okta is all you need. However, if you also pro
 to vendors who can query your API directly, you'd want to use Okta's API Access Management feature to
 secure your API as well as manage OpenID Connect for your customer app.
 
-For more information about Okta and OpenID Connect and OAuth 2.0, see [API Access Management](/use_cases/api_access_management/index.html).
+For more information about Okta and OpenID Connect, OAuth 2.0, and API Access Management, see [API Access Management](/use_cases/api_access_management/index.html).
