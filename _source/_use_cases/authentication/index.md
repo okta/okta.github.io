@@ -9,7 +9,7 @@ excerpt: Overview of the ways Okta can be used to authenticate users depending o
 
 Authentication is a crucial part of any application development.  Whether you are developing an internal IT app for your employees – or building a portal for your partners – or exposing a set of APIs for developers building apps around your resources, Okta Platform can provide the right support for your projects.
 
-## Building Apps that Support SSO
+## Building Apps That Support SSO
 
 For IT or ISVs who want to use Okta as an identity provider, Okta
 provides several options for secure SSO.  SAML has been
