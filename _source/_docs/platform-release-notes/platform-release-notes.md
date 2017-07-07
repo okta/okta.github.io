@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.25
+excerpt: Summary of changes to the Okta Platform since Release 2017.26
 ---
 
-## Release 2017.26
+## Release 2017.27
 
 ### Advance Notice: Data Retention Changes
 
@@ -27,29 +27,39 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
  <!-- OKTA-125424 -->
 
-### Platform Enhancement: New Authentication Method for OpenID Connect and API Access Management
-For OpenID Connect and API Access Management, Okta supports the `client_secret_jwt` method for token endpoint authentication (`token_endpoint_auth_method`).
-This method is specified in the [OpenID Connect specification](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication)
-and allows you to use JWT and HMAC to authenticate a client for [OAuth 2.0](https://developer.okta.com/docs/api/resources/oauth2.html#token-authentication-methods) or [OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html#token-authentication-methods) requests.
-<!-- (OKTA-101074) -->
+### Platform Enhancements
+
+* [Additional Scopes Available for Social Authentication](#additional-scopes-available-for-social-authentication)
+
+* [New Versions of Sign-In Widget and Auth SDK for JS](#new-versions-of-sign-in-widget-and-auth-sdk-for-js)
+
+#### Additional Scopes Available for Social Authentication
+
+When using a Social Identity Provider, you can request information in stages. The initial request to `/oauth2/v1/authorize` can ask for a minimal set of scopes, and you can add scopes to collect additional user data in a subsequent request to the Social Identity Provider. This reduces friction during sign-in when users don't yet trust your app. For more information, see the descriptions of `idp_scope` in the [OAuth 2.0 API](https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters ) and [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3) parameter tables.
+
+<!-- (OKTA-117521) -->
+
+#### New Versions of Sign-In Widget and Auth SDK for JS
+
+Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.11.0) and version 1.8 of the [Okta Auth SDK for Javascript](https://github.com/okta/okta-auth-js) are available. Check out the new features and bug fixes!
+
+<!-- (OKTA-131642) -->
+
 
 ### Platform Bugs Fixed
 
-* When suspicious activity was logged for OAuth 2.0 clients the invalid secret was not masked. (OKTA-129694)
+* If any sign-in policy using MFA existed for an application, the Open ID Connect reauthentication flow redirected to multi-factor authentication (MFA) by default.  (OKTA-129094)
 
-* When validating the names of scopes for social identity providers, Okta didn't enforce the restrictions
-specified in the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#section-3.3). (OKTA-117352)
+* Clients with `token_endpoint_auth_method` set to `client_secret_post` did not have a selected radio button on the Client Credentials UI (**Applications > _application name_ > General**).  (OKTA-130764)
 
-* When the same user was created multiple times simultaneously and added to a group, the HTTP error
-response code was 500 rather than 400. (OKTA-126223)
+* If you created a SAML 2.0 Identity Provider but omitted some fields, Okta reported an error.  (OKTA-131294)
 
-* `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
+* Okta Sign-In Widget failed to run when installed with `npm`.  (OKTA-131608)
 
-### Does Your Org Have This Change Yet?
+* Updates to clients sometimes received an error response if they contained values for `client_id_issued_at` or `client_secret_expires_at`.  (OKTA-131647)
 
-To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
+* API Access Management customers can no longer self-validate the Okta Access Token.  (OKTA-131885)
 
-{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 

@@ -6,6 +6,10 @@ redirect_from:
     - "/docs/guides/"
     - "/docs/guides"
 ---
+
+<style>
+    h1 {color:#003366;}
+</style>
 <!-- START Page Center w/Sub Nav & Content -->
   <!-- START Page Content -->
   <div class="PageContent-main">
@@ -30,52 +34,45 @@ redirect_from:
     </div>
     <!-- END Subpages Grid w/Github Link -->
 
-    <h1>Reference</h1>
-    <!-- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
-    <!-- START Subpages Grid -->
-    <div class="Row">
-    {% assign documents = site.reference | sort:'weight' %}
-      {% for document in documents %}
-      <div class="Column--4 Column--small-12">
-	<a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' | append: '/' }}{% else %}{{ document.link }}{% endif %}">
-	  <h3 class="h4">{{ document.title }}</h3>
-	</a>
-	<p>{{ document.excerpt }}</p>
+      <h1>Reference</h1>
+      <!-- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
+      <!-- START Subpages Grid -->
+      <div class="Row">
+          {% assign documents = site.reference | sort:'weight' %}
+          {% for document in documents %}
+          <div class="Column--4 Column--small-12">
+              <a href="{% if document.id contains '/index' %}{{ document.url | remove: '/index' | append: '/' }}{% else %}{{ document.link }}{% endif %}">
+                  <h3 class="h4">{{ document.title }}</h3>
+              </a>
+              <p>{{ document.excerpt }}</p>
+          </div>
+          {% endfor %}
       </div>
-    {% endfor %}
-    </div>
-    <!-- END Subpages Grid -->
+      <!-- END Subpages Grid -->
 
+      <h1>Standards</h1>
+      <!-- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
+      <!-- START Subpages Grid -->
+      <div class="Row">
+      {% assign documents = site.standards | sort:'weight' %}
+      {% for document in documents %}
+        {% unless document.id contains '/index' %}
+          {% continue %}
+        {% endunless %}
+          <div class="Column--4 Column--small-12">
+              <a href="{{ document.url | remove: '/index' | append: '/' }}">
+                  <h3 class="h4">{{ document.title }}</h3>
+              </a>
+              <p>{{ document.excerpt }}</p>
+          </div>
+          {% endfor %}
+      </div>
+      <!-- END Subpages Grid -->
 
     <!-- START Grid w/Language Tiles -->
     <h1>Code</h1>
     {% include code.html %}
     <!-- END Grid w/Language Tiles -->
-
-    {% comment %}
-    <!-- START Grid w/Standards -->
-    <h1>Standards</h1>
-    <div class="Row">
-      {% assign standards = site.standards | sort: 'order' %}
-      {% for standard in standards %}
-      {% unless standard.id contains '/index' %}
-      {% continue %}
-      {% endunless %}
-      <div class="Column--4 Column--small-12">
-	<h3 class="h4">
-	  <a href="{{ standard.url }}">
-	    {% img {{ standard.icon }}  %}
-	    {{ standard.title }}
-	  </a>
-	</h3>
-	<p>
-	  {{ standard.excerpt }}
-	</p>
-      </div>
-      {% endfor %}
-    </div>
-    <!-- END Grid w/Standards -->
-    {% endcomment %}
 
   </div>
   <!-- END Page Content -->

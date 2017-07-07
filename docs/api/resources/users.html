@@ -819,8 +819,9 @@ This flow is common when developing a custom user-registration experience.</p>
   </tbody>
 </table>
 
-<p>When fetching a user by <code class="highlighter-rouge">login</code> or <code class="highlighter-rouge">login shortname</code>, <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.
-Logins with a <code class="highlighter-rouge">/</code> character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> character.</p>
+<blockquote>
+  <p>When fetching a user by <code class="highlighter-rouge">login</code> or <code class="highlighter-rouge">login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> or ‘?’  character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> and ‘?’ characters.</p>
+</blockquote>
 
 <blockquote>
   <p>Hint: you can substitute <code class="highlighter-rouge">me</code> for the <code class="highlighter-rouge">id</code> to fetch the current user linked to an API token or session cookie.</p>

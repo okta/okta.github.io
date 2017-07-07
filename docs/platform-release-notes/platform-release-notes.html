@@ -34,7 +34,7 @@
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.25">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.26">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -186,7 +186,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201726">Release 2017.26</h2>
+      <h2 id="release-201727">Release 2017.27</h2>
 
 <h3 id="advance-notice-data-retention-changes">Advance Notice: Data Retention Changes</h3>
 
@@ -213,36 +213,51 @@ Okta SDK <code class="highlighter-rouge">EventsAPIClient</code>.</p>
 
 <p><!-- OKTA-125424 --></p>
 
-<h3 id="platform-enhancement-new-authentication-method-for-openid-connect-and-api-access-management">Platform Enhancement: New Authentication Method for OpenID Connect and API Access Management</h3>
-<p>For OpenID Connect and API Access Management, Okta supports the <code class="highlighter-rouge">client_secret_jwt</code> method for token endpoint authentication (<code class="highlighter-rouge">token_endpoint_auth_method</code>).
-This method is specified in the <a href="http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication">OpenID Connect specification</a>
-and allows you to use JWT and HMAC to authenticate a client for <a href="https://developer.okta.com/docs/api/resources/oauth2.html#token-authentication-methods">OAuth 2.0</a> or <a href="https://developer.okta.com/docs/api/resources/oidc.html#token-authentication-methods">OpenID Connect</a> requests.
-<!-- (OKTA-101074) --></p>
+<h3 id="platform-enhancements">Platform Enhancements</h3>
+
+<ul>
+  <li>
+    <p><a href="#additional-scopes-available-for-social-authentication">Additional Scopes Available for Social Authentication</a></p>
+  </li>
+  <li>
+    <p><a href="#new-versions-of-sign-in-widget-and-auth-sdk-for-js">New Versions of Sign-In Widget and Auth SDK for JS</a></p>
+  </li>
+</ul>
+
+<h4 id="additional-scopes-available-for-social-authentication">Additional Scopes Available for Social Authentication</h4>
+
+<p>When using a Social Identity Provider, you can request information in stages. The initial request to <code class="highlighter-rouge">/oauth2/v1/authorize</code> can ask for a minimal set of scopes, and you can add scopes to collect additional user data in a subsequent request to the Social Identity Provider. This reduces friction during sign-in when users don’t yet trust your app. For more information, see the descriptions of <code class="highlighter-rouge">idp_scope</code> in the <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 API</a> and <a href="https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3">OpenID Connect API</a> parameter tables.</p>
+
+<!-- (OKTA-117521) -->
+
+<h4 id="new-versions-of-sign-in-widget-and-auth-sdk-for-js">New Versions of Sign-In Widget and Auth SDK for JS</h4>
+
+<p>Version 1.11 of the <a href="https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.11.0">Okta Sign-In Widget</a> and version 1.8 of the <a href="https://github.com/okta/okta-auth-js">Okta Auth SDK for Javascript</a> are available. Check out the new features and bug fixes!</p>
+
+<!-- (OKTA-131642) -->
 
 <h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
 <ul>
   <li>
-    <p>When suspicious activity was logged for OAuth 2.0 clients the invalid secret was not masked. (OKTA-129694)</p>
+    <p>If any sign-in policy using MFA existed for an application, the Open ID Connect reauthentication flow redirected to multi-factor authentication (MFA) by default.  (OKTA-129094)</p>
   </li>
   <li>
-    <p>When validating the names of scopes for social identity providers, Okta didn’t enforce the restrictions
-specified in the <a href="https://tools.ietf.org/html/rfc6749#section-3.3">OAuth 2.0 spec</a>. (OKTA-117352)</p>
+    <p>Clients with <code class="highlighter-rouge">token_endpoint_auth_method</code> set to <code class="highlighter-rouge">client_secret_post</code> did not have a selected radio button on the Client Credentials UI (<strong>Applications &gt; <em>application name</em> &gt; General</strong>).  (OKTA-130764)</p>
   </li>
   <li>
-    <p>When the same user was created multiple times simultaneously and added to a group, the HTTP error
-response code was 500 rather than 400. (OKTA-126223)</p>
+    <p>If you created a SAML 2.0 Identity Provider but omitted some fields, Okta reported an error.  (OKTA-131294)</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">/api/v1/apps/:appId/groups</code> didn’t return groups if the specified app is inactive. (OKTA-123695)</p>
+    <p>Okta Sign-In Widget failed to run when installed with <code class="highlighter-rouge">npm</code>.  (OKTA-131608)</p>
+  </li>
+  <li>
+    <p>Updates to clients sometimes received an error response if they contained values for <code class="highlighter-rouge">client_id_issued_at</code> or <code class="highlighter-rouge">client_secret_expires_at</code>.  (OKTA-131647)</p>
+  </li>
+  <li>
+    <p>API Access Management customers can no longer self-validate the Okta Access Token.  (OKTA-131885)</p>
   </li>
 </ul>
-
-<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
-
-<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
-
-<p><img src="/assets/release_notes/version_footer-6199e00ca76969eed4036e964a53b5598571c5cafe797a4890f152ce68dce49b.png" alt="Release Number in Footer" /></p>
 
 <h3 id="looking-for-something-else">Looking for Something Else?</h3>
 

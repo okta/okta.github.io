@@ -120,7 +120,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
 {
   "ver": 1,
   "sub": "00uid4BxXw6I6TV4m0g3",
-  "iss": "http://rain.okta1.com:1802",
+  "iss": "https://rain.okta1.com:1802",
   "aud": "uAaunofWkaDJxukCFeBx",
   "iat": 1449624026,
   "exp": 1449627626,
@@ -136,7 +136,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
   "given_name":"John",
   "middle_name":"James",
   "family_name":"Doe",
-  "profile":"http://profile.wordpress.com/john.doe",
+  "profile":"https://profile.wordpress.com/john.doe",
   "zoneinfo":"America/Los_Angeles",
   "locale":"en-US",
   "updated_at":1311280970,
@@ -205,7 +205,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 | given_name         | profile           | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.                                              | String         | "John"                                                                                                                          |
 | middle_name        | profile           | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used. | String         | "James"                                                                                                                         |
 | family_name        | profile           | Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.                               | String         | "Doe"                                                                                                                           |
-| profile            | profile           | URL of the user's profile page.                                                                                                                                                                                                    | String         | "http://profile.wordpress.com/john.doe"                                                                                         |
+| profile            | profile           | URL of the user's profile page.                                                                                                                                                                                                    | String         | "https://profile.wordpress.com/john.doe"                                                                                         |
 | zoneinfo           | profile           | String representing the user's time zone.                                                                                                                                                                                          | String         | "America/Los_Angeles"                                                                                                           |
 | locale             | profile           | Language and   [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.                                                                                                                   | String         | "en-US"                                                                                                                         |
 | updated_at         | profile           | Time the user's information was last updated, represented in Unix time (seconds).                                                                                                                                                  | Integer        | 1311280970                                                                                                                      |
@@ -273,7 +273,7 @@ Returns a JSON document with information requested in the scopes list of the tok
   "given_name":"John",
   "middle_name":"James",
   "family_name":"Doe",
-  "profile":"http://profile.wordpress.com/john.doe",
+  "profile":"https://profile.wordpress.com/john.doe",
   "zoneinfo":"America/Los_Angeles",
   "locale":"en-US",
   "updated_at":1311280970,
@@ -442,7 +442,7 @@ Based on the type of token and whether it is active or not, the returned JSON co
     "exp" : 1451606400,
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
-    "aud" : "http://api.example.com",
+    "aud" : "https://api.example.com",
     "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3"
@@ -553,6 +553,11 @@ If automatic key rotation is disabled, provide the *client_id* to fetch public k
 #### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Cache-Control → max-age=3832304, must-revalidate
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "keys": [
@@ -594,9 +599,8 @@ If automatic key rotation is disabled, provide the *client_id* to fetch public k
 ~~~
 
 >Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document.
-It is safe to cache or persist downloaded keys for performance.
-However, if the client application is pinned to a signing key, the verification might fail since Okta rotates the key automatically.
-Pinned client applications must periodically check the Okta signing keys.
+
+>Okta also recommends caching or persisting downloaded keys to improve performance by eliminating multiple API requests. If the client application is pinned to a signing key, the verification fails when Okta rotates the key automatically. Pinned client applications must periodically check the cached Okta signing keys.
 
 Any of the two or three keys listed are used to sign tokens. The order of keys in the result doesn't indicate which keys are used.
 
@@ -743,10 +747,11 @@ of the response.
 | code_challenge        | A challenge of   [PKCE](#parameter-details). The challenge is verified in the Access Token request.                                                                                                                                                                                                                                                                                                       | Query      | String   | FALSE    |
 | code_challenge_method | Method used to derive the code challenge. Must be `S256`.                                                                                                                                                                                                                                                                                                                                                | Query      | String   | FALSE    |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                               | Query      | String   | FALSE    |
+| idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                 | Query      | String   | FALSE    |
 
 #### Parameter Details
 
- * *idp* and *sessionToken* are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
+ * *idp*, *sessionToken* and *idp_scope* are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
     All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.
  * Each value for *response_mode* delivers different behavior:
     * *fragment* -- Parameters are encoded in the URL fragment added to the *redirect_uri* when redirecting back to the client.
@@ -883,7 +888,7 @@ curl -v -X GET \
 The requested scope is invalid:
 
 ~~~
-http://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
+https://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
 ~~~
 
 ### Token Request
