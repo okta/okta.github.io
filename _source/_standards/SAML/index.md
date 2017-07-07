@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: SAML
-excerpt: Enable single sign-on for your web and mobile applications with SAML.
+excerpt: Enable SSO for your web and mobile applications with SAML.
 icon: /assets/img/icons/saml.svg
 redirect_from:
     - "/docs/getting_started/saml_guidance.html"

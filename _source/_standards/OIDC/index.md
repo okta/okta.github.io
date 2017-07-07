@@ -20,9 +20,9 @@ Okta is [certified for OpenID Connect](http://openid.net/certification/) for Bas
 
 Okta provides two types of authorization servers:
 
-* Okta Authorization Server requires no configuration, and supports single sign-on use cases. 
-* Custom Authorization Server is configurable, and supports the use of OpenID Connect with Okta's API Access Management,
-which helps you secure access to your API .
+* Okta Authorization Server requires no configuration, and supports SSO use cases. 
+* Custom Authorization Server is configurable. It supports the use of OpenID Connect with Okta's API Access Management,
+an Okta feature that helps you secure access to your API.
 
 ## Dynamic Client Registration
 
