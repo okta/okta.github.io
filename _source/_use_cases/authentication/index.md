@@ -50,7 +50,7 @@ can all be configured easily in the Okta Admin console.
 Many of these policies can also be controlled through Okta's API.
 
 Okta builds its authentication flows to comply with industry standards
-[OAuth 2.0](/standards/oauth2/index.html) and [OpenID Connect](/standards/oid/index.html). 
+[OAuth 2.0](/standards/OAuth/index.html) and [OpenID Connect](/standards/OIDC/index.html). 
 Okta keeps up to date with the latest extensions to core standards, so you don't have to.
 
 You can build custom apps with either OpenID Connect or OAuth 2.0.
@@ -59,7 +59,7 @@ In this case, OpenID Connect with Okta is all you need. However, if you also pro
 to vendors who can query your API directly, you'd want to use Okta's API Access Management feature to
 secure your API as well as manage OpenID Connect for your customer app.
 
-For more information about Okta and OpenID Connect and OAuth 2.0, see [API Access Management](/use_cases/api_access-management/index.html).
+For more information about Okta and OpenID Connect and OAuth 2.0, see [API Access Management](/use_cases/api_access_management/index.html).
 
 Okta provides a number of tools in addition to rigorous specification compliance:
 
