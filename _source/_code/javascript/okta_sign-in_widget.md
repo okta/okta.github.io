@@ -40,7 +40,7 @@ If you want to see the Sign-in Widget in action for yourself, and you already ha
 1.  Create an HTML file with the widget code
 2.  Modify the HTML to use your Okta organization
 3.  Serve the HTML file with a web server
-4.  Configure CORS support in your Okta organization
+4.  Configure a Trusted Origin in your Okta organization
 
 > If you do not have an Okta org, you can sign-up for one here: <https://www.okta.com/developer/signup/>
 
@@ -90,17 +90,23 @@ Change the `orgUrl` variable to your Okta org's URL (for example: `https://dev-1
 
 If you aren’t sure which web server to use or don’t have one set up already, an easy web server to set up on Mac OS X or GNU/Linux is the SimpleHTTPServer that is included with Python.
 
-If you have Python installed on your system, you can start the SimpleHTTPServer by running the following command from the same directory that the `login-to-okta.html` file is located in:
+If you have Python 2 installed on your system, you can start the SimpleHTTPServer by running the following command from the same directory that the `login-to-okta.html` file is located in:
 
 ~~~
 $ python -m SimpleHTTPServer
 ~~~
 
-#### 4. Configure CORS
+In Python 3 this command is:
+
+~~~
+python3 -m http.server
+~~~
+
+#### 4. Configure a Trusted Origin
 
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
-You can enable Cross-Origin Resource Sharing (CORS) by following the steps in our [guide for Enabling CORS](/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base URL as the web server you are using to host the HTML for the Okta Sign-In Widget (see below for instructions). For example, if you're serving the page using the Python SimpleHTTPServer, the origin would be `http://0.0.0.0:8000`.
+You can enable your Sign-in Widget page as a "Trusted Origin" in Okta, which enables Cross-Origin Resource Sharing (CORS). To do this, follow the steps found under the "Trusted Origins tab" section in our [API Security help page](https://help.okta.com/en/prev/Content/Topics/Security/API.htm). Configure your Origin using the same base URL as the web server you are using to host the HTML for the Okta Sign-In Widget. For example, if you're serving the page using the Python SimpleHTTPServer, the origin would be `http://0.0.0.0:8000`.
 
 If you now open the page with the Widget code on it, you can enter in the credentials for a user in your Okta org and you will be logged in. And that's it!
 
@@ -111,9 +117,9 @@ In the simple example above, you already performed the following steps:
 1.  Created an HTML file with the widget code
 2.  Modified the HTML to use your Okta organization
 3.  Served the HTML file with a web server
-4.  Configured CORS support in your Okta organization
+4.  Configured a Trusted Origin in your Okta organization
 
-In that example, you redirect the user to their Okta dashboard (as defined in the `orgUrl` variable). Now you will now configure a redirect to a custom authentication landing page hosted on your server. 
+In that example, you redirect the user to their Okta dashboard (as defined in the `orgUrl` variable). Now you will configure a redirect to a custom authentication landing page hosted on your server. 
 
 To do this, you will now perform the following steps:
 
