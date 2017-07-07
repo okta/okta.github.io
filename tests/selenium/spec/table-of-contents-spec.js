@@ -15,7 +15,7 @@ describe('table of contents navigation spec', () => {
   it('has basic table of contents in the documentation page', () => {
     expect(tocPage.level1ItemContains('Authentication')).toBe(true);
 
-    const expectedLevel2Items = ['Authentication with Okta', 'Building Apps That Support Single Sign On',
+    const expectedLevel2Items = ['Authentication with Okta', 'Building Apps That Support SSO',
         'Building a Custom Login Experience for Your Application',
         'Sign-In Widget', 'Auth SDK',
         'Authentication API', 'Social Login'];
