@@ -48,7 +48,7 @@ strong and adaptive authentication policies, password reset workflow, and more
 can all be configured easily in the Okta Admin console.
 Many of these policies can also be controlled through Okta's API.
 
-Okta provides an API, the Sign-in Widget and Auth JS SDK, and built-in support for social login:
+Okta provides the Authentication API, the Sign-in Widget and Auth JS SDK, and built-in support for social login:
 
 * [Sign-In Widget](#sign-in-widget)
 * [Auth SDK](#auth-sdk)
@@ -105,7 +105,7 @@ and accounts on social identity providers.
 
 Okta builds its authentication flows to comply with industry standards
 [OAuth 2.0](https://tools.ietf.org/html/rfc6749) and [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html). 
-Okta keeps up to date with the latest extensions to core standards, so you don't have to.
+As mentioned previously, the authentication flows are also built with [SAML](/docs/guides/saml_guidance.html). Okta keeps up to date with the latest extensions to core standards, so you don't have to.
 
 You can build custom apps with either OpenID Connect or OAuth 2.0.
 For example, perhaps you want users to sign into your custom web application to access their account.

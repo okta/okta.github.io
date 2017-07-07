@@ -335,11 +335,11 @@ At its core, an authorization server is simply an engine for minting OpenID Conn
 Okta provides two types of authorization servers:
 
 * Okta Authorization Server:
-Use the Okta Authorization Server to perform single-sign on with Okta or sign in users for apps displayed on the Okta home page.
+Use the Okta Authorization Server to perform SSO with Okta or sign in users for apps displayed on the Okta home page.
 Okta hosts and manages the Okta Authorization Server. It can't be configured,
 though you can add a [groups claim](/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned)
 and [app-user profile attributes](/docs/api/resources/apps.html#application-user-properties) to a client.
-The Access Token minted by the Okta Authorization Server is consumed by Okta APIs. Its audience is always Okta specific and can't be validated by your applications.
+The Access Token minted by the Okta Authorization Server is consumed by Okta APIs. The Access Token audience is always Okta specific and can't be validated by your applications.
 
     >Note: The Okta Authorization Server doesn't require that the API Access Management feature be enabled.
 
@@ -349,7 +349,7 @@ Custom Authorization Servers are hosted on Okta, and created and configured by a
 You can create and configure Custom Authorization Servers using the Okta Admin UI or the [Custom Authorization Server API](/docs/api/resources/oauth2.html#authorization-server-operations).
 The Access Token minted by a Custom Authorization Server is consumed by your APIs. 
 You can specify the audience to make sure that the Access Token is for your APIs.
-Also, custom scopes can be modified to support the authorization for your APIs. 
+Also, custom scopes can be configured to support the authorization for your APIs. 
 
      >Note: Custom Authorization Servers are available as part of the [API Access Management](/use_cases/api_access_management/index.html) feature.
 
