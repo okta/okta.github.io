@@ -4,7 +4,7 @@ title: Platform Release Notes
 excerpt: Summary of changes to the Okta Platform since Release 2017.26
 ---
 
-## Release 2017.27
+## Release 2017.28
 
 ### Advance Notice: Data Retention Changes
 
@@ -17,49 +17,64 @@ Okta SDK `EventsAPIClient`.
 The new data retention policy starts:
 
 * June 7, 2017 for existing preview orgs
-* July 17, 2017 for existing production orgs
+* July 17, 2017 for existing production org
 
 Preview and production orgs created on or after July 17, 2017, will retain log data for three months.
 
 For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
-You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API. <!-- OKTA-125424 -->
+You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API.
 
  <!-- OKTA-125424 -->
 
-### Platform Enhancements
+### Platform Enhancements in Preview and Expected in Production during Week 2017.29 (July 19, 2017)
 
-* [Additional Scopes Available for Social Authentication](#additional-scopes-available-for-social-authentication)
+*[Reactivate Suspended](#reactivate-suspended)
 
-* [New Versions of Sign-In Widget and Auth SDK for JS](#new-versions-of-sign-in-widget-and-auth-sdk-for-js)
+*[PLUGIN_BLOCK](#plugin_block)
 
-#### Additional Scopes Available for Social Authentication
+*[Limit Events](limit-events)
 
-When using a Social Identity Provider, you can request information in stages. The initial request to `/oauth2/v1/authorize` can ask for a minimal set of scopes, and you can add scopes to collect additional user data in a subsequent request to the Social Identity Provider. This reduces friction during sign-in when users don't yet trust your app. For more information, see the descriptions of `idp_scope` in the [OAuth 2.0 API](https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters ) and [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3) parameter tables.
 
-<!-- (OKTA-117521) -->
+#### Reactivate Suspended
+zzzz
+  <!-- OKTA-128384  -->
 
-#### New Versions of Sign-In Widget and Auth SDK for JS
 
-Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.11.0) and version 1.8 of the [Okta Auth SDK for Javascript](https://github.com/okta/okta-auth-js) are available. Check out the new features and bug fixes!
+#### PLUGIN_BLOCK
+wwww
+  <!-- OKTA-132490  -->
 
-<!-- (OKTA-131642) -->
+
+#### Limit Events
+vvvv
+  <!-- OKTA-125424, 120605  -->
+
+
+### Platform Enhancements in Preview and Expected in Production during Week 2017.31 (August 2, 2017)
+
+* [OPENID_CONNECT](#openid_connect)
+
+* [KEY_ROLLOVER](#key_rollover)
+
+
+#### OPENID_CONNECT
+xxxx
+  <!-- OKTA-132049  -->
+
+
+#### KEY_ROLLOVER
+yyyy
+  <!-- OKTA-132045  -->
 
 
 ### Platform Bugs Fixed
 
-* If any sign-in policy using MFA existed for an application, the Open ID Connect reauthentication flow redirected to multi-factor authentication (MFA) by default.  (OKTA-129094)
+* (OKTA-123695)
 
-* Clients with `token_endpoint_auth_method` set to `client_secret_post` did not have a selected radio button on the Client Credentials UI (**Applications > _application name_ > General**).  (OKTA-130764)
+* (OKTA-131784)
 
-* If you created a SAML 2.0 Identity Provider but omitted some fields, Okta reported an error.  (OKTA-131294)
-
-* Okta Sign-In Widget failed to run when installed with `npm`.  (OKTA-131608)
-
-* Updates to clients sometimes received an error response if they contained values for `client_id_issued_at` or `client_secret_expires_at`.  (OKTA-131647)
-
-* API Access Management customers can no longer self-validate the Okta Access Token.  (OKTA-131885)
-
+* (OKTA-132207)
 
 ### Looking for Something Else?
 
