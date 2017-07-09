@@ -19,7 +19,7 @@ The Okta Auth SDK builds on top of our [Authentication API](/docs/api/resources/
 Include the following script tag in your target web page:
 
 ~~~ html
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/OktaAuth.min.js" type="text/javascript"></script>
+<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js" type="text/javascript"></script>
 ~~~
 
 ## Authentication Flow
