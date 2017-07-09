@@ -1081,7 +1081,7 @@ HTTP/1.1 204 No Content
 
 ## Group Rule Operations
 
-The Group Rules API is currently a {% api_lifecycle beta %} [release](/docs/api/getting_started/releases-at-okta.html).
+The Group Rules API is currently a {% api_lifecycle beta %} release.
 
 ### Create Group Rule
 {:.api .api-operation}
@@ -1090,7 +1090,7 @@ The Group Rules API is currently a {% api_lifecycle beta %} [release](/docs/api/
 
 Creates a group rule to dynamically add users to the specified group if they match the condition
 
-> Group rules would be created with status='INACTIVE'.
+> Group rules are created with status='INACTIVE'.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1840,6 +1840,8 @@ Profile for any group that is **not** imported from Active Directory
 ~~~
 
 ## Rule Model
+
+The Group Rules API is currently a {% api_lifecycle beta %} release.
 
 ### Example
 
