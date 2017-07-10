@@ -27,35 +27,43 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
  <!-- OKTA-125424 -->
 
-### Platform Enhancements in Preview and Expected in Production during Week 2017.31 (August 2, 2017)
+### Platform Enhancements and New Features
 
-* [OpenID Connect to GA](#openid-connect-to-ga)
+The following changes are available Wednesday, July 12 in preview orgs.
+Availability in production orgs follows either by approximately one week or one month.
+ 
+#### Generally Available (GA) Features
 
-* [Key Rollover to GA](#key-rollover-to-ga)
+These features are GA in preview orgs, and expected in production orgs during the week of August 8, 2017.
+
+* [OpenID Connect](#openid-connect)
+
+* [Key Rollover](#key-rollover)
+
+These feature enhancements are GA in preview orgs, and expected in production orgs during the week of July 17, 2017.
+
+* [Allow Unsuspended During Inbound SAML Login](#unsuspended-suspended-users-during-inbound-saml-ogin)
+
+* [Block Insecure Cross-Org Requests to GA](#block-insecure-cross-org-requests)
+
+* [Limit Age of Events to GA](#limit-age-of-events)
 
 
-#### OpenID Connect to GA
-Okta's [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) moves from early access (EA) to generally available (GA).
+##### OpenID Connect
+[OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) 
 
   <!-- OKTA-132049  -->
 
 
-#### Key Rollover to GA
-Key rollover is a feature available with OpenID Connect and moves from early access (EA) to generally available (GA) with it. For more information, see [Validating ID Tokens](https://developer.okta.com/docs/api/resources/oidc.html#validating-id-tokens)
+##### Key Rollover
+Key rollover 
+ 
+ For more information, see [Validating ID Tokens](https://developer.okta.com/docs/api/resources/oidc.html#validating-id-tokens)
 
   <!-- OKTA-132045  -->
 
 
-### Platform Enhancements in Preview and Expected in Production during Week 2017.29 (July 19, 2017)
-
-* [Unsuspended Suspended Users During Inbound SAML Login](#unsuspended-suspended-users-during-inbound-saml-ogin)
-
-* [Block Insecure Cross-Org Requests to GA](#block-insecure-cross-org-requests-to-ga)
-
-* [Limit Age of Events to GA](#limit-age-of-events-to-ga)
-
-
-#### Unsuspended Suspended Users During Inbound SAML Login
+#### Allow Suspended Users During Inbound SAML Login
 
 You can configure the JIT settings for a SAML identity provider (IdP) to enable inbound SAML login for users who are suspended in Okta.
 
@@ -63,13 +71,13 @@ You can configure the JIT settings for a SAML identity provider (IdP) to enable 
   <!-- OKTA-128384  -->
 
 
-#### Block Insecure Cross-Org Requests to GA
-Okta blocks cross-org requests that do not meet our security requirements. This feature moves from early access (EA) to generally available (GA).
+#### Block Insecure Cross-Org Requests
+Okta blocks cross-org requests that do not meet our security requirements. This feature moves from EA to GA.
 
   <!-- OKTA-132490  -->
 
 
-#### Limit Age of Events to GA
+#### Limit Age of Events
 The events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from early access (EA) to generally available (GA).
 
   <!-- OKTA-125424, 120605  -->
@@ -78,6 +86,8 @@ The events API (`/api/v1/events`) no longer accepts queries for events greater t
 
 
 ### Platform Bugs Fixed
+
+These platform bug fixes are available in preview orgs and expected in production orgs the week of July 17, 2017.
 
 * `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
 
