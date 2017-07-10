@@ -40,30 +40,35 @@ These features are GA in preview orgs, and expected in production orgs during th
 
 These feature enhancements are GA in preview orgs, and expected in production orgs during the week of July 17, 2017.
 
-* [Allow Unsuspended Users During Inbound SAML Login](#allow-suspended-users-during-inbound-saml-ogin)
+* [Allow Unsuspended Users During Inbound SAML Login](#allow-suspended-users-during-inbound-saml-login)
 
 * [Block Insecure Cross-Org Requests to GA](#block-insecure-cross-org-requests)
 
 * [Limit Age of Events to GA](#limit-age-of-events)
 
 #### OpenID Connect
-[OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) 
+[OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
+
+ OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.
+
+ Okta is [certified for OpenID Connect](http://openid.net/certification/). For more information, see [OpenID Connect and Okta](https://developer.okta.com/standards/OIDC/).
 
   <!-- OKTA-132049  -->
 
 
 #### Key Rollover
-Key rollover 
+The ability to generate a certificate with specified validity period (see the [Apps API](https://developer.okta.com/docs/api/resources/apps.html) and [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html)) moves from early access (EA) to generally available (GA). We build OpenID Connect and API Access Management on this feature.
  
- For more information, see [Validating ID Tokens](https://developer.okta.com/docs/api/resources/oidc.html#validating-id-tokens)
-
-  <!-- OKTA-132045  -->
+   <!-- OKTA-132045  -->
 
 #### Allow Suspended Users During Inbound SAML Login
 
 You can configure the JIT settings for a SAML identity provider (IdP) to enable inbound SAML login for users who are suspended in Okta.
 
 {% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
+
+If the POST to `/api/v1/idps` includes a `policy.provisioning.conditions` section, that section must include `policy.provisioning.conditions.suspended.action`.
+
   <!-- OKTA-128384  -->
 
 #### Block Insecure Cross-Org Requests
@@ -84,7 +89,7 @@ These platform bug fixes are available in preview orgs and expected in productio
 
 * Just-in-time reactivation of users failed in some circumstances. (OKTA-131784)
 
-* Okta didn't capture `externalId` from Microsoft social identity providers.  (OKTA-132207)
+* In some circumstances, the link between the external Microsoft user and the Okta user was inaccurate.  (OKTA-132207)
 
 ### Does Your Org Have This Change Yet?
 
