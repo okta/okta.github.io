@@ -27,6 +27,25 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
  <!-- OKTA-125424 -->
 
+### Platform Enhancements in Preview and Expected in Production during Week 2017.31 (August 2, 2017)
+
+* [OpenID Connect to GA](#openid-connect-to-ga)
+
+* [Key Rollover to GA](#key-rollover-to-ga)
+
+
+#### OpenID Connect to GA
+Okta's [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) moves from early access (EA) to generally available (GA).
+
+  <!-- OKTA-132049  -->
+
+
+#### Key Rollover to GA
+Key rollover is a feature available with OpenID Connect and moves from early access (EA) to generally available (GA) with it. For more information, see [Validating ID Tokens](https://developer.okta.com/docs/api/resources/oidc.html#validating-id-tokens)
+
+  <!-- OKTA-132045  -->
+
+
 ### Platform Enhancements in Preview and Expected in Production during Week 2017.29 (July 19, 2017)
 
 * [Unsuspended Suspended Users During Inbound SAML Login](#unsuspended-suspended-users-during-inbound-saml-ogin)
@@ -56,23 +75,6 @@ The events API (`/api/v1/events`) no longer accepts queries for events greater t
   <!-- OKTA-125424, 120605  -->
 
 
-### Platform Enhancements in Preview and Expected in Production during Week 2017.31 (August 2, 2017)
-
-* [OpenID Connect to GA](#openid-connect-to-ga)
-
-* [Key Rollover to GA](#key-rollover-to-ga)
-
-
-#### OpenID Connect to GA
-Okta's [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) moves from early access (EA) to generally available (GA).
-
-  <!-- OKTA-132049  -->
-
-
-#### Key Rollover to GA
-Key rollover is a feature available with OpenID Connect and moves from early access (EA) to generally available (GA) with it. For more information, see [Validating ID Tokens](https://developer.okta.com/docs/api/resources/oidc.html#validating-id-tokens)
-
-  <!-- OKTA-132045  -->
 
 
 ### Platform Bugs Fixed
@@ -81,7 +83,7 @@ Key rollover is a feature available with OpenID Connect and moves from early acc
 
 * Just-in-time reactivation of users failed in some circumstances. (OKTA-131784)
 
-* Okta didn't capture `externalId` from Microsoft Social Identity Providers.  (OKTA-132207)
+* Okta didn't capture `externalId` from Microsoft social identity providers.  (OKTA-132207)
 
 
 
