@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.26
+excerpt: Summary of changes to the Okta Platform since Release 2017.27
 ---
 
-## Release 2017.27
+## Release 2017.28
 
 ### Advance Notice: Data Retention Changes
 
@@ -23,43 +23,74 @@ Preview and production orgs created on or after July 17, 2017, will retain log d
 
 For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
-You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API. <!-- OKTA-125424 -->
+You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API.
 
  <!-- OKTA-125424 -->
 
-### Platform Enhancements
+### Platform Enhancements and New Features
 
-* [Additional Scopes Available for Social Authentication](#additional-scopes-available-for-social-authentication)
+The following changes are available Wednesday, July 12 in preview orgs.
+Availability in production orgs follows either by approximately one week or one month.
 
-* [New Versions of Sign-In Widget and Auth SDK for JS](#new-versions-of-sign-in-widget-and-auth-sdk-for-js)
+These features are GA in preview orgs, and expected in production orgs during the week of August 8, 2017.
 
-#### Additional Scopes Available for Social Authentication
+* [OpenID Connect](#openid-connect)
 
-When using a Social Identity Provider, you can request information in stages. The initial request to `/oauth2/v1/authorize` can ask for a minimal set of scopes, and you can add scopes to collect additional user data in a subsequent request to the Social Identity Provider. This reduces friction during sign-in when users don't yet trust your app. For more information, see the descriptions of `idp_scope` in the [OAuth 2.0 API](https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters ) and [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3) parameter tables.
+* [Key Rollover](#key-rollover)
 
-<!-- (OKTA-117521) -->
+These feature enhancements are GA in preview orgs, and expected in production orgs during the week of July 17, 2017.
 
-#### New Versions of Sign-In Widget and Auth SDK for JS
+* [Allow Unsuspended Users During Inbound SAML Login](#allow-suspended-users-during-inbound-saml-ogin)
 
-Version 1.11 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.11.0) and version 1.8 of the [Okta Auth SDK for Javascript](https://github.com/okta/okta-auth-js) are available. Check out the new features and bug fixes!
+* [Block Insecure Cross-Org Requests to GA](#block-insecure-cross-org-requests)
 
-<!-- (OKTA-131642) -->
+* [Limit Age of Events to GA](#limit-age-of-events)
 
+#### OpenID Connect
+[OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) 
+
+  <!-- OKTA-132049  -->
+
+
+#### Key Rollover
+Key rollover 
+ 
+ For more information, see [Validating ID Tokens](https://developer.okta.com/docs/api/resources/oidc.html#validating-id-tokens)
+
+  <!-- OKTA-132045  -->
+
+#### Allow Suspended Users During Inbound SAML Login
+
+You can configure the JIT settings for a SAML identity provider (IdP) to enable inbound SAML login for users who are suspended in Okta.
+
+{% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
+  <!-- OKTA-128384  -->
+
+#### Block Insecure Cross-Org Requests
+Okta blocks cross-org requests that do not meet our security requirements. This feature moves from EA to GA.
+
+  <!-- OKTA-132490  -->
+
+#### Limit Age of Events
+The events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from early access (EA) to generally available (GA).
+
+  <!-- OKTA-125424, 120605  -->
 
 ### Platform Bugs Fixed
 
-* If any sign-in policy using MFA existed for an application, the Open ID Connect reauthentication flow redirected to multi-factor authentication (MFA) by default.  (OKTA-129094)
+These platform bug fixes are available in preview orgs and expected in production orgs the week of July 17, 2017.
 
-* Clients with `token_endpoint_auth_method` set to `client_secret_post` did not have a selected radio button on the Client Credentials UI (**Applications > _application name_ > General**).  (OKTA-130764)
+* `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
 
-* If you created a SAML 2.0 Identity Provider but omitted some fields, Okta reported an error.  (OKTA-131294)
+* Just-in-time reactivation of users failed in some circumstances. (OKTA-131784)
 
-* Okta Sign-In Widget failed to run when installed with `npm`.  (OKTA-131608)
+* Okta didn't capture `externalId` from Microsoft social identity providers.  (OKTA-132207)
 
-* Updates to clients sometimes received an error response if they contained values for `client_id_issued_at` or `client_secret_expires_at`.  (OKTA-131647)
+### Does Your Org Have This Change Yet?
 
-* API Access Management customers can no longer self-validate the Okta Access Token.  (OKTA-131885)
+To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 

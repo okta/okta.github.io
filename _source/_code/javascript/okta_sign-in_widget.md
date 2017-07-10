@@ -1,326 +1,196 @@
 ---
 layout: docs_page
-title: Okta Sign-In Widget
-excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta. An <a href="/code/javascript/okta_sign-in_widget_ref.html">in-depth reference</a> is also available.
+title: Getting Started with the Okta Sign-In Widget
+excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta.
 weight: 1
 redirect_from:
     - "/docs/guides/okta_sign-in_widget.html"
 ---
 
-# Overview
+# Sign-In Widget Quickstart
 
-The Okta Sign-In Widget is a JavaScript widget from Okta that gives
-you a fully featured and customizable login experience which
-can be used to authenticate users on any web site.
+The Okta Sign-In Widget is a JavaScript library that gives
+you a fully-featured and customizable login experience which
+can be used to authenticate users on any website. This guide will introduce you to the Widget and show you how to create a simple page that uses it. 
 
 {% img okta-signin.png alt:"Screenshot of basic Okta Sign-In Widget" %}
 
-### Authentication
+If you'd like to jump right into the Widget's code, you can find it on GitHub here: <https://github.com/okta/okta-signin-widget>.
 
-The primary, and most visible, use case for the Okta Sign-In Widget is
-validating a user using a username and password. In addition to
-credential validation, the Okta Sign-In Widget also handles validation of
-password complexity requirements and will display common error messages
-for things like invalid passwords or blank fields.
+If you'd like to read the Widget's reference page, you will find it here: [Okta Sign-In Widget Reference Page](/code/javascript/okta_sign-in_widget_ref).
 
-### Multi-Factor Authentication
+### Features
 
-The Okta Sign-In Widget also comes with full support for Multi-Factor
-Authentication user flows. It handles enrollment and verification
-of factors and comes with built-in support for all of the factors listed below:
+The Sign-in Widget supports the following use cases:
 
--   Okta Verify
--   Google Authenticator
--   RSA SecureID
--   Symantec VIP
--   Duo Security
--   SMS Authentication
--   Security Question
+- **Authentication:** In addition to standard credential validation, the Okta Sign-In Widget also handles validation of password complexity requirements and will display common error messages for things like invalid passwords or blank fields.
 
-{% img okta-signin-mfa-select.png alt:"Screenshot of Okta Sign-In Widget Multi-Factor Authentication selector" %}
+- **Multi-Factor Authentication:** The Widget also handles enrollment and verification of multiple authentication factors. It comes with built-in support for SMS authentication, security questions, and Google Authenticator, among others.
 
-### Self service password reset
+- **Self-Service Password Reset:** Support for sending reset notifications as well as prompting users to verify themselves by prompting them to answer a security question. 
 
-The Okta Sign-In Widget has everything you need to give your users the
-ability to reset their forgotten passwords, it comes with support
-for sending reset notifications as well as prompting users to verify
-themselves by prompting them to answer a security question.
+- **Password Expiration:** The Widget can notify users when their password has expired and prompt them to update their password before allowing them to sign in.
 
-{% img okta-signin-reset-password.png alt:"Screenshot of Okta Sign-In Widget reset password dialog" %}
+- **Validation and Error Handling:** Extensive support for validating user input as well as handling every imaginable error condition which might occur in a user login flow.
 
-### Password Expiration
+## Try the Widget for yourself
 
-Another feature of the Okta Sign-In Widget is notifying users when their password has expired
-and prompting them to update their password before allowing them to
-log in.
+If you want to see the Sign-in Widget in action for yourself, and you already have an Okta org, you only need to do four things: 
 
-{% img okta-signin-password-expired.png alt:"Screenshot of Okta Sign-In Widget password expired dialog" %}
+1.  Create an HTML file with the widget code
+2.  Modify the HTML to use your Okta organization
+3.  Serve the HTML file with a web server
+4.  Configure a Trusted Origin in your Okta organization
 
-### Validation and error handling
+> If you do not have an Okta org, you can sign-up for one here: <https://www.okta.com/developer/signup/>
 
-Finally, the Okta Sign-In Widget comes with extensive support for validating user
-input as well as handling every imaginable error condition which
-might occur in a user login flow.
+#### 1. Create an HTML file
 
-{% img okta-signin-validation-failure.png alt:"Screenshot of Okta Sign-In Widget displaying validation error" %}
-
-## A simple example
-
-If you are a developer, the best way to understand the Okta
-Sign-In Widget is to look at a simple example of the HTML
-needed to get it working. The HTML below shows you how to quickly
-and easily set up a fully featured login experience:
+The below code will render a login page using the Okta Sign-in Widget. You can copy and paste it into an HTML file called, for example, `login-to-okta.html`:
 
 ~~~ html
+<!doctype html>
+<html lang="en-us">
 <head>
-	<!-- Core widget js and css -->
-	<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js" type="text/javascript"></script>
-	<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
-	<!-- Customizable css theme options. Link your own customized copy of this file or override styles in-line -->
-	<link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css" type="text/css" rel="stylesheet">
+
+  <title>Example Okta Sign-In Widget</title>
+
+  <!-- Core widget js and css -->
+
+  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js" type="text/javascript"></script>
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
+  <!-- Optional, customizable css theme options. Link your own customized copy of this file or override styles in-line -->
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-	<div id="okta-login-container"></div>
-	<script type="text/javascript">
-		var orgUrl = 'https://example.okta.com';
-		var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
+  <!-- Render the login widget here -->
+  <div id="okta-login-container"></div>
 
-		oktaSignIn.renderEl(
-		  { el: '#okta-login-container' },
-		  function (res) {
-		    if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect(orgUrl); }
-		  }
-		);
-	</script>
+  <!-- Script to init the widget -->
+  <script>
+    var orgUrl = 'https://dev-144769.oktapreview.com';
+    var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
+
+    oktaSignIn.renderEl(
+      { el: '#okta-login-container' },
+      function (res) {
+        if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect(orgUrl); }
+      }
+    );
+  </script>
 </body>
+</html>
 ~~~
 
-Here is what is happening in the HTML above:
+#### 2. Modify the HTML
 
-First, in the `<head>`
-tag, we include the  `okta-sign-in.min.js` and
-`okta-sign-in.min.css` files. These files have all of the
-logic and default stylesheets used by the Okta Sign-In Widget.
+Change the `orgUrl` variable to your Okta org's URL (for example: `https://dev-123456.oktapreview.com`), then save the file.
 
-We also include the `okta-theme.css` file, which adds Okta's own custom theme you get in the login page of your Okta organization if you have enabled the New Sign-In Page setting in `Admin -> Settings -> Appearance` in the `Sign-In Configuration` section. You can choose not to include this okta-theme.css stylesheet if you so wish.
+#### 3. Serve the File
 
-In the `<body>`, we add a `<div>` tag with an "`id`" of
-`okta-login-container`  &#x2013; you can use any "`id`" value in this tag,
-we are just using `okta-login-container` here for the sake of clarity.
+If you aren’t sure which web server to use or don’t have one set up already, an easy web server to set up on Mac OS X or GNU/Linux is the SimpleHTTPServer that is included with Python.
 
-Next, we add some JavaScript code to insert the Okta Sign-In Widget
-into the `okta-login-container` tag. In this short example, this
-JavaScript is included at the end of the file. However, when you use
-this code on your own site, you will need to run these functions
-in the parts of your code that are run when the DOM is ready.
+If you have Python 2 installed on your system, you can start the SimpleHTTPServer by running the following command from the same directory that the `login-to-okta.html` file is located in:
 
-Here is what that JavaScript code is doing: first, the line below
-initializes the Okta Sign-In Widget object, note that
-the `baseUrl` value **MUST** be the domain for *your* Okta
-organization. If you don't already have an Okta organization, please read the "Creation an Okta organization" section below.
-
-For example, if your Okta organization is "`acme.okta.com`" you
-would replace the string "`example.okta.com`" below with
-"`acme.okta.com`":
-
-~~~ javascript
-var baseUrl = 'https://example.okta.com';
-var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
+~~~
+$ python -m SimpleHTTPServer
 ~~~
 
-Finally, the lines below actually render the Okta Sign-In
-Widget. Note that the value for `el` can be any selector of your choice - "#okta-login-container" is a selector for an element in the HTML code that has an `id` attribute of "okta-login-container".
+In Python 3 this command is:
 
-Also note that we only define a "SUCCESS" callback in which we create an Okta session and redirect the browser to the Okta organization. This logs the user directly into the Okta dashboard. In a production environment, you should  handle statuses beyond "SUCCESS" and define an "ERROR" callback as well.
-
-~~~ javascript
-oktaSignIn.renderEl(
-  { el: '#okta-login-container' },
-  function (res) {
-    if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect(orgUrl); }
-  }
-);
+~~~
+python3 -m http.server
 ~~~
 
-## An in-depth example
-
-Now that you have a basic idea of how the Okta Sign-In widget works,
-your next step is to see these capabilities in action for
-yourself. The best way to do this is to set up a version of the
-Okta Sign-In Widget that is configured to point at your own Okta
-organization.
-
-Setting up the Okta Sign-In Widget for your Okta organization requires the
-following steps:
-
-1.  Creating an Okta organization
-2.  Creating an HTML file with the widget code
-3.  Modifying the HTML to use your Okta organization
-4.  Copying the HTML file to a web server
-5.  Configuring CORS support on your Okta organization
-
-### Creating an Okta organization
-
-You can skip this step if you already have an Okta organization and
-have the ability to configure CORS on that Okta organization.
-
-If you do have the ability to [configure CORS](/docs/api/getting_started/enabling_cors.html) for your Okta
-organization, or do not have an Okta organization, you will need to
-create an [Okta Developer Edition](https://www.okta.com/developer/signup/) account for yourself before
-continuing on the steps below.
-
-### Configuring CORS support for your Okta organization
+#### 4. Configure a Trusted Origin
 
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
-You can enable CORS by following the steps in our guide for
-[guide for Enabling CORS](/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base url of the
-web server you are using to host the HTML for the Okta Sign-In Widget (see below for instructions). For example, if you plan to host your Sign-In Widget in a page accessible under `http://localhost:8000`, you need to add `http://localhost:8000` as a trusted CORS endpoint in Okta.
+You can enable your Sign-in Widget page as a "Trusted Origin" in Okta, which enables Cross-Origin Resource Sharing (CORS). To do this, follow the steps found under the "Trusted Origins tab" section in our [API Security help page](https://help.okta.com/en/prev/Content/Topics/Security/API.htm). Configure your Origin using the same base URL as the web server you are using to host the HTML for the Okta Sign-In Widget. For example, if you're serving the page using the Python SimpleHTTPServer, the origin would be `http://0.0.0.0:8000`.
 
-To do so, follow the steps below:
+If you now open the page with the Widget code on it, you can enter in the credentials for a user in your Okta org and you will be logged in. And that's it!
 
-1. Navigate to the `Admin -> Security -> API` page of your Okta dashboard.
-2. In the `CORS` tab, add the url of the site that will host the Okta Sign-In Widget. For instance, if you want to test it on a development machine on a web site hosted at `http://localhost:8081`, add `http://localhost:8081` in the CORS multi-line text box.
-3. Click `Enable CORS for the following base URLs`.
-4. Press `Save`.
+## Adding a Redirect
 
-If you see the `Trusted Origins` tab instead of the `CORS` tab, follow the steps below:
+In the simple example above, you already performed the following steps:
 
-1. Press the `Add Origin` button.
-2. Fill out the Name field, add add the url of the site that will host the Okta Sign-In Widget to the `Origin URL` field.
-3. Check the `CORS` check box in the `Type` section.
-4. Press `Save`.
+1.  Created an HTML file with the widget code
+2.  Modified the HTML to use your Okta organization
+3.  Served the HTML file with a web server
+4.  Configured a Trusted Origin in your Okta organization
 
+In that example, you redirect the user to their Okta dashboard (as defined in the `orgUrl` variable). Now you will configure a redirect to a custom authentication landing page hosted on your server. 
 
-### Creating an HTML file with the widget code
+To do this, you will now perform the following steps:
 
-The first step of getting the Okta Sign-In Widget set up for your Okta
-organization is to copy the HTML below to a file named
-`login-to-okta.html` - note that the HTML below is the *absolute minimum* that
-you need to get the Okta Sign-In Widget working, it is not a complete
-example by any means. A production deployment of the Okta Sign-In Widget
-will have a lot more in-depth configuration.
+1. Create a landing page
+2. Add a redirect URL variable to the widget
+3. Update the post-authentication behavior of the widget
+4. Configure redirects in your Okta organization
 
-Copy this to a file named `login-to-okta.html`:
+#### Create the landing page
 
-    <!doctype html>
-    <html lang="en-us">
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Example Okta Sign-In Widget</title>
+The first step will be to create the landing page that the user will be redirected to after authentication. For this example, you should create the file in the same directory as your existing sign-in page, and name it something like `signed-in.html`. You can add any content you might like to your landing page.
 
-      <!--[if lt IE 9]>
-          <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <![endif]-->
+#### Add a Redirect URL
 
-      <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js" type="text/javascript"></script>
-      <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
-      <!-- Optional, customizable css theme options. Link your own customized copy of this file or override styles in-line -->
-      <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css" type="text/css" rel="stylesheet">
-    </head>
-    <body>
-      <!-- Render the login widget here -->
-      <div id="okta-login-container"></div>
+There are just two lines you will need to modify in your widget code to get the sample working in your own environment. Under the line where you specify the fully-qualified domain name for your Okta org, add the following line:
 
-      <!-- Script to init the widget -->
-      <script>
-        var orgUrl = 'https://example.okta.com';
-        var redirectUrl = 'http://localhost:8000/signed-in.html';
-        var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
+~~~ javascript
+  var redirectUrl = 'http://localhost:3333/signed-in.html';
+~~~
 
-        oktaSignIn.renderEl(
-          { el: '#okta-login-container' },
-          function (res) {
-            if (res.status === 'SUCCESS') {
-              console.log('User %s successfully authenticated %o', res.user.profile.login, res.user);
-              res.session.setCookieAndRedirect(redirectUrl);
-            }
-          }
-        );
-      </script>
-    </body>
-    </html>
+Replace `http://localhost:3333/signed-in.html` in the `redirectUrl` variable with the URL of the landing page in your own web application where you would like to redirect the user after a successful login.
 
-Note that in this code snippet, we redirect the user to a custom page we host locally at `http://localhost:8081/signed-in.html` instead of redirecting the user to the Okta dashboard (as was done in the simple example section above).
+#### Update the post-authentication behavior
 
-### Modify the HTML for your Okta organization
+The other change you should make to your widget code is to change the success behavior, found on this line:
 
-Once you've copied the HTML above into a file named
-`login-to-okta.html`, the next step is for you to use your favorite
-text editor to modify `login-to-okta.html`. You will need to
-replace all instances of the string `example.okta.com` with the
-[fully qualified domain name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) for your Okta organization.
+~~~ javascript
+  if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect(orgUrl); }
+~~~
 
-**NOTE:** If you aren't sure what the "fully qualified domain name" for your
-Okta organization is, it is simply the "[domain](https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax)" part of the URL
-that you use to log in to Okta. For example, if your company name
-is "Acme" and you log in to Okta using the
-`https://acme.okta.com` then your fully qualified domain name
-would be "`acme.okta.com`". Likewise, if you are using an Okta
-Developer Edition organization, your domain will be something like
-"`dev-12345.oktapreview.com`".
+Replacing `orgUrl` with `redirectUrl` will send the user to our new landing page.
 
-There is just one line you will need to modify in
-`login-to-okta.html` to get the sample working in your own environment. Simply  update the two lines below to match your environment with your fully qualified domain name in the following line:
+The updated section of your sign-in widget will now look something like this:
 
-		var orgUrl = 'https://example.okta.com';
-       var redirectUrl = 'http://localhost:8000/signed-in.html';
+~~~ html
+<script>
+  var orgUrl = 'https://dev-123456.oktapreview.com';
+  var redirectUrl = 'http://localhost:3333/signed-in.html';
+  var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
 
-Replace `example.okta.com` in the `orgUrl` variable with the fully qualified domain name of your organization.
-Replace also `http://localhost:8000/signed-in.html` in the `redirectUrl` variable with the url of the page in your own web application where you would like to redirect the user after a successful login.
+  oktaSignIn.renderEl(
+    { el: '#okta-login-container' },
+    function (res) {
+      if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect(redirectUrl); }
+    }
+  );
+</script>
+~~~
 
-### Copy the HTML to a web server
+Once you are done, save the updated file.
 
-Once you've created a `login-to-okta.html` file, your next step is
-get this file hosted on a web server. The web server you use will
-depend on your development environment and what you are comfortable
-with using.
+#### Configure redirects
 
-If you aren't sure which web server to use, or don't have one set up
-already, an easy web server to set up on Mac OS X or GNU/Linux
-is the `SimpleHTTPServer` that is included with `python`.
-
-If you have Python installed on your system, you can start the
-`SimpleHTTPServer` by running the following command from the same
-directory that the `login-to-okta.html` file is located in:
-
-    $ python -m SimpleHTTPServer
-
-If you are a Node.js developer, you might be more comfortable
-running a simple HTTP server in Node.js, which you can do as follows:
-
-    $ npm install -g http-server
-
-    $ http-server
+To allow redirects, go back to the Trusted Origins section where you allowed CORS and edit the Origin that you entered. In addition to enabling CORS, also enable Redirect. If you need any help doing this, you can refer to [the Security API help page](https://help.okta.com/en/prev/Content/Topics/Security/API.htm?cshid=Security_API#Security_API).
 
 ### Testing the Okta Sign-In Widget
 
 At this point, you are ready to test the Okta Sign-In Widget.
 
-Test the Okta Sign-In Widget by loading the URL for the
-`login-to-okta.html` file in your favorite web browser.
+Test the Widget by starting up your web server again, then loading the URL for the Widget file in your favorite web browser.
 
-If you used `python -m SimpleHTTPServer` command above, this URL will be
-`http://localhost:8000/login-to-okta.html`
-
-Once you've successfully loaded the Okta Sign-In Widget, it is
-time to start exploring the capabilities of the
-widget.
+Once you've successfully loaded the Okta Sign-In Widget, it is time to start exploring the capabilities of the widget.
 
 Here are two things for you to try:
 
 1.  Log in using credentials that you know are invalid.
-    For example: Try using "invalid@example.com" as the user name and
-    "invalid" as the password. You should see an error.
-2.  Try using a valid user name and password. If everything works,
-    you will be redirected to `http://localhost:8000/signed-in.html`.
-3.  [Configure Multifactor Authentication](https://support.okta.com/help/articles/Knowledge_Article/27315047-Configuring-Multifactor-Authentication)
-    for your Okta org and try logging in using the Okta Sign-In Widget.
+    For example: Try using "invalid@example.com" as the username and "invalid" as the password. You should see an error.
+2.  Try using a valid username and password. If everything works, you will be redirected to `signed-in.html`.
 
-    If you are redirected when you log in successfully, then it works!
-    Your next step is to configure the Okta Sign-In Widget for your specific requirements.
+If you are redirected when you sign in successfully, then it works! Your next step is to configure the Okta Sign-In Widget for your specific requirements. For example, you can [configure Multi-factor Authentication](https://help.okta.com/en/prod/Content/Topics/Security/MFA.htm) for your Okta org and try logging in using the Okta Sign-In Widget.
+
 
 ## Customization
 
@@ -366,35 +236,35 @@ future versions of the Okta Sign-In Widget.
 Below is an in-line CSS example, which gives you an idea of how you
 can style the Okta Sign-In Widget. Try the following style below
 by copying the `<style>` tag below into the `<head>` section of
-the `login-to-okta.html` file that you created above.
+the `login-to-okta.html` file that you created above. It will change the background image for the sign-in page, as well as the color of the "Sign In" button.
 
 ~~~ html
- <style>
-	  body {
-	    background-image: url('https://farm9.staticflickr.com/8332/8451032652_b2bf0bdadc_h.jpg');
-	    background-repeat: no-repeat;
-	    background-position: center center fixed;
-	    -webkit-background-size: cover;
-	    -moz-background-size: cover;
-	    -o-background-size: cover;
-	    background-size: cover;
-	  }
+<style>
+    body {
+      background-image: url('https://farm9.staticflickr.com/8332/8451032652_b2bf0bdadc_h.jpg');
+      background-repeat: no-repeat;
+      background-position: center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
 
-	  #okta-login-container .button {
-	    color: #ffffff;
-	    background-color: #3a3f44;
-	    border-color: #3a3f44;
-	    background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
-	    background-repeat: no-repeat;
-	    filter: none;
-	  }
+    #okta-login-container .button {
+      color: #ffffff;
+      background-color: #3a3f44;
+      border-color: #3a3f44;
+      background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
+      background-repeat: no-repeat;
+      filter: none;
+    }
 </style>
 ~~~
 
 #### Advice for hosting your own CSS
 
 While the example above demonstrates how to use an in-page style
-tag, we strongly encourage you to create your own stylesheet by
+tag, we strongly encourage you to create your own style sheet by
 copying the `okta-theme.css` file onto your own website, and
 update that file as needed. Here is what that might look like in
 your HTML:
@@ -406,16 +276,101 @@ your HTML:
 The configuration options that are passed to the `OktaSignIn()`
 constructor are used to configure the functionality and text labels
 of the Okta Sign-In Widget. An example of how to configure
-`OktaSignIn()` is below, followed by a full list of all of the
-features and text labels that you can use to configure the Okta Sign-In Widget.
+`OktaSignIn()` is below. If you'd like to see the full list of configuration options, see the [Sign-in Widget Reference page](https://developer.okta.com/code/javascript/okta_sign-in_widget_ref.html#configuration-options).
 
-#### Example
+#### A Walkthrough of the Widget Code
 
-Below is a working example of a customized version of the Okta Sign-In Widget. You can
-see what these customizations do by copying this code into your
+If you are a developer, the best way to understand the Okta
+Sign-In Widget is to look at a simple example of the HTML
+needed to get it working. The HTML below is the same as the HTML you added above:
+
+~~~ html
+<!doctype html>
+<html lang="en-us">
+<head>
+
+  <title>Example Okta Sign-In Widget</title>
+
+  <!-- Core widget js and css -->
+
+  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js" type="text/javascript"></script>
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
+  <!-- Optional, customizable css theme options. Link your own customized copy of this file or override styles in-line -->
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+  <!-- Render the login widget here -->
+  <div id="okta-login-container"></div>
+
+  <!-- Script to init the widget -->
+  <script>
+    var orgUrl = 'https://dev-123456.oktapreview.com';
+    var redirectUrl = 'http://localhost:3333/signed-in.html';
+    var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
+
+    oktaSignIn.renderEl(
+      { el: '#okta-login-container' },
+      function (res) {
+        if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect(redirectUrl); }
+      }
+    );
+  </script>
+</body>
+</html>
+~~~
+
+Here is what is happening in the HTML above:
+
+#### Head
+
+First, in the `<head>` tag, we include the  `okta-sign-in.min.js` and
+`okta-sign-in.min.css` files. These files have all of the
+logic and default style sheets used by the Okta Sign-In Widget.
+
+We also include the `okta-theme.css` file, which adds Okta's own custom theme. This is the same theme you see on the login page of your Okta organization, assuming you have enabled the New Sign-In Page setting in `Admin -> Settings -> Appearance` in the `Sign-In Configuration` section. You can choose not to include this `okta-theme.css` style sheet if you so wish.
+
+#### Body
+
+In the `<body>`, we add a `<div>` tag with an `id` value of
+`okta-login-container`. 
+
+>Note: You can use any `id` value in this tag, we are just using `okta-login-container` here for the sake of clarity.
+
+Next, we add some JavaScript code to insert the Okta Sign-In Widget
+into the `okta-login-container` tag. In this short example, this
+JavaScript is included at the end of the file. However, when you use
+this code on your own site, you will need to run these functions
+in the parts of your code that are run when the DOM is ready.
+
+Here is what that JavaScript code is doing: first, the line below
+initializes the Okta Sign-In Widget object. 
+
+> The `baseUrl` value must be the domain for your Okta
+organization. 
+
+For example, if your Okta organization is `acme.okta.com` you
+would replace the string `example.okta.com` below with
+`acme.okta.com`.
+
+Finally, the lines below actually render the Okta Sign-In
+Widget. Note that the value for `el` can be any selector of your choice - "#okta-login-container" is a selector for an element in the HTML code that has an `id` attribute of "okta-login-container".
+
+Also, note that we only define a "SUCCESS" callback in which we create an Okta session and redirect the browser to the Okta organization. This logs the user directly into the Okta dashboard. In a production environment, you should handle statuses beyond "SUCCESS" and define an "ERROR" callback as well.
+
+~~~ javascript
+oktaSignIn.renderEl(
+  { el: '#okta-login-container' },
+  function (res) {
+    if (res.status === 'SUCCESS') { res.session.setCookieAndRedirect(orgUrl); }
+  }
+);
+~~~
+
+#### Customized Example
+
+Below is a working example of a customized version of the Okta Sign-In Widget. You can see what these customizations do by copying this code into your
 `login-to-okta.html` example file and reloading the page in your
-web browser. A full list of the supported customization options
-are below.
+web browser. 
 
 ~~~ javascript
 var oktaSignIn = new OktaSignIn({
@@ -449,96 +404,16 @@ var oktaSignIn = new OktaSignIn({
 });
 ~~~
 
-#### Configurable features
-
--   `baseUrl`
-
-    The base URL for your Okta organization. Examples base URLs include:
-    `https://example.okta.com` and `https://dev-12345.oktapreview.com`.
--   `recoveryToken`
-
-    If starting in recovery flow (unlock or forgot pass), pass in the `recoveryToken`.
--   `logo`
-
-    Company logo to use in the widget.
--   `features`
-
-    The options in the `features` object enable or disable widget
-    features via a Boolean `true` or `false`. Features are enabled
-    by defining them with `true`, and disabled with `false`. For
-    example, to disable display of the "Remember Me" checkbox, you would
-    update your `features` object to look like below:
-
-        features: {
-            rememberMe: false
-        }
-
-    Here is the full list of features that you can configure:
-
-    -   `rememberMe`
-
-        When set to **true**, this will display a checkbox allowing a
-        user to enable "Remember me" functionality at login.
-
-        Defaults to **true**
-    -   `smsRecovery`
-
-        When set to **true**, this will allow a users with a configured
-        mobile phone number to recover their password using an SMS.
-
-        Defaults to **false**
-    -   `selfServiceUnlock`
-
-        When set to **true**, this will give users the option to perform a self-service password reset.
-
-        Defaults to **false**
--   `helpLinks`
-
-    The options in the `helpLinks` object set alternate links to be
-    used for the help links on the Okta Sign-In Widget.
-
-    Here is an example of configuring an alternate help link for the
-    link labeled "Help", as well as configuring a custom link with a
-    label of "Dehydrated Boulders Support":
-
-        helpLinks: {
-          help: 'http://acme.example.com/custom/help/page',
-          custom: [
-            { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
-          ]
-        }
-
-    -   `help`
-
-        When set to a *string containing a URL*, the value of this
-        option will be used as the `href` for the help text labeled
-        "Help" by default.
-    -   `forgotPassword`
-
-        When set to a *string containing a URL*, the value of this
-        option will be used as the `href` for the help text labeled
-        "Forgot password?" by default.
-    -   `unlock`
-
-        When set to a *string containing a URL*, the value of this
-        option will be used as the `href` for the help text labeled
-        "Unlock account?" by default.
-    -   `custom`
-
-        When set to an *array containing objects* with `text` and
-        `href` keys, new links will be added to the help text for
-        the Okta Sign-In Widget where the value of the `text` key will be
-        used as the text label and the value of the `href` key will be
-        used as the `href` link that label points to. For example:
-
-            custom: [
-              { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
-              { text: 'Rocket Sled Questions', href: 'http://acme.example.com/questions/rocket-sled' }
-            ]
+For more information about these configuration options, see the [Sign-in Widget Reference page](https://developer.okta.com/code/javascript/okta_sign-in_widget_ref.html#configuration-options). 
 
 ## Troubleshooting
 
 If you are working with a single-page app using the Sign-In Widget and your Okta cookie isn't set, try enabling third-party cookies in the browser.
 
-## Reference Documentation
-You can find more reference information in the [Okta Sign-In Widget reference](/code/javascript/okta_sign-in_widget_ref) page.
+For other questions, please get in touch with <developers@okta.com>.
+
+## Next Steps
+
+You can find more information about the Widget on the [Okta Sign-In Widget Reference Page](/code/javascript/okta_sign-in_widget_ref).
+
+If you'd like to see the code that powers the Widget, you can find it on Github here: <https://github.com/okta/okta-signin-widget>.
