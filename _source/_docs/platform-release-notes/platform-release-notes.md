@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.26
+excerpt: Summary of changes to the Okta Platform since Release 2017.27
 ---
 
 ## Release 2017.28
@@ -17,7 +17,7 @@ Okta SDK `EventsAPIClient`.
 The new data retention policy starts:
 
 * June 7, 2017 for existing preview orgs
-* July 17, 2017 for existing production org
+* July 17, 2017 for existing production orgs
 
 Preview and production orgs created on or after July 17, 2017, will retain log data for three months.
 
@@ -29,52 +29,68 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 ### Platform Enhancements in Preview and Expected in Production during Week 2017.29 (July 19, 2017)
 
-*[Reactivate Suspended](#reactivate-suspended)
+* [Unsuspended Suspended Users During Inbound SAML Login](#unsuspended-suspended-users-during-inbound-saml-ogin)
 
-*[PLUGIN_BLOCK](#plugin_block)
+* [Block Insecure Cross-Org Requests to GA](#block-insecure-cross-org-requests-to-ga)
 
-*[Limit Events](limit-events)
+* [Limit Age of Events to GA](#limit-age-of-events-to-ga)
 
 
-#### Reactivate Suspended
-zzzz
+#### Unsuspended Suspended Users During Inbound SAML Login
+
+You can configure the JIT settings for a SAML identity provider (IdP) to enable inbound SAML login for users who are suspended in Okta.
+
+{% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
   <!-- OKTA-128384  -->
 
 
-#### PLUGIN_BLOCK
-wwww
+#### Block Insecure Cross-Org Requests to GA
+Okta blocks cross-org requests that do not meet our security requirements. This feature moves from early access (EA) to generally available (GA).
+
   <!-- OKTA-132490  -->
 
 
-#### Limit Events
-vvvv
+#### Limit Age of Events to GA
+The events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from early access (EA) to generally available (GA).
+
   <!-- OKTA-125424, 120605  -->
 
 
 ### Platform Enhancements in Preview and Expected in Production during Week 2017.31 (August 2, 2017)
 
-* [OPENID_CONNECT](#openid_connect)
+* [OpenID Connect to GA](#openid-connect-to-ga)
 
-* [KEY_ROLLOVER](#key_rollover)
+* [Key Rollover to GA](#key-rollover-to-ga)
 
 
-#### OPENID_CONNECT
-xxxx
+#### OpenID Connect to GA
+Okta's [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) moves from early access (EA) to generally available (GA).
+
   <!-- OKTA-132049  -->
 
 
-#### KEY_ROLLOVER
-yyyy
+#### Key Rollover to GA
+Key rollover is a feature available with OpenID Connect and moves from early access (EA) to generally available (GA) with it. For more information, see [Validating ID Tokens](https://developer.okta.com/docs/api/resources/oidc.html#validating-id-tokens)
+
   <!-- OKTA-132045  -->
 
 
 ### Platform Bugs Fixed
 
-* (OKTA-123695)
+* `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
 
-* (OKTA-131784)
+* Just-in-time reactivation of users failed in some circumstances. (OKTA-131784)
 
-* (OKTA-132207)
+* Okta didn't capture `externalId` from Microsoft Social Identity Providers.  (OKTA-132207)
+
+
+
+### Does Your Org Have This Change Yet?
+
+To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
+
+{% img release_notes/version_footer.png alt:"Release Number in Footer" %}
+
 
 ### Looking for Something Else?
 
