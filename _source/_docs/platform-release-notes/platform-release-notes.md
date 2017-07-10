@@ -30,7 +30,7 @@ You can export data before Okta deletes it. We recommend using Security Informat
 ### Platform Enhancements and New Features
 
 The following changes are available Wednesday, July 12 in preview orgs.
-Availability in production orgs follows either by approximately one week or one month.
+Availability in production orgs follows by approximately either one week or one month.
 
 These features are GA in preview orgs, and expected in production orgs during the week of August 8, 2017.
 
@@ -40,7 +40,7 @@ These features are GA in preview orgs, and expected in production orgs during th
 
 These feature enhancements are GA in preview orgs, and expected in production orgs during the week of July 17, 2017.
 
-* [Allow Unsuspended Users During Inbound SAML Login](#allow-suspended-users-during-inbound-saml-login)
+* [Allow Unsuspending Users During Inbound SAML Login](#allow-unsuspending-users-during-inbound-saml-login)
 
 * [Block Insecure Cross-Org Requests to GA](#block-insecure-cross-org-requests)
 
@@ -61,7 +61,7 @@ The ability to generate a certificate with specified validity period (see the [A
  
    <!-- OKTA-132045  -->
 
-#### Allow Suspended Users During Inbound SAML Login
+#### Allow Unsuspending Users During Inbound SAML Login
 
 You can configure the JIT settings for a SAML identity provider (IdP) to enable inbound SAML login for users who are suspended in Okta.
 
@@ -87,7 +87,7 @@ These platform bug fixes are available in preview orgs and expected in productio
 
 * `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
 
-* Just-in-time reactivation of users failed in some circumstances. (OKTA-131784)
+* Identity provider JIT reactivation of users sometimes failed when there were configured group assignments. (OKTA-131784)
 
 * In some circumstances, the link between the external Microsoft user and the Okta user was inaccurate.  (OKTA-132207)
 
