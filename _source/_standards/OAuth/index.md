@@ -339,7 +339,7 @@ Use the Okta Authorization Server to perform SSO with Okta or sign in users for 
 Okta hosts and manages the Okta Authorization Server. It can't be configured,
 though you can add a [groups claim](/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned)
 and [app-user profile attributes](/docs/api/resources/apps.html#application-user-properties) to a client.
-The Access Token minted by the Okta Authorization Server is consumed by Okta APIs. The Access Token audience is always Okta specific and can't be validated by your applications.
+The Access Token minted by the Okta Authorization Server is consumed by Okta APIs. The Access Token audience is always Okta specific, so the token can't be validated by your applications.
 
     >Note: The Okta Authorization Server doesn't require that the API Access Management feature be enabled.
 
