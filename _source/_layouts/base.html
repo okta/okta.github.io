@@ -4,11 +4,15 @@
 <body>
   <div class="Page {{ page.title | slugify: 'pretty' }}">
     <!-- START Header -->
-    {% include header.html %}     <!-- END Header -->
+    {% include header.html %}
+    <!-- END Header -->
     {{ content }}
     <!-- START Footer -->
     {% include footer.html %}
-     <!-- END Footer -->
+    <!-- END Footer -->
   </div>
+  <!-- START Post Footer -->
+  {% include post-footer.html %}
+  <!-- END Post Footer -->
 </body>
 </html>
