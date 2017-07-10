@@ -42,7 +42,7 @@ These feature enhancements are GA in preview orgs, and expected in production or
 
 * [Allow Unsuspending Users During Inbound SAML Login](#allow-unsuspending-users-during-inbound-saml-login)
 
-* [Block Insecure Cross-Org Requests to GA](#block-insecure-cross-org-requests)
+* [Improved Plugin Security to GA](#improved-plugin-security)
 
 * [Limit Age of Events to GA](#limit-age-of-events)
 
@@ -63,21 +63,21 @@ The ability to generate a certificate with specified validity period (see the [A
 
 #### Allow Unsuspending Users During Inbound SAML Login
 
-You can configure the JIT settings for a SAML identity provider (IdP) to enable inbound SAML login for users who are suspended in Okta.
+You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending suspended Okta users during inbound SAML login.
 
 {% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
 
-If the POST to `/api/v1/idps` includes a `policy.provisioning.conditions` section, that section must include `policy.provisioning.conditions.suspended.action`.
+See the [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html) for more information.
 
   <!-- OKTA-128384  -->
 
-#### Block Insecure Cross-Org Requests
-Okta blocks cross-org requests that do not meet our security requirements. This feature moves from EA to GA.
+#### Improved Plugin Security
+Template Plugin Apps you create from the admin portal (Admin > Applications > Add Application > Template Plugin App) have improved security. This feature moves from EA to GA.
 
   <!-- OKTA-132490  -->
 
 #### Limit Age of Events
-The events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from early access (EA) to generally available (GA).
+The events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from EA to GA.
 
   <!-- OKTA-125424, 120605  -->
 
