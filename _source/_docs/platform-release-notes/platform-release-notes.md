@@ -31,8 +31,6 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 The following changes are available Wednesday, July 12 in preview orgs.
 Availability in production orgs follows either by approximately one week or one month.
- 
-#### Generally Available (GA) Features
 
 These features are GA in preview orgs, and expected in production orgs during the week of August 8, 2017.
 
@@ -42,26 +40,24 @@ These features are GA in preview orgs, and expected in production orgs during th
 
 These feature enhancements are GA in preview orgs, and expected in production orgs during the week of July 17, 2017.
 
-* [Allow Unsuspended During Inbound SAML Login](#unsuspended-suspended-users-during-inbound-saml-ogin)
+* [Allow Unsuspended Users During Inbound SAML Login](#allow-suspended-users-during-inbound-saml-ogin)
 
 * [Block Insecure Cross-Org Requests to GA](#block-insecure-cross-org-requests)
 
 * [Limit Age of Events to GA](#limit-age-of-events)
 
-
-##### OpenID Connect
+#### OpenID Connect
 [OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) 
 
   <!-- OKTA-132049  -->
 
 
-##### Key Rollover
+#### Key Rollover
 Key rollover 
  
  For more information, see [Validating ID Tokens](https://developer.okta.com/docs/api/resources/oidc.html#validating-id-tokens)
 
   <!-- OKTA-132045  -->
-
 
 #### Allow Suspended Users During Inbound SAML Login
 
@@ -70,20 +66,15 @@ You can configure the JIT settings for a SAML identity provider (IdP) to enable 
 {% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
   <!-- OKTA-128384  -->
 
-
 #### Block Insecure Cross-Org Requests
 Okta blocks cross-org requests that do not meet our security requirements. This feature moves from EA to GA.
 
   <!-- OKTA-132490  -->
 
-
 #### Limit Age of Events
 The events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from early access (EA) to generally available (GA).
 
   <!-- OKTA-125424, 120605  -->
-
-
-
 
 ### Platform Bugs Fixed
 
@@ -95,14 +86,11 @@ These platform bug fixes are available in preview orgs and expected in productio
 
 * Okta didn't capture `externalId` from Microsoft social identity providers.  (OKTA-132207)
 
-
-
 ### Does Your Org Have This Change Yet?
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
-
 
 ### Looking for Something Else?
 
