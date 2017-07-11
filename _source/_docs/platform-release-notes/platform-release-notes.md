@@ -6,45 +6,30 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.27
 
 ## Release 2017.28
 
-### Data Retention Policy Changes
-
-Okta is changing system log data retention windows. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
-
-* For orgs created before July 17th, data older than 180 days will be removed.
-* For orgs created on or after July 17th, data older than 90 days will be removed.
-
-The new data retention policy started June 7, 2017, for existing preview orgs. It will start July 17, 2017, for existing production orgs.
-
-Preview and production orgs created on or after July 17, 2017, will retain log data for 90 days.
-
-For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
-
-You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API.
-
- <!-- OKTA-125424 -->
-
 ### Platform Enhancements and New Features
 
-The following changes are available in preview orgs on Wednesday, July 12.
-Availability in production orgs follows by approximately either one week or one month.
+The following changes are available in preview orgs on Wednesday, July 12. Availability in production orgs follows by approximately either one week or one month. For information about the designations EA and GA, see [Okta Release Lifecycle](https://developer.okta.com/docs/api/getting_started/releases-at-okta.html).
 
-These features are GA in preview orgs, and expected in production orgs during the week of August 8, 2017:
+The following features are GA in preview orgs, and expected to go into GA in production orgs during the week of August 8, 2017:
 
 * [OpenID Connect](#openid-connect)
 
 * [Key Rollover](#key-rollover)
 
-These feature enhancements are GA in preview orgs, and expected in production orgs during the week of July 17, 2017:
 
-* [Allow Unsuspending Users During Inbound SAML Login](#allow-unsuspending-users-during-inbound-saml-login)
+The following GA feature enhancements are in preview orgs, and expected in production orgs during the week of July 17, 2017:
+
+* [Data Retention Policy Changes](#data-retention-policy-changes)
 
 * [Improved Plugin Security](#improved-plugin-security)
 
-* [Limit Age of Events](#limit-age-of-events)
 
-This feature enhancement is EA in preview orgs and expected in production orgs during the week of July 17, 2017:
+The following EA feature enhancements are in preview orgs and expected in production orgs during the week of July 17, 2017:
 
-* [Okta Email Factor](#okta-email-factor)
+* [Allow Unsuspending Users During Inbound SAML Login](#allow-unsuspending-users-during-inbound-saml-login)
+
+* [Email Factor](#email-factor)
+
 
 #### OpenID Connect
 [OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html) is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
@@ -61,30 +46,52 @@ The ability to generate a certificate with specified validity period (see the [A
  
    <!-- OKTA-132045  -->
 
-#### Allow Unsuspending Users During Inbound SAML Login
+#### Data Retention Policy Changes
 
-You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending suspended Okta users during inbound SAML login.
+Okta is changing system log data retention windows. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
 
-{% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
+* For orgs created before July 17th, data older than 180 days will be removed.
+* For orgs created on or after July 17th, data older than 90 days will be removed.
 
-See the [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html) for more information.
+The new data retention policy started June 7, 2017, for existing preview orgs. It will start July 17, 2017, for existing production orgs.
 
-  <!-- OKTA-128384  -->
+Preview and production orgs created on or after July 17, 2017, will retain log data for 90 days.
+
+For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
+
+You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API.
+
+
+<!--
+#### Limit Age of Events
+
+In keeping with the [Data Retention Policy Changes](#data-retention-policy-changes), the events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from EA to GA.
+
+-->
+
+  <!-- OKTA-125424, 120605  -->
+
+
 
 #### Improved Plugin Security
 Template Plugin Apps you create from the admin portal (**Admin > Applications > Add Application > Template Plugin App**) have improved security. This feature moves from EA to GA.
 
   <!-- OKTA-132490  -->
 
-#### Limit Age of Events
 
-In keeping with the [Data Retention Policy Changes](#data-retention-policy-changes), the events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from EA to GA.
+#### Allow Unsuspending Users During Inbound SAML Login
 
-  <!-- OKTA-125424, 120605  -->
+You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending suspended Okta users during inbound SAML login. See the [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html) for more information. This feature moves into EA. To enable it, call Okta Support.
 
-#### Okta Email Factor
+{% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
 
- You can send a one-time password (OTP) and an activation link to an email address as part of enrolling a user. This feature moves into EA.
+ <!-- OKTA-128384 -->
+
+
+#### Email Factor
+
+ You can send a one-time password (OTP) and an activation link to an email address as part of enrolling a user. This feature moves into EA. To enable it, call Okta Support.
+
 
    <!-- OKTA-132297  -->
 
@@ -100,11 +107,13 @@ These platform bug fixes are available in preview orgs and expected in productio
 
 * In some circumstances, the link between the external Microsoft user and the Okta user was inaccurate.  (OKTA-132207)
 
+
 ### Does Your Org Have This Change Yet?
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
+
 
 ### Looking for Something Else?
 
