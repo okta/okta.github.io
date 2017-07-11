@@ -27,7 +27,7 @@ The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Con
 There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:
 
 * Social Authentication -- {% api_lifecycle ea %}
-* OpenID Connect -- {% api_lifecycle ea %}
+* OpenID Connect
 * API Access Management -- {% api_lifecycle ea %}
 
 It's important to understand which use case you are targeting and build your application according to the correct patterns for that use case.

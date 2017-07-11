@@ -9,8 +9,6 @@ The OpenID Connect API endpoints enable clients to use [OIDC workflows](http://o
 With OpenID Connect, a client can use Okta as a broker. The user authenticates against identity providers like Google, Facebook, LinkedIn, or Microsoft,
 and the client obtains an Okta session.
 
-> This API is currently in **Early Access** status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.
-
 ## Getting Started
 
 If you are new to OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with
