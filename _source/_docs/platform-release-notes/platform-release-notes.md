@@ -6,20 +6,16 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.27
 
 ## Release 2017.28
 
-### Advance Notice: Data Retention Changes
+### Data Retention Policy Changes
 
-Okta is changing system log data retention windows. System log data is available from `/api/v1/events` or
-Okta SDK `EventsAPIClient`.
+Okta is changing system log data retention windows. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
 
-* For orgs created before July 17th, data older than six months will be removed.
-* For orgs created on or after July 17th, data older than three months will be removed.
+* For orgs created before July 17th, data older than 180 days will be removed.
+* For orgs created on or after July 17th, data older than 90 days will be removed.
 
-The new data retention policy starts:
+The new data retention policy started June 7, 2017, for existing preview orgs. It will start July 17, 2017, for existing production orgs.
 
-* June 7, 2017 for existing preview orgs
-* July 17, 2017 for existing production orgs
-
-Preview and production orgs created on or after July 17, 2017, will retain log data for three months.
+Preview and production orgs created on or after July 17, 2017, will retain log data for 90 days.
 
 For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
@@ -29,25 +25,29 @@ You can export data before Okta deletes it. We recommend using Security Informat
 
 ### Platform Enhancements and New Features
 
-The following changes are available Wednesday, July 12 in preview orgs.
+The following changes are available in preview orgs on Wednesday, July 12.
 Availability in production orgs follows by approximately either one week or one month.
 
-These features are GA in preview orgs, and expected in production orgs during the week of August 8, 2017.
+These features are GA in preview orgs, and expected in production orgs during the week of August 8, 2017:
 
 * [OpenID Connect](#openid-connect)
 
 * [Key Rollover](#key-rollover)
 
-These feature enhancements are GA in preview orgs, and expected in production orgs during the week of July 17, 2017.
+These feature enhancements are GA in preview orgs, and expected in production orgs during the week of July 17, 2017:
 
 * [Allow Unsuspending Users During Inbound SAML Login](#allow-unsuspending-users-during-inbound-saml-login)
 
-* [Improved Plugin Security to GA](#improved-plugin-security)
+* [Improved Plugin Security](#improved-plugin-security)
 
-* [Limit Age of Events to GA](#limit-age-of-events)
+* [Limit Age of Events](#limit-age-of-events)
+
+This feature enhancement is EA in preview orgs and expected in production orgs during the week of July 17, 2017:
+
+* [Okta Email Factor](#okta-email-factor)
 
 #### OpenID Connect
-[OpenID Connect API](https://developer.okta.com/docs/api/resources/oidc.html) is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
+[OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html) is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
 
  OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.
 
@@ -72,14 +72,23 @@ See the [Identity Providers API](https://developer.okta.com/docs/api/resources/i
   <!-- OKTA-128384  -->
 
 #### Improved Plugin Security
-Template Plugin Apps you create from the admin portal (Admin > Applications > Add Application > Template Plugin App) have improved security. This feature moves from EA to GA.
+Template Plugin Apps you create from the admin portal (**Admin > Applications > Add Application > Template Plugin App**) have improved security. This feature moves from EA to GA.
 
   <!-- OKTA-132490  -->
 
 #### Limit Age of Events
-The events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from EA to GA.
+
+In keeping with the [Data Retention Policy Changes](#data-retention-policy-changes), the events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from EA to GA.
 
   <!-- OKTA-125424, 120605  -->
+
+#### Okta Email Factor
+
+ You can send a one-time password (OTP) and an activation link to an email address as part of enrolling a user. This feature moves into EA.
+
+   <!-- OKTA-132297  -->
+
+
 
 ### Platform Bugs Fixed
 
