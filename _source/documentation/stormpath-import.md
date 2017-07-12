@@ -189,7 +189,7 @@ The import tool works by iterating over your Stormpath data and then uses the Ok
 Stormpath Resource | Okta Equivalent
 --- | ---
 Account | [User](/docs/api/resources/users.html#user-properties)
-Application | [OAuth 2.0 Client Application](/docs/api/resources/oauth-clients.html) acting as a client for an [OAuth 2.0 Authorization Server](/docs/api/resources/oauth2.html#authorization-operations)
+Application | [Client applications](/docs/api/resources/oauth-clients.html) acting as a client for an [OAuth 2.0 Authorization Server](/docs/api/resources/oauth2.html#authorization-operations)
 Directory (Cloud) | [Group](/docs/api/resources/groups.html)
 Directory (Social) | [Identity Provider](/docs/api/resources/idps.html) + [Group](/docs/api/resources/groups.html)
 Directory (SAML) | [Identity Provider](/docs/api/resources/idps.html)

@@ -136,7 +136,7 @@ groups instead of **Everyone**.
 Now that we have all the configuration at Okta done, we can begin setting up our PHP application. There are a
 couple of different ways to include the sign-in widget in your application. You can use the NPM module by installing
 `@okta/okta-signin-widget` in your project, or by using the Okta CDN, which is what we'll be using. Once you have the
- sign-in widget, there's a little bit of configuration you have to do to talk with your new authentication server.
+ sign-in widget, there's a little bit of configuration you have to do to talk with your new authorization server.
 
 ## Installing and Configuring the Sign In Widget
 There are 2 files we will require for the sign in widget to work, a JS file and a CSS file. You will also be able to
@@ -198,7 +198,7 @@ We also need to add a script block to initialize and configure the widget.
 | clientId                | The client ID of the Okta application.                                                                                                               |
 | redirectUri             | Where we will send the user to once they attempt a login.                                                                                            |
 | authParams.responseType | What we want back from a successful login                                                                                                            |
-| authParams.issuer       | The issuer of the authentication server. Can be retrieved from **Admin -> Security -> API -> {Auth Server}**                                           |
+| authParams.issuer       | The issuer of the authorization server. Can be retrieved from **Admin -> Security -> API -> Authorization Servers**                                           |
 | authParams.display      | Redirect to the authorization server when an External Identity Provider button is clicked                                                            |
 
 Now we can visit the `login.php` page and see the Sign-In Widget. You should be able to log into your main account.

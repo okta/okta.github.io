@@ -1,13 +1,13 @@
 ---
 layout: docs_page
-title: OAuth 2.0 API
+title: OAuth 2.0
 weight: 4
 ---
 # OAuth 2.0 API
 
 {% api_lifecycle ea %}
 
-Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) Authorization Server and a certified [OpenID Provider](http://openid.net/certification).
+Okta is a standards-compliant [OAuth 2.0](http://oauth.net/documentation) authorization server and a certified [OpenID Provider](http://openid.net/certification).
 
 The OAuth 2.0 API provides API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
 
@@ -18,7 +18,7 @@ To understand more about OAuth 2.0 and Okta:
 
 ## Endpoints
 
-You can perform authorization and token operations, as well as create, configure, and delete Authorization Servers, policies, rules, scopes, and claims.
+You can perform authorization and token operations, as well as create, update, and delete Custom Authorization Servers, policies, rules, scopes, or claims.
 
 * [Authorization Operations](#authorization-operations)
 * [Authorization Server Operations](#authorization-server-operations)
@@ -59,7 +59,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
 | display               | Specifies how to display the authentication and consent UI. Valid values: ``page`` or ``popup``.                                                                                                                                                                                                                                                                                                                                            | Query | String   | FALSE    |                  |
 | max_age               | Specifies the allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                                      | Query | String   | FALSE    |                  |
 | response_mode         | Specifies how the authorization response should be returned.     [Valid values: ``fragment``, ``form_post``, ``query`` or ``okta_post_message``](#request-parameter-details). If ``id_token`` or ``token`` is specified as the *response_type*, then ``query`` isn't allowed as a *response_mode*. Defaults to ``fragment`` in implicit and hybrid flows. Defaults to ``query`` in authorization code flow and cannot be set as ``okta_post_message``.  | Query | String   | FALSE    | See Description. |
-| scope                 | Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the Access Token and ID Token. The ``openid`` scope has to be specified to get back an ID Token. If omitted, the default scopes configured in the Authorization Server are used.                                                                                                                                                                                                       | Query | String   | TRUE     |                  |
+| scope                 | Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the Access Token and ID Token. The ``openid`` scope has to be specified to get back an ID Token. If omitted, the default scopes configured in the Custom Authorization Server are used.                                                                                                                                                                                                       | Query | String   | TRUE     |                  |
 | state                 | A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.                                                                                                                                                                                                                                              | Query | String   | TRUE     |                  |
 | prompt                | Can be either ``none`` or ``login``. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there's an existing Okta session.                                                                                                                                                                       | Query | String   | FALSE    | See Description. |
 | nonce                 | Specifies a nonce that is reflected back in the ID Token. It is used to mitigate replay attacks.                                                                                                                                                                                                                                                                                                                                            | Query | String   | TRUE     |                  |
@@ -238,7 +238,7 @@ and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/U
 
 Use only one of these methods in a single request or an error will occur.
 
->If the value returned by `token_endpoint_auth_method` in the [OAuth 2.0 Clients API](/docs/api/resources/oauth-clients.html#update-client-application) is not what you wish to use, you can change the value of a client app's `token_endpoint_auth_method` with any of the values returned by `token_endpoint_auth_methods_support` (`client_secret_post`, `client_secret_basic`, or `client_secret_jwt`).
+>If the value returned by `token_endpoint_auth_method` in the [Dynamic Client Registration API](/docs/api/resources/oauth-clients.html#update-client-application) is not what you wish to use, you can change the value of a client app's `token_endpoint_auth_method` with any of the values returned by `token_endpoint_auth_methods_support` (`client_secret_post`, `client_secret_basic`, or `client_secret_jwt`).
 
 You can't change this value in the Okta user interface.
 
@@ -652,7 +652,7 @@ Standard open-source libraries are available for every major language to perform
 
 {% api_operation get /oauth2/*:authorizationServerId*/.well-known/oauth-authorization-server %}
 
-This API endpoint returns metadata related to an Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
+This API endpoint returns metadata related to a Custom Authorization Server that can be used by clients to programmatically configure their interactions with Okta.
 Custom scopes and custom claims aren't returned.
 
 This API doesn't require any authentication and returns a JSON object with the following structure.
@@ -733,7 +733,7 @@ This API doesn't require any authentication and returns a JSON object with the f
 
 This API endpoint returns OpenID Connect metadata that can be used by clients to programmatically configure their interactions with Okta.
 
-> Note: Custom scopes and claims aren't returned. To see your Authorization Server's custom scopes, use the [Get All Scopes API](#get-all-scopes), and to see its custom claims use [Get All Claims API](#get-all-claims).
+> Note: Custom scopes and claims aren't returned. To see your Custom Authorization Server's custom scopes, use the [Get All Scopes API](#get-all-scopes), and to see its custom claims use [Get All Claims API](#get-all-claims).
 
 This API doesn't require any authentication and returns a JSON object with the following structure.
 
@@ -839,6 +839,8 @@ This API doesn't require any authentication and returns a JSON object with the f
 
 ### Authorization Server Operations
 
+Use the following operations for Custom Authorization Servers:
+
 * [Create Authorization Server](#create-authorization-server)
 * [List Authorization Servers](#list-authorization-servers)
 * [Get Authorization Server](#get-authorization-server)
@@ -852,7 +854,7 @@ This API doesn't require any authentication and returns a JSON object with the f
 
 {% api_operation post /api/v1/authorizationServers %} 
 
-Creates a new Authorization Server with key rotation mode as `AUTO`
+Creates a new Custom Authorization Server with key rotation mode as `AUTO`
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -862,7 +864,7 @@ Creates a new Authorization Server with key rotation mode as `AUTO`
 ##### Response Parameters
 {:.api .api-request .api-response-params}
 
-The [Authorization Server](#authorization-server-object) you just created.
+The [Custom Authorization Server](#authorization-server-object) you just created.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -883,14 +885,14 @@ curl -v -X POST \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-The [Authorization Server](#authorization-server-object) you just created.
+The [Custom Authorization Server](#authorization-server-object) you just created.
 
 #### List Authorization Servers
 {:.api .api-operation}
 
 {% api_operation GET /api/v1/authorizationServers %}
 
-Lists the Authorization Servers in this org
+Lists all Custom Authorization Servers in this org
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -911,26 +913,26 @@ curl -v -X GET \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-The [Authorization Servers](#authorization-server-object) in this org.
+The [Custom Authorization Server](#authorization-server-object) in this org.
 
 #### Get Authorization Server
 {:.api .api-operation}
 
 {% api_operation get /api/v1/authorizationServers/:authorizationServerId %}
 
-Returns the Authorization Server identified by *authorizationServerId*.
+Returns the Custom Authorization Server identified by *authorizationServerId*.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                                                              | Type   | Required |
 |:----------------------|:-------------------------------------------------------------------------|:-------|:---------|
-| authorizationServerId | Authorization Server ID. You can find the ID in the Okta user interface. | String | True     |
+| authorizationServerId | Custom Authorization Server ID. You can find the ID in the Okta user interface. | String | True     |
 
 ##### Response Parameters
 {:.api .api-request .api-response-params}
 
-The [Authorization Server](#authorization-server-object) you requested.
+The [Custom Authorization Server](#authorization-server-object) you requested.
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -946,7 +948,7 @@ curl -v -X GET \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-The [Authorization Server](#authorization-server-object) you requested by *:authorizationServerId*.
+The [Custom Authorization Server](#authorization-server-object) you requested by *:authorizationServerId*.
 
 #### Update Authorization Server
 {:.api .api-operation}
@@ -964,13 +966,13 @@ Updates authorization server identified by *authorizationServerId*.
 |:------------|:----------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|:---------|
 | name        | The name of the authorization server                                                                            | String                                                                                                  | TRUE     |
 | description | The description of the authorization server                                                                     | String                                                                                                  | FALSE    |
-| audiences   | The list of audiences this Authorization Server can issue tokens to, currently Okta only supports one audience. | Array                                                                                                   | TRUE     |
+| audiences   | The list of audiences this Custom Authorization Server can issue tokens to, currently Okta only supports one audience. | Array                                                                                                   | TRUE     |
 | credentials | The credentials signing object with the `rotationMode` of the authorization server                              |     [Authorization server credentials object](oauth2.html#authorization-server-credentials-signing-object)  | FALSE    |
 
 ##### Response Parameters
 {:.api .api-request .api-response-params}
 
-The [Authorization Server](#authorization-server-object) you updated
+The [Custom Authorization Server](#authorization-server-object) you updated
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -992,21 +994,21 @@ curl -X PUT \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-The [Authorization Server](#authorization-server-object) you updated
+The [Custom Authorization Server](#authorization-server-object) you updated
 
 #### Delete Authorization Server
 {:.api .api-operation}
 
 {% api_operation delete /api/v1/authorizationServers/:authorizationServerId %}
 
-Deletes the Authorization Server identified by *authorizationServerId*.
+Deletes the Custom Authorization Server identified by *authorizationServerId*.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                                  | Type   | Required |
 |:----------------------|:---------------------------------------------|:-------|:---------|
-| authorizationServerId | The ID of the Authorization Server to delete | String | TRUE     |
+| authorizationServerId | The ID of a Custom Authorization Server to delete | String | TRUE     |
 
 ##### Response Parameters
 {:.api .api-request .api-response-params}
@@ -1036,14 +1038,14 @@ HTTP/1.1 204: No content
 
 {% api_operation post /api/v1/authorizationServers/:authorizationServerId/lifecycle/activate %} 
 
-Make an Authorization Server available for clients
+Make a Custom Authorization Server available for clients
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                                    | Type   | Required |
 |:----------------------|:-----------------------------------------------|:-------|:---------|
-| authorizationServerId | The ID of the Authorization Server to activate | String | TRUE     |
+| authorizationServerId | The ID of a Custom Authorization Server to activate | String | TRUE     |
 
 ##### Response Parameters
 {:.api .api-request .api-response-params}
@@ -1073,14 +1075,14 @@ HTTP/1.1 204: No content
 
 {% api_operation post /api/v1/authorizationServers/:authorizationServerId/lifecycle/deactivate %} 
 
-Make an Authorization Server unavailable to clients. Inactive Authorization Servers can be returned to `ACTIVE` status.
+Make a Custom Authorization Server unavailable to clients. An inactive Custom Authorization Server can be returned to `ACTIVE` status.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                                      | Type   | Required |
 |:----------------------|:-------------------------------------------------|:-------|:---------|
-| authorizationServerId | The ID of the Authorization Server to deactivate | String | TRUE     |
+| authorizationServerId | The ID of a Custom Authorization Server to deactivate | String | TRUE     |
 
 ##### Response Parameters
 {:.api .api-request .api-response-params}
@@ -1118,14 +1120,14 @@ HTTP/1.1 204: No content
 
 {% api_operation get /api/v1/authorizationServers/:authorizationServerId/policies %}
 
-Returns all the policies for a specified Authorization Server
+Returns all the policies for a specified Custom Authorization Server
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1141,20 +1143,20 @@ curl -v -X GET \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-Returns [the policies](#policies-object) defined in the specified Authorization Server
+Returns [the policies](#policies-object) defined in the specified Custom Authorization Server
 
 #### Get a Policy
 
 {% api_operation get /api/v1/authorizationServers/:authorizationServerId/policies/:policyId %}
 
-Returns the policies defined in the specified Authorization Server ID
+Returns the policies defined in the specified Custom Authorization Server ID
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 | policyId              | ID of a policy                | String | True     |
 
 ##### Request Example
@@ -1177,7 +1179,7 @@ Returns [the policy](#policies-object) you requested
 
 {% api_operation post /api/v1/authorizationServers/:authorizationServerId/policies %}
 
-Create a policy for an Authorization Server
+Create a policy for a Custom Authorization Server
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1224,7 +1226,7 @@ Change the configuration of a policy specified by the *policyId*
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 | policyId              | ID of a policy                | String | True     |
 
 
@@ -1271,7 +1273,7 @@ Delete a policy specified by the *policyId*
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 | policyId              | ID of a policy                | String | True     |
 
 ##### Request Example
@@ -1305,14 +1307,14 @@ Status 204: No content
 
 {% api_operation get /api/v1/authorizationServers/:authorizationServerId/scopes %}
 
-Get the scopes defined for a specified Authorization Server
+Get the scopes defined for a specified Custom Authorization Server
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1328,7 +1330,7 @@ curl -v -X GET \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-Returns [the scopes](#scopes-object) defined in the specified Authorization Server
+Returns [the scopes](#scopes-object) defined in the specified Custom Authorization Server
 
 
 #### Get a Scope
@@ -1342,7 +1344,7 @@ Get a scope specified by the *scopeId*
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 | scopeId               | ID of a scope                 | String | True     |
 
 ##### Request Example
@@ -1365,14 +1367,14 @@ Returns [the scope](#scopes-object) you requested
 
 {% api_operation post /api/v1/authorizationServers/:authorizationServerId/scopes %}
 
-Create a scope for an Authorization Server
+Create a scope for a Custom Authorization Server
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1404,7 +1406,7 @@ Change the configuration of a scope specified by the *scopeId*
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 | scopeId               | ID of a scope                 | String | True     |
 
 
@@ -1440,7 +1442,7 @@ Delete a scope specified by the *scopeId*
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 | scopeId               | ID of a scope                 | String | True     |
 
 ##### Request Example
@@ -1474,14 +1476,14 @@ HTTP/1.1 204: No content
 
 {% api_operation get /api/v1/authorizationServers/:authorizationServerId/claims %}
 
-Get the claims defined for a specified Authorization Server
+Get the claims defined for a specified a Custom Authorization Server
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1497,7 +1499,7 @@ curl -v -X GET \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-Returns [the claims](#claims-object) defined in the specified Authorization Server
+Returns [the claims](#claims-object) defined in the specified Custom Authorization Server
 
 
 #### Get a Claim
@@ -1511,7 +1513,7 @@ Returns the claim specified by the *claimId*
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 | claimId               | ID of a claim                 | String | True     |
 
 ##### Request Example
@@ -1534,14 +1536,14 @@ Returns [the claim](#claims-object) you requested
 
 {% api_operation post /api/v1/authorizationServers/:authorizationServerId/claims %}
 
-Create a claim for an Authorization Server
+Create a claim for a Custom Authorization Server
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 | Parameter             | Description                   | Type   | Required |
 |:----------------------|:------------------------------|:-------|:---------|
-| authorizationServerId | ID of an Authorization Server | String | True     |
+| authorizationServerId | ID of a Custom Authorization Server | String | True     |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1658,7 +1660,7 @@ HTTP/1.1 204: No content
 
 {% api_operation get /api/v1/authorizationServers/:authorizationServerId/credentials/keys %}
 
-Returns the current keys in rotation for the Authorization Server.
+Returns the current keys in rotation for a Custom Authorization Server.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1670,7 +1672,7 @@ Returns the current keys in rotation for the Authorization Server.
 ##### Response Parameters
 {:.api .api-response .api-res-params}
 
-Returns the [keys](#authorization-server-certificate-key-object) defined for the Authorization Server
+Returns the [keys](#authorization-server-certificate-key-object) defined for a Custom Authorization Server
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1765,7 +1767,7 @@ curl -v -X GET \
 
 {% api_operation post /api/v1/authorizationServers/:authorizationServerId/credentials/lifecycle/keyRotate %}
 
-Rotates the current keys for the Authorization Server. If you rotate keys, the `ACTIVE` key becomes the `EXPIRED` key, the `NEXT` key becomes the `ACTIVE` key, and the Authorization Server immediately issues tokens signed with the new active key.
+Rotates the current keys for a Custom Authorization Server. If you rotate keys, the `ACTIVE` key becomes the `EXPIRED` key, the `NEXT` key becomes the `ACTIVE` key, and the Custom Authorization Server immediately issues tokens signed with the new active key.
 
 >Authorization server keys can be rotated in both *MANUAL* and *AUTO* mode, however, it is recommended to rotate keys manually only when the authorization server is in *MANUAL* mode.
 >If keys are rotated manually, any intermediate cache should be invalidated and keys should be fetched again using the [get keys](oauth2.html#get-keys) endpoint.
@@ -1780,7 +1782,7 @@ Rotates the current keys for the Authorization Server. If you rotate keys, the `
 ##### Response Parameters
 {:.api .api-response .api-res-params}
 
-Returns the [keys](#authorization-server-certificate-key-object) defined for the Authorization Server
+Returns the [keys](#authorization-server-certificate-key-object) defined for a Custom Authorization Server
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -1928,7 +1930,7 @@ To resolve, create at least one rule in a policy in the authorization server for
 that specifies client, user, and scope.
 
 * OpenID Connect scopes are granted by default, so if you are requesting only those scopes ( `openid`, `profile`, `email`, `address`, `phone`, or `offline_access` ), you don't need to define any scopes for them, but you need a policy and rule
-in the Authorization Server. The rule grants the OpenID Connect scopes by default, so they don't need to be configured in the rule.
+in a Custom Authorization Server. The rule grants the OpenID Connect scopes by default, so they don't need to be configured in the rule.
 Token expiration times depend on how they are defined in the rules, and which policies and rules match the request.
 
 * OpenID scopes can be requested with custom scopes. For example, a request can include `openid` and a custom scope.
@@ -2045,13 +2047,13 @@ Token expiration times depend on how they are defined in the rules, and which po
 
 | Parameter   | Description                                                                                                          | Type                                                                    | Required for create or update |
 |:------------|:---------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------|:------------------------------|
-| name        | The name of the Authorization Server                                                                                 | String                                                                  | True                          |
-| description | The description of the Authorization Server                                                                          | String                                                                  | True                          |
+| name        | The name of a Custom Authorization Server                                                                                 | String                                                                  | True                          |
+| description | The description of a Custom Authorization Server                                                                          | String                                                                  | True                          |
 | audiences   | The recipients that the tokens are intended for. This becomes the `aud` claim in an Access Token.                    | Array                                                                   | True                          |
-| issuer      | The complete URL for the Authorization Server. This becomes the `iss` claim in an Access Token.                      | String                                                                  | False                         |
-| status      | Indicates whether the Authorization Server is `ACTIVE` or `INACTIVE`.                                                | Enum                                                                    | False                         |
+| issuer      | The complete URL for a Custom Authorization Server. This becomes the `iss` claim in an Access Token.                      | String                                                                  | False                         |
+| status      | Indicates whether a Custom Authorization Server is `ACTIVE` or `INACTIVE`.                                                | Enum                                                                    | False                         |
 | credentials | Keys used to sign tokens.                                                                                            |               [Credentials Object](#authorization-server-credentials-signing-object) | False                         |
-| _links      | List of discoverable resources related to the Authorization Server                                                   |       Links                                                                  | False                         |
+| _links      | List of discoverable resources related to a Custom Authorization Server                                                   |       Links                                                                  | False                         |
 
 #### Policies Object
 
@@ -2113,7 +2115,7 @@ Token expiration times depend on how they are defined in the rules, and which po
 | name        | Name of the policy                                                                                                  | String                                    | True                                     |
 | status      | Specifies whether requests have access to this policy. Valid values: `ACTIVE` or `INACTIVE`                         | Enum                                    | True                                     |
 | description | Description of the policy                                                                                           | String                                    | True                                     |
-| priority    | Specifies the order in which this policy is evaluated in relation to the other policies in the Authorization Server | Integer                                   | True                                     |
+| priority    | Specifies the order in which this policy is evaluated in relation to the other policies in a Custom Authorization Server              | Integer                                   | True                                     |
 | system      | Specifies whether Okta created this policy (`true`) or not (`false`).                                               | Boolean                                   | True                                     |
 | conditions  | Specifies the clients that the policy will be applied to.                                                           |                    [Conditions Object](#conditions-object) | False                                    |
 | created     | Timestamp when the policy was created                                                                               | DateTime                                  | System                                   |

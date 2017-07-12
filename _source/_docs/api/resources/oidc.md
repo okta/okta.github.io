@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: OpenID Connect API
+title: OpenID Connect
 ---
 
 # OpenID Connect API
@@ -491,6 +491,8 @@ Content-Type: application/json;charset=UTF-8
 
 The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
 
+> Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don't need an authorization server ID.
+
 #### Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
@@ -727,6 +729,8 @@ This is a starting point for OpenID Connect flows such as implicit and authoriza
 authenticates the user and returns tokens along with an authorization grant to the client application as a part
 of the response.
 
+> Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don't need an authorization server ID.
+
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
@@ -735,7 +739,7 @@ of the response.
 |   [idp](idps.html)      | Identity provider (default is Okta)                                                                                                                                                                                                                                                                                                                                                                      | Query      | String   | FALSE    | Okta is the IDP. |
 | sessionToken          | Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the   [Authentication API](authn.html).                                                                                                                                                                                                                              | Query      | String   | FALSE    |                  |
 | response_type         | Any combination of *code*, *token*, and *id_token*. The combination determines the   [flow](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). The `code` response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.                                                                                                          | Query      | String   | TRUE     |                  |
-| client_id             | Obtained during either   UI client registration or   [API client registration](oauth-clients.html). It identifies the client and must match the value preregistered in Okta.                                                                                                                                                                             | Query      | String   | TRUE     |
+| client_id             | Obtained during either   UI client registration or   [Dynamic Client Registration API](oauth-clients.html). It identifies the client and must match the value preregistered in Okta.                                                                                                                                                                             | Query      | String   | TRUE     |
 | redirect_uri          | Callback location where the authorization code should be sent. It must match the value preregistered in Okta during client registration.                                                                                                                                                                                                                                                                 | Query      | String   | TRUE     |
 | display               | How to display the authentication and consent UI. Valid values: *page* or *popup*.                                                                                                                                                                                                                                                                                                                       | Query      | String   | FALSE    |                  |
 | max_age               | Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                 | Query      | String   | FALSE    |                  |
@@ -897,6 +901,8 @@ https://www.example.com/#error=invalid_scope&error_description=The+requested+sco
 {% api_operation post /oauth2/v1/token %}
 
 The API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters. 
+
+>Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don't need an authorization server ID.
 
 #### Request Parameters
 

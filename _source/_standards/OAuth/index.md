@@ -366,7 +366,6 @@ Also, custom scopes can be configured to support the authorization for your APIs
 | Custom Claims                            |                           | &#10004;                    |
 | Custom Access Policies and Rules         |                           | &#10004;                    |
 
-
 To configure a Custom Authorization Server, sign in to your org and navigate to **Security** > **API** > **Add Authorization Server** or use the [Custom Authorization Server API](/docs/api/resources/oauth2.html#authorization-server-operations).
 
 If you use a Custom Authorization Server, we recommend that you use it instead of the Okta Authorization Server for 
