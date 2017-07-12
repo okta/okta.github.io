@@ -329,7 +329,7 @@ The action `objectType` identifies the unique action performed.
 
 | ObjectType                  | Description                                             |
 |:----------------------------|:--------------------------------------------------------|
-| app.auth.sso                | Event occurred during single sign on                    |
+| app.auth.sso                | Event occurred during SSO                               |
 | app.auth.delegated.outbound | Event occurred during outbound delegated authentication |
 
 ##### Application User Management
