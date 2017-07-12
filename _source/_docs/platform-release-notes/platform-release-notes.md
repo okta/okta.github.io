@@ -24,17 +24,16 @@ The following feature enhancements are GA in preview orgs, and expected to be GA
 * [Improved Plugin Security](#improved-plugin-security)
 
 
-The following EA feature enhancements are in preview orgs and expected in production orgs during the week of July 17, 2017:
+The following EA feature enhancements are in preview orgs and expected in production orgs during the week of July 17, 2017.
+To enable an EA feature, contact Okta Support.
 
 * [Allow Unsuspending Users During Inbound SAML Login](#allow-unsuspending-users-during-inbound-saml-login)
 
 * [Email Factor](#email-factor)
 
-
 The following feature enhancement is available on GitHub:
 
 * [New Version of Sign-In Widget](#new-version-of-sign-in-widget)
-
 
 #### OpenID Connect
 
