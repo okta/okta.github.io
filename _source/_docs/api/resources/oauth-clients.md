@@ -61,22 +61,22 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
 
 Client applications have the following properties:
 
-| --------------------------- | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
-| Property                    | Description                                                                                             | DataType                                                                                     | Nullable | Unique | Readonly  |
-|:----------------------------|:--------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:----------|
-| client_id                   | Unique key for the client application                                                                   | String                                                                                       | FALSE    | TRUE   | TRUE      |
-| client_id_issued_at         | Time at which the client_id was issued (measured in unix seconds)                                       | Number                                                                                       | TRUE     | FALSE  | TRUE      |
-| client_name                 | Human-readable string name of the client application                                                    | String                                                                                       | FALSE    | TRUE   | FALSE     |
-| client_secret               | OAuth 2.0 client secret string (used for confidential clients)                                          | String                                                                                       | TRUE     | TRUE   | TRUE      |
-| client_secret_expires_at    | Time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)        | Number                                                                                       | TRUE     | FALSE  | TRUE      |
-| logo_uri                    | URL string that references a logo for the client                                                        | String                                                                                       | TRUE     | FALSE  | FALSE     |
-| application_type            | The type of client application. Default value: `web`                                                    | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE      |
-| redirect_uris               | Array of redirection URI strings for use in redirect-based flows                                        | Array                                                                                        | TRUE     | FALSE  | FALSE     |
-| post_logout_redirect_uris   | Array of redirection URI strings for use for relying party initiated logouts                            | Array                                                                                        | TRUE     | FALSE  | FALSE     |
-| response_types              | Array of OAuth 2.0 response type strings. Default value: `code`                                         | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE     |
-| grant_types                 | Array of OAuth 2.0 grant type strings. Default value: `authorization_code`                              | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | TRUE     | FALSE  | FALSE     |
-| token_endpoint_auth_method  | requested authentication method for the token endpoint. Default value: `client_secret_basic`            | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | TRUE     | FALSE  | FALSE     |
-| initiate_login_uri          | URL that a third party can use to initiate a login by the client                                        | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| --------------------------- | ------------------------------------------------------------------------------------------------                                                                                                                                                                    | -------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
+| Property                    | Description                                                                                                                                                                                                                                                         | DataType                                                                                     | Nullable | Unique | Readonly  |
+|:----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:----------|
+| client_id                   | unique key for the client application                                                                                                                                                                                                                               | String                                                                                       | FALSE    | TRUE   | TRUE      |
+| client_id_issued_at         | time at which the client_id was issued (measured in unix seconds)                                                                                                                                                                                                   | Number                                                                                       | TRUE     | FALSE  | TRUE      |
+| client_name                 | human-readable string name of the client application                                                                                                                                                                                                                | String                                                                                       | FALSE    | TRUE   | FALSE     |
+| client_secret               | OAuth 2.0 client secret string (used for confidential clients)                                                                                                                                                                                                      | String                                                                                       | TRUE     | FALSE  | TRUE      |
+| client_secret_expires_at    | time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)                                                                                                                                                                    | Number                                                                                       | TRUE     | FALSE  | TRUE      |
+| logo_uri                    | URL string that references a logo for the client                                                                                                                                                                                                                    | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| application_type            | The type of client application                                                                                                                                                                                                                                      | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE      |
+| redirect_uris               | array of redirection URI strings for use in redirect-based flows                                                                                                                                                                                                    | Array                                                                                        | TRUE     | FALSE  | FALSE     |
+| post_logout_redirect_uris   | array of redirection URI strings for use for relying party initiated logouts                                                                                                                                                                                        | Array                                                                                        | TRUE     | FALSE  | FALSE     |
+| response_types              | array of OAuth 2.0 response type strings                                                                                                                                                                                                                            | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE     |
+| grant_types                 | array of OAuth 2.0 grant type strings                                                                                                                                                                                                                               | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE     |
+| token_endpoint_auth_method  | requested authentication method for the token endpoint                                                                                                                                                                                                              | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | FALSE    | FALSE  | FALSE     |
+| initiate_login_uri          | URL that a third party can use to initiate a login by the client                                                                                                                                                                                                    | String                                                                                       | TRUE     | FALSE  | FALSE     |
 
 Property Details
 
@@ -109,6 +109,7 @@ Property Details
     value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
     the OAuth 2.0 authorization code grant.
 
+
 ## Client Application Operations
 
 Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7a7f9956c58e49996dc8)
@@ -123,9 +124,9 @@ Adds a new client application to your organization.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-| Parameter | Description                        | ParamType | DataType                                      | Required |
-|:----------|:-----------------------------------|:----------|:----------------------------------------------|:---------|
-| settings  | OAuth client registration settings | Body      |   [Client Settings](#client-application-model)  | TRUE     |
+Parameter | Description                               | ParamType | DataType                               | Required |
+--------- | ----------------------------------------- | --------- | -------------------------------------- | -------- |
+settings  | OAuth client registration settings        | Body      | [Client Settings](#client-application-model) | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -191,8 +192,7 @@ curl -v -X POST \
     "authorization_code"
   ],
   "token_endpoint_auth_method": "client_secret_post",
-  "initiate_login_uri": "https://www.example-application.com/oauth2/login",
-  "registration_client_uri": "https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+  "initiate_login_uri": "https://www.example-application.com/oauth2/login"
 }
 ~~~
 
