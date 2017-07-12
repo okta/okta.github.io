@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -42,7 +50,8 @@
 <body>
   <div class="Page okta-sign-in-widget">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -156,7 +156,6 @@
             <li>
               <a href="/standards/OIDC/">OpenID Connect and Okta</a>
             </li>
-            
             
             
             <li>
@@ -357,24 +356,24 @@ groups instead of <strong>Everyone</strong>.</li>
 <p>Now that we have all the configuration at Okta done, we can begin setting up our PHP application. There are a
 couple of different ways to include the sign-in widget in your application. You can use the NPM module by installing
 <code class="highlighter-rouge">@okta/okta-signin-widget</code> in your project, or by using the Okta CDN, which is what we’ll be using. Once you have the
- sign-in widget, there’s a little bit of configuration you have to do to talk with your new authentication server.</p>
+ sign-in widget, there’s a little bit of configuration you have to do to talk with your new authorization server.</p>
 
 <h2 id="installing-and-configuring-the-sign-in-widget">Installing and Configuring the Sign In Widget</h2>
 <p>There are 2 files we will require for the sign in widget to work, a JS file and a CSS file. You will also be able to
 supply a 3rd file from our CDN or supply your own for the theme of the signin widget.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- Latest CDN production Javascript and CSS: 1.11.0 --&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="c">&lt;!-- Latest CDN production Javascript and CSS: 1.13.0 --&gt;</span>
 <span class="nt">&lt;script
-  </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js"</span>
+  </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/js/okta-sign-in.min.js"</span>
   <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;link</span>
-  <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-sign-in.min.css"</span>
+  <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css"</span>
   <span class="na">type=</span><span class="s">"text/css"</span>
   <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">/&gt;</span>
 
 <span class="c">&lt;!-- Theme file: Customize or replace this file if you want to override our default styles --&gt;</span>
 <span class="nt">&lt;link</span>
-  <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css"</span>
+  <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css"</span>
   <span class="na">type=</span><span class="s">"text/css"</span>
   <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">/&gt;</span>
 </code></pre>
@@ -441,7 +440,7 @@ to be rendered..</p>
     </tr>
     <tr>
       <td>authParams.issuer</td>
-      <td>The issuer of the authentication server. Can be retrieved from <strong>Admin -&gt; Security -&gt; API -&gt; {Auth Server}</strong></td>
+      <td>The issuer of the authorization server. Can be retrieved from <strong>Admin -&gt; Security -&gt; API -&gt; Authorization Servers</strong></td>
     </tr>
     <tr>
       <td>authParams.display</td>
@@ -673,33 +672,35 @@ However, in an emergency situation you can still stay in sync with Okta’s key 
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>

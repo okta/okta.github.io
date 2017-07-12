@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -34,7 +42,7 @@
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.26">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.27">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -42,7 +50,8 @@
 <body>
   <div class="Page platform-release-notes">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -158,7 +158,6 @@
             </li>
             
             
-            
             <li>
               <a href="/standards/SAML/">SAML</a>
             </li>
@@ -186,78 +185,119 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201727">Release 2017.27</h2>
+      <h2 id="release-201728">Release 2017.28</h2>
 
-<h3 id="advance-notice-data-retention-changes">Advance Notice: Data Retention Changes</h3>
+<h3 id="platform-enhancements-and-new-features">Platform Enhancements and New Features</h3>
 
-<p>Okta is changing system log data retention windows. System log data is available from <code class="highlighter-rouge">/api/v1/events</code> or
-Okta SDK <code class="highlighter-rouge">EventsAPIClient</code>.</p>
+<p>The following changes are available in preview orgs on Wednesday, July 12. Availability in production orgs is expected either one week or one month later. For information about Early Availability (EA) and Generally Available (GA), see <a href="https://developer.okta.com/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>.</p>
 
-<ul>
-  <li>For orgs created before July 17th, data older than six months will be removed.</li>
-  <li>For orgs created on or after July 17th, data older than three months will be removed.</li>
-</ul>
-
-<p>The new data retention policy starts:</p>
-
-<ul>
-  <li>June 7, 2017 for existing preview orgs</li>
-  <li>July 17, 2017 for existing production orgs</li>
-</ul>
-
-<p>Preview and production orgs created on or after July 17, 2017, will retain log data for three months.</p>
-
-<p>For the full data retention policy, see our <a href="https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy">Data Retention Policy</a>.</p>
-
-<p>You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta’s API. <!-- OKTA-125424 --></p>
-
-<p><!-- OKTA-125424 --></p>
-
-<h3 id="platform-enhancements">Platform Enhancements</h3>
+<p>The following features are GA in preview orgs, and expected to be GA in production orgs during the week of August 8, 2017:</p>
 
 <ul>
   <li>
-    <p><a href="#additional-scopes-available-for-social-authentication">Additional Scopes Available for Social Authentication</a></p>
+    <p><a href="#openid-connect">OpenID Connect</a></p>
   </li>
   <li>
-    <p><a href="#new-versions-of-sign-in-widget-and-auth-sdk-for-js">New Versions of Sign-In Widget and Auth SDK for JS</a></p>
+    <p><a href="#key-rollover">Key Rollover</a></p>
   </li>
 </ul>
 
-<h4 id="additional-scopes-available-for-social-authentication">Additional Scopes Available for Social Authentication</h4>
+<p>The following feature enhancements are GA in preview orgs, and expected to be GA in production orgs during the week of July 17, 2017:</p>
 
-<p>When using a Social Identity Provider, you can request information in stages. The initial request to <code class="highlighter-rouge">/oauth2/v1/authorize</code> can ask for a minimal set of scopes, and you can add scopes to collect additional user data in a subsequent request to the Social Identity Provider. This reduces friction during sign-in when users don’t yet trust your app. For more information, see the descriptions of <code class="highlighter-rouge">idp_scope</code> in the <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 API</a> and <a href="https://developer.okta.com/docs/api/resources/oidc.html#request-parameters-3">OpenID Connect API</a> parameter tables.</p>
+<ul>
+  <li>
+    <p><a href="#limit-age-of-events">Limit Age of Events</a></p>
+  </li>
+  <li>
+    <p><a href="#improved-plugin-security">Improved Plugin Security</a></p>
+  </li>
+</ul>
 
-<!-- (OKTA-117521) -->
+<p>The following EA feature enhancements are in preview orgs and expected in production orgs during the week of July 17, 2017.
+To enable an EA feature, contact Okta Support.</p>
 
-<h4 id="new-versions-of-sign-in-widget-and-auth-sdk-for-js">New Versions of Sign-In Widget and Auth SDK for JS</h4>
+<ul>
+  <li>
+    <p><a href="#allow-unsuspending-users-during-inbound-saml-login">Allow Unsuspending Users During Inbound SAML Login</a></p>
+  </li>
+  <li>
+    <p><a href="#email-factor">Email Factor</a></p>
+  </li>
+</ul>
 
-<p>Version 1.11 of the <a href="https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.11.0">Okta Sign-In Widget</a> and version 1.8 of the <a href="https://github.com/okta/okta-auth-js">Okta Auth SDK for Javascript</a> are available. Check out the new features and bug fixes!</p>
+<p>The following feature enhancement is available on GitHub:</p>
 
-<!-- (OKTA-131642) -->
+<ul>
+  <li><a href="#new-version-of-sign-in-widget">New Version of Sign-In Widget</a></li>
+</ul>
+
+<h4 id="openid-connect">OpenID Connect</h4>
+
+<p><a href="https://developer.okta.com/docs/api/resources/oidc.html">OpenID Connect</a> is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
+
+<p>OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.</p>
+
+<p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a>. For more information, see <a href="https://developer.okta.com/standards/OIDC/">OpenID Connect and Okta</a>.</p>
+
+<p><!-- OKTA-132049  --></p>
+
+<h4 id="key-rollover">Key Rollover</h4>
+
+<p>We provide the ability to generate a certificate with specified validity period (see the <a href="https://developer.okta.com/docs/api/resources/apps.html">Apps API</a> and <a href="https://developer.okta.com/docs/api/resources/idps.html">Identity Providers API</a>). We build OpenID Connect and API Access Management on this feature.</p>
+
+<p><!-- OKTA-132045  --></p>
+
+<h4 id="limit-age-of-events">Limit Age of Events</h4>
+
+<p>In keeping with the <a href="https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy">Okta Data Retention Policy</a>, the events API (<code class="highlighter-rouge">/api/v1/events</code>) no longer accepts queries for events greater than 180 days old. 
+  <!-- OKTA-125424, 120605  --></p>
+
+<h4 id="improved-plugin-security">Improved Plugin Security</h4>
+<p>Template Plugin Apps you create from the admin portal (<strong>Admin &gt; Applications &gt; Add Application &gt; Template Plugin App</strong>) have improved security.</p>
+
+<p><!-- OKTA-132490  --></p>
+
+<h4 id="new-version-of-sign-in-widget">New Version of Sign-In Widget</h4>
+
+<p>Version 1.13.0 of the <a href="https://github.com/okta/okta-signin-widget/releases">Okta Sign-In Widget</a> is available. Check out the new features and bug fixes!</p>
+
+<p><!-- (OKTA-131661) --></p>
+
+<h4 id="allow-unsuspending-users-during-inbound-saml-login">Allow Unsuspending Users During Inbound SAML Login</h4>
+
+<p>You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending users during inbound SAML login. See the <a href="https://developer.okta.com/docs/api/resources/idps.html">Identity Providers API</a> for more information.</p>
+
+<p><img src="/assets/release_notes/JIT_settings-dde02f5dddea77603f8770d6a498b7b70463c5e8365d3838af652c365c5c1e88.png" alt="JIT settings for SAML IdP" /></p>
+
+<p><!-- OKTA-128384 --></p>
+
+<h4 id="email-factor">Email Factor</h4>
+
+<p>You can send a one-time password (OTP) and an activation link to an email address as part of enrolling a user.</p>
+
+<p><!-- OKTA-132297  --></p>
 
 <h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
+<p>These platform bug fixes are available in preview orgs and expected in production orgs the week of July 17, 2017.</p>
+
 <ul>
   <li>
-    <p>If any sign-in policy using MFA existed for an application, the Open ID Connect reauthentication flow redirected to multi-factor authentication (MFA) by default.  (OKTA-129094)</p>
+    <p><code class="highlighter-rouge">/api/v1/apps/:appId/groups</code> didn’t return groups if the specified app is inactive. (OKTA-123695)</p>
   </li>
   <li>
-    <p>Clients with <code class="highlighter-rouge">token_endpoint_auth_method</code> set to <code class="highlighter-rouge">client_secret_post</code> did not have a selected radio button on the Client Credentials UI (<strong>Applications &gt; <em>application name</em> &gt; General</strong>).  (OKTA-130764)</p>
+    <p>Identity provider JIT reactivation of users sometimes failed when there were configured group assignments. (OKTA-131784)</p>
   </li>
   <li>
-    <p>If you created a SAML 2.0 Identity Provider but omitted some fields, Okta reported an error.  (OKTA-131294)</p>
-  </li>
-  <li>
-    <p>Okta Sign-In Widget failed to run when installed with <code class="highlighter-rouge">npm</code>.  (OKTA-131608)</p>
-  </li>
-  <li>
-    <p>Updates to clients sometimes received an error response if they contained values for <code class="highlighter-rouge">client_id_issued_at</code> or <code class="highlighter-rouge">client_secret_expires_at</code>.  (OKTA-131647)</p>
-  </li>
-  <li>
-    <p>API Access Management customers can no longer self-validate the Okta Access Token.  (OKTA-131885)</p>
+    <p>In some circumstances, the link between the external Microsoft user and the Okta user was inaccurate.  (OKTA-132207)</p>
   </li>
 </ul>
+
+<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
+
+<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
+
+<p><img src="/assets/release_notes/version_footer-6199e00ca76969eed4036e964a53b5598571c5cafe797a4890f152ce68dce49b.png" alt="Release Number in Footer" /></p>
 
 <h3 id="looking-for-something-else">Looking for Something Else?</h3>
 
@@ -330,33 +370,35 @@ Okta SDK <code class="highlighter-rouge">EventsAPIClient</code>.</p>
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>

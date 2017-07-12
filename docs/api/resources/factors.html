@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -42,7 +50,8 @@
 <body>
   <div class="Page factors">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -129,12 +129,12 @@
             <li>
               <a href="/docs/api/resources/authn.html">Authentication Reference</a>
               <ul id="Sidebar_References" class="Sidebar-hide">
-                <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
-                <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
+                <li><a href="/docs/api/resources/authn.html">Authentication</a></li>
+                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
+                <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
                 <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
-                <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
-                <li><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
+                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
+                <li><a href="/docs/api/resources/oauth-clients.html">Dynamic Client Registration</a></li>
               </ul>
             </li>
             <li>
@@ -177,7 +177,6 @@
             <li>
               <a href="/standards/OIDC/">OpenID Connect and Okta</a>
             </li>
-            
             
             
             <li>
@@ -771,6 +770,7 @@
   <li><a href="#enroll-rsa-securid-factor">Enroll RSA SecurID Factor</a></li>
   <li><a href="#enroll-symantec-vip-factor">Enroll Symantec VIP Factor</a></li>
   <li><a href="#enroll-yubikey-factor">Enroll YubiKey Factor</a></li>
+  <li><a href="#enroll-okta-email-factor">Enroll Okta Email Factor</a></li>
 </ul>
 
 <h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
@@ -1637,6 +1637,88 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
+<h4 class="api api-operation" id="enroll-okta-email-factor">Enroll Okta Email Factor</h4>
+<p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
+
+<p>Enrolls a user with an email factor. An email with an OTP is sent to the primary or secondary (depending on which one is enrolled) email address of the user during enrollment. The factor must be <a href="#activate-email-factor">activated</a> by following the <code class="highlighter-rouge">activate</code> link relation to complete the enrollment process. An optional <code class="highlighter-rouge">tokenLifetimeSeconds</code> can be specified as a query parameter to indicate the lifetime of the OTP. The default lifetime is 300 seconds. <code class="highlighter-rouge">tokenLifetimeSeconds</code> should be in the range 1 to 86400 inclusive.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-17">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+    "factorType": "email",
+    "provider": "OKTA",
+    "profile": {
+        "email": "test@gmail.com"
+    }
+  }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors?tokenLifetimeSeconds=600"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-13">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emfnf3gSScB8xXoXK0g3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING_ACTIVATION"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/lifecycle/activate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"POST"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"resend"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/resend"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"POST"</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"GET"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/users/00umvfJKwXOQ1mEL50g3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"GET"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h6 id="invalid-email-address-response">Invalid Email address response</h6>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Api validation failed: Only verified primary or secondary email can be enrolled."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaeeJunJcxXQlCsrYEwGzN2LQ"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h3 class="api api-operation" id="activate-factor">Activate Factor</h3>
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:uid</em>/factors/<em>:fid</em>/lifecycle/activate</span></p>
@@ -1648,6 +1730,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   <li><a href="#activate-sms-factor">Activate SMS Factor</a></li>
   <li><a href="#activate-call-factor">Activate Call Factor</a></li>
   <li><a href="#activate-push-factor">Activate Push Factor</a></li>
+  <li><a href="#activate-email-factor">Activate Email Factor</a></li>
 </ul>
 
 <h4 class="api api-operation" id="activate-totp-factor">Activate TOTP Factor</h4>
@@ -1715,7 +1798,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-17">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-18">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1727,7 +1810,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-13">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-14">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ostf1fmaMGJLMNGNLIVG"</span><span class="p">,</span><span class="w">
@@ -1831,7 +1914,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-18">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1843,7 +1926,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-14">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sms1o51EADOTFXHHBXBP"</span><span class="p">,</span><span class="w">
@@ -1951,7 +2034,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
-<h5 class="api api-request api-request-example" id="request-example-19">Request Example</h5>
+<h5 class="api api-request api-request-example" id="request-example-20">Request Example</h5>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -1963,7 +2046,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h5 class="api api-response api-response-example" id="response-example-15">Response Example</h5>
+<h5 class="api api-response api-response-example" id="response-example-16">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"clf1o51EADOTFXHHBXBP"</span><span class="p">,</span><span class="w">
@@ -2071,7 +2154,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   </tbody>
 </table>
 
-<h4 class="api api-request api-request-example" id="request-example-20">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-21">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2189,13 +2272,129 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
+<h4 class="api api-operation" id="activate-email-factor">Activate Email Factor</h4>
+<p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
+
+<p>Activates an <code class="highlighter-rouge">email</code> factor by verifying the OTP.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-9">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>uid</td>
+      <td><code class="highlighter-rouge">id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>fid</td>
+      <td><code class="highlighter-rouge">id</code> of factor returned from enrollment</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+    </tr>
+    <tr>
+      <td>passCode</td>
+      <td>OTP sent to email</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>TRUE</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-9">Response Parameters</h5>
+
+<p>If the passcode is correct the response contains <a href="#factor-model">Factor</a> with an <code class="highlighter-rouge">ACTIVE</code> status.</p>
+
+<p>If the passcode is invalid response will be <code class="highlighter-rouge">403 Forbidden</code> with the following error:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Passcode/Answer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaei_IfXcpnTHit_YEKGInpFw"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your passcode doesn't match our records. Please try again."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 class="api api-request api-request-example" id="request-example-22">Request Example</h4>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "passCode": "123456"
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/users/00u15s1KDETTQMQYABRL/factors/emfnf3gSScB8xXoXK0g3/lifecycle/activate"</span>
+</code></pre>
+</div>
+
+<h4 class="api api-response api-response-example" id="response-example-activated-1">Response Example (Activated)</h4>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emfnf3gSScB8xXoXK0g3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"factorType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OKTA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"changed@clouditude.net"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"verify"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3/verify"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"POST"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/users/00umvfJKwXOQ1mEL50g3/factors/emfnf3gSScB8xXoXK0g3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"DELETE"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://${org}.okta.com/api/v1/users/00umvfJKwXOQ1mEL50g3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"GET"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h3 class="api api-operation" id="reset-factor">Reset Factor</h3>
 
 <p><span class="api-uri-template api-uri-delete"><span class="api-label">DELETE</span> /api/v1/users/<em>:uid</em>/factors/<em>:fid</em></span></p>
 
 <p>Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.</p>
 
-<h4 class="api api-request api-request-params" id="request-parameters-9">Request Parameters</h4>
+<h4 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h4>
 
 <table>
   <thead>
@@ -2228,11 +2427,11 @@ Or, you can pass the existing phone number in a profile object.</p>
   </tbody>
 </table>
 
-<h4 class="api api-response api-response-params" id="response-parameters-9">Response Parameters</h4>
+<h4 class="api api-response api-response-params" id="response-parameters-10">Response Parameters</h4>
 
 <p><code class="highlighter-rouge">204 No Content</code></p>
 
-<h4 class="api api-request api-request-example" id="request-example-21">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-23">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X DELETE <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2242,7 +2441,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-16">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-17">Response Example</h4>
 
 <p><code class="highlighter-rouge">204 No Content</code></p>
 
@@ -2254,7 +2453,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <p>Verifies an answer to a <code class="highlighter-rouge">question</code> factor.</p>
 
-<h4 class="api api-request api-request-params" id="request-parameters-10">Request Parameters</h4>
+<h4 class="api api-request api-request-params" id="request-parameters-11">Request Parameters</h4>
 
 <table>
   <thead>
@@ -2295,7 +2494,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   </tbody>
 </table>
 
-<h4 class="api api-response api-response-params" id="response-parameters-10">Response Parameters</h4>
+<h4 class="api api-response api-response-params" id="response-parameters-11">Response Parameters</h4>
 
 <table>
   <thead>
@@ -2336,7 +2535,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-22">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-24">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2348,7 +2547,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-17">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-18">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
@@ -2362,7 +2561,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <p>Verifies an OTP for a <code class="highlighter-rouge">sms</code> factor.</p>
 
-<h4 class="api api-request api-request-params" id="request-parameters-11">Request Parameters</h4>
+<h4 class="api api-request api-request-params" id="request-parameters-12">Request Parameters</h4>
 
 <table>
   <thead>
@@ -2410,7 +2609,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   <p>If you omit <code class="highlighter-rouge">passCode</code> in the request a new OTP is sent to the device, otherwise the request attempts to verify the <code class="highlighter-rouge">passCode</code>.</p>
 </blockquote>
 
-<h4 class="api api-response api-response-params" id="response-parameters-11">Response Parameters</h4>
+<h4 class="api api-response api-response-params" id="response-parameters-12">Response Parameters</h4>
 
 <table>
   <thead>
@@ -2469,7 +2668,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-23">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-25">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2481,7 +2680,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-18">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-19">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
@@ -2500,7 +2699,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <p>To create custom templates, see <a href="/docs/api/resources/templates.html#add-sms-template">Templates</a>.</p>
 
-<h6 class="api api-request api-request-example" id="request-example-24">Request Example</h6>
+<h6 class="api api-request api-request-example" id="request-example-26">Request Example</h6>
 
 <p>Sends the verification message in German, assuming that the SMS template is configured with a German translation</p>
 
@@ -2521,7 +2720,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <p>Verifies an OTP for a <code class="highlighter-rouge">call</code> factor</p>
 
-<h4 class="api api-request api-request-params" id="request-parameters-12">Request Parameters</h4>
+<h4 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h4>
 
 <table>
   <thead>
@@ -2566,7 +2765,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   <p>If you omit <code class="highlighter-rouge">passCode</code> in the request a new OTP is sent to the device, otherwise the request attempts to verify the <code class="highlighter-rouge">passCode</code>.</p>
 </blockquote>
 
-<h4 class="api api-response api-response-params" id="response-parameters-12">Response Parameters</h4>
+<h4 class="api api-response api-response-params" id="response-parameters-13">Response Parameters</h4>
 
 <table>
   <thead>
@@ -2621,7 +2820,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-25">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-27">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2633,7 +2832,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-19">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-20">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
@@ -2647,7 +2846,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <p>Verifies an OTP for a <code class="highlighter-rouge">token:software:totp</code> factor</p>
 
-<h4 class="api api-request api-request-params" id="request-parameters-13">Request Parameters</h4>
+<h4 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h4>
 
 <table>
   <thead>
@@ -2684,7 +2883,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   </tbody>
 </table>
 
-<h4 class="api api-response api-response-params" id="response-parameters-13">Response Parameters</h4>
+<h4 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h4>
 
 <table>
   <thead>
@@ -2723,7 +2922,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-26">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-28">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2735,7 +2934,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-20">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-21">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
@@ -2751,7 +2950,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <h5 id="start-new-verify-transaction">Start new Verify Transaction</h5>
 
-<h4 class="api api-request api-request-params" id="request-parameters-14">Request Parameters</h4>
+<h4 class="api api-request api-request-params" id="request-parameters-15">Request Parameters</h4>
 
 <table>
   <thead>
@@ -2792,7 +2991,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   <p>The <strong>public IP address</strong> of your application must be <a href="../getting_started/design_principles.html#ip-address">whitelisted as a gateway IP address</a> to forward the user agent’s original IP address with the <code class="highlighter-rouge">X-Forwarded-For</code> HTTP header.</p>
 </blockquote>
 
-<h4 class="api api-response api-response-params" id="response-parameters-14">Response Parameters</h4>
+<h4 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h4>
 
 <table>
   <thead>
@@ -2815,7 +3014,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   </tbody>
 </table>
 
-<h4 class="api api-request api-request-example" id="request-example-27">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-29">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -2827,7 +3026,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-21">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-22">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"expiresAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-01T15:57:32.000Z"</span><span class="p">,</span><span class="w">
@@ -2864,7 +3063,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   <p>You should always use the <code class="highlighter-rouge">poll</code> link relation and never manually construct your own URL.</p>
 </blockquote>
 
-<h5 class="api api-request api-request-params" id="request-parameters-15">Request Parameters</h5>
+<h5 class="api api-request api-request-params" id="request-parameters-16">Request Parameters</h5>
 
 <table>
   <thead>
@@ -2901,7 +3100,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   </tbody>
 </table>
 
-<h5 class="api api-response api-response-params" id="response-parameters-15">Response Parameters</h5>
+<h5 class="api api-response api-response-params" id="response-parameters-16">Response Parameters</h5>
 
 <table>
   <thead>
@@ -3019,7 +3218,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 
 <p>Verifies an OTP for a <code class="highlighter-rouge">token</code> or <code class="highlighter-rouge">token:hardware</code> factor</p>
 
-<h4 class="api api-request api-request-params" id="request-parameters-16">Request Parameters</h4>
+<h4 class="api api-request api-request-params" id="request-parameters-17">Request Parameters</h4>
 
 <table>
   <thead>
@@ -3056,7 +3255,7 @@ Or, you can pass the existing phone number in a profile object.</p>
   </tbody>
 </table>
 
-<h4 class="api api-response api-response-params" id="response-parameters-16">Response Parameters</h4>
+<h4 class="api api-response api-response-params" id="response-parameters-17">Response Parameters</h4>
 
 <table>
   <thead>
@@ -3095,7 +3294,7 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="request-example-28">Request Example</h4>
+<h4 class="api api-request api-request-example" id="request-example-30">Request Example</h4>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
@@ -3107,7 +3306,142 @@ Or, you can pass the existing phone number in a profile object.</p>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-example" id="response-example-22">Response Example</h4>
+<h4 class="api api-response api-response-example" id="response-example-23">Response Example</h4>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="verify-email-factor">Verify Email Factor</h3>
+<p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/users/<em>:uid</em>/factors/<em>:fid</em>/verify</span></p>
+
+<p>Verifies an OTP for an <code class="highlighter-rouge">email</code> factor</p>
+
+<h4 class="api api-request api-request-params" id="request-parameters-18">Request Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>uid</td>
+      <td><code class="highlighter-rouge">id</code> of user</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>fid</td>
+      <td><code class="highlighter-rouge">id</code> of factor</td>
+      <td>URL</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>passCode</td>
+      <td>OTP sent to email address</td>
+      <td>Body</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>””</td>
+    </tr>
+    <tr>
+      <td>tokenLifetimeSeconds</td>
+      <td>Lifetime of the OTP when requesting one</td>
+      <td>QueryString</td>
+      <td>Int</td>
+      <td>FALSE</td>
+      <td>300</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>If you omit <code class="highlighter-rouge">passCode</code> in the request a new OTP is sent to the email address, otherwise the request attempts to verify the <code class="highlighter-rouge">passCode</code>.</p>
+</blockquote>
+
+<h4 class="api api-response api-response-params" id="response-parameters-18">Response Parameters</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>factorResult</td>
+      <td>verification result</td>
+      <td>Body</td>
+      <td><a href="#factor-verify-result-object">Factor Verify Result</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If the passcode is invalid response will be <code class="highlighter-rouge">403 Forbidden</code> with the following error:</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid Passcode/Answer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000068"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oaei_IfXcpnTHit_YEKGInpFw"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your passcode doesn't match our records. Please try again."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><code class="highlighter-rouge">429 Too Many Requests</code> status code may be returned if you attempt to resend an Email challenge (OTP) within the same time window.</p>
+
+<p><em>The current rate limit is one per email address every 5 seconds.</em></p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000118"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An email was recently sent. Please wait 5 seconds before trying again."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000118"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oae0qf10rGJQQeWFX1OSuStdQ"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 class="api api-request api-request-example" id="request-example-31">Request Example</h4>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  "passCode": "123456"
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00u15s1KDETTQMQYABRL/factors/emfnf3gSScB8xXoXK0g3/verify?tokenLifetimeSeconds=600"</span>
+</code></pre>
+</div>
+
+<h4 class="api api-response api-response-example" id="response-example-24">Response Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"factorResult"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
@@ -3415,6 +3749,10 @@ Or, you can pass the existing phone number in a profile object.</p>
       <td><code class="highlighter-rouge">token:software:totp</code></td>
     </tr>
     <tr>
+      <td><code class="highlighter-rouge">OKTA</code></td>
+      <td><code class="highlighter-rouge">email</code></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">GOOGLE</code></td>
       <td><code class="highlighter-rouge">token:software:totp</code></td>
     </tr>
@@ -3690,6 +4028,60 @@ Or, you can pass the existing phone number in a profile object.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
+
+<h4 id="email-profile">Email Profile</h4>
+
+<p>Specifies the profile for a <code class="highlighter-rouge">email</code> factor</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>email</td>
+      <td>email address of the user</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td>100</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alice@okta.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 id="note">Note</h5>
+
+<p>Email factor can be used</p>
+
+<ul>
+  <li>
+    <p>As an out-of-band transactional factor to send an email challenge to a user. This can be injected into any custom step-up flow and is not part of Okta Sign-On (it does not count as MFA for logging onto Okta). This is currently EA.</p>
+  </li>
+  <li>
+    <p>As a proper Okta 2nd factor (just like Okta Verify, SMS, etc). This can be configured via the standard MultiFactor UI in the Okta Administrator dashboard. The email factor is then eligible to be used during Okta Sign-On as a valid 2nd factor just like any of other the factors. This is currently BETA.</p>
+  </li>
+</ul>
 
 <h3 id="factor-verification-object">Factor Verification Object</h3>
 
@@ -4156,33 +4548,35 @@ Or, you can pass the existing phone number in a profile object.</p>
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>
