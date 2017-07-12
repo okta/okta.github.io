@@ -19,9 +19,14 @@ The following features are GA in preview orgs, and expected to go into GA in pro
 
 The following GA feature enhancements are in preview orgs, and expected in production orgs during the week of July 17, 2017:
 
-* [Data Retention Policy Changes](#data-retention-policy-changes)
+* [Limit Age of Events](#limit-age-of-events)
 
 * [Improved Plugin Security](#improved-plugin-security)
+
+
+The following feature enhancement is available on GitHub:
+
+* [New Version of Sign-In Widget](#new-version-of-sign-in-widget)
 
 
 The following EA feature enhancements are in preview orgs and expected in production orgs during the week of July 17, 2017:
@@ -46,6 +51,8 @@ The ability to generate a certificate with specified validity period (see the [A
  
    <!-- OKTA-132045  -->
 
+<!--
+
 #### Data Retention Policy Changes
 
 Okta is changing system log data retention windows. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
@@ -61,13 +68,14 @@ For the full data retention policy, see our [Data Retention Policy](https://supp
 
 You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API.
 
+-->
 
-<!--
+
 #### Limit Age of Events
 
-In keeping with the [Data Retention Policy Changes](#data-retention-policy-changes), the events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from EA to GA.
+In keeping with the [Okta Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy), the events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. This feature moves from EA to GA.
 
--->
+
 
   <!-- OKTA-125424, 120605  -->
 
@@ -79,9 +87,17 @@ Template Plugin Apps you create from the admin portal (**Admin > Applications > 
   <!-- OKTA-132490  -->
 
 
+#### New Version of Sign-In Widget
+
+Version 1.13.0 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases) is available. Check out the new features and bug fixes!
+
+  <!-- (OKTA-131661) -->
+
+
+
 #### Allow Unsuspending Users During Inbound SAML Login
 
-You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending suspended Okta users during inbound SAML login. See the [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html) for more information. This feature moves into EA. To enable it, call Okta Support.
+You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending users during inbound SAML login. See the [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html) for more information. This feature moves into EA. To enable it, call Okta Support.
 
 {% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
 
