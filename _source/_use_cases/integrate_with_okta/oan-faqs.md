@@ -9,7 +9,7 @@ excerpt: OAN FAQs
 
 **Q: Do I need to contact Okta first to start integrating my application?**
 
-A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance.html) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). Get stuck or have questions? Email <developers@okta.com>.
+A: No, the materials here should be enough to help you get started. You should start by enabling [SAML](/docs/guides/saml_guidance.html) with your application. Then test your app integration and submit for review by Okta with the [App Wizard](/use_cases/integrate_with_okta/sso-with-saml.html). Get stuck or have questions? Email <developers@okta.com>.
 
 <br/>
 
@@ -51,7 +51,7 @@ A: SWA was developed by Okta to provide single sign-on for apps that do not supp
 
 **Q: What is the process after I have submitted my app using the App Wizard?**
 
-A: Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <developers@okta.com>.
+A: The Okta App Integration team reviews all submitted apps. The team will reach out during the testing and documentation process for additional information. When completed, the application is then be promoted to the public Okta Application Network, and you are notified. Typical review time is two weeks. Have you submitted an app but have not heard from Okta? Email <developers@okta.com>.
 
 <br/>
 
