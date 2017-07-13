@@ -3555,7 +3555,7 @@ curl -v -X GET \
 
 {% api_operation GET /api/v1/users/*:uid*/idps %}
 
-Lists the IdPs associated with the user.
+Lists the IdPs associated with the user. This endpoint doesn't support the SAML2 [Identity Provider Type](#identity-provider-type).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3676,7 +3676,7 @@ curl -v -X GET \
 }]
 ~~~
 
-If the user does not exist, you receive an error response.
+If the user doesn't exist, you receive an error response.
 
 ~~~http
 HTTP/1.1 400 Bad Request
@@ -3696,7 +3696,7 @@ Content-Type: application/json
 
 {% api_operation POST /api/v1/idps/*:id*/users/*:uid* %}
 
-Links an Okta user to an existing Social [Identity Provider](#identity-provider-model). This does not support the SAML2 [Identity Provider Type](#identity-provider-type).
+Links an Okta user to an existing Social [Identity Provider](#identity-provider-model). This endpoint doesn't support the SAML2 [Identity Provider Type](#identity-provider-type).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3705,7 +3705,7 @@ Parameter     | Description                                                     
 ------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
 id            | `id` of the IdP                                                                 | URL        | String                                        | TRUE     |
 uid           | `id` of the Okta User                                                           | URL        | String                                        | TRUE     |
-externalId    | unique IdP-specific identifier for user                                         | Body        | String                                        | TRUE     |
+externalId    | unique IdP-specific identifier for user                                         | Body       | String                                        | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3754,7 +3754,7 @@ curl -v -X POST \
 }
 ~~~
 
-If either the user or the IdP does not exist, you receive an error response.
+If either the user or the IdP doesn't exist, you receive an error response.
 
 ~~~http
 HTTP/1.1 400 Bad Request
