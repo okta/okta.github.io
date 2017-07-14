@@ -8,10 +8,8 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
-        <title>Protecting a Spring-Boot App with Apache Shiro</title>
-        <description>&lt;h1 id=&quot;protecting-a-spring-boot-app-with-apache-shiro&quot;&gt;Protecting a Spring-Boot App with Apache Shiro&lt;/h1&gt;
-
-&lt;p&gt;My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I’d handle the following scenario:&lt;/p&gt;
+        <title>Protecting a Spring Boot App with Apache Shiro</title>
+        <description>&lt;p&gt;My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I’d handle the following scenario:&lt;/p&gt;
 
 &lt;p&gt;Your boss (The Supreme Commander) shows up at your desk and tells you the current volunteer (Stormtrooper) registration application needs have different access roles for the  different &lt;em&gt;types&lt;/em&gt; of employees.&lt;/p&gt;
 
@@ -26,7 +24,7 @@
 
 &lt;p&gt;To get started, grab this &lt;a href=&quot;https://github.com/oktadeveloper/shiro-spring-boot-example&quot;&gt;Spring Boot example&lt;/a&gt;. It’ll get you started with a set of REST endpoints which expose CRUD operations to manage a list of Stormtroopers. You’ll be adding authentication and authorization using &lt;a href=&quot;https://shiro.apache.org&quot;&gt;Apache Shiro&lt;/a&gt;.  All of the code is up on &lt;a href=&quot;https://github.com/bdemers/shiro-spring-boot-example&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Using the Apache Shiro Spring-Boot starter is all you need, just add the dependency to your pom. (where &lt;code class=&quot;highlighter-rouge&quot;&gt;${shiro.version}&lt;/code&gt; is at least 1.4.0):&lt;/p&gt;
+&lt;p&gt;Using the Apache Shiro Spring Boot starter is all you need, just add the dependency to your pom. (where &lt;code class=&quot;highlighter-rouge&quot;&gt;${shiro.version}&lt;/code&gt; is at least 1.4.0):&lt;/p&gt;
 
 &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
     &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.shiro&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
