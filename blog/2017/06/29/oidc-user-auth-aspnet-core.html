@@ -197,11 +197,11 @@
 <h2 id="add-authentication">Add Authentication</h2>
 <p>When you open your application in Visual Studio or Visual Studio Code, you’ll notice that there’s a <code class="highlighter-rouge">&lt;ProjectName&gt;.csproj</code> file. You’ll need to make some quick changes to that to get some dependencies you’ll need to make this work. In the <code class="highlighter-rouge">ItemGroup</code> section of the <code class="highlighter-rouge">csproj</code> document add:</p>
 
-<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.1.2" />
-
-<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="1.1.2" />
-
-<PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">"Microsoft.AspNetCore.Authentication.JwtBearer"</span> <span class="na">Version=</span><span class="s">"1.1.2"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">"Microsoft.AspNetCore.Authentication.OpenIdConnect"</span> <span class="na">Version=</span><span class="s">"1.1.2"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">"Microsoft.AspNetCore.Authentication.Cookies"</span> <span class="na">Version=</span><span class="s">"1.1.2"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
 
 <p>This will allow you to use <a href="https://www.jsonwebtoken.io/">JSON Web Tokens</a> for authorization information, get the tokens from the OpenID Connect provider (Okta in this case) and store them in cookies for session management. You’ll need to run a quick <code class="highlighter-rouge">dotnet restore</code> command, but don’t worry, once you save the file, VS Code will give you an option to return to the command line.</p>
 
