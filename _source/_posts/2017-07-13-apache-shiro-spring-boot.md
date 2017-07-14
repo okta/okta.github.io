@@ -1,11 +1,9 @@
 ---
 layout: blog_post
-title: 'Protecting a Spring-Boot App with Apache Shiro'
+title: 'Protecting a Spring Boot App with Apache Shiro'
 author: bdemers
 tags: [java, authentication, auth]
 ---
-
-# Protecting a Spring-Boot App with Apache Shiro
 
 My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I’d handle the following scenario:
 
@@ -21,7 +19,7 @@ Your boss (The Supreme Commander) shows up at your desk and tells you the curren
 To get started, grab this [Spring Boot example](https://github.com/oktadeveloper/shiro-spring-boot-example). It’ll get you started with a set of REST endpoints which expose CRUD operations to manage a list of Stormtroopers. You’ll be adding authentication and authorization using [Apache Shiro](https://shiro.apache.org).  All of the code is up on [Github](https://github.com/bdemers/shiro-spring-boot-example).
 
 
-Using the Apache Shiro Spring-Boot starter is all you need, just add the dependency to your pom. (where `${shiro.version}` is at least 1.4.0):
+Using the Apache Shiro Spring Boot starter is all you need, just add the dependency to your pom. (where `${shiro.version}` is at least 1.4.0):
 
 ``` xml
 <dependency>

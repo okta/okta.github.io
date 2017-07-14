@@ -42,14 +42,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
     <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Protecting a Spring-Boot App with Apache Shiro | Okta Developer</title>
-  <meta name="description" content="Protecting a Spring-Boot App with Apache Shiro">
+  <title>Protecting a Spring Boot App with Apache Shiro | Okta Developer</title>
+  <meta name="description" content="My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to ...">
   <link rel="canonical" href="https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -111,7 +111,7 @@
   <div class="wrap">
     <article class="post-block">
       <header class="post-title-block">
-        <h1><a href="/blog/2017/07/13/apache-shiro-spring-boot">Protecting a Spring-Boot App with Apache Shiro</a></h1>
+        <h1><a href="/blog/2017/07/13/apache-shiro-spring-boot">Protecting a Spring Boot App with Apache Shiro</a></h1>
         <div class="attribution">
           
             
@@ -135,9 +135,7 @@
 	      </div>
 	    </header>
 	    <section class="post-content">
-	     <h1 id="protecting-a-spring-boot-app-with-apache-shiro">Protecting a Spring-Boot App with Apache Shiro</h1>
-
-<p>My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I’d handle the following scenario:</p>
+	     <p>My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I’d handle the following scenario:</p>
 
 <p>Your boss (The Supreme Commander) shows up at your desk and tells you the current volunteer (Stormtrooper) registration application needs have different access roles for the  different <em>types</em> of employees.</p>
 
@@ -152,7 +150,7 @@
 
 <p>To get started, grab this <a href="https://github.com/oktadeveloper/shiro-spring-boot-example">Spring Boot example</a>. It’ll get you started with a set of REST endpoints which expose CRUD operations to manage a list of Stormtroopers. You’ll be adding authentication and authorization using <a href="https://shiro.apache.org">Apache Shiro</a>.  All of the code is up on <a href="https://github.com/bdemers/shiro-spring-boot-example">Github</a>.</p>
 
-<p>Using the Apache Shiro Spring-Boot starter is all you need, just add the dependency to your pom. (where <code class="highlighter-rouge">${shiro.version}</code> is at least 1.4.0):</p>
+<p>Using the Apache Shiro Spring Boot starter is all you need, just add the dependency to your pom. (where <code class="highlighter-rouge">${shiro.version}</code> is at least 1.4.0):</p>
 
 <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.apache.shiro<span class="nt">&lt;/groupId&gt;</span>
