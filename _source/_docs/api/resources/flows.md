@@ -1,6 +1,7 @@
+---
 layout: docs_page
 title: OAuth 2.0 and OIDC Flows
-weight: 4
+weight: 3
 ---
 # OAuth 2.0 and OIDC Flows
 
