@@ -7,7 +7,7 @@ redirect_from:
 
 # Overview
 
-Okta utilizes an HTTP session cookie to provide access to your Okta organization and applications across web requests for an interactive user-agents such as a browser. This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.
+Okta utilizes an HTTP session cookie to provide access to your Okta organization and applications across web requests for interactive user-agents such as a browser. This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.
 
 Okta sessions are created and managed with the [Session API](/docs/api/rest/sessions.html).
 
@@ -88,7 +88,7 @@ Location: https://your-app.example.com
 
 This scenario is ideal for deployment scenarios where you have a custom login page but immediately want to launch an Okta application after login without returning to a landing page. The login page will typically collect the user's credentials via a HTML form submit or POST and validate the credentials against your Okta organization by calling the [Authentication API](/docs/api/rest/authn.html) to obtain a session token.
 
-The session token can than be passed as a query parameter to an Okta application's embed link that will set a session cookie as well as launch the application in a single web request.
+The session token can then be passed as a query parameter to an Okta application's embed link that will set a session cookie as well as launch the application in a single web request.
 
 > The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.
 
@@ -119,7 +119,7 @@ Location: https://mail.google.com/a/your-subdomain
 
 ### Initiate a SAML SSO with the session token
 
-After your login flow is complete you can also initiate a SAML SSO into an Okta application for the user with either the `HTTP-Redirect` or `HTTP-POST`binding to the application's SAML SSO URL
+After your login flow is complete you can also initiate a SAML SSO into an Okta application for the user with either the `HTTP-Redirect` or `HTTP-POST` binding to the application's SAML SSO URL
 that contains the the session token as query parameter `sessionToken`.
 
 ##### Request Example
