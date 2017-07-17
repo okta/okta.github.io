@@ -12,31 +12,17 @@ class SideBarPage extends BasePage {
     this.$useCasesNav = this.$$sideBarNav.get(0);
     this.$referenceNav = this.$$sideBarNav.get(1);
     this.$standardsNav = this.$$sideBarNav.get(2);
-    
-    this.$mfaUseCaseLink = element(by.linkText('Multi-Factor Authentication'));
-    this.$apiamUseCaseLink = element(by.linkText('API Access Management'));
-    this.$integrateUseCaseLink = element(by.linkText('Integrate with Okta'));
 
-    this.$gettingStartedReferenceLink = element(by.linkText('Getting Started'));
     this.$authenticationReferenceLink = element(by.linkText('Authentication Reference'));
     this.$apiReferenceLink = element(by.linkText('API Reference'));
+
+    this.$$sideBarReferences = $$('#Sidebar_References li.is-active');
+    this.$$sideBarResources = $$('#Sidebar_Resources li.is-active');
+
+    this.$$useCasesLinks = this.$useCasesNav.all(By.tagName('li'));
+    this.$$referenceLinks = this.$referenceNav.all(By.tagName('li'));
+    this.$$standardsLinks = this.$standardsNav.all(By.tagName('li'));
     this.setPageLoad(this.$sideBar)
-  }
-
-  clickMFAUseCase() {
-    this.$mfaUseCaseLink.click();
-  }
-
-  clickAPIAMUserCase() {
-    this.$apiamUseCaseLink.click();
-  }
-
-  clickIntegrateUseCaseLink() {
-    this.$integrateUseCaseLink.click();
-  }
-
-  clickGettingStartedReferenceLink() {
-    this.$gettingStartedReferenceLink.click();
   }
 
   clickAuthenticationReferenceLink() {
@@ -47,16 +33,27 @@ class SideBarPage extends BasePage {
     this.$apiReferenceLink.click();
   }
 
-  doesUseCasesHaveLinks(links) {
-    return this.elementHasLinks(this.$useCasesNav, links);
+  useCasesHasLinks() {
+    // We check if 'Use Cases' section has at least 1 link. We can enhance this in the future to check for a specific number of links
+    return this.$$useCasesLinks.count().then(count => count > 0);
   }
 
-  doesReferenceHaveLinks(links) {
-    return this.elementHasLinks(this.$referenceNav, links);
+  authenticationReferenceHasLinks() {
+    return this.$$sideBarReferences.count().then(count => count > 0);
   }
-  
-  doesStandardsHaveLinks(links) {
-    return this.elementHasLinks(this.$standardsNav, links);
+
+  APIReferenceHasLinks() {
+    return this.$$sideBarResources.count().then(count => count > 0);
+  }
+
+  referenceHasLinks() {
+    // We check if 'References' section has at least 1 link. We can enhance this in the future to check for a specific number of links
+    return this.$$referenceLinks.count().then(count => count > 0);
+  }
+
+  standardsHasLinks() {
+    // We check if 'Standards' section has at least 1 link. We can enhance this in the future to check for a specific number of links
+    return this.$$standardsLinks.count().then(count => count > 0);
   }
 }
 

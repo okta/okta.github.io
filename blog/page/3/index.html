@@ -26,6 +26,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -34,7 +42,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
     <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
@@ -48,7 +56,8 @@
 </head>
 
     <body id="blog">
-	<header id="header">
+	
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -94,21 +103,153 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
+    </header>
 
 	<div class="page-content">
 		<section id="blog-index" class="main-container">
     <div class="wrap blog">
+        
+            
+            <section >
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2015/12/02/tls-client-authentication-for-services">TLS Client Authentication for Internal Services</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-william_dawson-4370e92bb436cc9418583c674a589b870200a0a6d2c5de013a3d34486ae6f4bb.jpg" alt="avatar-william_dawson.jpg" class="author-avatar">
+            
+            <address>William Dawson</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/wdawson"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/wilsdawson"><i class="fa fa-twitter-square"></i></a>
+            
+            
+              <a class="social_link" href="https://linkedin.com/in/wilsdawson"><i class="fa fa-linkedin-square"></i></a>
+            
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2015-12-02">December 2, 2015</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     If you’re like me, the most aggravating thing is finding a Stack Overflow question that exactly describes the issue you are facing, only to scroll down and see that it has remained unanswered since 2011. I was recently trying to configure Transport Layer Security (TLS) client authentication (also referred to as mutual SSL) between two internal services at Okta and found the lack of complete examples astonishing. I hope that this blog post provides a... <a href="/blog/2015/12/02/tls-client-authentication-for-services">Read more</a> 
+	    </section>
+	  </article>
+  </div>
+</section>
+
+            <br/>
+        
+            
+            <section >
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2015/06/11/trustpage">The New Age of Trust</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-vimarsh_karbhari-a5957ecc34041cf688c7d53d4fb81f39ec713de690cd80433f310d1a6e9cf035.jpg" alt="avatar-vimarsh_karbhari.jpg" class="author-avatar">
+            
+            <address>Vimarsh Karbhari</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/vimarshkarbhari-okta"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/VimarshApi"><i class="fa fa-twitter-square"></i></a>
+            
+            
+            
+              <a class="social_link" href="https://medium.com/@vimarshk/"><i class="fa fa-external-link-square"></i></a>
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2015-06-11">June 11, 2015</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     I recently read an excellent article about how amazing products shape the trust relationship with customers. I think great products are the first step in building a trust relationship. And like other aspects of the product that are derived from the product but are not physically part of it, the trust relationship is now more important than ever before. When you use a product, every engagement with that product has a direct correlation with your... <a href="/blog/2015/06/11/trustpage">Read more</a> 
+	    </section>
+	  </article>
+  </div>
+</section>
+
+            <br/>
+        
+            
+            <section >
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2015/05/22/tcmalloc">How Okta Chased Down Severe System CPU Contention in MySQL</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-okta_logo-5c247e7dc6f7e15bb43ebb957a1794464a1dd642226194ee788b08de57664af3.jpg" alt="avatar-okta_logo.jpg" class="author-avatar">
+            
+            <address>Okta Staff</address>&nbsp;
+            
+            
+            
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2015-05-22">May 22, 2015</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     Sometimes fixing a problem causes or reveals a new one. And sometimes this sets off a chain reaction of problems and fixes, where each solution exposes a deeper issue. In technology, cascades like these are common, often painful, and occasionally welcome. Our battle against CPU contention last fall is a good example of such a cascade. What began as a buffer pool adjustment triggered a series of issues and fixes that generated plenty of stress,... <a href="/blog/2015/05/22/tcmalloc">Read more</a> 
+	    </section>
+	  </article>
+  </div>
+</section>
+
+            <br/>
+        
+            
+            <section >
+  <div class="wrap">
+    <article class="post-block">
+      <header class="post-title-block">
+        <h1><a href="/blog/2015/05/08/software-engineering-design-principles">Okta Software Engineering Design Principles</a></h1>
+        <div class="attribution">
+          
+            
+            
+              <img src="/assets/avatar-jon_todd-86742acd24a15233d88a8c7b3183d0584adbdb45d06a6b9c1e140d02b7584486.jpg" alt="avatar-jon_todd.jpg" class="author-avatar">
+            
+            <address>Jon Todd</address>&nbsp;
+            
+              <a class="social_link" href="https://github.com/jontodd"><i class="fa fa-github-square"></i></a>
+            
+            
+              <a class="social_link" href="https://twitter.com/jonrtodd"><i class="fa fa-twitter-square"></i></a>
+            
+            
+            
+              <a class="social_link" href="http://www.jontodd.com"><i class="fa fa-external-link-square"></i></a>
+            
+            <span class="sepr">&middot;</span>
+          
+          <time datetime="2015-05-08">May 8, 2015</time>
+	      </div>
+	    </header>
+	    <section class="post-content">
+	     Okta has been an agile development shop since the beginning. One important aspect of being agile is enabling a mix of bottom-up and top-down decision making. Specifically where high level vision and strategy is clearly communicated enabling teams to autonomously deliver value while also feeding back learnings from the trenches to inform the high level goals.1 Below are the tacit engineering design principles we’ve used to guide development at Okta. They continue to evolve as... <a href="/blog/2015/05/08/software-engineering-design-principles">Read more</a> 
+	    </section>
+	  </article>
+  </div>
+</section>
+
+            <br/>
         
             
             <section >
@@ -325,31 +466,33 @@
     
     
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
+  <!-- END Post Footer -->
 </body>
 </html>

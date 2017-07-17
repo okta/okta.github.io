@@ -1,96 +1,99 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.24
+excerpt: Summary of changes to the Okta Platform since Release 2017.27
 ---
 
-## Release 2017.25
+## Release 2017.28
 
-### Advance Notice: Data Retention Changes
+### Platform Enhancements and New Features
 
-Okta is changing system log data retention. System log data is available from `/api/v1/events` or
-Okta SDK `EventsAPIClient`.
+The following changes are available in preview orgs on Wednesday, July 12. Availability in production orgs is expected either one week or one month later. For information about Early Availability (EA) and Generally Available (GA), see [Okta Release Lifecycle](https://developer.okta.com/docs/api/getting_started/releases-at-okta.html).
 
-* For orgs created before July 17th, data will be retained for 6 months.
-* For orgs created on and after July 17th, data will be retained for 3 months.
+The following features are GA in preview orgs, and expected to be GA in production orgs during the week of August 8, 2017:
 
-The new data retention policy starts:
+* [OpenID Connect](#openid-connect)
 
-* June 7, 2017 for existing preview orgs
-* July 17, 2017 for existing production orgs
-
-Preview and production orgs created on July 17, 2017 and later will retain this log data for three months.
-
-For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
-
-You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API. <!-- OKTA-125424 -->
-
- <!-- OKTA-125424 -->
-
-### Platform Enhancements
-
-* [System Logs Track Key Rotation and Generation](#system-logs-track-key-rotation-and-generation)
-* [Client Registration API Is an Early Access Feature](#client-registration-api-is-an-early-access-feature)
-* [Create OAuth 2.0 and OpenID Connect Clients with the Apps API](#create-oauth-20-and-openid-connect-clients-with-apps-api)
-* [OAuth 2.0 and OpenID Connect Client App Updates Available in System Log](#oauth-20-and-openid-connect-client-app-updates-available-in-system-log)
-* [Support for RP-Initiated Logout](#support-for-rp-initiated-logout)
-* [OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint](#oauth-20-and-openid-connect-well-known-response-includes-registration-endpoint)
+* [Key Rollover](#key-rollover)
 
 
-#### System Logs Track Key Rotation and Generation
-Logged information about key rotation and generation for apps and identity providers is available by using GET requests to either of the following endpoints: `/api/v1/events` or `/api/v1/logs`.
-For more information, see [Identity Provider Signing Key Store Operations](https://developer.okta.com/docs/api/resources/idps.html#identity-provider-signing-key-store-operations)
-or [Update Key Credential for Application](https://developer.okta.com/docs/api/resources/apps.html#update-key-credential-for-application).
+The following feature enhancements are GA in preview orgs, and expected to be GA in production orgs during the week of July 17, 2017:
 
-Here is a response from `/api/v1/logs`
-{% img release_notes/KeyRotateLog.png alt:"Logged Key Rotation Event" %}
-<!-- (OKTA-76607) -->
+* [Limit Age of Events](#limit-age-of-events)
 
-#### Client Registration API Is an Early Access Feature
-The [Client Registration API](/docs/api/resources/oauth-clients.html) provides operations to register and manage client applications for use with Okta’s
-OAuth 2.0 and OpenID Connect endpoints.
+* [Improved Plugin Security](#improved-plugin-security)
 
-#### Create OAuth 2.0 and OpenID Connect Clients with Apps API
-The [Apps API](https://developer.okta.com/docs/api/resources/apps.html) supports creating and configuring
-OAuth 2.0 or OpenID Connect clients. Alternatively, you can use
-[Client Registration API](https://developer.okta.com/docs/api/resources/oauth-clients.html) (RFC 7591 and RFC 7592)
-to create and manage clients.
-<!-- (OKTA-78223) -->
 
-#### OAuth 2.0 and OpenID Connect Client App Updates Available in System Log
-Logged information about OAuth 2.0 client updates is now available by using GET requests to
-either log endpoint: `/api/v1/events` or `/api/v1/logs`.
+The following EA feature enhancements are in preview orgs and expected in production orgs during the week of July 17, 2017.
+To enable an EA feature, contact Okta Support.
 
-{% img release_notes/DeactClientLog.png alt:"Logged Client Update Event" %}
-<!-- (OKTA-86738, OKTA-127445) -->
+* [Allow Unsuspending Users During Inbound SAML Login](#allow-unsuspending-users-during-inbound-saml-login)
 
-#### Support for RP-Initiated Logout
-Okta supports [RP-intiated logout](http://openid.net/specs/openid-connect-session-1_0.html#RPLogout)
-from OpenID Connect client apps in both the Okta UI and Okta API. You can specify a logout redirect URI,
-or accept the default behavior of returning to the Okta Login page. You can access this feature on the
-Create OpenID Connect Integration page (under Applications) in the UI.
-<!-- (OKTA-94106) -->
+* [Email Factor](#email-factor)
 
-#### OAuth 2.0 and OpenID Connect .well-known Response Includes Registration Endpoint
-Okta returns the `registration_endpoint` in OAuth 2.0 and OpenID Connect `.well-known` responses.
-<!-- (OKTA-127457) -->
+The following feature enhancement is available on GitHub:
+
+* [New Version of Sign-In Widget](#new-version-of-sign-in-widget)
+
+#### OpenID Connect
+
+[OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html) is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
+
+ OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.
+
+ Okta is [certified for OpenID Connect](http://openid.net/certification/). For more information, see [OpenID Connect and Okta](https://developer.okta.com/standards/OIDC/).
+
+  <!-- OKTA-132049  -->
+
+
+#### Key Rollover
+
+We provide the ability to generate a certificate with specified validity period (see the [Apps API](https://developer.okta.com/docs/api/resources/apps.html) and [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html)). We build OpenID Connect and API Access Management on this feature.
+ 
+   <!-- OKTA-132045  -->
+
+#### Limit Age of Events
+
+In keeping with the [Okta Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy), the events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. 
+  <!-- OKTA-125424, 120605  -->
+
+#### Improved Plugin Security
+Template Plugin Apps you create from the admin portal (**Admin > Applications > Add Application > Template Plugin App**) have improved security. 
+
+  <!-- OKTA-132490  -->
+
+#### New Version of Sign-In Widget
+
+Version 1.13.0 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases) is available. Check out the new features and bug fixes!
+
+  <!-- (OKTA-131661) -->
+
+#### Allow Unsuspending Users During Inbound SAML Login
+
+You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending users during inbound SAML login. See the [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html) for more information.
+
+{% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
+
+ <!-- OKTA-128384 -->
+
+#### Email Factor
+
+ You can send a one-time password (OTP) and an activation link to an email address as part of enrolling a user. 
+
+
+   <!-- OKTA-132297  -->
+
 
 
 ### Platform Bugs Fixed
 
-* [Invalid Availability of credentials.signing.kid](#invalid-availability-of-credentialssigningkid)
-* [WWW-Authenticate Header in HTTP 401 Response](#www-authenticate-header-in-http-401-response)
+These platform bug fixes are available in preview orgs and expected in production orgs the week of July 17, 2017.
 
+* `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
 
-#### Invalid Availability of credentials.signing.kid
-The `credentials.signing.kid` property of an app was available even if its sign-on mode does not support
-certificates. Only apps using the following sign-on mode types support certificates: SAML 2.0, SAML 1.1,
-WS-Fed, or OpenID Connect. For more information,
-see: [Application Key Store Operations](https://developer.okta.com/docs/api/resources/apps.html#application-key-store-operations) (OKTA-76439)
+* Identity provider JIT reactivation of users sometimes failed when there were configured group assignments. (OKTA-131784)
 
-#### WWW-Authenticate Header in HTTP 401 Response
-When a call to the token, introspect, or revocation endpoint of OpenID Connect or API Access Management
-encountered an invalid_client error, the response did not include the WWW­Authenticate header. (OKTA-127653)
+* In some circumstances, the link between the external Microsoft user and the Okta user was inaccurate.  (OKTA-132207)
 
 
 ### Does Your Org Have This Change Yet?
@@ -98,6 +101,7 @@ encountered an invalid_client error, the response did not include the WWW­Authe
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
+
 
 ### Looking for Something Else?
 

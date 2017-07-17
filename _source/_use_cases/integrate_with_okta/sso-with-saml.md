@@ -2,7 +2,7 @@
 layout: docs_page
 title: Single Sign-On with SAML
 weight: 2
-excerpt: Support single sign-on in your app and join the Okta Application Network.
+excerpt: Support SSO in your app and join the Okta Application Network.
 ---
 
 ## Single Sign-On

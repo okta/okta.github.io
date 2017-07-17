@@ -52,22 +52,7 @@ class BasePage {
       return elementList.length == expectedTextArray.length;
     })
   }
-
-  elementHasLinks(element, expectedTextArray) {
-    if (!Array.isArray(expectedTextArray)) {
-      expectedTextArray = [expectedTextArray];
-    }
-
-    return element.getText().then((text) => {
-      for(let i = 0; i < expectedTextArray.length; i++) {
-        if (text.indexOf(expectedTextArray[i]) < 0) {
-          return false;
-        }
-      }
-      return true;
-    });
-  }
-
+  
   urlContains(str) {
     return EC.urlContains(str)();
   }

@@ -976,24 +976,24 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 ##### Credentials
 {:.api .api-request .api-request-params}
 
-Parameter             | Description                                                                                                       | DataType                                             | Nullable | Unique | Validation
---------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- --| -------- | ----- | ----------------------------------------
- client_id                  | Unique identifier for the client application                                                                | String                                                 | TRUE     | TRUE  | TRUE     |
- client_secret              | OAuth 2.0 client secret string (used for confidential clients)                                              | String                                                 | TRUE     | FALSE | TRUE     |
- token_endpoint_auth_method | Requested authentication method for the token endpoint                                                      | `none`, `client_secret_post`, or `client_secret_basic` | FALSE    | FALSE | FALSE    |
+| Parameter                  | Description                                                    | DataType                                                                    | Nullable | Unique | Validation |
+|:---------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------------------|:---------|:-------|:-----------|
+| client_id                  | Unique identifier for the client application                   | String                                                                      | TRUE     | TRUE   | TRUE       |
+| client_secret              | OAuth 2.0 client secret string (used for confidential clients) | String                                                                      | TRUE     | FALSE  | TRUE       |
+| token_endpoint_auth_method | Requested authentication method for the token endpoint         | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt` | FALSE    | FALSE  | FALSE      |
 
 ##### Settings
 {:.api .api-request .api-request-params}
 
-Parameter             | Description                                                      | DataType                                                                                     | Nullable | Unique | Validation
---------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------- | ------ | ----------------------------------------
- client_uri           | URL string of a web page providing information about the client  | String                                                                                       | TRUE     | FALSE  | FALSE |
- logo_uri             | URL string that references a logo for the client                 | String                                                                                       | TRUE     | FALSE  | FALSE |
- application_type     | The type of client application                                   | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE  |
- redirect_uris        | Array of redirection URI strings for use in redirect-based flows | Array                                                                                        | TRUE     | FALSE  | TRUE  |
- response_types       | Array of OAuth 2.0 response type strings                         | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE  |
- grant_types          | Array of OAuth 2.0 grant type strings                            | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE  |
- initiate_login_uri   | URL that a third party can use to initiate a login by the client | String                                                                                       | TRUE     | FALSE  | TRUE  |
+| Parameter          | Description                                                      | DataType                                                                                     | Nullable | Unique | Validation |
+|:-------------------|:-----------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|
+| client_uri         | URL string of a web page providing information about the client  | String                                                                                       | TRUE     | FALSE  | FALSE      |
+| logo_uri           | URL string that references a logo for the client                 | String                                                                                       | TRUE     | FALSE  | FALSE      |
+| application_type   | The type of client application                                   | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE       |
+| redirect_uris      | Array of redirection URI strings for use in redirect-based flows | Array                                                                                        | TRUE     | FALSE  | TRUE       |
+| response_types     | Array of OAuth 2.0 response type strings                         | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |
+| grant_types        | Array of OAuth 2.0 grant type strings                            | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |
+| initiate_login_uri | URL that a third party can use to initiate a login by the client | String                                                                                       | TRUE     | FALSE  | TRUE       |
 
 * At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
   [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)

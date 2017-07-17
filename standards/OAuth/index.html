@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -29,20 +37,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>OAuth 2.0 and Okta | Okta Developer</title>
-  <meta name="description" content="The next evolution of the OAuth protocol focuses on client developer simplicity">
-  <link rel="canonical" href="https://developer.okta.com/standards/OAuth/">
+  <meta name="description" content="The next evolution of the OAuth protocol focuses on client developer simplicity.">
+  <link rel="canonical" href="https://developer.okta.com/standards/OAuth/index">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
   <div class="Page oauth-2.0-and-okta">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -158,7 +158,6 @@
             </li>
             
             
-            
             <li>
               <a href="/standards/SAML/">SAML</a>
             </li>
@@ -212,7 +211,7 @@ The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Con
 
 <ul>
   <li>Social Authentication –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
-  <li>OpenID Connect –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
+  <li>OpenID Connect</li>
   <li>API Access Management –  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></li>
 </ul>
 
@@ -521,7 +520,7 @@ client does not make the token valid again.</p>
 
 <p>Step 4 involves downloading the public JWKS from Okta (specified by the <em>jwks_uri</em> property in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">Authorization Server metadata</a>. The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
 
-<p>Each public key is identified by a <em>kid</em> attribute, which corresponds with the <em>kid</em> claim in the <a href="/docs/api/resources/oauth2.html#token-authentication-method">Access Token header</a>.</p>
+<p>Each public key is identified by a <em>kid</em> attribute, which corresponds with the <em>kid</em> claim in the <a href="/docs/api/resources/oauth2.html#token-authentication-methods">Access Token header</a>.</p>
 
 <p>The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
 However, in an emergency situation you can still stay in sync with Okta’s key rotation. Have your application check the <code class="highlighter-rouge">kid</code>, and if it has changed and the key is missing from the local cache, check the <code class="highlighter-rouge">jwks_uri</code> value in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">Authorization Server metadata</a> and you can go back to the <a href="/docs/api/resources/oauth2.html#get-keys">jwks uri</a> to get keys again from Okta</p>
@@ -595,7 +594,23 @@ OAuth2, except the public keys should be retrieved via the <a href="/docs/api/re
 
 <h3 id="rules">Rules</h3>
 
-<p>In a policy the administrators can define several rules with people, scope, and grant type conditions. The people condition identifies users and groups that are included or exclueded to match the user the token is requested for. Rules are ordered numerically by priority. This priority determines the order in which they are searched for a user/group match. The highest priority rule has a priorityOrder of 1.</p>
+<p>In a policy the administrators can define several rules with people, scope, and grant type conditions.</p>
+
+<h4 id="scope-condition">Scope Condition</h4>
+
+<p>The scope condition identifies scopes that are included or excluded to match the claims the token will contain.
+Scopes are not ordered.</p>
+
+<h4 id="grant-type-condition">Grant Type Condition</h4>
+
+<p>The grant type condition identifies how the authorization grant is presented to Okta: 
+via an authorization code, password credentials, refresh token, or client credentials.</p>
+
+<h4 id="people-condition">People Condition</h4>
+
+<p>The people condition identifies users and groups that are included or excluded to match the user the token is requested for.
+Rules are ordered numerically by priority. This priority determines the order in which they are searched for a user/group match.
+The highest priority rule has a priorityOrder of 1.</p>
 
 <p>For example, assume the following conditions are in effect:</p>
 
@@ -610,24 +625,117 @@ OAuth2, except the public keys should be retrieved via the <a href="/docs/api/re
 
 <h2 id="authorization-servers">Authorization Servers</h2>
 
-<p>API Access Management allows you to build custom Authorization Servers in Okta which can be used to protect your own API endpoints. An Authorization Server defines your security boundary, for example “staging” or “production.” Within each Authorization Server you can define your own OAuth scopes, claims, and access policies. This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.</p>
+<p>At its core, an authorization server is simply an engine for minting OpenID Connect or OAuth 2.0 tokens.</p>
 
-<p>At its core, an Authorization Server is simply an OAuth 2.0 token minting engine.
-Each Authorization Server has a unique issuer URI and its own signing key for tokens in order to keep proper boundary between security domains.
-The Authorization Server also acts as an OpenID Connect Provider, which means you can request ID tokens in addition to access tokens from the Authorization Server endpoints.
-To configure an Authorization Server, log into your org and navigate to <strong>Security</strong> &gt; <strong>API</strong> &gt; <strong>Add Authorization Server</strong>.</p>
+<p>Okta provides two types of authorization servers:</p>
+
+<ul>
+  <li>
+    <p>Okta Authorization Server:
+Use the Okta Authorization Server to perform SSO with Okta or sign in users for apps displayed on the Okta home page.
+Okta hosts and manages the Okta Authorization Server. It can’t be configured,
+though you can add a <a href="/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned">groups claim</a>
+and <a href="/docs/api/resources/apps.html#application-user-properties">app-user profile attributes</a> to a client.
+The Access Token minted by the Okta Authorization Server is consumed by Okta APIs. The Access Token audience is always Okta specific, so the token can’t be validated by your applications.</p>
+
+    <blockquote>
+      <p>Note: The Okta Authorization Server doesn’t require that the API Access Management feature be enabled.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Custom Authorization Server:
+Use a Custom Authorization Server to secure your APIs.
+Custom Authorization Servers are hosted on Okta, and created and configured by an org administrator.
+You can create and configure Custom Authorization Servers using the Okta Admin UI or the <a href="/docs/api/resources/oauth2.html#authorization-server-operations">Custom Authorization Server API</a>.
+The Access Token minted by a Custom Authorization Server is consumed by your APIs. 
+You can specify the audience to make sure that the Access Token is for your APIs.
+Also, custom scopes can be configured to support the authorization for your APIs.</p>
+
+    <blockquote>
+      <p>Note: Custom Authorization Servers are available as part of the <a href="/use_cases/api_access_management/index.html">API Access Management</a> feature.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Feature</th>
+      <th style="text-align: left">Okta Authorization Server</th>
+      <th style="text-align: left">Custom Authorization Server</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Hosted by Okta</td>
+      <td style="text-align: left">✔</td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Add groups claim</td>
+      <td style="text-align: left">✔</td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Add user-profile attributes</td>
+      <td style="text-align: left">✔</td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Manage resources outside Okta</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Requires API Access Management</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Org Admin creates one or more</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Validate the Access Token in custom code</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Custom Scopes</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Custom Claims</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">✔</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Custom Access Policies and Rules</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">✔</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To configure a Custom Authorization Server, sign in to your org and navigate to <strong>Security</strong> &gt; <strong>API</strong> &gt; <strong>Add Authorization Server</strong> or use the <a href="/docs/api/resources/oauth2.html#authorization-server-operations">Custom Authorization Server API</a>.</p>
+
+<p>If you use a Custom Authorization Server, we recommend that you use it instead of the Okta Authorization Server for 
+any platform use cases (perform SSO or secure your API access).
+Doing so will make it easier to consume enhancements to the API Access Management product and features.</p>
 
 <h2 id="openid-connect-and-authorization-servers">OpenID Connect and Authorization Servers</h2>
 
-<p>You can use OpenID Connect without the API Access Management feature, using the <a href="/docs/api/resources/oidc.html">OpenID Connect API</a>.
-However, you can also use OpenID Connect with an Authorization Server specified:</p>
+<p>You can use <a href="/docs/api/resources/oidc.html">OpenID Connect API</a> without the API Access Management feature.
+However, you can also use OpenID Connect with a Custom Authorization Server:</p>
 
 <ul>
   <li><code class="highlighter-rouge">/oauth2/v1/userinfo</code> for OpenID Connect without API Access Management</li>
   <li><code class="highlighter-rouge">/oauth2/:authorizationServerId/v1/userinfo</code> for OpenID Connect with API Access Management</li>
 </ul>
 
-<p>You can’t mix tokens between different Authorization Servers. By design, Authorization Servers don’t have trust relationships with each other.</p>
+<p>You can’t mix tokens between different authorization servers. By design, authorization servers don’t have trust relationships with each other.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
@@ -692,33 +800,35 @@ However, you can also use OpenID Connect with an Authorization Server specified:
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>

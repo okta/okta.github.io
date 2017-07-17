@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -29,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -42,7 +50,8 @@
 <body>
   <div class="Page api-access-management">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -158,7 +158,6 @@
             </li>
             
             
-            
             <li>
               <a href="/standards/SAML/">SAML</a>
             </li>
@@ -186,21 +185,21 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_use_cases/api_access_management/index.md">Edit Page</a>
-      <h1 id="overview">Overview</h1>
-
-<p>Use API Access Management, Okta’s implementation of the OAuth 2.0 standard, to secure your APIs.
+      <p>Use API Access Management, Okta’s implementation of the OAuth 2.0 standard, to secure your APIs.
 API Access Management is integrated with Okta’s implementation of OpenID Connect for authentication;
 OpenID Connect is also available separately. Similarly, Okta provides a client management API
 for onboarding, monitoring, and deprovisioning client apps.</p>
 
-<h2 id="oauth-20-and-openid-connect">OAuth 2.0 and OpenID Connect</h2>
+<p>API Access Management is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
+
+<h1 id="oauth-20-and-openid-connect">OAuth 2.0 and OpenID Connect</h1>
 
 <p>When do you use API Access Management and when do you use OpenID Connect?</p>
 
-<h3 id="simple-use-cases">Simple Use Cases</h3>
+<h2 id="simple-use-cases">Simple Use Cases</h2>
 
 <p>In general, use OpenID Connect to sign users into apps, and use API Access Management to secure your APIs: 
-create one or more authentication servers, define scopes and claims, and create policies and rules to determine who can access your API resources.</p>
+create one or more Custom Authorization Servers, define scopes and claims, and create policies and rules to determine who can access your API resources.</p>
 
 <p>For example:</p>
 
@@ -209,19 +208,19 @@ create one or more authentication servers, define scopes and claims, and create 
   <li>Use Case 2 (OpenID Connect): You want users to sign into your custom web application to access their account.</li>
 </ul>
 
-<h3 id="complex-use-cases">Complex Use Cases</h3>
+<h2 id="complex-use-cases">Complex Use Cases</h2>
 
 <p>You can also specify authorization servers in your OpenID Connect API calls. 
 Every OpenID resource is also available in a version that lets you specify an authorization server that you created in Okta.
 See <a href="#oauth-20-and-openid-connect">OAuth 2.0 and OpenID Connect</a> for details.</p>
 
-<h2 id="benefits-of-api-access-management">Benefits of API Access Management</h2>
+<h1 id="benefits-of-api-access-management">Benefits of API Access Management</h1>
 
 <p>Centralizing the management of your APIs makes it easier for others to consume your API resources.
 Using Okta’s OAuth-as-a-Service feature, API Access Management, provides many benefits:</p>
 
 <ul>
-  <li>Create one or more hosted authentication servers, which makes it easier to manage sets of API access for multiple client apps across many customer types.</li>
+  <li>Create one or more <a href="/standards/OAuth/index.html#authorization-servers">Custom Authorization Servers</a>, hosted on Okta. Custom Authorization Servers make it easier to manage sets of API access for multiple client apps across many customer types.</li>
   <li>Create custom scopes and claims. Map your claims to the profiles in your user directory.</li>
   <li>Tokens are passed instead of credentials. In addition, the JWT tokens carry payloads for user context.</li>
   <li>Stay protected with security standards compliance.</li>
@@ -235,12 +234,12 @@ Using Okta’s OAuth-as-a-Service feature, API Access Management, provides many 
   <p>Note: In some places we have implemented stricter requirements or behaviors for additional security.</p>
 </blockquote>
 
-<h2 id="putting-the-pieces-together">Putting the Pieces Together</h2>
+<h1 id="putting-the-pieces-together">Putting the Pieces Together</h1>
 
 <p>The following is a high-level look at the basic components of API Access Management. 
 We use the same terms as the OpenID Connect and OAuth 2.0 spec. For complete explanations, read those specs.</p>
 
-<h3 id="tokens-and-scopes">Tokens and Scopes</h3>
+<h2 id="tokens-and-scopes">Tokens and Scopes</h2>
 
 <p>The two biggest security benefits of OAuth are using tokens instead of passing credentials and restricting the scope of tokens. 
 Both of these measures go a long way toward mitigating the impact of a security compromise.</p>
@@ -254,7 +253,7 @@ Both of these measures go a long way toward mitigating the impact of a security 
 
 <p>Okta helps you manage ID Tokens (OpenID Connect) and Access Tokens (OAuth 2.0).</p>
 
-<h3 id="custom-claims">Custom Claims</h3>
+<h2 id="custom-claims">Custom Claims</h2>
 
 <p>The JWT extension to the OAuth Framework lets you include custom claims in ID and Access Tokens. 
 You can design tokens to disclose the information you want to share depending on the client and the scope of the tokens.
@@ -264,12 +263,13 @@ like changing their personal information.</p>
 <p>Custom claims also help you by reducing the number of lookup calls required to retrieve user information from the identity provider (IdP).
 This benefit depends, of course, on the level of security your apps require.</p>
 
-<h2 id="getting-started-with-api-access-management">Getting Started with API Access Management</h2>
+<h1 id="getting-started-with-api-access-management">Getting Started with API Access Management</h1>
 
 <ul>
-  <li><a href="https://help.okta.com/en/prev/Content/Topics/Security/API_Access.htm">Set up an authorization server</a> and use the power of Okta’s API Access Management.</li>
+  <li><a href="/standards/OAuth/index.html">Learn more</a> about Okta and OAuth 2.0.</li>
+  <li><a href="https://help.okta.com/en/prev/Content/Topics/Security/API_Access.htm">Set up a custom authorization server</a> and use the power of Okta’s API Access Management.</li>
   <li>Visit <a href="/docs/api/resources/oauth2.html">the API Access Management endpoint documentation</a> and start building your integration today.</li>
-  <li>For simpler use cases focused on single-sign on, visit <a href="/docs/api/resources/oidc.html">the OpenID Connect documentation</a>.</li>
+  <li>For simpler use cases focused on SSO, visit <a href="/docs/api/resources/oidc.html">the OpenID Connect documentation</a>.</li>
 </ul>
 
       </div>
@@ -335,33 +335,35 @@ This benefit depends, of course, on the level of security your apps require.</p>
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>

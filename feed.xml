@@ -8,6 +8,938 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Protecting a Spring Boot App with Apache Shiro</title>
+        <description>&lt;p&gt;My favorite thing about Apache Shiro is how easy it makes handling authorization. You can use a role-based access control (RBAC) model of assigning roles to users and then permissions to roles. This makes dealing with the inevitable requirements change simple. Your code does not change, just the permissions associated with the roles. In this post I want to demonstrate just how simple it is, using a Spring Boot application and walking through how I’d handle the following scenario:&lt;/p&gt;
+
+&lt;p&gt;Your boss (The Supreme Commander) shows up at your desk and tells you the current volunteer (Stormtrooper) registration application needs have different access roles for the  different &lt;em&gt;types&lt;/em&gt; of employees.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Officers can register new &lt;em&gt;“volunteers”&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Underlings (you and I) only have read access the volunteers&lt;/li&gt;
+  &lt;li&gt;Anyone from outside the &lt;em&gt;organization&lt;/em&gt; doesn’t have any access to the &lt;em&gt;“volunteers”&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;It should go without saying the Supreme Commander has access to everything&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;start-with-a-rest-application&quot;&gt;Start with a REST Application&lt;/h2&gt;
+
+&lt;p&gt;To get started, grab this &lt;a href=&quot;https://github.com/oktadeveloper/shiro-spring-boot-example&quot;&gt;Spring Boot example&lt;/a&gt;. It’ll get you started with a set of REST endpoints which expose CRUD operations to manage a list of Stormtroopers. You’ll be adding authentication and authorization using &lt;a href=&quot;https://shiro.apache.org&quot;&gt;Apache Shiro&lt;/a&gt;.  All of the code is up on &lt;a href=&quot;https://github.com/bdemers/shiro-spring-boot-example&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Using the Apache Shiro Spring Boot starter is all you need, just add the dependency to your pom. (where &lt;code class=&quot;highlighter-rouge&quot;&gt;${shiro.version}&lt;/code&gt; is at least 1.4.0):&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.shiro&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;shiro-spring-boot-web-starter&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${shiro.version}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Jumping into the code we will start with our &lt;code class=&quot;highlighter-rouge&quot;&gt;StormtrooperController&lt;/code&gt;, and simply add annotations:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/troopers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;produces&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MediaType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;APPLICATION_JSON_UTF8_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StormtrooperController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;StormtrooperDao&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;StormtrooperController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StormtrooperDao&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;trooperDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logical&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;officer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;underling&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listTroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;listStormtroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logical&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;officer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;underling&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logical&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;officer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updateStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@DeleteMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@ResponseStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NO_CONTENT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deleteTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;deleteStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In the code block above you’re using Shiro’s &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequiresRoles&lt;/code&gt; annotation to describe your use-case.  You’ll notice the logical &lt;code class=&quot;highlighter-rouge&quot;&gt;OR&lt;/code&gt; to allow any of these roles access.  This is great, your code is done, it was pretty easy to add, just a single line.&lt;/p&gt;
+
+&lt;p&gt;You could stop here but, roles are not that flexible, and if you put them directly in your code you’re now tightly coupled to those names/IDs.&lt;/p&gt;
+
+&lt;h2 id=&quot;stop-using-roles&quot;&gt;Stop Using Roles&lt;/h2&gt;
+
+&lt;p&gt;Imagine your application has been deployed and is working fine, the following week your &lt;em&gt;boss&lt;/em&gt; stops by your desk and tells you to to make some changes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Officers need to be able to update troopers&lt;/li&gt;
+  &lt;li&gt;He feels that the term ‘admin’ is fine for most superiors, but is not suitable to the Dark Lord&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Fine, you say, easy enough, you can just make a few small changes to the method signatures:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logical&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emperor&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;emperor&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;officer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;underling&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listTroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logical&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emperor&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;officer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;underling&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logical&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emperor&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;officer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logical&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emperor&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;officer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@DeleteMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ResponseStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NO_CONTENT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresRoles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logical&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Logical&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;OR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emperor&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;admin&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deleteTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After another round of testing the deployment and you’re back in action!&lt;/p&gt;
+
+&lt;p&gt;Wait, take a step back. Roles are great for simple use cases and making a change like this would work fine, but you know this will be changed again. Instead of changing your code every time the requirements change slightly, let’s decouple the roles and what they represent from your code. Instead, use permissions. Your method signatures will look like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresPermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;troopers:read&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listTroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresPermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;troopers:read&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresPermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;troopers:create&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresPermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;troopers:update&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@DeleteMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ResponseStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NO_CONTENT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequiresPermissions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;troopers:delete&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deleteTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;By using Shiro’s &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequiresPermissions&lt;/code&gt; annotation, this code would work with the original requirements and the new requirements without modification. The only thing that changes is how you map those permissions to roles, and in turn, to users. This could be done externally from your application in a database, or for this example a simple properties file.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This example uses static usernames and passwords all stored as clear text, this is fine for a blog post, but seriously, manage your passwords &lt;a href=&quot;https://stormpath.com/blog/password-security-right-way&quot;&gt;correctly&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;To meet the original requirements, the role-to-permission mapping would look like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;role.admin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;troopers:*&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;role.officer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;troopers:create, troopers:read&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;role.underling&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;troopers:read&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;For the updated requirements, you would just change the file slightly to add the new ‘emperor’ role, and grant officers the ‘update’ permission:&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;role.emperor&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;role.admin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;troopers:*&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;role.officer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;troopers:create, troopers:read, troopers:update&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;role.underling&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;troopers:read&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If the permission syntax looks a little funny to you, take a look at &lt;a href=&quot;https://shiro.apache.org/permissions.html&quot;&gt;Apache Shiro’s Wildcard Permission&lt;/a&gt; documentation for an in depth explanation.&lt;/p&gt;
+
+&lt;h2 id=&quot;apache-shiro-and-spring&quot;&gt;Apache Shiro and Spring&lt;/h2&gt;
+
+&lt;p&gt;We’ve already covered the Maven dependencies and the actual REST controller, but our application will also need a &lt;code class=&quot;highlighter-rouge&quot;&gt;Realm&lt;/code&gt; and error handling.&lt;/p&gt;
+
+&lt;p&gt;If you take a look at the &lt;code class=&quot;highlighter-rouge&quot;&gt;SpringBootApp&lt;/code&gt; class you will notice a few things that were NOT in the &lt;a href=&quot;https://github.com/stormpath/jaxrs-spring-blog-example/blob/master/spring-boot/src/main/java/com/stormpath/example/springboot/SpringBootApp.java&quot;&gt;original example&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Realm&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;realm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// uses 'classpath:shiro-users.properties' by default&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;PropertiesRealm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PropertiesRealm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Caching isn't needed in this example, but we can still turn it on&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;realm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setCachingEnabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ShiroFilterChainDefinition&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;shiroFilterChainDefinition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;DefaultShiroFilterChainDefinition&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chainDefinition&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DefaultShiroFilterChainDefinition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// use permissive to NOT require authentication, our controller Annotations will decide that&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;chainDefinition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addPathDefinition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;authcBasic[permissive]&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chainDefinition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CacheManager&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cacheManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Caching isn't needed in this example, but we will use the MemoryConstrainedCacheManager for this example.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MemoryConstrainedCacheManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;First you have defined a Shiro &lt;code class=&quot;highlighter-rouge&quot;&gt;Realm&lt;/code&gt;, a realm  is simply a user-store specific DAO. Shiro supports many different types of Realms out of the box (Active Directory, LDAP, Database, file, etc.).&lt;/p&gt;
+
+&lt;p&gt;Next up you have the &lt;code class=&quot;highlighter-rouge&quot;&gt;ShiroFilterChainDefinition&lt;/code&gt; which you’ve configured to allow BASIC authentication but NOT required it by using the ‘permissive’ option. This way your annotations configure everything. Instead of using annotations (or in addition to using them) you could define your &lt;a href=&quot;https://shiro.apache.org/web.html#default-filters&quot;&gt;permission to URL mappings&lt;/a&gt; with Ant-style paths. This example would look something like:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;chainDefinition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addPathDefinition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/troopers/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;authcBasic, rest[troopers]&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This would map any resource starting with the path &lt;code class=&quot;highlighter-rouge&quot;&gt;/troopers&lt;/code&gt; to require BASIC authentication, and use the &lt;a href=&quot;https://shiro.apache.org/static/current/apidocs/org/apache/shiro/web/filter/authz/HttpMethodPermissionFilter.html&quot;&gt;‘rest’ filter&lt;/a&gt; which based on the HTTP request method, appends a CRUD action to the permission string. For example an HTTP &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; would map to ‘read’ so the full permission string for a ‘GET’ request would be &lt;code class=&quot;highlighter-rouge&quot;&gt;troopers:read&lt;/code&gt; (just like you did with your annotations).&lt;/p&gt;
+
+&lt;h2 id=&quot;exception-handling&quot;&gt;Exception Handling&lt;/h2&gt;
+
+&lt;p&gt;The last bit of code you have handles exceptions.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@ExceptionHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UnauthenticatedException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ResponseStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UNAUTHORIZED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UnauthenticatedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{} was thrown&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@ExceptionHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthorizationException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ResponseStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;FORBIDDEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AuthorizationException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{} was thrown&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@ExceptionHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@ResponseStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NOT_FOUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@ResponseBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ErrorMessage&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ErrorMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Trooper Not Found: &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;, why aren't you at your post? &quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;, do you copy?&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The first two handle Shiro exceptions and simply set the status to 401 or 403. A 401 for invalid or missing user/passwords, and a 403 for any valid logged in user that does NOT have access to the resource. Lastly, you’ll want to handle any &lt;code class=&quot;highlighter-rouge&quot;&gt;NotFoundException&lt;/code&gt; with a 404 and return a JSON serialized &lt;code class=&quot;highlighter-rouge&quot;&gt;ErrorMessage&lt;/code&gt; object.&lt;/p&gt;
+
+&lt;h2 id=&quot;fire-it-up&quot;&gt;Fire it Up!&lt;/h2&gt;
+
+&lt;p&gt;If you put all of this together, or you just grab the code from &lt;a href=&quot;https://github.com/oktadeveloper/shiro-spring-boot-example&quot;&gt;Github&lt;/a&gt;, you can start the application using &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt;.  Once you have everything running you can start making requests!&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl http://localhost:8080/troopers
+HTTP/1.1 401
+Content-Length: 0
+Date: Thu, 26 Jan 2017 21:12:41 GMT
+WWW-Authenticate: BASIC &lt;span class=&quot;nv&quot;&gt;realm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;application&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Don’t forget, you need to authenticate!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-basic&quot;&gt;$ curl --user emperor:secret http://localhost:8080/troopers
+HTTP/1.1 200
+Content-Type: application/json;charset=UTF-8
+Date: Thu, 26 Jan 2017 21:14:17 GMT
+Transfer-Encoding: chunked
+
+[
+    {
+        &quot;id&quot;: &quot;FN-0128&quot;,
+        &quot;planetOfOrigin&quot;: &quot;Naboo&quot;,
+        &quot;species&quot;: &quot;Twi'lek&quot;,
+        &quot;type&quot;: &quot;Sand&quot;
+    },
+    {
+        &quot;id&quot;: &quot;FN-1383&quot;,
+        &quot;planetOfOrigin&quot;: &quot;Hoth&quot;,
+        &quot;species&quot;: &quot;Human&quot;,
+        &quot;type&quot;: &quot;Basic&quot;
+    },
+    {
+        &quot;id&quot;: &quot;FN-1692&quot;,
+        &quot;planetOfOrigin&quot;: &quot;Hoth&quot;,
+        &quot;species&quot;: &quot;Nikto&quot;,
+        &quot;type&quot;: &quot;Marine&quot;
+    },
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;404&lt;/code&gt; looks would look like this:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl --user emperor:secret http://localhost:8080/troopers/TK-421
+HTTP/1.1 404
+Content-Type: application/json;charset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;UTF-8
+Date: Thu, 26 Jan 2017 21:15:54 GMT
+Transfer-Encoding: chunked
+
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;error&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Trooper Not Found: TK-421, why aren't you at your post? TK-421, do you copy?&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;learn-more-about-apache-shiro&quot;&gt;Learn More About Apache Shiro&lt;/h2&gt;
+
+&lt;p&gt;This example has shown how easy it is to integrate Apache Shiro into a Spring Boot application, how using permissions allow for greater flexibility over roles, and all it takes is a single Annotation in your controller.&lt;/p&gt;
+
+&lt;p&gt;At Stormpath we were happy to be able to commit our support to Apache Shiro, and we’ve carried that commitment forward to Okta. Look forward to more Shiro content from our team, including tutorials on using Shiro with Okta and OAuth plus how to add an AngularJS frontend to this &lt;em&gt;volunteer&lt;/em&gt; application. Stay tuned, the Empire needs YOU!&lt;/p&gt;
+
+&lt;p&gt;If you have questions on this example you can send them to &lt;a href=&quot;http://shiro.apache.org/mailing-lists.html&quot;&gt;Apache Shiro’s user list&lt;/a&gt;, me on &lt;a href=&quot;https://twitter.com/briandemers&quot;&gt;Twitter&lt;/a&gt;, or just leave them in the comments section below!&lt;/p&gt;
+
+&lt;p&gt;To learn more, check out these posts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shiro.apache.org/10-minute-tutorial.html&quot;&gt;Apache Shiro 10 Minute Tutorial&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stormpath.com/blog/new-rbac-resource-based-access-control&quot;&gt;The New RBAC: Resource-Based Access Control&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shiro.apache.org/permissions.html#wildcard-permissions&quot;&gt;Apache Shiro Wildcard Permissions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 13 Jul 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot</guid>
+      </item>
+    
+      <item>
+        <title>OpenID Connect for User Authentication in ASP.NET Core</title>
+        <description>&lt;p&gt;In the age of the “personalized web experience”, authentication and user management is a given, and it’s easier than ever to tap into third-party authentication providers like Facebook, Twitter, and Google. And it’s not just the wild, wild web that needs it. Businesses need ways to secure their APIs, and identify users logged into their apps.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt; is a protocol for authenticating users. It is a specification by the OpenID Foundation describing the best way for the authentication “handshake” to happen. It lays out what an Identity Provider needs to provide in order to be considered “OpenID Connect Certified” which makes it easier than ever to consume authentication as a service.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-not-use-oauth-20&quot;&gt;Why Not Use OAuth 2.0?&lt;/h2&gt;
+&lt;p&gt;First, &lt;a href=&quot;https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth&quot;&gt;OAuth 2.0 is NOT an authentication protocol&lt;/a&gt;. I know what you’re thinking: “What?!!?” But it’s not. It &lt;em&gt;is&lt;/em&gt; an delegated authorization framework, which many modern authentication protocols are built on.&lt;/p&gt;
+
+&lt;p&gt;Second, while OAuth 2.0 does a great job of providing the necessary information for consumers to make authorization decisions, it says nothing about how that information will be exchanged securely. This has led to every authentication provider having their own way of exchanging the OAuth 2.0 information, which has led to a few well-publicized hacks. OpenID Connect fixes these problems by providing an authentication protocol that describes exactly how the exchange of authorization information happens between a subscriber and their provider.&lt;/p&gt;
+
+&lt;p&gt;So let’s see how this works.&lt;/p&gt;
+
+&lt;h3 id=&quot;nothing-up-my-sleeve&quot;&gt;Nothing Up My Sleeve&lt;/h3&gt;
+&lt;p&gt;You’ll be using &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; and the command line. You can also use Visual Studio, but Visual Studio Code is cross-platform and lightweight, so it won’t matter what operating system you are using.&lt;/p&gt;
+
+&lt;p&gt;First, get the &lt;a href=&quot;https://dot.net/core&quot;&gt;dotnet command-line program&lt;/a&gt;. Once you have the dotnet-cli installed, run the &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet new mvc --auth None&lt;/code&gt; command. This will create a new MVC application without the built-in authentication. You’re going to do that yourself.&lt;/p&gt;
+
+&lt;p&gt;In just a few seconds you’ll have a simple ASP.NET Core app ready to go. You may need to run a &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; command to install the dependencies for the base application.&lt;/p&gt;
+
+&lt;h2 id=&quot;add-an-identity-provider&quot;&gt;Add an Identity Provider&lt;/h2&gt;
+&lt;p&gt;Now you need an Identity Provider. For this tutorial you’ll  use &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt;. Once you’ve created an account and logged in, click &lt;em&gt;Admin&lt;/em&gt; on the top menu.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/admin_button-10c629ae4f749f3b0851d3206f3069876fd193d3e9696e7e1a17b150239e11dd.png&quot; alt=&quot;Admin Button&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then choose the &lt;em&gt;Applications&lt;/em&gt; menu item from the admin dashboard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/applications_button-08fcd59c5ce94e306dd52a8ca933fafe2ece4d84d66b6840b3bc627b39b1179f.png&quot; alt=&quot;Applications Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the Applications page, click the &lt;em&gt;Add Application&lt;/em&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/add_application_button-e917c5ac29a95532285ea60c1853c4b849aaaa520add0ee3dd1b5c0cc6d26488.png&quot; alt=&quot;Add Application Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On the Add Application page, click on the &lt;em&gt;Create New Application&lt;/em&gt; button.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/create_app_button-bd24015c3fac20e164679b100d846be1967927cf6f99b635493b31878769a617.png&quot; alt=&quot;Create Application Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When the New Application Integration window pops up, set up the new application. We’ll choose &lt;em&gt;Web&lt;/em&gt; from the Platform dropdown, and OpenID Connect from the Sign On Method.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/create_application_page-9a0ce95a392e87da357853b7733323fa27af824e4c02115c6b12ee8e51b7f9d1.png&quot; alt=&quot;Create Application Page&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once you’ve created the application, choose it from the list of applications. In the General Settings tab, click the &lt;em&gt;Edit&lt;/em&gt; button and make sure to add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/signin-oidc&lt;/code&gt; to the Redirect URIs.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/redirect_uri-564499ce3721350c6a82855e9f425c4bdef9ca4ad856183a3c667c8e0cf3b5a8.png&quot; alt=&quot;Redirect URI Setting&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;While you are on the General Settings tab, scroll down and copy your Client ID and Client Secret somewhere. You’ll use this later when configuring the middleware in your application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/client_id_secret-b8d9e3ceaa9398eb3ec4b4f3b568bab2b0a1f3960a53bda84fdb719d70ffd72e.png&quot; alt=&quot;Client ID and Secret&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, you’ll need to make sure that you can use the API by adding the localhost URI to your CORS settings. First, choose the &lt;em&gt;Security&lt;/em&gt; menu item from the dashboard and the choose &lt;em&gt;API&lt;/em&gt; from the drop down menu.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/security_drop_down-e7b02e973ce3098c8e540b3dc1afbdd3d83ce8baf934cbc662d2747f90cc9a2c.png&quot; alt=&quot;Security Drop Down Menu&quot; width=&quot;200&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then select the &lt;em&gt;Trusted Origins&lt;/em&gt; tab.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/trusted_origins_tab-9997990aaf27d68a30f73c99e28f22bc4038d1502f4157de4dcf7b067dcd16ba.png&quot; alt=&quot;Trusted Origins Tab&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Click on &lt;em&gt;Add Origin&lt;/em&gt; and add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000&lt;/code&gt; as a trusted origin. Make sure that CORS and Redirect are selected. Enter “ASP.NET web app (debug)” as the redirect name (or any other name that makes sense to you).&lt;/p&gt;
+
+&lt;p&gt;Now you’re ready to set up authentication!&lt;/p&gt;
+
+&lt;h2 id=&quot;add-authentication&quot;&gt;Add Authentication&lt;/h2&gt;
+&lt;p&gt;When you open your application in Visual Studio or Visual Studio Code, you’ll notice that there’s a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ProjectName&amp;gt;.csproj&lt;/code&gt; file. You’ll need to make some quick changes to that to get some dependencies you’ll need to make this work. In the &lt;code class=&quot;highlighter-rouge&quot;&gt;ItemGroup&lt;/code&gt; section of the &lt;code class=&quot;highlighter-rouge&quot;&gt;csproj&lt;/code&gt; document add:&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;PackageReference&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Include=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.AspNetCore.Authentication.JwtBearer&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.1.2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;PackageReference&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Include=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.AspNetCore.Authentication.OpenIdConnect&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.1.2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;PackageReference&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Include=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.AspNetCore.Authentication.Cookies&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.1.2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This will allow you to use &lt;a href=&quot;https://www.jsonwebtoken.io/&quot;&gt;JSON Web Tokens&lt;/a&gt; for authorization information, get the tokens from the OpenID Connect provider (Okta in this case) and store them in cookies for session management. You’ll need to run a quick &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; command, but don’t worry, once you save the file, VS Code will give you an option to return to the command line.&lt;/p&gt;
+
+&lt;p&gt;Now, open the &lt;code class=&quot;highlighter-rouge&quot;&gt;Startup.cs&lt;/code&gt; file, and on the first line of the Configure method add:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.IdentityModel.Protocols.OpenIdConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System.IdentityModel.Tokens.Jwt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.IdentityModel.Tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then, between the &lt;code class=&quot;highlighter-rouge&quot;&gt;app.UseStaticFiles();&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;app.UseMvc(…);&lt;/code&gt; add:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseCookieAuthentication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CookieAuthenticationOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AuthenticationScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Cookies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AutomaticAuthenticate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This tells the application that you want to store your session tokens in cookies. Then, you just need to add the authentication instructions.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseOpenIdConnectAuthentication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OpenIdConnectOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;AuthenticationScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;oidc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SignInScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Cookies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Authority&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://&amp;lt;your Okta dev subdomain&amp;gt;.oktapreview.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ResponseType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpenIdConnectResponseType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ClientId&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Your Client ID from Okta}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;ClientSecret&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Your Client Secret from Okta}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;GetClaimsFromUserInfoEndpoint&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;TokenValidationParameters&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TokenValidationParameters&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ValidateIssuer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;SaveTokens&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This is the important part, so let’s go through it line by line:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationScheme&lt;/code&gt; gives out scheme a name, and will be used to build the default callback url (~/signin-oidc).&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;SignInScheme&lt;/code&gt; is used to set the sign-in middleware.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Authority&lt;/code&gt; identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ResponseType&lt;/code&gt; is also specified in that document under “response_types_supported”. This tells the application you want to start an authorization code flow from from the provider.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientId&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientSecret&lt;/code&gt; are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest &lt;a href=&quot;https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core&quot;&gt;storing these in a secure way&lt;/a&gt; and referencing them here. They’re in line here for demonstration purposes.&lt;/li&gt;
+  &lt;li&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;GetClaimsFromUserInfoEndpoint = true&lt;/code&gt; tells the provider that if you’re successful authenticating, go ahead and make a call to the &lt;code class=&quot;highlighter-rouge&quot;&gt;userinfo_endpoint&lt;/code&gt; (specified in the configuration document at the same URL you got the &lt;code class=&quot;highlighter-rouge&quot;&gt;authorization_endpoint&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;response_types_supported&lt;/code&gt; from). This will get the claims that we’re going to display from Okta once the authentication has completed.&lt;/li&gt;
+  &lt;li&gt;The TokenValidationParameters tells the middleware that we want to validate that the issuer is who we expect it to be by getting the signing key from the &lt;code class=&quot;highlighter-rouge&quot;&gt;jwks_uri&lt;/code&gt; endpoint in the &lt;code class=&quot;highlighter-rouge&quot;&gt;.well-known/openid_configuration&lt;/code&gt; document.&lt;/li&gt;
+  &lt;li&gt;Finally, we tell the application to save the token once it comes back from the provider.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;That’s all there is to it, but how do you know it’s working? Well, you &lt;em&gt;could&lt;/em&gt; hook up a login form but there is an easier way!&lt;/p&gt;
+
+&lt;h2 id=&quot;check-your-work&quot;&gt;Check Your Work&lt;/h2&gt;
+&lt;p&gt;All you really need to do is add an [Authorize] attribute to a controller method. That will simply and quickly show us that it’s going to the login page on the provider, but it won’t show us what the provider is sending back. Let’s create a page that will show that information so you can make sure you’re getting what you &lt;em&gt;think&lt;/em&gt; you should be getting from the provider.&lt;/p&gt;
+
+&lt;p&gt;First, add a using statement to the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; for the &lt;code class=&quot;highlighter-rouge&quot;&gt;Authorize&lt;/code&gt; attribute.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.AspNetCore.Authorization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then add a “Secure” method to the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; controller.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;[Authorize]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IActionResult&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Secure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then create a view to return in &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Views/Home&lt;/code&gt; called &lt;code class=&quot;highlighter-rouge&quot;&gt;Security.cshtml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@{
+    ViewData[&quot;Title&quot;] = &quot;Security&quot;;
+}
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Secure&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dl&amp;gt;&lt;/span&gt;
+    @foreach (var claim in User.Claims)
+    {
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dt&amp;gt;&lt;/span&gt;@claim.Type&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dt&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dd&amp;gt;&lt;/span&gt;@claim.Value&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dd&amp;gt;&lt;/span&gt;
+    }
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dl&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This will just loop through the claims and output them. When you navigate to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/Home/Secure&lt;/code&gt;, you should be redirected to a login page. Once you’re logged in (with a user that is assigned to your app), you should now see a list of the claims on the secure page.
+If you do, congratulations! You just set up OpenID Connect for authenticating in your ASP.NET Core app!&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</guid>
+      </item>
+    
+      <item>
+        <title>7 Essential .NET Developer Tools for 2017</title>
+        <description>&lt;p&gt;Every good dev knows that time spent setting up the perfect environment and searching out the latest tools is time well spent. Little things make a huge difference — upgrade your IDE plugins, automate a task or two, or look for new tools and libraries that can increase your efficiency. We’ve taken a crack at an updated list of our favorite .NET developer tools, that can simplify your life and amplify your work.&lt;/p&gt;
+&lt;h2 id=&quot;1-jsonnet&quot;&gt;1. JSON.NET&lt;/h2&gt;
+&lt;p&gt;Chances are that for any given project these days, you’ll be consuming a RESTful JSON API, producing one, or both. And even if you’re not, you may still be using JSON to serialize data or configuration on disk. Sure, you could get it done using System.Runtime.Serialization.Json, but &lt;a href=&quot;http://json.net/&quot;&gt;JSON.NET&lt;/a&gt; is faster and has tons of nice features to make your life easier. Built-in &lt;a href=&quot;http://www.newtonsoft.com/json/help/html/LINQtoJSON.htm&quot;&gt;LINQ-to-JSON&lt;/a&gt; support, plus the ability to query JSON using &lt;a href=&quot;http://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenJsonPath.htm&quot;&gt;XPath-like syntax&lt;/a&gt; has earned this library the reputation as the de facto JSON implementation for .NET.&lt;/p&gt;
+&lt;h2 id=&quot;2-net-api-browser-and-reverse-package-search&quot;&gt;2. .NET API Browser (and Reverse Package Search)&lt;/h2&gt;
+&lt;p&gt;Here’s a two-for-one for our second tool suggestion: the .NET API Browser and Reverse Package Search. As classes get moved around when their packages are refactored and reshuffled between versions, these two services are invaluable for tracking everything down.&lt;/p&gt;
+
+&lt;p&gt;Microsoft’s &lt;a href=&quot;https://docs.microsoft.com/en-us/dotnet/api&quot;&gt;.NET API Browser&lt;/a&gt; is a comprehensive reference for all classes and methods in the .NET API. The best part is that it autocompletes while you type, making it easy to locate APIs even when you can’t remember exactly where they exist in the package hierarchy.&lt;/p&gt;
+
+&lt;p&gt;Similarly, the &lt;a href=&quot;https://packagesearch.azurewebsites.net&quot;&gt;Reverse Package Search&lt;/a&gt; lets you quickly search a vast collection of third party libraries, tagged with their respective supported versions of .NET Framework or .NET Core. It’s a little less curated than Microsoft’s official API browser, but the breadth makes up for it.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-stylecopanalyzers&quot;&gt;3. StyleCop.Analyzers&lt;/h2&gt;
+&lt;p&gt;If there’s one thing that can really get a team of developers fussed up, it’s adhering to a consistent code formatting style. The only real solution is to adopt a formatting tool like StyleCop, and then share the configuration throughout the team. StyleCop can detect and fix a broad range of style offences, and can even be set up in some IDEs to work real-time as you type.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/DotNetAnalyzers/StyleCopAnalyzers&quot;&gt;StyleCop.Analyzers&lt;/a&gt; is the latest incarnation of this project. Okta’s very own .NET evangelist &lt;a href=&quot;https://github.com/nbarbettini&quot;&gt;Nate&lt;/a&gt; is a dedicated contributor.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-visual-studio-code&quot;&gt;4. Visual Studio Code&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://code.visualstudio.com&quot;&gt;Visual Studio Code&lt;/a&gt; is Microsoft’s open source text editor and IDE. It’s beautiful and featureful and a joy to use. Not just for .NET, it works well with lots of language ecosystems and runs on Mac, Linux, and Windows. It’s got some similarities to Atom, but comes with IntelliSense, debugger, git integration, and can be extended even further with plugins.&lt;/p&gt;
+
+&lt;h2 id=&quot;5-posh-git&quot;&gt;5. Posh-git&lt;/h2&gt;
+&lt;p&gt;Been working for days on a major feature branch when a critical issue pops up in production? No worries: just commit to your feature branch, switch to the stable branch to push a fix, and switch back. Git (and modern version control in general) has really enabled this sort of multitasking on a codebase—but it can get confusing quickly.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/dahlbyk/posh-git&quot;&gt;Posh-git&lt;/a&gt; (and its equivalent for &lt;a href=&quot;https://github.com/JeremySkinner/posh-svn&quot;&gt;Subversion&lt;/a&gt;, &lt;a href=&quot;https://github.com/JeremySkinner/posh-hg&quot;&gt;Mercurial&lt;/a&gt;, and &lt;a href=&quot;https://github.com/Zougi/posh-p4&quot;&gt;Perforce&lt;/a&gt;) modifies your shell prompt to include the current branch and other status information. It also provides tab-completion for your SCM commands and branch names, which results in a very nice git experience.&lt;/p&gt;
+
+&lt;h2 id=&quot;6-resharper&quot;&gt;6. ReSharper&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.jetbrains.com/resharper/&quot;&gt;ReSharper&lt;/a&gt; is the premier code analysis tool for Visual Studio. It provides analysis, linting, and refactoring assistance. From on-the-fly “quick fixes” to project-wide symbol renaming, this tool is like having your own co-pilot. It costs a few hundred bucks per year, but it should quickly pay for itself in increased productivity, and it comes with a 30-day trial so you can take it for a test drive. Combine it with the &lt;a href=&quot;https://github.com/StyleCop/StyleCop.ReSharper&quot;&gt;StyleCop plugin&lt;/a&gt; and get the benefits of code format evaluation as you type.&lt;/p&gt;
+
+&lt;h2 id=&quot;7-xunitnet&quot;&gt;7. xUnit.net&lt;/h2&gt;
+&lt;p&gt;If you’ve invested in good unit test coverage, then you’re undoubtedly pretty committed to a testing framework already. But if you’re starting a new project, or just haven’t got around to writing any tests yet (we won’t judge) then look no further than &lt;a href=&quot;https://xunit.github.io&quot;&gt;xUnit.net&lt;/a&gt;. It is the successor to NUnit, and builds on the long lineage of similarly-named testing frameworks in other languages such as JUnit, CPPUnit, PHPUnit, and dozens more. However, xUnit has made some opinionated deviations to promote clearer more isolated tests that are easier to maintain, and a focus on data-driven testing using theories.&lt;/p&gt;
+
+&lt;p&gt;xUnit.net makes writing unit tests more approachable by providing the scaffolding to put them on. It supplies the infrastructure for basic fixturing and test running (including in parallel), and combines nicely with &lt;a href=&quot;https://github.com/AutoFixture/AutoFixture&quot;&gt;AutoFixture&lt;/a&gt; and &lt;a href=&quot;https://github.com/moq/moq&quot;&gt;Moq&lt;/a&gt; for writing concise and effective unit tests.&lt;/p&gt;
+
+&lt;h2 id=&quot;bonus--fluentassertions&quot;&gt;Bonus – FluentAssertions&lt;/h2&gt;
+&lt;p&gt;On the topic of writing concise and effective unit tests, &lt;a href=&quot;http://www.fluentassertions.com&quot;&gt;Fluent Assertions&lt;/a&gt; is a library that enables expressive assertions. When a test fails, it’s important to be able to know why without reaching for the debugger.&lt;/p&gt;
+
+&lt;p&gt;The possibilities for tweaking and refining your development workflow go on and on. While shiny new tools have the potential to dramatically increase productivity, it’s easy to go down the rabbit hole of research and not actually get any work done. So now that you’ve got some new tricks, you can stop reading and go put them to work.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/27/seven-tools-net-developers</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/27/seven-tools-net-developers</guid>
+      </item>
+    
+      <item>
+        <title>What the Heck is OAuth?</title>
+        <description>&lt;p&gt;There’s a &lt;em&gt;lot&lt;/em&gt; of confusion around what OAuth &lt;em&gt;actually is&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some people think OAuth is a login flow (like when you sign into an application with Google Login), and some people think of OAuth as a &lt;em&gt;“security thing”&lt;/em&gt;, and don’t really know much more than that.&lt;/p&gt;
+
+&lt;p&gt;I’m going to show you what OAuth is, explain how it works, and hopefully leave you with a sense of how and where OAuth can benefit your application.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-oauth&quot;&gt;What Is OAuth?&lt;/h2&gt;
+
+&lt;p&gt;To begin at a high level, OAuth is &lt;em&gt;not&lt;/em&gt; an API or a service: it’s an open standard for authorization and anyone can implement it.&lt;/p&gt;
+
+&lt;p&gt;More specifically, OAuth is a standard that apps can use to provide client applications with “secure delegated access”. OAuth works over HTTPS and authorizes devices, APIs, servers, and applications with access tokens rather than credentials.&lt;/p&gt;
+
+&lt;p&gt;There are two versions of OAuth: &lt;a href=&quot;https://tools.ietf.org/html/rfc5849&quot;&gt;OAuth 1.0a&lt;/a&gt; and &lt;a href=&quot;https://tools.ietf.org/html/rfc6749&quot;&gt;OAuth 2.0&lt;/a&gt;. These specifications are &lt;em&gt;completely different&lt;/em&gt; from one another, and cannot be used together: there is &lt;em&gt;no&lt;/em&gt; backwards compatibility between them.&lt;/p&gt;
+
+&lt;p&gt;Which one is more popular? &lt;em&gt;Great question!&lt;/em&gt; Nowadays, OAuth 2.0 is the most widely used form of OAuth. So from now on, whenever I say &lt;em&gt;“OAuth”&lt;/em&gt;, I’m talking about OAuth 2.0 – as it’s most likely what you’ll be using.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-oauth&quot;&gt;Why OAuth?&lt;/h2&gt;
+
+&lt;p&gt;OAuth was created as response to the direct authentication pattern. This pattern was made famous by HTTP Basic Authentication, where the user is prompted for a username and password. Basic Authentication is still used as a primitive form of API authentication for server side applications: instead of sending a username and password to the server with each request, the user sends an API key ID and secret. Before OAuth, sites would prompt you to enter your username and password directly into a form and they would login to your data (e.g. your Gmail account) as you. This is often called &lt;a href=&quot;https://arstechnica.com/information-technology/2010/01/oauth-and-oauth-wrap-defeating-the-password-anti-pattern/&quot;&gt;the password anti-pattern&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To create a better system for the web, federated identity was created for single sign-on (SSO). In this scenario, an end user talks to their identity provider, and the identity provider generates a  cryptographically signed token which it hands off to the application to authenticate the user. The application trusts the identity provider. As long as that trust relationship works with the signed assertion, you’re good to go. The diagram below (from &lt;a href=&quot;https://developer.okta.com/standards/OAuth/&quot;&gt;Okta’s OAuth docs&lt;/a&gt;) show how this works.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/browser_spa_implicit_flow-aa8b504d81ca3e57be798da01b0d570a92287e1b28f8b6209c16ca500d4f34a6.png&quot; alt=&quot;Browser Implicit Flow&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It’s a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chicklets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
+
+&lt;h3 id=&quot;saml&quot;&gt;SAML&lt;/h3&gt;
+
+&lt;p&gt;SAML is basically a session cookie in your browser that gives you access to webapps. It’s limited in the kinds of device profiles and scenarios you might want to do outside of a web browser.&lt;/p&gt;
+
+&lt;p&gt;When SAML 2.0 was launched in 2005, it made sense. However, a lot has changed since then. Now we have modern web and native application development platforms. There’s Single Page Applications (SPAs) like Gmail/Google Inbox, Facebook, and Twitter. They have different behaviors than your traditional web application, because they make AJAX (background HTTP calls) to APIs. Mobile phones make API calls too, as do TVs, gaming consoles, and IoT devices. SAML SSO isn’t particularly good at any of this.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-and-apis&quot;&gt;OAuth and APIs&lt;/h3&gt;
+
+&lt;p&gt;A lot has changed with the way we build APIs too. In 2005, people were invested in WS-* for building web services. Now, most developers have moved to REST and stateless APIs. REST is, in a nutshell, HTTP commands pushing JSON packets over the network.&lt;/p&gt;
+
+&lt;p&gt;Developers build a lot of APIs. The API Economy is a common buzzword you might hear in boardrooms today. Companies need to protect their REST APIs in a way that allows many devices to access them. In the old days, you’d enter your username/password directory and the app would login directly as you. This gave rise to the delegated authorization problem.&lt;/p&gt;
+
+&lt;p&gt;“How can I allow an app to access my data without necessarily giving it my password?”&lt;/p&gt;
+
+&lt;p&gt;If you’ve ever seen one of the dialogs below, that’s what we’re talking about. This is an application asking if it can access data on your behalf.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/biketoworkday-fb-login-f00e39aabbf3e44bc3570333643cbf5d966fc27367dbffd2623ff4a3694831c3.png&quot; alt=&quot;Facebook OAuth&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is OAuth.&lt;/p&gt;
+
+&lt;p&gt;OAuth is a delegated authorization framework for REST/APIs. It enables apps to obtain limited access (scopes) to a user’s data without giving away a user’s password. It decouples authentication from authorization and supports multiple use cases addressing different device capabilities. It supports server-to-server apps, browser-based apps, mobile/native apps, and consoles/TVs.&lt;/p&gt;
+
+&lt;p&gt;You can think of this like hotel key cards, but for apps. If you have a hotel key card, you can get access to your room. How do you get a hotel key card? You have to do an authentication process at the front desk to get it. After authenticating and obtaining the key card, you can access resources across the hotel.&lt;/p&gt;
+
+&lt;p&gt;To break it down simply, OAuth is where:&lt;/p&gt;
+
+&lt;p&gt;App requests authorization from User
+User authorizes App and delivers proof
+App presents proof of authorization to server to get a Token
+Token is restricted to only access what the User authorized for the specific App&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth-central-components&quot;&gt;OAuth Central Components&lt;/h2&gt;
+
+&lt;p&gt;OAuth is built on the following central components:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Scopes and Consent&lt;/li&gt;
+  &lt;li&gt;Actors&lt;/li&gt;
+  &lt;li&gt;Clients&lt;/li&gt;
+  &lt;li&gt;Tokens&lt;/li&gt;
+  &lt;li&gt;Authorization Server&lt;/li&gt;
+  &lt;li&gt;Flows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;oauth-scopes&quot;&gt;OAuth Scopes&lt;/h3&gt;
+
+&lt;p&gt;Scopes are what you see on the authorization screens when an app requests permissions. They’re bundles of permissions asked for by the client when requesting a token. These are coded by the application developer when writing the application.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-scopes-7ea53a0efe6c05a8113671297f641baae7486dfb6ab8b8357c74cb6e6f8371ce.png&quot; alt=&quot;OAuth Scopes&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Scopes decouple authorization policy decisions from enforcement. This is the first key aspect of OAuth. The permissions are front and center. They’re not hidden behind the app layer that you have to reverse engineer. They’re often listed in the API docs: here are the scopes that this app requires.&lt;/p&gt;
+
+&lt;p&gt;You have to capture this consent. This is called trusting on first use. It’s a pretty significant user experience change on the web. Most people before OAuth were just used to name and password dialog boxes. Now you have this new screen that comes up and you have to train users to use. Retraining the internet population is difficult. There’s all kinds of users from the tech-savvy young folk to grandparents that aren’t familiar with this flow. It’s a new concept on the web that’s now front and center. Now you have to authorize and bring consent.&lt;/p&gt;
+
+&lt;p&gt;The consent can vary based on the application. It can be a time-sensitive range (day, weeks, months), but not all platforms allow you to choose the duration. One thing to watch for when you consent is that the app can do stuff on your behalf - e.g. LinkedIn spamming everyone in your network.&lt;/p&gt;
+
+&lt;p&gt;OAuth is an internet-scale solution because it’s per application. You often have the ability to log in to a dashboard to see what applications you’ve given access to and to revoke consent.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-actors&quot;&gt;OAuth Actors&lt;/h3&gt;
+
+&lt;p&gt;The actors in OAuth flows are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Resource Owner&lt;/strong&gt;: owns the data in the resource server. For example, I’m the Resource Owner of my Facebook profile.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Resource Server&lt;/strong&gt;: The API which stores data the application wants to access&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Client&lt;/strong&gt;: the application that wants to access your data&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Authorization Server&lt;/strong&gt;: The main engine of OAuth&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-actors-cd8b4861e839037400d8521e97c5d8cf0cb029add65d1036488991c7e85dcb72.png&quot; alt=&quot;OAuth Actors&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The resource owner is a role that can change with different credentials. It can be an end user, but it can also be a company.&lt;/p&gt;
+
+&lt;p&gt;Clients can be public and confidential. There is a significant distinction between the two in OAuth nomenclature. Confidential clients can be trusted to store a secret. They’re not running on a desktop or distributed through an app store. People can’t reverse engineer them and get the secret key. They’re running in a protected area where end users can’t access them.&lt;/p&gt;
+
+&lt;p&gt;Public clients are browsers, mobile apps, and IoT devices.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-clients-93fc6cc8e83fa7d885c9daa0ed88007fc44780b99682dcfa580af319894870c7.png&quot; alt=&quot;OAuth Clients&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Client registration also a key component of OAuth. It’s like the DMV of OAuth. You need to get a license plate for your application. This is how your app’s logo shows up in an authorization dialog.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-tokens&quot;&gt;OAuth Tokens&lt;/h3&gt;
+
+&lt;p&gt;Access tokens are the token the client uses to access the Resource Server (API). They’re meant to be short-lived. Think of them in hours and minutes, not days and month. You don’t need a confidential client to get an access token. You can get access tokens with public clients. They’re designed to optimize for internet scale problems. Because these tokens can be short lived and scale out, they can’t be revoked, you just have to wait for them to time out.&lt;/p&gt;
+
+&lt;p&gt;The other token is the refresh token. This is much longer-lived; days, months, years. This can be used to get new tokens. To get a refresh token, applications typically require confidential clients with authentication.&lt;/p&gt;
+
+&lt;p&gt;Refresh tokens can be revoked. When revoking an application’s access in a dashboard, you’re killing its refresh token. This gives you the ability to force the clients to rotate secrets.  What you’re doing is you’re using your refresh token to get new access tokens and the access tokens are going over the wire to hit all the API resources. Each time you refresh your access token you get a new cryptographically signed token.. Key rotation is built into the system.&lt;/p&gt;
+
+&lt;p&gt;The OAuth spec doesn’t define what a token is. It can be in whatever format you want. Usually though, you want these tokens to be JSON Web Tokens (a &lt;a href=&quot;https://tools.ietf.org/html/rfc7519&quot;&gt;standard&lt;/a&gt;). In a nutshell, a JWT (pronounced “jot”) is a secure and trustworthy standard for token authentication. JWTs allow you to digitally sign information (referred to as claims) with a signature and can be verified at a later time with a secret signing key. To learn more about JWTs, see &lt;a href=&quot;https://stormpath.com/blog/beginners-guide-jwts-in-java&quot;&gt;A Beginner’s Guide to JWTs in Java&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Tokens are retrieved from endpoints on the authorization server. The two main endpoints are the authorize endpoint and the token endpoint. They’re separated for different use cases. The authorize endpoint is where you go to get consent and authorization from the user. This returns an authorization grant that says the user has consented to it. Then the authorization is passed to the token endpoint. The token endpoint processes the grant and says “great, here’s your refresh token and your access token”.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/authorization-server-99a4ad01368a4c8e407917358d4394d573a6c0e3c9fa10c01a59d1a54c4938cf.png&quot; alt=&quot;Authorization Server&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can use the access token to get access to APIs. Once it expires, you’ll have to go back to the token endpoint with the refresh token to get a new access token.&lt;/p&gt;
+
+&lt;p&gt;The downside is this causes a lot of developer friction. One of the biggest pain points of OAuth for developers is you having to manage the refresh tokens. You push state management onto each client developer. You get the benefits of key rotation, but you’ve just created a lot of pain for developers. That’s why developers love API keys. They can just copy/paste them, slap them in a text file, and be done with them. API keys are very convenient for the developer, but very bad for security.&lt;/p&gt;
+
+&lt;p&gt;There’s a pay to play problem here. Getting developers to do OAuth flows increases security, but there’s more friction. There’s opportunities for toolkits and platforms to simplify things and help with token management. Luckily, OAuth is pretty mature these days, and chances are your favorite language or framework has tools available to simplify things.&lt;/p&gt;
+
+&lt;p&gt;We’ve talked a bit about the client types, the token types, and the endpoints of the authorization server and how we can pass that to a resource server. I mentioned two different flows: getting the authorization and getting the tokens. Those don’t have to happen on the same channel. The front channel is what goes over the browser. The browser redirected the user to the authorization server, the user gave consent. This happens on the user’s browser. Once the user takes that authorization grant and hands that to the application, the client application no longer needs to use the browser to complete the OAuth flow to get the tokens.&lt;/p&gt;
+
+&lt;p&gt;The tokens are meant to be consumed by the client application so it can access resources on your behalf. We call that the back channel. The back channel is a direct HTTP call directly from the client application to the resource server to exchange the authorization grant for tokens. These channels are used for different flows depending on what device capabilities you have.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/flow-channels-5d8996b3706cab1e4ac8f9ed716d6529d3970f91cbc3cb5ff5a21a94389d0e1d.png&quot; alt=&quot;Flow Channels&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, a Front Channel Flow where you authorize via user agent might look as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Resource Owner starts flow to delegate access to protected resource&lt;/li&gt;
+  &lt;li&gt;Client sends authorization request with desired scopes via browser redirect to the Authorize Endpoint on the Authorization Server&lt;/li&gt;
+  &lt;li&gt;Authorization Server returns a consent dialog saying “do you allow this application to have access to these scopes?” Of course, you’ll need to authenticate to the application, so if you’re not authenticated to your Resource Server, it’ll ask you to login. If you already have a cached session cookie, you’ll just see the consent dialog box. View the the consent dialog, and agree.&lt;/li&gt;
+  &lt;li&gt;The authorization grant is passed back to the application via browser redirect. This all happens on the front channel.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/front-channel-flow-4eb727aa0e67884935dd1642749fac60a7194815b8a1724aa11a0ce9adb80fa1.png&quot; alt=&quot;Front Channel Flow&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There’s also a variance in this flow called the implicit flow. We’ll get to that in a minute.&lt;/p&gt;
+
+&lt;p&gt;This is what it looks like on the wire.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+GET https://accounts.google.com/o/oauth2/auth?scope=gmail.insert gmail.send
+&amp;amp;redirect_uri=https://app.example.com/oauth2/callback
+&amp;amp;response_type=code&amp;amp;client_id=812741506391
+&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+This is a GET request with a bunch of query params (not URL-encoded for example purposes). Scopes are from Gmail's API. The redirect_uri is the URL of the client application that the authorization grant should be returned to. This should match the value from the client registration process (at the DMV). You don't want the authorization being bounced back to a foreign application. Response type varies the OAuth flows. Client ID is also from the registration process. State is a security flag, similar to XRSF. To learn more about XRSF, see &lt;a href=&quot;https://dzone.com/articles/cross-site-request-forgery&quot;&gt;DZone's &quot;Cross-Site Request Forgery explained&quot;&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+HTTP/1.1 302 Found
+Location: https://app.example.com/oauth2/callback?
+code=MsCeLvIaQm6bTrgtp7&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+The &lt;code&gt;code&lt;/code&gt; returned is the authorization grant and &lt;code&gt;state&lt;/code&gt; is to ensure it's not forged and it's from the same request.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;After the Front Channel is done, a Back Channel Flow happens, exchanging the authorization code for an access token.&lt;/p&gt;
+
+&lt;p&gt;The Client application sends an access token request to the token endpoint on the Authorization Server with confidential client credentials and client id. This process exchanges an Authorization Code Grant for an Access Token and (optionally) a Refresh Token.
+Client accesses a protected resource with Access Token.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/back-channel-flow-7a2fb837d1950d5718ee788c2d904247edc5b06b9e3f399253da78636197cbbc.png&quot; alt=&quot;Back Channel Flow&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Below is how this looks in raw HTTP.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+POST /oauth2/v3/token HTTP/1.1
+Host: www.googleapis.com
+Content-Type: application/x-www-form-urlencoded
+
+code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;client_secret={client_secret}&amp;amp;redirect_uri=https://app.example.com/oauth2/callback&amp;amp;grant_type=authorization_code
+&lt;/pre&gt;
+&lt;p&gt;The grant_type is the extensibility part of OAuth. It's an authorization code from a precomputed perspective. It opens up the flexibility to have different ways to describe these grants. This is the most common type of OAuth flow.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+{
+  &quot;access_token&quot;: &quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+  &quot;token_type&quot;: &quot;Bearer&quot;,
+  &quot;expires_in&quot;: 3600,
+  &quot;refresh_token&quot;: &quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;
+}
+&lt;/pre&gt;
+&lt;p&gt;
+The response is JSON. You can be reactive or proactive in using tokens. Proactive is to have a timer in your client. Reactive is to catch an error and attempt to get a new token then.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Once you have an access token, you can use the access token in an Authentication header (using the &lt;code class=&quot;highlighter-rouge&quot;&gt;token_type&lt;/code&gt; as a prefix) to make protected resource requests.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -H &quot;Authorization: Bearer 2YotnFZFEjr1zCsicMWpAA&quot; \
+  https://www.googleapis.com/gmail/v1/users/1444587525/messages
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;So now you have a front channel, a back channel, different endpoints, and different clients. You have to mix and match these for different use cases. This up-levels the complexity of OAuth and it can get confusing.&lt;/p&gt;
+
+&lt;h3 id=&quot;oauth-flows&quot;&gt;OAuth Flows&lt;/h3&gt;
+
+&lt;p&gt;The very first flow is what we call the &lt;strong&gt;Implicit Flow&lt;/strong&gt;. The reason it’s called the implicit flow is because all the communication is happening through the browser. There is no backend server redeeming the authorization grant for an access token. An SPA is a good example of this flow’s use case. This flow is also called 2 Legged OAuth.&lt;/p&gt;
+
+&lt;p&gt;Implicit flow is optimized for browser-only public clients. An access token is returned directly from the authorization request (front channel only). It typically does not support refresh tokens. It assumes the Resource Owner and Public Client are on the same device. Since everything happens on the browser, it’s the most vulnerable to security threats.&lt;/p&gt;
+
+&lt;p&gt;The gold standard is the &lt;strong&gt;Authorization Code Flow&lt;/strong&gt;, aka 3 Legged, that uses both the front channel and the back channel. This is what we’ve been talking about the most in this article. The front channel flow is used by the client application to obtain an authorization code grant. The back channel is used by the client application to exchange the authorization code grant for an access token (and optionally a refresh token). It assumes the Resource Owner and Client Application are on separate devices. It’s the most secure flow because you can authenticate the client to redeem the authorization grant, and tokens are never passed through a user-agent.
+There’s not just Implicit and Authorization Code flows, there’s additional flows you can do with OAuth. Again, OAuth is more of a framework.&lt;/p&gt;
+
+&lt;p&gt;For server-to-server scenarios, you might want to use a &lt;strong&gt;Client Credential Flow&lt;/strong&gt;. In this scenario, the client application is a confidential client that’s acting on its own, not on behalf of the user. It’s more of a service account type of scenario. All you need is the client’s credentials to do the whole flow. It’s a back channel only flow to obtain an access token using the client’s credentials. It supports shared secrets or assertions as client credentials signed with either symmetric or asymmetric keys.&lt;/p&gt;
+
+&lt;p&gt;Symmetric-key algorithms are cryptographic algorithms that allow you to decrypt anything, as long as you have the password. This is often found when securing PDFs or .zip files.&lt;/p&gt;
+
+&lt;p&gt;Public key cryptography, or asymmetric cryptography, is any cryptographic system that uses pairs of keys: public keys and private keys. Public keys can be read by anyone, private keys are sacred to the owner. This allows data to be secure without the need to share a password.&lt;/p&gt;
+
+&lt;p&gt;There’s also a legacy mode called &lt;strong&gt;Resource Owner Password Flow&lt;/strong&gt;. This is very similar to the direct authentication with username and password scenario and is not recommended. It’s a legacy grant type for native username/password apps such as desktop applications. In this flow, you send the client application a username and password and it returns an access token from the Authorization Server. It typically does not support refresh tokens and it assumes the Resource Owner and Public Client are on the same device. For when you have an API that only wants to speak OAuth, but you have old-school clients to deal with.&lt;/p&gt;
+
+&lt;p&gt;A more recent addition to OAuth is the &lt;strong&gt;Assertion Flow&lt;/strong&gt;, which is similar to the client credential flow. This was added to open up the idea of federation. This flow allows an Authorization Server to trust authorization grants from third parties such as SAML IdP. The Authorization Server trusts the Identity Provider. The assertion is used to obtain an access token from the token endpoint. This is great for companies that have invested in SAML or SAML-related technologies and allow them to integrate with OAuth. Because SAML assertions are short-lived, there are no refresh tokens in this flow and you have to keep retrieving access tokens every time the assertion expires.&lt;/p&gt;
+
+&lt;p&gt;Not in the OAuth spec, is a &lt;strong&gt;Device Flow&lt;/strong&gt;. There’s no web browser, just a controller for something like a TV. A user code is returned from an authorization request that must be redeemed by visiting a URL on a device with a browser to authorize. A back channel flow is used by the client application to poll for authorization approval for an access token and optionally a refresh token. Also popular for CLI clients.&lt;/p&gt;
+
+&lt;p&gt;We’ve covered six different flows using the different actors and token types. They’re necessary because of the capabilities of the clients, how we needed to get consent from the client, who is making consent, and that adds a lot of complexity to OAuth.&lt;/p&gt;
+
+&lt;p&gt;When people ask if you support OAuth, you have to clarify what they’re asking for. Are they asking if you support all six flows, or just the main ones? There’s a lot of granularity available between all the different flows.&lt;/p&gt;
+
+&lt;h2 id=&quot;security-and-the-enterprise&quot;&gt;Security and the Enterprise&lt;/h2&gt;
+
+&lt;p&gt;There’s a large surface area with OAuth. With Implicit Flow, there’s lots of redirects and lots of room for errors. There’s been a lot of people trying to exploit OAuth between applications and it’s easy to do if you don’t follow recommended Web Security 101 guidelines. For example:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.twobotechnologies.com/blog/2014/02/importance-of-state-in-oauth2.html&quot;&gt;Always use CSRF token with the &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt; parameter to ensure flow integrity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Always whitelist redirect URIs to ensure proper URI validations&lt;/li&gt;
+  &lt;li&gt;Bind the same client to authorization grants and token requests with a client ID&lt;/li&gt;
+  &lt;li&gt;For confidential clients, make sure the client secrets aren’t leaked. Don’t put a client secret in your app that’s distributed through an App Store!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The biggest complaint about OAuth in general comes from Security people. It’s regarding the Bearer tokens and that they can be passed just like session cookies. You can pass it around and you’re good to go, it’s not cryptographically bound to the user. Using JWTs helps because they can’t be tampered with. However, in the end, a JWT is just a string of characters so they can easily be copied and used in an &lt;code class=&quot;highlighter-rouge&quot;&gt;Authorization&lt;/code&gt; header.&lt;/p&gt;
+
+&lt;h3 id=&quot;enterprise-oauth-20-use-cases&quot;&gt;Enterprise OAuth 2.0 Use Cases&lt;/h3&gt;
+
+&lt;p&gt;OAuth decouples your authorization policy decisions from authentication. It enables the right blend of fine and coarse grained authorization. It can replace traditional Web Access Management (WAM) Policies. It’s also great for restricting and revoking permissions when building apps that can access specific APIs. It ensures only managed and/or compliant devices can access specific APIs. It has deep integration with identity deprovisioning workflows to revoke all tokens from a user or device. Finally, it supports federation with an identity provider.&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth-is-not-an-authentication-protocol&quot;&gt;OAuth is not an Authentication Protocol&lt;/h2&gt;
+
+&lt;p&gt;To summarize some of the misconceptions of OAuth 2.0: it’s not backwards compatible with OAuth 1.0. It replaces signatures with HTTPS for all communication. When people talk about OAuth today, they’re talking about OAuth 2.0.&lt;/p&gt;
+
+&lt;p&gt;Because OAuth is an authorization framework and not a protocol, you may have interoperability issues. There are lots of variances in how teams implement OAuth and you might need custom code to integrate with vendors.&lt;/p&gt;
+
+&lt;p&gt;OAuth 2.0 is not an authentication protocol. It even says so in &lt;a href=&quot;https://oauth.net/articles/authentication/&quot;&gt;its documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oauth-not-authentication-highlighted-b20b0ee8790740e1c354643e770dcd394ed9c6079812e5a85440e6dcbe14085a.png&quot; alt=&quot;OAuth 2.0 is not an authentication protocol&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We’ve been talking about delegated authorization this whole time. It’s not about authenticating the user, and this is key. OAuth 2.0 alone says absolutely nothing about the user. You just have a token to get access to a resource.&lt;/p&gt;
+
+&lt;p&gt;There’s a huge number of additions that’ve happened to OAuth in the last several years. These add complexity back on top of OAuth to complete a variety of enterprise scenarios. For example, JWTs can be used as interoperable tokens that can be signed and encrypted.&lt;/p&gt;
+
+&lt;h2 id=&quot;pseudo-authentication-with-oauth-20&quot;&gt;Pseudo-Authentication with OAuth 2.0&lt;/h2&gt;
+
+&lt;p&gt;Login with OAuth was made famous by Facebook Connect and Twitter. In this flow, a client accesses a &lt;code class=&quot;highlighter-rouge&quot;&gt;/me&lt;/code&gt; endpoint with an access token. All it says is that the client has access to the resource with a token. People invented this fake endpoint as a way of getting back a user profile with an access token. It’s a non-standard way to get information about the user. There’s nothing in the standards that say everyone has to implement this endpoint. Access tokens are meant to be opaque. They’re meant for the API, they’re not designed to contain user information.&lt;/p&gt;
+
+&lt;p&gt;What you’re really trying to answer with authentication is &lt;em&gt;who&lt;/em&gt; the user is, &lt;em&gt;when&lt;/em&gt; did the user authenticate, and &lt;em&gt;how&lt;/em&gt; did the user authenticate. You can answer typically answer these questions with SAML assertions, not with access tokens and authorization grants. That’s why we call this pseudo authentication.&lt;/p&gt;
+
+&lt;h2 id=&quot;enter-openid-connect&quot;&gt;Enter OpenID Connect&lt;/h2&gt;
+
+&lt;p&gt;To solve the pseudo authentication problem, the best parts of OAuth 2.0, Facebook Connect, and SAML 2.0 were combined to create &lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt;. OpenID Connect (OIDC) extends OAuth 2.0 with a new signed &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; for the client and a &lt;code class=&quot;highlighter-rouge&quot;&gt;UserInfo&lt;/code&gt; endpoint to fetch user attributes. Unlike SAML, OIDC provides a standard set of scopes and claims for identities. Examples include: &lt;code class=&quot;highlighter-rouge&quot;&gt;profile&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;email&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;address&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;phone&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;OIDC was created to be internet scalable by making things completely dynamic. There’s no longer downloading metadata and federation like SAML requires. There’s built-in registration, discovery, and metadata for dynamic federations. You can type in your email address, then it dynamically discovers your OIDC provider, dynamically downloads the metadata, dynamically know what certs it’s going to use, and allows BYOI (Bring Your Own Identity). It supports high assurance levels and key SAML use cases for enterprises.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/openid-connect-protocol-suite-7e1d4655fc5f66461dc78fcb069fb54e3eb2eabf412a244c6617f49af747b3ba.png&quot; alt=&quot;OpenID Connect Protocol Suite&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OIDC was made famous by Google and Microsoft, both big early adopters. Okta has made a big investment in OIDC as well.&lt;/p&gt;
+
+&lt;p&gt;All that changes in the initial request is it contains standard scopes (like &lt;code class=&quot;highlighter-rouge&quot;&gt;openid&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;email&lt;/code&gt;):&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+GET https://accounts.google.com/o/oauth2/auth?
+scope=&lt;strong&gt;openid email&lt;/strong&gt;&amp;amp;
+redirect_uri=https://app.example.com/oauth2/callback&amp;amp;
+response_type=code&amp;amp;
+client_id=812741506391&amp;amp;
+state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+HTTP/1.1 302 Found
+Location: https://app.example.com/oauth2/callback?
+code=MsCeLvIaQm6bTrgtp7&amp;amp;state=af0ifjsldkj
+&lt;/pre&gt;
+&lt;p&gt;
+The &lt;code&gt;code&lt;/code&gt; returned is the authorization grant and &lt;code&gt;state&lt;/code&gt; is to ensure it's not forged and it's from the same request.
+&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;And the authorization grant for tokens response contains an ID token.&lt;/p&gt;
+
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Request&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+POST /oauth2/v3/token HTTP/1.1
+Host: www.googleapis.com
+Content-Type: application/x-www-form-urlencoded
+
+code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;
+  client_secret={client_secret}&amp;amp;
+  redirect_uri=https://app.example.com/oauth2/callback&amp;amp;
+  grant_type=authorization_code
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;vertical-align: top&quot;&gt;&lt;strong&gt;Response&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;
+&lt;pre&gt;
+{
+  &quot;access_token&quot;: &quot;2YotnFZFEjr1zCsicMWpAA&quot;,
+  &quot;token_type&quot;: &quot;Bearer&quot;,
+  &quot;expires_in&quot;: 3600,
+  &quot;refresh_token&quot;: &quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,
+  &lt;strong&gt;&quot;id_token&quot;: &quot;eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkazcifQ...&quot;&lt;/strong&gt;
+}
+&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;You can see this is layered nicely on top of OAuth to give back an ID token as a structured token. An ID token is a JSON Web Token (JWT). A JWT (aka “jot”) is much smaller than a giant XML-based SAML assertion and can be efficiently passed around between different devices. A JWT has three parts: a header, a body, and a signature. The header says what algorithm was used to sign it, the claims are in the body, and its signed in the signature.&lt;/p&gt;
+
+&lt;p&gt;An Open ID Connect flow involves the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Discover OIDC metadata&lt;/li&gt;
+  &lt;li&gt;Perform OAuth flow to obtain id token and access token&lt;/li&gt;
+  &lt;li&gt;Get JWT signature keys and optionally dynamically register the Client application&lt;/li&gt;
+  &lt;li&gt;Validate JWT ID token locally based on built-in dates and signature&lt;/li&gt;
+  &lt;li&gt;Get additional user attributes as needed with access token&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oidc-flow-d93872818e8d040a5b7f1d02ac6b0a2d2961a91de72727f64ba47635dce5f2a1.png&quot; alt=&quot;OIDF Flow&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;oauth--okta&quot;&gt;OAuth + Okta&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.okta.com&quot;&gt;Okta&lt;/a&gt; is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta’s Developer Platform straight from the source, you should attend &lt;a href=&quot;https://www.okta.com/oktane17/&quot;&gt;Oktane17&lt;/a&gt; in late August. There’s a &lt;a href=&quot;https://www.okta.com/oktane17/agenda/#AppDev&quot;&gt;track dedicated to app development&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&quot;http://developer.okta.com/docs/api/resources/oauth2.html&quot;&gt;Okta’s OAuth 2.0 API&lt;/a&gt; for specific information on how we support OAuth.&lt;/p&gt;
+
+&lt;p&gt;SAML is implement by Okta with its SSO chicklets. If you’re an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chicklet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
+
+&lt;p&gt;If you’d rather watch a video to learn about OAuth, please see the presentation below from &lt;a href=&quot;https://twitter.com/jankytweet&quot;&gt;Karl McGuinness&lt;/a&gt;, Senior Director of Identity at Okta.&lt;/p&gt;
+
+&lt;div style=&quot;max-width: 560px; margin: 0 auto&quot;&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/NnNha_p-iq0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;OAuth 2.0 is an authorization framework for delegated access to APIs. It involves clients that request scopes that Resource Owners authorize/give consent to. Authorization grants are exchanged for access tokens and refresh tokens (depending on flow). There are multiple flows to address varying client and authorization scenarios. JWTs can be used for structured tokens between Authorization Servers and Resource Servers.&lt;/p&gt;
+
+&lt;p&gt;OAuth has a very large security surface area. Make sure to use a secure toolkit and validate all inputs!&lt;/p&gt;
+
+&lt;p&gt;OAuth is not an authentication protocol. OpenID Connect extends OAuth 2.0 for authentication scenarios and is often called “SAML with curly-braces”. If you’re looking to dive even deeper into OAuth 2.0, I recommend you check out &lt;a href=&quot;https://www.oauth.com/&quot;&gt;OAuth.com&lt;/a&gt;, take Okta’s Auth SDK for a spin, and try out the OAuth flows for yourself.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</guid>
+      </item>
+    
+      <item>
         <title>Develop and Deploy Microservices with JHipster</title>
         <description>&lt;p&gt;JHipster is one of those open-source projects you stumble upon and immediately think, “&lt;code class=&quot;highlighter-rouge&quot;&gt;Of course!&lt;/code&gt;” It combines three 
 very successful frameworks in web development: Bootstrap, Angular, and Spring Boot. Bootstrap was one of the first dominant 
@@ -5471,7 +6403,7 @@ npm start
 &lt;h2 id=&quot;add-the-openid-connect-application-in-okta&quot;&gt;Add the OpenID Connect Application in Okta&lt;/h2&gt;
 &lt;p&gt;In order to &lt;em&gt;use&lt;/em&gt; Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta developer portal&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;So log in to your Okta account, [or create one](https://developer.okta.com] if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
+&lt;p&gt;So log in to your Okta account, &lt;a href=&quot;https://developer.okta.com&quot;&gt;or create one&lt;/a&gt; if you haven’t yet. Navigate to Admin &amp;gt; Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3000&lt;/code&gt; as a Redirect URI and click Finish. You should see settings like the following.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener-757b218884250a613b267c5d2c0b2a01292d96efd85a0c0706cc50e39ac6779d.png&quot; alt=&quot;OIDC Application Settings&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
