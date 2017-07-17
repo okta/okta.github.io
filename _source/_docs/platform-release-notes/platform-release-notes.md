@@ -49,7 +49,9 @@ These platform bug fixes are available in preview orgs and expected in productio
 
 * [`/oauth2/v1/clients`](/docs/api/resources/oauth-clients.html#register-new-client) returned an incorrect resource URI in the response header.  (OKTA-131891)
 
-* Some API error responses used incorrect HTTP status codes. (OKTA-128839, OKTA-130804, OKTA-130812, OKTA-130848)
+* `/oauth2/v1/clients` returned HTTP status code 200 rather than 201 when creating a client successfully. (OKTA-128839)
+
+* `/oauth2/v1/clients/{clientId}` returned HTTP status code 404 rather than 401 when it did not find the specified client. (OKTA-130804, OKTA-130848)
 
 
 ### Does Your Org Have This Change Yet?
