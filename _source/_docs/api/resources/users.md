@@ -71,7 +71,7 @@ Creating users with `FEDERATION` or `SOCIAL` provider will be either `ACTIVE` or
 
 Creates a user without a [password](#password-object) or [recovery question & answer](#recovery-question-object)
   
-When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.
+When the user is activated, an email is sent to the user with an activation token that can be used to complete the activation process.
 This is the default flow for new user registration with the Okta Admin UI.
 
 ##### Request Example
