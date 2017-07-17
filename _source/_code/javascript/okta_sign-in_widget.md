@@ -416,4 +416,6 @@ For other questions, please get in touch with <developers@okta.com>.
 
 You can find more information about the Widget on the [Okta Sign-In Widget Reference Page](/code/javascript/okta_sign-in_widget_ref).
 
-If you'd like to see the code that powers the Widget, you can find it on Github here: <https://github.com/okta/okta-signin-widget>.
+## GitHub Project
+
+If you'd like to see the code that powers the Widget, you can [find it on GitHub](https://github.com/okta/okta-signin-widget).
