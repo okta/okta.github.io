@@ -5,7 +5,7 @@ const util = require('../shared/util');
 
 class TableOfContentsPage extends BasePage {
   constructor(url) {
-    const relativeUrl = '/use_cases/authentication/';
+    const relativeUrl = '/test_page';
     super(relativeUrl);
     this.$tableOfContents = $('.TableOfContents');
     this.$level1Item = $('.TableOfContents-item.is-level1');

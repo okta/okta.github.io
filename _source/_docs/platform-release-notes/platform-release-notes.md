@@ -1,174 +1,107 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.22
+excerpt: Summary of changes to the Okta Platform since Release 2017.27
 ---
 
-## Release 2017.23
+## Release 2017.28
 
-### Advance Notices
+### Platform Enhancements and New Features
+
+The following changes are available in preview orgs on Wednesday, July 12. Availability in production orgs is expected either one week or one month later. For information about Early Availability (EA) and Generally Available (GA), see [Okta Release Lifecycle](https://developer.okta.com/docs/api/getting_started/releases-at-okta.html).
+
+The following features are GA in preview orgs, and expected to be GA in production orgs during the week of August 8, 2017:
+
+* [OpenID Connect](#openid-connect)
+
+* [Key Rollover](#key-rollover)
 
 
-* [Data Retention Policy Changes](#data-retention-changes)
-* [API Rate Limit Improvements](#api-rate-limit-improvements)
-* [Simple HAL Links in Production Soon](#simple-hal-links-generally-available-in-preview-for-may-2017)
+The following feature enhancements are GA in preview orgs, and expected to be GA in production orgs during the week of July 17, 2017:
+
+* [Limit Age of Events](#limit-age-of-events)
+
+* [Improved Plugin Security](#improved-plugin-security)
+
+
+The following EA feature enhancements are in preview orgs and expected in production orgs during the week of July 17, 2017.
+To enable an EA feature, contact Okta Support.
+
+* [Allow Unsuspending Users During Inbound SAML Login](#allow-unsuspending-users-during-inbound-saml-login)
+
+* [Email Factor](#email-factor)
+
+The following feature enhancement is available on GitHub:
+
+* [New Version of Sign-In Widget](#new-version-of-sign-in-widget)
+
+#### OpenID Connect
+
+[OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html) is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
+
+ OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.
+
+ Okta is [certified for OpenID Connect](http://openid.net/certification/). For more information, see [OpenID Connect and Okta](https://developer.okta.com/standards/OIDC/).
+
+  <!-- OKTA-132049  -->
+
+
+#### Key Rollover
+
+We provide the ability to generate a certificate with specified validity period (see the [Apps API](https://developer.okta.com/docs/api/resources/apps.html) and [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html)). We build OpenID Connect and API Access Management on this feature.
  
-#### Data Retention Changes
+   <!-- OKTA-132045  -->
 
-Okta is changing system log data retention. System log data is available from `/api/v1/events` or Okta SDK `EventsAPIClient`.
+#### Limit Age of Events
 
-* For orgs created before July 17th, data will be retained for 6 months.
-* For orgs created on and after July 17th, data will be retained for 3 months.
+In keeping with the [Okta Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy), the events API (`/api/v1/events`) no longer accepts queries for events greater than 180 days old. 
+  <!-- OKTA-125424, 120605  -->
 
-The new data retention policy starts:
+#### Improved Plugin Security
+Template Plugin Apps you create from the admin portal (**Admin > Applications > Add Application > Template Plugin App**) have improved security. 
 
-* June 7, 2017 for existing preview orgs
-* July 17, 2017 for existing production orgs
+  <!-- OKTA-132490  -->
 
-Preview and production orgs created on July 17,2017 and later will retain this log data for three months. 
+#### New Version of Sign-In Widget
 
-For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
+Version 1.13.0 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases) is available. Check out the new features and bug fixes!
 
-You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API. <!-- OKTA-125424 -->
+  <!-- (OKTA-131661) -->
 
-#### API Rate Limit Improvements
+#### Allow Unsuspending Users During Inbound SAML Login
 
-We are making org-wide rate limits more granular, and treating authenticated end-user interactions separately. More granular rate limits lessen the likelihood of calls to one URI impacting another. Treating authenticated end-user interactions separately lessens the chances of one user's request impacting another. We’re also providing a transition period so you can see what these changes look like in your Okta system log before enforcing them:
+You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending users during inbound SAML login. See the [Identity Providers API](https://developer.okta.com/docs/api/resources/idps.html) for more information.
 
-##### Preview Orgs
+{% img release_notes/JIT_settings.png alt:"JIT settings for SAML IdP" %}
 
-We enforce new rate limits for all preview orgs. API calls exceeding the new rate limits return an HTTP 429 error.
+ <!-- OKTA-128384 -->
 
-##### Production Orgs
+#### Email Factor
 
-1. As of May 8, we have enabled a System Log alert which lets you know if you have exceeded any of the new API rate limits:
+ You can send a one-time password (OTP) and an activation link to an email address as part of enrolling a user. 
 
-    ```
-    Warning: requests for url pattern <url-pattern> have reached 
-    a threshold of <number> requests per <time-duration>. Please 
-    be warned these rate limits will be enforced in the near future.
-    ```
 
-2. As of mid-May, we started enforcing these new rate limits for all newly created orgs. For these new orgs, instead of alerts in your System log, the API calls exceeding the new rate limits return an HTTP 429 error.
+   <!-- OKTA-132297  -->
 
-3. In early June, we'll enforce these new rate limits for all orgs, and instead of alerts in your System Log, the API calls exceeding the new rate limits will return an HTTP 429 error.
 
-For a full description of the new rate limits, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 --> 
-
-### Platform Enhancements
-
-* [Authorization Server API Enhancements](#authorization-server-api-enhancements)
-* [Additional Logging for Invalid Use by OAuth 2.0 Client](#additional-logging-for-invalid-use-by-oauth-20-client)
-* [Restrictions on Set Recovery and Set Password Operations](#restrictions-on-set-recovery-question-answer-and-set-password)
-* [Step-up Authentication for SAML Apps in Early Access](#step-up-authentication-for-saml-apps-is-an-early-access-feature)
-* [Simple HAL Links](#simple-hal-links-generally-available-in-preview-for-may-2017)
-
-#### Authorization Server API Enhancements
-
-You can now use the Authorization Server API to configure components of an Authorization Server.
-With the following enhancements, the API Access Management Authorization Servers API is an {% api_lifecycle ea %} Release:
-
-* Manage Authorization Server policies, policy rules, claims, and scopes with the API.
-* Activate or deactivate Authorization Servers, or delete them.
-* Scopes were actions previously, but are now conditions in a policy rule.
-* Control which claims are returned in ID tokens with the `alwaysIncludeInToken` property. You can also configure this in the [Okta Admin UI](https://help.okta.com/en/prev/Content/Topics/Security/API_Access.htm#create_claims).
-
-For more information see the [Authorization Server API documentation](/docs/api/resources/oauth2.html#authorization-server-operations).
-<!-- OKTA-127511, OKTA-123638 -->
-
-#### Additional Logging for Invalid Use by OAuth 2.0 Client
-
-If Okta detects five or more consecutive request attempts with the wrong client secret, we log the events as suspicious:
-
-* The requests may be to any OAuth 2.0 endpoint that accepts client credentials.
-* The counter resets after 14 days of no invalid authentication attempts, or after a successful authentication.
-
-We log an event when an invalid `client_id` is provided, and when an invalid `client_secret` is provided for a given `client_id`.<!-- OKTA-122503 -->
-
-#### Restrictions on Set Recovery Question Answer and Set Password
-
-The API operations Set Recovery Question Answer and Set Password must be requested with an API token, not a session token. 
-Additionally, the Set Recovery Question Answer operation doesn't validate complexity policies or credential policies. <!-- OKTA-126826, OKTA-126824 -->
-
-#### Step-up Authentication for SAML Apps is an Early Access Feature
-
-Every step-up transaction starts with a user accessing an application. If step-up authentication is required, Okta redirects the user to the custom login page with state token as a request parameter.
-For more information, see the [Step-up Authentication documentation](/docs/api/resources/authn.html#step-up-authentication).
-
-#### Simple HAL Links Generally Available in Preview for May, 2017
-
-Okta has enabled the Simple HAL Links on User Collections feature for most preview organizations.
-This feature removes the HAL links that reflect state from user objects returned in collections.
-
->Important: Okta expects to deliver this feature to production orgs (with the same Okta .NET SDK caveats described below) starting June 12, 2017.
-
-Before release 2017.19, a user object returned in a collection contains some or all of the following links:
-
-```
-"_links": {
-    "suspend": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/suspend",
-      "method": "POST"
-    },
-    "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/reset_password",
-      "method": "POST"
-    },
-    "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/expire_password",
-      "method": "POST"
-    },
-    "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/forgot_password",
-      "method": "POST"
-    },
-    "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
-    },
-    "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_recovery_question",
-      "method": "POST"
-    },
-    "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/lifecycle/deactivate",
-      "method": "POST"
-    },
-    "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3/credentials/change_password",
-      "method": "POST"
-    }
-}
-```
-
-Unfortunately, these links are not guaranteed to accurately reflect the state of the specified user.
-As outlined in [Design Principles](/docs/api/getting_started/design_principles.html#links-in-collections):
-
-"Search and list operations are intended to find matching resources and their identifiers. If you intend to search for a resource and then modify its state or make a lifecycle change, the correct pattern is to first retrieve the resource by ID using the `self` link provided for that resource in the collection. This will provide the full set of lifecycle links for that resource based on its most up-to-date state."
- 
-The Simple HAL Links on User Collections feature ensures that possibly invalid state links are not returned.  Instead only the `self` link is returned:
-
-```
-"_links": {
-    "self": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ulxgGOjrKcnmDHT0g3"
-    }
-}
-```
- 
-As noted above, to change user state, the `self` link should be called to retrieve a user object with up-to-date links.
- 
->Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.
 
 ### Platform Bugs Fixed
 
-* When completing enrollment for SMS and call factors, the API forced end users to verify the factor that was just enrolled. (OKTA-125923)
-* When using a refresh token, default scope requests sometimes failed. (OKTA-127671)
+These platform bug fixes are available in preview orgs and expected in production orgs the week of July 17, 2017.
+
+* `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
+
+* Identity provider JIT reactivation of users sometimes failed when there were configured group assignments. (OKTA-131784)
+
+* In some circumstances, the link between the external Microsoft user and the Okta user was inaccurate.  (OKTA-132207)
+
 
 ### Does Your Org Have This Change Yet?
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
+
 
 ### Looking for Something Else?
 

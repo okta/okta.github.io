@@ -10,7 +10,7 @@ The Okta Groups API provides operations to manage Okta groups and their user mem
 
 ## Getting Started with the Groups API
 
-Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c33a1f9fa8a44c481a6f)
+Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0bb414f9594ed93672a0)
 
 ## Group Operations
 
@@ -1079,6 +1079,10 @@ curl -v -X DELETE \
 HTTP/1.1 204 No Content
 ~~~
 
+## Group Rule Operations
+
+The Group Rules API is currently a {% api_lifecycle beta %} release.
+
 ### Create Group Rule
 {:.api .api-operation}
 
@@ -1086,7 +1090,7 @@ HTTP/1.1 204 No Content
 
 Creates a group rule to dynamically add users to the specified group if they match the condition
 
-> Group rules would be created with status='INACTIVE'.
+> Group rules are created with status='INACTIVE'.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1836,6 +1840,8 @@ Profile for any group that is **not** imported from Active Directory
 ~~~
 
 ## Rule Model
+
+The Group Rules API is currently a {% api_lifecycle beta %} release.
 
 ### Example
 

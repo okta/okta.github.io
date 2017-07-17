@@ -18,7 +18,7 @@ The System Log API has one endpoint:
 
 {% api_operation get /api/v1/logs %}
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8f19fc704561a8b44e27){:target="_blank"}
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6){:target="_blank"}
 
 See below for [Examples](#examples) and more on how to use the System Log API.
 

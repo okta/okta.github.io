@@ -75,7 +75,7 @@ and then add the route inside the main route (the one with the path of "/")
 ## Add the OpenID Connect Application in Okta
 In order to *use* Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the [Okta developer portal](https://developer.okta.com).
 
-So log in to your Okta account, [or create one](https://developer.okta.com] if you haven’t yet. Navigate to Admin > Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add `http://localhost:3000` as a Redirect URI and click Finish. You should see settings like the following.
+So log in to your Okta account, [or create one](https://developer.okta.com) if you haven’t yet. Navigate to Admin > Add Applications and click on the Create New App button. Select Single Page App (SPA) for Platform and OpenID Connect for the sign on method. Click the Create button and give your application a name. On the next screen, add `http://localhost:3000` as a Redirect URI and click Finish. You should see settings like the following.
 
 {% img blog/react-sign-in-widget/Okta-Developer-Portal-OIDC-App-Screener.png alt:"OIDC Application Settings" width:"800" %}
 

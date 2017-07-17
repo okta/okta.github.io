@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -29,20 +37,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-769c382bff5a81bd583ab79117ee38033b8a3aa634dc24fa2ddf8a8e70b30bef.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Okta Sign-In Widget | Okta Developer</title>
-  <meta name="description" content="A drop-in widget with custom UI capabilities to power sign-in with Okta. An in-depth reference is also available.">
+  <title>Getting Started with the Okta Sign-In Widget | Okta Developer</title>
+  <meta name="description" content="A drop-in widget with custom UI capabilities to power sign-in with Okta.">
   <link rel="canonical" href="https://developer.okta.com/code/javascript/okta_sign-in_widget">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page okta-sign-in-widget">
+  <div class="Page getting-started-with-the-okta-sign-in-widget">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -61,7 +70,7 @@
                 <a href="/documentation/">Documentation</a>
               </li>
               <li>
-                <a href="/blog/">Blog</a>
+                <a href="/code/">Code</a>
               </li>
               <li class="has-dropdown">
                 <a href="#">Support</a>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -158,7 +158,6 @@
             </li>
             
             
-            
             <li>
               <a href="/standards/SAML/">SAML</a>
             </li>
@@ -186,225 +185,71 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_code/javascript/okta_sign-in_widget.md">Edit Page</a>
-      <h1 id="overview">Overview</h1>
+      <h1 id="sign-in-widget-quickstart">Sign-In Widget Quickstart</h1>
 
-<p>The Okta Sign-In Widget is a JavaScript widget from Okta that gives
-you a fully featured and customizable login experience which
-can be used to authenticate users on any web site.</p>
+<p>The Okta Sign-In Widget is a JavaScript library that gives
+you a fully-featured and customizable login experience which
+can be used to authenticate users on any website. This guide will introduce you to the Widget and show you how to create a simple page that uses it.</p>
 
 <p><img src="/assets/okta-signin-da15ebe650d0258b247d4981a956abec094e9891c0b7f9e2ce7c5731f103d6be.png" alt="Screenshot of basic Okta Sign-In Widget" /></p>
 
-<h3 id="authentication">Authentication</h3>
+<p>If you’d like to jump right into the Widget’s code, you can find it on GitHub here: <a href="https://github.com/okta/okta-signin-widget">https://github.com/okta/okta-signin-widget</a>.</p>
 
-<p>The primary, and most visible, use case for the Okta Sign-In Widget is
-validating a user using a username and password. In addition to
-credential validation, the Okta Sign-In Widget also handles validation of
-password complexity requirements and will display common error messages
-for things like invalid passwords or blank fields.</p>
+<p>If you’d like to read the Widget’s reference page, you will find it here: <a href="/code/javascript/okta_sign-in_widget_ref">Okta Sign-In Widget Reference Page</a>.</p>
 
-<h3 id="multi-factor-authentication">Multi-Factor Authentication</h3>
+<h3 id="features">Features</h3>
 
-<p>The Okta Sign-In Widget also comes with full support for Multi-Factor
-Authentication user flows. It handles enrollment and verification
-of factors and comes with built-in support for all of the factors listed below:</p>
+<p>The Sign-in Widget supports the following use cases:</p>
 
 <ul>
-  <li>Okta Verify</li>
-  <li>Google Authenticator</li>
-  <li>RSA SecureID</li>
-  <li>Symantec VIP</li>
-  <li>Duo Security</li>
-  <li>SMS Authentication</li>
-  <li>Security Question</li>
+  <li>
+    <p><strong>Authentication:</strong> In addition to standard credential validation, the Okta Sign-In Widget also handles validation of password complexity requirements and will display common error messages for things like invalid passwords or blank fields.</p>
+  </li>
+  <li>
+    <p><strong>Multi-Factor Authentication:</strong> The Widget also handles enrollment and verification of multiple authentication factors. It comes with built-in support for SMS authentication, security questions, and Google Authenticator, among others.</p>
+  </li>
+  <li>
+    <p><strong>Self-Service Password Reset:</strong> Support for sending reset notifications as well as prompting users to verify themselves by prompting them to answer a security question.</p>
+  </li>
+  <li>
+    <p><strong>Password Expiration:</strong> The Widget can notify users when their password has expired and prompt them to update their password before allowing them to sign in.</p>
+  </li>
+  <li>
+    <p><strong>Validation and Error Handling:</strong> Extensive support for validating user input as well as handling every imaginable error condition which might occur in a user login flow.</p>
+  </li>
 </ul>
 
-<p><img src="/assets/okta-signin-mfa-select-6db66c4648ae53db9204bf0c6a50940b813eb07546e4310b3262b5c82b2cb579.png" alt="Screenshot of Okta Sign-In Widget Multi-Factor Authentication selector" /></p>
+<h2 id="try-the-widget-for-yourself">Try the Widget for yourself</h2>
 
-<h3 id="self-service-password-reset">Self service password reset</h3>
-
-<p>The Okta Sign-In Widget has everything you need to give your users the
-ability to reset their forgotten passwords, it comes with support
-for sending reset notifications as well as prompting users to verify
-themselves by prompting them to answer a security question.</p>
-
-<p><img src="/assets/okta-signin-reset-password-00323d544e0e5cba2bd02e6c790f6c61c49eb9240a2d420a34829db591281b58.png" alt="Screenshot of Okta Sign-In Widget reset password dialog" /></p>
-
-<h3 id="password-expiration">Password Expiration</h3>
-
-<p>Another feature of the Okta Sign-In Widget is notifying users when their password has expired
-and prompting them to update their password before allowing them to
-log in.</p>
-
-<p><img src="/assets/okta-signin-password-expired-b25dde8e7d21c8183cc8b9efde532ca226a7a3eb7c7cfa216ecc3a6fb088a2ee.png" alt="Screenshot of Okta Sign-In Widget password expired dialog" /></p>
-
-<h3 id="validation-and-error-handling">Validation and error handling</h3>
-
-<p>Finally, the Okta Sign-In Widget comes with extensive support for validating user
-input as well as handling every imaginable error condition which
-might occur in a user login flow.</p>
-
-<p><img src="/assets/okta-signin-validation-failure-996bc2909d744586c5047f14b3673dd619ba76b4ef6d1d5edcdbf46d23ef09ca.png" alt="Screenshot of Okta Sign-In Widget displaying validation error" /></p>
-
-<h2 id="a-simple-example">A simple example</h2>
-
-<p>If you are a developer, the best way to understand the Okta
-Sign-In Widget is to look at a simple example of the HTML
-needed to get it working. The HTML below shows you how to quickly
-and easily set up a fully featured login experience:</p>
-
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
-	<span class="c">&lt;!-- Core widget js and css --&gt;</span>
-	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/js/okta-sign-in.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-	<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-sign-in.min.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
-	<span class="c">&lt;!-- Customizable css theme options. Link your own customized copy of this file or override styles in-line --&gt;</span>
-	<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"okta-login-container"</span><span class="nt">&gt;&lt;/div&gt;</span>
-	<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
-		<span class="kd">var</span> <span class="nx">orgUrl</span> <span class="o">=</span> <span class="s1">'https://example.okta.com'</span><span class="p">;</span>
-		<span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="na">baseUrl</span><span class="p">:</span> <span class="nx">orgUrl</span><span class="p">});</span>
-
-		<span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
-		  <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
-		  <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-		    <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">orgUrl</span><span class="p">);</span> <span class="p">}</span>
-		  <span class="p">}</span>
-		<span class="p">);</span>
-	<span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-</code></pre>
-</div>
-
-<p>Here is what is happening in the HTML above:</p>
-
-<p>First, in the <code class="highlighter-rouge">&lt;head&gt;</code>
-tag, we include the  <code class="highlighter-rouge">okta-sign-in.min.js</code> and
-<code class="highlighter-rouge">okta-sign-in.min.css</code> files. These files have all of the
-logic and default stylesheets used by the Okta Sign-In Widget.</p>
-
-<p>We also include the <code class="highlighter-rouge">okta-theme.css</code> file, which adds Okta’s own custom theme you get in the login page of your Okta organization if you have enabled the New Sign-In Page setting in <code class="highlighter-rouge">Admin -&gt; Settings -&gt; Appearance</code> in the <code class="highlighter-rouge">Sign-In Configuration</code> section. You can choose not to include this okta-theme.css stylesheet if you so wish.</p>
-
-<p>In the <code class="highlighter-rouge">&lt;body&gt;</code>, we add a <code class="highlighter-rouge">&lt;div&gt;</code> tag with an “<code class="highlighter-rouge">id</code>” of
-<code class="highlighter-rouge">okta-login-container</code>  – you can use any “<code class="highlighter-rouge">id</code>” value in this tag,
-we are just using <code class="highlighter-rouge">okta-login-container</code> here for the sake of clarity.</p>
-
-<p>Next, we add some JavaScript code to insert the Okta Sign-In Widget
-into the <code class="highlighter-rouge">okta-login-container</code> tag. In this short example, this
-JavaScript is included at the end of the file. However, when you use
-this code on your own site, you will need to run these functions
-in the parts of your code that are run when the DOM is ready.</p>
-
-<p>Here is what that JavaScript code is doing: first, the line below
-initializes the Okta Sign-In Widget object, note that
-the <code class="highlighter-rouge">baseUrl</code> value <strong>MUST</strong> be the domain for <em>your</em> Okta
-organization. If you don’t already have an Okta organization, please read the “Creation an Okta organization” section below.</p>
-
-<p>For example, if your Okta organization is “<code class="highlighter-rouge">acme.okta.com</code>” you
-would replace the string “<code class="highlighter-rouge">example.okta.com</code>” below with
-“<code class="highlighter-rouge">acme.okta.com</code>”:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'https://example.okta.com'</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="na">baseUrl</span><span class="p">:</span> <span class="nx">orgUrl</span><span class="p">});</span>
-</code></pre>
-</div>
-
-<p>Finally, the lines below actually render the Okta Sign-In
-Widget. Note that the value for <code class="highlighter-rouge">el</code> can be any selector of your choice - “#okta-login-container” is a selector for an element in the HTML code that has an <code class="highlighter-rouge">id</code> attribute of “okta-login-container”.</p>
-
-<p>Also note that we only define a “SUCCESS” callback in which we create an Okta session and redirect the browser to the Okta organization. This logs the user directly into the Okta dashboard. In a production environment, you should  handle statuses beyond “SUCCESS” and define an “ERROR” callback as well.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
-  <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
-  <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">orgUrl</span><span class="p">);</span> <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">);</span>
-</code></pre>
-</div>
-
-<h2 id="an-in-depth-example">An in-depth example</h2>
-
-<p>Now that you have a basic idea of how the Okta Sign-In widget works,
-your next step is to see these capabilities in action for
-yourself. The best way to do this is to set up a version of the
-Okta Sign-In Widget that is configured to point at your own Okta
-organization.</p>
-
-<p>Setting up the Okta Sign-In Widget for your Okta organization requires the
-following steps:</p>
+<p>If you want to see the Sign-in Widget in action for yourself, and you already have an Okta org, you only need to do four things:</p>
 
 <ol>
-  <li>Creating an Okta organization</li>
-  <li>Creating an HTML file with the widget code</li>
-  <li>Modifying the HTML to use your Okta organization</li>
-  <li>Copying the HTML file to a web server</li>
-  <li>Configuring CORS support on your Okta organization</li>
+  <li>Create an HTML file with the widget code</li>
+  <li>Modify the HTML to use your Okta organization</li>
+  <li>Serve the HTML file with a web server</li>
+  <li>Configure a Trusted Origin in your Okta organization</li>
 </ol>
 
-<h3 id="creating-an-okta-organization">Creating an Okta organization</h3>
+<blockquote>
+  <p>If you do not have an Okta org, you can sign-up for one here: <a href="https://www.okta.com/developer/signup/">https://www.okta.com/developer/signup/</a></p>
+</blockquote>
 
-<p>You can skip this step if you already have an Okta organization and
-have the ability to configure CORS on that Okta organization.</p>
+<h4 id="1-create-an-html-file">1. Create an HTML file</h4>
 
-<p>If you do have the ability to <a href="/docs/api/getting_started/enabling_cors.html">configure CORS</a> for your Okta
-organization, or do not have an Okta organization, you will need to
-create an <a href="https://www.okta.com/developer/signup/">Okta Developer Edition</a> account for yourself before
-continuing on the steps below.</p>
+<p>The below code will render a login page using the Okta Sign-in Widget. You can copy and paste it into an HTML file called, for example, <code class="highlighter-rouge">login-to-okta.html</code>:</p>
 
-<h3 id="configuring-cors-support-for-your-okta-organization">Configuring CORS support for your Okta organization</h3>
-
-<p>This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.</p>
-
-<p>You can enable CORS by following the steps in our guide for
-<a href="/docs/api/getting_started/enabling_cors.html">guide for Enabling CORS</a>. Configure CORS using the same base url of the
-web server you are using to host the HTML for the Okta Sign-In Widget (see below for instructions). For example, if you plan to host your Sign-In Widget in a page accessible under <code class="highlighter-rouge">http://localhost:8000</code>, you need to add <code class="highlighter-rouge">http://localhost:8000</code> as a trusted CORS endpoint in Okta.</p>
-
-<p>To do so, follow the steps below:</p>
-
-<ol>
-  <li>Navigate to the <code class="highlighter-rouge">Admin -&gt; Security -&gt; API</code> page of your Okta dashboard.</li>
-  <li>In the <code class="highlighter-rouge">CORS</code> tab, add the url of the site that will host the Okta Sign-In Widget. For instance, if you want to test it on a development machine on a web site hosted at <code class="highlighter-rouge">http://localhost:8081</code>, add <code class="highlighter-rouge">http://localhost:8081</code> in the CORS multi-line text box.</li>
-  <li>Click <code class="highlighter-rouge">Enable CORS for the following base URLs</code>.</li>
-  <li>Press <code class="highlighter-rouge">Save</code>.</li>
-</ol>
-
-<p>If you see the <code class="highlighter-rouge">Trusted Origins</code> tab instead of the <code class="highlighter-rouge">CORS</code> tab, follow the steps below:</p>
-
-<ol>
-  <li>Press the <code class="highlighter-rouge">Add Origin</code> button.</li>
-  <li>Fill out the Name field, add add the url of the site that will host the Okta Sign-In Widget to the <code class="highlighter-rouge">Origin URL</code> field.</li>
-  <li>Check the <code class="highlighter-rouge">CORS</code> check box in the <code class="highlighter-rouge">Type</code> section.</li>
-  <li>Press <code class="highlighter-rouge">Save</code>.</li>
-</ol>
-
-<h3 id="creating-an-html-file-with-the-widget-code">Creating an HTML file with the widget code</h3>
-
-<p>The first step of getting the Okta Sign-In Widget set up for your Okta
-organization is to copy the HTML below to a file named
-<code class="highlighter-rouge">login-to-okta.html</code> - note that the HTML below is the <em>absolute minimum</em> that
-you need to get the Okta Sign-In Widget working, it is not a complete
-example by any means. A production deployment of the Okta Sign-In Widget
-will have a lot more in-depth configuration.</p>
-
-<p>Copy this to a file named <code class="highlighter-rouge">login-to-okta.html</code>:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en-us"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge,chrome=1"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+
   <span class="nt">&lt;title&gt;</span>Example Okta Sign-In Widget<span class="nt">&lt;/title&gt;</span>
 
-  <span class="c">&lt;!--[if lt IE 9]&gt;
-      &lt;script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"&gt;&lt;/script&gt;
-  &lt;![endif]--&gt;</span>
+  <span class="c">&lt;!-- Core widget js and css --&gt;</span>
 
-  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/js/okta-sign-in.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
-  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-sign-in.min.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/js/okta-sign-in.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- Optional, customizable css theme options. Link your own customized copy of this file or override styles in-line --&gt;</span>
-  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
   <span class="c">&lt;!-- Render the login widget here --&gt;</span>
@@ -412,17 +257,13 @@ will have a lot more in-depth configuration.</p>
 
   <span class="c">&lt;!-- Script to init the widget --&gt;</span>
   <span class="nt">&lt;script&gt;</span>
-    <span class="kd">var</span> <span class="nx">orgUrl</span> <span class="o">=</span> <span class="s1">'https://example.okta.com'</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">redirectUrl</span> <span class="o">=</span> <span class="s1">'http://localhost:8000/signed-in.html'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">orgUrl</span> <span class="o">=</span> <span class="s1">'https://dev-144769.oktapreview.com'</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="na">baseUrl</span><span class="p">:</span> <span class="nx">orgUrl</span><span class="p">});</span>
 
     <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
       <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
       <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'User %s successfully authenticated %o'</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">profile</span><span class="p">.</span><span class="nx">login</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
-          <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">redirectUrl</span><span class="p">);</span>
-        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">orgUrl</span><span class="p">);</span> <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">);</span>
   <span class="nt">&lt;/script&gt;</span>
@@ -431,94 +272,120 @@ will have a lot more in-depth configuration.</p>
 </code></pre>
 </div>
 
-<p>Note that in this code snippet, we redirect the user to a custom page we host locally at <code class="highlighter-rouge">http://localhost:8081/signed-in.html</code> instead of redirecting the user to the Okta dashboard (as was done in the simple example section above).</p>
+<h4 id="2-modify-the-html">2. Modify the HTML</h4>
 
-<h3 id="modify-the-html-for-your-okta-organization">Modify the HTML for your Okta organization</h3>
+<p>Change the <code class="highlighter-rouge">orgUrl</code> variable to your Okta org’s URL (for example: <code class="highlighter-rouge">https://dev-123456.oktapreview.com</code>), then save the file.</p>
 
-<p>Once you’ve copied the HTML above into a file named
-<code class="highlighter-rouge">login-to-okta.html</code>, the next step is for you to use your favorite
-text editor to modify <code class="highlighter-rouge">login-to-okta.html</code>. You will need to
-replace all instances of the string <code class="highlighter-rouge">example.okta.com</code> with the
-<a href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name">fully qualified domain name</a> for your Okta organization.</p>
+<h4 id="3-serve-the-file">3. Serve the File</h4>
 
-<p><strong>NOTE:</strong> If you aren’t sure what the “fully qualified domain name” for your
-Okta organization is, it is simply the “<a href="https://en.wikipedia.org/wiki/Uniform_Resource_Locator#Syntax">domain</a>” part of the URL
-that you use to log in to Okta. For example, if your company name
-is “Acme” and you log in to Okta using the
-<code class="highlighter-rouge">https://acme.okta.com</code> then your fully qualified domain name
-would be “<code class="highlighter-rouge">acme.okta.com</code>”. Likewise, if you are using an Okta
-Developer Edition organization, your domain will be something like
-“<code class="highlighter-rouge">dev-12345.oktapreview.com</code>”.</p>
+<p>If you aren’t sure which web server to use or don’t have one set up already, an easy web server to set up on Mac OS X or GNU/Linux is the SimpleHTTPServer that is included with Python.</p>
 
-<p>There is just one line you will need to modify in
-<code class="highlighter-rouge">login-to-okta.html</code> to get the sample working in your own environment. Simply  update the two lines below to match your environment with your fully qualified domain name in the following line:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>	var orgUrl = 'https://example.okta.com';
-   var redirectUrl = 'http://localhost:8000/signed-in.html';
-</code></pre>
-</div>
-
-<p>Replace <code class="highlighter-rouge">example.okta.com</code> in the <code class="highlighter-rouge">orgUrl</code> variable with the fully qualified domain name of your organization.
-Replace also <code class="highlighter-rouge">http://localhost:8000/signed-in.html</code> in the <code class="highlighter-rouge">redirectUrl</code> variable with the url of the page in your own web application where you would like to redirect the user after a successful login.</p>
-
-<h3 id="copy-the-html-to-a-web-server">Copy the HTML to a web server</h3>
-
-<p>Once you’ve created a <code class="highlighter-rouge">login-to-okta.html</code> file, your next step is
-get this file hosted on a web server. The web server you use will
-depend on your development environment and what you are comfortable
-with using.</p>
-
-<p>If you aren’t sure which web server to use, or don’t have one set up
-already, an easy web server to set up on Mac OS X or GNU/Linux
-is the <code class="highlighter-rouge">SimpleHTTPServer</code> that is included with <code class="highlighter-rouge">python</code>.</p>
-
-<p>If you have Python installed on your system, you can start the
-<code class="highlighter-rouge">SimpleHTTPServer</code> by running the following command from the same
-directory that the <code class="highlighter-rouge">login-to-okta.html</code> file is located in:</p>
+<p>If you have Python 2 installed on your system, you can start the SimpleHTTPServer by running the following command from the same directory that the <code class="highlighter-rouge">login-to-okta.html</code> file is located in:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>$ python -m SimpleHTTPServer
 </code></pre>
 </div>
 
-<p>If you are a Node.js developer, you might be more comfortable
-running a simple HTTP server in Node.js, which you can do as follows:</p>
+<p>In Python 3 this command is:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>$ npm install -g http-server
-
-$ http-server
+<div class="highlighter-rouge"><pre class="highlight"><code>python3 -m http.server
 </code></pre>
 </div>
+
+<h4 id="4-configure-a-trusted-origin">4. Configure a Trusted Origin</h4>
+
+<p>This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.</p>
+
+<p>You can enable your Sign-in Widget page as a “Trusted Origin” in Okta, which enables Cross-Origin Resource Sharing (CORS). To do this, follow the steps found under the “Trusted Origins tab” section in our <a href="https://help.okta.com/en/prev/Content/Topics/Security/API.htm">API Security help page</a>. Configure your Origin using the same base URL as the web server you are using to host the HTML for the Okta Sign-In Widget. For example, if you’re serving the page using the Python SimpleHTTPServer, the origin would be <code class="highlighter-rouge">http://0.0.0.0:8000</code>.</p>
+
+<p>If you now open the page with the Widget code on it, you can enter in the credentials for a user in your Okta org and you will be logged in. And that’s it!</p>
+
+<h2 id="adding-a-redirect">Adding a Redirect</h2>
+
+<p>In the simple example above, you already performed the following steps:</p>
+
+<ol>
+  <li>Created an HTML file with the widget code</li>
+  <li>Modified the HTML to use your Okta organization</li>
+  <li>Served the HTML file with a web server</li>
+  <li>Configured a Trusted Origin in your Okta organization</li>
+</ol>
+
+<p>In that example, you redirect the user to their Okta dashboard (as defined in the <code class="highlighter-rouge">orgUrl</code> variable). Now you will configure a redirect to a custom authentication landing page hosted on your server.</p>
+
+<p>To do this, you will now perform the following steps:</p>
+
+<ol>
+  <li>Create a landing page</li>
+  <li>Add a redirect URL variable to the widget</li>
+  <li>Update the post-authentication behavior of the widget</li>
+  <li>Configure redirects in your Okta organization</li>
+</ol>
+
+<h4 id="create-the-landing-page">Create the landing page</h4>
+
+<p>The first step will be to create the landing page that the user will be redirected to after authentication. For this example, you should create the file in the same directory as your existing sign-in page, and name it something like <code class="highlighter-rouge">signed-in.html</code>. You can add any content you might like to your landing page.</p>
+
+<h4 id="add-a-redirect-url">Add a Redirect URL</h4>
+
+<p>There are just two lines you will need to modify in your widget code to get the sample working in your own environment. Under the line where you specify the fully-qualified domain name for your Okta org, add the following line:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="kd">var</span> <span class="nx">redirectUrl</span> <span class="o">=</span> <span class="s1">'http://localhost:3333/signed-in.html'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Replace <code class="highlighter-rouge">http://localhost:3333/signed-in.html</code> in the <code class="highlighter-rouge">redirectUrl</code> variable with the URL of the landing page in your own web application where you would like to redirect the user after a successful login.</p>
+
+<h4 id="update-the-post-authentication-behavior">Update the post-authentication behavior</h4>
+
+<p>The other change you should make to your widget code is to change the success behavior, found on this line:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">orgUrl</span><span class="p">);</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Replacing <code class="highlighter-rouge">orgUrl</code> with <code class="highlighter-rouge">redirectUrl</code> will send the user to our new landing page.</p>
+
+<p>The updated section of your sign-in widget will now look something like this:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+  <span class="kd">var</span> <span class="nx">orgUrl</span> <span class="o">=</span> <span class="s1">'https://dev-123456.oktapreview.com'</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">redirectUrl</span> <span class="o">=</span> <span class="s1">'http://localhost:3333/signed-in.html'</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="na">baseUrl</span><span class="p">:</span> <span class="nx">orgUrl</span><span class="p">});</span>
+
+  <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
+    <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
+    <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">redirectUrl</span><span class="p">);</span> <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+<p>Once you are done, save the updated file.</p>
+
+<h4 id="configure-redirects">Configure redirects</h4>
+
+<p>To allow redirects, go back to the Trusted Origins section where you allowed CORS and edit the Origin that you entered. In addition to enabling CORS, also enable Redirect. If you need any help doing this, you can refer to <a href="https://help.okta.com/en/prev/Content/Topics/Security/API.htm?cshid=Security_API#Security_API">the Security API help page</a>.</p>
 
 <h3 id="testing-the-okta-sign-in-widget">Testing the Okta Sign-In Widget</h3>
 
 <p>At this point, you are ready to test the Okta Sign-In Widget.</p>
 
-<p>Test the Okta Sign-In Widget by loading the URL for the
-<code class="highlighter-rouge">login-to-okta.html</code> file in your favorite web browser.</p>
+<p>Test the Widget by starting up your web server again, then loading the URL for the Widget file in your favorite web browser.</p>
 
-<p>If you used <code class="highlighter-rouge">python -m SimpleHTTPServer</code> command above, this URL will be
-<code class="highlighter-rouge">http://localhost:8000/login-to-okta.html</code></p>
-
-<p>Once you’ve successfully loaded the Okta Sign-In Widget, it is
-time to start exploring the capabilities of the
-widget.</p>
+<p>Once you’ve successfully loaded the Okta Sign-In Widget, it is time to start exploring the capabilities of the widget.</p>
 
 <p>Here are two things for you to try:</p>
 
 <ol>
   <li>Log in using credentials that you know are invalid.
-For example: Try using “invalid@example.com” as the user name and
-“invalid” as the password. You should see an error.</li>
-  <li>Try using a valid user name and password. If everything works,
-you will be redirected to <code class="highlighter-rouge">http://localhost:8000/signed-in.html</code>.</li>
-  <li>
-    <p><a href="https://support.okta.com/help/articles/Knowledge_Article/27315047-Configuring-Multifactor-Authentication">Configure Multifactor Authentication</a>
-for your Okta org and try logging in using the Okta Sign-In Widget.</p>
-
-    <p>If you are redirected when you log in successfully, then it works!
-Your next step is to configure the Okta Sign-In Widget for your specific requirements.</p>
-  </li>
+For example: Try using “invalid@example.com” as the username and “invalid” as the password. You should see an error.</li>
+  <li>Try using a valid username and password. If everything works, you will be redirected to <code class="highlighter-rouge">signed-in.html</code>.</li>
 </ol>
+
+<p>If you are redirected when you sign in successfully, then it works! Your next step is to configure the Okta Sign-In Widget for your specific requirements. For example, you can <a href="https://help.okta.com/en/prod/Content/Topics/Security/MFA.htm">configure Multi-factor Authentication</a> for your Okta org and try logging in using the Okta Sign-In Widget.</p>
 
 <h2 id="customization">Customization</h2>
 
@@ -556,9 +423,9 @@ is up to you. Customization of the widget itself will be done on
 the <code class="highlighter-rouge">#okta-login-container</code> selector and its child elements.</p>
 
 <p>A full list of the CSS selectors that you can use to style the
-Okta Sign-In Widget are in the <a href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css">okta-theme.css</a> file. We strongly
+Okta Sign-In Widget are in the <a href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css">okta-theme.css</a> file. We strongly
 urge you to style your widget using only the selectors that are
-present in the <a href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.7.0/css/okta-theme.css">okta-theme.css</a> file as other stylistic elements in the widget may be subject to change and may cause your styling to break in
+present in the <a href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css">okta-theme.css</a> file as other stylistic elements in the widget may be subject to change and may cause your styling to break in
 future versions of the Okta Sign-In Widget.</p>
 
 <h4 id="example-css-styling-for-the-okta-sign-in-widget">Example CSS styling for the Okta Sign-In Widget</h4>
@@ -566,27 +433,27 @@ future versions of the Okta Sign-In Widget.</p>
 <p>Below is an in-line CSS example, which gives you an idea of how you
 can style the Okta Sign-In Widget. Try the following style below
 by copying the <code class="highlighter-rouge">&lt;style&gt;</code> tag below into the <code class="highlighter-rouge">&lt;head&gt;</code> section of
-the <code class="highlighter-rouge">login-to-okta.html</code> file that you created above.</p>
+the <code class="highlighter-rouge">login-to-okta.html</code> file that you created above. It will change the background image for the sign-in page, as well as the color of the “Sign In” button.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code> <span class="nt">&lt;style&gt;</span>
-	  <span class="nt">body</span> <span class="p">{</span>
-	    <span class="nl">background-image</span><span class="p">:</span> <span class="sx">url('https://farm9.staticflickr.com/8332/8451032652_b2bf0bdadc_h.jpg')</span><span class="p">;</span>
-	    <span class="nl">background-repeat</span><span class="p">:</span> <span class="nb">no-repeat</span><span class="p">;</span>
-	    <span class="nl">background-position</span><span class="p">:</span> <span class="nb">center</span> <span class="nb">center</span> <span class="nb">fixed</span><span class="p">;</span>
-	    <span class="nl">-webkit-background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
-	    <span class="nl">-moz-background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
-	    <span class="nl">-o-background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
-	    <span class="nl">background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
-	  <span class="p">}</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+    <span class="nt">body</span> <span class="p">{</span>
+      <span class="nl">background-image</span><span class="p">:</span> <span class="sx">url('https://farm9.staticflickr.com/8332/8451032652_b2bf0bdadc_h.jpg')</span><span class="p">;</span>
+      <span class="nl">background-repeat</span><span class="p">:</span> <span class="nb">no-repeat</span><span class="p">;</span>
+      <span class="nl">background-position</span><span class="p">:</span> <span class="nb">center</span> <span class="nb">center</span> <span class="nb">fixed</span><span class="p">;</span>
+      <span class="nl">-webkit-background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+      <span class="nl">-moz-background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+      <span class="nl">-o-background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+      <span class="nl">background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+    <span class="p">}</span>
 
-	  <span class="nf">#okta-login-container</span> <span class="nc">.button</span> <span class="p">{</span>
-	    <span class="nl">color</span><span class="p">:</span> <span class="m">#ffffff</span><span class="p">;</span>
-	    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#3a3f44</span><span class="p">;</span>
-	    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#3a3f44</span><span class="p">;</span>
-	    <span class="nl">background-image</span><span class="p">:</span> <span class="n">linear-gradient</span><span class="p">(</span><span class="m">#484e55</span><span class="p">,</span> <span class="m">#3a3f44</span> <span class="m">60%</span><span class="p">,</span> <span class="m">#313539</span><span class="p">);</span>
-	    <span class="nl">background-repeat</span><span class="p">:</span> <span class="nb">no-repeat</span><span class="p">;</span>
-	    <span class="nl">filter</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
-	  <span class="p">}</span>
+    <span class="nf">#okta-login-container</span> <span class="nc">.button</span> <span class="p">{</span>
+      <span class="nl">color</span><span class="p">:</span> <span class="m">#ffffff</span><span class="p">;</span>
+      <span class="nl">background-color</span><span class="p">:</span> <span class="m">#3a3f44</span><span class="p">;</span>
+      <span class="nl">border-color</span><span class="p">:</span> <span class="m">#3a3f44</span><span class="p">;</span>
+      <span class="nl">background-image</span><span class="p">:</span> <span class="n">linear-gradient</span><span class="p">(</span><span class="m">#484e55</span><span class="p">,</span> <span class="m">#3a3f44</span> <span class="m">60%</span><span class="p">,</span> <span class="m">#313539</span><span class="p">);</span>
+      <span class="nl">background-repeat</span><span class="p">:</span> <span class="nb">no-repeat</span><span class="p">;</span>
+      <span class="nl">filter</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 </code></pre>
 </div>
@@ -594,7 +461,7 @@ the <code class="highlighter-rouge">login-to-okta.html</code> file that you crea
 <h4 id="advice-for-hosting-your-own-css">Advice for hosting your own CSS</h4>
 
 <p>While the example above demonstrates how to use an in-page style
-tag, we strongly encourage you to create your own stylesheet by
+tag, we strongly encourage you to create your own style sheet by
 copying the <code class="highlighter-rouge">okta-theme.css</code> file onto your own website, and
 update that file as needed. Here is what that might look like in
 your HTML:</p>
@@ -608,16 +475,105 @@ your HTML:</p>
 <p>The configuration options that are passed to the <code class="highlighter-rouge">OktaSignIn()</code>
 constructor are used to configure the functionality and text labels
 of the Okta Sign-In Widget. An example of how to configure
-<code class="highlighter-rouge">OktaSignIn()</code> is below, followed by a full list of all of the
-features and text labels that you can use to configure the Okta Sign-In Widget.</p>
+<code class="highlighter-rouge">OktaSignIn()</code> is below. If you’d like to see the full list of configuration options, see the <a href="https://developer.okta.com/code/javascript/okta_sign-in_widget_ref.html#configuration-options">Sign-in Widget Reference page</a>.</p>
 
-<h4 id="example">Example</h4>
+<h4 id="a-walkthrough-of-the-widget-code">A Walkthrough of the Widget Code</h4>
 
-<p>Below is a working example of a customized version of the Okta Sign-In Widget. You can
-see what these customizations do by copying this code into your
+<p>If you are a developer, the best way to understand the Okta
+Sign-In Widget is to look at a simple example of the HTML
+needed to get it working. The HTML below is the same as the HTML you added above:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en-us"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+
+  <span class="nt">&lt;title&gt;</span>Example Okta Sign-In Widget<span class="nt">&lt;/title&gt;</span>
+
+  <span class="c">&lt;!-- Core widget js and css --&gt;</span>
+
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/js/okta-sign-in.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- Optional, customizable css theme options. Link your own customized copy of this file or override styles in-line --&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="c">&lt;!-- Render the login widget here --&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"okta-login-container"</span><span class="nt">&gt;&lt;/div&gt;</span>
+
+  <span class="c">&lt;!-- Script to init the widget --&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="kd">var</span> <span class="nx">orgUrl</span> <span class="o">=</span> <span class="s1">'https://dev-123456.oktapreview.com'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">redirectUrl</span> <span class="o">=</span> <span class="s1">'http://localhost:3333/signed-in.html'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span><span class="na">baseUrl</span><span class="p">:</span> <span class="nx">orgUrl</span><span class="p">});</span>
+
+    <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
+      <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
+      <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">redirectUrl</span><span class="p">);</span> <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>Here is what is happening in the HTML above:</p>
+
+<h4 id="head">Head</h4>
+
+<p>First, in the <code class="highlighter-rouge">&lt;head&gt;</code> tag, we include the  <code class="highlighter-rouge">okta-sign-in.min.js</code> and
+<code class="highlighter-rouge">okta-sign-in.min.css</code> files. These files have all of the
+logic and default style sheets used by the Okta Sign-In Widget.</p>
+
+<p>We also include the <code class="highlighter-rouge">okta-theme.css</code> file, which adds Okta’s own custom theme. This is the same theme you see on the login page of your Okta organization, assuming you have enabled the New Sign-In Page setting in <code class="highlighter-rouge">Admin -&gt; Settings -&gt; Appearance</code> in the <code class="highlighter-rouge">Sign-In Configuration</code> section. You can choose not to include this <code class="highlighter-rouge">okta-theme.css</code> style sheet if you so wish.</p>
+
+<h4 id="body">Body</h4>
+
+<p>In the <code class="highlighter-rouge">&lt;body&gt;</code>, we add a <code class="highlighter-rouge">&lt;div&gt;</code> tag with an <code class="highlighter-rouge">id</code> value of
+<code class="highlighter-rouge">okta-login-container</code>.</p>
+
+<blockquote>
+  <p>Note: You can use any <code class="highlighter-rouge">id</code> value in this tag, we are just using <code class="highlighter-rouge">okta-login-container</code> here for the sake of clarity.</p>
+</blockquote>
+
+<p>Next, we add some JavaScript code to insert the Okta Sign-In Widget
+into the <code class="highlighter-rouge">okta-login-container</code> tag. In this short example, this
+JavaScript is included at the end of the file. However, when you use
+this code on your own site, you will need to run these functions
+in the parts of your code that are run when the DOM is ready.</p>
+
+<p>Here is what that JavaScript code is doing: first, the line below
+initializes the Okta Sign-In Widget object.</p>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">baseUrl</code> value must be the domain for your Okta
+organization.</p>
+</blockquote>
+
+<p>For example, if your Okta organization is <code class="highlighter-rouge">acme.okta.com</code> you
+would replace the string <code class="highlighter-rouge">example.okta.com</code> below with
+<code class="highlighter-rouge">acme.okta.com</code>.</p>
+
+<p>Finally, the lines below actually render the Okta Sign-In
+Widget. Note that the value for <code class="highlighter-rouge">el</code> can be any selector of your choice - “#okta-login-container” is a selector for an element in the HTML code that has an <code class="highlighter-rouge">id</code> attribute of “okta-login-container”.</p>
+
+<p>Also, note that we only define a “SUCCESS” callback in which we create an Okta session and redirect the browser to the Okta organization. This logs the user directly into the Okta dashboard. In a production environment, you should handle statuses beyond “SUCCESS” and define an “ERROR” callback as well.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
+  <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
+  <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span> <span class="nx">res</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">orgUrl</span><span class="p">);</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</code></pre>
+</div>
+
+<h4 id="customized-example">Customized Example</h4>
+
+<p>Below is a working example of a customized version of the Okta Sign-In Widget. You can see what these customizations do by copying this code into your
 <code class="highlighter-rouge">login-to-okta.html</code> example file and reloading the page in your
-web browser. A full list of the supported customization options
-are below.</p>
+web browser.</p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
   <span class="na">baseUrl</span><span class="p">:</span> <span class="nx">orgUrl</span><span class="p">,</span>
@@ -651,140 +607,19 @@ are below.</p>
 </code></pre>
 </div>
 
-<h4 id="configurable-features">Configurable features</h4>
-
-<ul>
-  <li>
-    <p><code class="highlighter-rouge">baseUrl</code></p>
-
-    <p>The base URL for your Okta organization. Examples base URLs include:
-<code class="highlighter-rouge">https://example.okta.com</code> and <code class="highlighter-rouge">https://dev-12345.oktapreview.com</code>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">recoveryToken</code></p>
-
-    <p>If starting in recovery flow (unlock or forgot pass), pass in the <code class="highlighter-rouge">recoveryToken</code>.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">logo</code></p>
-
-    <p>Company logo to use in the widget.</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">features</code></p>
-
-    <p>The options in the <code class="highlighter-rouge">features</code> object enable or disable widget
-features via a Boolean <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>. Features are enabled
-by defining them with <code class="highlighter-rouge">true</code>, and disabled with <code class="highlighter-rouge">false</code>. For
-example, to disable display of the “Remember Me” checkbox, you would
-update your <code class="highlighter-rouge">features</code> object to look like below:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>features: {
-    rememberMe: false
-}
-</code></pre>
-    </div>
-
-    <p>Here is the full list of features that you can configure:</p>
-
-    <ul>
-      <li>
-        <p><code class="highlighter-rouge">rememberMe</code></p>
-
-        <p>When set to <strong>true</strong>, this will display a checkbox allowing a
-user to enable “Remember me” functionality at login.</p>
-
-        <p>Defaults to <strong>true</strong></p>
-      </li>
-      <li>
-        <p><code class="highlighter-rouge">smsRecovery</code></p>
-
-        <p>When set to <strong>true</strong>, this will allow a users with a configured
-mobile phone number to recover their password using an SMS.</p>
-
-        <p>Defaults to <strong>false</strong></p>
-      </li>
-      <li>
-        <p><code class="highlighter-rouge">selfServiceUnlock</code></p>
-
-        <p>When set to <strong>true</strong>, this will give users the option to perform a self-service password reset.</p>
-
-        <p>Defaults to <strong>false</strong></p>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">helpLinks</code></p>
-
-    <p>The options in the <code class="highlighter-rouge">helpLinks</code> object set alternate links to be
-used for the help links on the Okta Sign-In Widget.</p>
-
-    <p>Here is an example of configuring an alternate help link for the
-link labeled “Help”, as well as configuring a custom link with a
-label of “Dehydrated Boulders Support”:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>helpLinks: {
-  help: 'http://acme.example.com/custom/help/page',
-  custom: [
-    { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
-  ]
-}
-</code></pre>
-    </div>
-
-    <ul>
-      <li>
-        <p><code class="highlighter-rouge">help</code></p>
-
-        <p>When set to a <em>string containing a URL</em>, the value of this
-option will be used as the <code class="highlighter-rouge">href</code> for the help text labeled
-“Help” by default.</p>
-      </li>
-      <li>
-        <p><code class="highlighter-rouge">forgotPassword</code></p>
-
-        <p>When set to a <em>string containing a URL</em>, the value of this
-option will be used as the <code class="highlighter-rouge">href</code> for the help text labeled
-“Forgot password?” by default.</p>
-      </li>
-      <li>
-        <p><code class="highlighter-rouge">unlock</code></p>
-
-        <p>When set to a <em>string containing a URL</em>, the value of this
-option will be used as the <code class="highlighter-rouge">href</code> for the help text labeled
-“Unlock account?” by default.</p>
-      </li>
-      <li>
-        <p><code class="highlighter-rouge">custom</code></p>
-
-        <p>When set to an <em>array containing objects</em> with <code class="highlighter-rouge">text</code> and
-<code class="highlighter-rouge">href</code> keys, new links will be added to the help text for
-the Okta Sign-In Widget where the value of the <code class="highlighter-rouge">text</code> key will be
-used as the text label and the value of the <code class="highlighter-rouge">href</code> key will be
-used as the <code class="highlighter-rouge">href</code> link that label points to. For example:</p>
-
-        <div class="highlighter-rouge"><pre class="highlight"><code>custom: [
-  { text: 'Dehydrated Boulders Support', href: 'http://acme.example.com/support/dehydrated-boulders' },
-  { text: 'Rocket Sled Questions', href: 'http://acme.example.com/questions/rocket-sled' }
-]
-</code></pre>
-        </div>
-      </li>
-    </ul>
-  </li>
-</ul>
+<p>For more information about these configuration options, see the <a href="https://developer.okta.com/code/javascript/okta_sign-in_widget_ref.html#configuration-options">Sign-in Widget Reference page</a>.</p>
 
 <h2 id="troubleshooting">Troubleshooting</h2>
 
 <p>If you are working with a single-page app using the Sign-In Widget and your Okta cookie isn’t set, try enabling third-party cookies in the browser.</p>
 
-<h2 id="reference-documentation">Reference Documentation</h2>
+<p>For other questions, please get in touch with <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
 
-<p>You can find more reference information in the <a href="/code/javascript/okta_sign-in_widget_ref">Okta Sign-In Widget reference</a> page.</p>
+<h2 id="next-steps">Next Steps</h2>
 
-<h2 id="github-project">GitHub Project</h2>
+<p>You can find more information about the Widget on the <a href="/code/javascript/okta_sign-in_widget_ref">Okta Sign-In Widget Reference Page</a>.</p>
 
-<p>The source code for this project <a href="https://github.com/okta/okta-signin-widget">can be found on GitHub</a>.</p>
+<p>If you’d like to see the code that powers the Widget, you can find it on Github here: <a href="https://github.com/okta/okta-signin-widget">https://github.com/okta/okta-signin-widget</a>.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">
@@ -849,33 +684,35 @@ used as the <code class="highlighter-rouge">href</code> link that label points t
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>

@@ -10,7 +10,7 @@ The Okta Application API provides operations to manage applications and/or assig
 
 ## Getting Started
 
-Explore the Apps API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4b283a9afed50a1ccd6b)
+Explore the Apps API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4857222012c11cf5e8cd)
 
 ## Application Operations
 
@@ -966,6 +966,200 @@ curl -v -X POST \
 }' "https://${org}.okta.com/api/v1/apps"
 ~~~
 
+#### Add OAuth 2.0 Client Application
+{:.api .api-operation}
+
+Adds an OAuth 2.0 client application. This application is only available to the org that creates it.
+
+> You must enable the OpenID Connect feature to create an OAuth 2.0 client. OpenId Connect is an {% api_lifecycle ea %} feature.
+
+##### Credentials
+{:.api .api-request .api-request-params}
+
+| Parameter                  | Description                                                    | DataType                                                                    | Nullable | Unique | Validation |
+|:---------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------------------|:---------|:-------|:-----------|
+| client_id                  | Unique identifier for the client application                   | String                                                                      | TRUE     | TRUE   | TRUE       |
+| client_secret              | OAuth 2.0 client secret string (used for confidential clients) | String                                                                      | TRUE     | FALSE  | TRUE       |
+| token_endpoint_auth_method | Requested authentication method for the token endpoint         | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt` | FALSE    | FALSE  | FALSE      |
+
+##### Settings
+{:.api .api-request .api-request-params}
+
+| Parameter          | Description                                                      | DataType                                                                                     | Nullable | Unique | Validation |
+|:-------------------|:-----------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|
+| client_uri         | URL string of a web page providing information about the client  | String                                                                                       | TRUE     | FALSE  | FALSE      |
+| logo_uri           | URL string that references a logo for the client                 | String                                                                                       | TRUE     | FALSE  | FALSE      |
+| application_type   | The type of client application                                   | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE       |
+| redirect_uris      | Array of redirection URI strings for use in redirect-based flows | Array                                                                                        | TRUE     | FALSE  | TRUE       |
+| response_types     | Array of OAuth 2.0 response type strings                         | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |
+| grant_types        | Array of OAuth 2.0 grant type strings                            | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |
+| initiate_login_uri | URL that a third party can use to initiate a login by the client | String                                                                                       | TRUE     | FALSE  | TRUE       |
+
+* At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
+  [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
+  or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
+  then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
+
+* All redirect URIs must be absolute URIs and must not include a fragment compontent.
+
+* Different application types have different valid values for the corresponding grant type:
+
+    |-------------------+---------------------------------------------------------------+-----------------------------------------------------------------------------------|
+    | Application Type  | Valid Grant Type                                              | Requirements                                                                      |
+    | ----------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+    | `web`             | `authorization_code`, `implicit`, `refresh_token`             | Must have at least `authorization_code`                                           |
+    | `native`          | `authorization_code`, `implicit`, `password`, `refresh_token` | Must have at least `authorization_code`                                           |
+    | `browser`         | `implicit`                                                    |                                                                                   |
+    | `service`         | `client_credentials`                                          | Works with OAuth 2.0 flow (not OpenID Connect)                                    |
+
+* The `grant_types` and `response_types` values described above are partially orthogonal, as they refer to arguments passed to different
+    endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the `grant_types`
+    available to a client influence the `response_types` that the client is allowed to use, and vice versa. For instance, a `grant_types`
+    value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
+    the OAuth 2.0 authorization code grant.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+> [Application](#application-model)'s `signOnMode` must be set to OPENID_CONNECT, the `name` field must be "oidc_client", and `label` field must be defined.
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+    "name": "oidc_client",
+    "label": "Sample Client",
+    "signOnMode": "OPENID_CONNECT",
+    "credentials": {
+      "oauthClient": {
+        "token_endpoint_auth_method": "client_secret_post"
+      }
+    },
+    "settings": {
+      "oauthClient": {
+        "client_uri": "http://example.com/client",
+        "logo_uri": "http://example.com/assets/images/logo-new.png",
+        "redirect_uris": [
+          "https://example.com/oauth2/callback",
+          "myapp://callback"
+        ],
+        "response_types": [
+          "token",
+          "id_token",
+          "code"
+        ],
+        "grant_types": [
+          "implicit",
+          "authorization_code"
+        ],
+        "application_type": "native"
+      }
+    }
+    }' "https://${org}.okta.com/api/v1/apps"
+~~~
+
+##### Response Example
+{:.api .api-response .api-response-example}
+
+~~~json
+{
+  "id": "0oa1hm4POxgJM6CPu0g4",
+  "name": "oidc_client",
+  "label": "Sample Client",
+  "status": "ACTIVE",
+  "lastUpdated": "2017-06-12T09:17:24.000Z",
+  "created": "2017-06-12T09:17:23.000Z",
+  "accessibility": {
+    "selfService": false,
+    "errorRedirectUrl": null,
+    "loginRedirectUrl": null
+  },
+  "visibility": {
+    "autoSubmitToolbar": false,
+    "hide": {
+      "iOS": true,
+      "web": true
+    },
+    "appLinks": {
+      "oidc_client_link": true
+    }
+  },
+  "features": [],
+  "signOnMode": "OPENID_CONNECT",
+  "credentials": {
+    "userNameTemplate": {
+      "template": "${source.login}",
+      "type": "BUILT_IN"
+    },
+    "signing": {
+      "kid": "cg4-_A_ifCK7fsKIKjHP27P0JGeuhnHHKEID1yXy42M"
+    },
+    "oauthClient": {
+      "client_id": "0oa1hm4POxgJM6CPu0g4",
+      "client_secret": "5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z",
+      "token_endpoint_auth_method": "client_secret_post"
+    }
+  },
+  "settings": {
+    "app": {},
+    "notifications": {
+      "vpn": {
+        "network": {
+          "connection": "DISABLED"
+        },
+        "message": null,
+        "helpUrl": null
+      }
+    },
+    "oauthClient": {
+      "client_uri": "http://example.com/client",
+      "logo_uri": "http://example.com/assets/images/logo-new.png",
+      "redirect_uris": [
+        "https://example.com/oauth2/callback",
+        "myapp://callback"
+      ],
+      "response_types": [
+        "token",
+        "id_token",
+        "code"
+      ],
+      "grant_types": [
+        "implicit",
+        "authorization_code"
+      ],
+      "application_type": "native"
+    }
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "http://rain.okta1.com:1802/assets/img/logos/default.6770228fb0dab49a1695ef440a5279bb.png",
+        "type": "image/png"
+      }
+    ],
+    "appLinks": [
+      {
+        "name": "oidc_client_link",
+        "href": "http://rain.okta1.com:1802/home/oidc_client/0oa1hm4POxgJM6CPu0g4/alnivcK7lCqtQ1jOE0g3",
+        "type": "text/html"
+      }
+    ],
+    "users": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/users"
+    },
+    "deactivate": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/lifecycle/deactivate"
+    },
+    "groups": {
+      "href": "http://rain.okta1.com:1802/api/v1/apps/0oa1hm4POxgJM6CPu0g4/groups"
+    }
+  }
+}
+~~~
+
 ### Get Application
 {:.api .api-operation}
 
@@ -1702,8 +1896,8 @@ curl -v -X GET \
         "template": "${fn:substringBefore(source.login, \"@\")}",
         "type": "BUILT_IN"
       },
-       "signing": {
-      "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
+      "signing": {
+        "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
       }
     },
     "settings": {
@@ -2524,26 +2718,6 @@ curl -v -X PUT \
   }
 }
 ~~~
-
-#### Set Profile Property for OpenID Connect Apps
-{:.api .api-operation}
-
-Update the [app's `profile` property](#application-properties), a container for any valid JSON schema that can be referenced from a request.
-For example, add an app manager contact email address,
-or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
-
-To add a `profile` property to an OpenID Connect public client app:
-
-1. Create a [public client app](/docs/api/resources/oauth-clients.html) configured for OpenID Connect, if it doesn't already exist. Creating the public client app creates a corresponding app instance accessible via the Apps API.
-2. List your org's apps and look for the app named `oidc_client` that corresponds to your public client app.
-3. Use the ID of the corresponding app instance to update the app instance properties with a `profile` property.
-4. Once the property is populated, you can refer to it in Okta Expression Language, such as the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
-
-
-Profile Requirements
-
-* The `profile` property is not encrypted, so don't store sensitive data in it.
-* The `profile` property doesn't limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.
 
 ### Delete Application
 {:.api .api-operation}
@@ -3510,6 +3684,8 @@ Location: https://${org}.okta.com/api/v1/apps/0oad5lTSBOMUBOBVVQSC/credentials/k
   "x5c": [
     "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
   ],
+  "e": "AQAB",
+  "n": "mkC6yAJVvFwUlmM9gKjb2d-YK5qHFt-mXSsbjWKKs4EfNm-BoQeeovBZtSACyaqLc8IYFTPEURFcbDQ9DkAL04uUIRD2gaHYY7uK0jsluEaXGq2RAIsmzAwNTzkiDw4q9pDL_q7n0f_SDt1TsMaMQayB6bU5jWsmqcWJ8MCRJ1aJMjZ16un5UVx51IIeCbe4QRDxEXGAvYNczsBoZxspDt28esSpq5W0dBFxcyGVudyl54Er3FzAguhgfMVjH-bUec9j2Tl40qDTktrYgYfxz9pfjm01Hl4WYP1YQxeETpSL7cQ5Ihz4jGDtHUEOcZ4GfJrPzrGpUrak8Qp5xcwCqQ",
   "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
   "kty": "RSA",
   "use": "sig",
@@ -3587,6 +3763,8 @@ Location: https://${org}.okta.com/api/v1/apps/0oal21k0DVN7DhS3R0g3/credentials/k
   "x5c": [
     "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
   ],
+  "e": "AQAB",
+  "n": "mkC6yAJVvFwUlmM9gKjb2d-YK5qHFt-mXSsbjWKKs4EfNm-BoQeeovBZtSACyaqLc8IYFTPEURFcbDQ9DkAL04uUIRD2gaHYY7uK0jsluEaXGq2RAIsmzAwNTzkiDw4q9pDL_q7n0f_SDt1TsMaMQayB6bU5jWsmqcWJ8MCRJ1aJMjZ16un5UVx51IIeCbe4QRDxEXGAvYNczsBoZxspDt28esSpq5W0dBFxcyGVudyl54Er3FzAguhgfMVjH-bUec9j2Tl40qDTktrYgYfxz9pfjm01Hl4WYP1YQxeETpSL7cQ5Ihz4jGDtHUEOcZ4GfJrPzrGpUrak8Qp5xcwCqQ",
   "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
   "kty": "RSA",
   "use": "sig",
@@ -3655,6 +3833,8 @@ curl -v -X GET \
     "x5c": [
       "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
     ],
+    "e": "AQAB",
+    "n": "mkC6yAJVvFwUlmM9gKjb2d-YK5qHFt-mXSsbjWKKs4EfNm-BoQeeovBZtSACyaqLc8IYFTPEURFcbDQ9DkAL04uUIRD2gaHYY7uK0jsluEaXGq2RAIsmzAwNTzkiDw4q9pDL_q7n0f_SDt1TsMaMQayB6bU5jWsmqcWJ8MCRJ1aJMjZ16un5UVx51IIeCbe4QRDxEXGAvYNczsBoZxspDt28esSpq5W0dBFxcyGVudyl54Er3FzAguhgfMVjH-bUec9j2Tl40qDTktrYgYfxz9pfjm01Hl4WYP1YQxeETpSL7cQ5Ihz4jGDtHUEOcZ4GfJrPzrGpUrak8Qp5xcwCqQ",
     "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
     "kty": "RSA",
     "use": "sig",
@@ -3666,6 +3846,8 @@ curl -v -X GET \
     "x5c": [
       "MIIDqDCCApCgAwIBAgIGAUsUkouzMA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTAxMjMwMjE0MjNaFw00NTAxMjMwMjE1MjNaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKhmkmKsu3FYeBiJg44aN6Ah3g9gof1cytXJVMnblDUWpLfe/FMUQCssh8Y8NCYRri5jni4efBgk6B3SkC7ymqsOXILIEHSwUYWnAaqDOTxO101mHzryowu1+0PldRNoyTthahpprvAPYlTin9zrDTqFT+WY/zwoaN8H+CfixlW1nM85qF18zYYekkW50MSoHPcfJKe2ywIhPXTYTSBEPcHh8dQEjBrZn7A4qOoDnfOXll8OL7j2O6EVyTtHA0tLJHVLpwI4gSPsXFwEnHltjN57odwYe9yds0BbM/YG9i+am1+3cmZ6Uyd16mLGclrr05o9BHcEZ4ZctV2hr6whbRsCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEAnNlF27gRmhGTQ+GRAvbvYToFRgsIbBAPvRqB2LmEIiQ6UJd602w6uP1sv/zEzBYg4SnMLuVyWgOJ6d71dCvXdIO9mgAq6BaEPjlo0WhGyt+zGrpkMnIX5EwRa64kHydcPRHNA607wVYA96sJdyNJEMzBvjY9fJnfevzzDCN3NWpMS2T6rk6HP5IziI1VuFWY2OUC1kbCqLj1dUgp8koe3ftLL55ZpkAocnVMnrzBveNjgAOAiKTMcyS0bhESph9aVWvuHVZSfTnUjnTPb/4jA2YlB3ED+qaU3aqHwft1KXwZskNXBKXy7lyC+CMoeB3/ncFhSg/UllBooPPS3wYlNA=="
     ],
+    "e": "AQAB",
+    "n": "htbi5H5MN_oYaKcZ8vlWRZn2oTrPY0v8_2Br_VZPJgJ57dCgguq5dDk1Me_ax-B3kjBPdXcW8wEoUFaU30spyVeQjZrdqsSvF0nMW4OzrMOIqrGLwCrAoDBS8tutfk5Y7qc-5xABzxgu4BjgSK5nWXbCt_UR0DzVTknotmMGeT8tAej8F6GAphLa0YhIxWT7Jy-y_pdANsiUPRiZBoLueGI0rrCqgYHIQVjNoj4-si105KCXbQuyYM9_Cd-dyyu5KJ4Ic0cOW61gpx4pnecMgSy8OX57FEd06W2hExBd49ah6jra2KFMeOGe3rkIXirdkofl1mBgeQ77ruKO1wW9Qw",
     "kid": "mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo",
     "kty": "RSA",
     "use": "sig",
@@ -3716,6 +3898,8 @@ curl -v -X GET \
   "x5c": [
     "MIIDqDCCApCgAwIBAgIGAVGNQFX5MA0GCSqGSIb3DQEBBQUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTAeFw0xNTEyMTAxODU1MjJaFw0xNzEyMTAxODU2MjJaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGJhbGFjb21wdGVzdDEcMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJJjrcnI6cXBiXNq9YDgfYrQe2O5qEHG4MXP8Ue0sMeefFkFEHYHnHUeZCq6WTAGqR+1LFgOl+Eq9We5V+qNlGIfkFkQ3iHGBrIALKqLCd0Et76HicDiegz7j9DtN+lo0hG/gfcw5783L5g5xeQ7zVmCQMkFwoUA0uA3bsfUSrmfORHJL+EMNQT8XIXD8NkG4g6u7ylHVRTLgXbe+W/p04m3EP6l41xl+MhIpBaPxDsyUvcKCNwkZN3aZIin1O9Y4YJuDHxrM64/VtLLp0sC05iawAmfsLunF7rdJAkWUpPn+xkviyNQ3UpvwAYuDr+jKLUdh2reRnm1PezxMIXzBVMCAwEAATANBgkqhkiG9w0BAQUFAAOCAQEARnFIjyitrCGbleFr3KeAwdOyeHiRmgeKupX5ZopgXtcseJoToUIinX5DVw2fVZPahqs0Q7/a0wcVnTRpw6946qZCwKd/PvZ1feVuVEA5Ui3+XvHuSH5xLp7NvYG1snNEvlbN3+NDUMlWj2NEbihowUBt9+UxTpQO3+N08q3aZk3hOZ+tHt+1Te7KEEL/4CM28GZ9MY7fSrS7MAgp1+ZXtn+kRlMrXnQ49qBda37brwDRqmSY9PwNMbev3r+9ZHwxr9W5wXW4Ev4C4xngA7RkVoyDbItSUho0I0M0u/LHuppclnXrw97xyO5Z883eIBvPVjfRcxsJxXJ8jx70ATDskw=="
   ],
+  "e": "AQAB",
+  "n": "htbi5H5MN_oYaKcZ8vlWRZn2oTrPY0v8_2Br_VZPJgJ57dCgguq5dDk1Me_ax-B3kjBPdXcW8wEoUFaU30spyVeQjZrdqsSvF0nMW4OzrMOIqrGLwCrAoDBS8tutfk5Y7qc-5xABzxgu4BjgSK5nWXbCt_UR0DzVTknotmMGeT8tAej8F6GAphLa0YhIxWT7Jy-y_pdANsiUPRiZBoLueGI0rrCqgYHIQVjNoj4-si105KCXbQuyYM9_Cd-dyyu5KJ4Ic0cOW61gpx4pnecMgSy8OX57FEd06W2hExBd49ah6jra2KFMeOGe3rkIXirdkofl1mBgeQ77ruKO1wW9Qw",
   "kid": "mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo",
   "kty": "RSA",
   "use": "sig",
@@ -4329,7 +4513,7 @@ Applications have the following properties:
 | visibility       | visibility settings for app                  |  [Visibility Object](#visibility-object)                            | TRUE       | FALSE    | FALSE      |             |             |
 | credentials      | credentials for the specified `signOnMode`   |  [Application Credentials Object](#application-credentials-object)  | TRUE       | FALSE    | FALSE      |             |             |
 | settings         | settings for app                             | Object ( [App Names & Settings](#app-names--settings))              | TRUE       | FALSE    | FALSE      |             |             |
-| profile          | Valid JSON schema for specifying properties  | [JSON](#set-profile-property-for-openid-connect-apps)  | TRUE       | FALSE    | FALSE      |             |             |
+| profile          | Valid JSON schema for specifying properties  | [JSON](#profile-object)                                             | TRUE       | FALSE    | FALSE      |             |             |
 | _links           | discoverable resources related to the app    |  [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)     | TRUE       | FALSE    | TRUE       |             |             |
 | _embedded        | embedded resources related to the app        |  [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)     | TRUE       | FALSE    | TRUE       |             |             |
 | ---------------- | -------------------------------------------- | ------------------------------------------------------------------ | ---------- | -------- | ---------- | ----------- | ----------- |
@@ -4337,7 +4521,7 @@ Applications have the following properties:
 Property details
 
  * `id`, `created`, `lastUpdated`, `status`, `_links`, and `_embedded` are only available after an app is created.
- * `profile` is only available for OpenID Connect apps. See [Set Profile Property for OpenID Connect Apps](#set-profile-property-for-openid-connect-apps).
+ * `profile` is only available for OAuth 2.0 client apps. See [Profile Object](#profile-object).
 
 ##### App Names & Settings
 
@@ -4354,6 +4538,7 @@ The catalog is currently not exposed via an API.  While additional apps may be a
 | template_swa3field  | [Add Plugin SWA (3 Field) Application](#add-plugin-swa-3-field-application)   |
 | tempalte_sps        | [Add SWA Application (No Plugin)](#add-swa-application-no-plugin)             |
 | template_wsfed      | [Add WS-Federation Application](#add-ws-federation-application)               |
+| oidc_client         | [Add OAuth 2.0 client Application](#add-oauth-20-client-application)          |
 | Custom SAML 2.0     | [Add Custom SAML 2.0 Application](#add-custom-saml-application)               |
 | Custom SWA          | [Add Custom SWA Application](#add-custom-swa-application)                     |
 |---------------------+-------------------------------------------------------------------------------|
@@ -4401,6 +4586,7 @@ The list of possible modes an app may support are:
 | SAML_2_0              | Federated Authentication with SAML 2.0 WebSSO                           |
 | WS_FEDERATION         | Federated Authentication with WS-Federation Passive Requestor Profile   |
 | AUTO_LOGIN            | Secure Web Authentication (SWA)
+| OPENID_CONNECT        | Federated Authentication with OpenID Connect
 | Custom                | App-Specific SignOn Mode                                                |
 |-----------------------+-------------------------------------------------------------------------|
 
@@ -4484,6 +4670,7 @@ Specifies credentials and scheme for the application's `signOnMode`.
 | signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | False    |                 |           |           |            |
 | userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
 | password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |
+| oauthClient      | Credential for OAuth 2.0 client                                                                                | [OAuth Credential Object](#oauth-credential-object)   | False    |                 |           |           |            |
 |------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
 
 ~~~json
@@ -4554,10 +4741,40 @@ Determines the [key](#application-key-credential-model) used for signing asserti
 
 > You must enable the key rollover feature to view `kid`. Key rollover is an {% api_lifecycle ea %} feature.
 
+> Only apps with `SAML_2_0`, `SAML_1_1`, `WS_FEDERATION` or `OPENID_CONNECT` `signOnMode` support the key rollover feature.
+
 ~~~json
 {
   "signing": {
     "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4"
+  }
+}
+~~~
+
+#### OAuth Credential Object
+
+Determines how to authenticate the OAuth 2.0 client
+
+|----------------------------+----------------------------------------------------------------------------------+----------+----------|
+| Property                   | Description                                                                      | DataType | Nullable |
+| -------------------------- | ------------------------------------------------------------------------------------------- | -------- |
+| client_id                  | Unique identifier for the OAuth 2.0 client application                           | String   | TRUE     |
+| client_secret              | OAuth 2.0 client secret string                                                   | String   | TRUE     |
+| token_endpoint_auth_method | Requested authentication method for the token endpoint                           | String   | FALSE    |
+|----------------------------+----------------------------------------------------------------------------------+----------+----------|
+
+* When creating an OAuth 2.0 client application, you can specify the `client_id`, or Okta will set it the same value as the application ID. Thereafter, the client_id is immutable.
+
+* If a `client_secret` is not provided on creation, and the `token_endpoint_auth_method` requires one Okta will generate a random `client_secret` for the client application.  The `client_secret` is only shown on the creation or update of an OAuth 2.0 client application (and only if the `token_endpoint_auth_method` is one that requires a client secret).
+
+* The `client_id` must consist of alphanumeric characters or the following special characters `$-_.+!*'(),`. It must contain between 6 and 100 characters, inclusive, and must not be the reserved word `ALL_CLIENTS`. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
+
+~~~json
+{
+  "oauthClient": {
+    "client_id": "0oa1hm4POxgJM6CPu0g4",
+    "client_secret": "5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z",
+    "token_endpoint_auth_method": "client_secret_post"
   }
 }
 ~~~
@@ -4709,6 +4926,18 @@ Basic           | urn:oasis:names:tc:SAML:2.0:attrname-format:basic
   }
 }
 ~~~
+
+### Profile Object
+{:.api .api-operation}
+
+Profile object is a container for any valid JSON schema that can be referenced from a request. For example, add an app manager contact email address, or define a whitelist of groups that you can then reference using the [Okta Expression `getFilteredGroups`](/reference/okta_expression_language/index.html#group-functions).
+
+Profile Requirements
+
+* The `profile` property is not encrypted, so don't store sensitive data in it.
+* The `profile` property doesn't limit the level of nesting in the JSON schema you created, but there is a practical size limit. We recommend a JSON schema size of 1 MB or less for best performance.
+
+> Profile Object is only avialible to OAuth 2.0 client applications.
 
 ### Application User Model
 
@@ -4936,6 +5165,8 @@ The application key credential model defines a [JSON Web Key](https://tools.ietf
   "x5c": [
     "MIIDmDCCAoCgAwIBAgIGAVEmuwhKMA0GCSqGSIb3DQEBBQUAMIGMMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxDTALBgNVBAMMBHJhaW4xHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMTUxMTIwMjEwODMwWhcNMTcxMTIwMjEwOTI5WjCBjDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMQ0wCwYDVQQDDARyYWluMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ml7//IDMpngTKGJJ5qhodUaOY2Yx7k6mCYyETA8wjVfJjWFYVDwfTJ5kB7zbuPBNVDFuLIxMqGyJk3i2/nSBKe1eAC2lv+WK2R5xqSgXNNLlnhR3xMp8ed7TCmrHFRoS46uIBpMfvROij4cmOjVtX1ZGTjdqC8Z8bPg+JiZW9BkBo9sdEIjWjZTzMpmuHJ26EcJkuODFp5jr3/SKv3LvFAjbF5slEXrZLyUFrmSL0AXU6fWszN1llUoPBjS9uSTelOsS4PvBUy/oH1e7vbo8jag68ym2+wbbTw9toOjGcdOcwsT7Phwh0ixjt1/oKnjNvMKHapSr2GoiY8cltkQ2wIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQBkYvW3dtPU5spAvUUNHZmk76C0GC0Dg+XD15menebia931qeO6o21SJLbcRr+0Doy8p59r8ZmqIj/jJOhCrA0jqiKT+wch/494K6OYz8k3jJ3OtrBQ3OtYJ7gpAq0QuWf/G3tFpH23tW/8VfBtalwPMxiffG9rkFzPYAoNgYHXAGLO5yRz3TC0Z8nkcY5xPO/NAN1gsWvlvTBxf3B06giug7g+szRaReAjpM3WUFz9XG4Hs/EtaqiBFeArWRqWxxO7igmSQEEmlAHYCCoTZ/Atvwa96CqCTlM2Dr45aT1h8tkaVFXl8HGdt1/m8mnw53PbgxvYW2AvN5JBwp9S8c6w"
   ],
+  "e": "AQAB",
+  "n": "mkC6yAJVvFwUlmM9gKjb2d-YK5qHFt-mXSsbjWKKs4EfNm-BoQeeovBZtSACyaqLc8IYFTPEURFcbDQ9DkAL04uUIRD2gaHYY7uK0jsluEaXGq2RAIsmzAwNTzkiDw4q9pDL_q7n0f_SDt1TsMaMQayB6bU5jWsmqcWJ8MCRJ1aJMjZ16un5UVx51IIeCbe4QRDxEXGAvYNczsBoZxspDt28esSpq5W0dBFxcyGVudyl54Er3FzAguhgfMVjH-bUec9j2Tl40qDTktrYgYfxz9pfjm01Hl4WYP1YQxeETpSL7cQ5Ihz4jGDtHUEOcZ4GfJrPzrGpUrak8Qp5xcwCqQ",
   "x5t#S256": "CyhOiLD8_9hCFT02nUbkvmlNncBsb31xY_SUbF6fHPA",
   "kid": "SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4",
   "kty": "RSA",
@@ -4952,6 +5183,8 @@ The application key credential model defines a [JSON Web Key](https://tools.ietf
 | expiresAt        | timestamp when certificate expires                           | Date                                                                        | FALSE    | FALSE  | TRUE     |           |           |            |
 | x5c              | X.509 certificate chain                                      | Array                                                                       | TRUE     | TRUE   | TRUE     |           |           |            |
 | x5t#S256         | X.509 certificate SHA-256 thumbprint                         | String                                                                      | TRUE     | TRUE   | TRUE     |           |           |            |
+| e                | RSA key value (exponent) for key blinding                    | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
+| n                | RSA key value (modulus) for key blinding                     | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | kid              | unique identifier for the certificate                        | String                                                                      | FALSE    | TRUE   | TRUE     |           |           |            |
 | kty              | cryptographic algorithm family for the certificate's keypair | String                                                                      | FALSE    | FALSE  | TRUE     |           |           |            |
 | use              | acceptable usage of the certificate                          | String                                                                      | TRUE     | FALSE  | TRUE     |           |           |            |

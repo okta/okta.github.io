@@ -7,17 +7,17 @@ tags: [pwa, progressive web app, angular, typescript, oidc, spring boot, java]
 
 You're developing a Progressive Web Application (PWA) and your service worker and web app manifest are working swimmingly. You've even taken the time to deploy it to a server with HTTPS and you're feeling pretty good about  things. But wait, you don't have any way of knowing who your users are! Don't you want to provide them with an opportunity to authenticate and tell you who they are? Once you know who they are, you can give them all kinds of personalization options, inspire them to ❤️ your app, and maybe even support your work!
 
-In this article, I'll show you how you can lock down a Spring Boot app, then use modern authentication protocol, in this case OpenID Connect (OIDC), to authenticate and gain access to its APIs. 
+In this article, I'll show you how you can lock down a Spring Boot app, then use a modern authentication protocol, in this case OpenID Connect (OIDC), to authenticate and gain access to its APIs. 
 
 ## Secure Your Spring Boot App
 
 You might've heard that [Stormpath joined forces with Okta](https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/) a few months ago (February 2017). Since the transition, we've been working hard to make the Stormpath SDKs work with Okta's API. The good news is we've made great progress! 
 
-In this example, you'll use a Stormpath's Spring Boot Starter to add security to a Spring Boot app. I'll show you how this starter provides functionality such as login, forgot password, and user registration. 
+In this example, you'll use Stormpath's Spring Boot Starter to add security to a Spring Boot app. I'll show you how this starter provides functionality such as login, forgot password, and user registration. 
 
 Then I'll show you how you can use OIDC and Okta's Auth SDK in an Angular app to login and get data from the Spring Boot app. Finally, I'll show how Stormpath's Angular SDK has similar functionality to the Spring Boot Starter, providing login, user registration, and forgot password features.
 
-I recently created a Sping Boot app that provides a list of good beers, based on a pre-populated list. It filters out less-than-great beers and displays them in an Angular UI that displays the first animated GIF (from Giphy) that matches the beer name.
+I recently created a Spring Boot app that provides a list of good beers, based on a pre-populated list. It filters out less-than-great beers and displays them in an Angular UI that displays the first animated GIF (from Giphy) that matches the beer name.
 
 Let's get started! 
 
@@ -27,7 +27,7 @@ Rather than building Spring Boot and Angular applications from scratch, you can 
 git clone https://github.com/oktadeveloper/spring-boot-angular-pwa-example.git
 ```
 
-If you'd prefer to build this application yourself, please read [Build Your First Progressive Web Application with Angular and Spring Boot](https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot).
+If you'd prefer to build this application yourself, please read [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot).
 
 In this project's `server/pom.xml` file, you'll need to add the following XML:
 
@@ -92,7 +92,7 @@ To setup your Okta account for Spring Boot, you'll first need to create an appli
     - Sign-on Method - OpenID Connect
 6. On the *Create OpenID Connect Integration* page, enter the following value, then click **Next**
     - Application Name - Spring Boot Awesomesauce
-7. Use `http://localhost:8080/client/callback` for the Redirect URI's, and click **Finish**
+7. Use `http://localhost:8080/client/callback` for the Redirect URIs, and click **Finish**
 
 Your application has been created, but you still have a few settings to change. 
 
@@ -102,7 +102,7 @@ Your application has been created, but you still have a few settings to change.
 4. Select the *Use Client Authentication* radio button, and click the **Save** button 
 5. Click on the *Assignments* tab and then select the *Assign* button and **Assign to Groups**
 6. Select the *Assign* button in the *Everyone* column, and click the **Done** button
-7. Grab the ID portion of the URL of your browsers current page, for example: if my URL was: `https://dev-123456-admin.oktapreview.com/admin/app/oidc_client/instance/00icu81200icu812/#tab-assignments` then `00icu81200icu812` is my application's ID
+7. Grab the ID portion of the URL of your browser's current page. For example, if my URL was: `https://dev-123456-admin.oktapreview.com/admin/app/oidc_client/instance/00icu81200icu812/#tab-assignments` then `00icu81200icu812` is my application's ID
 
 **Important:** You will need to remember your application's ID.
 
@@ -111,11 +111,11 @@ Your application has been created, but you still have a few settings to change.
 1. Navigate to your Admin console
 2. On the top menu click on **Security** > **API**
 3. Click the *Tokens* tab and then click **Create Token**
-5. On the popup, give your new token a name, for example: "Bootiful Token", and click **Create Token**
+5. On the popup, give your new token a name like "Bootiful Token", and click **Create Token**
 
 **Important:** You will need to remember this token value, so copy/paste it somewhere safe.
 
-For more information take a look at the official [Create an API token](http://developer.okta.com/docs/api/getting_started/getting_a_token.html) guide.
+For more information take a look at the official [Create an API token](/docs/api/getting_started/getting_a_token.html) guide.
 
 ### Run the Spring Boot App
 
@@ -181,9 +181,9 @@ X-XSS-Protection: 1; mode=block
 <a name="create-open-id-connect-app"></a>
 ## Create an OpenID Connect App for Angular
 
-OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To get started you'll need to:
+OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To get started you'll need to:
 
-1. Login to your Okta account and navigate to **Admin > Add Applications** and click on **Create New App** 
+1. Log in to your Okta account and navigate to **Admin > Add Applications** and click on **Create New App** 
 2. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method 
 3. Click **Create** and give your application a name (e.g. Angular PWA)
 4. On the next screen, add `http://localhost:4200` as a Redirect URI and click **Finish**. You should see settings like this:
@@ -220,9 +220,9 @@ not allowed access. The response had HTTP status code 403. If an opaque response
 your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
 
-When you're using Spring Boot without Stormpath, you can use a `@CrossOrigin` annotation to enable cross-origin resource 
-sharing (CORS) on the server. See the [configure CORS for Spring Boot section](https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular#configure-cors-for-spring-boot) of 
-[Bootiful Development with Spring Boot and Angular](https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular).
+When you're using Spring Boot without the Stormpath Spring Boot starter, you can use a `@CrossOrigin` annotation to enable cross-origin resource 
+sharing (CORS) on the server. See the [configure CORS for Spring Boot section](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular#configure-cors-for-spring-boot) of 
+[Bootiful Development with Spring Boot and Angular](/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular).
 
 When you're using the Stormpath Spring Boot Starter, you can enable it by adding the following property to the Spring 
 Boot app's `src/main/resources/application.properties`.
@@ -446,7 +446,7 @@ If it works - great, now we can add auth with Okta!
 
 ### Authenticating with the Okta Auth SDK
 
-The Okta Auth SDK builds on top of Otka's [Authentication API](/docs/api/resources/authn.html) and [OAuth 2.0 API](/docs/api/resources/oidc.html) to enable you to create a fully branded sign-in experience using JavaScript.
+The Okta Auth SDK builds on top of Okta's [Authentication API](/docs/api/resources/authn.html) and [OAuth 2.0 API](/docs/api/resources/oidc.html) to enable you to create a fully branded sign-in experience using JavaScript.
 
 Install it using npm:
 
@@ -777,7 +777,7 @@ Now both login techniques should work as expected and you should be able to load
 
 {% img blog/angular-pwa-auth/production-beer-list.png alt:"Production Beer List" width:"800" %}
 
-The first time I ran [Lighthouse](https://developers.google.com/web/tools/lighthouse/) on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it [received a 98](https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot#cloud-foundry).
+The first time I ran [Lighthouse](https://developers.google.com/web/tools/lighthouse/) on this application, I was surprised to see it received a PWA score of 91. When I deployed this application previously, it [received a 98](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot#cloud-foundry).
  
 {% img blog/angular-pwa-auth/lighthouse-without-512.png alt:"Lighthouse Score, first attempt" width:"800" %}
 
@@ -805,8 +805,8 @@ This article showed you how to develop a Spring Boot backend, and lock it down w
 
 To learn more about PWAs, check out some recent tutorials I wrote:
 
-* [Build Your First Progressive Web Application with Angular and Spring Boot](http://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) 
-* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](http://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
+* [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot) 
+* [Tutorial: Develop a Mobile App With Ionic and Spring Boot](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot)
 * [The Ultimate Guide to Progressive Web Applications](https://scotch.io/tutorials/the-ultimate-guide-to-progressive-web-applications)
 
 There's also a number of excellent resources by Google and Smashing Magazine:

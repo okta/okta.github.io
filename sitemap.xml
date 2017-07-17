@@ -3,6 +3,96 @@
   
     
     <url>
+      <loc>https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot</loc>
+      
+        <lastmod>2017-07-13T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</loc>
+      
+        <lastmod>2017-06-29T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/06/27/seven-tools-net-developers</loc>
+      
+        <lastmod>2017-06-27T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</loc>
+      
+        <lastmod>2017-06-21T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster</loc>
+      
+        <lastmod>2017-06-20T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/06/15/build-microservices-architecture-spring-boot</loc>
+      
+        <lastmod>2017-06-15T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa</loc>
       
         <lastmod>2017-06-13T00:00:00+00:00</lastmod>
@@ -573,6 +663,19 @@
     
     <url>
       <loc>https://developer.okta.com/terms/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/test_page/</loc>
       
       
         <changefreq>monthly</changefreq>

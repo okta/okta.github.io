@@ -12,7 +12,7 @@ function setupAuthJs() {
 }
 
 function setupOSW() {
-  return setup('/code/javascript/okta_sign-in_widget_external_ref');
+  return setup('/code/javascript/okta_sign-in_widget_ref');
 }
 
 describe('imported docs string spec', function() {

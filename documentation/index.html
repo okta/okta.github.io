@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -29,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-769c382bff5a81bd583ab79117ee38033b8a3aa634dc24fa2ddf8a8e70b30bef.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -43,7 +51,8 @@
 <body>
   <div class="Page ">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -62,7 +71,7 @@
                 <a href="/documentation/">Documentation</a>
               </li>
               <li>
-                <a href="/blog/">Blog</a>
+                <a href="/code/">Code</a>
               </li>
               <li class="has-dropdown">
                 <a href="#">Support</a>
@@ -89,20 +98,14 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
     <section class="PageContent">
-  <!-- START Page Center w/Sub Nav & Content -->
+  <style>
+    h1 {color:#003366;}
+</style>
+<!-- START Page Center w/Sub Nav & Content -->
   <!-- START Page Content -->
   <div class="PageContent-main">
     <h1>Use Cases</h1>
@@ -127,7 +130,7 @@
 	  <h3 class="h4">Authentication</h3>
 	</a>
 	<p>
-	  Overview of the various ways Okta can be used to authenticate users depending on your needs.
+	  Overview of the ways Okta can be used to authenticate users depending on your needs.
 	</p>
       </div>
       
@@ -172,57 +175,101 @@
     </div>
     <!-- END Subpages Grid w/Github Link -->
 
-    <h1>Reference</h1>
-    <!-- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
-    <!-- START Subpages Grid -->
-    <div class="Row">
-    
-      
-      <div class="Column--4 Column--small-12">
-	<a href="/docs/api/getting_started/api_test_client.html">
-	  <h3 class="h4">Getting started with the Okta API</h3>
-	</a>
-	<p>Understand the basics of the Okta API. Includes details on design principles, error codes and CORS to help you quickly get started.</p>
+      <h1>Reference</h1>
+      <!-- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
+      <!-- START Subpages Grid -->
+      <div class="Row">
+          
+          
+          <div class="Column--4 Column--small-12">
+              <a href="/docs/api/getting_started/api_test_client.html">
+                  <h3 class="h4">Getting started with the Okta API</h3>
+              </a>
+              <p>Understand the basics of the Okta API. Includes details on design principles, error codes and CORS to help you quickly get started.</p>
+          </div>
+          
+          <div class="Column--4 Column--small-12">
+              <a href="/docs/api/resources/authn.html">
+                  <h3 class="h4">Authentication Reference</h3>
+              </a>
+              <p>Documentation describing how to use Okta APIs to authenticate users. Includes sample requests and responses.</p>
+          </div>
+          
+          <div class="Column--4 Column--small-12">
+              <a href="/docs/api/resources/apps.html">
+                  <h3 class="h4">API Reference</h3>
+              </a>
+              <p>Documentation for all available Okta REST API endpoints. Includes sample requests and responses.</p>
+          </div>
+          
+          <div class="Column--4 Column--small-12">
+              <a href="/reference/error_codes/">
+                  <h3 class="h4">Error Codes</h3>
+              </a>
+              <p>Information about the errors that the Okta API returns.</p>
+          </div>
+          
+          <div class="Column--4 Column--small-12">
+              <a href="/reference/okta_expression_language/">
+                  <h3 class="h4">Okta Expression Language</h3>
+              </a>
+              <p>The features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API.</p>
+          </div>
+          
+          <div class="Column--4 Column--small-12">
+              <a href="/docs/platform-release-notes/platform-release-notes.html">
+                  <h3 class="h4">Platform Release Notes</h3>
+              </a>
+              <p>Information on the changes and updates in the Okta platform.</p>
+          </div>
+          
       </div>
-    
-      <div class="Column--4 Column--small-12">
-	<a href="/docs/api/resources/authn.html">
-	  <h3 class="h4">Authentication Reference</h3>
-	</a>
-	<p>Documentation describing how to use Okta APIs to authenticate users. Includes sample requests and responses.</p>
-      </div>
-    
-      <div class="Column--4 Column--small-12">
-	<a href="/docs/api/resources/apps.html">
-	  <h3 class="h4">API Reference</h3>
-	</a>
-	<p>Documentation for all available Okta REST API endpoints. Includes sample requests and responses.</p>
-      </div>
-    
-      <div class="Column--4 Column--small-12">
-	<a href="/reference/error_codes/">
-	  <h3 class="h4">Error Codes</h3>
-	</a>
-	<p>Information about the errors that the Okta API returns.</p>
-      </div>
-    
-      <div class="Column--4 Column--small-12">
-	<a href="/reference/okta_expression_language/">
-	  <h3 class="h4">Okta Expression Language</h3>
-	</a>
-	<p>The features and syntax of Okta's Expression Language which can be used throughout the Okta Admin Console and API.</p>
-      </div>
-    
-      <div class="Column--4 Column--small-12">
-	<a href="/docs/platform-release-notes/platform-release-notes.html">
-	  <h3 class="h4">Platform Release Notes</h3>
-	</a>
-	<p>Information on the changes and updates in the Okta platform.</p>
-      </div>
-    
-    </div>
-    <!-- END Subpages Grid -->
+      <!-- END Subpages Grid -->
 
+      <h1>Standards</h1>
+      <!-- <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
+      <!-- START Subpages Grid -->
+      <div class="Row">
+      
+      
+        
+          <div class="Column--4 Column--small-12">
+              <a href="/standards/OAuth/">
+                  <h3 class="h4">OAuth 2.0 and Okta</h3>
+              </a>
+              <p>The next evolution of the OAuth protocol focuses on client developer simplicity.</p>
+          </div>
+          
+        
+          <div class="Column--4 Column--small-12">
+              <a href="/standards/OIDC/">
+                  <h3 class="h4">OpenID Connect and Okta</h3>
+              </a>
+              <p>This simple identity layer on top of the OAuth 2.0 protocol makes identity management easier.</p>
+          </div>
+          
+        
+          <div class="Column--4 Column--small-12">
+              <a href="/standards/SAML/">
+                  <h3 class="h4">SAML</h3>
+              </a>
+              <p>Enable SSO for your web and mobile applications with SAML.</p>
+          </div>
+          
+        
+          
+        
+          
+        
+          <div class="Column--4 Column--small-12">
+              <a href="/standards/SCIM/">
+                  <h3 class="h4">SCIM Provisioning with Lifecycle Management</h3>
+              </a>
+              <p>Enable SCIM-based provisioning from Okta to your application.</p>
+          </div>
+          
+      </div>
+      <!-- END Subpages Grid -->
 
     <!-- START Grid w/Language Tiles -->
     <h1>Code</h1>
@@ -255,8 +302,6 @@
 </div>
 
     <!-- END Grid w/Language Tiles -->
-
-    
 
   </div>
   <!-- END Page Content -->
@@ -313,33 +358,35 @@
     
     
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>
