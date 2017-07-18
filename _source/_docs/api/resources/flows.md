@@ -5,60 +5,63 @@ weight: 3
 ---
 # OAuth 2.0 and OIDC Flows
 
-You're writing software that needs to access a protected resource by making a request to the API of the server that houses the resource. The resource owner might have a username and password for that server but is understandably reluctant to give them to you because
+You're writing software to create an app or service that needs to access a protected resource by making a request to an API endpoint. The resource owner (typically the end user of your app) might have a username and password for accessing the protected resource but is understandably reluctant to give them to you because
 
- * Hackers might get their hands on them.
- * The resource owner has no control of what you can do with those credentials.
+ * Malicious actors might get their hands on them.
+ * The user has no control of what you can do with those credentials.
 
-This is the situation that the [OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749) standard was developed to address. In that standard your software is called a client. The approximate story is that the Authorization Server (AS) acts as an intermediary between your client and the resource owner (RO). When you develop your software to use API Access Management, Okta is the AS.
+## OAuth 2.0 and OIDC
 
-The AS authenticates the RO and asks for the RO's permission for your client to access the specific resources your client has told the AS that it needs. The AS gives your client an opaque Access Token to present to the Resource Server (RS). The RS can tell by interpreting the Access Token that your client has permission to access those specific resources, so it returns them to your client.
+The [OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749) standard was developed to enable users to give apps like yours access to their protected resources without giving out their passwords. The Authorization Server is an intermediary between your app and the user. When you use API Access Management, Okta is the Authorization Server.
 
-The Access Token is intended for the RS. It means nothing to the client.
+The Authorization Server authenticates the user, probably by asking for a username and password. Then it asks for the user's permission for your app to access the specific resources your app  says it needs. The Authorization Server gives your app an opaque Access Token to present to the API endpoint (the Resource Server) that controls the resource. The Resource Server can tell by interpreting the Access Token that your app has permission to access those specific resources, so it returns the resources to your app.
 
-Your software may need a variety of information about the RO in order to support the services it's designed to provide. Rather than asking the RO a lot of questions, you can often obtain this information from the AS, which typically knows a lot about the RO. The AS sends this information to your client in the form of an ID Token, which contains a variety of assertions (called claims) about the RO. The format and handling of ID Tokens is in accord with the [Open ID Connect (OIDC) standard](https://openid.net/specs/openid-connect-core-1_0.html).
+The Access Token is intended for the Resource Server. It means nothing to your app.
 
-The ID Token is intended for the client. It means nothing to the RS.
+Your software may need a variety of information about the user in order to support the services it's designed to provide. Rather than asking the user a lot of questions, you can often obtain this information from the Authorization Server, which typically knows a lot about the user. The Authorization Server sends this information to your app in the form of an ID Token, which contains a variety of assertions (called claims) about the user. The format and handling of ID Tokens is in accord with the [Open ID Connect (OIDC) standard](https://openid.net/specs/openid-connect-core-1_0.html).
 
-The description so far omits details and variations. The main source of variation is the environment your client runs in, which affects the degree of trust the AS and RS have in your client.
+The ID Token is intended for your app. It means nothing to the Resource Server.
 
-All authorization flows begin with requests to the [`/authorize` endpoint](https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user). The `response_type` request parameter determines which of the basic flows your client will use.
+## Authorization Flows
+
+All authorization flows begin with requests to the [`/authorize` endpoint](https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user). The `response_type` request parameter determines which of the basic flows your app will use.
 
 The basic OAuth 2.0 flows are:
 
- * Authorization Code -- RO receives an authorization code to give the client to exchange for an Access Token.
- * Implicit -- RO authorizes client to receive an Access Token directly.
- * Resource Owner Password -- Client submits the RO's credentials to the AS to obtain an Access Token.
- * Client Credentials -- Client owns the resource and submits its own credentials to the AS to obtain an Access Token.
+ * Authorization Code -- the user receives an authorization code to give to your app, so your app can exchange it for an Access Token.
+ * Implicit -- the user authorizes the Authorization Server to send an Access Token directly to your app.
+ * Resource Owner Password -- Your app submits the user's credentials to the Authorization Server to obtain an Access Token.
+ * Client Credentials -- Your app submits its own credentials to the Authorization Server to obtain an Access Token.
 
-The AS optionally issues Refresh Tokens whenever it issues Access Tokens.
+The OIDC flows use the first two OAuth 2.0 flows to enable your app to receive ID Tokens as well as Access Tokens and Refresh Tokens. You cannot obtain ID Tokens using the Resource Owner Password or Client Credentials flow.
 
-The OIDC flows use the first two OAuth 2.0 flows to enable your client to receive ID Tokens as well as Access Tokens. You cannot obtain ID Tokens using the Resource Owner Password or Client Credentials flow.
-
-Except for the implicit flow, your client obtains all tokens from the [`/token` endpoint](https://developer.okta.com/docs/api/resources/oauth2.html#request-a-token). The `grant_type` request parameter determines how the AS processes token requests.
-
-Now for some details.
+Your app can request Access Tokens, ID Tokens, and Refresh Tokens. Except for the implicit flow, your app obtains all tokens from the Authorization Server's [`/token` endpoint](https://developer.okta.com/docs/api/resources/oauth2.html#request-a-token). The `grant_type` request parameter determines how the Authorization Server processes token requests.
 
 
 ## Authorization Code Flow
 
-Your client sends the RO to the AS, which authenticates the RO, determines which permissions the RO wishes to grant to your client, and sends the RO, with an authorization code, to an endpoint that you provided to the AS when you first registered your client with the AS. Your client presents the code at the AS `/token` endpoint to request some combination of Access Token, ID Token, and Refresh Token. Use this flow unless you have a good reason not to.
+Your app sends the resource owner to the Authorization Server, which authenticates the resource owner, determines which permissions the resource owner wishes to grant to your app, and sends the resource owner, with an authorization code, to an endpoint that you provided to the Authorization Server when you first registered your app with the Authorization Server. Your app presents the authorization code at the Authorization Server's `/token` endpoint to request some combination of Access Token, ID Token, and Refresh Token. Most apps use this code flow because of its security advantages:
 
+ * Your app never sees the user's credentials.
+ * The Authorization Server authenticates your app before issuing it an Access Token.
+ * The Access Token comes directly to your app, so it's not as likely to be exposed.
+
+Using the Authorization Code flow whenever possible is a best practice.
 
 ## Implicit Flow
 
-If your client is implemented in a browser using a language like JavaScript, you can increase efficiency by eliminating round trips using an implicit flow. You send a request to the AS `/authorize` endpoint and receive the requested combination of Access Token, ID Token, and Refresh Token in the response. The AS authenticates the RO and obtains the necessary permissions from the RO but does not necessarily authenticate your client. The RO and others with access to the machine your client runs on may be able to capture the returned tokens. Carefully consider the security implications of using this flow.
+If your app is implemented in a browser using a language like JavaScript, you can increase efficiency by eliminating round trips using an implicit flow. You send a request to the Authorization Server `/authorize` endpoint and receive the requested combination of Access Token, ID Token, and Refresh Token in the response. The Authorization Server authenticates the resource owner and obtains the necessary permissions from the resource owner but does not necessarily authenticate your app. The resource owner and others with access to the machine your app runs on may be able to capture the returned tokens. Carefully consider the security implications of using this flow.
 
 
 ## Resource Owner Password Flow
 
-You can obtain the RO's login credentials for the RS and present them directly to the AS `/token` endpoint. It's a bad idea. Don't do it.
+You can obtain the user's login credentials for the Resource Server and present them directly to the Authorization Server's `/token` endpoint. This is not a good practice because of the danger of exposing those credentials.
 
 
 
 ## Client Credentials Flow
 
-If there is no end user in the picture, your client can present its own credentials (already registered with the AS) to the AS `/token` endpoint to obtain the desired tokens.
+If there is no end user in the picture, your app can present its own credentials (already registered with the Authorization Server) to the Authorization Server's `/token` endpoint to obtain the desired tokens.
 
 
 
