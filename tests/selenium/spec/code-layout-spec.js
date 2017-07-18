@@ -10,7 +10,7 @@ describe('code page spec', () => {
   it('has columns in right order', () => {
     expect(codePage.hasColumns()).toBe(true);
 
-    const expectedLinks = ['Okta SDK', 'Okta AWS-CLI Tool',
+    const expectedLinks = ['Okta SDK',
       'Android Native Application with AppAuth', 'Spring Security SAML'];
 
     expect(codePage.linksInOrder(expectedLinks)).toBe(true);
