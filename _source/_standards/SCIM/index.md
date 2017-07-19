@@ -1136,13 +1136,14 @@ Note: When you are ready, use [this form](https://docs.google.com/forms/d/e/1FAI
 
 #### Test with Customers
 
-We require that one joint customer successfully uses and validates the integration in production before making it publicly available in the Okta Application Network.
+We require that one joint customer successfully validate that the integration is working as expected from their perspective before making it publicly available in the Okta Application Network for any customer to use without assistance.
 
-Here’s the process for getting joint customers involved in testing the newly developed SCIM integration:
+Here’s the process for getting joint customers involved in testing a newly developed SCIM integration:
 
-* Identify joint customers interested in piloting the integration.
-* Once identified, an Okta admin from the joint customer will need to email <developers@okta.com> asking for this integration to be assigned to their Okta preview org (please have them specify org subdomain in their request). Okta will then assign the app.
-* Integration and configuration review with the joint customer. Partners are responsible for managing the customer identification and testing process, but Okta can support as needed. Please coordinate by emailing <developers@okta.com>.
+1. Identify joint customers interested in piloting the integration.
+2. Once identified, an Okta admin from the joint customer emails <developers@okta.com> and asks for this integration to be assigned to their Okta org (be sure to specify the org subdomain in the request). Okta assigns the app.
+3. Integration and configuration review with the joint customer. Partners are responsible for managing the customer identification and testing process, but Okta can support as needed. Please coordinate by emailing <developers@okta.com>.
+4. The Okta admin emails <developers@okta.com> directly stating that the integration is working as expected. 
 
 #### Publish to Okta Application Network
 

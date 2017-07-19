@@ -1290,7 +1290,7 @@ curl -v -X POST \
 ### List Group Rules
 {:.api .api-operation}
 
-{% api_operation get /api/v1/groups/roles %}
+{% api_operation get /api/v1/groups/rules %}
 
 Lists all group rules for your organization.
 

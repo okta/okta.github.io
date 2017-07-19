@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -213,7 +213,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 <h2 id="getting-started">Getting Started</h2>
 
-<p>Explore the Identity Providers API: <a href="https://app.getpostman.com/run-collection/e67463599312db1413cb"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p>Explore the Identity Providers API: <a href="https://app.getpostman.com/run-collection/00a7a643fc0ab3bb54c8"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="setup-guides">Setup Guides</h2>
 
@@ -333,6 +333,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
           "conditions": {
             "deprovisioned": {
               "action": "NONE"
+            },
+            "suspended": {
+              "action": "NONE"
             }
           }
         },
@@ -411,6 +414,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -504,6 +510,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
           "conditions": {
             "deprovisioned": {
               "action": "NONE"
+            },
+            "suspended": {
+              "action": "NONE"
             }
           }
         },
@@ -566,6 +575,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -645,6 +657,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
           "conditions": {
             "deprovisioned": {
               "action": "NONE"
+            },
+            "suspended": {
+              "action": "NONE"
             }
           }
         },
@@ -708,6 +723,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -786,6 +804,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
           "conditions": {
             "deprovisioned": {
               "action": "NONE"
+            },
+            "suspended": {
+              "action": "NONE"
             }
           }
         },
@@ -848,6 +869,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -923,6 +947,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
                 "conditions": {
                   "deprovisioned": {
                     "action": "NONE"
+                  },
+                  "suspended": {
+                    "action": "NONE"
                   }
                 }
             },
@@ -987,6 +1014,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -1115,6 +1145,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -1286,6 +1319,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
         </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -1378,6 +1414,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1473,6 +1512,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
         </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -1550,6 +1592,9 @@ For example, your app can support logging in with credentials from Facebook, Goo
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1667,6 +1712,9 @@ Exact matches are returned before partial matches.</p>
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1801,6 +1849,9 @@ Exact matches are returned before partial matches.</p>
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
@@ -1971,6 +2022,9 @@ Exact matches are returned before partial matches.</p>
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -2174,6 +2228,9 @@ Exact matches are returned before partial matches.</p>
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -2302,6 +2359,9 @@ Exact matches are returned before partial matches.</p>
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -4218,7 +4278,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/users/<em>:uid</em>/idps</span></p>
 
-<p>Lists the IdPs associated with the user.</p>
+<p>Lists the IdPs associated with the user. This endpoint doesn’t support the SAML2 <a href="#identity-provider-type">Identity Provider Type</a>.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-28">Request Parameters</h5>
 
@@ -4301,6 +4361,9 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -4351,7 +4414,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 </span></code></pre>
 </div>
 
-<p>If the user does not exist, you receive an error response.</p>
+<p>If the user doesn’t exist, you receive an error response.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">400</span> <span class="ne">Bad Request</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -4370,7 +4433,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 
 <p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/idps/<em>:id</em>/users/<em>:uid</em></span></p>
 
-<p>Links an Okta user to an existing Social <a href="#identity-provider-model">Identity Provider</a>. This does not support the SAML2 <a href="#identity-provider-type">Identity Provider Type</a>.</p>
+<p>Links an Okta user to an existing Social <a href="#identity-provider-model">Identity Provider</a>. This endpoint doesn’t support the SAML2 <a href="#identity-provider-type">Identity Provider Type</a>.</p>
 
 <h5 class="api api-request api-request-params" id="request-parameters-29">Request Parameters</h5>
 
@@ -4457,7 +4520,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
 </span></code></pre>
 </div>
 
-<p>If either the user or the IdP does not exist, you receive an error response.</p>
+<p>If either the user or the IdP doesn’t exist, you receive an error response.</p>
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">400</span> <span class="ne">Bad Request</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
@@ -4593,6 +4656,9 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -6049,6 +6115,9 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
       </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -6172,7 +6241,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
       <td> </td>
     </tr>
     <tr>
-      <td>conditions  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></td>
+      <td>conditions  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></td>
       <td>Conditional behaviors for an IdP user during authentication</td>
       <td><a href="#provisioning-conditions-object">Provisioning Conditions Object</a></td>
       <td>FALSE</td>
@@ -6197,6 +6266,9 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -6536,8 +6608,7 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
   </tbody>
 </table>
 
-<div class="beta">
-<h5 id="provisioning-conditions-object">Provisioning Conditions Object</h5>
+<h6 id="provisioning-conditions-object">Provisioning Conditions Object</h6>
 
 <table>
   <thead>
@@ -6563,11 +6634,24 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
       <td> </td>
       <td> </td>
     </tr>
+    <tr>
+      <td>suspended</td>
+      <td>Behavior for a previously suspended IdP user during authentication</td>
+      <td><a href="#suspended-condition-object">Suspended Condition Object</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"deprovisioned"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"suspended"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -6634,7 +6718,65 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
   </tbody>
 </table>
 
+<h6 id="suspended-condition-object">Suspended Condition Object</h6>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td>action</td>
+      <td>Action for a previously suspended IdP user during authentication</td>
+      <td><a href="#suspended-action-type">Suspended Action Type</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 </div>
+
+<h6 id="suspended-action-type">Suspended Action Type</h6>
+
+<p>Specifies the action during authentication when an IdP user is linked to a previously suspended Okta user.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Action Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">NONE</code></td>
+      <td>Take no action. If an IdP user matching a previously suspended Okta user attempts to authenticate, authentication will fail.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">UNSUSPEND</code></td>
+      <td>If an IdP user matching a previously suspended Okta user attempts to authenticate, unsuspened the matching user in Okta and allow the authentication attempt to proceed.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="account-link-policy-object">Account Link Policy Object</h4>
 

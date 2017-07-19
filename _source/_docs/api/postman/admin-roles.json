@@ -2,7 +2,7 @@
 	"id": "975b2d79-c9a2-fc1e-c05c-14e486e453b7",
 	"owner": "64678",
 	"name": "Admin Roles (Okta API)",
-	"description": "Lists, assigns. and revokes administrative roles for a user",
+	"description": "Lists, assigns, and revokes administrative roles for a user",
 	"order": [
 		"8d3d7bf3-db45-37bf-6a65-64bcce0d334c",
 		"c912759b-21eb-f555-b1da-4b2af8fa6c19",
@@ -47,7 +47,7 @@
 		{
 			"id": "27be1eac-40d7-aed2-9c12-2bd4f808cf7e",
 			"folder": null,
-			"name": "Add Group Target to User Admin Role",
+			"name": "Add Group Target to Group Admin Role",
 			"dataMode": "raw",
 			"data": [],
 			"rawModeData": "",
@@ -106,7 +106,7 @@
 		{
 			"id": "9962d460-ab72-1169-6049-5a28c7ad3323",
 			"folder": null,
-			"name": "List Group Targets for User Admin Role",
+			"name": "List Group Targets for Group Admin Role",
 			"dataMode": "params",
 			"data": [],
 			"rawModeData": null,
@@ -146,7 +146,7 @@
 		{
 			"id": "c1f97d0f-0bcf-cf5a-b7eb-82056ebff3d7",
 			"folder": null,
-			"name": "Remove Group Target from User Admin Role",
+			"name": "Remove Group Target from Group Admin Role",
 			"dataMode": "raw",
 			"data": [],
 			"rawModeData": "",

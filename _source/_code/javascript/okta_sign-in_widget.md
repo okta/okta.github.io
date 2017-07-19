@@ -35,14 +35,18 @@ The Sign-in Widget supports the following use cases:
 
 ## Try the Widget for yourself
 
-If you want to see the Sign-in Widget in action for yourself, and you already have an Okta org, you only need to do four things: 
+If you want to see the Sign-in Widget in action for yourself, you will need three things before you start:
+
+- An Okta Developer org, which you can sign-up for here: <https://developer.okta.com/signup/>
+- A client Application in Okta: for more information, you can read about [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm)
+- At least one [User assigned to it](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning)
+
+Once you have these prerequisites, getting the Sign-in Widget working has four steps:
 
 1.  Create an HTML file with the widget code
 2.  Modify the HTML to use your Okta organization
 3.  Serve the HTML file with a web server
 4.  Configure a Trusted Origin in your Okta organization
-
-> If you do not have an Okta org, you can sign-up for one here: <https://www.okta.com/developer/signup/>
 
 #### 1. Create an HTML file
 
