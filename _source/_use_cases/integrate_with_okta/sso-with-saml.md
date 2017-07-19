@@ -29,9 +29,12 @@ Use Okta’s [Single Sign-On with Okta](/docs/guides/saml_guidance.html) guide f
 
     1. Select **I'm a software vendor. I'd like to integrate my app with Okta.** if you want your app added to the OAN. Okta won’t contact you until this option is selected.
     2. Click **Submit your app for review.** You are redirected to [the OAN Manager](https://oanmanager.okta.com/).
+        {% img oan-manager.png alt:"OAN Manager submission page" %}
     3. In the OAN Manager, click **Start Submission Form,** and enter the requested information in the General Settings tab.
+        {% img oan-general.png alt:"General tab for OAN review" %}
     4. In the SAML tab, select On in the **SAML support** button, and enter information requested.
     5. When you've  entered all the information requested on the General Settings and SAML tabs, the **Submit for Review** button is enabled. Click it to submit your app for review.
+        {% img submit-for-review.png alt:"Submit for OAN review" %}
 
 Once submitted, you can track the stage of your integration in the OAN Manager.
 
