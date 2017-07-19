@@ -911,7 +911,7 @@ code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;
   &lt;li&gt;Get additional user attributes as needed with access token&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oidc-flow-d93872818e8d040a5b7f1d02ac6b0a2d2961a91de72727f64ba47635dce5f2a1.png&quot; alt=&quot;OIDF Flow&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oidc-flow-3f640eb4b5d82151643a1d7bc2d55cfab1c1c6e14b6c2ad501660216c6d227c8.png&quot; alt=&quot;OIDF Flow&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;oauth--okta&quot;&gt;OAuth + Okta&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.okta.com&quot;&gt;Okta&lt;/a&gt; is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta’s Developer Platform straight from the source, you should attend &lt;a href=&quot;https://www.okta.com/oktane17/&quot;&gt;Oktane17&lt;/a&gt; in late August. There’s a &lt;a href=&quot;https://www.okta.com/oktane17/agenda/#AppDev&quot;&gt;track dedicated to app development&lt;/a&gt;.&lt;/p&gt;
