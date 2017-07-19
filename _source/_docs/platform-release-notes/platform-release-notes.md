@@ -37,7 +37,7 @@ We provide the ability to generate a certificate with specified validity period 
 
 These platform bug fixes are available in preview orgs and expected in production orgs the week of July 24, 2017.
 
-* Sign-in didn't display the "locked out" message when a user recovering a password was locked out after too many incorrect responses to the security question. (OKTA-126117)
+* When answering a security question to recover a forgotten password, users who gave too many incorrect responses didn't receive the "locked out" message. (OKTA-126117)
 
 * Custom SMS templates allowed messages greater than 160 characters after substituting the org name and code. The new behavior is to use a default template instead of the custom template when that happens. To ensure use of your custom template, update it to stay within the 160-character limit. (OKTA-128721)
 
