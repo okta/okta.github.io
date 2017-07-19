@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -204,13 +204,24 @@
 <ul>
   <li>Sign up for an Okta <a href="https://www.okta.com/developer/signup/">developer account</a>.</li>
   <li>In your Okta account (make sure you are signed in as an admin), use the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard">App Wizard</a> to build a Single Sign-on integration with Okta. For the more visually inclined, see our <a href="https://support.okta.com/help/articles/Knowledge_Article/Adding-Applications-Using-the-Application-Integration-Wizard-AIW">video</a> for using the App Wizard.</li>
-  <li>Note: In the SAML Wizard step #3 Feedback, be sure to identify yourself as a Partner (“I’m a software vendor. I’d like to integrate my app with Okta”) and that you want to your app reviewed and promoted to the OAN (“Yes, my app integration is ready for public use in the Okta Application Network”)</li>
+  <li>
+    <p>When you are ready, navigate to the Feedback tab of the App Wizard:
+  <img src="/assets/saml-step3-acdad80f654937a2dfca5356cdd25ae6908ad8f17832db13d24de6e6db0f7e16.png" alt="Feedback page for App wizard" /></p>
+
+    <ol>
+      <li>Select <strong>I’m a software vendor. I’d like to integrate my app with Okta.</strong> if you want your app added to the OAN. Okta won’t contact you until this option is selected.</li>
+      <li>Click <strong>Submit your app for review.</strong> You are redirected to <a href="https://oanmanager.okta.com/">the OAN Manager</a>.
+ <img src="/assets/oan-manager-4b0e4f7097f5cef4d3df6f126577ffc484ef4c4c3d0d3ca92b4195701d017c85.png" alt="OAN Manager submission page" /></li>
+      <li>In the OAN Manager, click <strong>Start Submission Form,</strong> and enter the requested information in the General Settings tab.
+ <img src="/assets/oan-general-572b279dd1bebe2fdd72a6786612ba5d12be695db98b9c119133faa7884fcfce.png" alt="General tab for OAN review" /></li>
+      <li>In the SAML tab, select On in the <strong>SAML support</strong> button, and enter information requested.</li>
+      <li>When you’ve  entered all the information requested on the General Settings and SAML tabs, the <strong>Submit for Review</strong> button is enabled. Click it to submit your app for review.
+ <img src="/assets/submit-for-review-cec574d7c727263dba906f53b62a9d07650f2868f02d88d80d396b86285f1d5b.png" alt="Submit for OAN review" /></li>
+    </ol>
+  </li>
 </ul>
 
-<p><img src="https://cloud.githubusercontent.com/assets/3278918/12026882/a2e71aee-ad73-11e5-9ef4-cd477d2990e7.png" alt="App Wizard - Feedback" title="App Wizard - Feedback" /></p>
-
-<p>Select <strong>Is your app integration complete</strong> if you want your app added to the OAN.
-Okta won’t contact you until this option is selected.</p>
+<p>Once submitted, you can track the stage of your integration in the OAN Manager.</p>
 
 <blockquote>
   <p>Note: Okta doesn’t proactively add SWA-only, branded apps to the OAN. If you want a branded app in the OAN that only supports SWA to all customers, submit a request to <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
