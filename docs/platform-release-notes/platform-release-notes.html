@@ -37,12 +37,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.27">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.28">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -185,13 +185,11 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201728">Release 2017.28</h2>
+      <h2 id="release-201729">Release 2017.29</h2>
 
-<h3 id="platform-enhancements-and-new-features">Platform Enhancements and New Features</h3>
+<h3 id="platform-features">Platform Features</h3>
 
-<p>The following changes are available in preview orgs on Wednesday, July 12. Availability in production orgs is expected either one week or one month later. For information about Early Availability (EA) and Generally Available (GA), see <a href="https://developer.okta.com/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>.</p>
-
-<p>The following features are GA in preview orgs, and expected to be GA in production orgs during the week of August 8, 2017:</p>
+<p>The following platform features are Generally Available (GA) in preview orgs (as of Release 2017.28), and expected to roll out as GA to production orgs during the week of August 8, 2017:</p>
 
 <ul>
   <li>
@@ -202,94 +200,44 @@
   </li>
 </ul>
 
-<p>The following feature enhancements are GA in preview orgs, and expected to be GA in production orgs during the week of July 17, 2017:</p>
-
-<ul>
-  <li>
-    <p><a href="#limit-age-of-events">Limit Age of Events</a></p>
-  </li>
-  <li>
-    <p><a href="#improved-plugin-security">Improved Plugin Security</a></p>
-  </li>
-</ul>
-
-<p>The following EA feature enhancements are in preview orgs and expected in production orgs during the week of July 17, 2017.
-To enable an EA feature, contact Okta Support.</p>
-
-<ul>
-  <li>
-    <p><a href="#allow-unsuspending-users-during-inbound-saml-login">Allow Unsuspending Users During Inbound SAML Login</a></p>
-  </li>
-  <li>
-    <p><a href="#email-factor">Email Factor</a></p>
-  </li>
-</ul>
-
-<p>The following feature enhancement is available on GitHub:</p>
-
-<ul>
-  <li><a href="#new-version-of-sign-in-widget">New Version of Sign-In Widget</a></li>
-</ul>
-
 <h4 id="openid-connect">OpenID Connect</h4>
 
-<p><a href="https://developer.okta.com/docs/api/resources/oidc.html">OpenID Connect</a> is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
+<p><a href="/docs/api/resources/oidc.html">OpenID Connect</a> is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
 
 <p>OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.</p>
 
-<p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a>. For more information, see <a href="https://developer.okta.com/standards/OIDC/">OpenID Connect and Okta</a>.</p>
+<p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a>. For more information, see <a href="/standards/OIDC/">OpenID Connect and Okta</a>.</p>
 
 <p><!-- OKTA-132049  --></p>
 
 <h4 id="key-rollover">Key Rollover</h4>
 
-<p>We provide the ability to generate a certificate with specified validity period (see the <a href="https://developer.okta.com/docs/api/resources/apps.html">Apps API</a> and <a href="https://developer.okta.com/docs/api/resources/idps.html">Identity Providers API</a>). We build OpenID Connect and API Access Management on this feature.</p>
+<p>We provide the ability to generate a certificate with specified validity period (see the <a href="/docs/api/resources/apps.html">Apps API</a> and <a href="/docs/api/resources/idps.html">Identity Providers API</a>). We build OpenID Connect and API Access Management on this feature.</p>
 
 <p><!-- OKTA-132045  --></p>
 
-<h4 id="limit-age-of-events">Limit Age of Events</h4>
-
-<p>In keeping with the <a href="https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy">Okta Data Retention Policy</a>, the events API (<code class="highlighter-rouge">/api/v1/events</code>) no longer accepts queries for events greater than 180 days old. 
-  <!-- OKTA-125424, 120605  --></p>
-
-<h4 id="improved-plugin-security">Improved Plugin Security</h4>
-<p>Template Plugin Apps you create from the admin portal (<strong>Admin &gt; Applications &gt; Add Application &gt; Template Plugin App</strong>) have improved security.</p>
-
-<p><!-- OKTA-132490  --></p>
-
-<h4 id="new-version-of-sign-in-widget">New Version of Sign-In Widget</h4>
-
-<p>Version 1.13.0 of the <a href="https://github.com/okta/okta-signin-widget/releases">Okta Sign-In Widget</a> is available. Check out the new features and bug fixes!</p>
-
-<p><!-- (OKTA-131661) --></p>
-
-<h4 id="allow-unsuspending-users-during-inbound-saml-login">Allow Unsuspending Users During Inbound SAML Login</h4>
-
-<p>You can configure the JIT settings for a SAML identity provider (IdP) to enable unsuspending users during inbound SAML login. See the <a href="https://developer.okta.com/docs/api/resources/idps.html">Identity Providers API</a> for more information.</p>
-
-<p><img src="/assets/release_notes/JIT_settings-dde02f5dddea77603f8770d6a498b7b70463c5e8365d3838af652c365c5c1e88.png" alt="JIT settings for SAML IdP" /></p>
-
-<p><!-- OKTA-128384 --></p>
-
-<h4 id="email-factor">Email Factor</h4>
-
-<p>You can send a one-time password (OTP) and an activation link to an email address as part of enrolling a user.</p>
-
-<p><!-- OKTA-132297  --></p>
-
 <h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
-<p>These platform bug fixes are available in preview orgs and expected in production orgs the week of July 17, 2017.</p>
+<p>These platform bug fixes are available in preview orgs and expected in production orgs the week of July 24, 2017.</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">/api/v1/apps/:appId/groups</code> didn’t return groups if the specified app is inactive. (OKTA-123695)</p>
+    <p>When answering a security question to recover a forgotten password, users who gave too many incorrect responses didn’t receive the “locked out” message. (OKTA-126117)</p>
   </li>
   <li>
-    <p>Identity provider JIT reactivation of users sometimes failed when there were configured group assignments. (OKTA-131784)</p>
+    <p>Custom SMS templates allowed messages greater than 160 characters after substituting the org name and code. The new behavior is to use a default template instead of the custom template when that happens. To ensure use of your custom template, update it to stay within the 160-character limit. (OKTA-128721)</p>
   </li>
   <li>
-    <p>In some circumstances, the link between the external Microsoft user and the Okta user was inaccurate.  (OKTA-132207)</p>
+    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> error responses didn’t conform to the format in the <a href="https://tools.ietf.org/html/rfc7591#section-3.2.2">OAuth 2.0 Dynamic Client Registration spec</a>. (OKTA-130375)</p>
+  </li>
+  <li>
+    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> didn’t allow default values for optional parameters. (OKTA-130910)</p>
+  </li>
+  <li>
+    <p>Neither <a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> nor <a href="/docs/api/resources/apps.html#add-application"><code class="highlighter-rouge">/api/v1/apps</code></a> required client secrets to be unique. (OKTA-131259)</p>
+  </li>
+  <li>
+    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> returned an incorrect resource URI in the response header.  (OKTA-131891)</p>
   </li>
 </ul>
 

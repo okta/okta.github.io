@@ -179,7 +179,7 @@ We also need to add a script block to initialize and configure the widget.
         clientId: 'sRmBpCfR3xKyf4goHZhM',
         redirectUri: 'http://localhost:8000/oauth2-callback.php',
         authParams: {
-            responseType: 'access_token',
+            responseType: 'code',
             issuer: 'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7',
             display: 'page'
         }

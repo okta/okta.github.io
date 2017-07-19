@@ -71,7 +71,7 @@ Creating users with `FEDERATION` or `SOCIAL` provider will be either `ACTIVE` or
 
 Creates a user without a [password](#password-object) or [recovery question & answer](#recovery-question-object)
   
-When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.
+When the user is activated, an email is sent to the user with an activation token that can be used to complete the activation process.
 This is the default flow for new user registration with the Okta Admin UI.
 
 ##### Request Example
@@ -497,7 +497,7 @@ Parameter | Description                                                        |
 --------- | ------------------------------------------------------------------ | ---------- | -------- | -------- |
 id        | `id`, `login`, or *login shortname* (as long as it is unambiguous) | URL        | String   | TRUE     |
 
-> When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` or '?'  character can only be fetched by `id` due to URL issues with escaping the `/` and '?' characters.
+> When fetching a user by `login` or `login shortname`, you should [URL encode](http://en.wikipedia.org/wiki/Percent-encoding) the request parameter to ensure special characters are escaped properly.  Logins with a `/` or `?`  character can only be fetched by `id` due to URL issues with escaping the `/` and `?` characters.
 
 >Hint: you can substitute `me` for the `id` to fetch the current user linked to an API token or session cookie.
 

@@ -11,7 +11,7 @@ For example, your app can support logging in with credentials from Facebook, Goo
 
 ## Getting Started
 
-Explore the Identity Providers API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e67463599312db1413cb)
+Explore the Identity Providers API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/00a7a643fc0ab3bb54c8)
 
 ## Setup Guides
 
@@ -112,6 +112,9 @@ curl -v -X POST \
           "conditions": {
             "deprovisioned": {
               "action": "NONE"
+            },
+            "suspended": {
+              "action": "NONE"
             }
           }
         },
@@ -191,6 +194,9 @@ curl -v -X POST \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -286,6 +292,9 @@ curl -v -X POST \
           "conditions": {
             "deprovisioned": {
               "action": "NONE"
+            },
+            "suspended": {
+              "action": "NONE"
             }
           }
         },
@@ -349,6 +358,9 @@ curl -v -X POST \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -430,6 +442,9 @@ curl -v -X POST \
           "conditions": {
             "deprovisioned": {
               "action": "NONE"
+            },
+            "suspended": {
+              "action": "NONE"
             }
           }
         },
@@ -494,6 +509,9 @@ curl -v -X POST \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -574,6 +592,9 @@ curl -v -X POST \
           "conditions": {
             "deprovisioned": {
               "action": "NONE"
+            },
+            "suspended": {
+              "action": "NONE"
             }
           }
         },
@@ -637,6 +658,9 @@ curl -v -X POST \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -714,6 +738,9 @@ curl -v -X POST \
                 "conditions": {
                   "deprovisioned": {
                     "action": "NONE"
+                  },
+                  "suspended": {
+                    "action": "NONE"
                   }
                 }
             },
@@ -779,6 +806,9 @@ curl -v -X POST \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -893,6 +923,9 @@ curl -v -X GET \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -1026,6 +1059,9 @@ curl -v -X GET \
         "conditions": {
           "deprovisioned": {
             "action": "NONE"
+          },
+          "suspended": {
+            "action": "NONE"
           }
         }
       },
@@ -1118,6 +1154,9 @@ curl -v -X GET \
         },
         "conditions": {
           "deprovisioned": {
+            "action": "NONE"
+          },
+          "suspended": {
             "action": "NONE"
           }
         }
@@ -1213,6 +1252,9 @@ curl -v -X GET \
         "conditions": {
           "deprovisioned": {
             "action": "NONE"
+          },
+          "suspended": {
+            "action": "NONE"
           }
         }
       },
@@ -1290,6 +1332,9 @@ curl -v -X GET \
         },
         "conditions": {
           "deprovisioned": {
+            "action": "NONE"
+          },
+          "suspended": {
             "action": "NONE"
           }
         }
@@ -1410,6 +1455,9 @@ curl -v -X GET \
         },
         "conditions": {
           "deprovisioned": {
+            "action": "NONE"
+          },
+          "suspended": {
             "action": "NONE"
           }
         }
@@ -1547,6 +1595,9 @@ Link: <https://your-domain.okta.com/api/v1/idps?after=0oaxdqpA88PtFNmhu0g3&limit
         },
         "conditions": {
           "deprovisioned": {
+            "action": "NONE"
+          },
+          "suspended": {
             "action": "NONE"
           }
         }
@@ -1696,6 +1747,9 @@ curl -v -X PUT \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -1870,6 +1924,9 @@ curl -v -X POST \
       "conditions": {
         "deprovisioned": {
           "action": "NONE"
+        },
+        "suspended": {
+          "action": "NONE"
         }
       }
     },
@@ -1984,6 +2041,9 @@ curl -v -X POST \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -3495,7 +3555,7 @@ curl -v -X GET \
 
 {% api_operation GET /api/v1/users/*:uid*/idps %}
 
-Lists the IdPs associated with the user.
+Lists the IdPs associated with the user. This endpoint doesn't support the SAML2 [Identity Provider Type](#identity-provider-type).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3564,6 +3624,9 @@ curl -v -X GET \
       "conditions": {
         "deprovisioned": {
           "action": "NONE"
+        },
+        "suspended": {
+          "action": "NONE"
         }
       }
     },
@@ -3613,7 +3676,7 @@ curl -v -X GET \
 }]
 ~~~
 
-If the user does not exist, you receive an error response.
+If the user doesn't exist, you receive an error response.
 
 ~~~http
 HTTP/1.1 400 Bad Request
@@ -3633,7 +3696,7 @@ Content-Type: application/json
 
 {% api_operation POST /api/v1/idps/*:id*/users/*:uid* %}
 
-Links an Okta user to an existing Social [Identity Provider](#identity-provider-model). This does not support the SAML2 [Identity Provider Type](#identity-provider-type).
+Links an Okta user to an existing Social [Identity Provider](#identity-provider-model). This endpoint doesn't support the SAML2 [Identity Provider Type](#identity-provider-type).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -3642,7 +3705,7 @@ Parameter     | Description                                                     
 ------------- | ------------------------------------------------------------------------------- | ---------- | --------------------------------------------- | -------- | -------
 id            | `id` of the IdP                                                                 | URL        | String                                        | TRUE     |
 uid           | `id` of the Okta User                                                           | URL        | String                                        | TRUE     |
-externalId    | unique IdP-specific identifier for user                                         | Body        | String                                        | TRUE     |
+externalId    | unique IdP-specific identifier for user                                         | Body       | String                                        | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -3691,7 +3754,7 @@ curl -v -X POST \
 }
 ~~~
 
-If either the user or the IdP does not exist, you receive an error response.
+If either the user or the IdP doesn't exist, you receive an error response.
 
 ~~~http
 HTTP/1.1 400 Bad Request
@@ -3807,6 +3870,9 @@ curl -v -X GET \
       },
       "conditions": {
         "deprovisioned": {
+          "action": "NONE"
+        },
+        "suspended": {
           "action": "NONE"
         }
       }
@@ -4482,6 +4548,9 @@ Client authentication credentials for an [OAuth 2.0 Authorization Server (AS)](h
       "conditions": {
         "deprovisioned": {
           "action": "NONE"
+        },
+        "suspended": {
+          "action": "NONE"
         }
       }
     },
@@ -4524,7 +4593,7 @@ Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a n
 | profileMaster                       | Determines if the IdP should act as a source of truth for user profile attributes | Boolean                                                               | FALSE    | FALSE    |           |           |            |
 | callout                             | Webhook settings for the `CALLOUT` action                                         | [Callout Object](#callout-object)                                     | TRUE     | FALSE    |           |           |            |
 | groups                              | Provisioning settings for a user's group memberships                              | [Group Provisioning Policy Object](#group-provisioning-policy-object) | FALSE    | FALSE    |           |           |            |
-| conditions {%api_lifecycle beta %}  | Conditional behaviors for an IdP user during authentication                       | [Provisioning Conditions Object](#provisioning-conditions-object)     | FALSE    | FALSE    |           |           |            |
+| conditions {%api_lifecycle EA %}  | Conditional behaviors for an IdP user during authentication                       | [Provisioning Conditions Object](#provisioning-conditions-object)     | FALSE    | FALSE    |           |           |            |
 |---------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------+----------+----------+-----------+-----------+----------------------------------|
 
 ~~~json
@@ -4541,6 +4610,9 @@ Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a n
     },
     "conditions": {
       "deprovisioned": {
+        "action": "NONE"
+      },
+      "suspended": {
         "action": "NONE"
       }
     }
@@ -4679,20 +4751,22 @@ The group provisioning action for an IdP user:
 | `SYNC`   | Groups                |                      | 00glxpsrGUKMnSPss0g3 | **Enterprise IdP Users**, Domain Users, & Everyone              |
 |----------|-----------------------|----------------------|----------------------|-----------------------------------------------------------------|
 
-{% beta %}
-
-##### Provisioning Conditions Object
+###### Provisioning Conditions Object
 
 |---------------------+--------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 | Property      | Description                                                              | DataType                                                          | Nullable | Readonly | MinLength | MaxLength | Validation |
 | ------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
 | deprovisioned | Behavior for a previously deprovisioned IdP user during authentication   | [Deprovisioned Condition Object](#deprovisioned-condition-object) | FALSE    | FALSE    |           |           |            |
+| suspended     | Behavior for a previously suspended IdP user during authentication       | [Suspended Condition Object](#suspended-condition-object)         | FALSE    | FALSE    |           |           |            |
 |---------------+--------------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
 
 
 ~~~json
 {
   "deprovisioned": {
+    "action": "NONE"
+  },
+  "suspended": {
     "action": "NONE"
   }
 }
@@ -4724,7 +4798,31 @@ Specifies the action during authentication when an IdP user is linked to a previ
 | `REACTIVATE` | If an IdP user matching a previously deprovisioned Okta user attempts to authenticate, reactivate the matching user in Okta and allow the authentication attempt to proceed. |
 |--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-{% endbeta %}
+###### Suspended Condition Object
+
+-----------+------------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+| Property | Description                                                            | DataType                                                          | Nullable | Readonly | MinLength | MaxLength | Validation |
+|--------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------- | -------- | -------- | --------- | --------- | ---------- |
+| action   | Action for a previously suspended IdP user during authentication       | [Suspended Action Type](#suspended-action-type)                   | FALSE    | FALSE    |           |           |            |
+|----------+------------------------------------------------------------------------+-------------------------------------------------------------------+----------+----------+-----------+-----------+------------|
+
+
+~~~json
+{
+  "action": "NONE"
+}
+~~~
+
+###### Suspended Action Type
+
+Specifies the action during authentication when an IdP user is linked to a previously suspended Okta user.
+
+|--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action Type  | Description                                                                                                                                                                  |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NONE`       | Take no action. If an IdP user matching a previously suspended Okta user attempts to authenticate, authentication will fail.                                             |
+| `UNSUSPEND`  | If an IdP user matching a previously suspended Okta user attempts to authenticate, unsuspened the matching user in Okta and allow the authentication attempt to proceed. |
+|--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 #### Account Link Policy Object
 
