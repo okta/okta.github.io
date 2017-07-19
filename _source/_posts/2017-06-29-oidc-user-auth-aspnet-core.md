@@ -67,10 +67,11 @@ Now you’re ready to set up authentication!
 ## Add Authentication
 When you open your application in Visual Studio or Visual Studio Code, you’ll notice that there’s a `<ProjectName>.csproj` file. You’ll need to make some quick changes to that to get some dependencies you’ll need to make this work. In the `ItemGroup` section of the `csproj` document add:
 
+```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.1.2"/>
 <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="1.1.2"/>
 <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2"/>
-
+```
 
 This will allow you to use [JSON Web Tokens](https://www.jsonwebtoken.io/) for authorization information, get the tokens from the OpenID Connect provider (Okta in this case) and store them in cookies for session management. You’ll need to run a quick `dotnet restore` command, but don’t worry, once you save the file, VS Code will give you an option to return to the command line. 
 
