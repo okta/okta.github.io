@@ -191,7 +191,7 @@ Create a production build of the `weekly` branch, merge it, then reset `weekly`.
     [okta.github.io weekly-2017.25] git push origin weekly-2017.25:weekly-2017.25
     ```
 
-6. After it's been approved and passes the Travis tests, merge it into `master`. The changes are live! Don't merge into `weekly` before the next step!
+6. After it's been approved and passes the Travis tests, merge it into `master` **without squashing**. The changes are live! Don't merge into `weekly` before the next step!
 
 7. Reset the `weekly` branch with the latest `master` changes.
 
