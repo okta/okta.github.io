@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -799,7 +799,7 @@ and only via POST data or within request headers. If you store them on your serv
 <p>Clients must validate the ID Token in the Token Response in the following manner:</p>
 
 <ol>
-  <li>Verify that the <em>iss</em> (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during <a href="#openid-connect-discovery-document">Discovery</a>.</li>
+  <li>Verify that the <em>iss</em> (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during <a href="#openid-connect-discovery-document">Discovery</a>).</li>
   <li>Verify that the <em>aud</em> (audience) claim contains the <em>client_id</em> of your app.</li>
   <li>Verify the signature of the ID Token according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <em>alg</em> header property. Use the public keys provided by Okta via the <a href="#openid-connect-discovery-document">Discovery Document</a>.</li>
   <li>Verify that the expiry time (from the <em>exp</em> claim) has not already passed.</li>
@@ -807,7 +807,7 @@ and only via POST data or within request headers. If you store them on your serv
   <li>The client should check the <em>auth_time</em> claim value and request re-authentication using the <em>prompt=login</em> parameter if it determines too much time has elapsed since the last end-user authentication.</li>
 </ol>
 
-<p>Step 3 involves downloading the public JWKS from Okta (specified by the <em>jwks_uri</em> property in the <a href="#openid-connect-discovery-document">discovery document</a>. The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
+<p>Step 3 involves downloading the public JWKS from Okta (specified by the <em>jwks_uri</em> property in the <a href="#openid-connect-discovery-document">discovery document</a>). The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
 
 <p>Each public key is identified by a <em>kid</em> attribute, which corresponds with the <em>kid</em> claim in the <a href="#claims-in-the-header-section">ID Token header</a>.</p>
 

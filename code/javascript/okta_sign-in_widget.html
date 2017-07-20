@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -224,7 +224,15 @@ can be used to authenticate users on any website. This guide will introduce you 
 
 <h2 id="try-the-widget-for-yourself">Try the Widget for yourself</h2>
 
-<p>If you want to see the Sign-in Widget in action for yourself, and you already have an Okta org, you only need to do four things:</p>
+<p>If you want to see the Sign-in Widget in action for yourself, you will need three things before you start:</p>
+
+<ul>
+  <li>An Okta Developer org, which you can sign-up for here: <a href="https://developer.okta.com/signup/">https://developer.okta.com/signup/</a></li>
+  <li>A client Application in Okta: for more information, you can read about <a href="https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm">the OpenID Connect Application Wizard</a></li>
+  <li>At least one <a href="https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning">User assigned to it</a></li>
+</ul>
+
+<p>Once you have these prerequisites, getting the Sign-in Widget working has four steps:</p>
 
 <ol>
   <li>Create an HTML file with the widget code</li>
@@ -232,10 +240,6 @@ can be used to authenticate users on any website. This guide will introduce you 
   <li>Serve the HTML file with a web server</li>
   <li>Configure a Trusted Origin in your Okta organization</li>
 </ol>
-
-<blockquote>
-  <p>If you do not have an Okta org, you can sign-up for one here: <a href="https://www.okta.com/developer/signup/">https://www.okta.com/developer/signup/</a></p>
-</blockquote>
 
 <h4 id="1-create-an-html-file">1. Create an HTML file</h4>
 
