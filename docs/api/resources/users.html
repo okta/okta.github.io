@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -388,7 +388,7 @@
 
 <p>Creates a user without a <a href="#password-object">password</a> or <a href="#recovery-question-object">recovery question &amp; answer</a></p>
 
-<p>When the user is activated, an email is sent to the user with an activation token that the can be used to complete the activation process.
+<p>When the user is activated, an email is sent to the user with an activation token that can be used to complete the activation process.
 This is the default flow for new user registration with the Okta Admin UI.</p>
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
@@ -819,7 +819,7 @@ This flow is common when developing a custom user-registration experience.</p>
 </table>
 
 <blockquote>
-  <p>When fetching a user by <code class="highlighter-rouge">login</code> or <code class="highlighter-rouge">login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> or ‘?’  character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> and ‘?’ characters.</p>
+  <p>When fetching a user by <code class="highlighter-rouge">login</code> or <code class="highlighter-rouge">login shortname</code>, you should <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encode</a> the request parameter to ensure special characters are escaped properly.  Logins with a <code class="highlighter-rouge">/</code> or <code class="highlighter-rouge">?</code>  character can only be fetched by <code class="highlighter-rouge">id</code> due to URL issues with escaping the <code class="highlighter-rouge">/</code> and <code class="highlighter-rouge">?</code> characters.</p>
 </blockquote>
 
 <blockquote>

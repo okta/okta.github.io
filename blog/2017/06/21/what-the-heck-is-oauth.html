@@ -42,7 +42,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
     <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
@@ -247,7 +247,7 @@ Token is restricted to only access what the User authorized for the specific App
 
 <p>The other token is the refresh token. This is much longer-lived; days, months, years. This can be used to get new tokens. To get a refresh token, applications typically require confidential clients with authentication.</p>
 
-<p>Refresh tokens can be revoked. When revoking an application’s access in a dashboard, you’re killing its refresh token. This gives you the ability to force the clients to rotate secrets.  What you’re doing is you’re using your refresh token to get new access tokens and the access tokens are going over the wire to hit all the API resources. Each time you refresh your access token you get a new cryptographically signed token.. Key rotation is built into the system.</p>
+<p>Refresh tokens can be revoked. When revoking an application’s access in a dashboard, you’re killing its refresh token. This gives you the ability to force the clients to rotate secrets.  What you’re doing is you’re using your refresh token to get new access tokens and the access tokens are going over the wire to hit all the API resources. Each time you refresh your access token you get a new cryptographically signed token. Key rotation is built into the system.</p>
 
 <p>The OAuth spec doesn’t define what a token is. It can be in whatever format you want. Usually though, you want these tokens to be JSON Web Tokens (a <a href="https://tools.ietf.org/html/rfc7519">standard</a>). In a nutshell, a JWT (pronounced “jot”) is a secure and trustworthy standard for token authentication. JWTs allow you to digitally sign information (referred to as claims) with a signature and can be verified at a later time with a secret signing key. To learn more about JWTs, see <a href="https://stormpath.com/blog/beginners-guide-jwts-in-java">A Beginner’s Guide to JWTs in Java</a>.</p>
 
@@ -512,7 +512,7 @@ code=MsCeLvIaQm6bTrgtp7&amp;client_id=812741506391&amp;
   <li>Get additional user attributes as needed with access token</li>
 </ol>
 
-<p><img src="/assets/blog/oauth/oidc-flow-d93872818e8d040a5b7f1d02ac6b0a2d2961a91de72727f64ba47635dce5f2a1.png" alt="OIDF Flow" width="800" /></p>
+<p><img src="/assets/blog/oauth/oidc-flow-3f640eb4b5d82151643a1d7bc2d55cfab1c1c6e14b6c2ad501660216c6d227c8.png" alt="OIDF Flow" width="800" /></p>
 
 <h2 id="oauth--okta">OAuth + Okta</h2>
 <p><a href="https://www.okta.com">Okta</a> is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta’s Developer Platform straight from the source, you should attend <a href="https://www.okta.com/oktane17/">Oktane17</a> in late August. There’s a <a href="https://www.okta.com/oktane17/agenda/#AppDev">track dedicated to app development</a>.</p>
