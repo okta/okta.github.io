@@ -29,7 +29,7 @@ For security reasons, browsers make it difficult to make requests to other domai
 You can configure `https://{yourOrg}.oktapreview.com` to accept our requests by [enabling CORS for `http://localhost:4200`](/docs/api/getting_started/enabling_cors.html#granting-cross-origin-access-to-websites).
 
 ## Create an Angular App
-To quickly create an Angular app, you'll need to install the Angular CLI:
+To quickly create an Angular app, install the Angular CLI:
 ```bash
 $ npm install -g @angular/cli
 ```
@@ -39,16 +39,16 @@ Now, create a new application:
 $ ng new okta-app
 ```
 
-This creates a new project named `okta-app` and will install all required dependencies. The simplest way to add authentication into an Angular app is using the library [Okta Sign-In Widget](okta_sign-in_widget).
+This creates a new project named `okta-app` and installs all required dependencies.
 
-We can install it via `npm`:
+The simplest way to add authentication into an Angular app is using the library [Okta Sign-In Widget](okta_sign-in_widget). We can install it via `npm`:
 
 ```bash
 [okta-app] $ npm install @okta/okta-signin-widget --save
 ```
 
 ## Create an Authentication Service
-There are a number of different ways to log users into your Angular application.
+Users can sign in to your Angular application a number of different ways.
 To provide a fully-featured and customizable login experience, the [Okta Sign-In Widget](okta_sign-in_widget) is available to handle User Lifecycle operations, MFA, and more. 
 
 First, create `src/app/app.service.ts` as an authorization utility file and use it to bootstrap the required fields to login:
@@ -102,8 +102,8 @@ export class OktaAuthService {
 }
 ```
 
-## Create an Auth Guard
-Now that you have a shared service to start, control, and end the authentication state, use it to protect endpoints of an app.
+## Create an Authorization Guard
+Now that you have a shared service to start, control, and end the authentication state, use it to protect the endpoints of an app.
 
 Create `src/app/app.guard.ts` that implements [`CanActivate`](https://angular.io/api/router/CanActivate):
 
@@ -130,9 +130,9 @@ export class OktaAuthGuard implements CanActivate {
 }
 ```
 
-Whenever a user attempts to access a route that is protected by `OktaAuthGuard`, it will first check to see if the user has been authenticated. If `isAuthenticated()` returns `false`, start the login flow.
+Whenever a user attempts to access a route that is protected by `OktaAuthGuard`, it first checks to see if the user has been authenticated. If `isAuthenticated()` returns `false`, start the login flow.
 
-Finally, inject the Guard and Service into `src/app/app.module.ts` so we can use it in any declared routes:
+Finally, inject the guard and service into `src/app/app.module.ts` so we can use it in any declared routes:
 ```typescript
 import { OktaAuthGuard } from './app.guard';
 import { OktaAuthService } from './app.service';
@@ -144,7 +144,7 @@ Lets take a look at what routes are needed:
 - `/protected`: A protected route by the `OktaAuthGuard`.
 
 ### `/`
-First, we need to update `src/app/app.component.html` to provide the Login logic:
+First, update `src/app/app.component.html` to provide the Login logic:
 ```html
 <link
   href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css"
@@ -194,7 +194,7 @@ export class ProtectedComponent {
 
 ### Connect the Routes
 
-Finally, you need to add each of our new routes to `src/app/app.module.ts`:
+Add each of our new routes to `src/app/app.module.ts`:
 
 ```typescript
 const appRoutes: Routes = [
@@ -205,7 +205,7 @@ const appRoutes: Routes = [
   }
 ]
 ```
-*Notice how the path [/protected](#protected) uses the `canActivate` param to gate access to the route.*
+*Notice how the path [/protected](#protected) uses the `canActivate` parameter to gate access to the route.*
 
 
 Finally, update your `@NgModule` to include your project components and routes in `src/app/app.module.ts`:
@@ -230,7 +230,7 @@ export class AppModule { }
 ```
 
 ## Conclusion
-You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims into the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
+You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
 
 ## Support 
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).
