@@ -8,7 +8,7 @@ function setup(url) {
 }
 
 function setupAuthJs() {
-  return setup('/code/javascript/okta_auth_sdk_external_ref');
+  return setup('/code/javascript/okta_auth_sdk_ref');
 }
 
 function setupOSW() {

@@ -1,12 +1,9 @@
 ---
 layout: docs_page
-title: Okta Sign-In Widget
+title: Okta Sign-In Widget Reference
 weight: 100
-hide_from_layout: 1
+hide_from_layout: 0
 excerpt: Reference information for customizing the Okta Sign-In Widget.
-redirect_from:
-    - "/_docs/api/resources/okta_signin_widget.html"
-    - "/docs/api/resources/okta_signin_widget.html"
 ---
 
 {% npm import-external @okta/okta-signin-widget %}

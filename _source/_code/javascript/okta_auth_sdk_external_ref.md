@@ -1,9 +1,4 @@
 ---
-layout: docs_page
-title: Okta Auth SDK
-weight: 100
 hide_from_layout: 1
-excerpt: Reference information for customizing the Okta Auth SDK.
+redirect_to: /code/javascript/okta_auth_sdk_ref.html
 ---
-
-{% npm import-external @okta/okta-auth-js %}

@@ -1,13 +1,13 @@
 ---
 layout: docs_page
-title: Getting Started with the Okta Sign-In Widget
+title: Okta Sign-In Widget Quickstart
 excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta.
 weight: 1
 redirect_from:
     - "/docs/guides/okta_sign-in_widget.html"
 ---
 
-# Sign-In Widget Quickstart
+## Overview
 
 The Okta Sign-In Widget is a JavaScript library that gives
 you a fully-featured and customizable login experience which
