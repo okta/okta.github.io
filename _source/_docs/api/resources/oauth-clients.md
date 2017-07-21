@@ -167,6 +167,9 @@ curl -v -X POST \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 201 Created
+~~~
 ~~~json
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
@@ -228,6 +231,9 @@ curl -v -X GET \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+~~~
 ~~~json
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
@@ -301,6 +307,8 @@ curl -v -X GET \
 ~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
+~~~
+~~~json
 Link: <https://your-domain.okta.com/oauth2/v1/clients>; rel="self"
 Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko>; rel="next"
 
@@ -375,6 +383,9 @@ curl -v -X GET \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+~~~
 ~~~json
 [
   {
@@ -460,8 +471,10 @@ curl -v -X PUT \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+~~~
 ~~~json
-
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
   "client_secret": "5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe",
@@ -524,8 +537,10 @@ curl -v -X POST \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+~~~
 ~~~json
-
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
   "client_secret": "t1hgVNl06UiMTzlsVVj0UywSDDuNdG529lm0bpy8",

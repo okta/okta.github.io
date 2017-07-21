@@ -364,9 +364,11 @@ curl -X POST \
 ##### Response Example (Error)
 {:.api .api-response .api-response-example}
 
-~~~sh
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
+~~~
+~~~json
 {
     "error" : "invalid_client",
     "error_description" : "No client credentials found."
@@ -486,6 +488,8 @@ For more information about token authentication, see [Token Authentication Metho
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
+~~~
+~~~json
 {
     "error" : "invalid_client",
     "error_description" : "No client credentials found."
@@ -545,6 +549,8 @@ HTTP/1.1 200 OK
 {:.api .api-response .api-response-example}
 ~~~http
 HTTP/1.1 401 Unauthorized
+~~~
+~~~json
 Content-Type: application/json;charset=UTF-8
 {
     "error" : "invalid_client",

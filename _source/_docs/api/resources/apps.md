@@ -1063,6 +1063,9 @@ curl -v -X POST \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 201 Created
+~~~
 ~~~json
 {
   "id": "0oa1hm4POxgJM6CPu0g4",
