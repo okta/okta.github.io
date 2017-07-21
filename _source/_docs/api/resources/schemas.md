@@ -920,8 +920,6 @@ curl -v -X POST \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
-*The following response is only a subset of properties for brevity*
-
 ~~~json
 {
   "id": "https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default",
