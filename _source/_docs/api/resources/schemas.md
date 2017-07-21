@@ -865,7 +865,7 @@ curl -v -X POST \
 
 {% api_operation post /api/v1/meta/schemas/apps/*:instanceId*/default %}
 
-Updates one or more [custom app user profile properties](#app-user-profile-schema-property-object) in the schema or a [permission](#schema-property-permission-object-1) for a [app-user profile base property](#app-user-profile-base-subschema).
+Updates one or more [custom app user profile properties](#app-user-profile-schema-property-object) in the schema or a [permission](#schema-property-permission-object-1) for a [app user profile base property](#app-user-profile-base-subschema).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
