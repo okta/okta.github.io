@@ -28,7 +28,7 @@ To create a better system for the web, federated identity was created for single
 
 {% img browser_spa_implicit_flow alt:"Browser Implicit Flow" width:"600" %}
 
-Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It's a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chicklets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
+Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It's a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chiclets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap a digital signature on it and you're good to go.
 
 ### SAML
 
@@ -379,7 +379,7 @@ An Open ID Connect flow involves the following steps:
 
 See [Okta's OAuth 2.0 API](http://developer.okta.com/docs/api/resources/oauth2.html) for specific information on how we support OAuth.
 
-SAML is implement by Okta with its SSO chicklets. If you're an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chicklet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
+SAML is implement by Okta with its SSO chiclets. If you're an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chiclet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
 
 If you'd rather watch a video to learn about OAuth, please see the presentation below from [Karl McGuinness](https://twitter.com/jankytweet), Senior Director of Identity at Okta.
 
