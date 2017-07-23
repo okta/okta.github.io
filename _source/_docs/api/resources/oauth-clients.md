@@ -169,6 +169,7 @@ curl -v -X POST \
 
 ~~~http
 HTTP/1.1 201 Created
+Content-Type: application/json;charset=UTF-8
 ~~~
 ~~~json
 {
@@ -233,6 +234,7 @@ curl -v -X GET \
 
 ~~~http
 HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
 ~~~
 ~~~json
 {
@@ -385,6 +387,7 @@ curl -v -X GET \
 
 ~~~http
 HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
 ~~~
 ~~~json
 [
@@ -473,6 +476,7 @@ curl -v -X PUT \
 
 ~~~http
 HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
 ~~~
 ~~~json
 {
@@ -539,6 +543,7 @@ curl -v -X POST \
 
 ~~~http
 HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
 ~~~
 ~~~json
 {
