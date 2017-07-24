@@ -798,7 +798,7 @@ If you do, congratulations! You just set up OpenID Connect for authenticating in
 
 &lt;p&gt;&lt;img src=&quot;/assets/browser_spa_implicit_flow-aa8b504d81ca3e57be798da01b0d570a92287e1b28f8b6209c16ca500d4f34a6.png&quot; alt=&quot;Browser Implicit Flow&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It’s a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chicklets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
+&lt;p&gt;Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It’s a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chiclets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap a digital signature on it and you’re good to go.&lt;/p&gt;
 
 &lt;h3 id=&quot;saml&quot;&gt;SAML&lt;/h3&gt;
 
@@ -1159,7 +1159,7 @@ code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;
 
 &lt;p&gt;See &lt;a href=&quot;http://developer.okta.com/docs/api/resources/oauth2.html&quot;&gt;Okta’s OAuth 2.0 API&lt;/a&gt; for specific information on how we support OAuth.&lt;/p&gt;
 
-&lt;p&gt;SAML is implement by Okta with its SSO chicklets. If you’re an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chicklet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
+&lt;p&gt;SAML is implement by Okta with its SSO chiclets. If you’re an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chiclet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you’re good to go.&lt;/p&gt;
 
 &lt;p&gt;If you’d rather watch a video to learn about OAuth, please see the presentation below from &lt;a href=&quot;https://twitter.com/jankytweet&quot;&gt;Karl McGuinness&lt;/a&gt;, Senior Director of Identity at Okta.&lt;/p&gt;
 
