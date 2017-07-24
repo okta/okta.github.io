@@ -605,7 +605,7 @@ curl -v -X GET \
   id_token_hint=${id_token_hint}
 ~~~
 
-This request initiates a logout and redirects to the `post_logout_redirect_uri` on success.
+This request initiates a logout; it redirects to the `post_logout_redirect_uri` on success.
 
 ~~~sh
 curl -v -X GET \
