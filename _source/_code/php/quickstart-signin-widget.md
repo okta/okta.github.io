@@ -136,25 +136,25 @@ groups instead of **Everyone**.
 Now that we have all the configuration at Okta done, we can begin setting up our PHP application. There are a
 couple of different ways to include the sign-in widget in your application. You can use the NPM module by installing
 `@okta/okta-signin-widget` in your project, or by using the Okta CDN, which is what we'll be using. Once you have the
- sign-in widget, there's a little bit of configuration you have to do to talk with your new authentication server.
+ sign-in widget, there's a little bit of configuration you have to do to talk with your new authorization server.
 
 ## Installing and Configuring the Sign In Widget
 There are 2 files we will require for the sign in widget to work, a JS file and a CSS file. You will also be able to
 supply a 3rd file from our CDN or supply your own for the theme of the signin widget.
 
 ```html
-<!-- Latest CDN production Javascript and CSS: 1.11.0 -->
+<!-- Latest CDN production Javascript and CSS: 1.13.0 -->
 <script
-  src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/js/okta-sign-in.min.js"
+  src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/js/okta-sign-in.min.js"
   type="text/javascript"></script>
 <link
-  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-sign-in.min.css"
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css"
   type="text/css"
   rel="stylesheet"/>
 
 <!-- Theme file: Customize or replace this file if you want to override our default styles -->
 <link
-  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.11.0/css/okta-theme.css"
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css"
   type="text/css"
   rel="stylesheet"/>
 ```
@@ -179,7 +179,7 @@ We also need to add a script block to initialize and configure the widget.
         clientId: 'sRmBpCfR3xKyf4goHZhM',
         redirectUri: 'http://localhost:8000/oauth2-callback.php',
         authParams: {
-            responseType: 'access_token',
+            responseType: 'code',
             issuer: 'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7',
             display: 'page'
         }
@@ -198,7 +198,7 @@ We also need to add a script block to initialize and configure the widget.
 | clientId                | The client ID of the Okta application.                                                                                                               |
 | redirectUri             | Where we will send the user to once they attempt a login.                                                                                            |
 | authParams.responseType | What we want back from a successful login                                                                                                            |
-| authParams.issuer       | The issuer of the authentication server. Can be retrieved from **Admin -> Security -> API -> {Auth Server}**                                           |
+| authParams.issuer       | The issuer of the authorization server. Can be retrieved from **Admin -> Security -> API -> Authorization Servers**                                           |
 | authParams.display      | Redirect to the authorization server when an External Identity Provider button is clicked                                                            |
 
 Now we can visit the `login.php` page and see the Sign-In Widget. You should be able to log into your main account.

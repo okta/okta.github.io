@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -29,12 +37,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Single Sign-On with SAML | Okta Developer</title>
-  <meta name="description" content="Support single sign-on in your app and join the Okta Application Network.">
+  <meta name="description" content="Support SSO in your app and join the Okta Application Network.">
   <link rel="canonical" href="https://developer.okta.com/use_cases/integrate_with_okta/sso-with-saml">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -42,7 +50,8 @@
 <body>
   <div class="Page single-sign-on-with-saml">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -158,7 +158,6 @@
             </li>
             
             
-            
             <li>
               <a href="/standards/SAML/">SAML</a>
             </li>
@@ -205,13 +204,24 @@
 <ul>
   <li>Sign up for an Okta <a href="https://www.okta.com/developer/signup/">developer account</a>.</li>
   <li>In your Okta account (make sure you are signed in as an admin), use the <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard">App Wizard</a> to build a Single Sign-on integration with Okta. For the more visually inclined, see our <a href="https://support.okta.com/help/articles/Knowledge_Article/Adding-Applications-Using-the-Application-Integration-Wizard-AIW">video</a> for using the App Wizard.</li>
-  <li>Note: In the SAML Wizard step #3 Feedback, be sure to identify yourself as a Partner (“I’m a software vendor. I’d like to integrate my app with Okta”) and that you want to your app reviewed and promoted to the OAN (“Yes, my app integration is ready for public use in the Okta Application Network”)</li>
+  <li>
+    <p>When you are ready, navigate to the Feedback tab of the App Wizard:
+  <img src="/assets/saml-step3-acdad80f654937a2dfca5356cdd25ae6908ad8f17832db13d24de6e6db0f7e16.png" alt="Feedback page for App wizard" /></p>
+
+    <ol>
+      <li>Select <strong>I’m a software vendor. I’d like to integrate my app with Okta.</strong> if you want your app added to the OAN. Okta won’t contact you until this option is selected.</li>
+      <li>Click <strong>Submit your app for review.</strong> You are redirected to <a href="https://oanmanager.okta.com/">the OAN Manager</a>.
+ <img src="/assets/oan-manager-4b0e4f7097f5cef4d3df6f126577ffc484ef4c4c3d0d3ca92b4195701d017c85.png" alt="OAN Manager submission page" /></li>
+      <li>In the OAN Manager, click <strong>Start Submission Form,</strong> and enter the requested information in the General Settings tab.
+ <img src="/assets/oan-general-572b279dd1bebe2fdd72a6786612ba5d12be695db98b9c119133faa7884fcfce.png" alt="General tab for OAN review" /></li>
+      <li>In the SAML tab, select On in the <strong>SAML support</strong> button, and enter information requested.</li>
+      <li>When you’ve  entered all the information requested on the General Settings and SAML tabs, the <strong>Submit for Review</strong> button is enabled. Click it to submit your app for review.
+ <img src="/assets/submit-for-review-cec574d7c727263dba906f53b62a9d07650f2868f02d88d80d396b86285f1d5b.png" alt="Submit for OAN review" /></li>
+    </ol>
+  </li>
 </ul>
 
-<p><img src="https://cloud.githubusercontent.com/assets/3278918/12026882/a2e71aee-ad73-11e5-9ef4-cd477d2990e7.png" alt="App Wizard - Feedback" title="App Wizard - Feedback" /></p>
-
-<p>Select <strong>Is your app integration complete</strong> if you want your app added to the OAN.
-Okta won’t contact you until this option is selected.</p>
+<p>Once submitted, you can track the stage of your integration in the OAN Manager.</p>
 
 <blockquote>
   <p>Note: Okta doesn’t proactively add SWA-only, branded apps to the OAN. If you want a branded app in the OAN that only supports SWA to all customers, submit a request to <a href="mailto:developers@okta.com">developers@okta.com</a>.</p>
@@ -296,33 +306,35 @@ Okta won’t contact you until this option is selected.</p>
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>

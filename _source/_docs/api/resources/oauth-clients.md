@@ -1,13 +1,14 @@
 ---
 layout: docs_page
-title: OAuth 2.0 Clients Registration API
+title: Dynamic Client Registration
 redirect_from: "/docs/api/rest/oauth-clients.html"
 ---
 
-# OAuth 2.0 Clients Registration API
+# Dynamic Client Registration API
 
-The OAuth Clients API provides operations to register and manage client applications for use with Okta's
-OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in [RFC7591](https://tools.ietf.org/html/rfc7591).
+The Dynamic Client Registration API provides operations to register and manage client applications for use with Okta's
+OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in [RFC7591: OAuth 2.0 Dynamic Client Registration Protocol](https://tools.ietf.org/html/rfc7591)
+and [OpenID Connect Dynamic Client Registration 1.0](https://openid.net/specs/openid-connect-registration-1_0.html).
 
 Note that clients managed via this API are modeled as applications in Okta and appear in the Applications section of the
 Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
@@ -22,7 +23,7 @@ Explore the Client Registration API: [![Run in Postman](https://run.pstmn.io/but
 If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html), you may want to experiment with the Postman collection first:
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7){:target="_blank"}
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7)
 
 ## Client Application Model
 
@@ -35,8 +36,8 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
   "client_id_issued_at": 1453913425,
   "client_secret_expires_at": 0,
   "client_name": "Example OAuth Client",
-  "client_uri": "http://www.example-application.com",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
@@ -60,22 +61,22 @@ flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation) or [OpenID
 
 Client applications have the following properties:
 
-| --------------------------- | ------------------------------------------------------------------------------------------------                                                                                                                                                                    | -------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
-| Property                    | Description                                                                                                                                                                                                                                                         | DataType                                                                                     | Nullable | Unique | Readonly  |
-|:----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:----------|
-| client_id                   | unique key for the client application                                                                                                                                                                                                                               | String                                                                                       | FALSE    | TRUE   | TRUE      |
-| client_id_issued_at         | time at which the client_id was issued (measured in unix seconds)                                                                                                                                                                                                   | Number                                                                                       | TRUE     | FALSE  | TRUE      |
-| client_name                 | human-readable string name of the client application                                                                                                                                                                                                                | String                                                                                       | FALSE    | TRUE   | FALSE     |
-| client_secret               | OAuth 2.0 client secret string (used for confidential clients)                                                                                                                                                                                                      | String                                                                                       | TRUE     | FALSE  | TRUE      |
-| client_secret_expires_at    | time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)                                                                                                                                                                    | Number                                                                                       | TRUE     | FALSE  | TRUE      |
-| logo_uri                    | URL string that references a logo for the client                                                                                                                                                                                                                    | String                                                                                       | TRUE     | FALSE  | FALSE     |
-| application_type            | The type of client application                                                                                                                                                                                                                                      | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE      |
-| redirect_uris               | array of redirection URI strings for use in redirect-based flows                                                                                                                                                                                                    | Array                                                                                        | TRUE     | FALSE  | FALSE     |
-| post_logout_redirect_uris   | array of redirection URI strings for use for relying party initiated logouts                                                                                                                                                                                        | Array                                                                                        | TRUE     | FALSE  | FALSE     |
-| response_types              | array of OAuth 2.0 response type strings                                                                                                                                                                                                                            | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE     |
-| grant_types                 | array of OAuth 2.0 grant type strings                                                                                                                                                                                                                               | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | FALSE     |
-| token_endpoint_auth_method  | requested authentication method for the token endpoint                                                                                                                                                                                                              | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | FALSE    | FALSE  | FALSE     |
-| initiate_login_uri          | URL that a third party can use to initiate a login by the client                                                                                                                                                                                                    | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------- | ------ | --------- |
+| Property                    | Description                                                                                                                | DataType                                                                                     | Nullable | Unique | Readonly  |
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:----------|
+| client_id                   | Unique key for the client application                                                                                      | String                                                                                       | FALSE    | TRUE   | TRUE      |
+| client_id_issued_at         | Time at which the client_id was issued (measured in unix seconds)                                                          | Number                                                                                       | TRUE     | FALSE  | TRUE      |
+| client_name                 | Human-readable string name of the client application                                                                       | String                                                                                       | FALSE    | TRUE   | FALSE     |
+| client_secret               | OAuth 2.0 client secret string (used for confidential clients)                                                             | String                                                                                       | TRUE     | TRUE   | TRUE      |
+| client_secret_expires_at    | Time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)                           | Number                                                                                       | TRUE     | FALSE  | TRUE      |
+| logo_uri                    | (Not currently implemented in Okta) URL string that references a logo for the client consent dialogs (not sign-in dialogs) | String                                                                                       | TRUE     | FALSE  | FALSE     |
+| application_type            | The type of client application. Default value: `web`                                                                       | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE      |
+| redirect_uris               | Array of redirection URI strings for use in redirect-based flows                                                           | Array                                                                                        | TRUE     | FALSE  | FALSE     |
+| post_logout_redirect_uris   | Array of redirection URI strings for use for relying party initiated logouts                                               | Array                                                                                        | TRUE     | FALSE  | FALSE     |
+| response_types              | Array of OAuth 2.0 response type strings. Default value: `code`                                                            | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | FALSE     |
+| grant_types                 | Array of OAuth 2.0 grant type strings. Default value: `authorization_code`                                                 | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | TRUE     | FALSE  | FALSE     |
+| token_endpoint_auth_method  | requested authentication method for the token endpoint. Default value: `client_secret_basic`                               | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt`                  | TRUE     | FALSE  | FALSE     |
+| initiate_login_uri          | URL that a third party can use to initiate a login by the client                                                           | String                                                                                       | TRUE     | FALSE  | FALSE     |
 
 Property Details
 
@@ -108,7 +109,6 @@ Property Details
     value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
     the OAuth 2.0 authorization code grant.
 
-
 ## Client Application Operations
 
 Explore the Client Application API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7a7f9956c58e49996dc8)
@@ -123,9 +123,9 @@ Adds a new client application to your organization.
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-Parameter | Description                               | ParamType | DataType                               | Required |
---------- | ----------------------------------------- | --------- | -------------------------------------- | -------- |
-settings  | OAuth client registration settings        | Body      | [Client Settings](#client-application-model) | TRUE     |
+| Parameter | Description                        | ParamType | DataType                                      | Required |
+|:----------|:-----------------------------------|:----------|:----------------------------------------------|:---------|
+| settings  | OAuth client registration settings | Body      |   [Client Settings](#client-application-model)  | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -142,8 +142,8 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
       "client_name": "Example OAuth Client",
-      "client_uri": "http://www.example-application.com",
-      "logo_uri": "http://www.example-application.com/logo.png",
+      "client_uri": "https://www.example-application.com",
+      "logo_uri": "https://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
          "https://www.example-application.com/oauth2/redirectUri"
@@ -174,8 +174,8 @@ curl -v -X POST \
   "client_id_issued_at": 1453913425,
   "client_secret_expires_at": 0,
   "client_name": "Example OAuth Client",
-  "client_uri": "http://www.example-application.com",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
@@ -233,8 +233,8 @@ curl -v -X GET \
   "client_id": "0jrabyQWm4B9zVJPbotY",
   "client_id_issued_at": 1453913425,
   "client_name": "Example OAuth Client",
-  "client_uri": "http://www.example-application.com",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
@@ -309,8 +309,8 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "client_id": "0jrabyQWm4B9zVJPbotY",
     "client_id_issued_at": 1453913425,
     "client_name": "Example OAuth Client",
-    "client_uri": "http://www.example-application.com",
-    "logo_uri": "http://www.example-application.com/logo.png",
+    "client_uri": "https://www.example-application.com",
+    "logo_uri": "https://www.example-application.com/logo.png",
     "application_type": "web",
     "redirect_uris": [
       "https://www.example-application.com/oauth2/redirectUri"
@@ -332,8 +332,8 @@ Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko
     "client_id": "F10CaazJPQ5Zpyu1Ojko",
     "client_id_issued_at": 1453913425,
     "client_name": "Another OAuth Client",
-    "client_uri": "http://www.another-application.com",
-    "logo_uri": "http://www.another-application.com/logo.png",
+    "client_uri": "https://www.another-application.com",
+    "logo_uri": "https://www.another-application.com/logo.png",
     "application_type": "browser",
     "redirect_uris": [
       "https://www.another-application.com/oauth2/redirectUri"
@@ -381,8 +381,8 @@ curl -v -X GET \
     "client_id": "JoLxQvMz6u0kEkHFSnC8",
     "client_id_issued_at": 1453913425,
     "client_name": "Payroll Application",
-    "client_uri": "http://www.payroll-application.com",
-    "logo_uri": "http://www.payroll-application.com/logo.png",
+    "client_uri": "https://www.payroll-application.com",
+    "logo_uri": "https://www.payroll-application.com/logo.png",
     "application_type": "web",
     "redirect_uris": [
       "https://www.payroll-application.com/oauth2/redirectUri"
@@ -436,8 +436,8 @@ curl -v -X PUT \
 -d '{
       "client_id": "0jrabyQWm4B9zVJPbotY",
       "client_name": "Updated OAuth Client",
-      "client_uri": "http://www.example-application.com",
-      "logo_uri": "http://www.example-application.com/logo.png",
+      "client_uri": "https://www.example-application.com",
+      "logo_uri": "https://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
         "https://www.example-application.com/oauth2/redirectUri"
@@ -468,8 +468,8 @@ curl -v -X PUT \
   "client_id_issued_at": 1453913425,
   "client_secret_expires_at": 0,
   "client_name": "Updated OAuth Client",
-  "client_uri": "http://www.example-application.com",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "client_uri": "https://www.example-application.com",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"
@@ -532,9 +532,9 @@ curl -v -X POST \
   "client_id_issued_at": 1453913425,
   "client_secret_expires_at": 0,
   "client_name": "Updated OAuth Client",
-  "client_uri": "http://www.example-application.com",
+  "client_uri": "https://www.example-application.com",
   "client_secret": "cdUQIFvE61wGI5P51H33ORC4SRB1RXfX",
-  "logo_uri": "http://www.example-application.com/logo.png",
+  "logo_uri": "https://www.example-application.com/logo.png",
   "application_type": "web",
   "redirect_uris": [
     "https://www.example-application.com/oauth2/redirectUri"

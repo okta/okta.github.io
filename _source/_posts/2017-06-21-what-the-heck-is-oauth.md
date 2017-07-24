@@ -28,7 +28,7 @@ To create a better system for the web, federated identity was created for single
 
 {% img browser_spa_implicit_flow alt:"Browser Implicit Flow" width:"600" %}
 
-Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It's a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chicklets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
+Federated identity was made famous by SAML 2.0, an OASIS Standard released on March 15, 2005. It's a large spec but the main two components are its authentication request protocol (aka Web SSO) and the way it packages identity attributes and signs them, called SAML assertions. Okta does this with its SSO chiclets. We send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap a digital signature on it and you're good to go.
 
 ### SAML
 
@@ -113,7 +113,7 @@ Access tokens are the token the client uses to access the Resource Server (API).
 
 The other token is the refresh token. This is much longer-lived; days, months, years. This can be used to get new tokens. To get a refresh token, applications typically require confidential clients with authentication.
 
-Refresh tokens can be revoked. When revoking an application's access in a dashboard, you're killing its refresh token. This gives you the ability to force the clients to rotate secrets.  What you're doing is you're using your refresh token to get new access tokens and the access tokens are going over the wire to hit all the API resources. Each time you refresh your access token you get a new cryptographically signed token.. Key rotation is built into the system.
+Refresh tokens can be revoked. When revoking an application's access in a dashboard, you're killing its refresh token. This gives you the ability to force the clients to rotate secrets.  What you're doing is you're using your refresh token to get new access tokens and the access tokens are going over the wire to hit all the API resources. Each time you refresh your access token you get a new cryptographically signed token. Key rotation is built into the system.
 
 The OAuth spec doesn't define what a token is. It can be in whatever format you want. Usually though, you want these tokens to be JSON Web Tokens (a [standard](https://tools.ietf.org/html/rfc7519)). In a nutshell, a JWT (pronounced "jot") is a secure and trustworthy standard for token authentication. JWTs allow you to digitally sign information (referred to as claims) with a signature and can be verified at a later time with a secret signing key. To learn more about JWTs, see [A Beginner's Guide to JWTs in Java](https://stormpath.com/blog/beginners-guide-jwts-in-java).
 
@@ -379,7 +379,7 @@ An Open ID Connect flow involves the following steps:
 
 See [Okta's OAuth 2.0 API](http://developer.okta.com/docs/api/resources/oauth2.html) for specific information on how we support OAuth.
 
-SAML is implement by Okta with its SSO chicklets. If you're an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chicklet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
+SAML is implement by Okta with its SSO chiclets. If you're an Okta customer, like me, you likely interact with most apps using something like https://okta.okta.com/app/UserHome. When you click on a chiclet, we send a message, we sign the assertion, inside the assertion it says who the user is, and that it came from Okta. Slap on a digital signature on it and you're good to go.
 
 If you'd rather watch a video to learn about OAuth, please see the presentation below from [Karl McGuinness](https://twitter.com/jankytweet), Senior Director of Identity at Okta.
 

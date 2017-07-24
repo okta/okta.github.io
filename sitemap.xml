@@ -3,6 +3,36 @@
   
     
     <url>
+      <loc>https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications</loc>
+      
+        <lastmod>2017-07-20T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot</loc>
+      
+        <lastmod>2017-07-13T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</loc>
       
         <lastmod>2017-06-29T00:00:00+00:00</lastmod>
@@ -648,6 +678,19 @@
     
     <url>
       <loc>https://developer.okta.com/terms/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/test_page/</loc>
       
       
         <changefreq>monthly</changefreq>

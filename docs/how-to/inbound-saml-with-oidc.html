@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -29,20 +37,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Setting up a SAML application in Okta | Okta Developer</title>
-  <meta name="description" content="Here is how to configure Okta:">
-  <link rel="canonical" href="https://developer.okta.com/standards/SAML/configuring_a_saml_application_in_okta">
+  <title>SAML Authentication for an OIDC Token | Okta Developer</title>
+  <meta name="description" content="How to use an inbound SAML flow to get back an ID Token.">
+  <link rel="canonical" href="https://developer.okta.com/docs/how-to/inbound-saml-with-oidc.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page setting-up-a-saml-application-in-okta">
+  <div class="Page saml-authentication-for-an-oidc-token">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -158,7 +158,6 @@
             </li>
             
             
-            
             <li>
               <a href="/standards/SAML/">SAML</a>
             </li>
@@ -185,100 +184,77 @@
 <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_standards/SAML/configuring_a_saml_application_in_okta.md">Edit Page</a>
-      <p>Here is how to configure Okta:</p>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/how-to/inbound-saml-with-oidc.md">Edit Page</a>
+      <h2 id="overview">Overview</h2>
+
+<p>Okta supports authentication with an external SAML Identity Provider (IdP) that then redirects you to Okta and/or your application, which we call Inbound SAML. Additionally, it is possible to include an OpenID Connect (OIDC) ID token along with this redirect. This means that you can use Okta to proxy between SAML-only Identity Providers and OIDC-only applications that would normally be incompatible.</p>
+
+<p>The SAML flow is initiated with the Service Provider (SP), in this case Okta, who then redirects you to the IdP for authentication. On successful authentication, a user is created inside Okta, and you are redirected back to the URL you specified along with an ID token.</p>
+
+<p>For more high-level information, you can read about <a href="/standards/SAML/index#understanding-sp-initiated-login-flow">Understanding SP-initiated Login Flow</a>.</p>
+
+<h2 id="set-up">Set-up</h2>
+
+<p>In addition to a SAML IdP that supports SP-initiated SAML, and an Okta org, this flow requires:</p>
+
+<ul>
+  <li>Your SAML IdP to be configured in Okta</li>
+  <li>An Okta OIDC Client Application</li>
+</ul>
+
+<blockquote>
+  <p>Note: The actual order in which you create these is up to you.</p>
+</blockquote>
+
+<h3 id="1-configure-your-saml-identity-provider-inside-okta">1. Configure your SAML Identity Provider inside Okta</h3>
+
+<p>The configuration information for your external Identity Provider is stored within an Identity Provider entity inside Okta. The instructions for creating a SAML IdP inside Okta can be found on the <a href="https://support.okta.com/help/Documentation/Knowledge_Article/40561903-Configuring-Inbound-SAML">Configuring Inbound SAML Support Page</a>.</p>
+
+<blockquote>
+  <p>If you need a quick and easy SAML Identity Provider to use for testing purposes, you can try using this one: <a href="https://github.com/mcguinness/saml-idp">https://github.com/mcguinness/saml-idp</a></p>
+</blockquote>
+
+<p>Once you are done with the configuration, take note of the value at the end of your Assertion Consumer Service (ACS) URL, this is your Okta SAML IdP’s <code class="highlighter-rouge">id</code> value. For example: If your ACS URL is <code class="highlighter-rouge">https://example.okta.com/sso/saml2/0oab8rlfooi5Atqv60h7</code>, then your Okta IdP’s <code class="highlighter-rouge">id</code> is <code class="highlighter-rouge">0oab8rlfooi5Atqv60h7</code>.</p>
+
+<h3 id="2-configure-an-openid-connect-client-application">2. Configure an OpenID Connect Client Application</h3>
+
+<p>You will also need to add an OIDC Client Application inside Okta. Users that are signing in for the first time will have <a href="/docs/api/resources/users.html">user entities</a> created for them and associated with this application. You can add an OIDC App using <a href="https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm">the OpenID Connect Application Wizard</a>. You will also need to assign the application to either “Everyone” or a particular Group that you’d like your new SAML users to be associated with. For more information, see <a href="https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning">How to assign a User to an Application</a>.</p>
+
+<p>Once you are done setting this up, be sure to copy the Client ID for your new application.</p>
+
+<h3 id="3-create-an-authorize-url">3. Create an Authorize URL</h3>
+
+<p>At this point you should have:</p>
+
+<ul>
+  <li>Your Okta SAML IdP <code class="highlighter-rouge">id</code> from your ACS URL</li>
+  <li>Your OIDC Client Application’s Client ID</li>
+</ul>
+
+<p>You will now input these into an Authorize URL in order to kick off the authentication flow.</p>
+
+<p>The authorize URL looks like this:</p>
+
+<p><code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&amp;client_id=0oab8om4bars6Y80Z0h7&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=http%3A%2F%2Flocalhost%3A7000&amp;state=WM6D&amp;nonce=YsG76j</code></p>
+
+<p>In this URL, replace <code class="highlighter-rouge">example.okta.com</code> with your org’s base URL, and then input the following:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">idp=</code> is the value of your SAML IdP’s <code class="highlighter-rouge">id</code></li>
+  <li><code class="highlighter-rouge">client_id=</code> is your OIDC Client Application’s Client ID</li>
+  <li><code class="highlighter-rouge">redirect_uri=</code> needs to be URL encoded and to match a redirect URI that you configured in your OIDC application</li>
+  <li><code class="highlighter-rouge">state</code> and <code class="highlighter-rouge">nonce</code> can have any value you want for the purposes of this example</li>
+</ul>
+
+<p>For a full explanation of all these parameters, see here: <a href="/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
+
+<h3 id="testing-the-flow">Testing the flow</h3>
+
+<p>To test the flow, you can enter the completed authorize URL into your browser. For testing purposes, you should try in your browser’s privacy mode to ensure you do not have any existing sessions with either Okta or the external IdP. If everything has been configured properly, you should see the following:</p>
 
 <ol>
-  <li>
-    <p>Log in to your Okta organization as a user with administrative
-privileges.</p>
-
-    <p>If you don’t have an Okta organization, you can create a free Okta
-Developer Edition organization here:
-<a href="https://www.okta.com/developer/signup/">https://www.okta.com/developer/signup/</a></p>
-  </li>
-  <li>
-    <p>Click on the blue “Admin” button
-<img src="/assets/okta-admin-ui-button-admin-fde86b7da4fe6c58611007a97361ac3c876869ec94ffb2a4093019243b728c39.png" alt="Admin" /></p>
-  </li>
-  <li>
-    <p>Click on the “Add Applications” shortcut
-<img src="/assets/okta-admin-ui-add-applications-c26bf1ab66282dca1b8ef685ad8b234b88e08ff07270c0401454439ecfd206e4.png" alt="Add Applications" /></p>
-  </li>
-  <li>
-    <p>Click on the green “Create New App” button
-<img src="/assets/okta-admin-ui-button-create-new-app-9a65dd5f6f48440bba64e3704c297fd8be5361d0608979b3d77c4038edf6c15c.png" alt="Create New App" /></p>
-  </li>
-  <li>
-    <p>In the dialog that opens, select the “SAML 2.0” option, then click
-the green “Create” button
-<img src="/assets/okta-admin-ui-create-new-application-integration-6f0c471b53031d1d5a6fc06fd65d1eba8f0135fb6272375f133c4798b9cadb4d.png" alt="Create a New Application Integration" /></p>
-  </li>
-  <li>
-    <p>In Step 1 “General Settings”, enter “Spring Security SAML” in the
-“App name” field, then click the green “Next” button.
-<img src="/assets/spring-security-saml-okta-general-settings-1a2a1485053b86a40c7f9e7c8deca28410b1a2cecf3c1f047677533e90f83ea9.png" alt="General Settings" /></p>
-  </li>
-  <li>
-    <p>In Step 2 “Configure SAML”,
-Paste the URL below into the “Single sign on URL” field:</p>
-
-    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>http://localhost:8080/spring-security-saml2-sample/saml/SSO
-</code></pre>
-    </div>
-
-    <p>Then paste the URL below into the “Audience URI (SP Entity ID)”
-field:</p>
-
-    <div class="language-shell highlighter-rouge"><pre class="highlight"><code>http://localhost:8080/spring-security-saml2-sample/saml/SSO/alias/defaultAlias
-</code></pre>
-    </div>
-
-    <p>Then click the green “Next” button</p>
-
-    <p><img src="/assets/spring-security-saml-okta-configure-settings-a4ae5a4497dc2b5bab0c0e36f1da802867ec1b373a4c14505e78525662d393a1.png" alt="SAML Settings" /></p>
-  </li>
-  <li>
-    <p>In Step 3 “Feedback”, click the checkbox next to the text “This is
-an internal application that we created”, then click the green
-“Finish” button.
-<img src="/assets/okta-admin-ui-new-application-step-3-feedback-831346803a6ac5c91d92308b84786541630098c0cbeaec77c3c51a401e1b76d2.png" alt="App type" /></p>
-  </li>
-  <li>
-    <p>You will now see the “Sign On” section of your newly created “Spring
-Security SAML” application.</p>
-  </li>
-  <li>
-    <p>Keep this page open it a separate tab or browser window. You will
-need to return to this page later in this guide and copy the
-“Identity Provider metadata” link. (To copy the that link, right
-click on the “Identity Provider metadata” link and select “Copy”)
-<img src="/assets/okta-admin-ui-identity-provider-metadata-link-312145eacc4d76d493afd1b054f2dbb3dce120dca79e6b645f1155a88dd1b0f1.png" alt="Sign on methods" /></p>
-  </li>
-  <li>
-    <p>Right-click on the “People” section of the “Spring Security SAML”
-application and select “Open Link In New Tab” (so that you can come
-back to the “Sign On” section later).</p>
-
-    <p>In the new tab that opens, click on the “Assign Application” button
-<img src="/assets/spring-security-saml-okta-assign-people-to-application-08799062da0cb863cdd9cc6f05c95eccb9de352496235e0abe0f649cc15fcf37.png" alt="Assign Application" /></p>
-  </li>
-  <li>
-    <p>A dialog titled “Assign Spring Security SAML to up to 500 people”
-will open. Type your username into the search box, select the
-checkbox next to your username, then click the green “Next” button
-<img src="/assets/okta-admin-ui-confirm-assignments-16d648c104dcedd11b4beff3d2e18fba07d65f77021be1d4ab678ac676b97f92.png" alt="People search box" /></p>
-  </li>
-  <li>
-    <p>You will be prompted to “Enter user-specific attributes”. Just click
-the green “Confirm Assignments” button to keep the defaults.
-<img src="/assets/spring-security-saml-okta-confirm-assignments-435c77a884e5acf6b1a3fba08e238770e86af90557d2a4cc38014f56cf3d338c.png" alt="Enter user attributes" /></p>
-  </li>
-  <li>
-    <p>You are now ready to proceed to the next section. Make sure that the
-link you copied in step #9 is still in your clipboard, as you will
-need it in the next section.</p>
-  </li>
+  <li>A redirect to your Identity Provider’s sign-in page</li>
+  <li>On successful authentication, you are redirected back to the redirect URI that you specified, along with an <code class="highlighter-rouge">#id_token=</code> fragment in the URL. The value of this parameter will be your Okta OpenID Connect ID Token.</li>
 </ol>
 
       </div>
@@ -344,33 +320,35 @@ need it in the next section.</p>
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>

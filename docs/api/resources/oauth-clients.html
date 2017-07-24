@@ -21,6 +21,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-15777010-3', 'auto');
       ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
     }
 	</script>
   <meta charset="utf-8">
@@ -29,20 +37,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>OAuth 2.0 Clients Registration API | Okta Developer</title>
-  <meta name="description" content="OAuth 2.0 Clients Registration API">
+  <title>Dynamic Client Registration | Okta Developer</title>
+  <meta name="description" content="Dynamic Client Registration API">
   <link rel="canonical" href="https://developer.okta.com/docs/api/resources/oauth-clients.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page oauth-2.0-clients-registration-api">
+  <div class="Page dynamic-client-registration">
     <!-- START Header -->
-    <header id="header">
+    
+<header id="header">
       <div class="Wrap">
         <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
         <nav>
@@ -88,18 +97,9 @@
           </div>
         </nav><!-- END Primary Nav -->
       </div>
-    </header><!-- Google Tag Manager -->
-    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <script>
-      if (isProduction) {
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TJ45R6');
-      }
-    </script> <!-- End Google Tag Manager -->
-     <!-- END Header -->
+    </header>
+
+    <!-- END Header -->
      <!-- START Page Center w/Sub Nav & Content -->
     <section class="PageContent DynamicSidebar has-tableOfContents">
       <!-- START Fixed sidebar --><aside class="Sidebar">
@@ -129,12 +129,12 @@
             <li>
               <a href="/docs/api/resources/authn.html">Authentication Reference</a>
               <ul id="Sidebar_References" class="Sidebar-hide">
-                <li><a href="/docs/api/resources/authn.html">Authentication API</a></li>
-                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0 API</a></li>
-                <li><a href="/docs/api/resources/oidc.html">OpenID Connect API</a></li>
+                <li><a href="/docs/api/resources/authn.html">Authentication</a></li>
+                <li><a href="/docs/api/resources/oauth2.html">OAuth 2.0</a></li>
+                <li><a href="/docs/api/resources/oidc.html">OpenID Connect</a></li>
                 <li><a href="/docs/api/resources/social_authentication.html">Social Login</a></li>
-                <li><a href="/docs/api/resources/sessions.html">Sessions API</a></li>
-                <li class="is-active"><a href="/docs/api/resources/oauth-clients.html">OAuth 2.0 Clients Registration API</a></li>
+                <li><a href="/docs/api/resources/sessions.html">Sessions</a></li>
+                <li class="is-active"><a href="/docs/api/resources/oauth-clients.html">Dynamic Client Registration</a></li>
               </ul>
             </li>
             <li>
@@ -179,7 +179,6 @@
             </li>
             
             
-            
             <li>
               <a href="/standards/SAML/">SAML</a>
             </li>
@@ -207,10 +206,11 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/oauth-clients.md">Edit Page</a>
-      <h1 id="oauth-20-clients-registration-api">OAuth 2.0 Clients Registration API</h1>
+      <h1 id="dynamic-client-registration-api">Dynamic Client Registration API</h1>
 
-<p>The OAuth Clients API provides operations to register and manage client applications for use with Okta’s
-OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in <a href="https://tools.ietf.org/html/rfc7591">RFC7591</a>.</p>
+<p>The Dynamic Client Registration API provides operations to register and manage client applications for use with Okta’s
+OAuth 2.0 and OpenID Connect endpoints. This API largely follows the contract defined in <a href="https://tools.ietf.org/html/rfc7591">RFC7591: OAuth 2.0 Dynamic Client Registration Protocol</a>
+and <a href="https://openid.net/specs/openid-connect-registration-1_0.html">OpenID Connect Dynamic Client Registration 1.0</a>.</p>
 
 <p>Note that clients managed via this API are modeled as applications in Okta and appear in the Applications section of the
 Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
@@ -227,7 +227,7 @@ follow the rules for Access Tokens and ID Tokens.</p>
 <p>If you are new to OAuth 2.0 or OpenID Connect, read this topic before experimenting with the Postman collection. If you are familiar with the
 flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a> or <a href="http://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect spec</a>, you may want to experiment with the Postman collection first:</p>
 
-<p><a href="https://app.getpostman.com/run-collection/291ba43cde74844dd4a7" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
+<p><a href="https://app.getpostman.com/run-collection/291ba43cde74844dd4a7"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
 <h2 id="client-application-model">Client Application Model</h2>
 
@@ -239,8 +239,8 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -279,7 +279,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
   <tbody>
     <tr>
       <td style="text-align: left">client_id</td>
-      <td style="text-align: left">unique key for the client application</td>
+      <td style="text-align: left">Unique key for the client application</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left">TRUE</td>
@@ -287,7 +287,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </tr>
     <tr>
       <td style="text-align: left">client_id_issued_at</td>
-      <td style="text-align: left">time at which the client_id was issued (measured in unix seconds)</td>
+      <td style="text-align: left">Time at which the client_id was issued (measured in unix seconds)</td>
       <td style="text-align: left">Number</td>
       <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
@@ -295,7 +295,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </tr>
     <tr>
       <td style="text-align: left">client_name</td>
-      <td style="text-align: left">human-readable string name of the client application</td>
+      <td style="text-align: left">Human-readable string name of the client application</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left">TRUE</td>
@@ -306,12 +306,12 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
       <td style="text-align: left">OAuth 2.0 client secret string (used for confidential clients)</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">TRUE</td>
-      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
       <td style="text-align: left">TRUE</td>
     </tr>
     <tr>
       <td style="text-align: left">client_secret_expires_at</td>
-      <td style="text-align: left">time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)</td>
+      <td style="text-align: left">Time at which the client_secret will expire or 0 if it will not expire(measured in unix seconds)</td>
       <td style="text-align: left">Number</td>
       <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
@@ -319,7 +319,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </tr>
     <tr>
       <td style="text-align: left">logo_uri</td>
-      <td style="text-align: left">URL string that references a logo for the client</td>
+      <td style="text-align: left">(Not currently implemented in Okta) URL string that references a logo for the client consent dialogs (not sign-in dialogs)</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
@@ -327,7 +327,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </tr>
     <tr>
       <td style="text-align: left">application_type</td>
-      <td style="text-align: left">The type of client application</td>
+      <td style="text-align: left">The type of client application. Default value: <code class="highlighter-rouge">web</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">web</code>, <code class="highlighter-rouge">native</code>, <code class="highlighter-rouge">browser</code>, or <code class="highlighter-rouge">service</code></td>
       <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
@@ -335,7 +335,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </tr>
     <tr>
       <td style="text-align: left">redirect_uris</td>
-      <td style="text-align: left">array of redirection URI strings for use in redirect-based flows</td>
+      <td style="text-align: left">Array of redirection URI strings for use in redirect-based flows</td>
       <td style="text-align: left">Array</td>
       <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
@@ -343,7 +343,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </tr>
     <tr>
       <td style="text-align: left">post_logout_redirect_uris</td>
-      <td style="text-align: left">array of redirection URI strings for use for relying party initiated logouts</td>
+      <td style="text-align: left">Array of redirection URI strings for use for relying party initiated logouts</td>
       <td style="text-align: left">Array</td>
       <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
@@ -351,7 +351,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </tr>
     <tr>
       <td style="text-align: left">response_types</td>
-      <td style="text-align: left">array of OAuth 2.0 response type strings</td>
+      <td style="text-align: left">Array of OAuth 2.0 response type strings. Default value: <code class="highlighter-rouge">code</code></td>
       <td style="text-align: left">Array of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, <code class="highlighter-rouge">id_token</code></td>
       <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
@@ -359,17 +359,17 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     </tr>
     <tr>
       <td style="text-align: left">grant_types</td>
-      <td style="text-align: left">array of OAuth 2.0 grant type strings</td>
+      <td style="text-align: left">Array of OAuth 2.0 grant type strings. Default value: <code class="highlighter-rouge">authorization_code</code></td>
       <td style="text-align: left">Array of <code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code>, <code class="highlighter-rouge">client_credentials</code></td>
-      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
       <td style="text-align: left">token_endpoint_auth_method</td>
-      <td style="text-align: left">requested authentication method for the token endpoint</td>
+      <td style="text-align: left">requested authentication method for the token endpoint. Default value: <code class="highlighter-rouge">client_secret_basic</code></td>
       <td style="text-align: left"><code class="highlighter-rouge">none</code>, <code class="highlighter-rouge">client_secret_post</code>, <code class="highlighter-rouge">client_secret_basic</code>, or <code class="highlighter-rouge">client_secret_jwt</code></td>
-      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">TRUE</td>
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left">FALSE</td>
     </tr>
@@ -464,20 +464,20 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>ParamType</th>
-      <th>DataType</th>
-      <th>Required</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">ParamType</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>settings</td>
-      <td>OAuth client registration settings</td>
-      <td>Body</td>
-      <td><a href="#client-application-model">Client Settings</a></td>
-      <td>TRUE</td>
+      <td style="text-align: left">settings</td>
+      <td style="text-align: left">OAuth client registration settings</td>
+      <td style="text-align: left">Body</td>
+      <td style="text-align: left">  <a href="#client-application-model">Client Settings</a></td>
+      <td style="text-align: left">TRUE</td>
     </tr>
   </tbody>
 </table>
@@ -494,8 +494,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
       "client_name": "Example OAuth Client",
-      "client_uri": "http://www.example-application.com",
-      "logo_uri": "http://www.example-application.com/logo.png",
+      "client_uri": "https://www.example-application.com",
+      "logo_uri": "https://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
          "https://www.example-application.com/oauth2/redirectUri"
@@ -525,8 +525,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -596,8 +596,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -703,8 +703,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example OAuth Client"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -726,8 +726,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"F10CaazJPQ5Zpyu1Ojko"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Another OAuth Client"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.another-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.another-application.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.another-application.com/logo.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"browser"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.another-application.com/oauth2/redirectUri"</span><span class="w">
@@ -774,8 +774,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JoLxQvMz6u0kEkHFSnC8"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payroll Application"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.payroll-application.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.payroll-application.com/logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.payroll-application.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.payroll-application.com/logo.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"https://www.payroll-application.com/oauth2/redirectUri"</span><span class="w">
@@ -850,8 +850,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -d <span class="s1">'{
       "client_id": "0jrabyQWm4B9zVJPbotY",
       "client_name": "Updated OAuth Client",
-      "client_uri": "http://www.example-application.com",
-      "logo_uri": "http://www.example-application.com/logo.png",
+      "client_uri": "https://www.example-application.com",
+      "logo_uri": "https://www.example-application.com/logo.png",
       "application_type": "web",
       "redirect_uris": [
         "https://www.example-application.com/oauth2/redirectUri"
@@ -881,8 +881,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -959,9 +959,9 @@ then no redirect URI or response type is necessary. In these cases you can pass 
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret_expires_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Updated OAuth Client"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cdUQIFvE61wGI5P51H33ORC4SRB1RXfX"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"logo_uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.example-application.com/logo.png"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"application_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"web"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"redirect_uris"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"https://www.example-application.com/oauth2/redirectUri"</span><span class="w">
@@ -1094,33 +1094,35 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     
       <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
     
-    <!-- Remarketing tag -->
-    <script type="text/javascript">
-        /* <![CDATA[ */
-        var google_conversion_id = 1006913831;
-        var google_custom_params = window.google_tag_params;
-        var google_remarketing_only = true;
-        /* ]]> */
-    </script>
-    <div style="display:none;">
-      <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    </div>
-    <noscript>
-      <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0">
-      </div>
-    </noscript>
-    <!-- End Remarketing tag -->
-    <!-- Crazy Egg Tracking -->
-    <script type="text/javascript">
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
     setTimeout(function(){var a=document.createElement("script");
     var b=document.getElementsByTagName("script")[0];
     a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
     a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-    </script>
-    <!-- End Crazy Egg Tracking -->
+  </script>
+  <!-- END Crazy Egg Tracking -->
 
-     <!-- END Footer -->
-  </div>
+  <!-- END Post Footer -->
 </body>
 </html>

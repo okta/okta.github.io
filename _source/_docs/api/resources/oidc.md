@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: OpenID Connect API
+title: OpenID Connect
 ---
 
 # OpenID Connect API
@@ -8,8 +8,6 @@ title: OpenID Connect API
 The OpenID Connect API endpoints enable clients to use [OIDC workflows](http://openid.net/specs/openid-connect-core-1_0.html) with Okta.
 With OpenID Connect, a client can use Okta as a broker. The user authenticates against identity providers like Google, Facebook, LinkedIn, or Microsoft,
 and the client obtains an Okta session.
-
-> This API is currently in **Early Access** status.  It has been tested as thoroughly as a Generally Available feature. Contact Support to enable this feature.
 
 ## Getting Started
 
@@ -120,7 +118,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
 {
   "ver": 1,
   "sub": "00uid4BxXw6I6TV4m0g3",
-  "iss": "http://rain.okta1.com:1802",
+  "iss": "https://rain.okta1.com:1802",
   "aud": "uAaunofWkaDJxukCFeBx",
   "iat": 1449624026,
   "exp": 1449627626,
@@ -136,7 +134,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
   "given_name":"John",
   "middle_name":"James",
   "family_name":"Doe",
-  "profile":"http://profile.wordpress.com/john.doe",
+  "profile":"https://profile.wordpress.com/john.doe",
   "zoneinfo":"America/Los_Angeles",
   "locale":"en-US",
   "updated_at":1311280970,
@@ -205,7 +203,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 | given_name         | profile           | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.                                              | String         | "John"                                                                                                                          |
 | middle_name        | profile           | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used. | String         | "James"                                                                                                                         |
 | family_name        | profile           | Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.                               | String         | "Doe"                                                                                                                           |
-| profile            | profile           | URL of the user's profile page.                                                                                                                                                                                                    | String         | "http://profile.wordpress.com/john.doe"                                                                                         |
+| profile            | profile           | URL of the user's profile page.                                                                                                                                                                                                    | String         | "https://profile.wordpress.com/john.doe"                                                                                         |
 | zoneinfo           | profile           | String representing the user's time zone.                                                                                                                                                                                          | String         | "America/Los_Angeles"                                                                                                           |
 | locale             | profile           | Language and   [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.                                                                                                                   | String         | "en-US"                                                                                                                         |
 | updated_at         | profile           | Time the user's information was last updated, represented in Unix time (seconds).                                                                                                                                                  | Integer        | 1311280970                                                                                                                      |
@@ -273,7 +271,7 @@ Returns a JSON document with information requested in the scopes list of the tok
   "given_name":"John",
   "middle_name":"James",
   "family_name":"Doe",
-  "profile":"http://profile.wordpress.com/john.doe",
+  "profile":"https://profile.wordpress.com/john.doe",
   "zoneinfo":"America/Los_Angeles",
   "locale":"en-US",
   "updated_at":1311280970,
@@ -317,14 +315,14 @@ and only via POST data or within request headers. If you store them on your serv
 
 Clients must validate the ID Token in the Token Response in the following manner:
 
-1. Verify that the *iss* (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](#openid-connect-discovery-document).
+1. Verify that the *iss* (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during [Discovery](#openid-connect-discovery-document)).
 2. Verify that the *aud* (audience) claim contains the *client_id* of your app.
 3. Verify the signature of the ID Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Discovery Document](#openid-connect-discovery-document).
 4. Verify that the expiry time (from the *exp* claim) has not already passed.
 5. A *nonce* claim must be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.
 6. The client should check the *auth_time* claim value and request re-authentication using the *prompt=login* parameter if it determines too much time has elapsed since the last end-user authentication.
 
-Step 3 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [discovery document](#openid-connect-discovery-document). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
+Step 3 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [discovery document](#openid-connect-discovery-document)). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
 Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [ID Token header](#claims-in-the-header-section).
 
@@ -359,11 +357,11 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | Parameter             | Description                                                                                                                                                                                                                                                 | Type   |
 |:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
 | token                 | An Access Token, ID Token, or Refresh Token.                                                                                                                                                                                                                | String |
-| token_type_hint       | A hint of the type of *token*.                                                                                                                                                                                                                              | String |
+| token_type_hint       | A hint of the type of `token`. Valid values are `access_token`, `id_token` and `refresh_token`.                                                                                                                                                             | Enum   |
 | client_id             | Required if client has a secret and client credentials are not provided in the Authorization header. This is used in conjunction with `client_secret`  to authenticate the client application.                                                              | String |
 | client_secret         | Required if the client has a secret and client credentials are not provided in the Authorization header, and if `client_assertion_type` isn't specified. This client secret is used in conjunction with `client_id` to authenticate the client application. | String |
 | client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.     [JWT Details](#token-authentication-methods)                                                                                                        | String |
-| client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the     [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.        | String |
+| client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the     [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.     | String |
 
 ##### Token Authentication Methods
 <!--If you change this section, change the section in oauth2.md as well -->
@@ -442,7 +440,7 @@ Based on the type of token and whether it is active or not, the returned JSON co
     "exp" : 1451606400,
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
-    "aud" : "http://api.example.com",
+    "aud" : "https://api.example.com",
     "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3"
@@ -491,6 +489,8 @@ Content-Type: application/json;charset=UTF-8
 
 The API takes an Access Token or Refresh Token and revokes it. Revoked tokens are considered inactive at the introspection endpoint. A client may only revoke its own tokens.
 
+> Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don't need an authorization server ID.
+
 #### Request Parameters
 
 The following parameters can be posted as a part of the URL-encoded form values to the API.
@@ -498,11 +498,11 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | Parameter             | Description                                                                                                                                                                                                                                                               | Type   |
 |:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|
 | token                 | An Access Token or Refresh Token.                                                                                                                                                                                                                                         | String |
-| token_type_hint       | A hint of the type of `token`.                                                                                                                                                                                                                                            | String |
+| token_type_hint       | A hint of the type of `token`. Valid values are `access_token` and `refresh_token`.                                                                                                                                                                                       | Enum   |
 | client_id             | The client ID generated as a part of client registration. This is used in conjunction with the `client_secret` parameter to authenticate the client application.                                                                                                          | String |
 | client_secret         | Required if the client has a secret and client credentials are not provided in the Authorization header, and if `client_assertion_type` isn't specified. This client secret is used in conjunction with the `client_id` parameter to authenticate the client application. | String |
 | client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.          [JWT Details](#token-authentication-methods)                                                                                                                     | String |
-| client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the           [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.                      | String |
+| client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the           [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.                   | String |
 
 A client may only revoke a token generated for that client.
 
@@ -553,6 +553,11 @@ If automatic key rotation is disabled, provide the *client_id* to fetch public k
 #### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Cache-Control → max-age=3832304, must-revalidate
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "keys": [
@@ -594,9 +599,8 @@ If automatic key rotation is disabled, provide the *client_id* to fetch public k
 ~~~
 
 >Okta strongly recommends retrieving keys dynamically with the JWKS published in the discovery document.
-It is safe to cache or persist downloaded keys for performance.
-However, if the client application is pinned to a signing key, the verification might fail since Okta rotates the key automatically.
-Pinned client applications must periodically check the Okta signing keys.
+
+>Okta also recommends caching or persisting downloaded keys to improve performance by eliminating multiple API requests. If the client application is pinned to a signing key, the verification fails when Okta rotates the key automatically. Pinned client applications must periodically check the cached Okta signing keys.
 
 Any of the two or three keys listed are used to sign tokens. The order of keys in the result doesn't indicate which keys are used.
 
@@ -723,6 +727,8 @@ This is a starting point for OpenID Connect flows such as implicit and authoriza
 authenticates the user and returns tokens along with an authorization grant to the client application as a part
 of the response.
 
+> Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don't need an authorization server ID.
+
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
@@ -731,7 +737,7 @@ of the response.
 |   [idp](idps.html)      | Identity provider (default is Okta)                                                                                                                                                                                                                                                                                                                                                                      | Query      | String   | FALSE    | Okta is the IDP. |
 | sessionToken          | Okta one-time sessionToken. This allows an API-based user login flow (rather than Okta login UI). Session tokens can be obtained via the   [Authentication API](authn.html).                                                                                                                                                                                                                              | Query      | String   | FALSE    |                  |
 | response_type         | Any combination of *code*, *token*, and *id_token*. The combination determines the   [flow](http://openid.net/specs/openid-connect-core-1_0.html#Authentication). The `code` response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.                                                                                                          | Query      | String   | TRUE     |                  |
-| client_id             | Obtained during either   UI client registration or   [API client registration](oauth-clients.html). It identifies the client and must match the value preregistered in Okta.                                                                                                                                                                             | Query      | String   | TRUE     |
+| client_id             | Obtained during either   UI client registration or   [Dynamic Client Registration API](oauth-clients.html). It identifies the client and must match the value preregistered in Okta.                                                                                                                                                                             | Query      | String   | TRUE     |
 | redirect_uri          | Callback location where the authorization code should be sent. It must match the value preregistered in Okta during client registration.                                                                                                                                                                                                                                                                 | Query      | String   | TRUE     |
 | display               | How to display the authentication and consent UI. Valid values: *page* or *popup*.                                                                                                                                                                                                                                                                                                                       | Query      | String   | FALSE    |                  |
 | max_age               | Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                 | Query      | String   | FALSE    |                  |
@@ -743,10 +749,11 @@ of the response.
 | code_challenge        | A challenge of   [PKCE](#parameter-details). The challenge is verified in the Access Token request.                                                                                                                                                                                                                                                                                                       | Query      | String   | FALSE    |
 | code_challenge_method | Method used to derive the code challenge. Must be `S256`.                                                                                                                                                                                                                                                                                                                                                | Query      | String   | FALSE    |
 | login_hint            | A username to prepopulate if prompting for authentication.                                                                                                                                                                                                                                                                                                                                               | Query      | String   | FALSE    |
+| idp_scope             | A space delimited list of scopes to be provided to the Social Identity Provider when performing [Social Login](social_authentication.html). These scopes are used in addition to the scopes already configured on the Identity Provider.                                                                                                                                                                 | Query      | String   | FALSE    |
 
 #### Parameter Details
 
- * *idp* and *sessionToken* are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
+ * *idp*, *sessionToken* and *idp_scope* are Okta extensions to [the OpenID specification](http://openid.net/specs/openid-connect-core-1_0.html#Authentication).
     All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.
  * Each value for *response_mode* delivers different behavior:
     * *fragment* -- Parameters are encoded in the URL fragment added to the *redirect_uri* when redirecting back to the client.
@@ -883,7 +890,7 @@ curl -v -X GET \
 The requested scope is invalid:
 
 ~~~
-http://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
+https://www.example.com/#error=invalid_scope&error_description=The+requested+scope+is+invalid%2C+unknown%2C+or+malformed
 ~~~
 
 ### Token Request
@@ -892,6 +899,8 @@ http://www.example.com/#error=invalid_scope&error_description=The+requested+scop
 {% api_operation post /oauth2/v1/token %}
 
 The API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters. 
+
+>Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don't need an authorization server ID.
 
 #### Request Parameters
 

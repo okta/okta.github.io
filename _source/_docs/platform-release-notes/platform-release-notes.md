@@ -1,55 +1,62 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.25
+excerpt: Summary of changes to the Okta Platform since Release 2017.28
 ---
 
-## Release 2017.26
+## Release 2017.29
 
-### Advance Notice: Data Retention Changes
+### Platform Features
 
-Okta is changing system log data retention windows. System log data is available from `/api/v1/events` or
-Okta SDK `EventsAPIClient`.
+The following platform features are Generally Available (GA) in preview orgs (as of Release 2017.28), and expected to roll out as GA to production orgs during the week of August 8, 2017:
 
-* For orgs created before July 17th, data older than six months will be removed.
-* For orgs created on or after July 17th, data older than three months will be removed.
+* [OpenID Connect](#openid-connect)
 
-The new data retention policy starts:
+* [Key Rollover](#key-rollover)
 
-* June 7, 2017 for existing preview orgs
-* July 17, 2017 for existing production orgs
+#### OpenID Connect
 
-Preview and production orgs created on or after July 17, 2017, will retain log data for three months.
+[OpenID Connect](/docs/api/resources/oidc.html) is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
 
-For the full data retention policy, see our [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
+ OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.
 
-You can export data before Okta deletes it. We recommend using Security Information and Event Management (SIEM) technology or Okta's API. <!-- OKTA-125424 -->
+ Okta is [certified for OpenID Connect](http://openid.net/certification/). For more information, see [OpenID Connect and Okta](/standards/OIDC/).
 
- <!-- OKTA-125424 -->
+  <!-- OKTA-132049  -->
 
-### Platform Enhancement: New Authentication Method for OpenID Connect and API Access Management
-For OpenID Connect and API Access Management, Okta supports the `client_secret_jwt` method for token endpoint authentication (`token_endpoint_auth_method`).
-This method is specified in the [OpenID Connect specification](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication)
-and allows you to use JWT and HMAC to authenticate a client for [OAuth 2.0](https://developer.okta.com/docs/api/resources/oauth2.html#token-authentication-methods) or [OpenID Connect](https://developer.okta.com/docs/api/resources/oidc.html#token-authentication-methods) requests.
-<!-- (OKTA-101074) -->
+
+#### Key Rollover
+
+We provide the ability to generate a certificate with specified validity period (see the [Apps API](/docs/api/resources/apps.html) and [Identity Providers API](/docs/api/resources/idps.html)). We build OpenID Connect and API Access Management on this feature.
+ 
+   <!-- OKTA-132045  -->
+
+
 
 ### Platform Bugs Fixed
 
-* When suspicious activity was logged for OAuth 2.0 clients the invalid secret was not masked. (OKTA-129694)
+These platform bug fixes are available in preview orgs and expected in production orgs the week of July 24, 2017.
 
-* When validating the names of scopes for social identity providers, Okta didn't enforce the restrictions
-specified in the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#section-3.3). (OKTA-117352)
+* When answering a security question to recover a forgotten password, users who gave too many incorrect responses didn't receive the "locked out" message. (OKTA-126117)
 
-* When the same user was created multiple times simultaneously and added to a group, the HTTP error
-response code was 500 rather than 400. (OKTA-126223)
+* Custom SMS templates allowed messages greater than 160 characters after substituting the org name and code. The new behavior is to use a default template instead of the custom template when that happens. To ensure use of your custom template, update it to stay within the 160-character limit. (OKTA-128721)
 
-* `/api/v1/apps/:appId/groups` didn't return groups if the specified app is inactive. (OKTA-123695)
+* [`/oauth2/v1/clients`](/docs/api/resources/oauth-clients.html#register-new-client) error responses didn't conform to the format in the [OAuth 2.0 Dynamic Client Registration spec](https://tools.ietf.org/html/rfc7591#section-3.2.2). (OKTA-130375)
+
+* [`/oauth2/v1/clients`](/docs/api/resources/oauth-clients.html#register-new-client) didn't allow default values for optional parameters. (OKTA-130910)
+
+* Neither [`/oauth2/v1/clients`](/docs/api/resources/oauth-clients.html#register-new-client) nor [`/api/v1/apps`](/docs/api/resources/apps.html#add-application) required client secrets to be unique. (OKTA-131259)
+
+* [`/oauth2/v1/clients`](/docs/api/resources/oauth-clients.html#register-new-client) returned an incorrect resource URI in the response header.  (OKTA-131891)
+
+
 
 ### Does Your Org Have This Change Yet?
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
+
 
 ### Looking for Something Else?
 
