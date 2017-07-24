@@ -1388,7 +1388,7 @@ Updated [User](#user-model)
 
 Updates a user's profile or credentials with partial update semantics
 
-> Important: Use the `POST` method for partial updates, because unspecified properties aren't changed with `POST`.
+> Important: Use the `POST` method for partial updates. Unspecified properties are set to null with `PUT`.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -1410,7 +1410,7 @@ Updated [User](#user-model)
 {:.api .api-request .api-request-example}
 
 ~~~sh
-curl -v -X PUT \
+curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
