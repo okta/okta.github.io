@@ -605,7 +605,7 @@ Transfer-Encoding: chunked
 
 &lt;p&gt;Once you’ve created the application, choose it from the list of applications. In the General Settings tab, click the &lt;em&gt;Edit&lt;/em&gt; button and make sure to add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/signin-oidc&lt;/code&gt; to the Redirect URIs.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/redirect_uri-564499ce3721350c6a82855e9f425c4bdef9ca4ad856183a3c667c8e0cf3b5a8.png&quot; alt=&quot;Redirect URI Setting&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/redirect_uri-c1a0090e3b1479c44500396f2b2605d04e2f176bdb54fed1112c197d40e5e7bd.png&quot; alt=&quot;Redirect URI Setting&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;While you are on the General Settings tab, scroll down and copy your Client ID and Client Secret somewhere. You’ll use this later when configuring the middleware in your application.&lt;/p&gt;
 
