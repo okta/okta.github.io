@@ -9,20 +9,12 @@ icon: /assets/img/icons/oauth.svg
 OAuth 2.0 is the next evolution of the OAuth protocol and is not backwards compatible with OAuth 1.0.
 OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and living room devices.
 
-The specification and associated RFCs are developed by [the IETF OAuth WG](https://tools.ietf.org/wg/oauth/).
-[The main framework](https://tools.ietf.org/html/rfc6749) and [Bearer Token Usage](https://tools.ietf.org/html/rfc6750) were published in 2012.
-Other documents are still being worked on within the OAuth working group.
-
-In addition to the information in this introduction, you can find detailed information about Okta's implementation of OAuth 2.0:
-
-* [Okta's API Access Management Introduction](/use_cases/api_security/)
-* [OAuth 2.0 API](/docs/api/resources/oauth2.html)
-* [Help for configuring API Access Management in the Okta UI](https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=api%20access%20management)
-
-# Introduction
 
 Okta is a fully standards-compliant [OAuth 2.0](http://oauth.net/documentation) Authorization Server and a certified [OpenID Provider](http://openid.net/certification).
 The OAuth 2.0 APIs provide API security via scoped access tokens, and OpenID Connect provides user authentication and an SSO layer which is lighter and easier to use than SAML.
+The specification and associated RFCs are developed by [the IETF OAuth WG](https://tools.ietf.org/wg/oauth/).
+[The main framework](https://tools.ietf.org/html/rfc6749) and [Bearer Token Usage](https://tools.ietf.org/html/rfc6750) were published in 2012.
+Other documents are still being worked on within the OAuth working group.
 
 There are several use cases and Okta product features built on top of the OAuth 2.0 APIs:
 
@@ -44,6 +36,12 @@ If you are new to OAuth 2.0, read this topic before experimenting with the Postm
 flows defined by [the OAuth 2.0 spec](http://oauth.net/documentation), you may want to experiment with the Postman collection first:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4adca9a35eab5716d9f6)
+
+In addition to the information in this topic, see:
+
+* [Okta's API Access Management Introduction](/use_cases/api_security/)
+* [OAuth 2.0 API](/docs/api/resources/oauth2.html)
+* [Help for configuring API Access Management in the Okta UI](https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=api%20access%20management)
 
 ## Basic Flows
 
