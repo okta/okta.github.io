@@ -2,16 +2,16 @@
 layout: blog_post
 title: 'Identity, Claims, & Tokens – An OpenID Connect Primer, Part 1 of 3'
 author: dogeared
-tags: [oauth, oauth2, OpenID, OpenID Connect, oidc]
+tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc]
 ---
 
-In the beginning, there were proprietary approaches to working with external identity providers for authentication and authorization. Then came SAML (Security Assertion Markup Language) – an open standard using XML as its message exchange type. Then, there was OAuth and OAuth 2.0 (henceforth OAuth2) – also open as well as being a modern, RESTful approach to authorization using JSON as its medium. And now, the holy grail of “secure delegated access” OpenID Connect (henceforth OIDC), which runs on top of OAuth2.
+In the beginning, there were proprietary approaches to working with external identity providers for authentication and authorization. Then came SAML (Security Assertion Markup Language) – an open standard using XML as its message exchange type. Then, there was OAuth and OAuth 2.0 – also open as well as being a modern, RESTful approach to authorization using JSON as its medium. And now, the holy grail of “secure delegated access” OpenID Connect (henceforth OIDC), which runs on top of OAuth 2.0.
 
-But wait. What was wrong with OAuth2? To understand better, let’s first dispense with the term, secure delegated access. It’s too vague and has led to confusion between authentication (authn) and authorization (authz).
+But wait. What was wrong with OAuth 2.0? To understand better, let’s first dispense with the term, secure delegated access. It’s too vague and has led to confusion between authentication (authn) and authorization (authz).
 
 Without secure, external authentication and authorization, you’d have to trust that every application, and every developer not only had your best interests and privacy in mind, but also *knew how to protect your identity* and was willing to keep up with security best practices. That’s a pretty tall order, right? With OIDC, you can use a trusted external provider to prove to a given application that you are who you say you are, without ever having to grant that application access to your credentials.
 
-OAuth2 leaves a lot of details up to implementers. For instance, it supports scopes, but scope names are not specified. It supports access tokens, but the format of those tokens are not specified. With OIDC, a number of specific scope names are defined that each produce different results. OIDC has both access tokens and ID tokens. An ID token must be JSON web token (JWT). Since the specification dictates the token format, it makes it easier to work with tokens across implementations.
+OAuth 2.0 leaves a lot of details up to implementers. For instance, it supports scopes, but scope names are not specified. It supports access tokens, but the format of those tokens are not specified. With OIDC, a number of specific scope names are defined that each produce different results. OIDC has both access tokens and ID tokens. An ID token must be JSON web token (JWT). Since the specification dictates the token format, it makes it easier to work with tokens across implementations.
 
 In this blog series, I share a primer on OIDC. In the first post, we’ll review some key concepts around OIDC and tokens, explained in human terms. Then, we’ll look at OIDC in action with some specific code examples to highlight its value in the authentication and authorization ecosystem. Finally, we’ll dig into the guts of the different token types and how to control what goes into them.
 
@@ -23,7 +23,7 @@ The code that backs this is at: [https://github.com/oktadeveloper/okta-oidc-flow
 
 Before we dive into the minutiae of OIDC, let’s take a step back and talk about how we interact with it.
 
-There are two primary actors involved in all OIDC interactions: the OpenID Provider (OP) and the Relying Party (RP). The OP is an [OAuth2](https://tools.ietf.org/html/rfc6749) server that is capable of authenticating the end-user and providing information about the result of the authentication and the end-user to the Relying Party. The Relying Party is an OAuth2 application that “relies” on the OP to handle authentication requests.
+There are two primary actors involved in all OIDC interactions: the OpenID Provider (OP) and the Relying Party (RP). The OP is an [OAuth 2.0](https://tools.ietf.org/html/rfc6749) server that is capable of authenticating the end-user and providing information about the result of the authentication and the end-user to the Relying Party. The Relying Party is an OAuth 2.0 application that “relies” on the OP to handle authentication requests.
 
 Typically, you kick off an OIDC interaction by hitting an `/authorization` endpoint with an HTTP GET. A number of query parameters indicate what you can expect to get back after authenticating and what you’ll have access to (authorization).
 
@@ -118,7 +118,7 @@ When the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749) was released in 2
 
 In 2015, the [JWT spec](https://tools.ietf.org/html/rfc7519) was released. It proposed the creation of tokens which encoded other information. This token could be used as an opaque identifier and could also be inspected for additional information – such as identity attributes. It called these attributes `claims`. The spec also includes provisions for cryptographically signed JWTs (called JWSs) and encrypted JWTs (called JWEs). A signed JWT is particularly useful in application development because you can have a high degree of confidence that the information encoded into the JWT has not been tampered with. By verifying the JWT within the application, you can avoid another round trip to an API service. It also allows to enforce behavior, like expiration, because you know the `exp` claim has not been altered.
 
-There’s no direct relationship between JWT and OAuth2. However, many OAuth2 implementers saw the benefits of JWTs and began using them as either (or both) access and refresh tokens.
+There’s no direct relationship between JWT and OAuth 2.0. However, many OAuth 2.0 implementers saw the benefits of JWTs and began using them as either (or both) access and refresh tokens.
 
 OIDC formalizes the role of JWT in mandating that ID Tokens be JWTs. Many OIDC implementers will also use JWTs for access and refresh tokens, but it is not dictated by the spec.
 
