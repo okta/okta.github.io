@@ -28,7 +28,7 @@ https://your-subdomain.okta.com/oauth2/v1/authorize?client_id={clientId}&respons
 
 > The `prompt=none` param guarantees that the user will not be prompted for credentials. You will either obtain the requested tokens or an OAuth error response.
 
-> The `sessionToken` param serves as the primary credentials. It represents the authentication that was already performed via the [Authentication API](/docs/api/rest/authn.html).
+> The `sessionToken` param serves as the primary credentials. It represents the authentication that was already performed via the [Authentication API](/docs/api/resources/authn.html).
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -39,7 +39,7 @@ Set-Cookie: sid=lGj4FPxaG63Wm89TpJnaDF6; Path=/
 Location: https://your-app.example.com?id_token=S4sx3uixdsalasd&state=Af0ifjslDkj&nonce=n-0S6_WzA2Mj
 ~~~
 
-The response also includes an [ID Token](/docs/api/resources/oidc.html#id-token) that describes the authenticated user and can contain additional claims such as user profile attributes or email.
+The response also includes an [ID Token](/standards/OIDC/index.html#id-token) that describes the authenticated user and can contain additional claims such as user profile attributes or email.
 
 The [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) uses this flow. This flow can also be used by Single Page Applications with the [`okta_post_messsage`](/docs/api/resources/oauth2.html#request-parameter-details) response type, which doesn't require a browser redirect.
 

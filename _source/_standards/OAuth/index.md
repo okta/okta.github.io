@@ -215,7 +215,7 @@ However, the specifics depend on which claims are requested, whether the request
 
 ##### Quick reference: which token has which claims?
 
-Okta defines two types of reserved (non-custom) claims, [base](/docs/api/resources/oidc.html#base-claims-always-present) and [scope-dependent claims](/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned).
+Okta defines two types of reserved (non-custom) claims, [base](/standards/OIDC/index.html#base-claims-always-present) and [scope-dependent claims](/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned).
 Base claims are always returned, and scope-dependent claims are returned depending on the scope requested. 
 Custom claims are configured in the Custom Authorization Server, and returned depending on the token type and configuration.
 
@@ -301,7 +301,7 @@ A Custom Authorization Server can issue an ID Token to the client, as in OpenID 
 The lifetime of an ID token is one hour. If the client that issued the token is deactivated, the token is
 immediately and permanently invalidated. Reactivating the client does not make the token valid again.
 
-The validation steps for [OpenID Connect with the Okta Authorization Server](/docs/api/resources/oidc.html#validating-id-tokens) can also be applied to ID tokens for
+The validation steps for [OpenID Connect with the Okta Authorization Server](/standards/OIDC/index.html#validating-id-tokens) can also be applied to ID tokens for
 OAuth 2.0 (Custom Authorization Server), except the public keys should be retrieved via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 
 ## Requesting a Token
@@ -361,7 +361,7 @@ Okta provides two types of authorization servers:
 * Okta Authorization Server:
 Use the Okta Authorization Server to perform SSO with Okta or sign in users for apps displayed on the Okta home page.
 Okta hosts and manages the Okta Authorization Server. It can't be configured,
-though you can add a [groups claim](/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned)
+though you can add a [groups claim](/standards/OIDC/index.html#scope-dependent-claims-not-always-returned)
 and [app-user profile attributes](/docs/api/resources/apps.html#application-user-properties) to a client.
 The Access Token minted by the Okta Authorization Server is consumed by Okta APIs. The Access Token audience is always Okta specific, so the token can't be validated by your applications.
 
