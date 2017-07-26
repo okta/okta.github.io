@@ -53,7 +53,11 @@ To provide a fully-featured and customizable login experience, the [Okta Sign-In
 
 First, create `src/app/app.service.ts` as an authorization utility file and use it to bootstrap the required fields to login:
 
+> Important: We're using Okta's organization authorization server to make setup easy, but it's less flexible than a custom authorization server. Most SPAs send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](https://developer.okta.com/docs/how-to/set-up-auth-server.html#create-an-authorization-server).
+
 ```typescript
+// app.service.ts
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min.js'
@@ -108,6 +112,8 @@ Now that you have a shared service to start, control, and end the authentication
 Create `src/app/app.guard.ts` that implements [`CanActivate`](https://angular.io/api/router/CanActivate):
 
 ```typescript
+// app.guard.ts
+
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { OktaAuthService } from './app.service';
@@ -134,6 +140,8 @@ Whenever a user attempts to access a route that is protected by `OktaAuthGuard`,
 
 Finally, inject the guard and service into `src/app/app.module.ts` so we can use it in any declared routes:
 ```typescript
+// app.module.ts
+
 import { OktaAuthGuard } from './app.guard';
 import { OktaAuthService } from './app.service';
 ```
@@ -146,6 +154,7 @@ Lets take a look at what routes are needed:
 ### `/`
 First, update `src/app/app.component.html` to provide the Login logic:
 ```html
+<!-- app.component.html -->
 <link
   href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css"
   type="text/css"
@@ -154,6 +163,7 @@ First, update `src/app/app.component.html` to provide the Login logic:
 <button routerLink="/"> Home </button>
 <button *ngIf="!signIn.isAuthenticated()" (click)="signIn.login()"> Login </button>
 <button *ngIf="signIn.isAuthenticated()" (click)="signIn.logout()"> Logout </button>
+<button routerLink="/protected"> Protected </button>
 
 <!-- Container to inject the Sign-In Widget -->
 <div id="okta-signin-container"></div>
@@ -164,6 +174,8 @@ First, update `src/app/app.component.html` to provide the Login logic:
 Then, update `src/app/app.component.ts` to handle the `login()` and `logout()` calls:
 
 ```typescript
+// app.component.ts
+
 import { Component } from '@angular/core';
 import { OktaAuthService } from './app.service';
 
@@ -181,6 +193,8 @@ export class AppComponent {
 This route will be protected by the `OktaAuthGuard`, only permitting users with a valid `accessToken`.
 
 ```typescript
+// protected.component.ts
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -197,6 +211,8 @@ export class ProtectedComponent {
 Add each of our new routes to `src/app/app.module.ts`:
 
 ```typescript
+// app.module.ts
+
 const appRoutes: Routes = [
   {
     path: 'protected',
@@ -210,6 +226,8 @@ const appRoutes: Routes = [
 
 Finally, update your `@NgModule` to include your project components and routes in `src/app/app.module.ts`:
 ```typescript
+// app.module.ts
+
 @NgModule({
   declarations: [
     AppComponent,

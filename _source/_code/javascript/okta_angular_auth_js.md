@@ -53,7 +53,11 @@ The easiest, and most secure way is to use the **default login page**. This page
 
 First, create `src/app/app.service.ts` as an authorization utility file and use it to bootstrap the required fields to login:
 
+> Important: We're using Okta's organization authorization server to make setup easy, but it's less flexible than a custom authorization server. Most SPAs send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](https://developer.okta.com/docs/how-to/set-up-auth-server.html#create-an-authorization-server).
+
 ```typescript
+// app.service.ts
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as OktaAuth from '@okta/okta-auth-js/dist/okta-auth-js.min.js';
@@ -108,6 +112,8 @@ Now that you have a shared service to start, control, and end the authentication
 Create `src/app/app.guard.ts` that implements [`CanActivate`](https://angular.io/api/router/CanActivate):
 
 ```typescript
+// app.guard.ts
+
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { OktaAuthService } from './app.service';
@@ -135,6 +141,8 @@ Whenever a user attempts to access a route that is protected by `OktaAuthGuard`,
 
 Finally, inject the guard and service into `src/app/app.module.ts` so we can use it in any declared routes:
 ```typescript
+// app.module.ts
+
 import { OktaAuthGuard } from './app.guard';
 import { OktaAuthService } from './app.service';
 ```
@@ -148,9 +156,12 @@ Lets take a look at what routes are needed:
 ### `/`
 First, update `src/app/app.component.html` to provide the Login logic:
 ```html
+<!-- app.component.html -->
+
 <button routerLink="/"> Home </button>
 <button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.login()"> Login </button>
 <button *ngIf="oktaAuth.isAuthenticated()" (click)="oktaAuth.logout()"> Logout </button>
+<button routerLink="/protected"> Protected </button>
 
 <router-outlet></router-outlet>
 ```
@@ -158,6 +169,8 @@ First, update `src/app/app.component.html` to provide the Login logic:
 Then, update `src/app/app.component.ts` to handle the `login()` and `logout()` calls:
 
 ```typescript
+// app.component.ts
+
 import { Component } from '@angular/core';
 import { OktaAuthService } from './app.service';
 
@@ -177,6 +190,8 @@ In order to handle the redirect back from Okta, we need to capture the token val
 Create a new component `src/app/callback.component.ts`:
 
 ```typescript
+// callback.component.ts
+
 import { Component } from '@angular/core';
 import { OktaAuthService } from './app.service';
 
@@ -194,6 +209,8 @@ export class CallbackComponent {
 This route will be protected by the `OktaAuthGuard`, only permitting users with a valid `accessToken`.
 
 ```typescript
+// protected.component.ts
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -210,6 +227,8 @@ export class ProtectedComponent {
 Add each of our new routes to `src/app/app.module.ts`:
 
 ```typescript
+// app.module.ts
+
 const appRoutes: Routes = [
   {
     path: 'callback',
@@ -227,6 +246,8 @@ const appRoutes: Routes = [
 
 Finally, update your `@NgModule` to include your project components and routes in `src/app/app.module.ts`:
 ```typescript
+// app.module.ts
+
 @NgModule({
   declarations: [
     AppComponent,
