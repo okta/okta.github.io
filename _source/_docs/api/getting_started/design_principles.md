@@ -276,7 +276,7 @@ Search and list operations are intended to find matching resources and their ide
 
 The number of API requests for an organization is limited for all APIs based on your edition.
 
-The following three headers are set in each response:
+Okta provides three headers in each response. These headers show the limit is that is being enforced, when it resets, and how close you are to hitting the limit:
 
 `X-Rate-Limit-Limit` - the rate limit ceiling that is applicable for the current request.
 
@@ -291,12 +291,12 @@ X-Rate-Limit-Remaining: 15
 X-Rate-Limit-Reset: 1366037820
 ~~~
 
-If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is on a per-org per-endpoint basis.
+If the rate limit is exceeded, an HTTP 429 Status Code is returned.  Rate limits apply to each endpoint per minute, per org.
 
 -**Rate limits are enforced for all organizations.**
 
-The best way to be sure about your rate limits is to include the relevant headers. The System Log does not report every
-API request, it reports completed or attempted actions and events, so you can't query the system log for accurate API rates.
+The best way to be sure about your rate limits is to include the relevant headers. The System Log doesn't report every
+API request, it reports completed or attempted real world events such as configuration changes, user logins, or user lockouts. You can't query the system log for accurate API rates.
 
 ### Org-Wide Rate Limits
 
