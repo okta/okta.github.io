@@ -71,6 +71,8 @@ collections:
   docs:
     output: true
     permalink: /:collection/:path:output_ext
+  quickstarts:
+    output: true
 
 paginate: 10
 paginate_path: "/blog/page/:num"
