@@ -37,10 +37,10 @@ The basic authentication flow with Okta as your identity provider:
 3. Okta authenticates the user.
 4. Okta approves or denies the requested scopes.
 5. Okta mints a token and sends it in the response.
-6. The application validates the ID Token’s integrity. For more information, see [Validating ID Tokens](#validating-id-tokens).
+6. The application validates the ID Token’s integrity. For more information, see [Validating ID Tokens](/docs/api/resources/oidc.html#validating-id-tokens).
 
 > Important: Okta uses public key cryptography to sign tokens and verify that they are valid.
-See the last section of [Validating ID Tokens](#validating-id-tokens) for more information on the necessary logic
+See the last section of [Validating ID Tokens](/docs/api/resources/oidc.html#validating-id-tokens) for more information on the necessary logic
 you must have in your application to ensure it’s always updated with the latest keys.
 
 ## Authorization Servers
@@ -107,11 +107,11 @@ token and optionally an Access Token directly from the authorization server's au
 two flows.
 <!-- * What is Configuration Publishing? Need to describe it here -->
 
-Clients should always [validate ID Tokens](#validating-id-tokens) to ensure their integrity.
+Clients should always [validate ID Tokens](/docs/api/resources/oidc.html#validating-id-tokens) to ensure their integrity.
 
 The ID Tokens returned by the authentication endpoint (implicit flow) or the Token endpoint (authorization code flow)
 are identical, except that in the implicit flow, the *nonce* parameter is required (and hence must have been included
-in the request), and the *at_hash* parameter is required if the response includes [an Access Token](/docs/api/resources/oauth2.html#access-tokens) but prohibited if the
+in the request), and the *at_hash* parameter is required if the response includes [an Access Token](/standards/OAuth/index#access-token) but prohibited if the
 response does not include an Access Token.
 
 The ID Token (*id_token*) consists of three period-separated, base64URL-encoded JSON segments: [a header](#id-token-header), [the payload](#id-token-payload), and [the signature](#id-token-signature).
@@ -179,7 +179,7 @@ Claims in the header are always returned.
 | Property      | Description                                                                                                                                                                                                  | DataType      | Example                    |
 |:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|:---------------------------|
 | alg           | Identifies the digital signature algorithm used. This is always be RS256.                                                                                                                                    | String        | "RS256"                    |
-| kid           | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the   [well-known configuration's](#openid-connect-discovery-document) *jwks_uri* value.   | String        | "a5dfwef1a-0ead3f5223_w1e" |
+| kid           | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the   [well-known configuration's](/docs/api/resources/oidc.html#openid-connect-discovery-document) *jwks_uri* value.   | String        | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Claims in the payload section
 
@@ -242,7 +242,7 @@ For more information about configuring an app for OpenID Connect, including grou
     | `id_token` `token`        | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
     | `code` `id_token` `token` | `email` if email scope is requested; `name` and `preferred_username` if profile scope is requested | Claims associated with the requested scopes |
 
-* The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](#get-user-information) endpoint. Call this endpoint using the Access Token.
+* The full set of claims for the requested scopes is available via the [/oauth2/v1/userinfo](/docs/api/resources/oidc.html#get-user-information) endpoint. Call this endpoint using the Access Token.
 
 
 ## More Information

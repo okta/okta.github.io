@@ -11,7 +11,7 @@ and the client obtains an Okta session.
 
 ## Getting Started
 
-If you are new to OpenID Connect, read [the standards topic](/docs/standards/OIDC/index.html) before experimenting with the Postman collection. If you are familiar with
+If you are new to OpenID Connect, read [the standards topic](/standards/OIDC/index.html) before experimenting with the Postman collection. If you are familiar with
 [the OpenID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html), you may want to experiment with the Postman collection now:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2)
@@ -68,7 +68,7 @@ Returns a JSON document with information requested in the scopes list of the tok
 ~~~
 
 The claims in the response are identical to those returned for the requested scopes in the *id_token* JWT, except for the *sub* claim which is always present.
-See [Scope-Dependent Claims](#scope-dependent-claims-not-always-returned) for more information about individual claims.
+See [Scope-Dependent Claims](/standards/OIDC/index.html#scope-dependent-claims-not-always-returned) for more information about individual claims.
 
 #### Response Example (Error)
 {:.api .api-response .api-response-example}
@@ -109,7 +109,7 @@ Clients must validate the ID Token in the Token Response in the following manner
 
 Step 3 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [discovery document](#openid-connect-discovery-document)). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
 
-Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [ID Token header](#claims-in-the-header-section).
+Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [ID Token header](/standards/OIDC/index.html#claims-in-the-header-section).
 
 Please note the following:
 
@@ -133,7 +133,7 @@ The API takes an Access Token or Refresh Token, and returns a boolean indicating
 If the token is active, additional data about the token is also returned. If the token is invalid, expired, or revoked, it is considered inactive.
 An implicit client can only introspect its own tokens, while a confidential client can inspect all Access Tokens.
 
-> Note; [ID Tokens](oidc.html#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
+> Note; [ID Tokens](/standards/OIDC/index.html#id-token) are also valid, however, they are usually validated on the service provider or app side of a flow.
 
 #### Request Parameters
 
@@ -527,7 +527,7 @@ of the response.
 | display               | How to display the authentication and consent UI. Valid values: *page* or *popup*.                                                                                                                                                                                                                                                                                                                      | Query      | String   | FALSE    |                  |
 | max_age               | Allowable elapsed time, in seconds, since the last time the end user was actively authenticated by Okta.                                                                                                                                                                                                                                                                                                | Query      | String   | FALSE    |                  |
 | response_mode         | How the authorization response should be returned.     [Valid values: *fragment*, *form_post*, *query* or *okta_post_message*](#parameter-details). If *id_token* or *token* is specified as the response type, then *query* isn't allowed as a response mode. Defaults to *fragment* in implicit and hybrid flow. Defaults to *query* in authorization code flow and cannot be set as *okta_post_message*. | Query      | String   | FALSE    | See Parameter Details. |
-| scope                 | `openid` is required. Other   [scopes](/docs/api/resources/oidc.html#scopes) may also be included.                                                                                                                                                                                                                                                                                                         | Query      | String   | TRUE     |
+| scope                 | `openid` is required. Other   [scopes](/standards/OIDC/index.html#scopes) may also be included.                                                                                                                                                                                                                                                                                                         | Query      | String   | TRUE     |
 | state                 | A value to be returned in the token. The client application can use it to remember the state of its interaction with the end user at the time of the authentication call. It can contain alphanumeric, comma, period, underscore and hyphen characters.                                                                                                                                                 | Query      | String   | TRUE     |
 | prompt                | Either *none* or *login*. If *none*,  do not prompt for authentication, and return an error if the end user is not already authenticated. If *login* force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.                                                                                                                                     | Query      | String   | FALSE    | See Parameter Details. |
 | nonce                 | A value that must be returned in the ID Token. It is used to mitigate replay attacks.                                                                                                                                                                                                                                                                                                                   | Query      | String   | TRUE     |

@@ -98,7 +98,7 @@ This authentication method produces a `sessionToken` which can be passed into th
 
 ## Access Token
 
-An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#jwt-header), [payload](#jwt-payload), and [signature](#jwt-signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
+An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#jwt-header), [payload](#jwt-payload), and [signature](#jwt-signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](/docs/api/resources/oauth2.html#scopes-and-claims) in the Access Token.
 
 The lifetime of Access Token can be configured in the [Access Policies](#access-policies). If the client that
 issued the token is deactivated, the token is immediately and permanently invalidated. Reactivating the
@@ -168,7 +168,7 @@ Okta defines a number of reserved scopes and claims which can't be overridden.
 #### Reserved scopes
 
 Reserved scopes: `openid`, `profile`, `email`, `address`, `phone`, `offline_access`, and `groups` are available to ID tokens and
-access tokens, using either Okta Authorization Server or Custom Authorization Server. For details, see [Scopes](/docs/api/resources/oidc.html#scopes).
+access tokens, using either Okta Authorization Server or Custom Authorization Server. For details, see [Scopes](/standards/OIDC/index.html#scopes).
 All of these scopes except `groups` and `offline_access` are defined in the OpenID Connect specification.
 
 #### Reserved claims in the header section
@@ -215,12 +215,12 @@ However, the specifics depend on which claims are requested, whether the request
 
 ##### Quick reference: which token has which claims?
 
-Okta defines two types of reserved (non-custom) claims, [base](/standards/OIDC/index.html#base-claims-always-present) and [scope-dependent claims](/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned).
+Okta defines two types of reserved (non-custom) claims, [base](/standards/OIDC/index.html#base-claims-always-present) and [scope-dependent claims](/standards/OIDC/index.html#scope-dependent-claims-not-always-returned).
 Base claims are always returned, and scope-dependent claims are returned depending on the scope requested. 
 Custom claims are configured in the Custom Authorization Server, and returned depending on the token type and configuration.
 
 * Base claims are always returned in ID Tokens and Access Tokens for both authorization server types (Okta Authorization Server or Custom Authorization Server).
-* Scope-dependent claims are returned in tokens depending on the response type for both authorization server types. See [the second table in the Scope-Dependent Claims topic](/docs/api/resources/oidc.html#scope-dependent-claims-not-always-returned) for details.
+* Scope-dependent claims are returned in tokens depending on the response type for both authorization server types. See [the second table in the Scope-Dependent Claims topic](/standards/OIDC/index.html#scope-dependent-claims-not-always-returned) for details.
 * Custom claims require the Custom Authorization Server to configure. You can specify that claims are to be returned in each token (ID or access) always, or only when requested:
     * If you configure a claim to always be returned in the ID Token, _____ .
     * If you configure a claim to always be returned in the access token, ____ .
@@ -301,7 +301,7 @@ A Custom Authorization Server can issue an ID Token to the client, as in OpenID 
 The lifetime of an ID token is one hour. If the client that issued the token is deactivated, the token is
 immediately and permanently invalidated. Reactivating the client does not make the token valid again.
 
-The validation steps for [OpenID Connect with the Okta Authorization Server](/standards/OIDC/index.html#validating-id-tokens) can also be applied to ID tokens for
+The validation steps for [OpenID Connect with the Okta Authorization Server](/docs/api/resources/oidc.html#validating-id-tokens) can also be applied to ID tokens for
 OAuth 2.0 (Custom Authorization Server), except the public keys should be retrieved via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
 
 ## Requesting a Token
