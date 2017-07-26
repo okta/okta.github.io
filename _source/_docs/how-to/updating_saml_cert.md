@@ -23,10 +23,6 @@ This How To contains six sections:
 
 To take advantage of the additional security features of SHA256 certificates.
 
-## Prerequisite
-
-SHA256 certificate creation and key rollover are **Early Access** (EA) features; contact Okta support to enable them.
-
 ### New SAML 2.0 App Integrations
 
 New SAML 2.0 app integrations automatically use SHA256 certificates when the key rollover feature is enabled.
