@@ -295,6 +295,66 @@ If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current
 
 -**Rate limits are enforced for all organizations.**
 
+The best way to be sure about your rate limits is to include the relevant headers. The System Log does not report every
+API request, it reports completed or attempted actions and events, so you can't query the system log for accurate API rates.
+
+### Org-Wide Rate Limits
+
+API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
+For any endpoint not listed, the API rate limit is 10,000 requests per minute.
+
+<table border="1" style="width: 100%;">
+	<caption>Org-Wide Rate Limits Per Minute</caption>
+	<thead>
+		<tr>
+			<th colspan="1" rowspan="1">Endpoint</th>
+			<th colspan="1" rowspan="1">Limit</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps/<i>{id}</i></span><span style="font-family: verdana,geneva,sans-serif;"> </span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">100</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/authn</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups/<i>{id}</i>&nbsp;</span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups/<i>{id}</i>&nbsp;</span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/sessions</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">750</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users/<i>{:id}</i></span> (exact URL plus query params or other qualifiers)</td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/</span>&nbsp; (if no other limit specified in this table)</td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+	</tbody>
+</table>
+
 ## Request Debugging
 
 The request ID will always be present in every API response and can be used for debugging. This value can be used to correlate events from the [Events API](/docs/api/resources/events.html) as well as the System Log events.
