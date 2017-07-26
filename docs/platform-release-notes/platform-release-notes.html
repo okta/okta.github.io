@@ -37,12 +37,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.28">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.29">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -188,22 +188,30 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201729">Release 2017.29</h2>
+      <h2 id="release-201730">Release 2017.30</h2>
 
 <h3 id="platform-features">Platform Features</h3>
 
-<p>The following platform features are Generally Available (GA) in preview orgs (as of Release 2017.28), and expected to roll out as GA to production orgs during the week of August 8, 2017:</p>
+<p>These platform features are GA in preview orgs (as of Release 2017.28), and expected to roll out as GA to production orgs during the week of August 7, 2017:</p>
 
 <ul>
   <li>
-    <p><a href="#openid-connect">OpenID Connect</a></p>
+    <p><a href="#openid-connect---">OpenID Connect</a></p>
   </li>
   <li>
-    <p><a href="#key-rollover">Key Rollover</a></p>
+    <p><a href="#key-rollover----">Key Rollover</a></p>
   </li>
 </ul>
 
-<h4 id="openid-connect">OpenID Connect</h4>
+<p>This platform feature enhancement is EA in preview orgs with this release and expected in production orgs the week of July 31, 2017. To enable an EA feature, contact Okta Support.</p>
+
+<ul>
+  <li><a href="#email-for-two-factor-authentication--">Email for Two-Factor Authentication</a></li>
+</ul>
+
+<p>For information about Early Access (EA) and General Availability (GA), see <a href="https://developer.okta.com/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>.</p>
+
+<h4 id="openid-connect---">OpenID Connect   <!-- OKTA-132049  --></h4>
 
 <p><a href="/docs/api/resources/oidc.html">OpenID Connect</a> is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
 
@@ -211,36 +219,33 @@
 
 <p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a>. For more information, see <a href="/standards/OIDC/">OpenID Connect and Okta</a>.</p>
 
-<p><!-- OKTA-132049  --></p>
-
-<h4 id="key-rollover">Key Rollover</h4>
+<h4 id="key-rollover----">Key Rollover    <!-- OKTA-132045  --></h4>
 
 <p>We provide the ability to generate a certificate with specified validity period (see the <a href="/docs/api/resources/apps.html">Apps API</a> and <a href="/docs/api/resources/idps.html">Identity Providers API</a>). We build OpenID Connect and API Access Management on this feature.</p>
 
-<p><!-- OKTA-132045  --></p>
+<h4 id="email-for-two-factor-authentication--">Email for Two-Factor Authentication  <!-- OKTA-134593  --></h4>
+
+<p>You can enroll a user with an email factor. See <a href="/docs/api/resources/factors.html#enroll-okta-email-factor">Enroll Okta Email Factor</a> for details.</p>
 
 <h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
 
-<p>These platform bug fixes are available in preview orgs and expected in production orgs the week of July 24, 2017.</p>
+<p>These platform bug fixes are in preview orgs with this release and expected in production orgs the week of July 31, 2017.</p>
 
 <ul>
   <li>
-    <p>When answering a security question to recover a forgotten password, users who gave too many incorrect responses didn’t receive the “locked out” message. (OKTA-126117)</p>
+    <p>Under some circumstances users who did not have a secondary email address could not perform a self-service password reset operation.   (OKTA-128340)</p>
   </li>
   <li>
-    <p>Custom SMS templates allowed messages greater than 160 characters after substituting the org name and code. The new behavior is to use a default template instead of the custom template when that happens. To ensure use of your custom template, update it to stay within the 160-character limit. (OKTA-128721)</p>
+    <p>“When the <code class="highlighter-rouge">expand</code> parameter was set in GET requests to <a href="/docs/api/resources/groups.html#list-groups"><code class="highlighter-rouge">/api/v1/groups</code></a>, the second and subsequent pages of the response did not have the same <code class="highlighter-rouge">expand</code> setting.  (OKTA-132503)</p>
   </li>
   <li>
-    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> error responses didn’t conform to the format in the <a href="https://tools.ietf.org/html/rfc7591#section-3.2.2">OAuth 2.0 Dynamic Client Registration spec</a>. (OKTA-130375)</p>
+    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> returned HTTP status code 200 rather than 201 when creating a client successfully.  (OKTA-128839)</p>
   </li>
   <li>
-    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> didn’t allow default values for optional parameters. (OKTA-130910)</p>
+    <p><a href="/docs/api/resources/oauth2.html#create-authorization-server"><code class="highlighter-rouge">/api/v1/authorizationServers</code></a> returned HTTP status code 200 rather than 201 when creating an Authorization Server successfully.  (OKTA-128839)</p>
   </li>
   <li>
-    <p>Neither <a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> nor <a href="/docs/api/resources/apps.html#add-application"><code class="highlighter-rouge">/api/v1/apps</code></a> required client secrets to be unique. (OKTA-131259)</p>
-  </li>
-  <li>
-    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> returned an incorrect resource URI in the response header.  (OKTA-131891)</p>
+    <p><a href="/docs/api/resources/oauth-clients.html#get-oauth-client"><code class="highlighter-rouge">/oauth2/v1/clients/{clientId}</code></a> returned HTTP status code 404 rather than 401 when it did not find the specified client.  (OKTA-130804, OKTA-130848)</p>
   </li>
 </ul>
 

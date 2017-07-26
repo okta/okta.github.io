@@ -37,18 +37,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Okta Auth SDK | Okta Developer</title>
-  <meta name="description" content="A Javascript wrapper for Okta's Authentication APIs. Build your own branded UI and power sign-in with Okta.">
+  <title>Okta Auth SDK Quickstart | Okta Developer</title>
+  <meta name="description" content="A JavaScript wrapper for Okta's Authentication APIs.">
   <link rel="canonical" href="https://developer.okta.com/code/javascript/okta_auth_sdk">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page okta-auth-sdk">
+  <div class="Page okta-auth-sdk-quickstart">
     <!-- START Header -->
     
 <header id="header">
@@ -188,15 +188,32 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_code/javascript/okta_auth_sdk.md">Edit Page</a>
-      <h1 id="overview">Overview</h1>
+      <h2 id="overview">Overview</h2>
 
 <p>The Okta Auth SDK builds on top of our <a href="/docs/api/resources/authn.html">Authentication API</a> and <a href="/docs/api/resources/oidc.html">OAuth 2.0 API</a> to enable you to create a fully branded sign-in experience using JavaScript.</p>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<p>The Auth SDK is used by Okta’s <a href="/code/javascript/okta_auth_sdk">Sign-in Widget</a> which powers the default Okta sign-in page. If you are building a JavaScript front end or Single Page App (SPA), the Auth SDK gives you added control and customization beyond what is possible with the Widget.</p>
+
+<p>In this Quickstart you will learn how to use the Auth SDK on a simple static page to:</p>
 
 <ul>
-  <li>An Okta org - Register for <a href="https://www.okta.com/developer/signup/">Okta Developer Edition</a> if you don’t have an existing org</li>
-  <li>A domain that is <a href="/docs/api/getting_started/enabling_cors.html">CORS enabled for your org</a></li>
+  <li>Retrieve and store an OpenID Connect (OIDC) token</li>
+  <li>Get an Okta session</li>
+</ul>
+
+<p>If you’d like to jump right into the Auth SDK’s code, you can find it on GitHub here: <a href="https://github.com/okta/okta-auth-js">https://github.com/okta/okta-auth-js</a>.</p>
+
+<p>If you’d like to read the Auth SDK’s reference page, you will find it here: <a href="/code/javascript/okta_auth_sdk_ref">Okta Auth SDK Reference Page</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>You will need the following things for this quickstart:</p>
+
+<ul>
+  <li>An Okta org - If you don’t have an existing org, register for <a href="https://www.okta.com/developer/signup/">Okta Developer Edition</a>.</li>
+  <li>An OpenID Connect Application. Instructions for creating one can be found on <a href="https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm">this page</a>, under the “OpenID Connect Wizard” section.</li>
+  <li>At least one User <a href="https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning">assigned to the Application</a>.</li>
+  <li>An entry in your Org’s “Trusted Origins” for your application. To do this, follow the steps found under the “Trusted Origins tab” section in our <a href="https://help.okta.com/en/prev/Content/Topics/Security/API.htm">API Security help page</a>.</li>
 </ul>
 
 <h2 id="installation">Installation</h2>
@@ -207,1161 +224,213 @@
 </code></pre>
 </div>
 
-<h2 id="authentication-flow">Authentication Flow</h2>
+<h2 id="part-1-retrieve-and-store-an-openid-connect-token">Part 1: Retrieve and Store an OpenID Connect Token</h2>
 
-<p>The goal of an authentication flow is to set an Okta session cookie on the user’s browser.</p>
+<p>In this first section you will learn how to:</p>
 
-<p>All Auth SDK methods return <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>, deferred objects that resolve when the method has finished. For more information about why Promises are useful, and how to use our specific promise library, check out the <a href="https://github.com/kriskowal/q">Q.js readme</a>.</p>
+<ul>
+  <li><a href="#client-configuration">Configure your Okta Auth SDK Client</a></li>
+  <li>Retrieve an ID Token using a redirect to your Okta org’s sign-in page</li>
+  <li>Parse a token from the URL that results from the redirect</li>
+  <li>Store the parsed token inside the SDK’s Token Manager</li>
+  <li>Retrieve the stored token from the Token Manager</li>
+</ul>
 
-<p>An example authentication flow would look like this:</p>
+<p>If you’d like to see the complete code example, you can find it <a href="#complete-openid-connect-token-example">below</a>.</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span><span class="na">url</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com'</span><span class="p">});</span>
-<span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
-  <span class="na">username</span><span class="p">:</span> <span class="s1">'some-username'</span><span class="p">,</span>
-  <span class="na">password</span><span class="p">:</span> <span class="s1">'some-password'</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">transaction</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// On success</span>
-  <span class="k">switch</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+<h3 id="client-configuration">Client Configuration</h3>
 
-    <span class="k">case</span> <span class="s1">'SUCCESS'</span><span class="err">:</span>
-      <span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">);</span> <span class="c1">// Sets a cookie on redirect</span>
-      <span class="k">break</span><span class="p">;</span>
+<p>To initialize the SDK, create a new instance of the <code class="highlighter-rouge">OktaAuth</code> object:</p>
 
-    <span class="nl">default</span><span class="p">:</span>
-      <span class="k">throw</span> <span class="s1">'We cannot handle the '</span> <span class="o">+</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">status</span> <span class="o">+</span> <span class="s1">' status'</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// On failure</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://dev-123456.oktapreview.com'</span><span class="p">,</span> 
+  <span class="na">clientId</span><span class="p">:</span> <span class="s1">'0oab4exampleR4Jbi0h7'</span><span class="p">,</span>
+  <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:3333'</span> 
 <span class="p">});</span>
 </code></pre>
 </div>
 
-<h2 id="transactions">Transactions</h2>
+<p>Replace each of these property values with ones from your Okta org and application. For more information about these properties, see the <a href="/code/javascript/okta_auth_sdk_ref#client-configuration">Client Configuration section of the Auth SDK reference</a>.</p>
 
-<p>When Auth SDK methods resolve, they return a Transaction object that encapsulates the new state in the authentication flow. This Transaction object contains metadata about the current state, and methods that can be used to progress to the next state.</p>
+<h3 id="retrieve-id-token-from-okta">Retrieve ID Token from Okta</h3>
 
-<p>More information about Transaction states, their definitions, and the flow between them can be found in our <a href="/docs/api/resources/authn.html#transaction-state">Authentication API documentation</a>.</p>
+<p>To retrieve an ID Token from Okta, you will use the <code class="highlighter-rouge">token.getWithRedirect</code> method, specifying that you want an <code class="highlighter-rouge">id_token</code> included in the response:</p>
 
-<h3 id="transaction-states">Transaction States</h3>
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithRedirect</span><span class="p">({</span>
+  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p><a href="/code/javascript/okta_auth_sdk_ref#tokengetwithredirect">Read more about getWithRedirect in the Auth SDK Reference</a>.</p>
+
+<h3 id="parse-the-token">Parse the Token</h3>
+
+<p>After the redirect, the URL will contain an ID Token in the form of a JWT. The <code class="highlighter-rouge">token.parseFromUrl</code> method can be used to parse that token from the URL:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">parseFromUrl</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>You can also display a specific part of the parsed token:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">hi</span> <span class="nx">$</span><span class="p">{</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p><a href="/code/javascript/okta_auth_sdk_ref#tokenparsefromurl">Read more about parseFromUrl in the Auth SDK Reference</a>.</p>
+
+<h3 id="store-the-parsed-token">Store the Parsed Token</h3>
+
+<p>Once the token has been parsed out of the URL, you can add it to the Token Manager using the <code class="highlighter-rouge">tokenManager.add</code> method.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">,</span> <span class="nx">idToken</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p><a href="/code/javascript/okta_auth_sdk_ref#tokenmanageradd">Read more about tokenManager.add in the Auth SDK Reference</a></p>
+
+<p>The full code to parse the token, display the email from it, and then add it to the SDK’s Token Manager looks like this:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">parseFromUrl</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">idToken</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">hi</span> <span class="nx">$</span><span class="p">{</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">);</span>
+    <span class="nx">authClient</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">,</span> <span class="nx">idToken</span><span class="p">);</span>
+  <span class="p">})</span>
+</code></pre>
+</div>
+
+<h3 id="retrieve-the-stored-token">Retrieve the Stored Token</h3>
+
+<p>A token that is stored in the Token Manager can be retrieved using the <code class="highlighter-rouge">tokenManager.get</code> method.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">idToken</span> <span class="o">=</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p><a href="/code/javascript/okta_auth_sdk_ref#tokenmanagerget">Read more about tokenManager.get in the Auth SDK Reference</a></p>
+
+<h3 id="complete-openid-connect-token-example">Complete OpenID Connect Token Example</h3>
+
+<p>Putting it all together, the final example looks like this:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="c1">// Bootstrap the AuthJS Client</span>
+    <span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
+      <span class="c1">// Org URL</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s1">'https://dev-144769.oktapreview.com'</span><span class="p">,</span> 
+      <span class="c1">// OpenID Connect APP Client ID</span>
+      <span class="na">clientId</span><span class="p">:</span> <span class="s1">'0oab4qpkhz1UR4Jbi0h7'</span><span class="p">,</span> 
+      <span class="c1">// Trusted Origin Redirect URI</span>
+      <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:3333'</span>
+    <span class="p">});</span>
+    <span class="c1">// Attempt to retrieve ID Token from Token Manager</span>
+    <span class="kd">var</span> <span class="nx">idToken</span> <span class="o">=</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">);</span>
+    <span class="c1">// If ID Token exists, return it in console.log</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">idToken</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">hi</span> <span class="nx">$</span><span class="p">{</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">);</span>
+    <span class="c1">// If ID Token isn't found, try to parse it from the current URL</span>
+    <span class="p">}</span> 
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">parseFromUrl</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">idToken</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">hi</span> <span class="nx">$</span><span class="p">{</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">);</span>
+        <span class="c1">// Store parsed token in Token Manager</span>
+        <span class="nx">authClient</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">,</span> <span class="nx">idToken</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">idToken</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">}</span> 
+    <span class="k">else</span> <span class="p">{</span>
+ <span class="c1">// You're not logged in, you need a sessionToken</span>
+      <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithRedirect</span><span class="p">({</span>
+        <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+</code></pre>
+</div>
+
+<h2 id="part-2-get-an-okta-session-cookie">Part 2: Get an Okta Session Cookie</h2>
+
+<p>In the code example above, the ID Token is retrieved using a redirect to the Okta sign-in page. It is also possible to take a user-inputted <code class="highlighter-rouge">username</code> and <code class="highlighter-rouge">password</code> pair and pass them to the <code class="highlighter-rouge">signIn</code> method. This method then initiates an authentication process which returns an <a href="/use_cases/authentication/session_cookie#retrieving-a-session-cookie-by-visiting-a-session-redirect-link">Okta session cookie</a>. This Okta session cookie can then be used, along with the <code class="highlighter-rouge">getWithRedirect</code> method, to get back the ID Token. This means that there is no need to redirect the user to the Okta sign-in page.</p>
+
+<p><a href="/code/javascript/okta_auth_sdk_ref#signin">Read more about signIn in the Auth SDK Reference</a>.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">else</span> <span class="p">{</span>
+  <span class="c1">// You're not logged in, you need a sessionToken</span>
+  <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s1">'What is your username?'</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s1">'What is your password?'</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithRedirect</span><span class="p">({</span>
+        <span class="na">sessionToken</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">,</span>
+        <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+</div>
 
 <blockquote>
-  <p>Keep in mind:</p>
-
-  <ul>
-    <li>
-      <p>Methods listed for a state are not always guaranteed to be available.</p>
-    </li>
-    <li>
-      <p><code class="highlighter-rouge">stateToken</code> is never required as a parameter.</p>
-    </li>
-    <li>
-      <p>All transactions have a <code class="highlighter-rouge">data</code> attribute that contains the response body as an object.</p>
-    </li>
-  </ul>
+  <p>This example, like everything else on this page, is for illustrative purposes only. The <code class="highlighter-rouge">prompt()</code> method is not considered a secure way of asking for user authentication credentials.</p>
 </blockquote>
 
-<h4 id="locked-out">Locked Out</h4>
+<h4 id="complete-okta-session-and-oidc-token-example">Complete Okta Session and OIDC Token Example</h4>
 
-<p>The user account is locked; self-service unlock or admin unlock is required.</p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
 
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">LOCKED_OUT</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">unlock</code></td>
-      <td>Function</td>
-      <td><a href="/docs/api/resources/authn.html#unlock-account">Parameters</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">unlock</span><span class="p">({</span>
-  <span class="na">username</span><span class="p">:</span> <span class="s1">'dade.murphy@example.com'</span><span class="p">,</span>
-  <span class="na">factorType</span><span class="p">:</span> <span class="s1">'EMAIL'</span>
-<span class="p">});</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="c1">// Bootstrap the AuthJS Client</span>
+    <span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
+      <span class="c1">// Org URL</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s1">'https://dev-123456.oktapreview.com'</span><span class="p">,</span> 
+      <span class="c1">// OpenID Connect APP Client ID</span>
+      <span class="na">clientId</span><span class="p">:</span> <span class="s1">'0oab4example4Jbi0h7'</span><span class="p">,</span> 
+      <span class="c1">// Trusted Origin Redirect URI</span>
+      <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:3333'</span>
+    <span class="p">});</span>
+    <span class="c1">// Attempt to retrieve ID Token from Token Manager</span>
+    <span class="kd">var</span> <span class="nx">idToken</span> <span class="o">=</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">);</span>
+    <span class="c1">// If ID Token exists, return it in console.log</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">idToken</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">hi</span> <span class="nx">$</span><span class="p">{</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">);</span>
+    <span class="c1">// If ID Token isn't found, try to parse it from the current URL</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">parseFromUrl</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">idToken</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">hi</span> <span class="nx">$</span><span class="p">{</span><span class="nx">idToken</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">email</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">);</span>
+        <span class="c1">// Store parsed token in Token Manager</span>
+        <span class="nx">authClient</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">,</span> <span class="nx">idToken</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">idToken</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// You're not logged in, you need a sessionToken</span>
+      <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s1">'What is your username?'</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">prompt</span><span class="p">(</span><span class="s1">'What is your password?'</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">})</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithRedirect</span><span class="p">({</span>
+            <span class="na">sessionToken</span><span class="p">:</span> <span class="nx">res</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">,</span>
+            <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
+          <span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
 </code></pre>
 </div>
-
-<h4 id="password-expired">Password Expired</h4>
-
-<p>The user’s password was successfully validated but is expired.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">PASSWORD_EXPIRED</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the transaction will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">changePassword</code></td>
-      <td>Function</td>
-      <td><a href="/docs/api/resources/authn.html#change-password">Parameters</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">changePassword</span><span class="p">({</span>
-  <span class="na">oldPassword</span><span class="p">:</span> <span class="s1">'0ldP4ssw0rd'</span><span class="p">,</span>
-  <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h4 id="password-reset">Password Reset</h4>
-
-<p>The user successfully answered their recovery question and can set a new password.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">PASSWORD_RESET</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the transaction will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">resetPassword</code></td>
-      <td>Function</td>
-      <td><a href="/docs/api/resources/authn.html#reset-password">Parameters</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">resetPassword</span><span class="p">({</span>
-  <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h4 id="password-almost-expired">Password Almost Expired</h4>
-
-<p>The user’s password was successfully validated but is about to expire and should be changed.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">PASSWORD_WARN</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the transaction will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">policy</code></td>
-      <td><a href="/docs/api/resources/authn#password-policy-object">Policy</a></td>
-      <td>Password requirements</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">changePassword</code></td>
-      <td>Function</td>
-      <td><a href="/docs/api/resources/authn.html#change-password">Parameters</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">skip</code></td>
-      <td>Function</td>
-      <td>Ignore the warning and continue</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">changePassword</span><span class="p">({</span>
-  <span class="na">oldPassword</span><span class="p">:</span> <span class="s1">'0ldP4ssw0rd'</span><span class="p">,</span>
-  <span class="na">newPassword</span><span class="p">:</span> <span class="s1">'N3wP4ssw0rd'</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h4 id="recovery">Recovery</h4>
-
-<p>The user has requested a recovery token to reset their password or unlock their account.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">RECOVERY</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">recoveryType</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">PASSWORD</code> or <code class="highlighter-rouge">UNLOCK</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">answer</code></td>
-      <td>Function</td>
-      <td><a href="/docs/api/resources/authn#answer-recovery-question">Parameters</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">answer</span><span class="p">({</span>
-  <span class="na">answer</span><span class="p">:</span> <span class="s1">'My favorite recovery question answer'</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h4 id="verify-recovery">Verify Recovery</h4>
-
-<p>The user must verify the factor-specific recovery challenge.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">RECOVERY_CHALLENGE</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the transaction will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factorType</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">EMAIL</code> or <code class="highlighter-rouge">SMS</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">recoveryType</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">PASSWORD</code> or <code class="highlighter-rouge">UNLOCK</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">verify</code></td>
-      <td>Function</td>
-      <td><a href="/docs/api/resources/authn.html#verify-recovery-factor">Parameters</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">resend</code></td>
-      <td>Function</td>
-      <td>Resend the recovery email or text</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Examples:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Verify the recovery</span>
-<span class="nx">transaction</span><span class="p">.</span><span class="nx">verify</span><span class="p">({</span>
-  <span class="na">passCode</span><span class="p">:</span> <span class="s1">'615243'</span>
-<span class="p">});</span>
-
-<span class="c1">// Resend recovery email or sms</span>
-<span class="nx">transaction</span><span class="p">.</span><span class="nx">resend</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<h4 id="begin-mfa-enrollment">Begin MFA Enrollment</h4>
-
-<p>When MFA is required, but a user isn’t enrolled in MFA, they must enroll in at least one factor.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">MFA_ENROLL</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the transaction will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factors</code></td>
-      <td>List of <a href="#enroll-factor">Enroll Factors</a></td>
-      <td>Factors enabled for an org</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">skip</code></td>
-      <td>Function</td>
-      <td>Ignore enrollment and continue</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="enroll-factor">Enroll Factor</h5>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">enrollment</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">OPTIONAL</code> or <code class="highlighter-rouge">REQUIRED</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">NOT_SETUP</code>, <code class="highlighter-rouge">PENDING_ACTIVATION</code>, <code class="highlighter-rouge">ENROLLED</code>, <code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">INACTIVE</code>, or <code class="highlighter-rouge">EXPIRED</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factorType</code></td>
-      <td><a href="/docs/api/resources/factors.html#factor-type">Factor Type</a></td>
-      <td>Type of factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">provider</code></td>
-      <td><a href="/docs/api/resources/factors.html#provider-type">Factor Provider</a></td>
-      <td>Provider of the given <code class="highlighter-rouge">factorType</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">enroll</code></td>
-      <td>Function</td>
-      <td><a href="/docs/api/resources/authn.html#enroll-factor">Parameters</a>. <code class="highlighter-rouge">factorType</code> and <code class="highlighter-rouge">provider</code> are optional</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">questions</code></td>
-      <td>Function</td>
-      <td>Returns <a href="/docs/api/resources/factors.html#response-example-3">available questions</a>, not a transaction. Only available for the <code class="highlighter-rouge">question</code> factorType</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the first factor is a question</span>
-<span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-
-<span class="c1">// Returns the available questions</span>
-<span class="nx">factor</span><span class="p">.</span><span class="nx">questions</span><span class="p">();</span>
-
-<span class="c1">// Enroll after selecting a question and entering an answer</span>
-<span class="nx">factor</span><span class="p">.</span><span class="nx">enroll</span><span class="p">({</span>
-  <span class="na">profile</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">question</span><span class="p">:</span> <span class="s1">'disliked_food'</span><span class="p">,</span>
-    <span class="na">answer</span><span class="p">:</span> <span class="s1">'mayonnaise'</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h4 id="activate-a-factor-for-mfa-enrollment">Activate a Factor for MFA Enrollment</h4>
-
-<p>The user must activate the factor to complete enrollment.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">MFA_ENROLL_ACTIVATE</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the transaction will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factorResult</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">WAITING</code>, <code class="highlighter-rouge">CANCELLED</code>, <code class="highlighter-rouge">TIMEOUT</code>, or <code class="highlighter-rouge">ERROR</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factor</code></td>
-      <td><a href="#activate-enroll-factor">Activate Enroll Factor</a></td>
-      <td>Factor to activate</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">activate</code></td>
-      <td>Function</td>
-      <td>Verify the OTP or restart the activation process if the activation is expired</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">poll</code></td>
-      <td>Function</td>
-      <td>Poll until <code class="highlighter-rouge">factorResult</code> changes. Throws <a href="#authpollstoperror">AuthPollStopError</a> when <code class="highlighter-rouge">prev</code> or <code class="highlighter-rouge">cancel</code> is called</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">resend</code></td>
-      <td>Function</td>
-      <td>Send another OTP if user doesn’t receive the original activation SMS OTP</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">prev</code></td>
-      <td>Function</td>
-      <td>End current factor enrollment and return to <a href="#begin-mfa-enrollment">MFA_ENROLL</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="activate-enroll-factor">Activate Enroll Factor</h5>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">id</code></td>
-      <td>String</td>
-      <td>Unique id for the factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factorType</code></td>
-      <td><a href="/docs/api/resources/factors.html#factor-type">Factor Type</a></td>
-      <td>Type of factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">provider</code></td>
-      <td><a href="/docs/api/resources/factors.html#provider-type">Factor Provider</a></td>
-      <td>Provider of the given <code class="highlighter-rouge">factorType</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">activation</code></td>
-      <td><a href="#activation">Activation</a></td>
-      <td>Activation properties</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="activation">Activation</h5>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the activation will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factorResult</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">WAITING</code>, <code class="highlighter-rouge">CANCELLED</code>, <code class="highlighter-rouge">TIMEOUT</code>, or <code class="highlighter-rouge">ERROR</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">send</code></td>
-      <td>Function</td>
-      <td>Takes a <code class="highlighter-rouge">name</code> parameter that’s <code class="highlighter-rouge">sms</code> or <code class="highlighter-rouge">email</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">qrcode</code></td>
-      <td><a href="/docs/api/getting_started/design_principles.html#links">Link</a></td>
-      <td>Contains <code class="highlighter-rouge">href</code> and <code class="highlighter-rouge">type</code> to embed as an image</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">activate</span><span class="p">({</span>
-  <span class="na">passCode</span><span class="p">:</span> <span class="s1">'615243'</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h4 id="select-mfa-when-required">Select MFA When Required</h4>
-
-<p>The user must provide additional verification with a previously enrolled factor.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">MFA_REQUIRED</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the transaction will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factors</code></td>
-      <td>List of <a href="#enrolled-factor">Enrolled Factors</a></td>
-      <td>Factors available to pass MFA</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="enrolled-factor">Enrolled Factor</h5>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">id</code></td>
-      <td>String</td>
-      <td>Unique id for the factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factorType</code></td>
-      <td><a href="/docs/api/resources/factors.html#factor-type">Factor Type</a></td>
-      <td>Type of factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">provider</code></td>
-      <td><a href="/docs/api/resources/factors.html#provider-type">Factor Provider</a></td>
-      <td>Provider of the given <code class="highlighter-rouge">factorType</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">profile</code></td>
-      <td><a href="/docs/api/resources/factors.html#factor-profile-object">Factor Profile</a></td>
-      <td>Details about the factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">verify</code></td>
-      <td>Function</td>
-      <td><a href="/docs/api/resources/authn.html#verify-factor">Parameters</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Assume the first factor is a question</span>
-<span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-
-<span class="nx">factor</span><span class="p">.</span><span class="nx">verify</span><span class="p">({</span>
-  <span class="na">answer</span><span class="p">:</span> <span class="s1">'mayonnaise'</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h4 id="mfa-enforcement">MFA Enforcement</h4>
-
-<p>The user must verify the factor-specific challenge.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">MFA_CHALLENGE</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the transaction will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factorResult</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">WAITING</code>, <code class="highlighter-rouge">CANCELLED</code>, <code class="highlighter-rouge">TIMEOUT</code>, or <code class="highlighter-rouge">ERROR</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factor</code></td>
-      <td><a href="#challenge-factor">Challenge Factor</a></td>
-      <td>Factor currently being challenged</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">poll</code></td>
-      <td>Function</td>
-      <td>Poll until <code class="highlighter-rouge">factorResult</code> is not <code class="highlighter-rouge">WAITING</code>. Throws <a href="#authpollstoperror">AuthPollStopError</a> if <code class="highlighter-rouge">prev</code>, <code class="highlighter-rouge">resend</code>, or <code class="highlighter-rouge">cancel</code> is called</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">resend</code></td>
-      <td>Function</td>
-      <td>Takes a <code class="highlighter-rouge">name</code> parameter that’s usually <code class="highlighter-rouge">sms</code> or <code class="highlighter-rouge">push</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">prev</code></td>
-      <td>Function</td>
-      <td>End current factor enrollment and return to <a href="#begin-mfa-enrollment">MFA_ENROLL</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cancel</code></td>
-      <td>Function</td>
-      <td>Ends the transaction</td>
-    </tr>
-  </tbody>
-</table>
-
-<h5 id="challenge-factor">Challenge Factor</h5>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">id</code></td>
-      <td>String</td>
-      <td>Unique id for the factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">factorType</code></td>
-      <td><a href="/docs/api/resources/factors.html#factor-type">Factor Type</a></td>
-      <td>Type of factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">provider</code></td>
-      <td><a href="/docs/api/resources/factors.html#provider-type">Factor Provider</a></td>
-      <td>Provider of the given <code class="highlighter-rouge">factorType</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">profile</code></td>
-      <td><a href="/docs/api/resources/factors.html#factor-profile-object">Factor Profile</a></td>
-      <td>Details about the factor</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">verification</code></td>
-      <td><a href="/docs/api/resources/authn.html#verify-factor">Verification</a></td>
-      <td>Verification properties</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">transaction</span><span class="p">.</span><span class="nx">poll</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<h4 id="successful-sign-in">Successful Sign-In</h4>
-
-<p>At the end of the authentication flow, a transaction with a status of <code class="highlighter-rouge">SUCCESS</code> is returned. This transaction contains a <code class="highlighter-rouge">sessionToken</code> that you can <a href="#create-a-session">exchange for an Okta cookie</a>.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">status</code></td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">SUCCESS</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expiresAt</code></td>
-      <td><a href="https://tools.ietf.org/html/rfc3339">Date String</a></td>
-      <td>Time the sessionToken will expire</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">sessionToken</code></td>
-      <td><a href="/docs/api/resources/authn.html#session-token">Session Token</a></td>
-      <td>Token that can be exchanged for a cookie</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user</code></td>
-      <td><a href="/docs/api/resources/authn.html#user-object">User</a></td>
-      <td>Subset of user properties</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Example:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">);</span>
-</code></pre>
-</div>
-
-<h2 id="transaction-management">Transaction Management</h2>
-
-<p>If the user navigates away from the page during an authentication flow, you may want to resume the transaction.</p>
-
-<h3 id="check-for-existing-transaction">Check for Existing Transaction</h3>
-
-<p>Check for a transaction to be resumed. This is synchronous and returns <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tx</span><span class="p">.</span><span class="nx">exists</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<h3 id="resume-the-transaction">Resume the transaction</h3>
-
-<p>Returns a transaction with a user’s previous state.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">tx</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<h2 id="social-authentication-and-openid-connect">Social Authentication and OpenID Connect</h2>
-
-<p>If you want to create a token via <a href="/docs/api/resources/oidc.html">OpenID Connect</a> or <a href="/docs/api/resources/social_authentication.html">social authentication</a>, it’s possible to manage the flow with this SDK. To do so, instantiate your client with a <code class="highlighter-rouge">clientId</code> and <code class="highlighter-rouge">redirectUri</code>. If you don’t have either of those, <a href="https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw/blob/master/Okta-OIDC_SPA_JS-OSW_DevSetupGuide.pdf">set up OpenID Connect with these instructions</a>.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://your-org.okta.com'</span><span class="p">,</span>
-  <span class="na">clientId</span><span class="p">:</span> <span class="s1">'your-client-id'</span><span class="p">,</span>
-  <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'https://your.redirect.uri/redirect'</span> <span class="c1">// defaults to current url if omitted</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<p>Each method to create a token (or tokens) takes an optional argument:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// Defaults</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span><span class="p">,</span>
-  <span class="na">scopes</span><span class="p">:</span> <span class="p">[</span><span class="s1">'openid'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">]</span>
-<span class="p">};</span>
-</code></pre>
-</div>
-
-<p>The <code class="highlighter-rouge">responseType</code> option can be a string (<code class="highlighter-rouge">id_token</code>, <code class="highlighter-rouge">token</code>, or <code class="highlighter-rouge">code</code>) or an array with multiple responseTypes. When a string is passed, the response is a single token. When an array is passed, the response is a token array in the order they were requested. For example:</p>
-
-<p>A single token</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithPopup</span><span class="p">({</span>
-  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">idToken</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Manage the idToken</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Handle OAuthError</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<p>Multiple tokens</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithPopup</span><span class="p">({</span>
-  <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'token'</span><span class="p">,</span> <span class="s1">'id_token'</span><span class="p">]</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tokenArray</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// The tokenArray order corresponds with the responseType array</span>
-
-  <span class="c1">// 'token' was first, so the first item is an accessToken</span>
-  <span class="kd">var</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">tokenArray</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-
-  <span class="c1">// 'id_token' was second, so the second item is an idToken</span>
-  <span class="kd">var</span> <span class="nx">idToken</span> <span class="o">=</span> <span class="nx">tokenArray</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-
-  <span class="c1">// Manage the tokens</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Handle OAuthError</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<p>Each <code class="highlighter-rouge">responseType</code> has its own format:</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// id_token</span>
-<span class="p">{</span>
-  <span class="nl">idToken</span><span class="p">:</span> <span class="s1">'theIdTokenString'</span><span class="p">,</span>
-  <span class="nx">claims</span><span class="err">:</span> <span class="p">{},</span> <span class="c1">// The claims of the idToken (they're determined by the scopes requested)</span>
-  <span class="nx">expiresAt</span><span class="err">:</span> <span class="mi">123456789</span><span class="p">,</span> <span class="c1">// When the token expires in unix time</span>
-  <span class="nx">scopes</span><span class="err">:</span> <span class="p">[]</span> <span class="c1">// The scopes requested</span>
-<span class="p">}</span>
-
-<span class="c1">// token</span>
-<span class="p">{</span>
-  <span class="nl">accessToken</span><span class="p">:</span> <span class="s1">'theAccessTokenString'</span><span class="p">,</span>
-  <span class="nx">expiresAt</span><span class="err">:</span> <span class="mi">123456789</span><span class="p">,</span> <span class="c1">// When the token expires in unix time,</span>
-  <span class="nx">tokenType</span><span class="err">:</span> <span class="s1">'Bearer'</span><span class="p">,</span> <span class="c1">// This is the default type for access tokens</span>
-  <span class="nx">scopes</span><span class="err">:</span> <span class="p">[]</span> <span class="c1">// The scopes requested</span>
-<span class="p">}</span>
-
-<span class="c1">// code</span>
-<span class="p">{</span>
-  <span class="nl">authorizationCode</span><span class="p">:</span> <span class="s1">'theAuthorizationCodeString'</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<h3 id="create-token-with-a-popup">Create token with a popup</h3>
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithPopup</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tokenOrTokens</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Manage token or tokens</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Handle OAuthError</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<p>This is commonly used to create a token with an external idp.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithPopup</span><span class="p">({</span>
-  <span class="na">idp</span><span class="p">:</span> <span class="s1">'target-idp'</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h3 id="create-token-using-a-redirect">Create token using a redirect</h3>
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithRedirect</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
-
-<span class="c1">// If the token is in the url after the redirect</span>
-<span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">parseFromUrl</span><span class="p">()</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tokenOrTokens</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Manage token or tokens</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Handle OAuthError</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<p>This is commonly used to create an authorization code.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithRedirect</span><span class="p">({</span>
-  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'code'</span>
-<span class="p">});</span>
-
-<span class="c1">// authClient.token.parseFromUrl isn't necessary, because it's parsed from the query param by your server</span>
-</code></pre>
-</div>
-
-<h3 id="exchange-a-sessiontoken-for-a-token">Exchange a sessionToken for a token</h3>
-
-<p>When you’ve obtained a sessionToken from the authorization flows, or a session already exists, you can obtain a token or tokens without prompting the user to log in.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithoutPrompt</span><span class="p">({</span>
-  <span class="na">responseType</span><span class="p">:</span> <span class="s1">'id_token'</span><span class="p">,</span> <span class="c1">// or array of types</span>
-  <span class="na">sessionToken</span><span class="p">:</span> <span class="s1">'testSessionToken'</span> <span class="c1">// optional if the user has an existing Okta session</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tokenOrTokens</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Manage token or tokens</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Handle OAuthError</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<p>Note: If the Okta cookie is not set and you are using <code class="highlighter-rouge">token.getWithoutPrompt</code>, try enabling third-party cookies in the browser.</p>
-
-<h3 id="refresh-a-token">Refresh a token</h3>
-
-<p>Returns a new token if the Okta session is still valid.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">refresh</span><span class="p">(</span><span class="nx">tokenToRefresh</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">freshToken</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Manage freshToken</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Handle OAuthError</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h3 id="decode-an-id-token">Decode an ID Token</h3>
-
-<p>Decode a raw ID Token</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">idTokenString</span><span class="p">);</span>
-</code></pre>
-</div>
-
-<h2 id="session-management">Session Management</h2>
-
-<p>The SDK allows managing your Okta session. Each of these methods returns a Promise.</p>
-
-<h3 id="create-a-session">Create a session</h3>
-
-<p>To create a session, you must first have a <code class="highlighter-rouge">sessionToken</code>. This can be created by going through the <a href="#authentication-flow">Authentication Flow</a> until the <a href="#successful-sign-in">SUCCESS</a> status. The transaction will contain the <code class="highlighter-rouge">sessionToken</code>. If a <code class="highlighter-rouge">redirectUri</code> is not passed, Okta will redirect to the current page.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">setCookieAndRedirect</span><span class="p">(</span><span class="nx">sessionToken</span><span class="p">,</span> <span class="nx">redirectUri</span><span class="p">);</span>
-</code></pre>
-</div>
-
-<h3 id="check-for-an-existing-session">Check for an existing session</h3>
-
-<p>Resolves with <code class="highlighter-rouge">true</code> or <code class="highlighter-rouge">false</code>.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">exists</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<h3 id="get-an-existing-session">Get an existing session</h3>
-
-<p>Resolves with a <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<h3 id="refresh-a-session">Refresh a session</h3>
-
-<p>Resolves with a refreshed version of your existing <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<h3 id="close-a-session">Close a session</h3>
-
-<p>Terminates an existing <a href="/docs/api/resources/sessions.html#example">session</a>.</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">authClient</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-</code></pre>
-</div>
-
-<h2 id="errors">Errors</h2>
-
-<p>A <code class="highlighter-rouge">fail</code> on a promise will resolve with one of these failures:</p>
-
-<h4 id="authapierror">AuthApiError</h4>
-
-<p>This is thrown when we receive a response from the Okta service that is not a 200. It contains the same properties as our <a href="/docs/api/getting_started/design_principles.html#errors">API errors</a>.</p>
-
-<h4 id="authsdkerror">AuthSdkError</h4>
-
-<p>This is thrown when an error occurs within the SDK.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">errorCode</code></td>
-      <td>String</td>
-      <td>Always <code class="highlighter-rouge">INTERNAL</code></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorSummary</code></td>
-      <td>String</td>
-      <td>Summary of the error</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="authpollstoperror">AuthPollStopError</h4>
-
-<p>This is thrown when a <code class="highlighter-rouge">poll</code> has been initiated, but another action is taken before the <code class="highlighter-rouge">poll</code> is finished.</p>
-
-<h4 id="oautherror">OAuthError</h4>
-
-<p>This is thrown when an <a href="/reference/error_codes/index#openid-connect-and-okta-social-authentication">error occurs during the OAuth flow</a>.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">errorCode</code></td>
-      <td>String</td>
-      <td>The OAuth error code</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">errorSummary</code></td>
-      <td>String</td>
-      <td>Summary of the error</td>
-    </tr>
-  </tbody>
-</table>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

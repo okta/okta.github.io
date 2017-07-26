@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+  <script>
+    var isProduction = window.location.hostname === 'developer.okta.com';
+    if (isProduction) {
+      // TypeKit
+      (function(d) {
+        var config = {
+          kitId: 'jff5neq',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15777010-3', 'auto');
+      ga('send', 'pageview');
+
+      // START Google Tag Manager
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJ45R6');
+      // END Google Tag Manager
+    }
+	</script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 	
+  <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  
+  
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+  <title>JWT Validation Guide | Okta Developer</title>
+  <meta name="description" content="How to validate Okta JWTs with PHP.">
+  <link rel="canonical" href="https://developer.okta.com/code/php/jwt-validation">
+  <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
+</head>
+
+<body>
+  <div class="Page jwt-validation-guide">
+    <!-- START Header -->
+    
+<header id="header">
+      <div class="Wrap">
+        <h1 class="logo"><a href="/">Okta</a></h1><!-- START Primary Nav -->
+        <nav>
+          <div id="top-nav">
+            <a href="#" id="mobile-close" class="mobile-toggle">
+              <span></span>
+              <span></span>
+            </a>
+            <a class="Button--green" href="https://developer.okta.com/signup/" id="top-nav-cta">Get Started</a>
+            <a class="SearchIcon" href="#"></a>
+            <ul>
+              <li>
+                <a href="/product/">Product</a>
+              </li>
+              <li>
+                <a href="/documentation/">Documentation</a>
+              </li>
+              <li>
+                <a href="/code/">Code</a>
+              </li>
+              <li>
+                <a href="/blog/">Blog</a>
+              </li>
+              <li class="has-dropdown">
+                <a href="#">Support</a>
+                <div class="dropdown-window">
+                  <p class="devforum">Post your question on <a href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank">Okta Developer Forums</a></p>
+                  <p class="email">Email us:<br>
+                  <a href="mailto:developers@okta.com">developers@okta.com</a></p>
+                  <p class="tel">Call us:<br>
+                  <a href="tel:18887227871">1 (888) 722-7871</a></p>
+                </div>
+              </li>
+            </ul>
+            <form id="form_search" method="get" action="/search/" name="form_search">
+              <input type="text" name="q" id="q" autocomplete="off">
+            </form>
+          </div>
+          <div id="mobile-nav">
+            <a id="mobile-search" href="/search/"><span class="icon-search-light"></span></a>
+            <a id="mobile-open" class="mobile-toggle" href="#top-nav">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+        </nav><!-- END Primary Nav -->
+      </div>
+    </header>
+
+    <!-- END Header -->
+     <!-- START Page Center w/Sub Nav & Content -->
+    <section class="PageContent DynamicSidebar has-tableOfContents">
+      <!-- START Fixed sidebar --><aside class="Sidebar">
+        <h2 class="Sidebar-location Sidebar-toggle h6">Navigation</h2>
+        <div class="Sidebar-close Sidebar-toggle"></div>
+        <div>
+          <h3 class="Sidebar-title">Use Cases</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/use_cases/authentication/">Authentication</a>
+            </li>
+            <li>
+              <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
+            </li>
+            <li>
+              <a href="/use_cases/api_access_management/">API Access Management</a>
+            </li>
+            <li>
+              <a href="/use_cases/integrate_with_okta/">Integrate with Okta</a>
+            </li>
+          </ul>
+          <h3 class="Sidebar-title">Reference</h3>
+          <ul class="Sidebar-nav">
+            <li>
+              <a href="/docs/api/getting_started/api_test_client.html">Getting Started</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/authn.html">Authentication Reference</a>
+            </li>
+            <li>
+              <a href="/docs/api/resources/apps.html">API Reference</a>
+            </li>
+            <li>
+              <a href="/reference/error_codes/">Error Codes</a>
+            </li>
+            <li>
+              <a href="/reference/okta_expression_language/">Okta Expression Language</a>
+            </li>
+            <li>
+              <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+            </li>
+          </ul>
+
+          <h3 class="Sidebar-title">Standards</h3>
+          <ul class="Sidebar-nav">
+            
+            
+            
+            <li>
+              <a href="/standards/OAuth/">OAuth 2.0 and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/OIDC/">OpenID Connect and Okta</a>
+            </li>
+            
+            
+            <li>
+              <a href="/standards/SAML/">SAML</a>
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/standards/SCIM/">SCIM Provisioning with Lifecycle Management</a>
+            </li>
+            
+          </ul>
+          <script>
+            if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
+                document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
+            }
+
+            if (document.querySelectorAll("#Sidebar_References .is-active").length) {
+                document.getElementById('Sidebar_References').classList.remove('Sidebar-hide');
+            }
+          </script>
+        </div>
+      </aside>
+<!-- END Fixed sidebar -->
+      <!-- START Page Content -->
+      <div class="PageContent-main" id="docs-body">
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_code/php/jwt-validation.md">Edit Page</a>
+      <p>As a result of a successful authentication by <a href="https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">obtaining an authorization grant from a user</a> using the Okta API, you 
+using the Okta API, you will be provided with a signed JWT (<code class="highlighter-rouge">id_token</code> and/or <code class="highlighter-rouge">access_token</code>). A common use case for 
+these access tokens is to use it inside of the Bearer authentication header to let your application know who the user
+is that is making the request. In order for you to know this use is valid, you will need to know how to validate the
+token against Okta. This guide gives you an example of how to do this using common libraries in PHP for working 
+with JWTs. These steps can be adapted for most JWT libraries that you may want to use.</p>
+
+<h2 id="things-you-will-need">Things you will need</h2>
+<p>For validating a JWT, you will need a few different items:</p>
+
+<ol>
+  <li>Your issuer URL</li>
+  <li>The JWT string you want to verify</li>
+  <li>A JWT library, this guide will use <a href="https://packagist.org/packages/firebase/php-jwt">firebase/php-jwt</a></li>
+  <li>A package to convert a JWK to a public key.</li>
+</ol>
+
+<h2 id="working-with-authorization-server-keys">Working with Authorization Server Keys</h2>
+<p>The first thing you will need to do is make a request to get your current keys for your authorization server. The URL
+ for the keys can be discovered by visiting the .well-known endpoint of your authorization server. The .well-known 
+ endpoint is listed in your authorization server dashboard and looks like 
+ <code class="highlighter-rouge">https://php.oktapreview.com/oauth2/ausb5jqgqkd774i490h7/.well-known/oauth-authorization-server</code></p>
+
+<p>Once you have your .well-known URL, have your application make a request to this endpoint and <code class="highlighter-rouge">json_decode</code> the 
+ results.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code> $keys = json_decode(file_get_contents('https://php.oktapreview.com/oauth2/ausb5jqg774i490h7/v1/keys'));
+</code></pre>
+</div>
+
+<p>This will return a JSON object of any keys. Typically, this will return a single key entry, but can return a set of 
+ keys.</p>
+
+<p>### Caching Keys
+ To avoid any future requests to the keys endpoint, you should cache the keys you receive in response to this 
+ request. As a guideline, store each key that is returned with the a combination of your Authorization Server id 
+ and the <code class="highlighter-rouge">kid</code>, or just the <code class="highlighter-rouge">kid</code> as the lookup key in your cache.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code> foreach($keys as $key) {
+    $item = $this-&gt;cache-&gt;getItem($serverId . '-' . $kid);
+    
+    if(!$item-&gt;isHit()) {
+        $item-&gt;set($key);
+        $this-&gt;cache-&gt;save($item);
+    } 
+</code></pre>
+</div>
+
+<blockquote>
+  <p>Note: If you are not setting TTL for the cache entry, you should make sure to empty out old keys when new
+  ones are added to the cache.</p>
+</blockquote>
+
+<p>This will allow you to look up the key for a later step. You could also update this to include a TTL if you wanted 
+ to make sure you request a fresh set of keys after a set amount of time, but this is not required.</p>
+
+<p>## Validating a JWT
+ After you have your <code class="highlighter-rouge">access_token</code> from a successful login, or from the <code class="highlighter-rouge">Bearer token</code> in the authorization header, 
+ you will need to make sure that this is still valid. There are a few steps here to fully validate it.</p>
+
+<p>### Parsing Keys
+ The keys you have stored in cache, or retrieved from the Authorization Server, need to be converted to an OpenSSL 
+ key resource that you can use. This can be done in any way you would like. There are some great libraries <a href="https://packagist.org/search/?q=jwk">on 
+ packagist</a> that can be used for this. Once you have the public key set, you are
+  ready to continue validating the JWT.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>$keys = JWK::parseKeySet($authorizationServer-&gt;getKeys());
+</code></pre>
+</div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">$authorizationServer</code> would be a class that gives you access to a method that gets the keys either from cache if 
+they exist already, or makes a request to the keys server. <code class="highlighter-rouge">parseKeySet</code> is a function that can turn each key from 
+the authorization server into a public key resource.</p>
+</blockquote>
+
+<h3 id="decode-a-jwt">Decode a JWT</h3>
+<p>The JWT will then need to be decoded. In the <a href="https://packagist.org/packages/firebase/php-jwt">Firebase PHP-JWT</a> 
+library, this is a method that accepts the <code class="highlighter-rouge">jwt</code>, <code class="highlighter-rouge">key</code>, and <code class="highlighter-rouge">allowed_algorithms</code>.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>$decoded = \Firebase\JWT\JWT::decode($jwt, $keys, ['RS256']);
+</code></pre>
+</div>
+
+<p>If the key does not exist in the set of keys you pass, an exception will be thrown letting you know this. At this 
+point, you can:</p>
+<ul>
+  <li>Call the token invalid</li>
+  <li>Go check for any new keys first, then validate again</li>
+  <li>Fail validation</li>
+</ul>
+
+<h4 id="alternate-decode-to-get-kid">Alternate decode to get kid</h4>
+<p>You can also decode the JWT without key validation to get the headers of the JWT itself. The value of doing this 
+allows you to get the <code class="highlighter-rouge">kid</code> out of the JWT header. This will allow you to see if the key was cached based on the <code class="highlighter-rouge">kid</code> 
+from the header, and then decode fully with only passing the single key.</p>
+
+<h3 id="verifying-jwt-claims">Verifying JWT Claims</h3>
+<p>There are two different types of JWTs that you may need to verify, and each has its own set of claims to look at as 
+well as some common ones. Use the table below as a guide of what element in the <code class="highlighter-rouge">access_token</code> or <code class="highlighter-rouge">idToken</code> 
+corresponds to what you should verify it against.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>access_token</th>
+      <th>id_token</th>
+      <th>Compare With</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Issuer</td>
+      <td><code class="highlighter-rouge">iss</code></td>
+      <td><code class="highlighter-rouge">iss</code></td>
+      <td>Issuer URI</td>
+      <td>Who issued this token. This will be your Authorization Server URI</td>
+    </tr>
+    <tr>
+      <td>Client ID</td>
+      <td><code class="highlighter-rouge">cid</code></td>
+      <td><code class="highlighter-rouge">aud</code></td>
+      <td>ClientID</td>
+      <td>The Client ID of the Application</td>
+    </tr>
+    <tr>
+      <td>Issued At</td>
+      <td><code class="highlighter-rouge">iat</code></td>
+      <td><code class="highlighter-rouge">iat</code></td>
+      <td>time()+300</td>
+      <td>Verify that this claim is valid by checking that the token was not issued in the future, with some leeway for clock skew.</td>
+    </tr>
+    <tr>
+      <td>Expired At</td>
+      <td><code class="highlighter-rouge">exp</code></td>
+      <td><code class="highlighter-rouge">exp</code></td>
+      <td>time()-300</td>
+      <td>Verify that this claim is valid by checking that the token has not expired, with some leeway for clock skew.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>To make sure all machines are able to test this, we set the leeway to 5 minutes. In our research, 5 minutes was 
+enough time to prevent most issues in regards to expire time and issued at time.</p>
+</blockquote>
+
+<h4 id="verify-nonce-only-when-verifying-id_token">Verify nonce (only when verifying id_token)</h4>
+<p>To mitigate replay attacks, verify that the <code class="highlighter-rouge">nonce</code> value in the <code class="highlighter-rouge">id_token</code> matches the <code class="highlighter-rouge">nonce</code> that was used when 
+doing the code exchange. This verification is optional, but is highly suggested to verify after the initial code 
+exchange.</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>if($decoded-&gt;claims['nonce'] != $request-&gt;getCookieParam('okta-oauth-nonce')) {
+    throw new \Exception('Invalid Token: Nonce does not match.')
+}
+</code></pre>
+</div>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>The above are the basic steps for verifying an access token locally. The steps are not tied directly to a library, 
+and can be applied to any JWT library you decide to use. We suggest you use either 
+<a href="https://packagist.org/packages/firebase/php-jwt">firebase/php-jwt</a> or 
+<a href="https://packagist.org/packages/spomky-labs/jose">spomky-labs/jose</a> as they have great support for this validation.</p>
+
+      </div>
+      <div class="TableOfContents TableOfContentsPreload">
+        <div class="TableOfContents-item is-level1">
+          <script>
+                  document.write(document.title.split('|')[0].trim());
+          </script>
+        </div>
+        <div class="TableOfContentsLoader"></div>
+      </div><!-- END Page Content -->
+    </section><!-- END Page Center w/Sub Nav & Content -->
+
+    <!-- START Footer -->
+    <footer class="footer">
+      <div class="Wrap">
+        <ul>
+          <li>
+            <a href="https://www.okta.com" target="_blank">Okta.com</a>
+          </li>
+          <li>
+            <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+          </li>
+          <li>
+            <a href="/terms/">Terms & Conditions</a>
+          </li>
+          <li>
+            <a href="/3rd_party_notices/">3rd Party Notices</a>
+          </li>
+          <li>
+            <a href="/privacy/">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/contact/">Contact Sales</a>
+          </li>
+          <li>
+            <a href="mailto:developers@okta.com">Contact Support</a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <a class="icon" href="http://github.com/oktadeveloper" target="_blank"><i class="fa fa-github"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://twitter.com/OktaDev" target="_blank"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="https://devforum.okta.com/" title="Okta Developer Forums" target="_blank"><i class="fa fa-comments"></i></a>
+          </li>
+          <li>
+            <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
+          </li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
+        </ul>
+      </div>
+    </footer>
+    <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    
+    
+    
+    
+      <script type="text/javascript" src="/assets/docs-a2d1c410ee8c45eaa505f76f4f72815741c3bb6532081ae1abe25e3d8d00f4fa.js"></script>
+    
+
+    <!-- END Footer -->
+  </div>
+  <!-- START Post Footer -->
+  
+  <!-- START Google Tag Manager -->
+  <!-- https://support.google.com/tagmanager/answer/6103696?hl=en -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJ45R6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- END Google Tag Manager -->
+  <!-- START Google Remarketing Tag -->
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1006913831;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+  </script>
+  <div style="display:none;"><script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script></div>
+  <noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1006913831/?value=0&amp;guid=ON&amp;script=0"></div></noscript>
+  <!-- END Google Remarketing Tag -->
+  <!-- START Crazy Egg Tracking -->
+  <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/9333.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+  </script>
+  <!-- END Crazy Egg Tracking -->
+
+  <!-- END Post Footer -->
+</body>
+</html>

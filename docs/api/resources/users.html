@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -1865,7 +1865,7 @@ in the request is deleted.</p>
 <p>Updates a user’s profile or credentials with partial update semantics</p>
 
 <blockquote>
-  <p>Important: Use the <code class="highlighter-rouge">POST</code> method for partial updates, because unspecified properties aren’t changed with <code class="highlighter-rouge">POST</code>.</p>
+  <p>Important: Use the <code class="highlighter-rouge">POST</code> method for partial updates. Unspecified properties are set to null with <code class="highlighter-rouge">PUT</code>.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
@@ -1913,7 +1913,7 @@ in the request is deleted.</p>
 
 <h5 class="api api-request api-request-example" id="request-example-13">Request Example</h5>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X PUT <span class="se">\</span>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
