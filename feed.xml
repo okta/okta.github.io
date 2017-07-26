@@ -8,6 +8,242 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Identity, Claims, &amp; Tokens – An OpenID Connect Primer, Part 1 of 3</title>
+        <description>&lt;p&gt;In the beginning, there were proprietary approaches to working with external identity providers for authentication and authorization. Then came SAML (Security Assertion Markup Language) – an open standard using XML as its message exchange type. Then, there was OAuth and OAuth 2.0 – also open as well as being a modern, RESTful approach to authorization using JSON as its medium. And now, the holy grail of “secure delegated access” OpenID Connect (henceforth OIDC), which runs on top of OAuth 2.0.&lt;/p&gt;
+
+&lt;p&gt;But wait. What was wrong with OAuth 2.0? To understand better, let’s first dispense with the term, secure delegated access. It’s too vague and has led to confusion between authentication (authn) and authorization (authz).&lt;/p&gt;
+
+&lt;p&gt;Without secure, external authentication and authorization, you’d have to trust that every application, and every developer not only had your best interests and privacy in mind, but also &lt;em&gt;knew how to protect your identity&lt;/em&gt; and was willing to keep up with security best practices. That’s a pretty tall order, right? With OIDC, you can use a trusted external provider to prove to a given application that you are who you say you are, without ever having to grant that application access to your credentials.&lt;/p&gt;
+
+&lt;p&gt;OAuth 2.0 leaves a lot of details up to implementers. For instance, it supports scopes, but scope names are not specified. It supports access tokens, but the format of those tokens are not specified. With OIDC, a number of specific scope names are defined that each produce different results. OIDC has both access tokens and ID tokens. An ID token must be JSON web token (JWT). Since the specification dictates the token format, it makes it easier to work with tokens across implementations.&lt;/p&gt;
+
+&lt;p&gt;In this blog series, I share a primer on OIDC. In the first post, we’ll review some key concepts around OIDC and tokens, explained in human terms. Then, we’ll look at OIDC in action with some specific code examples to highlight its value in the authentication and authorization ecosystem. Finally, we’ll dig into the guts of the different token types and how to control what goes into them.&lt;/p&gt;
+
+&lt;p&gt;You can see the various concepts and OIDC interactions covered at: &lt;a href=&quot;https://okta-oidc-fun.herokuapp.com&quot;&gt;https://okta-oidc-fun.herokuapp.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The code that backs this is at: &lt;a href=&quot;https://github.com/oktadeveloper/okta-oidc-flows-example&quot;&gt;https://github.com/oktadeveloper/okta-oidc-flows-example&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;key-concepts-scopes-claims-and-response-types&quot;&gt;Key Concepts: Scopes, Claims, and Response Types&lt;/h2&gt;
+
+&lt;p&gt;Before we dive into the minutiae of OIDC, let’s take a step back and talk about how we interact with it.&lt;/p&gt;
+
+&lt;p&gt;There are two primary actors involved in all OIDC interactions: the OpenID Provider (OP) and the Relying Party (RP). The OP is an &lt;a href=&quot;https://tools.ietf.org/html/rfc6749&quot;&gt;OAuth 2.0&lt;/a&gt; server that is capable of authenticating the end-user and providing information about the result of the authentication and the end-user to the Relying Party. The Relying Party is an OAuth 2.0 application that “relies” on the OP to handle authentication requests.&lt;/p&gt;
+
+&lt;p&gt;Typically, you kick off an OIDC interaction by hitting an &lt;code class=&quot;highlighter-rouge&quot;&gt;/authorization&lt;/code&gt; endpoint with an HTTP GET. A number of query parameters indicate what you can expect to get back after authenticating and what you’ll have access to (authorization).&lt;/p&gt;
+
+&lt;p&gt;Often, you’ll need to hit a &lt;code class=&quot;highlighter-rouge&quot;&gt;/token&lt;/code&gt; endpoint with an HTTP POST to get tokens which are used for further interactions.&lt;/p&gt;
+
+&lt;p&gt;OIDC also has an &lt;code class=&quot;highlighter-rouge&quot;&gt;/introspect&lt;/code&gt; endpoint for verifying a token, a &lt;code class=&quot;highlighter-rouge&quot;&gt;/userinfo&lt;/code&gt; endpoint for getting identity information about the user.&lt;/p&gt;
+
+&lt;p&gt;All of the above endpoints are the convention, but can be defined by the OP to be anything. One of the great improvements in OIDC is a &lt;a href=&quot;http://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata&quot;&gt;metadata&lt;/a&gt; mechanism to discover endpoints from the provider. For instance, if you navigate to: &lt;a href=&quot;https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration&quot;&gt;https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/.well-known/openid-configuration&lt;/a&gt;, you’ll get back a JSON formatted document with the metadata that identifies all the available endpoints from the OP (Okta, in this case).&lt;/p&gt;
+
+&lt;h3 id=&quot;whats-a-scope&quot;&gt;What’s a Scope?&lt;/h3&gt;
+
+&lt;p&gt;Scopes are space-separated lists of identifiers used to specify what access privileges are being requested. Valid scope identifiers are specified in &lt;a href=&quot;https://tools.ietf.org/html/rfc6749&quot;&gt;RFC 6749&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;OIDC has a number of built in scope identifiers. &lt;code class=&quot;highlighter-rouge&quot;&gt;openid&lt;/code&gt; is a required scope. All others – including custom scopes – are optional. The built-in scopes are:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;scope&lt;/th&gt;
+      &lt;th&gt;purpose&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;profile&lt;/td&gt;
+      &lt;td&gt;requests access to default profile claims&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;email&lt;/td&gt;
+      &lt;td&gt;requests access to email and email_verified claims&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;address&lt;/td&gt;
+      &lt;td&gt;requests access to address claim&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;phone&lt;/td&gt;
+      &lt;td&gt;requests access to phone_number and phone_number_verified claims&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The default profile claims are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;family_name&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;given_name&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;middle_name&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nickname&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;preferred_username&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;profile&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;picture&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;website&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gender&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;birthdate&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;zoneinfo&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;locale&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;updated_at&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Notice how the scopes are tied to claims. You may be asking, what the heck are claims?&lt;/p&gt;
+
+&lt;h3 id=&quot;whats-a-claim&quot;&gt;What’s a Claim?&lt;/h3&gt;
+
+&lt;p&gt;Simply put, claims are name/value pairs that contain information about a user, as well meta-information about the OIDC service. The official definition from the spec is a &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html#Terminology&quot;&gt;“piece of information asserted about an Entity.”&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s typical set of claims:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;family_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Silverman&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;given_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Micah&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;locale&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en-US&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Micah Silverman&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;preferred_username&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;micah.silverman@okta.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;sub&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;00u9vme99nxudvxZA0h7&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;updated_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1490198843&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;zoneinfo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;America/Los_Angeles&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;A number of the &lt;code class=&quot;highlighter-rouge&quot;&gt;profile&lt;/code&gt; claims are included above. That’s because the request for the user’s info was made using a token that was obtained with the &lt;code class=&quot;highlighter-rouge&quot;&gt;profile&lt;/code&gt; scope. In other words, a request is made that results in the issuance of a token. That token contains certain information based on the scopes specified in the original request.&lt;/p&gt;
+
+&lt;h3 id=&quot;whats-a-response-type&quot;&gt;What’s a Response Type?&lt;/h3&gt;
+
+&lt;p&gt;When working with OIDC, you’ll hear talk of various “flows”. These flows are used to describe different common authentication and authorization scenarios. Considerations include the type of application (like web-based or native mobile app), how you want to validate tokens (in the app or in the backend), and how you want to access additional identity information (make another API call or have it encoded right into a token).&lt;/p&gt;
+
+&lt;p&gt;There are three primary flows: &lt;em&gt;Authorization Code&lt;/em&gt;, &lt;em&gt;Implicit&lt;/em&gt;, and &lt;em&gt;Hybrid&lt;/em&gt;. These flows are controlled by the &lt;code class=&quot;highlighter-rouge&quot;&gt;response_type&lt;/code&gt; query parameter in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/authorization&lt;/code&gt; request. When thinking of which flow to use, consider front-channel vs. back-channel requirements. Front-channel refers to a user-agent (such as a SPA or mobile app) interacting directly with the OpenID provider (OP).  The implicit flow is a good choice when front-channel communication is required. Back-channel refers to a middle-tier client (such as Spring Boot or Express) interacting with the OP. The authorization code flow is a good choice when back-channel communication is required.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Authorization Code&lt;/em&gt; flow uses &lt;code class=&quot;highlighter-rouge&quot;&gt;response_type=code&lt;/code&gt;. After successful authentication, the response will contain a &lt;code class=&quot;highlighter-rouge&quot;&gt;code&lt;/code&gt; value. This code can later be exchanged for an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; and an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; (Hang in for now, we’ll talk about tokens in more depth later on.) This flow is useful where you have “middleware” as part of the architecture. The middleware has a &lt;code class=&quot;highlighter-rouge&quot;&gt;client id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;client secret&lt;/code&gt;, which is required to exchange the &lt;code class=&quot;highlighter-rouge&quot;&gt;code&lt;/code&gt; for tokens by hitting the &lt;code class=&quot;highlighter-rouge&quot;&gt;/token&lt;/code&gt; endpoint. These tokens can then be returned to the end-user application, such as a browser, without the browser ever having to know the &lt;code class=&quot;highlighter-rouge&quot;&gt;client secret&lt;/code&gt;. This flow allows for long-lived sessions through the use of &lt;code class=&quot;highlighter-rouge&quot;&gt;refresh tokens&lt;/code&gt;. The only purpose of &lt;code class=&quot;highlighter-rouge&quot;&gt;refresh tokens&lt;/code&gt; is to obtain new &lt;code class=&quot;highlighter-rouge&quot;&gt;access tokens&lt;/code&gt; to extend a user session.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Implicit&lt;/em&gt; flow uses &lt;code class=&quot;highlighter-rouge&quot;&gt;response_type=id_token token&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;response_type=id_token&lt;/code&gt;. After successful authentication, the response will contain an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; and an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; in the first case or just an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; in the second case. This flow is useful when you have an app speaking directly to a backend to obtain tokens with no middleware. It does not support long-lived sessions.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Hybrid&lt;/em&gt; flow combines the above two in different combinations – whatever make sense for the use case. An example would be &lt;code class=&quot;highlighter-rouge&quot;&gt;response_type=code id_token&lt;/code&gt;. This approach enables a scenario whereby you can have a long lived session in an app and get tokens back immediately from the &lt;code class=&quot;highlighter-rouge&quot;&gt;/authorization&lt;/code&gt; endpoint.&lt;/p&gt;
+
+&lt;h2 id=&quot;all-about-tokens&quot;&gt;All About Tokens&lt;/h2&gt;
+
+&lt;p&gt;With the foundation of scopes, claims, and response types, we can now talk about tokens! There are three types of tokens in OIDC: &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;refresh_token&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;id-tokens&quot;&gt;ID Tokens&lt;/h3&gt;
+
+&lt;p&gt;An &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; is a &lt;a href=&quot;https://tools.ietf.org/html/rfc7519&quot;&gt;JWT&lt;/a&gt;, per the &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html#TokenResponse&quot;&gt;OIDC Specification&lt;/a&gt;. This means that:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;identity information about the user is encoded right into the token and&lt;/li&gt;
+  &lt;li&gt;the token can be definitively verified to prove that it hasn’t been tampered with.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There’s a set of &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation&quot;&gt;rules&lt;/a&gt; in the specification for validating an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt;. Among the claims encoded in the &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; is an expiration (&lt;code class=&quot;highlighter-rouge&quot;&gt;exp&lt;/code&gt;), which must be honored as part of the validation process. Additionally, the signature section of JWT is used in concert with a key to validate that the entire JWT has not been tampered with in any way.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-brief-history-of-jwts&quot;&gt;A Brief History of JWTs&lt;/h4&gt;
+
+&lt;p&gt;In the beginning tokens were opaque – they carried no intrinsic information. This was fine as the server knew the token and could look up any data related to it, such as identity information.&lt;/p&gt;
+
+&lt;p&gt;When the &lt;a href=&quot;https://tools.ietf.org/html/rfc6749&quot;&gt;OAuth 2.0 spec&lt;/a&gt; was released in 2012, it defined token types (such as access and refresh tokens), but it purposely avoided dictating the format of these tokens.&lt;/p&gt;
+
+&lt;p&gt;In 2015, the &lt;a href=&quot;https://tools.ietf.org/html/rfc7519&quot;&gt;JWT spec&lt;/a&gt; was released. It proposed the creation of tokens which encoded other information. This token could be used as an opaque identifier and could also be inspected for additional information – such as identity attributes. It called these attributes &lt;code class=&quot;highlighter-rouge&quot;&gt;claims&lt;/code&gt;. The spec also includes provisions for cryptographically signed JWTs (called JWSs) and encrypted JWTs (called JWEs). A signed JWT is particularly useful in application development because you can have a high degree of confidence that the information encoded into the JWT has not been tampered with. By verifying the JWT within the application, you can avoid another round trip to an API service. It also allows to enforce behavior, like expiration, because you know the &lt;code class=&quot;highlighter-rouge&quot;&gt;exp&lt;/code&gt; claim has not been altered.&lt;/p&gt;
+
+&lt;p&gt;There’s no direct relationship between JWT and OAuth 2.0. However, many OAuth 2.0 implementers saw the benefits of JWTs and began using them as either (or both) access and refresh tokens.&lt;/p&gt;
+
+&lt;p&gt;OIDC formalizes the role of JWT in mandating that ID Tokens be JWTs. Many OIDC implementers will also use JWTs for access and refresh tokens, but it is not dictated by the spec.&lt;/p&gt;
+
+&lt;h3 id=&quot;access-tokens&quot;&gt;Access Tokens&lt;/h3&gt;
+
+&lt;p&gt;Access tokens are used as bearer tokens. A bearer token means that the bearer can access authorized resources without further identification. Because of this, it’s important that bearer tokens are protected. If I can somehow get ahold of and “bear” &lt;em&gt;your&lt;/em&gt; access token, I can masquerade as you.&lt;/p&gt;
+
+&lt;p&gt;These tokens usually have a short lifespan (dictated by its expiration) for improved security. That is, when the access token expires, the user must authenticate again to get a new access token limiting the exposure of the fact that it’s a bearer token.&lt;/p&gt;
+
+&lt;p&gt;Although not mandated by the OIDC spec, Okta uses JWTs for access tokens as (among other things) the expiration is built right into the token.&lt;/p&gt;
+
+&lt;p&gt;OIDC specifies a &lt;code class=&quot;highlighter-rouge&quot;&gt;/userinfo&lt;/code&gt; endpoint that returns identity information and must be protected. Presenting the access token makes the endpoint accessible.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example using &lt;a href=&quot;https://httpie.org&quot;&gt;HTTPie&lt;/a&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http https://micah.oktapreview.com/oauth2/.../v1/userinfo
+
+HTTP/1.1 400 Bad Request
+...
+WWW-Authenticate: Bearer error=&quot;invalid_request&quot;, error_description=&quot;The access token is missing.&quot;
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Let’s try again with an expired access token:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http https://micah.oktapreview.com/oauth2/.../v1/userinfo \
+Authorization:&quot;Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ik93bFNJS3p3Mmt1Wk8zSmpnMW5Dc2RNelJhOEV1elY5emgyREl6X3RVRUkifQ...&quot;
+
+HTTP/1.1 401 Unauthorized
+...
+WWW-Authenticate: Bearer error=&quot;invalid_token&quot;, error_description=&quot;The token has expired.&quot;
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Finally, let’s try with a valid access token:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http https://micah.oktapreview.com/oauth2/.../v1/userinfo \
+Authorization:&quot;Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ik93bFNJS3p3Mmt1Wk8zSmpnMW5Dc2RNelJhOEV1elY5emgyREl6X3RVRUkifQ...&quot;
+
+HTTP/1.1 200 OK
+...
+{
+    &quot;family_name&quot;: &quot;Silverman&quot;,
+    &quot;given_name&quot;: &quot;Micah&quot;,
+    &quot;groups&quot;: [
+        &quot;ABC123&quot;,
+        &quot;Everyone&quot;
+    ],
+    &quot;locale&quot;: &quot;en-US&quot;,
+    &quot;name&quot;: &quot;Micah Silverman&quot;,
+    &quot;preferred_username&quot;: &quot;micah+okta@afitnerd.com&quot;,
+    &quot;sub&quot;: &quot;...&quot;,
+    &quot;updated_at&quot;: 1490198843,
+    &quot;zoneinfo&quot;: &quot;America/Los_Angeles&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;refresh-tokens&quot;&gt;Refresh Tokens&lt;/h3&gt;
+
+&lt;p&gt;Refresh tokens are used to obtain new access tokens. Typically, refresh tokens will be long-lived while access tokens are short-lived. This allows for long-lived sessions that can be killed if necessary. Here’s a typical scenario:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;User logs in and gets back an access token and a refresh token&lt;/li&gt;
+  &lt;li&gt;The application detects that the access token is expired&lt;/li&gt;
+  &lt;li&gt;The application uses the refresh token to obtain a new access token&lt;/li&gt;
+  &lt;li&gt;Repeat 2 and 3 until the refresh token expires&lt;/li&gt;
+  &lt;li&gt;After the refresh token expires, the user must authenticate again&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You may be asking: Why do this dance? This approach strikes a balance between user experience and security. Imagine if the user is compromised in some way. Or, their subscription expires. Or, they are fired. At any point, the refresh token can be revoked by an admin. Then, step three above will fail and the user will be forced to (attempt to) establish a new session by authenticating. If their account has been suspended, they will not be able to authenticate.&lt;/p&gt;
+
+&lt;h3 id=&quot;identifying-token-types&quot;&gt;Identifying Token Types&lt;/h3&gt;
+
+&lt;p&gt;It can be confusing sometimes to distinguish between the different token types. Here’s a quick reference:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ID tokens carry identity information encoded in the token itself, which must be a JWT&lt;/li&gt;
+  &lt;li&gt;Access tokens are used to gain access to resources by using them as bearer tokens&lt;/li&gt;
+  &lt;li&gt;Refresh tokens exist solely to get more access tokens&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;continue-the-openid-connect-journey&quot;&gt;Continue the OpenID Connect Journey&lt;/h2&gt;
+
+&lt;p&gt;In this post, we learned some basics about OpenID Connect, its history, and a bit about the various flow types, scopes, and tokens involved. In the next installment, we’ll see OIDC in action!&lt;/p&gt;
+
+&lt;p&gt;If you want to jump ahead, check out the example at: &lt;a href=&quot;https://okta-oidc-fun.herokuapp.com&quot;&gt;https://okta-oidc-fun.herokuapp.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And, the source code is at: &lt;a href=&quot;https://github.com/oktadeveloper/okta-oidc-flows-example&quot;&gt;https://github.com/oktadeveloper/okta-oidc-flows-example&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 25 Jul 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1</guid>
+      </item>
+    
+      <item>
         <title>The Ultimate Guide to Progressive Web Applications</title>
         <description>&lt;p&gt;Progressive Web Apps, aka PWAs, are the best way for developers to make their webapps load faster and more performant. In a nutshell, PWAs are websites that use recent web standards to allow for installation on a user’s computer or device, and deliver an app-like experience to those users.&lt;/p&gt;
 
