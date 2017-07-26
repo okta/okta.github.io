@@ -98,7 +98,7 @@ This authentication method produces a `sessionToken` which can be passed into th
 
 ## Access Token
 
-An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#jwt-header), [payload](#jwt-payload), and [signature](#jwt-signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](/docs/api/resources/oauth2.html#scopes-and-claims) in the Access Token.
+An Access Token is a [JSON web token (JWT)](https://tools.ietf.org/html/rfc7519) encoded in base64URL format that contains [a header](#jwt-header), [payload](#jwt-payload), and [signature](#jwt-signature). A resource server can authorize the client to access particular resources based on the [scopes and claims](#scopes-and-claims) in the Access Token.
 
 The lifetime of Access Token can be configured in the [Access Policies](#access-policies). If the client that
 issued the token is deactivated, the token is immediately and permanently invalidated. Reactivating the
@@ -149,7 +149,7 @@ client does not make the token valid again.
 
 This is a digital signature Okta generates using the public key identified by the `kid` property in the header section.
 
-## Scopes and claims
+## Scopes and Claims
 
 Access Tokens include reserved scopes and claims, and can optionally include custom scopes and claims.
 
