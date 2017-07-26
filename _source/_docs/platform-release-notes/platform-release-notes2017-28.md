@@ -10,7 +10,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.27
 
 The following changes are available in preview orgs on Wednesday, July 12. Availability in production orgs is expected either one week or one month later. For information about Early Availability (EA) and Generally Available (GA), see [Okta Release Lifecycle](https://developer.okta.com/docs/api/getting_started/releases-at-okta.html).
 
-The following features are GA in preview orgs, and expected to be GA in production orgs during the week of August 8, 2017:
+The following features are GA in preview orgs, and expected to be GA in production orgs during the week of August 7, 2017:
 
 * [OpenID Connect](#openid-connect)
 
