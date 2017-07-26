@@ -151,7 +151,7 @@ client does not make the token valid again.
 
 This is a digital signature Okta generates using the public key identified by the `kid` property in the header section.
 
-## Scopes and claims
+## Scopes and Claims
 
 Access Tokens include reserved scopes and claims, and can optionally include custom scopes and claims.
 
@@ -159,9 +159,9 @@ Scopes are requested in the request parameter, and the Authorization Server uses
 
 Based on the granted scopes, claims are added into the Access Token returned from the request.
 
-### Reserved scopes and claims
+### Reserved Scopes and Claims
 
-The Okta Authorization Server defines a number of reserved scopes and claims which can't be overridden.
+Okta defines a number of reserved scopes and claims which can't be overridden.
 
 * [Reserved scopes](#reserved-scopes)
 * [Reserved claims in the header section](#reserved-claims-in-the-header-section)
@@ -169,50 +169,86 @@ The Okta Authorization Server defines a number of reserved scopes and claims whi
 
 #### Reserved scopes
 
-Reserved scopes include 'openid', 'profile', 'email', 'address', 'phone', 'offline_access', all defined in OpenID Connect.
+Reserved scopes include 'openid', 'profile', 'email', 'address', 'phone', 'offline_access', all defined in the OpenID Connect specification.
+Reserved scopes are returned differently to the ID token and access token:
+
+* If one of the associated scopes is granted to the access token, the reserved claim is added into it. 
+* If one of the associated scopes is granted to the ID token, the properties of that claim are added into it.
+
+For example, assume you have sent a request to `/oauth2/v1/authorize` requesting an ID token and an access token,
+and specified the following claims: `profile`, `openid`, and `email`. Different claims, and sometimes different values, are returned
+because the ID Token is validated directly by the client app, but the access token is consumed by an audience that may not be the client app. 
+
+| Claim                                      | ID Token                                       | Access Token                                                  |
+|:-------------------------------------------|:-----------------------------------------------|:--------------------------------------------------------------|
+| sub                                        | 00u5t60iloOHN9pBi0h7                           | tony.stark@starkenterprises.com                               |
+| name  (property of `profile`)              | Tony Stark                                     |                                                               |
+| email (property of `email`)                | tony.stark@starkenterprises.com                |                                                               |
+| ver                                        | 1                                              | 1                                                             |
+| iss                                        | https://starkenterprises.oktapreview.com       | https://starkenterprises.oktapreview.com                      |
+| aud                                        | rHQoApjizqc4MGVlW5En (the client ID)           | https://starkenterprises.oktapreview.com                      |
+| iat                                        | 1500935984                                     | 1500935984                                                    |
+| exp                                        | 1500939584                                     | 1500939584                                                    |
+| cid                                        |                                                | rHQoApjizqc4MGVlW5En                                          |
+| jti                                        | ID.lzcBQKJWUvrWZVB6q7_4qNuYStXhUnnxxfMvPDZYxIU | AT.86oGmcd67bk_jlh6uCYqyaiLdo_mG5fluOu583zxt24                |
+| uid                                        |                                                | 00u5t60iloOHN9pBi0h7                                          |
+| amr                                        | ["pwd"]                                        |                                                               |
+| scp (exchanged for claims)                 |                                                | [ "groups", "address", "email", "phone", "openid", "profile"] |
+| idp                                        | "00o5t60il3UzyIe5v0h7",                        |                                                               |
+| nonce                                      | "9207605d-e32e-4f83-92cb-d4412acf300e"         |                                                               |
+| preferred_username (property of `profile`) | "tony.stark@starkenterprises.com"              |                                                               |
+| auth_time                                  | 1500932859                                     |                                                               |
+| at_hash:                                   | "tUR4yo9bhsa8t4Qbectlhw"                       |                                                               |
 
 #### Reserved claims in the header section
 
 The header only includes the following reserved claims:
 
-|--------------+-----------------------------------------------------------------------------------------------------+--------------|--------------------------|
-| Property     | Description                                                                      | DataType     | Example                  |
-|--------------+---------+--------------------------------------------------------------------------------------------+--------------|--------------------------|
-| alg          | Identifies the digital signature algorithm used. This is always be RS256.      | String       | "RS256"                  |
-| kid          | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the [metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) `jwks_uri` value.                                  | String       | "a5dfwef1a-0ead3f5223_w1e" |
+| Property | Description                                                                                                                                                                                                                     | DataType | Example                    |
+|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------|:---------------------------|
+| alg      | Identifies the digital signature algorithm used. This is always be RS256.                                                                                                                                                       | String   | "RS256"                    |
+| kid      | Identifies the `public-key` used to sign the `access_token`. The corresponding `public-key` can be found as a part of the   [metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) `jwks_uri` value.  | String   | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Reserved claims in the payload section
 
 The payload includes the following reserved claims:
 
-|--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
-| Property     |  Description                                                                      | DataType     | Example                  |
-|--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
-| ver     | The semantic version of the Access Token.   |  Integer   |  1    |
-| jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
-| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4"     |
-| aud     | Identifies the audience(resource URI) that this Access Token is intended for. | String    | "http://api.example.com/api"     |
-| sub     | The subject. A name for the user or a unique identifier for the client.  | String    | 	"john.doe@example.com"     |
-| iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| exp     | The time the Access Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
-| cid     | Client ID of your application that requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
-| uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
-| scp     | Array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
+| Property | Description                                                                                                            | DataType | Example                                                 |
+|:---------|:-----------------------------------------------------------------------------------------------------------------------|:---------|:--------------------------------------------------------|
+| ver      | The semantic version of the Access Token.                                                                              | Integer  | 1                                                       |
+| jti      | A unique identifier for this Access Token for debugging and revocation purposes.                                       | String   | "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"        |
+| iss      | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance. | String   | "https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4" |
+| aud      | Identifies the audience(resource URI) that this Access Token is intended for.                                          | String   | "http://api.example.com/api"                            |
+| sub      | The subject. A name for the user or a unique identifier for the client.                                                | String   | "john.doe@example.com"                                  |
+| iat      | The time the Access Token was issued, represented in Unix time (seconds).                                              | Integer  | 1311280970                                              |
+| exp      | The time the Access Token expires, represented in Unix time (seconds).                                                 | Integer  | 1311280970                                              |
+| cid      | Client ID of your application that requests the Access Token.                                                          | String   | "6joRGIzNCaJfdCPzRjlh"                                  |
+| uid      | A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.         | String   | "00uk1u7AsAk6dZL3z0g3"                                  |
+| scp      | Array of scopes that are granted to this Access Token.                                                                 | Array    | [ "openid", "custom" ]                                  |
 
+For example, assume you have sent a request to `/oauth2/v1/authorize` requesting an ID token and an access token,
+and specified the following claims: 
 
-### Custom scopes and claims
+### Custom Scopes and Claims
 
-The admin can configure custom scopes and claims for the Authorization Server.
+The admin can configure custom scopes and claims for the Custom Authorization Server. The admin can also configure a groups claim for the Okta Authorization Server.
 
 #### Custom scopes
 
-If the request that generates the access token contains any custom scopes, those scopes will be part of the *scp* claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html). The form of these custom scopes must conform to the [OAuth2 specification](https://tools.ietf.org/html/rfc6749#section-3.3).
+If the request that generates the access token contains any custom scopes, those scopes will be part of the *scp* claim together with the scopes provided from the [OIDC specification](http://openid.net/specs/openid-connect-core-1_0.html). The form of these custom scopes must conform to the [OAuth 2.0 specification](https://tools.ietf.org/html/rfc6749#section-3.3).
 
 >*Note:* Scope names can contain the characters < (less than) or > (greater than), but not both characters.
 
 #### Custom claims
 
-Custom claims are associated with scopes. If one of the associated scopes is granted to the Access Token, the custom claim is added into it. The value of a custom claim can be either an [expression](/reference/okta_expression_language/) or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn't added into the Access Token. The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.
+Custom claims are associated with scopes:
+
+* If one of the associated scopes is granted to the access token, the custom claim is added into it. 
+* If one of the associated scopes is granted to the ID token, the properties of that claim are added into it.
+
+The value of a custom claim can be either an [expression](/reference/okta_expression_language/) or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn't added into the access token.
+
+The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.
 
 >*Note:* For the custom claim with group filter, its value has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
 
@@ -259,7 +295,6 @@ You can use an [introspection endpoint](/docs/api/resources/oauth2.html#introspe
 A Refresh Token is an opaque string. It is a long-lived token that the client can use to obtain a new Access Token without re-obtaining authorization from the resource owner. The new Access Token must have the same or subset of the scopes associated with the Refresh Token.
 A Refresh Token will be returned if 'offline_access' scope is requested using authorization_code, password, or refresh_token grant type.
 
-
 The lifetime of a Refresh Token is configured in [Access Policies](#access-policies), the minimum value is 24 hours. The refresh token can also expire after a period if no clients redeem it for an Access Token. The period should be equal to or larger than 10 minutes. If the token's lifetime is set to unlimited, the Authorization Server will not check if clients use it or not.
 
 ### Refresh Token Revocation
@@ -273,16 +308,24 @@ Refresh Tokens can be revoked explicitly by making a [Revocation Request](/docs/
 No other modifications affect existing tokens.
 
 ## ID Token
-An Authorization Server can also issue an ID Token to the client, as in OpenID Connect, but with the following differences:
 
-* The ID Token cannot contain a reserved scope or claim called 'groups'. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
+A Custom Authorization Server can issue an ID Token to the client, as the Okta Authorization Server can, but with the following differences:
+
+* The ID Token can contain [custom scopes](#custom-scopes) and [custom claims](#custom-claims).
+* The ID Token can't contain a reserved scope or claim called 'groups'. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
 * The custom properties in the app user profile are not included in the Id Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.
 
-The lifetime of an Id Token is 1 hour. If the client that issued the token is deactivated, the token is
+The lifetime of an ID Token is 1 hour. If the client that issued the token is deactivated, the token is
 immediately and permanently invalidated. Reactivating the client does not make the token valid again.
 
-The same validation steps for [OpenID Connect](/docs/api/resources/oidc.html#validating-id-tokens) can also be applied to ID Token for
-OAuth2, except the public keys should be retrieved via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
+The same validation steps for [OpenID Connect with the Okta Authorization Server](/docs/api/resources/oidc.html#validating-id-tokens) can also be applied to ID Token for
+OAuth 2.0, except the public keys should be retrieved via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys). 
+
+For more information about OpenID Connect with the Okta Authorization Server, see [OpenID Connect API](/docs/api/resources/oidc.html).
+
+## Requesting a Token
+
+For a list of tokens returned, depending on grant type and scope in your request, see [Response Parameters](/docs/api/resources/oidc.html#response-parameters-4).
 
 ## Access Policies
 
