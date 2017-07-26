@@ -55,6 +55,14 @@ With API Access Management and Okta's implementation of OIDC Connect, the Author
 
 The Resource Owner Password and Client Credentials flows begin and end with requests to the [`/token` endpoint](/docs/api/resources/oauth2.html#request-a-token). The Authorization Code and Hybrid flows end with a request to the `/token` endpoint. The `grant_type` request parameter determines how the Authorization Server processes token requests.
 
+<!--  Table of grant types -->
+`grant_type` | Flow |
+| --- | --- |
+| `authorization_code` |  xx |
+| `password` |  xx |
+| `refresh_token` |  xx |
+| `client_credentials` |  xx |
+
 
 ## Authorization Code Flow
 
