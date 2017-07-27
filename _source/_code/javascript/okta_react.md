@@ -252,7 +252,7 @@ export default withAuth(class Callback extends Component {
 ```
 
 ### `/login`
-This route hosts the Sign-In Widget and redirects if the user is already logged in. If the user is coming from a protected page, they'll be redirected back to the page upon login.
+This route redirects if the user is already logged in. If the user is coming from a protected page, they'll be redirected back to the page upon login.
 
 Create a new component `src/Login.js`:
 
