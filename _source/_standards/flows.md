@@ -38,25 +38,33 @@ When your app needs to access one of the user's protected resources (for example
 
 4. Your app presents the Access Token to the API guarding the resource. This API may know nothing about your app, but it trusts Okta's Authorization Server, which issued the Access Token. It can understand the Access Token, which is opaque to anyone else who sees it. It can decide how much of the requested access to provide.
 
-When your App needs personal information about the user, it can also ask for an ID Token when it asks for the Access Token. This is a direct connection between your app and Okta's Authorization Server. The ID Token is encoded, so it is opaque to others. Your app can decode it and must validate its contents before extracting personal information from it. Once your app has extracted the personal information from the ID Token it must protect it as it would protect personal information gathered any other way.
+When your App needs personal information about the user, it can also ask for an ID Token when it asks for the Access Token. This is a direct connection between your app and Okta's Authorization Server. The ID Token is encoded, so it is opaque to others. Your app can decode it and must [validate its contents](/docs/api/resources/oauth2.html#introspection-request) before extracting personal information from it. Once your app has extracted the personal information from the ID Token it must protect it as it would protect personal information gathered any other way.
 
 ## Authorization Flows
 
-The preceding sequence of steps describes the most common way of obtaining tokens. The framework provides other possible sequences, called flows. The choice of flow depends on your execution environment and security needs. The basic OAuth 2.0 flows are:
+The preceding sequence of steps describes the Authorization Code flow, the most common way of obtaining tokens. The framework provides other possible flows. The choice of flow depends on your execution environment and security needs. T
+
+The OAuth 2.0 flows are:
 
   * Authorization Code -- your app receives an authorization code that it can exchange for an Access Token.
   * Implicit -- the user authorizes the Authorization Server to send an Access Token directly to your app.
   * Resource Owner Password -- Your app submits the user's credentials to the Authorization Server to obtain an Access Token.
   * Client Credentials -- Your app submits its own credentials to the Authorization Server to obtain an Access Token.
 
- The OpenID Connect flows use the OAuth 2.0 flows to enable your app to receive ID Tokens as well as Access Tokens and Refresh Tokens. In addition, OpenID Connect specifies a Hybrid flow. It combines aspects of the Authorization Code and Implicit flows.
+The OpenID Connect flows use the OAuth 2.0 flows to enable your app to receive ID Tokens as well as Access Tokens and Refresh Tokens. In addition, OpenID Connect specifies a Hybrid flow. It combines aspects of the Authorization Code and Implicit flows.
 
- The OpenID Connect flows are
+The OpenID Connect flows are
 
   * Authorization Code -- the OAuth 2.0 Authorization Code flow.
   * Implicit -- the OAuth 2.0 Implicit flow.
   * Hybrid -- the OAuth 2.0 Implicit flow, but your app also receives an authorization code.
   * Password -- not part of the OpenID Connect specification, but you can obtain ID Tokens using the OAuth 2.0 Resource Owner Password flow.
+
+## How to Choose
+
+As a rule of thumb, use Authorization Code flow whenever possible. Use Implicit flow with single-page apps (SPAs) and other cases where your app consists entirely of software downloaded into a browser and does not have its own backend website. Use Client Credentials flow for communication between software packages within a single protected environment.
+
+## Flow Details
 
 With API Access Management and Okta's implementation of OpenID Connect, the Authorization Code, Implicit, and Hybrid flows begin with requests to the [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user). The `response_type` request parameter determines which flow your app uses.
 
@@ -74,15 +82,17 @@ The Resource Owner Password and Client Credentials flows begin and end with requ
 > For the `refresh_token` grant type, scopes in the Access Token and the new Refresh Token are those in the supplied Refresh Token minus any not listed in the `scope` parameter in the request. For the `client_credentials` grant type, scopes in the Access Token are those in the request plus those granted by policy.
 
 
-## Authorization Code Flow
+### Authorization Code Flow
 
 Your app redirects the user's browser to the Okta Authorization Server's [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) with the `response_type` set to `code` in the URL. The Authorization Server authenticates the user, determines which permissions the user wishes to grant to your app, and redirects the browser, with an authorization code, to an endpoint that you provided  when you first registered your app with Okta. Your app presents the authorization code at the Authorization Server's `/token` endpoint with `grant_type` set to `authorization_code` and `scope` set to request some combination of Access Token, ID Token, and Refresh Token. The Authorization Server issues the requested tokens with the requested scopes.
 
 Most apps use this flow because of the security advantages described earlier. Using the Authorization Code flow whenever possible is a best practice.
 
-## Implicit Flow
+### Implicit Flow
 
-The implicit flow is designed for situations in which your app is not on a separate website but instead is written in a language like JavaScript that runs within the user's browser. This presents the following security problems:
+The implicit flow is designed for situations in which your app is not on a separate website but instead is written in a language like JavaScript that runs within the user's browser. Examples include single-page apps (SPAs).
+
+This flow presents the following security problems:
 
 * You cannot exclude the client from communications between the user and the Authorization server, so your app might be able to steal the user's username and password.
 
@@ -98,7 +108,7 @@ The user and others with access to the machine your app runs on may be able to c
 
 Carefully consider the security implications of using this flow.
 
-## Resource Owner Password Flow
+### Resource Owner Password Flow
 
 Your app makes a request directly (with no prior request to the `/authorize` endpoint) to the Authorization Server's [`/token` endpoint](/docs/api/resources/oauth2.html#request-a-token) with `grant_type` set to `password`. The request includes the `username` and `password` parameters. By setting `scope` appropriately your app can receive an Access Token and any combination of ID Token and Refresh Token.
 
@@ -107,19 +117,19 @@ This connection is directly between your app and the Okta Authorization Server, 
 Using this flow is not considered a good practice.
 
 
-## Client Credentials Flow
+### Client Credentials Flow
 
-If there is no end user in the picture, your app can use its own credentials (already registered with the Authorization Server). For example, if your app connects to an app that provides services to other apps, that app might accept tokens you obtain using the Client Credentials flow.
+If there is no end user in the picture, your app can use its own credentials (already registered with the Authorization Server). For example, if your app connects to an app that provides services to other apps, that app might accept tokens you obtain using the Client Credentials flow. This flow is typically for API-to-API communication between apps that are part of the same trusted environment. Using it may require setting up additional agreements outside the protocol.
 
 Your app makes a request directly (with no prior request to the `/authorize` endpoint) to the Authorization Server's [`/token` endpoint](/docs/api/resources/oauth2.html#request-a-token) to obtain the desired tokens. The request has `grant_type` set to `client_credentials` and includes `client_id`, `client_secret`, and `scope`. This flow returns only an Access Token, which contains the scopes specified in the request.
 
 
-## Hybrid Flow
+### Hybrid Flow
 
 This is the same as the [OAuth 2.0 Implicit flow](#implicit-flow), except that your app redirects the user's browser to the Authorization Server's [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) with the `response_type` set to `code id_token`, `code token` or `code id_token token` in the URL. It receives the requested combination of Access Token and ID Token in the response. It also receives an authorization code. The scopes in the authorization code and the returned tokens match those in the `scope` parameter of the request. In order for your app to receive an ID Token, `scope` must include `openid`.
 
 
-## Refresh Tokens
+### Refresh Tokens
 
 Refresh tokens eliminate the need for reauthorization. Access Tokens come with an expiration time and can be reused until they expire. When you acquire an Access Token, you can also acquire a Refresh Token, which has an expiration time and the same scopes as the Access Token. You can use the Refresh Token to obtain a fresh Access Token (with a later expiration time). You can also use a Refresh Token to obtain an Access Token with more limited scopes than the original Access Token.
 
