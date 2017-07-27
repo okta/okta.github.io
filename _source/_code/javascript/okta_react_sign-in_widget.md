@@ -158,9 +158,8 @@ export default class OktaSignInWidget extends Component {
 
 ## Create a SecureRoute
 Some routes will require authentication in order to render. Defining those routes is easy if we centralize our logic by creating a `src/SecureRoute.js` file:
-
-```typescript
 {% raw %}
+```typescript
 // src/SecureRoute.js
 
 import React from 'react';
@@ -179,9 +178,8 @@ export default withAuth(({ auth, component: Component, ...rest }) => (
     )
   )}/>
 ));
-{% endraw %}
 ```
-
+{% endraw %}
 ## Create Routes
 Lets take a look at what routes are needed:
 - `/`: A default page to handle basic control of the app.
