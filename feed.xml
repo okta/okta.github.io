@@ -8,6 +8,170 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>OIDC in Action – An OpenID Connect Primer, Part 2 of 3</title>
+        <description>&lt;p&gt;In the &lt;a href=&quot;https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1&quot;&gt;first installment of this OpenID Connect (OIDC) series&lt;/a&gt;, we looked at some OIDC basics, its history, and the various flow types, scopes, and tokens involved. In this post, we’ll dive into the mechanics of OIDC and see the various flows in action.&lt;/p&gt;
+
+&lt;p&gt;The token(s) you get back from an OIDC flow and the contents of the &lt;code class=&quot;highlighter-rouge&quot;&gt;/userinfo&lt;/code&gt; endpoint are a function of the flow type and scopes requested. You can see this live on the &lt;a href=&quot;https://okta-oidc-fun.herokuapp.com&quot;&gt;OIDC flow test site&lt;/a&gt;. Here, you can set different toggles for &lt;code class=&quot;highlighter-rouge&quot;&gt;scope&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;response_type&lt;/code&gt;, which determines the type of flow for your app.&lt;/p&gt;
+
+&lt;p&gt;Your use case will determine which flow to use. Are you building a SPA or mobile app that needs to interact directly with the OpenID Provider (OP)? Do you have middleware, such as Spring Boot or Node.js Express that will interact with the OP? Below, we dig into some of the available flows and when it’s appropriate to use them.&lt;/p&gt;
+
+&lt;h2 id=&quot;authorization-code-flow&quot;&gt;Authorization Code Flow&lt;/h2&gt;
+
+&lt;p&gt;The Authorization Code flow is covered in &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth&quot;&gt;Section 3.1 of the OIDC spec&lt;/a&gt;. The TL;DR is: a code is returned from the &lt;code class=&quot;highlighter-rouge&quot;&gt;/authorization&lt;/code&gt; endpoint which can be exchanged for ID and access tokens using the &lt;code class=&quot;highlighter-rouge&quot;&gt;/token&lt;/code&gt; endpoint.&lt;/p&gt;
+
+&lt;p&gt;This is a suitable approach when you have a middleware client connected to an OIDC OP and don’t (necessarily) want tokens to ever come back to an end-user application, such as a browser. It also means the end-user application never needs to know a secret key.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example of how this flow gets started using Okta:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&amp;amp;response_type=code&amp;amp;scope=openid&amp;amp;state=little-room-greasy-pie&amp;amp;nonce=b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581&amp;amp;redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Let’s break that down:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Part&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;https://micah.okta.com&lt;/td&gt;
+      &lt;td&gt;Okta Tenant&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize&lt;/td&gt;
+      &lt;td&gt;Auth endpoint, with Okta Authorization Server ID&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;?client_id=0oa2yrbf35Vcbom491t7&lt;/td&gt;
+      &lt;td&gt;Client ID of the OIDC Application defined in Okta&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;response_type=code&lt;/td&gt;
+      &lt;td&gt;The response type indicating code flow&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;scope=openid&lt;/td&gt;
+      &lt;td&gt;openid scope is required&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;state=little-room-greasy-pie&lt;/td&gt;
+      &lt;td&gt;value is returned back at the end of the flow&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;nonce=b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581&lt;/td&gt;
+      &lt;td&gt;nonce is encoded into the id_token&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result&lt;/td&gt;
+      &lt;td&gt;url-encoded url that the OP redirects to&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here it is in the browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/code_flow_1-cb06f089f594b904fac942ebd9f0f7e0642781f96e895c3291000d58cdf0e1ee.png&quot; alt=&quot;code flow 1&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Notice that on the new screen, you are redirected back to the &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect_uri&lt;/code&gt; originally specified (with the returned code and original &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt;):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/code_flow_2-755081ebf0820c6e5caebd57fbd9f0995cc0f1ddea028f746c1351c321943d5c.png&quot; alt=&quot;code flow 2&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from &lt;a href=&quot;&quot;&gt;here&lt;/a&gt;), when you click the link you would be redirected to login and then redirected back to this same page.&lt;/p&gt;
+
+&lt;p&gt;That code can now be exchanged for an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; and an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; by the middle tier (a Spring Boot application, in this case). More on that below.&lt;/p&gt;
+
+&lt;h2 id=&quot;implicit-flow&quot;&gt;Implicit Flow&lt;/h2&gt;
+
+&lt;p&gt;The Implicit flow is covered in &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth&quot;&gt;Section 3.2 of the OIDC spec&lt;/a&gt;. Essentially, access and ID tokens are returned directly from the &lt;code class=&quot;highlighter-rouge&quot;&gt;/authorization&lt;/code&gt; endpoint. The &lt;code class=&quot;highlighter-rouge&quot;&gt;/token&lt;/code&gt; endpoint is not used.&lt;/p&gt;
+
+&lt;p&gt;This is a suitable approach when working with a client (such as a Single Page Application or mobile application) that you want to interact with the OIDC OP directly.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example of how this flow gets started using Okta:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&amp;amp;response_type=id_token+token&amp;amp;scope=openid&amp;amp;state=shrill-word-accessible-iron&amp;amp;nonce=f8c658f0-1eb9-4f8d-8692-5da4e2f24cf0&amp;amp;redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;It’s almost identical to the authorization code flow, except that the &lt;code class=&quot;highlighter-rouge&quot;&gt;response_type&lt;/code&gt; is either &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;token&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token+token&lt;/code&gt;. Below, we cover exactly what’s in these tokens and how it’s driven, but remember: an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; encodes identity information and an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; (returned if &lt;code class=&quot;highlighter-rouge&quot;&gt;token&lt;/code&gt; is specified) is a bearer token used to access resources. Okta also uses JWT for an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt;, which enables additional information to be encoded into it.&lt;/p&gt;
+
+&lt;p&gt;Here’s this flow in the browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/implicit_flow_1-b4f46fb9297769a60ae1f4d4bebe5ce661b3ebee65d344599423fdad56761c3b.png&quot; alt=&quot;implicit flow 1&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You are redirected back to the &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect_uri&lt;/code&gt; originally specified (with the returned tokens and original &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt;):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/implicit_flow_2-99f3cd007ede90ebf08a4d1aa32a2a1b5859cde942f2738801901e35fe66d714.png&quot; alt=&quot;implicit flow 2&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The application can now verify the &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; locally. Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;/introspect&lt;/code&gt; endpoint to verify the &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt;. It can also use the &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; as a bearer token to hit protected resources, such as the &lt;code class=&quot;highlighter-rouge&quot;&gt;/userinfo&lt;/code&gt; endpoint.&lt;/p&gt;
+
+&lt;h2 id=&quot;hybrid-flow&quot;&gt;Hybrid Flow&lt;/h2&gt;
+
+&lt;p&gt;The Hybrid flow is covered in &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth&quot;&gt;Section 3.3 of the OIDC spec&lt;/a&gt;. In this flow, some tokens are returned from the authorization endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;/authorize&lt;/code&gt;) and others are returned from the token endpoint (&lt;code class=&quot;highlighter-rouge&quot;&gt;/token&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;This is a suitable approach when you want your end-user application to have immediate access to short-lived tokens – such as the &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; for identity information, and also want to use a backend service to exchange the authorization code for longer-lived tokens using refresh tokens.&lt;/p&gt;
+
+&lt;p&gt;It’s a combination of the authorization code and implicit code flows. You can spot it by looking at the &lt;code class=&quot;highlighter-rouge&quot;&gt;response_type&lt;/code&gt; it &lt;em&gt;must&lt;/em&gt; contain &lt;code class=&quot;highlighter-rouge&quot;&gt;code&lt;/code&gt; and one or both of &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;token&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yrbf35Vcbom491t7&amp;amp;response_type=code+id_token+token&amp;amp;scope=openid&amp;amp;state=shrill-word-accessible-iron&amp;amp;nonce=f8c658f0-1eb9-4f8d-8692-5da4e2f24cf0&amp;amp;redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Here it is in the browser:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/hybrid_flow_1-dcaa46f012c82b300e2eeccb87e742df651ffdb95854401ffd2bb1021ca77157.png&quot; alt=&quot;hybrid flow 1&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You are redirected back to the &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect_uri&lt;/code&gt; originally specified (with the returned code, tokens and original &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt;):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/hybrid_flow_2-3644708f10ccb660376b6244040225d65581ab7b4b2a16955642ed7f4af5d2a8.png&quot; alt=&quot;hybrid flow 2&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the next installment, we dig into how to control what’s in these tokens, but here’s a little taste now:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/action-8d0ce9194de634b23581551643081ffe1f55f3206ab187965e1e2faf47839c74.gif&quot; alt=&quot;token in action&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;These tokens were produced as a result of hybrid flow with all default scopes enabled.&lt;/p&gt;
+
+&lt;p&gt;Here’s the response from the &lt;code class=&quot;highlighter-rouge&quot;&gt;/userinfo&lt;/code&gt; endpoint using the &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; as a bearer token:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;sub&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;00u2yulup4eWbOttd1t7&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Okta OIDC Fun&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;locale&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en-US&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;email&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;okta_oidc_fun@okta.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;preferred_username&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;okta_oidc_fun@okta.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;given_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Okta OIDC&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;family_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Fun&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;zoneinfo&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;America/Los_Angeles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;updated_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1499922371&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+	&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;email_verified&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;other-oidc-flows&quot;&gt;Other OIDC Flows&lt;/h2&gt;
+
+&lt;p&gt;There are two other flows not covered in this post: &lt;a href=&quot;https://tools.ietf.org/html/rfc6749#section-4.4&quot;&gt;Client Credentials Flow&lt;/a&gt; and &lt;a href=&quot;https://tools.ietf.org/html/rfc6749#section-4.3&quot;&gt;Resource Owner Password Credentials&lt;/a&gt;. These are both holdovers from OAuth 2.0 and, as such, are supported by OIDC. Here, we’re focusing on flows that require an external authentication provider, such as Okta or Google, and not the alternative methods that these flows support.&lt;/p&gt;
+
+&lt;p&gt;What information is encoded in the &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt;, the &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; and what information is returned when hitting the protected &lt;code class=&quot;highlighter-rouge&quot;&gt;/userinfo&lt;/code&gt; endpoint are a function of the flow type and the scopes requested. In the next post, we dig deeper into this.&lt;/p&gt;
+
+&lt;h2 id=&quot;token-teardowns&quot;&gt;Token Teardowns&lt;/h2&gt;
+
+&lt;p&gt;In this installment, we looked at OIDC in action. You can experiment with OIDC at: &lt;a href=&quot;https://okta-oidc-fun.herokuapp.com/&quot;&gt;https://okta-oidc-fun.herokuapp.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can easily create your own instance of the OIDC tool if you have an Okta tenant. Check mine out at: &lt;a href=&quot;https://github.com/dogeared/okta-oidc-flows&quot;&gt;https://github.com/dogeared/okta-oidc-flows&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can explore the code or just click the friendly purple button to deploy your own instance.&lt;/p&gt;
+
+&lt;p&gt;In the final installment, we’ll dig into the various types of tokens and how to validate them.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 25 Jul 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2</guid>
+      </item>
+    
+      <item>
         <title>Identity, Claims, &amp; Tokens – An OpenID Connect Primer, Part 1 of 3</title>
         <description>&lt;p&gt;In the beginning, there were proprietary approaches to working with external identity providers for authentication and authorization. Then came SAML (Security Assertion Markup Language) – an open standard using XML as its message exchange type. Then, there was OAuth and OAuth 2.0 – also open as well as being a modern, RESTful approach to authorization using JSON as its medium. And now, the holy grail of “secure delegated access” OpenID Connect (henceforth OIDC), which runs on top of OAuth 2.0.&lt;/p&gt;
 
