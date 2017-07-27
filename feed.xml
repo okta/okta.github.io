@@ -37,12 +37,12 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;https://micah.okta.com&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://micah.okta.com&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;Okta Tenant&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize&lt;/td&gt;
-      &lt;td&gt;Auth endpoint, with Okta Authorization Server ID&lt;/td&gt;
+      &lt;td&gt;Auth endpoint, with your Okta org’s Authorization Server ID&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;?client_id=0oa2yrbf35Vcbom491t7&lt;/td&gt;
@@ -75,11 +75,13 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/code_flow_1-cb06f089f594b904fac942ebd9f0f7e0642781f96e895c3291000d58cdf0e1ee.png&quot; alt=&quot;code flow 1&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Notice that on the new screen, you are redirected back to the &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect_uri&lt;/code&gt; originally specified (with the returned code and original &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt;):&lt;/p&gt;
+&lt;p&gt;Notice that on the new screen, you are redirected back to the &lt;code class=&quot;highlighter-rouge&quot;&gt;redirect_uri&lt;/code&gt; originally specified:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/code_flow_2-755081ebf0820c6e5caebd57fbd9f0995cc0f1ddea028f746c1351c321943d5c.png&quot; alt=&quot;code flow 2&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from &lt;a href=&quot;&quot;&gt;here&lt;/a&gt;), when you click the link you would be redirected to login and then redirected back to this same page.&lt;/p&gt;
+&lt;p&gt;On this screen, you see the returned code and original &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt;. That state value can be used in validating the response. That is, if the state were different than what was expected, your app would know that something was not the way it should be (perhaps indicating a man in the middle attack, for instance).&lt;/p&gt;
+
+&lt;p&gt;Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from &lt;a href=&quot;https://github.com/oktadeveloper/okta-oidc-flows-example#okta-openid-connect-fun&quot;&gt;here&lt;/a&gt;), when you click the link you would be redirected to login and then redirected back to this same page.&lt;/p&gt;
 
 &lt;p&gt;That code can now be exchanged for an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; and an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; by the middle tier (a Spring Boot application, in this case). More on that below.&lt;/p&gt;
 

@@ -166,12 +166,12 @@
   </thead>
   <tbody>
     <tr>
-      <td>https://micah.okta.com</td>
+      <td><code class="highlighter-rouge">https://micah.okta.com</code></td>
       <td>Okta Tenant</td>
     </tr>
     <tr>
       <td>/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize</td>
-      <td>Auth endpoint, with Okta Authorization Server ID</td>
+      <td>Auth endpoint, with your Okta org’s Authorization Server ID</td>
     </tr>
     <tr>
       <td>?client_id=0oa2yrbf35Vcbom491t7</td>
@@ -204,11 +204,13 @@
 
 <p><img src="/assets/blog/oidc_primer/code_flow_1-cb06f089f594b904fac942ebd9f0f7e0642781f96e895c3291000d58cdf0e1ee.png" alt="code flow 1" width="800" /></p>
 
-<p>Notice that on the new screen, you are redirected back to the <code class="highlighter-rouge">redirect_uri</code> originally specified (with the returned code and original <code class="highlighter-rouge">state</code>):</p>
+<p>Notice that on the new screen, you are redirected back to the <code class="highlighter-rouge">redirect_uri</code> originally specified:</p>
 
 <p><img src="/assets/blog/oidc_primer/code_flow_2-755081ebf0820c6e5caebd57fbd9f0995cc0f1ddea028f746c1351c321943d5c.png" alt="code flow 2" width="800" /></p>
 
-<p>Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from <a href="">here</a>), when you click the link you would be redirected to login and then redirected back to this same page.</p>
+<p>On this screen, you see the returned code and original <code class="highlighter-rouge">state</code>. That state value can be used in validating the response. That is, if the state were different than what was expected, your app would know that something was not the way it should be (perhaps indicating a man in the middle attack, for instance).</p>
+
+<p>Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from <a href="https://github.com/oktadeveloper/okta-oidc-flows-example#okta-openid-connect-fun">here</a>), when you click the link you would be redirected to login and then redirected back to this same page.</p>
 
 <p>That code can now be exchanged for an <code class="highlighter-rouge">id_token</code> and an <code class="highlighter-rouge">access_token</code> by the middle tier (a Spring Boot application, in this case). More on that below.</p>
 
