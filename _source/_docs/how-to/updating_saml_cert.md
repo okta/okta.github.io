@@ -26,7 +26,7 @@ To take advantage of the additional security features of SHA256 certificates.
 ### New SAML 2.0 App Integrations
 
 New SAML 2.0 app integrations automatically use SHA256 certificates.
-To upgrade a new SAML 2.0 app, upload the SHA256 certificate to the ISV as instructed.
+As instructed, upload the SHA256 certificate to the ISV.
 
 ### Existing SAML 2.0 App Integrations
 
