@@ -27,6 +27,8 @@ The Sign-in Widget supports the following use cases:
 
 - **Multi-Factor Authentication:** The Widget also handles enrollment and verification of multiple authentication factors. It comes with built-in support for SMS authentication, security questions, and Google Authenticator, among others.
 
+- **Social Authentication:** Support for starting social authentication with providers supported by Okta, such as Facebook Google, LinkedIn, and Microsoft.
+
 - **Self-Service Password Reset:** Support for sending reset notifications as well as prompting users to verify themselves by prompting them to answer a security question. 
 
 - **Password Expiration:** The Widget can notify users when their password has expired and prompt them to update their password before allowing them to sign in.
