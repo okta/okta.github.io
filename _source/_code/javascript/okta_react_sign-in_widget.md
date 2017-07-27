@@ -2,11 +2,11 @@
 layout: docs_page
 title: React + Okta Sign-In Widget
 weight: 30
-excerpt: Integrate Okta with a React application using the Sign-In Widget.
+excerpt: Integrate Okta with a React app using the Sign-In Widget.
 ---
 
 # Overview
-This guide will walk you through integrating authentication into a React application with Okta by performing these steps:
+This guide will walk you through integrating authentication into a React app with Okta by performing these steps:
 1. [Add an OpenID Connect Client in Okta](#add-an-openid-connect-client-in-okta)
 2. [Create a React App](#create-a-react-app)
 3. [Create an Authentication Utility](#create-an-authentication-utility)
@@ -21,15 +21,15 @@ If you do not already have a **Developer Edition Account**, you can create one a
 
 ## Add an OpenID Connect Client in Okta
 * Log into the Okta Developer Dashboard, and **Create New App**
-* Choose **Single Page App (SPA)** as the platform, then populate your new OpenID Connect application with values similar to:
+* Choose **Single Page App (SPA)** as the platform, then populate your new OpenID Connect app with values similar to:
 
 | Setting             | Value                                               |
 | ------------------- | --------------------------------------------------- |
-| Application Name    | OpenId Connect App *(must be unique)*               |
+| App Name    | OpenId Connect App *(must be unique)*               |
 | Login redirect URIs | http://localhost:3000/callback                      |
 | Logout redirect URIs| http://localhost:3000/login                         |
 
-> *As with any Okta application, make sure you assign Users or Groups to the OpenID Connect Client. Otherwise, no one can use it.*
+> *As with any Okta app, make sure you assign Users or Groups to the OpenID Connect Client. Otherwise, no one can use it.*
 
 ### Enable [CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html)
 For security reasons, browsers make it difficult to make requests to other domains. In this example, we'll make requests from `http://localhost:3000` to `https://{yourOrg}.oktapreview.com`.
@@ -42,7 +42,7 @@ To quickly create a React app, install the create-react-app CLI:
 $ npm install -g create-react-app
 ```
 
-Now, create a new application:
+Now, create a new app:
 ```bash
 $ create-react-app okta-app
 ```
@@ -60,8 +60,8 @@ We'll also need `react-router-dom` to manage our routes:
 ```
 
 ## Create an Authentication Utility
-Users can sign in to your React application a number of different ways.
-To provide a fully-featured and customizable login experience, the [Okta Sign-In Widget](okta_sign-in_widget) is available to handle User Lifecycle operations, MFA, and more. 
+Users can sign in to your React app a number of different ways.
+To provide a fully featured and customizable login experience, the [Okta Sign-In Widget](okta_sign-in_widget) is available to handle User Lifecycle operations, MFA, and more. 
 
 First, create `src/auth.js` as an authorization utility file and use it to bootstrap the required fields to login. This file will expose a `withAuth` method that makes it easy to create [Higher-Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that include an `auth` prop:
 
@@ -157,7 +157,7 @@ export default class OktaSignInWidget extends Component {
 ```
 
 ## Create a SecureRoute
-Some routes will require authentication in order to render. Defining those routes is easy if we centralize our logic by creating a `src/SecureRoute.js` file:
+Some routes require authentication in order to render. Defining those routes is easy if we centralize our logic by creating a `src/SecureRoute.js` file:
 {% raw %}
 ```typescript
 // src/SecureRoute.js
