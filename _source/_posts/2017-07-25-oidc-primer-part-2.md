@@ -24,26 +24,28 @@ https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yr
 ```
 Let’s break that down:
 
-|Part                                                                  |Description                                       |
-|----------------------------------------------------------------------|--------------------------------------------------|
-| https://micah.okta.com                                               | Okta Tenant                                      |
-| /oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize                            | Auth endpoint, with Okta Authorization Server ID |
-| ?client_id=0oa2yrbf35Vcbom491t7                                      | Client ID of the OIDC Application defined in Okta|
-| response_type=code                                                   | The response type indicating code flow           |
-| scope=openid                                                         | openid scope is required                         |
-| state=little-room-greasy-pie                                         | value is returned back at the end of the flow    |
-| nonce=b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581                           | nonce is encoded into the id_token               |
-| redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result | url-encoded url that the OP redirects to         |
+|Part                                                                  |Description                                                  |
+|----------------------------------------------------------------------|-------------------------------------------------------------|
+| `https://micah.okta.com`                                             | Okta Tenant                                                 |
+| /oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize                            | Auth endpoint, with your Okta org's Authorization Server ID |
+| ?client_id=0oa2yrbf35Vcbom491t7                                      | Client ID of the OIDC Application defined in Okta           |
+| response_type=code                                                   | The response type indicating code flow                      |
+| scope=openid                                                         | openid scope is required                                    |
+| state=little-room-greasy-pie                                         | value is returned back at the end of the flow               |
+| nonce=b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581                           | nonce is encoded into the id_token                          |
+| redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result | url-encoded url that the OP redirects to                    |
 
 Here it is in the browser:
 
 {% img blog/oidc_primer/code_flow_1.png alt:"code flow 1" width:"800" %}
 
-Notice that on the new screen, you are redirected back to the `redirect_uri` originally specified (with the returned code and original `state`):
+Notice that on the new screen, you are redirected back to the `redirect_uri` originally specified:
 
 {% img blog/oidc_primer/code_flow_2.png alt:"code flow 2" width:"800" %}
 
-Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from [here]()), when you click the link you would be redirected to login and then redirected back to this same page.
+ On this screen, you see the returned code and original `state`. That state value can be used in validating the response. That is, if the state were different than what was expected, your app would know that something was not the way it should be (perhaps indicating a man in the middle attack, for instance).
+
+Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from [here](https://github.com/oktadeveloper/okta-oidc-flows-example#okta-openid-connect-fun)), when you click the link you would be redirected to login and then redirected back to this same page.
 
 That code can now be exchanged for an `id_token` and an `access_token` by the middle tier (a Spring Boot application, in this case). More on that below.
 
