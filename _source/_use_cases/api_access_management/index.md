@@ -5,6 +5,8 @@ title: API Access Management
 excerpt: Secure your APIs with Okta's implementation of the OAuth 2.0 standard.
 ---
 
+## API Access Management with Okta
+
 Use API Access Management, Okta's implementation of the OAuth 2.0 standard, to secure your APIs.
 API Access Management is integrated with Okta's implementation of OpenID Connect for authentication;
 OpenID Connect is also available separately. Similarly, Okta provides a client management API
@@ -12,7 +14,7 @@ for onboarding, monitoring, and deprovisioning client apps.
 
 API Access Management is an {% api_lifecycle ea %} feature.
 
-# OAuth 2.0 and OpenID Connect
+## OAuth 2.0 and OpenID Connect
  
 When do you use API Access Management and when do you use OpenID Connect?
  
