@@ -88,12 +88,53 @@ The Resource Owner Password and Client Credentials flows begin and end with requ
 
 {% img graphics/AuthCodeFlow.png alt:"Authorization Code Flow" %}
 
+<!-- Source for image generated using http://www.plantuml.com/plantuml/uml/
+Authorization code flow
+
+@startuml
+skinparam monochrome true
+
+participant "Your App" as app
+participant "Okta /authorize" as oa
+participant "Okta /token" as ot
+participant "User's Browser" as ub
+participant "Resource" as pr
+
+ub -> app: Request that needs a protected resource
+app -> ub: Redirect to /authorize response_type=code
+oa -> ub: Redirect to your app with access code
+app -> ot: Access code
+ot -> app: Access Token
+app -> pr
+@enduml
+-->
 
 Your app redirects the user's browser to the Okta Authorization Server's [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) with parameters encoded in the URL. The `response_type` = `code`, and `scope` specifies the access your app wants to the protected resource.. The Authorization Server authenticates the user, determines which permissions the user wishes to grant to your app, and redirects the browser, with an authorization code, to an endpoint that you provided  when you first registered your app with Okta. Your app presents the authorization code at the Authorization Server's `/token` endpoint with `grant_type` set to `authorization_code` and `scope` set to request some combination of Access Token, ID Token, and Refresh Token. The Authorization Server issues the requested tokens with the requested scopes.
 
 Most apps use this flow because of the security advantages described earlier. Using the Authorization Code flow whenever possible is a best practice.
 
 ### Implicit Flow
+
+
+{% img graphics/ImplicitFlow.png alt:"Implicit Flow" %}
+
+<!-- Source for image generated using http://www.plantuml.com/plantuml/uml/
+Implicit flow
+
+@startuml
+skinparam monochrome true
+
+participant "Your App" as app
+participant "Okta /authorize" as oa
+participant "User's Browser" as ub
+participant "Resource" as pr
+
+ub -> app: Request that needs a protected resource
+app -> ub: Redirect to /authorize response_type=token or token id_token
+oa -> ub: Requested tokens
+app -> pr
+@enduml
+-->
 
 The implicit flow is designed for situations in which your app is not on a separate website but instead is written in a language like JavaScript that runs within the user's browser. Examples include single-page apps (SPAs).
 
