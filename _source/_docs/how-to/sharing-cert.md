@@ -19,10 +19,6 @@ Sharing certificates is useful for Okta orgs that have apps with [sign-on modes]
 When configuring multiple apps, you might need them to accept the same identity provider (IdP).
 In that case, the assertions from the two apps must be signed by the same key.
 
-### Prerequisite
-
-The key rollover feature must be enabled. It's an Early Access feature; contact Support to enable it.
-
 ### How to Share the Certificate
 
 For this example, assume that you want to share a certificate between two instances of an app: `app1` is the source app, the app from

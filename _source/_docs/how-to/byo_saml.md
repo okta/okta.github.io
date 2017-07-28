@@ -13,9 +13,7 @@ Okta Admins can upload their own SAML certificates to sign the assertion for Out
 
 ## Prerequisite
 
-{% api_lifecycle ea %}
-
-To use your own SAML certificate, update the key credential for the affected apps or IdPs. Key rollover is an **Early Access** (EA) feature; contact Okta support to enable it.
+To use your own SAML certificate, update the key credential for the affected apps or IdPs.
 
 ### Outbound and Inbound SAML Applications
 
