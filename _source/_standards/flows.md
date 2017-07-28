@@ -66,7 +66,9 @@ As a rule of thumb, use Authorization Code flow whenever possible. Use Implicit 
 
 ## Flow Details
 
-With API Access Management and Okta's implementation of OpenID Connect, the Authorization Code, Implicit, and Hybrid flows begin with requests to the [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user). The `response_type` request parameter determines which flow your app uses.
+With API Access Management and Okta's implementation of OpenID Connect, the Authorization Code, Implicit, and Hybrid flows begin with requests to the [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user).
+
+The `response_type` request parameter determines which flow your app uses.
 
 The Resource Owner Password and Client Credentials flows begin and end with requests to the [`/token` endpoint](/docs/api/resources/oauth2.html#request-a-token). The Authorization Code and Hybrid flows end with a request to the `/token` endpoint. The `grant_type` request parameter determines how the Authorization Server processes token requests.
 
@@ -83,6 +85,9 @@ The Resource Owner Password and Client Credentials flows begin and end with requ
 
 
 ### Authorization Code Flow
+
+{% img graphics/AuthCodeFlow.png alt:"Authorization Code Flow" %}
+
 
 Your app redirects the user's browser to the Okta Authorization Server's [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) with parameters encoded in the URL. The `response_type` = `code`, and `scope` specifies the access your app wants to the protected resource.. The Authorization Server authenticates the user, determines which permissions the user wishes to grant to your app, and redirects the browser, with an authorization code, to an endpoint that you provided  when you first registered your app with Okta. Your app presents the authorization code at the Authorization Server's `/token` endpoint with `grant_type` set to `authorization_code` and `scope` set to request some combination of Access Token, ID Token, and Refresh Token. The Authorization Server issues the requested tokens with the requested scopes.
 
