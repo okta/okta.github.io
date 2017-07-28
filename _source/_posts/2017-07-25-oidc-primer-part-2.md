@@ -24,16 +24,16 @@ https://micah.okta.com/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize?client_id=0oa2yr
 ```
 Let’s break that down:
 
-|Part                                                                  |Description                                                  |
-|----------------------------------------------------------------------|-------------------------------------------------------------|
-| `https://micah.okta.com`                                             | Okta Tenant                                                 |
-| /oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize                            | Auth endpoint, with your Okta org's Authorization Server ID |
-| ?client_id=0oa2yrbf35Vcbom491t7                                      | Client ID of the OIDC Application defined in Okta           |
-| response_type=code                                                   | The response type indicating code flow                      |
-| scope=openid                                                         | openid scope is required                                    |
-| state=little-room-greasy-pie                                         | value is returned back at the end of the flow               |
-| nonce=b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581                           | nonce is encoded into the id_token                          |
-| redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result | url-encoded url that the OP redirects to                    |
+| Key               | Value                                                   | Description                                                   |
+|-------------------|---------------------------------------------------------|---------------------------------------------------------------|
+| Organization URL  | `https://micah.okta.com`                                | Okta Tenant                                                   |
+| Authorization URL | /oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize               | Default authorization endpoint for your org                   |
+| client_id         | 0oa2yrbf35Vcbom491t7                                    | Client ID of the OIDC Application defined in Okta             |
+| response_type     | code                                                    | The response type indicating code flow                        |
+| scope             | openid                                                  | openid scope is required                                      |
+| state             | little-room-greasy-pie                                  | Randon value is returned back at the end of the flow          |
+| nonce             | b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581                    | Random value to encode into the id_token for later validation |
+| redirect_uri      | https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result | url-encoded url that the OP redirects to                      |
 
 Here it is in the browser:
 
