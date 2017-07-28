@@ -208,11 +208,11 @@
 
 <p><img src="/assets/blog/oidc_primer/code_flow_2-755081ebf0820c6e5caebd57fbd9f0995cc0f1ddea028f746c1351c321943d5c.png" alt="code flow 2" width="800" /></p>
 
-<p>On this screen, you see the returned code and original <code class="highlighter-rouge">state</code>. That state value can be used in validating the response. That is, if the state were different than what was expected, your app would know that something was not the way it should be (perhaps indicating a man in the middle attack, for instance).</p>
-
 <p>Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from <a href="https://github.com/oktadeveloper/okta-oidc-flows-example#okta-openid-connect-fun">here</a>), when you click the link you would be redirected to login and then redirected back to this same page.</p>
 
-<p>That code can now be exchanged for an <code class="highlighter-rouge">id_token</code> and an <code class="highlighter-rouge">access_token</code> by the middle tier (a Spring Boot application, in this case). More on that below.</p>
+<p>On the above screenshot, you see the returned code and original <code class="highlighter-rouge">state</code>.</p>
+
+<p>That code can now be exchanged for an <code class="highlighter-rouge">id_token</code> and an <code class="highlighter-rouge">access_token</code> by the middle tier - a Spring Boot application, in this case. This middle tier will validate the state we sent in the authorize request earlier and make a <code class="highlighter-rouge">/token</code> request using the Client Secret to mint an <code class="highlighter-rouge">access_token</code> and <code class="highlighter-rouge">id_token</code> for the user.</p>
 
 <h2 id="implicit-flow">Implicit Flow</h2>
 

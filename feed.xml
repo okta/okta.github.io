@@ -79,11 +79,11 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/oidc_primer/code_flow_2-755081ebf0820c6e5caebd57fbd9f0995cc0f1ddea028f746c1351c321943d5c.png&quot; alt=&quot;code flow 2&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;On this screen, you see the returned code and original &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt;. That state value can be used in validating the response. That is, if the state were different than what was expected, your app would know that something was not the way it should be (perhaps indicating a man in the middle attack, for instance).&lt;/p&gt;
-
 &lt;p&gt;Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from &lt;a href=&quot;https://github.com/oktadeveloper/okta-oidc-flows-example#okta-openid-connect-fun&quot;&gt;here&lt;/a&gt;), when you click the link you would be redirected to login and then redirected back to this same page.&lt;/p&gt;
 
-&lt;p&gt;That code can now be exchanged for an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; and an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; by the middle tier (a Spring Boot application, in this case). More on that below.&lt;/p&gt;
+&lt;p&gt;On the above screenshot, you see the returned code and original &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;That code can now be exchanged for an &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; and an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; by the middle tier - a Spring Boot application, in this case. This middle tier will validate the state we sent in the authorize request earlier and make a &lt;code class=&quot;highlighter-rouge&quot;&gt;/token&lt;/code&gt; request using the Client Secret to mint an &lt;code class=&quot;highlighter-rouge&quot;&gt;access_token&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;id_token&lt;/code&gt; for the user.&lt;/p&gt;
 
 &lt;h2 id=&quot;implicit-flow&quot;&gt;Implicit Flow&lt;/h2&gt;
 
