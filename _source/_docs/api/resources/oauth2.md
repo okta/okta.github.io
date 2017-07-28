@@ -568,8 +568,8 @@ HTTP/1.1 200 OK
 ##### Response Example (Error)
 {:.api .api-response .api-response-example}
 ~~~http
-Content-Type: application/json;charset=UTF-8
 HTTP/1.1 401 Unauthorized
+Content-Type: application/json;charset=UTF-8
 ~~~
 ~~~json
 {
