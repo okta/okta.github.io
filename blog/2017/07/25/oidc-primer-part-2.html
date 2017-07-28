@@ -42,7 +42,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-fe3337502d4360bcb36814ced8dd4f88ec4c9e7d7a0be6fa2995c3524314aa7d.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
   
   
     <link type="text/css" rel="stylesheet" href="/assets/page-blog-367850afad8093d512ce46256493ec36aa919ccb2ed99af419063c06816ac5d8.css">
@@ -160,41 +160,50 @@
 <table>
   <thead>
     <tr>
-      <th>Part</th>
+      <th>Key</th>
+      <th>Value</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td>Organization URL</td>
       <td><code class="highlighter-rouge">https://micah.okta.com</code></td>
       <td>Okta Tenant</td>
     </tr>
     <tr>
+      <td>Authorization URL</td>
       <td>/oauth2/aus2yrcz7aMrmDAKZ1t7/v1/authorize</td>
-      <td>Auth endpoint, with your Okta org’s Authorization Server ID</td>
+      <td>Default authorization endpoint for your org</td>
     </tr>
     <tr>
-      <td>?client_id=0oa2yrbf35Vcbom491t7</td>
+      <td>client_id</td>
+      <td>0oa2yrbf35Vcbom491t7</td>
       <td>Client ID of the OIDC Application defined in Okta</td>
     </tr>
     <tr>
-      <td>response_type=code</td>
+      <td>response_type</td>
+      <td>code</td>
       <td>The response type indicating code flow</td>
     </tr>
     <tr>
-      <td>scope=openid</td>
+      <td>scope</td>
+      <td>openid</td>
       <td>openid scope is required</td>
     </tr>
     <tr>
-      <td>state=little-room-greasy-pie</td>
-      <td>value is returned back at the end of the flow</td>
+      <td>state</td>
+      <td>little-room-greasy-pie</td>
+      <td>Randon value is returned back at the end of the flow</td>
     </tr>
     <tr>
-      <td>nonce=b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581</td>
-      <td>nonce is encoded into the id_token</td>
+      <td>nonce</td>
+      <td>b1e7b75d-6248-4fc7-bad0-ac5ae0f2e581</td>
+      <td>Random value to encode into the id_token for later validation</td>
     </tr>
     <tr>
-      <td>redirect_uri=https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result</td>
+      <td>redirect_uri</td>
+      <td>https%3A%2F%2Fokta-oidc-fun.herokuapp.com%2Fflow_result</td>
       <td>url-encoded url that the OP redirects to</td>
     </tr>
   </tbody>
