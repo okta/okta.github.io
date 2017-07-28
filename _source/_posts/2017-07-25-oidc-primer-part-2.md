@@ -43,11 +43,11 @@ Notice that on the new screen, you are redirected back to the `redirect_uri` ori
 
 {% img blog/oidc_primer/code_flow_2.png alt:"code flow 2" width:"800" %}
 
- On this screen, you see the returned code and original `state`. That state value can be used in validating the response. That is, if the state were different than what was expected, your app would know that something was not the way it should be (perhaps indicating a man in the middle attack, for instance).
-
 Behind the scenes, a session is established with a fixed username and password. If you deploy this app on your own (which you can easily do from [here](https://github.com/oktadeveloper/okta-oidc-flows-example#okta-openid-connect-fun)), when you click the link you would be redirected to login and then redirected back to this same page.
 
-That code can now be exchanged for an `id_token` and an `access_token` by the middle tier (a Spring Boot application, in this case). More on that below.
+On the above screenshot, you see the returned code and original `state`.
+
+That code can now be exchanged for an `id_token` and an `access_token` by the middle tier - a Spring Boot application, in this case. This middle tier will validate the state we sent in the authorize request earlier and make a `/token` request using the Client Secret to mint an `access_token` and `id_token` for the user.
 
 
 ## Implicit Flow
