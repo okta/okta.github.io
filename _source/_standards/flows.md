@@ -156,6 +156,24 @@ Carefully consider the security implications of using this flow.
 
 ### Resource Owner Password Flow
 
+{% img graphics/PasswordFlow.png alt:"Resource Owner Password Flow" %}
+
+<!-- Source for image generated using http://www.plantuml.com/plantuml/uml/
+Resource Owner Password flow
+
+@startuml
+skinparam monochrome true
+
+participant "Your App" as app
+participant "Okta /token" as ot
+participant "Resource" as pr
+
+app -> ot: grant_type=password
+ot -> app: Requested tokens
+app -> pr
+@enduml
+-->
+
 Your app makes a request directly (with no prior request to the `/authorize` endpoint) to the Authorization Server's [`/token` endpoint](/docs/api/resources/oauth2.html#request-a-token) with `grant_type` set to `password`. The request includes the `username` and `password` parameters. By setting `scope` appropriately your app can receive an Access Token and any combination of ID Token and Refresh Token.
 
 This connection is directly between your app and the Okta Authorization Server, so it's not likely to be intercepted. However, it requires your app to know the user's username and password.
@@ -164,6 +182,24 @@ Using this flow is not considered a good practice.
 
 
 ### Client Credentials Flow
+
+{% img graphics/ClientCredentialsFlow.png alt:"Client Credentials Flow" %}
+
+<!-- Source for image generated using http://www.plantuml.com/plantuml/uml/
+Client Credentials flow
+
+@startuml
+skinparam monochrome true
+
+participant "Your App" as app
+participant "Okta /token" as ot
+participant "Resource" as pr
+
+app -> ot: grant_type=client_credentials
+ot -> app: Access Token
+app -> pr
+@enduml
+-->
 
 If there is no end user in the picture, your app can use its own credentials (already registered with the Authorization Server). For example, if your app connects to an app that provides services to other apps, that app might accept tokens you obtain using the Client Credentials flow. This flow is typically for API-to-API communication between apps that are part of the same trusted environment. Using it may require setting up additional agreements outside the protocol.
 
