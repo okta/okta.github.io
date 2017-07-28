@@ -143,6 +143,12 @@ Finally, inject the guard and service into `src/app/app.module.ts` so we can use
 ```typescript
 // app.module.ts
 
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { RouterModule, Routes } from '@angular/router';
+
+// Okta Guard and Service
 import { OktaAuthGuard } from './app.guard';
 import { OktaAuthService } from './app.service';
 ```
@@ -228,6 +234,10 @@ Add each of our new routes to `src/app/app.module.ts`:
 
 ```typescript
 // app.module.ts
+
+import { CallbackComponent } from './callback.component';
+import { ProtectedComponent } from './protected.component';
+...
 
 const appRoutes: Routes = [
   {
