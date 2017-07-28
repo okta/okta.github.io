@@ -42,7 +42,7 @@ When your App needs personal information about the user, it can also ask for an 
 
 ## Authorization Flows
 
-The preceding sequence of steps describes the Authorization Code flow, the most common way of obtaining tokens. The framework provides other possible flows. The choice of flow depends on your execution environment and security needs. T
+The preceding sequence of steps describes the Authorization Code flow, the most common way of obtaining tokens. The framework provides other possible flows. The choice of flow depends on your execution environment and security needs.
 
 The OAuth 2.0 flows are:
 
@@ -84,7 +84,7 @@ The Resource Owner Password and Client Credentials flows begin and end with requ
 
 ### Authorization Code Flow
 
-Your app redirects the user's browser to the Okta Authorization Server's [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) with the `response_type` set to `code` in the URL. The Authorization Server authenticates the user, determines which permissions the user wishes to grant to your app, and redirects the browser, with an authorization code, to an endpoint that you provided  when you first registered your app with Okta. Your app presents the authorization code at the Authorization Server's `/token` endpoint with `grant_type` set to `authorization_code` and `scope` set to request some combination of Access Token, ID Token, and Refresh Token. The Authorization Server issues the requested tokens with the requested scopes.
+Your app redirects the user's browser to the Okta Authorization Server's [`/authorize` endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) with parameters encoded in the URL. The `response_type` = `code`, and `scope` specifies the access your app wants to the protected resource.. The Authorization Server authenticates the user, determines which permissions the user wishes to grant to your app, and redirects the browser, with an authorization code, to an endpoint that you provided  when you first registered your app with Okta. Your app presents the authorization code at the Authorization Server's `/token` endpoint with `grant_type` set to `authorization_code` and `scope` set to request some combination of Access Token, ID Token, and Refresh Token. The Authorization Server issues the requested tokens with the requested scopes.
 
 Most apps use this flow because of the security advantages described earlier. Using the Authorization Code flow whenever possible is a best practice.
 
