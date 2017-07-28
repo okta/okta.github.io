@@ -3,6 +3,21 @@
   
     
     <url>
+      <loc>https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2</loc>
+      
+        <lastmod>2017-07-25T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1</loc>
       
         <lastmod>2017-07-25T00:00:00+00:00</lastmod>
@@ -1306,6 +1321,19 @@
     
     <url>
       <loc>https://developer.okta.com/blog/page/3/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/page/4/</loc>
       
       
         <changefreq>monthly</changefreq>
