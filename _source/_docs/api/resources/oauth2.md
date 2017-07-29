@@ -311,7 +311,11 @@ curl -X POST \
 ##### Response Example: Resource Owner Password Flow
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
 ~~~
+~~~json
 {
     "access_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOjEsImp0aSI6IkFULkpfUVlIMlJEckI5R
                       mxDd0hYVVI1WTIzcDg4U1JPS29jajJkd2kwZkhvTVEiLCJpc3MiOiJodHRwczovL3dlc3R3b3JsZC5
@@ -336,6 +340,10 @@ curl -X POST \
 #### Response Example (Success)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
     "access_token" : "eyJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImlzcyI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyIiwiaWF0IjoxNDQ5Nj
@@ -364,9 +372,11 @@ curl -X POST \
 ##### Response Example (Error)
 {:.api .api-response .api-response-example}
 
-~~~sh
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
+~~~
+~~~json
 {
     "error" : "invalid_client",
     "error_description" : "No client credentials found."
@@ -432,6 +442,10 @@ For more information about token authentication, see [Token Authentication Metho
 ##### Response Example (Success, Access Token)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
     "active" : true,
@@ -458,6 +472,10 @@ For more information about token authentication, see [Token Authentication Metho
 #### Response Example (Success, Refresh Token)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
     "active" : true,
@@ -474,6 +492,10 @@ For more information about token authentication, see [Token Authentication Metho
 #### Response Example (Success, Inactive Token)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
     "active" : false
@@ -486,6 +508,8 @@ For more information about token authentication, see [Token Authentication Metho
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
+~~~
+~~~json
 {
     "error" : "invalid_client",
     "error_description" : "No client credentials found."
@@ -546,6 +570,8 @@ HTTP/1.1 200 OK
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
+~~~
+~~~json
 {
     "error" : "invalid_client",
     "error_description" : "No client credentials found."
@@ -579,7 +605,7 @@ curl -v -X GET \
   id_token_hint=${id_token_hint}
 ~~~
 
-This request initiates a logout and will redirect to the `post_logout_redirect_uri` on success.
+This request initiates a logout; it redirects to the `post_logout_redirect_uri` on success.
 
 ~~~sh
 curl -v -X GET \
@@ -599,6 +625,10 @@ Retrieve the public keys Okta uses to sign the tokens.
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "keys": [
@@ -1688,6 +1718,10 @@ curl -v -X GET \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "keys": [
@@ -1800,6 +1834,10 @@ curl -v -X POST \
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "keys": [
@@ -1873,6 +1911,10 @@ curl -v -X POST \
 #### Response Example (Error)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "errorCode": "E0000001",
