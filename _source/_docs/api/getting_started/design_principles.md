@@ -276,7 +276,7 @@ Search and list operations are intended to find matching resources and their ide
 
 The number of API requests for an organization is limited for all APIs based on your edition.
 
-Okta provides three headers in each response. These headers show the limit is that is being enforced, when it resets, and how close you are to hitting the limit:
+Okta provides three headers in each response. These headers show the limit that is being enforced, when it resets, and how close you are to hitting the limit:
 
 `X-Rate-Limit-Limit` - the rate limit ceiling that is applicable for the current request.
 
@@ -291,17 +291,17 @@ X-Rate-Limit-Remaining: 15
 X-Rate-Limit-Reset: 1366037820
 ~~~
 
-If the rate limit is exceeded, an HTTP 429 Status Code is returned.  Rate limits apply to each endpoint per minute, per org.
+If a rate limit is exceeded, an HTTP 429 Status Code is returned.
 
 -**Rate limits are enforced for all organizations.**
 
-The best way to be sure about your rate limits is to include the relevant headers. The System Log doesn't report every
-API request, it reports completed or attempted real world events such as configuration changes, user logins, or user lockouts. You can't query the system log for accurate API rates.
+The best way to be sure about your rate limits is to check the relevant headers in the response. The System Log doesn't report every
+API request. Rather, it typically reports completed or attempted real world events such as configuration changes, user logins, or user lockouts. You can't query the System Log for accurate API rates.
 
 ### Org-Wide Rate Limits
 
 API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
-For any endpoint not listed, the API rate limit is 10,000 requests per minute.
+For all endpoints not listed, the API rate limit is a combined 10,000 requests per minute.
 
 <table border="1" style="width: 100%;">
 	<caption>Org-Wide Rate Limits Per Minute</caption>
