@@ -12,6 +12,10 @@ The Okta Event API provides read access to your organization's system log. Expor
 
 Explore the Events API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf)
 
+## Data Retention
+
+Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy}(https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
+
 ## Event Operations
 
 ### List Events
