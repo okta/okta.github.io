@@ -217,16 +217,14 @@ However, the specifics depend on which claims are requested, whether the request
 
 Okta defines two types of reserved (non-custom) claims, [base](/standards/OIDC/index.html#base-claims-always-present) and [scope-dependent claims](/standards/OIDC/index.html#scope-dependent-claims-not-always-returned).
 Base claims are always returned, and scope-dependent claims are returned depending on the scope requested. 
-Custom claims are configured in the Custom Authorization Server, and returned depending on the token type and configuration.
+Custom claims are configured in the Custom Authorization Server, and returned depending on whether it matches a scope in the request, and also depending on the token type, authorization server type, and the token and claim configuration set in the authorization server:
 
-* Base claims are always returned in ID Tokens and Access Tokens for both authorization server types (Okta Authorization Server or Custom Authorization Server).
-* Scope-dependent claims are returned in tokens depending on the response type for both authorization server types. See [the second table in the Scope-Dependent Claims topic](/standards/OIDC/index.html#scope-dependent-claims-not-always-returned) for details.
-* Custom claims require the Custom Authorization Server to configure. You can specify that claims are to be returned in each token (ID or access) always, or only when requested:
-    * If you configure a claim to always be returned in the ID Token, _____ .
-    * If you configure a claim to always be returned in the access token, ____ .
-    * If you configure a claim to be returned only when requested to either token type, ________ . 
+* Base claims are always returned in ID tokens and Access Tokens for both authorization server types (Okta Authorization Server or Custom Authorization Server).
+* Scope-dependent claims are returned in tokens depending on the response type for either authorization server type. See [the second table in the Scope-Dependent Claims topic](/standards/OIDC/index.html#scope-dependent-claims-not-always-returned) for details.
+* Custom claims require configuration in the Custom Authorization Server. You can specify that claims are to be returned in each token (ID or access) always, or only when requested. Assuming a claim matches a requested scope,
+    it is returned to the ID token if there is no access token requested. 
 
-The full set of claims for requested scopes is available via the `/oauth2/v1/userinfo` endpoint. Call this endpoint using the access token.
+The full set of claims for requested scopes is available via the `/oauth2/v1/userinfo` endpoint. To verify the claims for a scope, call this endpoint using the access token.
 
 ##### Custom claim values
 
@@ -293,9 +291,9 @@ No other modifications affect existing tokens.
 
 ## ID Token
 
-A Custom Authorization Server can issue an ID Token to the client, as in OpenID Connect, but with the following differences:
+A Custom Authorization Server can issue an ID token to the client, as in OpenID Connect, but with the following differences:
 
-* The ID Token cannot contain a reserved scope, nor can it contain a claim called 'groups'. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
+* The ID token cannot contain a reserved scope, nor can it contain a claim called 'groups'. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
 * The custom properties in the app user profile are not included in the Id Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.
 
 The lifetime of an ID token is one hour. If the client that issued the token is deactivated, the token is
