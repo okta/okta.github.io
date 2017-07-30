@@ -168,7 +168,7 @@ Each Log object describes a single action performed by a set of actors for a set
     "result": "SUCCESS"
   },
   "uuid": "f790999f-fe87-467a-9880-6982a583986c",
-  "published": "2016-05-31T22:23:07.777Z",
+  "published": "2017-05-31T22:23:07.777Z",
   "eventType": "user.session.start",
   "displayMessage": "User login to Okta",
   "transaction": {
