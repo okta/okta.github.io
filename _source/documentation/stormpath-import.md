@@ -14,7 +14,7 @@ Before you begin the import process, you need the following:
 
 - A decompressed local copy of the data you [exported from Stormpath](https://stormpath.com/export)
 - An Okta account which you can sign-up for here: [https://www.okta.com/developer/signup/stormpath/](https://www.okta.com/developer/signup/stormpath/)
-- The URL for your new Okta org (for example: https://dev-884792.oktapreview.com)
+- The URL for your new Okta org (for example: https://{yourOktaDomain}.com)
 - An Okta API token: [Instructions](/docs/api/getting_started/getting_a_token.html)
 
 Once you have collected all these, start [the import process](#running-the-import).
@@ -98,7 +98,7 @@ npm install -g @okta/stormpath-migration
 #### Run
 
 ```
-import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://your-domain.okta.com --oktaApiToken yourApiToken
+import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://{yourOktaDomain}.com --oktaApiToken yourApiToken
 ```
 
 
@@ -113,7 +113,7 @@ import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://y
 
 - `--oktaBaseUrl (-u)`: Base URL of your Okta tenant
 
-    - Example: `--oktaBaseUrl https://your-domain.oktapreview.com`
+    - Example: `--oktaBaseUrl https://{yourOktaDomain}.com`
 
 - `--oktaApiToken (-t)`: API token for your Okta tenant (SSWS token)
 

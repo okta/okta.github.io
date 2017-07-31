@@ -130,7 +130,7 @@ Content-Type: application/json
 }
 
 201 Created
-Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000
+Location: https://{yourOktaDomain}.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000
 
 {
   "id": "abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000",
@@ -139,7 +139,7 @@ Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentia
   "kty": "RSA",
   "_links": {
     "self": {
-      "href": "https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000",
+      "href": "https://{yourOktaDomain}.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000",
       "hints": {
         "allow": [
           "GET",
@@ -148,7 +148,7 @@ Location: https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentia
       }
     },
     "publish": {
-      "href": "https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000/lifecycle/publish",
+      "href": "https://{yourOktaDomain}.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000/lifecycle/publish",
       "hints": {
         "allow": [
           "POST"
@@ -194,7 +194,7 @@ ZRUaagvFUo1EO9m1xnjpLDIa7+M=
 
 
 201 Created
-Location: https://your-domain.okta.com/api/v1/apps/0oa1ysid1U3iyFqLu0g4/credentials/keys/ElsCzR8nbPamANBFu7QPRvtLD6Q3O1KQNJ92zkfFJNw
+Location: https://{yourOktaDomain}.com/api/v1/apps/0oa1ysid1U3iyFqLu0g4/credentials/keys/ElsCzR8nbPamANBFu7QPRvtLD6Q3O1KQNJ92zkfFJNw
 Content-Type: application/json;charset=UTF-8
 
 {

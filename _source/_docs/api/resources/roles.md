@@ -40,7 +40,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles"
+"https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles"
 ~~~
 
 ##### Response Example
@@ -97,7 +97,7 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
       "type": "SUPER_ADMIN"
-}' "https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles"
+}' "https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles"
 ~~~
 
 ##### Response Example
@@ -144,7 +144,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/ra1b8anIk7rx7em7L0g4"
+"https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles/ra1b8anIk7rx7em7L0g4"
 ~~~
 
 ##### Response Example
@@ -192,7 +192,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups"
+"https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups"
 ~~~
 
 ##### Response Example
@@ -212,21 +212,21 @@ curl -v -X GET \
     "_links": {
       "logo": [
         {
-          "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
+          "href": "https://{yourOktaDomain}.com/img/logos/groups/okta-medium.png",
           "name": "medium",
           "type": "image/png"
         },
         {
-          "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
+          "href": "https://{yourOktaDomain}.com/img/logos/groups/okta-large.png",
           "name": "large",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https://your-domain.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users"
+        "href": "https://{yourOktaDomain}.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users"
       },
       "apps": {
-        "href": "https://your-domain.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps"
+        "href": "https://{yourOktaDomain}.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps"
       }
     }
   }
@@ -266,7 +266,7 @@ curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups/00garkxjAHDYPFcsP0g4"
+"https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups/00garkxjAHDYPFcsP0g4"
 ~~~
 
 ##### Response Example
@@ -309,7 +309,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups/00garkxjAHDYPFcsP0g4"
+"https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/groups/00garkxjAHDYPFcsP0g4"
 ~~~
 
 ##### Response Example
@@ -355,7 +355,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps"
+"https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps"
 ~~~
 
 ##### Response Example
@@ -390,7 +390,7 @@ curl -v -X GET \
       "logo": [
         {
           "name": "medium",
-          "href": "https://your-domain.okta.com/img/logos/salesforce_logo.png",
+          "href": "https://{yourOktaDomain}.com/img/logos/salesforce_logo.png",
           "type": "image/png"
         }
       ]
@@ -421,7 +421,7 @@ curl -v -X GET \
       "logo": [
         {
           "name": "medium",
-          "href": "https://your-domain.okta.com/img/logos/box.png",
+          "href": "https://{yourOktaDomain}.com/img/logos/box.png",
           "type": "image/png"
         }
       ]
@@ -463,7 +463,7 @@ curl -v -X PUT \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps/amazon_aws"
+"https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps/amazon_aws"
 ~~~
 
 ##### Response Example
@@ -506,7 +506,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps/amazon_aws"
+"https://{yourOktaDomain}..com/api/v1/users/00u6fud33CXDPBXULRNG/roles/KVJUKUS7IFCE2SKO/targets/catalog/apps/amazon_aws"
 ~~~
 
 ##### Response Example

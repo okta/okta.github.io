@@ -124,7 +124,7 @@ client does not make the token valid again.
 {
   "ver": 1,
   "jti": "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE",
-  "iss": "https://your-domain.okta.com/oauth2/0oacqf8qaJw56czJi0g4",
+  "iss": "https://{yourOktaDomain}.com/oauth2/0oacqf8qaJw56czJi0g4",
   "aud": "https://api.you-company.com",
   "sub": "00ujmkLgagxeRrAg20g3",
   "iat": 1467145094,
@@ -190,7 +190,7 @@ The payload includes the following reserved claims:
 |--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
 | ver     | The semantic version of the Access Token.   |  Integer   |  1    |
 | jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
-| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://your-domain.okta.com/oauth2/0oacqf8qaJw56czJi0g4"     |
+| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://{yourOktaDomain}.com/oauth2/0oacqf8qaJw56czJi0g4"     |
 | aud     | Identifies the audience(resource URI) that this Access Token is intended for. | String    | "http://api.example.com/api"     |
 | sub     | The subject. A name for the user or a unique identifier for the client.  | String    | 	"john.doe@example.com"     |
 | iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |

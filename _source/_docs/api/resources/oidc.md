@@ -179,7 +179,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 |:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|:----------------------------------------------------|
 | ver           | The semantic version of the ID Token.                                                                                                                                      | Integer   | 1                                                   |
 | jti           | A unique identifier for this ID Token for debugging and revocation purposes.                                                                                               | String    | "Tlenfse93dgkaksginv"                               |
-| iss           | The Issuer Identifier of the response.                                                                                                                                     | String    | "https://your-domain.okta.com"                         |
+| iss           | The Issuer Identifier of the response.                                                                                                                                     | String    | "https://{yourOktaDomain}.com"                         |
 | sub           | The subject. A unique identifier for the user.                                                                                                                             | String    | "00uk1u7AsAk6dZL3z0g3"                              |
 | aud           | Identifies the audience that this ID Token is intended for. It must be one of the OAuth 2.0 client IDs of your application.                                                | String    | "6joRGIzNCaJfdCPzRjlh"                              |
 | iat           | The time the ID Token was issued, represented in Unix time (seconds).                                                                                                      | Integer   | 1311280970                                          |
@@ -253,7 +253,7 @@ This endpoint complies with the [OIDC userinfo spec](http://openid.net/specs/ope
 ~~~sh
 curl -v -X POST \
 -H "Authorization: Bearer <access_token>" \
-"https://${org}.okta.com/oauth2/v1/userinfo"
+"https://{yourOktaDomain}..com/oauth2/v1/userinfo"
 ~~~
 
 #### Response Parameters
@@ -441,7 +441,7 @@ Based on the type of token and whether it is active or not, the returned JSON co
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
     "aud" : "https://api.example.com",
-    "iss" : "https://your-domain.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
+    "iss" : "https://{yourOktaDomain}.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3"
 }
@@ -620,12 +620,12 @@ This API doesn't require any authentication and returns a JSON object with the f
 
 ~~~json
 {
-    "issuer": "https://${org}.okta.com",
-    "authorization_endpoint": "https://${org}.okta.com/oauth2/v1/authorize",
-    "token_endpoint": "https://${org}.okta.com/oauth2/v1/token",
-    "userinfo_endpoint": "https://${org}.okta.com/oauth2/v1/userinfo",
-    "registration_endpoint": "https://${org}.okta.com/oauth2/v1/clients",
-    "jwks_uri": "https://${org}.okta.com/oauth2/v1/keys",
+    "issuer": "https://{yourOktaDomain}..com",
+    "authorization_endpoint": "https://{yourOktaDomain}..com/oauth2/v1/authorize",
+    "token_endpoint": "https://{yourOktaDomain}..com/oauth2/v1/token",
+    "userinfo_endpoint": "https://{yourOktaDomain}..com/oauth2/v1/userinfo",
+    "registration_endpoint": "https://{yourOktaDomain}..com/oauth2/v1/clients",
+    "jwks_uri": "https://{yourOktaDomain}..com/oauth2/v1/keys",
     "response_types_supported": [
         "code",
         "code id_token",
@@ -700,21 +700,21 @@ This API doesn't require any authentication and returns a JSON object with the f
         "at_hash",
         "c_hash"
     ],
-    "introspection_endpoint": "https://${org}.okta.com/oauth2/v1/introspect",
+    "introspection_endpoint": "https://{yourOktaDomain}..com/oauth2/v1/introspect",
     "introspection_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "client_secret_jwt",
         "none"
     ],
-    "revocation_endpoint": "https://${org}.okta.com/oauth2/v1/revoke",
+    "revocation_endpoint": "https://{yourOktaDomain}..com/oauth2/v1/revoke",
     "revocation_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "client_secret_jwt",
         "none"
     ],
-    "end_session_endpoint": "https://${org}.okta.com/oauth2/v1/logout"
+    "end_session_endpoint": "https://{yourOktaDomain}..com/oauth2/v1/logout"
 }
 ~~~
 
@@ -844,7 +844,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/authorize?
+"https://{yourOktaDomain}..com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=code&
   response_mode=form_post&
@@ -862,7 +862,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/authorize?
+"https://{yourOktaDomain}..com/oauth2/v1/authorize?
   client_id=${client_id}&
   response_type=id_token token&
   response_mode=form_post&
@@ -1022,7 +1022,7 @@ This request initiates a logout and will redirect to the Okta login page on succ
 
 ~~~sh
 curl -v -X GET \
-"https://${org}.okta.com/oauth2/v1/logout?
+"https://{yourOktaDomain}..com/oauth2/v1/logout?
   id_token_hint=${id_token_hint}
 ~~~
 
@@ -1030,7 +1030,7 @@ This request initiates a logout and will redirect to the `post_logout_redirect_u
 
 ~~~sh
 curl -v -X GET \
-"https://${org}.okta.com/oauth2/v1/logout?
+"https://{yourOktaDomain}..com/oauth2/v1/logout?
   id_token_hint=${id_token_hint}&
   post_logout_redirect_uri=${post_logout_redirect_uri}&
   state=${state}

@@ -26,7 +26,7 @@ To use these collections, you'll need to set up your local environment and impor
 
 1. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
     * Rename your environment to something you'll recognize. For example, `My Org`.
-    * `url`: Replace the example value with your org's URL. For example, `https://dev-123456.oktapreview.com`. (Don't include '-admin' in the subdomain!)
+    * `url`: Replace the example value with your org's URL. For example, `https://{yourOktaDomain}.com`. (Don't include '-admin' in the subdomain!)
     * `apikey`: Enter the API token you created earlier, for example `00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS`.
 
 1. Click **Update** to save your changes.
