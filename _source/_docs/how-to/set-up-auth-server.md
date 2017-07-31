@@ -207,7 +207,7 @@ Once you have an OpenID Connect Application set-up, and a User assigned to it yo
 
 First, you will need your Authorization Server's Authorization Endpoint, which you can retrieve using the Server's Metadata URI: `/oauth2/:authorizationServerId/.well-known/openid-configuration`. It will look like this:
 
-`https://example.okta.com/oauth2/:authorizationServerId/v1/authorize`
+`https://your-domain.okta.com/oauth2/:authorizationServerId/v1/authorize`
 
 To this you will need to add the following URL query parameters:
 
@@ -220,11 +220,11 @@ All of the values are fully documented here: [Obtain an Authorization Grant from
 
 The resulting URL would look like this:
 
-`https://example.okta.com/oauth2/:authorizationServerId/v1/authorize?client_id=examplefa39J4jXdcCwWA&response_type=id_token&response_mode=fragment&scope=openid%20profile&redirect_uri=https%3A%2F%2FyourRedirectUriHere.com&state=WM6D&nonce=YsG76jo`
+`https://your-domain.okta.com/oauth2/:authorizationServerId/v1/authorize?client_id=examplefa39J4jXdcCwWA&response_type=id_token&response_mode=fragment&scope=openid%20profile&redirect_uri=https%3A%2F%2FyourRedirectUriHere.com&state=WM6D&nonce=YsG76jo`
 
 If you paste this into your browser you are redirected to the sign-in page for your Okta org, with a URL that looks like this:
 
-`https://example.okta.com/login/login.htm?fromURI=%2Foauth2%2Fv1%2Fauthorize%2Fredirect%3Fokta_key%aKeyValueWillBeHere`
+`https://your-domain.okta.com/login/login.htm?fromURI=%2Foauth2%2Fv1%2Fauthorize%2Fredirect%3Fokta_key%aKeyValueWillBeHere`
 
 Here you enter in the credentials for a user who is mapped to your Open ID Connect Application and you will be directed to the `redirect_uri` that you specified along with an ID Token, and any state that you included as well:
 
@@ -238,7 +238,7 @@ To check the returned ID Token you can copy the value and paste it into your JWT
  "name": "Jakub Vulcan",
  "locale": "en-US",
  "ver": 1,
- "iss": "https://example.okta.com/oauth2/:authorizationServerId",
+ "iss": "https://your-domain.okta.com/oauth2/:authorizationServerId",
  "aud": "fa39J40exampleXdcCwWA",
  "iat": 1498328175,
  "exp": 1498331912,

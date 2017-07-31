@@ -2143,13 +2143,13 @@ curl -v -X GET \
   },
   "_links": {
     "source": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
     },
     "target": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/target"
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/target"
     },
     "cancel": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/cancel",
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/cancel",
       "hints": {
         "allow": [
           "POST"
@@ -2157,7 +2157,7 @@ curl -v -X GET \
       }
     },
     "provision": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/provision",
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/provision",
       "hints": {
         "allow": [
           "POST"
@@ -2214,7 +2214,7 @@ curl -v -X GET \
   },
   "_links": {
     "idp": {
-      "href": "https://example.okta.com/api/v1/idps/0oabmluDNh2JZi8lt0g4"
+      "href": "https://your-domain.okta.com/api/v1/idps/0oabmluDNh2JZi8lt0g4"
     }
   }
 }
@@ -2341,26 +2341,26 @@ curl -v -X GET \
     },
     "_links": {
       "suspend": {
-        "href": "https://example.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4/lifecycle/suspend",
+        "href": "https://your-domain.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4/lifecycle/suspend",
         "method": "POST"
       },
       "resetPassword": {
-        "href": "https://example.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4/lifecycle/reset_password",
+        "href": "https://your-domain.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4/lifecycle/reset_password",
         "method": "POST"
       },
       "self": {
-        "href": "https://example.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4"
+        "href": "https://your-domain.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4"
       },
       "changeRecoveryQuestion": {
-        "href": "https://example.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4/credentials/change_recovery_question",
+        "href": "https://your-domain.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4/credentials/change_recovery_question",
         "method": "POST"
       },
       "deactivate": {
-        "href": "https://example.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4/lifecycle/deactivate",
+        "href": "https://your-domain.okta.com/api/v1/users/00uc8wfZSNWKlFGZa0g4/lifecycle/deactivate",
         "method": "POST"
       },
       "confirm": {
-        "href": "https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/lifecycle/confirm/00uc8wfZSNWKlFGZa0g4",
+        "href": "https://your-domain.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/lifecycle/confirm/00uc8wfZSNWKlFGZa0g4",
         "method": "POST"
       }
     }
@@ -2425,7 +2425,7 @@ curl -v -X POST \
   },
   "_links": {
     "next": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/finish",
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/finish",
       "hints": {
         "allow": [
           "POST"
@@ -2433,7 +2433,7 @@ curl -v -X POST \
       }
     },
     "cancel": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/cancel",
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/cancel",
       "hints": {
         "allow": [
           "POST"
@@ -2502,7 +2502,7 @@ curl -v -X POST \
   },
   "_links": {
     "next": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/finish",
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/finish",
       "hints": {
         "allow": [
           "POST"
@@ -2510,7 +2510,7 @@ curl -v -X POST \
       }
     },
     "cancel": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/cancel",
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvkokI9JsOxqsjz0g3/cancel",
       "hints": {
         "allow": [
           "POST"
@@ -2544,7 +2544,7 @@ List of the users that are linked to the specified identity provider
 ##### Request Example
 
 ~~~sh
-GET https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
+GET https://your-domain.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
 200 OK
 ~~~
 
@@ -2567,7 +2567,7 @@ GET https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
       },
       "_links": {
         "self": {
-          "href": "https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7",
+          "href": "https://your-domain.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7",
           "hints": {
               "allow": [
                   "GET",
@@ -2576,10 +2576,10 @@ GET https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7/users
           }
         },
         "idp": {
-            "href": "https://example.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7"
+            "href": "https://your-domain.okta.com/api/v1/idps/0oa4lb6lbtmH355Hx0h7"
         },
         "user": {
-            "href": "https://example.okta.com/api/v1/users/00u5cl9lo7nMjHjPr0h7"
+            "href": "https://your-domain.okta.com/api/v1/users/00u5cl9lo7nMjHjPr0h7"
         }
      }
   }
@@ -2609,7 +2609,7 @@ uid       | `uid` of user to delete | URL        | String   | TRUE     |
 ##### Request Example
 
 ~~~sh
-DELETE https://example.okta.com//api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7
+DELETE https://your-domain.okta.com//api/v1/idps/0oa4lb6lbtmH355Hx0h7/users/00u5cl9lo7nMjHjPr0h7
 ~~~
 
 ##### Response Example
@@ -3210,7 +3210,7 @@ curl -v -X POST \
 Return CSR in DER format:
 ~~~http
 HTTP/1.1 201 Created
-Location: https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50
+Location: https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50
 Content-Type: application/pkcs10; filename=okta.p10
 Content-Transfer-Encoding: base64
 
@@ -3221,7 +3221,7 @@ Return a [CSR model](#identity-provider-csr-model)
 
 ~~~http
 HTTP/1.1 201 Created
-Location: https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50
+Location: https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50
 Content-Type: application/json
 
 {
@@ -3231,7 +3231,7 @@ Content-Type: application/json
   "kty": "RSA",
   "_links": {
     "self": {
-      "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50",
       "hints": {
         "allow": [
           "GET",
@@ -3240,7 +3240,7 @@ Content-Type: application/json
       }
     },
     "publish": {
-      "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish",
       "hints": {
         "allow": [
           "POST"
@@ -3319,7 +3319,7 @@ curl -v -X POST \
 ~~~http
 HTTP/1.1 201 Created
 Content-Type: application/json
-Location: https://example.okta.com/api/v1/idps/0oal21k0DVN7DhS3R0g3/credentials/keys/ZC5C-1gEUwVxiYI8xdmYYDI3Noc4zI24fLNxBpZVR04
+Location: https://your-domain.okta.com/api/v1/idps/0oal21k0DVN7DhS3R0g3/credentials/keys/ZC5C-1gEUwVxiYI8xdmYYDI3Noc4zI24fLNxBpZVR04
 
 {
     "created": "2017-03-27T21:19:57.000Z",
@@ -3437,7 +3437,7 @@ curl -v -X GET \
     "kty": "RSA",
     "_links": {
       "self": {
-        "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50",
+        "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50",
         "hints": {
           "allow": [
             "GET",
@@ -3446,7 +3446,7 @@ curl -v -X GET \
         }
       },
       "publish": {
-        "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish",
+        "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish",
         "hints": {
           "allow": [
             "POST"
@@ -3462,7 +3462,7 @@ curl -v -X GET \
     "kty": "RSA",
     "_links": {
       "self": {
-        "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/-_-BFwAGoUYN-DDvsSKQFdx7OXaPZqrEPpFDO1hu-rg",
+        "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/-_-BFwAGoUYN-DDvsSKQFdx7OXaPZqrEPpFDO1hu-rg",
         "hints": {
           "allow": [
             "GET",
@@ -3471,7 +3471,7 @@ curl -v -X GET \
         }
       },
       "publish": {
-        "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/-_-BFwAGoUYN-DDvsSKQFdx7OXaPZqrEPpFDO1hu-rg/lifecycle/publish",
+        "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/-_-BFwAGoUYN-DDvsSKQFdx7OXaPZqrEPpFDO1hu-rg/lifecycle/publish",
         "hints": {
           "allow": [
             "POST"
@@ -3526,7 +3526,7 @@ curl -v -X GET \
   "kty": "RSA",
   "_links": {
     "self": {
-      "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50",
       "hints": {
         "allow": [
           "GET",
@@ -3535,7 +3535,7 @@ curl -v -X GET \
       }
     },
     "publish": {
-      "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish",
       "hints": {
         "allow": [
           "POST"
@@ -3890,7 +3890,7 @@ curl -v -X GET \
   },
   "_links": {
     "metadata": {
-      "href": "https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/metadata.xml",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/metadata.xml",
       "type": "application/xml",
       "hints": {
         "allow": [
@@ -3899,7 +3899,7 @@ curl -v -X GET \
       }
     },
     "acs": {
-      "href": "https://example.okta.com/sso/saml2/0oa1k5d68qR2954hb0g4",
+      "href": "https://your-domain.okta.com/sso/saml2/0oa1k5d68qR2954hb0g4",
       "type": "application/xml",
       "hints": {
         "allow": [
@@ -3908,7 +3908,7 @@ curl -v -X GET \
       }
     },
     "users": {
-      "href": "https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/users",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/users",
       "hints": {
         "allow": [
           "GET"
@@ -3916,7 +3916,7 @@ curl -v -X GET \
       }
     },
     "activate": {
-      "href": "https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/activate",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/activate",
       "hints": {
         "allow": [
           "POST"
@@ -3924,7 +3924,7 @@ curl -v -X GET \
       }
     },
     "deactivate": {
-      "href": "https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/deactivate",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/lifecycle/deactivate",
       "hints": {
         "allow": [
           "POST"
@@ -5134,13 +5134,13 @@ The Identity Provider Transaction Model represents an account link or just-in-ti
   },
   "_links": {
     "source": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/source"
     },
     "target": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/target"
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/target"
     },
     "cancel": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/cancel",
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/cancel",
       "hints": {
         "allow": [
           "POST"
@@ -5148,7 +5148,7 @@ The Identity Provider Transaction Model represents an account link or just-in-ti
       }
     },
     "provision": {
-      "href": "https://example.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/provision",
+      "href": "https://your-domain.okta.com/api/v1/idps/tx/satvklBYyJmwa6qOg0g3/lifecycle/provision",
       "hints": {
         "allow": [
           "POST"
@@ -5324,7 +5324,7 @@ The Identity Provider User Model represents a linked user and their IdP user pro
   },
   "_links": {
     "self": {
-      "href": "https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/users/00ulwodIu7wCfdiVR0g3",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4/users/00ulwodIu7wCfdiVR0g3",
       "hints": {
         "allow": [
           "GET",
@@ -5333,10 +5333,10 @@ The Identity Provider User Model represents a linked user and their IdP user pro
       }
     },
     "idp": {
-      "href": "https://example.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4"
+      "href": "https://your-domain.okta.com/api/v1/idps/0oa1k5d68qR2954hb0g4"
     },
     "user": {
-      "href": "https://example.okta.com/api/v1/users/00ulwodIu7wCfdiVR0g3"
+      "href": "https://your-domain.okta.com/api/v1/users/00ulwodIu7wCfdiVR0g3"
     }
   }
 }
@@ -5417,7 +5417,7 @@ The CSR model for IdP defines a certificate signing request for a signature or d
   "kty": "RSA",
   "_links": {
     "self": {
-      "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50",
       "hints": {
         "allow": [
           "GET",
@@ -5426,7 +5426,7 @@ The CSR model for IdP defines a certificate signing request for a signature or d
       }
     },
     "publish": {
-      "href": "https://example.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish",
+      "href": "https://your-domain.okta.com/api/v1/idps/0oad5lTSBOMUBOBVVQSC/credentials/csrs/h9zkutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azha50/lifecycle/publish",
       "hints": {
         "allow": [
           "POST"

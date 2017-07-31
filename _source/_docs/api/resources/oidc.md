@@ -179,7 +179,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 |:--------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------|:----------------------------------------------------|
 | ver           | The semantic version of the ID Token.                                                                                                                                      | Integer   | 1                                                   |
 | jti           | A unique identifier for this ID Token for debugging and revocation purposes.                                                                                               | String    | "Tlenfse93dgkaksginv"                               |
-| iss           | The Issuer Identifier of the response.                                                                                                                                     | String    | "https://your-org.okta.com"                         |
+| iss           | The Issuer Identifier of the response.                                                                                                                                     | String    | "https://your-domain.okta.com"                         |
 | sub           | The subject. A unique identifier for the user.                                                                                                                             | String    | "00uk1u7AsAk6dZL3z0g3"                              |
 | aud           | Identifies the audience that this ID Token is intended for. It must be one of the OAuth 2.0 client IDs of your application.                                                | String    | "6joRGIzNCaJfdCPzRjlh"                              |
 | iat           | The time the ID Token was issued, represented in Unix time (seconds).                                                                                                      | Integer   | 1311280970                                          |
@@ -441,7 +441,7 @@ Based on the type of token and whether it is active or not, the returned JSON co
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
     "aud" : "https://api.example.com",
-    "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
+    "iss" : "https://your-domain.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3"
 }

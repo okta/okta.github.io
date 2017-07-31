@@ -212,21 +212,21 @@ curl -v -X GET \
     "_links": {
       "logo": [
         {
-          "href": "https://example.okta.com/img/logos/groups/okta-medium.png",
+          "href": "https://your-domain.okta.com/img/logos/groups/okta-medium.png",
           "name": "medium",
           "type": "image/png"
         },
         {
-          "href": "https://example.okta.com/img/logos/groups/okta-large.png",
+          "href": "https://your-domain.okta.com/img/logos/groups/okta-large.png",
           "name": "large",
           "type": "image/png"
         }
       ],
       "users": {
-        "href": "https://example.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users"
+        "href": "https://your-domain.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/users"
       },
       "apps": {
-        "href": "https://example.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps"
+        "href": "https://your-domain.okta.com/api/v1/groups/00g1emaKYZTWRYYRRTSK/apps"
       }
     }
   }
@@ -390,7 +390,7 @@ curl -v -X GET \
       "logo": [
         {
           "name": "medium",
-          "href": "http://example.okta.com:1802/img/logos/salesforce_logo.png",
+          "href": "https://your-domain.okta.com/img/logos/salesforce_logo.png",
           "type": "image/png"
         }
       ]
@@ -421,7 +421,7 @@ curl -v -X GET \
       "logo": [
         {
           "name": "medium",
-          "href": "http://example.okta.com:1802/img/logos/box.png",
+          "href": "https://your-domain.okta.com/img/logos/box.png",
           "type": "image/png"
         }
       ]

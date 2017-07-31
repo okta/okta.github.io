@@ -457,7 +457,7 @@ Content-Type: application/json;charset=UTF-8
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
     "aud" : "https://api.example.com",
-    "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
+    "iss" : "https://your-domain.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3",
     "number_of_flights": 2,

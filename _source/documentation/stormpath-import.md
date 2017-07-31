@@ -98,7 +98,7 @@ npm install -g @okta/stormpath-migration
 #### Run
 
 ```
-import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://your-org.okta.com --oktaApiToken yourApiToken
+import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://your-domain.okta.com --oktaApiToken yourApiToken
 ```
 
 
@@ -113,7 +113,7 @@ import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://y
 
 - `--oktaBaseUrl (-u)`: Base URL of your Okta tenant
 
-    - Example: `--oktaBaseUrl https://your-org.oktapreview.com`
+    - Example: `--oktaBaseUrl https://your-domain.oktapreview.com`
 
 - `--oktaApiToken (-t)`: API token for your Okta tenant (SSWS token)
 

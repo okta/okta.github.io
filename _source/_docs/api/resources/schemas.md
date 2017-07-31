@@ -52,7 +52,7 @@ curl -v -X GET \
 
 ~~~json
 {
-    "id": "https://example.okta.com/meta/schemas/user/default",
+    "id": "https://your-domain.okta.com/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -209,7 +209,7 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "https://example.okta.com/meta/schemas/user/default",
+    "id": "https://your-domain.okta.com/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -380,7 +380,7 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "https://example.okta.com/meta/schemas/user/default",
+    "id": "https://your-domain.okta.com/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -541,7 +541,7 @@ curl -v -X POST \
 
 ~~~json
 {
-    "id": "https://example.okta.com/meta/schemas/user/default",
+    "id": "https://your-domain.okta.com/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
@@ -645,7 +645,7 @@ The [User Model](./users.html#user-model) schema is defined using [JSON Schema D
 
 ~~~json
 {
-    "id": "https://example.okta.com/meta/schemas/user/default",
+    "id": "https://your-domain.okta.com/meta/schemas/user/default",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "name": "user",
     "title": "Default Okta User",
