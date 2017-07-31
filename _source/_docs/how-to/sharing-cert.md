@@ -233,14 +233,3 @@ Response:
 ~~~
 
 > Note: The response has been truncated for clarity.
-
-<!-- Add this section when second bullet is available
-### Other Tasks
-
-You may also want to do related tasks:
-
-* List all the keys in an app with a request.
-* Discover which apps are sharing a certificate. Waiting for feature -->
-
-
-

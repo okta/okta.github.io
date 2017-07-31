@@ -271,32 +271,6 @@ page pictured above using both "SP initated" and "IdP initated" login.
 
 Congratulations on getting Okta working with SimpleSAMLphp!
 
-<!--
-## Cleanup
-
-After you have confirmed that SimpleSAMLphp is working, you should remove the "admin" login option for SimpleSAMLphp, do this by editing the `authsources.php` file and commenting out the section that enables the "admin" login option.
-
-~~~
-$ $EDITOR ~/simplesamlphp/simplesamlphp/config/authsources.php
-~~~
-
-Then comment out the section of `authsources.php` that is below:
-
-~~~
-$config = array(
-    // This is a authentication source which handles admin authentication.
-    'admin' => array(
-        // The default is to use core:AdminPassword, but it can be replaced with
-        // any authentication source.
-        'core:AdminPassword',
-    ),
-);
-~~~
-
-If you need to use the "admin" login option later, you can re-enable
-it by uncommenting the section above.
--->
-
 ## Next Steps
 
 At this point, you should be familiar with setting up a SAML enabled application

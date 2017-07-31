@@ -77,7 +77,7 @@ function transformSignInWidget(markdown) {
  */
 function transformAuthJs(markdown) {
   // Bad link
-  return markdown.replace('#configuration', '#client-configuration');
+  return markdown.replace('#configuration', '#client-configuration').replace(/######/g, '');
 }
 
 /**

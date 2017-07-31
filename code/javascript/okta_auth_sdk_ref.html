@@ -189,6 +189,11 @@
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_code/javascript/okta_auth_sdk_ref.md">Edit Page</a>
       
+<blockquote>
+  <p>@okta/okta.github.io@0.0.4 import-external /Users/jmelberg/okta.github.io
+node scripts/import-external 2&gt;&amp;1 “@okta/okta-auth-js”</p>
+</blockquote>
+
 <h1 id="introduction">Introduction</h1>
 
 <p>The Okta Auth SDK builds on top of our <a href="http://developer.okta.com/docs/api/resources/authn.html">Authentication API</a> and <a href="http://developer.okta.com/docs/api/resources/oidc.html">OAuth 2.0 API</a> to enable you to create a fully branded sign-in experience using JavaScript.</p>
@@ -809,7 +814,7 @@
 
 <p>The enroll options depend on the desired factor.</p>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-security-question-factor">OKTA question</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-security-question-factor">OKTA question</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">questionFactor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'OKTA'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'question'</span><span class="p">;</span>
@@ -824,7 +829,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-sms-factor">OKTA sms</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-sms-factor">OKTA sms</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'OKTA'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'sms'</span><span class="p">;</span>
@@ -841,7 +846,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-call-factor">OKTA call</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-call-factor">OKTA call</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'OKTA'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'call'</span><span class="p">;</span>
@@ -858,7 +863,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-verify-push-factor">OKTA push</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-verify-push-factor">OKTA push</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'OKTA'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'push'</span><span class="p">;</span>
@@ -870,7 +875,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-verify-totp-factor">OKTA token:software:totp</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-okta-verify-totp-factor">OKTA token:software:totp</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'OKTA'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'token:software:totp'</span><span class="p">;</span>
@@ -882,7 +887,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-google-authenticator-factor">GOOGLE token:software:totp</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-google-authenticator-factor">GOOGLE token:software:totp</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'GOOGLE'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'token:software:totp'</span><span class="p">;</span>
@@ -894,7 +899,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-yubikey-factor">YUBICO token:hardware</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-yubikey-factor">YUBICO token:hardware</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'YUBICO'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'token:hardware'</span><span class="p">;</span>
@@ -906,7 +911,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-rsa-securid-factor">RSA token</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-rsa-securid-factor">RSA token</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'RSA'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'token'</span><span class="p">;</span>
@@ -921,7 +926,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-symantec-vip-factor">SYMANTEC token</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/factors.html#enroll-symantec-vip-factor">SYMANTEC token</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'SYMANTEC'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'token'</span><span class="p">;</span>
@@ -1105,7 +1110,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/authn.html#verify-security-question-factor">OKTA question</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/authn.html#verify-security-question-factor">OKTA question</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">questionFactor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'OKTA'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'question'</span><span class="p">;</span>
@@ -1117,7 +1122,7 @@
 </code></pre>
 </div>
 
-<p>####### <a href="http://developer.okta.com/docs/api/resources/authn.html#verify-factor">All other factors</a></p>
+<p><a href="http://developer.okta.com/docs/api/resources/authn.html#verify-factor">All other factors</a></p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">factor</span> <span class="o">=</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">factors</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">factor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">provider</span> <span class="o">===</span> <span class="s1">'YOUR_PROVIDER'</span> <span class="o">&amp;&amp;</span> <span class="nx">factor</span><span class="p">.</span><span class="nx">factorType</span> <span class="o">===</span> <span class="s1">'yourFactorType'</span><span class="p">;</span>
