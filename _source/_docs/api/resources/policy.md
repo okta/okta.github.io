@@ -533,7 +533,7 @@ For example, assume the following policies exist.
 - Policy B has priority 2 and applies to members of the "Everyone" group.
 
 When policy is evaluated for a user, policy "A" will be evaluated first.  If the user is a member of the "Administrators" group then the rules associated with policy "A" will be evaluated.   If a match is found then the policy settings will be applied.
-If the user is not a member of teh "Administrators" group, then policy B would be evaluated.
+If the user is not a member of the "Administrators" group, then policy B would be evaluated.
 
 ### Policy JSON Example (Okta Sign On Policy)
 
@@ -823,8 +823,8 @@ include | The AD integrations this policy applies to | Array | No | Include all 
 ## Okta Sign On Policy
 {: #OktaSignOnPolicy }
 
-Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challanged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
-Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be peformed before a specific Okta application can be invoked.
+Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challenged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
+Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.
 
 ### Policy Settings Data
 
@@ -956,7 +956,7 @@ self | Requirements for use-initiated enrollment | `NOT_ALLOWED`, `OPTIONAL` or 
 #### Policy Factor Consent Object
 {: #PolicyFactorConsentObject }
 
-The Policy Factor Consent Object is an extensibility point.  In the future, policy may be configureable to require user consent to specified terms when enrolling in a factor.   At present settings other than type = `NONE` are ignored.
+The Policy Factor Consent Object is an extensibility point.  In the future, policy may be configurable to require user consent to specified terms when enrolling in a factor.   At present settings other than type = `NONE` are ignored.
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- | ---
@@ -1010,7 +1010,7 @@ The following conditions may be applied to the rules associated with MFA Enrollm
 
 > The Password Policy API is a {% api_lifecycle beta %} [release](/docs/api/getting_started/releases-at-okta.html).
 
-Password policy controls settings that deterine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
+Password policy controls settings that determine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
 
 #### Policy Settings Example
 
@@ -1163,7 +1163,7 @@ minLength | Minimum length of the password recovery question answer | Integer | 
 Property | Description | Data Type | Required |
 | --- | --- | --- | ---
 status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes |
-properties | sConfiguration ettings for okta email factor | <a href="#EmailFactorPropertiesObject">Email Factor Properties Object</a> | No
+properties | Configuration settings for okta email factor | <a href="#EmailFactorPropertiesObject">Email Factor Properties Object</a> | No
 
 ###### Email Factor Properties Object
 {: #EmailFactorPropertiesObject }
@@ -1205,11 +1205,11 @@ The following conditions may be applied to Password Policy
 
 <a href="#PeopleObject">People Condition</a>
 
-<a href="#AuthProviderConditionObject">Authentication Povider Condition</a>
+<a href="#AuthProviderConditionObject">Authentication Provider Condition</a>
 
 ### Password Rules Action Data
 
-#### Passsword Actions Example
+#### Password Actions Example
 
 ~~~json
   "actions": {
