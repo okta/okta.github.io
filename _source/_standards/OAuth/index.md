@@ -293,7 +293,7 @@ No other modifications affect existing tokens.
 
 A Custom Authorization Server can issue an ID token to the client, as in OpenID Connect, but with the following differences:
 
-* The ID token cannot contain a reserved scope, nor can it contain a claim called 'groups'. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
+* The ID token can't contain OIDC reserved scopes or a `groups` claim. To obtain a claim with group information, administrators must define a custom claim with a group filter and associate it with a scope.
 * The custom properties in the app user profile are not included in the Id Token by default, even if profile scope is granted. To obtain a claim for a custom property, administrators must define a custom claim with an Okta Expression Language expression and associate it with a scope.
 
 The lifetime of an ID token is one hour. If the client that issued the token is deactivated, the token is
