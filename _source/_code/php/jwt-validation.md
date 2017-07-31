@@ -22,51 +22,51 @@ For validating a JWT, you will need a few different items:
 
 ## Working with Authorization Server Keys
 The first thing you will need to do is make a request to get your current keys for your authorization server. The URL
- for the keys can be discovered by visiting the .well-known endpoint of your authorization server. The .well-known 
- endpoint is listed in your authorization server dashboard and looks like 
- `https://php.oktapreview.com/oauth2/ausb5jqgqkd774i490h7/.well-known/oauth-authorization-server`
- 
- Once you have your .well-known URL, have your application make a request to this endpoint and `json_decode` the 
- results.
- 
- ```php
- $keys = json_decode(file_get_contents('https://php.oktapreview.com/oauth2/ausb5jqg774i490h7/v1/keys'));
- ```
- 
- This will return a JSON object of any keys. Typically, this will return a single key entry, but can return a set of 
- keys. 
- 
- ### Caching Keys
- To avoid any future requests to the keys endpoint, you should cache the keys you receive in response to this 
- request. As a guideline, store each key that is returned with the a combination of your Authorization Server id 
- and the `kid`, or just the `kid` as the lookup key in your cache.
- 
- ```php
- foreach($keys as $key) {
-    $item = $this->cache->getItem($serverId . '-' . $kid);
-    
-    if(!$item->isHit()) {
-        $item->set($key);
-        $this->cache->save($item);
-    } 
- ```
- 
- > Note: If you are not setting TTL for the cache entry, you should make sure to empty out old keys when new
-  ones are added to the cache.
- 
- This will allow you to look up the key for a later step. You could also update this to include a TTL if you wanted 
- to make sure you request a fresh set of keys after a set amount of time, but this is not required.
- 
- ## Validating a JWT
- After you have your `access_token` from a successful login, or from the `Bearer token` in the authorization header, 
- you will need to make sure that this is still valid. There are a few steps here to fully validate it.
- 
- ### Parsing Keys
- The keys you have stored in cache, or retrieved from the Authorization Server, need to be converted to an OpenSSL 
- key resource that you can use. This can be done in any way you would like. There are some great libraries [on 
- packagist](https://packagist.org/search/?q=jwk) that can be used for this. Once you have the public key set, you are
-  ready to continue validating the JWT.
-  
+for the keys can be discovered by visiting the .well-known endpoint of your authorization server. The .well-known 
+endpoint is listed in your authorization server dashboard and looks like 
+`https://php.oktapreview.com/oauth2/ausb5jqgqkd774i490h7/.well-known/oauth-authorization-server`
+
+Once you have your .well-known URL, have your application make a request to this endpoint and `json_decode` the 
+results.
+
+```php
+$keys = json_decode(file_get_contents('https://php.oktapreview.com/oauth2/ausb5jqg774i490h7/v1/keys'));
+```
+
+This will return a JSON object of any keys. Typically, this will return a single key entry, but can return a set of 
+keys. 
+
+### Caching Keys
+To avoid any future requests to the keys endpoint, you should cache the keys you receive in response to this 
+request. As a guideline, store each key that is returned with the a combination of your Authorization Server id 
+and the `kid`, or just the `kid` as the lookup key in your cache.
+
+```php
+foreach($keys as $key) {
+$item = $this->cache->getItem($serverId . '-' . $kid);
+
+if(!$item->isHit()) {
+    $item->set($key);
+    $this->cache->save($item);
+} 
+```
+
+> Note: If you are not setting TTL for the cache entry, you should make sure to empty out old keys when new
+ones are added to the cache.
+
+This will allow you to look up the key for a later step. You could also update this to include a TTL if you wanted 
+to make sure you request a fresh set of keys after a set amount of time, but this is not required.
+
+## Validating a JWT
+After you have your `access_token` from a successful login, or from the `Bearer token` in the authorization header, 
+you will need to make sure that this is still valid. There are a few steps here to fully validate it.
+
+### Parsing Keys
+The keys you have stored in cache, or retrieved from the Authorization Server, need to be converted to an OpenSSL 
+key resource that you can use. This can be done in any way you would like. There are some great libraries [on 
+packagist](https://packagist.org/search/?q=jwk) that can be used for this. Once you have the public key set, you are
+ready to continue validating the JWT.
+
 ```php
 $keys = JWK::parseKeySet($authorizationServer->getKeys());
 ```

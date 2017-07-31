@@ -6,7 +6,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.41
 
 # Release 2016.43
 
-<!-- ### Feature Enhancement: New Version of Okta Sign-In Widget
+<!-- Feature Enhancement: New Version of Okta Sign-In Widget
 
 The new version of Okta Sign-In Widget, 1.8.0, is available:
 

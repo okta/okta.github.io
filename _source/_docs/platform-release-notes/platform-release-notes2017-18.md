@@ -107,8 +107,6 @@ As noted above, to change user state, the `self` link should be called to retrie
 
 >Important: Not all preview organizations will receive this feature. Okta has identified preview organizations that depend on the Okta .NET SDK, which requires the old functionality. Okta won’t enable the feature for these orgs. Instead, when the SDK issue is resolved, Okta will send a customer communication explaining the migration path to enable the feature for those orgs.
 
-<!-- ### Platform New Features -->
-
 ### Platform Feature Improvement: View Access Tokens from Social Authentication
 
 Using `GET /api/v1/idps/:id/users/:uid/credentials/tokens`, you can fetch the Access Tokens minted by a social authentication provider.

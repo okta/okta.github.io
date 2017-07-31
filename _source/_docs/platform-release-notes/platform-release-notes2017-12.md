@@ -25,12 +25,6 @@ Of course, as each change is released, we'll announce the change here.
 
 For a full description of the rate limit changes, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
-<!--
-### Feature Improvements
- * xxx
--->
-<!-- (OKTA-114417) -->
-
 ### Platform Bugs Fixed
  * The `/api/v1/apps` API sometimes incorrectly returned `null` for the `realm` or `groupName`
  attribute for a Template WS-Fed application. (OKTA-117274)

@@ -24,8 +24,6 @@ For a full description of the rate limit changes, see [API Rate Limit Improvemen
 the pre-filled default values include all grant types and the `All scopes` radio button.
 <!-- (OKTA-110748, OKTA-110751) -->
 
-<!-- ### Platform Bugs Fixed -->
-
 ### Does Your Org Have This Change Yet?
 
 To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.

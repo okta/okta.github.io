@@ -25,11 +25,6 @@ Of course, as each change is released, we'll announce the change here.
 
 For a full description of the rate limit changes, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
-<!-- ### Feature Improvement
-
-xxx.  -->
-<!-- (OKTA-xxx) -->
-
 ### Platform Bugs Fixed
 
  * Request to [`/api/v1/authn/factors/<factorId>/verify`](/docs/api/resources/authn.html#enroll-factor) responded with a valid `stateToken` after user status

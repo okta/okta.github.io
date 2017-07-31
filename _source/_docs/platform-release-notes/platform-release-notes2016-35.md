@@ -24,7 +24,7 @@ The new version of Okta Sign-In Widget, 1.6.0, is available:
 
 Learn about these and other improvements at [the Git site](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-1.6.0).
 
-<!-- ## Bugs Fixed The following issues are fixed: * -->
+<!-- Bugs Fixed The following issues are fixed: * -->
 
 ## Does Your Org Have These Changes Yet?
 

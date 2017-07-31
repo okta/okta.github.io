@@ -79,7 +79,7 @@ When performing a self-service password reset (forgot password), the request for
 For more information, see [Password Complexity Object](/docs/api/resources/authn#password-complexity-object)
 and [Answer Recovery Question](/docs/api/resources/authn#answer-recovery-question).
 
-<!-- ## Bugs Fixed -->
+<!-- Bugs Fixed -->
 
 ### Does Your Org Have These Changes Yet?
 

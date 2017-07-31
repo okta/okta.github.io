@@ -6,8 +6,6 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.36
 
 # Release 2016.37
 
-<!-- ### Feature Enhancement -->
-
 ### Bug Fixed
 
 * In some cases, a `GET /api/v1/users` request incorrectly returned a 403 error. <!-- OKTA-75861 -->

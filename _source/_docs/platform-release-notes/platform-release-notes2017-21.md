@@ -31,8 +31,6 @@ We are making org-wide rate limits more granular, and treating authenticated end
 
 For a full description of the new rate limits, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
-<!-- ### Platform New Features -->
-
 ### Platform Feature Improvement: System Log Notifications for OpenID Connect Apps
 
 Notifications are entered in the [System Log](/docs/api/resources/system_log.html) when OpenID Connect apps are created or updated.

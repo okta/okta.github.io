@@ -32,8 +32,6 @@ We are making org-wide rate limits more granular, and treating authenticated end
 
 For a full description of the new rate limits, see [API Rate Limit Improvements](https://support.okta.com/help/articles/Knowledge_Article/API-Rate-Limit-Improvements).<!-- OKTA-110472 -->
 
-<!-- ### Platform New Features -->
-
 ### Platform Bugs Fixed
 
 * OpenID Connect and OAuth 2.0 requests failed to respect default SAML IdP configuration. (OKTA-127155)

@@ -6,8 +6,6 @@ excerpt: Summary of changes to the Okta Platform since Release 2016.46
 
 # Release 2016.47
 
-<!-- ## Feature Enhancements -->
-
 ## Platform Bugs Fixed
 
 * Read-Only Admins were unable to evaluate an MFA action, resulting in a failure to create a session. (OKTA-105659)
