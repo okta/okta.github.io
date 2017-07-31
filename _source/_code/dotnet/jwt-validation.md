@@ -9,7 +9,7 @@ support_email: developers@okta.com
 
 When you use the Okta API to [obtain an authorization grant for a user](https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user), the response contains a signed JWT (`id_token` and/or `access_token`).
 
-A common practice is to use attach one of these tokens to the `Bearer` header of future requests, to instruct your server to authorize the request for that user. Your server must then validate the token to make sure it's authentic and hasn't expired.
+A common practice is to send one of these tokens in the `Bearer` header of future requests, to authorize the request for that user. Your server must then validate the token to make sure it's authentic and hasn't expired.
 
 ## Who should use this guide
 
