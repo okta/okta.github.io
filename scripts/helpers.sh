@@ -124,3 +124,15 @@ function check_for_localhost_links() {
         return 1
     fi
 }
+
+# Check for broken markdown headers
+function header_checker() {
+    local dir=$(pwd)
+    local allheaders=$( grep -EoR "##" --include="*.html" $dir --exclude-dir={node_modules,scripts,tests,dist,_source} | sort | uniq )
+    if [ "$allheaders" ];
+    then
+        echo $allheaders
+        echo "Files contain broken headers."
+        return 1
+    fi
+}
