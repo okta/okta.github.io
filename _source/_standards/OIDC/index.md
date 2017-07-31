@@ -10,7 +10,7 @@ icon: /assets/img/icons/openid.svg
 OpenID Connect is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable manner.
 In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.
 
-OpenID Connect allows a range of clients to request and receive information about authenticated sessions and end-users, including
+OpenID Connect allows a range of clients to request and receive information about authenticated sessions and end users, including
 web-based clients, mobile apps, and JavaScript clients.
 The [specification suite](http://openid.net/connect/) is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.
 
@@ -18,10 +18,10 @@ Okta is [certified for OpenID Connect](http://openid.net/certification/) for Bas
 
 ## Authentication Basics with OAuth 2.0 and OpenID Connect
 
-OAuth 2.0 is an authorization framework for delegated access to APIs, and OpenID Connect is an SSO protocol for authenticating end-users and asserting their identity.
+OAuth 2.0 is an authorization framework for delegated access to APIs, and OpenID Connect is an SSO protocol for authenticating end users and asserting their identity.
 OpenID Connect extends OAuth 2.0:
 
-* Provides a signed [*id_token*](#id-token) for the client and [a UserInfo endpoint](/docs/api/resources/oidc.html#openid-connect-discovery-document) from which you can fetch user attributes.
+* Provides a signed [*id_token*](#id-token) for the client and [a UserInfo endpoint](/docs/api/resources/oidc.html#openid-connect-discovery-document) from which you can retrieve user attributes.
 * Provides access to the [Okta Authorization Server](#authorization-servers).
 * Provides a standard set of scopes and claims for identities including profile, email, address, and phone.
 
@@ -75,7 +75,7 @@ to access [the OIDC `userinfo` endpoint](/docs/api/resources/oidc.html#get-user-
 | Property       | Description                                                                                                   | Required       |
 |:---------------|:--------------------------------------------------------------------------------------------------------------|:---------------|
 | openid         | Identifies the request as an OpenID Connect request.                                                          | Yes            |
-| profile        | Requests access to the end-user's default profile claims.                                                     | No             |
+| profile        | Requests access to the end user's default profile claims.                                                     | No             |
 | email          | Requests access to the `email` and `email_verified` claims.                                                   | No             |
 | phone          | Requests access to the `phone_number` and `phone_number_verified` claims.                                     | No             |
 | address        | Requests access to the `address` claim.                                                                       | No             |
@@ -105,7 +105,6 @@ token from the authorization server's Token endpoint.
 token and optionally an Access Token directly from the authorization server's authentication endpoint.
 * [Hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) -- a combination of the other
 two flows.
-<!-- * What is Configuration Publishing? Need to describe it here -->
 
 Clients should always [validate ID Tokens](/docs/api/resources/oidc.html#validating-id-tokens) to ensure their integrity.
 
@@ -143,7 +142,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
   "at_hash": "cpqKfdQA5eH891Ff5oJr_Q",
   "name" :"John Doe",
   "nickname":"Jimmy",
-  "preferred_username": "administrator1@clouditude.net",
+  "preferred_username": "john.doe@example.com",
   "given_name":"John",
   "middle_name":"James",
   "family_name":"Doe",
@@ -197,7 +196,7 @@ Claims in the payload are either base claims, independent of scope (always retur
 | aud           | Identifies the audience that this ID Token is intended for. It must be one of the OAuth 2.0 client IDs of your application.                                                | String    | "6joRGIzNCaJfdCPzRjlh"                              |
 | iat           | The time the ID Token was issued, represented in Unix time (seconds).                                                                                                      | Integer   | 1311280970                                          |
 | exp           | The time the ID Token expires, represented in Unix time (seconds).                                                                                                         | Integer   | 1311280970                                          |
-| auth_time     | The time the end-user was authenticated, represented in Unix time (seconds).                                                                                               | Integer   | 1311280970                                          |
+| auth_time     | The time the end user was authenticated, represented in Unix time (seconds).                                                                                               | Integer   | 1311280970                                          |
 | amr           | JSON array of strings that are identifiers for     [authentication methods](http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html) used in the authentication.     | Array     | [ "pwd", "mfa", "otp", "kba", "sms", "swk", "hwk" ] |
 | idp           | The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If the IdP is an Okta org, the value is the Okta OrgId.           | String    | "00ok1u7AsAkrwdZL3z0g3"                             |
 | nonce         | Value used to associate a Client session with an ID Token, and to mitigate replay attacks.                                                                                 | String    | "n-0S6_WzA2Mj"                                      |
@@ -210,9 +209,9 @@ Claims in the payload are either base claims, independent of scope (always retur
 | Property           | Required Scope    | Description                                                                                                                                                                                                                        | DataType       | Example                                                                                                                         |
 |:-------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------|:--|
 | name               | profile           | User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user's locale and preferences.                                                                     | String         | "John Doe"                                                                                                                      |
-| preferred_username | profile           | The Okta login (username) for the end-user.                                                                                                                                                                                        | String         | "john.doe@example.com"                                                                                                          |
+| preferred_username | profile           | The Okta login (username) for the end user.                                                                                                                                                                                        | String         | "john.doe@example.com"                                                                                                          |
 | nickname           | profile           | Casual name of the user that may or may not be the same as the given_name.                                                                                                                                                         | String         | "Jimmy"                                                                                                                         |
-| preferred_username | profile           | The chosen login (username) for the end-user. By default this is the Okta username.                                                                                                                                                | String         | "john.doe@example.com"                                                                                                          |
+| preferred_username | profile           | The chosen login (username) for the end user. By default this is the Okta username.                                                                                                                                                | String         | "john.doe@example.com"                                                                                                          |
 | given_name         | profile           | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.                                              | String         | "John"                                                                                                                          |
 | middle_name        | profile           | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used. | String         | "James"                                                                                                                         |
 | family_name        | profile           | Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.                               | String         | "Doe"                                                                                                                           |

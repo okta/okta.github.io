@@ -224,7 +224,7 @@ Custom claims are configured in the Custom Authorization Server, and returned de
 * Custom claims require configuration in the Custom Authorization Server. You can specify that claims are to be returned in each token (ID or access) always, or only when requested. Assuming a claim matches a requested scope,
     it is returned to the ID token if there is no access token requested. 
 
-The full set of claims for requested scopes is available via the `/oauth2/v1/userinfo` endpoint. To verify the claims for a scope, call this endpoint using the access token.
+The full set of claims for requested scopes is available via the `/oauth2/v1/userinfo` endpoint. Call this endpoint using the access token.
 
 ##### Custom claim values
 
@@ -304,7 +304,10 @@ OAuth 2.0 (Custom Authorization Server), except the public keys should be retrie
 
 ## Requesting a Token
 
-For a list of tokens returned, depending on grant type and scope in your request, see [Response Parameters](/docs/api/resources/oauth2.html#response-parameters-1).
+You can request a token with the endpoint [`/oauth2/:authorizationServerId/v1/token`](/docs/api/resources/oauth2.html#request-a-token).
+
+The grant type and scope in your request, as well as configurations set in the Custom Authorization Server, determine which
+tokens are returned. For details, see [Response Parameters](/docs/api/resources/oauth2.html#response-parameters-1).
 
 ## Access Policies
 
