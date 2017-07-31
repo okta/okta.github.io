@@ -8,21 +8,25 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.30
 
 ### Platform Features
 
-These platform features are in preview orgs (as of Release 2017.28), and expected to roll out to production orgs during the week of August 7, 2017:
+These platform features are generally available in preview orgs (as of Release 2017.28), and expected to be generally available in production orgs during the week of August 7, 2017:
 
 * [OpenID Connect](#openid-connect---)
 
 * [Key Rollover](#key-rollover----)
 
-This platform feature enhancement is EA in preview orgs (as of release 2017.30) and in production orgs with this release. To enable an EA feature, contact Okta Support.
+This platform feature enhancement is EA in preview orgs (as of release 2017.30) and expected to be EA in production orgs during the week of August 7, 2017:
 
 * [Email for Two-Factor Authentication](#email-for-two-factor-authentication--)
 
-This platform feature enhancement is rolling out in preview orgs with this release and expected to roll out to production orgs the week of September 11, 2017.
+To enable an EA feature, contact Okta Support. For information about Early Access (EA), see [Okta Release Lifecycle](https://developer.okta.com/docs/api/getting_started/releases-at-okta.html).
+
+This platform feature enhancement is generally available in preview orgs with this release and expected to be generally available in production orgs the week of September 11, 2017:
 
 * [Sign SAML Assertions with SHA256 Certs](#sign-saml-assertions-with-sha256-certs)
 
-For information about Early Access (EA), see [Okta Release Lifecycle](https://developer.okta.com/docs/api/getting_started/releases-at-okta.html).
+This feature enhancement is available on GitHub:
+
+* [New Version of Sign-In Widget](#new-version-of-sign-in-widget--)
 
 #### OpenID Connect   <!-- OKTA-132049  -->
 
@@ -42,13 +46,16 @@ You can enroll a user with an email factor. See [Enroll Okta Email Factor](/docs
 
 #### Sign SAML Assertions with SHA256 Certs
 
-You can use SHA256 certificates to sign outbound SAML assertions. For details see [SAML Apps and SHA256 Certificates](/docs/how-to/updating_saml_cert.html)
+You can use SHA256 certificates to sign outbound SAML assertions. See [SAML Apps and SHA256 Certificates](/docs/how-to/updating_saml_cert.html) for details.
+
+#### New Version of Sign-In Widget  <!-- (OKTA-132800) -->
+
+Version 2.1.0 of the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-2.1.0) is available. Check out the new features and bug fixes!
 
 <!--
 ### Platform Bugs Fixed
 
-This platform bug fix is in preview orgs with this release and expected in production orgs the week of August 7, 2017.
-
+This platform bug fix is in preview orgs with this release and expected in production orgs the week of {next Monday date}.
 -->
 
 ### Does Your Org Have This Change Yet?
