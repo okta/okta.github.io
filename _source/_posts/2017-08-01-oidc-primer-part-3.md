@@ -443,3 +443,5 @@ It took some time, but here is what I consider to be the important takeaways:
 * It’s inherently flexible. It’s easy to provide custom scopes and claims and to dictate what information should be encoded into tokens beyond the default specification.
 
 All the code used in this series can be found on [github](https://github.com/oktadeveloper/okta-oidc-flows-example). You can use the OIDC sample app to exercise the various flows and scopes discussed throughout these posts. It’s at: [https://okta-oidc-fun.herokuapp.com/](https://okta-oidc-fun.herokuapp.com/). The entire final OIDC spec can be found [here](http://openid.net/specs/openid-connect-core-1_0.html). And you can learn more about OAuth 2.0 at [oauth.com](https://www.oauth.com/).
+
+The whole series is live now. Part 1 is [here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1). Part 2 is [here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2).

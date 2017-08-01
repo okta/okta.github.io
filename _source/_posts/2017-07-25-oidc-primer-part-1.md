@@ -205,3 +205,5 @@ In this post, we learned some basics about OpenID Connect, its history, and a bi
 If you want to jump ahead, check out the example at: [https://okta-oidc-fun.herokuapp.com](https://okta-oidc-fun.herokuapp.com)
 
 And, the source code is at: [https://github.com/oktadeveloper/okta-oidc-flows-example](https://github.com/oktadeveloper/okta-oidc-flows-example)
+
+The whole series is live now. Part 2 is [here](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2). Part 3 is [here](https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3).
