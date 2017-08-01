@@ -230,7 +230,7 @@ The full set of claims for requested scopes is available via the `/oauth2/v1/use
 
 ##### Custom claim configuration
 
-Define custom claims in [the Okta user interface](https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=custom%20claim) or using [the OAuth 2.0 API](docs/api/resources/oauth2.html#create-a-claim).
+Define custom claims in [the Okta user interface](https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=custom%20claim) or using [the OAuth 2.0 API](/docs/api/resources/oauth2.html#create-a-claim).
 
 A custom claim can be configured in the following ways:
 
