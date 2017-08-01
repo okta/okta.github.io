@@ -271,16 +271,16 @@ Generally speaking, the scopes specified in a request are included in the Access
 | Requested grant type | Requested scope                                                            | Tokens in the response                                                                   |
 |:---------------------|:---------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------|
 | authorization_code   | None                                                                       | Access Token. Contains scopes requested in the `/authorize` endpoint.                    |
-| authorization_code   | Any or no scopes plus `offline_scope`                                      | Access Token, Refresh Token                                                              |
+| authorization_code   | Any or no scopes plus `offline_access`                                     | Access Token, Refresh Token                                                              |
 | authorization_code   | Any or no scopes plus `openid`                                             | Access Token, ID Token                                                                   |
-| authorization_code   | Any or no scopes plus `openid` and `offline_scope`                         | Access Token, ID Token, Refresh Token                                                    |
+| authorization_code   | Any or no scopes plus `openid` and `offline_access`                        | Access Token, ID Token, Refresh Token                                                    |
 | refresh_token        | None                                                                       | Access Token, Refresh Token. Contains scopes used to generate the Refresh Token.         |
 | refresh_token        | Subset of scopes used to generate Refresh Token excluding `offline_access` | Access Token. Contains specified scopes.                                                 |
-| refresh_token        | Subset of scopes used to generate Refresh Token including `offline_scope`  | Access Token, Refresh Token                                                              |
+| refresh_token        | Subset of scopes used to generate Refresh Token including `offline_access` | Access Token, Refresh Token                                                              |
 | password             | None                                                                       | Access Token. Contains default scopes granted by policy.                                 |
-| password             | Any or no scopes plus `offline_scope`                                      | Access Token, Refresh Token. Contains specified scopes.                                  |
+| password             | Any or no scopes plus `offline_access`                                     | Access Token, Refresh Token. Contains specified scopes.                                  |
 | password             | Any or no scopes plus `openid`                                             | Access Token, ID Token                                                                   |
-| password             | Any or no scopes plus `openid` and `offline_scope`                         | Access Token, ID Token, Refresh Token                                                    |
+| password             | Any or no scopes plus `openid` and `offline_access`                        | Access Token, ID Token, Refresh Token                                                    |
 | client_credentials   | Any or no scope                                                            | Access Token. Contains default scopes granted by policy in addition to requested scopes. |
 
 ##### List of Errors
