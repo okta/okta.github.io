@@ -800,11 +800,15 @@ authType |  | `ANY` or `RADIUS` | No |
 #### Network Condition Object
 {: #NetworkConditionObject }
 
-Specifies a network segment.
+Specifies a network segment, and a set of network zones to be included or excluded. If the connection parameter's data type is `ZONE`, exactly one of the include or exclude arrays is required. 
 
-Parameter | Description | Data Type | Required | Default
+Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No |
+connection |  | `ANYWHERE`, `ZONE`, `ON_NETWORK`, or `OFF_NETWORK` | No |
+include | The zones to include | Array | Only if connection data type is `ZONE` |
+exclude | The zones to exclude | Array | Only if connection data type is `ZONE` |
+
+> The `ON_NETWORK` and `OFF_NETWORK` data types are part of a {% api_lifecycle deprecated %} feature. The `ZONE` data type is now used when selecting network zones. Specific zones to include or exclude are specified in the respective arrays.
 
 #### Authentication Provider Condition Object
 {: #AuthProviderConditionObject }
