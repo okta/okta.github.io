@@ -211,7 +211,7 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/authn.md">Edit Page</a>
       <h1 id="authentication-api">Authentication API</h1>
 
-<p>The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta <a href="sessions.html">Sessions API</a> to obtain an Okta <a href="/docs/examples/session_cookie.html">session cookie</a> and access apps within Okta.</p>
+<p>The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta <a href="sessions.html">Sessions API</a> to obtain an Okta <a href="/use_cases/authentication/session_cookie.html">session cookie</a> and access apps within Okta.</p>
 
 <p>The API is targeted for developers who want to build their own end-to-end login experience to replace the built-in Okta login experience and addresses the following key scenarios:</p>
 
@@ -7145,7 +7145,7 @@ Represents the type of authentication. Currently available only during <a href="
 <p>One-time token issued as <code class="highlighter-rouge">sessionToken</code> response parameter when an authentication transaction completes with the <code class="highlighter-rouge">SUCCESS</code> status.</p>
 
 <ul>
-  <li>The token can be exchanged for a session with the <a href="sessions.html#create-session-with-session-token">Session API</a> or converted to a <a href="/docs/examples/session_cookie.html">session cookie</a>.</li>
+  <li>The token can be exchanged for a session with the <a href="sessions.html#create-session-with-session-token">Session API</a> or converted to a <a href="/use_cases/authentication/session_cookie.html">session cookie</a>.</li>
   <li>The lifetime of the <code class="highlighter-rouge">sessionToken</code> is the same as the lifetime of a user’s session and managed by the organization’s security policy.</li>
 </ul>
 
