@@ -90,7 +90,7 @@ curl -v -X POST \
     "login": "isaac.brock@example.com",
     "mobilePhone": "555-415-1337"
   }
-}' "https://${org}.okta.com/api/v1/users?activate=false"
+}' "https://{yourOktaDomain}.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
@@ -121,7 +121,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
     }
   }
 }
@@ -157,7 +157,7 @@ curl -v -X POST \
       "answer": "Annie Oakley"
     }
   }
-}' "https://${org}.okta.com/api/v1/users?activate=false"
+}' "https://{yourOktaDomain}.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
@@ -191,7 +191,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
     }
   }
 }
@@ -226,7 +226,7 @@ curl -v -X POST \
   "credentials": {
     "password" : { "value": "tlpWENT2m" }
   }
-}' "https://${org}.okta.com/api/v1/users?activate=false"
+}' "https://{yourOktaDomain}.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
@@ -258,7 +258,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
     }
   }
 }
@@ -297,7 +297,7 @@ curl -v -X POST \
       "answer": "Annie Oakley"
     }
   }
-}' "https://${org}.okta.com/api/v1/users?activate=false"
+}' "https://{yourOktaDomain}.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
@@ -332,7 +332,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
     }
   }
 }
@@ -365,7 +365,7 @@ curl -v -X POST \
       "name": "FEDERATION"
     }
   }
-}' "https://${org}.okta.com/api/v1/users?provider=true"
+}' "https://{yourOktaDomain}.com/api/v1/users?provider=true"
 ~~~
 
 ##### Response Example
@@ -397,15 +397,15 @@ curl -v -X POST \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/reset_password",
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/reset_password",
       "method": "POST"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/credentials/change_recovery_question",
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00uijntSwJjSHtDY70g3/credentials/change_recovery_question",
       "method": "POST"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/deactivate",
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/deactivate",
       "method": "POST"
     }
   }
@@ -439,7 +439,7 @@ curl -v -X POST \
     "00g1emaKYZTWRYYRRTSK",
     "00garwpuyxHaWOkdV0g4"
   ]
-}' "https://${org}.okta.com/api/v1/users?activate=false"
+}' "https://{yourOktaDomain}.com/api/v1/users?activate=false"
 ~~~
 
 ##### Response Example
@@ -470,7 +470,7 @@ curl -v -X POST \
   },
   "_links": {
     "activate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"
     }
   }
 }
@@ -534,7 +534,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/me"
+"https://{yourOktaDomain}.com/api/v1/users/me"
 ~~~
 
 ##### Response Example
@@ -569,25 +569,25 @@ curl -v -X GET \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }
@@ -608,7 +608,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
@@ -643,25 +643,25 @@ curl -v -X GET \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }
@@ -683,7 +683,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/isaac.brock@example.com"
+"https://{yourOktaDomain}.com/api/v1/users/isaac.brock@example.com"
 ~~~
 
 ##### Response Example
@@ -718,25 +718,25 @@ curl -v -X GET \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }
@@ -758,7 +758,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/isaac.brock"
+"https://{yourOktaDomain}.com/api/v1/users/isaac.brock"
 ~~~
 
 ##### Response Example
@@ -793,25 +793,25 @@ curl -v -X GET \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }
@@ -873,7 +873,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?limit=200"
+"https://{yourOktaDomain}.com/api/v1/users?limit=200"
 ~~~
 
 ##### Response Example
@@ -882,8 +882,8 @@ curl -v -X GET \
 ~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
-Link: <https://your-domain.okta.com/api/v1/users?limit=200>; rel="self"
-Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limit=200>; rel="next"
+Link: <https://{yourOktaDomain}.com/api/v1/users?limit=200>; rel="self"
+Link: <https://{yourOktaDomain}.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limit=200>; rel="next"
 
 [
   {
@@ -910,7 +910,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
     },
     "_links": {
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+        "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   },
@@ -943,7 +943,7 @@ Link: <https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&limi
     },
     "_links": {
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+        "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -973,7 +973,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?q=eric&limit=1"
+"https://{yourOktaDomain}.com/api/v1/users?q=eric&limit=1"
 ~~~
 
 ##### Response Example
@@ -1010,7 +1010,7 @@ curl -v -X GET \
     },
     "_links": {
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+        "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1082,7 +1082,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
+"https://{yourOktaDomain}.com/api/v1/users?filter=status+eq+\"ACTIVE\"+or+status+eq+\"RECOVERY\""
 ~~~
 
 
@@ -1120,7 +1120,7 @@ curl -v -X GET \
     },
     "_links": {
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+        "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1139,7 +1139,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?filter=lastUpdated+gt+\"2013-07-01T00:00:00.000Z\""
+"https://{yourOktaDomain}.com/api/v1/users?filter=lastUpdated+gt+\"2013-07-01T00:00:00.000Z\""
 ~~~
 
 ##### Response Example
@@ -1176,7 +1176,7 @@ curl -v -X GET \
     },
     "_links": {
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+        "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1230,7 +1230,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?search=profile.mobilePhone+sw+\"555\"+and+status+eq+\"ACTIVE\""
+"https://{yourOktaDomain}.com/api/v1/users?search=profile.mobilePhone+sw+\"555\"+and+status+eq+\"ACTIVE\""
 ~~~
 
 ##### Response Example
@@ -1266,7 +1266,7 @@ curl -v -X GET \
     },
     "_links": {
       "self": {
-        "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+        "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
       }
     }
   }
@@ -1291,7 +1291,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users?search=profile.arrayAttr+eq+\"arrayAttrVal1\" "
+"https://{yourOktaDomain}.com/api/v1/users?search=profile.arrayAttr+eq+\"arrayAttrVal1\" "
 ~~~
 
 ##### Response Example for Array
@@ -1344,7 +1344,7 @@ curl -v -X GET \
         },
         "_links": {
             "self": {
-                "href": "http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR"
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u19uiKQa0xXkbdGLNR"
             }
         }
     }
@@ -1422,7 +1422,7 @@ curl -v -X POST \
     "login": "isaac.brock@example.com",
     "mobilePhone": "555-415-1337"
   }
-}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+}' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
@@ -1457,25 +1457,25 @@ curl -v -X POST \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }
@@ -1500,7 +1500,7 @@ curl -v -X POST \
   "credentials": {
     "password" : { "value": "uTVM,TPw55" }
   }
-}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+}' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
@@ -1535,25 +1535,25 @@ curl -v -X POST \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }
@@ -1581,7 +1581,7 @@ curl -v -X POST \
       "answer": "forty two"
     }
   }
-}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+}' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
@@ -1616,25 +1616,25 @@ curl -v -X POST \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }
@@ -1669,7 +1669,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"
 ~~~
 
 ##### Response Example
@@ -1680,8 +1680,8 @@ curl -v -X GET \
   {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "label": "Google Apps Mail",
-    "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/50",
-    "logoUrl": "https://your-domain.okta.com/img/logos/google-mail.png",
+    "linkUrl": "https://{yourOktaDomain}.com/home/google/0oa3omz2i9XRNSRIHBZO/50",
+    "logoUrl": "https://{yourOktaDomain}.com/img/logos/google-mail.png",
     "appName": "google",
     "appInstanceId": "0oa3omz2i9XRNSRIHBZO",
     "appAssignmentId": "0ua3omz7weMMMQJERBKY",
@@ -1692,8 +1692,8 @@ curl -v -X GET \
   {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "label": "Google Apps Calendar",
-    "linkUrl": "https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/54",
-    "logoUrl": "https://your-domain.okta.com/img/logos/google-calendar.png",
+    "linkUrl": "https://{yourOktaDomain}.com/home/google/0oa3omz2i9XRNSRIHBZO/54",
+    "logoUrl": "https://{yourOktaDomain}.com/img/logos/google-calendar.png",
     "appName": "google",
     "appInstanceId": "0oa3omz2i9XRNSRIHBZO",
     "appAssignmentId": "0ua3omz7weMMMQJERBKY",
@@ -1704,8 +1704,8 @@ curl -v -X GET \
   {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "label": "Box",
-    "linkUrl": "https://your-domain.okta.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72",
-    "logoUrl": "https://your-domain.okta.com/img/logos/box.png",
+    "linkUrl": "https://{yourOktaDomain}.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72",
+    "logoUrl": "https://{yourOktaDomain}.com/img/logos/box.png",
     "appName": "boxnet",
     "appInstanceId": "0oa3ompioiQCSTOYXVBK",
     "appAssignmentId": "0ua3omx46lYEZLPPRWBO",
@@ -1716,8 +1716,8 @@ curl -v -X GET \
   {
     "id": "00ub0oNGTSWTBKOLGLNR",
     "label": "Salesforce.com",
-    "linkUrl": "https://your-domain.okta.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46",
-    "logoUrl": "https://your-domain.okta.com/img/logos/salesforce_logo.png",
+    "linkUrl": "https://{yourOktaDomain}.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46",
+    "logoUrl": "https://{yourOktaDomain}.com/img/logos/salesforce_logo.png",
     "appName": "salesforce",
     "appInstanceId": "0oa12ecnxtBQMKOXJSMF",
     "appAssignmentId": "0ua173qgj5VAVOBQMCVB",
@@ -1755,7 +1755,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups"
 ~~~
 
 ##### Response Example
@@ -1816,7 +1816,7 @@ sendEmail | Sends an activation email to the user if `true` | Query      | Boole
 
 ~~~json
 {
-  "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO",
+  "activationUrl": "https://{yourOktaDomain}.com/welcome/XE6wE17zmphl3KqAPFxO",
   "activationToken": "XE6wE17zmphl3KqAPFxO"
 }
 ~~~
@@ -1831,7 +1831,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"
 ~~~
 
 ##### Response Example
@@ -1839,7 +1839,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO",
+  "activationUrl": "https://{yourOktaDomain}.com/welcome/XE6wE17zmphl3KqAPFxO",
   "activationToken": "XE6wE17zmphl3KqAPFxO"
 }
 ~~~
@@ -1871,7 +1871,7 @@ sendEmail | Sends an activation email to the user if `true` | Query      | Boole
 
 ~~~json
 {
-  "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO",
+  "activationUrl": "https://{yourOktaDomain}.com/welcome/XE6wE17zmphl3KqAPFxO",
   "activationToken": "XE6wE17zmphl3KqAPFxO"
 }
 ~~~
@@ -1884,7 +1884,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reactivate?sendEmail=false"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reactivate?sendEmail=false"
 ~~~
 
 ##### Response Example (Success)
@@ -1892,7 +1892,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "activationUrl": "https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO",
+  "activationUrl": "https://{yourOktaDomain}.com/welcome/XE6wE17zmphl3KqAPFxO",
   "activationToken": "XE6wE17zmphl3KqAPFxO"
 }
 ~~~
@@ -1947,7 +1947,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
 ~~~
 
 ##### Response Example
@@ -1995,7 +1995,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/suspend"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/suspend"
 ~~~
 
 ##### Response Example
@@ -2039,7 +2039,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unsuspend"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unsuspend"
 ~~~
 
 ##### Response Example
@@ -2084,7 +2084,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"
 ~~~
 
 ##### Response Example
@@ -2126,7 +2126,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"
 ~~~
 
 ##### Response Example
@@ -2169,7 +2169,7 @@ To ensure a successful password recovery lookup if an email address is associate
 
 ~~~json
 {
-  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+  "resetPasswordUrl": "https://{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ~~~
 
@@ -2181,7 +2181,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"
 ~~~
 
 ##### Response Example
@@ -2189,7 +2189,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+  "resetPasswordUrl": "https://{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ~~~
 
@@ -2204,7 +2204,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATED&sendEmail=false"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATED&sendEmail=false"
 ~~~
 
 ##### Response Example
@@ -2254,7 +2254,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"
 ~~~
 
 ##### Response Example
@@ -2289,25 +2289,25 @@ curl -v -X POST \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }
@@ -2340,7 +2340,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
 ~~~
 
 ##### Response Example
@@ -2383,7 +2383,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/${userId}/sessions"
+"https://{yourOktaDomain}.com/api/v1/users/${userId}/sessions"
 ~~~
 
 #### Response Example
@@ -2425,7 +2425,7 @@ To ensure a successful password recovery lookup if an email address is associate
 
 ~~~json
 {
-  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+  "resetPasswordUrl": "https://{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ~~~
 
@@ -2439,7 +2439,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password?sendEmail=false"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password?sendEmail=false"
 ~~~
 
 ##### Response Example
@@ -2447,7 +2447,7 @@ curl -v -X POST \
 
 ~~~json
 {
-  "resetPasswordUrl": "https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"
+  "resetPasswordUrl": "https://{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"
 }
 ~~~
 
@@ -2486,7 +2486,7 @@ curl -v -X POST \
 -d '{
   "password": { "value": "uTVM,TPw55" },
   "recovery_question": { "answer": "Annie Oakley" }
-}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+}' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
 ~~~
 
 ##### Response Example
@@ -2543,7 +2543,7 @@ curl -v -X POST \
 -d '{
   "oldPassword": { "value": "tlpWENT2m" },
   "newPassword": { "value": "uTVM,TPw55" }
-}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+}' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
 ~~~
 
 ##### Response Example
@@ -2603,7 +2603,7 @@ curl -v -X POST \
     "question": "How many roads must a man walk down?",
     "answer": "forty two"
   }
-}' "https://${org}.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+}' "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
 ~~~
 
 ##### Response Example
@@ -2675,25 +2675,25 @@ curl -v -X POST \
   },
   "_links": {
     "resetPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"
     },
     "resetFactors": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"
     },
     "expirePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"
     },
     "forgotPassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"
     },
     "changeRecoveryQuestion": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"
     },
     "deactivate": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"
     },
     "changePassword": {
-      "href": "https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
+      "href": "https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"
     }
   }
 }

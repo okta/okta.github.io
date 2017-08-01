@@ -43,7 +43,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}"
 ~~~
 
 ##### Response Example
@@ -70,7 +70,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}?expand=rules"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}?expand=rules"
 ~~~
 
 ##### Response Types
@@ -98,7 +98,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies?type={type}"
+"https://{yourOktaDomain}.com/api/v1/policies?type={type}"
 ~~~
 
 ##### Response Types
@@ -126,7 +126,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}"
 ~~~
 
 ##### Response Types
@@ -168,7 +168,7 @@ curl -v -X PUT \
          }
         }
      }, \
-"https://${org}.okta.com/api/v1/policies/{policyId}"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}"
 ~~~
 
 ##### Response Types
@@ -208,7 +208,7 @@ curl -v -X POST \
           }
         }
       }, \
-"https://${org}.okta.com/api/v1/policies"
+"https://{yourOktaDomain}.com/api/v1/policies"
 ~~~
 
 ##### Response Types
@@ -234,7 +234,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}/lifecycle/activate"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/lifecycle/activate"
 ~~~
 
 ##### Response Types
@@ -260,7 +260,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}/lifecycle/deactivate"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/lifecycle/deactivate"
 ~~~
 
 ##### Response Types
@@ -288,7 +288,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}/rules"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules"
 ~~~
 
 ##### Response Types
@@ -334,7 +334,7 @@ curl -v -X POST \
       "access": "ALLOW"
     }
   }' \
-"https://${org}.okta.com/api/v1/policies/{policyId}/rules"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules"
 ~~~
 
 ##### Response Types
@@ -360,7 +360,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}"
 ~~~
 
 ##### Response Types
@@ -386,7 +386,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}"
 ~~~
 
 ##### Response Types
@@ -433,7 +433,7 @@ curl -v -X PUT \
     }
   }
 }' \
-"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}"
 ~~~
 
 ##### Response Types
@@ -459,7 +459,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate"
 ~~~
 
 ##### Response Types
@@ -485,7 +485,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate"
 ~~~
 
 ##### Response Types
@@ -533,7 +533,7 @@ For example, assume the following policies exist.
 - Policy B has priority 2 and applies to members of the "Everyone" group.
 
 When policy is evaluated for a user, policy "A" will be evaluated first.  If the user is a member of the "Administrators" group then the rules associated with policy "A" will be evaluated.   If a match is found then the policy settings will be applied.
-If the user is not a member of teh "Administrators" group, then policy B would be evaluated.
+If the user is not a member of the "Administrators" group, then policy B would be evaluated.
 
 ### Policy JSON Example (Okta Sign On Policy)
 
@@ -823,8 +823,8 @@ include | The AD integrations this policy applies to | Array | No | Include all 
 ## Okta Sign On Policy
 {: #OktaSignOnPolicy }
 
-Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challanged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
-Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be peformed before a specific Okta application can be invoked.
+Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challenged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
+Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.
 
 ### Policy Settings Data
 
@@ -956,7 +956,7 @@ self | Requirements for use-initiated enrollment | `NOT_ALLOWED`, `OPTIONAL` or 
 #### Policy Factor Consent Object
 {: #PolicyFactorConsentObject }
 
-The Policy Factor Consent Object is an extensibility point.  In the future, policy may be configureable to require user consent to specified terms when enrolling in a factor.   At present settings other than type = `NONE` are ignored.
+The Policy Factor Consent Object is an extensibility point.  In the future, policy may be configurable to require user consent to specified terms when enrolling in a factor.   At present settings other than type = `NONE` are ignored.
 
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | --- | ---
@@ -1010,7 +1010,7 @@ The following conditions may be applied to the rules associated with MFA Enrollm
 
 > The Password Policy API is a {% api_lifecycle beta %} [release](/docs/api/getting_started/releases-at-okta.html).
 
-Password policy controls settings that deterine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
+Password policy controls settings that determine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
 
 #### Policy Settings Example
 
@@ -1098,7 +1098,27 @@ minLowerCase | Indicates if a password must contain at least one lower case lett
 minUpperCase | Indicates if a password must contain at least one upper case letter: 0 indicates no, 1 indicates yes | integer | No | 1
 minNumber | Indicates if a password must contain at least one number: 0 indicates no, 1 indicates yes | integer | No | 1
 minSymbol | Indicates if a password must contain at least one symbol (e.g., !@#$%^&*): 0 indicates no, 1 indicates yes | integer | No | 1
-excludeUserName | Indicates if the user name must be excluded from the password | boolean | no | true
+excludeUsername | Indicates if the user name must be excluded from the password | boolean | No | true
+dictionary {%api_lifecycle beta %} | Weak password dictionary lookup settings | <a href="#WeakPasswordDictionaryObject">Weak Password Dictionary Object</a> | No | N/A
+
+###### Weak Password Dictionary Object
+{: #WeakPasswordDictionaryObject }
+
+> Weak password lookup is a {% api_lifecycle beta %} feature.
+
+Specifies how lookups for weak passwords are done. Designed to be extensible with multiple possible dictionary types against which to do lookups.
+
+Property | Description | Data Type | Required
+| --- | --- | --- | ---
+common | Lookup settings for commonly used passwords  | <a href="#CommonPasswordLookupObject">Common Password Lookup Object</a> | No
+
+Common Password Lookup Object
+
+{: #CommonPasswordLookupObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | ---| --- | ---
+exclude | Indicates whether to check passwords against common password dictionary | Boolean | No | false
 
 ##### Age Object
 {: #PasswordAgeObject }
@@ -1140,7 +1160,7 @@ okta_sms | Settings for SMS factor | <a href="#SMSFactorObject">SMS Factor Objec
 
 Property | Description | Data Type | Required |
 | --- | --- | --- | ---
-status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes |
+status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` (EA) | Yes |
 properties | Configuration settings for security question factor | <a href="#RecoveryQuestionFactorPropertiesObject">Recovery Question Factor Properties Object</a> | No
 
 ###### Recovery Question Factor Properties Object
@@ -1163,7 +1183,7 @@ minLength | Minimum length of the password recovery question answer | Integer | 
 Property | Description | Data Type | Required |
 | --- | --- | --- | ---
 status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes |
-properties | sConfiguration ettings for okta email factor | <a href="#EmailFactorPropertiesObject">Email Factor Properties Object</a> | No
+properties | Configuration settings for okta email factor | <a href="#EmailFactorPropertiesObject">Email Factor Properties Object</a> | No
 
 ###### Email Factor Properties Object
 {: #EmailFactorPropertiesObject }
@@ -1205,11 +1225,11 @@ The following conditions may be applied to Password Policy
 
 <a href="#PeopleObject">People Condition</a>
 
-<a href="#AuthProviderConditionObject">Authentication Povider Condition</a>
+<a href="#AuthProviderConditionObject">Authentication Provider Condition</a>
 
 ### Password Rules Action Data
 
-#### Passsword Actions Example
+#### Password Actions Example
 
 ~~~json
   "actions": {

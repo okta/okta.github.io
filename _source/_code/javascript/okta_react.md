@@ -31,9 +31,9 @@ If you do not already have a **Developer Edition Account**, you can create one a
 > *As with any Okta app, make sure you assign Users or Groups to the OpenID Connect Client. Otherwise, no one can use it.*
 
 ### Enable [CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html)
-For security reasons, browsers make it difficult to make requests to other domains. In this example, we'll make requests from `http://localhost:3000` to `https://{yourOrg}.oktapreview.com`.
+For security reasons, browsers make it difficult to make requests to other domains. In this example, we'll make requests from `http://localhost:3000` to `https://{yourOktaDomain}.com`.
 
-You can configure `https://{yourOrg}.oktapreview.com` to accept our requests by [enabling CORS for `http://localhost:3000`](/docs/api/getting_started/enabling_cors.html#granting-cross-origin-access-to-websites).
+You can configure `https://{yourOktaDomain}.com` to accept our requests by [enabling CORS for `http://localhost:3000`](/docs/api/getting_started/enabling_cors.html#granting-cross-origin-access-to-websites).
 
 ## Create a React App
 To quickly create a React app, install the create-react-app CLI:
@@ -81,9 +81,9 @@ class Auth {
     this.handleAuthentication = this.handleAuthentication.bind(this);
 
     oktaAuth = new OktaAuth({
-      url: 'https://{yourOrg}.oktapreview.com',
+      url: 'https://{yourOktaDomain}.com',
       clientId: '{clientId}',
-      issuer: 'https://{yourOrg}.oktapreview.com',
+      issuer: 'https://{yourOktaDomain}.com',
       redirectUri: 'http://localhost:3000/callback',
     });
   }

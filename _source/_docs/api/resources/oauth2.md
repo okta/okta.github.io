@@ -271,16 +271,16 @@ Generally speaking, the scopes specified in a request are included in the Access
 | Requested grant type | Requested scope                                                            | Tokens in the response                                                                   |
 |:---------------------|:---------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------|
 | authorization_code   | None                                                                       | Access Token. Contains scopes requested in the `/authorize` endpoint.                    |
-| authorization_code   | Any or no scopes plus `offline_scope`                                      | Access Token, Refresh Token                                                              |
+| authorization_code   | Any or no scopes plus `offline_access`                                     | Access Token, Refresh Token                                                              |
 | authorization_code   | Any or no scopes plus `openid`                                             | Access Token, ID Token                                                                   |
-| authorization_code   | Any or no scopes plus `openid` and `offline_scope`                         | Access Token, ID Token, Refresh Token                                                    |
+| authorization_code   | Any or no scopes plus `openid` and `offline_access`                        | Access Token, ID Token, Refresh Token                                                    |
 | refresh_token        | None                                                                       | Access Token, Refresh Token. Contains scopes used to generate the Refresh Token.         |
 | refresh_token        | Subset of scopes used to generate Refresh Token excluding `offline_access` | Access Token. Contains specified scopes.                                                 |
-| refresh_token        | Subset of scopes used to generate Refresh Token including `offline_scope`  | Access Token, Refresh Token                                                              |
+| refresh_token        | Subset of scopes used to generate Refresh Token including `offline_access` | Access Token, Refresh Token                                                              |
 | password             | None                                                                       | Access Token. Contains default scopes granted by policy.                                 |
-| password             | Any or no scopes plus `offline_scope`                                      | Access Token, Refresh Token. Contains specified scopes.                                  |
+| password             | Any or no scopes plus `offline_access`                                     | Access Token, Refresh Token. Contains specified scopes.                                  |
 | password             | Any or no scopes plus `openid`                                             | Access Token, ID Token                                                                   |
-| password             | Any or no scopes plus `openid` and `offline_scope`                         | Access Token, ID Token, Refresh Token                                                    |
+| password             | Any or no scopes plus `openid` and `offline_access`                        | Access Token, ID Token, Refresh Token                                                    |
 | client_credentials   | Any or no scope                                                            | Access Token. Contains default scopes granted by policy in addition to requested scopes. |
 
 ##### List of Errors
@@ -299,7 +299,7 @@ Generally speaking, the scopes specified in a request are included in the Access
 
 ~~~sh
 curl -X POST \
-  "https://${org}.okta.com/oauth2/aus9s3ami4MRoqQR90h7/v1/token" \
+  "https://{yourOktaDomain}.com/oauth2/aus9s3ami4MRoqQR90h7/v1/token" \
   -H "Accept: application/json" \
   -H "Cache-Control: no-cache" \
   -H "Content-Type: application/x-www-form-urlencoded" \
@@ -311,7 +311,11 @@ curl -X POST \
 ##### Response Example: Resource Owner Password Flow
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
 ~~~
+~~~json
 {
     "access_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2ZXIiOjEsImp0aSI6IkFULkpfUVlIMlJEckI5R
                       mxDd0hYVVI1WTIzcDg4U1JPS29jajJkd2kwZkhvTVEiLCJpc3MiOiJodHRwczovL3dlc3R3b3JsZC5
@@ -336,6 +340,10 @@ curl -X POST \
 #### Response Example (Success)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
     "access_token" : "eyJhbGciOiJSUzI1NiJ9.eyJ2ZXIiOjEsImlzcyI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyIiwiaWF0IjoxNDQ5Nj
@@ -364,9 +372,11 @@ curl -X POST \
 ##### Response Example (Error)
 {:.api .api-response .api-response-example}
 
-~~~sh
+~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
+~~~
+~~~json
 {
     "error" : "invalid_client",
     "error_description" : "No client credentials found."
@@ -432,6 +442,10 @@ For more information about token authentication, see [Token Authentication Metho
 ##### Response Example (Success, Access Token)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
     "active" : true,
@@ -443,7 +457,7 @@ For more information about token authentication, see [Token Authentication Metho
     "iat" : 1451602800,
     "sub" : "john.doe@example.com",
     "aud" : "https://api.example.com",
-    "iss" : "https://your-org.okta.com/oauth2/orsmsg0aWLdnF3spV0g3",
+    "iss" : "https://{yourOktaDomain}.com/oauth2/orsmsg0aWLdnF3spV0g3",
     "jti" : "AT.7P4KlczBYVcWLkxduEuKeZfeiNYkZIC9uGJ28Cc-YaI",
     "uid" : "00uid4BxXw6I6TV4m0g3",
     "number_of_flights": 2,
@@ -458,6 +472,10 @@ For more information about token authentication, see [Token Authentication Metho
 #### Response Example (Success, Refresh Token)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
     "active" : true,
@@ -474,6 +492,10 @@ For more information about token authentication, see [Token Authentication Metho
 #### Response Example (Success, Inactive Token)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
     "active" : false
@@ -486,6 +508,8 @@ For more information about token authentication, see [Token Authentication Metho
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
+~~~
+~~~json
 {
     "error" : "invalid_client",
     "error_description" : "No client credentials found."
@@ -546,6 +570,8 @@ HTTP/1.1 200 OK
 ~~~http
 HTTP/1.1 401 Unauthorized
 Content-Type: application/json;charset=UTF-8
+~~~
+~~~json
 {
     "error" : "invalid_client",
     "error_description" : "No client credentials found."
@@ -575,15 +601,15 @@ This request initiates a logout and will redirect to the Okta login page on succ
 
 ~~~sh
 curl -v -X GET \
-"https://${org}.okta.com/oauth2/*:authorizationServerId*/v1/logout?
+"https://{yourOktaDomain}.com/oauth2/*:authorizationServerId*/v1/logout?
   id_token_hint=${id_token_hint}
 ~~~
 
-This request initiates a logout and will redirect to the `post_logout_redirect_uri` on success.
+This request initiates a logout; it redirects to the `post_logout_redirect_uri` on success.
 
 ~~~sh
 curl -v -X GET \
-"https://${org}.okta.com/oauth2/:authorizationServerId/v1/logout?
+"https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/logout?
   id_token_hint=${id_token_hint}&
   post_logout_redirect_uri=${post_logout_redirect_uri}&
   state=${state}
@@ -599,6 +625,10 @@ Retrieve the public keys Okta uses to sign the tokens.
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "keys": [
@@ -659,11 +689,11 @@ This API doesn't require any authentication and returns a JSON object with the f
 
 ~~~json
 {
-    "issuer": "https://${org}.okta.com",
-    "authorization_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/authorize",
-    "token_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/token",
-    "registration_endpoint": "https://${org}.okta.com/oauth2/v1/clients",
-    "jwks_uri": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/keys",
+    "issuer": "https://{yourOktaDomain}.com",
+    "authorization_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/authorize",
+    "token_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/token",
+    "registration_endpoint": "https://{yourOktaDomain}.com/oauth2/v1/clients",
+    "jwks_uri": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/keys",
     "response_types_supported": [
         "code",
         "token",
@@ -709,14 +739,14 @@ This API doesn't require any authentication and returns a JSON object with the f
     "code_challenge_methods_supported": [
         "S256"
     ],
-    "introspection_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/introspect",
+    "introspection_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/introspect",
     "introspection_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "client_secret_jwt",
         "none"
     ],
-    "revocation_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/revoke",
+    "revocation_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/revoke",
     "revocation_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
@@ -739,12 +769,12 @@ This API doesn't require any authentication and returns a JSON object with the f
 
 ~~~json
 {
-    "issuer": "https://${org}.okta.com",
-    "authorization_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/authorize",
-    "token_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/token",
-    "userinfo_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/userinfo",
-    "registration_endpoint": "https://${org}.okta.com/oauth2/v1/clients",
-    "jwks_uri": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/keys",
+    "issuer": "https://{yourOktaDomain}.com",
+    "authorization_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/authorize",
+    "token_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/token",
+    "userinfo_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/userinfo",
+    "registration_endpoint": "https://{yourOktaDomain}.com/oauth2/v1/clients",
+    "jwks_uri": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/keys",
     "response_types_supported": [
         "code",
         "id_token",
@@ -821,13 +851,13 @@ This API doesn't require any authentication and returns a JSON object with the f
     "code_challenge_methods_supported": [
         "S256"
     ],
-    "introspection_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/introspect",
+    "introspection_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/introspect",
     "introspection_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "none"
     ],
-    "revocation_endpoint": "https://${org}.okta.com/oauth2/{authorizationServerId}/v1/revoke",
+    "revocation_endpoint": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/revoke",
     "revocation_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
@@ -879,7 +909,7 @@ curl -v -X POST \
       "audiences": [
         "https://test.com"
       ]
-}' "https://${org}.okta.com/api/v1/authorizationServers"
+}' "https://{yourOktaDomain}.com/api/v1/authorizationServers"
 ~~~
 
 ##### Response Example
@@ -907,7 +937,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers"
 ~~~
 
 ##### Response Example
@@ -942,7 +972,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4"
 ~~~
 
 ##### Response Example
@@ -1060,7 +1090,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/aus1sb3dl8L5WoTOO0g7/lifecycle/activate"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1sb3dl8L5WoTOO0g7/lifecycle/activate"
 ~~~
 
 ##### Response Example
@@ -1097,7 +1127,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/aus1sb3dl8L5WoTOO0g7/lifecycle/deactivate"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/aus1sb3dl8L5WoTOO0g7/lifecycle/deactivate"
 ~~~
 
 ##### Response Example
@@ -1137,7 +1167,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies"
 ~~~
 
 ##### Response Example
@@ -1167,7 +1197,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies/00p5m9xrrBffPd9ah0g4"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies/00p5m9xrrBffPd9ah0g4"
 ~~~
 
 ##### Response Example
@@ -1207,7 +1237,7 @@ curl -v -X POST \
 			]
 		}
 	}
-}' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies"
+}' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies"
 ~~~
 
 ##### Response Example
@@ -1253,7 +1283,7 @@ curl -v -X PUT \
           ]
        }
    }
-}' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies/00p5m9xrrBffPd9ah0g4"
+}' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies/00p5m9xrrBffPd9ah0g4"
 ~~~
 
 ##### Response Example
@@ -1284,7 +1314,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies/00p5m9xrrBffPd9ah0g4"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/policies/00p5m9xrrBffPd9ah0g4"
 ~~~
 
 ##### Response Example
@@ -1324,7 +1354,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes"
 ~~~
 
 ##### Response Example
@@ -1355,7 +1385,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes/scpanemfdtktNn7w10h7"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes/scpanemfdtktNn7w10h7"
 ~~~
 
 ##### Response Example
@@ -1387,7 +1417,7 @@ curl -v -X POST \
 -d `{
   "description": "Drive car",
   "name": "car:drive"
-}' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes"
+}' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes"
 ~~~
 
 ##### Response Example
@@ -1422,7 +1452,7 @@ curl -v -X PUT \
   "description": "Order car",
   "name": "car:order"
      }'
-}' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes/scpanemfdtktNn7w10h7"
+}' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes/scpanemfdtktNn7w10h7"
 ~~~
 
 ##### Response Example
@@ -1453,7 +1483,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes/00p5m9xrrBffPd9ah0g4"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/scopes/00p5m9xrrBffPd9ah0g4"
 ~~~
 
 ##### Response Example
@@ -1493,7 +1523,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims"
 ~~~
 
 ##### Response Example
@@ -1524,7 +1554,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims/scpanemfdtktNn7w10h7"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims/scpanemfdtktNn7w10h7"
 ~~~
 
 ##### Response Example
@@ -1564,7 +1594,7 @@ curl -v -X POST \
          "car:drive"
          ]
        }
-    }' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims"
+    }' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims"
 ~~~
 
 ##### Response Example
@@ -1609,7 +1639,7 @@ curl -v -X PUT \
          ]
        }
     }'
-}' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims/oclain6za1HQ0noop0h7"
+}' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims/oclain6za1HQ0noop0h7"
 ~~~
 
 ##### Response Example
@@ -1640,7 +1670,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims/oclain6za1HQ0noop0h7"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/claims/oclain6za1HQ0noop0h7"
 ~~~
 
 ##### Response Example
@@ -1682,12 +1712,16 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys"
+"https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "keys": [
@@ -1701,7 +1735,7 @@ curl -v -X GET \
       "use": "sig",
       "_links": {
         "self": {
-          "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc",
+          "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc",
           "hints": {
             "allow": [
               "GET"
@@ -1723,7 +1757,7 @@ curl -v -X GET \
       "use": "sig",
       "_links": {
         "self": {
-          "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo",
+          "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo",
           "hints": {
             "allow": [
               "GET"
@@ -1745,7 +1779,7 @@ curl -v -X GET \
       "use": "sig",
       "_links": {
         "self": {
-          "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/h5Sr3LXcpQiQlAUVPdhrdLFoIvkhRTAVs_h39bQnxlU",
+          "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/h5Sr3LXcpQiQlAUVPdhrdLFoIvkhRTAVs_h39bQnxlU",
           "hints": {
             "allow": [
               "GET"
@@ -1794,12 +1828,16 @@ curl -v -X POST \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
   "use": "sig"
-}' "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/lifecycle/keyRotate"
+}' "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/lifecycle/keyRotate"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "keys": [
@@ -1813,7 +1851,7 @@ curl -v -X POST \
                "use": "sig",
                "_links": {
                  "self": {
-                   "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo",
+                   "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/Y3vBOdYT-l-I0j-gRQ26XjutSX00TeWiSguuDhW3ngo",
                    "hints": {
                      "allow": [
                        "GET"
@@ -1835,7 +1873,7 @@ curl -v -X POST \
                "use": "sig",
                "_links": {
                  "self": {
-                 "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/T5dZ1dYT-l-I0j-gRQ82XjutSX00TeWiSguuDhW3zdf",
+                 "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/T5dZ1dYT-l-I0j-gRQ82XjutSX00TeWiSguuDhW3zdf",
                  "hints": {
                    "allow": [
                      "GET"
@@ -1857,7 +1895,7 @@ curl -v -X POST \
                "use": "sig",
                "_links": {
                  "self": {
-                 "href": "https://${org}.okta.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc",
+                 "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausnsopoM6vBRB3PD0g3/credentials/keys/RQ8DuhdxCczyMvy7GNJb4Ka3lQ99vrSo3oFBUiZjzzc",
                  "hints": {
                    "allow": [
                      "GET"
@@ -1873,6 +1911,10 @@ curl -v -X POST \
 #### Response Example (Error)
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "errorCode": "E0000001",
@@ -1955,7 +1997,7 @@ Token expiration times depend on how they are defined in the rules, and which po
   "name": "Sample Authorization Server",
   "description": "Authorization Server Description",
   "audiences": "https://api.resource.com",
-  "issuer": "https://${org}.okta.com/oauth2/ausain6z9zIedDCxB0h7",
+  "issuer": "https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7",
   "status": "ACTIVE",
   "created": "2017-05-17T22:25:57.000Z",
   "lastUpdated": "2017-05-17T22:25:57.000Z",
@@ -1969,7 +2011,7 @@ Token expiration times depend on how they are defined in the rules, and which po
   },
   "_links": {
       "scopes": {
-        "href": "https://${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/scopes",
+        "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/scopes",
         "hints": {
           "allow": [
             "GET"
@@ -1977,7 +2019,7 @@ Token expiration times depend on how they are defined in the rules, and which po
         }
       },
       "claims": {
-        "href": "https://${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims",
+        "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims",
         "hints": {
           "allow": [
             "GET"
@@ -1985,7 +2027,7 @@ Token expiration times depend on how they are defined in the rules, and which po
         }
       },
       "policies": {
-        "href": "https://${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies",
+        "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies",
         "hints": {
           "allow": [
             "GET"
@@ -1994,7 +2036,7 @@ Token expiration times depend on how they are defined in the rules, and which po
       }
     },   
     "self": {
-      "href": "https:${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
+      "href": "https:{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
       "hints": {
         "allow": [
           "GET",
@@ -2006,7 +2048,7 @@ Token expiration times depend on how they are defined in the rules, and which po
     "metadata": [
       {
         "name": "oauth-authorization-server",
-        "href": "https:${org}.okta.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/oauth-authorization-server",
+        "href": "https:{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/oauth-authorization-server",
         "hints": {
           "allow": [
             "GET"
@@ -2015,7 +2057,7 @@ Token expiration times depend on how they are defined in the rules, and which po
       },
       {
         "name": "openid-configuration",
-        "href": "${org}.okta.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/openid-configuration",
+        "href": "{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/.well-known/openid-configuration",
         "hints": {
           "allow": [
             "GET"
@@ -2024,7 +2066,7 @@ Token expiration times depend on how they are defined in the rules, and which po
       }
     ],
     "rotateKey": {
-      "href": "https://${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/credentials/lifecycle/keyRotate",
+      "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/credentials/lifecycle/keyRotate",
       "hints": {
         "allow": [
           "POST"
@@ -2032,7 +2074,7 @@ Token expiration times depend on how they are defined in the rules, and which po
       }
     },
     "deactivate": {
-          "href": "https://${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/lifecycle/deactivate",
+          "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/lifecycle/deactivate",
           "hints": {
             "allow": [
               "POST"
@@ -2077,7 +2119,7 @@ Token expiration times depend on how they are defined in the rules, and which po
     "lastUpdated": "2017-06-07T15:28:17.000Z",
     "_links": {
       "self": {
-        "href": "${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7",
+        "href": "{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7",
         "hints": {
           "allow": [
             "GET",
@@ -2087,7 +2129,7 @@ Token expiration times depend on how they are defined in the rules, and which po
         }
       },
       "deactivate": {
-        "href": "${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7/lifecycle/deactivate",
+        "href": "{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7/lifecycle/deactivate",
         "hints": {
           "allow": [
             "POST"
@@ -2095,7 +2137,7 @@ Token expiration times depend on how they are defined in the rules, and which po
         }
       },
       "rules": {
-        "href": "https://${org}.okta.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7/rules",
+        "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/policies/00palyaappA22DPkj0h7/rules",
         "hints": {
           "allow": [
             "GET"

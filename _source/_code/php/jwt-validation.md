@@ -24,13 +24,13 @@ For validating a JWT, you will need a few different items:
 The first thing you will need to do is make a request to get your current keys for your authorization server. The URL
  for the keys can be discovered by visiting the .well-known endpoint of your authorization server. The .well-known 
  endpoint is listed in your authorization server dashboard and looks like 
- `https://php.oktapreview.com/oauth2/ausb5jqgqkd774i490h7/.well-known/oauth-authorization-server`
+ `https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/.well-known/oauth-authorization-server`
  
  Once you have your .well-known URL, have your application make a request to this endpoint and `json_decode` the 
  results.
  
  ```php
- $keys = json_decode(file_get_contents('https://php.oktapreview.com/oauth2/ausb5jqg774i490h7/v1/keys'));
+ $keys = json_decode(file_get_contents('https://{yourOktaDomain}/oauth2/{authorizationServerId}/v1/keys'));
  ```
  
  This will return a JSON object of any keys. Typically, this will return a single key entry, but can return a set of 

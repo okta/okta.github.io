@@ -72,7 +72,7 @@ The below code will render a login page using the Okta Sign-in Widget. You can c
 
   <!-- Script to init the widget -->
   <script>
-    var orgUrl = 'https://dev-144769.oktapreview.com';
+    var orgUrl = 'https://{yourOktaDomain}.com';
     var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
 
     oktaSignIn.renderEl(
@@ -88,7 +88,7 @@ The below code will render a login page using the Okta Sign-in Widget. You can c
 
 #### 2. Modify the HTML
 
-Change the `orgUrl` variable to your Okta org's URL (for example: `https://dev-123456.oktapreview.com`), then save the file.
+Change the `orgUrl` variable to your Okta org's URL (for example: `https://{yourOktaDomain}.com`), then save the file.
 
 #### 3. Serve the File
 
@@ -160,7 +160,7 @@ The updated section of your sign-in widget will now look something like this:
 
 ~~~ html
 <script>
-  var orgUrl = 'https://dev-123456.oktapreview.com';
+  var orgUrl = 'https://{yourOktaDomain}.com';
   var redirectUrl = 'http://localhost:3333/signed-in.html';
   var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
 
@@ -308,7 +308,7 @@ needed to get it working. The HTML below is the same as the HTML you added above
 
   <!-- Script to init the widget -->
   <script>
-    var orgUrl = 'https://dev-123456.oktapreview.com';
+    var orgUrl = 'https://{yourOktaDomain}.com';
     var redirectUrl = 'http://localhost:3333/signed-in.html';
     var oktaSignIn = new OktaSignIn({baseUrl: orgUrl});
 

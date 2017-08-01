@@ -23,12 +23,12 @@ Once a session token is obtained, it can be passed into the [OpenID Connect auth
 {:.api .api-request .api-request-example}
 
 ~~~
-https://your-subdomain.okta.com/oauth2/v1/authorize?client_id={clientId}&response_type=id_token&scope=openid&prompt=none&redirect_uri=https%3A%2F%2Fyour-app.example.com&state=Af0ifjslDkj&nonce=n-0S6_WzA2Mj&sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY
+https://{yourOktaDomain}.com/oauth2/v1/authorize?client_id={clientId}&response_type=id_token&scope=openid&prompt=none&redirect_uri=https%3A%2F%2Fyour-app.example.com&state=Af0ifjslDkj&nonce=n-0S6_WzA2Mj&sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY
 ~~~
 
 > The `prompt=none` param guarantees that the user will not be prompted for credentials. You will either obtain the requested tokens or an OAuth error response.
 
-> The `sessionToken` param serves as the primary credentials. It represents the authentication that was already performed via the [Authentication API](/docs/api/rest/authn.html).
+> The `sessionToken` param serves as the primary credentials. It represents the authentication that was already performed via the [Authentication API](/docs/api/resources/authn.html).
 
 ##### Response Example
 {:.api .api-response .api-response-example}
@@ -39,7 +39,7 @@ Set-Cookie: sid=lGj4FPxaG63Wm89TpJnaDF6; Path=/
 Location: https://your-app.example.com?id_token=S4sx3uixdsalasd&state=Af0ifjslDkj&nonce=n-0S6_WzA2Mj
 ~~~
 
-The response also includes an [ID Token](/docs/api/resources/oidc.html#id-token) that describes the authenticated user and can contain additional claims such as user profile attributes or email.
+The response also includes an [ID Token](/standards/OIDC/index.html#id-token) that describes the authenticated user and can contain additional claims such as user profile attributes or email.
 
 The [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) uses this flow. This flow can also be used by Single Page Applications with the [`okta_post_messsage`](/docs/api/resources/oauth2.html#request-parameter-details) response type, which doesn't require a browser redirect.
 
@@ -49,7 +49,7 @@ The [Okta Sign-In Widget](/docs/guides/okta_sign-in_widget.html) uses this flow.
 
 This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. Your web application will solicit and validate the user credentials against your Okta organization by calling the [Authentication API](/docs/api/rest/authn.html) to obtain a [session token](/docs/api/resources/authn.html#session-token).
 
-The session token along with the URL for your landing page can then be used to complete the following [URI Template](http://tools.ietf.org/html/rfc6570) `https://your-subdomain.okta.com/login/sessionCookieRedirect?token={sessionToken}&redirectUrl={redirectUrl}` that will retrieve a session cookie for a user's browser when visited.
+The session token along with the URL for your landing page can then be used to complete the following [URI Template](http://tools.ietf.org/html/rfc6570) `https://{yourOktaDomain}.com/login/sessionCookieRedirect?token={sessionToken}&redirectUrl={redirectUrl}` that will retrieve a session cookie for a user's browser when visited.
 
 > You must have your redirect URI white-listed as a Trusted Origin within Okta. This is required to protect against open redirect attacks. {% api_lifecycle ea %}
 
@@ -61,7 +61,7 @@ The session token along with the URL for your landing page can then be used to c
 ~~~ http
 HTTP/1.1 302 Moved Temporarily
 Set-Cookie: my_app_session_cookie_name=my_apps_session_cookie_value; Path=/
-Location: https://your-subdomain.okta.com/login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome
+Location: https://{yourOktaDomain}.com/login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&redirectUrl=https%3A%2F%2Fwww.example.com%2Fportal%2Fhome
 ~~~
 
 The user's browser will set your app's session cookie and follow the redirect to Okta.  Okta will validate the session token and return a 302 status response that sets a session cookie for Okta and redirects the user's browser back to your landing page.  After the page has loaded the user will have an active session with Okta and will be able to SSO into their applications until the session is expired or the user closes the session (logout) or browser application.
@@ -71,7 +71,7 @@ The user's browser will set your app's session cookie and follow the redirect to
 
 ~~~ http
 GET /login/sessionCookieRedirect?token=0HsohZYpJgMSHwmL9TQy7RRzuY&redirectUrl=https%3A%2F%2Fyour-app.example.com HTTP/1.1
-Host: your-subdomain.okta.com
+Host: your-domain.okta.com
 Accept: */*
 ~~~
 
@@ -127,7 +127,7 @@ that contains the the session token as query parameter `sessionToken`.
 
 ~~~ http
 GET /home/appwizardsaml_1/0oalkgr25YMb5reZp0g4/alnlkriVMi9J5WYmk0g4?RelayState=%2Fcustom%2Fdeep%2Flink&sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY HTTP/1.1
-Host: your-subdomain.okta.com
+Host: your-domain.okta.com
 Accept: */*
 ~~~
 
@@ -169,6 +169,6 @@ You can also use the same [flow as SAML](#initiate-a-saml-sso-with-the-session-t
 
 ~~~ http
 GET /app/template_wsfed/k9x69oiKYSUWMIYZBKTY/sso/wsfed/passive?wa=wsignin1.0&wtrealm=https%3A%2F%2Fexample.com%2FApp%2F&wctx=rm%3D0%26id%3Dpassive%26ru%3D%2FApp%2FHome%2FAbout&sessionToken=0HsohZYpJgMSHwmL9TQy7RRzuY HTTP/1.1
-Host: your-subdomain.okta.com
+Host: your-domain.okta.com
 Accept: */*
 ~~~

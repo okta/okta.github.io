@@ -161,12 +161,16 @@ curl -v -X POST \
       ],
       "token_endpoint_auth_method": "client_secret_post",
       "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }' "https://${org}.okta.com/oauth2/v1/clients"
+    }' "https://{yourOktaDomain}.com/oauth2/v1/clients"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 201 Created
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
@@ -222,12 +226,16 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
@@ -292,7 +300,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/clients"
+"https://{yourOktaDomain}.com/oauth2/v1/clients"
 ~~~
 
 ##### Response Example
@@ -301,8 +309,10 @@ curl -v -X GET \
 ~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
-Link: <https://your-domain.okta.com/oauth2/v1/clients>; rel="self"
-Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko>; rel="next"
+~~~
+~~~json
+Link: <https://{yourOktaDomain}.com/oauth2/v1/clients>; rel="self"
+Link: <https://{yourOktaDomain}.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko>; rel="next"
 
 [
   {
@@ -369,12 +379,16 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/clients?q=Payroll&limit=10"
+"https://{yourOktaDomain}.com/oauth2/v1/clients?q=Payroll&limit=10"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
 [
   {
@@ -454,14 +468,17 @@ curl -v -X PUT \
       ],
       "token_endpoint_auth_method": "client_secret_post",
       "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }' "https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+    }' "https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
-
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
   "client_secret": "5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe",
@@ -518,14 +535,17 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
- "https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"
+ "https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"
 ~~~
 
 ##### Response Example
 {:.api .api-response .api-response-example}
 
+~~~http
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+~~~
 ~~~json
-
 {
   "client_id": "0jrabyQWm4B9zVJPbotY",
   "client_secret": "t1hgVNl06UiMTzlsVVj0UywSDDuNdG529lm0bpy8",
@@ -581,7 +601,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 
