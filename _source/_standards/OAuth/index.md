@@ -122,7 +122,7 @@ client does not make the token valid again.
 {
   "ver": 1,
   "jti": "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE",
-  "iss": "https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4",
+  "iss": "https://{yourOktaDomain}.com/oauth2/0oacqf8qaJw56czJi0g4",
   "aud": "https://api.you-company.com",
   "sub": "00ujmkLgagxeRrAg20g3",
   "iat": 1467145094,
@@ -184,19 +184,19 @@ The header only includes the following reserved claims:
 
 The payload includes the following reserved claims:
 
-| Property | Description                                                                                                            | DataType | Example                                                 |
-|:---------|:-----------------------------------------------------------------------------------------------------------------------|:---------|:--------------------------------------------------------|
-| ver      | The semantic version of the access token.                                                                              | Integer  | 1                                                       |
-| jti      | A unique identifier for this access token for debugging and revocation purposes.                                       | String   | "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"        |
-| iss      | The Issuer Identifier of the response. This value is the unique identifier for the Authorization Server instance.      | String   | "https://your-org.okta.com/oauth2/0oacqf8qaJw56czJi0g4" |
-| aud      | Identifies the audience(resource URI) that this access token is intended for.                                          | String   | "http://api.example.com/api"                            |
-| sub      | The subject. A name for the user or a unique identifier for the client.                                                | String   | "john.doe@example.com"                                  |
-| iat      | The time the Access Token was issued, represented in Unix time (seconds).                                              | Integer  | 1311280970                                              |
-| exp      | The time the Access Token expires, represented in Unix time (seconds).                                                 | Integer  | 1311280970                                              |
-| cid      | Client ID of your application that requests the access token.                                                          | String   | "6joRGIzNCaJfdCPzRjlh"                                  |
-| uid      | A unique identifier for the user. It will not be included in the access token if there is no user bound to it.         | String   | "00uk1u7AsAk6dZL3z0g3"                                  |
-| scp      | Array of scopes that are granted to this Access Token.                                                                 | Array    | [ "openid", "custom" ]                                  |
-
+|--------------+-------------------+----------------------------------------------------------------------------------+--------------|--------------------------|
+| Property     |  Description                                                                      | DataType     | Example                  |
+|--------------+---------+----------+----------------------------------------------------------------------------------+--------------|--------------------------|
+| ver     | The semantic version of the Access Token.   |  Integer   |  1    |
+| jti     | A unique identifier for this Access Token for debugging and revocation purposes.   | String    |  "AT.0mP4JKAZX1iACIT4vbEDF7LpvDVjxypPMf0D7uX39RE"  |
+| iss     | The Issuer Identifier of the response. This value will be the unique identifier for the Authorization Server instance.   | String    | "https://{yourOktaDomain}.com/oauth2/0oacqf8qaJw56czJi0g4"     |
+| aud     | Identifies the audience(resource URI) that this Access Token is intended for. | String    | "http://api.example.com/api"     |
+| sub     | The subject. A name for the user or a unique identifier for the client.  | String    | 	"john.doe@example.com"     |
+| iat     | The time the Access Token was issued, represented in Unix time (seconds).   | Integer    | 1311280970     |
+| exp     | The time the Access Token expires, represented in Unix time (seconds).   | Integer    | 1311280970     |
+| cid     | Client ID of your application that requests the Access Token.  | String    | "6joRGIzNCaJfdCPzRjlh"     |
+| uid     | A unique identifier for the user. It will not be included in the Access Token if there is no user bound to it.  | String    | 	"00uk1u7AsAk6dZL3z0g3"     |
+| scp     | Array of scopes that are granted to this Access Token.   | Array    | [ "openid", "custom" ]     |
 
 ### Custom Scopes and Claims
 

@@ -31,11 +31,11 @@ Response Example:
 
 ~~~sh
 {
-    "issuer": "https://${org}.okta.com",
-    "authorization_endpoint": "https://${org}.okta.com/oauth2/v1/authorize",
-    "token_endpoint": "https://${org}.okta.com/oauth2/v1/token",
-    "userinfo_endpoint": "https://${org}.okta.com/oauth2/v1/userinfo",
-    "jwks_uri": "https://${org}.okta.com/oauth2/v1/keys",
+    "issuer": "https://{yourOktaDomain}.com",
+    "authorization_endpoint": "https://{yourOktaDomain}.com/oauth2/v1/authorize",
+    "token_endpoint": "https://{yourOktaDomain}.com/oauth2/v1/token",
+    "userinfo_endpoint": "https://{yourOktaDomain}.com/oauth2/v1/userinfo",
+    "jwks_uri": "https://{yourOktaDomain}.com/oauth2/v1/keys",
     "response_types_supported": [
         "code",
         "code id_token",
@@ -45,13 +45,13 @@ Response Example:
         "token"
     ],
     ...
-    "introspection_endpoint": "https://${org}.okta.com/oauth2/v1/introspect",
+    "introspection_endpoint": "https://{yourOktaDomain}.com/oauth2/v1/introspect",
     "introspection_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
         "none"
     ],
-    "revocation_endpoint": "https://${org}.okta.com/oauth2/v1/revoke",
+    "revocation_endpoint": "https://{yourOktaDomain}.com/oauth2/v1/revoke",
     "revocation_endpoint_auth_methods_supported": [
         "client_secret_basic",
         "client_secret_post",
