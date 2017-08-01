@@ -7,7 +7,7 @@ tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc]
 
 In the previous two installments of this OpenID Connect (OIDC) series, we dug deep into the [OIDC flow types](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1) and saw [OIDC in action](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2) using a playground found at: [https://okta-oidc-fun.herokuapp.com/](https://okta-oidc-fun.herokuapp.com/).
 
-In this third and final installment, we’ll look at what’s encoded into the various types of tokens and how to control what gets put in them. JWTs, have the benefit of being able to carry information in them. With this information available to your app you can easily enforce token expiration and reduce the number of API calls. Additionally, since they’re cryptographically signed, you can verify that they have not been tampered with. 
+In this third and final installment, we’ll look at what’s encoded into the various types of tokens and how to control what gets put in them. JWTs, have the benefit of being able to carry information in them. With this information available to your app you can easily enforce token expiration and reduce the number of API calls. Additionally, since they’re cryptographically signed, you can verify that they have not been tampered with.
 
 The source code that backs the site can be found at: [https://github.com/oktadeveloper/okta-oidc-flows-example](https://github.com/oktadeveloper/okta-oidc-flows-example).
 
@@ -442,8 +442,4 @@ It took some time, but here is what I consider to be the important takeaways:
 * The different flows provide clean use case implementations for mobile apps, SPAs, and traditional web apps.
 * It’s inherently flexible. It’s easy to provide custom scopes and claims and to dictate what information should be encoded into tokens beyond the default specification.
 
-All the code used in this series can be found on [github](https://github.com/oktadeveloper/okta-oidc-flows-example).
-
-You can use the OIDC sample app to exercise the various flows and scopes discussed throughout these posts. It’s at: [https://okta-oidc-fun.herokuapp.com/](https://okta-oidc-fun.herokuapp.com/)
-
-The entire final OIDC spec can be found [here](http://openid.net/specs/openid-connect-core-1_0.html). And you can learn more about OAuth 2.0 at [oauth.com](https://www.oauth.com/).
+All the code used in this series can be found on [github](https://github.com/oktadeveloper/okta-oidc-flows-example). You can use the OIDC sample app to exercise the various flows and scopes discussed throughout these posts. It’s at: [https://okta-oidc-fun.herokuapp.com/](https://okta-oidc-fun.herokuapp.com/). The entire final OIDC spec can be found [here](http://openid.net/specs/openid-connect-core-1_0.html). And you can learn more about OAuth 2.0 at [oauth.com](https://www.oauth.com/).
