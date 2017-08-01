@@ -292,7 +292,7 @@
 
 <h2 id="other-oidc-flows">Other OIDC Flows</h2>
 
-<p>There are two other flows not covered in this post: <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials Flow</a> and <a href="https://tools.ietf.org/html/rfc6749#section-4.3">Resource Owner Password Credentials</a>. These are both holdovers from OAuth 2.0 and, as such, are supported by OIDC. Here, we’re focusing on flows that require an external authentication provider, such as Okta or Google, and not the alternative methods that these flows support.</p>
+<p>There are two other flows not covered in this post: <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials Flow</a> and <a href="https://tools.ietf.org/html/rfc6749#section-4.3">Resource Owner Password Credentials</a>. These are both defined in the OAuth 2.0 spec and, as such, are supported by OIDC. Here, we’re focusing on flows that require an external authentication provider, such as Okta or Google, and not the alternative methods that these flows support.</p>
 
 <p>What information is encoded in the <code class="highlighter-rouge">id_token</code>, the <code class="highlighter-rouge">access_token</code> and what information is returned when hitting the protected <code class="highlighter-rouge">/userinfo</code> endpoint are a function of the flow type and the scopes requested. In the next post, we dig deeper into this.</p>
 
@@ -304,7 +304,7 @@
 
 <p>You can explore the code or just click the friendly purple button to deploy your own instance.</p>
 
-<p>In the final installment, we’ll dig into the various types of tokens and how to validate them.</p>
+<p>In the <a href="https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3">final installment</a>, we dig into the various types of tokens and how to validate them.</p>
 
 	    </section>
 	  </article>
