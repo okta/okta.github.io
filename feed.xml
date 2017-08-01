@@ -471,11 +471,7 @@ Verified Access Token
   &lt;li&gt;It’s inherently flexible. It’s easy to provide custom scopes and claims and to dictate what information should be encoded into tokens beyond the default specification.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;All the code used in this series can be found on &lt;a href=&quot;https://github.com/oktadeveloper/okta-oidc-flows-example&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;You can use the OIDC sample app to exercise the various flows and scopes discussed throughout these posts. It’s at: &lt;a href=&quot;https://okta-oidc-fun.herokuapp.com/&quot;&gt;https://okta-oidc-fun.herokuapp.com/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;The entire final OIDC spec can be found &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html&quot;&gt;here&lt;/a&gt;. And you can learn more about OAuth 2.0 at &lt;a href=&quot;https://www.oauth.com/&quot;&gt;oauth.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;All the code used in this series can be found on &lt;a href=&quot;https://github.com/oktadeveloper/okta-oidc-flows-example&quot;&gt;github&lt;/a&gt;. You can use the OIDC sample app to exercise the various flows and scopes discussed throughout these posts. It’s at: &lt;a href=&quot;https://okta-oidc-fun.herokuapp.com/&quot;&gt;https://okta-oidc-fun.herokuapp.com/&lt;/a&gt;. The entire final OIDC spec can be found &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html&quot;&gt;here&lt;/a&gt;. And you can learn more about OAuth 2.0 at &lt;a href=&quot;https://www.oauth.com/&quot;&gt;oauth.com&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3</link>
