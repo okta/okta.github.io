@@ -472,6 +472,8 @@ Verified Access Token
 &lt;/ul&gt;
 
 &lt;p&gt;All the code used in this series can be found on &lt;a href=&quot;https://github.com/oktadeveloper/okta-oidc-flows-example&quot;&gt;github&lt;/a&gt;. You can use the OIDC sample app to exercise the various flows and scopes discussed throughout these posts. It’s at: &lt;a href=&quot;https://okta-oidc-fun.herokuapp.com/&quot;&gt;https://okta-oidc-fun.herokuapp.com/&lt;/a&gt;. The entire final OIDC spec can be found &lt;a href=&quot;http://openid.net/specs/openid-connect-core-1_0.html&quot;&gt;here&lt;/a&gt;. And you can learn more about OAuth 2.0 at &lt;a href=&quot;https://www.oauth.com/&quot;&gt;oauth.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The whole series is live now. Part 1 is &lt;a href=&quot;https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1&quot;&gt;here&lt;/a&gt;. Part 2 is &lt;a href=&quot;https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3</link>
@@ -647,6 +649,8 @@ Verified Access Token
 &lt;p&gt;You can explore the code or just click the friendly purple button to deploy your own instance.&lt;/p&gt;
 
 &lt;p&gt;In the &lt;a href=&quot;https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3&quot;&gt;final installment&lt;/a&gt;, we dig into the various types of tokens and how to validate them.&lt;/p&gt;
+
+&lt;p&gt;The whole series is live now. Part 1 is &lt;a href=&quot;https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1&quot;&gt;here&lt;/a&gt;. Part 3 is &lt;a href=&quot;https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Tue, 25 Jul 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2</link>
@@ -883,6 +887,8 @@ HTTP/1.1 200 OK
 &lt;p&gt;If you want to jump ahead, check out the example at: &lt;a href=&quot;https://okta-oidc-fun.herokuapp.com&quot;&gt;https://okta-oidc-fun.herokuapp.com&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;And, the source code is at: &lt;a href=&quot;https://github.com/oktadeveloper/okta-oidc-flows-example&quot;&gt;https://github.com/oktadeveloper/okta-oidc-flows-example&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The whole series is live now. Part 2 is &lt;a href=&quot;https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2&quot;&gt;here&lt;/a&gt;. Part 3 is &lt;a href=&quot;https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Tue, 25 Jul 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1</link>
