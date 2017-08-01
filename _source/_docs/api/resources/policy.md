@@ -1098,7 +1098,27 @@ minLowerCase | Indicates if a password must contain at least one lower case lett
 minUpperCase | Indicates if a password must contain at least one upper case letter: 0 indicates no, 1 indicates yes | integer | No | 1
 minNumber | Indicates if a password must contain at least one number: 0 indicates no, 1 indicates yes | integer | No | 1
 minSymbol | Indicates if a password must contain at least one symbol (e.g., !@#$%^&*): 0 indicates no, 1 indicates yes | integer | No | 1
-excludeUserName | Indicates if the user name must be excluded from the password | boolean | no | true
+excludeUsername | Indicates if the user name must be excluded from the password | boolean | No | true
+dictionary {%api_lifecycle beta %} | Weak password dictionary lookup settings | <a href="#WeakPasswordDictionaryObject">Weak Password Dictionary Object</a> | No | N/A
+
+###### Weak Password Dictionary Object
+{: #WeakPasswordDictionaryObject }
+
+> Weak password lookup is a {% api_lifecycle beta %} feature.
+
+Specifies how lookups for weak passwords are done. Designed to be extensible with multiple possible dictionary types against which to do lookups.
+
+Property | Description | Data Type | Required
+| --- | --- | --- | ---
+common | Lookup settings for commonly used passwords  | <a href="#CommonPasswordLookupObject">Common Password Lookup Object</a> | No
+
+Common Password Lookup Object
+
+{: #CommonPasswordLookupObject }
+
+Property | Description | Data Type | Required | Default
+| --- | --- | ---| --- | ---
+exclude | Indicates whether to check passwords against common password dictionary | Boolean | No | false
 
 ##### Age Object
 {: #PasswordAgeObject }
@@ -1140,7 +1160,7 @@ okta_sms | Settings for SMS factor | <a href="#SMSFactorObject">SMS Factor Objec
 
 Property | Description | Data Type | Required |
 | --- | --- | --- | ---
-status | Indicates if the factor is enabled.  This property is read-only | `ACTIVE` | Yes |
+status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` (EA) | Yes |
 properties | Configuration settings for security question factor | <a href="#RecoveryQuestionFactorPropertiesObject">Recovery Question Factor Properties Object</a> | No
 
 ###### Recovery Question Factor Properties Object
