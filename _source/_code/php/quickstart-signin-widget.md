@@ -27,6 +27,7 @@ To see the Sign-in Widget in action, you will need:
 > **Note:** CORS is automatically enabled for the granted login redirect URIs.
 
 ## Create an Authorization Server
+
 An authorization server defines your security boundary, for example "staging" or "production". Within each authorization server you can define your own OAuth scopes, claims, and access policies. This allows your apps and APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log.
 
 Navigate to `https://{yourOktaDomain}.com/oauth2/default` to see if your default authorization server is setup. If not, [follow this setup guide](/docs/how-to/set-up-auth-server.html).

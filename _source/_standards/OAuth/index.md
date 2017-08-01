@@ -71,7 +71,7 @@ In addition to the information in this topic, see:
     
 3. Web Application
 
-    * Server-side app with an end-user
+    * Server-side app with an end user
     * Uses [Authorization Code Grant Flow](https://tools.ietf.org/html/rfc6749#section-4.1)
     * Assumes Resource Owner and Client are on separate devices
     * Most secure flow as tokens never pass through user-agent
@@ -80,7 +80,7 @@ In addition to the information in this topic, see:
 
 4. Service Application
 
-    * Server-side app with no end-user, such as an on-prem agent
+    * Server-side app with no end user, such as an on-prem agent
     * Uses [Client Credentials Flow](https://tools.ietf.org/html/rfc6749#section-4.4)
     * Optimized for [Confidential Clients](https://tools.ietf.org/html/rfc6749#section-2.1) acting on behalf of itself or a user
     * Back-channel only flow to obtain an access token using the Client’s credentials
@@ -228,10 +228,22 @@ Custom claims are configured in the Custom Authorization Server, and returned de
 
 The full set of claims for requested scopes is available via the `/oauth2/v1/userinfo` endpoint. Call this endpoint using the access token.
 
-##### Custom claim values
+##### Custom claim configuration
 
-The value of a custom claim can be either an [expression](/reference/okta_expression_language/) or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn't added into the ID token or access token.
-The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.
+Define custom claims in [the Okta user interface](https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=custom%20claim) or using [the OAuth 2.0 API](docs/api/resources/oauth2.html#create-a-claim).
+
+A custom claim can be configured in the following ways:
+
+* Choose whether the claim is included in the ID token or the access token.
+* Choose whether the claim is always included in the token, or only when the claim is specified.
+* Define the scopes that this claim is included in: either any scope or a list of scopes that you define.
+* Disable the claim. This is often used for testing.
+* Define what the claim refers to. For example, the claim may apply to all groups of a certain type, or apply to any expression you can define using [Okta's Expression Language](/reference/okta_expression_language/), including a literal string.
+    * Example of an string literal expression: `"orderFood"` maps to the scope `food:order` (also defined in the Custom Authorization Server). You can create more elaborate expressions if needed.
+    * Examples of group list: Groups that start with "Customer." You can also use regular expressions to define the group list.
+  
+  The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn't added into the ID token or access token.
+  The datatype of a claim is an array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.
 
 >*Note:* For the custom claim with group filter, its value has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
 
@@ -309,7 +321,7 @@ OAuth 2.0 (Custom Authorization Server), except the public keys should be retrie
 You can request a token with the endpoint [`/oauth2/:authorizationServerId/v1/token`](/docs/api/resources/oauth2.html#request-a-token).
 
 The grant type and scope in your request, as well as configurations set in the Custom Authorization Server, determine which
-tokens are returned. For details, see [Response Parameters](/docs/api/resources/oauth2.html#response-parameters-1).
+tokens are returned and what they contain. For details, see [Response Parameters](/docs/api/resources/oauth2.html#response-parameters-1) and [Custom claim configuration](#custom-claim-configuration).
 
 ## Access Policies
 

@@ -4366,11 +4366,11 @@ relayState  | Optional state value that is persisted for the lifetime of the rec
 
 [Recovery Transaction Object](#recovery-transaction-model) with `RECOVERY_CHALLENGE` status for the new recovery transaction.
 
-> You will always receive a [Recovery Transaction](#recovery-transaction-model) response even if the requested `username` is not a valid identifier to prevent information disclosure.
+You will always receive a [Recovery Transaction](#recovery-transaction-model) response even if the requested `username` is not a valid identifier to prevent information disclosure.
 
 ###### Trusted Application
 
-[Recovery Transaction Object](#recovery-transaction-model) with an issued `recoveryToken` that can be distributed to the end-user.
+[Recovery Transaction Object](#recovery-transaction-model) with an issued `recoveryToken` that can be distributed to the end user.
 
 You will receive a `403 Forbidden` status code if the `username` requested is not valid
 
@@ -4658,7 +4658,7 @@ relayState  | Optional state value that is persisted for the lifetime of the rec
 
 ###### Trusted Application
 
-[Recovery Transaction Object](#recovery-transaction-model) with an issued `recoveryToken` that can be distributed to the end-user.
+[Recovery Transaction Object](#recovery-transaction-model) with an issued `recoveryToken` that can be distributed to the end user.
 
 You will receive a `403 Forbidden` status code if the `username` requested is not valid
 
@@ -5183,7 +5183,7 @@ curl -v -X POST \
 }
 ~~~
 
-> The `factorType` and `recoveryType` properties will vary depending on recovery transaction
+The `factorType` and `recoveryType` properties vary depending on the recovery transaction.
 
 
 ### Verify Recovery Token
@@ -5191,14 +5191,14 @@ curl -v -X POST \
 
 {% api_operation post /api/v1/authn/recovery/token %}
 
-Validates a [recovery token](#recovery-token) that was distributed to the end-user to continue the recovery transaction.
+Validates a [recovery token](#recovery-token) that was distributed to the end user to continue the recovery transaction.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
 Parameter     | Description                                                                                                | Param Type | DataType | Required |
 ------------- | ---------------------------------------------------------------------------------------------------------- | ---------- | -------- | -------- |
-recoveryToken | [Recovery token](#recovery-token) that was distributed to end-user via out-of-band mechanism such as email | Body       | String   | TRUE     |
+recoveryToken | [Recovery token](#recovery-token) that was distributed to the end user via out-of-band mechanism such as email | Body       | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -5285,7 +5285,7 @@ curl -v -X POST \
 
 {% api_operation post /api/v1/authn/recovery/answer %}
 
-Answers the user's recovery question to ensure only the end-user redeemed the [recovery token](#recovery-token) for recovery transaction with a `RECOVERY` [status](#transaction-state).
+Answers the user's recovery question to ensure only the end user redeemed the [recovery token](#recovery-token) for recovery transaction with a `RECOVERY` [status](#transaction-state).
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -5841,7 +5841,7 @@ The Authentication API leverages the [JSON HAL](http://tools.ietf.org/html/draft
 | Property      | Description                                                                                            | DataType                                                       | Nullable | Readonly | MaxLength |
 | ------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- | -------- | -------- | --------- |
 | stateToken    | ephemeral [token](#state-token) that encodes the current state of a recovery transaction               | String                                                         | TRUE     | TRUE     |           |
-| recoveryToken | ephemeral [one-time token](#recovery-token) for recovery transaction to be distributed to the end-user | String                                                         | TRUE     | TRUE     |           |
+| recoveryToken | ephemeral [one-time token](#recovery-token) for recovery transaction to be distributed to the end user | String                                                         | TRUE     | TRUE     |           |
 | expiresAt     | lifetime of the `stateToken` or `recoveryToken` (See [Tokens](#tokens))                                | Date                                                           | TRUE     | TRUE     |           |
 | status        | current [state](#transaction-state) of the recovery transaction                                        | [Transaction State](#transaction-state)                        | FALSE    | TRUE     |           |
 | relayState    | optional opaque value that is persisted for the lifetime of the recovery transaction                   | String                                                         | TRUE     | TRUE     |   2048    |
@@ -5879,7 +5879,7 @@ An authentication or recovery transaction has one of the following states:
 
 You advance the authentication or recovery transaction to the next state by posting a request with a valid [state token](#state-token) to the the `next` link relation published in the [JSON HAL links object](#links-object) for the response.
 
-[Enrolling a factor](#enroll-factor) and [verifying a factor](#verify-factor) do not have `next` link relationships as the end-user must make a selection of which factor to enroll or verify.
+[Enrolling a factor](#enroll-factor) and [verifying a factor](#verify-factor) do not have `next` link relationships as the end user must make a selection of which factor to enroll or verify.
 
 > You should never assume a specific state transition or URL when navigating the [state model](#transaction-state).  Always inspect the response for `status` and dynamically follow the [published link relations](#links-object).
 
@@ -5936,7 +5936,7 @@ Authentication API operations will return different token types depending on the
 Ephemeral token that encodes the current state of an authentication or recovery transaction.
 
 - The `stateToken` must be passed with every request except when verifying a `recoveryToken` that was distributed out-of-band
-- The `stateToken` is only intended to be used between the web application performing end-user authentication and the Okta API. It should never be distributed to the end-user via email or other out-of-band mechanisms.
+- The `stateToken` is only intended to be used between the web application performing end-user authentication and the Okta API. It should never be distributed to the end user via email or other out-of-band mechanisms.
 - The lifetime of the `stateToken` uses a sliding scale expiration algorithm that extends with every request.  Always inspect the `expiresAt` property for the transaction when making decisions based on lifetime.
 
 > All Authentication API operations will return `401 Unauthorized` status code when you attempt to use an expired state token.
@@ -5981,7 +5981,7 @@ One-time token issued as `recoveryToken` response parameter when a recovery tran
 - Unlike the `statusToken` the `recoveryToken` should be distributed out-of-band to a user such as via email.
 - The lifetime of the `recoveryToken` is managed by the organization's security policy.
 
-The `recoveryToken` is sent via an out-of-band channel to the end-user's verified email address or SMS phone number and acts as primary authentication for the recovery transaction.
+The `recoveryToken` is sent via an out-of-band channel to the end user's verified email address or SMS phone number and acts as primary authentication for the recovery transaction.
 
 > Directly obtaining a `recoveryToken` is a highly privileged operation and should be restricted to trusted web applications.  Anyone that obtains a `recoveryToken` for a user and knows the answer to a user's recovery question can reset their password or unlock their account.
 

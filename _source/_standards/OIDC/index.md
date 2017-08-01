@@ -14,7 +14,7 @@ OpenID Connect allows a range of clients to request and receive information abou
 web-based clients, mobile apps, and JavaScript clients.
 The [specification suite](http://openid.net/connect/) is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.
 
-Okta is [certified for OpenID Connect](http://openid.net/certification/) for Basic, Implicit, Hybrid, and Configuration Publishing.
+Okta is [certified for OpenID Connect](http://openid.net/certification/) for Basic, Implicit, Hybrid, and Publishing Configuration Publishing.
 
 ## Authentication Basics with OAuth 2.0 and OpenID Connect
 
@@ -130,7 +130,7 @@ The ID Token (*id_token*) consists of three period-separated, base64URL-encoded 
 {
   "ver": 1,
   "sub": "00uid4BxXw6I6TV4m0g3",
-  "iss": "https://rain.okta1.com:1802",
+  "iss": "https:{myOktaDomain.com}",
   "aud": "uAaunofWkaDJxukCFeBx",
   "iat": 1449624026,
   "exp": 1449627626,

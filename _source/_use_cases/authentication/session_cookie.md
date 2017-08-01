@@ -15,7 +15,7 @@ Okta sessions are created and managed with the [Session API](/docs/api/resources
 
 This scenario is ideal for deployment scenarios where you have implemented both a custom login page and custom landing page for your application. The login page will typically collect the user's credentials via a HTML form submit or POST and the web application will validate the credentials against your Okta organization by calling the [Authentication API](/docs/api/resources/authn.html) to obtain a [session token](/docs/api/resources/sessions.html#session-token).
 
-Once a session token is obtained, it can be passed into the [OpenID Connect authorize endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) in order to get an Okta session cookie. Executing this flow will set a cookie in the end-user's browser and then redirect them back to the `redirect_uri` that is passed into the request.
+Once a session token is obtained, it can be passed into the [OpenID Connect authorize endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) in order to get an Okta session cookie. Executing this flow will set a cookie in the end user's browser and then redirect them back to the `redirect_uri` that is passed into the request.
 
 > The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, the user won't be able to reuse the same session token to get a new session cookie.
 
