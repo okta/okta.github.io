@@ -1098,15 +1098,15 @@ minLowerCase | Indicates if a password must contain at least one lower case lett
 minUpperCase | Indicates if a password must contain at least one upper case letter: 0 indicates no, 1 indicates yes | integer | No | 1
 minNumber | Indicates if a password must contain at least one number: 0 indicates no, 1 indicates yes | integer | No | 1
 minSymbol | Indicates if a password must contain at least one symbol (e.g., !@#$%^&*): 0 indicates no, 1 indicates yes | integer | No | 1
-excludeUserName | Indicates if the user name must be excluded from the password | boolean | No | true
+excludeUsername | Indicates if the user name must be excluded from the password | boolean | No | true
 dictionary {%api_lifecycle beta %} | Weak password dictionary lookup settings | <a href="#WeakPasswordDictionaryObject">Weak Password Dictionary Object</a> | No | N/A
 
 ###### Weak Password Dictionary Object
 {: #WeakPasswordDictionaryObject }
 
-> Weak password dictionary lookup is an {% api_lifecycle beta %} feature. Contact Support to enable it.
+> Weak password lookup is a {% api_lifecycle beta %} feature.
 
-Specifies settings for dictionaries of weak passwords against which lookups of users' passwords may be done, in order to help verify password strength. Designed to be extensible with multiple possible dictionary types against which to do lookups.
+Specifies how lookups for weak passwords are done. Designed to be extensible with multiple possible dictionary types against which to do lookups.
 
 Property | Description | Data Type | Required
 | --- | --- | --- | ---
