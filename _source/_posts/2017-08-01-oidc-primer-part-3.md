@@ -7,11 +7,14 @@ tags: [oauth, oauth2, oauth2.0, oauth 2.0, OpenID, OpenID Connect, oidc]
 
 In the previous two installments of this OpenID Connect (OIDC) series, we dug deep into the [OIDC flow types](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1) and saw [OIDC in action](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2) using a playground found at: [https://okta-oidc-fun.herokuapp.com/](https://okta-oidc-fun.herokuapp.com/).
 
-In this third and final installment, we’ll look at what’s encoded into the various types of tokens and how to control what gets put in them. The source code that backs the site can be found at: [https://github.com/oktadeveloper/okta-oidc-flows-example](https://github.com/oktadeveloper/okta-oidc-flows-example).
+In this third and final installment, we’ll look at what’s encoded into the various types of tokens and how to control what gets put in them. JWTs, have the benefit of being able to carry information in them. With this information available to your app you can easily enforce token expiration and reduce the number of API calls. Additionally, since they’re cryptographically signed, you can verify that they have not been tampered with. 
+
+The source code that backs the site can be found at: [https://github.com/oktadeveloper/okta-oidc-flows-example](https://github.com/oktadeveloper/okta-oidc-flows-example).
 
 There are two primary sources for information relating to identity as dictated by the OIDC spec. One source is the information encoded into the `id_token` [JWT](https://tools.ietf.org/html/rfc7519). Another is the response from the `/userinfo` endpoint, accessible using an `access_token` as a bearer token. At Okta, we’ve chosen to make our access tokens JWTs as well, which provides a third source of information. (You’ll see this in many OIDC implementations.)
 
 There are a lot of combinations of query parameters in the `/authorization` request that determine what information will be encoded into an `id_token`. The two query parameters that impact what will ultimately be found in returned tokens and the `/userinfo` endpoint are `response_type` and `scope`.
+
 ## OIDC Response Types
 
 For the moment, we’ll set aside `scope` and focus on `response_type`. In the following examples, we use only the scopes, `openid` (required) and `email`. We’ll also work with the [implicit flow](http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth), since that gives us back tokens immediately.
@@ -254,6 +257,7 @@ HTTP/1.1 200 OK
 ```
 
 This rounds out all the identity information that was requested in the scopes.
+
 ## Custom Scopes and Claims
 
 The OIDC spec accommodate custom scopes and claims. The ability to include custom claims in a token (which is cryptographically verifiable) is an important capability for identity providers. Okta’s implementation provides support for this.
@@ -424,7 +428,8 @@ If any part of the `id_token` JWT had been tampered with, you would see this ins
 io.jsonwebtoken.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
 ```
 
-Verifying JWT’s using the `/introspect` endpoint and using JWKs is a powerful component of OIDC. It allows for a high degree of confidence that the token has not been tampered in any way. And, because of that, information contained within - such as expiration - can be safely enforced.
+Verifying JWT’s using the `/introspect` endpoint and using JWKs is a powerful component of OIDC. It allows for a high degree of confidence that the token has not been tampered in any way. And, because of that, information contained within – such as expiration – can be safely enforced.
+
 ## How I Learned to Love OpenID Connect
 
 When OIDC was first released and early implementers, such as Google, adopted it, I thought: “I just got used to OAuth 2.0. Why do I have to learn a new thing that rides on top of it?”
