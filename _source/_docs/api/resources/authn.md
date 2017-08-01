@@ -6,7 +6,7 @@ redirect_from: "/docs/api/rest/authn.html"
 
 # Authentication API
 
-The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta [Sessions API](sessions.html) to obtain an Okta [session cookie](/docs/examples/session_cookie.html) and access apps within Okta.
+The Okta Authentication API provides operations to authenticate users, perform multi-factor enrollment and verification, recover forgotten passwords, and unlock accounts. It can be used as a standalone API to provide the identity layer on top of your existing application, or it can be integrated with the Okta [Sessions API](sessions.html) to obtain an Okta [session cookie](/use_cases/authentication/session_cookie.html) and access apps within Okta.
 
 The API is targeted for developers who want to build their own end-to-end login experience to replace the built-in Okta login experience and addresses the following key scenarios:
 
@@ -5989,7 +5989,7 @@ The `recoveryToken` is sent via an out-of-band channel to the end-user's verifie
 
 One-time token issued as `sessionToken` response parameter when an authentication transaction completes with the `SUCCESS` status.
 
-- The token can be exchanged for a session with the [Session API](sessions.html#create-session-with-session-token) or converted to a [session cookie](/docs/examples/session_cookie.html).
+- The token can be exchanged for a session with the [Session API](sessions.html#create-session-with-session-token) or converted to a [session cookie](/use_cases/authentication/session_cookie.html).
 - The lifetime of the `sessionToken` is the same as the lifetime of a user's session and managed by the organization's security policy.
 
 ### Factor Result
