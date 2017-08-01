@@ -200,7 +200,7 @@ It can be confusing sometimes to distinguish between the different token types. 
 
 ## Continue the OpenID Connect Journey
 
-In this post, we learned some basics about OpenID Connect, its history, and a bit about the various flow types, scopes, and tokens involved. In the next installment, we’ll see OIDC in action!
+In this post, we learned some basics about OpenID Connect, its history, and a bit about the various flow types, scopes, and tokens involved. In the [next installment](https://developer.okta.com/blog/2017/07/25/oidc-primer-part-2), we see OIDC in action!
 
 If you want to jump ahead, check out the example at: [https://okta-oidc-fun.herokuapp.com](https://okta-oidc-fun.herokuapp.com)
 

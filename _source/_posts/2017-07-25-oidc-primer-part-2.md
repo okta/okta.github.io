@@ -119,7 +119,7 @@ Here's the response from the `/userinfo` endpoint using the `access_token` as a 
 
 ## Other OIDC Flows
 
-There are two other flows not covered in this post: [Client Credentials Flow](https://tools.ietf.org/html/rfc6749#section-4.4) and [Resource Owner Password Credentials](https://tools.ietf.org/html/rfc6749#section-4.3). These are both holdovers from OAuth 2.0 and, as such, are supported by OIDC. Here, we’re focusing on flows that require an external authentication provider, such as Okta or Google, and not the alternative methods that these flows support.
+There are two other flows not covered in this post: [Client Credentials Flow](https://tools.ietf.org/html/rfc6749#section-4.4) and [Resource Owner Password Credentials](https://tools.ietf.org/html/rfc6749#section-4.3). These are both defined in the OAuth 2.0 spec and, as such, are supported by OIDC. Here, we’re focusing on flows that require an external authentication provider, such as Okta or Google, and not the alternative methods that these flows support.
 
 What information is encoded in the `id_token`, the `access_token` and what information is returned when hitting the protected `/userinfo` endpoint are a function of the flow type and the scopes requested. In the next post, we dig deeper into this.
 
@@ -131,4 +131,4 @@ You can easily create your own instance of the OIDC tool if you have an Okta ten
 
 You can explore the code or just click the friendly purple button to deploy your own instance.
 
-In the final installment, we’ll dig into the various types of tokens and how to validate them.
+In the [final installment](https://developer.okta.com/blog/2017/08/01/oidc-primer-part-3), we dig into the various types of tokens and how to validate them.
