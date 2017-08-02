@@ -293,10 +293,10 @@ X-Rate-Limit-Reset: 1366037820
 
 If a rate limit is exceeded, an HTTP 429 Status Code is returned.
 
--**Rate limits are enforced for all organizations.**
+**Rate limits are enforced for all organizations.**
 
 The best way to be sure about your rate limits is to check the relevant headers in the response. The System Log doesn't report every
-API request. Rather, it typically reports completed or attempted real world events such as configuration changes, user logins, or user lockouts. You can't query the System Log for accurate API rates.
+API request. Rather, it typically reports completed or attempted real-world events such as configuration changes, user logins, or user lockouts. You can't query the System Log for API rate limit information.
 
 ### Org-Wide Rate Limits
 
@@ -331,10 +331,6 @@ For all endpoints not listed, the API rate limit is a combined 10,000 requests p
 		<tr>
 			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups</span></td>
 			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups/<i>{id}</i>&nbsp;</span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
 		</tr>
 		<tr>
 			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/sessions</span></td>
