@@ -516,12 +516,16 @@ then no redirect URI or response type is necessary. In these cases you can pass 
       ],
       "token_endpoint_auth_method": "client_secret_post",
       "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients"</span>
+    }'</span> <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/clients"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example">Response Example</h5>
 
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
+</code></pre>
+</div>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe"</span><span class="p">,</span><span class="w">
@@ -589,12 +593,16 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"</span>
+<span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
 
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
+</code></pre>
+</div>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
@@ -690,7 +698,7 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients"</span>
+<span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/clients"</span>
 </code></pre>
 </div>
 
@@ -698,10 +706,12 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/oauth2/v1/clients&gt;; rel="self"</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko&gt;; rel="next"</span>
+</code></pre>
+</div>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="err">Link:</span><span class="w"> </span><span class="err">&lt;https://</span><span class="p">{</span><span class="err">yourOktaDomain</span><span class="p">}</span><span class="err">.com/oauth</span><span class="mi">2</span><span class="err">/v</span><span class="mi">1</span><span class="err">/clients&gt;;</span><span class="w"> </span><span class="err">rel=</span><span class="s2">"self"</span><span class="w">
+</span><span class="err">Link:</span><span class="w"> </span><span class="err">&lt;https://</span><span class="p">{</span><span class="err">yourOktaDomain</span><span class="p">}</span><span class="err">.com/oauth</span><span class="mi">2</span><span class="err">/v</span><span class="mi">1</span><span class="err">/clients?after=F</span><span class="mi">10</span><span class="err">CaazJPQ</span><span class="mi">5</span><span class="err">Zpyu</span><span class="mi">1</span><span class="err">Ojko&gt;;</span><span class="w"> </span><span class="err">rel=</span><span class="s2">"next"</span><span class="w">
 
-<span class="p">[</span><span class="w">
+</span><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
@@ -766,12 +776,16 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients?q=Payroll&amp;limit=10"</span>
+<span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/clients?q=Payroll&amp;limit=10"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-3">Response Example</h5>
 
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
+</code></pre>
+</div>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JoLxQvMz6u0kEkHFSnC8"</span><span class="p">,</span><span class="w">
@@ -871,14 +885,17 @@ then no redirect URI or response type is necessary. In these cases you can pass 
       ],
       "token_endpoint_auth_method": "client_secret_post",
       "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"</span>
+    }'</span> <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
+</code></pre>
+</div>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5W7XULCEs4BJKnWUXwh8lgmeXRhcGcdViFp84pWe"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
@@ -949,14 +966,17 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
- <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span>
+ <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json;charset=UTF-8</span>
+</code></pre>
+</div>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0jrabyQWm4B9zVJPbotY"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t1hgVNl06UiMTzlsVVj0UywSDDuNdG529lm0bpy8"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"client_id_issued_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1453913425</span><span class="p">,</span><span class="w">
@@ -1024,7 +1044,7 @@ then no redirect URI or response type is necessary. In these cases you can pass 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"</span>
+<span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"</span>
 </code></pre>
 </div>
 

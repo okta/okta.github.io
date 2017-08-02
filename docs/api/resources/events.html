@@ -217,6 +217,10 @@
 
 <p>Explore the Events API: <a href="https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
+<h2 id="data-retention">Data Retention</h2>
+
+<p>Log data older than 90 days is not returned, in accordance with Okta’s [Data Retention Policy}(https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).</p>
+
 <h2 id="event-operations">Event Operations</h2>
 
 <h3 class="api api-operation" id="list-events">List Events</h3>
@@ -324,14 +328,14 @@
 <p>See <a href="/docs/api/getting_started/design_principles.html#filtering">Filtering</a> for more information on expressions.</p>
 
 <blockquote>
-  <p>Note: All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code class="highlighter-rouge">filter=published gt "2013-06-01T00:00:00.000Z"</code> is encoded as <code class="highlighter-rouge">filter=published%20gt%20%222013-06-01T00:00:00.000Z%22</code>.</p>
+  <p>Note: All filters must be <a href="http://en.wikipedia.org/wiki/Percent-encoding">URL encoded</a> where <code class="highlighter-rouge">filter=published gt "2017-06-01T00:00:00.000Z"</code> is encoded as <code class="highlighter-rouge">filter=published%20gt%20%222017-06-01T00:00:00.000Z%22</code>.</p>
 </blockquote>
 
 <p><strong>Filter Examples</strong></p>
 
-<p>Events published after 06/01/2013</p>
+<p>Events published after 06/01/2017</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z"
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2017-06-01T00:00:00.000Z"
 </code></pre>
 </div>
 
@@ -341,15 +345,15 @@
 </code></pre>
 </div>
 
-<p>Failed login events published after 06/01/2013</p>
+<p>Failed login events published after 06/01/2017</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2017-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
 </code></pre>
 </div>
 
-<p>Events published after 06/01/2013 for a target user and application</p>
+<p>Events published after 06/01/2017 for a target user and application</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+<div class="highlighter-rouge"><pre class="highlight"><code>filter=published gt "2017-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
 </code></pre>
 </div>
 
@@ -369,7 +373,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z</span><span class="se">\&amp;</span><span class="s2">limit=3"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z</span><span class="se">\&amp;</span><span class="s2">limit=3"</span>
 </code></pre>
 </div>
 
@@ -377,13 +381,13 @@
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&amp;limit=3&gt;; rel="self"</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&amp;limit=3&gt;; rel="next"</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://{yourOktaDomain}.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&amp;limit=3&gt;; rel="self"</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://{yourOktaDomain}.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&amp;limit=3&gt;; rel="next"</span>
 
 <span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tev8hc_KK9NRzKe2WtdvVQIOg1384845263000"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:14:23.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tev8hc_KK9NRzKe2WtdvVQIOg1784845263000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T07:14:23.000Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"App activated"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
@@ -413,8 +417,8 @@
         </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevaEByjeq-QZW-utKgDVVvng1384847185000"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:46:25.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevaEByjeq-QZW-utKgDVVvng1784847185000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T07:46:25.000Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign-in successful"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -447,8 +451,8 @@
         </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevR26HuMJMSkWsKBUcQ65Raw1384847190000"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-11-19T07:46:30.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"eventId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tevR26HuMJMSkWsKBUcQ65Raw1784847190000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T07:46:30.000Z"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User performed single sign on to app"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -496,7 +500,7 @@
 <h3 id="example">Example</h3>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"eventId"</span><span class="p">:</span><span class="s2">"tevGr2BhQTMR72OiBGvKXTp2Q1399593071000"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"eventId"</span><span class="p">:</span><span class="s2">"tevGr2BhQTMR72OiBGvKXTp2Q1799593071000"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"published"</span><span class="p">:</span><span class="s2">"2014-05-08T23:51:11.000Z"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"requestId"</span><span class="p">:</span><span class="s2">"req8U_MHmEbSai_0I4RopTnfA"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"sessionId"</span><span class="p">:</span><span class="s2">"000cWiYg47QSFyk1YjE6cDcEg"</span><span class="p">,</span><span class="w">

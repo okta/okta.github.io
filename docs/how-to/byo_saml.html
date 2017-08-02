@@ -197,9 +197,7 @@
 
 <h2 id="prerequisite">Prerequisite</h2>
 
-<p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
-
-<p>To use your own SAML certificate, update the key credential for the affected apps or IdPs. Key rollover is an <strong>Early Access</strong> (EA) feature; contact Okta support to enable it.</p>
+<p>To use your own SAML certificate, update the key credential for the affected apps or IdPs.</p>
 
 <h3 id="outbound-and-inbound-saml-applications">Outbound and Inbound SAML Applications</h3>
 
@@ -324,7 +322,7 @@
 </span><span class="p">}</span><span class="w">
 
 </span><span class="mi">201</span><span class="w"> </span><span class="err">Created</span><span class="w">
-</span><span class="err">Location:</span><span class="w"> </span><span class="err">https://your-domain.okta.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">00000</span><span class="err">id</span><span class="mi">1</span><span class="err">U</span><span class="mi">3</span><span class="err">iyFqLu</span><span class="mi">0</span><span class="err">g</span><span class="mi">4</span><span class="err">/credentials/csrs/abckutaSe</span><span class="mi">7</span><span class="err">fZX</span><span class="mi">0</span><span class="err">SwN</span><span class="mi">1</span><span class="err">GqDApofgD</span><span class="mi">1</span><span class="err">OW</span><span class="mi">8</span><span class="err">g</span><span class="mi">2</span><span class="err">B</span><span class="mi">5</span><span class="err">l</span><span class="mi">2</span><span class="err">azh</span><span class="mi">000</span><span class="w">
+</span><span class="err">Location:</span><span class="w"> </span><span class="err">https://</span><span class="p">{</span><span class="err">yourOktaDomain</span><span class="p">}</span><span class="err">.com/api/v</span><span class="mi">1</span><span class="err">/apps/</span><span class="mi">00000</span><span class="err">id</span><span class="mi">1</span><span class="err">U</span><span class="mi">3</span><span class="err">iyFqLu</span><span class="mi">0</span><span class="err">g</span><span class="mi">4</span><span class="err">/credentials/csrs/abckutaSe</span><span class="mi">7</span><span class="err">fZX</span><span class="mi">0</span><span class="err">SwN</span><span class="mi">1</span><span class="err">GqDApofgD</span><span class="mi">1</span><span class="err">OW</span><span class="mi">8</span><span class="err">g</span><span class="mi">2</span><span class="err">B</span><span class="mi">5</span><span class="err">l</span><span class="mi">2</span><span class="err">azh</span><span class="mi">000</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000"</span><span class="p">,</span><span class="w">
@@ -333,7 +331,7 @@
   </span><span class="nt">"kty"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RSA"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
@@ -342,7 +340,7 @@
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"publish"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000/lifecycle/publish"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/apps/00000id1U3iyFqLu0g4/credentials/csrs/abckutaSe7fZX0SwN1GqDApofgD1OW8g2B5l2azh000/lifecycle/publish"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"POST"</span><span class="w">
@@ -392,7 +390,7 @@ ZRUaagvFUo1EO9m1xnjpLDIa7+M=
 
 
 201 Created
-Location: https://your-domain.okta.com/api/v1/apps/0oa1ysid1U3iyFqLu0g4/credentials/keys/ElsCzR8nbPamANBFu7QPRvtLD6Q3O1KQNJ92zkfFJNw
+Location: https://{yourOktaDomain}.com/api/v1/apps/0oa1ysid1U3iyFqLu0g4/credentials/keys/ElsCzR8nbPamANBFu7QPRvtLD6Q3O1KQNJ92zkfFJNw
 Content-Type: application/json;charset=UTF-8
 
 {

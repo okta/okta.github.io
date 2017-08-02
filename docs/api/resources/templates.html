@@ -276,7 +276,7 @@
      "fr" : "${org.name}: votre code de vérification est ${code}",
      "it" : "${org.name}: il codice di verifica è ${code}"
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/templates/sms"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/templates/sms"</span>
 </code></pre>
 </div>
 
@@ -339,7 +339,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/templates/sms/</span><span class="k">${</span><span class="nv">templateId</span><span class="k">}</span><span class="s2">"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/templates/sms/</span><span class="k">${</span><span class="nv">templateId</span><span class="k">}</span><span class="s2">"</span>
 </code></pre>
 </div>
 
@@ -415,7 +415,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/templates/sms"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/templates/sms"</span>
 </code></pre>
 </div>
 
@@ -470,7 +470,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/templates/sms?templateType=SMS_ENROLLMENT_CODE"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/templates/sms?templateType=SMS_ENROLLMENT_CODE"</span>
 </code></pre>
 </div>
 
@@ -561,7 +561,7 @@
       "</span>es<span class="s2">": "</span><span class="k">${</span><span class="nv">org</span><span class="p">.name</span><span class="k">}</span>: su código de inscripción es <span class="k">${</span><span class="nv">code</span><span class="k">}</span><span class="s2">",
       "</span>de<span class="s2">": "</span><span class="k">${</span><span class="nv">org</span><span class="p">.name</span><span class="k">}</span>: ihre anmeldung code ist <span class="k">${</span><span class="nv">code</span><span class="k">}</span><span class="s2">"
     }
-}' "</span>https://<span class="k">${</span><span class="nv">org</span><span class="k">}</span>.okta.com/api/v1/templates/sms/<span class="k">${</span><span class="nv">templateId</span><span class="k">}</span><span class="s2">"
+}' "</span>https://<span class="o">{</span>yourOktaDomain<span class="o">}</span>.com/api/v1/templates/sms/<span class="k">${</span><span class="nv">templateId</span><span class="k">}</span><span class="s2">"
 </span></code></pre>
 </div>
 
@@ -647,7 +647,7 @@
    {
       "de" : "${org.name}: ihre bestätigungscode ist ${code}."
    }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/templates/sms/</span><span class="k">${</span><span class="nv">templateId</span><span class="k">}</span><span class="s2">"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/templates/sms/</span><span class="k">${</span><span class="nv">templateId</span><span class="k">}</span><span class="s2">"</span>
 </code></pre>
 </div>
 
@@ -715,7 +715,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/templates/sms/</span><span class="k">${</span><span class="nv">templateId</span><span class="k">}</span><span class="s2">"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/templates/sms/</span><span class="k">${</span><span class="nv">templateId</span><span class="k">}</span><span class="s2">"</span>
 </code></pre>
 </div>
 

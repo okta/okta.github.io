@@ -276,7 +276,7 @@
 
 <h6 id="xmlhttprequest">XMLHttpRequest</h6>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'https://your-domain.okta.com'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'https://{yourOktaDomain}.com'</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
 <span class="k">if</span> <span class="p">(</span><span class="s2">"withCredentials"</span> <span class="k">in</span> <span class="nx">xhr</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -296,7 +296,7 @@
 
 <h6 id="jquery">jQuery</h6>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'https://your-domain.okta.com'</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="s1">'https://{yourOktaDomain}.com'</span><span class="p">;</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="nx">baseUrl</span> <span class="o">+</span> <span class="s1">'/api/v1/users/me'</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
@@ -328,27 +328,27 @@
 
 <h6 id="chrome">Chrome</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://your-domain.okta.com/api/v1/users/me. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'https://your-website.com' is therefore not allowed access.
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://{yourOktaDomain}.com/api/v1/users/me. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'https://your-website.com' is therefore not allowed access.
 </code></pre>
 </div>
 
 <h6 id="safari">Safari</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://your-domain.okta.com/api/v1/users/me. Origin https://your-domain.okta.com is not allowed by Access-Control-Allow-Origin.
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://{yourOktaDomain}.com/api/v1/users/me. Origin https://{yourOktaDomain}.com is not allowed by Access-Control-Allow-Origin.
 </code></pre>
 </div>
 
 <h6 id="firefox">Firefox</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://your-domain.okta.com/api/v1/users/me. This can be fixed by moving the resource to the same domain or enabling CORS.
+<div class="highlighter-rouge"><pre class="highlight"><code>Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://{yourOktaDomain}.com/api/v1/users/me. This can be fixed by moving the resource to the same domain or enabling CORS.
 </code></pre>
 </div>
 
 <h6 id="internet-explorer">Internet Explorer</h6>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>SEC7118: XMLHttpRequest for https://your-domain.okta.com/api/v1/users/me required Cross Origin Resource Sharing (CORS).
+<div class="highlighter-rouge"><pre class="highlight"><code>SEC7118: XMLHttpRequest for https://{yourOktaDomain}.com/api/v1/users/me required Cross Origin Resource Sharing (CORS).
 
-SEC7120: Origin https://your-domain.okta.com not found in Access-Control-Allow-Origin header.
+SEC7120: Origin https://{yourOktaDomain}.com not found in Access-Control-Allow-Origin header.
 
 SCRIPT7002: XMLHttpRequest: Network Error 0x80070005, Access is denied.
 </code></pre>

@@ -251,7 +251,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}"</span>
 </code></pre>
 </div>
 
@@ -277,7 +277,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}?expand=rules"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}?expand=rules"</span>
 </code></pre>
 </div>
 
@@ -302,7 +302,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies?type={type}"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies?type={type}"</span>
 </code></pre>
 </div>
 
@@ -327,7 +327,7 @@ HTTP 204:
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}"</span>
 </code></pre>
 </div>
 
@@ -366,7 +366,7 @@ HTTP 204:
          }
         }
      }, \
-"https://${org}.okta.com/api/v1/policies/{policyId}"
+"https://{yourOktaDomain}.com/api/v1/policies/{policyId}"
 </span></code></pre>
 </div>
 
@@ -403,7 +403,7 @@ HTTP 204:
           }
         }
       }, \
-"https://${org}.okta.com/api/v1/policies"
+"https://{yourOktaDomain}.com/api/v1/policies"
 </span></code></pre>
 </div>
 
@@ -426,7 +426,7 @@ HTTP 204:
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/lifecycle/activate"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/lifecycle/activate"</span>
 </code></pre>
 </div>
 
@@ -449,7 +449,7 @@ HTTP 204:
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/lifecycle/deactivate"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/lifecycle/deactivate"</span>
 </code></pre>
 </div>
 
@@ -474,7 +474,7 @@ HTTP 204:
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules"</span>
 </code></pre>
 </div>
 
@@ -517,7 +517,7 @@ HTTP 204:
       "access": "ALLOW"
     }
   }'</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules"</span>
 </code></pre>
 </div>
 
@@ -540,7 +540,7 @@ HTTP 204:
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
 </code></pre>
 </div>
 
@@ -563,7 +563,7 @@ HTTP 204:
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
 </code></pre>
 </div>
 
@@ -607,7 +607,7 @@ HTTP 204:
     }
   }
 }'</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}"</span>
 </code></pre>
 </div>
 
@@ -630,7 +630,7 @@ HTTP 204:
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate"</span>
 </code></pre>
 </div>
 
@@ -653,7 +653,7 @@ HTTP 204:
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate"</span>
 </code></pre>
 </div>
 
@@ -705,7 +705,7 @@ During policy evaluation each policy of the appropriate type is considered in tu
 </ul>
 
 <p>When policy is evaluated for a user, policy “A” will be evaluated first.  If the user is a member of the “Administrators” group then the rules associated with policy “A” will be evaluated.   If a match is found then the policy settings will be applied.
-If the user is not a member of teh “Administrators” group, then policy B would be evaluated.</p>
+If the user is not a member of the “Administrators” group, then policy B would be evaluated.</p>
 
 <h3 id="policy-json-example-okta-sign-on-policy">Policy JSON Example (Okta Sign On Policy)</h3>
 
@@ -1302,8 +1302,8 @@ See <a href="#Conditions">conditions</a></p>
 
 <h2 id="OktaSignOnPolicy">Okta Sign On Policy</h2>
 
-<p>Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challanged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
-Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be peformed before a specific Okta application can be invoked.</p>
+<p>Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challenged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
+Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.</p>
 
 <h3 id="policy-settings-data">Policy Settings Data</h3>
 
@@ -1584,7 +1584,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
 
 <h4 id="PolicyFactorConsentObject">Policy Factor Consent Object</h4>
 
-<p>The Policy Factor Consent Object is an extensibility point.  In the future, policy may be configureable to require user consent to specified terms when enrolling in a factor.   At present settings other than type = <code class="highlighter-rouge">NONE</code> are ignored.</p>
+<p>The Policy Factor Consent Object is an extensibility point.  In the future, policy may be configurable to require user consent to specified terms when enrolling in a factor.   At present settings other than type = <code class="highlighter-rouge">NONE</code> are ignored.</p>
 
 <table>
   <thead>
@@ -1699,7 +1699,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
   <p>The Password Policy API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  <a href="/docs/api/getting_started/releases-at-okta.html">release</a>.</p>
 </blockquote>
 
-<p>Password policy controls settings that deterine a user’s password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.</p>
+<p>Password policy controls settings that determine a user’s password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.</p>
 
 <h4 id="policy-settings-example-1">Policy Settings Example</h4>
 
@@ -1875,11 +1875,68 @@ Note that Okta sign on policy is not the same thing as application sign on polic
       <td>1</td>
     </tr>
     <tr>
-      <td>excludeUserName</td>
+      <td>excludeUsername</td>
       <td>Indicates if the user name must be excluded from the password</td>
       <td>boolean</td>
-      <td>no</td>
+      <td>No</td>
       <td>true</td>
+    </tr>
+    <tr>
+      <td>dictionary  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></td>
+      <td>Weak password dictionary lookup settings</td>
+      <td><a href="#WeakPasswordDictionaryObject">Weak Password Dictionary Object</a></td>
+      <td>No</td>
+      <td>N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="WeakPasswordDictionaryObject">Weak Password Dictionary Object</h6>
+
+<blockquote>
+  <p>Weak password lookup is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature.</p>
+</blockquote>
+
+<p>Specifies how lookups for weak passwords are done. Designed to be extensible with multiple possible dictionary types against which to do lookups.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>common</td>
+      <td>Lookup settings for commonly used passwords</td>
+      <td><a href="#CommonPasswordLookupObject">Common Password Lookup Object</a></td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Common Password Lookup Object</p>
+
+<table id="CommonPasswordLookupObject">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Data Type</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>exclude</td>
+      <td>Indicates whether to check passwords against common password dictionary</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -2033,8 +2090,8 @@ Note that Okta sign on policy is not the same thing as application sign on polic
   <tbody>
     <tr>
       <td>status</td>
-      <td>Indicates if the factor is enabled.  This property is read-only</td>
-      <td><code class="highlighter-rouge">ACTIVE</code></td>
+      <td>Indicates if the factor is enabled.</td>
+      <td><code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">INACTIVE</code> (EA)</td>
       <td>Yes</td>
     </tr>
     <tr>
@@ -2110,7 +2167,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
     </tr>
     <tr>
       <td>properties</td>
-      <td>sConfiguration ettings for okta email factor</td>
+      <td>Configuration settings for okta email factor</td>
       <td><a href="#EmailFactorPropertiesObject">Email Factor Properties Object</a></td>
       <td>No</td>
     </tr>
@@ -2233,11 +2290,11 @@ Note that Okta sign on policy is not the same thing as application sign on polic
 
 <p><a href="#PeopleObject">People Condition</a></p>
 
-<p><a href="#AuthProviderConditionObject">Authentication Povider Condition</a></p>
+<p><a href="#AuthProviderConditionObject">Authentication Provider Condition</a></p>
 
 <h3 id="password-rules-action-data">Password Rules Action Data</h3>
 
-<h4 id="passsword-actions-example">Passsword Actions Example</h4>
+<h4 id="password-actions-example">Password Actions Example</h4>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="s2">"actions"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"passwordChange"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">

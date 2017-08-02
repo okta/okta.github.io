@@ -214,11 +214,11 @@ Learn about these and other improvements in [the GitHub repository](https://gith
 <p>Response Example:</p>
 
 <div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="o">{</span>
-    <span class="s2">"issuer"</span>: <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com"</span>,
-    <span class="s2">"authorization_endpoint"</span>: <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/authorize"</span>,
-    <span class="s2">"token_endpoint"</span>: <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/token"</span>,
-    <span class="s2">"userinfo_endpoint"</span>: <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/userinfo"</span>,
-    <span class="s2">"jwks_uri"</span>: <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/keys"</span>,
+    <span class="s2">"issuer"</span>: <span class="s2">"https://{yourOktaDomain}.com"</span>,
+    <span class="s2">"authorization_endpoint"</span>: <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/authorize"</span>,
+    <span class="s2">"token_endpoint"</span>: <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/token"</span>,
+    <span class="s2">"userinfo_endpoint"</span>: <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/userinfo"</span>,
+    <span class="s2">"jwks_uri"</span>: <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/keys"</span>,
     <span class="s2">"response_types_supported"</span>: <span class="o">[</span>
         <span class="s2">"code"</span>,
         <span class="s2">"code id_token"</span>,
@@ -228,13 +228,13 @@ Learn about these and other improvements in [the GitHub repository](https://gith
         <span class="s2">"token"</span>
     <span class="o">]</span>,
     ...
-    <span class="s2">"introspection_endpoint"</span>: <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/introspect"</span>,
+    <span class="s2">"introspection_endpoint"</span>: <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/introspect"</span>,
     <span class="s2">"introspection_endpoint_auth_methods_supported"</span>: <span class="o">[</span>
         <span class="s2">"client_secret_basic"</span>,
         <span class="s2">"client_secret_post"</span>,
         <span class="s2">"none"</span>
     <span class="o">]</span>,
-    <span class="s2">"revocation_endpoint"</span>: <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/oauth2/v1/revoke"</span>,
+    <span class="s2">"revocation_endpoint"</span>: <span class="s2">"https://{yourOktaDomain}.com/oauth2/v1/revoke"</span>,
     <span class="s2">"revocation_endpoint_auth_methods_supported"</span>: <span class="o">[</span>
         <span class="s2">"client_secret_basic"</span>,
         <span class="s2">"client_secret_post"</span>,

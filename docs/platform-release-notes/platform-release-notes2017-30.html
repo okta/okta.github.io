@@ -41,14 +41,14 @@
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>API Access Management | Okta Developer</title>
-  <meta name="description" content="Secure your APIs with Okta's implementation of the OAuth 2.0 standard.">
-  <link rel="canonical" href="https://developer.okta.com/use_cases/api_access_management/index">
+  <title>Platform Release Notes | Okta Developer</title>
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.29">
+  <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes2017-30.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page api-access-management">
+  <div class="Page platform-release-notes">
     <!-- START Header -->
     
 <header id="header">
@@ -117,7 +117,7 @@
             <li>
               <a href="/use_cases/mfa/">Multi-Factor Authentication</a>
             </li>
-            <li class="is-active">
+            <li>
               <a href="/use_cases/api_access_management/">API Access Management</a>
             </li>
             <li>
@@ -141,7 +141,7 @@
             <li>
               <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
-            <li>
+            <li class="is-active">
               <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
             </li>
           </ul>
@@ -187,95 +187,81 @@
 <!-- END Fixed sidebar -->
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
-        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_use_cases/api_access_management/index.md">Edit Page</a>
-      <h2 id="api-access-management-with-okta">API Access Management with Okta</h2>
+        <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes2017-30.md">Edit Page</a>
+      <h2 id="release-201730">Release 2017.30</h2>
 
-<p>Use API Access Management, Okta’s implementation of the OAuth 2.0 standard, to secure your APIs.
-API Access Management is integrated with Okta’s implementation of OpenID Connect for authentication;
-OpenID Connect is also available separately. Similarly, Okta provides a client management API
-for onboarding, monitoring, and deprovisioning client apps.</p>
+<h3 id="platform-features">Platform Features</h3>
 
-<p>API Access Management is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
-
-<h2 id="oauth-20-and-openid-connect">OAuth 2.0 and OpenID Connect</h2>
-
-<p>When do you use API Access Management and when do you use OpenID Connect?</p>
-
-<h2 id="simple-use-cases">Simple Use Cases</h2>
-
-<p>In general, use OpenID Connect to sign users into apps, and use API Access Management to secure your APIs: 
-create one or more Custom Authorization Servers, define scopes and claims, and create policies and rules to determine who can access your API resources.</p>
-
-<p>For example:</p>
+<p>These platform features are GA in preview orgs (as of Release 2017.28), and expected to roll out as GA to production orgs during the week of August 7, 2017:</p>
 
 <ul>
-  <li>Use Case 1 (API Access Management): You need to control API access for a variety of consumers: vendors, employees, and customers, for example.</li>
-  <li>Use Case 2 (OpenID Connect): You want users to sign into your custom web application to access their account.</li>
+  <li>
+    <p><a href="#openid-connect---">OpenID Connect</a></p>
+  </li>
+  <li>
+    <p><a href="#key-rollover----">Key Rollover</a></p>
+  </li>
 </ul>
 
-<h2 id="complex-use-cases">Complex Use Cases</h2>
-
-<p>You can also specify authorization servers in your OpenID Connect API calls. 
-Every OpenID resource is also available in a version that lets you specify an authorization server that you created in Okta.
-See <a href="#oauth-20-and-openid-connect">OAuth 2.0 and OpenID Connect</a> for details.</p>
-
-<h1 id="benefits-of-api-access-management">Benefits of API Access Management</h1>
-
-<p>Centralizing the management of your APIs makes it easier for others to consume your API resources.
-Using Okta’s OAuth-as-a-Service feature, API Access Management, provides many benefits:</p>
+<p>This platform feature enhancement is EA in preview orgs with this release and expected in production orgs the week of July 31, 2017. To enable an EA feature, contact Okta Support.</p>
 
 <ul>
-  <li>Create one or more <a href="/standards/OAuth/index.html#authorization-servers">Custom Authorization Servers</a>, hosted on Okta. Custom Authorization Servers make it easier to manage sets of API access for multiple client apps across many customer types.</li>
-  <li>Create custom scopes and claims. Map your claims to the profiles in your user directory.</li>
-  <li>Tokens are passed instead of credentials. In addition, the JWT tokens carry payloads for user context.</li>
-  <li>Stay protected with security standards compliance.</li>
-  <li>Manage API access with rules. Specifying the conditions under which actions are taken gives you precise and confident control over your APIs.</li>
-  <li>Control complex business requirements with polices and rules. You control the ordering and relationships.</li>
-  <li>Enjoy the highest quality, always-available API Access Management.</li>
-  <li>Let Okta do the work of consuming standards changes to provide more or better services.</li>
+  <li><a href="#email-for-two-factor-authentication--">Email for Two-Factor Authentication</a></li>
 </ul>
 
-<blockquote>
-  <p>Note: In some places we have implemented stricter requirements or behaviors for additional security.</p>
-</blockquote>
+<p>For information about Early Access (EA) and General Availability (GA), see <a href="https://developer.okta.com/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>.</p>
 
-<h1 id="putting-the-pieces-together">Putting the Pieces Together</h1>
+<h4 id="openid-connect---">OpenID Connect   <!-- OKTA-132049  --></h4>
 
-<p>The following is a high-level look at the basic components of API Access Management. 
-We use the same terms as the OpenID Connect and OAuth 2.0 spec. For complete explanations, read those specs.</p>
+<p><a href="/docs/api/resources/oidc.html">OpenID Connect</a> is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
 
-<h2 id="tokens-and-scopes">Tokens and Scopes</h2>
+<p>OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.</p>
 
-<p>The two biggest security benefits of OAuth are using tokens instead of passing credentials and restricting the scope of tokens. 
-Both of these measures go a long way toward mitigating the impact of a security compromise.</p>
+<p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a>. For more information, see <a href="/standards/OIDC/">OpenID Connect and Okta</a>.</p>
+
+<h4 id="key-rollover----">Key Rollover    <!-- OKTA-132045  --></h4>
+
+<p>We provide the ability to generate a certificate with specified validity period (see the <a href="/docs/api/resources/apps.html">Apps API</a> and <a href="/docs/api/resources/idps.html">Identity Providers API</a>). We build OpenID Connect and API Access Management on this feature.</p>
+
+<h4 id="email-for-two-factor-authentication--">Email for Two-Factor Authentication  <!-- OKTA-134593  --></h4>
+
+<p>You can enroll a user with an email factor. See <a href="/docs/api/resources/factors.html#enroll-okta-email-factor">Enroll Okta Email Factor</a> for details.</p>
+
+<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
+
+<p>These platform bug fixes are in preview orgs with this release and expected in production orgs the week of July 31, 2017.</p>
 
 <ul>
-  <li>Sending usernames and passwords around is like putting all of your eggs in one basket. By using credentials to obtain a token, 
-  if someone gains access to the token, they may be able to use it for a short time, but they haven’t compromised the user’s identity.</li>
-  <li>Controlling what a token is entitled to access further limits damage in case of compromise. For example, scoping a token for shoppers 
-  on a web site, and not allowing them access to change prices, provides significant mitigation.</li>
+  <li>
+    <p>Under some circumstances users who did not have a secondary email address could not perform a self-service password reset operation.   (OKTA-128340)</p>
+  </li>
+  <li>
+    <p>“When the <code class="highlighter-rouge">expand</code> parameter was set in GET requests to <a href="/docs/api/resources/groups.html#list-groups"><code class="highlighter-rouge">/api/v1/groups</code></a>, the second and subsequent pages of the response did not have the same <code class="highlighter-rouge">expand</code> setting.  (OKTA-132503)</p>
+  </li>
+  <li>
+    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> returned HTTP status code 200 rather than 201 when creating a client successfully.  (OKTA-128839)</p>
+  </li>
+  <li>
+    <p><a href="/docs/api/resources/oauth2.html#create-authorization-server"><code class="highlighter-rouge">/api/v1/authorizationServers</code></a> returned HTTP status code 200 rather than 201 when creating an Authorization Server successfully.  (OKTA-128839)</p>
+  </li>
+  <li>
+    <p><a href="/docs/api/resources/oauth-clients.html#get-oauth-client"><code class="highlighter-rouge">/oauth2/v1/clients/{clientId}</code></a> returned HTTP status code 404 rather than 401 when it did not find the specified client.  (OKTA-130804, OKTA-130848)</p>
+  </li>
 </ul>
 
-<p>Okta helps you manage ID Tokens (OpenID Connect) and Access Tokens (OAuth 2.0).</p>
+<h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 
-<h2 id="custom-claims">Custom Claims</h2>
+<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
 
-<p>The JWT extension to the OAuth Framework lets you include custom claims in ID and Access Tokens. 
-You can design tokens to disclose the information you want to share depending on the client and the scope of the tokens.
-For example, a shopping site might have one set of claims for customers while they browse, but another claim for admin functions
-like changing their personal information.</p>
+<p><img src="/assets/release_notes/version_footer-6199e00ca76969eed4036e964a53b5598571c5cafe797a4890f152ce68dce49b.png" alt="Release Number in Footer" /></p>
 
-<p>Custom claims also help you by reducing the number of lookup calls required to retrieve user information from the identity provider (IdP).
-This benefit depends, of course, on the level of security your apps require.</p>
-
-<h1 id="getting-started-with-api-access-management">Getting Started with API Access Management</h1>
+<h3 id="looking-for-something-else">Looking for Something Else?</h3>
 
 <ul>
-  <li><a href="/standards/OAuth/index.html">Learn more</a> about Okta and OAuth 2.0.</li>
-  <li><a href="https://help.okta.com/en/prev/Content/Topics/Security/API_Access.htm">Set up a custom authorization server</a> and use the power of Okta’s API Access Management.</li>
-  <li>Visit <a href="/docs/api/resources/oauth2.html">the API Access Management endpoint documentation</a> and start building your integration today.</li>
-  <li>For simpler use cases focused on SSO, visit <a href="/docs/api/resources/oidc.html">the OpenID Connect documentation</a>.</li>
+  <li><a href="platform-release-notes2016-index.html">Platform Release Note Index</a></li>
+  <li>For changes outside the Okta platform, see the <a href="https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm">Product Release Notes</a>.</li>
 </ul>
+
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

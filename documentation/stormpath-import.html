@@ -201,7 +201,7 @@
 <ul>
   <li>A decompressed local copy of the data you <a href="https://stormpath.com/export">exported from Stormpath</a></li>
   <li>An Okta account which you can sign-up for here: <a href="https://www.okta.com/developer/signup/stormpath/">https://www.okta.com/developer/signup/stormpath/</a></li>
-  <li>The URL for your new Okta org (for example: https://dev-884792.oktapreview.com)</li>
+  <li>The URL for your new Okta org (for example: https://{yourOktaDomain}.com)</li>
   <li>An Okta API token: <a href="/docs/api/getting_started/getting_a_token.html">Instructions</a></li>
 </ul>
 
@@ -292,7 +292,7 @@
 <p><a name="run"></a></p>
 <h4 id="run">Run</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://your-org.okta.com --oktaApiToken yourApiToken
+<div class="highlighter-rouge"><pre class="highlight"><code>import-stormpath --stormPathBaseDir /path/to/export/data --oktaBaseUrl https://{yourOktaDomain}.com --oktaApiToken yourApiToken
 </code></pre>
 </div>
 
@@ -315,7 +315,7 @@
     <p><code class="highlighter-rouge">--oktaBaseUrl (-u)</code>: Base URL of your Okta tenant</p>
 
     <ul>
-      <li>Example: <code class="highlighter-rouge">--oktaBaseUrl https://your-org.oktapreview.com</code></li>
+      <li>Example: <code class="highlighter-rouge">--oktaBaseUrl https://{yourOktaDomain}.com</code></li>
     </ul>
   </li>
   <li>

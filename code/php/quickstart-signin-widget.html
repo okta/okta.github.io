@@ -211,9 +211,7 @@ Account</strong></li>
 <p>After your are finished creating your account, you will be logged into your new organization. In the top right of the
  screen, there is an <strong>Admin</strong> button.
 Clicking on the <strong>Admin</strong> button will take you to your Okta Administration Dashboard and this is where we’ll be
-spending
-most of our time during this guide. For the remainder of this quickstart, we’re going to assume the domain for your
-organization will be <code class="highlighter-rouge">dev-123456.oktapreview.com</code>. For your application, you’ll want to change this url to match your own organizations url.</p>
+spending most of our time during this guide.</p>
 
 <h2 id="enable-cors-for-your-domain">Enable CORS for your Domain</h2>
 <p>This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.</p>
@@ -397,14 +395,14 @@ to be rendered..</p>
 <p>We also need to add a script block to initialize and configure the widget.</p>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
-    <span class="kd">var</span> <span class="nx">orgUrl</span> <span class="o">=</span> <span class="s1">'https://dev-123456.oktapreview.com'</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">orgUrl</span> <span class="o">=</span> <span class="s1">'https://{yourOktaDomain}.com'</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">signIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
         <span class="na">baseUrl</span><span class="p">:</span> <span class="nx">orgUrl</span><span class="p">,</span>
         <span class="na">clientId</span><span class="p">:</span> <span class="s1">'sRmBpCfR3xKyf4goHZhM'</span><span class="p">,</span>
         <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:8000/oauth2-callback.php'</span><span class="p">,</span>
         <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
             <span class="na">responseType</span><span class="p">:</span> <span class="s1">'code'</span><span class="p">,</span>
-            <span class="na">issuer</span><span class="p">:</span> <span class="s1">'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7'</span><span class="p">,</span>
+            <span class="na">issuer</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}'</span><span class="p">,</span>
             <span class="na">display</span><span class="p">:</span> <span class="s1">'page'</span>
         <span class="p">}</span>
     <span class="p">});</span>
@@ -427,7 +425,7 @@ to be rendered..</p>
   <tbody>
     <tr>
       <td>baseUrl</td>
-      <td>This is your Organization URL in Okta. It will be the URL of the admin pages without the <strong>-admin</strong> for example <code class="highlighter-rouge">https://dev-123456.oktapreview.com</code></td>
+      <td>This is your Organization URL in Okta. It will be the URL of the admin pages without the <strong>-admin</strong> for example <code class="highlighter-rouge">https://{yourOktaDomain}.com</code></td>
     </tr>
     <tr>
       <td>clientId</td>
@@ -475,7 +473,7 @@ $headers = [
     'Connection: close',
     'Content-Length: 0'
 ];
-$url = 'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7/v1/token?' . $query;
+$url = 'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/token?' . $query;
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -521,7 +519,7 @@ algorithm specified in the JWT <code class="highlighter-rouge">alg</code> header
   <li>Verify that the expiry time (from the <code class="highlighter-rouge">exp</code> claim) has not already passed.</li>
 </ol>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code>if($res-&gt;claims['iss'] != 'https://dev-123456.oktapreview.com/') {
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>if($res-&gt;claims['iss'] != 'https://{yourOktaDomain}.com/') {
     return $response-&gt;withStatus(401);
 }
 
@@ -548,7 +546,7 @@ if($res-&gt;claims['exp'] <span class="nt">&lt; time</span><span class="err">()<
 else {
 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7/v1/keys');
+    curl_setopt($ch, CURLOPT_URL, 'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/keys');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HEADER, 0);
 

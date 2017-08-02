@@ -42,7 +42,7 @@
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.29">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.30">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -188,30 +188,50 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201730">Release 2017.30</h2>
+      <h2 id="release-201731">Release 2017.31</h2>
 
-<h3 id="platform-features">Platform Features</h3>
+<h3 id="platform-feature-enhancements">Platform Feature Enhancements</h3>
 
-<p>These platform features are GA in preview orgs (as of Release 2017.28), and expected to roll out as GA to production orgs during the week of August 7, 2017:</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Feature Enhancement</th>
+      <th style="text-align: left">Expected in Preview Orgs</th>
+      <th style="text-align: left">Expected in Production Orgs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">                 <a href="#openid-connect">OpenID Connect</a></td>
+      <td style="text-align: left">Generally Available now</td>
+      <td style="text-align: left">Generally Available beginning 8/7/2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">           <a href="#key-rollover">Key Rollover</a></td>
+      <td style="text-align: left">Generally Available now</td>
+      <td style="text-align: left">Generally Available beginning 8/7/2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">           <a href="#email-for-two-factor-authentication">Email for Two-Factor Authentication</a></td>
+      <td style="text-align: left">Early Access by 8/3/2017</td>
+      <td style="text-align: left">Early Access beginning 8/7/2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">       <a href="#sha-256-signed-certificates-for-new-saml-20-apps">SHA-256 Signed Certificates for New SAML 2.0 Apps</a></td>
+      <td style="text-align: left">Generally Available by 8/3/2017</td>
+      <td style="text-align: left">Generally Available beginning 9/11/2017</td>
+    </tr>
+  </tbody>
+</table>
 
-<ul>
-  <li>
-    <p><a href="#openid-connect---">OpenID Connect</a></p>
-  </li>
-  <li>
-    <p><a href="#key-rollover----">Key Rollover</a></p>
-  </li>
-</ul>
+<p>To enable an Early Availability (EA) feature, contact Okta Support. For more information, see <a href="https://developer.okta.com/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>.</p>
 
-<p>This platform feature enhancement is EA in preview orgs with this release and expected in production orgs the week of July 31, 2017. To enable an EA feature, contact Okta Support.</p>
+<blockquote>
+  <p>A <a href="#new-version-of-the-sign-in-widget">new version of the Sign-In Widget</a> is available now for all orgs.</p>
+</blockquote>
 
-<ul>
-  <li><a href="#email-for-two-factor-authentication--">Email for Two-Factor Authentication</a></li>
-</ul>
-
-<p>For information about Early Access (EA) and General Availability (GA), see <a href="https://developer.okta.com/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>.</p>
-
-<h4 id="openid-connect---">OpenID Connect   <!-- OKTA-132049  --></h4>
+<h4 id="openid-connect">OpenID Connect</h4>
+<!-- OKTA-132049  -->
 
 <p><a href="/docs/api/resources/oidc.html">OpenID Connect</a> is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
 
@@ -219,35 +239,24 @@
 
 <p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a>. For more information, see <a href="/standards/OIDC/">OpenID Connect and Okta</a>.</p>
 
-<h4 id="key-rollover----">Key Rollover    <!-- OKTA-132045  --></h4>
+<h4 id="key-rollover">Key Rollover</h4>
+<!-- OKTA-132045  -->
 
-<p>We provide the ability to generate a certificate with specified validity period (see the <a href="/docs/api/resources/apps.html">Apps API</a> and <a href="/docs/api/resources/idps.html">Identity Providers API</a>). We build OpenID Connect and API Access Management on this feature.</p>
+<p>We provide the ability to generate a certificate with a specified validity period for the <a href="/docs/api/resources/apps.html">Apps API</a> and <a href="/docs/api/resources/idps.html">Identity Providers API</a>.</p>
 
-<h4 id="email-for-two-factor-authentication--">Email for Two-Factor Authentication  <!-- OKTA-134593  --></h4>
+<h4 id="sha-256-signed-certificates-for-new-saml-20-apps">SHA-256 Signed Certificates for New SAML 2.0 Apps</h4>
+
+<p>All new SAML 2.0 apps are bootstrapped with SHA-256 signed public certificates. Existing SAML 2.0 apps are unchanged.</p>
+
+<h4 id="email-for-two-factor-authentication">Email for Two-Factor Authentication</h4>
+<!-- OKTA-134593  -->
 
 <p>You can enroll a user with an email factor. See <a href="/docs/api/resources/factors.html#enroll-okta-email-factor">Enroll Okta Email Factor</a> for details.</p>
 
-<h3 id="platform-bugs-fixed">Platform Bugs Fixed</h3>
+<h3 id="new-version-of-the-sign-in-widget">New Version of the Sign-In Widget</h3>
+<!-- (OKTA-132800) -->
 
-<p>These platform bug fixes are in preview orgs with this release and expected in production orgs the week of July 31, 2017.</p>
-
-<ul>
-  <li>
-    <p>Under some circumstances users who did not have a secondary email address could not perform a self-service password reset operation.   (OKTA-128340)</p>
-  </li>
-  <li>
-    <p>“When the <code class="highlighter-rouge">expand</code> parameter was set in GET requests to <a href="/docs/api/resources/groups.html#list-groups"><code class="highlighter-rouge">/api/v1/groups</code></a>, the second and subsequent pages of the response did not have the same <code class="highlighter-rouge">expand</code> setting.  (OKTA-132503)</p>
-  </li>
-  <li>
-    <p><a href="/docs/api/resources/oauth-clients.html#register-new-client"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> returned HTTP status code 200 rather than 201 when creating a client successfully.  (OKTA-128839)</p>
-  </li>
-  <li>
-    <p><a href="/docs/api/resources/oauth2.html#create-authorization-server"><code class="highlighter-rouge">/api/v1/authorizationServers</code></a> returned HTTP status code 200 rather than 201 when creating an Authorization Server successfully.  (OKTA-128839)</p>
-  </li>
-  <li>
-    <p><a href="/docs/api/resources/oauth-clients.html#get-oauth-client"><code class="highlighter-rouge">/oauth2/v1/clients/{clientId}</code></a> returned HTTP status code 404 rather than 401 when it did not find the specified client.  (OKTA-130804, OKTA-130848)</p>
-  </li>
-</ul>
+<p>Version 2.1.0 of the Okta Sign-In Widget is available on <a href="https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-2.1.0">GitHub</a> or <a href="https://www.npmjs.com/package/@okta/okta-signin-widget">NPM</a>. Check out the new features and bug fixes!</p>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 

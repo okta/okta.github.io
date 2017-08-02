@@ -217,7 +217,7 @@
   <p>If you need a quick and easy SAML Identity Provider to use for testing purposes, you can try using this one: <a href="https://github.com/mcguinness/saml-idp">https://github.com/mcguinness/saml-idp</a></p>
 </blockquote>
 
-<p>Once you are done with the configuration, take note of the value at the end of your Assertion Consumer Service (ACS) URL, this is your Okta SAML IdP’s <code class="highlighter-rouge">id</code> value. For example: If your ACS URL is <code class="highlighter-rouge">https://example.okta.com/sso/saml2/0oab8rlfooi5Atqv60h7</code>, then your Okta IdP’s <code class="highlighter-rouge">id</code> is <code class="highlighter-rouge">0oab8rlfooi5Atqv60h7</code>.</p>
+<p>Once you are done with the configuration, take note of the value at the end of your Assertion Consumer Service (ACS) URL, this is your Okta SAML IdP’s <code class="highlighter-rouge">id</code> value. For example: If your ACS URL is <code class="highlighter-rouge">https://{yourOktaDomain}.com/sso/saml2/0oab8rlfooi5Atqv60h7</code>, then your Okta IdP’s <code class="highlighter-rouge">id</code> is <code class="highlighter-rouge">0oab8rlfooi5Atqv60h7</code>.</p>
 
 <h3 id="2-configure-an-openid-connect-client-application">2. Configure an OpenID Connect Client Application</h3>
 
@@ -238,7 +238,7 @@
 
 <p>The authorize URL looks like this:</p>
 
-<p><code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&amp;client_id=0oab8om4bars6Y80Z0h7&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=http%3A%2F%2Flocalhost%3A7000&amp;state=WM6D&amp;nonce=YsG76j</code></p>
+<p><code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&amp;client_id=0oab8om4bars6Y80Z0h7&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=http%3A%2F%2Flocalhost%3A7000&amp;state=WM6D&amp;nonce=YsG76j</code></p>
 
 <p>In this URL, replace <code class="highlighter-rouge">example.okta.com</code> with your org’s base URL, and then input the following:</p>
 

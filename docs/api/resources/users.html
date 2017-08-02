@@ -408,7 +408,7 @@ This is the default flow for new user registration with the Okta Admin UI.</p>
     "login": "isaac.brock@example.com",
     "mobilePhone": "555-415-1337"
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?activate=false"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users?activate=false"</span>
 </code></pre>
 </div>
 
@@ -438,7 +438,7 @@ This is the default flow for new user registration with the Okta Admin UI.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -472,7 +472,7 @@ This flow is useful if migrating users from an existing user store.</p>
       "answer": "Annie Oakley"
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?activate=false"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users?activate=false"</span>
 </code></pre>
 </div>
 
@@ -505,7 +505,7 @@ This flow is useful if migrating users from an existing user store.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -540,7 +540,7 @@ This flow is common when developing a custom user registration experience.</p>
   "credentials": {
     "password" : { "value": "tlpWENT2m" }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?activate=false"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users?activate=false"</span>
 </code></pre>
 </div>
 
@@ -571,7 +571,7 @@ This flow is common when developing a custom user registration experience.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -610,7 +610,7 @@ This flow is common when developing a custom user-registration experience.</p>
       "answer": "Annie Oakley"
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?activate=false"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users?activate=false"</span>
 </code></pre>
 </div>
 
@@ -644,7 +644,7 @@ This flow is common when developing a custom user-registration experience.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -675,7 +675,7 @@ This flow is common when developing a custom user-registration experience.</p>
       "name": "FEDERATION"
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?provider=true"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users?provider=true"</span>
 </code></pre>
 </div>
 
@@ -706,15 +706,15 @@ This flow is common when developing a custom user-registration experience.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/reset_password"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/reset_password"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/credentials/change_recovery_question"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00uijntSwJjSHtDY70g3/credentials/change_recovery_question"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00uijntSwJjSHtDY70g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"POST"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -746,7 +746,7 @@ This flow is common when developing a custom user-registration experience.</p>
     "00g1emaKYZTWRYYRRTSK",
     "00garwpuyxHaWOkdV0g4"
   ]
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?activate=false"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users?activate=false"</span>
 </code></pre>
 </div>
 
@@ -776,7 +776,7 @@ This flow is common when developing a custom user-registration experience.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -858,7 +858,7 @@ This flow is common when developing a custom user-registration experience.</p>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/me"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/me"</span>
 </code></pre>
 </div>
 
@@ -892,25 +892,25 @@ This flow is common when developing a custom user-registration experience.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -931,7 +931,7 @@ This flow is common when developing a custom user-registration experience.</p>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
 </code></pre>
 </div>
 
@@ -965,25 +965,25 @@ This flow is common when developing a custom user-registration experience.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1003,7 +1003,7 @@ Logins with a <code class="highlighter-rouge">/</code> character can only be fet
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/isaac.brock@example.com"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/isaac.brock@example.com"</span>
 </code></pre>
 </div>
 
@@ -1037,25 +1037,25 @@ Logins with a <code class="highlighter-rouge">/</code> character can only be fet
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1075,7 +1075,7 @@ Logins with a <code class="highlighter-rouge">/</code> character can only be fet
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/isaac.brock"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/isaac.brock"</span>
 </code></pre>
 </div>
 
@@ -1109,25 +1109,25 @@ Logins with a <code class="highlighter-rouge">/</code> character can only be fet
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1228,7 +1228,7 @@ Logins with a <code class="highlighter-rouge">/</code> character can only be fet
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?limit=200"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users?limit=200"</span>
 </code></pre>
 </div>
 
@@ -1236,8 +1236,8 @@ Logins with a <code class="highlighter-rouge">/</code> character can only be fet
 
 <div class="language-http highlighter-rouge"><pre class="highlight"><code><span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/users?limit=200&gt;; rel="self"</span>
-<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://your-domain.okta.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&amp;limit=200&gt;; rel="next"</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://{yourOktaDomain}.com/api/v1/users?limit=200&gt;; rel="self"</span>
+<span class="na">Link</span><span class="p">:</span> <span class="s">&lt;https://{yourOktaDomain}.com/api/v1/users?after=00ud4tVDDXYVKPXKVLCO&amp;limit=200&gt;; rel="next"</span>
 
 <span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -1264,7 +1264,7 @@ Logins with a <code class="highlighter-rouge">/</code> character can only be fet
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">},</span><span class="w">
@@ -1297,7 +1297,7 @@ Logins with a <code class="highlighter-rouge">/</code> character can only be fet
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1326,7 +1326,7 @@ The value of <code class="highlighter-rouge">q</code> is matched against <code c
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?q=eric&amp;limit=1"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users?q=eric&amp;limit=1"</span>
 </code></pre>
 </div>
 
@@ -1362,7 +1362,7 @@ The value of <code class="highlighter-rouge">q</code> is matched against <code c
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1498,7 +1498,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?filter=status+eq+</span><span class="se">\"</span><span class="s2">ACTIVE</span><span class="se">\"</span><span class="s2">+or+status+eq+</span><span class="se">\"</span><span class="s2">RECOVERY</span><span class="se">\"</span><span class="s2">"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users?filter=status+eq+</span><span class="se">\"</span><span class="s2">ACTIVE</span><span class="se">\"</span><span class="s2">+or+status+eq+</span><span class="se">\"</span><span class="s2">RECOVERY</span><span class="se">\"</span><span class="s2">"</span>
 </code></pre>
 </div>
 
@@ -1534,7 +1534,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1552,7 +1552,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?filter=lastUpdated+gt+</span><span class="se">\"</span><span class="s2">2013-07-01T00:00:00.000Z</span><span class="se">\"</span><span class="s2">"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users?filter=lastUpdated+gt+</span><span class="se">\"</span><span class="s2">2013-07-01T00:00:00.000Z</span><span class="se">\"</span><span class="s2">"</span>
 </code></pre>
 </div>
 
@@ -1588,7 +1588,7 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1677,7 +1677,7 @@ Use an Id lookup for records that you update to ensure your results contain the 
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?search=profile.mobilePhone+sw+</span><span class="se">\"</span><span class="s2">555</span><span class="se">\"</span><span class="s2">+and+status+eq+</span><span class="se">\"</span><span class="s2">ACTIVE</span><span class="se">\"</span><span class="s2">"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users?search=profile.mobilePhone+sw+</span><span class="se">\"</span><span class="s2">555</span><span class="se">\"</span><span class="s2">+and+status+eq+</span><span class="se">\"</span><span class="s2">ACTIVE</span><span class="se">\"</span><span class="s2">"</span>
 </code></pre>
 </div>
 
@@ -1712,7 +1712,7 @@ Use an Id lookup for records that you update to ensure your results contain the 
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1738,7 +1738,7 @@ For examples, see <a href="#request-example-for-array">Request Example for Array
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users?search=profile.arrayAttr+eq+</span><span class="se">\"</span><span class="s2">arrayAttrVal1</span><span class="se">\"</span><span class="s2"> "</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users?search=profile.arrayAttr+eq+</span><span class="se">\"</span><span class="s2">arrayAttrVal1</span><span class="se">\"</span><span class="s2"> "</span>
 </code></pre>
 </div>
 
@@ -1790,7 +1790,7 @@ For examples, see <a href="#request-example-for-array">Request Example for Array
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/users/00u19uiKQa0xXkbdGLNR"</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00u19uiKQa0xXkbdGLNR"</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1925,7 +1925,7 @@ in the request is deleted.</p>
     "login": "isaac.brock@example.com",
     "mobilePhone": "555-415-1337"
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
 </code></pre>
 </div>
 
@@ -1959,25 +1959,25 @@ in the request is deleted.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2000,7 +2000,7 @@ in the request is deleted.</p>
   "credentials": {
     "password" : { "value": "uTVM,TPw55" }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
 </code></pre>
 </div>
 
@@ -2034,25 +2034,25 @@ in the request is deleted.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2078,7 +2078,7 @@ in the request is deleted.</p>
       "answer": "forty two"
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
 </code></pre>
 </div>
 
@@ -2112,25 +2112,25 @@ in the request is deleted.</p>
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -2178,7 +2178,7 @@ in the request is deleted.</p>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/appLinks"</span>
 </code></pre>
 </div>
 
@@ -2188,8 +2188,8 @@ in the request is deleted.</p>
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google Apps Mail"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"linkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/50"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/img/logos/google-mail.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"linkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/home/google/0oa3omz2i9XRNSRIHBZO/50"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/img/logos/google-mail.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"google"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appInstanceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa3omz2i9XRNSRIHBZO"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appAssignmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0ua3omz7weMMMQJERBKY"</span><span class="p">,</span><span class="w">
@@ -2200,8 +2200,8 @@ in the request is deleted.</p>
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Google Apps Calendar"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"linkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/home/google/0oa3omz2i9XRNSRIHBZO/54"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/img/logos/google-calendar.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"linkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/home/google/0oa3omz2i9XRNSRIHBZO/54"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/img/logos/google-calendar.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"google"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appInstanceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa3omz2i9XRNSRIHBZO"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appAssignmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0ua3omz7weMMMQJERBKY"</span><span class="p">,</span><span class="w">
@@ -2212,8 +2212,8 @@ in the request is deleted.</p>
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Box"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"linkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/img/logos/box.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"linkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/home/boxnet/0oa3ompioiQCSTOYXVBK/72"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/img/logos/box.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boxnet"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appInstanceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa3ompioiQCSTOYXVBK"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appAssignmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0ua3omx46lYEZLPPRWBO"</span><span class="p">,</span><span class="w">
@@ -2224,8 +2224,8 @@ in the request is deleted.</p>
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00ub0oNGTSWTBKOLGLNR"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salesforce.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"linkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/img/logos/salesforce_logo.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"linkUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/home/salesforce/0oa12ecnxtBQMKOXJSMF/46"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logoUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/img/logos/salesforce_logo.png"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"salesforce"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appInstanceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa12ecnxtBQMKOXJSMF"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"appAssignmentId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0ua173qgj5VAVOBQMCVB"</span><span class="p">,</span><span class="w">
@@ -2276,7 +2276,7 @@ in the request is deleted.</p>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/groups"</span>
 </code></pre>
 </div>
 
@@ -2363,7 +2363,7 @@ For example, you can’t unlock a user that is <code class="highlighter-rouge">A
 </ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"activationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2377,14 +2377,14 @@ For example, you can’t unlock a user that is <code class="highlighter-rouge">A
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/activate?sendEmail=false"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-20">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"activationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2441,7 +2441,7 @@ For example, you can’t unlock a user that is <code class="highlighter-rouge">A
 </ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"activationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2453,14 +2453,14 @@ For example, you can’t unlock a user that is <code class="highlighter-rouge">A
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reactivate?sendEmail=false"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reactivate?sendEmail=false"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-success">Response Example (Success)</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"activationUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/welcome/XE6wE17zmphl3KqAPFxO"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"activationToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2531,7 +2531,7 @@ For example, you can’t unlock a user that is <code class="highlighter-rouge">A
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span>
 </code></pre>
 </div>
 
@@ -2595,7 +2595,7 @@ For example, you can’t unlock a user that is <code class="highlighter-rouge">A
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/suspend"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/suspend"</span>
 </code></pre>
 </div>
 
@@ -2650,7 +2650,7 @@ Passing an <code class="highlighter-rouge">id</code> that is not in the <code cl
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unsuspend"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unsuspend"</span>
 </code></pre>
 </div>
 
@@ -2711,7 +2711,7 @@ is required to delete the user.</p>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR"</span>
 </code></pre>
 </div>
 
@@ -2769,7 +2769,7 @@ is required to delete the user.</p>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/unlock"</span>
 </code></pre>
 </div>
 
@@ -2838,7 +2838,7 @@ is required to delete the user.</p>
 </ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
+  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -2849,14 +2849,14 @@ is required to delete the user.</p>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?sendEmail=false"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-26">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
+  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -2870,7 +2870,7 @@ parameter must be false or omitted for this type of conversion.</p>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATED&amp;sendEmail=false"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATED&amp;sendEmail=false"</span>
 </code></pre>
 </div>
 
@@ -2943,7 +2943,7 @@ and the user is presented with the password-expired page where he or she can cha
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password?tempPassword=false"</span>
 </code></pre>
 </div>
 
@@ -2977,25 +2977,25 @@ and the user is presented with the password-expired page where he or she can cha
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -3043,7 +3043,7 @@ and the user is presented with the password-expired page where he or she can cha
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span>
 </code></pre>
 </div>
 
@@ -3109,7 +3109,7 @@ and the user is presented with the password-expired page where he or she can cha
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/</span><span class="k">${</span><span class="nv">userId</span><span class="k">}</span><span class="s2">/sessions"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/</span><span class="k">${</span><span class="nv">userId</span><span class="k">}</span><span class="s2">/sessions"</span>
 </code></pre>
 </div>
 
@@ -3177,7 +3177,7 @@ and the user is presented with the password-expired page where he or she can cha
 </ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
+  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -3190,14 +3190,14 @@ and the user is presented with the password-expired page where he or she can cha
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password?sendEmail=false"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password?sendEmail=false"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-31">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
+  </span><span class="nt">"resetPasswordUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/reset_password/XE6wE17zmphl3KqAPFxO"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
@@ -3264,7 +3264,7 @@ and the user is presented with the password-expired page where he or she can cha
 -d <span class="s1">'{
   "password": { "value": "uTVM,TPw55" },
   "recovery_question": { "answer": "Annie Oakley" }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span>
 </code></pre>
 </div>
 
@@ -3345,7 +3345,7 @@ and the user is presented with the password-expired page where he or she can cha
 -d <span class="s1">'{
   "oldPassword": { "value": "tlpWENT2m" },
   "newPassword": { "value": "uTVM,TPw55" }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span>
 </code></pre>
 </div>
 
@@ -3431,7 +3431,7 @@ and the user is presented with the password-expired page where he or she can cha
     "question": "How many roads must a man walk down?",
     "answer": "forty two"
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span>
 </code></pre>
 </div>
 
@@ -3502,25 +3502,25 @@ and the user is presented with the password-expired page where he or she can cha
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"resetPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"resetFactors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_factors"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"expirePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/expire_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"forgotPassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/forgot_password"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changeRecoveryQuestion"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_recovery_question"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/deactivate"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"changePassword"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://your-domain.okta.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/credentials/change_password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">

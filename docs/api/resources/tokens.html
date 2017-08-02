@@ -225,7 +225,7 @@
 
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Content-type:application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Accept:application/json"</span> <span class="se">\</span>
--X POST https://your-subdomain.okta.com/api/v1/tokens/ <span class="se">\</span>
+-X POST https://<span class="o">{</span>yourOktaDomain<span class="o">}</span>.com/api/v1/tokens/ <span class="se">\</span>
 -d <span class="se">\</span>
 <span class="s1">'{
   "username": "user8u3VOJBREVQHBTAS@asdf.com",
@@ -255,7 +255,7 @@
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Content-type:application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization:SSWS 00F-MBcxD2SC8tzXDCDZm2a04qtXLcFqtlrrPu6eVtxRs"</span> <span class="se">\</span>
 -H <span class="s2">"Accept:application/json"</span> <span class="se">\</span>
--X DELETE https://your-subdomain.okta.com/api/v1/tokens/
+-X DELETE https://<span class="o">{</span>yourOktaDomain<span class="o">}</span>.com/api/v1/tokens/
 </code></pre>
 </div>
 

@@ -228,7 +228,11 @@
 
 <p><a href="https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6" target="_blank"><img src="https://run.pstmn.io/button.svg" alt="Run in Postman" /></a></p>
 
-<p>See below for <a href="#examples">Examples</a> and more on how to use the System Log API.</p>
+<p>See <a href="#examples">Examples</a> for way you can use the System Log API.</p>
+
+<h2 id="data-retention">Data Retention</h2>
+
+<p>Log data older than 90 days is not returned, in accordance with Okta’s [Data Retention Policy}(https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).</p>
 
 <h2 id="examples">Examples</h2>
 
@@ -240,7 +244,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?q=Jane+Doe"
+"https://{yourOktaDomain}.com/api/v1/logs?q=Jane+Doe"
 </code></pre>
 </div>
 
@@ -251,7 +255,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
+"https://{yourOktaDomain}.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
 </code></pre>
 </div>
 
@@ -262,7 +266,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11"
+"https://{yourOktaDomain}.com/api/v1/logs?since=2017-03-11"
 </code></pre>
 </div>
 
@@ -442,7 +446,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
     </span><span class="nt">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f790999f-fe87-467a-9880-6982a583986c"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-31T22:23:07.777Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"published"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-05-31T22:23:07.777Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"eventType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user.session.start"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"displayMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User login to Okta"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1476,7 +1480,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
 </div>
 
 <p>For example:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;https://${org}.okta.com/api/v1/logs?q=&amp;sortOrder=DESCENDING&amp;limit=20&amp;until=2017-03-17T23%3A59%3A59%2B00%3A00&amp;since=2017-03-10T00%3A00%3A00%2B00%3A00&gt;; rel="self"
+<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;https://{yourOktaDomain}.com/api/v1/logs?q=&amp;sortOrder=DESCENDING&amp;limit=20&amp;until=2017-03-17T23%3A59%3A59%2B00%3A00&amp;since=2017-03-10T00%3A00%3A00%2B00%3A00&gt;; rel="self"
 </code></pre>
 </div>
 
@@ -1489,7 +1493,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
 </div>
 
 <p>For example:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;https://${org}.okta.com/api/v1/logs?q=&amp;sortOrder=DESCENDING&amp;limit=20&amp;until=2017-03-17T15%3A41%3A12.994Z&amp;after=349996bd-5091-45dc-a39f-d357867a30d7&amp;since=2017-03-10T00%3A00%3A00%2B00%3A00&gt;; rel="next"
+<div class="highlighter-rouge"><pre class="highlight"><code>Link: &lt;https://{yourOktaDomain}.com/api/v1/logs?q=&amp;sortOrder=DESCENDING&amp;limit=20&amp;until=2017-03-17T15%3A41%3A12.994Z&amp;after=349996bd-5091-45dc-a39f-d357867a30d7&amp;since=2017-03-10T00%3A00%3A00%2B00%3A00&gt;; rel="next"
 </code></pre>
 </div>
 

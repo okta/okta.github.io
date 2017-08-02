@@ -247,7 +247,7 @@
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/user/default"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"</span>
 </code></pre>
 </div>
 
@@ -256,7 +256,7 @@
 <p><em>The following response is only a subset of properties for brevity</em></p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default Okta User"</span><span class="p">,</span><span class="w">
@@ -418,7 +418,7 @@
       }
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/user/default"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"</span>
 </code></pre>
 </div>
 
@@ -427,7 +427,7 @@
 <p><em>The following response is only a subset of properties for brevity</em></p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default Okta User"</span><span class="p">,</span><span class="w">
@@ -603,7 +603,7 @@
       }
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/user/default"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"</span>
 </code></pre>
 </div>
 
@@ -612,7 +612,7 @@
 <p><em>The following response is only a subset of properties for brevity</em></p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default Okta User"</span><span class="p">,</span><span class="w">
@@ -780,7 +780,7 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
       }
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/user/default"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/meta/schemas/user/default"</span>
 </code></pre>
 </div>
 
@@ -789,7 +789,7 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
 <p><em>The following response is only a subset of properties for brevity</em></p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default Okta User"</span><span class="p">,</span><span class="w">
@@ -895,7 +895,7 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
 <h3 id="example">Example</h3>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Default Okta User"</span><span class="p">,</span><span class="w">

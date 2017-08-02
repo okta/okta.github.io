@@ -469,7 +469,7 @@ to the end of the tag identified by this CSS selector syntax:
     <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.opensaml.saml2.metadata.provider.HTTPMetadataProvider"</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- URL containing the metadata --&gt;</span>
   <span class="nt">&lt;constructor-arg&gt;</span>
-    <span class="c">&lt;!-- This URL should look something like this: https://example.okta.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;</span>
+    <span class="c">&lt;!-- This URL should look something like this: https://{yourOktaDomain}.com/app/abc0defghijK1lmN23o4/sso/saml/metadata --&gt;</span>
     <span class="nt">&lt;value</span> <span class="na">type=</span><span class="s">"java.lang.String"</span><span class="nt">&gt;</span>{metadata-url}<span class="nt">&lt;/value&gt;</span>
   <span class="nt">&lt;/constructor-arg&gt;</span>
   <span class="c">&lt;!-- Timeout for metadata loading in ms --&gt;</span>

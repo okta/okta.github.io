@@ -443,7 +443,7 @@
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Authorization: SSWS yourtoken"</span> <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X GET <span class="s2">"https://your-domain.okta.com/api/v1/org/factors"</span>
+-X GET <span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors"</span>
 </code></pre>
 </div>
 
@@ -456,7 +456,7 @@
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/google_otp"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/google_otp"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"GET"</span><span class="w">
@@ -464,7 +464,7 @@
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/google_otp/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/google_otp/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"POST"</span><span class="w">
@@ -480,7 +480,7 @@
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_question/lifecycle/activate"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_question/lifecycle/activate"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"POST"</span><span class="w">
@@ -488,7 +488,7 @@
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_question"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_question"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"GET"</span><span class="w">
@@ -504,7 +504,7 @@
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_otp"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_otp"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"GET"</span><span class="w">
@@ -528,7 +528,7 @@
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_sms"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_sms"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"GET"</span><span class="w">
@@ -536,7 +536,7 @@
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"POST"</span><span class="w">
@@ -560,7 +560,7 @@
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/symantec_vip"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/symantec_vip"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"GET"</span><span class="w">
@@ -576,7 +576,7 @@
         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOT_SETUP"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/rsa_token/lifecycle/activate"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/rsa_token/lifecycle/activate"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"POST"</span><span class="w">
@@ -584,7 +584,7 @@
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">},</span><span class="w">
             </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/rsa_token"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/rsa_token"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                     </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                         </span><span class="s2">"GET"</span><span class="w">
@@ -611,7 +611,7 @@
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Authorization: SSWS yourtoken"</span> <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST <span class="s2">"https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/activate"</span>
+-X POST <span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_sms/lifecycle/activate"</span>
 </code></pre>
 </div>
 
@@ -624,7 +624,7 @@
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_sms"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_sms"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                     </span><span class="s2">"GET"</span><span class="w">
@@ -632,7 +632,7 @@
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                     </span><span class="s2">"POST"</span><span class="w">
@@ -659,7 +659,7 @@
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Authorization: SSWS yourtoken"</span> <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST <span class="s2">"https://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"</span>
+-X POST <span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_sms/lifecycle/deactivate"</span>
 </code></pre>
 </div>
 
@@ -672,7 +672,7 @@
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_sms/lifecycle/activate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_sms/lifecycle/activate"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                     </span><span class="s2">"POST"</span><span class="w">
@@ -680,7 +680,7 @@
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_sms"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_sms"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                     </span><span class="s2">"GET"</span><span class="w">
@@ -707,7 +707,7 @@
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Authorization: SSWS yourtoken"</span> <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST <span class="s2">"https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/activate"</span>
+-X POST <span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_otp/lifecycle/activate"</span>
 </code></pre>
 </div>
 
@@ -720,7 +720,7 @@
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_otp"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_otp"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                     </span><span class="s2">"GET"</span><span class="w">
@@ -728,7 +728,7 @@
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_otp/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                     </span><span class="s2">"POST"</span><span class="w">
@@ -755,7 +755,7 @@
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -v -H <span class="s2">"Authorization: SSWS yourtoken"</span> <span class="se">\</span>
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST <span class="s2">"https://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/deactivate"</span>
+-X POST <span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_otp/lifecycle/deactivate"</span>
 </code></pre>
 </div>
 
@@ -768,7 +768,7 @@
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INACTIVE"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"activate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_otp/lifecycle/activate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_otp/lifecycle/activate"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                     </span><span class="s2">"POST"</span><span class="w">
@@ -776,7 +776,7 @@
             </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://your-domain.okta.com/api/v1/org/factors/okta_otp"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/org/factors/okta_otp"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
                     </span><span class="s2">"GET"</span><span class="w">

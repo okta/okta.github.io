@@ -190,22 +190,55 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_standards/OIDC/index.md">Edit Page</a>
       <h1 id="openid-connect-and-okta">OpenID Connect and Okta</h1>
 
-<p>OpenID Connect is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end-user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end-user in an interoperable and REST-like manner.
+<p>OpenID Connect is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable manner.
 In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
 
-<p>OpenID Connect allows a range of clients to request and receive information about authenticated sessions and end-users, including
+<p>OpenID Connect allows a range of clients to request and receive information about authenticated sessions and end users, including
 web-based clients, mobile apps, and JavaScript clients.
 The <a href="http://openid.net/connect/">specification suite</a> is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.</p>
 
 <p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a> for Basic, Implicit, Hybrid, and Configuration Publishing.</p>
+
+<h2 id="authentication-basics-with-oauth-20-and-openid-connect">Authentication Basics with OAuth 2.0 and OpenID Connect</h2>
+
+<p>OAuth 2.0 is an authorization framework for delegated access to APIs, and OpenID Connect is an SSO protocol for authenticating end users and asserting their identity.
+OpenID Connect extends OAuth 2.0:</p>
+
+<ul>
+  <li>Provides a signed <a href="#id-token"><em>id_token</em></a> for the client and <a href="/docs/api/resources/oidc.html#openid-connect-discovery-document">a UserInfo endpoint</a> from which you can retrieve user attributes.</li>
+  <li>Provides access to the <a href="#authorization-servers">Okta Authorization Server</a>.</li>
+  <li>Provides a standard set of scopes and claims for identities including profile, email, address, and phone.</li>
+</ul>
+
+<p><img src="/assets/openID_overview-631f59c8e4e12ee8806244a23303d9a025476e6116d55d59465c0b0b72b3760c.png" alt="OpenID Architecture Diagram" /></p>
+
+<p>Okta is the identity provider responsible for verifying the identity of users and applications that exist in an organization’s directory,
+and issuing ID Tokens upon successful authentication of those users and applications.</p>
+
+<p>The basic authentication flow with Okta as your identity provider:</p>
+
+<ol>
+  <li>The application sends a request to Okta.</li>
+  <li>Okta authenticates the client.</li>
+  <li>Okta authenticates the user.</li>
+  <li>Okta approves or denies the requested scopes.</li>
+  <li>Okta mints a token and sends it in the response.</li>
+  <li>The application validates the ID Token’s integrity. For more information, see <a href="/docs/api/resources/oidc.html#validating-id-tokens">Validating ID Tokens</a>.</li>
+</ol>
+
+<blockquote>
+  <p>Important: Okta uses public key cryptography to sign tokens and verify that they are valid.
+See the last section of <a href="/docs/api/resources/oidc.html#validating-id-tokens">Validating ID Tokens</a> for more information on the necessary logic
+you must have in your application to ensure it’s always updated with the latest keys.</p>
+</blockquote>
 
 <h2 id="authorization-servers">Authorization Servers</h2>
 
 <p>Okta provides two types of authorization servers:</p>
 
 <ul>
-  <li>Okta Authorization Server requires no configuration, and supports SSO use cases.</li>
-  <li>Custom Authorization Server is configurable. It supports the use of OpenID Connect with Okta’s API Access Management,
+  <li>The Okta Authorization Server requires no configuration, and supports SSO use cases.</li>
+  <li>The Custom Authorization Server is configurable. It supports the use of OpenID Connect with Okta’s API Access Management,
 an Okta feature that helps you secure access to your API.</li>
 </ul>
 
@@ -214,6 +247,467 @@ an Okta feature that helps you secure access to your API.</li>
 <p>Okta provides <a href="/docs/api/resources/oauth-clients.html">dynamic client registration</a>, operations to register and manage
 client applications for use with Okta’s OAuth 2.0 and OpenID Connect endpoints.
 You can also perform these operations in the <a href="/docs/api/resources/apps.html">Apps API</a>.</p>
+
+<h2 id="claims">Claims</h2>
+
+<p>Tokens issued by Okta contain claims, which are statements about a subject (user).
+For example, the claim can be about a name, identity, key, group, or privilege.
+The claims in a security token are dependent upon the type of token, the type of credential used to authenticate the user, and the application configuration.</p>
+
+<p>The claims requested by the <code class="highlighter-rouge">profile</code>, <code class="highlighter-rouge">email</code>, <code class="highlighter-rouge">address</code>, and <code class="highlighter-rouge">phone</code> scope values are returned from the UserInfo Endpoint, as described in <a href="http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse">the OpenID spec Section 5.3.2</a>, when a <code class="highlighter-rouge">response_type</code> value is used that results in an Access Token being issued. However, when no Access Token is issued (which is the case for the <code class="highlighter-rouge">response_type</code> value <code class="highlighter-rouge">id_token</code>), the resulting Claims are returned in the ID Token.</p>
+
+<h2 id="scopes">Scopes</h2>
+
+<p>OpenID Connect uses scope values to specify what access privileges are being requested for Access Tokens.
+The scopes associated with Access Tokens determine which claims are available when they are used
+to access <a href="/docs/api/resources/oidc.html#get-user-information">the OIDC <code class="highlighter-rouge">userinfo</code> endpoint</a>. The following scopes are supported:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">openid</td>
+      <td style="text-align: left">Identifies the request as an OpenID Connect request.</td>
+      <td style="text-align: left">Yes</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Requests access to the end user’s default profile claims.</td>
+      <td style="text-align: left">No</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">Requests access to the <code class="highlighter-rouge">email</code> and <code class="highlighter-rouge">email_verified</code> claims.</td>
+      <td style="text-align: left">No</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">phone</td>
+      <td style="text-align: left">Requests access to the <code class="highlighter-rouge">phone_number</code> and <code class="highlighter-rouge">phone_number_verified</code> claims.</td>
+      <td style="text-align: left">No</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">address</td>
+      <td style="text-align: left">Requests access to the <code class="highlighter-rouge">address</code> claim.</td>
+      <td style="text-align: left">No</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">groups</td>
+      <td style="text-align: left">Requests access to the <code class="highlighter-rouge">groups</code> claim.</td>
+      <td style="text-align: left">No</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">offline_access</td>
+      <td style="text-align: left">Requests a Refresh Token, used to obtain more access tokens without re-prompting the user for authentication.</td>
+      <td style="text-align: left">No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="scope-values">Scope Values</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">openid</code> is required for any OpenID request connect flow. If no openid scope value is present, the request may
+be a valid OAuth 2.0 request, but it’s not an OpenID Connect request.</li>
+  <li><code class="highlighter-rouge">profile</code> requests access to these default profile claims: <code class="highlighter-rouge">name</code>, <code class="highlighter-rouge">family_name</code>, <code class="highlighter-rouge">given_name</code>, <code class="highlighter-rouge">middle_name</code>, <code class="highlighter-rouge">nickname</code>, <code class="highlighter-rouge">preferred_username</code>, <code class="highlighter-rouge">profile</code>,  
+<code class="highlighter-rouge">picture</code>, <code class="highlighter-rouge">website</code>, <code class="highlighter-rouge">gender</code>, <code class="highlighter-rouge">birthdate</code>, <code class="highlighter-rouge">zoneinfo</code>,<code class="highlighter-rouge">locale</code>, and <code class="highlighter-rouge">updated_at</code>.</li>
+  <li><code class="highlighter-rouge">offline_access</code> can only be requested in combination with a <code class="highlighter-rouge">response_type</code> containing <code class="highlighter-rouge">code</code>. If the <code class="highlighter-rouge">response_type</code> does not contain <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">offline_access</code> will be ignored.</li>
+  <li>For more information about <code class="highlighter-rouge">offline_access</code>, see the <a href="http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess">OIDC spec</a>.</li>
+</ul>
+
+<h2 id="id-token">ID Token</h2>
+
+<p>OpenID Connect introduces an <a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a>
+which is a <a href="https://tools.ietf.org/html/rfc7519">JSON web token (JWT)</a> that contains information about an authentication event
+and claims about the authenticated user that clients can rely on.</p>
+
+<p>Clients can use any of the following sequences of operations to obtain an ID Token:</p>
+<ul>
+  <li>Basic, or <a href="http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth">Authorization code flow</a> – the client obtains
+an authorization code from the authorization server’s authentication endpoint and uses it to obtain an ID token and an access
+token from the authorization server’s Token endpoint.</li>
+  <li><a href="http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth">Implicit flow</a> – the client obtains an ID
+token and optionally an Access Token directly from the authorization server’s authentication endpoint.</li>
+  <li><a href="http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth">Hybrid flow</a> – a combination of the other
+two flows.</li>
+</ul>
+
+<p>Clients should always <a href="/docs/api/resources/oidc.html#validating-id-tokens">validate ID Tokens</a> to ensure their integrity.</p>
+
+<p>The ID Tokens returned by the authentication endpoint (implicit flow) or the Token endpoint (authorization code flow)
+are identical, except that in the implicit flow, the <em>nonce</em> parameter is required (and hence must have been included
+in the request), and the <em>at_hash</em> parameter is required if the response includes <a href="/standards/OAuth/index#access-token">an Access Token</a> but prohibited if the
+response does not include an Access Token.</p>
+
+<p>The ID Token (<em>id_token</em>) consists of three period-separated, base64URL-encoded JSON segments: <a href="#id-token-header">a header</a>, <a href="#id-token-payload">the payload</a>, and <a href="#id-token-signature">the signature</a>.</p>
+
+<h3 id="id-token-header">ID Token Header</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"alg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RS256"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"45js03w0djwedsw"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="id-token-payload">ID Token Payload</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rain.okta1.com:1802"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uAaunofWkaDJxukCFeBx"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449624026</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449627626</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"amr"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"pwd"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"jti"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID.4eAWJOCMB3SX8XewDfVR"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"auth_time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449624026</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"at_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cpqKfdQA5eH891Ff5oJr_Q"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"nickname"</span><span class="p">:</span><span class="s2">"Jimmy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"preferred_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john.doe@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"given_name"</span><span class="p">:</span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"middle_name"</span><span class="p">:</span><span class="s2">"James"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"family_name"</span><span class="p">:</span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"profile"</span><span class="p">:</span><span class="s2">"https://profile.wordpress.com/john.doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"zoneinfo"</span><span class="p">:</span><span class="s2">"America/Los_Angeles"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"locale"</span><span class="p">:</span><span class="s2">"en-US"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="mi">1311280970</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="s2">"john.doe@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_verified"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Hollywood Blvd."</span><span class="p">,</span><span class="w">
+  		</span><span class="nt">"locality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Los Angeles"</span><span class="p">,</span><span class="w">
+  		</span><span class="nt">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CA"</span><span class="p">,</span><span class="w">
+  		</span><span class="nt">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90210"</span><span class="p">,</span><span class="w">
+  		</span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
+  	</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="s2">"+1 (425) 555-1212"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="id-token-signature">ID Token Signature</h3>
+
+<p>This is the digital signature that Okta signs, using the public key identified by the <em>kid</em> property in the header section.</p>
+
+<h3 id="id-token-claims">ID Token Claims</h3>
+
+<p>The header and payload sections contain claims.</p>
+
+<h4 id="claims-in-the-header-section">Claims in the header section</h4>
+
+<p>Claims in the header are always returned.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">alg</td>
+      <td style="text-align: left">Identifies the digital signature algorithm used. This is always be RS256.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“RS256”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">kid</td>
+      <td style="text-align: left">Identifies the <em>public-key</em> used to verify the <em>id_token</em>. The corresponding <em>public-key</em> can be found as a part of the   <a href="/docs/api/resources/oidc.html#openid-connect-discovery-document">well-known configuration’s</a> <em>jwks_uri</em> value.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“a5dfwef1a-0ead3f5223_w1e”</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="claims-in-the-payload-section">Claims in the payload section</h4>
+
+<p>Claims in the payload are either base claims, independent of scope (always returned), or dependent on scope (not always returned).</p>
+
+<h5 id="base-claims-always-present">Base claims (always present)</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">ver</td>
+      <td style="text-align: left">The semantic version of the ID Token.</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">jti</td>
+      <td style="text-align: left">A unique identifier for this ID Token for debugging and revocation purposes.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“Tlenfse93dgkaksginv”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iss</td>
+      <td style="text-align: left">The Issuer Identifier of the response.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“https://your-org.okta.com”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">sub</td>
+      <td style="text-align: left">The subject. A unique identifier for the user.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“00uk1u7AsAk6dZL3z0g3”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">aud</td>
+      <td style="text-align: left">Identifies the audience that this ID Token is intended for. It must be one of the OAuth 2.0 client IDs of your application.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“6joRGIzNCaJfdCPzRjlh”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iat</td>
+      <td style="text-align: left">The time the ID Token was issued, represented in Unix time (seconds).</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1311280970</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">exp</td>
+      <td style="text-align: left">The time the ID Token expires, represented in Unix time (seconds).</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1311280970</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">auth_time</td>
+      <td style="text-align: left">The time the end user was authenticated, represented in Unix time (seconds).</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1311280970</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">amr</td>
+      <td style="text-align: left">JSON array of strings that are identifiers for     <a href="http://self-issued.info/docs/draft-jones-oauth-amr-values-00.html">authentication methods</a> used in the authentication.</td>
+      <td style="text-align: left">Array</td>
+      <td style="text-align: left">[ “pwd”, “mfa”, “otp”, “kba”, “sms”, “swk”, “hwk” ]</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">idp</td>
+      <td style="text-align: left">The id of the Identity Provider that the user authenticated to Okta with. (Used for Social Auth and Inbound SAML). If the IdP is an Okta org, the value is the Okta OrgId.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“00ok1u7AsAkrwdZL3z0g3”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">nonce</td>
+      <td style="text-align: left">Value used to associate a Client session with an ID Token, and to mitigate replay attacks.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“n-0S6_WzA2Mj”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">at_hash</td>
+      <td style="text-align: left">The base64URL-encoded first 128-bits of the SHA-256 hash of the Access Token. This is only returned if an Access Token is also returned with an ID Token.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“MTIzNDU2Nzg5MDEyMzQ1Ng”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">c_hash</td>
+      <td style="text-align: left">The base64URL-encoded first 128-bits of the SHA-256 hash of the authorization code. This is only returned if an authorization code is also returned with the ID Token.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“DE5MzQ1TIzlr30gokT2UDN”</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="scope-dependent-claims-not-always-returned">Scope-dependent claims (not always returned)</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Required Scope</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">name</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">User’s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user’s locale and preferences.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“John Doe”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">preferred_username</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">The Okta login (username) for the end user.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“john.doe@example.com”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">nickname</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Casual name of the user that may or may not be the same as the given_name.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“Jimmy”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">preferred_username</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">The chosen login (username) for the end user. By default this is the Okta username.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“john.doe@example.com”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">given_name</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“John”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">middle_name</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“James”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">family_name</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“Doe”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">URL of the user’s profile page.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“https://profile.wordpress.com/john.doe”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">zoneinfo</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">String representing the user’s time zone.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“America/Los_Angeles”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">locale</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Language and   <a href="http://www.iso.org/iso/country_codes">ISO3166‑1</a> country code in uppercase, separated by a dash.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“en-US”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">updated_at</td>
+      <td style="text-align: left">profile</td>
+      <td style="text-align: left">Time the user’s information was last updated, represented in Unix time (seconds).</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">1311280970</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">User’s preferred email address. The resource provider must not rely upon this value being unique.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“john.doe@example.com”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">email_verified</td>
+      <td style="text-align: left">email</td>
+      <td style="text-align: left">True if the user’s email address (Okta primary email) has been verified; otherwise false.</td>
+      <td style="text-align: left">boolean</td>
+      <td style="text-align: left">true</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">address</td>
+      <td style="text-align: left">address</td>
+      <td style="text-align: left">User’s preferred postal address. The value of the address member is a JSON structure containing <em>street_address</em>, <em>locality</em>, <em>region</em>, <em>postal_code</em>, and <em>country</em>.</td>
+      <td style="text-align: left">JSON structure</td>
+      <td style="text-align: left">{ “street_address”: “123 Hollywood Blvd.”, “locality”: “Los Angeles”, “region”: “CA”, “postal_code”: “90210”, “country”: “US” }</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">phone_number</td>
+      <td style="text-align: left">phone</td>
+      <td style="text-align: left">User’s preferred telephone number in E.164 format.</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">“+1 (425) 555-1212”</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">groups</td>
+      <td style="text-align: left">groups</td>
+      <td style="text-align: left">The groups that the user is a member of that also match the ID Token group filter of the client app.</td>
+      <td style="text-align: left">List</td>
+      <td style="text-align: left">[“MyGroup1”, “MyGroup2”, “MyGroup3”]</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Be aware of the following before you work with scope-dependent claims:</p>
+
+<ul>
+  <li>To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100.
+If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
+For more information about configuring an app for OpenID Connect, including group claims, see <a href="https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect">Using OpenID Connect</a>.</li>
+  <li>
+    <p><strong>Important:</strong> Scope-dependent claims are returned differently depending on the values in <code class="highlighter-rouge">response_type</code> and the scopes requested:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Response Type</th>
+          <th style="text-align: left">Claims Returned in ID Token</th>
+          <th style="text-align: left">Claims Returned from the Userinfo Endpoint</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">code </code></td>
+          <td style="text-align: left">N/A</td>
+          <td style="text-align: left">N/A</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">token</code></td>
+          <td style="text-align: left">N/A</td>
+          <td style="text-align: left">N/A</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">id_token</code></td>
+          <td style="text-align: left">Claims associated with requested scopes.</td>
+          <td style="text-align: left">N/A</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">id_token</code> <code class="highlighter-rouge">code </code></td>
+          <td style="text-align: left">Claims associated with requested scopes.</td>
+          <td style="text-align: left">N/A</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">id_token</code> <code class="highlighter-rouge">token</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">email</code> if email scope is requested; <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">preferred_username</code> if profile scope is requested</td>
+          <td style="text-align: left">Claims associated with the requested scopes</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code class="highlighter-rouge">code</code> <code class="highlighter-rouge">id_token</code> <code class="highlighter-rouge">token</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">email</code> if email scope is requested; <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">preferred_username</code> if profile scope is requested</td>
+          <td style="text-align: left">Claims associated with the requested scopes</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>The full set of claims for the requested scopes is available via the <a href="/docs/api/resources/oidc.html#get-user-information">/oauth2/v1/userinfo</a> endpoint. Call this endpoint using the Access Token.</li>
+</ul>
 
 <h2 id="more-information">More Information</h2>
 

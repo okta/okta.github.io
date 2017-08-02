@@ -385,7 +385,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>For a full explanation of all these parameters, see here: <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
 
-<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
 
 <h4 id="using-facebook-for-login">Using Facebook for Login</h4>
 
@@ -395,7 +395,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>One option is to create a link that the user clicks in order to log in. The HREF for that link would be the Authorize URL that you created previously:</p>
 
-<p><code class="highlighter-rouge">&lt;a href=“https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Facebook&lt;/a&gt;</code></p>
+<p><code class="highlighter-rouge">&lt;a href=“https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Facebook&lt;/a&gt;</code></p>
 
 <p>After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified <code class="highlighter-rouge">redirect_uri</code> along with an ID Token in JWT format.</p>
 
@@ -515,7 +515,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>For a full explanation of all these parameters, see here: <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
 
-<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
 
 <h4 id="using-google-for-login">Using Google for Login</h4>
 
@@ -525,7 +525,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>One option is to create a link that the user clicks in order to log in. The HREF for that link would be the Authorize URL that you created previously:</p>
 
-<p><code class="highlighter-rouge">&lt;a href=“https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Google&lt;/a&gt;</code></p>
+<p><code class="highlighter-rouge">&lt;a href=“https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Google&lt;/a&gt;</code></p>
 
 <p>After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified <code class="highlighter-rouge">redirect_uri</code> along with an ID Token in JWT format.</p>
 
@@ -629,7 +629,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>For a full explanation of all these parameters, see here: <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
 
-<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
 
 <h4 id="using-linkedin-for-login">Using LinkedIn for Login</h4>
 
@@ -639,7 +639,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>One option is to create a link that the user clicks in order to log in. The HREF for that link would be the Authorize URL that you created previously:</p>
 
-<p><code class="highlighter-rouge">&lt;a href=“https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With LinkedIn&lt;/a&gt;</code></p>
+<p><code class="highlighter-rouge">&lt;a href=“https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With LinkedIn&lt;/a&gt;</code></p>
 
 <p>After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified <code class="highlighter-rouge">redirect_uri</code> along with an ID Token in JWT format.</p>
 
@@ -745,7 +745,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>For a full explanation of all these parameters, see here: <a href="https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters">OAuth 2.0 Request parameters</a>.</p>
 
-<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+<p>An example of a complete URL looks like this: <code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
 
 <h4 id="using-microsoft-for-login">Using Microsoft for Login</h4>
 
@@ -755,7 +755,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>One option is to create a link that the user clicks in order to log in. The HREF for that link would be the Authorize URL that you created previously:</p>
 
-<p><code class="highlighter-rouge">&lt;a href=“https://example.okta.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Microsoft&lt;/a&gt;</code></p>
+<p><code class="highlighter-rouge">&lt;a href=“https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&amp;client_id=GkGw4K49N4UEE1example&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid&amp;redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&amp;state=WM6D&amp;nonce=YsG76jo”&gt;Login With Microsoft&lt;/a&gt;</code></p>
 
 <p>After clicking this link, the user will be prompted to sign in with the social provider. After they succeed they will be returned to the specified <code class="highlighter-rouge">redirect_uri</code> along with an ID Token in JWT format.</p>
 

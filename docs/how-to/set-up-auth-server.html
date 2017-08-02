@@ -192,7 +192,7 @@
 
 <p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
 
-<p>API Access Management is an <strong>Early Access</strong> (EA) feature; contact Okta support to enable it.</p>
+<p>API Access Management is an Early Access (EA) feature; contact Okta support to enable it.</p>
 
 <p>API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints.
 An authorization server defines your security boundary, for example “staging” or “production.”
@@ -442,7 +442,7 @@ Be sure to check that your expression returns the results expected–the express
 
 <p>First, you will need your Authorization Server’s Authorization Endpoint, which you can retrieve using the Server’s Metadata URI: <code class="highlighter-rouge">/oauth2/:authorizationServerId/.well-known/openid-configuration</code>. It will look like this:</p>
 
-<p><code class="highlighter-rouge">https://example.okta.com/oauth2/:authorizationServerId/v1/authorize</code></p>
+<p><code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/authorize</code></p>
 
 <p>To this you will need to add the following URL query parameters:</p>
 
@@ -457,11 +457,11 @@ Be sure to check that your expression returns the results expected–the express
 
 <p>The resulting URL would look like this:</p>
 
-<p><code class="highlighter-rouge">https://example.okta.com/oauth2/:authorizationServerId/v1/authorize?client_id=examplefa39J4jXdcCwWA&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid%20profile&amp;redirect_uri=https%3A%2F%2FyourRedirectUriHere.com&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
+<p><code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/authorize?client_id=examplefa39J4jXdcCwWA&amp;response_type=id_token&amp;response_mode=fragment&amp;scope=openid%20profile&amp;redirect_uri=https%3A%2F%2FyourRedirectUriHere.com&amp;state=WM6D&amp;nonce=YsG76jo</code></p>
 
 <p>If you paste this into your browser you are redirected to the sign-in page for your Okta org, with a URL that looks like this:</p>
 
-<p><code class="highlighter-rouge">https://example.okta.com/login/login.htm?fromURI=%2Foauth2%2Fv1%2Fauthorize%2Fredirect%3Fokta_key%aKeyValueWillBeHere</code></p>
+<p><code class="highlighter-rouge">https://{yourOktaDomain}.com/login/login.htm?fromURI=%2Foauth2%2Fv1%2Fauthorize%2Fredirect%3Fokta_key%aKeyValueWillBeHere</code></p>
 
 <p>Here you enter in the credentials for a user who is mapped to your Open ID Connect Application and you will be directed to the <code class="highlighter-rouge">redirect_uri</code> that you specified along with an ID Token, and any state that you included as well:</p>
 
@@ -474,7 +474,7 @@ Be sure to check that your expression returns the results expected–the express
  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jakub Vulcan"</span><span class="p">,</span><span class="w">
  </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en-US"</span><span class="p">,</span><span class="w">
  </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
- </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/oauth2/:authorizationServerId"</span><span class="p">,</span><span class="w">
+ </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/oauth2/:authorizationServerId"</span><span class="p">,</span><span class="w">
  </span><span class="nt">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fa39J40exampleXdcCwWA"</span><span class="p">,</span><span class="w">
  </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498328175</span><span class="p">,</span><span class="w">
  </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498331912</span><span class="p">,</span><span class="w">
