@@ -276,7 +276,7 @@ Search and list operations are intended to find matching resources and their ide
 
 The number of API requests for an organization is limited for all APIs based on your edition.
 
-The following three headers are set in each response:
+Okta provides three headers in each response. These headers show the limit that is being enforced, when it resets, and how close you are to hitting the limit:
 
 `X-Rate-Limit-Limit` - the rate limit ceiling that is applicable for the current request.
 
@@ -291,9 +291,66 @@ X-Rate-Limit-Remaining: 15
 X-Rate-Limit-Reset: 1366037820
 ~~~
 
-If the rate limit is exceeded, an HTTP 429 Status Code is returned.  The current Rate Limit is on a per-org per-endpoint basis.
+If a rate limit is exceeded, an HTTP 429 Status Code is returned.
 
--**Rate limits are enforced for all organizations.**
+**Rate limits are enforced for all organizations.**
+
+The best way to be sure about your rate limits is to check the relevant headers in the response. The System Log doesn't report every
+API request. Rather, it typically reports completed or attempted real-world events such as configuration changes, user logins, or user lockouts.
+The System Log doesn’t report the rate at which you’ve been calling the API.
+
+### Org-Wide Rate Limits
+
+API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
+For all endpoints not listed, the API rate limit is a combined 10,000 requests per minute.
+
+<table border="1" style="width: 100%;">
+	<caption>Org-Wide Rate Limits Per Minute</caption>
+	<thead>
+		<tr>
+			<th colspan="1" rowspan="1">Endpoint</th>
+			<th colspan="1" rowspan="1">Limit</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps/<i>{id}</i></span><span style="font-family: verdana,geneva,sans-serif;"> </span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">100</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/authn</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups/<i>{id}</i>&nbsp;</span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/sessions</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">750</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users/<i>{:id}</i></span> (exact URL plus query params or other qualifiers)</td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/</span>&nbsp; (if no other limit specified in this table)</td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+	</tbody>
+</table>
 
 ## Request Debugging
 

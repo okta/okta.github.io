@@ -20,7 +20,11 @@ The System Log API has one endpoint:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6){:target="_blank"}
 
-See below for [Examples](#examples) and more on how to use the System Log API.
+See [Examples](#examples) for way you can use the System Log API.
+
+## Data Retention
+
+Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy}(https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
 ## Examples
 
@@ -164,7 +168,7 @@ Each Log object describes a single action performed by a set of actors for a set
     "result": "SUCCESS"
   },
   "uuid": "f790999f-fe87-467a-9880-6982a583986c",
-  "published": "2016-05-31T22:23:07.777Z",
+  "published": "2017-05-31T22:23:07.777Z",
   "eventType": "user.session.start",
   "displayMessage": "User login to Okta",
   "transaction": {
