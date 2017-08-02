@@ -135,6 +135,7 @@ function header_checker() {
         echo "Files contain broken headers."
         return 1
     fi
+}
 
 function check_sample_code_orgs() {
     # Sample code URLS should be in the following format:
