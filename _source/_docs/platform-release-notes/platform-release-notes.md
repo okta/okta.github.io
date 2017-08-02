@@ -13,7 +13,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.30
 |                  [OpenID Connect](#openid-connect)                                                 | Generally Available now         | Generally Available beginning 8/7/2017  |
 |            [Key Rollover](#key-rollover)                                                     | Generally Available now         | Generally Available beginning 8/7/2017  |
 |            [Email for Two-Factor Authentication](#email-for-two-factor-authentication)       | Early Access by 8/3/2017        | Early Access beginning 8/7/2017         |
-|        [SHA-256 Signed Certificates for SAML 2.0 Apps](#sha-256-signed-certificates-for-saml-20-apps) | Generally Available by 8/3/2017 | Generally Available beginning 9/11/2017 |
+|        [SHA-256 Signed Certificates for New SAML 2.0 Apps](#sha-256-signed-certificates-for-new-saml-20-apps) | Generally Available by 8/3/2017 | Generally Available beginning 9/11/2017 |
 
 To enable an Early Availability (EA) feature, contact Okta Support. For more information, see [Okta Release Lifecycle](https://developer.okta.com/docs/api/getting_started/releases-at-okta.html). 
 
