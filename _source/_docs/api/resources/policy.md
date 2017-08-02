@@ -323,7 +323,7 @@ curl -v -X POST \
       }
     },
     "network": {
-      "connection": "ON_NETWORK"
+      "connection": "ANYWHERE"
     },
     "authContext": {
       "authType": "ANY"
@@ -421,7 +421,7 @@ curl -v -X PUT \
       }
     },
     "network": {
-      "connection": "ON_NETWORK"
+      "connection": "ANYWHERE"
     },
     "authContext": {
       "authType": "ANY"
@@ -652,9 +652,9 @@ Like policies, rules have a priority which governs the order in which they are c
 For example if a particular policy had two rules, "A" and "B" as below.
 
 - Rule A has priority 1 and applies to RADIUS VPN scenarios.
-- Rule B has priority 2 and applies to ON_NETWORK scenarios.
+- Rule B has priority 2 and applies to ANYWHERE (network connection) scenarios.
 
-If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
+If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ANYWHERE,
 the action in Rule A would be taken, and Rule B would not be evaluated.
 
 ### Rules Message Example (Password Policy)
@@ -800,11 +800,15 @@ authType |  | `ANY` or `RADIUS` | No |
 #### Network Condition Object
 {: #NetworkConditionObject }
 
-Specifies a network segment.
+Specifies a network selection mode, and a set of network zones to be included or excluded. If the connection parameter's data type is `ZONE`, exactly one of the include or exclude arrays is required.
 
-Parameter | Description | Data Type | Required | Default
+Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No |
+connection | Network selection mode | `ANYWHERE`, `ZONE`, `ON_NETWORK`, or `OFF_NETWORK` | No |
+include | The zones to include | Array | Only if connection data type is `ZONE` |
+exclude | The zones to exclude | Array | Only if connection data type is `ZONE` |
+
+> The `ON_NETWORK` and `OFF_NETWORK` data types are part of a {% api_lifecycle deprecated %} feature. The `ZONE` data type is now used when selecting network zones. Specific zones to include or exclude are specified in the respective arrays.
 
 #### Authentication Provider Condition Object
 {: #AuthProviderConditionObject }
