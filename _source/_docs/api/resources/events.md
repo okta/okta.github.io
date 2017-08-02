@@ -56,25 +56,25 @@ The following expressions are supported for events with the `filter` query param
 
 See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information on expressions.
 
->Note: All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2013-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222013-06-01T00:00:00.000Z%22`.
+>Note: All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2017-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222017-06-01T00:00:00.000Z%22`.
 
 **Filter Examples**
 
-Events published after 06/01/2013
+Events published after 06/01/2017
 
-    filter=published gt "2013-06-01T00:00:00.000Z"
+    filter=published gt "2017-06-01T00:00:00.000Z"
 
 Events published for a target user
 
     filter=target.id eq "00uxc78lMKUMVIHLTAXY"
 
-Failed login events published after 06/01/2013
+Failed login events published after 06/01/2017
 
-    filter=published gt "2013-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
+    filter=published gt "2017-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
 
-Events published after 06/01/2013 for a target user and application
+Events published after 06/01/2017 for a target user and application
 
-    filter=published gt "2013-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+    filter=published gt "2017-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
 
 App SSO events for a target user and application
 
@@ -108,8 +108,8 @@ Link: <https://{yourOktaDomain}.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0
 
 [
     {
-        "eventId": "tev8hc_KK9NRzKe2WtdvVQIOg1384845263000",
-        "published": "2013-11-19T07:14:23.000Z",
+        "eventId": "tev8hc_KK9NRzKe2WtdvVQIOg1784845263000",
+        "published": "2017-11-19T07:14:23.000Z",
         "action": {
             "message": "App activated",
             "categories": [],
@@ -139,8 +139,8 @@ Link: <https://{yourOktaDomain}.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0
         ]
     },
     {
-        "eventId": "tevaEByjeq-QZW-utKgDVVvng1384847185000",
-        "published": "2013-11-19T07:46:25.000Z",
+        "eventId": "tevaEByjeq-QZW-utKgDVVvng1784847185000",
+        "published": "2017-11-19T07:46:25.000Z",
         "action": {
             "message": "Sign-in successful",
             "categories": [
@@ -173,8 +173,8 @@ Link: <https://{yourOktaDomain}.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0
         ]
     },
     {
-        "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1384847190000",
-        "published": "2013-11-19T07:46:30.000Z",
+        "eventId": "tevR26HuMJMSkWsKBUcQ65Raw1784847190000",
+        "published": "2017-11-19T07:46:30.000Z",
         "action": {
             "message": "User performed single sign on to app",
             "categories": [
@@ -222,7 +222,7 @@ Every organization has a system log that maintains a history of actions performe
 
 ~~~ json
 {
-   "eventId":"tevGr2BhQTMR72OiBGvKXTp2Q1399593071000",
+   "eventId":"tevGr2BhQTMR72OiBGvKXTp2Q1799593071000",
    "published":"2014-05-08T23:51:11.000Z",
    "requestId":"req8U_MHmEbSai_0I4RopTnfA",
    "sessionId":"000cWiYg47QSFyk1YjE6cDcEg",
