@@ -323,7 +323,7 @@ curl -v -X POST \
       }
     },
     "network": {
-      "connection": "ON_NETWORK"
+      "connection": "ANYWHERE"
     },
     "authContext": {
       "authType": "ANY"
@@ -421,7 +421,7 @@ curl -v -X PUT \
       }
     },
     "network": {
-      "connection": "ON_NETWORK"
+      "connection": "ANYWHERE"
     },
     "authContext": {
       "authType": "ANY"
@@ -652,9 +652,9 @@ Like policies, rules have a priority which governs the order in which they are c
 For example if a particular policy had two rules, "A" and "B" as below.
 
 - Rule A has priority 1 and applies to RADIUS VPN scenarios.
-- Rule B has priority 2 and applies to ON_NETWORK scenarios.
+- Rule B has priority 2 and applies to ANYWHERE (network connection) scenarios.
 
-If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
+If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ANYWHERE,
 the action in Rule A would be taken, and Rule B would not be evaluated.
 
 ### Rules Message Example (Password Policy)
