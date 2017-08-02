@@ -800,11 +800,11 @@ authType |  | `ANY` or `RADIUS` | No |
 #### Network Condition Object
 {: #NetworkConditionObject }
 
-Specifies a network segment mode, and a set of network zones to be included or excluded. If the connection parameter's data type is `ZONE`, exactly one of the include or exclude arrays is required.
+Specifies a network selection mode, and a set of network zones to be included or excluded. If the connection parameter's data type is `ZONE`, exactly one of the include or exclude arrays is required.
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-connection |  | `ANYWHERE`, `ZONE`, `ON_NETWORK`, or `OFF_NETWORK` | No |
+connection | Network selection mode | `ANYWHERE`, `ZONE`, `ON_NETWORK`, or `OFF_NETWORK` | No |
 include | The zones to include | Array | Only if connection data type is `ZONE` |
 exclude | The zones to exclude | Array | Only if connection data type is `ZONE` |
 
