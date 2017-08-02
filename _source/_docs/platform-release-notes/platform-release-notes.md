@@ -6,7 +6,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.30
 
 ## Release 2017.31
 
-### Quick Reference Table for Platform Feature Enhancements
+### Platform Feature Enhancements
 
 | Feature Enhancement                                                               | Expected in Preview Orgs        | Expected in Production Orgs             |
 |:----------------------------------------------------------------------------------|:--------------------------------|:----------------------------------------|
@@ -19,7 +19,6 @@ To enable an Early Availability (EA) feature, contact Okta Support. For more inf
 
 > A [new version of the Sign-In Widget](#new-version-of-the-sign-in-widget) is available now for all orgs.
 
-### Platform Feature Enhancements
 
 #### OpenID Connect
 <!-- OKTA-132049  -->
@@ -34,11 +33,10 @@ Okta is [certified for OpenID Connect](http://openid.net/certification/). For mo
 <!-- OKTA-132045  -->
 
 We provide the ability to generate a certificate with a specified validity period for the [Apps API](/docs/api/resources/apps.html) and [Identity Providers API](/docs/api/resources/idps.html).
-For more information, see [the OpenID Connect API](/docs/api/resources/oidc.html#validating-id-tokens) or [the OAuth 2.0 API](/docs/api/resources/oauth2.html#authorization-server-credentials-signing-object).
 
-#### SHA-256 Signed Certificates for SAML 2.0 Apps
+#### SHA-256 Signed Certificates for New SAML 2.0 Apps
 
-All new SAML 2.0 apps are now bootstrapped with SHA-256 signed public certificates. Existing SAML 2.0 apps will remain on a SHA1-signed certificate unless you perform [a manual key rollover](/docs/how-to/updating_saml_cert.html).
+All new SAML 2.0 apps are bootstrapped with SHA-256 signed public certificates. Existing SAML 2.0 apps are unchanged.
 
 #### Email for Two-Factor Authentication
 <!-- OKTA-134593  -->
