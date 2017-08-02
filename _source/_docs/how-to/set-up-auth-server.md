@@ -8,7 +8,7 @@ excerpt: Set Up an Authorization Service
 
 {% api_lifecycle ea %}
 
-API Access Management is an **Early Access** (EA) feature; contact Okta support to enable it.
+API Access Management is an Early Access (EA) feature; contact Okta support to enable it.
 
 API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints.
 An authorization server defines your security boundary, for example "staging" or "production."

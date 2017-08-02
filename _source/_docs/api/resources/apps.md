@@ -971,8 +971,6 @@ curl -v -X POST \
 
 Adds an OAuth 2.0 client application. This application is only available to the org that creates it.
 
-> You must enable the OpenID Connect feature to create an OAuth 2.0 client. OpenId Connect is an {% api_lifecycle ea %} feature.
-
 ##### Credentials
 {:.api .api-request .api-request-params}
 
@@ -1329,8 +1327,6 @@ Filter                 | Description
 `credentials.signing.kid eq ":kid"`   | Apps using a particular key such as `SIMcCQNY3uwXoW3y0vf6VxiBb5n9pf8L2fK8d-FIbm4`
 
 > Only a single expression is supported as this time. The only supported filter type is `eq`.
-
-> To use `credentials.signing.kid` as a filter, you must enable the key rollover feature. Key rollover is an Early Access feature; contact Customer Support to enable it.
 
 ###### Link Expansions
 
@@ -2586,8 +2582,6 @@ curl -v -X PUT \
 
 Update [application key credential](#application-key-credential-model) by `kid`
 
-> You must enable the key rollover feature to perform this operation. Key rollover is an Early Access feature; contact Customer Support to enable it.
-
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
@@ -3633,8 +3627,6 @@ curl -v -X DELETE \
 ~~~
 
 ## Application Key Store Operations
-
-> You must enable the key rollover feature to perform the following operations. Key rollover is an Early Access feature; contact Customer Support to enable it.
 
 ### Generate New Application Key Credential
 {:.api .api-operation}
@@ -4738,8 +4730,6 @@ Determines the [key](#application-key-credential-model) used for signing asserti
 | ---------- | ------------------------------------------------------------------------------------------- | -------- |
 | kid        | Reference for [key credential for the app](#application-key-store-operations)    | String   | FALSE    |
 |------------+----------------------------------------------------------------------------------+----------+----------|
-
-> You must enable the key rollover feature to view `kid`. Key rollover is an {% api_lifecycle ea %} feature.
 
 > Only apps with `SAML_2_0`, `SAML_1_1`, `WS_FEDERATION` or `OPENID_CONNECT` `signOnMode` support the key rollover feature.
 

@@ -2876,8 +2876,6 @@ HTTP/1.1 204 No Content
 
 ## Identity Provider Signing Key Store Operations
 
-> You must enable the key rollover feature to perform the following operations. Key rollover is an {% api_lifecycle ea %} feature; contact Customer Support to enable it.
-
 > EA feature constraint: Okta currently uses the same key for both request signing and decrypting SAML Assertions that have been encrypted by the IdP. Changing your signing key also changes your decryption key.
 
 ### Generate New IdP Signing Key Credential
@@ -4294,8 +4292,6 @@ Federation trust credentials for verifying assertions from the IdP:
 ###### SAML 2.0 Signing Credentials Object
 
 Determines the [IdP Key Credential](#identity-provider-key-credential-model) used to sign requests sent to the IdP.
-
-> You must enable the key rollover feature to perform [Signing Key Operations](#identity-provider-signing-key-store-operations). Key rollover is an {% api_lifecycle ea %} feature; contact Customer Support to enable it.
 
 |---------+----------------------------------------------------------------------------------------------------------------+----------+----------+----------+-----------+-----------+--------------------------------------------|
 | Property | Description                                                                                                   | DataType | Nullable | Readonly | MinLength | MaxLength | Validation                                 |
