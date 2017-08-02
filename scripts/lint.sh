@@ -15,6 +15,13 @@ require_env_var "REPO"
 cd ${OKTA_HOME}/${REPO}
 
 interject "Running lint.sh in $(pwd)"
+
+if ! check_sample_code_orgs ;
+then
+    echo "Failed URL consistency check. Please use https://{yourOktaDomain}.com"
+    exit 1;
+fi
+
 if ! generate_html;
 then
     echo "Error building site"

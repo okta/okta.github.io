@@ -27,9 +27,7 @@ Account**
 After your are finished creating your account, you will be logged into your new organization. In the top right of the
  screen, there is an **Admin** button.
 Clicking on the **Admin** button will take you to your Okta Administration Dashboard and this is where we'll be
-spending
-most of our time during this guide. For the remainder of this quickstart, we're going to assume the domain for your
-organization will be `dev-123456.oktapreview.com`. For your application, you'll want to change this url to match your own organizations url.
+spending most of our time during this guide.
 
 ## Enable CORS for your Domain
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
@@ -173,14 +171,14 @@ We also need to add a script block to initialize and configure the widget.
 
 ```html
 <script>
-    var orgUrl = 'https://dev-123456.oktapreview.com';
+    var orgUrl = 'https://{yourOktaDomain}.com';
     var signIn = new OktaSignIn({
         baseUrl: orgUrl,
         clientId: 'sRmBpCfR3xKyf4goHZhM',
         redirectUri: 'http://localhost:8000/oauth2-callback.php',
         authParams: {
             responseType: 'code',
-            issuer: 'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7',
+            issuer: 'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}',
             display: 'page'
         }
     });
@@ -194,7 +192,7 @@ We also need to add a script block to initialize and configure the widget.
 
 | Key                     | Description                                                                                                                                          |
 |-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| baseUrl                 | This is your Organization URL in Okta. It will be the URL of the admin pages without the **-admin** for example `https://dev-123456.oktapreview.com`   |
+| baseUrl                 | This is your Organization URL in Okta. It will be the URL of the admin pages without the **-admin** for example `https://{yourOktaDomain}.com`   |
 | clientId                | The client ID of the Okta application.                                                                                                               |
 | redirectUri             | Where we will send the user to once they attempt a login.                                                                                            |
 | authParams.responseType | What we want back from a successful login                                                                                                            |
@@ -225,7 +223,7 @@ $headers = [
     'Connection: close',
     'Content-Length: 0'
 ];
-$url = 'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7/v1/token?' . $query;
+$url = 'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/token?' . $query;
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -269,7 +267,7 @@ algorithm specified in the JWT `alg` header property. Use the public keys provid
 5. Verify that the expiry time (from the `exp` claim) has not already passed.
 
 ```php
-if($res->claims['iss'] != 'https://dev-123456.oktapreview.com/') {
+if($res->claims['iss'] != 'https://{yourOktaDomain}.com/') {
     return $response->withStatus(401);
 }
 
@@ -296,7 +294,7 @@ $jwk = null;
 else {
 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://dev-123456.oktapreview.com/oauth2/ausa87h9g2misxHVS0h7/v1/keys');
+    curl_setopt($ch, CURLOPT_URL, 'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/keys');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_HEADER, 0);
 

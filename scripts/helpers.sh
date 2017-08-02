@@ -135,4 +135,66 @@ function header_checker() {
         echo "Files contain broken headers."
         return 1
     fi
+
+function check_sample_code_orgs() {
+    # Sample code URLS should be in the following format:
+    # Currently: https://your-org.okta.com
+    
+    local dir=$(pwd)
+    local yourOrgUrls=$(grep -EoR "(http|https)://your-org.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
+    local yourExampleUrls=$(grep -EoR "(http|https)://example.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
+    local rainUrls=$(grep -EoR "http://rain.okta1.com:1802*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
+    local subdomainUrls=$(grep -EoR "(http|https)://your-subdomain.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
+    local yourDomainUrls=$(grep -EoR "(http|https)://your-domain.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
+    local jspUrls=$(grep -EoR "(http|https)://.*{org}.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,s} | sort | uniq)
+    local oktaPreviewUrls=$(grep -EoR "(http|https)://.*oktapreview.com*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
+    
+    if [ "$yourOrgUrls" ];
+    then
+        echo "$yourOrgUrls"
+        echo "Files contain old URL reference -> https://your-org.okta{preview}.com"
+        return 1
+    fi
+
+    if [ "$yourExampleUrls" ];
+    then
+        echo "$yourExampleUrls"
+        echo "Files contain old URL reference -> https://example.okta{preview}.com"
+        return 1
+    fi
+
+    if [ "$rainUrls" ];
+    then
+        echo "$rainUrls"
+        echo "Files contain old URL reference -> http://rain.okta1.com:1802"
+        return 1
+    fi
+
+    if [ "$subdomainUrls" ];
+    then
+        echo "$subdomainUrls"
+        echo "Files contain old URL reference -> https://subdomain.okta{preview}.com"
+        return 1
+    fi
+
+    if [ "$yourDomainUrls" ];
+    then
+        echo "$yourDomainUrls"
+        echo "Files contain old URL reference -> https://your-domain.okta{preview}.com"
+        return 1
+    fi
+
+    if [ "$jspUrls" ];
+    then
+        echo "$jspUrls"
+        echo "Files contain old URL reference -> https://\${org}.okta{preview}.com"
+        return 1
+    fi
+
+    if [ "$oktaPreviewUrls" ];
+    then
+        echo "$oktaPreviewUrls"
+        echo "Files contain old URL reference -> oktapreview.com"
+        return 1
+    fi
 }

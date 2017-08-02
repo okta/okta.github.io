@@ -24,9 +24,9 @@ If you do not already have a  **Developer Edition Account**, you can create one 
 > *As with any Okta application, make sure you assign Users or Groups to the OpenID Connect Client. Otherwise, no one can use it.*
 
 #### Enable [CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html)
-For security reasons, browsers make it difficult to make requests to other domains. In this example, we'll make requests from `http://localhost:4200` to `https://{yourOrg}.oktapreview.com`.
+For security reasons, browsers make it difficult to make requests to other domains. In this example, we'll make requests from `http://localhost:4200` to `https://{yourOktaDomain}.com`.
 
-You can configure `https://{yourOrg}.oktapreview.com` to accept our requests by [enabling CORS for `http://localhost:4200`](/docs/api/getting_started/enabling_cors.html#granting-cross-origin-access-to-websites).
+You can configure `https://{yourOktaDomain}.com` to accept our requests by [enabling CORS for `http://localhost:4200`](/docs/api/getting_started/enabling_cors.html#granting-cross-origin-access-to-websites).
 
 ## Create an Angular App
 To quickly create an Angular app, install the Angular CLI:
@@ -66,9 +66,9 @@ import * as OktaAuth from '@okta/okta-auth-js/dist/okta-auth-js.min.js';
 export class OktaAuthService {
 
   oktaAuth = new OktaAuth({
-    url: 'https://{yourOrg}.oktapreview.com/',
+    url: 'https://{yourOktaDomain}.com/',
     clientId: '{clientId}',
-    issuer: 'https://{yourOrg}.oktapreview.com/oauth2/{authorizationServerId}',
+    issuer: 'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}',
     redirectUri: 'http://localhost:4200/callback',
   });
 

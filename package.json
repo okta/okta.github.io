@@ -18,7 +18,8 @@
     "test": "npm run test-only || (npm stop && exit 1)",
     "posttest": "npm stop",
     "import-external": "node scripts/import-external 2>&1",
-    "find-missing-slashes": "node scripts/find-missing-slashes"
+    "find-missing-slashes": "node scripts/find-missing-slashes",
+    "consistency-check": "bash scripts/consistency.sh"
   },
   "repository": {
     "type": "git",

@@ -33,7 +33,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?q=Jane+Doe"
+"https://{yourOktaDomain}.com/api/v1/logs?q=Jane+Doe"
 ```
 
 ### Polling
@@ -44,7 +44,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
+"https://{yourOktaDomain}.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
 ```
 
 ### Transferring Data to a separate system
@@ -55,7 +55,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/api/v1/logs?since=2017-03-11"
+"https://{yourOktaDomain}.com/api/v1/logs?since=2017-03-11"
 ```
 
 ## Event Operations
@@ -569,7 +569,7 @@ Link: <url>; rel="self"
 
 For example:
 ```
-Link: <https://${org}.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T23%3A59%3A59%2B00%3A00&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="self"
+Link: <https://{yourOktaDomain}.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T23%3A59%3A59%2B00%3A00&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="self"
 ```
 
 ### Next Link Response Header
@@ -582,7 +582,7 @@ Link: <url>; rel="next"
 
 For example:
 ```
-Link: <https://${org}.okta.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T15%3A41%3A12.994Z&after=349996bd-5091-45dc-a39f-d357867a30d7&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="next"
+Link: <https://{yourOktaDomain}.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T15%3A41%3A12.994Z&after=349996bd-5091-45dc-a39f-d357867a30d7&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="next"
 ```
 
 ## Timeouts

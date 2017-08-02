@@ -161,7 +161,7 @@ curl -v -X POST \
       ],
       "token_endpoint_auth_method": "client_secret_post",
       "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }' "https://${org}.okta.com/oauth2/v1/clients"
+    }' "https://{yourOktaDomain}.com/oauth2/v1/clients"
 ~~~
 
 ##### Response Example
@@ -226,7 +226,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 ##### Response Example
@@ -300,7 +300,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/clients"
+"https://{yourOktaDomain}.com/oauth2/v1/clients"
 ~~~
 
 ##### Response Example
@@ -311,8 +311,8 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 ~~~
 ~~~json
-Link: <https://your-domain.okta.com/oauth2/v1/clients>; rel="self"
-Link: <https://your-domain.okta.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko>; rel="next"
+Link: <https://{yourOktaDomain}.com/oauth2/v1/clients>; rel="self"
+Link: <https://{yourOktaDomain}.com/oauth2/v1/clients?after=F10CaazJPQ5Zpyu1Ojko>; rel="next"
 
 [
   {
@@ -379,7 +379,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/clients?q=Payroll&limit=10"
+"https://{yourOktaDomain}.com/oauth2/v1/clients?q=Payroll&limit=10"
 ~~~
 
 ##### Response Example
@@ -468,7 +468,7 @@ curl -v -X PUT \
       ],
       "token_endpoint_auth_method": "client_secret_post",
       "initiate_login_uri": "https://www.example-application.com/oauth2/login"
-    }' "https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+    }' "https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 ##### Response Example
@@ -535,7 +535,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
- "https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"
+ "https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY/lifecycle/newSecret"
 ~~~
 
 ##### Response Example
@@ -601,7 +601,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${org}.okta.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
+"https://{yourOktaDomain}.com/oauth2/v1/clients/0jrabyQWm4B9zVJPbotY"
 ~~~
 
 
