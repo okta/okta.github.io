@@ -297,7 +297,7 @@ If a rate limit is exceeded, an HTTP 429 Status Code is returned.
 
 The best way to be sure about your rate limits is to check the relevant headers in the response. The System Log doesn't report every
 API request. Rather, it typically reports completed or attempted real-world events such as configuration changes, user logins, or user lockouts.
-The System Log contains events that report when you are nearing an API limit, but doesn’t report the rate at which you’ve been calling the API.
+The System Log doesn’t report the rate at which you’ve been calling the API.
 
 ### Org-Wide Rate Limits
 
