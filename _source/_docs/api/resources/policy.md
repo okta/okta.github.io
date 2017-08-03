@@ -808,7 +808,8 @@ connection | Network selection mode | `ANYWHERE`, `ZONE`, `ON_NETWORK`, or `OFF_
 include | The zones to include | Array | Only if connection data type is `ZONE` |
 exclude | The zones to exclude | Array | Only if connection data type is `ZONE` |
 
-> The `ON_NETWORK` and `OFF_NETWORK` data types are part of a {% api_lifecycle deprecated %} feature. The `ZONE` data type is now used when selecting network zones. Specific zone ids to include or exclude are specified in the respective arrays.
+> The connection parameter may be set to the `ZONE` data type to select individual network zones. Specific zone ids to include or exclude are enumerated in the respective arrays.
+> The [Zones API](./zones.html) can be used to manage network zones.
 
 #### Authentication Provider Condition Object
 {: #AuthProviderConditionObject }
