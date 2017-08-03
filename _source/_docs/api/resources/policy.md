@@ -654,8 +654,8 @@ For example if a particular policy had two rules, "A" and "B" as below.
 - Rule A has priority 1 and applies to RADIUS VPN scenarios.
 - Rule B has priority 2 and applies to ANYWHERE (network connection) scenarios.
 
-If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ANYWHERE,
-the action in Rule A would be taken, and Rule B would not be evaluated.
+If a request came in from the Radius endpoint, the action in Rule A would be taken, and Rule B would not be evaluated.
+This occurs because, even though requests coming from anywhere would match the ANYWHERE location condition of Rule B, Rule A has higher priority and is evaluated first.
 
 ### Rules Message Example (Password Policy)
 
@@ -808,7 +808,7 @@ connection | Network selection mode | `ANYWHERE`, `ZONE`, `ON_NETWORK`, or `OFF_
 include | The zones to include | Array | Only if connection data type is `ZONE` |
 exclude | The zones to exclude | Array | Only if connection data type is `ZONE` |
 
-> The `ON_NETWORK` and `OFF_NETWORK` data types are part of a {% api_lifecycle deprecated %} feature. The `ZONE` data type is now used when selecting network zones. Specific zones to include or exclude are specified in the respective arrays.
+> The `ON_NETWORK` and `OFF_NETWORK` data types are part of a {% api_lifecycle deprecated %} feature. The `ZONE` data type is now used when selecting network zones. Specific zone ids to include or exclude are specified in the respective arrays.
 
 #### Authentication Provider Condition Object
 {: #AuthProviderConditionObject }
