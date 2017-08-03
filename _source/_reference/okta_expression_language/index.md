@@ -87,7 +87,7 @@ Function | Input Parameter Signature | Return Type | Example | Output
 
 
 
-The following deprecated functions perform some of the same tasks as the ones in the above table.
+The following {% api_lifecycle deprecated %} functions perform some of the same tasks as the ones in the above table.
 
 Function  | Example | Input | Output
 -------- | --------- | -------| --------
