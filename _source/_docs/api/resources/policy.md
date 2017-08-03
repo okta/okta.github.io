@@ -1162,7 +1162,7 @@ okta_sms | Settings for SMS factor | <a href="#SMSFactorObject">SMS Factor Objec
 
 Property | Description | Data Type | Required |
 | --- | --- | --- | ---
-status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` (EA) | Yes |
+status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` {% api_lifecycle ea %} | Yes |
 properties | Configuration settings for security question factor | <a href="#RecoveryQuestionFactorPropertiesObject">Recovery Question Factor Properties Object</a> | No
 
 ###### Recovery Question Factor Properties Object

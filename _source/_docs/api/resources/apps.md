@@ -5084,7 +5084,7 @@ Application User profiles are app-specific but may be customized by the Profile 
 
 {% img okta-admin-ui-profile-editor.png "Profile Editor UI" alt:"Profile Editor UI" %}
 
-> Managing profiles for applications is restricted to specific editions and requires access to the Universal Directory Early Access feature
+> Managing profiles for applications is restricted to specific editions and requires access to the Universal Directory {% api_lifecycle ea %} feature
 
 ##### Example Application Assignment
 
