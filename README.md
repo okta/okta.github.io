@@ -6,6 +6,12 @@
 [![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)](https://devforum.okta.com/)
 
 # Okta Developer 'Hub
+
+Okta developer site [developer.okta.com](https://developer.okta.com) is a custom [Jekyll](http://jekyllrb.com/) site deployed on [GitHub pages](https://pages.github.com/).
+
+All documentation submissions are welcome. To submit a change, please follow the [contribution process](Contributing-to-the-Site#you-are-making-a-non-blog-change).
+
+## Resources
 - [API Reference](https://developer.okta.com/docs/api/resources/)
 - [Developer Blog](https://developer.okta.com/blog/)
 - [Sample Code](https://developer.okta.com/code/)
