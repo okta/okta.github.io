@@ -235,12 +235,13 @@ Define custom claims in [the Okta user interface](https://help.okta.com/en/prod/
 A custom claim can be configured in the following ways:
 
 * Choose whether the claim is included in the ID token or the access token.
-* Choose whether the claim is always included in the token, or only when the claim is specified.
+* Choose whether the claim is always included in a token, or only when the claim is specified.
 * Define the scopes that this claim is included in: either any scope or a list of scopes that you define.
 * Disable the claim. This is often used for testing.
-* Define what the claim refers to. For example, the claim may apply to all groups of a certain type, or apply to any expression you can define using [Okta's Expression Language](/reference/okta_expression_language/), including a literal string.
-    * Example of an string literal expression: `"orderFood"` maps to the scope `food:order` (also defined in the Custom Authorization Server). You can create more elaborate expressions if needed.
-    * Examples of group list: Groups that start with "Customer." You can also use regular expressions to define the group list.
+* Define the claim value (what's returned in the token for this claim), using [Okta's Expression Language](/reference/okta_expression_language/) or a group filter.
+    * Example of expressions: `"user.region"`, the value of the custom field "region" on the user's profile. You can create expressions to reference non-Okta groups.
+    * Example of a set of Okta groups specified by `groupFilterType`: If the token recipient wanted to display a badge for all current customers, you could specify a `groupFilterType` that start with "Customer" (`STARTS_WITH=Customer`). See [`groupFilterType`](/docs/api/resources/oauth2.html#details-for-groupfiltertype) for details.
+        Notice that you can use the group filter (`valueType` is `GROUP`) for Okta user groups. For non-Okta groups, `valueType` must be `EXPRESSION`. Okta app groups are not yet supported.
   
   The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn't added into the ID token or access token.
   The datatype of a claim is an array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.
