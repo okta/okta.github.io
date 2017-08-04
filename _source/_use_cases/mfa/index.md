@@ -234,5 +234,5 @@ Okta MFA API with the following resources.
 -   The video in this guide.
     These instructions only cover part of what is covered in the video.
 -   The [design principles for the Okta API](/docs/getting_started/design_principles.html).
--   The API documentation for the [Okta Factors API](/docs/api/rest/factors.html).
--   The API documentation for the [Okta Authentication API](/docs/api/rest/authn.html).
+-   The API documentation for the [Okta Factors API](/docs/api/resources/factors.html).
+-   The API documentation for the [Okta Authentication API](/docs/api/resources/authn.html).
