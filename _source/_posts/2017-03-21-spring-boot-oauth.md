@@ -68,7 +68,7 @@ Navigate to [http://localhost:8080](http://localhost:8080) and you'll be prompte
 
 ## Create an Authorization Server in Okta
 
-To start authenticating against Okta'a API, you have to first create a developer account on [https://developer.okta.com](https://developer.okta.com). After activating your account, sign in and navigate to **Security > API** and click on the **Add Authorization Server** button.
+To start authenticating against Okta'a API, you have to first create a developer account on [https://developer.okta.com](https://developer.okta.com). After activating your account, sign in and navigate to **API** > **Authorization Servers** and click on the **Add Authorization Server** button.
 
 {% img blog/spring-boot-oauth/1-add-auth-server.png alt:"Add Authorization Server" width:"800" %}
 
@@ -163,7 +163,7 @@ The next error you'll see when trying to authenticate is _Policy evaluation fail
 
 {% img blog/spring-boot-oauth/11-policy-evaluation-failure.png alt:"Policy Evaluation Failure" width:"800" %}
 
-In Okta's UI, navigate to **Security > API** and click on your Authorization Server's name and **Access Policies**. Click **Add Policy** to continue.
+In Okta's UI, navigate to **API** > **Authorization Servers** and click on your Authorization Server's name and **Access Policies**. Click **Add Policy** to continue.
 
 {% img blog/spring-boot-oauth/12-access-policies.png alt:"Access Policies" width:"800" %}
 

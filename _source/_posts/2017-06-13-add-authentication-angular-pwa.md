@@ -109,8 +109,8 @@ Your application has been created, but you still have a few settings to change.
 ### Create an Access Token
 
 1. Navigate to your Admin console
-2. On the top menu click on **Security** > **API**
-3. Click the *Tokens* tab and then click **Create Token**
+2. On the top menu click on **API** > **Tokens**
+3. Click **Create Token**
 5. On the popup, give your new token a name like "Bootiful Token", and click **Create Token**
 
 **Important:** You will need to remember this token value, so copy/paste it somewhere safe.
@@ -406,7 +406,7 @@ https://dev-158606.oktapreview.com/.well-known/openid-configuration net::ERR_FAI
 error loading discovery document 
 ```
  
-To fix this problem, you need to add the client’s URL as a Trusted Origin for a cross-origin request. Login to your Okta dashboard and navigate to **Security** > **API**. Click on the **Trusted Origins** tab and click the **Add Origin** button. Enter `http://localhost:4200` for the Origin URL, give it a name like "Angular PWA", check **CORS**, and click **Save**.
+To fix this problem, you need to add the client’s URL as a Trusted Origin for a cross-origin request. Login to your Okta dashboard and navigate to **API** > **Trusted Origins**. Click the **Add Origin** button and enter `http://localhost:4200` for the Origin URL, give it a name like "Angular PWA", check **CORS**, and click **Save**.
 
 Now you should be able to login and see a welcome message.
 
@@ -761,7 +761,7 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. Or
 'https://pwa-client-phototopographical-subcurrent.cfapps.io' is therefore not allowed access.
 ```
 
-To fix this, modify the Trusted Origins on Okta (under **Security** > **API**) to have your client's URL (e.g. `https://pwa-client-phototopographical-subcurrent.cfapps.io`). 
+To fix this, modify the Trusted Origins on Okta (under **API** > **Trusted Origins**) to have your client's URL (e.g. `https://pwa-client-phototopographical-subcurrent.cfapps.io`). 
 
 {% img blog/angular-pwa-auth/add-cf-origin.png alt:"Add Trusted Origin" width:"600" %}
 

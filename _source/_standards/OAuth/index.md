@@ -41,7 +41,7 @@ In addition to the information in this topic, see:
 
 * [Okta's API Access Management Introduction](/use_cases/api_security/)
 * [OAuth 2.0 API](/docs/api/resources/oauth2.html)
-* [Help for configuring API Access Management in the Okta UI](https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=api%20access%20management)
+* [Help for configuring API Access Management in the Okta UI](/docs/how-to/set-up-auth-server.html)
 
 ## Basic Flows
 
@@ -393,7 +393,7 @@ Also, custom scopes can be configured to support the authorization for your APIs
 | Custom Claims                            |                           | &#10004;                    |
 | Custom Access Policies and Rules         |                           | &#10004;                    |
 
-To configure a Custom Authorization Server, sign in to your org and navigate to **Security** > **API** > **Add Authorization Server** or use the [Custom Authorization Server API](/docs/api/resources/oauth2.html#authorization-server-operations).
+To configure a Custom Authorization Server, sign in to your org and navigate to **API** > **Authorization Servers** > **Add Authorization Server** or use the [Custom Authorization Server API](/docs/api/resources/oauth2.html#authorization-server-operations).
 
 If you use a Custom Authorization Server, we recommend that you use it instead of the Okta Authorization Server for 
 any platform use cases (perform SSO or secure your API access).
