@@ -9,7 +9,7 @@ Okta's [Universal Directory](https://support.okta.com/articles/Knowledge_Article
 
 > Okta has only implemented a subset of [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04).  This document should describe which parts are applicable to Okta and any extensions Okta has made to [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04)
 
-> This API is currently in **Early Access (EA)** status.
+{% api_lifecycle ea %}
 
 ## Getting Started
 
