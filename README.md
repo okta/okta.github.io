@@ -15,12 +15,12 @@ All documentation submissions are welcome. To submit a change, please follow the
 - [API Reference](https://developer.okta.com/docs/api/resources/)
 - [Developer Blog](https://developer.okta.com/blog/)
 - [Sample Code](https://developer.okta.com/code/)
-- [Contributing to the Site](https://github.com/jmelberg-okta/okta.github.io/wiki/Contributing-to-the-Site)
-- [Wiki](https://github.com/jmelberg-okta/okta.github.io/wiki)
+- [Contributing to the Site](https://github.com/okta/okta.github.io/wiki/Contributing-to-the-Site)
+- [Wiki](https://github.com/okta/okta.github.io/wiki)
 
 ## Getting Started
-- [Clone and install dependencies](https://github.com/jmelberg-okta/okta.github.io/wiki/Setting-Up-Your-Environment)
+- [Clone and install dependencies](https://github.com/okta/okta.github.io/wiki/Setting-Up-Your-Environment)
 - Build the site `npm start`
 - Visit [`http://localhost:4000`](http://localhost:4000) in your browser
 
-> *To submit a change, please follow the contribution process detailed in our [wiki](https://github.com/jmelberg-okta/okta.github.io/wiki).*
+> *To submit a change, please follow the contribution process detailed in our [wiki](https://github.com/okta/okta.github.io/wiki).*
