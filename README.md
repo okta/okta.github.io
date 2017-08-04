@@ -16,11 +16,11 @@ All documentation submissions are welcome. To submit a change, please follow the
 - [Developer Blog](https://developer.okta.com/blog/)
 - [Sample Code](https://developer.okta.com/code/)
 - [Contributing to the Site](https://github.com/jmelberg-okta/okta.github.io/wiki/Contributing-to-the-Site)
-- [Documentation Wiki](https://github.com/jmelberg-okta/okta.github.io/wiki)
+- [Wiki](https://github.com/jmelberg-okta/okta.github.io/wiki)
 
 ## Getting Started
-- [Clone and install `gem` and `npm` dependencies](https://github.com/jmelberg-okta/okta.github.io/wiki/Setting-Up-Your-Environment)
-- Build and start the site `npm start`
+- [Clone and install dependencies](https://github.com/jmelberg-okta/okta.github.io/wiki/Setting-Up-Your-Environment)
+- Build the site `npm start`
 - Visit [`http://localhost:4000`](http://localhost:4000) in your browser
 
 > *To submit a change, please follow the contribution process detailed in our [wiki](https://github.com/jmelberg-okta/okta.github.io/wiki).*
