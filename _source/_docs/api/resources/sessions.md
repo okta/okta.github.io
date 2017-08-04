@@ -682,7 +682,7 @@ The [Create Session](#create-session-with-session-token) operation can optionall
 
 > The `cookieToken` is a {% api_lifecycle deprecated %} property. Instead, use the [Authentication API](./authn.html), which supports the full user authentication pipeline and produces a `sessionToken` which can be used in this API.
 
-> The `cookieTokenUrl` is a {% api_lifecycle deprecated %} property. because modern browsers block cookies set via embedding images from another origin (cross-domain).
+> The `cookieTokenUrl` is a {% api_lifecycle deprecated %} property, because modern browsers block cookies set via embedding images from another origin (cross-domain).
 
 ### Session Status
 
