@@ -7,7 +7,7 @@ support_email: developers@okta.com
 
 # Overview
 
-When you use the Okta API to [obtain an authorization grant for a user](https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user), the response contains a signed JWT (`id_token` and/or `access_token`).
+When you use the Okta API to [obtain an authorization grant for a user](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user), the response contains a signed JWT (`id_token` and/or `access_token`).
 
 A common practice is to send one of these tokens in the `Bearer` header of future requests, to authorize the request for that user. Your server must then validate the token to make sure it's authentic and hasn't expired.
 
@@ -16,7 +16,7 @@ A common practice is to send one of these tokens in the `Bearer` header of futur
 You **don't** need to validate tokens manually if:
 
 * You are using ASP.NET or ASP.NET Core with the `JwtBearer` or `OpenIdConnect` middleware
-* You want to send tokens to Okta to be validated (this is called [token introspection](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request))
+* You want to send tokens to Okta to be validated (this is called [token introspection](/docs/api/resources/oauth2.html#introspection-request))
 
 If you need to validate a token manually, and don't want to make a network call to Okta, this guide will help you validate tokens locally.
 

@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Okta Auth SDK Reference 
 weight: 100
 hide_from_layout: 0

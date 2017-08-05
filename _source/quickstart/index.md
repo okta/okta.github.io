@@ -8,6 +8,8 @@ title: Authentication Quickstart Guide
 
 <h2 id="client_setup">Client Setup</h2>
 
+First, let's add authentication to your client. (Already done? [Skip to server setup.](#server_setup))
+
 <div class="code-selector" id="client-selector">
   <h3>Client</h3>
 </div>

@@ -1,12 +1,12 @@
 ---
-layout: docs_page
+layout: software
 title: JWT Validation Guide
 excerpt: How to validate Okta JWTs with PHP.
 support_email: developers@okta.com
 ---
 
 # Overview
-As a result of a successful authentication by [obtaining an authorization grant from a user](https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) 
+As a result of a successful authentication by [obtaining an authorization grant from a user](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) 
 or using the Okta API, you will be provided with a signed JWT (`id_token` and/or `access_token`). A common use case for 
 these access tokens is to use it inside of the Bearer authentication header to let your application know who the user
 is that is making the request. In order for you to know this use is valid, you will need to know how to validate the

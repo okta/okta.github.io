@@ -9,7 +9,7 @@ excerpt: Integrate Okta with an iOS native application using OktaAuth.
 This guide will walk you through integrating authentication and authorization into a Swift iOS native application with Okta.
 
 ## Prerequisites
-If you do not already have a  **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
+If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](/signup/).
 
 ### Add an OpenID Connect Client
 * Log into the Okta Developer Dashboard, and **Create New App**
@@ -54,7 +54,7 @@ Create a new `Okta.plist` file in your application's bundle with the following f
 ```
 **Note**: *To receive a **refresh_token**, you must include the `offline_access` scope.*
 
-> Important: Most native applications send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](https://developer.okta.com/docs/how-to/set-up-auth-server.html#create-an-authorization-server).
+> Important: Most native applications send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](/docs/how-to/set-up-auth-server.html#create-an-authorization-server).
 
 ### Update the Private-use URI Scheme
 In order to redirect back to your application from a web browser, you must specify a unique URI to your app. To do this, open `Info.plist` in your application bundle and set a **URL Scheme** to the scheme of the login redirect URI.

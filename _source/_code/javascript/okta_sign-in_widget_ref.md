@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Okta Sign-In Widget Reference
 weight: 100
 hide_from_layout: 0

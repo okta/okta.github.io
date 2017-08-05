@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'okticon';
+  src: font_url('okticon.eot');
+  src: font_url('okticon.eot?#iefix') format('embedded-opentype'),
+    font_url('okticon.woff') format('woff'),
+    font_url('okticon.ttf') format('truetype'),
+    font_url('okticon.svg#okticon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 h6 {
 	font-family: $font-family--alt;
 }

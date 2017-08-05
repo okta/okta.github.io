@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Okta Sign-In Widget Quickstart
 excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta.
 weight: 1
@@ -280,7 +280,7 @@ your HTML:
 The configuration options that are passed to the `OktaSignIn()`
 constructor are used to configure the functionality and text labels
 of the Okta Sign-In Widget. An example of how to configure
-`OktaSignIn()` is below. If you'd like to see the full list of configuration options, see the [Sign-in Widget Reference page](https://developer.okta.com/code/javascript/okta_sign-in_widget_ref.html#configuration-options).
+`OktaSignIn()` is below. If you'd like to see the full list of configuration options, see the [Sign-in Widget Reference page](/code/javascript/okta_sign-in_widget_ref.html#configuration).
 
 #### A Walkthrough of the Widget Code
 
@@ -408,7 +408,7 @@ var oktaSignIn = new OktaSignIn({
 });
 ~~~
 
-For more information about these configuration options, see the [Sign-in Widget Reference page](https://developer.okta.com/code/javascript/okta_sign-in_widget_ref.html#configuration-options). 
+For more information about these configuration options, see the [Sign-in Widget Reference page](/code/javascript/okta_sign-in_widget_ref.html#configuration). 
 
 ## Troubleshooting
 

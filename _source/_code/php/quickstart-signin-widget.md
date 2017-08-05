@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Okta Sign-In Widget
 excerpt: Quickstart guide for using the Okta Sign-In Widget with PHP.
 support_email: developers@okta.com

@@ -7,12 +7,8 @@ describe('code page spec (java)', () => {
     codePage.load();
   });
 
-  it('has columns in right order', () => {
-    expect(codePage.hasColumns()).toBe(true);
-
-    const expectedLinks = ['Okta SDK', 'JWT Validation Guide',
-      'Android Native Application with AppAuth', 'Spring Security SAML'];
-
-    expect(codePage.linksInOrder(expectedLinks)).toBe(true);
+  it('has a quick start guide and sample app', () => {
+    expect(codePage.hasQuickStart()).toBe(true);
+    expect(codePage.hasSampleApp()).toBe(true);
   });
 });

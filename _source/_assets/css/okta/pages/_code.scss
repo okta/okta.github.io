@@ -1,0 +1,50 @@
+.code-icon {
+  display: inline-block;
+  margin-right: 14px;
+}
+
+ul.code-list {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.code-button {
+  height: 70px;
+  padding: 20px;
+  font-size: 18px;
+  display: block;
+  text-decoration:none;
+  border: solid;
+  border-width: 1px;
+  border-color: #D2D2D6;
+  border-radius: 3px;
+
+  .code-icon {
+    margin-right: 28px;
+  }
+
+  .code-icon::before {
+    font-size: 26px;
+  }
+
+  .fa {
+    margin-right: 6px;
+  }
+
+  .fa::before {
+    font-size: 26px;
+  }
+
+  &.inverse {
+    background: #115D8B;
+    border: #115D8B;
+
+    .code-icon::before {
+      color: white;
+    }
+
+    &:link, &:active, &:visited {
+      color: white;
+    }
+  }
+}
