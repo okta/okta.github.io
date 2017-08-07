@@ -397,6 +397,13 @@ If you use a Custom Authorization Server, we recommend that you use it instead o
 any platform use cases (perform SSO or secure your API access).
 Doing so will make it easier to consume enhancements to the API Access Management product and features.  
 
+Okta provides a pre-configured Custom Authorization Server with the name `default`.
+This default authorization server includes a basic access policy and rule, which you can edit to control access. 
+It allows you to specify `default` instead of the `authorizationServerId` in requests to it:
+
+* `https://{YourOktaOrg}}/api/v1/authorizationServers/default`  vs 
+* `https://{YourOktaOrg}}/api/v1/authorizationServers/:authorizationServerId` for other Customer Authorization Servers
+
 ## OpenID Connect and Authorization Servers
 
 You can use the [OpenID Connect API](/docs/api/resources/oidc.html) without API Access Management (Custom Authorization Server).
