@@ -47,7 +47,7 @@ Bug fixes are expected on preview orgs starting August 9, 2017, and on productio
 
 * The **Add policy** button wasn't disabled for Org Admins, who don't have permission to create authorization server policies. (OKTA-127450)
 * Some requests to `/oauth2/v1/authorize` with the `state` parameter incorrectly returned an error. (OKTA-130916)
-* When an ID token was minted for a custom authorization server from a request to `/oauth2/:authorizationServerId/v1/token`, an app sign-on event wasn't generated. (OKTA-134554)
+* When an ID token was minted for a custom authorization server, an app sign-on event wasn't generated. (OKTA-134554)
 
 ### Does Your Org Have This Change Yet?
 
