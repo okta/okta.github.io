@@ -19,7 +19,7 @@
 		position: absolute;
 		top: 0;
 		transform: translateX(-100%);
-		width: 20px;
+		width: 100vw;
 	}
 
 	&-title {
@@ -106,7 +106,15 @@
 		    height: auto;
 		    border-bottom: solid 3px get-color('gray-light');
 		    z-index: 100;
-		    position: relative;
+
+			@include media('<medium') {
+				margin-top: get-spacing(x-small);
+			}
+
+			@include media('<600px') {
+				margin-top: 0;
+			}
+
 	        h3,
 	        ul {
 		        display: none;

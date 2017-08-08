@@ -35,6 +35,7 @@ var oktaCustomRenderFunction = function(document_type, item) {
       event.preventDefault();
       $('.Header').toggleClass('is-active');
       $('.PrimaryNav').toggleClass('is-active');
+      $('.Page').toggleClass('PrimaryNav-is-active');
   });
 
   $('#form_search #st-search-input-auto').on('keyup', function(){

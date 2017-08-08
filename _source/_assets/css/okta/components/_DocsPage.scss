@@ -1,11 +1,13 @@
 // Variation for docs pages
 .Page--docs-page {
 
-  &.scrolling {
+  &.scrolling:not(.PrimaryNav-is-active) {
 
     * {
       @include transition(all slow);
     }
+
+
 
     .Header {
       background: get-color('white');
@@ -33,10 +35,12 @@
 
         .Button {
           &--redOutline {
+            @include transition('none');
             color: get-color('cerise');
           }
 
           &--red {
+            @include transition('none');
             color: get-color('white');
           }
         }
@@ -63,13 +67,6 @@
       }
     }
   }
-
-  .PageContent {
-    @include media('>=medium') {
-      padding-top: 90px !important;
-    }
-  }
-
 
   @include media('<doc-min-toc') {
     .Sidebar {
