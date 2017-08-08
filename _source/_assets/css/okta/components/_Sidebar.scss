@@ -19,16 +19,14 @@
 		position: absolute;
 		top: 0;
 		transform: translateX(-100%);
-		width: 50vw;
+		width: 20px;
 	}
 
 	&-title {
-		@include color('gray-dark');
-		@include font-size('base');
-		@include margin(medium 0 xx-small);
-		font-weight: 400;
-		text-transform: uppercase;
-		border-bottom: solid 1px get-color('gray-dark');
+		@include color('white');
+		@include font-size('h2');
+		@include margin(medium 0 small);
+		font-weight: 500;
 	}
 
 	&-nav {
@@ -47,7 +45,9 @@
 			a {
 				@include padding(0.1em x-small);
 				@include transition(background normal);
+				@include font-size('small');
 				border-radius: 3px;
+				text-transform: uppercase;
 			}
 
 			a:active, a:hover {
@@ -56,10 +56,12 @@
 		}
 
 		a {
-			@include color('default');
+			@include color('white');
+			@include font-size('small');
 			display: block;
 			font-weight: 400;
 			text-decoration: none;
+			text-transform: uppercase;
 		}
 
 
@@ -75,7 +77,7 @@
 
 		.is-active {
 			> a {
-				@include color('accent');
+				@include color('cerise');
 			}
 
 			> ul {

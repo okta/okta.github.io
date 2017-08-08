@@ -64,5 +64,14 @@ var oktaCustomRenderFunction = function(document_type, item) {
       perPage: 40
   });
 
+  $('.Sidebar-toggle').on('click', function(e) {
+    e.stopPropagation();
+    $(this).parent().toggleClass('Sidebar-active');
+  });
+
+  $('header, .Sidebar').bind('click', function() {
+    $('.Sidebar.Sidebar-active').removeClass('Sidebar-active');
+  });
+
 })(jQuery);
 

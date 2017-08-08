@@ -2,19 +2,68 @@
 .Page--docs-page {
   .Header {
     background: get-color('white');
+    border-bottom: solid 2px get-color('iron');
 
     .Wrap {
       background: get-color('white');
     }
 
     .PrimaryNav {
-      a {
+      a,
+      span {
         color: get-color('default');
+
+        &.active {
+          color: #F1847F;
+        }
+      }
+
+      .Button {
+        &--redOutline {
+          color: get-color('cerise');
+        }
+
+        &--red {
+          color: get-color('white');
+        }
+      }
+
+      .SearchIcon {
+        background: image_url("icons/search.svg") center no-repeat;
       }
     }
 
-    .Button--redOutline {
-      color: get-color('cerise');
+    #form_search {
+      background: transparent;
+
+      input[type=submit] {
+        color: get-color('white');
+        background-color: get-color('iron');
+      }
+
+      &.button-active {
+        input[type=submit] {
+          background: #e22866;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .PageContent {
+    @include media('>=medium') {
+      padding-top: 90px !important;
+    }
+  }
+
+
+  @include media('<doc-min-toc') {
+    .Sidebar {
+      background: get-color('ebony-clay');
+
+      &-location {
+        color: get-color('white');
+      }
     }
   }
 }

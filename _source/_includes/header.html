@@ -1,17 +1,28 @@
+{% assign active_documentation = '' %}
+{% assign documentation_dirs = "code,documentation,docs,standards,use_cases" | split:"," %}
+
+{% for dir in documentation_dirs %}
+  {% if page.url contains dir %}
+    {% assign active_documentation = ' class="active"' %}
+  {% endif %}
+{% endfor %}
+
 <header class="Header is-fixed">
 
   <div class="Wrap">
 
-    <div class="LogoFill">
-      <a class="Logo" href="{{ site.external_domain }}{{ site.external_path }}">
+    <a class="Logo" href="{{ site.external_domain }}{{ site.external_path }}">
+      {% if layout.variant == 'docs_base' %}
+        {% img logo.svg %}
+      {% else %}
         <img src="{{ site.external_domain }}/sites/all/themes/developer/media/logo.svg">
-      </a>
-    </div>
+      {% endif %}
+    </a>
 
     <nav class="Header-nav PrimaryNav">
       <ul class="menu">
         <li class="first leaf">
-          <a href="{{ site.internal_url }}/documentation/"{% if page.url contains "/documentation/" %} class="active"{% endif %}>Docs</a>
+          <a href="{{ site.internal_url }}/documentation/"{{ active_documentation }}>Docs</a>
         </li>
         <li class="leaf">
           <a href="{{ site.external_domain }}{{ site.external_path }}/pricing/">Pricing</a>
