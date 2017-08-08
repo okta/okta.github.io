@@ -511,6 +511,21 @@ export class OktaAuthService {
 
 Make sure to replace `{yourOktaDomain}` and `{client}` in the above code.
 
+Add `OktaAuthService` as a provider to `client/src/app/app.module.ts`.
+
+```typescript
+import { OktaAuthService } from './shared/okta/okta.service';
+
+@NgModule({
+  ...
+  providers: [
+    BeerService, GiphyService, OktaAuthService
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
 Modify `client/src/app/shared/beer/beer.service.ts` to read the access token and set it in an `Authorization` header when 
 it exists. 
 
