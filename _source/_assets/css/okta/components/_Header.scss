@@ -1,7 +1,20 @@
 .Header {
   background: get-color('ebony-clay');
+
+  #OktaLogo {
+    path {
+      fill: get-color('white');
+    }
+  }
+
+  @include media('<=600px') {
+    #form_search {
+      input[type=text] {
+        margin-left: 10px !important;
+      }
+    }
+  }
+
 }
 
-@include media('<860px') {
-
-}
+@include media('<860px') {}

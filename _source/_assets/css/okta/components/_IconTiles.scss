@@ -1,7 +1,6 @@
 // Programming Language Icons
 %IconTile {
 	@include responsiveRatio('5x3');
-	background-color: get-color('matisse');
 	box-shadow: get-color('elephant') 10px 10px;
 
 	&:after {
@@ -28,12 +27,16 @@
 
 .IconTile {
 	&--javascript {
+		background-color: #D09B44;
+
 		&:after {
 			background-image: image_url("icons/javascript--white.svg");
 		}
 	}
 
 	&--java {
+		background-color: #AD5656;
+
 		&:after {
 			background-image: image_url("icons/java--white.svg");
 			max-height: 80px;
@@ -41,12 +44,16 @@
 	}
 
 	&--python {
+		background-color: #1584F9;
+
 		&:after {
 			background-image: image_url("icons/python--white.svg");
 		}
 	}
 
 	&--dotnet {
+		background-color: #3C5DDD;
+
 		&:after {
 			background-image: image_url("icons/dotnet--white.svg");
 			max-height: 30px;
@@ -54,72 +61,100 @@
 	}
 
 	&--objectivec {
+		background-color: #7F8C9B;
+
 		&:after {
 			background-image: image_url("icons/objectivec--white.svg");
 		}
 	}
 
 	&--php {
+		background-color: #854DB1;
+
 		&:after {
 			background-image: image_url("icons/php--white.svg");
 		}
 	}
 
 	&--swift {
+		background-image: #ffb52a;
+		background-image: -moz-linear-gradient(-45deg, #ffb52a 0%, #fe8a1c 46%, #ff4a2d 100%);
+		background-image: -webkit-linear-gradient(-45deg, #ffb52a 0%,#fe8a1c 46%,#ff4a2d 100%);
+		background-image: linear-gradient(135deg, #ffb52a 0%,#fe8a1c 46%,#ff4a2d 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb52a', endColorstr='#ff4a2d',GradientType=1 );
+
 		&:after {
 			background-image: image_url("icons/swift--white.svg");
 		}
 	}
 
 	&--bash {
+		background-color: #2C3439;
+
 		&:after {
 			background-image: image_url("icons/bash--white.svg");
 		}
 	}
 
 	&--salesforce {
+		background-color: #009ada;
+
 		&:after {
 			background-image: image_url("logos/salesforce--white.svg");
 		}
 	}
 
 	&--box {
+		background-color: #16abe4;
+
 		&:after {
 			background-image: image_url("logos/box--white.svg");
 		}
 	}
 
 	&--aws {
+		background-color: #ff9a00;
+
 		&:after {
 			background-image: image_url("logos/aws--white.svg");
 		}
 	}
 
 	&--concur {
+		background-color: #0076cc;
+
 		&:after {
 			background-image: image_url("logos/concur--white.svg");
 		}
 	}
 
 	&--zendesk {
+		background-color: #77a500;
+
 		&:after {
 			background-image: image_url("logos/zendesk--white.svg");
 		}
 	}
 
 	&--slack {
+		background-color: #74d5b6;
+
 		&:after {
 			background-image: image_url("logos/slack--white.svg");
 		}
 	}
 
 	&--dropbox {
+		background-color: #007be8;
+
 		&:after {
 			background-image: image_url("logos/dropbox--white.svg");
 		}
 	}
 
 	&--docusign {
+		background-color: #007ac5;
+
 		&:after {
 			background-image: image_url("logos/docusign--white.svg");
 		}

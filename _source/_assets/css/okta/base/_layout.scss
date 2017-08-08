@@ -7,7 +7,11 @@ body {
     position: relative;
 
   @include media('<medium') {
-    padding-top: 75px;
+    padding-top: 70px;
+  }
+
+  @include media('<=600px') {
+    padding-top: 0;
   }
 
   &.Page-Full-Width {

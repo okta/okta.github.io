@@ -11,7 +11,7 @@
 	width: 100%;
 	z-index: 10;
 	background-color: get-color('white');
-	padding-top: 100px;
+	padding-top: 90px;
 
 	h1 {
 		margin-top: 0px;
@@ -774,11 +774,18 @@
 
 @include media('<medium') {
 	.PageContent {
-		// padding-left: get-spacing('medium');
+		 padding-top: 0;
+
 		&-main {
 			@include padding(medium small);
             flex-grow: 1;
 		}
+	}
+}
+
+@include media('<600px') {
+	.PageContent {
+		padding-top: 90px;
 	}
 }
 
@@ -791,8 +798,7 @@
 @include media('<doc-min-toc') {
 	.PageContent {
 		padding-left: 0px;
-        padding-top: 10px;
-		&.has-tableOfContents {
+        &.has-tableOfContents {
 			flex-direction: column;
 			padding-right: 0;
 		}

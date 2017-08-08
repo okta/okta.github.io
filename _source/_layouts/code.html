@@ -13,7 +13,7 @@
         <h2 class="Sidebar-location Sidebar-toggle h6">HTTP Verbs</h3>
            <div class="Sidebar-close Sidebar-toggle"></div>
 	   <div>
-	     <h3 class="Sidebar-title">Programming languages</h3>
+	     <h3 class="Sidebar-title">Programming Languages</h3>
 	     <ul class="Sidebar-nav">{%
            assign indices = site.code | sort: 'id' %}{% for index in indices %}{% unless index.id contains '/index' %}{% continue %}{% endunless %}{% assign parts = index.id | split: "/" %}{% assign language = parts[2] %}{% assign element = index %}
            <li{% if element.title == page.title%} class="is-active"{% endif %}><a href="/code/{{ language | prepend: site.baseurl }}">{{ element.title }}</a></li>{%
