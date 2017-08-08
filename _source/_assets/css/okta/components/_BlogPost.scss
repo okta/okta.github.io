@@ -68,46 +68,93 @@
 	&-content {
 		@include color('charcoal');
 		
-		h1 {
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
 			@include color('charcoal');
+			@include margin(large 0 x-small);
+	
+			a {
+				@include color('default');
+				position: relative;
+				text-decoration: none;
+				
+				&:active,
+				&:hover {
+					@include color('charcoal');
+					text-decoration: none;
+				}
+			}
+			
+			&:hover a:after,	
+			a:active:after,
+			a:hover:after {
+				background: image_url('icon-link.svg') no-repeat center;
+				background-size: contain;
+				content: '';
+				display: inline-block;
+				height: 18px;
+				margin-left: get-spacing('small');
+				vertical-align: middle;
+				width: 18px;
+			}
+		}
+		
+		h1 {
 			font-size: 44px;
 			font-weight: 500;
 			line-height: 52px;
 		}
 		
 		h2 {
-			@include color('charcoal');
 			font-size: 38px;
 			font-weight: 500;
 			line-height: 54px;
 		}
 		
 		h3 {
-			@include color('charcoal');
 			font-size: 32px;
 			font-weight: 500;
 			line-height: 48px;
 		}
 		
 		h4 {
-			@include color('charcoal');
 			font-size: 24px;
 			font-weight: 500;
 			line-height: 40px;
 		}
 		
 		h5 {
-			@include color('charcoal');
 			font-size: 20px;
 			font-weight: 500;
 			line-height: 32px;
 		}
 		
 		h6 {
-			@include color('charcoal');
 			font-size: 18px;
 			font-weight: 500;
 			line-height: 24px;
+		}
+		
+		blockquote {
+			@include margin(large auto);
+			@include padding(large);
+			background: #ECF2F6;
+			border-left: 18px solid #115D8B;
+			font-style: normal;
+			max-width: 800px;
+			
+			p {
+				font-size: 24px;
+				line-height: 40px;
+			}
+			
+			cite {
+				font-size: 20px;
+			}
 		}
 		
 		pre {
@@ -115,6 +162,8 @@
 			background: #f4f4f4;
 			display: block;
 			margin: get-spacing('large') 0;
+			max-width: 900px;
+			overflow: auto;
 			
 			code {
 				background: none;
