@@ -46,12 +46,14 @@
 				@include padding(0.1em x-small);
 				@include transition(background normal);
 				@include font-size('small');
+				font-weight: 400;
 				border-radius: 3px;
 				text-transform: uppercase;
 			}
 
 			a:active, a:hover {
-				background-color: get-color('gray-light');
+				background-color: get-color('cerise');
+				color: get-color('white');
 			}
 		}
 
