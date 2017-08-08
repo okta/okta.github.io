@@ -646,6 +646,21 @@ npm install @okta/okta-signin-widget --save
 
 <p>Make sure to replace <code class="highlighter-rouge"><span class="p">{</span><span class="err">yourOktaDomain</span><span class="p">}</span></code> and <code class="highlighter-rouge"><span class="p">{</span><span class="err">client</span><span class="p">}</span></code> in the above code.</p>
 
+<p>Add <code class="highlighter-rouge">OktaAuthService</code> as a provider to <code class="highlighter-rouge">client/src/app/app.module.ts</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OktaAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./shared/okta/okta.service'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="p">...</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">BeerService</span><span class="p">,</span> <span class="nx">GiphyService</span><span class="p">,</span> <span class="nx">OktaAuthService</span>
+  <span class="p">],</span>
+  <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre>
+</div>
+
 <p>Modify <code class="highlighter-rouge">client/src/app/shared/beer/beer.service.ts</code> to read the access token and set it in an <code class="highlighter-rouge">Authorization</code> header when 
 it exists.</p>
 
