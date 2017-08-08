@@ -64,9 +64,11 @@ In addition to the information in this topic, see:
     {% img native_auth_flow.png alt:"Native Application Flow" %}
 
     > Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret.
-        Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
-        For more information, see the PKCE note in [Parameter Details](/docs/api/resources/oauth2.html#request-parameter-details).
-
+    Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
+    For more information, see the PKCE note in [Parameter Details](/docs/api/resources/oauth2.html#request-parameter-details).
+    
+    &nbsp;
+    
 3. Web Application
 
     * Server-side app with an end-user
