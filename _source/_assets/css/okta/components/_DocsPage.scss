@@ -1,50 +1,64 @@
 // Variation for docs pages
 .Page--docs-page {
-  .Header {
-    background: get-color('white');
-    border-bottom: solid 2px get-color('iron');
 
-    .Wrap {
+  &.scrolling {
+
+    * {
+      @include transition(all slow);
+    }
+
+    .Header {
       background: get-color('white');
-    }
+      border-bottom: solid 2px get-color('iron');
 
-    .PrimaryNav {
-      a,
-      span {
-        color: get-color('default');
-
-        &.active {
-          color: #F1847F;
+      #OktaLogo {
+        path {
+          fill: get-color('iron');
         }
       }
 
-      .Button {
-        &--redOutline {
-          color: get-color('cerise');
+      .Wrap {
+        background: get-color('white');
+      }
+
+      .PrimaryNav {
+        a,
+        span {
+          color: get-color('default');
+
+          &.active {
+            color: #F1847F;
+          }
         }
 
-        &--red {
-          color: get-color('white');
+        .Button {
+          &--redOutline {
+            color: get-color('cerise');
+          }
+
+          &--red {
+            color: get-color('white');
+          }
+        }
+
+        .SearchIcon {
+          background: image_url("icons/search.svg") center no-repeat;
         }
       }
 
-      .SearchIcon {
-        background: image_url("icons/search.svg") center no-repeat;
-      }
-    }
+      #form_search {
+        background: transparent;
 
-    #form_search {
-      background: transparent;
-
-      input[type=submit] {
-        color: get-color('white');
-        background-color: get-color('iron');
-      }
-
-      &.button-active {
         input[type=submit] {
-          background: #e22866;
-          color: #fff;
+          color: get-color('white');
+          background-color: get-color('iron');
+        }
+
+        &.button-active {
+          input[type=submit] {
+            background: #e22866;
+            color: #fff;
+          }
         }
       }
     }

@@ -58,6 +58,15 @@ var oktaCustomRenderFunction = function(document_type, item) {
       $('.search-active').removeClass('search-active');
   });
 
+  $(window).on('scroll', function(event){
+      if ($(document).scrollTop() > 0) {
+          $('.Page--docs-page').addClass('scrolling');
+      }
+      else {
+          $('.Page--docs-page').removeClass('scrolling');
+      }
+  });
+
   $(".st-search-input").swiftype({
       renderFunction: oktaCustomRenderFunction,
       engineKey: 'VoUosPoJvtAtkm68Cd-_',

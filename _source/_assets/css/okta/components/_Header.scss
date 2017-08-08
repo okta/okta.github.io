@@ -1,7 +1,11 @@
 .Header {
   background: get-color('ebony-clay');
+
+  #OktaLogo {
+    path {
+      fill: get-color('white');
+    }
+  }
 }
 
-@include media('<860px') {
-
-}
+@include media('<860px') {}
