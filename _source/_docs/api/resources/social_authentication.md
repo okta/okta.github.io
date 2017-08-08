@@ -542,7 +542,7 @@ You can enter an expression to reformat the value, if desired. For example, if t
 
 **Match against:** The Okta user property against which the IdP username is compared. 
 
-More user profile attributes are available for matching as an Early Access feature. To enable more choices, contact Support.
+More user profile attributes are available for matching as an {% api_lifecycle ea %} feature.
 
 **Account Link Policy:** Determines whether your Application User should be linked to an Okta user.
 

@@ -264,7 +264,7 @@ Pages are single purpose HTML or Markdown (`.md`) files
 
 ### Docs
 
-1.  Create `PAGE_NAME.md` in `docs/FOLDER_NAME` (e.g. `docs/api/rest/users.md`)
+1.  Create `PAGE_NAME.md` in `docs/FOLDER_NAME` (e.g. `docs/api/resources/users.md`)
 2.  Filenames are underscore separated and all lowercase. (e.g. `my_cool_doc_page.md`)
 3.  Author front matter:
 
