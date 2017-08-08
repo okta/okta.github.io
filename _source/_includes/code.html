@@ -1,9 +1,25 @@
-<div class="Row">{%
-  assign indices = site.code | sort: 'id' %}{% for index in indices %}{% unless index.id contains '/index' %}{% continue %}{% endunless %}{% assign parts = index.id | split: "/" %}{% unless parts[3] contains 'index' %}{% continue %}{% endunless %}{% assign language = parts[2] %}
-<div class="Column--3 Column--small-6">
-  <a href="/code/{{ language }}/">
-    <div class="IconTile--{{ language }}"></div>
-  </a>
-</div>{%
-endfor %}
+<div class="PageContent-code-tiles">
+
+  {% assign indices = site.code | sort: 'id' %}
+
+  {% for index in indices %}
+    {% unless index.id contains '/index' %}
+      {% continue %}
+    {% endunless %}
+
+    {% assign parts = index.id | split: "/" %}
+    {% unless parts[3] contains 'index' %}
+      {% continue %}
+    {% endunless %}
+
+    {% assign language = parts[2] %}
+
+    <div>
+      <a href="/code/{{ language }}/">
+        <div class="IconTile--{{ language }}"></div>
+      </a>
+    </div>
+
+  {% endfor %}
+
 </div>

@@ -71,7 +71,7 @@ $(function() {
 
 		var $window    = $(window);
 		var $body      = $('html, body');
-		var $footer    = $('.footer');
+		var $footer    = $('.Footer');
 		var $header    = $('#header');
 		var $page      = $('.PageContent');
 		var $sidebar   = $('.Sidebar');

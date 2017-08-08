@@ -1,0 +1,85 @@
+// Variation for docs pages
+.Page--docs-page {
+
+  &.scrolling:not(.PrimaryNav-is-active) {
+
+    * {
+      @include transition(all slow);
+    }
+
+    .Header {
+      background: get-color('white');
+      border-bottom: solid 2px get-color('iron');
+
+      #OktaLogo {
+        path {
+          fill: get-color('ebony-clay');
+        }
+      }
+
+      .Wrap {
+        background: get-color('white');
+      }
+
+      .PrimaryNav {
+        a,
+        span {
+          color: get-color('default');
+
+          &.active {
+            color: get-color('cerise');
+            border-bottom: 2px solid get-color('cerise');
+          }
+
+          &:hover {
+            color: get-color('cerise');
+          }
+        }
+
+        .Button {
+          &--redOutline {
+            @include transition('none');
+            color: get-color('cerise');
+            box-shadow: none !important;
+          }
+
+          &--red {
+            @include transition('none');
+            color: get-color('white');
+            box-shadow: none !important;
+          }
+        }
+
+        .SearchIcon {
+          background: image_url("icons/search.svg") center no-repeat;
+        }
+      }
+
+      #form_search {
+        background: transparent;
+
+        input[type=submit] {
+          color: get-color('white');
+          background-color: get-color('iron');
+        }
+
+        &.button-active {
+          input[type=submit] {
+            background: #e22866;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  @include media('<doc-min-toc') {
+    .Sidebar {
+      background: get-color('ebony-clay');
+
+      &-location {
+        color: get-color('white');
+      }
+    }
+  }
+}

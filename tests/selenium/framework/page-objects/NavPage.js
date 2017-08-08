@@ -6,39 +6,30 @@ const util = require('../shared/util');
 class NavPage extends BasePage {
   constructor() {
     super();
-    this.$topNav = $('#top-nav');
-    this.$mobileNav = $('#mobile-nav');
-    this.$header = $('#header');
+    this.$desktopNav = $('.Header-nav.PrimaryNav');
+    this.$mobileToggleIcon = $$('.PrimaryNav-toggle');
+    this.$mobileNav = $$('.PrimaryNav-is-active');
+    this.$header = $('header.Header');
     this.$searchIcon = $('.SearchIcon');
-    this.$searchInput = $('input#q');
-    this.$resultsBox = $('.gsc-resultsbox-visible');
-    this.$mobileSearch = $('#mobile-search');
-    this.$mobileSearchInput = $('#gsc-i-id1');
+    this.$searchInput = $('#st-search-input-auto');
+    this.$resultsBox = $('.SearchResults');
     this.setPageLoad(this.$header);
   }
 
-  waitUntilTopNavOnScreen() {
-    this.waitUntilOnScreen(this.$topNav);
-  }
-
-  waitUntilTopNavOffScreen() {
-    this.waitUntilOffScreen(this.$topNav);
+  isDesktopNavDisplayed() {
+    return this.$desktopNav.isDisplayed();
   }
 
   isMobileNavDisplayed() {
-    return this.$mobileNav.isDisplayed();
+    return this.hasElements(this.$mobileNav);
+  }
+
+  isMobileToggleIconDisplayed() {
+    return this.$mobileToggleIcon.isPresent();
   }
 
   clickSearchIcon() {
     return this.$searchIcon.click();
-  }
-
-  clickMobileSearch() {
-    return this.$mobileSearch.click();
-  }
-
-  enterMobileSearchText(searchText) {
-    return this.$mobileSearchInput.sendKeys(searchText);
   }
 
   enterSearchText(searchText) {
@@ -49,6 +40,10 @@ class NavPage extends BasePage {
     return this.$searchInput.sendKeys(protractor.Key.ENTER);
   }
 
+  isSearchFieldPresent() {
+    return this.$searchInput.isPresent();
+  }
+
   areSearchResultsPresent() {
     return this.$resultsBox.isPresent();
   }
@@ -57,9 +52,6 @@ class NavPage extends BasePage {
     return util.wait(this.$resultsBox);
   }
 
-  submitMobileSearch() {
-    return this.$mobileSearchInput.sendKeys(protractor.Key.ENTER);
-  }
 }
 
 module.exports = NavPage;

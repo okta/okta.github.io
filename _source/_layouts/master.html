@@ -5,8 +5,8 @@
 <!--[if IE 9 ]>    <html class="ie9 no-flexbox"> <![endif]-->
 <!--[if IE 10 ]>    <html class="ie10 no-flexbox"> <![endif]-->
 <!--[if (gt IE 10)|!(IE)]><!--> <html class="modern wf-loading" lang="en"> <!--<![endif]-->
-  <head>{%
-    include head.html %}{% if include.body_id %}{% assign body_id = include.body_id %}{% else %}{% assign active_page_name  = page.url | split: "/" | last | remove: ".html" %}{% assign split_url         = page.url | split: "/" %}{% assign body_id           = split_url[1] %}{% endif %}
+  {% include head.html %}
+  {% if include.body_id %}{% assign body_id = include.body_id %}{% else %}{% assign active_page_name  = page.url | split: "/" | last | remove: ".html" %}{% assign split_url         = page.url | split: "/" %}{% assign body_id           = split_url[1] %}{% endif %}
     <body id="{{ body_id }}">
 	{% include header.html %}
 	<div class="page-content">{%
