@@ -168,6 +168,12 @@
 
 <h2 id="add-stormpaths-zuul-support-to-the-edge-service">Add Stormpath’s Zuul Support to the Edge Service</h2>
 
+<blockquote>
+  <p><strong>NOTE:</strong> I’m using Stormpath’s Java SDK in this example. It has been updated to work with Okta’s API. We plan to release 
+Okta libraries that have this same functionality soon. I’ll make sure to update this post when the Okta Zuul support has 
+been released.</p>
+</blockquote>
+
 <p>The <strong>edge-service</strong> application handles the routing to the backend <code class="highlighter-rouge">beer-catalog-service</code>, so it’s the best place to start securing things. Add the Stormpath BOM (Bill Of Materials) in the <code class="highlighter-rouge">dependencyManagement</code> section of <code class="highlighter-rouge">edge-service/pom.xml</code>.</p>
 
 <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
@@ -188,10 +194,6 @@
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre>
 </div>
-
-<blockquote>
-  <p><strong>NOTE:</strong> I’m using Stormpath libraries in this example. We plan to release Okta libraries that have this same functionality soon. I’ll make sure to update this post when the Okta Zuul support has been released.</p>
-</blockquote>
 
 <p>Add the following properties and values to the project’s <code class="highlighter-rouge">application.properties</code>.</p>
 

@@ -39,6 +39,12 @@
 
 &lt;h2 id=&quot;add-stormpaths-zuul-support-to-the-edge-service&quot;&gt;Add Stormpath’s Zuul Support to the Edge Service&lt;/h2&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; I’m using Stormpath’s Java SDK in this example. It has been updated to work with Okta’s API. We plan to release 
+Okta libraries that have this same functionality soon. I’ll make sure to update this post when the Okta Zuul support has 
+been released.&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;p&gt;The &lt;strong&gt;edge-service&lt;/strong&gt; application handles the routing to the backend &lt;code class=&quot;highlighter-rouge&quot;&gt;beer-catalog-service&lt;/code&gt;, so it’s the best place to start securing things. Add the Stormpath BOM (Bill Of Materials) in the &lt;code class=&quot;highlighter-rouge&quot;&gt;dependencyManagement&lt;/code&gt; section of &lt;code class=&quot;highlighter-rouge&quot;&gt;edge-service/pom.xml&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
@@ -59,10 +65,6 @@
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; I’m using Stormpath libraries in this example. We plan to release Okta libraries that have this same functionality soon. I’ll make sure to update this post when the Okta Zuul support has been released.&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;p&gt;Add the following properties and values to the project’s &lt;code class=&quot;highlighter-rouge&quot;&gt;application.properties&lt;/code&gt;.&lt;/p&gt;
 
