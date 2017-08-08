@@ -35,6 +35,9 @@ export OKTA_API_TOKEN=[api-token]
 
 ## Add Stormpath's Zuul Support to the Edge Service
 
+> **NOTE:** I'm using Stormpath's Java SDK in this example. It has been updated to work with Okta's API. We plan to release 
+Okta libraries that have this same functionality soon. I'll make sure to update this post when the Okta Zuul support has 
+been released.
 
 The **edge-service** application handles the routing to the backend `beer-catalog-service`, so it's the best place to start securing things. Add the Stormpath BOM (Bill Of Materials) in the `dependencyManagement` section of `edge-service/pom.xml`.
 
@@ -56,8 +59,6 @@ Then add a dependency for Stormpath's Zuul integration.
     <artifactId>stormpath-zuul-spring-cloud-starter</artifactId>
 </dependency>
 ```
-
-> **NOTE:** I'm using Stormpath libraries in this example. We plan to release Okta libraries that have this same functionality soon. I'll make sure to update this post when the Okta Zuul support has been released.
 
 Add the following properties and values to the project's `application.properties`.
 
