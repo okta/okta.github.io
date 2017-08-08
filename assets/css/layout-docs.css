@@ -312,7 +312,8 @@ h6:hover .header-link {
   margin-bottom: 10px; }
 
 .api-label-beta {
-  background: #46B3E9; }
+  background: #f7f01b;
+  color: black; }
 
 .api-label-ea {
   background: #4CBF9C; }
