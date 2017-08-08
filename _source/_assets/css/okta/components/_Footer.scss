@@ -1,7 +1,24 @@
 .Footer {
   &-links {
-    a {
-      padding: 0;
+    margin-top: 28px;
+
+    li {
+      margin-bottom: -10px;
+
+      a {
+        padding: 0;
+      }
     }
+
+    &--github,
+    &--twitter,
+    &--forum,
+    &--rss {
+      margin-bottom: 20px;
+    }
+  }
+
+  h4 {
+    @include font-size('h6');
   }
 }
