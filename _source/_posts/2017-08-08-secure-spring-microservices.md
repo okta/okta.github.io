@@ -541,6 +541,7 @@ export class BeerService {
 
 Modify `app.component.html` to add a placeholder for the widget and a section to show the user’s name and a logout button.
 
+{% raw %}
 ```html
 <md-toolbar color="primary">
   <span>{{title}}</span>
@@ -561,6 +562,7 @@ Modify `app.component.html` to add a placeholder for the widget and a section to
   <app-beer-list></app-beer-list>
 </div>
 ```
+{% endraw %}
 
 You’ll notice the `user` variable in the HTML. To resolve this, you need to change your `AppComponent`, so it 1) shows
 the login or converts the token on initial load and 2) subscribes to changes in the `user$` observable from `OktaAuthService`.
