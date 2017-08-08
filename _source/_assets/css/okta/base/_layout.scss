@@ -4,7 +4,6 @@
 
 body {
     background: get-color('white');
-    padding-top: 100px;
     position: relative;
 
   @include media('<medium') {

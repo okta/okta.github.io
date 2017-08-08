@@ -1,44 +1,56 @@
-<footer class="footer">
-      <div class="Wrap">
-        <ul>
-          <li>
-            <a href="https://www.okta.com" target="_blank">Okta.com</a>
-          </li>
-          <li>
-            <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
-          </li>
-          <li>
-            <a href="/terms/">Terms & Conditions</a>
-          </li>
-          <li>
-            <a href="/3rd_party_notices/">3rd Party Notices</a>
-          </li>
-          <li>
-            <a href="/privacy/">Privacy Policy</a>
-          </li>
-          <li>
-            <a href="/contact/">Contact Sales</a>
-          </li>
-          <li>
-            <a href="mailto:{{ site.email }}">Contact Support</a>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <a class="icon" href="http://github.com/{{ site.github_username }}" target="_blank"><i class="fa fa-github"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="http://twitter.com/{{ site.twitter_username }}" target="_blank"><i class="fa fa-twitter"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="{{ site.dev_forum }}" title="Okta Developer Forums" target="_blank"><i class="fa fa-comments"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
-          </li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
-        </ul>
-      </div>
-    </footer>
+<footer class="Footer">
+    <div class="Wrap">
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="{{ site.internal_url }}/developer/">
+                    <img src="{{ site.external_domain }}/sites/all/themes/developer/images/logo-footer.png">
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <h5>Social</h5>
+                <!-- <ul class="SocialLinks">
+                  <li><a class="SocialLinks-twitter" target="_blank" href="//www.okta.com/blog/"></a></li>
+                  <li><a class="SocialLinks-facebook" target="_blank" href="#"></a></li>
+                  <li><a class="SocialLinks-linkedin" target="_blank" href="#"></a></li>
+                </ul> -->
+                <ul class="Footer-links">
+                    <li><a class="Footer-links--github" target="_blank" href="http://github.com/{{ site.github_username }}">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" href="http://twitter.com/{{ site.twitter_username }}">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" href="{{ site.dev_forum }}">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-12">
+                <h5>More Info</h5>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="#">Visit okta.com</a></li>
+                    <li><a target="_blank" href="#">Blog</a></li>
+                    <li><a target="_blank" href="#">Customers</a></li>
+                    <li><a target="_blank" href="#">Release Notes</a></li>
+                    <li><a target="_blank" href="#">3rd Party Notes</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-12">
+                <h5>Contact &amp; Legal</h5>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="#">Contact Sales</a></li>
+                    <li><a target="_blank" href="#">Contact Support</a></li>
+                    <li><a target="_blank" href="#">Terms &amp; Conditions</a></li>
+                    <li><a target="_blank" href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
     {% js master %}
     {% for script in page.scripts %}
       <script src="{{ script }}"></script>

@@ -1,6 +1,6 @@
 .Sidebar {
 	@include padding(large medium);
-	background: get-color('gray-lightest');
+	background: get-color('ebony-clay');
 	min-width: 280px;
 	position: relative;
 	width: 320px;
@@ -11,7 +11,7 @@
 	}
 
 	&:before {
-		background: get-color('gray-lightest');
+		background: get-color('ebony-clay');
 		bottom: 0;
 		content: '';
 		display: block;

@@ -1,0 +1,20 @@
+// Variation for docs pages
+.Page--docs-page {
+  .Header {
+    background: get-color('white');
+
+    .Wrap {
+      background: get-color('white');
+    }
+
+    .PrimaryNav {
+      a {
+        color: get-color('default');
+      }
+    }
+
+    .Button--redOutline {
+      color: get-color('cerise');
+    }
+  }
+}

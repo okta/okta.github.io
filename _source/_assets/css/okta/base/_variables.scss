@@ -79,7 +79,7 @@ $colors:        (
                 'black':                  #000000,
                 'white':                  #fff,
 
-                'default':                #5d5d5d,
+                'default':                #3D3D3D,
                 'accent':                 #007dc1,
 
                 'blue-bright':            #007dc1,
@@ -122,7 +122,15 @@ $colors:        (
 
                 'new-gray-dark':          #3d3d3d,
 
-                'red':                    #f57f7f
+                'red':                    #f57f7f,
+
+                // 2017-07 Redesign Colors
+                'ebony-clay':             #20313B, // Background
+                'elephant':               #153B56, // Secondary background, table rule
+                'big-stone':              #142430, // Card / table background
+                'matisse':                #115D8B, // Card / table banner
+                'iron':                   #D2D2D6, // Body (type) color (dark bg)
+                'cerise':                 #E22866, // CTA buttons, links
 );
 
 

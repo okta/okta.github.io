@@ -1,52 +1,67 @@
-//= require vendor/jquery-3.1.0.min
+/**
+ * jQUery version downgraded to 2.x for compatibility with swiftype library ($.ajax.success dependency)
+ */
+
+//= require vendor/jquery-2.2.4.min
+//= require vendor/jquery.ba-hashchange.min
+//= require vendor/jquery.swiftype.autocomplete
+//= require vendor/jquery.swiftype.search
+
+var oktaCustomRenderFunction = function(document_type, item) {
+    var out = '<a href="' + item['url'] + '" class="st-search-result-link"><div class="st-result autocomplete-item"><p class="title">' + item['title'] + '</p></div></a>';
+    return out;
+};
 
 (function($) {
+  $('.scrollTo, .PrimaryNav > ul.menu a').click(function(e) {
+      if(this.hash && $(this.hash).length) {
+          e.preventDefault()
+          $('html, body').animate({
+              scrollTop: $(this.hash).offset().top - 80
+          }, 500)
+      }
+  })
 
-  $('.mobile-toggle').click(function() {
-    $('body').toggleClass('mobile-nav-active');
+
+  $('.Header nav .SearchIcon').on('click', function(event) {
+      event.stopPropagation();
+      event.preventDefault();
+      $('.Header').toggleClass('search-active');
+      $('.Header nav #st-search-input-auto').focus();
   });
 
-  $('#top-nav .SearchIcon').on('click', function(e) {
-    $(this).parent().toggleClass('search-active');
-    $('#top-nav #q').focus();
+  $('.PrimaryNav-toggle').on('click', function(event){
+      event.stopPropagation();
+      event.preventDefault();
+      $('.Header').toggleClass('is-active');
+      $('.PrimaryNav').toggleClass('is-active');
   });
 
-  $('#top-nav').on('click', '.has-dropdown > a', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $(this).parent().toggleClass('dropdown-active');
+  $('#form_search #st-search-input-auto').on('keyup', function(){
+      if ($(this).val().length > 0) {
+          $(this).parent().addClass('button-active');
+      }
+      else {
+          $(this).parent().removeClass('button-active');
+      }
   });
 
-  $('.Sidebar-toggle').on('click', function(e) {
-    e.stopPropagation();
-    $(this).parent().toggleClass('Sidebar-active');
+  $('#form_search').on('click', function(event){
+      event.stopPropagation();
   });
 
-  $('#top-nav').on('click', '.has-dropdown > .dropdown-window', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+  $(window).on('click', function() {
+      $('.search-active').removeClass('search-active');
   });
 
-  $('#top-nav #q, .Sidebar h2').on('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+  $(window).on('resize', function(event){
+      $('.search-active').removeClass('search-active');
   });
 
-  $('#top-nav').on('click', '.has-dropdown > .dropdown-window a', function(e) {
-    e.stopPropagation();
-  });
-
-  $('#top-nav .SearchIcon, .Sidebar a').on('click', function(e) {
-    e.stopPropagation();
-  });
-
-  $(window).bind('click', function() {
-    $('#top-nav .has-dropdown').removeClass('dropdown-active');
-    $('#top-nav.search-active').removeClass('search-active');
-  });
-
-  $('header, .Sidebar').bind('click', function() {
-    $('.Sidebar.Sidebar-active').removeClass('Sidebar-active');
+  $(".st-search-input").swiftype({
+      renderFunction: oktaCustomRenderFunction,
+      engineKey: 'VoUosPoJvtAtkm68Cd-_',
+      perPage: 40
   });
 
 })(jQuery);
