@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -1684,6 +1684,17 @@ Custom scopes and custom claims aren’t returned.</p>
   <li><a href="#delete-authorization-server">Delete Authorization Server</a></li>
   <li><a href="#activate-authorization-server">Activate Authorization Server</a></li>
   <li><a href="#deactivate-authorization-server">Deactivate Authorization Server</a></li>
+</ul>
+
+<h4 id="using-the-default-authorization-server">Using the Default Authorization Server</h4>
+
+<p>Okta provides a pre-configured Custom Authorization Server with the name <code class="highlighter-rouge">default</code>.
+This default authorization server includes a basic access policy and rule, which you can edit to control access. 
+It allows you to specify <code class="highlighter-rouge">default</code> instead of the <code class="highlighter-rouge">authorizationServerId</code> in requests to it:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">https://{YourOktaOrg}}/api/v1/authorizationServers/default</code>  vs</li>
+  <li><code class="highlighter-rouge">https://{YourOktaOrg}}/api/v1/authorizationServers/:authorizationServerId</code> for other Customer Authorization Servers</li>
 </ul>
 
 <h4 class="api api-operation" id="create-authorization-server">Create Authorization Server</h4>

@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -414,34 +414,36 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     <table>
       <thead>
         <tr>
-          <th>Application Type</th>
-          <th>Valid Grant Type</th>
-          <th>Requirements</th>
+          <th style="text-align: left">Application Type</th>
+          <th style="text-align: left">Valid Grant Type</th>
+          <th style="text-align: left">Requirements</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><code class="highlighter-rouge">web</code></td>
-          <td><code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">refresh_token</code></td>
-          <td>Must have at least <code class="highlighter-rouge">authorization_code</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">web</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">refresh_token</code>, <code class="highlighter-rouge">client_credentials</code>(*)</td>
+          <td style="text-align: left">Must have at least <code class="highlighter-rouge">authorization_code</code></td>
         </tr>
         <tr>
-          <td><code class="highlighter-rouge">native</code></td>
-          <td><code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code></td>
-          <td>Must have at least <code class="highlighter-rouge">authorization_code</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">native</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">authorization_code</code>, <code class="highlighter-rouge">implicit</code>, <code class="highlighter-rouge">password</code>, <code class="highlighter-rouge">refresh_token</code></td>
+          <td style="text-align: left">Must have at least <code class="highlighter-rouge">authorization_code</code></td>
         </tr>
         <tr>
-          <td><code class="highlighter-rouge">browser</code></td>
-          <td><code class="highlighter-rouge">implicit</code></td>
-          <td> </td>
+          <td style="text-align: left"><code class="highlighter-rouge">browser</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">implicit</code></td>
+          <td style="text-align: left"> </td>
         </tr>
         <tr>
-          <td><code class="highlighter-rouge">service</code></td>
-          <td><code class="highlighter-rouge">client_credentials</code></td>
-          <td>Works with OAuth 2.0 flow (not OpenID Connect)</td>
+          <td style="text-align: left"><code class="highlighter-rouge">service</code></td>
+          <td style="text-align: left"><code class="highlighter-rouge">client_credentials</code></td>
+          <td style="text-align: left">Works with OAuth 2.0 flow (not OpenID Connect)</td>
         </tr>
       </tbody>
     </table>
+
+    <p>(*) <code class="highlighter-rouge">client_credentials</code> with a <code class="highlighter-rouge">web</code> application type allows you to use one <code class="highlighter-rouge">client_id</code> for an application that needs to make user-specific calls and back-end calls for data.</p>
   </li>
   <li>
     <p>The <code class="highlighter-rouge">grant_types</code> and <code class="highlighter-rouge">response_types</code> values described above are partially orthogonal, as they refer to arguments passed to different

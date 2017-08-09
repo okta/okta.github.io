@@ -504,7 +504,7 @@ During policy evaluation each policy of the appropriate type is considered in tu
 Policies that have no rules are not considered during evaluation, and will never be applied.
 
 ### Policy Types
-Different policy types control settings for different operations.  All policy types share a common framework, message structure and API, but have different policy settings and rule data.  The data structures specific to each policy type are discussed in the various sections below.
+Different policy types control settings for different operations.  All policy types share a common framework, message structure and API, but have different policy settings and rule data. The data structures specific to each policy type are discussed in the various sections below.
 
 <a href="#OktaSignOnPolicy">Okta Sign On Policy</a>
 
@@ -818,13 +818,15 @@ include | The AD integrations this policy applies to | Array | No | Include all 
 
 
 
-## Type Specific Policy Data Structures
+## Type-Specific Policy Data Structures
 
 ## Okta Sign On Policy
 {: #OktaSignOnPolicy }
 
-Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challenged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
-Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.
+Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they are challenged for multifactor authentication (MFA) and how long they are allowed to remain signed in before re-authenticating.
+
+>Note: Okta Sign On Policy is different from application sign-on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.
+Application sign-on policy can't be configured via the API.
 
 ### Policy Settings Data
 
@@ -889,12 +891,12 @@ The following conditions may be applied to the rules associated with Okta Sign O
 <a href="#AuthContextConditionObject">AuthContext Condition</a>
 
 
-## Multifactor (MFA) Policy
+## Multifactor (MFA) Enrollment Policy
 {: #OktaMFAPolicy }
 
-> The MFA Policy API is a {% api_lifecycle beta %} [release](/docs/api/getting_started/releases-at-okta.html).
+> The MFA Policy API is a {% api_lifecycle beta %} release.
 
-Multifactor (MFA) Policy controls which MFA methods are available for a user, as well as when a user may enroll in a particular factor.
+Multifactor (MFA) Enrollment Policy controls which MFA methods are available for a user, as well as when a user may enroll in a particular factor.
 
 #### Policy Settings Example
 Note that policy settings are included only for those factors which have been enabled.
@@ -1160,7 +1162,7 @@ okta_sms | Settings for SMS factor | <a href="#SMSFactorObject">SMS Factor Objec
 
 Property | Description | Data Type | Required |
 | --- | --- | --- | ---
-status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` (EA) | Yes |
+status | Indicates if the factor is enabled. | `ACTIVE`, `INACTIVE` {% api_lifecycle ea %} | Yes |
 properties | Configuration settings for security question factor | <a href="#RecoveryQuestionFactorPropertiesObject">Recovery Question Factor Properties Object</a> | No
 
 ###### Recovery Question Factor Properties Object

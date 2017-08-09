@@ -95,13 +95,15 @@ Property Details
 
 * Different application types have different valid values for the corresponding grant type:
 
-    |-------------------+---------------------------------------------------------------+-----------------------------------------------------------------------------------|
-    | Application Type  | Valid Grant Type                                              | Requirements                                                                      |
-    | ----------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-    | `web`             | `authorization_code`, `implicit`, `refresh_token`             | Must have at least `authorization_code`                                           |
-    | `native`          | `authorization_code`, `implicit`, `password`, `refresh_token` | Must have at least `authorization_code`                                           |
-    | `browser`         | `implicit`                                                    |                                                                                   |
-    | `service`         | `client_credentials`                                          | Works with OAuth 2.0 flow (not OpenID Connect)                                    |
+    |------------------ | -------------------------------------------------------------------------- | ---------------------------------------------- |
+    | Application Type  | Valid Grant Type                                                           | Requirements                                   |
+    | :---------------- | :------------------------------------------------------------------------- | :--------------------------------------------- |
+    | `web`             | `authorization_code`, `implicit`, `refresh_token`, `client_credentials`(*) | Must have at least `authorization_code`        |
+    | `native`          | `authorization_code`, `implicit`, `password`, `refresh_token`              | Must have at least `authorization_code`        |
+    | `browser`         | `implicit`                                                                 |                                                |
+    | `service`         | `client_credentials`                                                       | Works with OAuth 2.0 flow (not OpenID Connect) |
+
+    (*) `client_credentials` with a `web` application type allows you to use one `client_id` for an application that needs to make user-specific calls and back-end calls for data.
 
 * The `grant_types` and `response_types` values described above are partially orthogonal, as they refer to arguments passed to different
     endpoints in the [OAuth 2.0 protocol](https://tools.ietf.org/html/rfc6749). However, they are related in that the `grant_types`
