@@ -8,6 +8,506 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>JAX-RS vs Spring for REST Endpoints</title>
+        <description>&lt;h1 id=&quot;lets-compare-jax-rs-vs-spring-for-rest-endpoints&quot;&gt;Let’s Compare: JAX-RS vs Spring for REST Endpoints&lt;/h1&gt;
+
+&lt;p&gt;Need to decouple your web service and client? You’re probably using REST endpoints, and if you’re a Java shop you’ve probably tried out JAX-RS, Spring REST, or both.But is one better than the other? In this post I’ll go over the the differences between the two using basically the same code for an apples to apples comparison. In future posts I’ll show you how easy it is to secure these REST endpoints using Apache Shiro and Okta.&lt;/p&gt;
+
+&lt;h2 id=&quot;lay-down-the-foundation--model-and-dao&quot;&gt;Lay Down the Foundation – Model and DAO&lt;/h2&gt;
+
+&lt;p&gt;To keep things focused, I’ll leave the Maven dependencies out of this post. You can browse the full source on &lt;a href=&quot;http://github.com/oktadeveloper/jaxrs-spring-blog-example&quot;&gt;Github&lt;/a&gt;, the pom files should be self explanatory: one for JAX-RS, another for Spring.&lt;/p&gt;
+
+&lt;p&gt;First up, we need to get the common bits out of the way. A simple model and DAO (Data Access Object]) will be used in all of the examples to register and manage &lt;code class=&quot;highlighter-rouge&quot;&gt;Stormtrooper&lt;/code&gt; objects.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;planetOfOrigin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;species&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// empty to allow for bean access&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;planetOfOrigin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;species&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;planetOfOrigin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;planetOfOrigin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;species&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;species&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// bean accessor methods&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Stormtrooper&lt;/code&gt; object contains an &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; and a few other attributes: &lt;code class=&quot;highlighter-rouge&quot;&gt;planetOfOrigin&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;species&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The DAO interface is just as simple, with the basic CRUD methods and an additional &lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt; method:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StormtrooperDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deleteStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listStormtroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The actual implementation of the &lt;code class=&quot;highlighter-rouge&quot;&gt;StormtrooperDao&lt;/code&gt; is not important for these examples, If you are interested, you can take a look at code for &lt;a href=&quot;https://github.com/oktadeveloper/jaxrs-spring-blog-example/blob/master/common/src/main/java/com/oktadeveloper/example/common/dao/DefaultStormtrooperDao.java&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultStormtrooperDao&lt;/code&gt;&lt;/a&gt;, which generates 50 random Stormtroopers.&lt;/p&gt;
+
+&lt;h2 id=&quot;try-spring&quot;&gt;Try Spring&lt;/h2&gt;
+
+&lt;p&gt;Now that we have the common bits out of the way, we can get into the meat of our Spring example. A basic Spring Boot app doesn’t get much easier than this:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SpringBootApp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;StormtrooperDao&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stormtrooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DefaultStormtrooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;SpringApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SpringBootApp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;There are a few things to point out:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;@SpringBootApplication&lt;/code&gt; annotation sets up Spring’s auto configuration and classpath scanning of components&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;@Bean&lt;/code&gt; binds an instance of &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultStormtrooperDao&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;StormtrooperDao&lt;/code&gt; interface&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; method starts the application uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;SpringApplication.run()&lt;/code&gt; helper method to bootstrap the application&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;spring-controller&quot;&gt;Spring Controller&lt;/h3&gt;
+
+&lt;p&gt;Next up, we have the implementation of our REST endpoint, or in the Spring world a &lt;code class=&quot;highlighter-rouge&quot;&gt;Controller&lt;/code&gt;. We will use this class to map our DAO to incoming HTTP requests&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/troopers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StormtrooperController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;StormtrooperDao&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Autowired&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;StormtrooperController&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StormtrooperDao&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;trooperDao&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listTroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;listStormtroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                                      &lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updateStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@DeleteMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@ResponseStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;NO_CONTENT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deleteTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;deleteStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Let’s break this down:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Controller&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/troopers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StormtroooperController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;@RestController&lt;/code&gt; is a convenience annotation for both &lt;code class=&quot;highlighter-rouge&quot;&gt;@Controller&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;@ResponseBody&lt;/code&gt; which marks this class as a web component discovered during classpath scanning. An &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; annotation at the the class level defines the base path mapping used for any other &lt;code class=&quot;highlighter-rouge&quot;&gt;RequestMapping&lt;/code&gt; annotations in this class. In this case, all end points in this class will start with the URL path &lt;code class=&quot;highlighter-rouge&quot;&gt;/troopers&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@ResponseBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathVariable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                                                &lt;span class=&quot;nd&quot;&gt;@RequestBody&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updateStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;PostMapping&lt;/code&gt; is an POST alias for the &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; annotation which has &lt;a href=&quot;http://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html&quot;&gt;many options&lt;/a&gt;, this example uses a small subset:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;path = &quot;/{id}&quot;&lt;/code&gt; used in conjunction with &lt;code class=&quot;highlighter-rouge&quot;&gt;@PathVariable(&quot;id&quot;)&lt;/code&gt; maps the &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt; part of the URL path to the given method argument - Example URL: &lt;code class=&quot;highlighter-rouge&quot;&gt;/troopers/FN-2187&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;value = HttpStatus.NO_CONTENT&lt;/code&gt; sets the expected HTTP response code, in this case a 204&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Method parameters annotated with &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestBody&lt;/code&gt; will be deserialize from the HTTP request before getting passed into the method. Return values are directly serialized to HTTP response using the &lt;code class=&quot;highlighter-rouge&quot;&gt;@ResponseBody&lt;/code&gt; annotation (or simply by using &lt;code class=&quot;highlighter-rouge&quot;&gt;@RestController&lt;/code&gt;), which will also bypass any MCV templates.&lt;/p&gt;
+
+&lt;p&gt;In this code block the &lt;code class=&quot;highlighter-rouge&quot;&gt;updateTrooper()&lt;/code&gt; method accepts HTTP &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; requests made to &lt;code class=&quot;highlighter-rouge&quot;&gt;/trooper/{id}&lt;/code&gt; and contain a serialized &lt;code class=&quot;highlighter-rouge&quot;&gt;Stormtrooper&lt;/code&gt; (JSON). If the request path was &lt;code class=&quot;highlighter-rouge&quot;&gt;/troopers/FN-2187&lt;/code&gt;, the &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; portion of the path would be assigned to the method’s &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; parameter. An updated &lt;code class=&quot;highlighter-rouge&quot;&gt;Stormtrooper&lt;/code&gt; object is returned and serialized to the HTTP response.&lt;/p&gt;
+
+&lt;p&gt;In the example above we are simply using a &lt;code class=&quot;highlighter-rouge&quot;&gt;POST&lt;/code&gt; for both the create and update methods. To keep the example short and sweet, the DAO implementation doesn’t actually do partial updates, so this should actually be a &lt;code class=&quot;highlighter-rouge&quot;&gt;PUT&lt;/code&gt;. Take a look at this blog post to read more about when to use &lt;a href=&quot;https://stormpath.com/blog/put-or-post&quot;&gt;PUT vs POST&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;run-the-spring-example&quot;&gt;Run the Spring Example&lt;/h3&gt;
+
+&lt;p&gt;To run this example, grab the &lt;a href=&quot;https://github.com/oktadeveloper/jaxrs-spring-blog-example&quot;&gt;source&lt;/a&gt;, change to the &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-boot&lt;/code&gt; directory, start the application using &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt;, make requests to the server.&lt;/p&gt;
+
+&lt;p&gt;To get get a list of all the Stormtroopers just make a request to &lt;code class=&quot;highlighter-rouge&quot;&gt;/troopers&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl http://localhost:8080/troopers
+
+HTTP/1.1 200
+Content-Type: application/json;charset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;UTF-8
+Date: Tue, 08 Nov 2016 20:33:36 GMT
+Transfer-Encoding: chunked
+X-Application-Context: application
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-2187&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Unknown&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Human&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Basic&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-0984&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Coruscant&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Human&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Aquatic&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-1253&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Tatooine&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Unidentified&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Sand&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+    ...
+&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To get a single Stormtrooper, use it’s ID:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl http://localhost:8080/troopers/FN-2187
+
+HTTP/1.1 200
+Content-Type: application/json;charset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;UTF-8
+Date: Tue, 08 Nov 2016 20:38:53 GMT
+Transfer-Encoding: chunked
+X-Application-Context: application
+
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-2187&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Unknown&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Human&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Basic&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Pretty easy, right? Now you can stop the server with a &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl-C&lt;/code&gt; and move on to the next example.&lt;/p&gt;
+
+&lt;h2 id=&quot;rinse-and-repeat--jax-rs&quot;&gt;Rinse and Repeat – JAX-RS&lt;/h2&gt;
+
+&lt;p&gt;We’ll use the same model and DAO for the JAX-RS example, all we’re going to change is the annotations on the &lt;code class=&quot;highlighter-rouge&quot;&gt;StormtroooperController&lt;/code&gt; class.&lt;/p&gt;
+
+&lt;p&gt;Since JAX-RS is an API spec you need to pick an implementation, we will use &lt;a href=&quot;https://jersey.java.net/&quot;&gt;Jersey&lt;/a&gt; for this example. While it’s possible to create a JAX-RS application with no direct dependencies on a specific JAX-RS implementation, it would make for a more verbose example.&lt;/p&gt;
+
+&lt;p&gt;I picked Jersey for a couple reasons, mostly though it was because I already knew how get simple dependency injection working without jumping through any hoops, we are comparing this to Spring after all. Apache Shiro has an &lt;a href=&quot;https://github.com/apache/shiro/blob/master/samples/jaxrs/&quot;&gt;example&lt;/a&gt; that runs the same code on &lt;a href=&quot;https://jersey.java.net/&quot;&gt;Jersey&lt;/a&gt;, &lt;a href=&quot;http://resteasy.jboss.org/&quot;&gt;RestEasy&lt;/a&gt;, and &lt;a href=&quot;https://cxf.apache.org/&quot;&gt;Apache CXF&lt;/a&gt;, if you’re interested in seeing a portable example.&lt;/p&gt;
+
+&lt;p&gt;This example also differs a bit from the Spring Boot one in that this example is packaged as a WAR, and Spring Boot was a single JAR. Packing this example in an executable jar is possible, but outside the scope of this post&lt;/p&gt;
+
+&lt;p&gt;A JAX-RS equivalent to a &lt;code class=&quot;highlighter-rouge&quot;&gt;SpringBootApplication&lt;/code&gt; is an &lt;code class=&quot;highlighter-rouge&quot;&gt;Application&lt;/code&gt; class. A Jersey subclass of &lt;code class=&quot;highlighter-rouge&quot;&gt;Application&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ResourceConfig&lt;/code&gt;, adds a few handy utility methods. The following snippet configures classpath scanning to detect our individual resource classes, and bind a &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultStormtrooperDao&lt;/code&gt; instance to the &lt;code class=&quot;highlighter-rouge&quot;&gt;StromtrooperDao&lt;/code&gt; interface.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@ApplicationPath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JaxrsApp&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResourceConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;JaxrsApp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// scan the resources package for our resources&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;packages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;.resources&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// use @Inject to bind the StormtrooperDao&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AbstractBinder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stormtrooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StormtrooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;StormtrooperDao&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stormtrooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DefaultStormtrooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;One other thing to point out, in the above class the &lt;code class=&quot;highlighter-rouge&quot;&gt;@ApplicationPath&lt;/code&gt; annotation marks this class as a JAX-RS Application bound to a specific url path, in our case to match the Spring example above we will just use the root path: &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt;. Each resource detected in the &lt;code class=&quot;highlighter-rouge&quot;&gt;resources&lt;/code&gt; package will be appended to this base path.&lt;/p&gt;
+
+&lt;p&gt;The JAX-RS resource implementation looks very similar to the Spring version above (renamed to &lt;code class=&quot;highlighter-rouge&quot;&gt;StormtroooperResource&lt;/code&gt;, to match naming conventions):&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/troopers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/json&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StormtroooperResource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Inject&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;StormtrooperDao&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;NotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@POST&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@POST&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                                      &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updateStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@DELETE&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;deleteTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;deleteStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@GET&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listTroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;listStormtroopers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To break down this example a bit, we first have the class deceleration:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/troopers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@Produces&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/json&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StormtroooperResource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Similar to the Spring example above the &lt;code class=&quot;highlighter-rouge&quot;&gt;@Path&lt;/code&gt; at the class level means each annotated method in this class will be under the &lt;code class=&quot;highlighter-rouge&quot;&gt;/troopers&lt;/code&gt; base path. The &lt;code class=&quot;highlighter-rouge&quot;&gt;@Produces&lt;/code&gt; annotation defines the default response content type (unless overridden by an annotation on another method).&lt;/p&gt;
+
+&lt;p&gt;Unlike the Spring example where an &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; annotation defined the path, method, and other attributes of the request, in a JAX-RS resource each attribute uses a separate annotation. Similar to above if we break down the &lt;code class=&quot;highlighter-rouge&quot;&gt;updateTrooper()&lt;/code&gt; method:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@POST&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;updateTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@PathParam&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                                  &lt;span class=&quot;n&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trooperDao&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;updateStormtrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updatedTrooper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We see that &lt;code class=&quot;highlighter-rouge&quot;&gt;@Path(&quot;/{id}&quot;)&lt;/code&gt; along with &lt;code class=&quot;highlighter-rouge&quot;&gt;@PathParam(&quot;id&quot;)&lt;/code&gt; allows the &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; portion of the path to be translated into a method argument. What differs from the Spring example, is that the &lt;code class=&quot;highlighter-rouge&quot;&gt;Stromtrooper&lt;/code&gt; parameter and return value do not need extra annotations, they are automatically serialized/deserialized into JSON due to the &lt;code class=&quot;highlighter-rouge&quot;&gt;@Produces(&quot;application/json&quot;)&lt;/code&gt; annotation on this class.&lt;/p&gt;
+
+&lt;h3 id=&quot;run-the-jax-rs-example&quot;&gt;Run the JAX-RS Example&lt;/h3&gt;
+
+&lt;p&gt;This example can be started from the &lt;code class=&quot;highlighter-rouge&quot;&gt;jersey&lt;/code&gt; directory, using the maven command: &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn jetty:run&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Making the same two requests as above, we can list all of the troopers with a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; request to the base resource:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl http://localhost:8080/troopers
+
+HTTP/1.1 200 OK
+Content-Length: 3944
+Content-Type: application/json
+Date: Tue, 08 Nov 2016 21:57:55 GMT
+Server: Jetty&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;9.3.12.v20160915&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-2187&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Unknown&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Human&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Basic&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-0064&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Naboo&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Nikto&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Sand&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-0069&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Hoth&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Twi'lek&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Basic&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-0169&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Felucia&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Kel Dor&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Jump&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+
+    ...
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Or again to a &lt;code class=&quot;highlighter-rouge&quot;&gt;GET&lt;/code&gt; to a specific resource:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;curl http://localhost:8080/troopers/FN-2187
+
+HTTP/1.1 200 OK
+Content-Length: 81
+Content-Type: application/json
+Date: Tue, 08 Nov 2016 22:00:02 GMT
+Server: Jetty&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;9.3.12.v20160915&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;FN-2187&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;planetOfOrigin&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Unknown&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;species&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Human&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&quot;Basic&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now we have seen basically the same code run in both Spring and JAX-RS applications by simply changing the annotations. I like the JAX-RS annotations better, they’re more concise. That said, why choose between the two? Jersey and RestEasy both support Spring (along with Guice and CDI/Weld). Let’s create a third example combining the two&lt;/p&gt;
+
+&lt;h2 id=&quot;jax-rs-and-spring--so-happy-together&quot;&gt;JAX-RS and Spring – So Happy Together&lt;/h2&gt;
+
+&lt;p&gt;For this example we need three classes: a Spring Boot application, Jersey configuration, and our resource.&lt;/p&gt;
+
+&lt;p&gt;Our &lt;code class=&quot;highlighter-rouge&quot;&gt;SpringBootApp&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;StormtrooperResource&lt;/code&gt; classes are identical to the previous versions, the only difference being the Jersey configuration class:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Component&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JerseyConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ResourceConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;JerseyConfig&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// scan the resources package for our resources&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;packages&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getClass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPackage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;.resources&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This class is a bit slimmer than the previous example. First, you probably noticed the &lt;code class=&quot;highlighter-rouge&quot;&gt;@Configuration&lt;/code&gt; annotation which is used to mark this class managed by Spring. All that is left, is to instruct Jersey to scan the &lt;code class=&quot;highlighter-rouge&quot;&gt;resources&lt;/code&gt; package again, the rest is handled for you (see what I did there?!).&lt;/p&gt;
+
+&lt;p&gt;From the &lt;code class=&quot;highlighter-rouge&quot;&gt;spring-jaxrs&lt;/code&gt; directory, this example can be started with the same &lt;code class=&quot;highlighter-rouge&quot;&gt;mvn spring-boot:run&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;h2 id=&quot;spring-to-jax-rs-cheat-sheet&quot;&gt;Spring to JAX-RS Cheat Sheet&lt;/h2&gt;
+
+&lt;p&gt;To help you navigate between the world of Spring and JAX-RS here is a quick cheat sheet.  This is not an exhaustive list, but it does include the most common annotations.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Spring Annotation&lt;/th&gt;
+      &lt;th&gt;JAX-RS Annotation&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@RequestMapping(path = “/troopers”&lt;/td&gt;
+      &lt;td&gt;@Path(“/troopers”)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@PostMapping&lt;/td&gt;
+      &lt;td&gt;@POST&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@PutMapping&lt;/td&gt;
+      &lt;td&gt;@PUT&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@GetMapping&lt;/td&gt;
+      &lt;td&gt;@GET&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@DeleteMapping&lt;/td&gt;
+      &lt;td&gt;@DELETE&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@ResponseBody&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@RequestBody&lt;/td&gt;
+      &lt;td&gt;N/A&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@PathVariable(“id”)&lt;/td&gt;
+      &lt;td&gt;@PathParam(“id”)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@RequestParam(“xyz”)&lt;/td&gt;
+      &lt;td&gt;@QueryParam(‘xyz”)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@RequestParam(value=”xyz”)&lt;/td&gt;
+      &lt;td&gt;@FormParam(“xyz”)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@RequestMapping(produces = {“application/json”})&lt;/td&gt;
+      &lt;td&gt;@Produces(“application/json”)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;@RequestMapping(consumes = {“application/json”})&lt;/td&gt;
+      &lt;td&gt;@Consumes(“application/json”)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;when-should-you-use-jax-rs-over-spring-rest&quot;&gt;When Should You Use JAX-RS over Spring Rest?&lt;/h2&gt;
+
+&lt;p&gt;In my opinion it breaks down like this:&lt;/p&gt;
+
+&lt;p&gt;If you’re already a Spring shop, just use Spring. If you’re creating an object JSON / XML REST layer, JAX-RS resources backed by the DI framework of your choice (Spring, Guice, etc.) might be the way to go. Rendering pages server side is not part of the JAX-RS spec (though it is supported with extensions). I hacked up a &lt;a href=&quot;http://www.thymeleaf.org/&quot;&gt;Thymeleaf&lt;/a&gt; view for Jersey once, but I think Spring MVC takes the cake here.&lt;/p&gt;
+
+&lt;p&gt;Now, comparing a Spring Boot application and an WAR packaged application, isn’t exactly comparing apples to apples. Dropwizard (which uses an embedded Jetty container and Jersey) is probably the closest thing to a Spring Boot app. Hopefully this post gave you a bit more background so you can do your own comparison. If you have any questions hit me up on Twitter &lt;a href=&quot;https://twitter.com/briandemers&quot;&gt;@briandemers&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;Want to learn more about securing your Spring or JAX-RS applications, Apache Shiro, or REST fundamentals? Take a look at these posts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot&quot;&gt;Protecting a Spring Boot App with Apache Shiro&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stormpath.com/blog/protecting-jax-rs-resources-rbac-apache-shiro&quot;&gt;Protecting JAX-RS Resources with RBAC and Apache Shiro&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stormpath.com/blog/fundamentals-rest-api-design&quot;&gt;The Fundamentals of REST API Design&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 09 Aug 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/08/09/jax-rs-vs-spring-rest-endpoints</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/08/09/jax-rs-vs-spring-rest-endpoints</guid>
+      </item>
+    
+      <item>
         <title>Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta</title>
         <description>&lt;p&gt;You’ve built a microservices architecture with Spring Boot and Spring Cloud. You’re happy with the results, and you like how it adds resiliency to your application. You’re also pleased with how it scales and how different teams can deploy microservices independently. But what about security?&lt;/p&gt;
 
