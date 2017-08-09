@@ -18,7 +18,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.31
 #### Default Custom Authorization Server
 <!-- OKTA-133786 -->
 
-Okta provides a pre-configured custom authorization server named `default`.
+Okta provides a pre-configured Custom Authorization Server named `default`.
 This default authorization server includes a basic access policy and rule, which you can edit to control access.
 It allows you to specify `default` instead of the `authorizationServerId` in requests to it:
 
@@ -28,14 +28,16 @@ It allows you to specify `default` instead of the `authorizationServerId` in req
 #### Web App Supports Client Credential Grant Type
 <!-- OKTA-102062 -->
 
-You can now [configure the `web` application type to use a `client_credential` grant type](/docs/api/resources/oauth-clients.html#client-application-properties).
+OAuth 2.0 clients now support [configuration of the `web` application type to use a `client_credential` grant type](/docs/api/resources/oauth-clients.html#client-application-properties).
 This allows you to use one `client_id` for an application that needs to make user-specific calls and back-end calls for data.
 
 #### OpenID Connect Group Claim Retrieves Application Groups
 <!-- OKTA_132193 -->
 
-OpenID Connect, which uses the Okta Authorization Server, now supports the use of the Okta Expression Language [`getFilteredGroups` function](/reference/okta_expression_language/index.html#group-functions) to retrieve [application groups](/docs/api/resources/apps.html#application-group-model) for use in tokens.
-Previously it only supported application groups in the Custom Authorization Server.  
+OpenID Connect, which uses the Okta Authorization Server, can retrieve [application groups](/docs/api/resources/apps.html#application-group-model) for use in tokens.
+Previously, application groups could only be retrieved with the Custom Authorization Server.  
+
+You can use the Okta Expression Language [`getFilteredGroups` function](/reference/okta_expression_language/index.html#group-functions) to retrieve application groups.
 
 #### SHA-256 Signed Certificates for New SAML 2.0 Apps
 
