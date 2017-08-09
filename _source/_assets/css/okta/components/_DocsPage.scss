@@ -27,7 +27,8 @@
           color: get-color('default');
 
           &.active {
-            color: #F1847F;
+            color: get-color('cerise');
+            border-bottom: 2px solid get-color('cerise');
           }
         }
 
