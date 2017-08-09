@@ -22,7 +22,6 @@ var oktaCustomRenderFunction = function(document_type, item) {
       }
   })
 
-
   $('.Header nav .SearchIcon').on('click', function(event) {
       event.stopPropagation();
       event.preventDefault();
@@ -36,6 +35,12 @@ var oktaCustomRenderFunction = function(document_type, item) {
       $('.Header').toggleClass('is-active');
       $('.PrimaryNav').toggleClass('is-active');
       $('.Page').toggleClass('PrimaryNav-is-active');
+  });
+
+  $('.PrimaryNav .expanded .nolink').on('click', function(event){
+      event.stopPropagation();
+      event.preventDefault();
+      $(this).parent('li').toggleClass('is-active');
   });
 
   $('#form_search #st-search-input-auto').on('keyup', function(){
@@ -53,6 +58,7 @@ var oktaCustomRenderFunction = function(document_type, item) {
 
   $(window).on('click', function() {
       $('.search-active').removeClass('search-active');
+      $('.PrimaryNav .expanded.is-active').removeClass('is-active');
   });
 
   $(window).on('resize', function(event){

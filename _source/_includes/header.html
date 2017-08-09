@@ -18,24 +18,21 @@
     <nav class="Header-nav PrimaryNav">
       <ul class="menu">
         <li class="first leaf">
-          <a href="{{ site.internal_url }}/documentation/"{{ active_documentation }}>Docs</a>
-        </li>
-        <li class="leaf">
-          <a href="{{ site.external_domain }}{{ site.external_path }}/pricing/">Pricing</a>
-        </li>
-        <li class="leaf">
           <a href="{{ site.external_domain }}{{ site.external_path }}/product/">Product</a>
         </li>
-        <li class="expanded">
+        <li class="leaf">
+          <a href="{{ site.internal_url }}/blog/"{% if page.url contains "/blog/" %} class="active"{% endif %}>Blog</a>
+        </li>
+        <li class="leaf">
+          <a href="{{ site.internal_url }}/documentation/"{{ active_documentation }}>Docs</a>
+        </li>
+        <li class="last expanded">
           <span class="nolink">Support</span>
           <ul class="menu">
             <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
             <li class="leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
             <li class="last leaf"><a href="tel:18887227871">1 (888) 722-7871</a></li>
           </ul>
-        </li>
-        <li class="leaf">
-          <a href="{{ site.internal_url }}/blog/"{% if page.url contains "/blog/" %} class="active"{% endif %}>Blog</a>
         </li>
       </ul>
       <a class="PrimaryNav-toggle" href="#">
@@ -50,12 +47,12 @@
       </a>
 
       <div class="PrimaryNav-cta">
-        <a target="_blank" href="https://login.okta.com/" class="Button--redOutline">Login</a>
-        <a target="_blank" href="{{ site.external_domain }}{{ site.external_path }}/signup/" class="Button--red">Sign up</a>
+        <a target="_blank" href="#" class="Button--redOutline">Login</a>
+        <a target="_blank" href="https://developer.okta.com/signup" class="Button--red">Sign up</a>
       </div>
 
       <a class="SearchIcon" href="#"></a>
-      <form id="form_search" class="SearchBar Formisimo_clocked_14258" method="get" action="{{ site.external_domain }}{{ site.external_path }}/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
+      <form id="form_search" class="SearchBar Formisimo_clocked_69929" method="get" action="{{ site.external_domain }}{{ site.external_path }}/search/" name="form_search" __bizdiag="-784164280" __biza="WJ__">
         <input type="text" name="stq" autocomplete="off" id="st-search-input-auto" class="st-search-input" placeholder="Search Okta Developer">
         <input type="submit" name="submit" value="GO">
       </form>
