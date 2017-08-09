@@ -22,7 +22,6 @@ Be aware of these constraints on the OpenID Connect authorize endpoint:
 * The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, the user won't be able to reuse the same session token to get a new session cookie.
 * When using a GET request to this API, Internet Explorer is only compatible with redirect URLs that don't grow beyond 255 characters, including request parameters.
   If the `redirectUrl` is only going to Okta and the request parameters are longer, then use a POST request to this API and provide additional request parameters as POST form parameters. For more information, see the [Microsoft documentation](https://support.microsoft.com/en-us/help/208427/maximum-url-length-is-2-083-characters-in-internet-explorer).
-  Options
 
 ##### Request Example
 {:.api .api-request .api-request-example}
