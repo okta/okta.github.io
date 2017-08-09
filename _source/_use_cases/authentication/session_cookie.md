@@ -17,7 +17,12 @@ This scenario is ideal for deployment scenarios where you have implemented both 
 
 Once a session token is obtained, it can be passed into the [OpenID Connect authorize endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) in order to get an Okta session cookie. Executing this flow will set a cookie in the end-user's browser and then redirect them back to the `redirect_uri` that is passed into the request.
 
-> The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.
+Be aware of these constraints on the OpenID Connect authorize endpoint:
+
+* The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, the user won't be able to reuse the same session token to get a new session cookie.
+* When using a GET request to this API, Internet Explorer is only compatible with redirect URLs that don't grow beyond 255 characters, including request parameters.
+  If the `redirectUrl` is only going to Okta and the request parameters are longer, then use a POST request to this API and provide additional request parameters as POST form parameters. For more information, see the [Microsoft documentation](https://support.microsoft.com/en-us/help/208427/maximum-url-length-is-2-083-characters-in-internet-explorer).
+  Options
 
 ##### Request Example
 {:.api .api-request .api-request-example}
