@@ -872,7 +872,7 @@ include | The AD integrations this policy applies to | Array | No | Include all 
 ## Okta Sign On Policy
 {: #OktaSignOnPolicy }
 
-Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they are challenged for multifactor authentication (MFA) and how long they are allowed to remain signed in before re-authenticating.
+Okta Sign On Policy controls the manner in which a user is allowed to sign on to Okta, including whether they are challenged for multifactor authentication (MFA) and how long they are allowed to remain signed in before re-authenticating.
 
 >Note: Okta Sign On Policy is different from application sign-on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.
 Application sign-on policy can't be configured via the API.

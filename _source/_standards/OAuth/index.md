@@ -239,9 +239,9 @@ A custom claim can be configured in the following ways:
 * Define the scopes that this claim is included in: either any scope or a list of scopes that you define.
 * Disable the claim. This is often used for testing.
 * Define the claim value, using [Okta's Expression Language](/reference/okta_expression_language/) or a group filter.
-    * Example of expressions: `"user.region"`, the value of the custom field "region" on the user's profile. You can create expressions to reference non-Okta groups.
+    * Example of expressions: `"user.region"`, the value of the custom field "region" on the user's profile. You can create expressions to reference application groups.
     * Example of a set of Okta groups specified by `groupFilterType`: If the token recipient wanted to display a badge for all current customers, you could specify a `groupFilterType` that start with "Customer" (`STARTS_WITH=Customer`). See [`groupFilterType`](/docs/api/resources/oauth2.html#details-for-groupfiltertype) for details.
-        Notice that you can use the group filter (`valueType` is `GROUP`) for Okta groups. For non-Okta groups, `valueType` must be `EXPRESSION`. 
+        Notice that you can use the group filter (`valueType` is `GROUP`) for Okta groups. For application groups, `valueType` must be `EXPRESSION`. 
   
   The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn't added into the ID token or access token.
   The datatype of a claim is an array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.
