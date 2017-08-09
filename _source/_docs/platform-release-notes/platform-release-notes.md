@@ -18,7 +18,7 @@ excerpt: Summary of changes to the Okta Platform since Release 2017.31
 #### Default Custom Authorization Server
 <!-- OKTA-133786 -->
 
-Okta provides a pre-configured custom authorization server named `default`.
+Okta provides a pre-configured Custom Authorization Server named `default`.
 This default authorization server includes a basic access policy and rule, which you can edit to control access.
 It allows you to specify `default` instead of the `authorizationServerId` in requests to it:
 
