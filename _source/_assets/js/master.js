@@ -83,6 +83,14 @@ var oktaCustomRenderFunction = function(document_type, item) {
 		$('.search-active').removeClass('search-active');
 	});
 
+	$(window).on('load', function(){
+		// TypeKit fallback to avoid page whiteout
+        setTimeout(
+            function(){
+                $('.wf-loading').addClass('wf-active').removeClass('wf-loading');
+			}, 100);
+    });
+
 	$(".st-search-input").swiftype({
 		renderFunction: oktaCustomRenderFunction,
 		engineKey: 'VoUosPoJvtAtkm68Cd-_',
