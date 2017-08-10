@@ -167,8 +167,8 @@ Follow the third-party process that your company uses to sign the CSR. **You can
 
 #### Step 4 – Publish the CSR
 
-- Use the [/api/v1/apps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate for Outbound SAML apps.
-- Use the [/api/v1/idps/credentials/csrs/lifecycle/publish API](#top) to publish the certificate for Inbound SAML apps.
+- Use the [/api/v1/apps/credentials/csrs/:csrid/lifecycle/publish API](/docs/api/resources/apps.html#publish-csr-for-application) to publish the certificate for Outbound SAML apps.
+- Use the [/api/v1/idps/credentials/csrs/:csrid/lifecycle/publish API](/docs/api/resources/idps.html#publish-signing-csr-for-idp) to publish the certificate for Inbound SAML apps.
 
 Base64 encoding and both PEM and CER certificate formats are supported.
 
