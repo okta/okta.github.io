@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -672,7 +672,7 @@ During policy evaluation each policy of the appropriate type is considered in tu
 <p>Policies that have no rules are not considered during evaluation, and will never be applied.</p>
 
 <h3 id="policy-types">Policy Types</h3>
-<p>Different policy types control settings for different operations.  All policy types share a common framework, message structure and API, but have different policy settings and rule data.  The data structures specific to each policy type are discussed in the various sections below.</p>
+<p>Different policy types control settings for different operations.  All policy types share a common framework, message structure and API, but have different policy settings and rule data. The data structures specific to each policy type are discussed in the various sections below.</p>
 
 <p><a href="#OktaSignOnPolicy">Okta Sign On Policy</a></p>
 
@@ -1298,12 +1298,16 @@ See <a href="#Conditions">conditions</a></p>
   </tbody>
 </table>
 
-<h2 id="type-specific-policy-data-structures">Type Specific Policy Data Structures</h2>
+<h2 id="type-specific-policy-data-structures">Type-Specific Policy Data Structures</h2>
 
 <h2 id="OktaSignOnPolicy">Okta Sign On Policy</h2>
 
-<p>Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they will be challenged for multifactor authentication (MFA) and how long they will be allowed to remain signed in before re-authenticating.
-Note that Okta sign on policy is not the same thing as application sign on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.</p>
+<p>Okta sign on policy controls the manner in which a user is allowed to sign on to Okta, including whether they are challenged for multifactor authentication (MFA) and how long they are allowed to remain signed in before re-authenticating.</p>
+
+<blockquote>
+  <p>Note: Okta Sign On Policy is different from application sign-on policy, which determines the extra levels of authentication (if any) which must be performed before a specific Okta application can be invoked.
+Application sign-on policy can’t be configured via the API.</p>
+</blockquote>
 
 <h3 id="policy-settings-data">Policy Settings Data</h3>
 
@@ -1439,13 +1443,13 @@ Note that Okta sign on policy is not the same thing as application sign on polic
 
 <p><a href="#AuthContextConditionObject">AuthContext Condition</a></p>
 
-<h2 id="OktaMFAPolicy">Multifactor (MFA) Policy</h2>
+<h2 id="OktaMFAPolicy">Multifactor (MFA) Enrollment Policy</h2>
 
 <blockquote>
-  <p>The MFA Policy API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  <a href="/docs/api/getting_started/releases-at-okta.html">release</a>.</p>
+  <p>The MFA Policy API is a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  release.</p>
 </blockquote>
 
-<p>Multifactor (MFA) Policy controls which MFA methods are available for a user, as well as when a user may enroll in a particular factor.</p>
+<p>Multifactor (MFA) Enrollment Policy controls which MFA methods are available for a user, as well as when a user may enroll in a particular factor.</p>
 
 <h4 id="policy-settings-example">Policy Settings Example</h4>
 <p>Note that policy settings are included only for those factors which have been enabled.</p>
@@ -2091,7 +2095,7 @@ Note that Okta sign on policy is not the same thing as application sign on polic
     <tr>
       <td>status</td>
       <td>Indicates if the factor is enabled.</td>
-      <td><code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">INACTIVE</code> (EA)</td>
+      <td><code class="highlighter-rouge">ACTIVE</code>, <code class="highlighter-rouge">INACTIVE</code>  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></td>
       <td>Yes</td>
     </tr>
     <tr>

@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -271,7 +271,7 @@ and the client obtains an Okta session.</p>
 </span></code></pre>
 </div>
 
-<p>The claims in the response are identical to those returned for the requested scopes in the <em>id_token</em> JWT, except for the <em>sub</em> claim which is always present.
+<p>The claims in the response are identical to those returned for the requested scopes in the <code class="highlighter-rouge">id_token</code> JWT, except for the <code class="highlighter-rouge">sub</code> claim which is always present.
 See <a href="/standards/OIDC/index.html#scope-dependent-claims-not-always-returned">Scope-Dependent Claims</a> for more information about individual claims.</p>
 
 <h4 class="api api-response api-response-example" id="response-example-error">Response Example (Error)</h4>
@@ -303,17 +303,17 @@ and only via POST data or within request headers. If you store them on your serv
 <p>Clients must validate the ID Token in the Token Response in the following manner:</p>
 
 <ol>
-  <li>Verify that the <em>iss</em> (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during <a href="#openid-connect-discovery-document">Discovery</a>).</li>
-  <li>Verify that the <em>aud</em> (audience) claim contains the <em>client_id</em> of your app.</li>
-  <li>Verify the signature of the ID Token according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <em>alg</em> header property. Use the public keys provided by Okta via the <a href="#openid-connect-discovery-document">Discovery Document</a>.</li>
-  <li>Verify that the expiry time (from the <em>exp</em> claim) has not already passed.</li>
-  <li>A <em>nonce</em> claim must be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.</li>
-  <li>The client should check the <em>auth_time</em> claim value and request re-authentication using the <em>prompt=login</em> parameter if it determines too much time has elapsed since the last end-user authentication.</li>
+  <li>Verify that the <code class="highlighter-rouge">iss</code> (issuer) claim in the ID Token exactly matches the issuer identifier for your Okta org (which is typically obtained during <a href="#openid-connect-discovery-document">Discovery</a>).</li>
+  <li>Verify that the <code class="highlighter-rouge">aud</code> (audience) claim contains the <code class="highlighter-rouge">client_id</code> of your app.</li>
+  <li>Verify the signature of the ID Token according to <a href="https://tools.ietf.org/html/rfc7515">JWS</a> using the algorithm specified in the JWT <code class="highlighter-rouge">alg</code> header property. Use the public keys provided by Okta via the <a href="#openid-connect-discovery-document">Discovery Document</a>.</li>
+  <li>Verify that the expiry time (from the <code class="highlighter-rouge">exp</code> claim) has not already passed.</li>
+  <li>A <code class="highlighter-rouge">nonce</code> claim must be present and its value checked to verify that it is the same value as the one that was sent in the Authentication Request. The client should check the nonce value for replay attacks.</li>
+  <li>The client should check the <code class="highlighter-rouge">auth_time</code> claim value and request re-authentication using <code class="highlighter-rouge">prompt=login</code> if it determines too much time has elapsed since the last end-user authentication.</li>
 </ol>
 
-<p>Step 3 involves downloading the public JWKS from Okta (specified by the <em>jwks_uri</em> property in the <a href="#openid-connect-discovery-document">discovery document</a>). The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
+<p>Step 3 involves downloading the public JWKS from Okta (specified by the <code class="highlighter-rouge">jwks_uri</code> property in the <a href="#openid-connect-discovery-document">discovery document</a>). The result of this call is a <a href="https://tools.ietf.org/html/rfc7517">JSON Web Key</a> set.</p>
 
-<p>Each public key is identified by a <em>kid</em> attribute, which corresponds with the <em>kid</em> claim in the <a href="/standards/OIDC/index.html#claims-in-the-header-section">ID Token header</a>.</p>
+<p>Each public key is identified by a <code class="highlighter-rouge">kid</code> attribute, which corresponds with the <code class="highlighter-rouge">kid</code> claim in the <a href="/standards/OIDC/index.html#claims-in-the-header-section">ID Token header</a>.</p>
 
 <p>Please note the following:</p>
 
@@ -322,7 +322,7 @@ and only via POST data or within request headers. If you store them on your serv
   <li>The current key rotation schedule is four times a year. This schedule can change without notice.</li>
   <li>In case of an emergency, Okta can rotate keys as needed.</li>
   <li>Okta always publishes keys to the JWKS.</li>
-  <li>If your app follows the best practice to always resolve the <em>kid</em>, key rotations won’t cause problems.</li>
+  <li>If your app follows the best practice to always resolve the <code class="highlighter-rouge">kid</code>, key rotations won’t cause problems.</li>
   <li>If you download the key and store it locally, <strong>you are responsible for updates</strong>.</li>
 </ul>
 
@@ -734,7 +734,7 @@ using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in <code class="hi
 
 <p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /oauth2/v1/keys</span></p>
 
-<p>If automatic key rotation is disabled, provide the <em>client_id</em> to fetch public keys for your app. Otherwise, this endpoint returns the public keys automatically rotated.</p>
+<p>If automatic key rotation is disabled, provide the <code class="highlighter-rouge">client_id</code> to fetch public keys for your app. Otherwise, this endpoint returns the public keys automatically rotated.</p>
 
 <h4 class="api api-request api-request-params" id="request-parameters-2">Request Parameters</h4>
 
@@ -975,7 +975,7 @@ of the response.</p>
     </tr>
     <tr>
       <td style="text-align: left">response_type</td>
-      <td style="text-align: left">Any combination of <em>code</em>, <em>token</em>, and <em>id_token</em>. The combination determines the     <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">flow</a>. The <code class="highlighter-rouge">code</code> response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.</td>
+      <td style="text-align: left">Any combination of <code class="highlighter-rouge">code</code>, <code class="highlighter-rouge">token</code>, and <code class="highlighter-rouge">id_token</code>. The combination determines the     <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">flow</a>. The <code class="highlighter-rouge">code</code> response type returns an authorization code, which the client can use to obtain an Access Token or a Refresh Token.</td>
       <td style="text-align: left">Query</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">TRUE</td>
@@ -999,7 +999,7 @@ of the response.</p>
     </tr>
     <tr>
       <td style="text-align: left">display</td>
-      <td style="text-align: left">How to display the authentication and consent UI. Valid values: <em>page</em> or <em>popup</em>.</td>
+      <td style="text-align: left">How to display the authentication and consent UI. Valid values: <code class="highlighter-rouge">page</code> or <code class="highlighter-rouge">popup</code>.</td>
       <td style="text-align: left">Query</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">FALSE</td>
@@ -1015,7 +1015,7 @@ of the response.</p>
     </tr>
     <tr>
       <td style="text-align: left">response_mode</td>
-      <td style="text-align: left">How the authorization response should be returned.     <a href="#parameter-details">Valid values: <em>fragment</em>, <em>form_post</em>, <em>query</em> or <em>okta_post_message</em></a>. If <em>id_token</em> or <em>token</em> is specified as the response type, then <em>query</em> isn’t allowed as a response mode. Defaults to <em>fragment</em> in implicit and hybrid flow. Defaults to <em>query</em> in authorization code flow and cannot be set as <em>okta_post_message</em>.</td>
+      <td style="text-align: left">How the authorization response should be returned.     <a href="#parameter-details">Valid values: <code class="highlighter-rouge">fragment</code>, <code class="highlighter-rouge">form_post</code>, <code class="highlighter-rouge">query</code> or <code class="highlighter-rouge">okta_post_message</code></a>. If <code class="highlighter-rouge">id_token</code> or <code class="highlighter-rouge">token</code> is specified as the response type, then <code class="highlighter-rouge">query</code> isn’t allowed as a response mode. Defaults to <code class="highlighter-rouge">fragment</code> in implicit and hybrid flow. Defaults to <code class="highlighter-rouge">query</code> in authorization code flow and cannot be set as <code class="highlighter-rouge">okta_post_message</code>.</td>
       <td style="text-align: left">Query</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">FALSE</td>
@@ -1039,7 +1039,7 @@ of the response.</p>
     </tr>
     <tr>
       <td style="text-align: left">prompt</td>
-      <td style="text-align: left">Either <em>none</em> or <em>login</em>. If <em>none</em>,  do not prompt for authentication, and return an error if the end user is not already authenticated. If <em>login</em> force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.</td>
+      <td style="text-align: left">Either <em>none</em> or <code class="highlighter-rouge">login</code>. If <code class="highlighter-rouge">none</code>,  do not prompt for authentication, and return an error if the end user is not already authenticated. If <code class="highlighter-rouge">login</code>, force a prompt (even if the user had an existing session). Default: depends on whether an Okta session exists.</td>
       <td style="text-align: left">Query</td>
       <td style="text-align: left">String</td>
       <td style="text-align: left">FALSE</td>
@@ -1091,34 +1091,34 @@ of the response.</p>
 <h4 id="parameter-details">Parameter Details</h4>
 
 <ul>
-  <li><em>idp</em>, <em>sessionToken</em> and <em>idp_scope</em> are Okta extensions to <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">the OpenID specification</a>.
+  <li><code class="highlighter-rouge">idp</code>, <code class="highlighter-rouge">sessionToken</code> and <code class="highlighter-rouge">idp_scope</code> are Okta extensions to <a href="http://openid.net/specs/openid-connect-core-1_0.html#Authentication">the OpenID specification</a>.
  All other parameters comply with the OpenID Connect specification and their behavior is consistent with the specification.</li>
-  <li>Each value for <em>response_mode</em> delivers different behavior:
+  <li>Each value for <code class="highlighter-rouge">response_mode</code> delivers different behavior:
     <ul>
-      <li><em>fragment</em> – Parameters are encoded in the URL fragment added to the <em>redirect_uri</em> when redirecting back to the client.</li>
-      <li><em>query</em> – Parameters are encoded in the query string added to the <em>redirect_uri</em> when redirecting back to the client.</li>
-      <li><em>form_post</em> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent.Thus, the values are transmitted via the HTTP POST method to the client
+      <li><code class="highlighter-rouge">fragment</code> – Parameters are encoded in the URL fragment added to the <em>redirect_uri</em> when redirecting back to the client.</li>
+      <li><code class="highlighter-rouge">query</code> – Parameters are encoded in the query string added to the <em>redirect_uri</em> when redirecting back to the client.</li>
+      <li><code class="highlighter-rouge">form_post</code> – Parameters are encoded as HTML form values that are auto-submitted in the User Agent. Thus, the values are transmitted via the HTTP POST method to the client
 and the result parameters are encoded in the body using the application/x-www-form-urlencoded format.</li>
-      <li><em>okta_post_message</em> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authentication endpoint.
-<em>okta_post_message</em> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>.
+      <li><code class="highlighter-rouge">okta_post_message</code> – Uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">HTML5 Web Messaging</a> (for example, window.postMessage()) instead of the redirect for the authorization response from the authentication endpoint.
+<code class="highlighter-rouge">okta_post_message</code> is an adaptation of the <a href="https://tools.ietf.org/html/draft-sakimura-oauth-wmrm-00#section-4.1">Web Message Response Mode</a>.
 This value provides a secure way for a single-page application to perform a sign-in flow
 in a popup window or an iFrame and receive the ID Token and/or access token back in the parent page without leaving the context of that page.
 The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">postMessage</a> call is in the next section.</li>
     </ul>
   </li>
   <li>
-    <p>Okta requires the OAuth 2.0 <em>state</em> parameter on all requests to the authentication endpoint in order to prevent cross-site request forgery (CSRF).
+    <p>Okta requires the OAuth 2.0 <code class="highlighter-rouge">state</code> parameter on all requests to the authentication endpoint in order to prevent cross-site request forgery (CSRF).
  The OAuth 2.0 specification <a href="https://tools.ietf.org/html/rfc6749#section-10.12">requires</a> that clients protect their redirect URIs against CSRF by sending a value in the authorize request which binds the request to the user-agent’s authenticated state.
- Using the <em>state</em> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
+ Using the <code class="highlighter-rouge">state</code> parameter is also a countermeasure to several other known attacks as outlined in <a href="https://tools.ietf.org/html/rfc6819">OAuth 2.0 Threat Model and Security Considerations</a>.</p>
   </li>
   <li><a href="https://tools.ietf.org/html/rfc7636">Proof Key for Code Exchange</a> (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents <a href="https://tools.ietf.org/html/rfc7636#section-1">a code interception attack</a> if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as code_verifier and derives code_challenge from it using code_challenge_method. It passes the code_challenge and code_challenge_method in the authorization request for code flow. When a client tries to redeem the code, it must pass the code_verifer. Okta recomputes the challenge and returns the requested token only if it matches the code_challenge in the original authorization request. When a client, whose <code class="highlighter-rouge">token_endpoint_auth_method</code> is <code class="highlighter-rouge">none</code>, makes a code flow authorization request, the <code class="highlighter-rouge">code_challenge</code> parameter is required.</li>
 </ul>
 
 <h4 id="postmessage-data-model">postMessage() Data Model</h4>
 
-<p>Use the postMessage() data model to help you when working with the <em>okta_post_message</em> value of the <em>response_mode</em> request parameter.</p>
+<p>Use the postMessage() data model to help you when working with the <code class="highlighter-rouge">okta_post_message</code> value of the <code class="highlighter-rouge">response_mode</code> request parameter.</p>
 
-<p><em>message</em>:</p>
+<p><code class="highlighter-rouge">message</code>:</p>
 
 <table>
   <thead>
@@ -1136,7 +1136,7 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
     </tr>
     <tr>
       <td style="text-align: left">access_token</td>
-      <td style="text-align: left">The <em>access_token</em> used to access the   <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <em>response_type</em> included a token. <b>Important</b>: Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
+      <td style="text-align: left">The <code class="highlighter-rouge">access_token</code> used to access the   <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if the <code class="highlighter-rouge">response_type</code> included a token. <b>Important</b>: Unlike the ID Token JWT, the <code class="highlighter-rouge">access_token</code> structure is specific to Okta, and is subject to change.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
@@ -1157,15 +1157,15 @@ The data model for the <a href="https://developer.mozilla.org/en-US/docs/Web/API
   </tbody>
 </table>
 
-<p><em>targetOrigin</em>:</p>
+<p><code class="highlighter-rouge">targetOrigin</code>:</p>
 
-<p>Specifies what the origin of <em>parentWindow</em> must be in order for the postMessage() event to be dispatched
-(this is enforced by the browser). The <em>okta-post-message</em> response mode always uses the origin from the <em>redirect_uri</em>
+<p>Specifies what the origin of <code class="highlighter-rouge">parentWindow</code> must be in order for the postMessage() event to be dispatched
+(this is enforced by the browser). The <code class="highlighter-rouge">okta-post-message</code> response mode always uses the origin from the <code class="highlighter-rouge">redirect_uri</code>
 specified by the client. This is crucial to prevent the sensitive token data from being exposed to a malicious site.</p>
 
 <h4 id="response-parameters-3">Response Parameters</h4>
 
-<p>The method of returning the response depends on the response type passed to the API. For example, a <em>fragment</em> response mode returns values in the fragment portion of a redirect to the specified <em>redirect_uri</em> while a <em>form_post</em> response mode POSTs the return values to the redirect URI.
+<p>The method of returning the response depends on the response type passed to the API. For example, a <code class="highlighter-rouge">fragment</code> response mode returns values in the fragment portion of a redirect to the specified <code class="highlighter-rouge">redirect_uri</code> while a <code class="highlighter-rouge">form_post</code> response mode POSTs the return values to the redirect URI.
 Irrespective of the response type, the contents of the response are as described in the table.</p>
 
 <table>
@@ -1179,32 +1179,32 @@ Irrespective of the response type, the contents of the response are as described
   <tbody>
     <tr>
       <td style="text-align: left">id_token</td>
-      <td style="text-align: left">JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <em>response_type</em> includes <em>id_token</em>.</td>
+      <td style="text-align: left">JWT that contains the details of the authentication event and the claims corresponding to the requested scopes. This is returned if the <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">id_token</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
       <td style="text-align: left">access_token</td>
-      <td style="text-align: left">Used to access the   <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if <em>response_type</em> includes <code class="highlighter-rouge">token</code>. Unlike the ID Token JWT, the <em>access_token</em> structure is specific to Okta, and is subject to change.</td>
+      <td style="text-align: left">Used to access the   <a href="/docs/api/resources/oidc.html#get-user-information"><code class="highlighter-rouge">/oauth2/v1/userinfo</code></a> endpoint. This is returned if <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">token</code>. Unlike the ID Token JWT, the <code class="highlighter-rouge">access_token</code> structure is specific to Okta, and is subject to change.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
       <td style="text-align: left">token_type</td>
-      <td style="text-align: left">The token type is always <code class="highlighter-rouge">Bearer</code> and is returned only when <em>token</em> is specified as a <em>response_type</em>.</td>
+      <td style="text-align: left">The token type is always <code class="highlighter-rouge">Bearer</code> and is returned only when <code class="highlighter-rouge">token</code> is specified as a <code class="highlighter-rouge">response_type</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
       <td style="text-align: left">code</td>
-      <td style="text-align: left">An opaque value that can be used to redeem tokens from   <a href="#token-request">token endpoint</a>.</td>
+      <td style="text-align: left">An opaque value that can be used to redeem tokens from   the <a href="#token-request">token endpoint</a>. This is returned if the <code class="highlighter-rouge">response_type</code> includes <code class="highlighter-rouge">code</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
       <td style="text-align: left">expires_in</td>
-      <td style="text-align: left">Number of seconds until the <em>access_token</em> expires. This is only returned if the response included an <em>access_token</em>.</td>
+      <td style="text-align: left">Number of seconds until the <code class="highlighter-rouge">access_token</code> expires. This is only returned if the response included an <code class="highlighter-rouge">access_token</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
       <td style="text-align: left">scope</td>
-      <td style="text-align: left">Scopes specified in the <em>access_token</em>. Returned only if the response includes an <em>access_token</em>.</td>
+      <td style="text-align: left">Scopes specified in the <code class="highlighter-rouge">access_token</code>. Returned only if the response includes an <code class="highlighter-rouge">access_token</code>.</td>
       <td style="text-align: left">String</td>
     </tr>
     <tr>
@@ -1245,7 +1245,7 @@ Irrespective of the response type, the contents of the response are as described
     </tr>
     <tr>
       <td style="text-align: left">unsupported_response_mode</td>
-      <td style="text-align: left">The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes. For example, if the query response mode is specified for a response type that includes id_token.</td>
+      <td style="text-align: left">The specified response mode is invalid or unsupported. This error is also thrown for disallowed response modes. For example, if the query response mode is specified for a response type that includes <code class="highlighter-rouge">id_token</code>.</td>
     </tr>
     <tr>
       <td style="text-align: left">invalid_scope</td>

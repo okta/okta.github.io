@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -216,8 +216,8 @@
 <p>The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the <a href="/docs/api/resources/events.html">Events API</a>:</p>
 
 <ul>
-  <li>The System Log API supports more query parameters than the Events API.</li>
-  <li>The System Log API returns more objects than the Events API.</li>
+  <li>The System Log API contains much more <a href="/docs/api/resources/system_log.html#log-objects">structured data</a> than the <a href="/docs/api/resources/events.html#event-model">Events API</a>.</li>
+  <li>The System Log API supports additional <a href="/docs/api/resources/system_log.html#request-parameters">SCIM filters</a> and the <code class="highlighter-rouge">q</code> query parameter, because of the presence of more structured data than the <a href="/docs/api/resources/events.html#request-parameters">Events API</a>.</li>
 </ul>
 
 <h2 id="getting-started">Getting Started</h2>
@@ -357,7 +357,7 @@ can use the following <code class="highlighter-rouge">curl</code> command to see
     </tr>
     <tr>
       <td><code class="highlighter-rouge">actor.id eq ":id"</code></td>
-      <td>Events published with a specific target id</td>
+      <td>Events published with a specific actor id</td>
     </tr>
   </tbody>
 </table>

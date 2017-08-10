@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -451,7 +451,7 @@
   </tbody>
 </table>
 
-<p>The following deprecated functions perform some of the same tasks as the ones in the above table.</p>
+<p>The following  <a href="/docs/api/getting_started/releases-at-okta.html#deprecation"> <span class="api-label api-label-deprecated "> <i class="fa fa-fire-extinguisher"></i> Deprecated </span> </a>  functions perform some of the same tasks as the ones in the above table.</p>
 
 <table>
   <thead>
@@ -738,33 +738,33 @@ integer type range limitations when converting from a number to an integer with 
 
 <p><code class="highlighter-rouge">getFilteredGroups</code> returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the <code class="highlighter-rouge">group_expression</code> parameter. You must specify the maximum number of groups to return. The format of this EL function is <code class="highlighter-rouge">getFilteredGroups( whitelist, group_expression, limit)</code>.</p>
 
-<p>You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens for API access management that drive authorization flows.</p>
+<p>You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens that drive authorization flows.</p>
 
 <p>This function takes Okta EL expressions for all parameters that evaluate to the correct data type. With these expressions you can create complex definitions for the whitelist, the group format, and for the number of groups to return that can include <code class="highlighter-rouge">if</code> logic and customized formatting.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-      <th>Nullable</th>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Nullable</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>whitelist</td>
-      <td>Valid Okta EL expression that evaluates to a string array of group ids</td>
-      <td>FALSE</td>
+      <td style="text-align: left">whitelist</td>
+      <td style="text-align: left">Valid Okta EL expression that evaluates to a string array of group ids</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>group_expression</td>
-      <td>Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression.</td>
-      <td>FALSE</td>
+      <td style="text-align: left">group_expression</td>
+      <td style="text-align: left">Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression.</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
     <tr>
-      <td>limit</td>
-      <td>Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return</td>
-      <td>FALSE</td>
+      <td style="text-align: left">limit</td>
+      <td style="text-align: left">Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return</td>
+      <td style="text-align: left">FALSE</td>
     </tr>
   </tbody>
 </table>
@@ -795,76 +795,76 @@ a group, the function returns the <code class="highlighter-rouge">windowsDomainQ
 <table>
   <thead>
     <tr>
-      <th>Function</th>
-      <th>Input Parameter Signature</th>
-      <th>Return Type</th>
-      <th>Example</th>
-      <th>Output</th>
+      <th style="text-align: left">Function</th>
+      <th style="text-align: left">Input Parameter Signature</th>
+      <th style="text-align: left">Return Type</th>
+      <th style="text-align: left">Example</th>
+      <th style="text-align: left">Output</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">Time.now</code></td>
-      <td>(String timeZoneId, String format)</td>
-      <td>String</td>
-      <td><code class="highlighter-rouge">Time.now()</code></td>
-      <td>2015-07-31T17:18:37.979Z (Current time, UTC format)</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.now</code></td>
+      <td style="text-align: left">(String timeZoneId, String format)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.now()</code></td>
+      <td style="text-align: left">2015-07-31T17:18:37.979Z (Current time, UTC format)</td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td><code class="highlighter-rouge">Time.now("EST")</code></td>
-      <td>2015-07-31T13:30:49.964-04:00 (Specified time zone)</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.now("EST")</code></td>
+      <td style="text-align: left">2015-07-31T13:30:49.964-04:00 (Specified time zone)</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td><code class="highlighter-rouge">Time.now("EST", "YYYY-MM-dd HH:mm:ss")</code></td>
-      <td>2015-07-31 13:36:48 (Specified time zone and format, military time)</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.now("EST", "YYYY-MM-dd HH:mm:ss")</code></td>
+      <td style="text-align: left">2015-07-31 13:36:48 (Specified time zone and format, military time)</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">Time.fromWindowsToIso8601</code></td>
-      <td>(String time)</td>
-      <td>String</td>
-      <td>Windows timestamp time as a string (Windows/LDAP timestamp doc)</td>
-      <td>The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.fromWindowsToIso8601</code></td>
+      <td style="text-align: left">(String time)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">Windows timestamp time as a string (Windows/LDAP timestamp doc)</td>
+      <td style="text-align: left">The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">Time.fromUnixToIso8601</code></td>
-      <td>(String time)</td>
-      <td>String</td>
-      <td>Unix timestamp time as a string (Unix timestamp reference)</td>
-      <td>The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.fromUnixToIso8601</code></td>
+      <td style="text-align: left">(String time)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">Unix timestamp time as a string (Unix timestamp reference)</td>
+      <td style="text-align: left">The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">Time.fromStringToIso8601</code></td>
-      <td>(String time, String format)</td>
-      <td>String</td>
-      <td>Timestamp time in a human-readable yet machine-parseable arbitrary format format (as defined by Joda time pattern)</td>
-      <td>The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.fromStringToIso8601</code></td>
+      <td style="text-align: left">(String time, String format)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">Timestamp time in a human-readable yet machine-parseable arbitrary format format (as defined by Joda time pattern)</td>
+      <td style="text-align: left">The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">Time.fromIso8601ToWindows</code></td>
-      <td>(String time)</td>
-      <td>String</td>
-      <td>ISO 8601 timestamp time as a string</td>
-      <td>The passed-in time expressed in Windows timestamp format.</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.fromIso8601ToWindows</code></td>
+      <td style="text-align: left">(String time)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">ISO 8601 timestamp time as a string</td>
+      <td style="text-align: left">The passed-in time expressed in Windows timestamp format.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">Time.fromIso8601ToUnix</code></td>
-      <td>(String time)</td>
-      <td>String</td>
-      <td>ISO 8601 timestamp time as a string</td>
-      <td>The passed-in time expressed in Unix timestamp format.</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.fromIso8601ToUnix</code></td>
+      <td style="text-align: left">(String time)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">ISO 8601 timestamp time as a string</td>
+      <td style="text-align: left">The passed-in time expressed in Unix timestamp format.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">Time.fromIso8601ToString</code></td>
-      <td>(String time, String format)</td>
-      <td>String</td>
-      <td>ISO 8601 timestamp time, to convert to format using the same Joda time format semantics as fromStringToIso8601</td>
-      <td>The passed-in time expressed informat format.</td>
+      <td style="text-align: left"><code class="highlighter-rouge">Time.fromIso8601ToString</code></td>
+      <td style="text-align: left">(String time, String format)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">ISO 8601 timestamp time, to convert to format using the same Joda time format semantics as fromStringToIso8601</td>
+      <td style="text-align: left">The passed-in time expressed informat format.</td>
     </tr>
   </tbody>
 </table>

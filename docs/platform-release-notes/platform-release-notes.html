@@ -37,12 +37,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.30">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.31">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -188,7 +188,7 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="release-201731">Release 2017.31</h2>
+      <h2 id="platform-release-notes-for-release-201732">Platform Release Notes for Release 2017.32</h2>
 
 <h3 id="platform-feature-enhancements">Platform Feature Enhancements</h3>
 
@@ -202,61 +202,67 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">                 <a href="#openid-connect">OpenID Connect</a></td>
+      <td style="text-align: left">      <a href="#default-custom-authorization-server">Default Custom Authorization Server</a></td>
+      <td style="text-align: left">August 9, 2017</td>
+      <td style="text-align: left">August 14, 2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">     <a href="#web-app-supports-client-credential-grant-type">Web App Supports Client Credential Grant Type</a></td>
+      <td style="text-align: left">August 9, 2017</td>
+      <td style="text-align: left">August 14, 2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">    <a href="#openid-connect-group-claim-retrieves-application-groups">OpenID Connect Group Claim Retrieves Application Groups</a></td>
+      <td style="text-align: left">August 9, 2017</td>
+      <td style="text-align: left">August 14, 2017</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">               <a href="#sha-256-signed-certificates-for-new-saml-20-apps">SHA-256 Signed Certificates for New SAML 2.0 Apps</a></td>
       <td style="text-align: left">Generally Available now</td>
-      <td style="text-align: left">Generally Available beginning 8/7/2017</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">           <a href="#key-rollover">Key Rollover</a></td>
-      <td style="text-align: left">Generally Available now</td>
-      <td style="text-align: left">Generally Available beginning 8/7/2017</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">           <a href="#email-for-two-factor-authentication">Email for Two-Factor Authentication</a></td>
-      <td style="text-align: left">Early Access by 8/3/2017</td>
-      <td style="text-align: left">Early Access beginning 8/7/2017</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">       <a href="#sha-256-signed-certificates-for-new-saml-20-apps">SHA-256 Signed Certificates for New SAML 2.0 Apps</a></td>
-      <td style="text-align: left">Generally Available by 8/3/2017</td>
       <td style="text-align: left">Generally Available beginning 9/11/2017</td>
     </tr>
   </tbody>
 </table>
 
-<p>To enable an Early Availability (EA) feature, contact Okta Support. For more information, see <a href="https://developer.okta.com/docs/api/getting_started/releases-at-okta.html">Okta Release Lifecycle</a>.</p>
+<h4 id="default-custom-authorization-server">Default Custom Authorization Server</h4>
+<!-- OKTA-133786 -->
 
-<blockquote>
-  <p>A <a href="#new-version-of-the-sign-in-widget">new version of the Sign-In Widget</a> is available now for all orgs.</p>
-</blockquote>
+<p>Okta provides a pre-configured Custom Authorization Server named <code class="highlighter-rouge">default</code>.
+This default authorization server includes a basic access policy and rule, which you can edit to control access.
+It allows you to specify <code class="highlighter-rouge">default</code> instead of the <code class="highlighter-rouge">authorizationServerId</code> in requests to it:</p>
 
-<h4 id="openid-connect">OpenID Connect</h4>
-<!-- OKTA-132049  -->
+<ul>
+  <li><code class="highlighter-rouge">https://{YourOktaDomain}.com/api/v1/authorizationServers/default</code>  vs</li>
+  <li><code class="highlighter-rouge">https://{YourOktaDomain}.com/api/v1/authorizationServers/:authorizationServerId</code> for other Custom Authorization Servers</li>
+</ul>
 
-<p><a href="/docs/api/resources/oidc.html">OpenID Connect</a> is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format.</p>
+<h4 id="web-app-supports-client-credential-grant-type">Web App Supports Client Credential Grant Type</h4>
+<!-- OKTA-102062 -->
 
-<p>OpenID Connect allows a range of clients, including Web-based, mobile, and JavaScript clients, to request and receive information about authenticated sessions and end users. The specification suite is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.</p>
+<p>OAuth 2.0 clients now support <a href="/docs/api/resources/oauth-clients.html#client-application-properties">configuration of the <code class="highlighter-rouge">web</code> application type to use a <code class="highlighter-rouge">client_credential</code> grant type</a>.
+This allows you to use one <code class="highlighter-rouge">client_id</code> for an application that needs to make user-specific calls and back-end calls for data.</p>
 
-<p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a>. For more information, see <a href="/standards/OIDC/">OpenID Connect and Okta</a>.</p>
+<h4 id="openid-connect-group-claim-retrieves-application-groups">OpenID Connect Group Claim Retrieves Application Groups</h4>
+<!-- OKTA_132193 -->
 
-<h4 id="key-rollover">Key Rollover</h4>
-<!-- OKTA-132045  -->
+<p>OpenID Connect, which uses the Okta Authorization Server, can retrieve <a href="/docs/api/resources/apps.html#application-group-model">application groups</a> for use in tokens.
+Previously, application groups could only be retrieved with the Custom Authorization Server.</p>
 
-<p>We provide the ability to generate a certificate with a specified validity period for the <a href="/docs/api/resources/apps.html">Apps API</a> and <a href="/docs/api/resources/idps.html">Identity Providers API</a>.</p>
+<p>You can use the Okta Expression Language <a href="/reference/okta_expression_language/index.html#group-functions"><code class="highlighter-rouge">getFilteredGroups</code> function</a> to retrieve application groups.</p>
 
 <h4 id="sha-256-signed-certificates-for-new-saml-20-apps">SHA-256 Signed Certificates for New SAML 2.0 Apps</h4>
 
 <p>All new SAML 2.0 apps are bootstrapped with SHA-256 signed public certificates. Existing SAML 2.0 apps are unchanged.</p>
 
-<h4 id="email-for-two-factor-authentication">Email for Two-Factor Authentication</h4>
-<!-- OKTA-134593  -->
+<h3 id="platform-bug-fixes">Platform Bug Fixes</h3>
 
-<p>You can enroll a user with an email factor. See <a href="/docs/api/resources/factors.html#enroll-okta-email-factor">Enroll Okta Email Factor</a> for details.</p>
+<p>Bug fixes are expected on preview orgs starting August 9, 2017, and on production orgs starting August 14, 2017.</p>
 
-<h3 id="new-version-of-the-sign-in-widget">New Version of the Sign-In Widget</h3>
-<!-- (OKTA-132800) -->
-
-<p>Version 2.1.0 of the Okta Sign-In Widget is available on <a href="https://github.com/okta/okta-signin-widget/releases/tag/okta-signin-widget-2.1.0">GitHub</a> or <a href="https://www.npmjs.com/package/@okta/okta-signin-widget">NPM</a>. Check out the new features and bug fixes!</p>
+<ul>
+  <li>The <strong>Add policy</strong> button wasn’t disabled for Org Admins, who don’t have permission to create authorization server policies. (OKTA-127450)</li>
+  <li>Some requests to <code class="highlighter-rouge">/oauth2/v1/authorize</code> with the <code class="highlighter-rouge">state</code> parameter incorrectly returned an error. (OKTA-130916)</li>
+  <li>When an ID token was minted for a custom authorization server, an app sign-on event wasn’t generated. (OKTA-134554)</li>
+</ul>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 
@@ -267,7 +273,8 @@
 <h3 id="looking-for-something-else">Looking for Something Else?</h3>
 
 <ul>
-  <li><a href="platform-release-notes2016-index.html">Platform Release Note Index</a></li>
+  <li><a href="platform-release-notes2016-index.html">Platform Release Note Index for 2016</a></li>
+  <li><a href="platform-release-notes2017-index.html">Platform Release Note Index for 2017</a></li>
   <li>For changes outside the Okta platform, see the <a href="https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm">Product Release Notes</a>.</li>
 </ul>
 
