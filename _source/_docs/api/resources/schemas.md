@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Schemas API
+title: Schemas
 ---
 
 # Schemas API

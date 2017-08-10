@@ -21,7 +21,7 @@ Dates for preview and production release are the earliest possible release date.
 
 The Password Policy API is an {% api_lifecycle ea %} release. Contact Support to enable it.
 
-Use the [Password Policy API](/docs/api/resources/policy.html#GroupPasswordPolicy) to dynamically configure group-based password policies, including self service recovery and unlock options.
+Use the [Password Policy API](/docs/api/resources/policy.html#GroupPasswordPolicy) to dynamically configure group-based password policies, including self-service recovery and unlock options.
 
 #### Referrer Policy Header for OAuth 2.0 and OpenID Connect
 <!-- OKTA-96522 -->
@@ -34,7 +34,7 @@ Bug fixes are expected on preview orgs starting August 16, 2017, and on producti
 
 * A PUT request to [update a user](/docs/api/resources/users.html#update-user) didn't delete all unspecified properties. (OKTA-133499)
 * The [Dynamic Client Registration API](/docs/api/resources/oauth-clients.html) didn't display the complete error message for requests to update a client. (OKTA-134440)
-* We improved the messages returned with some error codes for [OpenID Connect client apps](/docs/api/resources/oauth-clients.html). (OKTA-135294)
+* We improved the messages returned with some error codes for OpenID Connect and OAuth 2.0 client apps using the [`/oauth2/v1/clients`](/docs/api/resources/oauth-clients.html) and [`/api/v1/apps`](/docs/api/resources/apps.html) endpoints. (OKTA-135294)
 
 ### Does Your Org Have This Change Yet?
 
