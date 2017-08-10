@@ -1,6 +1,6 @@
 ---
 layout: docs_page
-title: Authentication
+title: Authentication API
 redirect_from: "/docs/api/rest/authn.html"
 ---
 

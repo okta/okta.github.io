@@ -1,7 +1,8 @@
 .BlogPost {
 	flex-grow: 1;
 	margin: 0;
-	
+	overflow-wrap: break-word;
+
 	& + & {
 		border-top: 1px solid #979797;
 		margin-bottom: 0;
@@ -257,6 +258,13 @@
 			@include padding(0 xx-small);
 			background: #d8d8d8;
 		}
+
+		table {
+			display: block;
+			white-space: normal;
+			max-width: 100%;
+			overflow: scroll;
+		}
 	}
 	
 	&-more {
@@ -298,5 +306,38 @@
 		order: 3;
 		margin-bottom: 0;
 		width: 100%;
+	}
+}
+
+@include media('<860px') {
+	.BlogPost.is-excerpt {
+		.BlogPost {
+			&-header {
+				margin: 20px 0;
+			}
+
+			&-title {
+				@include line-height('h2');
+				@include font-size('h2');
+				margin: 20px 0;
+			}
+
+			&-date {
+				order: 1;
+				width: 100%;
+				text-align: left;
+			}
+
+			&-attribution {
+				order: 2;
+				width: 100%;
+              	padding: 20px 0;
+
+				img {
+					width: 56px;
+					height: 56px;
+				}
+			}
+		}
 	}
 }

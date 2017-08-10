@@ -30,17 +30,23 @@
             color: get-color('cerise');
             border-bottom: 2px solid get-color('cerise');
           }
+
+          &:hover {
+            color: get-color('cerise');
+          }
         }
 
         .Button {
           &--redOutline {
             @include transition('none');
             color: get-color('cerise');
+            box-shadow: none !important;
           }
 
           &--red {
             @include transition('none');
             color: get-color('white');
+            box-shadow: none !important;
           }
         }
 

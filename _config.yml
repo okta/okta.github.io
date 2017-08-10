@@ -100,13 +100,8 @@ dev_forum:  https://devforum.okta.com/
 
 
 # Internal (Jekyll Site) and External (Drupal Site) URL Settings
-# Because site resources are distributed managing these seaprately allows
-# local dev on two paths, but deployment to prod on a unified domain
-# TODO:cc cleanup before pull request
-internal_url: http://developer.okta.com.dev
-external_domain: http://okta.com.dev
-external_path: /developer
-
-#internal_url: http://okta.flickerbox.com
-#external_domain: https://www.atko.biz
-#external_path: /developer
+# Because site resources are distributed managing these separately allows
+# local dev on two sites, but deployment to prod on a unified domain
+internal_url: https://developer.okta.com
+external_domain: https://developer.okta.com
+external_path:

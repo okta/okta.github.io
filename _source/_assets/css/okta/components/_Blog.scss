@@ -6,6 +6,7 @@
 	padding-top: 90 + get-spacing('x-large');
 	position: relative;
 	width: calc(100% - #{get-spacing('medium') * 2});
+	overflow-wrap: break-word;
 	
 	&.is-index {
 		flex-direction: column;
@@ -71,6 +72,38 @@
 		
 		a + a {
 			margin-top: get-spacing('small');
+		}
+	}
+}
+
+
+@include media('<860px') {
+	.Blog {
+		&.is-single {
+			display: block;
+
+			.BlogPost {
+				width: 100%;
+				max-width: 100%;
+
+				&-title {
+					@include line-height('h2');
+					@include font-size('h2');
+				}
+			}
+		}
+
+		&-social {
+			margin-top: -40px;
+			margin-bottom: 40px;
+			padding-top: 0;
+			text-align: left;
+			width: 100%;
+
+			a {
+				display: inline-block;
+				margin-right: get-spacing('small');
+			}
 		}
 	}
 }

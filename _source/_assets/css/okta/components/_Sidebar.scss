@@ -1,10 +1,18 @@
 .Sidebar {
-	@include padding(large medium);
+	@include padding(large small large medium);
 	background: get-color('ebony-clay');
-	min-width: 280px;
+	min-width: 250px;
 	position: relative;
-	width: 320px;
+	width: 250px;
 	border-left: solid 1px get-color('gray-lightest');
+
+	@include media('>medium') {
+		@include padding(large small large small);
+	}
+
+	@include media('>1340px') {
+		@include padding(large small large 0);
+	}
 
 	&-hide {
 		display: none;
@@ -64,6 +72,8 @@
 			font-weight: 400;
 			text-decoration: none;
 			text-transform: uppercase;
+			line-height: 20px;
+			padding-bottom: 6px;
 		}
 
 
