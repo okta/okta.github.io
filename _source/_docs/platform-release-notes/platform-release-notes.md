@@ -26,7 +26,7 @@ Use the [Password Policy API](/docs/api/resources/policy.html#GroupPasswordPolic
 #### Referrer Policy Header for OAuth 2.0 and OpenID Connect
 <!-- OKTA-96522 -->
 
-For enhanced security, Okta automatically adds the `Referrer-Policy` header to any OpenID Connect or API Access Management request that has the `response_mode` set to `fragment` or `query`.
+For enhanced security, Okta automatically adds the `Referrer-Policy` header with `Referrer-Policy: no-referrer` to any OpenID Connect or API Access Management request that has the `response_mode` set to `fragment` or `query`.
 
 ### Platform Bug Fixes
 
