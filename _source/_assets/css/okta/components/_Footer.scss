@@ -26,3 +26,11 @@
     @include font-size('h6');
   }
 }
+
+@media (max-width: 859px) {
+  .Footer {
+    .Logo {
+      margin-left: 0;
+    }
+  }
+}
