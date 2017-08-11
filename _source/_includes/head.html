@@ -44,10 +44,10 @@
   {% css animate %}
   {% css okta %}
   {% if page.css %}
-  {% css '{{page.css}}' %}
+    {% css '{{page.css}}' %}
   {% endif %}
   {% if layout.css %}
-  {% css '{{layout.css}}' %}
+    {% css '{{layout.css}}' %}
   {% endif %}
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>

@@ -36,6 +36,7 @@
 			flex-basis: 18%;
 			min-width: 18%;
 			max-width: 48%;
+			margin-bottom: 3%;
 
 			@include media('<860px') {
 				flex-basis: 48%;

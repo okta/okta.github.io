@@ -99,9 +99,6 @@ signup_error_email_address: "BD-ISV@okta.com"
 dev_forum:  https://devforum.okta.com/
 
 
-# Internal (Jekyll Site) and External (Drupal Site) URL Settings
-# Because site resources are distributed managing these separately allows
-# local dev on two sites, but deployment to prod on a unified domain
-internal_url: https://developer.okta.com
+# Location of main Drupal site for navigation and shared resources
 external_domain: https://developer.okta.com
 external_path:
