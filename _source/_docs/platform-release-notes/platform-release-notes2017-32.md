@@ -22,8 +22,8 @@ Okta provides a pre-configured Custom Authorization Server named `default`.
 This default authorization server includes a basic access policy and rule, which you can edit to control access.
 It allows you to specify `default` instead of the `authorizationServerId` in requests to it:
 
-* `https://{YourOktaDomain}.com/api/v1/authorizationServers/default`  vs
-* `https://{YourOktaDomain}.com/api/v1/authorizationServers/:authorizationServerId` for other Custom Authorization Servers
+* `https://{yourOktaDomain}.com/api/v1/authorizationServers/default`  vs
+* `https://{yourOktaDomain}.com/api/v1/authorizationServers/:authorizationServerId` for other Custom Authorization Servers
 
 #### Web App Supports Client Credential Grant Type
 <!-- OKTA-102062 -->
