@@ -116,7 +116,7 @@ function require_env_var() {
 
 # Verify for occurences of localhost:4000 have been removed
 function check_for_localhost_links() {
-    local links=$(grep -R "localhost:4000" ../* --exclude-dir={node_modules,scripts,tests,dist} --exclude={README.md,package.json})
+    local links=$(grep -R "localhost:4000"  --include="*.html" ../* --exclude-dir={node_modules,scripts,tests,dist} --exclude={README.md,package.json})
     if [ "$links" ];
     then
         echo $links

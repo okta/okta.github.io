@@ -13,8 +13,6 @@ test-app-icons.html
 atlassian-ide-plugin.xml
 classes
 
-Gemfile.lock
-
 # Include files from snapshotted ide config (which are ignored otherwise)
 !buildtools/ide/idea/.idea
 !buildtools/ide/idea/*.iml
