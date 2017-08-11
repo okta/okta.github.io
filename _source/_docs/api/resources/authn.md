@@ -4362,17 +4362,19 @@ relayState  | Optional state value that is persisted for the lifetime of the rec
 ##### Response Parameters
 {:.api .api-response .api-response-params}
 
+The response is different, depending on whether the request is for a public application or a trusted application.
+
 ###### Public Application
 
-[Recovery Transaction Object](#recovery-transaction-model) with `RECOVERY_CHALLENGE` status for the new recovery transaction.
+The [Recovery Transaction Object](#recovery-transaction-model) with `RECOVERY_CHALLENGE` status for the new recovery transaction.
 
 You will always receive a [Recovery Transaction](#recovery-transaction-model) response even if the requested `username` is not a valid identifier to prevent information disclosure.
 
 ###### Trusted Application
 
-[Recovery Transaction Object](#recovery-transaction-model) with an issued `recoveryToken` that can be distributed to the end user.
+The [Recovery Transaction Object](#recovery-transaction-model) with an issued `recoveryToken` that can be distributed to the end user.
 
-You will receive a `403 Forbidden` status code if the `username` requested is not valid
+You will receive a `403 Forbidden` status code if the `username` requested is not valid.
 
 ~~~http
 HTTP/1.1 403 Forbidden
