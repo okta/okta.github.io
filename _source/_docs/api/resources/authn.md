@@ -50,10 +50,10 @@ Every authentication transaction starts with primary authentication which valida
 
 The requests and responses vary depending on the application type, and whether a password expiration warning is sent:
 
-* [Primary Authentication with Public Application](#primary-authentication-with-public-application)&mdash;[Request Example](#request-example-public-application)
-* [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)&mdash;[Request Example](#request-example-trusted-application)
-* [Primary Authentication with activationToken](#primary-authentication-with-activation-token)&mdash;[Request Example](#request-example-activation-token)
-* [Primary Authentication with Password Expiration Warning](#primary-authentication-with-password-expiration-warning)&mdash;[Request Example](#request-example-password-expiration-warning)
+* [Primary Authentication with Public Application](#primary-authentication-with-public-application)&mdash;[Request Example](#request-example-for-primary-authentication-with-public-application)
+* [Primary Authentication with Trusted Application](#primary-authentication-with-trusted-application)&mdash;[Request Example](#request-example-for-trusted-application)
+* [Primary Authentication with activationToken](#primary-authentication-with-activation-token)&mdash;[Request Example](#request-example-for-activation-token)
+* [Primary Authentication with Password Expiration Warning](#primary-authentication-with-password-expiration-warning)&mdash;[Request Example](#request-example-for-password-expiration-warning)
 
 > You must first enable MFA factors and assign a valid **Sign-On Policy** to a user to enroll and/or verify a MFA factor during authentication.
 
