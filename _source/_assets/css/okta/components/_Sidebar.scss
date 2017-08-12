@@ -32,9 +32,9 @@
 
 	&-title {
 		@include color('white');
-		@include font-size('h2');
+		@include font-size('h4');
 		@include margin(medium 0 small);
-		font-weight: 500;
+		font-weight: 400;
 	}
 
 	&-nav {
@@ -51,12 +51,12 @@
 			padding-left: get-spacing('x-small');
 
 			a {
+				@include color('iron');
 				@include padding(0.1em x-small);
 				@include transition(background normal);
 				@include font-size('small');
 				font-weight: 400;
 				border-radius: 3px;
-				text-transform: uppercase;
 			}
 
 			a:active, a:hover {
@@ -69,22 +69,16 @@
 			@include color('white');
 			@include font-size('small');
 			display: block;
-			font-weight: 400;
+			font-weight: 600;
 			text-decoration: none;
-			text-transform: uppercase;
 			line-height: 20px;
-			padding-bottom: 6px;
+			padding-bottom: 5px;
 		}
 
 
 		> li,
 		ul {
 			@include margin(x-small 0);
-		}
-
-		> li > a,
-		> li > span {
-			font-weight: 600;
 		}
 
 		.is-active {
