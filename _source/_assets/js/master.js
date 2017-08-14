@@ -8,6 +8,7 @@
 //= require vendor/jquery.swiftype.search
 
 function escapeHtml(unsafe) {
+  unsafe = (typeof unsafe !== 'undefined') ? unsafe.toString().replace(/["']/g, "") : '';
   return $('<div />').text(unsafe).html();
 };
 
