@@ -7,6 +7,10 @@
 //= require vendor/jquery.swiftype.autocomplete
 //= require vendor/jquery.swiftype.search
 
+function escapeHtml(unsafe) {
+  return $('<div />').text(unsafe).html();
+};
+
 function oktaCustomRenderFunction(document_type, item) {
   var page_url = escapeHtml(item['url']);
   var page_title = escapeHtml(item['title']);
