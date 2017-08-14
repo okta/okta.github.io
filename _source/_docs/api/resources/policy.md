@@ -323,7 +323,10 @@ curl -v -X POST \
       }
     },
     "network": {
-      "connection": "ANYWHERE"
+      "connection": "ZONE",
+      "include": [
+        "nzowdja2YRaQmOQYp0g3"
+      ]
     },
     "authContext": {
       "authType": "ANY"
@@ -421,7 +424,10 @@ curl -v -X PUT \
       }
     },
     "network": {
-      "connection": "ANYWHERE"
+      "connection": "ZONE",
+      "include": [
+        "nzowdja2YRaQmOQYp0g3"
+      ]
     },
     "authContext": {
       "authType": "ANY"
@@ -811,6 +817,18 @@ exclude | The zones to exclude | Array | Only if connection data type is `ZONE` 
 
 > The `ON_NETWORK` and `OFF_NETWORK` data types are part of a {% api_lifecycle deprecated %} feature. Backward compatibility is maintained, but using `ZONE` is preferred.
 > The connection parameter may be set to the `ZONE` data type to select individual network zones.
+
+#### Network Condition Object Example
+{: #NetworkConditionObjectExample }
+
+~~~json
+  "network": {
+    "connection": "ZONE",
+    "include": [
+      "nzowdja2YRaQmOQYp0g3", "nzowe1mKv1D10YNda0g3", "nzowduJMXKsPkRqL40g3"
+    ]
+  }
+~~~
 
 #### Authentication Provider Condition Object
 {: #AuthProviderConditionObject }
