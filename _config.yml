@@ -94,6 +94,10 @@ defaults:
     values:
       layout: documentation
 
+# Okta Library versions
+versions:
+  jwt_validator_java: 0.1.0
+
 signup_error_email_address: "BD-ISV@okta.com"
 
 # Bug: 37458
