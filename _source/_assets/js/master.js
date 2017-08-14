@@ -8,10 +8,10 @@
 //= require vendor/jquery.swiftype.search
 
 function oktaCustomRenderFunction(document_type, item) {
-    var page_url = escapeHtml(item['url']);
-    var page_title = escapeHtml(item['title']);
-    var out = '<a href="' + page_url + '" class="st-search-result-link"><div class="st-result autocomplete-item"><p class="title">' + page_title + '</p></div></a>';
-    return out;
+  var page_url = escapeHtml(item['url']);
+  var page_title = escapeHtml(item['title']);
+  var out = '<a href="' + page_url + '" class="st-search-result-link"><div class="st-result autocomplete-item"><p class="title">' + page_title + '</p></div></a>';
+  return out;
 };
 
 (function($) {
