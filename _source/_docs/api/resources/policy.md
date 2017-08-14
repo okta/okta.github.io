@@ -769,11 +769,10 @@ The people condition identifies users and groups that are used together. For pol
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-groups | The group condition | String | Yes |
-users | The user condition | String | Yes |
+groups | The groups condition | <a href="#UserConditionObject">User Condition Object</a> | Yes |
+users | The users condition | <a href="#GroupConditionObject">Group Condition Object</a> | Yes |
 
-
-#### User Condition Object
+##### User Condition Object
 {: #UserConditionObject }
 
 Specifies a set of users to be included or excluded
@@ -784,7 +783,7 @@ include | The users to be included | Array | Yes |
 exclude | The users to be excluded | Array | Yes |
 
 
-#### Group Condition Object
+##### Group Condition Object
 {: #GroupConditionObject }
 
 Specifies a set of groups whose users to be included or excluded
@@ -794,6 +793,23 @@ Parameter | Description | Data Type | Required |
 include | The groups to be included | Array | Yes |
 exclude | The groups to be excluded | Array | Yes |
 
+#### People Condition Object Example
+
+~~~json
+  "people": {
+    "users": {
+      "exclude": [
+        "00uo7dIiN4jizvY6q0g3"
+      ]
+    },
+    "groups": {
+      "include": [
+        "00go6lU1wxnmPisNp0g3"
+      ]
+    }
+  }
+~~~
+
 #### AuthContext Condition Object
 {: #AuthContextConditionObject }
 
@@ -802,6 +818,14 @@ Specifies an authentication entry point.
 Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 authType |  | `ANY` or `RADIUS` | No |
+
+#### AuthContext Condition Object Example
+
+~~~json
+  authContext: {
+    authType: "RADIUS"
+  }
+~~~
 
 #### Network Condition Object
 {: #NetworkConditionObject }
@@ -840,7 +864,16 @@ Parameter | Description | Data Type | Required | Default
 provider | Specifies the required authentication provider  | 'Okta', 'Active Directory' | Yes | 'Okta'
 include | The AD integrations this policy applies to | Array | No | Include all AD integrations
 
+#### Authentication Provider Condition Object Example
 
+~~~json
+  authProvider: {
+    provider: "ACTIVE_DIRECTORY",
+    include: [
+      "0oaoz0zUsohjfrWZ80g3"
+    ]
+  }
+~~~
 
 ## Type-Specific Policy Data Structures
 
