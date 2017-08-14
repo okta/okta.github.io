@@ -24,7 +24,7 @@ compile 'com.okta.jwt:okta-jwt-verifier:0.1.0'
 ```java
 // 1. build the parser
 JwtVerifier jwtVerifier = new JwtHelper()
-                            .setIssuerUrl("https://{yourOktaDomain}.com/oauth2/{authorizationServerId}")
+                            .setIssuerUrl("https://{yourOktaDomain}.com/oauth2/default")
                             .setClientOrAudience("api://default")
                             .build();
 

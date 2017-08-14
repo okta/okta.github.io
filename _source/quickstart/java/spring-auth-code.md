@@ -26,7 +26,7 @@ compile 'org.springframework.security.oauth:spring-security-oauth2:2.0.14.RELEAS
 ```
 
 ### Configuration
-Configure your []Spring properties](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html) via environment varialbes, system properties, your application.yaml:
+Configure your [Spring properties](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html) via environment variables, system properties, your application.yaml:
 
 ```yml
 security:
@@ -61,4 +61,4 @@ public class ExampleApplication {
 }
 ```
 
-You can read more about [Spring's OAuth 2 support](http://projects.spring.io/spring-security-oauth/docs/oauth2.html) or take a look at this [blog post](https://developer.okta.com/blog/2017/03/21/spring-boot-oauth) the describes the the steps and configuration in detail.
+You can read more about [Spring's OAuth 2 support](http://projects.spring.io/spring-security-oauth/docs/oauth2.html) or take a look at this [blog post](https://developer.okta.com/blog/2017/03/21/spring-boot-oauth) that describes the steps and configuration in detail.
