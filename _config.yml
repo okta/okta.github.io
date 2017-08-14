@@ -101,4 +101,3 @@ dev_forum:  https://devforum.okta.com/
 
 # Location of main Drupal site for navigation and shared resources
 external_domain: https://developer.okta.com
-external_path:

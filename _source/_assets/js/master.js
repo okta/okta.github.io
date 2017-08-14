@@ -13,16 +13,15 @@ function escapeHtml(unsafe) {
 };
 
 function oktaCustomRenderFunction(document_type, item) {
-  var page_url = escapeHtml(item['url']);
-  var page_title = escapeHtml(item['title']);
-  var out = '<a href="' + page_url + '" class="st-search-result-link"><div class="st-result autocomplete-item"><p class="title">' + page_title + '</p></div></a>';
+  var pageUrl = escapeHtml(item['url']);
+  var pageTitle = escapeHtml(item['title']);
+  var out = '<a href="' + pageUrl + '" class="st-search-result-link"><div class="st-result autocomplete-item"><p class="title">' + pageTitle + '</p></div></a>';
   return out;
 };
 
 (function($) {
 
-  var scrollTimeout;
-  var highlightHeader = function () {
+  function highlightHeader() {
     if ($(document).scrollTop() > 0) {
       $('.Page--docs-page').addClass('scrolling');
     }
@@ -31,13 +30,14 @@ function oktaCustomRenderFunction(document_type, item) {
     }
   };
 
-    $(window).scroll(function () {
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
+  var scrollTimeout;
+  $(window).scroll(function () {
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
 
-      scrollTimeout = setTimeout(highlightHeader, 100);
-    });
+    scrollTimeout = setTimeout(highlightHeader, 100);
+  });
 
   $('.scrollTo, .PrimaryNav > ul.menu a').click(function(e) {
     if(this.hash && $(this.hash).length) {
