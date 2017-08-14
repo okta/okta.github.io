@@ -26,9 +26,9 @@ If you need to validate a token manually, and don't want to make a network call 
 * JWT (string)
 * Libraries for retrieving the signing keys and validating the token
 
-The issuer URL is the URL of your Authorization Server (like `https://dev-123.oktapreview.com/oauth2/abc123`), which you can find in the Okta Developer Dashboard:
+The issuer URL is the URL of your Authorization Server (like `https://{yourOktaDomain}.com/oauth2/abc123`), which you can find in the Okta Developer Dashboard:
 
-{% img authz-server-issuer.png alt:"Authorization Server Issuer&58; https&58;//dev-1234.oktapreview.com/oauth2/aus9o8wvkhockw9TL0h7" %}
+{% img authz-server-issuer.png alt:"Authorization Server Issuer&58; https&58;//{yourOktaDomain}.com/oauth2/aus9o8wvkhockw9TL0h7" %}
 
 In this guide, you'll use the official Microsoft OpenID Connect and JWT libraries, but you can adapt it to your preferred key parser and JWT validation libraries if necessary.
 
@@ -40,7 +40,7 @@ The `OpenIdConnectConfigurationRetriever` class in the [Microsoft.IdentityModel.
 
 ```csharp
 // Replace with your issuer URL:
-var issuer = "https://dev-123.oktapreview.com/oauth2/aus9o8wvkhockw9TL0h7";
+var issuer = "https://{yourOktaDomain}.com/oauth2/aus9o8wvkhockw9TL0h7";
 
 var configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
     issuer + "/.well-known/oauth-authorization-server",

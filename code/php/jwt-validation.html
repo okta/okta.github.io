@@ -207,74 +207,60 @@ with JWTs. These steps can be adapted for most JWT libraries that you may want t
 </ol>
 
 <h2 id="working-with-authorization-server-keys">Working with Authorization Server Keys</h2>
-<p>The first thing you will need to do is make a request to get your current keys for your authorization server. The URL
- for the keys can be discovered by visiting the .well-known endpoint of your authorization server. The .well-known 
- endpoint is listed in your authorization server dashboard and looks like 
- <code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/.well-known/oauth-authorization-server</code></p>
+<p>The first thing you will need to do is make a request to get your current keys for your authorization server. The URL for the keys can be discovered by visiting the .well-known endpoint of your authorization server. The .well-known 
+endpoint is listed in your authorization server dashboard and looks like 
+<code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/.well-known/oauth-authorization-server</code></p>
 
-<p>Once you have your .well-known URL, have your application make a request to this endpoint and <code class="highlighter-rouge">json_decode</code> the 
- results.</p>
+<p>Once you have your .well-known URL, have your application make a request to this endpoint and <code class="highlighter-rouge">json_decode</code> the results.</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code> $keys = json_decode(file_get_contents('https://{yourOktaDomain}/oauth2/{authorizationServerId}/v1/keys'));
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>$keys = json_decode(file_get_contents('https://{yourOktaDomain}/oauth2/{authorizationServerId}/v1/keys'));
 </code></pre>
 </div>
 
-<p>This will return a JSON object of any keys. Typically, this will return a single key entry, but can return a set of 
- keys.</p>
+<p>This will return a JSON object of any keys. Typically, this will return a single key entry, but can return a set of keys.</p>
 
-<p>### Caching Keys
- To avoid any future requests to the keys endpoint, you should cache the keys you receive in response to this 
- request. As a guideline, store each key that is returned with the a combination of your Authorization Server id 
- and the <code class="highlighter-rouge">kid</code>, or just the <code class="highlighter-rouge">kid</code> as the lookup key in your cache.</p>
+<h3 id="caching-keys">Caching Keys</h3>
+<p>To avoid any future requests to the keys endpoint, you should cache the keys you receive in response to this 
+request. As a guideline, store each key that is returned with the a combination of your Authorization Server id and the <code class="highlighter-rouge">kid</code>, or just the <code class="highlighter-rouge">kid</code> as the lookup key in your cache.</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code> foreach($keys as $key) {
-    $item = $this-&gt;cache-&gt;getItem($serverId . '-' . $kid);
-    
-    if(!$item-&gt;isHit()) {
-        $item-&gt;set($key);
-        $this-&gt;cache-&gt;save($item);
-    } 
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>foreach($keys as $key) {
+$item = $this-&gt;cache-&gt;getItem($serverId . '-' . $kid);
+
+if(!$item-&gt;isHit()) {
+    $item-&gt;set($key);
+    $this-&gt;cache-&gt;save($item);
+} 
 </code></pre>
 </div>
 
 <blockquote>
-  <p>Note: If you are not setting TTL for the cache entry, you should make sure to empty out old keys when new
-  ones are added to the cache.</p>
+  <p>Note: If you are not setting TTL for the cache entry, you should make sure to empty out old keys when new ones are added to the cache.</p>
 </blockquote>
 
-<p>This will allow you to look up the key for a later step. You could also update this to include a TTL if you wanted 
- to make sure you request a fresh set of keys after a set amount of time, but this is not required.</p>
+<p>This will allow you to look up the key for a later step. You could also update this to include a TTL if you wanted to make sure you request a fresh set of keys after a set amount of time, but this is not required.</p>
 
-<p>## Validating a JWT
- After you have your <code class="highlighter-rouge">access_token</code> from a successful login, or from the <code class="highlighter-rouge">Bearer token</code> in the authorization header, 
- you will need to make sure that this is still valid. There are a few steps here to fully validate it.</p>
+<h2 id="validating-a-jwt">Validating a JWT</h2>
+<p>After you have your <code class="highlighter-rouge">access_token</code> from a successful login, or from the <code class="highlighter-rouge">Bearer token</code> in the authorization header, you will need to make sure that this is still valid. There are a few steps here to fully validate it.</p>
 
-<p>### Parsing Keys
- The keys you have stored in cache, or retrieved from the Authorization Server, need to be converted to an OpenSSL 
- key resource that you can use. This can be done in any way you would like. There are some great libraries <a href="https://packagist.org/search/?q=jwk">on 
- packagist</a> that can be used for this. Once you have the public key set, you are
-  ready to continue validating the JWT.</p>
+<h3 id="parsing-keys">Parsing Keys</h3>
+<p>The keys you have stored in cache, or retrieved from the Authorization Server, need to be converted to an OpenSSL key resource that you can use. This can be done in any way you would like. There are some great libraries <a href="https://packagist.org/search/?q=jwk">on packagist</a> that can be used for this. Once you have the public key set, you are ready to continue validating the JWT.</p>
 
 <div class="language-php highlighter-rouge"><pre class="highlight"><code>$keys = JWK::parseKeySet($authorizationServer-&gt;getKeys());
 </code></pre>
 </div>
 
 <blockquote>
-  <p><code class="highlighter-rouge">$authorizationServer</code> would be a class that gives you access to a method that gets the keys either from cache if 
-they exist already, or makes a request to the keys server. <code class="highlighter-rouge">parseKeySet</code> is a function that can turn each key from 
-the authorization server into a public key resource.</p>
+  <p><code class="highlighter-rouge">$authorizationServer</code> would be a class that gives you access to a method that gets the keys either from cache if they exist already, or makes a request to the keys server. <code class="highlighter-rouge">parseKeySet</code> is a function that can turn each key from the authorization server into a public key resource.</p>
 </blockquote>
 
 <h3 id="decode-a-jwt">Decode a JWT</h3>
-<p>The JWT will then need to be decoded. In the <a href="https://packagist.org/packages/firebase/php-jwt">Firebase PHP-JWT</a> 
-library, this is a method that accepts the <code class="highlighter-rouge">jwt</code>, <code class="highlighter-rouge">key</code>, and <code class="highlighter-rouge">allowed_algorithms</code>.</p>
+<p>The JWT will then need to be decoded. In the <a href="https://packagist.org/packages/firebase/php-jwt">Firebase PHP-JWT</a> library, this is a method that accepts the <code class="highlighter-rouge">jwt</code>, <code class="highlighter-rouge">key</code>, and <code class="highlighter-rouge">allowed_algorithms</code>.</p>
 
 <div class="language-php highlighter-rouge"><pre class="highlight"><code>$decoded = \Firebase\JWT\JWT::decode($jwt, $keys, ['RS256']);
 </code></pre>
 </div>
 
-<p>If the key does not exist in the set of keys you pass, an exception will be thrown letting you know this. At this 
-point, you can:</p>
+<p>If the key does not exist in the set of keys you pass, an exception will be thrown letting you know this. At this point, you can:</p>
 <ul>
   <li>Call the token invalid</li>
   <li>Go check for any new keys first, then validate again</li>
@@ -282,14 +268,10 @@ point, you can:</p>
 </ul>
 
 <h4 id="alternate-decode-to-get-kid">Alternate decode to get kid</h4>
-<p>You can also decode the JWT without key validation to get the headers of the JWT itself. The value of doing this 
-allows you to get the <code class="highlighter-rouge">kid</code> out of the JWT header. This will allow you to see if the key was cached based on the <code class="highlighter-rouge">kid</code> 
-from the header, and then decode fully with only passing the single key.</p>
+<p>You can also decode the JWT without key validation to get the headers of the JWT itself. The value of doing this allows you to get the <code class="highlighter-rouge">kid</code> out of the JWT header. This will allow you to see if the key was cached based on the <code class="highlighter-rouge">kid</code> from the header, and then decode fully with only passing the single key.</p>
 
 <h3 id="verifying-jwt-claims">Verifying JWT Claims</h3>
-<p>There are two different types of JWTs that you may need to verify, and each has its own set of claims to look at as 
-well as some common ones. Use the table below as a guide of what element in the <code class="highlighter-rouge">access_token</code> or <code class="highlighter-rouge">idToken</code> 
-corresponds to what you should verify it against.</p>
+<p>There are two different types of JWTs that you may need to verify, and each has its own set of claims to look at as well as some common ones. Use the table below as a guide of what element in the <code class="highlighter-rouge">access_token</code> or <code class="highlighter-rouge">idToken</code> corresponds to what you should verify it against.</p>
 
 <table>
   <thead>
@@ -339,9 +321,7 @@ enough time to prevent most issues in regards to expire time and issued at time.
 </blockquote>
 
 <h4 id="verify-nonce-only-when-verifying-id_token">Verify nonce (only when verifying id_token)</h4>
-<p>To mitigate replay attacks, verify that the <code class="highlighter-rouge">nonce</code> value in the <code class="highlighter-rouge">id_token</code> matches the <code class="highlighter-rouge">nonce</code> that was used when 
-doing the code exchange. This verification is optional, but is highly suggested to verify after the initial code 
-exchange.</p>
+<p>To mitigate replay attacks, verify that the <code class="highlighter-rouge">nonce</code> value in the <code class="highlighter-rouge">id_token</code> matches the <code class="highlighter-rouge">nonce</code> that was used when doing the code exchange. This verification is optional, but is highly suggested to verify after the initial code exchange.</p>
 
 <div class="language-php highlighter-rouge"><pre class="highlight"><code>if($decoded-&gt;claims['nonce'] != $request-&gt;getCookieParam('okta-oauth-nonce')) {
     throw new \Exception('Invalid Token: Nonce does not match.')
@@ -350,10 +330,7 @@ exchange.</p>
 </div>
 
 <h2 id="conclusion">Conclusion</h2>
-<p>The above are the basic steps for verifying an access token locally. The steps are not tied directly to a library, 
-and can be applied to any JWT library you decide to use. We suggest you use either 
-<a href="https://packagist.org/packages/firebase/php-jwt">firebase/php-jwt</a> or 
-<a href="https://packagist.org/packages/spomky-labs/jose">spomky-labs/jose</a> as they have great support for this validation.</p>
+<p>The above are the basic steps for verifying an access token locally. The steps are not tied directly to a library, and can be applied to any JWT library you decide to use. We suggest you use either <a href="https://packagist.org/packages/firebase/php-jwt">firebase/php-jwt</a> or <a href="https://packagist.org/packages/spomky-labs/jose">spomky-labs/jose</a> as they have great support for this validation.</p>
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

@@ -15,6 +15,10 @@ npm test
 
 # 4. Run lint and localhost:4000 checker
 export GENERATED_SITE_LOCATION="dist"
+
+# 5. Run Lint checker
+npm run post-build-lint
+
 if ! url_consistency_check || ! duplicate_slug_in_url || ! check_for_localhost_links ; then
   echo "FAILED LINT CHECK!"
   exit 1;
