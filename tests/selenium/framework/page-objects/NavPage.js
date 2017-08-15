@@ -6,14 +6,14 @@ const util = require('../shared/util');
 class NavPage extends BasePage {
   constructor() {
     super();
-    this.$topNav = $('#top-nav');
-    this.$mobileNav = $('#mobile-nav');
-    this.$header = $('#header');
+    this.$topNav = $('.PrimaryNav');
+    this.$mobileNav = $('.PrimaryNav-toggle');
+    this.$header = $('header.Header');
     this.$searchIcon = $('.SearchIcon');
-    this.$searchInput = $('input#q');
-    this.$resultsBox = $('.gsc-resultsbox-visible');
-    this.$mobileSearch = $('#mobile-search');
-    this.$mobileSearchInput = $('#gsc-i-id1');
+    this.$searchInput = $('input#st-search-input-auto');
+    this.$resultsBox = $('.SearchResults');
+    // this.$mobileSearch = $('#mobile-search');
+    // this.$mobileSearchInput = $('#gsc-i-id1');
     this.setPageLoad(this.$header);
   }
 
@@ -33,13 +33,13 @@ class NavPage extends BasePage {
     return this.$searchIcon.click();
   }
 
-  clickMobileSearch() {
-    return this.$mobileSearch.click();
-  }
+  // clickMobileSearch() {
+  //   return this.$mobileSearch.click();
+  // }
 
-  enterMobileSearchText(searchText) {
-    return this.$mobileSearchInput.sendKeys(searchText);
-  }
+  // enterMobileSearchText(searchText) {
+  //   return this.$mobileSearchInput.sendKeys(searchText);
+  // }
 
   enterSearchText(searchText) {
     return this.$searchInput.sendKeys(searchText);
@@ -57,9 +57,9 @@ class NavPage extends BasePage {
     return util.wait(this.$resultsBox);
   }
 
-  submitMobileSearch() {
-    return this.$mobileSearchInput.sendKeys(protractor.Key.ENTER);
-  }
+  // submitMobileSearch() {
+  //   return this.$mobileSearchInput.sendKeys(protractor.Key.ENTER);
+  // }
 }
 
 module.exports = NavPage;
