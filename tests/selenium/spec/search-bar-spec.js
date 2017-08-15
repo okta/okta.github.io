@@ -30,7 +30,7 @@ describe('navigation bar search spec', () => {
   // We do not need to test mobile search.
   // The selector and user experience is the same as desktop
   // util.itNoHeadless('does search on mobile browser sizes', () => {
-  //   navPage.resizeXsmall();
+  //   navPage.resizeXXsmall();
 
   //   navPage.clickMobileSearch();
   //   expect(navPage.areSearchResultsPresent()).toBe(false);
