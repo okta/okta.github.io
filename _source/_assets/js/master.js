@@ -73,8 +73,22 @@ function oktaCustomRenderFunction(document_type, item) {
   });
 
   $('#form_search #st-search-input-auto').on('keyup', function(){
-      var active = $(this).val().length;
-      $(this).parent().toggleClass('button-active', active);
+      if ($(this).val().length > 0) {
+          $(this).parent().addClass('button-active');
+      }
+      else {
+          $(this).parent().removeClass('button-active');
+      }
+  });
+
+  $('#form_search').on('submit', function(e){
+    e.preventDefault();
+
+    if($('#st-search-input-auto').val() != '') {
+      window.location.href = searchDomain + '/search/#stq=' + encodeURIComponent($('#st-search-input-auto').val());
+    }
+
+    return false;
   });
 
   $('#form_search').on('click', function(e){
