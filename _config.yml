@@ -12,6 +12,7 @@ plugins:
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
+  - jekyll-redirect-from
 
 source: _source
 destination: dist

@@ -243,6 +243,7 @@ DEPENDENCIES
   github-pages (= 155)
   html-proofer
   jekyll-assets
+  jekyll-redirect-from
   tzinfo-data
 
 BUNDLED WITH
