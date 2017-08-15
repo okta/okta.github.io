@@ -86,6 +86,6 @@ The above are the basic steps for verifying an access token locally. The steps a
 you could plugin the okta-jwt-verifier into the framework of your choice (Dropwizard, Guice, Servlet API, or JAX-RS).
 
 For more information on this project take a look at the following resources:
-- [Javadocs](/okta-jwt-verifier-java/apidocs/)
+- [Javadocs](https://developer.okta.com/okta-jwt-verifier-java/apidocs/)
 - [Github Project](https://github.com/okta/okta-jwt-verifier-java) 
 - [Maven Central](http://search.maven.org/#artifactdetails%7Ccom.okta.jwt%7Cokta-jwt-verifier%7C{{ site.versions.jwt_validator_java }}%7Cjar)
