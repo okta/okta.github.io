@@ -21,7 +21,7 @@ describe('page layout and browser size spec', () => {
     navPage.resizeXXsmall();
     // navPage.waitUntilTopNavOffScreen();
     expect(navPage.isMobileToggleIconDisplayed()).toBe(true);
-    const mobileToggle = navPage.element(by.css('.PrimaryNav-toggle'));
+    const mobileToggle = navPage.$mobileToggleIcon;
     mobileToggle.click();
     expect(navPage.isMobileNavDisplayed()).toBe(true);
   });
