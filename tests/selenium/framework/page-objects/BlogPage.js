@@ -7,7 +7,7 @@ class BlogPage extends BasePage {
   constructor(url) {
     super(url);
     this.$blog = $('.Blog.is-index');
-    this.$$blogPost = $$('BlogPost.is-excerpt');
+    this.$$blogPost = $$('.BlogPost.is-excerpt');
     this.$pagination = $('.Blog-pagination');
     this.$nextLink = element(by.partialLinkText('Next'));
     this.$prevLink = element(by.partialLinkText('Prev'));
