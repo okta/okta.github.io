@@ -1010,7 +1010,7 @@ The following conditions may be applied to the rules associated with MFA Enrollm
 ## Password Policy
 {: #GroupPasswordPolicy }
 
-> The Password Policy API is an {% api_lifecycle ea %} [release](/docs/api/getting_started/releases-at-okta.html).
+> The Password Policy API is an {% api_lifecycle ea %} release.
 
 Password policy controls settings that determine a user's password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
 
