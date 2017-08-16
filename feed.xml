@@ -2297,6 +2297,18 @@ vue init pwa my-pwa-project
   &lt;li&gt;&lt;a href=&quot;/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot&quot;&gt;Tutorial: Develop a Mobile App With Ionic and Spring Boot&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/&quot;&gt;A Beginner’s Guide To Progressive Web Apps&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Thu, 20 Jul 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications</link>
@@ -2611,6 +2623,18 @@ Transfer-Encoding: chunked
   &lt;li&gt;&lt;a href=&quot;https://stormpath.com/blog/new-rbac-resource-based-access-control&quot;&gt;The New RBAC: Resource-Based Access Control&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://shiro.apache.org/permissions.html#wildcard-permissions&quot;&gt;Apache Shiro Wildcard Permissions&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Thu, 13 Jul 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot</link>
@@ -2779,6 +2803,18 @@ Transfer-Encoding: chunked
 If you do, congratulations! You just set up OpenID Connect for authenticating in your ASP.NET Core app!&lt;/p&gt;
 
 &lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;.&lt;/p&gt;
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</link>
@@ -2822,6 +2858,18 @@ If you do, congratulations! You just set up OpenID Connect for authenticating in
 &lt;p&gt;On the topic of writing concise and effective unit tests, &lt;a href=&quot;http://www.fluentassertions.com&quot;&gt;Fluent Assertions&lt;/a&gt; is a library that enables expressive assertions. When a test fails, it’s important to be able to know why without reaching for the debugger.&lt;/p&gt;
 
 &lt;p&gt;The possibilities for tweaking and refining your development workflow go on and on. While shiny new tools have the potential to dramatically increase productivity, it’s easy to go down the rabbit hole of research and not actually get any work done. So now that you’ve got some new tricks, you can stop reading and go put them to work.&lt;/p&gt;
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/06/27/seven-tools-net-developers&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Tue, 27 Jun 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/06/27/seven-tools-net-developers</link>
@@ -3229,6 +3277,19 @@ code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;
 &lt;p&gt;OAuth has a very large security surface area. Make sure to use a secure toolkit and validate all inputs!&lt;/p&gt;
 
 &lt;p&gt;OAuth is not an authentication protocol. OpenID Connect extends OAuth 2.0 for authentication scenarios and is often called “SAML with curly-braces”. If you’re looking to dive even deeper into OAuth 2.0, I recommend you check out &lt;a href=&quot;https://www.oauth.com/&quot;&gt;OAuth.com&lt;/a&gt;, take Okta’s Auth SDK for a spin, and try out the OAuth flows for yourself.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Wed, 21 Jun 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth</link>
@@ -4234,6 +4295,18 @@ Stack Overflow with the &lt;a href=&quot;http://stackoverflow.com/questions/tagg
   &lt;li&gt;&lt;a href=&quot;https://blog.heroku.com/bootstrapping_your_microservices_architecture_with_jhipster_and_spring&quot;&gt;Bootstrapping Your Microservices Architecture with JHipster and Spring&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://microservices.io/resources/index.html&quot;&gt;Microservice Resources from Chris Richardson&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Tue, 20 Jun 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/06/20/develop-microservices-with-jhipster</link>
@@ -4853,6 +4926,18 @@ In Javaland, there’s &lt;a href=&quot;http://www.dropwizard.io/&quot;&gt;Dropw
 &lt;p&gt;If you have any questions about this article, you can email me at matt.raible@okta.com, post a question to Stack Overflow 
 &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;with the Okta tag&lt;/a&gt;, post to our &lt;a href=&quot;https://devforum.okta.com/&quot;&gt;Developer Forums&lt;/a&gt;, 
 or &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-microservices-example/issues/new&quot;&gt;create an issue on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/06/15/build-microservices-architecture-spring-boot&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
 
 </description>
         <pubDate>Thu, 15 Jun 2017 00:00:00 +0000</pubDate>
@@ -5689,6 +5774,19 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. Or
   &lt;li&gt;Google’s &lt;a href=&quot;https://developers.google.com/web/progressive-web-apps/&quot;&gt;Progressive Web Apps&lt;/a&gt; homepage, &lt;a href=&quot;https://codelabs.developers.google.com/codelabs/your-first-pwapp/&quot;&gt;step-by-step code lab&lt;/a&gt;, and &lt;a href=&quot;https://developers.google.com/web/ilt/pwa/&quot;&gt;instructor-led PWA training&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.smashingmagazine.com/2016/08/a-beginners-guide-to-progressive-web-apps/&quot;&gt;A Beginner’s Guide To Progressive Web Apps&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/06/13/add-authentication-angular-pwa</link>
@@ -6506,6 +6604,18 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
   &lt;li&gt;&lt;a href=&quot;/blog/2017/04/17/angular-authentication-with-oidc&quot;&gt;Angular Authentication with OpenID Connect and Okta in 20 Minutes&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot</link>
@@ -6611,6 +6721,18 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 
 &lt;h3 id=&quot;more-containers-to-come&quot;&gt;More Containers to Come!&lt;/h3&gt;
 &lt;p&gt;Keep an eye out for future posts about Docker where we’ll look at creating images and containers from a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; and how to coordinate an environment of containers (API, database and UI) with Docker-Compose.&lt;/p&gt;
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Wed, 10 May 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1</link>
@@ -7122,6 +7244,19 @@ cf push -p target/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;jar pwa-server
   &lt;li&gt;&lt;a href=&quot;http://bit.ly/pwa-ng-nl&quot;&gt;Maxim Salnikov’s Angular Mobile Toolkit Workshop&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/tastejs/hacker-news-pwas&quot;&gt;Hacker News Readers as Progressive Web Apps&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot</link>
@@ -7168,6 +7303,18 @@ cf push -p target/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;jar pwa-server
 &lt;p&gt;&lt;img src=&quot;/assets/blog/seven-new-vs-features/vs-docker-support-4a95842d59eb47b8d3c7c34c13496c4844e4f0b0e44dbdd15a75d3ff2d7cdbb4.png&quot; alt=&quot;Visual Studio Docker Support&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Visual Studio has always been the editor of choice for those writing .NET applications and tapping into the Microsoft ecosystem. It has always had all the tools developers need to be their best, most productive selves. Now Microsoft has done some outstanding work to include and integrate with non-Microsoft tools that developers love to use, as well as help developers discover problems in their code, and improve the performance of their IDE. With the new additions and improvements in Visual Studio 2017, developers should love it even more!&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/05/03/seven-new-vs-features&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
 
 </description>
         <pubDate>Wed, 03 May 2017 00:00:00 +0000</pubDate>
@@ -7624,6 +7771,19 @@ is present on the requested resource. Origin 'http://localhost:4200' is therefor
 &lt;/ul&gt;
 
 &lt;p&gt;You can find the source code associated with this article &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-angular-example&quot;&gt;on GitHub&lt;/a&gt;. If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;okta tag&lt;/a&gt;. Of course, you can always &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;ping me on Twitter&lt;/a&gt; too.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Wed, 26 Apr 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/04/26/bootiful-development-with-spring-boot-and-angular</link>
@@ -8621,6 +8781,18 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/Kb56GzQ2pSk&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Mon, 17 Apr 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/04/17/angular-authentication-with-oidc</link>
@@ -8888,6 +9060,19 @@ npm start
 &lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Sign up for a forever-free developer account&lt;/a&gt; and try Okta today!&lt;/p&gt;
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;, leave a comment below, or open an issue on GitHub.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Thu, 30 Mar 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/03/30/react-okta-sign-in-widget</link>
@@ -9199,6 +9384,19 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 &lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Sign up for a forever-free developer account and try Okta today!&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;on Twitter&lt;/a&gt;, &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;post a question to Stack Overflow with an “okta” tag&lt;/a&gt;, or &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new&quot;&gt;open a new issue on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Mon, 27 Mar 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/03/27/angular-okta-sign-in-widget</link>
@@ -9407,6 +9605,18 @@ brew install springboot
 &lt;p&gt;This tutorial showed you how to use Spring CLI, Groovy, Spring Boot, Spring Security, and Okta to quickly prototype an OAuth client. This information is useful for those that are developing a Spring MVC application with traditional server-rendered pages. However, these days, lots of developers are using JavaScript frameworks and mobile applications to build their UIs.&lt;/p&gt;
 
 &lt;p&gt;In a future tutorial, I’ll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that’s secured by Spring Security and does JWT validation.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/03/21/spring-boot-oauth&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
 
 </description>
         <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
@@ -9654,6 +9864,18 @@ Hello SAML!
 
 &lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Thanks to &lt;a href=&quot;https://github.com/AlexeySoshin&quot;&gt;Alexey Soshin&lt;/a&gt; for contributing a &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-saml-example/pull/2&quot;&gt;pull request&lt;/a&gt; to make the code in this blog post more bootiful!&lt;/p&gt;
 
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2017/03/16/spring-boot-saml&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Thu, 16 Mar 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/03/16/spring-boot-saml</link>
@@ -9735,6 +9957,19 @@ Hello SAML!
 &lt;p&gt;If you run into any issue while using the SP-initiated login flow (when a user clicks on the “Sign In” link of the /SamplePath page), then try to recompile the KentorIT.AuthServices project and make sure it is used by your project. If your project uses v0.17 of the NuGet corresponding library, make sure to comment out any &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;requestedAuthnContext &amp;gt;&lt;/code&gt; section in your web.config file.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Happy Okta’ing!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Tue, 22 Mar 2016 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2016/03/22/use-kentor-authservices-with-okta</link>
@@ -9765,6 +10000,19 @@ talk and focused on solutions for authentication and authorization between
 services within an application.&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/150714428&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Tue, 05 Jan 2016 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2016/01/05/rest-service-auth-jwt</link>
@@ -9780,6 +10028,19 @@ services within an application.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.slideshare.net/karl_mcguinness/demystifying-oauth-20&quot;&gt;Slides&lt;/a&gt;&lt;/p&gt;
 
 &lt;iframe src=&quot;https://player.vimeo.com/video/148164438&quot; width=&quot;500&quot; height=&quot;281&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/12/07/oauth&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Mon, 07 Dec 2015 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2015/12/07/oauth</link>
@@ -10197,6 +10458,19 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.dropwizard.io/0.7.0/docs/manual/configuration.html#man-configuration-https&quot;&gt;Dropwizard https configuration manual&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://jersey.java.net/documentation/latest/client.html#d0e5128&quot;&gt;Jersey client documentation&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Wed, 02 Dec 2015 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2015/12/02/tls-client-authentication-for-services</link>
@@ -10258,6 +10532,19 @@ you implement these authentication concepts in your applications.&lt;/p&gt;
 &lt;p&gt;Designing and developing the Trust Page has taught me much in the last few months. I’d be happy to hear from you on this topic, so please feel free to send comments or questions to &lt;a href=&quot;mailto:vimarsh.karbhari@okta.com&quot;&gt;vimarsh.karbhari@okta.com&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;The Trust Page is the work of an amazing team that includes Tim Gu, Shawn Gupta, Nathan Tate, Wendy Liao, and myself.&lt;/em&gt;&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/06/11/trustpage&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Thu, 11 Jun 2015 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2015/06/11/trustpage</link>
@@ -10344,6 +10631,19 @@ compared to the amount of available RAM, which meant that we were sacrificing bo
 &lt;h2 id=&quot;lessons-learned&quot;&gt;Lessons learned&lt;/h2&gt;
 
 &lt;p&gt;Beyond the technical lessons we learned during this period, we were reminded that sometimes the best thing to do is stay the course. At times we were tempted to pull back, but moving forward ultimately paid off as each improvement we made exposed the inadequacy (for our platform) of a downstream component.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/05/22/tcmalloc&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Fri, 22 May 2015 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2015/05/22/tcmalloc</link>
@@ -10553,6 +10853,18 @@ enforce limits and design for infinity.&lt;/li&gt;
 
 &lt;h3 id=&quot;reference&quot;&gt;Reference&lt;/h3&gt;
 
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/05/08/software-engineering-design-principles&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:the-knowledge-creating-company&quot;&gt;
@@ -10669,6 +10981,19 @@ where we were last fall, our goal is &lt;strong&gt;zero failover time&lt;/strong
 &lt;p&gt;In telling our story, we couldn’t resist tooting our own horn a bit. How many CTOs actually get
 their hands dirty tackling product issues? Our CTO doesn’t code very often, but when
 he does, he patches the JVM.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/05/08/productionalizing-active-mq&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Fri, 08 May 2015 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2015/05/08/productionalizing-active-mq</link>
@@ -10831,6 +11156,19 @@ steps in writing on our wiki. Thanks guys!&lt;/p&gt;
     &lt;p&gt;&lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Thu, 23 Apr 2015 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2015/04/23/android-unit-testing-part-4</link>
@@ -10990,6 +11328,19 @@ dependency, not a real one.&lt;/p&gt;
 &lt;p&gt;Stay tuned for the final part of our series, where I will show you
 how to make tests isolated. You can also check out the full code at
 &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Tue, 14 Apr 2015 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2015/04/14/android-unit-testing-part-3</link>
@@ -11184,6 +11535,19 @@ because of a bad network connection.&lt;/p&gt;
 &lt;p&gt;Stay tuned for part three of our series, where I will show you how
 to achieve test isolation using dependency injection. You can also
 check out the full code at &lt;a href=&quot;https://github.com/vronin-okta/okta_blog_samples/tree/master/android_unit_testing&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div id=&quot;discourse-comments&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var discourseUrl = &quot;https://devforum.okta.com/&quot;,
+      discourseEmbedUrl = &quot;https://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2&quot;;
+
+  (function() {
+    var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+      d.src = discourseUrl + 'javascripts/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+  })();
+&lt;/script&gt;
+
 </description>
         <pubDate>Tue, 07 Apr 2015 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2015/04/07/android-unit-testing-part-2</link>
