@@ -927,14 +927,14 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
 -H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
-<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
@@ -1051,14 +1051,14 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
       }
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
@@ -1183,14 +1183,14 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
       }
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
@@ -1312,14 +1312,14 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
       }
     }
   }
-}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
 </code></pre>
 </div>
 
 <h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
@@ -2272,7 +2272,7 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
 <h3 id="example-app-user-schema">Example App User Schema</h3>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">

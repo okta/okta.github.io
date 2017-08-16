@@ -17,7 +17,7 @@
 
 &lt;p&gt;To keep things focused, I’ll leave the Maven dependencies out of this post. You can browse the full source on &lt;a href=&quot;http://github.com/oktadeveloper/jaxrs-spring-blog-example&quot;&gt;Github&lt;/a&gt;, the pom files should be self explanatory: one for JAX-RS, another for Spring.&lt;/p&gt;
 
-&lt;p&gt;First up, we need to get the common bits out of the way. A simple model and DAO (Data Access Object]) will be used in all of the examples to register and manage &lt;code class=&quot;highlighter-rouge&quot;&gt;Stormtrooper&lt;/code&gt; objects.&lt;/p&gt;
+&lt;p&gt;First up, we need to get the common bits out of the way. A simple model and DAO (Data Access Object) will be used in all of the examples to register and manage &lt;code class=&quot;highlighter-rouge&quot;&gt;Stormtrooper&lt;/code&gt; objects.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Stormtrooper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
@@ -92,7 +92,7 @@
 
 &lt;h3 id=&quot;spring-controller&quot;&gt;Spring Controller&lt;/h3&gt;
 
-&lt;p&gt;Next up, we have the implementation of our REST endpoint, or in the Spring world a &lt;code class=&quot;highlighter-rouge&quot;&gt;Controller&lt;/code&gt;. We will use this class to map our DAO to incoming HTTP requests&lt;/p&gt;
+&lt;p&gt;Next up, we have the implementation of our REST endpoint, or in the Spring world a &lt;code class=&quot;highlighter-rouge&quot;&gt;Controller&lt;/code&gt;. We will use this class to map our DAO to incoming HTTP requests.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
 &lt;span class=&quot;nd&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/troopers&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
@@ -322,7 +322,7 @@ X-Application-Context: application
 
 &lt;p&gt;Similar to the Spring example above the &lt;code class=&quot;highlighter-rouge&quot;&gt;@Path&lt;/code&gt; at the class level means each annotated method in this class will be under the &lt;code class=&quot;highlighter-rouge&quot;&gt;/troopers&lt;/code&gt; base path. The &lt;code class=&quot;highlighter-rouge&quot;&gt;@Produces&lt;/code&gt; annotation defines the default response content type (unless overridden by an annotation on another method).&lt;/p&gt;
 
-&lt;p&gt;Unlike the Spring example where an &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; annotation defined the path, method, and other attributes of the request, in a JAX-RS resource each attribute uses a separate annotation. Similar to above if we break down the &lt;code class=&quot;highlighter-rouge&quot;&gt;updateTrooper()&lt;/code&gt; method:&lt;/p&gt;
+&lt;p&gt;Unlike the Spring example where a &lt;code class=&quot;highlighter-rouge&quot;&gt;@RequestMapping&lt;/code&gt; annotation defined the path, method, and other attributes of the request, in a JAX-RS resource each attribute uses a separate annotation. Similar to above if we break down the &lt;code class=&quot;highlighter-rouge&quot;&gt;updateTrooper()&lt;/code&gt; method:&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nd&quot;&gt;@Path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/{id}&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;nd&quot;&gt;@POST&lt;/span&gt;

@@ -7,24 +7,6 @@ benjamin_wesson:
   twitter: https://twitter.com/benjaminwesson
   github: https://github.com/benjaminwesson-okta
 
-doug:
-  full_name: Doug Lee
-  display_name: Doug
-  avatar: avatar-doug.jpg
-  email: doug@bigbadgoose.com
-  web: http://www.bigbadgoose.com
-  twitter: https://twitter.com/duggiwuggi
-  github: https://github.com/duggi
-
-billy:
-  full_name: William Estoque
-  display_name: Billy
-  avatar: avatar-billy.jpg
-  email: billy@bigbadgoose.com
-  web: http://company.com
-  twitter: https://twitter.com/duggiwuggi
-  github: https://github.com/duggi
-
 victor_ronin:
   full_name: Victor Ronin
   display_name: Victor
@@ -132,3 +114,18 @@ dogeared:
   web: https://afitnerd.com
   twitter: https://twitter.com/afitnerd
   github: https://github.com/dogeared
+
+nbarbettini:
+  full_name: Nate Barbettini
+  display_name: Nate Barbettini
+  avatar: avatar-nbarbettini.jpg
+  web: https://www.recaffeinate.co
+  twitter: https://twitter.com/nbarbettini
+  github: https://github.com/nbarbettini
+
+alexsalazar:
+  full_name: Alex Salazar
+  display_name: Alex Salazar
+  avatar: avatar-alex_salazar.jpg
+  email: alex.salazar@okta.com
+  twitter: https://twitter.com/SalaTzar

@@ -19,7 +19,7 @@
     "posttest": "npm stop",
     "import-external": "node scripts/import-external 2>&1",
     "find-missing-slashes": "node scripts/find-missing-slashes",
-    "consistency-check": "bash scripts/consistency.sh"
+    "post-build-lint": "bash scripts/post-build-lint.sh"
   },
   "repository": {
     "type": "git",

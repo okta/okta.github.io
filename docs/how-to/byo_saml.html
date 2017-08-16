@@ -361,8 +361,8 @@
 <h4 id="step-4--publish-the-csr">Step 4 – Publish the CSR</h4>
 
 <ul>
-  <li>Use the <a href="#top">/api/v1/apps/credentials/csrs/lifecycle/publish API</a> to publish the certificate for Outbound SAML apps.</li>
-  <li>Use the <a href="#top">/api/v1/idps/credentials/csrs/lifecycle/publish API</a> to publish the certificate for Inbound SAML apps.</li>
+  <li>Use the <a href="/docs/api/resources/apps.html#publish-csr-for-application">/api/v1/apps/credentials/csrs/:csrid/lifecycle/publish API</a> to publish the certificate for Outbound SAML apps.</li>
+  <li>Use the <a href="/docs/api/resources/idps.html#publish-signing-csr-for-idp">/api/v1/idps/credentials/csrs/:csrid/lifecycle/publish API</a> to publish the certificate for Inbound SAML apps.</li>
 </ul>
 
 <p>Base64 encoding and both PEM and CER certificate formats are supported.</p>

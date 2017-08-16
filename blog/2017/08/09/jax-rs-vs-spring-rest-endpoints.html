@@ -146,7 +146,7 @@
 
 <p>To keep things focused, I’ll leave the Maven dependencies out of this post. You can browse the full source on <a href="http://github.com/oktadeveloper/jaxrs-spring-blog-example">Github</a>, the pom files should be self explanatory: one for JAX-RS, another for Spring.</p>
 
-<p>First up, we need to get the common bits out of the way. A simple model and DAO (Data Access Object]) will be used in all of the examples to register and manage <code class="highlighter-rouge">Stormtrooper</code> objects.</p>
+<p>First up, we need to get the common bits out of the way. A simple model and DAO (Data Access Object) will be used in all of the examples to register and manage <code class="highlighter-rouge">Stormtrooper</code> objects.</p>
 
 <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stormtrooper</span> <span class="o">{</span>
 
@@ -221,7 +221,7 @@
 
 <h3 id="spring-controller">Spring Controller</h3>
 
-<p>Next up, we have the implementation of our REST endpoint, or in the Spring world a <code class="highlighter-rouge">Controller</code>. We will use this class to map our DAO to incoming HTTP requests</p>
+<p>Next up, we have the implementation of our REST endpoint, or in the Spring world a <code class="highlighter-rouge">Controller</code>. We will use this class to map our DAO to incoming HTTP requests.</p>
 
 <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/troopers"</span><span class="o">)</span>
@@ -451,7 +451,7 @@ X-Application-Context: application
 
 <p>Similar to the Spring example above the <code class="highlighter-rouge">@Path</code> at the class level means each annotated method in this class will be under the <code class="highlighter-rouge">/troopers</code> base path. The <code class="highlighter-rouge">@Produces</code> annotation defines the default response content type (unless overridden by an annotation on another method).</p>
 
-<p>Unlike the Spring example where an <code class="highlighter-rouge">@RequestMapping</code> annotation defined the path, method, and other attributes of the request, in a JAX-RS resource each attribute uses a separate annotation. Similar to above if we break down the <code class="highlighter-rouge">updateTrooper()</code> method:</p>
+<p>Unlike the Spring example where a <code class="highlighter-rouge">@RequestMapping</code> annotation defined the path, method, and other attributes of the request, in a JAX-RS resource each attribute uses a separate annotation. Similar to above if we break down the <code class="highlighter-rouge">updateTrooper()</code> method:</p>
 
 <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Path</span><span class="o">(</span><span class="s">"/{id}"</span><span class="o">)</span>
 <span class="nd">@POST</span>

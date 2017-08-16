@@ -8,7 +8,7 @@ url: "https://developer.okta.com"
 twitter_username: OktaDev
 github_username:  oktadeveloper
 
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
@@ -71,6 +71,8 @@ collections:
   docs:
     output: true
     permalink: /:collection/:path:output_ext
+  quickstarts:
+    output: true
 
 paginate: 10
 paginate_path: "/blog/page/:num"
