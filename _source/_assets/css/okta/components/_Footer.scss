@@ -1,91 +1,40 @@
+.Footer {
+  a {
+    text-decoration: none;
+  }
 
-.footer {
+  .Wrap {
+    padding: 0;
+  }
 
-	background: #fafafa;
-	border-top: 2px solid #007dc1;
-	padding: 30px 0;
-	position: relative;
-	text-align: center;
-	z-index: 10;
+  &-links {
+    margin-top: 28px;
 
-	ul {
-		list-style: none;
-		margin: 0;
-		overflow: auto;
-		padding: 0;
-		zoom: 1;
+    li {
+      margin-bottom: -10px;
 
-		& + ul {
-			margin-top: 20px;
-		}
-	}
+      a {
+        padding: 0;
+      }
+    }
 
-	li {
-		display: inline-block;
+    &--github,
+    &--twitter,
+    &--forum,
+    &--rss {
+      margin-bottom: 20px;
+    }
+  }
 
-		& + li {
-			margin-left: 20px;
-		}
-
-		i {
-			font-size: get-font-size('h1');
-		}
-	}
-
-	a {
-		color: #007dc1;
-		text-decoration: none;
-
-		&:active,
-		&:focus,
-		&:hover {
-			color: get-color('blue-bright-highlight');
-		}
-	}
-
+  h4 {
+    @include font-size('h6');
+  }
 }
 
-@include media("<medium") {
-	#footer {
-		ul {
-			li {
-				a {
-					&:hover {
-						&:before {
-							background: transparent;
-						}
-					}
-					&:before {
-						background: transparent;
-					}
-				}
-			}
-		}
-	}
-}
-
-@include media('<small') {
-	.footer {
-		padding-top: 25px;
-		
-		.Wrap {
-			padding: 0 10px;
-		}
-		
-		li {
-			@include font-size('small');
-			line-height: 16px;
-			margin: 5px !important;
-		}
-		
-		&-socialIcons {
-			display: flex;
-			justify-content: center;
-			width: 100%;
-			
-			li {
-				margin: 0 10px !important;
-			}
-		}
-	}
+@media (max-width: 859px) {
+  .Footer {
+    .Logo {
+      margin-left: 0;
+    }
+  }
 }

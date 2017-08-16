@@ -1,14 +1,39 @@
 ---
 layout: master
-css: page-blog
+js: blog.js
 show_bottom_cta: true
 ---
-<section id="blog-post" class="main-container">{% comment %}
-	// assigned variables will "leak" into the included file
-	// we must capture the content however otherwise {{ content }}
-	// will leak as a raw string
-	{% endcomment %}{% assign post = page %}{% capture _post_content %}{{ content }}{% endcapture %}
-	<div class="wrap blog">
-		{% include blog_post.html post_content=_post_content %}
+
+{% comment %}
+// assigned variables will "leak" into the included file
+// we must capture the content however otherwise {{ content }}
+// will leak as a raw string
+{% endcomment %}
+
+{% assign post = page %}
+{% assign author = site.data.authors[post.author] %}
+
+{% capture _post_content %}
+	{{ content }}
+{% endcapture %}
+
+<section class="Blog is-single">
+		
+	<div class="Blog-social">
+		{% if author.github %}
+		<a href="{{ author.github }}" target="_blank"><i class="fa fa-github"></i></a>
+		{% endif %}
+		{% if author.twitter %}
+		<a href="{{ author.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a>
+		{% endif %}
+		{% if author.linkedin %}
+		<a href="{{ author.linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+		{% endif %}
+		{% if author.web%}
+		<a href="{{ author.web }}" target="_blank"><i class="fa fa-external-link"></i></a>
+		{% endif %}
 	</div>
+	
+	{% include blog_post.html post_content=_post_content %}
+		
 </section>

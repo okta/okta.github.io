@@ -1,17 +1,25 @@
 .Sidebar {
-	@include padding(large medium);
-	background: get-color('gray-lightest');
-	min-width: 280px;
+	@include padding(large small large medium);
+	background: get-color('ebony-clay');
+	min-width: 250px;
 	position: relative;
-	width: 320px;
+	width: 250px;
 	border-left: solid 1px get-color('gray-lightest');
+
+	@include media('>medium') {
+		@include padding(large small large small);
+	}
+
+	@include media('>1340px') {
+		@include padding(large small large 0);
+	}
 
 	&-hide {
 		display: none;
 	}
 
 	&:before {
-		background: get-color('gray-lightest');
+		background: get-color('ebony-clay');
 		bottom: 0;
 		content: '';
 		display: block;
@@ -19,16 +27,14 @@
 		position: absolute;
 		top: 0;
 		transform: translateX(-100%);
-		width: 50vw;
+		width: 100vw;
 	}
 
 	&-title {
-		@include color('gray-dark');
-		@include font-size('base');
-		@include margin(medium 0 xx-small);
+		@include color('white');
+		@include font-size('h4');
+		@include margin(medium 0 small);
 		font-weight: 400;
-		text-transform: uppercase;
-		border-bottom: solid 1px get-color('gray-dark');
 	}
 
 	&-nav {
@@ -45,21 +51,28 @@
 			padding-left: get-spacing('x-small');
 
 			a {
+				@include color('iron');
 				@include padding(0.1em x-small);
 				@include transition(background normal);
+				@include font-size('small');
+				font-weight: 400;
 				border-radius: 3px;
 			}
 
 			a:active, a:hover {
-				background-color: get-color('gray-light');
+				background-color: get-color('cerise');
+				color: get-color('white');
 			}
 		}
 
 		a {
-			@include color('default');
+			@include color('white');
+			@include font-size('small');
 			display: block;
-			font-weight: 400;
+			font-weight: 600;
 			text-decoration: none;
+			line-height: 20px;
+			padding-bottom: 5px;
 		}
 
 
@@ -68,14 +81,9 @@
 			@include margin(x-small 0);
 		}
 
-		> li > a,
-		> li > span {
-			font-weight: 600;
-		}
-
 		.is-active {
 			> a {
-				@include color('accent');
+				@include color('cerise');
 			}
 
 			> ul {
@@ -102,7 +110,15 @@
 		    height: auto;
 		    border-bottom: solid 3px get-color('gray-light');
 		    z-index: 100;
-		    position: relative;
+
+			@include media('<medium') {
+				margin-top: get-spacing(x-small);
+			}
+
+			@include media('<600px') {
+				margin-top: 0;
+			}
+
 	        h3,
 	        ul {
 		        display: none;
@@ -116,11 +132,11 @@
 		    width: 22px;
 		    height: 22px;
 		    z-index: 3;
-		    right: get-spacing('small');
+		    right: 30px;
 		    top: 14px;
 	    }
 	    .Sidebar-location {
-		    @include margin(0 small);
+			margin: 0 30px;
 		    color: get-color('blue-bright');
 		    display: block;
 		    cursor: pointer;

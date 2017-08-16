@@ -1,7 +1,7 @@
 const BlogPage = require('../framework/page-objects/BlogPage');
 
 describe('blog page spec', () => {
-  const blogPage = new BlogPage('/blog');
+  const blogPage = new BlogPage('/blog/');
 
   beforeEach(() => {
     blogPage.load();

@@ -52,7 +52,7 @@ class BasePage {
       return elementList.length == expectedTextArray.length;
     })
   }
-  
+
   urlContains(str) {
     return EC.urlContains(str)();
   }
@@ -60,24 +60,23 @@ class BasePage {
   getCurrentURL() {
     return browser.getCurrentUrl().then(url => url.replace(baseUrl, ''));
   }
-  
+
   // These are values used in css for managing different browser sizes -
-  // max-width: 1599px -> xxLarge
-  // max-width: 1399px -> xLarge
-  // max-width: 1199px -> large
-  // max-width: 1023px -> medium
-  // max-width: 899px -> mediumSmall
-  // max-width: 767px -> small
-  // max-width: 479px -> xSmall
-  // max-width: 319px -> xxSmall
+  // 'xx-small': 480px,
+  // 'x-small': 600px,
+  // 'small': 768px,
+  // 'medium': 1024px,
+  // 'large': 1200px,
+  // 'x-large': 1400px,
+  // 'xx-large': 1600px
   // setSize() calls fail on headless chrome due to chromedriver issue
   resizeMedium() {
     if (!process.env.CHROME_HEADLESS) {
-      browser.driver.manage().window().setSize(1060, 640);
+      browser.driver.manage().window().setSize(1024, 640);
     }
   }
 
-  resizeXsmall() {
+  resizeXXsmall() {
     if (!process.env.CHROME_HEADLESS) {
       browser.driver.manage().window().setSize(480, 640);
     }
@@ -85,13 +84,13 @@ class BasePage {
 
   resizeXLarge() {
     if (!process.env.CHROME_HEADLESS) {
-      browser.driver.manage().window().setSize(1560, 840);
+      browser.driver.manage().window().setSize(1400, 840);
     }
   }
 
   hasElements(elements) {
     return elements.then(element => element.length > 0);
   }
-}
 
+}
 module.exports = BasePage;

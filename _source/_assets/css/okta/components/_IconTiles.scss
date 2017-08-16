@@ -1,6 +1,7 @@
 // Programming Language Icons
 %IconTile {
 	@include responsiveRatio('5x3');
+	box-shadow: get-color('elephant') 10px 10px;
 
 	&:after {
 		background: no-repeat center;
@@ -26,7 +27,7 @@
 
 .IconTile {
 	&--javascript {
-		background-color: #F3DA00;
+		background-color: #D09B44;
 
 		&:after {
 			background-image: image_url("icons/javascript--white.svg");
@@ -34,7 +35,7 @@
 	}
 
 	&--java {
-		background-color: #FD9B01;
+		background-color: #AD5656;
 
 		&:after {
 			background-image: image_url("icons/java--white.svg");
@@ -43,22 +44,20 @@
 	}
 
 	&--python {
-		background-color: #3776A9;
+		background-color: #1584F9;
 
 		&:after {
 			background-image: image_url("icons/python--white.svg");
 		}
-
 	}
 
 	&--dotnet {
-		background-color: #1B83B6;
+		background-color: #3C5DDD;
 
 		&:after {
 			background-image: image_url("icons/dotnet--white.svg");
 			max-height: 30px;
 		}
-
 	}
 
 	&--objectivec {
@@ -67,16 +66,14 @@
 		&:after {
 			background-image: image_url("icons/objectivec--white.svg");
 		}
-
 	}
 
 	&--php {
-		background-color: #6183BB;
+		background-color: #854DB1;
 
 		&:after {
 			background-image: image_url("icons/php--white.svg");
 		}
-
 	}
 
 	&--swift {
