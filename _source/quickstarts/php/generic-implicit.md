@@ -17,6 +17,9 @@ Using the API for the library is built to only require a few options to be set. 
 JWT using the SpomkyLabs Jose JWT library
 ```php
 <?php
+
+require __DIR__ . '/vendor/autoload.php';  // This should be adjusted to be the autoload file from your vendor folder.
+
 $jwt = 'eyJhbGciOiJSUzI1Nqd0FfRzh6X0ZsOGlJRnNoUlRuQUkweVUifQ.eyJ2ZXIiOjEsiOiJwaHBAb2t0YS5jb20ifQ.ZGrn4fvIoCq0QdSyA';
 
 $jwtVerifier = (new \Okta\JwtVerifier\JwtVerifierBuilder())
