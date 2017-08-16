@@ -17,7 +17,7 @@ This scenario is ideal for deployment scenarios where you have implemented both 
 
 Once a session token is obtained, it can be passed into the [OpenID Connect authorize endpoint](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user) in order to get an Okta session cookie. Executing this flow will set a cookie in the end-user's browser and then redirect them back to the `redirect_uri` that is passed into the request.
 
-> The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.
+> The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, the user won't be able to reuse the same session token to get a new session cookie.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -51,9 +51,12 @@ This scenario is ideal for deployment scenarios where you have implemented both 
 
 The session token along with the URL for your landing page can then be used to complete the following [URI Template](http://tools.ietf.org/html/rfc6570) `https://{yourOktaDomain}.com/login/sessionCookieRedirect?token={sessionToken}&redirectUrl={redirectUrl}` that will retrieve a session cookie for a user's browser when visited.
 
-> You must have your redirect URI white-listed as a Trusted Origin within Okta. This is required to protect against open redirect attacks. {% api_lifecycle ea %}
+Be aware of the following requirements:
 
-> The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.
+* You must have your redirect URI white-listed as a Trusted Origin ({% api_lifecycle ea %}) within Okta. This is required to protect against open redirect attacks.
+* The session token may only be used **once** to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.
+* When using a GET request to `https://{yourOktaDomain}.com/login/sessionCookieRedirect`, Internet Explorer is only compatible with redirect URLs that don't grow beyond 255 characters, including request parameters.
+    If the `redirectUrl` is only going to Okta and the request parameters are longer, then use a POST request to this API and provide additional request parameters as POST form parameters. For more information about the character limitation, see the [Microsoft documentation](https://support.microsoft.com/en-us/help/208427/maximum-url-length-is-2-083-characters-in-internet-explorer).
 
 ##### Response Example
 {:.api .api-response .api-response-example}
