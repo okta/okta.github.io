@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-216ed5feceef178e4491fbb46b4f6d564d1dac1782d2a2643de7bcc9d9355da7.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -201,7 +201,7 @@
 <p>Once a session token is obtained, it can be passed into the <a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">OpenID Connect authorize endpoint</a> in order to get an Okta session cookie. Executing this flow will set a cookie in the end-user’s browser and then redirect them back to the <code class="highlighter-rouge">redirect_uri</code> that is passed into the request.</p>
 
 <blockquote>
-  <p>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.</p>
+  <p>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, the user won’t be able to reuse the same session token to get a new session cookie.</p>
 </blockquote>
 
 <h5 class="api api-request api-request-example" id="request-example">Request Example</h5>
@@ -240,13 +240,14 @@
 
 <p>The session token along with the URL for your landing page can then be used to complete the following <a href="http://tools.ietf.org/html/rfc6570">URI Template</a> <code class="highlighter-rouge">https://{yourOktaDomain}.com/login/sessionCookieRedirect?token={sessionToken}&amp;redirectUrl={redirectUrl}</code> that will retrieve a session cookie for a user’s browser when visited.</p>
 
-<blockquote>
-  <p>You must have your redirect URI white-listed as a Trusted Origin within Okta. This is required to protect against open redirect attacks.  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
-</blockquote>
+<p>Be aware of the following requirements:</p>
 
-<blockquote>
-  <p>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.</p>
-</blockquote>
+<ul>
+  <li>You must have your redirect URI white-listed as a Trusted Origin ( <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a> ) within Okta. This is required to protect against open redirect attacks.</li>
+  <li>The session token may only be used <strong>once</strong> to establish a session. If the session expires or the user logs out of Okta after using the token, they will not be able to reuse the same session token to get a new session cookie.</li>
+  <li>When using a GET request to <code class="highlighter-rouge">https://{yourOktaDomain}.com/login/sessionCookieRedirect</code>, Internet Explorer is only compatible with redirect URLs that don’t grow beyond 255 characters, including request parameters.
+  If the <code class="highlighter-rouge">redirectUrl</code> is only going to Okta and the request parameters are longer, then use a POST request to this API and provide additional request parameters as POST form parameters. For more information about the character limitation, see the <a href="https://support.microsoft.com/en-us/help/208427/maximum-url-length-is-2-083-characters-in-internet-explorer">Microsoft documentation</a>.</li>
+</ul>
 
 <h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
 
@@ -416,6 +417,7 @@ that contains the the session token as query parameter <code class="highlighter-
       </div>
     </footer>
     <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    <script type="text/javascript" src="/assets/quickstart-165c59d612d8748d143e080f704c1e8308d505b3d01782430159a7ee09cb6f3a.js"></script>
     
     
     

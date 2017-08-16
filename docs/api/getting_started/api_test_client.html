@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-216ed5feceef178e4491fbb46b4f6d564d1dac1782d2a2643de7bcc9d9355da7.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -213,10 +213,17 @@
 
 <p>To use these collections, you’ll need to set up your local environment and import the collections. Then, you can send a test request and verify the results.</p>
 
+<h2 id="sign-up-for-okta">Sign Up for Okta</h2>
+
+<p>You’ll need a free Okta developer organization to get started. If you don’t have one already, <a href="https://www.okta.com/developer/signup/" target="_blank">sign up</a> to create one.</p>
+
+<p>When you create a new Okta organization, it will be assigned a base URL like <code class="highlighter-rouge">dev-12345.oktapreview.com</code>. This is your unique subdomain in Okta. <code class="highlighter-rouge">oktapreview.com</code> orgs are production-ready and can be used for development work or full-fledged apps, but they don’t include SLAs.</p>
+
+<p>If you need organizations with guaranteed SLAs or enterprise features, <a href="https://developer.okta.com/contact/">let us know</a>. These orgs use a different domain, like <code class="highlighter-rouge">your-org.okta.com</code>. Regardless of the domain or base URL style, you can use the following instructions to send requests to the Okta API.</p>
+
 <h2 id="set-up-your-environment">Set Up Your Environment</h2>
 
 <ol>
-  <li><a href="https://www.okta.com/developer/signup/" target="_blank">Sign up</a> for a free Okta developer organization, if you don’t have one already.</li>
   <li><a href="getting_a_token.html" target="_blank">Create an API token</a> for your org.</li>
   <li><a href="https://www.getpostman.com/apps" target="_blank">Install the Postman app</a>.</li>
   <li>
@@ -230,7 +237,7 @@
   <li>Click the eye icon next to <code class="highlighter-rouge">example.oktapreview.com</code> and select <strong>Edit</strong> to replace or add these values:
     <ul>
       <li>Rename your environment to something you’ll recognize. For example, <code class="highlighter-rouge">My Org</code>.</li>
-      <li><code class="highlighter-rouge">url</code>: Replace the example value with your org’s URL. For example, <code class="highlighter-rouge">https://{yourOktaDomain}.com</code>. (Don’t include ‘-admin’ in the subdomain!)</li>
+      <li><code class="highlighter-rouge">url</code>: Replace the example value with your org’s full URL. For example, <code class="highlighter-rouge">https://dev-{id}.oktapreview.com</code>. (Make sure you don’t include <code class="highlighter-rouge">-admin</code> in the subdomain!)</li>
       <li><code class="highlighter-rouge">apikey</code>: Enter the API token you created earlier, for example <code class="highlighter-rouge">00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS</code>.</li>
     </ul>
   </li>
@@ -432,6 +439,7 @@ Replace URL and body variables with the IDs of the resources you wish to specify
       </div>
     </footer>
     <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    <script type="text/javascript" src="/assets/quickstart-165c59d612d8748d143e080f704c1e8308d505b3d01782430159a7ee09cb6f3a.js"></script>
     
     
     
