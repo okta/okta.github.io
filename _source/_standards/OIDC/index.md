@@ -48,13 +48,13 @@ you must have in your application to ensure it’s always updated with the lates
 Okta provides two types of authorization servers:
 
 * The Okta Authorization Server requires no configuration, and supports SSO use cases. 
-* The Custom Authorization Server is configurable. It supports the use of OpenID Connect with Okta's API Access Management,
+* The Custom Authorization Server is configurable. It supports the use of OpenID Connect with Okta&#8217;s API Access Management,
 an Okta feature that helps you secure access to your API.
 
 ## Dynamic Client Registration
 
 Okta provides [dynamic client registration](/docs/api/resources/oauth-clients.html), operations to register and manage
-client applications for use with Okta's OAuth 2.0 and OpenID Connect endpoints.
+client applications for use with Okta&#8217;s OAuth 2.0 and OpenID Connect endpoints.
 You can also perform these operations in the [Apps API](/docs/api/resources/apps.html).
 
 ## Claims
@@ -75,7 +75,7 @@ to access [the OIDC `userinfo` endpoint](/docs/api/resources/oidc.html#get-user-
 | Property       | Description                                                                                                   | Required       |
 |:---------------|:--------------------------------------------------------------------------------------------------------------|:---------------|
 | openid         | Identifies the request as an OpenID Connect request.                                                          | Yes            |
-| profile        | Requests access to the end user's default profile claims.                                                     | No             |
+| profile        | Requests access to the end user&#8217;s default profile claims.                                               | No             |
 | email          | Requests access to the `email` and `email_verified` claims.                                                   | No             |
 | phone          | Requests access to the `phone_number` and `phone_number_verified` claims.                                     | No             |
 | address        | Requests access to the `address` claim.                                                                       | No             |
@@ -85,7 +85,7 @@ to access [the OIDC `userinfo` endpoint](/docs/api/resources/oidc.html#get-user-
 ### Scope Values
 
 * `openid` is required for any OpenID request connect flow. If no openid scope value is present, the request may
-  be a valid OAuth 2.0 request, but it's not an OpenID Connect request.
+  be a valid OAuth 2.0 request, but it&#8217;s not an OpenID Connect request.
 * `profile` requests access to these default profile claims: `name`, `family_name`, `given_name`, `middle_name`, `nickname`, `preferred_username`, `profile`,  
 `picture`, `website`, `gender`, `birthdate`, `zoneinfo`,`locale`, and `updated_at`.
 * `offline_access` can only be requested in combination with a `response_type` containing `code`. If the `response_type` does not contain `code`, `offline_access` will be ignored.
@@ -99,10 +99,10 @@ and claims about the authenticated user that clients can rely on.
 
 Clients can use any of the following sequences of operations to obtain an ID Token:
 * Basic, or [Authorization code flow](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth) -- the client obtains
-an authorization code from the authorization server's authentication endpoint and uses it to obtain an ID token and an access
-token from the authorization server's Token endpoint.
+an authorization code from the authorization server&#8217;s authentication endpoint and uses it to obtain an ID token and an access
+token from the authorization server&#8217;s Token endpoint.
 * [Implicit flow](http://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth) -- the client obtains an ID
-token and optionally an Access Token directly from the authorization server's authentication endpoint.
+token and optionally an Access Token directly from the authorization server&#8217;s authentication endpoint.
 * [Hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) -- a combination of the other
 two flows.
 
@@ -178,7 +178,7 @@ Claims in the header are always returned.
 | Property      | Description                                                                                                                                                                                                  | DataType      | Example                    |
 |:--------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|:---------------------------|
 | alg           | Identifies the digital signature algorithm used. This is always be RS256.                                                                                                                                    | String        | "RS256"                    |
-| kid           | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the   [well-known configuration's](/docs/api/resources/oidc.html#openid-connect-discovery-document) *jwks_uri* value.   | String        | "a5dfwef1a-0ead3f5223_w1e" |
+| kid           | Identifies the *public-key* used to verify the *id_token*. The corresponding *public-key* can be found as a part of the   [well-known configuration&#8217;s](/docs/api/resources/oidc.html#openid-connect-discovery-document) *jwks_uri* value.   | String        | "a5dfwef1a-0ead3f5223_w1e" |
 
 #### Claims in the payload section
 
@@ -208,21 +208,21 @@ Claims in the payload are either base claims, independent of scope (always retur
 | ------------------ | ----------------- | --------------------------------------------------------------------------------                                                                                                                                                   | -------------  | --------------------------                                                                                                      |
 | Property           | Required Scope    | Description                                                                                                                                                                                                                        | DataType       | Example                                                                                                                         |
 |:-------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------|:--|
-| name               | profile           | User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user's locale and preferences.                                                                     | String         | "John Doe"                                                                                                                      |
+| name               | profile           | User&#8217;s full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the user&#8217;s locale and preferences.                                                         | String         | "John Doe"                                                                                                                      |
 | preferred_username | profile           | The Okta login (username) for the end user.                                                                                                                                                                                        | String         | "john.doe@example.com"                                                                                                          |
 | nickname           | profile           | Casual name of the user that may or may not be the same as the given_name.                                                                                                                                                         | String         | "Jimmy"                                                                                                                         |
 | preferred_username | profile           | The chosen login (username) for the end user. By default this is the Okta username.                                                                                                                                                | String         | "john.doe@example.com"                                                                                                          |
 | given_name         | profile           | Given name(s) or first name(s) of the user. Note that in some cultures, people can have multiple given names; all can be present, with the names being separated by space characters.                                              | String         | "John"                                                                                                                          |
 | middle_name        | profile           | Middle name(s) of the user. Note that in some cultures, people can have multiple middle names; all can be present, with the names being separated by space characters. Also note that in some cultures, middle names are not used. | String         | "James"                                                                                                                         |
 | family_name        | profile           | Surname(s) or last name(s) of the user. Note that in some cultures, people can have multiple family names or no family name; all can be present, with the names being separated by space characters.                               | String         | "Doe"                                                                                                                           |
-| profile            | profile           | URL of the user's profile page.                                                                                                                                                                                                    | String         | "https://profile.wordpress.com/john.doe"                                                                                         |
-| zoneinfo           | profile           | String representing the user's time zone.                                                                                                                                                                                          | String         | "America/Los_Angeles"                                                                                                           |
-| locale             | profile           | Language and   [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.                                                                                                                   | String         | "en-US"                                                                                                                         |
-| updated_at         | profile           | Time the user's information was last updated, represented in Unix time (seconds).                                                                                                                                                  | Integer        | 1311280970                                                                                                                      |
-| email              | email             | User's preferred email address. The resource provider must not rely upon this value being unique.                                                                                                                                  | String         | "john.doe@example.com"                                                                                                          |
-| email_verified     | email             | True if the user's email address (Okta primary email) has been verified; otherwise false.                                                                                                                                          | boolean        | true                                                                                                                            |
-| address            | address           | User's preferred postal address. The value of the address member is a JSON structure containing *street_address*, *locality*, *region*, *postal_code*, and *country*.                                                              | JSON structure | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" } |
-| phone_number       | phone             | User's preferred telephone number in E.164 format.                                                                                                                                                                                 | String         | "+1 (425) 555-1212"                                                                                                             |
+| profile            | profile           | URL of the user&#8217;s profile page.                                                                                                                                                                                              | String         | "https://profile.wordpress.com/john.doe"                                                                                         |
+| zoneinfo           | profile           | String representing the user&#8217;s time zone.                                                                                                                                                                                    | String         | "America/Los_Angeles"                                                                                                           |
+| locale             | profile           | Language and   [ISO3166‑1](http://www.iso.org/iso/country_codes) country code in uppercase, separated by a dash.                                                                                                                     | String         | "en-US"                                                                                                                         |
+| updated_at         | profile           | Time the user&#8217;s information was last updated, represented in Unix time (seconds).                                                                                                                                            | Integer        | 1311280970                                                                                                                      |
+| email              | email             | User&#8217;s preferred email address. The resource provider must not rely upon this value being unique.                                                                                                                            | String         | "john.doe@example.com"                                                                                                          |
+| email_verified     | email             | True if the user&#8217;s email address (Okta primary email) has been verified; otherwise false.                                                                                                                                    | boolean        | true                                                                                                                            |
+| address            | address           | User&#8217;s preferred postal address. The value of the address member is a JSON structure containing *street_address*, *locality*, *region*, *postal_code*, and *country*.                                                        | JSON structure | { "street_address": "123 Hollywood Blvd.", "locality": "Los Angeles", "region": "CA", "postal_code": "90210", "country": "US" } |
+| phone_number       | phone             | User&#8217;s preferred telephone number in E.164 format.                                                                                                                                                                           | String         | "+1 (425) 555-1212"                                                                                                             |
 | groups             | groups            | The groups that the user is a member of that also match the ID Token group filter of the client app.                                                                                                                               | List           | ["MyGroup1", "MyGroup2", "MyGroup3"]                                                                                            |
 
 Be aware of the following before you work with scope-dependent claims:
@@ -248,5 +248,5 @@ For more information about configuring an app for OpenID Connect, including grou
  
 For more information about Okta and OpenID Connect, see:
 
-* [Okta's API Access Management Introduction](/use_cases/api_security/)
+* [Okta&#8217;s API Access Management Introduction](/use_cases/api_security/)
 * [API for OpenID Connect](/docs/api/resources/oidc.html)
