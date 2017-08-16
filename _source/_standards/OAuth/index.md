@@ -64,9 +64,11 @@ In addition to the information in this topic, see:
     {% img native_auth_flow.png alt:"Native Application Flow" %}
 
     > Note: For native applications, the client_id and client_secret are embedded in the source code of the application; in this context, the client secret isn't treated as a secret.
-        Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
-        For more information, see the PKCE note in [Parameter Details](/docs/api/resources/oauth2.html#request-parameter-details).
-
+    Therefore native apps should make use of Proof Key for Code Exchange (PKCE) to mitigate authorization code interception.
+    For more information, see the PKCE note in [Parameter Details](/docs/api/resources/oauth2.html#request-parameter-details).
+    
+    &nbsp;
+    
 3. Web Application
 
     * Server-side app with an end-user
@@ -396,6 +398,13 @@ To configure a Custom Authorization Server, sign in to your org and navigate to 
 If you use a Custom Authorization Server, we recommend that you use it instead of the Okta Authorization Server for 
 any platform use cases (perform SSO or secure your API access).
 Doing so will make it easier to consume enhancements to the API Access Management product and features.  
+
+Okta provides a pre-configured Custom Authorization Server with the name `default`.
+This default authorization server includes a basic access policy and rule, which you can edit to control access. 
+It allows you to specify `default` instead of the `authorizationServerId` in requests to it:
+
+* `https://{YourOktaOrg}}/api/v1/authorizationServers/default`  vs 
+* `https://{YourOktaOrg}}/api/v1/authorizationServers/:authorizationServerId` for other Customer Authorization Servers
 
 ## OpenID Connect and Authorization Servers
 

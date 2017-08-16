@@ -37,7 +37,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-c9d8d47e5d0b2c3f60c41beea5371ccb83174ddc23c0f090acf1ae9a6735cb31.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -217,9 +217,7 @@
   <p>Okta has only implemented a subset of <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a>.  This document should describe which parts are applicable to Okta and any extensions Okta has made to <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a></p>
 </blockquote>
 
-<blockquote>
-  <p>This API is currently in <strong>Early Access (EA)</strong> status.</p>
-</blockquote>
+<p><a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a></p>
 
 <h2 id="getting-started">Getting Started</h2>
 
@@ -884,6 +882,489 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
 </span></code></pre>
 </div>
 
+<h2 id="app-user-schema-operations">App User Schema Operations</h2>
+
+<p><a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a></p>
+
+<h3 class="api api-operation" id="get-app-user-schema">Get App User Schema</h3>
+
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/meta/schemas/apps/<em>:instanceId</em>/default</span></p>
+
+<p>Fetches the default schema for an App User</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-4">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>instanceId</td>
+      <td>The id of the target App Instance</td>
+      <td>Path</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-4">Response Parameters</h5>
+
+<p><a href="#app-user-schema-model">App User Schema</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-4">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-4">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-18T23:18:43.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-18T22:35:30.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#base"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"userName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"userName"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"allOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/base"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/custom"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="add-property-to-app-user-profile-schema">Add Property to App User Profile Schema</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/meta/schemas/apps/<em>:instanceId</em>/default</span></p>
+
+<p>Adds one or more <a href="#app-user-profile-schema-property-object">custom app user profile properties</a> to the app user schema</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-5">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>instanceId</td>
+      <td>The id of the target App Instance</td>
+      <td>Path</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>definitions</td>
+      <td>Subschema with one or more custom profile properties</td>
+      <td>Body</td>
+      <td><a href="#app-user-profile-custom-subschema">App User Profile Custom Subschema</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-5">Response Parameters</h5>
+
+<p><a href="#app-user-schema-model">App User Schema</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-5">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  {
+    "definitions": {
+      "custom": {
+        "id": "#custom",
+        "type": "object",
+        "properties": {
+          "twitterUserName": {
+            "title": "Twitter username",
+            "description": "User'</span><span class="se">\'</span><span class="s1">'s username for twitter.com",
+            "type": "string",
+            "required": false,
+            "minLength": 1,
+            "maxLength": 20,
+          }
+        },
+        "required": []
+      }
+    }
+  }
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-5">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-18T23:18:43.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-18T22:35:30.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#base"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"userName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"userName"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"twitterUserName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Twitter username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's username for twitter.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"allOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/base"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/custom"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="update-app-user-profile-schema-property">Update App User Profile Schema Property</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/meta/schemas/apps/<em>:instanceId</em>/default</span></p>
+
+<p>Updates one or more <a href="#app-user-profile-schema-property-object">custom app user profile properties</a> in the schema.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-6">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>instanceId</td>
+      <td>The id of the target App Instance</td>
+      <td>Path</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>definitions</td>
+      <td>Subschema with one or more custom profile properties</td>
+      <td>Body</td>
+      <td><a href="#app-user-profile-custom-subschema">App User Profile Custom Subschema</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters-6">Response Parameters</h5>
+
+<p><a href="#app-user-schema-model">App User Schema</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-6">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  {
+    "definitions": {
+      "custom": {
+        "id": "#custom",
+        "type": "object",
+        "properties": {
+          "twitterUserName": {
+            "title": "Twitter username",
+            "description": "User'</span><span class="se">\'</span><span class="s1">'s username for twitter.com",
+            "type": "string",
+            "required": false,
+            "minLength": 1,
+            "maxLength": 10,
+          }
+        },
+        "required": []
+      }
+    }
+  }
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-6">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-19T17:01:05.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-18T22:35:30.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#base"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"userName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"userName"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"twitterUserName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Twitter username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's username for twitter.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"allOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/base"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/custom"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 class="api api-operation" id="remove-property-from-app-user-profile-schema">Remove Property from App User Profile Schema</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/meta/schemas/apps/<em>:instanceId</em>/default</span></p>
+
+<p>Removes one or more <a href="#app-user-profile-schema-property-object">custom app user profile properties</a> from the user schema.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-7">Request Parameters</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+      <th>Param Type</th>
+      <th>DataType</th>
+      <th>Required</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>instanceId</td>
+      <td>The id of the target App Instance</td>
+      <td>Path</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>definitions</td>
+      <td>Subschema with one or more custom profile properties to remove</td>
+      <td>Body</td>
+      <td><a href="#app-user-profile-custom-subschema">App User Profile Custom Subschema</a></td>
+      <td>TRUE</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Properties must be explicitly set to <code class="highlighter-rouge">null</code> to be removed from schema, otherwise the <code class="highlighter-rouge">POST</code> will be interpreted as a partial update.</p>
+</blockquote>
+
+<h5 class="api api-response api-response-params" id="response-parameters-7">Response Parameters</h5>
+
+<p><a href="#app-user-schema-model">App User Schema</a></p>
+
+<h5 class="api api-request api-request-example" id="request-example-7">Request Example</h5>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -v -X POST <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'{
+  {
+    "definitions": {
+      "custom": {
+        "id": "#custom",
+        "type": "object",
+        "properties": {
+          "twitterUserName": null
+        },
+        "required": []
+      }
+    }
+  }
+}'</span> <span class="s2">"https://</span><span class="k">${</span><span class="nv">org</span><span class="k">}</span><span class="s2">.okta.com/api/v1/meta/schemas/apps/{instanceId}/default"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-7">Response Example</h5>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-19T17:11:22.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-18T22:35:30.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#base"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"userName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"userName"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"allOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/base"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/custom"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h2 id="user-schema-model">User Schema Model</h2>
 
 <p>The <a href="./users.html#user-model">User Model</a> schema is defined using <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a>.</p>
@@ -892,7 +1373,7 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
   <p>The schema currently only defines the <a href="./users.html#profile-object">profile object</a>.</p>
 </blockquote>
 
-<h3 id="example">Example</h3>
+<h3 id="example-user-schema">Example User Schema</h3>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/meta/schemas/user/default"</span><span class="p">,</span><span class="w">
@@ -1048,7 +1529,7 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
     <tr>
       <td>name</td>
       <td>name for the schema</td>
-      <td><code class="highlighter-rouge">user</code></td>
+      <td>String</td>
       <td>FALSE</td>
       <td>TRUE</td>
       <td>TRUE</td>
@@ -1102,8 +1583,8 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
     </tr>
     <tr>
       <td>type</td>
-      <td>type of root schema</td>
-      <td><code class="highlighter-rouge">object</code></td>
+      <td>type of <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4">root schema</a></td>
+      <td>String</td>
       <td>FALSE</td>
       <td>FALSE</td>
       <td>TRUE</td>
@@ -1779,6 +2260,461 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
     </tr>
   </tbody>
 </table>
+
+<h2 id="app-user-schema-model">App User Schema Model</h2>
+
+<p>The <a href="./apps.html#application-user-model">App User Model</a> schema is defined using <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a>.</p>
+
+<blockquote>
+  <p>The schema currently only defines the <a href="./apps.html#application-user-profile-object">profile object</a>.</p>
+</blockquote>
+
+<h3 id="example-app-user-schema">Example App User Schema</h3>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.okta.com/meta/schemas/apps/0oa25gejWwdXNnFH90g4/default"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema#"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example App User"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-18T22:37:55.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-18T22:35:30.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#base"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"userName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"userName"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"twitterUserName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Twitter username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's username for twitter.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"allOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/base"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/custom"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="schema-properties-1">Schema Properties</h3>
+
+<p>The app user schema is a valid <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a> document with the following properties :</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>id</td>
+      <td>URI of app user schema</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>$schema</td>
+      <td>JSON Schema version identifier</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>name for the schema</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>user-defined display name for the schema</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>created</td>
+      <td>timestamp when schema was created</td>
+      <td><a href="https://tools.ietf.org/html/rfc3339">ISO 8601 String</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>lastUpdated</td>
+      <td>timestamp when schema was last updated</td>
+      <td><a href="https://tools.ietf.org/html/rfc3339">ISO 8601 String</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>definitions</td>
+      <td>app user profile subschemas</td>
+      <td><a href="#app-user-profile-subschemas">App User Profile Subschemas</a></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td>JSON Schema</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>type of <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4">root schema</a></td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>properties</td>
+      <td>user model properties</td>
+      <td><a href="./apps.html#application-user-model">App User Model</a> property set</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="app-user-profile-subschemas">App User Profile Subschemas</h3>
+
+<p>The <a href="./apps.html#application-user-profile-object">profile object</a> for a user is defined by a composite schema of base and custom properties using JSON Path to reference subschemas.  The <code class="highlighter-rouge">#base</code> properties are defined and versioned by Okta while <code class="highlighter-rouge">#custom</code> properties are extensible.</p>
+
+<ul>
+  <li><a href="#app-user-profile-base-subschema">App User Profile Base Subschema</a></li>
+  <li><a href="#app-user-profile-custom-subschema">App User Profile Custom Subschema</a></li>
+</ul>
+
+<p>Custom property names for the <a href="./apps.html#application-user-profile-object">profile object</a> must be unique and cannot conflict with a property name defined in the <code class="highlighter-rouge">#base</code> subschema.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#base"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"allOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/base"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"$ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#/definitions/custom"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="app-user-profile-base-subschema">App User Profile Base Subschema</h4>
+
+<p>All Okta-defined profile properties are defined in a profile sub-schema with the resolution scope <code class="highlighter-rouge">#base</code>.  These properties cannot be removed or edited (except for permission).</p>
+
+<p>The base app user profile varies substantially depending on the application. The following properties are required for all app user profiles:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>userName</td>
+      <td>unique identifier for the user</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td>100</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="app-user-profile-custom-subschema">App User Profile Custom Subschema</h4>
+
+<p>All custom profile properties are defined in a profile sub-schema with the resolution scope <code class="highlighter-rouge">#custom</code>.</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#custom"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"customPropertyName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Title of custom property"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Description of custom property"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="app-user-profile-schema-property-object">App User Profile Schema Property Object</h4>
+
+<p>User profile schema properties have the following standard <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a> keywords:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>title</td>
+      <td>user-defined display name for the property</td>
+      <td>String</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td>description of the property</td>
+      <td>String</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>type of property</td>
+      <td><code class="highlighter-rouge">string</code>, <code class="highlighter-rouge">boolean</code>, <code class="highlighter-rouge">number</code>, <code class="highlighter-rouge">integer</code>, <code class="highlighter-rouge">array</code></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Okta has also extended <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a> with the following keywords:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>DataType</th>
+      <th>Nullable</th>
+      <th>Unique</th>
+      <th>Readonly</th>
+      <th>MinLength</th>
+      <th>MaxLength</th>
+      <th>Validation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>required</td>
+      <td>determines whether the property is required</td>
+      <td>Boolean</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>scope</td>
+      <td>determines whether an appuser attribute can be set at the Individual or Group Level</td>
+      <td><code class="highlighter-rouge">SELF</code>, <code class="highlighter-rouge">NONE</code></td>
+      <td>FALSE</td>
+      <td>FALSE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>A read-only <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a> compliant <code class="highlighter-rouge">required</code> property is also available on the <a href="#app-user-profile-subschemas">App User Profile Subschemas</a>.</p>
+</blockquote>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"definitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"custom"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#custom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"twitterUserName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Twitter username"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User's username for twitter.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"minLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"maxLength"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h5 id="app-user-schema-property-types-and-validation">App User Schema Property Types and Validation</h5>
+
+<p>Specific property types support a <strong>subset</strong> of <a href="https://tools.ietf.org/html/draft-fge-json-schema-validation-00">JSON Schema validations</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property Type</th>
+      <th>Description</th>
+      <th>Validation Keywords</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td><a href="https://tools.ietf.org/html/rfc7159#section-7">JSON String</a></td>
+      <td><code class="highlighter-rouge">minLength</code> and <code class="highlighter-rouge">maxLength</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">boolean</code></td>
+      <td><code class="highlighter-rouge">false</code>, <code class="highlighter-rouge">true</code>, or <code class="highlighter-rouge">null</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">number</code></td>
+      <td><a href="https://tools.ietf.org/html/rfc7159#section-6">JSON Number</a> with double-precision 64-bit IEEE 754 floating point number constraint</td>
+      <td><code class="highlighter-rouge">minimum</code> and <code class="highlighter-rouge">maximum</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">integer</code></td>
+      <td><a href="https://tools.ietf.org/html/rfc7159#section-6">JSON Number</a> with 32-bit signed two’s complement integer constraint</td>
+      <td><code class="highlighter-rouge">minimum</code> and <code class="highlighter-rouge">maximum</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">array</code></td>
+      <td><a href="https://tools.ietf.org/html/rfc7159#section-5">JSON Array</a></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

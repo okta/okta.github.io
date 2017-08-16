@@ -87,7 +87,7 @@ Function | Input Parameter Signature | Return Type | Example | Output
 
 
 
-The following deprecated functions perform some of the same tasks as the ones in the above table.
+The following {% api_lifecycle deprecated %} functions perform some of the same tasks as the ones in the above table.
 
 Function  | Example | Input | Output
 -------- | --------- | -------| --------
@@ -161,15 +161,15 @@ Function  | Return Type | Example | Output
 
 `getFilteredGroups` returns all groups contained in a specified list, the whitelist, of which the user is a member. The groups are returned in a format specified by the `group_expression` parameter. You must specify the maximum number of groups to return. The format of this EL function is `getFilteredGroups( whitelist, group_expression, limit)`.
 
-You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens for API access management that drive authorization flows.
+You can use this function anywhere to get a list of groups of which the current user is a member, incuding both user groups and app groups that originate from sources outside Okta, such as from Active Directory and Workday. Additionally, you can use this combined, custom-formatted list for customizable claims into Access and ID Tokens that drive authorization flows.
 
 This function takes Okta EL expressions for all parameters that evaluate to the correct data type. With these expressions you can create complex definitions for the whitelist, the group format, and for the number of groups to return that can include `if` logic and customized formatting.
 
-Parameter          | Description                                             | Nullable
------------------- | ------------------------------------------------------- | --------
-whitelist | Valid Okta EL expression that evaluates to a string array of group ids | FALSE    |
-group_expression | Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression. | FALSE
-limit | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return | FALSE
+| Parameter        | Description                                                                                                                            | Nullable |
+|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------|:---------|
+| whitelist        | Valid Okta EL expression that evaluates to a string array of group ids                                                                 | FALSE    |
+| group_expression | Valid Okta EL expression that evaluates to a string to use to evaluate the group. This string must also be a valid Okta EL expression. | FALSE    |
+| limit            | Valid Okta EL expression that evaluates to an integer between 1 and 100, inclusive to indicate the maximum number of groups to return  | FALSE    |
 
 All parameters must be valid Okta EL expressions that evaluate as described above. Okta EL expressions can be comprised of strings, integers, arrays, etc.
 
@@ -192,17 +192,17 @@ The `whitelist` parameter must evaluate to a list of group ids that is returned 
 
 ### Time Functions
 
-Function  | Input Parameter Signature | Return Type | Example | Output
---------- | ------------------------- | ----------- | ------- | -------
-`Time.now`  | (String timeZoneId, String format) | String      | `Time.now()` | 2015-07-31T17:18:37.979Z (Current time, UTC format)
-| | | `Time.now("EST")` | 2015-07-31T13:30:49.964-04:00 (Specified time zone)
-| | | `Time.now("EST", "YYYY-MM-dd HH:mm:ss")` | 2015-07-31 13:36:48 (Specified time zone and format, military time)
-`Time.fromWindowsToIso8601`|(String time)|String|Windows timestamp time as a string (Windows/LDAP timestamp doc)|The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).
-`Time.fromUnixToIso8601`|(String time)|String|Unix timestamp time as a string (Unix timestamp reference)|The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).
-`Time.fromStringToIso8601`|(String time, String format)|String|Timestamp time in a human-readable yet machine-parseable arbitrary format format (as defined by Joda time pattern)|The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard).
-`Time.fromIso8601ToWindows`|(String time)|String|ISO 8601 timestamp time as a string|The passed-in time expressed in Windows timestamp format.
-`Time.fromIso8601ToUnix`|(String time)|String|ISO 8601 timestamp time as a string|The passed-in time expressed in Unix timestamp format.
-`Time.fromIso8601ToString`|(String time, String format)|String|ISO 8601 timestamp time, to convert to format using the same Joda time format semantics as fromStringToIso8601|The passed-in time expressed informat format.
+| Function                    | Input Parameter Signature          | Return Type                              | Example                                                                                                            | Output                                                                                                  |
+|:----------------------------|:-----------------------------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|
+| `Time.now`                  | (String timeZoneId, String format) | String                                   | `Time.now()`                                                                                                       | 2015-07-31T17:18:37.979Z (Current time, UTC format)                                                     |
+|                             |                                    | `Time.now("EST")`                        | 2015-07-31T13:30:49.964-04:00 (Specified time zone)                                                                |                                                                                                         |
+|                             |                                    | `Time.now("EST", "YYYY-MM-dd HH:mm:ss")` | 2015-07-31 13:36:48 (Specified time zone and format, military time)                                                |                                                                                                         |
+| `Time.fromWindowsToIso8601` | (String time)                      | String                                   | Windows timestamp time as a string (Windows/LDAP timestamp doc)                                                    | The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard). |
+| `Time.fromUnixToIso8601`    | (String time)                      | String                                   | Unix timestamp time as a string (Unix timestamp reference)                                                         | The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard). |
+| `Time.fromStringToIso8601`  | (String time, String format)       | String                                   | Timestamp time in a human-readable yet machine-parseable arbitrary format format (as defined by Joda time pattern) | The passed-in time expressed in ISO 8601 format (specifically the RFC 3339 subset of the ISO standard). |
+| `Time.fromIso8601ToWindows` | (String time)                      | String                                   | ISO 8601 timestamp time as a string                                                                                | The passed-in time expressed in Windows timestamp format.                                               |
+| `Time.fromIso8601ToUnix`    | (String time)                      | String                                   | ISO 8601 timestamp time as a string                                                                                | The passed-in time expressed in Unix timestamp format.                                                  |
+| `Time.fromIso8601ToString`  | (String time, String format)       | String                                   | ISO 8601 timestamp time, to convert to format using the same Joda time format semantics as fromStringToIso8601     | The passed-in time expressed informat format.                                                           |
 
 >Both input parameters are optional for the Time.now function. The time zone ID supports both new and old style formats, listed below. The third example for
 the Time.now function shows how to specify the military time format.
