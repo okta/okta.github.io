@@ -37,12 +37,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
  	
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-5e6bf910e5a0721d71d9fb9af76c9807c5c9ba9a0cabb9b78fee8698d30b6b2c.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-216ed5feceef178e4491fbb46b4f6d564d1dac1782d2a2643de7bcc9d9355da7.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>Platform Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.31">
+  <meta name="description" content="Summary of changes to the Okta Platform since Release 2017.32">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -188,7 +188,10 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="platform-release-notes-for-release-201732">Platform Release Notes for Release 2017.32</h2>
+      <h2 id="platform-release-notes-for-release-201733">Platform Release Notes for Release 2017.33</h2>
+
+<p>The following platform feature enhancements and bug fixes are available in the 2017.33 release.
+Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.</p>
 
 <h3 id="platform-feature-enhancements">Platform Feature Enhancements</h3>
 
@@ -202,66 +205,38 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">      <a href="#default-custom-authorization-server">Default Custom Authorization Server</a></td>
-      <td style="text-align: left">August 9, 2017</td>
-      <td style="text-align: left">August 14, 2017</td>
+      <td style="text-align: left">      <a href="#password-policy-api-is-an-early-access-release">Password Policy API is an Early Access Release</a></td>
+      <td style="text-align: left">August 16, 2017</td>
+      <td style="text-align: left">August 21, 2017</td>
     </tr>
     <tr>
-      <td style="text-align: left">     <a href="#web-app-supports-client-credential-grant-type">Web App Supports Client Credential Grant Type</a></td>
-      <td style="text-align: left">August 9, 2017</td>
-      <td style="text-align: left">August 14, 2017</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">    <a href="#openid-connect-group-claim-retrieves-application-groups">OpenID Connect Group Claim Retrieves Application Groups</a></td>
-      <td style="text-align: left">August 9, 2017</td>
-      <td style="text-align: left">August 14, 2017</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">               <a href="#sha-256-signed-certificates-for-new-saml-20-apps">SHA-256 Signed Certificates for New SAML 2.0 Apps</a></td>
-      <td style="text-align: left">Generally Available now</td>
-      <td style="text-align: left">Generally Available beginning 9/11/2017</td>
+      <td style="text-align: left">     <a href="#referrer-policy-header-for-oauth-20-and-openid-connect">Referrer Policy Header for OAuth 2.0 and OpenID Connect</a></td>
+      <td style="text-align: left">August 16, 2017</td>
+      <td style="text-align: left">August 21, 2017</td>
     </tr>
   </tbody>
 </table>
 
-<h4 id="default-custom-authorization-server">Default Custom Authorization Server</h4>
-<!-- OKTA-133786 -->
+<h4 id="password-policy-api-is-an-early-access-release">Password Policy API is an Early Access Release</h4>
+<!-- REQ-10227 -->
 
-<p>Okta provides a pre-configured Custom Authorization Server named <code class="highlighter-rouge">default</code>.
-This default authorization server includes a basic access policy and rule, which you can edit to control access.
-It allows you to specify <code class="highlighter-rouge">default</code> instead of the <code class="highlighter-rouge">authorizationServerId</code> in requests to it:</p>
+<p>The Password Policy API is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  release. Contact Support to enable it.</p>
 
-<ul>
-  <li><code class="highlighter-rouge">https://{YourOktaDomain}.com/api/v1/authorizationServers/default</code>  vs</li>
-  <li><code class="highlighter-rouge">https://{YourOktaDomain}.com/api/v1/authorizationServers/:authorizationServerId</code> for other Custom Authorization Servers</li>
-</ul>
+<p>Use the <a href="/docs/api/resources/policy.html#GroupPasswordPolicy">Password Policy API</a> to dynamically configure group-based password policies, including self-service recovery and unlock options.</p>
 
-<h4 id="web-app-supports-client-credential-grant-type">Web App Supports Client Credential Grant Type</h4>
-<!-- OKTA-102062 -->
+<h4 id="referrer-policy-header-for-oauth-20-and-openid-connect">Referrer Policy Header for OAuth 2.0 and OpenID Connect</h4>
+<!-- OKTA-96522 -->
 
-<p>OAuth 2.0 clients now support <a href="/docs/api/resources/oauth-clients.html#client-application-properties">configuration of the <code class="highlighter-rouge">web</code> application type to use a <code class="highlighter-rouge">client_credential</code> grant type</a>.
-This allows you to use one <code class="highlighter-rouge">client_id</code> for an application that needs to make user-specific calls and back-end calls for data.</p>
-
-<h4 id="openid-connect-group-claim-retrieves-application-groups">OpenID Connect Group Claim Retrieves Application Groups</h4>
-<!-- OKTA_132193 -->
-
-<p>OpenID Connect, which uses the Okta Authorization Server, can retrieve <a href="/docs/api/resources/apps.html#application-group-model">application groups</a> for use in tokens.
-Previously, application groups could only be retrieved with the Custom Authorization Server.</p>
-
-<p>You can use the Okta Expression Language <a href="/reference/okta_expression_language/index.html#group-functions"><code class="highlighter-rouge">getFilteredGroups</code> function</a> to retrieve application groups.</p>
-
-<h4 id="sha-256-signed-certificates-for-new-saml-20-apps">SHA-256 Signed Certificates for New SAML 2.0 Apps</h4>
-
-<p>All new SAML 2.0 apps are bootstrapped with SHA-256 signed public certificates. Existing SAML 2.0 apps are unchanged.</p>
+<p>For enhanced security, Okta automatically adds the <code class="highlighter-rouge">Referrer-Policy</code> header with <code class="highlighter-rouge">Referrer-Policy: no-referrer</code> to any OpenID Connect or API Access Management request that has the <code class="highlighter-rouge">response_mode</code> set to <code class="highlighter-rouge">fragment</code> or <code class="highlighter-rouge">query</code>.</p>
 
 <h3 id="platform-bug-fixes">Platform Bug Fixes</h3>
 
-<p>Bug fixes are expected on preview orgs starting August 9, 2017, and on production orgs starting August 14, 2017.</p>
+<p>Bug fixes are expected on preview orgs starting August 16, 2017, and on production orgs starting August 21, 2017.</p>
 
 <ul>
-  <li>The <strong>Add policy</strong> button wasn’t disabled for Org Admins, who don’t have permission to create authorization server policies. (OKTA-127450)</li>
-  <li>Some requests to <code class="highlighter-rouge">/oauth2/v1/authorize</code> with the <code class="highlighter-rouge">state</code> parameter incorrectly returned an error. (OKTA-130916)</li>
-  <li>When an ID token was minted for a custom authorization server, an app sign-on event wasn’t generated. (OKTA-134554)</li>
+  <li>A PUT request to <a href="/docs/api/resources/users.html#update-user">update a user</a> didn’t delete all unspecified properties. (OKTA-133499)</li>
+  <li>The <a href="/docs/api/resources/oauth-clients.html">Dynamic Client Registration API</a> didn’t display the complete error message for requests to update a client. (OKTA-134440)</li>
+  <li>We improved the messages returned with some error codes for OpenID Connect and OAuth 2.0 client apps using the <a href="/docs/api/resources/oauth-clients.html"><code class="highlighter-rouge">/oauth2/v1/clients</code></a> and <a href="/docs/api/resources/apps.html"><code class="highlighter-rouge">/api/v1/apps</code></a> endpoints. (OKTA-135294)</li>
 </ul>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
@@ -333,6 +308,7 @@ Previously, application groups could only be retrieved with the Custom Authoriza
       </div>
     </footer>
     <script type="text/javascript" src="/assets/master-d164e3cb90ad42ea74c141546269db0efdbc2259b7d44b7f52babb60097099a8.js"></script>
+    <script type="text/javascript" src="/assets/quickstart-165c59d612d8748d143e080f704c1e8308d505b3d01782430159a7ee09cb6f3a.js"></script>
     
     
     
