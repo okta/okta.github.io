@@ -92,9 +92,5 @@ class BasePage {
     return elements.then(element => element.length > 0);
   }
 
-  isVisible(element) {
-    return element.is(':visible');
-  }
-
 }
 module.exports = BasePage;
