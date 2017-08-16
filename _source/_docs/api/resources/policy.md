@@ -822,8 +822,8 @@ authType |  | `ANY` or `RADIUS` | No |
 #### AuthContext Condition Object Example
 
 ~~~json
-  authContext: {
-    authType: "RADIUS"
+  "authContext": {
+    "authType": "RADIUS"
   }
 ~~~
 
@@ -867,9 +867,9 @@ include | The AD integrations this policy applies to | Array | No | Include all 
 #### Authentication Provider Condition Object Example
 
 ~~~json
-  authProvider: {
-    provider: "ACTIVE_DIRECTORY",
-    include: [
+  "authProvider": {
+    "provider": "ACTIVE_DIRECTORY",
+    "include": [
       "0oaoz0zUsohjfrWZ80g3"
     ]
   }
