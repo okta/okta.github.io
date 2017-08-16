@@ -8,9 +8,7 @@ url: "https://developer.okta.com"
 twitter_username: OktaDev
 github_username:  oktadeveloper
 
-# gems is now plugins
-# https://jekyllrb.com/news/2017/06/15/jekyll-3-5-0-released/
-plugins:
+gems:
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
