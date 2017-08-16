@@ -26,22 +26,22 @@ Account**
 
 After your are finished creating your account, you will be logged into your new organization. In the top right of the
  screen, there is an **Admin** button.
-Clicking on the **Admin** button will take you to your Okta Administration Dashboard and this is where we'll be
+Clicking on the **Admin** button will take you to your Okta Administration Dashboard and this is where we&#8217;ll be
 spending most of our time during this guide.
 
 ## Enable CORS for your Domain
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
 You can enable CORS by following the steps in our [guide for Enabling CORS](/docs/api/getting_started/enabling_cors.html). Configure CORS using the same base URL as the web server you are
-using to host the HTML for the Okta Sign-In Widget (see below for instructions). For our example, we'll be setting
-our example to be hosted on `http://localhost:8000`. We'll need to add `http://localhost:8000` as a trusted CORS
+using to host the HTML for the Okta Sign-In Widget (see below for instructions). For our example, we&#8217;ll be setting
+our example to be hosted on `http://localhost:8000`. We&#8217;ll need to add `http://localhost:8000` as a trusted CORS
 endpoint in Okta.
 
 To do so, follow the steps below:
 1. Navigate to **Admin -> Security -> API** on your Okta dashboard.
 2. In the **Trusted Origins** tab, click on **Add Origin**. This will open a modal window with a form to fill out.
 3. Give your new origin a name, we will use **PHP Sign-In Widget Example** as ours.
-4. In the Origin URL field, fill in your web server that you are hosting on, we'll use `http://localhost:8000`.
+4. In the Origin URL field, fill in your web server that you are hosting on, we&#8217;ll use `http://localhost:8000`.
 5. Check **CORS** in the **Type** section and then click **Save**
 
 ## Create an Authorization Server
@@ -79,7 +79,7 @@ will open a model window with a form to fill out.
    - Assign To: All Clients
 
 ### Add a Rule to New Policy
-For your new policy that we just created, we'll need to add a rule to tell the policy how to function.
+For your new policy that we just created, we&#8217;ll need to add a rule to tell the policy how to function.
 
 1. Navigate to **Admin -> Security -> API -> Access Policies** page of your Okta dashboard.
 2. Select the policy we just created **Policy 1**.
@@ -103,11 +103,11 @@ will represent the application the Widget signs users into. To create an applica
 
 1. Navigate to **Admin -> Applications** page of your Okta dashboard.
 2. Click **Add Application**. This will take you to the add application page, we will select the button **Create New
-App** instead of selecting a pre-defined one. This will open a modal window and give you a few options. We'll be using
+App** instead of selecting a pre-defined one. This will open a modal window and give you a few options. We&#8217;ll be using
  the following:
    - Platform: Web
    - Sign on method: OpenID Connect
-3. For the general settings page, we'll be using the following:
+3. For the general settings page, we&#8217;ll be using the following:
    - Application Name: PHP Sign-In Widget
    - Application Logo: none
 4. Click **Next** and then we will be configuring OpenID connect:
@@ -133,8 +133,8 @@ groups instead of **Everyone**.
 # PHP Application Set-up
 Now that we have all the configuration at Okta done, we can begin setting up our PHP application. There are a
 couple of different ways to include the sign-in widget in your application. You can use the NPM module by installing
-`@okta/okta-signin-widget` in your project, or by using the Okta CDN, which is what we'll be using. Once you have the
- sign-in widget, there's a little bit of configuration you have to do to talk with your new authorization server.
+`@okta/okta-signin-widget` in your project, or by using the Okta CDN, which is what we&#8217;ll be using. Once you have the
+ sign-in widget, there&#8217;s a little bit of configuration you have to do to talk with your new authorization server.
 
 ## Installing and Configuring the Sign In Widget
 There are 2 files we will require for the sign in widget to work, a JS file and a CSS file. You will also be able to
@@ -327,7 +327,7 @@ $jws->verify($jwk, 'RS256');
 Each public key is identified by a `kid` attribute, which corresponds with the `kid` claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-methods).
 
 The access token is signed by an RSA private key, and we publish the future signing key well in advance.
-However, in an emergency situation you can still stay in sync with Okta's key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
+However, in an emergency situation you can still stay in sync with Okta&#8217;s key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [authorization server metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
 
 Please note the following:
 

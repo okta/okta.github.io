@@ -23,7 +23,7 @@ The authorization server also acts as an [OpenID Connect Provider](http://openid
 which means you can request [ID tokens](http://openid.net/specs/openid-connect-core-1_0.html#IDToken)
 in addition to [access tokens](https://tools.ietf.org/html/rfc6749#section-1.4) from the authorization server endpoints.
 
-How do you know if you need to use Okta's Authorization Server instead of the authorization service that is
+How do you know if you need to use Okta&#8217;s Authorization Server instead of the authorization service that is
 built in to your Okta app?
 
 * You need to protect non-Okta resources.
@@ -31,7 +31,7 @@ built in to your Okta app?
 other similar specializations.
 
 > Note: If your employees, partners, and users can all use the same authentication policies for single sign-on,
-try [Okta's built in authorization service](https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub).
+try [Okta&#8217;s built in authorization service](https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub).
 
 
 ## Set Up an Authorization Server
@@ -41,7 +41,7 @@ Create and configure an Okta Authorization Server to manage authorization betwee
 * Identify the scopes and claims needed by your client app and register it with Okta.
 * Create one or more Authorization Servers and (optionally) define the scopes and claims to match those expected by your app.
 
-It doesn't matter which of these two you do first, but the client app must recognize the scope names and be expecting the claims as defined in the Authorization Server.
+It doesn&#8217;t matter which of these two you do first, but the client app must recognize the scope names and be expecting the claims as defined in the Authorization Server.
 
 This document provides step-by-step instructions for creating and configuring the Authorization Server:
 
@@ -63,7 +63,7 @@ This document provides step-by-step instructions for creating and configuring th
       This value is used as the default [audience](https://tools.ietf.org/html/rfc7519#section-4.1.3) for Access Tokens.
     * **Description**
 
-When complete, your Authorization Server's **Settings** tab displays the information that you provided and allows you to edit it.
+When complete, your Authorization Server&#8217;s **Settings** tab displays the information that you provided and allows you to edit it.
 {% img auth_server2.png alt:"Add Authorization Server" width:"640px" %}
 
 ### Create Access Policies
@@ -99,7 +99,7 @@ Rules control the mapping of client, user, and custom scope. For example, you ca
 4. Enter the requested information:
     * **Rule Name**
     * **IF Grant type is:** Select one or more OAuth 2.0 grant types.
-    * **AND User is:** Select whether there's no user (client credentials flow), or a user assigned to a client that's assigned to this rule's policy, or a user assigned to one or more groups that you specify or a list of users that you specify.
+    * **AND User is:** Select whether there&#8217;s no user (client credentials flow), or a user assigned to a client that&#8217;s assigned to this rule&#8217;s policy, or a user assigned to one or more groups that you specify or a list of users that you specify.
     * **AND Requested these scopes:** Choose the scopes (any scopes, or a list that you specify) that can be requested by the user as part of the rule conditions.
     * **THEN Access token lifetime is:** Choose the length of time before an access token expires.
     * **THEN Refresh token lifetime is:** Choose the length of time before a refresh token expires.
@@ -147,9 +147,9 @@ Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
 
     * **Name**
     * **Claim type**: Choose Access Token (Oauth 2.0) or ID Token (OpenID Connect).
-    * **Value type**: Choose whether you'll define the claim by a group filter or by an **Expression** written in Okta Expression Language.
-        * **Mapping**: This option displays if you chose **Expression** in the previous field. Add the mapping here using [Okta's Expression Language](/reference/okta_expression_language/), for example `appuser.username`.
-          Be sure to check that your expression returns the results expected--the expression isn't validated here.
+    * **Value type**: Choose whether you&#8217;ll define the claim by a group filter or by an **Expression** written in Okta Expression Language.
+        * **Mapping**: This option displays if you chose **Expression** in the previous field. Add the mapping here using [Okta&#8217;s Expression Language](/reference/okta_expression_language/), for example `appuser.username`.
+          Be sure to check that your expression returns the results expected--the expression isn&#8217;t validated here.
         * **Filter**: This option displays if you chose **Groups** in the previous field. Use it to add a group filter. If you leave it blank, all users are specified for this claim.
     * **Disable claim**: Check this option if you want to temporarily disable the claim for testing or debugging.
     * **Include in**: Specify whether the claim is valid for any scope, or select the scopes for which it is valid.
@@ -157,14 +157,14 @@ Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
 While in the Claims list, you can:
 
 * Sort claims by type.
-* Delete claims you've created, or disable claims for testing or debugging purposes.
+* Delete claims you&#8217;ve created, or disable claims for testing or debugging purposes.
 
     {% img claims2.png alt:"Claims List" width:"640px" %}
 
 
 ## Test Your Authorization Server Configuration
 
-Once you have followed the above instructions to set-up an Authorization Server, you can test it by sending any one of the API calls that returns OAuth 2.0 and/or OpenID Connect tokens. A full description of Okta's relevant APIs can be found here: [OAuth 2.0 Authorization Operations](/docs/api/resources/oauth2.html#authorization-operations). 
+Once you have followed the above instructions to set-up an Authorization Server, you can test it by sending any one of the API calls that returns OAuth 2.0 and/or OpenID Connect tokens. A full description of Okta&#8217;s relevant APIs can be found here: [OAuth 2.0 Authorization Operations](/docs/api/resources/oauth2.html#authorization-operations). 
 
 We have included here a few things that you can try to ensure that your Authorization Server is functioning as expected. 
 
@@ -172,7 +172,7 @@ We have included here a few things that you can try to ensure that your Authoriz
 
 ### OpenID Connect Configuration
 
-To verify that your server was created and has the expected configuration values, you can send an API request to the Server's OpenID Connect Metadata URI: `/oauth2/:authorizationServerId/.well-known/openid-configuration` using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.
+To verify that your server was created and has the expected configuration values, you can send an API request to the Server&#8217;s OpenID Connect Metadata URI: `/oauth2/:authorizationServerId/.well-known/openid-configuration` using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.
 
 For more information on this endpoint, see here: [Retrieve Authorization Server OpenID Connect Metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-openid-connect-metadata).
 
@@ -205,13 +205,13 @@ You will need the following values from your Application:
 
 Once you have an OpenID Connect Application set-up, and a User assigned to it you can try the authentication flow.
 
-First, you will need your Authorization Server's Authorization Endpoint, which you can retrieve using the Server's Metadata URI: `/oauth2/:authorizationServerId/.well-known/openid-configuration`. It will look like this:
+First, you will need your Authorization Server&#8217;s Authorization Endpoint, which you can retrieve using the Server&#8217;s Metadata URI: `/oauth2/:authorizationServerId/.well-known/openid-configuration`. It will look like this:
 
 `https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/authorize`
 
 To this you will need to add the following URL query parameters:
 
-- Your OpenID Connect Application's `client_id` and `redirect_uri`
+- Your OpenID Connect Application&#8217;s `client_id` and `redirect_uri`
 - A `scope`, which for the purposes of this test will be `openid` and `profile`
 - A `response_mode` which you can set to `fragment`
 - (Optionally) `state` and `nonce` values
