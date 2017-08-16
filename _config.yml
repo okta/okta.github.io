@@ -10,7 +10,7 @@ github_username:  oktadeveloper
 
 # gems is now plugins
 # https://jekyllrb.com/news/2017/06/15/jekyll-3-5-0-released/
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
