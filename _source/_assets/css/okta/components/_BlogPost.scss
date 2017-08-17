@@ -139,6 +139,21 @@
 			font-weight: 500;
 			line-height: 24px;
 		}
+
+		/* helper classes for images */
+		.m-x-sm {
+			margin: get-spacing('x-small')
+		}
+
+		.img-100px {
+			height: 100px;
+			width: 100px;
+		}
+
+		.img-150px {
+			height: 150px;
+			width: 150px;
+		}
 		
 		blockquote {
 			@include margin(large auto);
