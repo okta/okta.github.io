@@ -90,6 +90,14 @@
 					@include line-height('h2');
 					@include font-size('h2');
 				}
+
+				pre {
+					code {
+						font-size: 12px;
+						line-height: 18px;
+					}
+				}
+
 			}
 		}
 
