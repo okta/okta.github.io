@@ -1,44 +1,51 @@
-<footer class="footer">
-      <div class="Wrap">
-        <ul>
-          <li>
-            <a href="https://www.okta.com" target="_blank">Okta.com</a>
-          </li>
-          <li>
-            <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
-          </li>
-          <li>
-            <a href="/terms/">Terms & Conditions</a>
-          </li>
-          <li>
-            <a href="/3rd_party_notices/">3rd Party Notices</a>
-          </li>
-          <li>
-            <a href="/privacy/">Privacy Policy</a>
-          </li>
-          <li>
-            <a href="/contact/">Contact Sales</a>
-          </li>
-          <li>
-            <a href="mailto:{{ site.email }}">Contact Support</a>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <a class="icon" href="http://github.com/{{ site.github_username }}" target="_blank"><i class="fa fa-github"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="http://twitter.com/{{ site.twitter_username }}" target="_blank"><i class="fa fa-twitter"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="{{ site.dev_forum }}" title="Okta Developer Forums" target="_blank"><i class="fa fa-comments"></i></a>
-          </li>
-          <li>
-            <a class="icon" href="http://feeds.feedburner.com/OktaBlog" target="_blank"><i class="fa fa-rss"></i></a>
-          </li><!-- <li><a class="icon" href="http://community.okta.com" target="_blank"><i class="fa fa-comments"></i></a></li> -->
-        </ul>
-      </div>
-    </footer>
+<footer class="Footer">
+    <div class="Wrap">
+
+        <div class="Row">
+
+            <div class="Column--3 Column--medium-6 Column--xSmall-12">
+
+                <a class="Logo" href="/" rel="noopener noreferrer">
+                    <img src="{{ site.external_domain }}/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
+                    Visit okta.com
+                </a>
+
+            </div>
+
+            <div class="Column--3 Column--medium-12 Column--xSmall-12">
+
+                <h4>Social</h4>
+                <ul class="Footer-links Footer-links--social">
+                    <li><a class="Footer-links--github" target="_blank" rel="noopener noreferrer" href="http://github.com/{{ site.github_username }}">Github</a></li>
+                    <li><a class="Footer-links--twitter" target="_blank" rel="noopener noreferrer" href="http://twitter.com/{{ site.twitter_username }}">Twitter</a></li>
+                    <li><a class="Footer-links--forum" target="_blank" rel="noopener noreferrer" href="{{ site.dev_forum }}">Forum</a></li>
+                    <li><a class="Footer-links--rss" target="_blank" rel="noopener noreferrer" href="http://feeds.feedburner.com/OktaBlog">RSS Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>More Info</h4>
+                <ul class="Footer-links">
+                    <li><a target="_blank" href="{{ site.external_domain }}/integrate/">Integrate with Okta</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notes</a></li>
+                </ul>
+            </div>
+
+            <div class="Column--3 Column--medium-6 Column--small-12">
+                <h4>Contact &amp; Legal</h4>
+                <ul class="Footer-links">
+                    <li><a href="/contact/">Contact Sales</a></li>
+                    <li><a target="_blank" rel="noopener noreferrer" href="mailto:developers@okta.com">Contact Support</a></li>
+                    <li><a href="/terms/">Terms &amp; Conditions</a></li>
+                    <li><a href="/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
     {% js master %}
     {% js quickstart %}
     {% for script in page.scripts %}

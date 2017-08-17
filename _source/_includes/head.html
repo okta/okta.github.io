@@ -1,5 +1,6 @@
 <head>
   <script>
+    var searchDomain = '{{ site.external_domain }}';
     var isProduction = window.location.hostname === 'developer.okta.com';
     if (isProduction) {
       // TypeKit
@@ -9,7 +10,7 @@
           scriptTimeout: 3000,
           async: true
         },
-        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/bwf-loadingb/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
       })(document);
 
       // Google analytics
@@ -36,6 +37,11 @@
  	{% if page.sitemap.exclude == "yes" %}
  		<meta name="robots" content="noindex,nofollow">
  	{% endif %}
+
+  <link type="text/css" rel="stylesheet" href="{{ site.external_domain }}/sites/all/themes/developer/css/master.css" media="all" />
+  <meta class="swiftype" name="title" data-type="string" content="{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
+  <meta class="swiftype" name="summary" data-type="string" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}" />
+
   {% css animate %}
   {% css okta %}
   {% if page.css %}

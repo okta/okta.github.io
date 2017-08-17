@@ -13,9 +13,16 @@ A great way to learn an API is to issue requests and inspect the responses. You 
 
 To use these collections, you'll need to set up your local environment and import the collections. Then, you can send a test request and verify the results.
 
+## Sign Up for Okta
+
+You'll need a free Okta developer organization to get started. If you don't have one already, [sign up](https://www.okta.com/developer/signup/){:target="_blank"} to create one.
+
+When you create a new Okta organization, it will be assigned a base URL like `dev-12345.oktapreview.com`. This is your unique subdomain in Okta. `oktapreview.com` orgs are production-ready and can be used for development work or full-fledged apps, but they don't include SLAs.
+
+If you need organizations with guaranteed SLAs or enterprise features, [let us know](https://developer.okta.com/contact/). These orgs use a different domain, like `your-org.okta.com`. Regardless of the domain or base URL style, you can use the following instructions to send requests to the Okta API.
+
 ## Set Up Your Environment
 
-1. [Sign up](https://www.okta.com/developer/signup/){:target="_blank"} for a free Okta developer organization, if you don't have one already.
 1. [Create an API token](getting_a_token.html){:target="_blank"} for your org.
 1. [Install the Postman app](https://www.getpostman.com/apps){:target="_blank"}.
 1. Launch Postman and click the **Import** button. Select **Import From Link**, and paste this link into the textbox: `https://developer.okta.com/docs/api/postman/example.oktapreview.com.environment`
@@ -26,7 +33,7 @@ To use these collections, you'll need to set up your local environment and impor
 
 1. Click the eye icon next to `example.oktapreview.com` and select **Edit** to replace or add these values:
     * Rename your environment to something you'll recognize. For example, `My Org`.
-    * `url`: Replace the example value with your org's URL. For example, `https://{yourOktaDomain}.com`. (Don't include '-admin' in the subdomain!)
+    * `url`: Replace the example value with your org's full URL. For example, `https://dev-{id}.oktapreview.com`. (Make sure you don't include `-admin` in the subdomain!)
     * `apikey`: Enter the API token you created earlier, for example `00LzMWxMq_0sdErHy9Jf1sijEGexYZlsdGr9a4QjkS`.
 
 1. Click **Update** to save your changes.

@@ -8,7 +8,7 @@ url: "https://developer.okta.com"
 twitter_username: OktaDev
 github_username:  oktadeveloper
 
-gems:
+plugins:
   - jekyll-redirect-from
   - jekyll-paginate
   - jekyll-assets
@@ -99,3 +99,7 @@ signup_error_email_address: "BD-ISV@okta.com"
 # Bug: 37458
 # Add Discourse link
 dev_forum:  https://devforum.okta.com/
+
+
+# Location of main Drupal site for navigation and shared resources
+external_domain: https://developer.okta.com

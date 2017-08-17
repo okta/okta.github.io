@@ -13,7 +13,7 @@ Need to decouple your web service and client? You’re probably using REST endpo
 
 To keep things focused, I’ll leave the Maven dependencies out of this post. You can browse the full source on [Github](http://github.com/oktadeveloper/jaxrs-spring-blog-example), the pom files should be self explanatory: one for JAX-RS, another for Spring.
 
-First up, we need to get the common bits out of the way. A simple model and DAO (Data Access Object]) will be used in all of the examples to register and manage `Stormtrooper` objects.
+First up, we need to get the common bits out of the way. A simple model and DAO (Data Access Object) will be used in all of the examples to register and manage `Stormtrooper` objects.
 
 ```java
 public class Stormtrooper {
@@ -86,7 +86,7 @@ There are a few things to point out:
 
 ### Spring Controller
 
-Next up, we have the implementation of our REST endpoint, or in the Spring world a `Controller`. We will use this class to map our DAO to incoming HTTP requests
+Next up, we have the implementation of our REST endpoint, or in the Spring world a `Controller`. We will use this class to map our DAO to incoming HTTP requests.
 
 ```java
 @RestController
@@ -314,7 +314,7 @@ public class StormtroooperResource {
 
 Similar to the Spring example above the `@Path` at the class level means each annotated method in this class will be under the `/troopers` base path. The `@Produces` annotation defines the default response content type (unless overridden by an annotation on another method).
 
-Unlike the Spring example where an `@RequestMapping` annotation defined the path, method, and other attributes of the request, in a JAX-RS resource each attribute uses a separate annotation. Similar to above if we break down the `updateTrooper()` method:
+Unlike the Spring example where a `@RequestMapping` annotation defined the path, method, and other attributes of the request, in a JAX-RS resource each attribute uses a separate annotation. Similar to above if we break down the `updateTrooper()` method:
 
 ```java
 @Path("/{id}")
