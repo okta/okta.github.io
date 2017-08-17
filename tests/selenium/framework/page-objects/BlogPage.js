@@ -19,19 +19,23 @@ class BlogPage extends BasePage {
   }
 
   isPaginationVisible() {
+    this.waitForPresence(this.$pagination);
     return this.$pagination.isDisplayed();
   }
 
   clickNext() {
+    this.waitForPresence(this.$nextLink);
     return this.$nextLink.click();
   }
 
   clickPrevious() {
+    this.waitForPresence(this.$prevLink);
     return this.$prevLink.click();
   }
 
   clickItem(item) {
     const itemLink = element(by.linkText(item.toString()));
+    this.waitForPresence(itemLink);
     return itemLink.click();
   }
 

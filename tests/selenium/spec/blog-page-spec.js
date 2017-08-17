@@ -20,11 +20,13 @@ describe('blog page spec', () => {
 
     blogPage.clickNext();
     expect(blogPage.getCurrentURL()).toBe('/blog/page/2/');
+
     blogPage.clickPrevious();
     expect(blogPage.getCurrentURL()).toBe('/blog/');
 
     blogPage.clickItem(2);
     expect(blogPage.getCurrentURL()).toBe('/blog/page/2/');
+
     blogPage.clickItem(1);
     expect(blogPage.getCurrentURL()).toBe('/blog/');
   });
