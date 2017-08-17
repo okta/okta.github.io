@@ -5355,8 +5355,8 @@ or &lt;a href=&quot;https://github.com/oktadeveloper/spring-boot-microservices-e
 
 &lt;ol&gt;
   &lt;li&gt;Navigate to your Admin console&lt;/li&gt;
-  &lt;li&gt;On the top menu click on &lt;strong&gt;Security&lt;/strong&gt; &amp;gt; &lt;strong&gt;API&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;Click the &lt;em&gt;Tokens&lt;/em&gt; tab and then click &lt;strong&gt;Create Token&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;On the top menu click on &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Tokens&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;Create Token&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;On the popup, give your new token a name like “Bootiful Token”, and click &lt;strong&gt;Create Token&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -5653,7 +5653,7 @@ error loading discovery document
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;To fix this problem, you need to add the client’s URL as a Trusted Origin for a cross-origin request. Login to your Okta dashboard and navigate to &lt;strong&gt;Security&lt;/strong&gt; &amp;gt; &lt;strong&gt;API&lt;/strong&gt;. Click on the &lt;strong&gt;Trusted Origins&lt;/strong&gt; tab and click the &lt;strong&gt;Add Origin&lt;/strong&gt; button. Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; for the Origin URL, give it a name like “Angular PWA”, check &lt;strong&gt;CORS&lt;/strong&gt;, and click &lt;strong&gt;Save&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To fix this problem, you need to add the client’s URL as a Trusted Origin for a cross-origin request. Login to your Okta dashboard and navigate to &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Trusted Origins&lt;/strong&gt;. Click the &lt;strong&gt;Add Origin&lt;/strong&gt; button and enter &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; for the Origin URL, give it a name like “Angular PWA”, check &lt;strong&gt;CORS&lt;/strong&gt;, and click &lt;strong&gt;Save&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Now you should be able to login and see a welcome message.&lt;/p&gt;
 
@@ -6008,7 +6008,7 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. Or
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;To fix this, modify the Trusted Origins on Okta (under &lt;strong&gt;Security&lt;/strong&gt; &amp;gt; &lt;strong&gt;API&lt;/strong&gt;) to have your client’s URL (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;https://pwa-client-phototopographical-subcurrent.cfapps.io&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;To fix this, modify the Trusted Origins on Okta (under &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Trusted Origins&lt;/strong&gt;) to have your client’s URL (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;https://pwa-client-phototopographical-subcurrent.cfapps.io&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/angular-pwa-auth/add-cf-origin-c6bc12f60e457ce0acaf993e1a7333fbe704beb4755954ef5ed6f7e1201daa64.png&quot; alt=&quot;Add Trusted Origin&quot; width=&quot;600&quot; /&gt;&lt;/p&gt;
 
@@ -9483,7 +9483,7 @@ present on the requested resource. Origin 'http://localhost:4200' is therefore n
 &lt;/div&gt;
 
 &lt;p&gt;This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard,
-select &lt;strong&gt;Security&lt;/strong&gt; &amp;gt; &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Trusted Origins&lt;/strong&gt;. Click the “Add Origin” button and specify &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt;
+select &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Trusted Origins&lt;/strong&gt;. Click the “Add Origin” button and specify &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt;
 as the Origin URL with Type &lt;code class=&quot;highlighter-rouge&quot;&gt;CORS&lt;/code&gt;. For more specific instructions, see Okta’s &lt;a href=&quot;/docs/api/getting_started/enabling_cors.html&quot;&gt;Enabling CORS documentation&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/angular-sign-in-widget/cors-configuration-3ea19bdd525497544ceed789e84628e14586c0d314c8890025671155004a8264.png&quot; alt=&quot;CORS Configuration&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
@@ -9646,7 +9646,7 @@ brew install springboot
 
 &lt;h2 id=&quot;create-an-authorization-server-in-okta&quot;&gt;Create an Authorization Server in Okta&lt;/h2&gt;
 
-&lt;p&gt;To start authenticating against Okta’a API, you have to first create a developer account on &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt;. After activating your account, sign in and navigate to &lt;strong&gt;Security &amp;gt; API&lt;/strong&gt; and click on the &lt;strong&gt;Add Authorization Server&lt;/strong&gt; button.&lt;/p&gt;
+&lt;p&gt;To start authenticating against Okta’a API, you have to first create a developer account on &lt;a href=&quot;https://developer.okta.com&quot;&gt;https://developer.okta.com&lt;/a&gt;. After activating your account, sign in and navigate to &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Authorization Servers&lt;/strong&gt; and click on the &lt;strong&gt;Add Authorization Server&lt;/strong&gt; button.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/1-add-auth-server-a7f86ce0c69a220e33d69e3e83e489f0152c7f29deaa28af6050f90e23c678b8.png&quot; alt=&quot;Add Authorization Server&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
@@ -9743,7 +9743,7 @@ brew install springboot
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/11-policy-evaluation-failure-06a812246eaae06b2b1d2cf85d7adfd258c52b3fd0ab4e79eb01a67672ac88c6.png&quot; alt=&quot;Policy Evaluation Failure&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;In Okta’s UI, navigate to &lt;strong&gt;Security &amp;gt; API&lt;/strong&gt; and click on your Authorization Server’s name and &lt;strong&gt;Access Policies&lt;/strong&gt;. Click &lt;strong&gt;Add Policy&lt;/strong&gt; to continue.&lt;/p&gt;
+&lt;p&gt;In Okta’s UI, navigate to &lt;strong&gt;API&lt;/strong&gt; &amp;gt; &lt;strong&gt;Authorization Servers&lt;/strong&gt; and click on your Authorization Server’s name and &lt;strong&gt;Access Policies&lt;/strong&gt;. Click &lt;strong&gt;Add Policy&lt;/strong&gt; to continue.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/spring-boot-oauth/12-access-policies-925ff47cd0b74182a070847103c79f692eb882909ad90a13d8619801898ebf4a.png&quot; alt=&quot;Access Policies&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 

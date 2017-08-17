@@ -238,13 +238,8 @@
 </table>
 
 <blockquote>
-  <p><em>As with any Okta application, make sure you assign Users or Groups to the OpenID Connect Client. Otherwise, no one can use it.</em></p>
+  <p><strong>Note:</strong> CORS is automatically enabled for the granted login redirect URIs.</p>
 </blockquote>
-
-<h4 id="enable-cors">Enable <a href="http://developer.okta.com/docs/api/getting_started/enabling_cors.html">CORS</a></h4>
-<p>For security reasons, browsers make it difficult to make requests to other domains. In this example, we’ll make requests from <code class="highlighter-rouge">http://localhost:4200</code> to <code class="highlighter-rouge">https://{yourOktaDomain}.com</code>.</p>
-
-<p>You can configure <code class="highlighter-rouge">https://{yourOktaDomain}.com</code> to accept our requests by <a href="/docs/api/getting_started/enabling_cors.html#granting-cross-origin-access-to-websites">enabling CORS for <code class="highlighter-rouge">http://localhost:4200</code></a>.</p>
 
 <h2 id="create-an-angular-app">Create an Angular App</h2>
 <p>To quickly create an Angular app, install the Angular CLI:</p>
@@ -285,7 +280,7 @@ The easiest, and most secure way is to use the <strong>default login page</stron
 <span class="k">export</span> <span class="kr">class</span> <span class="nx">OktaAuthService</span> <span class="p">{</span>
 
   <span class="nx">oktaAuth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
-    <span class="na">url</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/'</span><span class="p">,</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com'</span><span class="p">,</span>
     <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
     <span class="na">issuer</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}'</span><span class="p">,</span>
     <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:4200/callback'</span><span class="p">,</span>

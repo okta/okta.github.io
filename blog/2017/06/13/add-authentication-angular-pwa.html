@@ -285,8 +285,8 @@
 
 <ol>
   <li>Navigate to your Admin console</li>
-  <li>On the top menu click on <strong>Security</strong> &gt; <strong>API</strong></li>
-  <li>Click the <em>Tokens</em> tab and then click <strong>Create Token</strong></li>
+  <li>On the top menu click on <strong>API</strong> &gt; <strong>Tokens</strong></li>
+  <li>Click <strong>Create Token</strong></li>
   <li>On the popup, give your new token a name like “Bootiful Token”, and click <strong>Create Token</strong></li>
 </ol>
 
@@ -583,7 +583,7 @@ error loading discovery document
 </code></pre>
 </div>
 
-<p>To fix this problem, you need to add the client’s URL as a Trusted Origin for a cross-origin request. Login to your Okta dashboard and navigate to <strong>Security</strong> &gt; <strong>API</strong>. Click on the <strong>Trusted Origins</strong> tab and click the <strong>Add Origin</strong> button. Enter <code class="highlighter-rouge">http://localhost:4200</code> for the Origin URL, give it a name like “Angular PWA”, check <strong>CORS</strong>, and click <strong>Save</strong>.</p>
+<p>To fix this problem, you need to add the client’s URL as a Trusted Origin for a cross-origin request. Login to your Okta dashboard and navigate to <strong>API</strong> &gt; <strong>Trusted Origins</strong>. Click the <strong>Add Origin</strong> button and enter <code class="highlighter-rouge">http://localhost:4200</code> for the Origin URL, give it a name like “Angular PWA”, check <strong>CORS</strong>, and click <strong>Save</strong>.</p>
 
 <p>Now you should be able to login and see a welcome message.</p>
 
@@ -938,7 +938,7 @@ No 'Access-Control-Allow-Origin' header is present on the requested resource. Or
 </code></pre>
 </div>
 
-<p>To fix this, modify the Trusted Origins on Okta (under <strong>Security</strong> &gt; <strong>API</strong>) to have your client’s URL (e.g. <code class="highlighter-rouge">https://pwa-client-phototopographical-subcurrent.cfapps.io</code>).</p>
+<p>To fix this, modify the Trusted Origins on Okta (under <strong>API</strong> &gt; <strong>Trusted Origins</strong>) to have your client’s URL (e.g. <code class="highlighter-rouge">https://pwa-client-phototopographical-subcurrent.cfapps.io</code>).</p>
 
 <p><img src="/assets/blog/angular-pwa-auth/add-cf-origin-c6bc12f60e457ce0acaf993e1a7333fbe704beb4755954ef5ed6f7e1201daa64.png" alt="Add Trusted Origin" width="600" /></p>
 

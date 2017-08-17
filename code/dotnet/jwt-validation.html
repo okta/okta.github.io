@@ -240,7 +240,8 @@
 <p>The <code class="highlighter-rouge">OpenIdConnectConfigurationRetriever</code> class in the <a href="https://www.nuget.org/packages/Microsoft.IdentityModel.Protocols.OpenIdConnect/">Microsoft.IdentityModel.Protocols.OpenIdConnect</a> package will download and parse the discovery document to get the key set. You can use it in conjunction with the <code class="highlighter-rouge">ConfigurationManager</code> class, which will handle caching the response and refreshing it regularly:</p>
 
 <div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="c1">// Replace with your issuer URL:
-</span><span class="kt">var</span> <span class="n">issuer</span> <span class="p">=</span> <span class="s">"https://{yourOktaDomain}.com/oauth2/aus9o8wvkhockw9TL0h7"</span><span class="p">;</span>
+</span>
+<span class="kt">var</span> <span class="n">issuer</span> <span class="p">=</span> <span class="s">"https://{yourOktaDomain}.com/oauth2/{authorizationServerId}"</span><span class="p">;</span>
 
 <span class="kt">var</span> <span class="n">configurationManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConfigurationManager</span><span class="p">&lt;</span><span class="n">OpenIdConnectConfiguration</span><span class="p">&gt;(</span>
     <span class="n">issuer</span> <span class="p">+</span> <span class="s">"/.well-known/oauth-authorization-server"</span><span class="p">,</span>
