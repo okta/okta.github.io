@@ -16,6 +16,10 @@
         name: 'angular',
         label: 'Angular',
         serverExampleType: 'implicit'
+      },{
+        name: 'react',
+        label: 'React',
+        serverExampleType: 'implicit'
       },
       {
         name: 'ios',
