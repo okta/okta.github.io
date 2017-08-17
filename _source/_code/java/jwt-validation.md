@@ -38,7 +38,7 @@ The Okta JWT Verifier can created via a fluent `JwtHelper` class:
 ```java
 JwtVerifier jwtVerifier = new JwtHelper()
     .setIssuerUrl("https://{yourOktaDomain}.com/oauth2/default")
-    .setClientOrAudience("api://default")
+    .setAudience("api://default")
     .build();
 ```
 
@@ -68,22 +68,10 @@ The result from the decode method is a `Jwt` object which you can introspect add
 jwt.getClaims().get("aClaimKey");
 ```
 
-#### Verify nonce (only when verifying id_token)
-
-To mitigate replay attacks, verify that the `nonce` value in the `id_token` matches the `nonce` that was used when 
-doing the code exchange. This verification is optional, but is highly suggested to verify after the initial code 
-exchange.
-
-```java
-if (yourNonceString.equals(jwt.getClaims().get("nonce"))) {
-  throw new Exception("Invalid Token: Nonce does not match.");
-}
-```
-
 ## Conclusion
 
 The above are the basic steps for verifying an access token locally. The steps are not tied directly to a framework so 
-you could plugin the okta-jwt-verifier into the framework of your choice (Dropwizard, Guice, Servlet API, or JAX-RS).
+you could plug in the `okta-jwt-verifier` into the framework of your choice (Dropwizard, Guice, Servlet API, or JAX-RS).
 
 For more information on this project take a look at the following resources:
 - [Javadocs](https://developer.okta.com/okta-jwt-verifier-java/apidocs/)
