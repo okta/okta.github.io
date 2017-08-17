@@ -28,6 +28,10 @@ class BasePage {
     return util.wait(this.$pageLoad);
   }
 
+  waitForPresence(elem) {
+    return util.wait(elem);
+  }
+
   setWindowSize(width, height) {
     browser.driver.manage().window().setSize(width, height);
   }
