@@ -367,12 +367,10 @@ problems in the authentication space, you should consider signing up for an [Okt
 Developer Account][]. Our API service stores user accounts for your web apps,
 mobile apps, and API services, and makes web security fun again.
 
-PS: If you’re interested in other security articles like this, please check out
-the [Okta Developer Blog][] where my coworkers and I write a lot of other fun
-articles like this. Or, if you’d rather see our tweets, go [follow us][] on twitter!
+If you have any questions, feel free to hit me up on Twitter [@rdegges][].
 
 
   [JWE]: http://self-issued.info/docs/draft-ietf-jose-json-web-encryption.html "JSON Web Encryption"
   [Okta Developer Account]: https://developer.okta.com/ "Okta Developer Account"
   [Okta Developer Blog]: http://developer.okta.com/blog/ "Okta Developer Blog"
-  [follow us]: https://twitter.com/oktadev "@oktadev on Twitter"
+  [@rdegges]: https://twitter.com/rdegges "Randall on Twitter"
