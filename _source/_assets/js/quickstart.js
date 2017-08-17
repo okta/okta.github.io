@@ -268,7 +268,7 @@
     $('#server_setup_link').removeClass('active');
   };
 
-  if (window.location.pathname.match('^/quickstarts')) {
+  if (window.location.pathname.match('^/quickstart')) {
     main();
   }
 
