@@ -79,6 +79,8 @@
 
 @include media('<860px') {
 	.Blog {
+		overflow-x: hidden;
+
 		&.is-single {
 			display: block;
 
