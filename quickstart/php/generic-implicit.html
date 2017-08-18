@@ -1,10 +1,85 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <body>
-    <p>
-  We're hard at work on this PHP Implicit Example quickstart, please check back soon!
-  <i class="fa fa-coffee" aria-hidden="true"></i>
-</p>
+    <h2 id="verifier-library">Verifier Library</h2>
+<p>We have created a JWT verifier library to help you decode and verify JWTs from Okta.</p>
+
+<h3 id="install-the-library">Install the library</h3>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>composer require okta/jwt-verifier
+</code></pre>
+</div>
+
+<h3 id="extra-libraries-to-install">Extra libraries to install</h3>
+<p>You will need to install a couple extra libraries for this to work.</p>
+
+<h4 id="psr7-compliant-library">PSR7 Compliant Library</h4>
+<p>This package will auto-discover most PSR7 compliant libraries to go out and get the keys. The most common library to 
+use is the <code class="highlighter-rouge">guzzlehttp/psr7</code> package.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>composer require guzzlehttp/psr7
+</code></pre>
+</div>
+
+<h4 id="jwt-library">JWT Library</h4>
+<p>The JWT Verifier has 2 adaptors that are built in. One for <code class="highlighter-rouge">firebase/php-jwt</code> and one for <code class="highlighter-rouge">spomky-labs/jose</code>. The 
+example assumes that you have installed <code class="highlighter-rouge">firebase/php-jwt</code></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>composer require firebase/php-jwt
+</code></pre>
+</div>
+
+<h2 id="usage">Usage</h2>
+<p>The library only requires a few options to be set. Use the following to validate your 
+JWT using the SpomkyLabs Jose JWT library:</p>
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="k">require</span> <span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">'/vendor/autoload.php'</span><span class="p">;</span>  <span class="c1">// This should be adjusted to be the autoload file from your vendor folder.
+</span>
+<span class="nv">$jwt</span> <span class="o">=</span> <span class="s1">'eyJhbGciOiJSUzI1Nqd0FfRzh6X0ZsOGlJRnNoUlRuQUkweVUifQ.eyJ2ZXIiOjEsiOiJwaHBAb2t0YS5jb20ifQ.ZGrn4fvIoCq0QdSyA'</span><span class="p">;</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$jwtVerifier</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nx">\Okta\JwtVerifier\JwtVerifierBuilder</span><span class="p">())</span>
+        <span class="o">-&gt;</span><span class="na">setDiscovery</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Okta\JwtVerifier\Discovery\Oauth</span><span class="p">)</span> <span class="c1">// This is not needed if using OAuth 2.0.  The other option is OIDC
+</span>        <span class="o">-&gt;</span><span class="na">setAdaptor</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Okta\JwtVerifier\Adaptors\FirebasePhpJwt</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">setIssuer</span><span class="p">(</span><span class="s1">'https://{yourOktaDomain}.com/oauth2/default'</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
+    
+    <span class="nv">$jwt</span> <span class="o">=</span> <span class="nv">$jwtVerifier</span><span class="o">-&gt;</span><span class="na">verify</span><span class="p">(</span><span class="nv">$jwt</span><span class="p">);</span>
+    
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$jwt</span><span class="p">);</span> <span class="c1">// Returns instance of \Okta\JwtVerifier\JWT
+</span>    
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">toJson</span><span class="p">());</span> <span class="c1">// Returns Claims as JSON Object
+</span>    
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">getClaims</span><span class="p">());</span> <span class="c1">// Returns Claims as they come from the JWT Package used
+</span>    
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">getIssuedAt</span><span class="p">());</span> <span class="c1">// Returns Carbon instance of issued at time
+</span>    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">getIssuedAt</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span> <span class="c1">// Returns timestamp of issued at time
+</span>    
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">getExpirationTime</span><span class="p">());</span> <span class="c1">// Returns Carbon instance of Expiration Time
+</span>    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">getExpirationTime</span><span class="p">(</span><span class="kc">false</span><span class="p">));</span> <span class="c1">// Returns timestamp of Expiration Time
+</span><span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="extra-notes">Extra Notes</h3>
+<p>The library currently validates the JWT signature based on the issuer and discovery method, based on the keys from the meta-data URI. An exception will be thrown if the JWT contains an invalid signature, is expired, or was issued in the future. You will need to validate manually the nonce and audience on your own after receiving the claims. An example of this is provided below:</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$claims</span> <span class="o">=</span> <span class="nv">$jwt</span><span class="o">-&gt;</span><span class="na">getClaims</span><span class="p">();</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nv">$claims</span><span class="p">[</span><span class="s1">'nonce'</span><span class="p">]</span> <span class="o">!=</span> <span class="nv">$nonce</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="o">/</span><span class="nx">Exception</span><span class="p">(</span><span class="s1">'The nonce does not match.'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nv">$claims</span><span class="p">[</span><span class="s1">'aud'</span><span class="p">]</span> <span class="o">!=</span> <span class="nv">$audience</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="o">/</span><span class="nx">Exception</span><span class="p">(</span><span class="s1">'The audience does not match.'</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
 </body>
 </html>

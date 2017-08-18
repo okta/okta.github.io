@@ -7,19 +7,17 @@ class CodePage extends BasePage {
   constructor(url) {
     super(url);
     this.$pageLoad = $('.Row');
-    this.$$codeColumn = $$('.Column--4');
-    this.$$columnHeader = $$('h3.h4');
+    this.$quickStart = element(by.cssContainingText('span', 'Authentication Quick Start Guide'));
+    this.$sampleApp = element(by.cssContainingText('span', 'Sample App'));
     this.setPageLoad(this.$pageLoad);
   }
 
-  hasColumns() {
-    return this.hasElements(this.$$codeColumn);
+  hasQuickStart() {
+    return this.$quickStart.isPresent();
   }
 
-  linksInOrder(expectedLinks) {
-    return this.$$columnHeader.filter((element, index) => {
-      return element.getText().then(text => text == expectedLinks[index]);
-    }).then(elementList => elementList.length == expectedLinks.length);
+  hasSampleApp() {
+    return this.$sampleApp.isPresent();
   }
 }
 module.exports = CodePage;

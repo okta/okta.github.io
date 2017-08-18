@@ -16,6 +16,10 @@
         name: 'angular',
         label: 'Angular',
         serverExampleType: 'implicit'
+      },{
+        name: 'react',
+        label: 'React',
+        serverExampleType: 'implicit'
       },
       {
         name: 'ios',
@@ -51,13 +55,13 @@
         label: 'Java',
         frameworks: [
           {
-            name: 'generic',
-            label: 'Generic Java',
+            name: 'spring',
+            label: 'Spring',
             active: true
           },
           {
-            name: 'spring',
-            label: 'Spring'
+            name: 'generic',
+            label: 'Generic Java'
           }
         ]
       },

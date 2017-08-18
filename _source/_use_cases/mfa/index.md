@@ -65,7 +65,7 @@ Before you can start writing code, you'll need to make do a few
 things in the Admin interface to your Okta org.
 
 1.  Enable support for MFA.
-2.  Create an API token.
+2.  [Create an API token](/docs/api/getting_started/getting_a_token.html).
 
 ### Enabling MFA in your Okta org
 
@@ -89,17 +89,8 @@ For more information about MFA and the Okta org, see the [MFA](https://help.okta
 ### Creating an API token for your Okta org
 
 Requests made to the Okta API are authenticated via an API
-token. Here is how to create an API token for your Okta
-org:
-
-1.  Log in to your Okta org as a user with administration.
-2.  Click the "Admin" button to get into the Admin interface.
-3.  Open the "Security" menu.
-4.  Select "API" from the menu.
-5.  Click the "Create Token" button.
-6.  Enter "Postman" (or something more descriptive) into the text field.
-7.  Click the green "Create Token" button.
-8.  Configure Postman to use the Token you just created.
+token. [Here is how to create an API token for your Okta
+org](/docs/api/getting_started/getting_a_token.html).
 
 ### Set up Postman
 
@@ -139,11 +130,11 @@ random user generated using the [Random User Generator](https://randomuser.me/) 
     -   First Name
     -   Last Name
     -   Email Address
-3.  Open the "Users (Okta API)" collection in Postman.
+3.  Open the **Users (Okta API)** collection in Postman.
 4.  Create a user using the "POST Create User without Credentials"
     request template in Postman.
-5.  Save the value of the "id" (the User ID) that is returned by Postman, you will
-    be using this ID a lot. (In Okta, User ID's start with "00u")
+5.  Save the value of the `id` (the User ID) that is returned by Postman, you will
+    be using this ID a lot. (In Okta, User ID's start with `00u`)
 
 ### Adding MFA
 
@@ -173,16 +164,16 @@ Once the factor has been enrolled, you can verify it as needed.
 Using the User ID that you created earlier, add a Google
 Authenticator factor to that user as follows:
 
-1.  Open the "Factors (Okta API)" collection in Postman.
+1.  Open the **Factors (Okta API)** collection in Postman.
 2.  Add a new Google Authenticator Factor to your user with the
-    "POST Enroll Google Authenticator Factor" request template in
-    Postman. **Important**, be sure to replace the "{{userId}}"
+    **POST Enroll Google Authenticator Factor** request template in
+    Postman. **Important**, be sure to replace the `{userId}`
     template in the request URL with the User ID for the user you
     created previously.
-3.  Save the value of the "id" (the Factor ID) that is returned by
+3.  Save the value of the `id` (the Factor ID) that is returned by
     Postman, you will be using this id in the next step.
-4.  Copy the URL located in the "href" value of the "qrcode" link
-    found in the "\_embedded" object located at the bottom of the
+4.  Copy the URL located in the `href` value of the `qrcode` link
+    found in the `\_embedded` object located at the bottom of the
     response in Postman. Open this URL in a new tab of your
     favorite browser.
 
@@ -195,35 +186,35 @@ that by answering a challenge with their token.
 Continuing on from the steps above:
 
 1.  Open Google Authenticator on your phone.
-2.  Tap the "+" button in Google Authenticator.
-3.  Select the "Scan barcode" option.
+2.  Tap the **+** button in Google Authenticator.
+3.  Select the **Scan barcode** option.
 4.  Scan the QR Code on the browser tab you opened previously.
 5.  Switch to Postman on your computer.
-6.  From the "Factors (Okta API)" collection, select the "POST
-    Activate TOTP Factor" request template.
-7.  Replace the "{{userId}}" and "{{factorId}}" templates with the
+6.  From the **Factors (Okta API)** collection, select the **POST
+    Activate TOTP Factor** request template.
+7.  Replace the `{userId}` and `{factorId}` templates with the
     User ID and Factor ID values that you've copied previously.
-8.  In the JSON body, replace the "passCode" value with the
+8.  In the JSON body, replace the `passCode` value with the
     passcode shown on Google Authenticator.
-9.  Click the blue "Send" button.
+9.  Click the blue **Send** button.
 
 ### Verifying the factor
 
 Now that you've verified the factor, you are ready to start
 verifying MFA tokens! Here is how to do that using Postman:
 
-1.  Open the "Factors (Okta API)" collection in Postman.
-2.  Select the "POST Verify TOTP Factor" request template.
-3.  Replace the "{{userId}}" and "{{factorId}}" templates with the
+1.  Open the **Factors (Okta API)** collection in Postman.
+2.  Select the **POST Verify TOTP Factor** request template.
+3.  Replace the `{userId}` and `{factorId}` templates with the
     User ID and Factor ID values that you've copied previously.
-4.  In the JSON body, replace the "passCode" value with the
+4.  In the JSON body, replace the `passCode` value with the
     passcode shown on Google Authenticator.
-5.  Click the blue "Send" button.
+5.  Click the blue **Send** button.
 6.  A successful verification of a token will result in an HTTP
-    status code of 200, with a JSON payload containing the key
-    "factorResult" with the value of "SUCCESS".
+    status code of `200`, with a JSON payload containing the key
+    `factorResult` with the value of `SUCCESS`.
     (Unsuccessful verification attempts will result in an HTTP
-    status code of 403, with a JSON payload containing the key "errorCode").
+    status code of `403`, with a JSON payload containing the key `errorCode`).
 
 ## Learn more
 

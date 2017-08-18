@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Okta Sign-In Widget Quickstart
 excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta.
 weight: 1
@@ -110,7 +110,7 @@ python3 -m http.server
 
 This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.
 
-You can enable your Sign-in Widget page as a "Trusted Origin" in Okta, which enables Cross-Origin Resource Sharing (CORS). To do this, follow the steps found under the "Trusted Origins tab" section in our [API Security help page](https://help.okta.com/en/prev/Content/Topics/Security/API.htm). Configure your Origin using the same base URL as the web server you are using to host the HTML for the Okta Sign-In Widget. For example, if you're serving the page using the Python SimpleHTTPServer, the origin would be `http://0.0.0.0:8000`.
+You can enable your Sign-in Widget page as a "Trusted Origin" in Okta, which enables Cross-Origin Resource Sharing (CORS). To do this, follow the steps found under **API** > **Trusted Origins**. Configure your Origin using the same base URL as the web server you are using to host the HTML for the Okta Sign-In Widget. For example, if you're serving the page using the Python SimpleHTTPServer, the origin would be `http://0.0.0.0:8000`.
 
 If you now open the page with the Widget code on it, you can enter in the credentials for a user in your Okta org and you will be logged in. And that's it!
 
@@ -280,7 +280,7 @@ your HTML:
 The configuration options that are passed to the `OktaSignIn()`
 constructor are used to configure the functionality and text labels
 of the Okta Sign-In Widget. An example of how to configure
-`OktaSignIn()` is below. If you'd like to see the full list of configuration options, see the [Sign-in Widget Reference page](https://developer.okta.com/code/javascript/okta_sign-in_widget_ref.html#configuration-options).
+`OktaSignIn()` is below. If you'd like to see the full list of configuration options, see the [Sign-in Widget Reference page](/code/javascript/okta_sign-in_widget_ref.html#configuration).
 
 #### A Walkthrough of the Widget Code
 
@@ -408,7 +408,7 @@ var oktaSignIn = new OktaSignIn({
 });
 ~~~
 
-For more information about these configuration options, see the [Sign-in Widget Reference page](https://developer.okta.com/code/javascript/okta_sign-in_widget_ref.html#configuration-options). 
+For more information about these configuration options, see the [Sign-in Widget Reference page](/code/javascript/okta_sign-in_widget_ref.html#configuration). 
 
 ## Troubleshooting
 

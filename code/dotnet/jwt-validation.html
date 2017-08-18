@@ -43,7 +43,7 @@
   <meta class="swiftype" name="summary" data-type="string" content="How to manually validate Okta JWTs with .NET (C#)." />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-64401363de9d863176872f2b0c3a4b5f711d306894d2b53897e6a45095790723.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-946e0567c97acc29559428738f3a57d1aedb12b5a960656bc52bfad14f629d50.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -204,7 +204,7 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_code/dotnet/jwt-validation.md">Edit Page</a>
       <h1 id="overview">Overview</h1>
 
-<p>When you use the Okta API to <a href="https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">obtain an authorization grant for a user</a>, the response contains a signed JWT (<code class="highlighter-rouge">id_token</code> and/or <code class="highlighter-rouge">access_token</code>).</p>
+<p>When you use the Okta API to <a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">obtain an authorization grant for a user</a>, the response contains a signed JWT (<code class="highlighter-rouge">id_token</code> and/or <code class="highlighter-rouge">access_token</code>).</p>
 
 <p>A common practice is to send one of these tokens in the <code class="highlighter-rouge">Bearer</code> header of future requests, to authorize the request for that user. Your server must then validate the token to make sure it’s authentic and hasn’t expired.</p>
 
@@ -214,7 +214,7 @@
 
 <ul>
   <li>You are using ASP.NET or ASP.NET Core with the <code class="highlighter-rouge">JwtBearer</code> or <code class="highlighter-rouge">OpenIdConnect</code> middleware</li>
-  <li>You want to send tokens to Okta to be validated (this is called <a href="https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request">token introspection</a>)</li>
+  <li>You want to send tokens to Okta to be validated (this is called <a href="/docs/api/resources/oauth2.html#introspection-request">token introspection</a>)</li>
 </ul>
 
 <p>If you need to validate a token manually, and don’t want to make a network call to Okta, this guide will help you validate tokens locally.</p>
@@ -240,7 +240,8 @@
 <p>The <code class="highlighter-rouge">OpenIdConnectConfigurationRetriever</code> class in the <a href="https://www.nuget.org/packages/Microsoft.IdentityModel.Protocols.OpenIdConnect/">Microsoft.IdentityModel.Protocols.OpenIdConnect</a> package will download and parse the discovery document to get the key set. You can use it in conjunction with the <code class="highlighter-rouge">ConfigurationManager</code> class, which will handle caching the response and refreshing it regularly:</p>
 
 <div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="c1">// Replace with your issuer URL:
-</span><span class="kt">var</span> <span class="n">issuer</span> <span class="p">=</span> <span class="s">"https://{yourOktaDomain}.com/oauth2/aus9o8wvkhockw9TL0h7"</span><span class="p">;</span>
+</span>
+<span class="kt">var</span> <span class="n">issuer</span> <span class="p">=</span> <span class="s">"https://{yourOktaDomain}.com/oauth2/{authorizationServerId}"</span><span class="p">;</span>
 
 <span class="kt">var</span> <span class="n">configurationManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConfigurationManager</span><span class="p">&lt;</span><span class="n">OpenIdConnectConfiguration</span><span class="p">&gt;(</span>
     <span class="n">issuer</span> <span class="p">+</span> <span class="s">"/.well-known/oauth-authorization-server"</span><span class="p">,</span>
@@ -441,7 +442,7 @@
                     <li><a target="_blank" href="https://developer.okta.com/integrate/">Integrate with Okta</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
-                    <li><a href="/3rd_party_notices/">3rd Party Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
                 </ul>
             </div>
 
@@ -459,7 +460,7 @@
 </footer>
 
     <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
-    <script type="text/javascript" src="/assets/quickstart-1a41b3ef5dc6ce16fa38cba7fd524f0aca4aba9a60eb346376aaf65919e2ece3.js"></script>
+    <script type="text/javascript" src="/assets/quickstart-e49102fc1a13bd82d3a085763e9fd15d1d302c0f5b63852f292781f26c905367.js"></script>
     
     
     

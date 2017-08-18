@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Angular + Okta Sign-In Widget
 weight: 20
 excerpt: Integrate Okta with an Angular application using the Sign-In Widget.
@@ -9,7 +9,7 @@ excerpt: Integrate Okta with an Angular application using the Sign-In Widget.
 This guide will walk you through integrating authentication and authorization into an Angular application with Okta.
 
 ## Prerequisites
-If you do not already have a  **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
+If you do not already have a  **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](/signup/).
 
 ### Add an OpenID Connect Client
 * Log into the Okta Developer Dashboard, and **Create New App**
@@ -21,12 +21,7 @@ If you do not already have a  **Developer Edition Account**, you can create one 
 | Login redirect URIs | http://localhost:4200/callback                      |
 | Logout redirect URIs| http://localhost:4200/login                         |
 
-> *As with any Okta application, make sure you assign Users or Groups to the OpenID Connect Client. Otherwise, no one can use it.*
-
-#### Enable [CORS](http://developer.okta.com/docs/api/getting_started/enabling_cors.html)
-For security reasons, browsers make it difficult to make requests to other domains. In this example, we'll make requests from `http://localhost:4200` to `https://{yourOktaDomain}.com`.
-
-You can configure `https://{yourOktaDomain}.com` to accept our requests by [enabling CORS for `http://localhost:4200`](/docs/api/getting_started/enabling_cors.html#granting-cross-origin-access-to-websites).
+> **Note:** CORS is automatically enabled for the granted login redirect URIs.
 
 ## Create an Angular App
 To quickly create an Angular app, install the Angular CLI:
@@ -53,7 +48,7 @@ To provide a fully-featured and customizable login experience, the [Okta Sign-In
 
 First, create `src/app/app.service.ts` as an authorization utility file and use it to bootstrap the required fields to login:
 
-> Important: We're using Okta's organization authorization server to make setup easy, but it's less flexible than a custom authorization server. Most SPAs send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](https://developer.okta.com/docs/how-to/set-up-auth-server.html#create-an-authorization-server).
+> Important: We're using Okta's organization authorization server to make setup easy, but it's less flexible than a custom authorization server. Most SPAs send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](/docs/how-to/set-up-auth-server.html#create-an-authorization-server).
 
 ```typescript
 // app.service.ts
@@ -66,7 +61,7 @@ import * as OktaSignIn from '@okta/okta-signin-widget/dist/js/okta-sign-in.min.j
 export class OktaAuthService {
 
   signIn = new OktaSignIn({
-    baseUrl: 'https://{yourOktaDomain}.com/',
+    baseUrl: 'https://{yourOktaDomain}.com',
     clientId: '{clientId}',
     authParams: {
       issuer: 'https://{yourOktaDomain}.com/oauth2/{authorizationServerId}',
