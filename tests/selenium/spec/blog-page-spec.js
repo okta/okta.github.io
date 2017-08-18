@@ -15,7 +15,7 @@ describe('blog page spec', () => {
     expect(blogLink).toContain(blogPage.getCurrentURL());
   });
 
-  it('has pagination and navigates to next and previous links', () => {
+  xit('has pagination and navigates to next and previous links', () => {
     expect(blogPage.isPaginationVisible()).toBe(true);
 
     blogPage.clickNext();
