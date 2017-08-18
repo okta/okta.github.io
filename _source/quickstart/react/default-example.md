@@ -359,7 +359,7 @@ If all is well, the development server should start and your application will be
 
 ## Using the Access Token
 
-Your React application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `MessageList` component that requires authentication, and uses the `auth.getAccessToken()` method to get the access token from local storage, and attach it to our resource request.
+Your React application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `MessageList` component that requires authentication, and uses a new `auth.getAccessToken()` method to get the access token from local storage, and attach it to our resource request.
 
 Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the React component could look like for this hypothetical example:
 
@@ -408,8 +408,3 @@ export default withAuth(withRouter(class MessageList extends Component {
   }
 }));
 ```
-
-## Conclusion
-You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. With the access token, you can authenticate requests to your own resource server.  You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
-
-Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).
