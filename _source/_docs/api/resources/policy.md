@@ -819,14 +819,6 @@ Parameter | Description | Data Type | Required | Default
 | --- | --- | --- | ---
 authType |  | `ANY` or `RADIUS` | No |
 
-#### AuthContext Condition Object Example
-
-~~~json
-  "authContext": {
-    "authType": "RADIUS"
-  }
-~~~
-
 #### Network Condition Object
 {: #NetworkConditionObject }
 
