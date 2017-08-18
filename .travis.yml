@@ -15,11 +15,6 @@ script: ./scripts/travis.sh
 sudo: false
 dist: trusty
 
-cache:
-  directories:
-  - travis_phantomjs
-  - /usr/bin
-
 env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
