@@ -10,13 +10,13 @@ For Apache Maven:
 <dependency>
     <groupId>com.okta.jwt</groupId>
     <artifactId>okta-jwt-verifier</artifactId>
-    <version>0.1.0</version>
+    <version>{{ site.versions.jwt_validator_java }}</version>
 </dependency>
 ```
 
 For Gradle:
 ```groovy
-compile 'com.okta.jwt:okta-jwt-verifier:0.1.0'
+compile 'com.okta.jwt:okta-jwt-verifier:{{ site.versions.jwt_validator_java }}'
 ```
 
 ### Use the API
@@ -25,7 +25,7 @@ compile 'com.okta.jwt:okta-jwt-verifier:0.1.0'
 // 1. build the parser
 JwtVerifier jwtVerifier = new JwtHelper()
                             .setIssuerUrl("https://{yourOktaDomain}.com/oauth2/default")
-                            .setClientOrAudience("api://default")
+                            .setAudience("api://default")
                             .build();
 
 // 2. Process the token (includes validation)
