@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <body>
-    <p>
-  We're hard at work on this Java Implicit Example quickstart, please check back soon!
-  <i class="fa fa-coffee" aria-hidden="true"></i>
-</p>
+    <h3 id="include-the-dependency">Include the dependency</h3>
+
+<p>For Apache Maven:</p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.okta.jwt<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>okta-jwt-verifier<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.2.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+
+<p>For Gradle:</p>
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'com.okta.jwt:okta-jwt-verifier:0.2.0'</span>
+</code></pre>
+</div>
+
+<h3 id="use-the-api">Use the API</h3>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="c1">// 1. build the parser</span>
+<span class="n">JwtVerifier</span> <span class="n">jwtVerifier</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JwtHelper</span><span class="o">()</span>
+                            <span class="o">.</span><span class="na">setIssuerUrl</span><span class="o">(</span><span class="s">"https://{yourOktaDomain}.com/oauth2/default"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">setAudience</span><span class="o">(</span><span class="s">"api://default"</span><span class="o">)</span>
+                            <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="c1">// 2. Process the token (includes validation)</span>
+<span class="n">Jwt</span> <span class="n">jwt</span> <span class="o">=</span> <span class="n">jwtVerifier</span><span class="o">.</span><span class="na">decodeAccessToken</span><span class="o">(</span><span class="n">jwtString</span><span class="o">);</span>
+
+<span class="c1">// 3. Do something with the token</span>
+<span class="n">println</span><span class="o">(</span><span class="n">jwt</span><span class="o">.</span><span class="na">getTokenValue</span><span class="o">());</span> <span class="c1">// print the token</span>
+<span class="n">println</span><span class="o">(</span><span class="n">jwt</span><span class="o">.</span><span class="na">getClaims</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"invalidKey"</span><span class="o">));</span> <span class="c1">// an invalid key just returns null</span>
+<span class="n">println</span><span class="o">((</span><span class="n">Collection</span><span class="o">)</span> <span class="n">jwt</span><span class="o">.</span><span class="na">getClaims</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"groups"</span><span class="o">));</span> <span class="c1">// handle an array value</span>
+<span class="n">println</span><span class="o">(</span><span class="n">jwt</span><span class="o">.</span><span class="na">getExpiresAt</span><span class="o">());</span> <span class="c1">// expiration time</span>
+</code></pre>
+</div>
 
 </body>
 </html>
