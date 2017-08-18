@@ -55,13 +55,13 @@
         label: 'Java',
         frameworks: [
           {
-            name: 'generic',
-            label: 'Generic Java',
+            name: 'spring',
+            label: 'Spring',
             active: true
           },
           {
-            name: 'spring',
-            label: 'Spring'
+            name: 'generic',
+            label: 'Generic Java'
           }
         ]
       },
