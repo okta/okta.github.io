@@ -33,7 +33,7 @@ composer require firebase/php-jwt
 
 
 ## Usage
-Using the API for the library is built to only require a few options to be set. Use the following to validate your 
+The library only requires a few options to be set. Use the following to validate your 
 JWT using the SpomkyLabs Jose JWT library
 ```php
 <?php
