@@ -4,7 +4,7 @@ exampleDescription: PHP Auth Code Example
 ---
 
 ## Redirecting to Authorization Endpoint
-First you need to generate a URL to the authorization endpoint for the Authorization Server and redirect the user
+First you need to generate a URL to the authorization endpoint for the Authorization Server and redirect the user.
 
 ```php
 <?php
@@ -14,19 +14,26 @@ $query = http_build_query([
     'response_type' => 'code',
     'response_mode' => 'query',
     'scope' => 'openid profile',
-    'redirect_uri' => 'http://localhost/login-callback.php',
-    'state' => 'state',
-    'nonce' => microtime()
-
+    'redirect_uri' => 'http://localhost/login_callback.php',
+    'state' => $state,
+    'nonce' => $nonce
 ]);
 
-header('Location: ' . '{{ISSUER}}/v1/authorize?'.$query);
+header('Location: ' . 'https://{yourOktaDomain}}/oauth2/default/v1/authorize?'.$query);
 ```
 
 ## Exchange Auth Code
 After a successful login from the redirect, a code will be present in the request object.
+
+This code should be placed in the file specified for your `redirect_uri` from the previous step.
+
 ```php
 <?php
+
+if(array_key_exists('state', $_REQUEST) && $_REQUEST['state'] !== $state) {
+    throw new \Exception('State does not match.');
+}
+
 if(array_key_exists('code', $_REQUEST)) {
     $exchange = exchangeCode($_REQUEST['code']);
 }
@@ -35,8 +42,7 @@ function exchangeCode($code) {
     $authHeaderSecret = base64_encode( '{{CLIENT_ID}}:{{CLIENT_SECRET}}' );
     $query = http_build_query([
         'grant_type' => 'authorization_code',
-        'code' => $code,
-        'redirect_uri' => 'http://localhost/login_callback.php'
+        'code' => $code
     ]);
     $headers = [
         'Authorization: Basic ' . $authHeaderSecret,
@@ -45,7 +51,7 @@ function exchangeCode($code) {
         'Connection: close',
         'Content-Length: 0'
     ];
-    $url = '{{ISSUER}}/v1/token?' . $query;
+    $url = 'https://{yourOktaDomain}}/oauth2/default/v1/token?' . $query;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -69,8 +75,10 @@ The result of this will provide you with a JWT for that user.
 $jwt = $exchange->access_token;
 ```
 
+Once you have the JWT, you should verify it using [this guide](https://developer.okta.com/code/php/jwt-validation.html)
+
 ### Handling Errors
-If an error is present in the login, an error query paramater will be present.
+If an error is present in the login, an `error` query parameter will be present.
 
 ```php
 <?php

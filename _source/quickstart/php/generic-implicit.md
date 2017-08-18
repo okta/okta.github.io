@@ -4,7 +4,7 @@ exampleDescription: PHP Implicit Example
 ---
 
 ## Verifier Library
-We have created a JWT verifier library for you to use to help you decode and verify JWT's from OKTA. 
+We have created a JWT verifier library to help you decode and verify JWTs from Okta.
 
 ### Install the library
 
@@ -16,7 +16,7 @@ composer require okta/jwt-verifier
 You will need to install a couple extra libraries for this to work.  
 
 #### PSR7 Compliant Library
-This package will auto discover most PSR7 compliant libraries to go out and get the keys. The most common library to 
+This package will auto-discover most PSR7 compliant libraries to go out and get the keys. The most common library to 
 use is the `guzzlehttp/psr7` package.
 
 ```bash
@@ -25,7 +25,7 @@ composer require guzzlehttp/psr7
 
 #### JWT Library
 The JWT Verifier has 2 adaptors that are built in. One for `firebase/php-jwt` and one for `spomky-labs/jose`. The 
-exaple assumes that you have installed `firebase/php-jwt`
+example assumes that you have installed `firebase/php-jwt`
 
 ```bash
 composer require firebase/php-jwt
@@ -42,25 +42,29 @@ require __DIR__ . '/vendor/autoload.php';  // This should be adjusted to be the 
 
 $jwt = 'eyJhbGciOiJSUzI1Nqd0FfRzh6X0ZsOGlJRnNoUlRuQUkweVUifQ.eyJ2ZXIiOjEsiOiJwaHBAb2t0YS5jb20ifQ.ZGrn4fvIoCq0QdSyA';
 
-$jwtVerifier = (new \Okta\JwtVerifier\JwtVerifierBuilder())
-    ->setDiscovery(new \Okta\JwtVerifier\Discovery\Oauth) // This is not needed if using oauth.  The other option is OIDC
-    ->setAdaptor(new \Okta\JwtVerifier\Adaptors\FirebasePhpJwt)
-    ->setIssuer('https://{yourOktaDomain}.com/oauth2/ausb5jqasde774i490h7')
-    ->build();
-
-$jwt = $jwtVerifier->verify($jwt);
-
-var_dump($jwt); //Returns instance of \Okta\JwtVerifier\JWT
-
-var_dump($jwt->toJson()); // Returns Claims as JSON Object
-
-var_dump($jwt->getClaims()); // Returns Claims as they come from the JWT Package used
-
-var_dump($jwt->getIssuedAt()); // returns Carbon instance of issued at time
-var_dump($jwt->getIssuedAt(false)); // returns timestamp of issued at time
-
-var_dump($jwt->getExpirationTime()); //returns Carbon instance of Expiration Time
-var_dump($jwt->getExpirationTime(false)); //returns timestamp of Expiration Time
+try {
+    $jwtVerifier = (new \Okta\JwtVerifier\JwtVerifierBuilder())
+        ->setDiscovery(new \Okta\JwtVerifier\Discovery\Oauth) // This is not needed if using oauth.  The other option is OIDC
+        ->setAdaptor(new \Okta\JwtVerifier\Adaptors\FirebasePhpJwt)
+        ->setIssuer('https://{yourOktaDomain}.com/oauth2/default')
+        ->build();
+    
+    $jwt = $jwtVerifier->verify($jwt);
+    
+    var_dump($jwt); // Returns instance of \Okta\JwtVerifier\JWT
+    
+    var_dump($jwt->toJson()); // Returns Claims as JSON Object
+    
+    var_dump($jwt->getClaims()); // Returns Claims as they come from the JWT Package used
+    
+    var_dump($jwt->getIssuedAt()); // Returns Carbon instance of issued at time
+    var_dump($jwt->getIssuedAt(false)); // Returns timestamp of issued at time
+    
+    var_dump($jwt->getExpirationTime()); // Returns Carbon instance of Expiration Time
+    var_dump($jwt->getExpirationTime(false)); // Returns timestamp of Expiration Time
+} catch(\Exception $e) {
+    var_dump($e->getMessage());
+}
 ```
 
 ### Extra Notes
@@ -72,6 +76,10 @@ the claims. An example of this is provided.
 <?php
 
 $claims = $jwt->getClaims();
+
+if($claims['nonce'] != $nonce) {
+    throw new /Exception('The nonce does not match.');
+}
 
 if($claims['aud'] != $audience) {
     throw new /Exception('The audience does not match.');
