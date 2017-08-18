@@ -201,7 +201,7 @@
 			white-space: normal;
 			padding: 1px 5px;
 			line-height: 1.428571429;
-			background: #f7f9fa;
+			background: #f4f4f4;
 			color: #333333;
 			font-size: 80%;
 			font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -681,7 +681,6 @@
 
 		p code {
 			@include padding(0 xx-small);
-			background: #d8d8d8;
 		}
 
 		.highlight pre { color: #3d3d3d; } /* Base Style */
