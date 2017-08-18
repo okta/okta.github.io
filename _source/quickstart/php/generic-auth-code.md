@@ -21,6 +21,8 @@ $query = http_build_query([
 
 header('Location: ' . 'https://{yourOktaDomain}}/oauth2/default/v1/authorize?'.$query);
 ```
+> The `nonce` should be a generated string such as UUID, and the `state` can be any string representing state of the 
+application.
 
 ## Exchange Auth Code
 After a successful login from the redirect, a code will be present in the request object.
