@@ -265,7 +265,7 @@ things in the Admin interface to your Okta org.</p>
 
 <ol>
   <li>Enable support for MFA.</li>
-  <li>Create an API token.</li>
+  <li><a href="/docs/api/getting_started/getting_a_token.html">Create an API token</a>.</li>
 </ol>
 
 <h3 id="enabling-mfa-in-your-okta-org">Enabling MFA in your Okta org</h3>
@@ -292,19 +292,8 @@ Authentication”.</li>
 <h3 id="creating-an-api-token-for-your-okta-org">Creating an API token for your Okta org</h3>
 
 <p>Requests made to the Okta API are authenticated via an API
-token. Here is how to create an API token for your Okta
-org:</p>
-
-<ol>
-  <li>Log in to your Okta org as a user with administration.</li>
-  <li>Click the “Admin” button to get into the Admin interface.</li>
-  <li>Open the “Security” menu.</li>
-  <li>Select “API” from the menu.</li>
-  <li>Click the “Create Token” button.</li>
-  <li>Enter “Postman” (or something more descriptive) into the text field.</li>
-  <li>Click the green “Create Token” button.</li>
-  <li>Configure Postman to use the Token you just created.</li>
-</ol>
+token. <a href="/docs/api/getting_started/getting_a_token.html">Here is how to create an API token for your Okta
+org</a>.</p>
 
 <h3 id="set-up-postman">Set up Postman</h3>
 
@@ -350,11 +339,11 @@ can refer to later:
       <li>Email Address</li>
     </ul>
   </li>
-  <li>Open the “Users (Okta API)” collection in Postman.</li>
+  <li>Open the <strong>Users (Okta API)</strong> collection in Postman.</li>
   <li>Create a user using the “POST Create User without Credentials”
 request template in Postman.</li>
-  <li>Save the value of the “id” (the User ID) that is returned by Postman, you will
-be using this ID a lot. (In Okta, User ID’s start with “00u”)</li>
+  <li>Save the value of the <code class="highlighter-rouge">id</code> (the User ID) that is returned by Postman, you will
+be using this ID a lot. (In Okta, User ID’s start with <code class="highlighter-rouge">00u</code>)</li>
 </ol>
 
 <h3 id="adding-mfa">Adding MFA</h3>
@@ -388,16 +377,16 @@ similar for all factors an works as follows:</p>
 Authenticator factor to that user as follows:</p>
 
 <ol>
-  <li>Open the “Factors (Okta API)” collection in Postman.</li>
+  <li>Open the <strong>Factors (Okta API)</strong> collection in Postman.</li>
   <li>Add a new Google Authenticator Factor to your user with the
-“POST Enroll Google Authenticator Factor” request template in
-Postman. <strong>Important</strong>, be sure to replace the “”
+<strong>POST Enroll Google Authenticator Factor</strong> request template in
+Postman. <strong>Important</strong>, be sure to replace the <code class="highlighter-rouge"><span class="p">{</span><span class="err">userId</span><span class="p">}</span></code>
 template in the request URL with the User ID for the user you
 created previously.</li>
-  <li>Save the value of the “id” (the Factor ID) that is returned by
+  <li>Save the value of the <code class="highlighter-rouge">id</code> (the Factor ID) that is returned by
 Postman, you will be using this id in the next step.</li>
-  <li>Copy the URL located in the “href” value of the “qrcode” link
-found in the “_embedded” object located at the bottom of the
+  <li>Copy the URL located in the <code class="highlighter-rouge">href</code> value of the <code class="highlighter-rouge">qrcode</code> link
+found in the <code class="highlighter-rouge">\_embedded</code> object located at the bottom of the
 response in Postman. Open this URL in a new tab of your
 favorite browser.</li>
 </ol>
@@ -412,17 +401,17 @@ that by answering a challenge with their token.</p>
 
 <ol>
   <li>Open Google Authenticator on your phone.</li>
-  <li>Tap the “+” button in Google Authenticator.</li>
-  <li>Select the “Scan barcode” option.</li>
+  <li>Tap the <strong>+</strong> button in Google Authenticator.</li>
+  <li>Select the <strong>Scan barcode</strong> option.</li>
   <li>Scan the QR Code on the browser tab you opened previously.</li>
   <li>Switch to Postman on your computer.</li>
-  <li>From the “Factors (Okta API)” collection, select the “POST
-Activate TOTP Factor” request template.</li>
-  <li>Replace the “” and “” templates with the
+  <li>From the <strong>Factors (Okta API)</strong> collection, select the <strong>POST
+Activate TOTP Factor</strong> request template.</li>
+  <li>Replace the <code class="highlighter-rouge"><span class="p">{</span><span class="err">userId</span><span class="p">}</span></code> and <code class="highlighter-rouge"><span class="p">{</span><span class="err">factorId</span><span class="p">}</span></code> templates with the
 User ID and Factor ID values that you’ve copied previously.</li>
-  <li>In the JSON body, replace the “passCode” value with the
+  <li>In the JSON body, replace the <code class="highlighter-rouge">passCode</code> value with the
 passcode shown on Google Authenticator.</li>
-  <li>Click the blue “Send” button.</li>
+  <li>Click the blue <strong>Send</strong> button.</li>
 </ol>
 
 <h3 id="verifying-the-factor">Verifying the factor</h3>
@@ -431,18 +420,18 @@ passcode shown on Google Authenticator.</li>
 verifying MFA tokens! Here is how to do that using Postman:</p>
 
 <ol>
-  <li>Open the “Factors (Okta API)” collection in Postman.</li>
-  <li>Select the “POST Verify TOTP Factor” request template.</li>
-  <li>Replace the “” and “” templates with the
+  <li>Open the <strong>Factors (Okta API)</strong> collection in Postman.</li>
+  <li>Select the <strong>POST Verify TOTP Factor</strong> request template.</li>
+  <li>Replace the <code class="highlighter-rouge"><span class="p">{</span><span class="err">userId</span><span class="p">}</span></code> and <code class="highlighter-rouge"><span class="p">{</span><span class="err">factorId</span><span class="p">}</span></code> templates with the
 User ID and Factor ID values that you’ve copied previously.</li>
-  <li>In the JSON body, replace the “passCode” value with the
+  <li>In the JSON body, replace the <code class="highlighter-rouge">passCode</code> value with the
 passcode shown on Google Authenticator.</li>
-  <li>Click the blue “Send” button.</li>
+  <li>Click the blue <strong>Send</strong> button.</li>
   <li>A successful verification of a token will result in an HTTP
-status code of 200, with a JSON payload containing the key
-“factorResult” with the value of “SUCCESS”.
+status code of <code class="highlighter-rouge">200</code>, with a JSON payload containing the key
+<code class="highlighter-rouge">factorResult</code> with the value of <code class="highlighter-rouge">SUCCESS</code>.
 (Unsuccessful verification attempts will result in an HTTP
-status code of 403, with a JSON payload containing the key “errorCode”).</li>
+status code of <code class="highlighter-rouge">403</code>, with a JSON payload containing the key <code class="highlighter-rouge">errorCode</code>).</li>
 </ol>
 
 <h2 id="learn-more">Learn more</h2>

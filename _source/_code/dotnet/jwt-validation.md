@@ -40,7 +40,8 @@ The `OpenIdConnectConfigurationRetriever` class in the [Microsoft.IdentityModel.
 
 ```csharp
 // Replace with your issuer URL:
-var issuer = "https://{yourOktaDomain}.com/oauth2/aus9o8wvkhockw9TL0h7";
+
+var issuer = "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}";
 
 var configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
     issuer + "/.well-known/oauth-authorization-server",

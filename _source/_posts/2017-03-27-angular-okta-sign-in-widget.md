@@ -218,7 +218,7 @@ present on the requested resource. Origin 'http://localhost:4200' is therefore n
 ```
 
 This happens when Cross-Origin Resource Sharing (CORS) is not enabled. To enable it, go to your Okta Admin Dashboard,
-select **Security** > **API** > **Trusted Origins**. Click the "Add Origin" button and specify `http://localhost:4200`
+select **API** > **Trusted Origins**. Click the "Add Origin" button and specify `http://localhost:4200`
 as the Origin URL with Type `CORS`. For more specific instructions, see Okta's [Enabling CORS documentation](/docs/api/getting_started/enabling_cors.html).
 
 {% img blog/angular-sign-in-widget/cors-configuration.png alt:"CORS Configuration" width:"800" %}

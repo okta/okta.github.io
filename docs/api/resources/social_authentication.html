@@ -319,7 +319,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>2.2. On the main page, click on the <strong>Admin</strong> button in the upper right.</p>
 
-<p>2.3. Hover your cursor over <strong>Security</strong> until the menu opens, then click on <strong>Identity Providers</strong>.</p>
+<p>2.3. Hover your cursor over <strong>Users</strong> until the menu opens, then click on <strong>Social &amp; Identity Providers</strong>.</p>
 
 <p>2.4. On the Identity Providers page, click on <strong>Add Identity Provider</strong> &gt; <strong>Add Facebook</strong>.</p>
 
@@ -359,29 +359,23 @@ ok -> ua: 302 to redirect_uri
 
 <h5 id="4-register-an-openid-connect-application-in-okta">4. Register an OpenID Connect Application in Okta</h5>
 
-<p>4.1. Back on the Okta Admin site, click on <strong>Applications</strong>.</p>
+<p>4.1. Back on the Okta Developer Dashboard, click on <strong>Applications</strong>.</p>
 
 <p>4.2. Click <strong>Add Application</strong>.</p>
 
 <p>4.3. On the “Add Application” page, click <strong>Create New App</strong>.</p>
 
-<p>4.4. In the modal that pops up, select the appropriate platform for your use case and choose <strong>OpenID Connect</strong> as your sign-on method.</p>
+<p>4.4. Select the appropriate platform for your use case and choose a name for your new application.</p>
 
-<p>4.5. Add a name of your choosing, and optionally a logo.</p>
+<p>4.5. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Facebook.</p>
 
-<p>4.6. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Facebook.</p>
+<p>4.6. Assign the group that you chose under “Group Assignments” in Step 2.4 above or assign “Everyone”.</p>
 
-<p>4.7. Click <strong>Finish</strong> and you will arrive on the page for your new application.</p>
+<p>4.7. Under “Grant type allowed”, make sure “Implicit” is enabled.</p>
 
-<p>4.8. Under “General Settings”, check if the “Implicit (Hybrid)” grant type is enabled. If it is not already enabled, click <strong>Edit</strong>, enable it, and click <strong>Save</strong>.</p>
+<p>4.8. Click <strong>Done</strong> and you will arrive on the page for your new application.</p>
 
 <p>4.9. In the “Client Credentials” section, copy your “Client ID”, which you will use to complete your Authorize URL in the next step.</p>
-
-<p>4.10. Click on the <strong>Assignments</strong> tab.</p>
-
-<p>4.11. Click <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>.</p>
-
-<p>4.12. Assign the group that you chose under “Group Assignments” in Step 2.4 above. If you did not choose a Group, assign “Everyone”, then click <strong>Done</strong>.</p>
 
 <h5 id="5-complete-your-authorize-url">5. Complete Your Authorize URL</h5>
 
@@ -451,7 +445,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>2.2. On the main page, click on the <strong>Admin</strong> button in the upper right.</p>
 
-<p>2.3. Hover your cursor over <strong>Security</strong> until the menu opens, then click on <strong>Identity Providers</strong>.</p>
+<p>2.3. Hover your cursor over <strong>Users</strong> until the menu opens, then click on <strong>Social &amp; Identity Providers</strong>.</p>
 
 <p>2.4. On the Identity Providers page, click on <strong>Add Identity Provider</strong> &gt; <strong>Add Google</strong>.</p>
 
@@ -489,29 +483,23 @@ ok -> ua: 302 to redirect_uri
 
 <h5 id="4-register-an-openid-connect-application-in-okta-1">4. Register an OpenID Connect Application in Okta</h5>
 
-<p>4.1. Back on the Okta Admin site, click on <strong>Applications</strong>.</p>
+<p>4.1. Back on the Okta Developer Dashboard, click on <strong>Applications</strong>.</p>
 
 <p>4.2. Click <strong>Add Application</strong>.</p>
 
 <p>4.3. On the “Add Application” page, click <strong>Create New App</strong>.</p>
 
-<p>4.4. In the modal that pops up, select the appropriate platform for your use case and choose <strong>OpenID Connect</strong> as your sign-on method.</p>
+<p>4.4. Select the appropriate platform for your use case and choose a name for your new application.</p>
 
-<p>4.5. Add a name of your choosing, and optionally a logo.</p>
+<p>4.5. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Google.</p>
 
-<p>4.6. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Google.</p>
+<p>4.6. Assign the group that you chose under “Group Assignments” in Step 2.4 above or assign “Everyone”.</p>
 
-<p>4.7. Click <strong>Finish</strong> and you will arrive on the page for your new application.</p>
+<p>4.7. Under “Grant type allowed”, make sure “Implicit” is enabled.</p>
 
-<p>4.8. Under “General Settings”, check if the “Implicit (Hybrid)” grant type is enabled. If it is not already enabled, click <strong>Edit</strong>, enable it, and click <strong>Save</strong>.</p>
+<p>4.8. Click <strong>Done</strong> and you will arrive on the page for your new application.</p>
 
 <p>4.9. In the “Client Credentials” section, copy your “Client ID”, which you will use to complete your Authorize URL in the next step.</p>
-
-<p>4.10. Click on the <strong>Assignments</strong> tab.</p>
-
-<p>4.11. Click <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>.</p>
-
-<p>4.12. Assign the group that you chose under “Group Assignments” in Step 2.4 above. If you did not choose a Group, assign “Everyone”, then click <strong>Done</strong>.</p>
 
 <h5 id="5-complete-your-authorize-url-1">5. Complete Your Authorize URL</h5>
 
@@ -569,7 +557,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>2.2. On the main page, click on the <strong>Admin</strong> button in the upper right.</p>
 
-<p>2.3. Hover your cursor over <strong>Security</strong> until the menu opens, then click on <strong>Identity Providers</strong>.</p>
+<p>2.3. Hover your cursor over <strong>Users</strong> until the menu opens, then click on <strong>Social &amp; Identity Providers</strong>.</p>
 
 <p>2.4. On the Identity Providers page, click on <strong>Add Identity Provider</strong> &gt; <strong>Add LinkedIn</strong></p>
 
@@ -603,29 +591,23 @@ ok -> ua: 302 to redirect_uri
 
 <h5 id="4-register-an-openid-connect-application-in-okta-2">4. Register an OpenID Connect Application in Okta</h5>
 
-<p>4.1. Back on the Okta Admin site, click on <strong>Applications</strong>.</p>
+<p>4.1. Back on the Okta Developer Dashboard, click on <strong>Applications</strong>.</p>
 
 <p>4.2. Click <strong>Add Application</strong>.</p>
 
 <p>4.3. On the “Add Application” page, click <strong>Create New App</strong>.</p>
 
-<p>4.4. In the modal that pops up, select the appropriate platform for your use case and choose <strong>OpenID Connect</strong> as your sign-on method.</p>
+<p>4.4. Select the appropriate platform for your use case and choose a name for your new application.</p>
 
-<p>4.5. Add a name of your choosing, and optionally a logo.</p>
+<p>4.5. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with LinkedIn.</p>
 
-<p>4.6. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with LinkedIn.</p>
+<p>4.6. Assign the group that you chose under “Group Assignments” in Step 2.4 above or assign “Everyone”.</p>
 
-<p>4.7. Click <strong>Finish</strong> and you will arrive on the page for your new application.</p>
+<p>4.7. Under “Grant type allowed”, make sure “Implicit” is enabled.</p>
 
-<p>4.8. Under “General Settings”, check if the “Implicit (Hybrid)” grant type is enabled. If it is not already enabled, click <strong>Edit</strong>, enable it, and click <strong>Save</strong>.</p>
+<p>4.8. Click <strong>Done</strong> and you will arrive on the page for your new application.</p>
 
 <p>4.9. In the “Client Credentials” section, copy your “Client ID”, which you will use to complete your Authorize URL in the next step.</p>
-
-<p>4.10. Click on the <strong>Assignments</strong> tab.</p>
-
-<p>4.11. Click <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>.</p>
-
-<p>4.12. Assign the group that you chose under “Group Assignments” in Step 2.4 above. If you did not choose a Group, assign “Everyone”, then click <strong>Done</strong>.</p>
 
 <h5 id="5-complete-your-authorize-url-2">5. Complete Your Authorize URL</h5>
 
@@ -681,7 +663,7 @@ ok -> ua: 302 to redirect_uri
 
 <p>2.2. On the main page, click on the <strong>Admin</strong> button in the upper right.</p>
 
-<p>2.3. Hover your cursor over <strong>Security</strong> until the menu opens, then click on <strong>Identity Providers</strong>.</p>
+<p>2.3. Hover your cursor over <strong>Users</strong> until the menu opens, then click on <strong>Social &amp; Identity Providers</strong>.</p>
 
 <p>2.4. On the Identity Providers page, click on <strong>Add Identity Provider</strong> &gt; <strong>Add Microsoft</strong>.</p>
 
@@ -719,29 +701,23 @@ ok -> ua: 302 to redirect_uri
 
 <h5 id="4-register-an-openid-connect-application-in-okta-3">4. Register an OpenID Connect Application in Okta</h5>
 
-<p>4.1. Back on the Okta Admin site, click on <strong>Applications</strong>.</p>
+<p>4.1. Back on the Okta Developer Dashboard, click on <strong>Applications</strong>.</p>
 
 <p>4.2. Click <strong>Add Application</strong>.</p>
 
 <p>4.3. On the “Add Application” page, click <strong>Create New App</strong>.</p>
 
-<p>4.4. In the modal that pops up, select the appropriate platform for your use case and choose <strong>OpenID Connect</strong> as your sign-on method.</p>
+<p>4.4. Select the appropriate platform for your use case and choose a name for your new application.</p>
 
-<p>4.5. Add a name of your choosing, and optionally a logo.</p>
+<p>4.5. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Microsoft.</p>
 
-<p>4.6. Add one or more Redirect URIs. This is where the user will be directed to after they have authenticated with Microsoft.</p>
+<p>4.6. Assign the group that you chose under “Group Assignments” in Step 2.4 above or assign “Everyone”.</p>
 
-<p>4.7. Click <strong>Finish</strong> and you will arrive on the page for your new application.</p>
+<p>4.7. Under “Grant type allowed”, make sure “Implicit” is enabled.</p>
 
-<p>4.8. Under “General Settings”, check if the “Implicit (Hybrid)” grant type is enabled. If it is not already enabled, click <strong>Edit</strong>, enable it, and click <strong>Save</strong>.</p>
+<p>4.8. Click <strong>Done</strong> and you will arrive on the page for your new application.</p>
 
 <p>4.9. In the “Client Credentials” section, copy your “Client ID”, which you will use to complete your Authorize URL in the next step.</p>
-
-<p>4.10. Click on the <strong>Assignments</strong> tab.</p>
-
-<p>4.11. Click <strong>Assign</strong> &gt; <strong>Assign to Groups</strong>.</p>
-
-<p>4.12. Assign the group that you chose under “Group Assignments” in Step 2.4 above. If you did not choose a Group, assign “Everyone”, then click <strong>Done</strong>.</p>
 
 <h5 id="5-complete-your-authorize-url-3">5. Complete Your Authorize URL</h5>
 

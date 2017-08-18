@@ -13,8 +13,7 @@ API Access Management is an {% api_lifecycle ea %} feature.
 API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints.
 An authorization server defines your security boundary, for example "staging" or "production."
 Within each authorization server you can define your own OAuth scopes, claims, and access policies.
-This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta,
-such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.
+This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.
 
 At its core, an authorization server is simply an OAuth 2.0 token minting engine.
 Each authorization server has a unique [issuer URI](https://tools.ietf.org/html/rfc7519#section-4.1.1)
@@ -27,11 +26,9 @@ How do you know if you need to use Okta's Authorization Server instead of the au
 built in to your Okta app?
 
 * You need to protect non-Okta resources.
-* You need different authorization policies depending on whether the person is an employee, partner, or end user, or
-other similar specializations.
+* You need different authorization policies depending on whether the person is an employee, partner, or end user, or other similar specializations.
 
-> Note: If your employees, partners, and users can all use the same authentication policies for single sign-on,
-try [Okta's built in authorization service](https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub).
+> Note: If your employees, partners, and users can all use the same authentication policies for single sign-on, try [Okta's built-in SSO](https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub).
 
 
 ## Set Up an Authorization Server
@@ -53,13 +50,13 @@ This document provides step-by-step instructions for creating and configuring th
 
 ### Create an Authorization Server
 
-1. In the Okta user interface, navigate to **Security > API**.
-{% img auth_server_image.png alt:"Authorization Server" width:"640px" %}
+1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
+{% img okta-admin-auth-server-toolbar-dev alt:"Authorization Server" %}
 
 2. Choose **Add Authorization Server** and supply the requested information.
 
     * **Name**
-    * **Audience:** URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as `http://api.example.com/pets`.
+    * **Audience:** URI for the OAuth resource that consumes the Access Tokens. Use an absolute path such as `https://api.example.com/pets`.
       This value is used as the default [audience](https://tools.ietf.org/html/rfc7519#section-4.1.3) for Access Tokens.
     * **Description**
 
@@ -70,9 +67,9 @@ When complete, your Authorization Server's **Settings** tab displays the informa
 
 Create access policies and rules for a client or set of clients.
 
-1. In the Okta user interface, navigate to **Security > API**.
+1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 2. Choose the name of an Authorization Server.
-3. Choose **Access Policies > Add New Access Policy**
+3. Choose **Access Policies > Add Policy**
     {% img access_policy1.png alt:"Add Access Policy" width:"640px" %}
 4. Provide the requested information:
     * **Name**
@@ -92,7 +89,7 @@ The first policy and rule that matches the client request is applied and no furt
 
 Rules control the mapping of client, user, and custom scope. For example, you can specify a rule for an access policy so that if the user is assigned to a client, then custom scope `scope1` is valid.
 
-1. In the Okta user interface, navigate to **Security > API**.
+1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 2. Choose the name of an authorization server, and select **Access Policies**.
 3. Choose the name of an access policy, and select **Add Rule**
     {% img rule1.png alt:"Add Rule" width:"640px" %}
@@ -123,7 +120,7 @@ and the access policy decides which ones to grant and which ones to deny.
 
 If you need scopes in addition to the reserved scopes provided, create them now.
 
-1. In the Okta user interface, navigate to **Security > API**.
+1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 2. Choose the name of the Authorization Server to display, and then select **Scopes**.
 {% img scope1.png alt:"Add Scopes" width:"800px" %}
 
@@ -138,7 +135,7 @@ Tokens contain claims that are statements about the subject or another subject, 
 
 Create ID Token claims for OpenID Connect, or Access Tokens for OAuth 2.0:
 
-1. In the Okta user interface, navigate to **Security > API**.
+1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 2. Choose the name of the Authorization Server to display, and choose **Claims**.
 {% img claims1.png alt:"Choose Claims" width:"800px" %}
  Okta provides a default subject claim. You can edit the mapping, or create your own claims.
@@ -172,7 +169,7 @@ We have included here a few things that you can try to ensure that your Authoriz
 
 ### OpenID Connect Configuration
 
-To verify that your server was created and has the expected configuration values, you can send an API request to the Server's OpenID Connect Metadata URI: `/oauth2/:authorizationServerId/.well-known/openid-configuration` using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.
+To verify that your server was created and has the expected configuration values, you can send an API request to the Server's OpenID Connect Metadata URI: `/oauth2/{authorizationServerId}/.well-known/openid-configuration` using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.
 
 For more information on this endpoint, see here: [Retrieve Authorization Server OpenID Connect Metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-openid-connect-metadata).
 
@@ -180,13 +177,13 @@ For more information on this endpoint, see here: [Retrieve Authorization Server 
 
 You can retrieve a list of all scopes for your Authorization Server, including custom ones, using this endpoint: 
 
-`/api/v1/authorizationServers/:authorizationServerId/scopes` 
+`/api/v1/authorizationServers/{authorizationServerId}/scopes` 
 
 For more information on this endpoint, see here: [Get all scopes](/docs/api/resources/oauth2.html#get-all-scopes).
 
 If you created any custom claims, the easiest way to confirm that they have been successfully added is to use this endpoint:
 
-`/api/v1/authorizationServers/:authorizationServerId/claims` 
+`/api/v1/authorizationServers/{authorizationServerId}/claims` 
 
 For more information on this endpoint, see here: [Get all claims](/docs/api/resources/oauth2.html#get-all-claims).
 
@@ -205,9 +202,9 @@ You will need the following values from your Application:
 
 Once you have an OpenID Connect Application set-up, and a User assigned to it you can try the authentication flow.
 
-First, you will need your Authorization Server's Authorization Endpoint, which you can retrieve using the Server's Metadata URI: `/oauth2/:authorizationServerId/.well-known/openid-configuration`. It will look like this:
+First, you will need your Authorization Server's Authorization Endpoint, which you can retrieve using the Server's Metadata URI: `/oauth2/{authorizationServerId}/.well-known/openid-configuration`. It will look like this:
 
-`https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/authorize`
+`https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/authorize`
 
 To this you will need to add the following URL query parameters:
 
@@ -220,7 +217,7 @@ All of the values are fully documented here: [Obtain an Authorization Grant from
 
 The resulting URL would look like this:
 
-`https://{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/authorize?client_id=examplefa39J4jXdcCwWA&response_type=id_token&response_mode=fragment&scope=openid%20profile&redirect_uri=https%3A%2F%2FyourRedirectUriHere.com&state=WM6D&nonce=YsG76jo`
+`https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/authorize?client_id=examplefa39J4jXdcCwWA&response_type=id_token&response_mode=fragment&scope=openid%20profile&redirect_uri=https%3A%2F%2FyourRedirectUriHere.com&state=WM6D&nonce=YsG76jo`
 
 If you paste this into your browser you are redirected to the sign-in page for your Okta org, with a URL that looks like this:
 
@@ -235,10 +232,10 @@ To check the returned ID Token you can copy the value and paste it into your JWT
 ```json
 {
  "sub": "00uawpa4r4Zybz9On0h7",
- "name": "Jakub Vulcan",
+ "name": "John Smith",
  "locale": "en-US",
  "ver": 1,
- "iss": "https://{yourOktaDomain}.com/oauth2/:authorizationServerId",
+ "iss": "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}",
  "aud": "fa39J40exampleXdcCwWA",
  "iat": 1498328175,
  "exp": 1498331912,
@@ -248,7 +245,7 @@ To check the returned ID Token you can copy the value and paste it into your JWT
  ],
  "idp": "examplefz3q4Yd3Zk70h7",
  "nonce": "YsG76jo",
- "preferred_username": "example@mailinator.com",
+ "preferred_username": "john@example.com",
  "given_name": "John",
  "family_name": "Smith",
  "zoneinfo": "America/Los_Angeles",

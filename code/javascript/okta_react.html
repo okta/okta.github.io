@@ -247,13 +247,8 @@
 </table>
 
 <blockquote>
-  <p><em>As with any Okta app, make sure you assign Users or Groups to the OpenID Connect Client. Otherwise, no one can use it.</em></p>
+  <p><strong>Note:</strong> CORS is automatically enabled for the granted login redirect URIs.</p>
 </blockquote>
-
-<h3 id="enable-cors">Enable <a href="http://developer.okta.com/docs/api/getting_started/enabling_cors.html">CORS</a></h3>
-<p>For security reasons, browsers make it difficult to make requests to other domains. In this example, we’ll make requests from <code class="highlighter-rouge">http://localhost:3000</code> to <code class="highlighter-rouge">https://{yourOktaDomain}.com</code>.</p>
-
-<p>You can configure <code class="highlighter-rouge">https://{yourOktaDomain}.com</code> to accept our requests by <a href="/docs/api/getting_started/enabling_cors.html#granting-cross-origin-access-to-websites">enabling CORS for <code class="highlighter-rouge">http://localhost:3000</code></a>.</p>
 
 <h2 id="create-a-react-app">Create a React App</h2>
 <p>To quickly create a React app, install the create-react-app CLI:</p>

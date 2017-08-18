@@ -317,7 +317,7 @@ can be used to authenticate users on any website. This guide will introduce you 
 
 <p>This step is necessary for Okta to accept authentication requests from an application through the Sign-In Widget.</p>
 
-<p>You can enable your Sign-in Widget page as a “Trusted Origin” in Okta, which enables Cross-Origin Resource Sharing (CORS). To do this, follow the steps found under the “Trusted Origins tab” section in our <a href="https://help.okta.com/en/prev/Content/Topics/Security/API.htm">API Security help page</a>. Configure your Origin using the same base URL as the web server you are using to host the HTML for the Okta Sign-In Widget. For example, if you’re serving the page using the Python SimpleHTTPServer, the origin would be <code class="highlighter-rouge">http://0.0.0.0:8000</code>.</p>
+<p>You can enable your Sign-in Widget page as a “Trusted Origin” in Okta, which enables Cross-Origin Resource Sharing (CORS). To do this, follow the steps found under <strong>API</strong> &gt; <strong>Trusted Origins</strong>. Configure your Origin using the same base URL as the web server you are using to host the HTML for the Okta Sign-In Widget. For example, if you’re serving the page using the Python SimpleHTTPServer, the origin would be <code class="highlighter-rouge">http://0.0.0.0:8000</code>.</p>
 
 <p>If you now open the page with the Widget code on it, you can enter in the credentials for a user in your Okta org and you will be logged in. And that’s it!</p>
 
