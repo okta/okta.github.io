@@ -34,7 +34,7 @@ composer require firebase/php-jwt
 
 ## Usage
 The library only requires a few options to be set. Use the following to validate your 
-JWT using the SpomkyLabs Jose JWT library
+JWT using the SpomkyLabs Jose JWT library:
 ```php
 <?php
 
@@ -44,7 +44,7 @@ $jwt = 'eyJhbGciOiJSUzI1Nqd0FfRzh6X0ZsOGlJRnNoUlRuQUkweVUifQ.eyJ2ZXIiOjEsiOiJwaH
 
 try {
     $jwtVerifier = (new \Okta\JwtVerifier\JwtVerifierBuilder())
-        ->setDiscovery(new \Okta\JwtVerifier\Discovery\Oauth) // This is not needed if using oauth.  The other option is OIDC
+        ->setDiscovery(new \Okta\JwtVerifier\Discovery\Oauth) // This is not needed if using OAuth 2.0.  The other option is OIDC
         ->setAdaptor(new \Okta\JwtVerifier\Adaptors\FirebasePhpJwt)
         ->setIssuer('https://{yourOktaDomain}.com/oauth2/default')
         ->build();
@@ -68,9 +68,7 @@ try {
 ```
 
 ### Extra Notes
-The library currently validates only the signature based on the issuer and discovery method. We go out and get the 
-keys from the meta-data uri. You will need to validate manually the nonce and audience on your own after receiving 
-the claims. An example of this is provided.
+The library currently validates the JWT signature based on the issuer and discovery method, based on the keys from the meta-data URI. An exception will be thrown if the JWT contains an invalid signature, is expired, or was issued in the future. You will need to validate manually the nonce and audience on your own after receiving the claims. An example of this is provided below:
 
 ```php
 <?php

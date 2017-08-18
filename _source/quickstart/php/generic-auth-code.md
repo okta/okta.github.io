@@ -77,7 +77,7 @@ The result of this will provide you with a JWT for that user.
 $jwt = $exchange->access_token;
 ```
 
-Once you have the JWT, you should verify it using [this guide](https://developer.okta.com/code/php/jwt-validation.html)
+Once you have the JWT, you should verify it using [this guide](/code/php/jwt-validation.html)
 
 ### Handling Errors
 If an error is present in the login, an `error` query parameter will be present.
