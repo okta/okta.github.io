@@ -43,7 +43,7 @@
   <meta class="swiftype" name="summary" data-type="string" content="How to manually validate Okta JWTs with .NET (C#)." />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-816a1293cb727447b038c26bd7277c083eb8c738180d3f42deac694400e3dd32.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-68ac8f3556a3c42181826abdca907bcd934378ed0888b8d6d6e5ea0ea09a6cec.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -204,7 +204,7 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_code/dotnet/jwt-validation.md">Edit Page</a>
       <h1 id="overview">Overview</h1>
 
-<p>When you use the Okta API to <a href="https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">obtain an authorization grant for a user</a>, the response contains a signed JWT (<code class="highlighter-rouge">id_token</code> and/or <code class="highlighter-rouge">access_token</code>).</p>
+<p>When you use the Okta API to <a href="/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user">obtain an authorization grant for a user</a>, the response contains a signed JWT (<code class="highlighter-rouge">id_token</code> and/or <code class="highlighter-rouge">access_token</code>).</p>
 
 <p>A common practice is to send one of these tokens in the <code class="highlighter-rouge">Bearer</code> header of future requests, to authorize the request for that user. Your server must then validate the token to make sure it’s authentic and hasn’t expired.</p>
 
@@ -214,7 +214,7 @@
 
 <ul>
   <li>You are using ASP.NET or ASP.NET Core with the <code class="highlighter-rouge">JwtBearer</code> or <code class="highlighter-rouge">OpenIdConnect</code> middleware</li>
-  <li>You want to send tokens to Okta to be validated (this is called <a href="https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request">token introspection</a>)</li>
+  <li>You want to send tokens to Okta to be validated (this is called <a href="/docs/api/resources/oauth2.html#introspection-request">token introspection</a>)</li>
 </ul>
 
 <p>If you need to validate a token manually, and don’t want to make a network call to Okta, this guide will help you validate tokens locally.</p>
@@ -442,7 +442,7 @@
                     <li><a target="_blank" href="https://developer.okta.com/integrate/">Integrate with Okta</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
-                    <li><a href="/3rd_party_notices/">3rd Party Notes</a></li>
+                    <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
                 </ul>
             </div>
 
