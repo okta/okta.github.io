@@ -15,7 +15,7 @@
 
 &lt;h2 id=&quot;how-to-build-a-developer-relations-team&quot;&gt;How to Build a Developer Relations Team&lt;/h2&gt;
 
-&lt;p&gt;Building a developer relations team at Okta was easy. Stormpath already had a DevRel team. When we &lt;a href=&quot;https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/&quot;&gt;joined forces&lt;/a&gt; – poof – it all came together! However, building a DevRel team at Stormpath wasn’t easy. The process started by hiring developers that could create and maintain SDKs for Stormpath’s API. Once the SDKs were created, these same developers started advocating for their respective projects through blog posts and speaking engagements.&lt;/p&gt;
+&lt;p&gt;Building a developer relations team at Okta was easy. Stormpath already had a DevRel team. When we &lt;a href=&quot;https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/&quot;&gt;joined forces&lt;/a&gt; — poof — it all came together! However, building a DevRel team at Stormpath wasn’t easy. The process started by hiring developers that could create and maintain SDKs for Stormpath’s API. Once the SDKs were created, these same developers started advocating for their respective projects through blog posts and speaking engagements.&lt;/p&gt;
 
 &lt;p&gt;Ultimately, this meant finding people who were a special combination of great developers with great taste for a good developer experience, who also genuinely loved helping other people build stuff, and were already actively engaged with the developer community because they loved it.&lt;/p&gt;
 
@@ -114,7 +114,7 @@ are the most valuable resource in business.&lt;/p&gt;
 
 &lt;p&gt;Supporting open source is something we did well at Stormpath. We helped support the &lt;a href=&quot;https://github.com/jwtk/jjwt&quot;&gt;Java JWT project&lt;/a&gt;, created a &lt;a href=&quot;https://www.jwtinspector.io/&quot;&gt;plugin for Chrome to inspect JWTs&lt;/a&gt;, and actively engaged with the open source security projects in the Java community (e.g. Apache Shiro and Spring Security) to make them better.&lt;/p&gt;
 
-&lt;p&gt;At Okta, we plan to do much of the same. We’re working to make &lt;a href=&quot;https://oauth.net&quot;&gt;https://oauth.net&lt;/a&gt; better, and we plan to do the same for OpenID Connect. We’ll continue to invest in the Java JWT project, and we’re working closely with the Spring Security team to make sure their OpenID Connect support is world-class.&lt;/p&gt;
+&lt;p&gt;At Okta, we plan to do much of the same. We’re working to make &lt;a href=&quot;https://oauth.com&quot;&gt;https://oauth.com&lt;/a&gt; better, and we plan to do the same for OpenID Connect. We’ll continue to invest in the Java JWT project, and we’re working closely with the Spring Security team to make sure their OpenID Connect support is world-class.&lt;/p&gt;
 
 &lt;p&gt;If you’re involved in an open source project that helps developers use OAuth, OIDC, and other authentication standards, let us know how we can help! We have the budget to help with hosting costs, promotional materials, or whatever your project might need.&lt;/p&gt;
 
@@ -124,13 +124,13 @@ are the most valuable resource in business.&lt;/p&gt;
 
 &lt;p&gt;We know that Developer DNA cannot just be a part of the DevRel team. All of Okta needs Developer DNA. We’ve been telling people they can help by sharing feedback with us, having a beer with an engineer, build for good developer experience, and by giving back to the community.&lt;/p&gt;
 
-&lt;h2 id=&quot;devx-devrel-and-roi&quot;&gt;DevX, DevRel, and ROI&lt;/h2&gt;
+&lt;h2 id=&quot;devex-devrel-and-roi&quot;&gt;DevEx, DevRel, and ROI&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/avatar-alex_salazar-b72c56883178044fbd5ed9f81d693f467ba1cb4aec14905ab79b7afe398fcf40.jpg&quot; alt=&quot;Alex Salazar&quot; class=&quot;BlogPost-avatar pull-right img-150px&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The DevRel Team focuses on making developers’ lives easier, but it’s not all fun and games. Our fearless leader, &lt;a href=&quot;https://twitter.com/salatzar&quot;&gt;Alex Salazar&lt;/a&gt;, is in charge of making sure our efforts are right on the business side of things. Alex is the former CEO of Stormpath, so he’s hyper aware of revenue growth, cost reduction, and trying to balance predictability and risk. He knows that our go-to-market strategy needs to be around developer experience (DevEx) and developer relations (DevRel). It’s going to be tough to market to developers if our product is crap.&lt;/p&gt;
 
-&lt;p&gt;We’re focused as a team on cost efficiency and repeatability, to increase our ROI. We know what types of DevRel are the most effective (blogging, how to videos). We know what DevX investments will have the greatest impact (ease of use, excellent documentation). We’ll do more of what’s working, and stop doing the things that aren’t.&lt;/p&gt;
+&lt;p&gt;We’re focused as a team on cost efficiency and repeatability, to increase our ROI. We know what types of DevRel are the most effective (blogging, how to videos). We know what DevEx investments will have the greatest impact (ease of use, excellent documentation). We’ll do more of what’s working, and stop doing the things that aren’t.&lt;/p&gt;
 
 &lt;p&gt;And more than anything, we’re &lt;strong&gt;tracking the metrics that matter&lt;/strong&gt;. This way, we know how many developers are using our API, with which SDKs, and how long it takes them to activate their account after signing up.&lt;/p&gt;
 
