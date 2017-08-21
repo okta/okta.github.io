@@ -1,0 +1,13 @@
+<svg width="1024" height="768" xmlns="http://www.w3.org/2000/svg">
+ <title/>
+
+ <g>
+  <title>background</title>
+  <rect fill="#ffffff" id="canvas_background" height="770" width="1026" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="icomoon-ignore"/>
+  <path stroke="null" id="svg_1" d="M0-64v1024h1024v-1024zM822 268l-42 340-2 24-24 14-218 120-24 14-24-14-218-120-24-12-2-26-42-338-4-40 38-12 258-92 16-6 18 6 260 90 38 12zM464 446l48-112 54 112h-56zM252 264l42 338 218 120 218-120 42-340-260-88zM620 576l-34-82h-144l-32 80-60 2 160-356 168 356z" fill="#d93934"/>
+ </g>
+</svg>

@@ -34,6 +34,31 @@
 		}
 	}
 
+	&--angular {
+		background-color: #d93934;
+
+		&:after {
+			background-image: image_url("icons/angular--white.svg");
+		}
+	}
+
+
+	&--react {
+		background-color: #46b3e9;
+
+		&:after {
+			background-image: image_url("icons/react--white.svg");
+		}
+	}
+
+	&--nodejs {
+		background-color: #4cdb82;
+
+		&:after {
+			background-image: image_url("icons/node--white.svg");
+		}
+	}
+
 	&--java {
 		background-color: #AD5656;
 

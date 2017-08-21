@@ -132,7 +132,7 @@
 [class^='-32']::after,
 [class*='-32']::after {
 
-  display: block;
+  display: inherit;
   position: absolute;
   white-space: normal;
   text-indent: 0;
@@ -1694,6 +1694,80 @@
 .icon-android-tab-32::before {
   content: $android-tab;
   color: $icon-color-dark;
+}
+
+.code-python-32::after {
+  content: $code-python;
+  color: #007dc1;
+  position: relative  
+}
+
+.code-php-32::after {
+  content: $code-php;
+  color: #115d8b;
+  position: relative  
+}
+
+.code-javascript-32::after {
+  content: $code-javascript;
+  color: #f1d10d;
+  position: relative  
+}
+
+.code-java-32::after {
+  content: $code-java;
+  color: #ff8b00;
+  position: relative  
+}
+
+.code-swift-32::after {
+  content: $code-swift;
+  color: #abadac;
+  position: relative  
+}
+
+.code-android-32::after {
+  content: $code-android;
+  color: #4cdb82;
+  position: relative  
+}
+
+.code-dotnet-32::after {
+  content: $code-dotnet;
+  color: #835ab1;
+  position: relative  
+}
+
+.code-angular-32::after {
+  content: $code-angular;
+  color: #d93934;
+  position: relative  
+}
+
+.code-nodejs-32::after {
+  content: $code-nodejs;
+  color: #4cdb82;
+  position: relative
+}
+
+.code-react-32::after {
+  content: $code-react;
+  color: #46b3e9;
+  position: relative  
+}
+
+.code-python-32::before,
+.code-php-32::before,
+.code-javascript-32::before,
+.code-java-32::before,
+.code-swift-32::before,
+.code-android-32::before,
+.code-dotnet-32::before,
+.code-angular-32::before,
+.code-nodejs-32::before,
+.code-react-32::before {
+  content: $code-background;
+  color: #fff;
 }
 
 
