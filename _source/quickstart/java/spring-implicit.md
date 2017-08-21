@@ -31,6 +31,21 @@ You can configure your applications properties with environment variables, syste
 | okta.oauth.scopeClaim | scp | The scope claim key in the Access Token's JWT |
 | okta.oauth.rolesClaim | groups | The claim key in the Access Token's JWT that corresponds to an array of the users groups. |
 
+### Create a Controller
+
+The above client makes a request to `/api/messages`, we simply need to create a `Controller` to handle the response: 
+
+```java
+@RestController
+class MessagesRestController {
+
+    @GetMapping("/api/messages")
+    public List<String> getMessages(Principal principal) {
+        // handle request
+    }
+}
+```
+
 ### That's it!
 
 Okta's Spring Security integration will [parse the JWT access token](/blog/2017/06/21/what-the-heck-is-oauth#oauth-flows) from the HTTP request's `Authorization: Bearer` header value.

@@ -178,7 +178,7 @@ The easiest, and most secure way is to use the <strong>default login page</stron
 
 <div class="language-swift highlighter-rouge"><pre class="highlight"><code>
 <span class="kd">func</span> <span class="nf">callMessagesApi</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:3000/api/messages"</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:{port}/api/messages"</span><span class="p">)</span>
 
     <span class="c1">// Set the authorization header</span>
     <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>

@@ -5,17 +5,17 @@
 
 <ol>
   <li>Add an OpenID Connect Client in Okta</li>
-  <li>Create a React App</li>
   <li>Create an Authentication Utility</li>
-  <li>Create a SecureRoute</li>
   <li>Create Routes</li>
   <li>Connect the Routes</li>
-  <li>Start Your App</li>
+  <li>Using the Access Token</li>
 </ol>
 
 <p>At the end of the React instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your React application can send to your server.</p>
+
 <h2 id="prerequisites">Prerequisites</h2>
 <p>If you do not already have a <strong>Developer Edition Account</strong>, you can create one at <a href="https://developer.okta.com/signup/">https://developer.okta.com/signup/</a>.</p>
+
 <h2 id="add-an-openid-connect-client-in-okta">Add an OpenID Connect Client in Okta</h2>
 <p>In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.</p>
 <ul>
@@ -37,11 +37,11 @@
     </tr>
     <tr>
       <td>Base URIs</td>
-      <td>http://localhost:3000/</td>
+      <td>http://localhost:{port}</td>
     </tr>
     <tr>
       <td>Login redirect URIs</td>
-      <td>http://localhost:3000/implicit/callback</td>
+      <td>http://localhost:{port}/callback</td>
     </tr>
     <tr>
       <td>Grant Types Allowed</td>
@@ -73,25 +73,7 @@
 
 <p>These values will be used in your React application to setup the OIDC flow with Okta.</p>
 
-<h2 id="create-a-react-app">Create a React App</h2>
-
-<p>To quickly create a React app, install the create-react-app CLI:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install -g create-react-app
-</code></pre>
-</div>
-
-<p>Now, create a new app:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>create-react-app okta-react-app
-</code></pre>
-</div>
-
-<p>This creates a new project named <code class="highlighter-rouge">okta-react-app</code> and installs all required dependencies.  Now change directories into this folder:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>okta-react-app
-</code></pre>
-</div>
+<h2 id="create-an-authentication-utility">Create an Authentication Utility</h2>
 
 <p>Your React app will use the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library to redirect the user to the authorization endpoint on your Okta Org. You can install it via npm:</p>
 
@@ -105,13 +87,11 @@
 </code></pre>
 </div>
 
-<h2 id="create-an-authentication-utility">Create an Authentication Utility</h2>
-
-<p>You will create a class that encapsulates the interaction with the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library. This file will expose a <code class="highlighter-rouge">withAuth</code> method that makes it easy to create <a href="https://facebook.github.io/react/docs/higher-order-components.html">Higher-Order Components</a> that include an <code class="highlighter-rouge">auth</code> property.</p>
+<p>You will need to create a class that encapsulates the interaction with the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library. This file will expose a <code class="highlighter-rouge">withAuth</code> method that makes it easy to create <a href="https://facebook.github.io/react/docs/higher-order-components.html">Higher-Order Components</a> that include an <code class="highlighter-rouge">auth</code> property.</p>
 
 <p>To create this file, you will need the values from the OIDC client that you created in the previous step.  You will also need to know your Okta Org URL, which you can see on the home page of the Okta Developer console.</p>
 
-<p>Create a new file <code class="highlighter-rouge">src/auth.js</code> and add the following code to it, replacing the <code class="highlighter-rouge"><span class="p">{</span><span class="err">yourOrgUrl</span><span class="p">}</span></code> with your Org URL, and <code class="highlighter-rouge"><span class="p">{</span><span class="err">clientId</span><span class="p">}</span></code> with the Client ID of the application that you created:</p>
+<p>Create a new file <code class="highlighter-rouge">src/auth.js</code> and add the following code to it, replacing the <code class="highlighter-rouge"><span class="p">{</span><span class="err">yourOktaDomain</span><span class="p">}</span></code> with your Org URL, and <code class="highlighter-rouge"><span class="p">{</span><span class="err">clientId</span><span class="p">}</span></code> with the Client ID of the application that you created:</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">// src/auth.js</span>
 
@@ -128,15 +108,20 @@
     <span class="k">this</span><span class="p">.</span><span class="nx">handleAuthentication</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleAuthentication</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">oktaAuth</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
-      <span class="na">url</span><span class="p">:</span> <span class="s1">'https://{yourOrgUrl}'</span><span class="p">,</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com'</span><span class="p">,</span>
       <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
-      <span class="na">issuer</span><span class="p">:</span> <span class="s1">'https://{yourOrgUrl}/oauth2/default'</span><span class="p">,</span>
-      <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:3000/implicit/callback'</span><span class="p">,</span>
+      <span class="na">issuer</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/oauth2/default'</span><span class="p">,</span>
+      <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:{port}/callback'</span><span class="p">,</span>
     <span class="p">});</span>
   <span class="p">}</span>
 
   <span class="nx">getIdToken</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oktaAuth</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">getAccessToken</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Return the token from the accessToken object.</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">okatAuth</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'accessToken'</span><span class="p">).</span><span class="nx">accessToken</span><span class="p">;</span>
   <span class="p">}</span>
 
   <span class="nx">login</span><span class="p">(</span><span class="nx">history</span><span class="p">)</span> <span class="p">{</span>
@@ -182,38 +167,13 @@
 </span></code></pre>
 </div>
 
-<h2 id="create-a-secureroute-component">Create a <code class="highlighter-rouge">SecureRoute</code> Component</h2>
-<p>You will want to restrict access to routes in your application and require the user to be authenticated. You will leverage our <code class="highlighter-rouge">auth.js</code> wrapper to ask Okta if the user is authenticated, and you’ll wrap this again in a proper component, called <code class="highlighter-rouge">SecureRoute</code>, so that you can use it elsewhere.  Place this code into a new <code class="highlighter-rouge">src/SecureRoute.js</code> file:</p>
-
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">// src/SecureRoute.js</span>
-
-<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Route</span><span class="p">,</span> <span class="nx">Redirect</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react-router'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">withAuth</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./auth'</span><span class="p">;</span>
-
-<span class="k">export</span> <span class="k">default</span> <span class="nx">withAuth</span><span class="p">(({</span> <span class="nx">auth</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">Component</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
-  <span class="o">&lt;</span><span class="nx">Route</span> <span class="p">{...</span><span class="nx">rest</span><span class="p">}</span> <span class="nx">render</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span> <span class="o">=&gt;</span> <span class="p">(</span>
-    <span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">()</span> <span class="p">?</span> <span class="p">(</span>
-      <span class="o">&lt;</span><span class="nx">Component</span> <span class="p">{...</span><span class="nx">props</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
-</span>    <span class="p">)</span> <span class="p">:</span> <span class="p">(</span>
-      <span class="o">&lt;</span><span class="nx">Redirect</span> <span class="nx">to</span><span class="o">=</span><span class="p">{{</span>
-        <span class="na">pathname</span><span class="p">:</span> <span class="s1">'/login'</span><span class="p">,</span>
-        <span class="na">state</span><span class="p">:</span> <span class="p">{</span> <span class="na">from</span><span class="p">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">location</span> <span class="p">}</span>
-      <span class="p">}}</span><span class="sr">/</span><span class="err">&gt;
-</span>    <span class="p">)</span>
-  <span class="p">)}</span><span class="sr">/</span><span class="err">&gt;
-</span><span class="p">));</span>
-</code></pre>
-</div>
-
 <h2 id="create-routes">Create Routes</h2>
 
 <p>You’ll want to create these routes in your sample application:</p>
 
 <ul>
   <li><code class="highlighter-rouge">/</code>: A default home page to handle basic control of the app.</li>
-  <li><code class="highlighter-rouge">/protected</code>: A route protected by <code class="highlighter-rouge">SecureRoute</code>.</li>
-  <li><code class="highlighter-rouge">/implicit/callback</code>: Handle the response from Okta and store the returned tokens.</li>
+  <li><code class="highlighter-rouge">/callback</code>: Handle the response from Okta and store the returned tokens.</li>
   <li><code class="highlighter-rouge">/login</code>: Redirect to the Okta Org login page.</li>
 </ul>
 
@@ -238,7 +198,6 @@
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
       <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">to</span><span class="o">=</span><span class="s1">'/'</span><span class="o">&gt;</span><span class="nx">Home</span><span class="o">&lt;</span><span class="sr">/Link&gt;&lt;br/</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">to</span><span class="o">=</span><span class="s1">'/protected'</span><span class="o">&gt;</span><span class="nx">Protected</span><span class="o">&lt;</span><span class="sr">/Link&gt;&lt;br/</span><span class="o">&gt;</span>
       <span class="p">{</span><span class="nx">button</span><span class="p">}</span>
     <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>  <span class="p">);</span>
@@ -246,34 +205,8 @@
 </code></pre>
 </div>
 
-<h3 id="protected"><code class="highlighter-rouge">/protected</code></h3>
-<p>Create a new component <code class="highlighter-rouge">src/Protected.js</code>, this route will only be visible to users with a valid <code class="highlighter-rouge">accessToken</code>:</p>
-
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">// src/Protected.js</span>
-
-<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">withAuth</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./auth'</span><span class="p">;</span>
-
-<span class="k">export</span> <span class="k">default</span> <span class="nx">withAuth</span><span class="p">(</span><span class="nx">props</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getIdToken</span><span class="p">();</span>
-  <span class="k">return</span> <span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="nx">This</span> <span class="k">is</span> <span class="nx">a</span> <span class="k">protected</span> <span class="nx">view</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span><span class="nx">token</span><span class="p">.</span><span class="nx">claims</span><span class="p">.</span><span class="nx">name</span><span class="p">},</span> <span class="nx">you</span> <span class="nx">are</span> <span class="nx">able</span> <span class="nx">to</span> <span class="nx">see</span> <span class="k">this</span> <span class="nx">page</span> <span class="nx">because</span> <span class="nx">you</span> <span class="nx">have</span> <span class="nx">authenticated</span><span class="p">.</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Below</span><span class="p">,</span> <span class="nx">you</span> <span class="nx">will</span> <span class="nx">see</span> <span class="nx">your</span> <span class="nx">ID</span> <span class="nx">Token</span> <span class="k">from</span> <span class="nx">Okta</span><span class="p">.</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"/"</span><span class="o">&gt;</span><span class="nx">Back</span> <span class="nx">to</span> <span class="nx">Home</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="nx">hr</span><span class="o">/&gt;</span>
-      <span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;</span>
-        <span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="p">}</span>
-      <span class="o">&lt;</span><span class="sr">/pre</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span>  <span class="p">)</span>
-<span class="p">});</span>
-</code></pre>
-</div>
-
-<h3 id="implicitcallback"><code class="highlighter-rouge">/implicit/callback</code></h3>
-<p>In order to handle the redirect back from Okta, you need to capture the token values from the URL. You’ll use <code class="highlighter-rouge">/implicit/callback</code> as the callback URL, and again you’ll use our <code class="highlighter-rouge">auth.js</code> to delegate the callback details to the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library.</p>
+<h3 id="callback"><code class="highlighter-rouge">/callback</code></h3>
+<p>In order to handle the redirect back from Okta, you need to capture the token values from the URL. You’ll use <code class="highlighter-rouge">/callback</code> as the callback URL, and again you’ll use our <code class="highlighter-rouge">auth.js</code> to delegate the callback details to the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library.</p>
 
 <p>Create a new component <code class="highlighter-rouge">src/Callback.js</code>:</p>
 
@@ -321,7 +254,7 @@
 </div>
 
 <h3 id="login"><code class="highlighter-rouge">/login</code></h3>
-<p>This route redirects to the Okta Authorization URL if the user is not authenticated. If the user is coming from a protected page, they’ll be redirected back to the page after authentication.</p>
+<p>This route redirects to the Okta Authorization URL if the user is not authenticated.</p>
 
 <p>Create a new component <code class="highlighter-rouge">src/Login.js</code>:</p>
 
@@ -352,18 +285,16 @@
 </code></pre>
 </div>
 
-<h3 id="connect-the-routes">Connect the Routes</h3>
+<h2 id="connect-the-routes">Connect the Routes</h2>
 <p>Open <code class="highlighter-rouge">src/App.js</code> (this was created by the generator) and replace its contents with this code, this will create your final application with the routes that you’ve created:</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">// src/App.js</span>
 
 <span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">BrowserRouter</span> <span class="k">as</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">Route</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'react-router-dom'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">SecureRoute</span> <span class="k">from</span> <span class="s1">'./SecureRoute'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">Home</span> <span class="k">from</span> <span class="s1">'./Home'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">Login</span> <span class="k">from</span> <span class="s1">'./Login'</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">Callback</span> <span class="k">from</span> <span class="s1">'./Callback'</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">Protected</span> <span class="k">from</span> <span class="s1">'./Protected'</span><span class="p">;</span>
 
 <span class="kr">class</span> <span class="nx">App</span> <span class="k">extends</span> <span class="nx">Component</span> <span class="p">{</span>
   <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
@@ -371,9 +302,8 @@
       <span class="o">&lt;</span><span class="nx">Router</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
           <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s1">'/'</span> <span class="nx">exact</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Home</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
-</span>          <span class="o">&lt;</span><span class="nx">SecureRoute</span> <span class="nx">path</span><span class="o">=</span><span class="s1">'/protected'</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Protected</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
 </span>          <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s1">'/login'</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Login</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
-</span>          <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s1">'/implicit/callback'</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Callback</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s1">'/callback'</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Callback</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
 </span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="sr">/Router</span><span class="err">&gt;
 </span>    <span class="p">);</span>
@@ -384,18 +314,9 @@
 </code></pre>
 </div>
 
-<h2 id="start-your-app">Start your app</h2>
-<p>Finally, start your app:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm start
-</code></pre>
-</div>
-
-<p>If all is well, the development server should start and your application will be visible at <a href="http://localhost:3000">http://localhost:3000</a>! At this point you should be able to sign in and view the protected route.</p>
-
 <h2 id="using-the-access-token">Using the Access Token</h2>
 
-<p>Your React application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">MessageList</code> component that requires authentication, and uses a new <code class="highlighter-rouge">auth.getAccessToken()</code> method to get the access token from local storage, and attach it to our resource request.</p>
+<p>Your React application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">MessageList</code> component that requires authentication, and uses the <code class="highlighter-rouge">auth.getAccessToken()</code> method to get the access token from local storage, and attach it to our resource request.</p>
 
 <p>Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the React component could look like for this hypothetical example:</p>
 
@@ -415,7 +336,7 @@
 
   <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
-      <span class="nx">fetch</span><span class="p">(</span><span class="s1">'http://localhost:3000/api/messages'</span><span class="p">,</span> <span class="p">{</span>
+      <span class="nx">fetch</span><span class="p">(</span><span class="s1">'/api/messages'</span><span class="p">,</span> <span class="p">{</span>
         <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
           <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getAccessToken</span><span class="p">().</span><span class="nx">accessToken</span>
         <span class="p">}</span>

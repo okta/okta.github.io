@@ -5,17 +5,17 @@
 
 <ol>
   <li>Add an OpenID Connect Client in Okta</li>
-  <li>Create an Angular App</li>
   <li>Create an Authentication Service</li>
-  <li>Create an Authentication Guard</li>
   <li>Create Routes</li>
   <li>Connect the Routes</li>
-  <li>Start Your App</li>
+  <li>Using the Access Token</li>
 </ol>
 
 <p>At the end of the Angular instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Angular application can send to your server.</p>
+
 <h2 id="prerequisites">Prerequisites</h2>
 <p>If you do not already have a <strong>Developer Edition Account</strong>, you can create one at <a href="https://developer.okta.com/signup/">https://developer.okta.com/signup/</a>.</p>
+
 <h2 id="add-an-openid-connect-client-in-okta">Add an OpenID Connect Client in Okta</h2>
 <p>In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.</p>
 <ul>
@@ -37,11 +37,11 @@
     </tr>
     <tr>
       <td>Base URIs</td>
-      <td>http://localhost:3000/</td>
+      <td>http://localhost:{port}</td>
     </tr>
     <tr>
       <td>Login redirect URIs</td>
-      <td>http://localhost:3000/implicit/callback</td>
+      <td>http://localhost:{port}/callback</td>
     </tr>
     <tr>
       <td>Grant Types Allowed</td>
@@ -73,45 +73,15 @@
 
 <p>These values will be used in your Angular application to setup the OIDC flow with Okta.</p>
 
-<h2 id="create-an-angular-app">Create an Angular App</h2>
+<h2 id="create-an-authentication-service">Create an Authentication Service</h2>
 
-<p>To quickly create an Angular app, install the Angular CLI:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install -g @angular/cli
-</code></pre>
-</div>
-
-<p>Now, create a new app:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>ng new okta-angular-app
-</code></pre>
-</div>
-
-<p>This creates a new project named <code class="highlighter-rouge">okta-angular-app</code> and installs all required dependencies.  Now change directories into this folder:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>okta-angular-app
-</code></pre>
-</div>
-
-<p>Your Angular app will use the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library to redirect the user to the authorization endpoint on your Okta Org. You can install it via npm:</p>
+<p>Your app will use the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library to redirect the user to the authorization endpoint on your Okta Org. You can install it via npm:</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install @okta/okta-auth-js --save
 </code></pre>
 </div>
 
-<p>Update your <code class="highlighter-rouge">.angular-cli.json</code> file to use the port <code class="highlighter-rouge">3000</code>:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>"defaults": {
-    "serve": {
-      "port": 3000
-    },
-    ...
-}
-</code></pre>
-</div>
-
-<h2 id="create-an-authentication-service">Create an Authentication Service</h2>
-
-<p>You will create a class that encapsulates the interaction with the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library.</p>
+<p>You will need to create a class that encapsulates the interaction with the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library.</p>
 
 <p>To create this file, you will need the values from the OIDC client that you created in the previous step.  You will also need to know your Okta Org URL, which you can see on the home page of the Okta Developer console.</p>
 
@@ -130,7 +100,7 @@
     <span class="na">url</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/'</span><span class="p">,</span>
     <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
     <span class="na">issuer</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/oauth2/default'</span><span class="p">,</span>
-    <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:3000/callback'</span><span class="p">,</span>
+    <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:{port}/callback'</span><span class="p">,</span>
   <span class="p">});</span>
 
   <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{}</span>
@@ -160,39 +130,14 @@
     <span class="p">});</span>
   <span class="p">}</span>
 
+  <span class="nx">getAccessToken</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Return the token from the accessToken object.</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oktaAuth</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"accessToken"</span><span class="p">).</span><span class="nx">accessToken</span><span class="p">;</span>
+  <span class="p">}</span>
+
   <span class="k">async</span> <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">oktaAuth</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
     <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">oktaAuth</span><span class="p">.</span><span class="nx">signOut</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<h2 id="create-an-authorization-guard">Create an Authorization Guard</h2>
-<p>You will want to restrict access to routes in your application and require the user to be authenticated. You will leverage our <code class="highlighter-rouge">OktaAuthService</code> to ask Okta if the user is authenticated, and you’ll wrap this again in a proper guard, called <code class="highlighter-rouge">OktaAuthGuard</code>, so that you can use it elsewhere.  Place this code into a new <code class="highlighter-rouge">src/arpp/app.guard.ts</code> file:</p>
-
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">// app.guard.ts</span>
-
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">CanActivate</span><span class="p">,</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">RouterStateSnapshot</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">OktaAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
-
-<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
-<span class="k">export</span> <span class="kr">class</span> <span class="nx">OktaAuthGuard</span> <span class="k">implements</span> <span class="nx">CanActivate</span> <span class="p">{</span>
-  <span class="nx">oktaAuth</span><span class="p">;</span>
-  <span class="nx">authenticated</span><span class="p">;</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">okta</span><span class="err">:</span> <span class="nx">OktaAuthService</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">authenticated</span> <span class="o">=</span> <span class="nx">okta</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">();</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">oktaAuth</span> <span class="o">=</span> <span class="nx">okta</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="nx">canActivate</span><span class="p">(</span><span class="nx">route</span><span class="err">:</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span> <span class="nx">state</span><span class="err">:</span> <span class="nx">RouterStateSnapshot</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">authenticated</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">}</span>
-    
-    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'route'</span><span class="p">,</span> <span class="nx">state</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
-    <span class="c1">// Redirect to login flow.</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">oktaAuth</span><span class="p">.</span><span class="nx">login</span><span class="p">();</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
@@ -204,12 +149,10 @@
 
 <ul>
   <li><code class="highlighter-rouge">/</code>: A default home page to handle basic control of the app.</li>
-  <li><code class="highlighter-rouge">/protected</code>: A route protected by <code class="highlighter-rouge">OktaAuthGuard</code>.</li>
-  <li><code class="highlighter-rouge">/implicit/callback</code>: Handle the response from Okta and store the returned tokens.</li>
-  <li><code class="highlighter-rouge">/login</code>: Redirect to the Okta Org login page.</li>
+  <li><code class="highlighter-rouge">/callback</code>: Handle the response from Okta and store the returned tokens.</li>
 </ul>
 
-<p>Follow the next sections to create these routes in your React application.</p>
+<p>Follow the next sections to create these routes in your Angular application.</p>
 
 <h3><code class="highlighter-rouge">/</code></h3>
 <p>Place the following code in a new file, <code class="highlighter-rouge">src/app/app.component.html</code>.  This will render a home page and show links to navigate within app:</p>
@@ -219,13 +162,12 @@
 <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/"</span><span class="o">&gt;</span> <span class="nx">Home</span> <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="nx">button</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!oktaAuth.isAuthenticated()"</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"oktaAuth.login()"</span><span class="o">&gt;</span> <span class="nx">Login</span> <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="nx">button</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"oktaAuth.isAuthenticated()"</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"oktaAuth.logout()"</span><span class="o">&gt;</span> <span class="nx">Logout</span> <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="nx">button</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/protected"</span><span class="o">&gt;</span> <span class="nx">Protected</span> <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>
 <span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">outlet</span><span class="o">&gt;&lt;</span><span class="sr">/router-outlet</span><span class="err">&gt;
 </span></code></pre>
 </div>
 
-<p>Then, update <code class="highlighter-rouge">src/app/app.compnent.ts</code> to handle the <code class="highlighter-rouge">login()</code> and <code class="highlighter-rouge">logout</code> calls:</p>
+<p>Then, update <code class="highlighter-rouge">src/app/app.compnent.ts</code> to handle the <code class="highlighter-rouge">login()</code> and <code class="highlighter-rouge">logout()</code> calls:</p>
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">// app.component.ts</span>
 
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
@@ -242,25 +184,8 @@
 </code></pre>
 </div>
 
-<h3 id="protected"><code class="highlighter-rouge">/protected</code></h3>
-<p>Create a new component <code class="highlighter-rouge">src/app/protected.component.ts</code>, this route will only be visible to users with a valid <code class="highlighter-rouge">accessToken</code>:</p>
-
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">// protected.component.ts</span>
-
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
-  <span class="na">selector</span><span class="p">:</span> <span class="s1">'app-secure'</span><span class="p">,</span>
-  <span class="na">template</span><span class="p">:</span> <span class="err">``</span>
-<span class="p">})</span>
-<span class="k">export</span> <span class="kr">class</span> <span class="nx">ProtectedComponent</span> <span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Protected endpont!"</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<h3 id="implicitcallback"><code class="highlighter-rouge">/implicit/callback</code></h3>
-<p>In order to handle the redirect back from Okta, you need to capture the token values from the URL. You’ll use <code class="highlighter-rouge">/implicit/callback</code> as the callback URL, and again you’ll use our <code class="highlighter-rouge">OktaAuthService</code> to delegate the callback details to the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library.</p>
+<h3 id="callback"><code class="highlighter-rouge">/callback</code></h3>
+<p>In order to handle the redirect back from Okta, you need to capture the token values from the URL. You’ll use <code class="highlighter-rouge">/callback</code> as the callback URL, and again you’ll use our <code class="highlighter-rouge">OktaAuthService</code> to delegate the callback details to the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library.</p>
 
 <p>Create a new component <code class="highlighter-rouge">src/app/callback.component.ts</code>:</p>
 
@@ -280,38 +205,7 @@
 </code></pre>
 </div>
 
-<h3 id="login"><code class="highlighter-rouge">/login</code></h3>
-<p>This route redirects to the Okta Authorization URL if the user is not authenticated. If the user is coming from a protected page, they’ll be redirected back to the page after authentication.</p>
-
-<p>Create a new component <code class="highlighter-rouge">src/app/login.component.ts</code>:</p>
-
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code>
-<span class="c1">// login.component.ts</span>
-
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
-
-<span class="k">import</span> <span class="p">{</span> <span class="nx">OktaAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
-
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span> <span class="na">template</span><span class="p">:</span> <span class="err">``</span> <span class="p">})</span>
-<span class="k">export</span> <span class="kr">class</span> <span class="nx">LoginComponent</span> <span class="p">{</span>
-
-  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">okta</span><span class="err">:</span> <span class="nx">OktaAuthService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">okta</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
-        <span class="c1">// Redirect to protected path</span>
-        <span class="kd">const</span> <span class="nx">route</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'route'</span><span class="p">)</span> <span class="o">||</span> <span class="s1">'/'</span><span class="p">;</span>
-        <span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">'route'</span><span class="p">);</span>
-
-        <span class="nx">router</span><span class="p">.</span><span class="nx">navigateByUrl</span><span class="p">(</span><span class="nx">route</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">okta</span><span class="p">.</span><span class="nx">login</span><span class="p">();</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<h3 id="connect-the-routes">Connect the Routes</h3>
+<h2 id="connect-the-routes">Connect the Routes</h2>
 <p>Open <code class="highlighter-rouge">src/app/app.module.ts</code> (this was created by the generator) and replace its contents with this code, this will create your final application with the routes that you’ve created:</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="c1">// app.module.ts</span>
@@ -322,41 +216,28 @@
 <span class="k">import</span> <span class="p">{</span> <span class="nx">RouterModule</span><span class="p">,</span> <span class="nx">Routes</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
 
 <span class="c1">// Okta Guard and Service</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">OktaAuthGuard</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./app.guard'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">OktaAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./app.service'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">CallbackComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./callback.component'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">ProtectedComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./protected.component'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">LoginComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./login.component'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">AppComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./app.componenet'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">appRoutes</span><span class="err">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span>
     <span class="na">path</span><span class="p">:</span> <span class="s1">'callback'</span><span class="p">,</span>
     <span class="na">component</span><span class="p">:</span> <span class="nx">CallbackComponent</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'protected'</span><span class="p">,</span>
-    <span class="na">component</span><span class="p">:</span> <span class="nx">ProtectedComponent</span><span class="p">,</span>
-    <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span> <span class="nx">OktaAuthGuard</span> <span class="p">]</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'login'</span><span class="p">,</span>
-    <span class="na">component</span><span class="p">:</span> <span class="nx">LoginComponent</span>
   <span class="p">}</span>
 <span class="p">]</span>
 
 <span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
   <span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
     <span class="nx">AppComponent</span><span class="p">,</span>
-    <span class="nx">CallbackComponent</span><span class="p">,</span>
-    <span class="nx">ProtectedComponent</span><span class="p">,</span>
-    <span class="nx">LoginComponent</span>
+    <span class="nx">CallbackComponent</span>
   <span class="p">],</span>
   <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
     <span class="nx">BrowserModule</span><span class="p">,</span>
     <span class="nx">RouterModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">(</span><span class="nx">appRoutes</span><span class="p">)</span>
   <span class="p">],</span>
   <span class="na">providers</span><span class="p">:</span> <span class="p">[</span>
-    <span class="nx">OktaAuthGuard</span><span class="p">,</span>
     <span class="nx">OktaAuthService</span><span class="p">,</span>
   <span class="p">],</span>
   <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span> <span class="nx">AppComponent</span> <span class="p">]</span>
@@ -367,18 +248,9 @@
 </code></pre>
 </div>
 
-<h2 id="start-your-app">Start your app</h2>
-<p>Finally, start your app:</p>
-
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm start
-</code></pre>
-</div>
-
-<p>If all is well, the development server should start and your application will be visible at <a href="http://localhost:3000">http://localhost:3000</a>! At this point you should be able to sign in and view the protected route.</p>
-
 <h2 id="using-the-access-token">Using the Access Token</h2>
 
-<p>Your Angular application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">MessageList</code> component that requires authentication, and uses a new <code class="highlighter-rouge">okta.getAccessToken()</code> method to get the access token from local storage, and attach it to our resource request.</p>
+<p>Your Angular application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">MessageList</code> component that requires authentication, and uses the <code class="highlighter-rouge">okta.getAccessToken()</code> method to get the access token from local storage, and attach it to our resource request.</p>
 
 <p>Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the Angular component could look like for this hypothetical example:</p>
 
@@ -410,7 +282,7 @@
       <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Headers</span><span class="p">({</span> <span class="na">Authorization</span><span class="p">:</span> <span class="s1">'Bearer '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">accessToken</span> <span class="p">});</span>
       
       <span class="c1">// Make request</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'http://localhost:3000/api/messages'</span><span class="p">,</span> <span class="k">new</span> <span class="nx">RequestOptions</span><span class="p">({</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span> <span class="p">}))</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/api/messages'</span><span class="p">,</span> <span class="k">new</span> <span class="nx">RequestOptions</span><span class="p">({</span> <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span> <span class="p">}))</span>
       <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">res</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
       <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">message</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">message</span><span class="p">);</span>
     <span class="p">}</span>

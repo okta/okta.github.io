@@ -58,6 +58,21 @@
   </tbody>
 </table>
 
+<h3 id="create-a-controller">Create a Controller</h3>
+
+<p>The above client makes a request to <code class="highlighter-rouge">/api/messages</code>, we simply need to create a <code class="highlighter-rouge">Controller</code> to handle the response:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@RestController</span>
+<span class="kd">class</span> <span class="nc">MessagesRestController</span> <span class="o">{</span>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/api/messages"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getMessages</span><span class="o">(</span><span class="n">Principal</span> <span class="n">principal</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// handle request</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
 <h3 id="thats-it">That’s it!</h3>
 
 <p>Okta’s Spring Security integration will <a href="/blog/2017/06/21/what-the-heck-is-oauth#oauth-flows">parse the JWT access token</a> from the HTTP request’s <code class="highlighter-rouge">Authorization: Bearer</code> header value.</p>
