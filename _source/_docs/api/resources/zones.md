@@ -5,11 +5,9 @@ title: Zones
 
 # Zones API
 
-{% api_lifecycle beta %} This API is [a Beta release](/docs/api/getting_started/releases-at-okta.html).
+Zones are used to group IP Address ranges so that policy decisions can be made based on the client's IP location.
 
-The Okta Zones API provides operations to manage zones in your organization. Zones may be used to guide policy decisions.
-
-IP zones are the only type currently supported by the Zones API. IP zones are used to group IP address ranges so that policy decisions can be made based on the client's IP location.
+> This API is an {% api_lifecycle ea %} feature.
 
 ## Zone API Operations
 
@@ -163,12 +161,12 @@ curl -X POST
 ### Get an IP Zone
 {% api_operation post /api/v1/zones/*:zoneId* %}
 
-Gets an IP zone by id
+Gets an IP zone by ID
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-The zone ID described in the [Zone Object](#ZoneModel) is required.
+The `zoneId` described in the [Zone Object](#ZoneModel) is required.
 
 #### Request Example
 {:.api .api-request .api-request-example}
