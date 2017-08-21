@@ -13,6 +13,11 @@
   var linkState = {
     clients: [
       {
+        name: 'android',
+        label: 'Android',
+        serverExampleType: 'implicit'
+      },
+      {
         name: 'angular',
         label: 'Angular',
         serverExampleType: 'implicit'
@@ -280,5 +285,4 @@
   if (window.location.pathname.match('^/quickstart')) {
     main();
   }
-
 })(jQuery);

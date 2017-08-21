@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: React + Okta Sign-In Widget
 weight: 30
 excerpt: Integrate Okta with a React app using the Sign-In Widget.
@@ -44,7 +44,7 @@ $ create-react-app okta-app
 
 This creates a new project named `okta-app` and installs all required dependencies.
 
-A simple way to add authentication into a React app is using the [Okta Sign-In Widget](okta_sign-in_widget) library. We can install it via `npm`:
+A simple way to add authentication into a React app is using the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget/) library. We can install it via `npm`:
 ```bash
 $ cd okta-app && npm install @okta/okta-signin-widget --save
 ```
@@ -56,7 +56,7 @@ We'll also need `react-router-dom` to manage our routes:
 
 ## Create an Authentication Utility
 Users can sign in to your React app a number of different ways.
-To provide a fully featured and customizable login experience, the [Okta Sign-In Widget](okta_sign-in_widget) is available to handle User Lifecycle operations, MFA, and more. 
+To provide a fully featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget/) is available to handle User Lifecycle operations, MFA, and more.
 
 First, create `src/auth.js` as an authorization utility file and use it to bootstrap the required fields to login. This file will expose a `withAuth` method that makes it easy to create [Higher-Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that include an `auth` prop:
 
@@ -316,6 +316,8 @@ Finally, start your app:
 
 ## Conclusion
 You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
+
+Want to learn how to use the user's `access_token`? Check out our [React Quickstart integrations](/quickstart/#/react/nodejs/generic.html) to learn about protecting routes on your server, validating the `access_token`, and more!
 
 ## Support 
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).

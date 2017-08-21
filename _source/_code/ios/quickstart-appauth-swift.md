@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: Okta + AppAuth Auth SDK
 weight: 20
 excerpt: Integrate Okta with an iOS native application using OktaAuth.

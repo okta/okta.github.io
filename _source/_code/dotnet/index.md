@@ -10,11 +10,6 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 
 <ul class='code-list'>
   <li>
-    <a href='quickstart.html' class='code-button inverse'>
-      <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
-    </a>
-  </li>
-  <li>
     <a href='https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw' class='code-button'>
       <span class='fa fa-github'></span><span>.NET Sample App</span>
     </a>

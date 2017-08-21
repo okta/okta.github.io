@@ -1,6 +1,6 @@
 ---
 layout: software
-title: Swift
+title: iOS
 integration: client
 ---
 
