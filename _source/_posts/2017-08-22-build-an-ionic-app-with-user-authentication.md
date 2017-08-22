@@ -568,13 +568,7 @@ ionic cordova emulate ios
 
 Now you should be able to log in by clicking on the “Login with Okta” button and entering valid credentials.
 
-<table>
-<tr>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/emulator-login.png"><img src="/assets/blog/ionic-authentication/emulator-login.png" alt="Emulator Login"></a></td>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/emulator-okta-login.png"><img src="/assets/blog/ionic-authentication/emulator-okta-login.png" alt="Emulator Okta Login"></a></td>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/emulator-home.png"><img src="/assets/blog/ionic-authentication/emulator-home.png" alt="Emulator Home"></a></td>
-</tr>
-</table>
+| [{% img blog/ionic-authentication/emulator-login.png alt:"Emulator Login" width:"280" %}](/assets/blog/ionic-authentication/emulator-login-28c3fe9253f50019e871f903ff7130b96e52b019f262dcfb3df8ae402684b84c.png) | [{% img blog/ionic-authentication/emulator-okta-login.png alt:"Emulator Okta Login" width:"280" %}](/assets/blog/ionic-authentication/emulator-okta-login-dbd386e324736d899df5f44f978ff7f40db70876001ffe80c42d1dcab021c2f0.png) | [{% img blog/ionic-authentication/emulator-home.png alt:"Emulator Home" width:"280" %}](/assets/blog/ionic-authentication/emulator-home-08dd2b798c4e121b930df14887af9401e95153c4acbdc65f4cf5bfe409e28f1e.png) |
 
 The nice thing about using this technique is the Okta login screen has Remember Me and Forgot Password support, so you don't need to code those yourself.
 
@@ -605,13 +599,7 @@ Select your phone as the target in Xcode and click the play button to run your a
 
 Once you've configured your phone, computer, and Apple ID, you should be able to open the app and log in. Below is how it looks on my iPhone.
 
-<table>
-<tr>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/iphone-login.png"><img src="/assets/blog/ionic-authentication/iphone-login.png" alt="iPhone Login"></a></td>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/iphone-okta-login.png"><img src="/assets/blog/ionic-authentication/iphone-okta-login.png" alt="iPhone Okta Login"></a></td>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/iphone-home.png"><img src="/assets/blog/ionic-authentication/iphone-home.png" alt="iPhone Home"></a></td>
-</tr>
-</table>
+| [{% img blog/ionic-authentication/iphone-login.png alt:"iPhone Login" width:"280" %}](/assets/blog/ionic-authentication/iphone-login-b2410de6bb2c6f04c5a620ce3a570e7ffa112c83a5eb91b320dd0322bb0c281b.png) | [{% img blog/ionic-authentication/iphone-okta-login.png alt:"iPhone Okta Login" width:"280" %}](/assets/blog/ionic-authentication/iphone-okta-login-e3b1cc3b6aded6ae1e0d6aa09507732ebd658612afde62537b2256cfd4d360c5.png) | [{% img blog/ionic-authentication/iphone-home.png alt:"iPhone Home" width:"280" %}](/assets/blog/ionic-authentication/iphone-home-fac7e46fb05c18e2ad814841e73c86af11038b045e6610c934d80f16b573a8a1.png) |
 
 ### Android
 
@@ -653,13 +641,7 @@ To solve this problem, open Android Studio, select “Open an existing Android S
 
 After performing these steps, you should be able to run `ionic cordova emulate android` and see your app running in the AVD.
 
-<table>
-<tr>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/android-login.png"><img src="/assets/blog/ionic-authentication/android-login.png" alt="Android Login"></a></td>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/android-okta-login.png"><img src="/assets/blog/ionic-authentication/android-okta-login.png" alt="Android Okta Login"></a></td>
-<td style="padding: 5px"><a href="/assets/blog/ionic-authentication/android-home.png"><img src="/assets/blog/ionic-authentication/android-home.png" alt="Android Home"></a></td>
-</tr>
-</table>
+| [{% img blog/ionic-authentication/android-login.png alt:"Android Login" width:"280" %}](/assets/blog/ionic-authentication/android-login-8bdc605b57afdaead566ee007d80942004aded32cf264288a3d887a92b875794.png) | [{% img blog/ionic-authentication/android-okta-login.png alt:"Android Okta Login" width:"280" %}](/assets/blog/ionic-authentication/android-okta-login-96f5a3f51b9a53e3d19890a5a8e4ea7bc54829b24ed98e40a1ba2fca0b165084.png) | [{% img blog/ionic-authentication/android-home.png alt:"Android Home" width:"280" %}](/assets/blog/ionic-authentication/android-home-c0c0a1c18b552e00e959c0b6d38d115aeac26016169b7004b35db865ade24cec.png) |   
 
 **NOTE**: If you get an application error that says "The connection to the server was unsuccessful. (`file:///android/www/index.html`)", add the following line to `config.xml`. This line sets the default timeout to 60 seconds (default is 20). Thanks to the [Stack Overflow community](http://stackoverflow.com/a/31377846) for this solution.
 
