@@ -20,21 +20,13 @@ GEM
     execjs (2.7.0)
     extras (0.3.0)
       forwardable-extended (~> 2.5)
-<<<<<<< HEAD
     faraday (0.13.1)
-=======
-    faraday (0.13.0)
->>>>>>> f84f6a2... adding Gemfile.lock per travis instructions
       multipart-post (>= 1.2, < 3)
     fastimage (2.1.0)
     ffi (1.9.18)
     forwardable-extended (2.6.0)
     gemoji (3.0.0)
-<<<<<<< HEAD
     github-pages (155)
-=======
-    github-pages (154)
->>>>>>> f84f6a2... adding Gemfile.lock per travis instructions
       activesupport (= 4.2.8)
       github-pages-health-check (= 1.3.5)
       jekyll (= 3.5.2)
@@ -248,11 +240,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-<<<<<<< HEAD
   github-pages (= 155)
-=======
-  github-pages (= 154)
->>>>>>> f84f6a2... adding Gemfile.lock per travis instructions
   html-proofer
   jekyll-assets
   jekyll-redirect-from
