@@ -210,14 +210,14 @@ ionic serve
 
 <p>This command will open your default browser on http://localhost:8100. You can use Chrome’s device toolbar to see what the application will look like on an iPhone 6.</p>
 
-<p><img src="/assets/blog/ionic-authentication/welcome-to-ionic-f6045828b9d7d7e7469145b1f237bacea35f94a084982deb6eb95eafa0689759.png" alt="Welcome to Ionic" /></p>
+<p><img src="/assets/blog/ionic-authentication/welcome-to-ionic-2de4557f99caa03e895380b0627547e82d8b7a365301745c231d8be9ccde9738.png" alt="Welcome to Ionic" /></p>
 
 <p>One slick feature of Ionic’s <code class="highlighter-rouge">serve</code> command is it shows compilation errors in the browser, rather than in the (sometimes hidden) developer console. For example, if you give an invalid type to the <code class="highlighter-rouge">rootPage</code> variable in <code class="highlighter-rouge">app.component.ts</code>, you’ll see an error like the one below.</p>
 
-<p><img src="/assets/blog/ionic-authentication/typescript-error-7ec4ae2a63f3b67df01fd9e8a3137d039bef150f1cd5f4afafc84144e778d6bc.png" alt="TypeScript Error" /></p>
+<p><img src="/assets/blog/ionic-authentication/typescript-error-8cae045f9dcd9160d3ed4ae07aeed07845a858d2db1360bc156142f789ac161d.png" alt="TypeScript Error" /></p>
 
 <h2 id="add-user-authentication">Add User Authentication</h2>
-<p>Ionic Cloud offers a free <a href="https://docs.ionic.io/services/auth/">Auth</a> service. It allows authentication with an email and password, as well as social providers like Facebook, Google, and Twitter. It provides several classes you can use to build authentication in its <code class="highlighter-rouge">@ionic/cloud-angular</code> dependency. It even has support <a href="https://docs.ionic.io/services/auth/custom-auth.html">custom authentication</a>, but it “requires our own server to handle authentication.”</p>
+<p>Ionic Cloud offers a free <a href="https://docs.ionic.io/services/auth/">Auth</a> service. It allows authentication with an email and password, as well as social providers like Facebook, Google, and Twitter. It provides several classes you can use to build authentication in its <code class="highlighter-rouge">@ionic/cloud-angular</code> dependency. It even has support <a href="https://docs.ionic.io/services/auth/custom-auth.html">custom authentication</a>, but it “requires your own server to handle authentication” and will be decommissioned on January 31, 2018.</p>
 
 <p>While there aren’t many current tutorials on using this service, there are a few from last year.</p>
 
@@ -236,21 +236,17 @@ ionic serve
 
 <ul>
   <li><a href="https://www.okta.com/developer/signup/">Register</a> and create an OIDC application</li>
-  <li>Log in to your Okta account and navigate to <strong>Admin &gt; Add Applications</strong> and click <strong>Create New App</strong></li>
-  <li>Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method</li>
-  <li>Click <strong>Create</strong> and give your application a name (e.g. “Ionic OIDC”)</li>
-  <li>On the next screen, add <code class="highlighter-rouge">http://localhost:8100</code> as a Redirect URI and click <strong>Finish</strong>. You should see settings like the following:</li>
+  <li>Log in to your Okta account and navigate to <strong>Applications &gt; Add Application</strong></li>
+  <li>Select <strong>SPA</strong> and click <strong>Next</strong></li>
+  <li>Give your application a name (e.g. “Ionic OIDC”)</li>
+  <li>Change the <strong>Base URI</strong> and <strong>Login redirect URI</strong> to <code class="highlighter-rouge">http://localhost:8100</code> and click <strong>Done</strong>. You should see settings like the following:</li>
 </ul>
 
-<p><img src="/assets/blog/ionic-authentication/oidc-settings-d4877331c363799680e827bbf1e1b588ac1edadd828e1a9320e840ba530c9557.png" alt="Okta OIDC Settings" /></p>
-
-<ul>
-  <li>Click on the <strong>Assignments</strong> tab and select <strong>Assign</strong> &gt; <strong>Assign to People</strong></li>
-  <li>Assign yourself as a user, or someone else that you have credentials for.</li>
-</ul>
+<p><img src="/assets/blog/ionic-authentication/oidc-settings-46747e5e9af164cf56d05f055a659520252558872d9319cadd831d5e7104b990.png" alt="Okta OIDC Settings" /></p>
 
 <h2 id="create-a-login-page">Create a Login Page</h2>
-<p>To create a login page for authentication, create <code class="highlighter-rouge">src/pages/login.ts</code> and <code class="highlighter-rouge">src/pages/login.html</code>. In <code class="highlighter-rouge">login.html</code>, add a form with username and password fields.</p>
+
+<p>To make a login page for authentication, create <code class="highlighter-rouge">src/pages/login/login.ts</code> and <code class="highlighter-rouge">src/pages/login/login.html</code>. In <code class="highlighter-rouge">login.html</code>, add a form with username and password fields.</p>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-header&gt;</span>
   <span class="nt">&lt;ion-navbar&gt;</span>
@@ -277,7 +273,7 @@ ionic serve
     <span class="nt">&lt;/ion-row&gt;</span>
     <span class="nt">&lt;ion-row&gt;</span>
       <span class="nt">&lt;ion-col&gt;</span>
-        <span class="nt">&lt;div</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"error"</span> <span class="na">class=</span><span class="s">"alert alert-danger"</span><span class="nt">&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"error"</span> <span class="na">class=</span><span class="s">"alert alert-danger"</span><span class="nt">&gt;</span>{{error}}<span class="nt">&lt;/div&gt;</span>
         <span class="nt">&lt;button</span> <span class="na">ion-button</span> <span class="na">class=</span><span class="s">"submit-btn"</span> <span class="na">full</span> <span class="na">type=</span><span class="s">"submit"</span>
                 <span class="err">[</span><span class="na">disabled</span><span class="err">]="!</span><span class="na">loginForm</span><span class="err">.</span><span class="na">form</span><span class="err">.</span><span class="na">valid</span><span class="err">"</span><span class="nt">&gt;</span>Login
         <span class="nt">&lt;/button&gt;</span>
@@ -288,17 +284,17 @@ ionic serve
 </code></pre>
 </div>
 
-<p>You can leverage a couple of open source libraries to perform the actual authentication. The first one is <a href="https://github.com/manfredsteyer">Manfred Steyer’s</a> <a href="https://github.com/manfredsteyer/angular-oauth2-oidc">angular-oauth2-oidc</a>. This library allows you to interact with identity and access tokens easily. The second is the <a href="/code/javascript/okta_auth_sdk">Okta Auth SDK</a>. Since <a href="/blog/2017/06/21/what-the-heck-is-oauth">OIDC and OAuth are not authentication protocols</a>, this is necessary to perform authentication from JavaScript without redirecting to Okta.</p>
+<p>You can leverage a couple of open source libraries to perform the actual authentication. The first one is <a href="https://github.com/manfredsteyer">Manfred Steyer’s</a> <a href="https://github.com/manfredsteyer/angular-oauth2-oidc">angular-oauth2-oidc</a>. This library allows you to interact with identity and access tokens easily. The second is the <a href="/code/javascript/okta_auth_sdk">Okta Auth SDK</a>. <a href="/blog/2017/06/21/what-the-heck-is-oauth">OAuth is not an authentication protocol</a>, but OIDC is. Why is it necessary to add Okta’s authentication library then? Because OIDC authentication works via redirect (when using in an SPA) and I’d rather perform authentication without redirecting to Okta.</p>
 
 <p>Install <code class="highlighter-rouge">angular-oauth2-oidc</code> using npm.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install angular-oauth2-oidc@1.0.20  --save
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install angular-oauth2-oidc@1.0.20 --save
 </code></pre>
 </div>
 
 <p>The Okta Auth SDK doesn’t currently have TypeScript support, so it’s easiest to add it by adding the following at the bottom of <code class="highlighter-rouge">src/index.html</code>.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.5.0/OktaAuth.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre>
 </div>
 
@@ -323,8 +319,7 @@ ionic serve
     <span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
     <span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span> <span class="o">=</span> <span class="s1">'[client-id]'</span><span class="p">;</span>
     <span class="nx">oauthService</span><span class="p">.</span><span class="nx">scope</span> <span class="o">=</span> <span class="s1">'openid profile email'</span><span class="p">;</span>
-    <span class="nx">oauthService</span><span class="p">.</span><span class="nx">oidc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-    <span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">=</span> <span class="s1">'https://dev-[dev-id].oktapreview.com'</span><span class="p">;</span>
+    <span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">=</span> <span class="s1">'https://dev-[dev-id].oktapreview.com/oauth2/default'</span><span class="p">;</span>
   <span class="p">}</span>
 
   <span class="nx">ionViewDidLoad</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
@@ -335,6 +330,8 @@ ionic serve
 <span class="p">}</span>
 </code></pre>
 </div>
+
+<p><strong>TIP:</strong> You might notice <code class="highlighter-rouge">declare const OktaAuth: any;</code> just under the imports. This is to solve for the lack of TypeScript support in Okta’s Auth SDK. To learn more about including external JavaScript libraries in a TypeScript project, see <a href="https://www.thepolyglotdeveloper.com/2016/01/include-external-javascript-libraries-in-an-angular-2-typescript-project/">Nic Raboy’s article on the subject</a>.</p>
 
 <p>Modify <code class="highlighter-rouge">src/app/app.component.ts</code> to check to see if the user is logged in. If they’re not, set the <code class="highlighter-rouge">LoginPage</code> as the rootPage.</p>
 
@@ -366,7 +363,10 @@ ionic serve
 
 <p>Update <code class="highlighter-rouge">src/app/app.module.ts</code> to add <code class="highlighter-rouge">LoginPage</code> to its <code class="highlighter-rouge">declarations</code> and <code class="highlighter-rouge">entryComponents</code>. You’ll also need to add <code class="highlighter-rouge">OAuthService</code> to its <code class="highlighter-rouge">providers</code>.</p>
 
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">LoginPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/login/login'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
   <span class="na">declarations</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">...</span>
     <span class="nx">LoginPage</span>
@@ -408,15 +408,7 @@ ionic serve
 
 <p>Now the login screen should load. You can use Chrome’s Device Toolbar to see what it’ll look like on an iPhone 6.</p>
 
-<p><img src="/assets/blog/ionic-authentication/login-page-4616218e28b0bbe6f2e05dd02b5a5a862b6b079fd48f924b8fd1bf3194d7708b.png" alt="Login Page" /></p>
-
-<p>To solve for the lack of TypeScript support you’ll need to add the following to the top of <code class="highlighter-rouge">src/app/pages/login/login.ts</code>.</p>
-
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kr">declare</span> <span class="kd">const</span> <span class="nx">OktaAuth</span><span class="err">:</span> <span class="kr">any</span><span class="p">;</span>
-</code></pre>
-</div>
-
-<p><strong>TIP:</strong> To learn more about including external JavaScript libraries in a TypeScript project, see <a href="https://www.thepolyglotdeveloper.com/2016/01/include-external-javascript-libraries-in-an-angular-2-typescript-project/">Nic Raboy’s article on the subject</a>.</p>
+<p><img src="/assets/blog/ionic-authentication/login-page-3091baa708880a862442451fddb4d2e746ac4b7dad9a77db1b6099b8b28e8261.png" alt="Login Page" /></p>
 
 <p>Add a <code class="highlighter-rouge">login()</code> method in <code class="highlighter-rouge">src/app/pages/login/login.ts</code> that uses the Okta Auth SDK to 1) login and 2) exchange the session token for an identity and access token. An <a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID token</a> is similar to an identity card, in standard JWT format, signed by the OpenID Provider. Access tokens are part of the OAuth specification. An access token can be a JWT. They are used to access protected resources, often by setting them as an <code class="highlighter-rouge">Authentication</code> header when making a request.</p>
 
@@ -425,7 +417,8 @@ ionic serve
     <span class="kd">const</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
       <span class="na">clientId</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span><span class="p">,</span>
       <span class="na">redirectUri</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span><span class="p">,</span>
-      <span class="na">url</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span>
+      <span class="na">url</span><span class="p">:</span> <span class="s1">'https://dev-[dev-id].oktapreview.com'</span><span class="p">,</span>
+      <span class="na">issuer</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span>
     <span class="p">});</span>
     <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
       <span class="na">username</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
@@ -496,13 +489,16 @@ ionic serve
 </div>
 
 <p>When you try to login to your application using credentials from an Okta user, you’ll see a cross-origin error in your browser’s console.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/authn. Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8100' is therefore not allowed access.
+
+<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/authn. No 
+'Access-Control-Allow-Origin' header is present on the requested resource. 
+Origin 'http://localhost:8100' is therefore not allowed access.
 </code></pre>
 </div>
 
-<p>To fix this, modify the Trusted Origins on Okta (under <strong>Security</strong> &gt; <strong>API</strong>) to include your client’s URL (e.g. <code class="highlighter-rouge">http://localhost:8100</code>). Check CORS and Redirect for the type of origin.</p>
+<p>To fix this, modify the Trusted Origins on Okta (under <strong>API</strong> &gt; <strong>Trusted Origins</strong>) to include your client’s URL (e.g. <code class="highlighter-rouge">http://localhost:8100</code>). Check CORS and Redirect for the type of origin.</p>
 
-<p><img src="/assets/blog/ionic-authentication/add-origin-89627620c4134303f2f81e8725a99a62d1ece7530dd8502e30ee4334da2699e9.png" alt="Add Origin" /></p>
+<p><img src="/assets/blog/ionic-authentication/add-origin-89627620c4134303f2f81e8725a99a62d1ece7530dd8502e30ee4334da2699e9.png" alt="Add Origin" width="612" /></p>
 
 <p>Now sign in should work, but there’s not much proof on the UI. Add a “Logout” button in the top right corner of the home screen. Replace the <code class="highlighter-rouge">&lt;ion-header&gt;</code> in <code class="highlighter-rouge">src/pages/home/home.html</code> with the HTML below.</p>
 
@@ -542,7 +538,7 @@ ionic serve
   <span class="p">}</span>
 
   <span class="nx">get</span> <span class="nx">givenName</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">claims</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">getIdentityClaims</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">claims</span><span class="err">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">getIdentityClaims</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">claims</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
     <span class="p">}</span>
@@ -560,10 +556,10 @@ ionic serve
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="err">*</span><span class="na">ngIf=</span><span class="s">"givenName"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;hr&gt;</span>
-  <span class="nt">&lt;p&gt;</span>You are logged in as: <span class="nt">&lt;b&gt;&lt;/b&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>You are logged in as: <span class="nt">&lt;b&gt;</span>{{ givenName }}<span class="nt">&lt;/b&gt;&lt;/p&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"claims"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;strong&gt;</span>Claims from Identity Token JWT:<span class="nt">&lt;/strong&gt;</span>
-    <span class="nt">&lt;pre&gt;&lt;/pre&gt;</span>
+    <span class="nt">&lt;pre&gt;</span>{{claims | json}}<span class="nt">&lt;/pre&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </code></pre>
@@ -588,13 +584,14 @@ ionic serve
 
 <p>Now you should see your name and claims information displayed when you log in.</p>
 
-<p><img src="/assets/blog/ionic-authentication/home-claims-497b79ccb6b56f0cfaedc29f3ca508c93d859a22c729f93ac59ef49a1f00d7b4.png" alt="Home claims" /></p>
+<p><img src="/assets/blog/ionic-authentication/home-claims-daf6b5729a3b77345b2cc1e9bf9e3077e32b1cafce795fa4e0b8c06f2de4b411.png" alt="Home claims" /></p>
 
 <p>You should also be able to log out and see the login screen with its logo.</p>
 
-<p><img src="/assets/blog/ionic-authentication/login-with-logo-25346abb597f3f7932ca2dc1d5e08e3b83944cde253137be8cba1bfbc7bdb90b.png" alt="Login with logo" /></p>
+<p><img src="/assets/blog/ionic-authentication/login-with-logo-a356dc76c0bdc401201f590e9b30b0177bca04b4e000f91c1adb5d6dbddf9722.png" alt="Login with logo" /></p>
 
-<p><strong>NOTE:</strong> You might notice that the tabs don’t disappear when logging out. I’m still trying to figure out why <a href="https://forum.ionicframework.com/t/go-back-to-the-root-page-ionic-2-typescript/49861/9">this doesn’t work as expected</a>.</p>
+<p><strong>NOTE:</strong> You might notice that the tabs don’t disappear when logging out. This is <a href="https://forum.ionicframework.com/t/go-back-to-the-root-page-ionic-2-typescript/49861/9">an issue</a> that you might be able to fix
+by upgrading to angular-oauth2-oidc 2.x. However, I’ve been <a href="https://github.com/manfredsteyer/angular-oauth2-oidc/issues/69">unable to make it work</a>.</p>
 
 <h2 id="deploy-to-a-mobile-device">Deploy to a Mobile Device</h2>
 
@@ -602,7 +599,7 @@ ionic serve
 
 <p>To see how your application will look on different devices you can run <code class="highlighter-rouge">ionic serve --lab</code>. The <code class="highlighter-rouge">--lab</code> flag opens a page in your browser that lets you see how your app will display on various devices.</p>
 
-<p><img src="/assets/blog/ionic-authentication/ionic-labs-2b6580616c2183d9d6bbadfeeb1ae021659ddb3db46b11305ad02bdffff84d00.png" alt="Ionic labs" /></p>
+<p><img src="/assets/blog/ionic-authentication/ionic-labs-af72a6964445850e20e953512d6891e76e3d847194036cc478721fadf8480ff3.png" alt="Ionic labs" /></p>
 
 <p>The <code class="highlighter-rouge">LoginPage</code> tries to auto-focus onto the <code class="highlighter-rouge">email</code> field when it loads. To auto-activate the keyboard you’ll need to tell Cordova it’s OK to display the keyboard without user interaction. You can do this by adding the following to <code class="highlighter-rouge">config.xml</code> in the root directory.</p>
 
@@ -615,7 +612,21 @@ ionic serve
 
 <p><strong>Make sure to open Xcode to complete the installation.</strong> Then run <code class="highlighter-rouge">ionic cordova emulate ios</code> to open your app in Simulator.</p>
 
-<p>You’ll likely be prompted to install the <code class="highlighter-rouge">@ionic/cli-plugin-cordova</code> plugin. Type “y” and hit enter when prompted.</p>
+<p>You may encounter an error like the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>** BUILD SUCCEEDED **
+
+Error: Cannot read property 'replace' of undefined
+
+[ERROR] An error occurred while running cordova emulate ios (exit code 1).
+</code></pre>
+</div>
+
+<p>This is a <a href="">known issue</a> and can be solved by running the following commands:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>platforms/ios/cordova <span class="o">&amp;&amp;</span> npm install ios-sim
+</code></pre>
+</div>
 
 <p><strong>TIP:</strong> The biggest problem I found when running the app in Simulator was that it was difficult to get the keyboard to pop up. To workaround this, I used <strong>Hardware</strong> &gt; <strong>Keyboard</strong> &gt; <strong>Toggle Software Keyboard</strong> when I needed to type text in a field.</p>
 
@@ -625,7 +636,7 @@ ionic serve
 
 <p>If you use the Network tab, you can see that only one network request is made (to <code class="highlighter-rouge">/authn</code>), which is different than the two requests (to <code class="highlighter-rouge">/authn</code> and <code class="highlighter-rouge">/authorize</code>) that are made when running in a browser.</p>
 
-<p><img src="/assets/blog/ionic-authentication/devtools-network-requests-fd598c1df0d3ccb9c3da246473440be5938a10458d506e6c0daf1eacc73369d5.png" alt="DevTools Network Requests" /></p>
+<p><img src="/assets/blog/ionic-authentication/devtools-network-requests-f8f4f42856ce9d831c7b99ce7044753b3b97c79a2fcbb25af619b20d95dae1a0.png" alt="DevTools Network Requests" /></p>
 
 <p>I believe this doesn’t work when the app is packaged with Cordova because it’s making a request to the server with an embedded iframe that then posts back to the current window using postMessage. It seems that Ionic/Cordova doesn’t support this flow (yet). To work around this issue, you can talk directly to Okta’s OAuth service using an in-app browser that’s provided by Cordova. <a href="https://twitter.com/nraboy">Nic Raboy</a> shows how to do this with Facebook in <a href="https://www.thepolyglotdeveloper.com/2016/01/using-an-oauth-2-0-service-within-an-ionic-2-mobile-app/">Using An OAuth 2.0 Service Within An Ionic 2 Mobile App</a>.</p>
 
@@ -712,7 +723,7 @@ ionic serve
   <span class="p">}</span>
 
   <span class="nx">buildOAuthUrl</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">+</span> <span class="s1">'/oauth2/v1/authorize?'</span> <span class="o">+</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">+</span> <span class="s1">'/v1/authorize?'</span> <span class="o">+</span>
         <span class="s1">'client_id='</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
         <span class="s1">'redirect_uri='</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
         <span class="s1">'response_type=id_token%20token&amp;'</span> <span class="o">+</span>
@@ -742,19 +753,18 @@ ionic serve
 <table>
   <tbody>
     <tr>
-      <td><a href="/assets/blog/ionic-authentication/emulator-login-28c3fe9253f50019e871f903ff7130b96e52b019f262dcfb3df8ae402684b84c.png"><img src="/assets/blog/ionic-authentication/emulator-login-28c3fe9253f50019e871f903ff7130b96e52b019f262dcfb3df8ae402684b84c.png" alt="Emulator Login" width="280" /></a></td>
-      <td><a href="/assets/blog/ionic-authentication/emulator-okta-login-dbd386e324736d899df5f44f978ff7f40db70876001ffe80c42d1dcab021c2f0.png"><img src="/assets/blog/ionic-authentication/emulator-okta-login-dbd386e324736d899df5f44f978ff7f40db70876001ffe80c42d1dcab021c2f0.png" alt="Emulator Okta Login" width="280" /></a></td>
-      <td><a href="/assets/blog/ionic-authentication/emulator-home-08dd2b798c4e121b930df14887af9401e95153c4acbdc65f4cf5bfe409e28f1e.png"><img src="/assets/blog/ionic-authentication/emulator-home-08dd2b798c4e121b930df14887af9401e95153c4acbdc65f4cf5bfe409e28f1e.png" alt="Emulator Home" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/emulator-login-28c3fe9253f50019e871f903ff7130b96e52b019f262dcfb3df8ae402684b84c.png"><img src="/assets/blog/ionic-authentication/emulator-login-c4b218091f6549081c063e2eb71af4b1bcf371d49cffd109d3f77e6019ec85ce.png" alt="Emulator Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/emulator-okta-login-dbd386e324736d899df5f44f978ff7f40db70876001ffe80c42d1dcab021c2f0.png"><img src="/assets/blog/ionic-authentication/emulator-okta-login-03521c0da232257989de99fe3c41e81f1c822d1397d4b5e2e8a5371b21aef085.png" alt="Emulator Okta Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/emulator-home-08dd2b798c4e121b930df14887af9401e95153c4acbdc65f4cf5bfe409e28f1e.png"><img src="/assets/blog/ionic-authentication/emulator-home-935f74e0cd70e31bcf49f782c0b1371c8ad1af4d44f6da3002a91cbf42a95d55.png" alt="Emulator Home" width="280" /></a></td>
     </tr>
   </tbody>
 </table>
 
 <p>The nice thing about using this technique is the Okta login screen has Remember Me and Forgot Password support, so you don’t need to code those yourself.</p>
 
-<p>To deploy the app to an iPhone, start by plugging one into your computer. Then run the following commands to install ios-deploy, build the app, and run it on your device.</p>
+<p>To deploy the app to an iPhone, start by plugging one into your computer. Then run the following commands to build the app and run it on your device.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>npm install -g ios-deploy 
-ionic cordova run ios
+<div class="highlighter-rouge"><pre class="highlight"><code>ionic cordova run ios
 </code></pre>
 </div>
 
@@ -780,9 +790,9 @@ Code signing is required for product type 'Application' in SDK 'iOS 10.3'
 <table>
   <tbody>
     <tr>
-      <td><a href="/assets/blog/ionic-authentication/iphone-login-b2410de6bb2c6f04c5a620ce3a570e7ffa112c83a5eb91b320dd0322bb0c281b.png"><img src="/assets/blog/ionic-authentication/iphone-login-b2410de6bb2c6f04c5a620ce3a570e7ffa112c83a5eb91b320dd0322bb0c281b.png" alt="iPhone Login" width="280" /></a></td>
-      <td><a href="/assets/blog/ionic-authentication/iphone-okta-login-e3b1cc3b6aded6ae1e0d6aa09507732ebd658612afde62537b2256cfd4d360c5.png"><img src="/assets/blog/ionic-authentication/iphone-okta-login-e3b1cc3b6aded6ae1e0d6aa09507732ebd658612afde62537b2256cfd4d360c5.png" alt="iPhone Okta Login" width="280" /></a></td>
-      <td><a href="/assets/blog/ionic-authentication/iphone-home-fac7e46fb05c18e2ad814841e73c86af11038b045e6610c934d80f16b573a8a1.png"><img src="/assets/blog/ionic-authentication/iphone-home-fac7e46fb05c18e2ad814841e73c86af11038b045e6610c934d80f16b573a8a1.png" alt="iPhone Home" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/iphone-login-b2410de6bb2c6f04c5a620ce3a570e7ffa112c83a5eb91b320dd0322bb0c281b.png"><img src="/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png" alt="iPhone Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/iphone-okta-login-e3b1cc3b6aded6ae1e0d6aa09507732ebd658612afde62537b2256cfd4d360c5.png"><img src="/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png" alt="iPhone Okta Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/iphone-home-fac7e46fb05c18e2ad814841e73c86af11038b045e6610c934d80f16b573a8a1.png"><img src="/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png" alt="iPhone Home" width="280" /></a></td>
     </tr>
   </tbody>
 </table>
@@ -830,9 +840,9 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 <table>
   <tbody>
     <tr>
-      <td><a href="/assets/blog/ionic-authentication/android-login-8bdc605b57afdaead566ee007d80942004aded32cf264288a3d887a92b875794.png"><img src="/assets/blog/ionic-authentication/android-login-8bdc605b57afdaead566ee007d80942004aded32cf264288a3d887a92b875794.png" alt="Android Login" width="280" /></a></td>
-      <td><a href="/assets/blog/ionic-authentication/android-okta-login-96f5a3f51b9a53e3d19890a5a8e4ea7bc54829b24ed98e40a1ba2fca0b165084.png"><img src="/assets/blog/ionic-authentication/android-okta-login-96f5a3f51b9a53e3d19890a5a8e4ea7bc54829b24ed98e40a1ba2fca0b165084.png" alt="Android Okta Login" width="280" /></a></td>
-      <td><a href="/assets/blog/ionic-authentication/android-home-c0c0a1c18b552e00e959c0b6d38d115aeac26016169b7004b35db865ade24cec.png"><img src="/assets/blog/ionic-authentication/android-home-c0c0a1c18b552e00e959c0b6d38d115aeac26016169b7004b35db865ade24cec.png" alt="Android Home" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/android-login-8bdc605b57afdaead566ee007d80942004aded32cf264288a3d887a92b875794.png"><img src="/assets/blog/ionic-authentication/android-login-a0363756fc25a974e87668bc0900acb783f7eec80a1b83b0c5de0a5016004f94.png" alt="Android Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/android-okta-login-96f5a3f51b9a53e3d19890a5a8e4ea7bc54829b24ed98e40a1ba2fca0b165084.png"><img src="/assets/blog/ionic-authentication/android-okta-login-bb57b05d91580c165352d0f21d2da0415827601a25720ec2121f269ae20618ae.png" alt="Android Okta Login" width="280" /></a></td>
+      <td><a href="/assets/blog/ionic-authentication/android-home-c0c0a1c18b552e00e959c0b6d38d115aeac26016169b7004b35db865ade24cec.png"><img src="/assets/blog/ionic-authentication/android-home-9438a0b8324d932abc0dcece445af75c8009350e683bb46d526baaa614e1de13.png" alt="Android Home" width="280" /></a></td>
     </tr>
   </tbody>
 </table>
@@ -848,7 +858,11 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 
 <p>You can see how to enable service workers and make your app into a PWA by reading the <a href="/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot#pwas-with-ionic">PWAs section</a> of <a href="/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot">how to develop a mobile app with Ionic and Spring Boot</a>. A PWA is a web application that can be “installed” on your system. It works offline when you don’t have an internet connection, leveraging data cached during your last interactions with the app. Adding PWA features can make your apps load a lot faster, creating happy users. To learn more about PWAs, see <a href="/blog/2017/07/20/the-ultimate-guide-to-progressive-web-applications">The Ultimate Guide to Progressive Web Applications</a>.</p>
 
+<p>Ionic has invested heavily in supporting PWAs. You can read more about why in <a href="http://blog.ionic.io/what-progressive-web-apps-can-do-for-you/">
+What Progressive Web Apps can do for you</a>.</p>
+
 <h2 id="learn-more">Learn More</h2>
+
 <p>I hope you’ve enjoyed this tour of Ionic, Angular, and Okta. I like how Ionic takes your web development skills up a notch and allows you to create mobile applications that look and behave natively and perform swiftly.</p>
 
 <p>You can see the complete source code for this project <a href="https://github.com/oktadeveloper/okta-ionic-auth-example">on GitHub</a>. Please contact me on Twitter <a href="https://twitter.com/mraible">@mraible</a> or on <a href="https://devforum.okta.com/">Okta’s Developer Forums</a> if you have any questions.</p>
