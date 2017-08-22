@@ -323,7 +323,10 @@ curl -v -X POST \
       }
     },
     "network": {
-      "connection": "ON_NETWORK"
+      "connection": "ZONE",
+      "include": [
+        "nzowdja2YRaQmOQYp0g3"
+      ]
     },
     "authContext": {
       "authType": "ANY"
@@ -421,7 +424,10 @@ curl -v -X PUT \
       }
     },
     "network": {
-      "connection": "ON_NETWORK"
+      "connection": "ZONE",
+      "include": [
+        "nzowdja2YRaQmOQYp0g3"
+      ]
     },
     "authContext": {
       "authType": "ANY"
@@ -652,10 +658,10 @@ Like policies, rules have a priority which governs the order in which they are c
 For example if a particular policy had two rules, "A" and "B" as below.
 
 - Rule A has priority 1 and applies to RADIUS VPN scenarios.
-- Rule B has priority 2 and applies to ON_NETWORK scenarios.
+- Rule B has priority 2 and applies to ANYWHERE (network connection) scenarios.
 
-If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
-the action in Rule A would be taken, and Rule B would not be evaluated.
+If a request came in from the Radius endpoint, the action in Rule A would be taken, and Rule B would not be evaluated.
+This occurs because, even though requests coming from anywhere would match the ANYWHERE location condition of Rule B, Rule A has higher priority and is evaluated first.
 
 ### Rules Message Example (Password Policy)
 
@@ -763,11 +769,10 @@ The people condition identifies users and groups that are used together. For pol
 
 Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-groups | The group condition | String | Yes |
-users | The user condition | String | Yes |
+groups | The groups condition | <a href="#UserConditionObject">User Condition Object</a> | Yes |
+users | The users condition | <a href="#GroupConditionObject">Group Condition Object</a> | Yes |
 
-
-#### User Condition Object
+##### User Condition Object
 {: #UserConditionObject }
 
 Specifies a set of users to be included or excluded
@@ -778,7 +783,7 @@ include | The users to be included | Array | Yes |
 exclude | The users to be excluded | Array | Yes |
 
 
-#### Group Condition Object
+##### Group Condition Object
 {: #GroupConditionObject }
 
 Specifies a set of groups whose users to be included or excluded
@@ -787,6 +792,23 @@ Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
 include | The groups to be included | Array | Yes |
 exclude | The groups to be excluded | Array | Yes |
+
+#### People Condition Object Example
+
+~~~json
+  "people": {
+    "users": {
+      "exclude": [
+        "00uo7dIiN4jizvY6q0g3"
+      ]
+    },
+    "groups": {
+      "include": [
+        "00go6lU1wxnmPisNp0g3"
+      ]
+    }
+  }
+~~~
 
 #### AuthContext Condition Object
 {: #AuthContextConditionObject }
@@ -800,11 +822,29 @@ authType |  | `ANY` or `RADIUS` | No |
 #### Network Condition Object
 {: #NetworkConditionObject }
 
-Specifies a network segment.
+Specifies a network selection mode, and a set of network zones to be included or excluded. If the connection parameter's data type is `ZONE`, exactly one of the include or exclude arrays is required.
+Specific zone ids to include or exclude are enumerated in the respective arrays. The [Zones API](./zones.html) can be used to manage network zones.
 
-Parameter | Description | Data Type | Required | Default
+Parameter | Description | Data Type | Required |
 | --- | --- | --- | ---
-connection |  | `ANYWHERE`, `ON_NETWORK` or `OFF_NETWORK` | No |
+connection | Network selection mode | `ANYWHERE`, `ZONE`, `ON_NETWORK`, or `OFF_NETWORK` | No |
+include | The zones to include | Array | Only if connection data type is `ZONE` |
+exclude | The zones to exclude | Array | Only if connection data type is `ZONE` |
+
+> The `ON_NETWORK` and `OFF_NETWORK` data types are part of a {% api_lifecycle deprecated %} feature. Backward compatibility is maintained, but using `ZONE` is preferred.
+> The connection parameter may be set to the `ZONE` data type to select individual network zones.
+
+#### Network Condition Object Example
+{: #NetworkConditionObjectExample }
+
+~~~json
+  "network": {
+    "connection": "ZONE",
+    "include": [
+      "nzowdja2YRaQmOQYp0g3", "nzowe1mKv1D10YNda0g3", "nzowduJMXKsPkRqL40g3"
+    ]
+  }
+~~~
 
 #### Authentication Provider Condition Object
 {: #AuthProviderConditionObject }
@@ -816,7 +856,16 @@ Parameter | Description | Data Type | Required | Default
 provider | Specifies the required authentication provider  | 'Okta', 'Active Directory' | Yes | 'Okta'
 include | The AD integrations this policy applies to | Array | No | Include all AD integrations
 
+#### Authentication Provider Condition Object Example
 
+~~~json
+  "authProvider": {
+    "provider": "ACTIVE_DIRECTORY",
+    "include": [
+      "0oaoz0zUsohjfrWZ80g3"
+    ]
+  }
+~~~
 
 ## Type-Specific Policy Data Structures
 
