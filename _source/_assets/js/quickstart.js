@@ -29,8 +29,13 @@
       {
         name: 'widget',
         label: 'Sign-In Widget',
-        serverExampleType: 'auth-code',
+        serverExampleType: 'implicit',
         active: true
+      },
+      {
+        name: 'hosted',
+        label: 'Hosted Login',
+        serverExampleType: 'auth-code',
       }
     ],
     servers: [
