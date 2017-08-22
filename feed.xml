@@ -581,11 +581,13 @@ ionic serve
 &lt;p&gt;Now you should be able to log in by clicking on the “Login with Okta” button and entering valid credentials.&lt;/p&gt;
 
 &lt;table&gt;
-&lt;tr&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-login.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-login.png&quot; alt=&quot;Emulator Login&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-okta-login.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-okta-login.png&quot; alt=&quot;Emulator Okta Login&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-home.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-home.png&quot; alt=&quot;Emulator Home&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-login-28c3fe9253f50019e871f903ff7130b96e52b019f262dcfb3df8ae402684b84c.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-login-28c3fe9253f50019e871f903ff7130b96e52b019f262dcfb3df8ae402684b84c.png&quot; alt=&quot;Emulator Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-okta-login-dbd386e324736d899df5f44f978ff7f40db70876001ffe80c42d1dcab021c2f0.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-okta-login-dbd386e324736d899df5f44f978ff7f40db70876001ffe80c42d1dcab021c2f0.png&quot; alt=&quot;Emulator Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-home-08dd2b798c4e121b930df14887af9401e95153c4acbdc65f4cf5bfe409e28f1e.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-home-08dd2b798c4e121b930df14887af9401e95153c4acbdc65f4cf5bfe409e28f1e.png&quot; alt=&quot;Emulator Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 
 &lt;p&gt;The nice thing about using this technique is the Okta login screen has Remember Me and Forgot Password support, so you don’t need to code those yourself.&lt;/p&gt;
@@ -617,11 +619,13 @@ Code signing is required for product type 'Application' in SDK 'iOS 10.3'
 &lt;p&gt;Once you’ve configured your phone, computer, and Apple ID, you should be able to open the app and log in. Below is how it looks on my iPhone.&lt;/p&gt;
 
 &lt;table&gt;
-&lt;tr&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-login.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-login.png&quot; alt=&quot;iPhone Login&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-okta-login.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-okta-login.png&quot; alt=&quot;iPhone Okta Login&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-home.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-home.png&quot; alt=&quot;iPhone Home&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-login-b2410de6bb2c6f04c5a620ce3a570e7ffa112c83a5eb91b320dd0322bb0c281b.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-login-b2410de6bb2c6f04c5a620ce3a570e7ffa112c83a5eb91b320dd0322bb0c281b.png&quot; alt=&quot;iPhone Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-okta-login-e3b1cc3b6aded6ae1e0d6aa09507732ebd658612afde62537b2256cfd4d360c5.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-okta-login-e3b1cc3b6aded6ae1e0d6aa09507732ebd658612afde62537b2256cfd4d360c5.png&quot; alt=&quot;iPhone Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-home-fac7e46fb05c18e2ad814841e73c86af11038b045e6610c934d80f16b573a8a1.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-home-fac7e46fb05c18e2ad814841e73c86af11038b045e6610c934d80f16b573a8a1.png&quot; alt=&quot;iPhone Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 
 &lt;h3 id=&quot;android&quot;&gt;Android&lt;/h3&gt;
@@ -665,11 +669,13 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 &lt;p&gt;After performing these steps, you should be able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;ionic cordova emulate android&lt;/code&gt; and see your app running in the AVD.&lt;/p&gt;
 
 &lt;table&gt;
-&lt;tr&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-login.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-login.png&quot; alt=&quot;Android Login&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-okta-login.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-okta-login.png&quot; alt=&quot;Android Okta Login&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;td style=&quot;padding: 5px&quot;&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-home.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-home.png&quot; alt=&quot;Android Home&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-login-8bdc605b57afdaead566ee007d80942004aded32cf264288a3d887a92b875794.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-login-8bdc605b57afdaead566ee007d80942004aded32cf264288a3d887a92b875794.png&quot; alt=&quot;Android Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-okta-login-96f5a3f51b9a53e3d19890a5a8e4ea7bc54829b24ed98e40a1ba2fca0b165084.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-okta-login-96f5a3f51b9a53e3d19890a5a8e4ea7bc54829b24ed98e40a1ba2fca0b165084.png&quot; alt=&quot;Android Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-home-c0c0a1c18b552e00e959c0b6d38d115aeac26016169b7004b35db865ade24cec.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-home-c0c0a1c18b552e00e959c0b6d38d115aeac26016169b7004b35db865ade24cec.png&quot; alt=&quot;Android Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;: If you get an application error that says “The connection to the server was unsuccessful. (&lt;code class=&quot;highlighter-rouge&quot;&gt;file:///android/www/index.html&lt;/code&gt;)”, add the following line to &lt;code class=&quot;highlighter-rouge&quot;&gt;config.xml&lt;/code&gt;. This line sets the default timeout to 60 seconds (default is 20). Thanks to the &lt;a href=&quot;http://stackoverflow.com/a/31377846&quot;&gt;Stack Overflow community&lt;/a&gt; for this solution.&lt;/p&gt;
