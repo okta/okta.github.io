@@ -168,6 +168,7 @@
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
                 <li><a href="/docs/api/resources/templates.html">Templates</a></li>
                 <li><a href="/docs/api/resources/users.html">Users</a></li>
+                <li class="is-active"><a href="/docs/api/resources/zones.html">Zones</a></li>
               </ul>
             </li>
             <li>
@@ -225,18 +226,27 @@
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/api/resources/zones.md">Edit Page</a>
       <h1 id="zones-api">Zones API</h1>
 
-<p><a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  This API is <a href="/docs/api/getting_started/releases-at-okta.html">a Beta release</a>.</p>
+<blockquote>
+  <p>This API is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  feature.</p>
+</blockquote>
 
-<p>Zones are used to group IP Address ranges so that policy decisions can be made based on the client’s IP location.</p>
+<p>The Okta Zones API provides operations to manage zones in your organization. Zones may be used to guide policy decisions.</p>
 
-<h2 id="endpoints">Endpoints</h2>
+<p>IP zones are the only type currently supported by the Zones API. IP zones are used to group IP address ranges so that policy decisions can be made based on the client’s IP location.</p>
 
-<h3 id="create-ip-zone">Create IP Zone</h3>
+<h2 id="zone-api-operations">Zone API Operations</h2>
 
-<h4 class="api api-request api-request-example" id="successful-create-example">Successful Create Example</h4>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X POST 
+<h3 class="api api-operation" id="create-an-ip-zone">Create an IP Zone</h3>
+
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/zones</span></p>
+
+<p>Creates a new IP Zone</p>
+
+<h4 class="api api-request api-request-example" id="valid-request-example">Valid Request Example</h4>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X POST
 -H <span class="s2">"Accept: application/json"</span><span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'{
   "type": "IP",
   "id": null,
@@ -265,11 +275,11 @@
       "value": "3.3.4.5/24"
     }
   ]
-}'</span> <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/"</span>
+}'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/"</span>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="response-example">Response Example</h4>
+<h4 class="api api-response api-response-example" id="successful-response-example">Successful Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzouagptWUz5DlLfM0g3"</span><span class="p">,</span><span class="w">
@@ -300,7 +310,7 @@
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzouagptWUz5DlLfM0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzouagptWUz5DlLfM0g3"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
@@ -310,7 +320,7 @@
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzouagptWUz5DlLfM0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzouagptWUz5DlLfM0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"POST"</span><span class="w">
@@ -322,270 +332,301 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="invalid-zone-creation-request-example">Invalid Zone Creation Request Example</h4>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X POST 
+<h4 class="api api-request api-request-example" id="invalid-request-example">Invalid Request Example</h4>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X POST
 -H <span class="s2">"Accept: application/json"</span><span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
 -d <span class="s1">'
 {
   "type": "IP",
   "id": null,
-  "name": "kgysngljmtiaeibcmpavhytgfevfbwjdpnmqnujmhdlgiiergvepikjmacdxmfntpfnarrlnisfpfyfbfehdvibuwgwgwhwhcxknenlrbdsebsgaernokhvaepdbdffdzbtn",
+  "name": "Zone with Invalid IP Range",
   "status": "ACTIVE",
   "created": null,
   "lastUpdated": null,
   "system": false,
   "gateways": [
     {
-      "type": "CIDR",
-      "value": "1.2.3.4/24"
-    },
-    {
-      "type": "CIDR",
-      "value": "2.3.4.5/24"
-    },
-    {
       "type": "RANGE",
-      "value": "3.4.5.6-3.4.5.8"
-    },
-    {
-      "type": "RANGE",
-      "value": "4.5.6.7-4.5.6.9"
+      "value": "1.2.3.4.5-1.2.3.6"
     }
   ],
   "proxies": [
     {
       "type": "CIDR",
       "value": "2.2.3.4/24"
-    },
-    {
-      "type": "CIDR",
-      "value": "3.3.4.5/24"
-    },
-    {
-      "type": "RANGE",
-      "value": "4.4.5.6-4.4.5.8"
-    },
-    {
-      "type": "RANGE",
-      "value": "5.5.6.7-5.5.6.9"
     }
   ]
 }
-'</span> <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/"</span>
+'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/zones"</span>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="response-example-1">Response Example</h4>
+<h4 class="api api-response api-response-example" id="unsuccessful-response-example">Unsuccessful Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Api validation failed: name"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oae0kFnvOhjRdKfRFgxaGaoUg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name: The field is too long"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+    </span><span class="nt">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Api validation failed: gateways"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E0000001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oae_LwW8xNqTqCzUpBh-plasQ"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"errorCauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"errorSummary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gateways: The IP: 1.2.3.4.5 in the RANGE: 1.2.3.4.5-1.2.3.6 is invalid. Make sure it is a valid IPV4."</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
-<h3 id="update-ip-zone">Update IP Zone</h3>
+<h3 id="get-an-ip-zone">Get an IP Zone</h3>
+<p><span class="api-uri-template api-uri-post"><span class="api-label">POST</span> /api/v1/zones/<em>:zoneId</em></span></p>
 
-<h4 class="api api-request api-request-example" id="update-existing-zone-request-example">Update Existing Zone Request Example</h4>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X PUT 
--H <span class="s2">"Accept: application/json"</span><span class="se">\</span>
+<p>Gets an IP zone by id</p>
+
+<h4 class="api api-request api-request-params" id="request-parameters">Request Parameters</h4>
+
+<p>The zone ID described in the <a href="#ZoneModel">Zone Object</a> is required.</p>
+
+<h4 class="api api-request api-request-example" id="request-example">Request Example</h4>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
 -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--d <span class="s1">'
-{
-  "type": "IP",
-  "id": "nzovw2rFz2YoqmvwZ0g3",
-  "name": "UpdatedNetZone",
-  "status": "ACTIVE",
-  "created": "2017-01-24T19:53:28.000Z",
-  "lastUpdated": "2017-01-24T19:53:28.000Z",
-  "system": false,
-  "gateways": [
-    {
-      "type": "CIDR",
-      "value": "10.2.3.4/24"
-    },
-    {
-      "type": "CIDR",
-      "value": "12.3.4.5/24"
-    },
-    {
-      "type": "RANGE",
-      "value": "13.4.5.6-13.4.5.8"
-    },
-    {
-      "type": "RANGE",
-      "value": "14.5.6.7-14.5.6.9"
-    }
-  ],
-  "proxies": [
-    {
-      "type": "CIDR",
-      "value": "12.2.3.4/24"
-    },
-    {
-      "type": "CIDR",
-      "value": "13.3.4.5/24"
-    },
-    {
-      "type": "RANGE",
-      "value": "14.4.5.6-14.4.5.8"
-    },
-    {
-      "type": "RANGE",
-      "value": "15.5.6.7-15.5.6.9"
-    }
-  ],
-  "_links": {
-    "self": {
-      "href": "https://yourorg.okta.com/api/v1/org/zones/nzovw2rFz2YoqmvwZ0g3",
-      "hints": {
-        "allow": [
-          "GET",
-          "PUT",
-          "DELETE"
-        ]
-      }
-    },
-    "deactivate": {
-      "href": "https://yourorg.okta.com/api/v1/org/zones/nzovw2rFz2YoqmvwZ0g3/lifecycle/deactivate",
-      "hints": {
-        "allow": [
-          "POST"
-        ]
-      }
-    }
-  }
-}
-'</span> <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzovw2rFz2YoqmvwZ0g3"</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoo6s03dLsg2I7HK0g3"</span>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="update-response-example">Update Response Example</h4>
+<h4 id="response-example">Response Example</h4>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzovw2rFz2YoqmvwZ0g3"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UpdatedNetZone"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T19:53:28.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T19:53:28.000Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"gateways"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.2.3.4/24"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.3.4.5/24"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.4.5.6-13.4.5.8"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14.5.6.7-14.5.6.9"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"proxies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.2.3.4/24"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.3.4.5/24"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14.4.5.6-14.4.5.8"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.5.6.7-15.5.6.9"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzovw2rFz2YoqmvwZ0g3"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"DELETE"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzovw2rFz2YoqmvwZ0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"POST"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
-
-<h3 id="get-ip-zones">Get IP Zones</h3>
-
-<h4 class="api api-request api-request-example" id="get-zones-request-example">Get Zones Request Example</h4>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/"</span>
-</code></pre>
-</div>
-
-<h4 class="api api-response api-response-params" id="get-response-example">Get Response Example</h4>
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzou98V1LpPAXPBos0g3"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LegacyIpZone"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzoo6s03dLsg2I7HK0g3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BlockedIpZone"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T19:52:32.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T19:52:32.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-28T23:24:36.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-14T20:41:08.000Z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"gateways"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gateways"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123.123.123-123.123.123.123"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"proxies"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzou98V1LpPAXPBos0g3"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"DELETE"</span><span class="w">
-          </span><span class="p">]</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoo6s03dLsg2I7HK0g3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"DELETE"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoo6s03dLsg2I7HK0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"POST"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzou98V1LpPAXPBos0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"POST"</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="list-zones">List Zones</h3>
+<p><span class="api-uri-template api-uri-get"><span class="api-label">GET</span> /api/v1/zones</span></p>
+
+<p>Lists all zones</p>
+
+<p>A subset of zones can be returned that match a supported filter expression or query criteria.</p>
+
+<h5 class="api api-request api-request-params" id="request-parameters-1">Request Parameters</h5>
+
+<ul>
+  <li><a href="#list-all-zones">List All Zones</a> (no parameters)</li>
+  <li><a href="#list-zones-with-a-filter">List Zones with a Filter</a> (<code class="highlighter-rouge">filter</code>)</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Parameter</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Param Type</th>
+      <th style="text-align: left">DataType</th>
+      <th style="text-align: left">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">filter</td>
+      <td style="text-align: left"><a href="/docs/api/getting_started/design_principles.html#filtering">Filter</a> zones with a supported expression for a subset of properties</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">No</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">limit</td>
+      <td style="text-align: left">Specifies the number of results returned</td>
+      <td style="text-align: left">Query</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 class="api api-response api-response-params" id="response-parameters">Response Parameters</h5>
+
+<p>Array of <a href="#ZoneModel">Zones</a></p>
+
+<h4 class="api api-operation" id="list-all-zones">List All Zones</h4>
+
+<p>Returns a list of all zones</p>
+
+<h5 class="api api-request api-request-example" id="request-example-1">Request Example</h5>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/zones"</span>
+</code></pre>
+</div>
+
+<h5 class="api api-response api-response-example" id="response-example-1">Response Example</h5>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzoo6s03dLsg2I7HK0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BlockedIpZone"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-28T23:24:36.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-14T20:41:08.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gateways"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123.123.123.123-123.123.123.123"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"proxies"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoo6s03dLsg2I7HK0g3"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"DELETE"</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoo6s03dLsg2I7HK0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"POST"</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzoo6rs9ZUobuTcsr0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LegacyIpZone"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-28T23:24:36.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-14T21:34:45.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gateways"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1-127.0.0.1"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"proxies"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoo6rs9ZUobuTcsr0g3"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"DELETE"</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoo6rs9ZUobuTcsr0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"POST"</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzowduJMXKsPkRqL40g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AiurIpZone"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-14T20:08:15.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-14T20:08:15.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gateways"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"127.0.0.1-127.0.0.1"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"proxies"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzowduJMXKsPkRqL40g3"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"DELETE"</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzowduJMXKsPkRqL40g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"POST"</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="get-zones-with-filter-expression-request-example">Get Zones With Filter Expression Request Example</h4>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/?limit=100&amp;filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"</span>
+<h4 class="api api-operation" id="list-zones-with-a-filter">List Zones with a Filter</h4>
+
+<p>Lists all zones that match the filter criteria</p>
+
+<p>This operation requires <a href="/docs/api/getting_started/design_principles.html#filtering">URL encoding</a>. For example, <code class="highlighter-rouge">filter=type eq "IP"</code> is encoded as <code class="highlighter-rouge">filter=type%20eq%20%22IP%22</code>.</p>
+
+<p>See <a href="/docs/api/getting_started/design_principles.html#filtering">Filtering</a> for more information about the expressions used in filtering.</p>
+
+<h5 class="api api-request api-request-example" id="request-example-2">Request Example</h5>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X GET <span class="se">\</span>
+-H <span class="s2">"Accept: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+<span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/?limit=100&amp;filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29"</span>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="response-example-2">Response Example</h4>
+<h5 class="api api-response api-response-example" id="response-example-2">Response Example</h5>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzoul0wf9jyb8xwZm0g3"</span><span class="p">,</span><span class="w">
@@ -633,7 +674,7 @@
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzoul0wf9jyb8xwZm0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoul0wf9jyb8xwZm0g3"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
@@ -643,7 +684,7 @@
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzoul0wf9jyb8xwZm0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoul0wf9jyb8xwZm0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"POST"</span><span class="w">
@@ -698,7 +739,7 @@
     </span><span class="p">],</span><span class="w">
     </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzoul1MxmGN18NDQT0g3"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoul1MxmGN18NDQT0g3"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
@@ -708,7 +749,7 @@
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzoul1MxmGN18NDQT0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzoul1MxmGN18NDQT0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"POST"</span><span class="w">
@@ -721,84 +762,261 @@
 </span></code></pre>
 </div>
 
-<h4 class="api api-request api-request-example" id="get-zone-where-name-attribute-contains-given-string-request-example">Get Zone Where ‘name’ Attribute Contains Given String Request Example</h4>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl <span class="s2">"https://yourorg.okta.com/api/v1/org/zones/?limit=-1&amp;q=First"</span>
+<h3 class="api api-operation" id="update-an-ip-zone">Update an IP Zone</h3>
+
+<p><span class="api-uri-template api-uri-put"><span class="api-label">PUT</span> /api/v1/zones/<em>:zoneId</em></span></p>
+
+<p>Updates an existing IP Zone</p>
+
+<h4 class="api api-request api-request-params" id="request-parameters-2">Request Parameters</h4>
+
+<p>The zone ID described in the <a href="#ZoneModel">Zone Object</a> is required.</p>
+
+<h4 class="api api-request api-request-example" id="request-example-3">Request Example</h4>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>curl -X PUT
+-H <span class="s2">"Accept: application/json"</span><span class="se">\</span>
+-H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-H <span class="s2">"Authorization: SSWS </span><span class="k">${</span><span class="nv">api_token</span><span class="k">}</span><span class="s2">"</span> <span class="se">\</span>
+-d <span class="s1">'
+{
+  "type": "IP",
+  "id": "nzovw2rFz2YoqmvwZ0g3",
+  "name": "UpdatedNetZone",
+  "status": "ACTIVE",
+  "created": "2017-01-24T19:53:28.000Z",
+  "lastUpdated": "2017-01-24T19:53:28.000Z",
+  "system": false,
+  "gateways": [
+    {
+      "type": "CIDR",
+      "value": "10.2.3.4/24"
+    },
+    {
+      "type": "CIDR",
+      "value": "12.3.4.5/24"
+    },
+    {
+      "type": "RANGE",
+      "value": "13.4.5.6-13.4.5.8"
+    },
+    {
+      "type": "RANGE",
+      "value": "14.5.6.7-14.5.6.9"
+    }
+  ],
+  "proxies": [
+    {
+      "type": "CIDR",
+      "value": "12.2.3.4/24"
+    },
+    {
+      "type": "CIDR",
+      "value": "13.3.4.5/24"
+    },
+    {
+      "type": "RANGE",
+      "value": "14.4.5.6-14.4.5.8"
+    },
+    {
+      "type": "RANGE",
+      "value": "15.5.6.7-15.5.6.9"
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://{yourOktaDomain}.com/api/v1/zones/nzovw2rFz2YoqmvwZ0g3",
+      "hints": {
+        "allow": [
+          "GET",
+          "PUT",
+          "DELETE"
+        ]
+      }
+    },
+    "deactivate": {
+      "href": "https://{yourOktaDomain}.com/api/v1/zones/nzovw2rFz2YoqmvwZ0g3/lifecycle/deactivate",
+      "hints": {
+        "allow": [
+          "POST"
+        ]
+      }
+    }
+  }
+}
+'</span> <span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzovw2rFz2YoqmvwZ0g3"</span>
 </code></pre>
 </div>
 
-<h4 class="api api-response api-response-params" id="response-example-3">Response Example</h4>
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzovhg5R4Gfat7hHE0g3"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"First0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T19:53:15.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T19:53:15.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"gateways"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2.3.4/24"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.3.4.5/24"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.4.5.6-3.4.5.8"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.5.6.7-4.5.6.9"</span><span class="w">
+<h4 class="api api-response api-response-example" id="response-example-3">Response Example</h4>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzovw2rFz2YoqmvwZ0g3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UpdatedNetZone"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T19:53:28.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastUpdated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-24T19:53:28.000Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"system"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gateways"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.2.3.4/24"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.3.4.5/24"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.4.5.6-13.4.5.8"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14.5.6.7-14.5.6.9"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"proxies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12.2.3.4/24"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13.3.4.5/24"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14.4.5.6-14.4.5.8"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15.5.6.7-15.5.6.9"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzovw2rFz2YoqmvwZ0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"DELETE"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"proxies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.2.3.4/24"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.3.4.5/24"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4.4.5.6-4.4.5.8"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.5.6.7-5.5.6.9"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzovhg5R4Gfat7hHE0g3"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"PUT"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"DELETE"</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzovhg5R4Gfat7hHE0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"POST"</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzovw2rFz2YoqmvwZ0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"POST"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
 
-<h2 id="ip-zone-data-model">IP Zone Data Model</h2>
+<h2 id="ZoneModel">Zone Model</h2>
 
+<h3 id="ip-zone-properties">IP Zone Properties</h3>
+
+<p>An IP zone defines several attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field Name</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Data Type</th>
+      <th style="text-align: left">Required</th>
+      <th style="text-align: left">Max Length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">type</td>
+      <td style="text-align: left">Type of zone (currently it can only be IP)</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left">N/A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">id</td>
+      <td style="text-align: left">Unique identifier for this zone</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">No (Assigned)</td>
+      <td style="text-align: left">N/A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">name</td>
+      <td style="text-align: left">Unique name for this zone</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">Yes</td>
+      <td style="text-align: left">128 (chars)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">gateways</td>
+      <td style="text-align: left">IP addresses (range or CIDR form) of this zone</td>
+      <td style="text-align: left">Array of <a href="#address-object">Address Objects</a></td>
+      <td style="text-align: left">No</td>
+      <td style="text-align: left">150 (entries)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">proxies</td>
+      <td style="text-align: left">IP addresses (range or CIDR form) allowed to forward request from gateway addresses above</td>
+      <td style="text-align: left">Array of <a href="#address-object">Address Objects</a></td>
+      <td style="text-align: left">No</td>
+      <td style="text-align: left">150 (entries)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="address-object">Address Object</h4>
+
+<p>Each address object specifies a set of IP addresses, expressed using either range or CIDR form.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field Name</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Data Type</th>
+      <th style="text-align: left">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">type</td>
+      <td style="text-align: left">Format of the value - either CIDR or RANGE</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">No</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">value</td>
+      <td style="text-align: left">Value in CIDR/RANGE form depending on the type specified</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">No</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="address-object-example-cidr">Address Object Example (CIDR)</h4>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CIDR"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2.3.4/24"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h4 id="address-object-example-range">Address Object Example (range)</h4>
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RANGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.2.3.0-1.2.3.255"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<h3 id="ip-zone-example">IP Zone Example</h3>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IP"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nzouagptWUz5DlLfM0g3"</span><span class="p">,</span><span class="w">
@@ -829,7 +1047,7 @@
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzouagptWUz5DlLfM0g3"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzouagptWUz5DlLfM0g3"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"GET"</span><span class="p">,</span><span class="w">
@@ -839,7 +1057,7 @@
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"deactivate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://yourorg.okta.com/api/v1/org/zones/nzouagptWUz5DlLfM0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://{yourOktaDomain}.com/api/v1/zones/nzouagptWUz5DlLfM0g3/lifecycle/deactivate"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"hints"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="s2">"POST"</span><span class="w">
@@ -850,84 +1068,6 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </div>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field Name</th>
-      <th>Description</th>
-      <th>DataType</th>
-      <th>Required</th>
-      <th>MaxLength</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>type</td>
-      <td>Type of zone (currently it can only be IP)</td>
-      <td>String</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>id</td>
-      <td>Unique identifier for this zone</td>
-      <td>String</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>name</td>
-      <td>Unique name for this zone</td>
-      <td>String</td>
-      <td>128</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>gateways</td>
-      <td>IP addresses (range or CIDR form) of this zone</td>
-      <td>Array</td>
-      <td>150</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>proxies</td>
-      <td>IP addresses (range or CIDR form) that are allowed to forward request from gateway addresses above.</td>
-      <td>Array</td>
-      <td>150</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>gateway.type</td>
-      <td>Format of the value - either CIDR or RANGE</td>
-      <td>String</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>gateway.value</td>
-      <td>Value in CIDR/RANGE form depending on the type specified</td>
-      <td>String</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>proxy.type</td>
-      <td>Format of the value - CIDR or RANGE</td>
-      <td>String</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>proxy.value</td>
-      <td>Value in CIDR/RANGE form depending on the type specified</td>
-      <td>String</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

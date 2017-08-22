@@ -168,6 +168,7 @@
                 <li><a href="/docs/api/resources/system_log.html">System Log (Beta)</a></li>
                 <li><a href="/docs/api/resources/templates.html">Templates</a></li>
                 <li><a href="/docs/api/resources/users.html">Users</a></li>
+                <li><a href="/docs/api/resources/zones.html">Zones</a></li>
               </ul>
             </li>
             <li>
@@ -520,7 +521,10 @@ HTTP 204:
       }
     },
     "network": {
-      "connection": "ON_NETWORK"
+      "connection": "ZONE",
+      "include": [
+        "nzowdja2YRaQmOQYp0g3"
+      ]
     },
     "authContext": {
       "authType": "ANY"
@@ -609,7 +613,10 @@ HTTP 204:
       }
     },
     "network": {
-      "connection": "ON_NETWORK"
+      "connection": "ZONE",
+      "include": [
+        "nzowdja2YRaQmOQYp0g3"
+      ]
     },
     "authContext": {
       "authType": "ANY"
@@ -947,11 +954,11 @@ For example if a particular policy had two rules, “A” and “B” as below.<
 
 <ul>
   <li>Rule A has priority 1 and applies to RADIUS VPN scenarios.</li>
-  <li>Rule B has priority 2 and applies to ON_NETWORK scenarios.</li>
+  <li>Rule B has priority 2 and applies to ANYWHERE (network connection) scenarios.</li>
 </ul>
 
-<p>If a request came in from the Radius endpoint but the request was on network then because Rule A has a higher priority, even though requests are coming from ON_NETWORK,
-the action in Rule A would be taken, and Rule B would not be evaluated.</p>
+<p>If a request came in from the Radius endpoint, the action in Rule A would be taken, and Rule B would not be evaluated.
+This occurs because, even though requests coming from anywhere would match the ANYWHERE location condition of Rule B, Rule A has higher priority and is evaluated first.</p>
 
 <h3 id="rules-message-example-password-policy">Rules Message Example (Password Policy)</h3>
 
@@ -1159,20 +1166,20 @@ See <a href="#Conditions">conditions</a></p>
   <tbody>
     <tr>
       <td>groups</td>
-      <td>The group condition</td>
-      <td>String</td>
+      <td>The groups condition</td>
+      <td><a href="#UserConditionObject">User Condition Object</a></td>
       <td>Yes</td>
     </tr>
     <tr>
       <td>users</td>
-      <td>The user condition</td>
-      <td>String</td>
+      <td>The users condition</td>
+      <td><a href="#GroupConditionObject">Group Condition Object</a></td>
       <td>Yes</td>
     </tr>
   </tbody>
 </table>
 
-<h4 id="UserConditionObject">User Condition Object</h4>
+<h5 id="UserConditionObject">User Condition Object</h5>
 
 <p>Specifies a set of users to be included or excluded</p>
 
@@ -1201,7 +1208,7 @@ See <a href="#Conditions">conditions</a></p>
   </tbody>
 </table>
 
-<h4 id="GroupConditionObject">Group Condition Object</h4>
+<h5 id="GroupConditionObject">Group Condition Object</h5>
 
 <p>Specifies a set of groups whose users to be included or excluded</p>
 
@@ -1230,6 +1237,23 @@ See <a href="#Conditions">conditions</a></p>
   </tbody>
 </table>
 
+<h4 id="people-condition-object-example">People Condition Object Example</h4>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="s2">"people"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"exclude"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"00uo7dIiN4jizvY6q0g3"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"00go6lU1wxnmPisNp0g3"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
 <h4 id="AuthContextConditionObject">AuthContext Condition Object</h4>
 
 <p>Specifies an authentication entry point.</p>
@@ -1257,7 +1281,8 @@ See <a href="#Conditions">conditions</a></p>
 
 <h4 id="NetworkConditionObject">Network Condition Object</h4>
 
-<p>Specifies a network segment.</p>
+<p>Specifies a network selection mode, and a set of network zones to be included or excluded. If the connection parameter’s data type is <code class="highlighter-rouge">ZONE</code>, exactly one of the include or exclude arrays is required.
+Specific zone ids to include or exclude are enumerated in the respective arrays. The <a href="./zones.html">Zones API</a> can be used to manage network zones.</p>
 
 <table>
   <thead>
@@ -1266,19 +1291,45 @@ See <a href="#Conditions">conditions</a></p>
       <th>Description</th>
       <th>Data Type</th>
       <th>Required</th>
-      <th>Default</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>connection</td>
-      <td> </td>
-      <td><code class="highlighter-rouge">ANYWHERE</code>, <code class="highlighter-rouge">ON_NETWORK</code> or <code class="highlighter-rouge">OFF_NETWORK</code></td>
+      <td>Network selection mode</td>
+      <td><code class="highlighter-rouge">ANYWHERE</code>, <code class="highlighter-rouge">ZONE</code>, <code class="highlighter-rouge">ON_NETWORK</code>, or <code class="highlighter-rouge">OFF_NETWORK</code></td>
       <td>No</td>
-      <td> </td>
+    </tr>
+    <tr>
+      <td>include</td>
+      <td>The zones to include</td>
+      <td>Array</td>
+      <td>Only if connection data type is <code class="highlighter-rouge">ZONE</code></td>
+    </tr>
+    <tr>
+      <td>exclude</td>
+      <td>The zones to exclude</td>
+      <td>Array</td>
+      <td>Only if connection data type is <code class="highlighter-rouge">ZONE</code></td>
     </tr>
   </tbody>
 </table>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">ON_NETWORK</code> and <code class="highlighter-rouge">OFF_NETWORK</code> data types are part of a  <a href="/docs/api/getting_started/releases-at-okta.html#deprecation"> <span class="api-label api-label-deprecated "> <i class="fa fa-fire-extinguisher"></i> Deprecated </span> </a>  feature. Backward compatibility is maintained, but using <code class="highlighter-rouge">ZONE</code> is preferred.
+The connection parameter may be set to the <code class="highlighter-rouge">ZONE</code> data type to select individual network zones.</p>
+</blockquote>
+
+<h4 id="NetworkConditionObjectExample">Network Condition Object Example</h4>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="s2">"network"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"connection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ZONE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"nzowdja2YRaQmOQYp0g3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nzowe1mKv1D10YNda0g3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nzowduJMXKsPkRqL40g3"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h4 id="AuthProviderConditionObject">Authentication Provider Condition Object</h4>
 
@@ -1311,6 +1362,17 @@ See <a href="#Conditions">conditions</a></p>
     </tr>
   </tbody>
 </table>
+
+<h4 id="authentication-provider-condition-object-example">Authentication Provider Condition Object Example</h4>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="w">  </span><span class="s2">"authProvider"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE_DIRECTORY"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"include"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"0oaoz0zUsohjfrWZ80g3"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
 
 <h2 id="type-specific-policy-data-structures">Type-Specific Policy Data Structures</h2>
 

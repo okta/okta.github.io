@@ -572,7 +572,7 @@
   
     
     <url>
-      <loc>https://developer.okta.com/quickstart/widget/default-example</loc>
+      <loc>https://developer.okta.com/quickstart/react/default-example</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -585,7 +585,7 @@
   
     
     <url>
-      <loc>https://developer.okta.com/quickstart/react/default-example</loc>
+      <loc>https://developer.okta.com/quickstart/widget/default-example</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -689,19 +689,6 @@
   
     
     <url>
-      <loc>https://developer.okta.com/quickstart/dotnet/generic-auth-code</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
       <loc>https://developer.okta.com/quickstart/nodejs/generic-auth-code</loc>
       
       
@@ -741,7 +728,7 @@
   
     
     <url>
-      <loc>https://developer.okta.com/quickstart/php/generic-implicit</loc>
+      <loc>https://developer.okta.com/quickstart/dotnet/generic-auth-code</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -767,19 +754,6 @@
   
     
     <url>
-      <loc>https://developer.okta.com/quickstart/dotnet/generic-implicit</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
       <loc>https://developer.okta.com/quickstart/java/generic-implicit</loc>
       
       
@@ -793,7 +767,7 @@
   
     
     <url>
-      <loc>https://developer.okta.com/product/</loc>
+      <loc>https://developer.okta.com/quickstart/php/generic-implicit</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -806,74 +780,7 @@
   
     
     <url>
-      <loc>https://developer.okta.com/privacy/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-  
-    
-    <url>
-      <loc>https://developer.okta.com/signup/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>https://developer.okta.com/integrate_with_okta/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>https://developer.okta.com/feed/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>https://developer.okta.com/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>https://developer.okta.com/documentation/</loc>
+      <loc>https://developer.okta.com/quickstart/dotnet/generic-implicit</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -899,33 +806,7 @@
   
     
     <url>
-      <loc>https://developer.okta.com/contact/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
       <loc>https://developer.okta.com/signup/thank-you/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>https://developer.okta.com/search/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -951,6 +832,19 @@
   
     
     <url>
+      <loc>https://developer.okta.com/signup/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/blog/</loc>
       
       
@@ -964,7 +858,7 @@
   
     
     <url>
-      <loc>https://developer.okta.com/quickstarts/</loc>
+      <loc>https://developer.okta.com/integrate_with_okta/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -977,7 +871,87 @@
   
     
     <url>
-      <loc>https://developer.okta.com/quickstart/</loc>
+      <loc>https://developer.okta.com/search/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/privacy/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/documentation/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/feed/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/contact/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/product/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1003,33 +977,7 @@
   
     
     <url>
-      <loc>https://developer.okta.com/oidc_playground/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>https://developer.okta.com/sitemap/</loc>
-      
-      
-        <changefreq>monthly</changefreq>
-      
-      
-        <priority>0.3</priority>
-      
-    </url>
-    
-  
-    
-    <url>
-      <loc>https://developer.okta.com/terms/</loc>
+      <loc>https://developer.okta.com/quickstarts/</loc>
       
       
         <changefreq>monthly</changefreq>
@@ -1055,7 +1003,59 @@
   
     
     <url>
+      <loc>https://developer.okta.com/oidc_playground/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/cla/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/terms/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/quickstart/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/sitemap/</loc>
       
       
         <changefreq>monthly</changefreq>
