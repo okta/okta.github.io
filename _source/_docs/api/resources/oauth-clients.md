@@ -14,7 +14,7 @@ Note that clients managed via this API are modeled as applications in Okta and a
 Administrator dashboard. Changes made via the API appear in the UI and vice versa. Tokens issued by these clients
 follow the rules for Access Tokens and ID Tokens.
 
-> This API is a {% api_lifecycle ea%} feature.
+> This API is an {% api_lifecycle ea%} feature.
 
 Explore the Client Registration API: [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/291ba43cde74844dd4a7){:target="_blank"}
 

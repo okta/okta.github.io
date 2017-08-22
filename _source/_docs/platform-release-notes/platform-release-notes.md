@@ -1,40 +1,47 @@
 ---
 layout: docs_page
 title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.32
+excerpt: Summary of changes to the Okta Platform since Release 2017.33
 ---
 
-## Platform Release Notes for Release 2017.33
+## Platform Release Notes for Release 2017.34
 
-The following platform feature enhancements and bug fixes are available in the 2017.33 release.
+The following platform feature enhancements and bug fixes are available in the 2017.34 release.
 Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
 
 ### Platform Feature Enhancements
 
-| Feature Enhancement                                                                                                  | Expected in Preview Orgs | Expected in Production Orgs             |
-|:---------------------------------------------------------------------------------------------------------------------|:-------------------------|:----------------------------------------|
-|       [Password Policy API is an Early Access Release](#password-policy-api-is-an-early-access-release)                    | August 16, 2017          | August 21, 2017                         |
-|      [Referrer Policy Header for OAuth 2.0 and OpenID Connect](#referrer-policy-header-for-oauth-20-and-openid-connect)   | August 16, 2017          | August 21, 2017                         |
+| Feature Enhancement                                                           | Expected in Preview Orgs            | Expected in Production Orgs |
+|:------------------------------------------------------------------------------|:------------------------------------|:----------------------------|
+|         [New Developer Dashboard](#new-developer-dashboard)                           | Available now in new developer orgs | N/A                         |
+|        [Zones API is an Early Access Release](#zones-api-is-an-early-access-release) | August 22, 2017                     | September 5, 2017           |
 
-#### Password Policy API is an Early Access Release
-<!-- REQ-10227 -->
+#### New Developer Dashboard
 
-The Password Policy API is an {% api_lifecycle ea %} release. Contact Support to enable it.
+The new developer dashboard is available in all new developer orgs in preview:
 
-Use the [Password Policy API](/docs/api/resources/policy.html#GroupPasswordPolicy) to dynamically configure group-based password policies, including self-service recovery and unlock options.
+{% img release_notes/dev-dashboard.png alt:"New Developer Dashboard" %}
 
-#### Referrer Policy Header for OAuth 2.0 and OpenID Connect
-<!-- OKTA-96522 -->
+Use the developer dashboard to access quick-start guides for your favorite language and view recent system log events.
+You can also create an OpenID Connect app more easily with this simplified flow:
 
-For enhanced security, Okta automatically adds the `Referrer-Policy` header with `Referrer-Policy: no-referrer` to any OpenID Connect or API Access Management request that has the `response_mode` set to `fragment` or `query`.
+{% img release_notes/new-oidc-app-dashboard.png alt:"New Developer Dashboard" %}
+
+#### Zones API is an Early Access Release
+<!-- OKTA-129115 -->
+
+Zones are used to group IP Address ranges so that policy decisions can be made based on the client’s IP location.
+
+[The Zones API](/docs/api/resources/zones.html) is an {% api_lifecycle ea %} release. Contact Support to enable it.
+This API can be enabled beginning August 22, 2017 for preview orgs, and beginning September 5, 2017 for production orgs.
 
 ### Platform Bug Fixes
 
-Bug fixes are expected on preview orgs starting August 16, 2017, and on production orgs starting August 21, 2017.
+Bug fixes are expected on preview orgs starting August 22, 2017, and on production orgs starting Sept 5, 2017.
 
-* A PUT request to [update a user](/docs/api/resources/users.html#update-user) didn't delete all unspecified properties. (OKTA-133499)
-* The [Dynamic Client Registration API](/docs/api/resources/oauth-clients.html) didn't display the complete error message for requests to update a client. (OKTA-134440)
-* We improved the messages returned with some error codes for OpenID Connect and OAuth 2.0 client apps using the [`/oauth2/v1/clients`](/docs/api/resources/oauth-clients.html) and [`/api/v1/apps`](/docs/api/resources/apps.html) endpoints. (OKTA-135294)
+* OpenID Connect and OAuth 2.0 client apps with an `application_type` of `native` or `browser` incorrectly allowed the `client_credentials` grant type. This fix adheres to the [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#section-1.3.4). (OKTA-135853)
+* Requests to `GET /api/v1/apps/:aid/groups?expand=group%2Cmetadata` caused an error in orgs with the Application Entitlements Policy enabled. (OKTA-135969)
+* The `AssertionConsumerServiceURL` attribute in a SAML authentication requests matched one of the configured SSO URLs but an error was returned. (OKTA-137555)
 
 ### Does Your Org Have This Change Yet?
 

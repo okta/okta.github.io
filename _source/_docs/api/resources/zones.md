@@ -5,7 +5,7 @@ title: Zones
 
 # Zones API
 
-{% api_lifecycle beta %} This API is [a Beta release](/docs/api/getting_started/releases-at-okta.html).
+> This API is an {% api_lifecycle ea %} feature.
 
 The Okta Zones API provides operations to manage zones in your organization. Zones may be used to guide policy decisions.
 
