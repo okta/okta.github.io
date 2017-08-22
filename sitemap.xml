@@ -3,6 +3,21 @@
   
     
     <url>
+      <loc>https://developer.okta.com/blog/2017/08/21/what-is-developer-relations-at-okta</loc>
+      
+        <lastmod>2017-08-21T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/blog/2017/08/17/why-jwts-suck-as-session-tokens</loc>
       
         <lastmod>2017-08-17T00:00:00+00:00</lastmod>

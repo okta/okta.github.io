@@ -8,6 +8,148 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>What is Developer Relations at Okta?</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/blog/devrel-at-okta/developer-relations-50f2d3a84221a1cb8a4b06d7b5c41a4095dbd92d9fba18c4860d02c2555cc05c.png&quot; alt=&quot;Developer Relations&quot; width=&quot;640&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Okta is investing heavily into making developers successful by creating great developer experiences through updated SDKs and integrations as well as new pricing and packaging. These updates are intended to give developers everything they need to build modern, secure applications. But equally important is how Okta &lt;strong&gt;speaks&lt;/strong&gt; to developers. How we engage with the community and build our reputation with a wide range of developers. At the heart of that effort, is our Developer Relations (DevRel) team. In this post, we’d like to introduce you to that team and give you a behind the scenes glimpse into how a large, successful company builds an authentic, high-value developer relations program from scratch.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-build-a-developer-relations-team&quot;&gt;How to Build a Developer Relations Team&lt;/h2&gt;
+
+&lt;p&gt;Building a developer relations team at Okta was easy. Stormpath already had a DevRel team. When we &lt;a href=&quot;https://www.okta.com/blog/2017/03/stormpath-welcome-to-Okta/&quot;&gt;joined forces&lt;/a&gt; — poof — it all came together! However, building a DevRel team at Stormpath wasn’t easy. The process started by hiring developers that could create and maintain SDKs for Stormpath’s API. Once the SDKs were created, these same developers started advocating for their respective projects through blog posts and speaking engagements.&lt;/p&gt;
+
+&lt;p&gt;Ultimately, this meant finding people who were a special combination of great developers with great taste for a good developer experience, who also genuinely loved helping other people build stuff, and were already actively engaged with the developer community because they loved it.&lt;/p&gt;
+
+&lt;p&gt;So, who made the team?&lt;/p&gt;
+
+&lt;h3 id=&quot;meet-the-okta-devrel-team&quot;&gt;Meet the Okta DevRel Team&lt;/h3&gt;
+
+&lt;p&gt;The DevRel team at Okta is made up of four individual contributors, each with our specialties. Let me take a moment and introduce them to you.&lt;/p&gt;
+
+&lt;h4 id=&quot;randall-degges&quot;&gt;Randall Degges&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/avatar-rdegges-9fb23ebb06890fb7924b8ceb3a28d666ae4ae1a297a3cddf517e549547e5dfe3.jpg&quot; alt=&quot;Randall Degges&quot; class=&quot;BlogPost-avatar pull-left img-100px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://twitter.com/rdegges&quot;&gt;Randall&lt;/a&gt;&lt;/strong&gt; is our Lead Developer Advocate. He wrote the &lt;a href=&quot;https://www.rdegges.com/2012/my-heroku-book-is-finished/&quot;&gt;first book on Heroku&lt;/a&gt;, loves to hack Python and JavaScript, and is our go-to guy when it comes to deployment pipelines and AWS. If you’re having issues with Okta’s Python or Node.js SDKs, Randall’s the guy to talk to.&lt;/p&gt;
+
+&lt;h4 id=&quot;nate-barbettini&quot;&gt;Nate Barbettini&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/avatar-nbarbettini-04840721946d0ed1aac5fdec3b87212e7d2656ec4482ba24df3a21d8306de85b.jpg&quot; alt=&quot;Nate Barbettini&quot; class=&quot;BlogPost-avatar pull-left img-100px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://twitter.com/nbarbettini&quot;&gt;Nate&lt;/a&gt;&lt;/strong&gt; specializes in full-stack .NET and JavaScript. He was recently &lt;a href=&quot;https://twitter.com/okta/status/862081320054276096&quot;&gt;granted the .NET MVP Award from Microsoft&lt;/a&gt; for his contributions to the .NET community. If you’re having issues with our .NET SDK, talk to Nate.&lt;/p&gt;
+
+&lt;h4 id=&quot;lee-brandt&quot;&gt;Lee Brandt&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/avatar-leebrandt-23a647548f26433d031856dcef1df5204763b94283cd68c397d816a61363a94d.jpg&quot; alt=&quot;Lee Brandt&quot; class=&quot;BlogPost-avatar pull-left img-100px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;Lee&lt;/a&gt;&lt;/strong&gt; also specializes in .NET and JavaScript. He’s a long-time Microsoft MVP and the founder of KCDC (Kansas City Developers Conference). &lt;a href=&quot;http://www.kcdc.info/&quot;&gt;KCDC&lt;/a&gt; is one of the region’s largest developer conferences and h numerous languages and communities represented. Lee is a rockstar in .NET, Angular, and React, so hit him up if you have issues with these frameworks and Okta.&lt;/p&gt;
+
+&lt;h4 id=&quot;matt-raible&quot;&gt;Matt Raible&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/avatar-matt_raible-9974af6192eb1753b7137c8fff0a2c6e6bb9736a2517986cb5cc50bb040e83d4.jpg&quot; alt=&quot;Matt Raible&quot; class=&quot;BlogPost-avatar pull-left img-100px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That’s me!  I’m &lt;strong&gt;&lt;a href=&quot;https://twitter.com/mraible&quot;&gt;Matt Raible&lt;/a&gt;&lt;/strong&gt; and I started as a web developer, then a Java developer for about a decade,  and then got back into UI development. I’m a Java Champion and like to code in both Java and JavaScript, though TypeScript has been a lot of fun lately. If you’re having issues with our Java SDK, Spring Boot, our Sign-In Widget, or anything Angular, let me know!&lt;/p&gt;
+
+&lt;h2 id=&quot;why-developer-relations&quot;&gt;Why Developer Relations?&lt;/h2&gt;
+
+&lt;p&gt;We have a Developer Relations team at Okta because we recognize that the decision maker for software has changed. In the past, companies that sell software could sell it via marketing, using a top-down approach that targeted CEOs or CTOs. Some companies still sell software this way, but the market has changed and developers have become the dominate decision makers. Especially when it comes to choosing software that their applications interact with. Need proof? See &lt;a href=&quot;http://redmonk.com/sogrady/&quot;&gt;Stephen O’Grady’s&lt;/a&gt; &lt;a href=&quot;https://thenewkingmakers.com/&quot;&gt;The New Kingmakers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;/assets/blog/devrel-at-okta/newkingmakers-0115572c11115c04ed1aea354aa13b3cb24e22aa5f3c60846a319a9a58ff0fc2.jpg&quot; alt=&quot;The New Kingmakers&quot; width=&quot;150&quot; class=&quot;pull-right m-x-sm&quot; /&gt;
+While the actual number might be up for debate, the importance of technical talent is not. The most successful companies today 
+are those that understand the strategic role that developers will play in their success or failure. Not just successful 
+technology companies – virtually every company today needs a developer strategy. There’s a reason that ESPN and Sears have 
+rolled out API programs, that companies are being bought not for their products but their people. The reason is that developers
+are the most valuable resource in business.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Everyone on the DevRel Team at Okta are former developers. In fact, we’re &lt;em&gt;still&lt;/em&gt; developers! We’re working on the Okta SDKs, coding new examples to show how certain frameworks interact with our API, and hacking because we like to hack! We &lt;em&gt;know&lt;/em&gt; that developers are the decision makers because we’ve been influencing software decisions for most of our lives.&lt;/p&gt;
+
+&lt;p&gt;Marketing to developers is often a hard shift for a successful traditional marketing organization. Proven tactics like branded collateral, Gartner and Forrester research, hosted events, and press releases can be difficult to map to developer audiences. Developers want to see code, they want to know how your systems work, and they want to use technology that’ll keep them excited and employed. Developers listen to the community. If there are negative things said about your product or API, you’re going to have a hard time winning them over.&lt;/p&gt;
+
+&lt;p&gt;DevRel means engaging the community. It’s a focused type of field marketing for the purpose of awareness, evaluation, sentiment, and product feedback. Our job is to make other developers &lt;em&gt;aware&lt;/em&gt; that we exist and respectful of our opinions and thoughts via blog posts, speaking at conferences, and creating cool shit.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-devrel-works-at-okta&quot;&gt;How DevRel Works at Okta&lt;/h2&gt;
+
+&lt;p&gt;We plan to increase awareness of Okta’s Identity API (aka &lt;a href=&quot;https://developer.okta.com/&quot;&gt;The Identity Platform for Developers&lt;/a&gt;) with many initiatives.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Developer content marketing and thought leadership&lt;/li&gt;
+  &lt;li&gt;Regional community presence&lt;/li&gt;
+  &lt;li&gt;Influencer programs&lt;/li&gt;
+  &lt;li&gt;Support and engagement in open source tooling&lt;/li&gt;
+  &lt;li&gt;Internal advocacy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;developer-content-marketing-and-thought-leadership&quot;&gt;Developer content marketing and thought leadership&lt;/h3&gt;
+
+&lt;p&gt;Okta’s &lt;a href=&quot;https://developer.okta.com/blog/&quot;&gt;Developer Blog&lt;/a&gt; is our primary way of creating content and providing thought leadership. We’re on Twitter &lt;a href=&quot;https://twitter.com/oktadev&quot;&gt;@OktaDev&lt;/a&gt;, and chances are you’ll find one of us speaking at your favorite tech conference.&lt;/p&gt;
+
+&lt;p&gt;We recognize that content is king and we use our blog posts to extend our reach into the communities we know devs are already participating in.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/devrel-at-okta/content-is-king-0b320f0b5963ff155ad7a06a299a61bee27e0efe84e4c3ee1f8b73c349024d30.png&quot; alt=&quot;Content is King&quot; /&gt;&lt;/p&gt;
+
+&lt;div style=&quot;text-align: right; font-style: italic; margin-top: -20px&quot;&gt;
+  Image created by &lt;a href=&quot;https://github.com/amateurhuman&quot;&gt;Chris Kelly&lt;/a&gt; / &lt;a href=&quot;https://twitter.com/amateurhuman&quot;&gt;@amateurhuman&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We do this so we can share the interesting stuff that we’re building and educate developers at the same time. This also allows us to get feedback on what we’re building. It’s a win-win situation and helps both us and our users.&lt;/p&gt;
+
+&lt;h3 id=&quot;regional-community-presence&quot;&gt;Regional community presence&lt;/h3&gt;
+
+&lt;p&gt;For those developers that happen to live in the same town as our DevRel Team, there are even more benefits. We sponsor meetups that use our favorite technologies, and we’re interested in sponsoring more! We also have a company-wide initiative that allows us to buy developers a strong cup of coffee or an ice cold beer. In exchange, we hope to hear about your pain points with APIs like ours, and how we can make things easier for you.&lt;/p&gt;
+
+&lt;p&gt;Our DevRel Team is traveling to many big cities in the US to give tech talks, hang out, and generally get to know YOU. We do this so we can solicit feedback from other developers, build relationships, and try to positively impact developers lives all over the place.&lt;/p&gt;
+
+&lt;p&gt;If you’re interested in having us speak at your user group outside of the US, we can make that happen too! However, at this time, we require you to cover our travel expenses.&lt;/p&gt;
+
+&lt;p&gt;We sponsor meetups because we recognize that they’re an important source of knowledge for many developers around the world. They also offer a sense of community, networking, and social interaction that can’t be found online.&lt;/p&gt;
+
+&lt;h3 id=&quot;influencer-programs&quot;&gt;Influencer programs&lt;/h3&gt;
+
+&lt;p&gt;We’re just getting started with our influencer program. We hope to engage with influencers in our respective communities and help them out by doing the little things that make them feel welcome. For example, giving them rides from the airport, taking them out to dinner, and hosting community meetups. If you’re an influencer in your community and have ideas, let us know!&lt;/p&gt;
+
+&lt;p&gt;We do this because we know how important influencers are and how traveling solo can be lonely. We want to make your hard work and traveling experience more pleasant!&lt;/p&gt;
+
+&lt;h3 id=&quot;support-and-engagement-in-open-source-tooling&quot;&gt;Support and engagement in open source tooling&lt;/h3&gt;
+
+&lt;p&gt;Supporting open source is something we did well at Stormpath. We helped support the &lt;a href=&quot;https://github.com/jwtk/jjwt&quot;&gt;Java JWT project&lt;/a&gt;, created a &lt;a href=&quot;https://www.jwtinspector.io/&quot;&gt;plugin for Chrome to inspect JWTs&lt;/a&gt;, and actively engaged with the open source security projects in the Java community (e.g. Apache Shiro and Spring Security) to make them better.&lt;/p&gt;
+
+&lt;p&gt;At Okta, we plan to do much of the same. We’re working to make &lt;a href=&quot;https://oauth.com&quot;&gt;https://oauth.com&lt;/a&gt; better, and we plan to do the same for OpenID Connect. We’ll continue to invest in the Java JWT project, and we’re working closely with the Spring Security team to make sure their OpenID Connect support is world-class.&lt;/p&gt;
+
+&lt;p&gt;If you’re involved in an open source project that helps developers use OAuth, OIDC, and other authentication standards, let us know how we can help! We have the budget to help with hosting costs, promotional materials, or whatever your project might need.&lt;/p&gt;
+
+&lt;h3 id=&quot;internal-advocacy&quot;&gt;Internal advocacy&lt;/h3&gt;
+
+&lt;p&gt;We’re doing our best to educate Okta employees how to work with developers too. We’ve already done several presentations on what DevRel is, and we’re making moves to make our documentation better, and our blog friendlier.&lt;/p&gt;
+
+&lt;p&gt;We know that Developer DNA cannot just be a part of the DevRel team. All of Okta needs Developer DNA. We’ve been telling people they can help by sharing feedback with us, having a beer with an engineer, build for good developer experience, and by giving back to the community.&lt;/p&gt;
+
+&lt;h2 id=&quot;devex-devrel-and-roi&quot;&gt;DevEx, DevRel, and ROI&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/avatar-alex_salazar-b72c56883178044fbd5ed9f81d693f467ba1cb4aec14905ab79b7afe398fcf40.jpg&quot; alt=&quot;Alex Salazar&quot; class=&quot;BlogPost-avatar pull-right img-150px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The DevRel Team focuses on making developers’ lives easier, but it’s not all fun and games. Our fearless leader, &lt;a href=&quot;https://twitter.com/salatzar&quot;&gt;Alex Salazar&lt;/a&gt;, is in charge of making sure our efforts are right on the business side of things. Alex is the former CEO of Stormpath, so he’s hyper aware of revenue growth, cost reduction, and trying to balance predictability and risk. He knows that our go-to-market strategy needs to be around developer experience (DevEx) and developer relations (DevRel). It’s going to be tough to market to developers if our product is crap.&lt;/p&gt;
+
+&lt;p&gt;We’re focused as a team on cost efficiency and repeatability, to increase our ROI. We know what types of DevRel are the most effective (blogging, how to videos). We know what DevEx investments will have the greatest impact (ease of use, excellent documentation). We’ll do more of what’s working, and stop doing the things that aren’t.&lt;/p&gt;
+
+&lt;p&gt;And more than anything, we’re &lt;strong&gt;tracking the metrics that matter&lt;/strong&gt;. This way, we know how many developers are using our API, with which SDKs, and how long it takes them to activate their account after signing up.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/devrel-at-okta/track-metrics-cbed8bd9e30688f7abd2d93206dfb695318eb12f6a0128189672f587444afd90.png&quot; alt=&quot;Track Metrics&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;heres-to-the-future&quot;&gt;Here’s to the Future!&lt;/h2&gt;
+
+&lt;p&gt;Being a part of the DevRel Team at Okta has been a great experience for me. It’s fun to be a part of something that’s just beginning, with a team of outstanding individuals. If you’re a developer using Okta, and you have feedback to share, please contact us at developers@okta.com. DevRel at Okta is a fun ride, and we’re just getting started.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.okta.com&quot;&gt;&lt;img src=&quot;/assets/blog/devrel-at-okta/okta-api-7171252458b62cd1b33acd6e0f738e7a0ed0b95acf6d8ad94ce502021b513474.png&quot; alt=&quot;Okta API&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you’d like to talk to me about DevRel at Okta, or in your organization, please hit me up on Twitter &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;@mraible&lt;/a&gt; or directly via email to matt.raible@okta.com.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Aug 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/08/21/what-is-developer-relations-at-okta</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/08/21/what-is-developer-relations-at-okta</guid>
+      </item>
+    
+      <item>
         <title>Why JWTs Suck as Session Tokens</title>
         <description>&lt;p&gt;&lt;img src=&quot;/assets/blog/why-jwts-suck-as-session-tokens/jwts-so-hot-right-now-51c95f8114d838c08ba3430c0495e355d54d328e33227495d58cb4e781de291c.jpg&quot; alt=&quot;blog/why-jwts-suck-as-session-tokens/jwts-so-hot-right-now.jpg&quot; /&gt;&lt;/p&gt;
 
