@@ -227,7 +227,7 @@ First, update the `@NgModule` imports with the `HttpModule`:
     RouterModule.forRoot(appRoutes)
  ]
 ```
-'
+
 ```typescript
 // messagelist.component.ts
 
