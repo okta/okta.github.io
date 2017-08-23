@@ -41,7 +41,7 @@
     </tr>
     <tr>
       <td>Login redirect URIs</td>
-      <td>http://localhost:{port}/callback</td>
+      <td>http://localhost:{port}/implicit/callback</td>
     </tr>
     <tr>
       <td>Grant Types Allowed</td>
@@ -71,7 +71,7 @@
   </tbody>
 </table>
 
-<p>These values will be used in your Angular application to setup the OIDC flow with Okta.</p>
+<p>These values will be used in your Angular application to setup the OpenID Connect flow with Okta.</p>
 
 <h2 id="create-an-authentication-service">Create an Authentication Service</h2>
 
@@ -100,7 +100,7 @@
     <span class="na">url</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/'</span><span class="p">,</span>
     <span class="na">clientId</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
     <span class="na">issuer</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/oauth2/default'</span><span class="p">,</span>
-    <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:{port}/callback'</span><span class="p">,</span>
+    <span class="na">redirectUri</span><span class="p">:</span> <span class="s1">'http://localhost:{port}/implicit/callback'</span><span class="p">,</span>
   <span class="p">});</span>
 
   <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{}</span>
@@ -149,7 +149,7 @@
 
 <ul>
   <li><code class="highlighter-rouge">/</code>: A default home page to handle basic control of the app.</li>
-  <li><code class="highlighter-rouge">/callback</code>: Handle the response from Okta and store the returned tokens.</li>
+  <li><code class="highlighter-rouge">/implicit/callback</code>: Handle the response from Okta and store the returned tokens.</li>
 </ul>
 
 <p>Follow the next sections to create these routes in your Angular application.</p>
@@ -184,8 +184,8 @@
 </code></pre>
 </div>
 
-<h3 id="callback"><code class="highlighter-rouge">/callback</code></h3>
-<p>In order to handle the redirect back from Okta, you need to capture the token values from the URL. You’ll use <code class="highlighter-rouge">/callback</code> as the callback URL, and again you’ll use our <code class="highlighter-rouge">OktaAuthService</code> to delegate the callback details to the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library.</p>
+<h3 id="implicitcallback"><code class="highlighter-rouge">/implicit/callback</code></h3>
+<p>In order to handle the redirect back from Okta, you need to capture the token values from the URL. You’ll use <code class="highlighter-rouge">/implicit/callback</code> as the callback URL, and again you’ll use our <code class="highlighter-rouge">OktaAuthService</code> to delegate the callback details to the <a href="/code/javascript/okta_auth_sdk">Okta Auth JS</a> library.</p>
 
 <p>Create a new component <code class="highlighter-rouge">src/app/callback.component.ts</code>:</p>
 
@@ -223,7 +223,7 @@
 
 <span class="kd">const</span> <span class="nx">appRoutes</span><span class="err">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span>
-    <span class="na">path</span><span class="p">:</span> <span class="s1">'callback'</span><span class="p">,</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'/implicit/callback'</span><span class="p">,</span>
     <span class="na">component</span><span class="p">:</span> <span class="nx">CallbackComponent</span>
   <span class="p">}</span>
 <span class="p">]</span>
@@ -250,7 +250,7 @@
 
 <h2 id="using-the-access-token">Using the Access Token</h2>
 
-<p>Your Angular application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">MessageList</code> component that requires authentication, and uses the <code class="highlighter-rouge">okta.getAccessToken()</code> method to get the access token from local storage, and attach it to our resource request.</p>
+<p>Your Angular application now has an access token in local storage that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">MessageList</code> component that gets the access token from local storage, and use it to make an authenticated request to your server.</p>
 
 <p>Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the Angular component could look like for this hypothetical example:</p>
 
