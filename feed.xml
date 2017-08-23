@@ -8,6 +8,141 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>5 Tips for Building your Java API</title>
+        <description>&lt;p&gt;Developers use APIs to for everything! You build APIs for your own apps to consume, or as a part of a microservices architecture. Bottom line, you’re building and using APIs to make your life easier. The ongoing effort to simplify development and work more efficiently, sometimes this also means looking for new libraries or processes (or more often less process). For many teams managing authentication and access control for their apps and APIs is more work than it’s worth, or simply not an efficient use of time, so we want to share a few tips that will save you time and code, along with making your applications more secure and easier to maintain.&lt;/p&gt;
+
+&lt;p&gt;For a bit of context: Okta at its core, is a Java-based REST+JSON API, built on the Spring Framework. We store user credentials and data on behalf of other companies, so for us security is paramount. Thus, my first requirement for these tips is that they help manage access to your Java API securely.&lt;/p&gt;
+
+&lt;p&gt;These tips should be universal to any type of Java application. They will help you move faster, write less code, and at the same time be more secure: a trifecta!&lt;/p&gt;
+
+&lt;h2 id=&quot;1-dont-roll-your-own-security&quot;&gt;1. Don’t roll your own security&lt;/h2&gt;
+
+&lt;p&gt;Seriously, just don’t, it’s hard.&lt;/p&gt;
+
+&lt;p&gt;Almost everyone knows to avoid implementing their own cryptography. The rest of your security stack is no different, and the risk/reward just isn’t worth it. There’s a high chance you’ll make some sort of mistake. Since 1999 there have been 89373 CVEs (&lt;a href=&quot;https://cve.mitre.org/&quot;&gt;Common Vulnerabilities and Exposures&lt;/a&gt;). And that’s just what’s been made public, many of those by very smart people.&lt;/p&gt;
+
+&lt;p&gt;You may think that dealing with a simple use case like validating a user’s password is trivial, all you’re doing is just comparing a couple strings after all. You would be wrong. You need to validate the password’s hash, audit the attempt, mitigate against dictionary attacks, and that’s just the tip of the iceberg. Your best bet is to use an existing library or a framework like &lt;a href=&quot;https://shiro.apache.org&quot;&gt;Apache Shiro&lt;/a&gt; or &lt;a href=&quot;https://projects.spring.io/spring-security/&quot;&gt;Spring Security&lt;/a&gt; and let the framework handle the complexities!&lt;/p&gt;
+
+&lt;h2 id=&quot;2-use-tls-always&quot;&gt;2. Use TLS, always!&lt;/h2&gt;
+
+&lt;p&gt;It’s 2017, everything should be HTTPS now, even the sites on your company’s intranet. &lt;a href=&quot;https://letsencrypt.org/&quot;&gt;Let’s encrypt&lt;/a&gt; makes this free and easy, which means you can stop using insecure self-signed keys too! You can even set up a local &lt;a href=&quot;https://community.letsencrypt.org/t/configuring-lets-encrypt-with-tomcat-6-x-and-7-x/32416&quot;&gt;Tomcat&lt;/a&gt; or &lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04&quot;&gt;Nginx&lt;/a&gt; instance with a certificate.&lt;/p&gt;
+
+&lt;p&gt;Making your application require TLS (HTTPS/SSL) is usually a one liner, so everybody should be doing it!&lt;/p&gt;
+
+&lt;p&gt;For Apache Shiro, it is just property:&lt;/p&gt;
+&lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[urls]&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;/**&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;ssl&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And Spring Security, a single method call when configuring an HttpSecurity:&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requiresChannel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anyRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requiresSecure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Or just use a &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/current/reference/html/howto-embedded-servlet-containers.html#howto-configure-ssl&quot;&gt;few properties&lt;/a&gt; with Spring Boot:&lt;/p&gt;
+
+&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;server.port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;8443&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;server.ssl.key-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;classpath:keystore.jks&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;server.ssl.key-store-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;secret&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;server.ssl.key-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;another-secret&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;3-build-your-java-web-service-with-spring-boot&quot;&gt;3. Build your Java web service with Spring Boot&lt;/h2&gt;
+
+&lt;p&gt;Spring Boot is an opinionated view of the Spring platform which makes it dead simple to write &lt;a href=&quot;https://12factor.net/&quot;&gt;twelve-factor apps&lt;/a&gt; in &lt;a href=&quot;https://virtualjug.com/building-robust-apis-and-apps-with-spring-boot-and-angular/&quot;&gt;very few lines&lt;/a&gt;. If you’re still building WAR files you owe it to yourself to check this out. You can create complicated, application wide functions like setting up an OAuth resource server by using a single annotation (&lt;code class=&quot;highlighter-rouge&quot;&gt;@EnableResourceServer&lt;/code&gt;) or change the server’s port with a single property:&lt;/p&gt;
+&lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;py&quot;&gt;server.port&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;8090&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If Spring is not your bag, take a look at &lt;a href=&quot;http://www.dropwizard.io/1.1.2/docs/&quot;&gt;Dropwizard&lt;/a&gt; for an opinionated JAX-RS stack.&lt;/p&gt;
+
+&lt;h2 id=&quot;4-use-monitoring-and-metrics-to-watch-your-back&quot;&gt;4. Use monitoring and metrics to watch your back&lt;/h2&gt;
+
+&lt;p&gt;It’s pretty difficult to pinpoint errors without any data. Spring Boot makes gathering metrics easy with &lt;a href=&quot;https://spring.io/blog/2017/08/22/introducing-actuator-endpoints-in-spring-boot-2-0&quot;&gt;Actuator&lt;/a&gt;, just add a single dependency to your application.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework.boot&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-boot-starter-actuator&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then browse to &lt;code class=&quot;highlighter-rouge&quot;&gt;/health&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;/metrics&lt;/code&gt; to view health checks or application metrics respectively. Dropwizard does the same thing with &lt;code class=&quot;highlighter-rouge&quot;&gt;/healthcheck&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/metrics&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here’s an output from a Spring Boot application’s &lt;code class=&quot;highlighter-rouge&quot;&gt;/metrics&lt;/code&gt; endpoint, out of the box:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;classes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7704&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;classes.loaded&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7704&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;classes.unloaded&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;counter.status.200.metrics&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;gauge.response.metrics&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;99.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;gc.ps_marksweep.count&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;gc.ps_marksweep.time&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;272&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;gc.ps_scavenge.count&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;gc.ps_scavenge.time&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;136&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;heap&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3728384&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;heap.committed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;470016&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;heap.init&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;262144&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;heap.used&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;207793&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;httpsessions.active&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;httpsessions.max&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;instance.uptime&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;25020&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;mem&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;529086&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;mem.free&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;262222&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;nonheap&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;nonheap.committed&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60608&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;nonheap.init&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2496&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;nonheap.used&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;59067&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;processors&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;systemload.average&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;5.56103515625&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;threads&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;threads.daemon&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;threads.peak&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;threads.totalStarted&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;uptime&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;37182&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;5-protect-your-sensitive-bits&quot;&gt;5. Protect your sensitive bits&lt;/h2&gt;
+
+&lt;p&gt;People treat API keys insecurely, it’s a fact of life. Keys get emailed around or checked into source control. Maybe this is because they seem more opaque than a password, I don’t know, but they’re just as sensitive, if not more so. If you need to store your API keys in a file, make sure there is limited access to that file. For example, we recommend storing our Okta yaml file in private directory &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.okta/okta.yaml&lt;/code&gt; and setting the file permissions to allow only the owner to read:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;chmod &lt;span class=&quot;nv&quot;&gt;u&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;r,go-rwx ~/.okta/okta.yaml
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you are creating API keys for users of your applications, plan to warn them. SSH ignores files in your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.ssh&lt;/code&gt; directory if the permissions are not set correctly. Github does a great job of warning users by marking items in the UI with ‘Danger Zone’ marking.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=yK0P1Bk8Cx4&quot; target=&quot;_blank&quot;&gt;
+&lt;img src=&quot;/assets/blog/five-java-tips/danger-zone-0133c72a44c994cb96f20c66706f19a036a29655f0438a73b1bd0eca596d5678.png&quot; alt=&quot;Danger Zone&quot; width=&quot;640&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;bonus-write-less-code-give-okta-a-try&quot;&gt;Bonus: Write less code, give Okta a try!&lt;/h2&gt;
+
+&lt;p&gt;Java has a bit of a reputation (and rightly so) for being verbose. All of the examples above show you how to write less code and when possible take advantage of existing libraries so you can focus on the code that will drive your business.&lt;/p&gt;
+
+&lt;p&gt;Shameless plug time: You can also write less code by &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;integrating Okta for fully featured user management&lt;/a&gt;. Just connect your apps, choose an IdP (or use ours), add users, configure rules, customize your login page, and then gain insights from our built-in reports. Want to see Okta in action? Check out these tutorials:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://scotch.io/tutorials/build-a-secure-notes-application-with-kotlin-typescript-and-okta&quot;&gt;Build a Secure Notes Application with Kotlin, TypeScript, and Okta&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.okta.com/blog/2017/08/08/secure-spring-microservices&quot;&gt;Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.okta.com/blog/2017/07/25/oidc-primer-part-1&quot;&gt;What is OpenId Connect&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And, as always, if you have any questions or comments you can hit me up on Twitter &lt;a href=&quot;https://twitter.com/briandemers&quot;&gt;@briandemers&lt;/a&gt;, or follow our whole team &lt;a href=&quot;https://twitter.com/OktaDev&quot;&gt;@oktadev&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/08/23/five-java-tips</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/08/23/five-java-tips</guid>
+      </item>
+    
+      <item>
         <title>Build an Ionic App with User Authentication</title>
         <description>&lt;p&gt;With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows you to authenticate directly against the &lt;a href=&quot;/&quot;&gt;Okta Platform API&lt;/a&gt;, and this article shows you how to do just that in an Ionic application. I’ll demo how to log in with OIDC redirect, using Okta’s Auth SDK, and using OAuth with Cordova’s in-app browser; user registration is omitted as the feature is still under active development.&lt;/p&gt;
 
@@ -1225,10 +1360,8 @@ mobile apps, and API services, and makes web security fun again.&lt;/p&gt;
       </item>
     
       <item>
-        <title>JAX-RS vs Spring for REST Endpoints</title>
-        <description>&lt;h1 id=&quot;lets-compare-jax-rs-vs-spring-for-rest-endpoints&quot;&gt;Let’s Compare: JAX-RS vs Spring for REST Endpoints&lt;/h1&gt;
-
-&lt;p&gt;Need to decouple your web service and client? You’re probably using REST endpoints, and if you’re a Java shop you’ve probably tried out JAX-RS, Spring REST, or both.But is one better than the other? In this post I’ll go over the the differences between the two using basically the same code for an apples to apples comparison. In future posts I’ll show you how easy it is to secure these REST endpoints using Apache Shiro and Okta.&lt;/p&gt;
+        <title>Let’s Compare: JAX-RS vs Spring for REST Endpoints</title>
+        <description>&lt;p&gt;Need to decouple your web service and client? You’re probably using REST endpoints, and if you’re a Java shop you’ve probably tried out JAX-RS, Spring REST, or both. But is one better than the other? In this post I’ll go over the the differences between the two using basically the same code for an apples to apples comparison. In future posts I’ll show you how easy it is to secure these REST endpoints using Apache Shiro and Okta.&lt;/p&gt;
 
 &lt;h2 id=&quot;lay-down-the-foundation--model-and-dao&quot;&gt;Lay Down the Foundation – Model and DAO&lt;/h2&gt;
 
