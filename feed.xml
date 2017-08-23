@@ -83,7 +83,7 @@ ionic serve
   &lt;li&gt;Change the &lt;strong&gt;Base URI&lt;/strong&gt; and &lt;strong&gt;Login redirect URI&lt;/strong&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8100&lt;/code&gt; and click &lt;strong&gt;Done&lt;/strong&gt;. You should see settings like the following:&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/oidc-settings-46747e5e9af164cf56d05f055a659520252558872d9319cadd831d5e7104b990.png&quot; alt=&quot;Okta OIDC Settings&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/oidc-settings-46747e5e9af164cf56d05f055a659520252558872d9319cadd831d5e7104b990.png&quot; alt=&quot;Okta OIDC Settings&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;create-a-login-page&quot;&gt;Create a Login Page&lt;/h2&gt;
 
@@ -579,9 +579,9 @@ Error: Cannot read property 'replace' of undefined
 &lt;table&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-login-28c3fe9253f50019e871f903ff7130b96e52b019f262dcfb3df8ae402684b84c.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-login-c4b218091f6549081c063e2eb71af4b1bcf371d49cffd109d3f77e6019ec85ce.png&quot; alt=&quot;Emulator Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-okta-login-dbd386e324736d899df5f44f978ff7f40db70876001ffe80c42d1dcab021c2f0.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-okta-login-03521c0da232257989de99fe3c41e81f1c822d1397d4b5e2e8a5371b21aef085.png&quot; alt=&quot;Emulator Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-home-08dd2b798c4e121b930df14887af9401e95153c4acbdc65f4cf5bfe409e28f1e.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-home-935f74e0cd70e31bcf49f782c0b1371c8ad1af4d44f6da3002a91cbf42a95d55.png&quot; alt=&quot;Emulator Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-login-c4b218091f6549081c063e2eb71af4b1bcf371d49cffd109d3f77e6019ec85ce.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-login-c4b218091f6549081c063e2eb71af4b1bcf371d49cffd109d3f77e6019ec85ce.png&quot; alt=&quot;Emulator Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-okta-login-03521c0da232257989de99fe3c41e81f1c822d1397d4b5e2e8a5371b21aef085.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-okta-login-03521c0da232257989de99fe3c41e81f1c822d1397d4b5e2e8a5371b21aef085.png&quot; alt=&quot;Emulator Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/emulator-home-935f74e0cd70e31bcf49f782c0b1371c8ad1af4d44f6da3002a91cbf42a95d55.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/emulator-home-935f74e0cd70e31bcf49f782c0b1371c8ad1af4d44f6da3002a91cbf42a95d55.png&quot; alt=&quot;Emulator Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -616,9 +616,9 @@ Code signing is required for product type 'Application' in SDK 'iOS 10.3'
 &lt;table&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-login-b2410de6bb2c6f04c5a620ce3a570e7ffa112c83a5eb91b320dd0322bb0c281b.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png&quot; alt=&quot;iPhone Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-okta-login-e3b1cc3b6aded6ae1e0d6aa09507732ebd658612afde62537b2256cfd4d360c5.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png&quot; alt=&quot;iPhone Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-home-fac7e46fb05c18e2ad814841e73c86af11038b045e6610c934d80f16b573a8a1.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png&quot; alt=&quot;iPhone Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://localhost:4000/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png&quot; alt=&quot;iPhone Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png&quot; alt=&quot;iPhone Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png&quot; alt=&quot;iPhone Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -666,9 +666,9 @@ For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
 &lt;table&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-login-8bdc605b57afdaead566ee007d80942004aded32cf264288a3d887a92b875794.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-login-a0363756fc25a974e87668bc0900acb783f7eec80a1b83b0c5de0a5016004f94.png&quot; alt=&quot;Android Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-okta-login-96f5a3f51b9a53e3d19890a5a8e4ea7bc54829b24ed98e40a1ba2fca0b165084.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-okta-login-bb57b05d91580c165352d0f21d2da0415827601a25720ec2121f269ae20618ae.png&quot; alt=&quot;Android Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-home-c0c0a1c18b552e00e959c0b6d38d115aeac26016169b7004b35db865ade24cec.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-home-9438a0b8324d932abc0dcece445af75c8009350e683bb46d526baaa614e1de13.png&quot; alt=&quot;Android Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-login-a0363756fc25a974e87668bc0900acb783f7eec80a1b83b0c5de0a5016004f94.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-login-a0363756fc25a974e87668bc0900acb783f7eec80a1b83b0c5de0a5016004f94.png&quot; alt=&quot;Android Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-okta-login-bb57b05d91580c165352d0f21d2da0415827601a25720ec2121f269ae20618ae.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-okta-login-bb57b05d91580c165352d0f21d2da0415827601a25720ec2121f269ae20618ae.png&quot; alt=&quot;Android Okta Login&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;/assets/blog/ionic-authentication/android-home-9438a0b8324d932abc0dcece445af75c8009350e683bb46d526baaa614e1de13.png&quot;&gt;&lt;img src=&quot;/assets/blog/ionic-authentication/android-home-9438a0b8324d932abc0dcece445af75c8009350e683bb46d526baaa614e1de13.png&quot; alt=&quot;Android Home&quot; width=&quot;280&quot; /&gt;&lt;/a&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
