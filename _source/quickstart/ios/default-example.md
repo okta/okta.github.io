@@ -140,7 +140,7 @@ if let currentToken = OktaAuth.tokens.get(forKey: "accessToken") {
 
 ## Using the Access Token
 
-Your iOS application now has an access token in the Keychain that was issued by your Okta Authorization server. You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that requires authentication, and uses the stored `accessToken` from the Keychain, to attach to our resource request.
+Your iOS application now has an access token in the Keychain that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that gets the access token from the Keychain, and use it to make an authenticated request to your server.
 
 Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the iOS HTTP request could look like for this hypothetical example:
 

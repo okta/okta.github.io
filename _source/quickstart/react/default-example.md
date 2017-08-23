@@ -21,12 +21,12 @@ In Okta, applications are OpenID Connect clients that can use Okta Authorization
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
 * Choose **Single Page App (SPA)** as the platform, then submit the form the default values, which should look like this:
 
-| Setting             | Value                                |
-| ------------------- | ------------------------------------ |
-| App Name            | My SPA App                           |
-| Base URIs           | http://localhost:{port}             |
-| Login redirect URIs | http://localhost:{port}/callback    |
-| Grant Types Allowed | Implicit                             |
+| Setting             | Value                                        |
+| ------------------- | -------------------------------------------- |
+| App Name            | My SPA App                                   |
+| Base URIs           | http://localhost:{port}                      |
+| Login redirect URIs | http://localhost:{port}/implicit/callback    |
+| Grant Types Allowed | Implicit                                     |
 
 After you have created the application there are two more values you will need to gather:
 
@@ -77,7 +77,7 @@ class Auth {
       url: 'https://{yourOktaDomain}.com',
       clientId: '{clientId}',
       issuer: 'https://{yourOktaDomain}.com/oauth2/default',
-      redirectUri: 'http://localhost:{port}/callback',
+      redirectUri: 'http://localhost:{port}/implicit/callback',
     });
   }
 
@@ -137,7 +137,7 @@ export const withAuth = WrappedComponent => props =>
 You'll want to create these routes in your sample application:
 
 - `/`: A default home page to handle basic control of the app.
-- `/callback`: Handle the response from Okta and store the returned tokens.
+- `/implicit/callback`: Handle the response from Okta and store the returned tokens.
 - `/login`: Redirect to the Okta Org login page.
 
 Follow the next sections to create these routes in your React application.
@@ -168,8 +168,8 @@ export default withAuth(withRouter(props => {
 }));
 ```
 
-### `/callback`
-In order to handle the redirect back from Okta, you need to capture the token values from the URL. You'll use `/callback` as the callback URL, and again you'll use our `auth.js` to delegate the callback details to the [Okta Auth JS](/code/javascript/okta_auth_sdk) library.
+### `/implicit/callback`
+In order to handle the redirect back from Okta, you need to capture the token values from the URL. You'll use `/implicit/callback` as the callback URL, and again you'll use our `auth.js` to delegate the callback details to the [Okta Auth JS](/code/javascript/okta_auth_sdk) library.
 
 Create a new component `src/Callback.js`:
 
@@ -267,7 +267,7 @@ class App extends Component {
         <div>
           <Route path='/' exact={true} component={Home}/>
           <Route path='/login' component={Login}/>
-          <Route path='/callback' component={Callback}/>
+          <Route path='/implicit/callback' component={Callback}/>
         </div>
       </Router>
     );
@@ -279,7 +279,7 @@ export default App;
 
 ## Using the Access Token
 
-Your React application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `MessageList` component that requires authentication, and uses the `auth.getAccessToken()` method to get the access token from local storage, and attach it to our resource request.
+Your React application now has an access token in local storage that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `MessageList` component that gets the access token from local storage, and use it to make an authenticated request to your server.
 
 Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the React component could look like for this hypothetical example:
 

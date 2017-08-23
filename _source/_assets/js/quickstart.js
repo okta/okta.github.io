@@ -30,12 +30,12 @@
         name: 'widget',
         label: 'Sign-In Widget',
         serverExampleType: 'implicit',
-        active: true
       },
       {
-        name: 'hosted',
-        label: 'Hosted Login',
+        name: 'okta-sign-in-page',
+        label: 'Okta Sign-In Page',
         serverExampleType: 'auth-code',
+        active: true
       }
     ],
     servers: [

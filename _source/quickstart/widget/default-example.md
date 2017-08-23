@@ -23,7 +23,7 @@ If you do not already have a **Developer Edition Account**, you can create one a
 | ------------------- | ----------------------------------------------------- |
 | Application Name    | My Web App                                            |
 | Base URIs           | http://localhost:{port}                               |
-| Login redirect URIs | http://localhost:{port}/callback                      |
+| Login redirect URIs | http://localhost:{port}/implicit/callback             |
 | Grant Types Allowed | Implicit                                              |
 
 After you have created the application there are two more values you will need to gather:
@@ -59,7 +59,7 @@ rel="stylesheet"/>
 
 ## Implement Okta Sign-In
 
-You can render the widget anywhere on the page by creating a `<div>` with a unique `id.`  You can also control the visual look of the widget by adding your own CSS.
+You can render the widget anywhere on the page by creating a `<div>` with a unique `id`.  You can also control the visual look of the widget by adding your own CSS.
 
 First, create a `<div>` inside of your HTML file:
 
@@ -85,14 +85,14 @@ Next, add a `script` to configure the widget to your organization and render it 
         }
         });
 
-        // Render the widget to the CSS selector okta-login-container
+        // Render the widget to the CSS selector #okta-login-container
         oktaSignIn.renderEl(
             { el: '#okta-login-container' },
             function success(res) {
                 if (res.status !== 'SUCCESS') {
                    return;
                 }
-                // Store the tokens in the TokenManager in the order requestsed
+                // Store the tokens in the TokenManager in the order requested
                 oktaSignIn.tokenManager.add('accessToken', res[0])
                 oktaSignIn.tokenManager.add('idToken', res[1])
                 
@@ -101,6 +101,7 @@ Next, add a `script` to configure the widget to your organization and render it 
             function error(err) {
                 // The widget handles most types of errors: CONFIG_ERROR, OAUTH_ERROR, etc
                 // Add any custom logic to handle uncaught exceptions
+                console.log(err);
             }
         );
 </script>
@@ -108,7 +109,7 @@ Next, add a `script` to configure the widget to your organization and render it 
 
 ### Using the Access Token
 
-Your application now has an access token in local storage that was issued by your Okta Authorization server.  You can read this token and present it to your own server to authenticate requests for resources on your server.  As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that requires authentication, retrieves the access token from local storage, and attach it to our resource request.
+Your application now has an access token in local storage that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that gets the access token from local storage, and use it to make an authenticated request to your server.
 
 Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the function could look like for this hypothetical example:
 
