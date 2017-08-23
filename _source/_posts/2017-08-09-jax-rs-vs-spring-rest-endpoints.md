@@ -1,13 +1,11 @@
 ---
 layout: blog_post
-title: 'JAX-RS vs Spring for REST Endpoints'
+title: 'Let’s Compare: JAX-RS vs Spring for REST Endpoints'
 author: bdemers
 tags: [spring, jaxrs, java, rest, stormtrooper]
 ---
 
-# Let’s Compare: JAX-RS vs Spring for REST Endpoints
-
-Need to decouple your web service and client? You’re probably using REST endpoints, and if you’re a Java shop you’ve probably tried out JAX-RS, Spring REST, or both.But is one better than the other? In this post I’ll go over the the differences between the two using basically the same code for an apples to apples comparison. In future posts I’ll show you how easy it is to secure these REST endpoints using Apache Shiro and Okta.
+Need to decouple your web service and client? You’re probably using REST endpoints, and if you’re a Java shop you’ve probably tried out JAX-RS, Spring REST, or both. But is one better than the other? In this post I’ll go over the the differences between the two using basically the same code for an apples to apples comparison. In future posts I’ll show you how easy it is to secure these REST endpoints using Apache Shiro and Okta.
 
 ## Lay Down the Foundation – Model and DAO
 
