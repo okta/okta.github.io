@@ -7,11 +7,11 @@ describe('quickstarts page spec', () => {
     return quickstartsPage.load();
   });
 
-  it('has sign-in widget + nodejs generic selected by default', () => {
-    expect(quickstartsPage.urlContains("/widget/nodejs/generic")).toBe(true);
+  it('has okta-sign-in-page + nodejs generic selected by default', () => {
+    expect(quickstartsPage.urlContains("/okta-sign-in-page/nodejs/generic")).toBe(true);
 
     expect(quickstartsPage.activeLinksContain([
-        'Sign-In Widget',
+        'Okta Sign-In Page',
         'Node JS',
         'Generic Node'
       ])).toBe(true);
@@ -41,6 +41,14 @@ describe('quickstarts page spec', () => {
         'Node JS',
         'Generic Node'
       ])).toBe(true);
+
+    quickstartsPage.selectHosted();
+    expect(quickstartsPage.urlContains("/okta-sign-in-page")).toBe(true);
+    expect(quickstartsPage.activeLinksContain([
+      'Okta Sign-In Page',
+      'Node JS',
+      'Generic Node'
+    ])).toBe(true);
   });
 
   it('can select all server setups', () => {

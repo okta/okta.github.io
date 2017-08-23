@@ -83,27 +83,27 @@ Next, add a `script` to configure the widget to your organization and render it 
             responseMode: 'query',
             scopes: ['openid', 'profile', 'email']
         }
-        });
+    });
 
-        // Render the widget to the CSS selector #okta-login-container
-        oktaSignIn.renderEl(
-            { el: '#okta-login-container' },
-            function success(res) {
-                if (res.status !== 'SUCCESS') {
-                   return;
-                }
-                // Store the tokens in the TokenManager in the order requested
-                oktaSignIn.tokenManager.add('accessToken', res[0])
-                oktaSignIn.tokenManager.add('idToken', res[1])
-                
+    // Render the widget to the CSS selector #okta-login-container
+    oktaSignIn.renderEl(
+        { el: '#okta-login-container' },
+        function success(res) {
+            if (res.status !== 'SUCCESS') {
                 return;
-            },
-            function error(err) {
-                // The widget handles most types of errors: CONFIG_ERROR, OAUTH_ERROR, etc
-                // Add any custom logic to handle uncaught exceptions
-                console.log(err);
             }
-        );
+            // Store the tokens in the TokenManager in the order requested
+            oktaSignIn.tokenManager.add('accessToken', res[0])
+            oktaSignIn.tokenManager.add('idToken', res[1])
+            
+            return;
+        },
+        function error(err) {
+            // The widget handles most types of errors: CONFIG_ERROR, OAUTH_ERROR, etc
+            // Add any custom logic to handle uncaught exceptions
+            console.log(err);
+        }
+    );
 </script>
 ```
 
@@ -125,12 +125,11 @@ function callMessagesApi() {
     $.ajax({
         url: '/api/messages',
         headers: {
-        Authorization : 'Bearer ' + accessToken
+            Authorization : 'Bearer ' + accessToken
         },
         success: function(response) {
-        // Received messages!
+            // Received messages!
         },
     });
-    }
 }
 ```

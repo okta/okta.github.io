@@ -10,6 +10,7 @@ class QuickStartsPage extends BasePage {
     this.$angularLink = element(by.linkText('Angular'));
     this.$iOSLink = element(by.linkText('iOS'));
     this.$siwLink = element(by.linkText('Sign-In Widget'));
+    this.$hostedLink = element(by.linkText('Okta Sign-In Page'));
     this.$nodeJSLink = element(by.linkText('Node JS'));
     this.$javaLink = element(by.linkText('Java'));
     this.$phpLink = element(by.linkText('PHP'));
@@ -25,6 +26,10 @@ class QuickStartsPage extends BasePage {
 
   selectSignInWidget() {
     return this.$siwLink.click();
+  }
+
+  selectHosted(){
+    return this.$hostedLink.click();
   }
 
   selectAngularClient() {
