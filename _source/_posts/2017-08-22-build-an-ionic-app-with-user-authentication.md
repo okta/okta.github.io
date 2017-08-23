@@ -599,7 +599,7 @@ Select your phone as the target in Xcode and click the play button to run your a
 
 Once you've configured your phone, computer, and Apple ID, you should be able to open the app and log in. Below is how it looks on my iPhone.
 
-| [{% img blog/ionic-authentication/iphone-login.png alt:"iPhone Login" width:"280" %}](http://localhost:4000/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png) | [{% img blog/ionic-authentication/iphone-okta-login.png alt:"iPhone Okta Login" width:"280" %}](/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png) | [{% img blog/ionic-authentication/iphone-home.png alt:"iPhone Home" width:"280" %}](/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png) |
+| [{% img blog/ionic-authentication/iphone-login.png alt:"iPhone Login" width:"280" %}](/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png) | [{% img blog/ionic-authentication/iphone-okta-login.png alt:"iPhone Okta Login" width:"280" %}](/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png) | [{% img blog/ionic-authentication/iphone-home.png alt:"iPhone Home" width:"280" %}](/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png) |
 
 ### Android
 
