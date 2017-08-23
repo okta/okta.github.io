@@ -154,6 +154,11 @@
 			height: 150px;
 			width: 150px;
 		}
+
+		/* Don't force small images in tables */
+		table td img {
+			max-width: unset;
+		}
 		
 		blockquote {
 			@include margin(large auto);
