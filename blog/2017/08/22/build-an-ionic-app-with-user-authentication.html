@@ -48,7 +48,7 @@
   <meta class="swiftype" name="summary" data-type="string" content="With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows..." />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-87b6d5fedbac89a079fbf55cd96a10fce322e40b26c58b065176869b385a8362.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-7e53a537d46fd4af76e9c67c03474a84c8f52f1803d30cbc34c446dbae2fd144.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -95,17 +95,26 @@
       </ul>
       <a class="PrimaryNav-toggle" href="#">
         <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-            <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
-            <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
-            <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
-            <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            <g class="MenuIcon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                <path d="M1,16 L19,16" class="MenuIcon-line1" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,4 L19,4" class="MenuIcon-line2" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line3" stroke="#FFFFFF" stroke-width="2"></path>
+                <path d="M1,10 L19,10" class="MenuIcon-line4" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </svg>
+        <svg class="CloseIcon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="ALl-Boards" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop" transform="translate(-915.000000, -235.000000)" fill="#FFFFFF">
+              <g id="Search-bar-Active" transform="translate(30.000000, 26.000000)">
+                <polygon id="Icon/Cross" points="901 210.6 899.4 209 893 215.4 886.6 209 885 210.6 891.4 217 885 223.4 886.6 225 893 218.6 899.4 225 901 223.4 894.6 217"></polygon>
+              </g>
+            </g>
           </g>
         </svg>
       </a>
 
       <div class="PrimaryNav-cta">
-        <a target="_blank" href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
+        <a href="https://developer.okta.com/signup/" class="Button--red">Sign up</a>
       </div>
 
       <a class="SearchIcon" href="#"></a>
@@ -232,7 +241,7 @@ ionic serve
 <p><a name="create-open-id-connect-app"></a></p>
 <h2 id="create-an-openid-connect-app-in-okta">Create an OpenID Connect App in Okta</h2>
 
-<p>OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To integrate Okta’s Identity Platform for user authentication, you’ll first need to:</p>
+<p>OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To integrate Okta’s Identity Platform for user authentication, you’ll first need to:</p>
 
 <ul>
   <li><a href="https://www.okta.com/developer/signup/">Register</a> and create an OIDC application</li>
@@ -284,17 +293,11 @@ ionic serve
 </code></pre>
 </div>
 
-<p>You can leverage a couple of open source libraries to perform the actual authentication. The first one is <a href="https://github.com/manfredsteyer">Manfred Steyer’s</a> <a href="https://github.com/manfredsteyer/angular-oauth2-oidc">angular-oauth2-oidc</a>. This library allows you to interact with identity and access tokens easily. The second is the <a href="/code/javascript/okta_auth_sdk">Okta Auth SDK</a>. <a href="/blog/2017/06/21/what-the-heck-is-oauth">OAuth is not an authentication protocol</a>, but OIDC is. Why is it necessary to add Okta’s authentication library then? Because OIDC authentication works via redirect (when using in an SPA) and I’d rather perform authentication without redirecting to Okta.</p>
+<p>You can leverage a couple of open source libraries to perform the actual authentication. The first one is <a href="https://github.com/manfredsteyer">Manfred Steyer’s</a> <a href="https://github.com/manfredsteyer/angular-oauth2-oidc">angular-oauth2-oidc</a>. This library allows you to interact with identity and access tokens easily. The second is the <a href="/code/javascript/okta_auth_sdk">Okta Auth SDK</a>. <a href="/blog/2017/06/21/what-the-heck-is-oauth">OAuth is not an authentication protocol</a>, but OIDC is. Why is it necessary to add Okta’s authentication library then? Because OIDC authentication works via redirect (when using in a SPA) and I’d rather perform authentication without redirecting to Okta.</p>
 
-<p>Install <code class="highlighter-rouge">angular-oauth2-oidc</code> using npm.</p>
+<p>Install <code class="highlighter-rouge">angular-oauth2-oidc</code> and the Okta Auth SDK using npm.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install angular-oauth2-oidc@1.0.20 --save
-</code></pre>
-</div>
-
-<p>The Okta Auth SDK doesn’t currently have TypeScript support, so it’s easiest to add it by adding the following at the bottom of <code class="highlighter-rouge">src/index.html</code>.</p>
-
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install angular-oauth2-oidc@1.0.20 @okta/okta-auth-js --save
 </code></pre>
 </div>
 
@@ -303,7 +306,7 @@ ionic serve
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">ViewChild</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">NavController</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
-<span class="kr">declare</span> <span class="kd">const</span> <span class="nx">OktaAuth</span><span class="err">:</span> <span class="kr">any</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">OktaAuth</span> <span class="k">from</span> <span class="s1">'@okta/okta-auth-js'</span><span class="p">;</span>
 
 <span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
   <span class="na">selector</span><span class="p">:</span> <span class="s1">'page-login'</span><span class="p">,</span>
@@ -331,11 +334,15 @@ ionic serve
 </code></pre>
 </div>
 
-<p><strong>TIP:</strong> You might notice <code class="highlighter-rouge">declare const OktaAuth: any;</code> just under the imports. This is to solve for the lack of TypeScript support in Okta’s Auth SDK. To learn more about including external JavaScript libraries in a TypeScript project, see <a href="https://www.thepolyglotdeveloper.com/2016/01/include-external-javascript-libraries-in-an-angular-2-typescript-project/">Nic Raboy’s article on the subject</a>.</p>
-
 <p>Modify <code class="highlighter-rouge">src/app/app.component.ts</code> to check to see if the user is logged in. If they’re not, set the <code class="highlighter-rouge">LoginPage</code> as the rootPage.</p>
 
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Platform</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">StatusBar</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ionic-native/status-bar'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SplashScreen</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@ionic-native/splash-screen'</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">TabsPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/tabs/tabs'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">LoginPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../pages/login/login'</span><span class="p">;</span>
 
 <span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
@@ -420,12 +427,12 @@ ionic serve
       <span class="na">url</span><span class="p">:</span> <span class="s1">'https://dev-[dev-id].oktapreview.com'</span><span class="p">,</span>
       <span class="na">issuer</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span>
     <span class="p">});</span>
-    <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
+    <span class="k">return</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
       <span class="na">username</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
       <span class="na">password</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">password</span>
     <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithoutPrompt</span><span class="p">({</span>
+        <span class="k">return</span> <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithoutPrompt</span><span class="p">({</span>
           <span class="na">nonce</span><span class="p">:</span> <span class="nx">nonce</span><span class="p">,</span>
           <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'id_token'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">],</span>
           <span class="na">sessionToken</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">,</span>
@@ -437,8 +444,7 @@ ionic serve
             <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'access_token'</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">processIdToken</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">idToken</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">);</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">TabsPage</span><span class="p">);</span>
-          <span class="p">})</span>
-          <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+          <span class="p">});</span>
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'We cannot handle the '</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">+</span> <span class="s1">' status'</span><span class="p">);</span>
       <span class="p">}</span>
@@ -488,19 +494,7 @@ ionic serve
 </code></pre>
 </div>
 
-<p>When you try to login to your application using credentials from an Okta user, you’ll see a cross-origin error in your browser’s console.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/authn. No 
-'Access-Control-Allow-Origin' header is present on the requested resource. 
-Origin 'http://localhost:8100' is therefore not allowed access.
-</code></pre>
-</div>
-
-<p>To fix this, modify the Trusted Origins on Okta (under <strong>API</strong> &gt; <strong>Trusted Origins</strong>) to include your client’s URL (e.g. <code class="highlighter-rouge">http://localhost:8100</code>). Check CORS and Redirect for the type of origin.</p>
-
-<p><img src="/assets/blog/ionic-authentication/add-origin-89627620c4134303f2f81e8725a99a62d1ece7530dd8502e30ee4334da2699e9.png" alt="Add Origin" width="612" /></p>
-
-<p>Now sign in should work, but there’s not much proof on the UI. Add a “Logout” button in the top right corner of the home screen. Replace the <code class="highlighter-rouge">&lt;ion-header&gt;</code> in <code class="highlighter-rouge">src/pages/home/home.html</code> with the HTML below.</p>
+<p>When you sign in, there’s not much proof on the UI. Add a “Logout” button in the top right corner of the home screen. Replace the <code class="highlighter-rouge">&lt;ion-header&gt;</code> in <code class="highlighter-rouge">src/pages/home/home.html</code> with the HTML below.</p>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ion-header&gt;</span>
   <span class="nt">&lt;ion-navbar&gt;</span>
@@ -891,7 +885,7 @@ What Progressive Web Apps can do for you</a>.</p>
 
             <div class="Column--3 Column--medium-6 Column--xSmall-12">
 
-                <a class="Logo" href="/" rel="noopener noreferrer">
+                <a class="Logo" href="https://www.okta.com/" target="_blank" rel="noopener noreferrer">
                     <img src="https://developer.okta.com/sites/all/themes/developer/images/logo-footer.png" alt="Okta">
                     Visit okta.com
                 </a>
@@ -912,7 +906,7 @@ What Progressive Web Apps can do for you</a>.</p>
             <div class="Column--3 Column--medium-6 Column--small-12">
                 <h4>More Info</h4>
                 <ul class="Footer-links">
-                    <li><a target="_blank" href="https://developer.okta.com/integrate/">Integrate with Okta</a></li>
+                    <li><a target="_blank" href="https://developer.okta.com/integrate-with-okta/">Integrate with Okta</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/docs/platform-release-notes/platform-release-notes.html">Release Notes</a></li>
                     <li><a href="/3rd_party_notices/">3rd Party Notices</a></li>
