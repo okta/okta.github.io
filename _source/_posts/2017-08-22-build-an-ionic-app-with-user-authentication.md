@@ -73,7 +73,7 @@ OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients
 * Give your application a name (e.g. "Ionic OIDC")
 * Change the **Base URI** and **Login redirect URI** to `http://localhost:8100` and click **Done**. You should see settings like the following:
 
-{% img blog/ionic-authentication/oidc-settings.png alt:"Okta OIDC Settings" %}
+{% img blog/ionic-authentication/oidc-settings.png alt:"Okta OIDC Settings" width:"800" %}
 
 ## Create a Login Page
 
@@ -570,7 +570,7 @@ ionic cordova emulate ios
 
 Now you should be able to log in by clicking on the “Login with Okta” button and entering valid credentials.
 
-| [{% img blog/ionic-authentication/emulator-login.png alt:"Emulator Login" width:"280" %}](/assets/blog/ionic-authentication/emulator-login-28c3fe9253f50019e871f903ff7130b96e52b019f262dcfb3df8ae402684b84c.png) | [{% img blog/ionic-authentication/emulator-okta-login.png alt:"Emulator Okta Login" width:"280" %}](/assets/blog/ionic-authentication/emulator-okta-login-dbd386e324736d899df5f44f978ff7f40db70876001ffe80c42d1dcab021c2f0.png) | [{% img blog/ionic-authentication/emulator-home.png alt:"Emulator Home" width:"280" %}](/assets/blog/ionic-authentication/emulator-home-08dd2b798c4e121b930df14887af9401e95153c4acbdc65f4cf5bfe409e28f1e.png) |
+| [{% img blog/ionic-authentication/emulator-login.png alt:"Emulator Login" width:"280" %}](/assets/blog/ionic-authentication/emulator-login-c4b218091f6549081c063e2eb71af4b1bcf371d49cffd109d3f77e6019ec85ce.png) | [{% img blog/ionic-authentication/emulator-okta-login.png alt:"Emulator Okta Login" width:"280" %}](/assets/blog/ionic-authentication/emulator-okta-login-03521c0da232257989de99fe3c41e81f1c822d1397d4b5e2e8a5371b21aef085.png) | [{% img blog/ionic-authentication/emulator-home.png alt:"Emulator Home" width:"280" %}](/assets/blog/ionic-authentication/emulator-home-935f74e0cd70e31bcf49f782c0b1371c8ad1af4d44f6da3002a91cbf42a95d55.png) |
 
 The nice thing about using this technique is the Okta login screen has Remember Me and Forgot Password support, so you don't need to code those yourself.
 
@@ -599,7 +599,7 @@ Select your phone as the target in Xcode and click the play button to run your a
 
 Once you've configured your phone, computer, and Apple ID, you should be able to open the app and log in. Below is how it looks on my iPhone.
 
-| [{% img blog/ionic-authentication/iphone-login.png alt:"iPhone Login" width:"280" %}](/assets/blog/ionic-authentication/iphone-login-b2410de6bb2c6f04c5a620ce3a570e7ffa112c83a5eb91b320dd0322bb0c281b.png) | [{% img blog/ionic-authentication/iphone-okta-login.png alt:"iPhone Okta Login" width:"280" %}](/assets/blog/ionic-authentication/iphone-okta-login-e3b1cc3b6aded6ae1e0d6aa09507732ebd658612afde62537b2256cfd4d360c5.png) | [{% img blog/ionic-authentication/iphone-home.png alt:"iPhone Home" width:"280" %}](/assets/blog/ionic-authentication/iphone-home-fac7e46fb05c18e2ad814841e73c86af11038b045e6610c934d80f16b573a8a1.png) |
+| [{% img blog/ionic-authentication/iphone-login.png alt:"iPhone Login" width:"280" %}](http://localhost:4000/assets/blog/ionic-authentication/iphone-login-5f731e6ba21115febd9c4c21ba802c636370a5eeb9d9e3b47812bb64171c1efb.png) | [{% img blog/ionic-authentication/iphone-okta-login.png alt:"iPhone Okta Login" width:"280" %}](/assets/blog/ionic-authentication/iphone-okta-login-920b0eb85c7865bb6e822e471c4ff5655050ac7342832bbb21cf9a928516dfc0.png) | [{% img blog/ionic-authentication/iphone-home.png alt:"iPhone Home" width:"280" %}](/assets/blog/ionic-authentication/iphone-home-f50201f8cc12ab535ee9583a23990c218cc9a23b50bba61302ae708ae9dd8d47.png) |
 
 ### Android
 
@@ -641,7 +641,7 @@ To solve this problem, open Android Studio, select “Open an existing Android S
 
 After performing these steps, you should be able to run `ionic cordova emulate android` and see your app running in the AVD.
 
-| [{% img blog/ionic-authentication/android-login.png alt:"Android Login" width:"280" %}](/assets/blog/ionic-authentication/android-login-8bdc605b57afdaead566ee007d80942004aded32cf264288a3d887a92b875794.png) | [{% img blog/ionic-authentication/android-okta-login.png alt:"Android Okta Login" width:"280" %}](/assets/blog/ionic-authentication/android-okta-login-96f5a3f51b9a53e3d19890a5a8e4ea7bc54829b24ed98e40a1ba2fca0b165084.png) | [{% img blog/ionic-authentication/android-home.png alt:"Android Home" width:"280" %}](/assets/blog/ionic-authentication/android-home-c0c0a1c18b552e00e959c0b6d38d115aeac26016169b7004b35db865ade24cec.png) |   
+| [{% img blog/ionic-authentication/android-login.png alt:"Android Login" width:"280" %}](/assets/blog/ionic-authentication/android-login-a0363756fc25a974e87668bc0900acb783f7eec80a1b83b0c5de0a5016004f94.png) | [{% img blog/ionic-authentication/android-okta-login.png alt:"Android Okta Login" width:"280" %}](/assets/blog/ionic-authentication/android-okta-login-bb57b05d91580c165352d0f21d2da0415827601a25720ec2121f269ae20618ae.png) | [{% img blog/ionic-authentication/android-home.png alt:"Android Home" width:"280" %}](/assets/blog/ionic-authentication/android-home-9438a0b8324d932abc0dcece445af75c8009350e683bb46d526baaa614e1de13.png) |   
 
 **NOTE**: If you get an application error that says "The connection to the server was unsuccessful. (`file:///android/www/index.html`)", add the following line to `config.xml`. This line sets the default timeout to 60 seconds (default is 20). Thanks to the [Stack Overflow community](http://stackoverflow.com/a/31377846) for this solution.
 
