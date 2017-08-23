@@ -65,7 +65,7 @@ You might notice that both tutorials require quite a bit of code. Also, there do
 <a name="create-open-id-connect-app"></a>
 ## Create an OpenID Connect App in Okta
 
-OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To integrate Okta's Identity Platform for user authentication, you'll first need to:
+OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To integrate Okta's Identity Platform for user authentication, you'll first need to:
 
 * [Register](https://www.okta.com/developer/signup/) and create an OIDC application
 * Log in to your Okta account and navigate to **Applications > Add Application** 
@@ -117,18 +117,12 @@ To make a login page for authentication, create `src/pages/login/login.ts` and `
 ```
 {% endraw %}
 
-You can leverage a couple of open source libraries to perform the actual authentication. The first one is [Manfred Steyer's](https://github.com/manfredsteyer) [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc). This library allows you to interact with identity and access tokens easily. The second is the [Okta Auth SDK](/code/javascript/okta_auth_sdk). [OAuth is not an authentication protocol](/blog/2017/06/21/what-the-heck-is-oauth), but OIDC is. Why is it necessary to add Okta's authentication library then? Because OIDC authentication works via redirect (when using in an SPA) and I'd rather perform authentication without redirecting to Okta.
+You can leverage a couple of open source libraries to perform the actual authentication. The first one is [Manfred Steyer's](https://github.com/manfredsteyer) [angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc). This library allows you to interact with identity and access tokens easily. The second is the [Okta Auth SDK](/code/javascript/okta_auth_sdk). [OAuth is not an authentication protocol](/blog/2017/06/21/what-the-heck-is-oauth), but OIDC is. Why is it necessary to add Okta's authentication library then? Because OIDC authentication works via redirect (when using in a SPA) and I'd rather perform authentication without redirecting to Okta.
 
-Install `angular-oauth2-oidc` using npm.
+Install `angular-oauth2-oidc` and the Okta Auth SDK using npm.
 
 ```bash
-npm install angular-oauth2-oidc@1.0.20 --save
-```
-
-The Okta Auth SDK doesn't currently have TypeScript support, so it's easiest to add it by adding the following at the bottom of `src/index.html`.
-
-```html
-<script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.8.0/okta-auth-js.min.js"></script>
+npm install angular-oauth2-oidc@1.0.20 @okta/okta-auth-js --save
 ```
 
 In `src/pages/login/login.ts`, add the basic structure of the `LoginPage` class and a constructor that configures your OIDC settings with the `OAuthService` from angular-oauth2-oidc. You will need to replace “[client-id]” with the Client ID from your Okta OIDC settings and “[dev-id]” with your account's correct URI.
@@ -137,7 +131,7 @@ In `src/pages/login/login.ts`, add the basic structure of the `LoginPage` class 
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { OAuthService } from 'angular-oauth2-oidc';
-declare const OktaAuth: any;
+import OktaAuth from '@okta/okta-auth-js';
 
 @Component({
   selector: 'page-login',
@@ -164,11 +158,15 @@ export class LoginPage {
 }
 ```
 
-**TIP:** You might notice `declare const OktaAuth: any;` just under the imports. This is to solve for the lack of TypeScript support in Okta's Auth SDK. To learn more about including external JavaScript libraries in a TypeScript project, see [Nic Raboy's article on the subject](https://www.thepolyglotdeveloper.com/2016/01/include-external-javascript-libraries-in-an-angular-2-typescript-project/). 
-
 Modify `src/app/app.component.ts` to check to see if the user is logged in. If they're not, set the `LoginPage` as the rootPage.
 
 ```typescript
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
+import { TabsPage } from '../pages/tabs/tabs';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { LoginPage } from '../pages/login/login';
 
@@ -254,12 +252,12 @@ login(): void {
       url: 'https://dev-[dev-id].oktapreview.com',
       issuer: this.oauthService.issuer
     });
-    authClient.signIn({
+    return authClient.signIn({
       username: this.username,
       password: this.password
     }).then((response) => {
       if (response.status === 'SUCCESS') {
-        authClient.token.getWithoutPrompt({
+        return authClient.token.getWithoutPrompt({
           nonce: nonce,
           responseType: ['id_token', 'token'],
           sessionToken: response.sessionToken,
@@ -271,8 +269,7 @@ login(): void {
             localStorage.setItem('access_token', tokens[1].accessToken);
             this.oauthService.processIdToken(tokens[0].idToken, tokens[1].accessToken);
             this.navCtrl.push(TabsPage);
-          })
-          .catch(error => console.error(error));
+          });
       } else {
         throw new Error('We cannot handle the ' + response.status + ' status');
       }
@@ -321,19 +318,7 @@ You can (optionally), pretty up the login screen by adding a logo above the form
 </ion-row>
 ``` 
 
-When you try to login to your application using credentials from an Okta user, you'll see a cross-origin error in your browser's console.
-
-```
-XMLHttpRequest cannot load https://dev-158606.oktapreview.com/api/v1/authn. No 
-'Access-Control-Allow-Origin' header is present on the requested resource. 
-Origin 'http://localhost:8100' is therefore not allowed access.
-```
-
-To fix this, modify the Trusted Origins on Okta (under **API** > **Trusted Origins**) to include your client's URL (e.g. `http://localhost:8100`). Check CORS and Redirect for the type of origin.
-
-{% img blog/ionic-authentication/add-origin.png alt:"Add Origin" width:"612" %}
-
-Now sign in should work, but there's not much proof on the UI. Add a “Logout” button in the top right corner of the home screen. Replace the `<ion-header>` in `src/pages/home/home.html` with the HTML below.
+When you sign in, there's not much proof on the UI. Add a “Logout” button in the top right corner of the home screen. Replace the `<ion-header>` in `src/pages/home/home.html` with the HTML below.
 
 ```html
 <ion-header>
