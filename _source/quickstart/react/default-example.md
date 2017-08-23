@@ -36,7 +36,7 @@ After you have created the application there are two more values you will need t
 | Org URL       | On the home screen of the developer dashboard, in the upper right.             |
 
 
-These values will be used in your React application to setup the OIDC flow with Okta.
+These values will be used in your React application to setup the OpenID Connect flow with Okta.
 
 ## Create an Authentication Utility
 

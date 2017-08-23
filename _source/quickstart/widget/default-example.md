@@ -16,7 +16,7 @@ At the end of the Sign-In Widget instructions you can choose your server type to
 If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 ## Add an OpenID Connect Client
-* Log into the Okta Developer Dashboard, and **Create New App**
+* Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
 * Choose **Single Page App (SPA)** as the platform, then populate your new OpenID Connect application with values similar to:
 
 | Setting             | Value                                                 |
@@ -34,13 +34,13 @@ After you have created the application there are two more values you will need t
 | Org URL       | On the home screen of the developer dashboard, in the upper right.             |
 
 
-These values will be used in your application to setup the OIDC flow with Okta.
+These values will be used in your application to setup the OpenID Connect flow with Okta.
 
 ## Add Sign-In Widget assets to your project
 
 The easiest way to get started with the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) is to load the JS and CSS files directly from the CDN.
 
-To use the CDN, include the following links to your HTML:
+To use our CDN, include the following links to your HTML:
 ```html
 <script
 src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/js/okta-sign-in.min.js"
@@ -59,7 +59,7 @@ rel="stylesheet"/>
 
 ## Implement Okta Sign-In
 
-The widget is rendered directly to the DOM by a unique `id` attribute value. Your application can control the widget by first rendering the widget, and handling user success/errors accordingly:
+You can render the widget anywhere on the page by creating a `<div>` with a unique `id.`  You can also control the visual look of the widget by adding your own CSS.
 
 First, create a `<div>` inside of your HTML file:
 
@@ -70,7 +70,7 @@ First, create a `<div>` inside of your HTML file:
 </body>
 ```
 
-Next, create a `script` to configure the widget based on to your organization:
+Next, add a `script` to configure the widget to your organization and render it inside of the `div` you just created:
 ```html
 <script type="text/javascript">
 
@@ -84,9 +84,11 @@ Next, create a `script` to configure the widget based on to your organization:
             scopes: ['openid', 'profile', 'email']
         }
         });
+
+        // Render the widget to the CSS selector okta-login-container
         oktaSignIn.renderEl(
             { el: '#okta-login-container' },
-            function (res) {
+            function success(res) {
                 if (res.status !== 'SUCCESS') {
                    return;
                 }
@@ -95,6 +97,10 @@ Next, create a `script` to configure the widget based on to your organization:
                 oktaSignIn.tokenManager.add('idToken', res[1])
                 
                 return;
+            },
+            function error(err) {
+                // The widget handles most types of errors: CONFIG_ERROR, OAUTH_ERROR, etc
+                // Add any custom logic to handle uncaught exceptions
             }
         );
 </script>
