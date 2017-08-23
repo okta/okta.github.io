@@ -147,7 +147,7 @@ Please continue down to the next section, Server Setup, to learn about access to
 ```swift
 
 func callMessagesApi() {
-    let url = URL(string: "http://localhost:{port}/api/messages")
+    let url = URL(string: "http://localhost:{serverPort}/api/messages")
 
     // Set the authorization header
     let headers = [

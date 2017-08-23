@@ -13,6 +13,8 @@ This guide will walk you through integrating authentication into an Angular app 
 
 At the end of the Angular instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Angular application can send to your server.
 
+Starting from scratch with Angular?  Our [Angular + Okta Auth SDK](/code/angular/okta_angular_auth_js) walkthrough will help you setup a new Angular application and cover the same topics as this quickstart.
+
 ## Prerequisites
 If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
@@ -246,7 +248,7 @@ export class MessageListComponent {
       const headers = new Headers({ Authorization: 'Bearer ' + this.accessToken });
       
       // Make request
-      this.http.get('/api/messages', new RequestOptions({ headers: headers }))
+      this.http.get('http://localhost:{serverPort}/api/messages', new RequestOptions({ headers: headers }))
       .map(res => res.json())
       .subscribe(message => this.message = message);
     }

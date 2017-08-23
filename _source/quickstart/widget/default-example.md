@@ -123,7 +123,7 @@ function callMessagesApi() {
 
     // Make the request using jQuery
     $.ajax({
-        url: '/api/messages',
+        url: 'http://localhost:{serverPort}/api/messages',
         headers: {
             Authorization : 'Bearer ' + accessToken
         },

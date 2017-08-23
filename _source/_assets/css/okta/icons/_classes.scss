@@ -1720,8 +1720,8 @@
   position: relative  
 }
 
-.code-swift-32::after {
-  content: $code-swift;
+.code-ios-32::after {
+  content: $code-ios;
   color: #abadac;
   position: relative  
 }
@@ -1760,7 +1760,7 @@
 .code-php-32::before,
 .code-javascript-32::before,
 .code-java-32::before,
-.code-swift-32::before,
+.code-ios-32::before,
 .code-android-32::before,
 .code-dotnet-32::before,
 .code-angular-32::before,

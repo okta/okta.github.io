@@ -13,6 +13,8 @@ This guide will walk you through integrating authentication into a React app wit
 
 At the end of the React instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your React application can send to your server.
 
+Starting from scratch with React?  Our [React + Okta Auth SDK](/code/react/okta_react) walkthrough will help you setup a new React application and cover the same topics as this quickstart.
+
 ## Prerequisites
 If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
@@ -87,7 +89,7 @@ class Auth {
 
   getAccessToken() {
     // Return the token from the accessToken object.
-    return this.okatAuth.tokenManager.get('accessToken').accessToken;
+    return this.oktaAuth.tokenManager.get('accessToken').accessToken;
   }
 
   login(history) {
@@ -300,7 +302,7 @@ export default withAuth(withRouter(class MessageList extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated()) {
-      fetch('/api/messages', {
+      fetch('http://localhost:{serverPort}/api/messages', {
         headers: {
           Authorization: 'Bearer ' + this.props.auth.getAccessToken().accessToken
         }
