@@ -36,7 +36,7 @@ $ ng new okta-app
 
 This creates a new project named `okta-app` and installs all required dependencies.
 
-The simplest way to add authentication into an Angular app is using the library [Okta Sign-In Widget](okta_sign-in_widget). We can install it via `npm`:
+The simplest way to add authentication into an Angular app is using the library [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget/). We can install it via `npm`:
 
 ```bash
 [okta-app] $ npm install @okta/okta-signin-widget --save
@@ -44,7 +44,7 @@ The simplest way to add authentication into an Angular app is using the library 
 
 ## Create an Authentication Service
 Users can sign in to your Angular application a number of different ways.
-To provide a fully-featured and customizable login experience, the [Okta Sign-In Widget](okta_sign-in_widget) is available to handle User Lifecycle operations, MFA, and more. 
+To provide a fully-featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget/) is available to handle User Lifecycle operations, MFA, and more.
 
 First, create `src/app/app.service.ts` as an authorization utility file and use it to bootstrap the required fields to login:
 
@@ -254,6 +254,8 @@ export class AppModule { }
 
 ## Conclusion
 You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
+
+Want to learn how to use the user's `access_token`? Check out our [Angular Quickstart integrations](/quickstart/#/angular/nodejs/generic.html) to learn about protecting routes on your server, validating the `access_token`, and more!
 
 ## Support 
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).

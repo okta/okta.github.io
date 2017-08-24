@@ -13,6 +13,11 @@
   var linkState = {
     clients: [
       {
+        name: 'android',
+        label: 'Android',
+        serverExampleType: 'implicit'
+      },
+      {
         name: 'angular',
         label: 'Angular',
         serverExampleType: 'implicit'
