@@ -18,7 +18,7 @@ we'll build a very simple single page application that compares the prices of
 the top 10 cryptocurrencies. To keep things simple, we'll just be using plain
 old HTML, CSS, and Javascript for this – nothing fancy required.
 
-{% img blog/cryptocurrency/vue.png alt:"Vue.js Homepage" %}
+{% img blog/cryptocurrency/vue-homepage.png alt:"Vue.js Homepage" %}
 
 
 ## Who is Vue Built For?
