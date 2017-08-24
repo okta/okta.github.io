@@ -6,7 +6,7 @@ tags: [vuejs, javascript, bitcoin, cryptocurrency]
 ---
 
 
-[Vue.js][] is a simple Javascript framework that lets you build dynamic front-end
+[Vue.js][] is a simple JavaScript framework that lets you build dynamic front-end
 web applications. Lots of people compare it to [React][] and [Angular][].
 
 As a back-end developer, and someone not incredibly experienced with frontend
@@ -16,7 +16,7 @@ successful with vs. React and Angular.
 In this article, I'll walk you through the basics of Vue.js, and in the process
 we'll build a very simple single page application that compares the prices of
 the top 10 cryptocurrencies. To keep things simple, we'll just be using plain
-old HTML, CSS, and Javascript for this – nothing fancy required.
+old HTML, CSS, and JavaScript for this – nothing fancy required.
 
 {% img blog/cryptocurrency/vue-homepage.png alt:"Vue.js Homepage" %}
 
@@ -31,7 +31,7 @@ Vue uses plain old HTML, and doesn't require you to learn another language (like
 JSX with React), and can therefore be picked up by web designers and other
 front-end developers who are familiar with HTML already.
 
-If you're looking for a simple Javascript framework to help you dynamically
+If you're looking for a simple JavaScript framework to help you dynamically
 display data, you can't really go wrong with Vue:
 
 > Vue is simple, fast, and well documented.
@@ -100,7 +100,7 @@ You'll also notice that my HTML code now contains a variable: `{{ message  }}`.
 After Vue starts up, and scans the `app` div for code, it will start replacing any
 variables it finds with the related `data` objects you've defined.
 
-If you open the Javascript console in your browser, and attempt to modify the
+If you open the JavaScript console in your browser, and attempt to modify the
 message value like so:
 
 ```javascript
@@ -115,7 +115,7 @@ This happens because Vue is managing that data for you. When the data changes,
 Vue re-renders the variable on the page.
 
 This behavior makes it really easy to build dynamic web applications, since any
-time you change data in Javascript, the page is re-rendered on your behalf and
+time you change data in JavaScript, the page is re-rendered on your behalf and
 you don't need to worry about any sort of UI management.
 
 
@@ -161,7 +161,7 @@ Because the `secretMessage` variable is false, the conditional statement in HTML
 will fail to execute, and the else statement code will be ran, outputting the
 HTML element with the welcome message.
 
-Since we know Vue is dynamic, we can now open the Javascript console, modify the
+Since we know Vue is dynamic, we can now open the JavaScript console, modify the
 value of `secretMessage`, and BAM, the page will re-render with the secret message
 being shown.
 
@@ -211,7 +211,7 @@ will repeat itself, looping over the contents of the `shoppingList` array:
 
 {% img blog/cryptocurrency/list-screenshot.png alt:"List Screenshot" %}
 
-If you go modify the `shoppingList` array in the Javascript console, you'll notice
+If you go modify the `shoppingList` array in the JavaScript console, you'll notice
 the same behavior as before: Vue will re-render the shopping list for you
 automatically.
 
@@ -256,7 +256,7 @@ two-way data binding.
 
 {% img blog/cryptocurrency/color-screenshot.png alt:"Color Screenshot" %}
 
-f you go into the Javascript console and modify this directly yourself, you'll
+f you go into the JavaScript console and modify this directly yourself, you'll
 see it change again.
 
 
@@ -266,7 +266,7 @@ Now that we've covered some of the fundamental Vue.js properties, let's talk
 about something a little more interesting: Vue methods.
 
 In addition to managing data, Vue also provides a convenient way to structure
-your Javascript *actions.*
+your JavaScript *actions.*
 
 Let's take a look at a very simple example application that uses a method to
 capitalize the color from the example above when clicked:
@@ -331,7 +331,7 @@ check it out on [Github][].
 ### Bootstrapping
 
 The first thing we'll do is get our page bootstrapped with some basic HTML,
-Javascript libraries, etc.
+JavaScript libraries, etc.
 
 Because I'm not a web designer (and have poor visual taste!), we'll be using
 Twitter's [Bootstrap][] library for basic styling. We'll also be using Vue.js, and a
@@ -340,7 +340,7 @@ few other small helper libraries which will be explained later on:
 - [vue2-filters][], a simple Vue.js library that provides some useful template
   filters for displaying text. In this app, I only the filter for helping to
   display currency values nicely.
-- [axios][], a popular Javascript library for making HTTP requests
+- [axios][], a popular JavaScript library for making HTTP requests
 
 All in all, our basic HTML page with all our dependencies included will look
 like this:
@@ -629,9 +629,9 @@ Let's start by implementing the `getCoins` method that will talk to the
 CoinMarketCap API. We know from before that all we need to do is hit the API and
 store the resulting array of JSON data in our Vue variable.
 
-To make API requests, I like to use the axios Javascript library (mentioned
+To make API requests, I like to use the axios JavaScript library (mentioned
 earlier on in this article). It's a very popular library for making HTTP
-requests in client side Javascript.
+requests in client side JavaScript.
 
 Since I've already loaded it up for us in the web scaffold, we can use it
 directly in our Vue code:
@@ -726,7 +726,7 @@ minutes, so as to not be aggressive, we'll be querying their API once per minute
 to display new results to our users.
 
 We can do this easily outside of our Vue app using a plain old call to
-Javascript's `setInterval` function:
+JavaScript's `setInterval` function:
 
 ```javascript
 /**
@@ -842,7 +842,7 @@ If you play around with the website a bit, you'll notice that every 60 seconds
 the data is updated as designed.
 
 In the event one currency takes over another's ranking, all the items will shift
-seamlessly on the page (you can play around with this in the Javascript console
+seamlessly on the page (you can play around with this in the JavaScript console
 by modifying `app.coins` directly if you want).
 
 
