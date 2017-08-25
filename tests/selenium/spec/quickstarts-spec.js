@@ -17,7 +17,7 @@ describe('quickstarts page spec', () => {
       ])).toBe(true);
   });
 
-  it('can select all client setups', () => {
+  xit('can select all client setups', () => {
     quickstartsPage.selectAndroid();
     expect(quickstartsPage.urlContains("/android")).toBe(true);
     expect(quickstartsPage.activeLinksContain([
