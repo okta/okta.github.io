@@ -1,27 +1,54 @@
 .code-selector {
   background-color: rgb(32, 49, 59);
   border-radius: 5px;
+  margin-bottom: 10px;
   padding: 20px;
+
   h3 {
     color: #fff;
     font-size: 18px;
     font-weight: lighter;
+    margin-bottom: 5px;
   }
+
   a {
-    display: inline-block;
     color: #fff;
-    padding: 0 10px;
+    display: inline-block;
+    height: 42px;
+    line-height: 32px;
+    margin-right: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
     &:hover{
       cursor: pointer;
       text-decoration: none;
     }
     &.active,
     &:hover {
-      border-bottom: 1px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
+    .icon {
+      left: 15px;
+      position: absolute;
     }
   }
-  margin-bottom: 10px;
+
+  li.with-icon a{
+    padding-left: 55px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline-block;
+      list-style-type: none;
+    }
+  }
 }
+
+
 
 .example-content-well {
   padding: 10px 0;

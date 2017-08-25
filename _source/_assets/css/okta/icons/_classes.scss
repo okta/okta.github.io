@@ -1699,61 +1699,73 @@
 .code-python-32::after {
   content: $code-python;
   color: #007dc1;
-  position: relative  
+  position: relative;
 }
 
 .code-php-32::after {
   content: $code-php;
   color: #115d8b;
-  position: relative  
+  position: relative;
 }
 
 .code-javascript-32::after {
   content: $code-javascript;
   color: #f1d10d;
-  position: relative  
+  position: relative;
 }
 
 .code-java-32::after {
   content: $code-java;
   color: #ff8b00;
-  position: relative  
+  position: relative;
 }
 
 .code-ios-32::after {
   content: $code-ios;
   color: #abadac;
-  position: relative  
+  position: relative;
 }
 
 .code-android-32::after {
   content: $code-android;
   color: #4cdb82;
-  position: relative  
+  position: relative;
 }
 
 .code-dotnet-32::after {
   content: $code-dotnet;
   color: #835ab1;
-  position: relative  
+  position: relative;
 }
 
 .code-angular-32::after {
   content: $code-angular;
   color: #d93934;
-  position: relative  
+  position: relative;
 }
 
 .code-nodejs-32::after {
   content: $code-nodejs;
   color: #4cdb82;
-  position: relative
+  position: relative;
 }
 
 .code-react-32::after {
   content: $code-react;
   color: #46b3e9;
-  position: relative  
+  position: relative;
+}
+
+.code-widget-32::after {
+  content: $aura;
+  color: #fff;
+  position: relative;
+}
+
+.code-okta-sign-in-page-32::after {
+  content: $aura;
+  color: #fff;
+  position: relative;
 }
 
 .code-python-32::before,

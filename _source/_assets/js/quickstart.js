@@ -127,8 +127,16 @@
           applySelectionTuple(getSelectionTupleFromLinkSate());
         }
       });
+      var listItem = $('<li>', {
+        class: 'with-icon'
+      });
+      var icon = $('<i>', {
+        class: 'icon code-' + client.name + '-32'
+      });
+      link.prepend(icon);
+      listItem.append(link);
       client.link = link;
-      $('#client-selector').append(link);
+      $('#client-selector ul').append(listItem);
     });
 
     linkState.servers.forEach(function (server) {
@@ -146,8 +154,16 @@
           applySelectionTuple(getSelectionTupleFromLinkSate());
         }
       });
+      var listItem = $('<li>', {
+        class: 'with-icon'
+      });
+      var icon = $('<i>', {
+        class: 'icon code-' + server.name + '-32'
+      });
+      link.prepend(icon);
+      listItem.append(link);
       server.link = link;
-      $('#server-selector').append(link);
+      $('#server-selector ul').append(listItem);
       if (server.active) {
         renderFrameworkLinks(server);
       }
@@ -173,7 +189,7 @@
           }
         });
         framework.link = link;
-        $('#framework-selector').append(link);
+        $('#framework-selector ul').append(link);
       });
     }
   }
