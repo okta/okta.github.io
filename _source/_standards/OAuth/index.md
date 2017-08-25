@@ -244,7 +244,9 @@ A custom claim can be configured in the following ways:
         Notice that you can use the group filter (`valueType` is `GROUP`) for Okta groups. For application groups, `valueType` must be `EXPRESSION`. 
   
   The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn&#8217;t added into the ID token or access token.
-  The datatype of a claim is an array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.
+  The datatype of a claim depends on the type of value. The datatype is:
+    * An array if the claim value is a group filter.
+    * The same datatype as the evaluated result if the claim value is an expression.
 
 >*Note:* For the custom claim with group filter, its value has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
 
