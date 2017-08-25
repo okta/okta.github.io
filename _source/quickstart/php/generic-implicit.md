@@ -40,11 +40,9 @@ Our client side application is going to be sending us a call to an api endpoint 
 Our first step is to include the composer autoload file.  In your new `messages.php` file, add the following:
  
  
- > NOTE: All code blocks will be added progressively to the file. The full file is provided at the end of this 
- quickstart.
-```php
-<?php
+> NOTE: All code blocks will be added progressively to the file. The full file is provided at the end of this quickstart.
 
+```php
 require __DIR__ . '/../vendor/autoload.php'; // This path may be different for you. 
 ```
  
