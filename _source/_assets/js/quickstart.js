@@ -85,6 +85,21 @@
             active: true
           }
         ]
+      },
+      {
+        name: 'dotnet',
+        label: '.NET',
+        frameworks: [
+          {
+            name: 'aspnetcore',
+            label: 'ASP.NET Core',
+            active: true
+          },
+          {
+            name: 'aspnet4',
+            label: 'ASP.NET 4.x',
+          }
+        ]
       }
     ]
   }
@@ -285,4 +300,5 @@
   if (window.location.pathname.match('^/quickstart')) {
     main();
   }
+
 })(jQuery);
