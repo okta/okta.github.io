@@ -39,22 +39,20 @@ Let’s install these two packages with composer.</p>
 <p>Our first step is to include the composer autoload file.  In your new <code class="highlighter-rouge">messages.php</code> file, add the following:</p>
 
 <blockquote>
-  <p>NOTE: All code blocks will be added progressively to the file. The full file is provided at the end of this 
- quickstart.
-```php
-&lt;?php</p>
+  <p>NOTE: All code blocks will be added progressively to the file. The full file is provided at the end of this quickstart.</p>
 </blockquote>
 
-<p>require <strong>DIR</strong> . ‘/../vendor/autoload.php’; // This path may be different for you.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code> 
-Next, we need to make sure that the authorization header is present, but we also need to ignore any `prefetch` 
-requests that have a request method of `OPTIONS`. We do this because the modern browsers will prefetch the page to 
-get all available options, but will not send the authorization header. If we return a `401 Unauthorized` during the 
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>require __DIR__ . '/../vendor/autoload.php'; // This path may be different for you. 
+</code></pre>
+</div>
+
+<p>Next, we need to make sure that the authorization header is present, but we also need to ignore any <code class="highlighter-rouge">prefetch</code> 
+requests that have a request method of <code class="highlighter-rouge">OPTIONS</code>. We do this because the modern browsers will prefetch the page to 
+get all available options, but will not send the authorization header. If we return a <code class="highlighter-rouge">401 Unauthorized</code> during the 
 prefetch, the client side application will quit trying to make the call, and will no longer respond to the messages 
-api.
+api.</p>
 
-```php
-
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>
 // Don't do anything for prefetch requests.
 if ( $_SERVER['REQUEST_METHOD'] === 'OPTIONS' ) {
     return false;
