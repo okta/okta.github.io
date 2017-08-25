@@ -1,7 +1,7 @@
 ---
 layout: docs_page
-title: Okta Identity Cloud Release Notes
-excerpt: Summary of changes to the Okta Identity Cloud since Release 2017.33
+title: Okta API Release Notes
+excerpt: Summary of changes to the Okta API since Release 2017.33
 ---
 
 ## Okta API Release Notes for Release 2017.34
