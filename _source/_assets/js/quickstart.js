@@ -50,11 +50,11 @@
         label: 'Node JS',
         frameworks: [
           {
-            active: true,
             name: 'generic',
             label: 'Generic Node'
           },
           {
+            active: true,
             name: 'express',
             label: 'Express.js'
           }
