@@ -72,8 +72,7 @@ application.</p>
 
 <p>The result of this will provide you with a JWT for that user.</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="nv">$jwt</span> <span class="o">=</span> <span class="nv">$exchange</span><span class="o">-&gt;</span><span class="na">access_token</span><span class="p">;</span>
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="nv">$jwt</span> <span class="o">=</span> <span class="nv">$exchange</span><span class="o">-&gt;</span><span class="na">access_token</span><span class="p">;</span>
 </code></pre>
 </div>
 
@@ -82,8 +81,7 @@ application.</p>
 <h3 id="handling-errors">Handling Errors</h3>
 <p>If an error is present in the login, an <code class="highlighter-rouge">error</code> query parameter will be present.</p>
 
-<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="k">if</span><span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nv">$_REQUEST</span><span class="p">))</span> <span class="p">{</span>
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nv">$_REQUEST</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="nv">$_REQUEST</span><span class="p">[</span><span class="s1">'error'</span><span class="p">]);</span>
 <span class="p">}</span>
 </code></pre>
