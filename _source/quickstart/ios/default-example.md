@@ -45,7 +45,7 @@ pod 'OktaAuth', '~> 0.1'
 
 Now, install the `OktaAuth` dependency and open the compiled project:
 ```bash
-[project] pod install && open project.xcworkspace
+pod install && open project.xcworkspace
 ```
 
 ### Configuration

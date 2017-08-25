@@ -1,6 +1,6 @@
 ---
 layout: software
-title: React + Okta Auth SDK
+title: React
 weight: 30
 excerpt: Integrate Okta with a React app using Auth JS.
 ---
@@ -33,24 +33,24 @@ If you do not already have a **Developer Edition Account**, you can create one a
 ## Create a React App
 To quickly create a React app, install the create-react-app CLI:
 ```bash
-$ npm install -g create-react-app
+npm install -g create-react-app
 ```
 
 Now, create a new app:
 ```bash
-$ create-react-app okta-app
+create-react-app okta-app
 ```
 
 This creates a new project named `okta-app` and installs all required dependencies.
 
 A simple way to add authentication into a React app is using the [Okta Auth JS](/code/javascript/okta_auth_sdk/) library. We can install it via `npm`:
 ```bash
-$ cd okta-app && npm install @okta/okta-auth-js --save
+cd okta-app && npm install @okta/okta-auth-js --save
 ```
 
 We'll also need `react-router-dom` to manage our routes:
 ```bash
-[okta-app] $ npm install react-router-dom --save
+npm install react-router-dom --save
 ```
 
 ## Create an Authentication Utility
@@ -312,7 +312,7 @@ export default App;
 Finally, start your app:
 
 ```bash
-[okta-app] $ npm start
+npm start
 ```
 
 ## Conclusion

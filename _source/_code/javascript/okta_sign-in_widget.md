@@ -1,6 +1,6 @@
 ---
 layout: software
-title: Okta Sign-In Widget Quickstart
+title: JavaScript
 excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta.
 weight: 1
 redirect_from:

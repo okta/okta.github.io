@@ -37,7 +37,7 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
 ## More Resources
 
 <ul class='code-list'>
-  <li><span class='code-icon expression-16'><span> <a href='quickstart-signin-widget.html'>PHP + Okta Sign-In Widget Quickstart Guide</a></li>
+  <li><span class='code-icon expression-16'></span> <a href='quickstart-signin-widget.html'>PHP + Okta Sign-In Widget Quickstart Guide</a></li>
   <li><span class='code-icon expression-16'></span> <a href='jwt-validation.html'>PHP JWT Validation Guide</a></li>
   <li><span class='code-icon info-16-gray'></span> <a href='simplesamlphp.html'>SimpleSAMLphp</a></li>
 </ul>

@@ -1,6 +1,6 @@
 ---
 layout: software
-title: Okta Auth SDK Quickstart
+title: JavaScript
 weight: 10
 excerpt: A JavaScript wrapper for Okta's Authentication APIs.
 ---

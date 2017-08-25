@@ -1,6 +1,6 @@
 ---
 layout: software
-title: Angular + Okta Auth SDK
+title: Angular
 weight: 20
 excerpt: Integrate Okta with an Angular application using Auth JS.
 ---
@@ -26,12 +26,12 @@ If you do not already have a  **Developer Edition Account**, you can create one 
 ## Create an Angular App
 To quickly create an Angular app, install the Angular CLI:
 ```bash
-$ npm install -g @angular/cli
+npm install -g @angular/cli
 ```
 
 Now, create a new application:
 ```bash
-$ ng new okta-app
+ng new okta-app
 ```
 
 This creates a new project named `okta-app` and installs all required dependencies.
@@ -39,7 +39,7 @@ This creates a new project named `okta-app` and installs all required dependenci
 The simplest way to add authentication into an Angular app is using the library [Okta Auth JS](/code/javascript/okta_auth_sdk/). We can install it via `npm`:
 
 ```bash
-[okta-app] $ npm install @okta/okta-auth-js --save
+npm install @okta/okta-auth-js --save
 ```
 
 ## Create an Authentication Service
