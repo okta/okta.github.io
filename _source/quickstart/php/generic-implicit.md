@@ -53,7 +53,6 @@ prefetch, the client side application will quit trying to make the call, and wil
 api.
 
 ```php?start_inline=true
-
 // Don't do anything for prefetch requests.
 if ( $_SERVER['REQUEST_METHOD'] === 'OPTIONS' ) {
     return false;
@@ -71,7 +70,6 @@ is present, we can not begin our verification process.  First, we set up some va
  the authentication type is a Bearer token.
  
 ```php?start_inline=true
-
 $authType = null;
 $authToken = null;
 
@@ -91,7 +89,6 @@ Now we are ready to use our verifier library to make sure the token is valid. Th
  Unauthorized` to tell the client there was an issue.
 
 ```php?start_inline=true
-
 try {
     // Setup the JWT Verifier.
     $jwtVerifier = ( new \Okta\JwtVerifier\JwtVerifierBuilder() )
@@ -111,7 +108,6 @@ If the verify method was successful, we will now have access to all the claims o
 make sure that the `cid` (ClientId) from the token matches what our ClientId is from the authoriztation server.
 
 ```php?start_inline=true
-
 // Check to make sure the client id is valid.
 if( $jwt->getClaims()['cid'] != '{clientId}') {
     return http_response_code( 401 );
@@ -122,7 +118,6 @@ Finally, if we have made it to this point, everything checks out and you can res
 supply the client application.
 
 ```php?start_inline=true
-
 //JWT is valid!
 print json_encode([
     'messages' => [
@@ -130,7 +125,6 @@ print json_encode([
         'message 2'
     ]
 ]);
-
 ```
 
 All that is left is to start the php server and try it out. To start your PHP server, and to make sure everything 
@@ -149,7 +143,7 @@ port match and that you are using `0.0.0.0` when starting the PHP server.
 #### Full Messages API
 
 ```php
-<?php
+<?php 
 
 // /api/messages.php
 
