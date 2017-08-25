@@ -42,7 +42,7 @@ Our first step is to include the composer autoload file.  In your new `messages.
  
 > NOTE: All code blocks will be added progressively to the file. The full file is provided at the end of this quickstart.
 
-```php
+```php?start_inline=true
 require __DIR__ . '/../vendor/autoload.php'; // This path may be different for you. 
 ```
  
@@ -52,8 +52,7 @@ get all available options, but will not send the authorization header. If we ret
 prefetch, the client side application will quit trying to make the call, and will no longer respond to the messages 
 api.
 
-```php
-
+```php?start_inline=true
 // Don't do anything for prefetch requests.
 if ( $_SERVER['REQUEST_METHOD'] === 'OPTIONS' ) {
     return false;
@@ -70,8 +69,7 @@ is present, we can not begin our verification process.  First, we set up some va
  Next we extract the authentication type and the token from the Authorization header then we need to make sure that 
  the authentication type is a Bearer token.
  
-```php
-
+```php?start_inline=true
 $authType = null;
 $authToken = null;
 
@@ -90,8 +88,7 @@ Now we are ready to use our verifier library to make sure the token is valid. Th
  All of this will be wrapped inside of a try catch block. If there are any exceptions, we will respond with a `401 
  Unauthorized` to tell the client there was an issue.
 
-```php
-
+```php?start_inline=true
 try {
     // Setup the JWT Verifier.
     $jwtVerifier = ( new \Okta\JwtVerifier\JwtVerifierBuilder() )
@@ -110,8 +107,7 @@ try {
 If the verify method was successful, we will now have access to all the claims of the token. We need to check and 
 make sure that the `cid` (ClientId) from the token matches what our ClientId is from the authoriztation server.
 
-```php
-
+```php?start_inline=true
 // Check to make sure the client id is valid.
 if( $jwt->getClaims()['cid'] != '{clientId}') {
     return http_response_code( 401 );
@@ -121,8 +117,7 @@ if( $jwt->getClaims()['cid'] != '{clientId}') {
 Finally, if we have made it to this point, everything checks out and you can respond with the messages you want to 
 supply the client application.
 
-```php
-
+```php?start_inline=true
 //JWT is valid!
 print json_encode([
     'messages' => [
@@ -130,7 +125,6 @@ print json_encode([
         'message 2'
     ]
 ]);
-
 ```
 
 All that is left is to start the php server and try it out. To start your PHP server, and to make sure everything 
@@ -149,7 +143,7 @@ port match and that you are using `0.0.0.0` when starting the PHP server.
 #### Full Messages API
 
 ```php
-<?php
+<?php 
 
 // /api/messages.php
 
