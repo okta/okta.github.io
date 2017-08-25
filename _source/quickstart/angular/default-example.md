@@ -14,7 +14,7 @@ At the end of the Angular instructions you can choose your server type to learn 
 
 ## Prerequisites
 * If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
-* If you don't have an Angular app, or are new to Angular, please continue with the [Angular + Okta Auth SDK](/code/angular/okta_angular_auth_js.html) guide instead.  It will walk you through the creation of an Angular app, and cover the same points as this quickstart.
+* If you don't have an Angular app, or are new to Angular, please continue with the [Angular Quickstart](https://angular.io/guide/quickstart) guide instead.  It will walk you through the creation of an Angular app, and cover the same points as this quickstart.
 
 ## Add an OpenID Connect Client in Okta
 In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.
@@ -43,7 +43,7 @@ These values will be used in your Angular application to setup the OpenID Connec
 You will need to use the [Okta Auth JS](/code/javascript/okta_auth_sdk.html) library to sign in the user by redirecting to the authorization endpoint on your Okta Org. You can install it via npm:
 
 ```bash
-[your-app]$ npm install @okta/okta-auth-js --save
+[your-app] npm install @okta/okta-auth-js --save
 ```
 
 You will need to create a class that encapsulates the interaction with the [Okta Auth JS](/code/javascript/okta_auth_sdk.html) library.

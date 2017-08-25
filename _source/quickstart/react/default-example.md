@@ -14,7 +14,7 @@ At the end of the React instructions you can choose your server type to learn mo
 
 ## Prerequisites
 * If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
-* If you don't have a React app, or are new to React, please continue with the [React + Okta Auth SDK](/code/react/okta_react.html) guide instead.  It will walk you through the creation of a React app, and cover the same points as this quickstart.
+* If you don't have a React app, or are new to React, please continue with the [React Quickstart](https://facebook.github.io/react-native/docs/getting-started.html) guide instead.  It will walk you through the creation of a React app, and cover the same points as this quickstart.
 
 ## Add an OpenID Connect Client in Okta
 In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.
@@ -43,7 +43,7 @@ These values will be used in your React application to setup the OpenID Connect 
 You will need to use the [Okta Auth JS](/code/javascript/okta_auth_sdk.html) library to sign in the user by redirecting to the authorization endpoint on your Okta Org. You can install it via npm:
 
 ```bash
-[your-app]$ npm install @okta/okta-auth-js --save
+[your-app] npm install @okta/okta-auth-js --save
 ```
 
 You will need to create a class that encapsulates the interaction with the [Okta Auth JS](/code/javascript/okta_auth_sdk.html) library. This file will expose a `withAuth` method that makes it easy to create [Higher-Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that include an `auth` property.
