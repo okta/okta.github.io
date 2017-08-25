@@ -51,7 +51,7 @@ To verify the current release for an org, click the **Admin** button and check t
 
 ### Looking for Something Else?
 
-* [Okta Identity Cloud Release Note Index for 2016](platform-release-notes2016-index.html) 
-* [Okta Identity Cloud Release Note Index for 2017](platform-release-notes2017-index.html)
+* [Okta API Release Note Index for 2016](platform-release-notes2016-index.html) 
+* [Okta API Release Note Index for 2017](platform-release-notes2017-index.html)
 * For changes outside the Okta API, see the [Product Release Notes](https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm).
 

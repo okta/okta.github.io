@@ -1,10 +1,10 @@
 ---
 layout: docs_page
 title: Okta API Release Notes Index 2016
-excerpt: List of changes to the Okta Platform in 2016
+excerpt: List of changes to the Okta API in 2016
 ---
 
-## Index of Platform Release Notes for 2016
+## Index of Okta API Release Notes for 2016
 
 * [Okta API Release Notes for Current Preview Release](platform-release-notes.html)
 * [Okta API Release Notes for 2017](platform-release-notes2017-index.html)
