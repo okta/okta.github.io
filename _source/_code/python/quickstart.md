@@ -1,6 +1,6 @@
 ---
 layout: software
-title: Okta Sign-In Widget
+title: Python
 excerpt: Quickstart guide for using the Okta Sign-In Widget with Python.
 support_email: developers@okta.com
 weight: 1

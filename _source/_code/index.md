@@ -1,7 +1,3 @@
 ---
-layout: default
+redirect_to: "/documentation/"
 ---
-
-<div class="PageContent-main">
-  {% include code.html %}
-</div>

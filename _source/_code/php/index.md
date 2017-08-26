@@ -10,7 +10,7 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 
 <ul class='code-list'>
   <li>
-    <a href='quickstart-signin-widget.html' class='code-button inverse'>
+    <a href='/quickstart/#/okta-sign-in-page/php/generic' class='code-button inverse'>
       <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
     </a>
   </li>
@@ -37,6 +37,7 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
 ## More Resources
 
 <ul class='code-list'>
+  <li><span class='code-icon expression-16'></span> <a href='quickstart-signin-widget.html'>PHP + Okta Sign-In Widget Quickstart Guide</a></li>
   <li><span class='code-icon expression-16'></span> <a href='jwt-validation.html'>PHP JWT Validation Guide</a></li>
   <li><span class='code-icon info-16-gray'></span> <a href='simplesamlphp.html'>SimpleSAMLphp</a></li>
 </ul>

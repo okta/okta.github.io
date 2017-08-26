@@ -17,7 +17,15 @@ describe('quickstarts page spec', () => {
       ])).toBe(true);
   });
 
-  it('can select all client setups', () => {
+  xit('can select all client setups', () => {
+    quickstartsPage.selectAndroid();
+    expect(quickstartsPage.urlContains("/android")).toBe(true);
+    expect(quickstartsPage.activeLinksContain([
+        'Android',
+        'Node JS',
+        'Generic Node'
+      ])).toBe(true);
+
     quickstartsPage.selectAngularClient();
     expect(quickstartsPage.urlContains("/angular")).toBe(true);
     expect(quickstartsPage.activeLinksContain([
@@ -41,14 +49,6 @@ describe('quickstarts page spec', () => {
         'Node JS',
         'Generic Node'
       ])).toBe(true);
-
-    quickstartsPage.selectHosted();
-    expect(quickstartsPage.urlContains("/okta-sign-in-page")).toBe(true);
-    expect(quickstartsPage.activeLinksContain([
-      'Okta Sign-In Page',
-      'Node JS',
-      'Generic Node'
-    ])).toBe(true);
   });
 
   it('can select all server setups', () => {

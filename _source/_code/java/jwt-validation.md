@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: JWT Validation Guide
 excerpt: How to validate Okta JWTs with Java.
 support_email: developers@okta.com

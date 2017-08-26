@@ -8,10 +8,11 @@ title: Authentication Quickstart Guide
 
 <h2 id="client_setup">Client Setup</h2>
 
-First, let's add authentication to your client. (Already done? [Skip to server setup.](#server_setup))
+First, let's add authentication to your client. (Already done? <a onclick="scrollToServer()" style="cursor: pointer;">Skip to server setup</a>)
 
 <div class="code-selector" id="client-selector">
   <h3>Client</h3>
+  <ul></ul>
 </div>
 
 <div id="client_content" class="example-content-well"></div>
@@ -20,10 +21,12 @@ First, let's add authentication to your client. (Already done? [Skip to server s
 
 <div class="code-selector" id="server-selector">
   <h3>Server</h3>
+  <ul></ul>
 </div>
 
 <div class="code-selector" id="framework-selector">
   <h3>Framework</h3>
+  <ul></ul>
 </div>
 
 <div id="server_content" class="example-content-well"></div>
