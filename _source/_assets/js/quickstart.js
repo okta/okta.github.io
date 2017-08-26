@@ -13,9 +13,10 @@
   var linkState = {
     clients: [
       {
-        name: 'android',
-        label: 'Android',
-        serverExampleType: 'implicit'
+        name: 'okta-sign-in-page',
+        label: 'Okta Sign-In Page',
+        serverExampleType: 'auth-code',
+        active: true
       },
       {
         name: 'angular',
@@ -27,21 +28,20 @@
         serverExampleType: 'implicit'
       },
       {
-        name: 'ios',
-        label: 'iOS',
-        serverExampleType: 'implicit'
-      },
-      {
         name: 'widget',
         label: 'Sign-In Widget',
         serverExampleType: 'implicit',
       },
       {
-        name: 'okta-sign-in-page',
-        label: 'Okta Sign-In Page',
-        serverExampleType: 'auth-code',
-        active: true
-      }
+        name: 'ios',
+        label: 'iOS',
+        serverExampleType: 'implicit'
+      },
+      {
+        name: 'android',
+        label: 'Android',
+        serverExampleType: 'implicit'
+      },
     ],
     servers: [
       {

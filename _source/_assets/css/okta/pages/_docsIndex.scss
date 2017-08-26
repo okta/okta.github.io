@@ -36,7 +36,16 @@
 		a {
 			display: block;
 			color: #d2d2d6;
-            padding: 0 20px 30px;
+			padding: 0 20px 30px;
+			border-bottom: 2px solid get-color('ebony-clay');
+			&:hover{
+				cursor: pointer;
+				text-decoration: none;
+			}
+			&.active,
+			&:hover {
+				border-bottom-color:  #fff;
+			}
 		}
 		ul {
 			list-style-type: none;
