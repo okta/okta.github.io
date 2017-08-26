@@ -76,7 +76,7 @@
 </div>
 
 <p>Now, install the <code class="highlighter-rouge">OktaAuth</code> dependency and open the compiled project:</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="o">[</span>project] pod install <span class="o">&amp;&amp;</span> open project.xcworkspace
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>pod install <span class="o">&amp;&amp;</span> open project.xcworkspace
 </code></pre>
 </div>
 
@@ -86,18 +86,18 @@
 <span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
 <span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;dict&gt;</span>
-	<span class="nt">&lt;key&gt;</span>issuer<span class="nt">&lt;/key&gt;</span>
-	<span class="nt">&lt;string&gt;</span>https://{yourOktaDomain}.com/oauth2/default<span class="nt">&lt;/string&gt;</span>
-	<span class="nt">&lt;key&gt;</span>clientId<span class="nt">&lt;/key&gt;</span>
-	<span class="nt">&lt;string&gt;</span>{clientIdValue}<span class="nt">&lt;/string&gt;</span>
-	<span class="nt">&lt;key&gt;</span>redirectUri<span class="nt">&lt;/key&gt;</span>
-	<span class="nt">&lt;string&gt;</span>com.oktapreview.{yourOrg}:/callback<span class="nt">&lt;/string&gt;</span>
-        <span class="nt">&lt;key&gt;</span>scopes<span class="nt">&lt;/key&gt;</span>
-	<span class="nt">&lt;array&gt;</span>
-		<span class="nt">&lt;string&gt;</span>offline_access<span class="nt">&lt;/string&gt;</span>
-		<span class="nt">&lt;string&gt;</span>openid<span class="nt">&lt;/string&gt;</span>
-		<span class="nt">&lt;string&gt;</span>profile<span class="nt">&lt;/string&gt;</span>
-	<span class="nt">&lt;/array&gt;</span>
+  <span class="nt">&lt;key&gt;</span>issuer<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>https://{yourOktaDomain}.com/oauth2/default<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;key&gt;</span>clientId<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>{clientIdValue}<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;key&gt;</span>redirectUri<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>com.oktapreview.{yourOrg}:/callback<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;key&gt;</span>scopes<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;array&gt;</span>
+	<span class="nt">&lt;string&gt;</span>offline_access<span class="nt">&lt;/string&gt;</span>
+	<span class="nt">&lt;string&gt;</span>openid<span class="nt">&lt;/string&gt;</span>
+	<span class="nt">&lt;string&gt;</span>profile<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;/array&gt;</span>
 <span class="nt">&lt;/dict&gt;</span>
 <span class="nt">&lt;/plist&gt;</span>
 </code></pre>
@@ -118,25 +118,27 @@ The easiest, and most secure way is to use the <strong>default login page</stron
 <div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// AppDelegate.swift</span>
 <span class="kd">import</span> <span class="kt">OktaAuth</span>
 
-<span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="kt">OktaAuth</span><span class="o">.</span><span class="nf">resume</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="n">options</span><span class="p">)</span>
+<span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">app</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span>
+    <span class="n">open</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationOpenURLOptionsKey</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kt">OktaAuth</span><span class="o">.</span><span class="nf">resume</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="n">options</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 </div>
 
 <p>Then, you can start the authorization flow by simply calling <code class="highlighter-rouge">login</code>:</p>
 <div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kt">OktaAuth</span>
-    <span class="o">.</span><span class="nf">login</span><span class="p">()</span>
-    <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>    
-        <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">)</span> <span class="p">}</span>
+  <span class="o">.</span><span class="nf">login</span><span class="p">()</span>
+  <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>    
+    <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">)</span> <span class="p">}</span>
 
-        <span class="c1">// Success</span>
-        <span class="k">if</span> <span class="k">let</span> <span class="nv">tokenResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
-            <span class="c1">// tokenResponse.accessToken</span>
-            <span class="c1">// tokenResponse.idToken</span>
-            <span class="c1">// tokenResponse.refreshToken</span>
-        <span class="p">}</span>
+    <span class="c1">// Success</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">tokenResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
+      <span class="c1">// tokenResponse.accessToken</span>
+      <span class="c1">// tokenResponse.idToken</span>
+      <span class="c1">// tokenResponse.refreshToken</span>
     <span class="p">}</span>
+  <span class="p">}</span>
 </code></pre>
 </div>
 
@@ -146,26 +148,35 @@ The easiest, and most secure way is to use the <strong>default login page</stron
 <h3 id="store-the-users-tokens">Store the User’s Tokens</h3>
 <p>Tokens are securly stored in the Keychain. They are easily set and retrieved with the helper methods <code class="highlighter-rouge">set</code> and <code class="highlighter-rouge">get</code>.</p>
 <div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kt">OktaAuth</span>
-    <span class="o">.</span><span class="nf">login</span><span class="p">()</span>
-    <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>    
-        <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">)</span> <span class="p">}</span>
+  <span class="o">.</span><span class="nf">login</span><span class="p">()</span>
+  <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>    
+    <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">!</span><span class="p">)</span> <span class="p">}</span>
 
-        <span class="c1">// Success</span>
-        <span class="k">if</span> <span class="k">let</span> <span class="nv">tokenResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
-            <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">accessToken</span><span class="o">!</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"accessToken"</span><span class="p">)</span>
-            <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">idToken</span><span class="o">!</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"idToken"</span><span class="p">)</span>
-            <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">refreshToken</span><span class="o">!</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"refreshToken"</span><span class="p">)</span>
-        <span class="p">}</span>
+    <span class="c1">// Success</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">tokenResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
+      <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span>
+        <span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">accessToken</span><span class="o">!</span><span class="p">,</span>
+        <span class="nv">forKey</span><span class="p">:</span> <span class="s">"accessToken"</span>
+      <span class="p">)</span>
+      <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span>
+        <span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">idToken</span><span class="o">!</span><span class="p">,</span>
+        <span class="nv">forKey</span><span class="p">:</span> <span class="s">"idToken"</span>
+      <span class="p">)</span>
+      <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span>
+        <span class="nv">value</span><span class="p">:</span> <span class="n">tokenResponse</span><span class="o">.</span><span class="n">refreshToken</span><span class="o">!</span><span class="p">,</span>
+        <span class="nv">forKey</span><span class="p">:</span> <span class="s">"refreshToken"</span>
+      <span class="p">)</span>
     <span class="p">}</span>
+  <span class="p">}</span>
 </code></pre>
 </div>
 
 <p>When starting up the application, check for the existance of an <code class="highlighter-rouge">access_token</code> to see if the user has an existing session:</p>
 
 <div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="k">let</span> <span class="nv">currentToken</span> <span class="o">=</span> <span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"accessToken"</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Token is valid!</span>
+  <span class="c1">// Token is valid!</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// Token does not exist, prompt the user to login.</span>
+  <span class="c1">// Token does not exist, prompt the user to login.</span>
 <span class="p">}</span>
 </code></pre>
 </div>
@@ -178,25 +189,25 @@ The easiest, and most secure way is to use the <strong>default login page</stron
 
 <div class="language-swift highlighter-rouge"><pre class="highlight"><code>
 <span class="kd">func</span> <span class="nf">callMessagesApi</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:{port}/api/messages"</span><span class="p">)</span>
+  <span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:{serverPort}/api/messages"</span><span class="p">)</span>
 
-    <span class="c1">// Set the authorization header</span>
-    <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer </span><span class="se">\(</span><span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"accessToken"</span><span class="p">)</span><span class="se">)</span><span class="s">"</span>
-        <span class="o">...</span>
-    <span class="p">]</span>
+  <span class="c1">// Set the authorization header</span>
+  <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer </span><span class="se">\(</span><span class="kt">OktaAuth</span><span class="o">.</span><span class="n">tokens</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"accessToken"</span><span class="p">)</span><span class="se">)</span><span class="s">"</span>
+    <span class="o">...</span>
+  <span class="p">]</span>
 
-    <span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="o">!</span><span class="p">)</span>
-    <span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+  <span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="o">!</span><span class="p">)</span>
+  <span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
 
-    <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">){</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span> 
-        <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+  <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">){</span> <span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span> 
+    <span class="k">if</span> <span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
 
-        <span class="k">let</span> <span class="nv">serverResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
-            <span class="c1">// serverResponse</span>
-        <span class="p">}</span>
+    <span class="k">let</span> <span class="nv">serverResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="p">{</span>
+      <span class="c1">// serverResponse</span>
     <span class="p">}</span>
-    <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+  <span class="p">}</span>
+  <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
 </div>

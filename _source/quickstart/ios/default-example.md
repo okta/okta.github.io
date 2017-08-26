@@ -45,7 +45,7 @@ pod 'OktaAuth', '~> 0.1'
 
 Now, install the `OktaAuth` dependency and open the compiled project:
 ```bash
-[project] pod install && open project.xcworkspace
+pod install && open project.xcworkspace
 ```
 
 ### Configuration
@@ -55,18 +55,18 @@ Create a new `Okta.plist` file in your application's bundle with the following f
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>issuer</key>
-	<string>https://{yourOktaDomain}.com/oauth2/default</string>
-	<key>clientId</key>
-	<string>{clientIdValue}</string>
-	<key>redirectUri</key>
-	<string>com.oktapreview.{yourOrg}:/callback</string>
-        <key>scopes</key>
-	<array>
-		<string>offline_access</string>
-		<string>openid</string>
-		<string>profile</string>
-	</array>
+  <key>issuer</key>
+  <string>https://{yourOktaDomain}.com/oauth2/default</string>
+  <key>clientId</key>
+  <string>{clientIdValue}</string>
+  <key>redirectUri</key>
+  <string>com.oktapreview.{yourOrg}:/callback</string>
+  <key>scopes</key>
+  <array>
+	<string>offline_access</string>
+	<string>openid</string>
+	<string>profile</string>
+  </array>
 </dict>
 </plist>
 ```
@@ -87,25 +87,27 @@ Login events can be triggered by an `@IBAction`, `viewDidLoad`, or programmatica
 // AppDelegate.swift
 import OktaAuth
 
-func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-    return OktaAuth.resume(url: url, options: options)
+func application(_ app: UIApplication,
+    open url: URL,
+    options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+  return OktaAuth.resume(url: url, options: options)
 }
 ```
 
 Then, you can start the authorization flow by simply calling `login`:
 ```swift
 OktaAuth
-    .login()
-    .start(self) { response, error in    
-        if error != nil { print(error!) }
+  .login()
+  .start(self) { response, error in    
+    if error != nil { print(error!) }
 
-        // Success
-        if let tokenResponse = response {
-            // tokenResponse.accessToken
-            // tokenResponse.idToken
-            // tokenResponse.refreshToken
-        }
+    // Success
+    if let tokenResponse = response {
+      // tokenResponse.accessToken
+      // tokenResponse.idToken
+      // tokenResponse.refreshToken
     }
+  }
 ```
 
 ## Handle the Login State
@@ -115,26 +117,35 @@ In native applications, it is common for users to have a long-lived session. It 
 Tokens are securly stored in the Keychain. They are easily set and retrieved with the helper methods `set` and `get`.
 ```swift
 OktaAuth
-    .login()
-    .start(self) { response, error in    
-        if error != nil { print(error!) }
+  .login()
+  .start(self) { response, error in    
+    if error != nil { print(error!) }
 
-        // Success
-        if let tokenResponse = response {
-            OktaAuth.tokens.set(value: tokenResponse.accessToken!, forKey: "accessToken")
-            OktaAuth.tokens.set(value: tokenResponse.idToken!, forKey: "idToken")
-            OktaAuth.tokens.set(value: tokenResponse.refreshToken!, forKey: "refreshToken")
-        }
+    // Success
+    if let tokenResponse = response {
+      OktaAuth.tokens.set(
+        value: tokenResponse.accessToken!,
+        forKey: "accessToken"
+      )
+      OktaAuth.tokens.set(
+        value: tokenResponse.idToken!,
+        forKey: "idToken"
+      )
+      OktaAuth.tokens.set(
+        value: tokenResponse.refreshToken!,
+        forKey: "refreshToken"
+      )
     }
+  }
 ```
 
 When starting up the application, check for the existance of an `access_token` to see if the user has an existing session:
 
 ```swift
 if let currentToken = OktaAuth.tokens.get(forKey: "accessToken") {
-    // Token is valid!
+  // Token is valid!
 } else {
-    // Token does not exist, prompt the user to login.
+  // Token does not exist, prompt the user to login.
 }
 ```
 
@@ -147,24 +158,24 @@ Please continue down to the next section, Server Setup, to learn about access to
 ```swift
 
 func callMessagesApi() {
-    let url = URL(string: "http://localhost:{port}/api/messages")
+  let url = URL(string: "http://localhost:{serverPort}/api/messages")
 
-    // Set the authorization header
-    let headers = [
-        "Authorization": "Bearer \(OktaAuth.tokens.get("accessToken"))"
-        ...
-    ]
+  // Set the authorization header
+  let headers = [
+    "Authorization": "Bearer \(OktaAuth.tokens.get("accessToken"))"
+    ...
+  ]
 
-    var request = URLRequest(url: url!)
-    request.allHTTPHeaderFields = headers
+  var request = URLRequest(url: url!)
+  request.allHTTPHeaderFields = headers
 
-    let task = URLSession.shared.dataTask(with: request){ data, response, error in 
-        if error != nil { return }
+  let task = URLSession.shared.dataTask(with: request){ data, response, error in 
+    if error != nil { return }
 
-        let serverResponse = response {
-            // serverResponse
-        }
+    let serverResponse = response {
+      // serverResponse
     }
-    task.resume()
+  }
+  task.resume()
 }
 ```

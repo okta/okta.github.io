@@ -24,7 +24,6 @@ describe('table of contents navigation spec', () => {
 
     tocPage.clickByLinkText('Last Section');
     tocPage.waitForLinkToBeDisplayed('Sub Section 1');
-
     expect(tocPage.level3ItemsVisible(expectedLevel3Items)).toBe(true);
     expect(tocPage.isTopOfPageLinkDisplayed()).toBe(true);
     

@@ -1,6 +1,6 @@
 ---
 layout: software
-title: JWT Validation Guide
+title: PHP
 excerpt: How to validate Okta JWTs with PHP.
 support_email: developers@okta.com
 ---
