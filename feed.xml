@@ -144,7 +144,7 @@
     
       <item>
         <title>Build an Ionic App with User Authentication</title>
-        <description>&lt;p&gt;With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows you to authenticate directly against the &lt;a href=&quot;/&quot;&gt;Okta Platform API&lt;/a&gt;, and this article shows you how to do just that in an Ionic application. I’ll demo how to log in with OIDC redirect, using Okta’s Auth SDK, and using OAuth with Cordova’s in-app browser; user registration is omitted as the feature is still under active development.&lt;/p&gt;
+        <description>&lt;p&gt;With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows you to authenticate directly against the &lt;a href=&quot;/&quot;&gt;Okta API&lt;/a&gt;, and this article shows you how to do just that in an Ionic application. I’ll demo how to log in with OIDC redirect, using Okta’s Auth SDK, and using OAuth with Cordova’s in-app browser; user registration is omitted as the feature is still under active development.&lt;/p&gt;
 
 &lt;h2 id=&quot;why-ionic&quot;&gt;Why Ionic?&lt;/h2&gt;
 
@@ -4560,7 +4560,7 @@ code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;
 &lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oidc-flow-3f640eb4b5d82151643a1d7bc2d55cfab1c1c6e14b6c2ad501660216c6d227c8.png&quot; alt=&quot;OIDF Flow&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;oauth--okta&quot;&gt;OAuth + Okta&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.okta.com&quot;&gt;Okta&lt;/a&gt; is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta’s Developer Platform straight from the source, you should attend &lt;a href=&quot;https://www.okta.com/oktane17/&quot;&gt;Oktane17&lt;/a&gt; in late August. There’s a &lt;a href=&quot;https://www.okta.com/oktane17/agenda/#AppDev&quot;&gt;track dedicated to app development&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.okta.com&quot;&gt;Okta&lt;/a&gt; is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta straight from the source, you should attend &lt;a href=&quot;https://www.okta.com/oktane17/&quot;&gt;Oktane17&lt;/a&gt; in late August. There’s a &lt;a href=&quot;https://www.okta.com/oktane17/agenda/#AppDev&quot;&gt;track dedicated to app development&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;See &lt;a href=&quot;http://developer.okta.com/docs/api/resources/oauth2.html&quot;&gt;Okta’s OAuth 2.0 API&lt;/a&gt; for specific information on how we support OAuth.&lt;/p&gt;
 
@@ -10563,7 +10563,7 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 
 &lt;p&gt;OAuth doesn’t validate a user’s identity — that’s taken care of by an authentication service like Okta. Authentication is when you validate a user’s identity (like asking for a username / password to log in), whereas authorization is when you check to see what permissions an existing user already has.&lt;/p&gt;
 
-&lt;p&gt;In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta Platform API. You can sign up for a &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;forever-free Okta developer account here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta API. You can sign up for a &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;forever-free Okta developer account here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you don’t want to code along, feel free to grab the &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-oauth-example&quot;&gt;source code from GitHub&lt;/a&gt;! You can also watch a video of this tutorial below.&lt;/p&gt;
 
