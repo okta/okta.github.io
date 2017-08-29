@@ -7,7 +7,7 @@ excerpt: Tell the world about your Okta integration to accelerate adoption, diff
 
 ## Promoting Your Integration
 
-Once you've completed your integration with Okta and published it on the Okta Application Network (OAN), it’s time to tell the world!
+Once you've completed your integration with Okta and published it on the Okta Integration Network (OIN), it’s time to tell the world!
 Raising awareness for your integration among joint customers and new prospects helps accelerate adoption, differentiate your app from competitors, and drive new business.
 
 Please keep us in the loop with your marketing plans by emailing <partnerdg@okta.com>.
@@ -62,11 +62,11 @@ In addition to amplifying your launch marketing, we’ll alert our thousands of 
 
 * Quarterly Blog Post
 
-    We’ll highlight your integration as part of our [quarterly OAN round-up](https://www.okta.com/blog/2016/12/seeing-success-in-oktas-scim-provisioning-program/) on the Okta blog.
+    We’ll highlight your integration as part of our [quarterly OIN round-up](https://www.okta.com/blog/2016/12/seeing-success-in-oktas-scim-provisioning-program/) on the Okta blog.
 
 * Customer Newsletter
 
-    We’ll feature your integration in the OAN section of our monthly customer newsletter.
+    We’ll feature your integration in the OIN section of our monthly customer newsletter.
 
 * Sales Newsletter
 
@@ -102,4 +102,4 @@ Related articles:
 
 * [Single Sign-On](/use_cases/integrate_with_okta/sso-with-saml.html)
 * [Provisioning](/use_cases/integrate_with_okta/provisioning.html)
-* [OAN FAQs](/use_cases/integrate_with_okta/oan-faqs.html)
+* [OIN FAQs](/use_cases/integrate_with_okta/oan-faqs.html)
