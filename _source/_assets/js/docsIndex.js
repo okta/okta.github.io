@@ -14,7 +14,8 @@
   function renderCodeLinks() {
     var ul = $('<ul>', {});
     code.forEach(function (language) {
-      var li = $('<li>', {});
+      var li = $('<li>');
+
       var icon = $('<i>', {
         class: 'icon code-' + language.name + '-32',
       });
@@ -22,10 +23,13 @@
       var link = $('<a>', {
         text: language.label + ' ›',
         href: '/code/' + language.name + '/',
-      });
-
-      li.append(icon);
+      });      
+      link.prepend($('<br />'));
+      link.prepend(icon);
       li.append(link);
+      
+      // li.append(icon);
+      // li.append(link);
       ul.append(li);
     });
     $('#docs-languages').append(ul);
