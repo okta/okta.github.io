@@ -9,7 +9,7 @@ Creating a consistent environment for development, testing, staging, and product
 
 A `Dockerfile` (without an extension) is simply a text file with some keywords and rules that Docker uses to create an image. That image is then used to create a container, or multiple containers that all have the same set up. In this tutorial, you'll build a `Dockerfile` that you'll use to create an image for a basic web application.
 
->In the previous article in this series, I told you that images are like blueprints for creating containers. Well really, they *are* containers. Containers frozen in time that you can use to “stamp out a copy” anytime you want.
+>In [the previous article in this series](https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1), I told you that images are like blueprints for creating containers. Well really, they *are* containers. Containers frozen in time that you can use to “stamp out a copy” anytime you want.
 
 To get the base application, just clone it from: [Github](https://github.com/leebrandt/docker-node-sample). This is just a basic Node website. Don’t have Node installed on your machine? Don’t worry, you’re not even going to run this application on your machine, you’re going to run it in a container.
 
