@@ -4,8 +4,8 @@ const BasePage = require('./BasePage');
 const util = require('../shared/util');
 
 class NavPage extends BasePage {
-  constructor() {
-    super();
+  constructor(url) {
+    super(url);
     this.$desktopNav = $('.Header-nav.PrimaryNav');
     this.$mobileToggleIcon = $$('.PrimaryNav-toggle');
     this.$mobileNav = $$('.PrimaryNav-is-active');

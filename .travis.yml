@@ -12,7 +12,7 @@ before_install:
   - bundle install
   - nvm install $(cat .nvmrc)
 
-script: ./scripts/travis.sh
+script: travis_retry ./scripts/travis.sh
 
 sudo: required
 dist: trusty
