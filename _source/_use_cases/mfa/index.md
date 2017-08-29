@@ -21,9 +21,9 @@ March 8, 2015</a>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 In this guide, we’ll show you how to add multi-factor authentication
-to your app with the Okta Platform.
+to your app with Okta.
 
-The Okta Platform gives you the flexibility to deploy Okta’s built-in
+Okta gives you the flexibility to deploy our built-in
 factors, or integrate with existing tokens. Native factors include
 SMS, and the Okta Verify app for iOS and Android. Integrations include
 Google Authenticator, RSA SecurID, Symantec VIP, and Duo Security.

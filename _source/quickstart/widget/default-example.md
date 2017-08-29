@@ -8,7 +8,7 @@ This guide will walk you through integrating the [Okta Sign-In Widget](https://g
 1. Add an OpenID Connect Client in Okta
 2. Add Sign-In Widget assets to your project
 3. Implement Okta Sign-In
-4. Handle the Authorization Code Flow
+4. Using the Access Token
 
 At the end of the Sign-In Widget instructions you can choose your server type to learn more about post-authentication workflows, such as exchanging the `authorization code` for tokens that your server can use to communicate with other servers.
 
@@ -123,7 +123,7 @@ function callMessagesApi() {
 
     // Make the request using jQuery
     $.ajax({
-        url: '/api/messages',
+        url: 'http://localhost:{serverPort}/api/messages',
         headers: {
             Authorization : 'Bearer ' + accessToken
         },

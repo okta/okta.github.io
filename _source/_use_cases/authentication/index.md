@@ -7,7 +7,7 @@ excerpt: Overview of the ways Okta can be used to authenticate users depending o
 
 # Authentication with Okta
 
-Authentication is a crucial part of any application development.  Whether you are developing an internal IT app for your employees – or building a portal for your partners – or exposing a set of APIs for developers building apps around your resources, Okta Platform can provide the right support for your projects.
+Authentication is a crucial part of any application development.  Whether you are developing an internal IT app for your employees – or building a portal for your partners – or exposing a set of APIs for developers building apps around your resources, Okta provides the right support for your projects.
 
 ## Building Apps That Support SSO
 
@@ -43,7 +43,7 @@ authentication during login is often critical to many implementations.
 
 Okta provides many options for developers around the authentication
 experience.  The foundation is built on top of the
-underlying feature set in the Okta platform.  Password policies,
+underlying feature set in Okta.  Password policies,
 strong and adaptive authentication policies, password reset workflow, and more
 can all be configured easily in the Okta Admin console.
 Many of these policies can also be controlled through Okta's API.
@@ -84,7 +84,7 @@ and authorization needs.
 
 The underlying foundation for the Sign-In Widget and Auth SDK is a
 comprehensive [authentication REST API](/docs/api/resources/authn.html)
-exposed through the Okta Platform.  Use it as a
+exposed through Okta.  Use it as a
 standalone API to provide the identity layer on top of your existing
 application and authentication logic, or use it with the Okta [Sessions API](/docs/api/resources/sessions.html)
 to obtain an Okta [session cookie](/use_cases/authentication/session_cookie) and access apps within Okta.

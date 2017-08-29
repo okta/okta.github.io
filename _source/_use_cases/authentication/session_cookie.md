@@ -7,7 +7,7 @@ redirect_from:
 
 # Overview
 
-Okta utilizes an HTTP session cookie to provide access to your Okta organization and applications across web requests for interactive user-agents such as a browser. This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on the Okta platform.
+Okta utilizes an HTTP session cookie to provide access to your Okta organization and applications across web requests for interactive user-agents such as a browser. This document provides examples for programmatically retrieving and setting a session cookie for different deployment scenarios to provide SSO capabilities for custom web applications built on Okta.
 
 Okta sessions are created and managed with the [Session API](/docs/api/resources/sessions.html).
 

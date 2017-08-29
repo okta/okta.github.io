@@ -11,7 +11,7 @@ Very simply, OAuth is a protocol that supports authorization workflows. It gives
 
 OAuth doesn’t validate a user’s identity — that’s taken care of by an authentication service like Okta. Authentication is when you validate a user’s identity (like asking for a username / password to log in), whereas authorization is when you check to see what permissions an existing user already has.
 
-In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta Platform API. You can sign up for a [forever-free Okta developer account here](https://www.okta.com/developer/signup/).
+In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta API. You can sign up for a [forever-free Okta developer account here](https://www.okta.com/developer/signup/).
 
 If you don’t want to code along, feel free to grab the [source code from GitHub](https://github.com/oktadeveloper/okta-spring-boot-oauth-example)! You can also watch a video of this tutorial below.
 
