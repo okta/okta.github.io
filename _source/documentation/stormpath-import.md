@@ -13,7 +13,7 @@ The Stormpath Import tool is a script that takes the data that you exported from
 Before you begin the import process, you need the following:
 
 - A decompressed local copy of the data you [exported from Stormpath](https://stormpath.com/export)
-- An Okta account which you can sign-up for here: [https://www.okta.com/developer/signup/stormpath/](https://www.okta.com/developer/signup/stormpath/)
+- An Okta account which you can sign-up for here: [https://developer.okta.com/signup/stormpath/](https://developer.okta.com/signup/stormpath/)
 - The URL for your new Okta org (for example: https://{yourOktaDomain}.com)
 - An Okta API token: [Instructions](/docs/api/getting_started/getting_a_token.html)
 

@@ -413,7 +413,7 @@ ionic serve
 &lt;p&gt;OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To integrate Okta’s Identity Platform for user authentication, you’ll first need to:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Register&lt;/a&gt; and create an OIDC application&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;Register&lt;/a&gt; and create an OIDC application&lt;/li&gt;
   &lt;li&gt;Log in to your Okta account and navigate to &lt;strong&gt;Applications &amp;gt; Add Application&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Select &lt;strong&gt;SPA&lt;/strong&gt; and click &lt;strong&gt;Next&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Give your application a name (e.g. “Ionic OIDC”)&lt;/li&gt;
@@ -9898,9 +9898,9 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;p&gt;OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see &lt;a href=&quot;https://openid.net/connect/&quot;&gt;https://openid.net/connect/&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;To integrate &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt; for user authentication, you’ll first need to &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;register&lt;/a&gt; and create an OIDC application.&lt;/p&gt;
+&lt;p&gt;To integrate &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt; for user authentication, you’ll first need to &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;register&lt;/a&gt; and create an OIDC application.&lt;/p&gt;
 
-&lt;p&gt;Login to your Okta account, or &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;create one&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like the following.&lt;/p&gt;
+&lt;p&gt;Login to your Okta account, or &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;create one&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like the following.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/oidc-settings-ec21ae1ecd7a70f68b887fa6ecf3daeb4f8f82e2f80328a2009272ff8b2c1c02.png&quot; alt=&quot;OIDC App Settings&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
@@ -10437,7 +10437,7 @@ npm start
 &lt;h2 id=&quot;react--okta&quot;&gt;React + Okta&lt;/h2&gt;
 &lt;p&gt;You can find a completed version of the application created in this blog post &lt;a href=&quot;https://github.com/leebrandt/okta-react-widget-sample&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Sign up for a forever-free developer account&lt;/a&gt; and try Okta today!&lt;/p&gt;
+&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;Sign up for a forever-free developer account&lt;/a&gt; and try Okta today!&lt;/p&gt;
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;, leave a comment below, or open an issue on GitHub.&lt;/p&gt;
 </description>
@@ -10748,7 +10748,7 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 
 &lt;p&gt;You can find a completed version of the application created in this blog post &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example&quot;&gt;on GitHub&lt;/a&gt;. In a future post, I’ll show you how to create a more Angular-native experience, where you control the HTML for the login form.&lt;/p&gt;
 
-&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Sign up for a forever-free developer account and try Okta today!&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;Sign up for a forever-free developer account and try Okta today!&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;on Twitter&lt;/a&gt;, &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;post a question to Stack Overflow with an “okta” tag&lt;/a&gt;, or &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new&quot;&gt;open a new issue on GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
@@ -10765,7 +10765,7 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 
 &lt;p&gt;OAuth doesn’t validate a user’s identity — that’s taken care of by an authentication service like Okta. Authentication is when you validate a user’s identity (like asking for a username / password to log in), whereas authorization is when you check to see what permissions an existing user already has.&lt;/p&gt;
 
-&lt;p&gt;In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta API. You can sign up for a &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;forever-free Okta developer account here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta API. You can sign up for a &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;forever-free Okta developer account here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you don’t want to code along, feel free to grab the &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-oauth-example&quot;&gt;source code from GitHub&lt;/a&gt;! You can also watch a video of this tutorial below.&lt;/p&gt;
 

@@ -67,7 +67,7 @@ You might notice that both tutorials require quite a bit of code. Also, there do
 
 OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To integrate Okta's Identity Platform for user authentication, you'll first need to:
 
-* [Register](https://www.okta.com/developer/signup/) and create an OIDC application
+* [Register](https://developer.okta.com/signup/) and create an OIDC application
 * Log in to your Okta account and navigate to **Applications > Add Application** 
 * Select **SPA** and click **Next**
 * Give your application a name (e.g. "Ionic OIDC")

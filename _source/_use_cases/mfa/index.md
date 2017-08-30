@@ -38,7 +38,7 @@ To follow along with this guide, you will need to have your own Okta Developer E
 
 1.  Creating your Okta Developer Edition org
     If you don’t already have one, create your own Okta Developer
-    Edition org by visiting: <https://www.okta.com/developer/signup/>
+    Edition org by visiting: <https://developer.okta.com/signup/>
     and following the instructions.
 2.  Setting up the Postman API client
     After you have logged in to your account in your Okta Developer

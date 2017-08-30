@@ -21,7 +21,7 @@ A: If you have any technical questions, you can submit them to <developers@okta.
 
 **Q: Where can I get a free Okta account to play around with?**
 
-A: Sign up for an [Okta Developer Edition](https://www.okta.com/developer/signup/) account.
+A: Sign up for an [Okta Developer Edition](https://developer.okta.com/signup/) account.
 
 <br/>
 
@@ -97,7 +97,7 @@ A: Yes, the session time out default is 2 hours but can be customized by the hou
 
 A: Okta creates unique SAML configuration documentation for each application in the OIN so each will be different but for a sample, see our instructions for [How to Configure SAML 2.0 in Salesforce.com](http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-in-Salesforce.html) as an example. See the [Setting up Salesforce in Okta](https://support.okta.com/help/articles/Knowledge_Article/Setting-Up-Salesforce-in-Okta) video for a step-by-step walk through of all the steps an IT admin would take to configure single sign-on and provisioning for an app.
 
-Also, if you haven’t already done so, sign up for an Okta [developer account](https://www.okta.com/developer/signup/) and you can test drive the Okta user experience yourself.
+Also, if you haven’t already done so, sign up for an Okta [developer account](https://developer.okta.com/signup/) and you can test drive the Okta user experience yourself.
 
 <br/>
 
