@@ -77,6 +77,139 @@ on the subject.&lt;/p&gt;
       </item>
     
       <item>
+        <title>A Developer's Guide To Docker - The Dockerfile</title>
+        <description>&lt;p&gt;Creating a consistent environment for development, testing, staging, and production is one of the big benefits of using containers. Not only do containers make the &lt;em&gt;entire&lt;/em&gt; environment portable, they remove &lt;em&gt;environment-specific problems&lt;/em&gt;, like, “Why does it work in test, but not in production?” Usually, it’s a package or framework that’s installed on the test machine that is not on the production server. Containers carry all those dependencies with them, minimizing the possibility for those problems. To help create a consistent container, you need an image that is configured in code that can be versioned and distributed. That’s where the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; comes in.&lt;/p&gt;
+
+&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; (without an extension) is simply a text file with some keywords and rules that Docker uses to create an image. That image is then used to create a container, or multiple containers that all have the same set up. In this tutorial, you’ll build a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; that you’ll use to create an image for a basic web application.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In &lt;a href=&quot;https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1&quot;&gt;the previous article in this series&lt;/a&gt;, I told you that images are like blueprints for creating containers. Well really, they &lt;em&gt;are&lt;/em&gt; containers. Containers frozen in time that you can use to “stamp out a copy” anytime you want.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To get the base application, just clone it from: &lt;a href=&quot;https://github.com/leebrandt/docker-node-sample&quot;&gt;Github&lt;/a&gt;. This is just a basic Node website. Don’t have Node installed on your machine? Don’t worry, you’re not even going to run this application on your machine, you’re going to run it in a container.&lt;/p&gt;
+
+&lt;h2 id=&quot;start-with-a-base-docker-image&quot;&gt;Start with a Base Docker Image&lt;/h2&gt;
+&lt;p&gt;Most of the time, you won’t start from scratch. You will create a Docker image based on another Docker image. The &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt; line tells Docker what base image you want to use to build your new image. This &lt;em&gt;must&lt;/em&gt; be the first line of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, you can have comments above it, but no other commands. In this case, you’ll be starting from the official &lt;code class=&quot;highlighter-rouge&quot;&gt;node:8.4&lt;/code&gt; image. So create a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; in the root folder of the application and add the &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt; line right at the top:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM node:8.4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This tells Docker that we want to start from the official Node image tagged with the 8.4 version. This comes with a Linux system base (in this case Debian Jessie), and adds Node and NPM to the image.&lt;/p&gt;
+
+&lt;h2 id=&quot;get-your-node-app-into-the-image&quot;&gt;Get your Node App into the Image&lt;/h2&gt;
+
+&lt;p&gt;Next, you’ll run some commands to get your app (and it’s dependencies) into the image you’re creating.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;COPY . /app
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This &lt;code class=&quot;highlighter-rouge&quot;&gt;COPY&lt;/code&gt; command just copies everything from the current directory (since your Dockerfile is in the root folder of your node application) to a folder called &lt;code class=&quot;highlighter-rouge&quot;&gt;/app&lt;/code&gt; inside the image you’re creating.&lt;/p&gt;
+
+&lt;p&gt;Next, you’ll set the working directory in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WORKDIR /app
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This tells Docker that the rest of the commands will be run in the context of the &lt;code class=&quot;highlighter-rouge&quot;&gt;/app&lt;/code&gt; folder inside the image. Next, you’ll add a RUN command to get the application’s dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RUN [&quot;npm&quot;, &quot;install&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You might be thinking, “That’s a really &lt;em&gt;weird&lt;/em&gt; way to &lt;em&gt;run&lt;/em&gt; things!”&lt;/p&gt;
+
+&lt;p&gt;This style of &lt;code class=&quot;highlighter-rouge&quot;&gt;RUN&lt;/code&gt; command in a Dockerfile is called the “exec form”. You can write these commands in “shell form”, like so:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RUN npm install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Use the exec form to avoid the image’s shell munging string arguments. If your shell command relies on a specific shell and you are not sure if the shell you need is available on the image you’re using. You can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;SHELL&lt;/code&gt; command to change the shell that a shell form command will run in.&lt;/p&gt;
+
+&lt;p&gt;Overall, this command will restore all the &lt;a href=&quot;https://www.npmjs.org/&quot;&gt;NPM&lt;/a&gt; packages for your project.&lt;/p&gt;
+
+&lt;h2 id=&quot;expose-and-run-your-node-app&quot;&gt;Expose and Run Your Node App&lt;/h2&gt;
+
+&lt;p&gt;Next, you’ll open up port 3000 on TCP (where our app runs), to the outside world.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;EXPOSE 3000/tcp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Lastly, you’ll run the application in the container. Remember that Docker is meant to be one-to-one, container to application, so when building this container it is only natural that we have a command that we want to run that will get our application running in the container. To do this, we need to run a &lt;code class=&quot;highlighter-rouge&quot;&gt;CMD&lt;/code&gt; command. Whatever is run by the CMD command will be run at Process ID 1 (PID1) in the container. As long as whatever runs at PID1 in the container is running, the container is running.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CMD [&quot;npm&quot;, &quot;start&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You could also use the ENTRYPOINT command in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, but either work and you will see the ENTRYPOINT command in the next post on &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Your whole &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; is six lines long. The &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt; line starts from a base image that gives you most of what you need, then copies your code to the image and runs a few commands to get dependencies and compile the app. Then opens port 5000 to listen for requests.&lt;/p&gt;
+
+&lt;h2 id=&quot;meet-your-dockerfile&quot;&gt;Meet Your Dockerfile&lt;/h2&gt;
+
+&lt;p&gt;The finished &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM node:8.4
+
+COPY . /app
+
+WORKDIR /app
+
+RUN [&quot;npm&quot;, &quot;install&quot;]
+
+EXPOSE 3000/tcp
+
+CMD [&quot;npm&quot;, &quot;start&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I like to put one line of space between the lines in &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;s because I think it helps with readability and because most examples I’ve read do it that way.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;From the directory where the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; is, simply run&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build -t tutorial:0.0.1 .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Just like when &lt;code class=&quot;highlighter-rouge&quot;&gt;pull&lt;/code&gt;ing images from &lt;a href=&quot;https://hub.docker.com&quot;&gt;Dockerhub&lt;/a&gt;, this command tells the Docker engine to create a repository named “tutorial” and tag it with “0.0.1”.&lt;/p&gt;
+
+&lt;p&gt;When it’s finished, you can run:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker image list
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You’ll see the image in your list named &lt;code class=&quot;highlighter-rouge&quot;&gt;tutorial&lt;/code&gt; with a tag of 0.0.1. If you want to create a container from this image and run it, run the command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -p 3000:3000 -d --name demo tutorial:0.0.1  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This will create a container based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;tutorial:0.0.1&lt;/code&gt; image that you just creted and name it ‘demo’. This command also has the &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; switch that specifies that you want to run it in daemon mode (in the background). Finally, it also has the &lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt; switch that maps port 3000 on the host machine (your local machine) to the exposed port on the container (formatted like &lt;code class=&quot;highlighter-rouge&quot;&gt;[host port]:[container port]&lt;/code&gt;). This will allow you to go to (http://localhost:3000) on your machine and be viewing the container’s response on that same port.&lt;/p&gt;
+
+&lt;h2 id=&quot;learn-more&quot;&gt;Learn More&lt;/h2&gt;
+
+&lt;p&gt;Congratulations! You just built your first container from a base image and added your application to it! As you can see, it’s easy to put together a container when you find the right base image to build from.&lt;/p&gt;
+
+&lt;p&gt;Obviously, there are a lot of other things the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; can do for you. To find out more about what you can do in a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; check out the &lt;a href=&quot;https://docs.docker.com/engine/reference/builder/&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now that you’ve &lt;a href=&quot;https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1&quot;&gt;learned the basics of Docker&lt;/a&gt; and built your first &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, you’re ready to &lt;a href=&quot;https://docs.docker.com/compose/&quot;&gt;start composing containers&lt;/a&gt; and delivering those containers to production!&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2</guid>
+      </item>
+    
+      <item>
         <title>5 Tips for Building your Java API</title>
         <description>&lt;p&gt;Developers use APIs to for everything! You build APIs for your own apps to consume, or as a part of a microservices architecture. Bottom line, you’re building and using APIs to make your life easier. The ongoing effort to simplify development and work more efficiently, sometimes this also means looking for new libraries or processes (or more often less process). For many teams managing authentication and access control for their apps and APIs is more work than it’s worth, or simply not an efficient use of time, so we want to share a few tips that will save you time and code, along with making your applications more secure and easier to maintain.&lt;/p&gt;
 
