@@ -32,7 +32,7 @@ adding things like...
 
 Okta handles things like user credential storage, password hashing, data
 isolation, best practices, etc. If you use one of our new [developer
-libraries](http://localhost:4000/documentation/), we'll do our very best to
+libraries](https://developer.okta.com/documentation/), we'll do our very best to
 solve all your user management problems.
 
 While the Okta service isn't perfect, and certainly has some rough edges, it's
