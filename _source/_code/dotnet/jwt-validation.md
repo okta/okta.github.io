@@ -1,5 +1,5 @@
 ---
-layout: docs_page
+layout: software
 title: JWT Validation Guide
 excerpt: How to manually validate Okta JWTs with .NET (C#).
 support_email: developers@okta.com

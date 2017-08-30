@@ -1,15 +1,15 @@
 ---
 layout: docs_page
-title: Platform Release Notes
-excerpt: Summary of changes to the Okta Platform since Release 2017.33
+title: Okta API Release Notes
+excerpt: Summary of changes to the Okta API since Release 2017.33
 ---
 
-## Platform Release Notes for Release 2017.34
+## Okta API Release Notes for Release 2017.34
 
-The following platform feature enhancements and bug fixes are available in the 2017.34 release.
-Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
+The following feature enhancements and bug fixes related to the Okta API are available in the 2017.34 release.
+Dates for preview and production release are for the earliest possible release date. Always check your org to verify the release version.
 
-### Platform Feature Enhancements
+### Feature Enhancements
 
 | Feature Enhancement                                                           | Expected in Preview Orgs            | Expected in Production Orgs |
 |:------------------------------------------------------------------------------|:------------------------------------|:----------------------------|
@@ -51,7 +51,7 @@ To verify the current release for an org, click the **Admin** button and check t
 
 ### Looking for Something Else?
 
-* [Platform Release Note Index for 2016](platform-release-notes2016-index.html) 
-* [Platform Release Note Index for 2017](platform-release-notes2017-index.html)
-* For changes outside the Okta platform, see the [Product Release Notes](https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm).
+* [Okta API Release Note Index for 2016](platform-release-notes2016-index.html) 
+* [Okta API Release Note Index for 2017](platform-release-notes2017-index.html)
+* For changes outside the Okta API, see the [Product Release Notes](https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm).
 

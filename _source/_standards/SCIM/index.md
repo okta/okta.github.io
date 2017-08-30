@@ -12,7 +12,7 @@ This article describes:
 
 * The provisioning actions and use cases that your integration should consider supporting.
 * The technical options for how to build the integration (focusing on SCIM).
-* The process for building, submitting for Okta Review, and publishing in the OAN (if you want the app available for all Okta customers).
+* The process for building, submitting for Okta Review, and publishing in the OIN (if you want the app available for all Okta customers).
 
 ## Understanding Provisioning Use Cases
 
@@ -74,7 +74,7 @@ Learn more about the overall use case [here](https://support.okta.com/help/artic
 
 > Profile Mastering Users is currently a {% api_lifecycle beta %} feature for Okta’s SCIM-Based Provisioning option.
 [Beta features](/docs/api/getting_started/releases-at-okta.html#beta) are made available to a small set of customers for testing and feedback.
-While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Application Network or used by customers in production environments.
+While in Beta, Okta may make breaking changes, so the integration with the feature can't be published in the Okta Integration Network or used by customers in production environments.
 
 Mastering is a more sophisticated version of read (import) Users.
 Mastering defines the flow and maintenance of user-object attributes and their lifecycle state.
@@ -861,7 +861,7 @@ example:
 ### Process
 
 In order to allow customers to use your SCIM provisioning integration with Okta,
-you’ll need to get your app published in [the Okta Application Network](https://www.okta.com/resources/find-your-apps/).
+you’ll need to get your app published in [the Okta Integration Network](https://www.okta.com/resources/find-your-apps/).
 
 Follow the steps below to test and submit your application for Okta review:
 
@@ -869,16 +869,16 @@ Follow the steps below to test and submit your application for Okta review:
 2. Test Your SCIM Server
 3. Submit for Okta Review
 4. Test with Customers
-5. Publish to Okta Application Network (OAN)
+5. Publish to Okta Integration Network (OIN)
 
 > Have questions? Need help? Email us at <developers@okta.com> or post your question on [Stack Overflow](http://stackoverflow.com/search?q=okta,scim).
 
 ### Private App Option
 
-The OAN is for making an integration publicly discoverable and accessible to all Okta customers.
+The OIN is for making an integration publicly discoverable and accessible to all Okta customers.
 However, you can also just use the integration privately within a few named orgs.
 This could be the case if you are a system integrator, customer, or Okta PS integrating to a custom app.
-If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OAN.
+If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OIN.
 Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app.
 Note that you cannot use the SCIM template app used for prototyping, as it has limitations that prevent it from being used in production.
 
@@ -1034,9 +1034,9 @@ Please request this in your email to <developers@okta.com>.
 
 #### Submit for Okta Review
 
-Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OAN Manager.
+Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OIN Manager.
 
-Your submission provides Okta with all the metadata needed to create a customized app for publication in [the Okta Application Network](https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324). Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.
+Your submission provides Okta with all the metadata needed to create a customized app for publication in [the Okta Integration Network](https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324). Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.
 
 We recommend completing these five steps before actual submission, with detailed instructions in the next section:
 
@@ -1046,7 +1046,7 @@ We recommend completing these five steps before actual submission, with detailed
 4. Prepare the customer-facing configuration guide.
 5. Create a demo video showing working integration (optional)
 
-After performing these steps, navigate to the OAN Manager at [https://oanmanager.okta.com/](https://oanmanager.okta.com/) to complete the submission form and track review status.
+After performing these steps, navigate to the OIN Manager at [https://oanmanager.okta.com/](https://oanmanager.okta.com/) to complete the submission form and track review status.
 
 ##### Check the Profile Attributes for your application
 
@@ -1136,7 +1136,7 @@ Note: When you are ready, use [this form](https://docs.google.com/forms/d/e/1FAI
 
 #### Test with Customers
 
-We require that one joint customer successfully validate that the integration is working as expected from their perspective before making it publicly available in the Okta Application Network for any customer to use without assistance.
+We require that one joint customer successfully validate that the integration is working as expected from their perspective before making it publicly available in the Okta Integration Network for any customer to use without assistance.
 
 Here’s the process for getting joint customers involved in testing a newly developed SCIM integration:
 
@@ -1145,9 +1145,9 @@ Here’s the process for getting joint customers involved in testing a newly dev
 3. Integration and configuration review with the joint customer. Partners are responsible for managing the customer identification and testing process, but Okta can support as needed. Please coordinate by emailing <developers@okta.com>.
 4. The Okta admin emails <developers@okta.com> directly stating that the integration is working as expected. 
 
-#### Publish to Okta Application Network
+#### Publish to Okta Integration Network
 
-In order for an app to be published in the Okta Application Network, it must meet the following criteria:
+In order for an app to be published in the Okta Integration Network, it must meet the following criteria:
 
 * ISV configuration guide explaining:
     * The supported features

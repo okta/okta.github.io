@@ -2,7 +2,7 @@
 layout: docs_page
 title: Single Sign-On with SAML
 weight: 2
-excerpt: Support SSO in your app and join the Okta Application Network.
+excerpt: Support SSO in your app and join the Okta Integration Network.
 ---
 
 ## Single Sign-On
@@ -14,7 +14,7 @@ For details on how to federate your application with SAML and Okta Mobile Connec
 
 ### Single Sign-On: Building an Integration with Okta
 
-Use the following instructions to support single sign-on for your app in the public-facing Okta Application Network:
+Use the following instructions to support single sign-on for your app in the public-facing Okta Integration Network:
 
 #### 1. Prepare Your Application
 
@@ -27,22 +27,22 @@ Use Okta’s [Single Sign-On with Okta](/docs/guides/saml_guidance.html) guide f
 * When you are ready, navigate to the Feedback tab of the App Wizard:
     {% img saml-step3.png alt:"Feedback page for App wizard" %}
 
-    1. Select **I'm a software vendor. I'd like to integrate my app with Okta.** if you want your app added to the OAN. Okta won’t contact you until this option is selected.
-    2. Click **Submit your app for review.** You are redirected to [the OAN Manager](https://oanmanager.okta.com/).
-        {% img oan-manager.png alt:"OAN Manager submission page" %}
-    3. In the OAN Manager, click **Start Submission Form,** and enter the requested information in the General Settings tab.
-        {% img oan-general.png alt:"General tab for OAN review" %}
+    1. Select **I'm a software vendor. I'd like to integrate my app with Okta.** if you want your app added to the OIN. Okta won’t contact you until this option is selected.
+    2. Click **Submit your app for review.** You are redirected to [the OIN Manager](https://oanmanager.okta.com/).
+        {% img oan-manager.png alt:"OIN Manager submission page" %}
+    3. In the OIN Manager, click **Start Submission Form,** and enter the requested information in the General Settings tab.
+        {% img oan-general.png alt:"General tab for OIN review" %}
     4. In the SAML tab, select On in the **SAML support** button, and enter information requested.
     5. When you've  entered all the information requested on the General Settings and SAML tabs, the **Submit for Review** button is enabled. Click it to submit your app for review.
-        {% img submit-for-review.png alt:"Submit for OAN review" %}
+        {% img submit-for-review.png alt:"Submit for OIN review" %}
 
-Once submitted, you can track the stage of your integration in the OAN Manager.
+Once submitted, you can track the stage of your integration in the OIN Manager.
 
->Note: Okta doesn't proactively add SWA-only, branded apps to the OAN. If you want a branded app in the OAN that only supports SWA to all customers, submit a request to <developers@okta.com>.
+>Note: Okta doesn't proactively add SWA-only, branded apps to the OIN. If you want a branded app in the OIN that only supports SWA to all customers, submit a request to <developers@okta.com>.
 
 #### 3. Need Help?
 
-Get stuck or have questions? See our Okta Application Network FAQs (below), email <developers@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
+Get stuck or have questions? See our Okta Integration Network FAQs (below), email <developers@okta.com> or post your questions on [stackoverflow](https://stackoverflow.com).
 
 #### 4. Partner with Okta (Optional)
 
@@ -52,4 +52,4 @@ Related articles:
 
 * [Provisioning](/use_cases/integrate_with_okta/provisioning.html)
 * [Promotion](/use_cases/integrate_with_okta/promotion.html)
-* [OAN FAQs](/use_cases/integrate_with_okta/oan-faqs.html)
+* [OIN FAQs](/use_cases/integrate_with_okta/oan-faqs.html)
