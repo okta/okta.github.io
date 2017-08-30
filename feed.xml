@@ -8,6 +8,75 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Meet the New Okta Identity Platform</title>
+        <description>&lt;p&gt;I’m genuinely excited to announce that today, we’re officially re-launching
+the &lt;em&gt;new and improved&lt;/em&gt; &lt;a href=&quot;https://developer.okta.com/&quot;&gt;Okta Identity Platform&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/authentication-still-sucks/okta-developer-screenshot-e059f167b125ac500df0d5dd68390029a46f16ecc2dbed411111bb1bf4b18a0a.png&quot; alt=&quot;Okta Developer Screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Everything has been molded to our vision, and we’re aiming to do something we
+could not before: build the world’s largest authentication-as-a-service platform
+for developers of all shapes and sizes.&lt;/p&gt;
+
+&lt;p&gt;The new Okta Identity Platform is our attempt to make authentication and
+authorization problems a relic of the past. We want to provide beautiful
+developer libraries across every programming language and framework to make
+adding things like…&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;User registration&lt;/li&gt;
+  &lt;li&gt;User login&lt;/li&gt;
+  &lt;li&gt;Password reset&lt;/li&gt;
+  &lt;li&gt;Social login&lt;/li&gt;
+  &lt;li&gt;Single Sign-On&lt;/li&gt;
+  &lt;li&gt;API authentication&lt;/li&gt;
+  &lt;li&gt;And lots more&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;…a thoughtless five minute task.&lt;/p&gt;
+
+&lt;p&gt;Okta handles things like user credential storage, password hashing, data
+isolation, best practices, etc. If you use one of our new &lt;a href=&quot;https://developer.okta.com/documentation/&quot;&gt;developer
+libraries&lt;/a&gt;, we’ll do our very best to
+solve all your user management problems.&lt;/p&gt;
+
+&lt;p&gt;While the Okta service isn’t perfect, and certainly has some rough edges, it’s
+something we’re all incredibly passionate about, and working hard every single
+day to improve. It will get better.&lt;/p&gt;
+
+&lt;p&gt;We won’t be satisfied until Okta fills the void that exists in the web world
+right now, and provides the absolute best platform for developers of all
+different types to scratch their user management itch.&lt;/p&gt;
+
+&lt;p&gt;This means we’re building the service to cater to actual developers of all
+types: students, hobbyists, 10pm - 4am hackers (like myself), startups, and even
+large enterprises. We’re aiming to build an extremely low-cost, usage-based
+service that anyone can use without the need to commit to expensive plans and
+upsells. We want to make something that WE would want to use in our next passion
+project.&lt;/p&gt;
+
+&lt;p&gt;For applications with fewer than 1,000 active monthly users, this means the
+service will be absolutely free. For applications with more active users than
+that, we’ve got inexpensive usage-based plans.&lt;/p&gt;
+
+&lt;p&gt;We’ll be doing our absolute best to build something that we hope you will love
+as well.&lt;/p&gt;
+
+&lt;p&gt;If you’re interested in trying out the new Okta Identity Platform that
+we’ve been working on, please &lt;a href=&quot;https://developer.okta.com&quot;&gt;sign up today&lt;/a&gt; and
+&lt;a href=&quot;https://twitter.com/oktadev&quot;&gt;hit us up&lt;/a&gt; if you’ve got questions, comments, or
+feedback.&lt;/p&gt;
+
+&lt;p&gt;Finally, if you’d like to read along with the entire story of how we got here,
+you can read my &lt;a href=&quot;https://www.rdegges.com/2017/authentication-still-sucks/&quot;&gt;personal thoughts&lt;/a&gt;
+on the subject.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 29 Aug 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform</guid>
+      </item>
+    
+      <item>
         <title>5 Tips for Building your Java API</title>
         <description>&lt;p&gt;Developers use APIs to for everything! You build APIs for your own apps to consume, or as a part of a microservices architecture. Bottom line, you’re building and using APIs to make your life easier. The ongoing effort to simplify development and work more efficiently, sometimes this also means looking for new libraries or processes (or more often less process). For many teams managing authentication and access control for their apps and APIs is more work than it’s worth, or simply not an efficient use of time, so we want to share a few tips that will save you time and code, along with making your applications more secure and easier to maintain.&lt;/p&gt;
 
