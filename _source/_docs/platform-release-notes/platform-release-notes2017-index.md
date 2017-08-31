@@ -1,7 +1,7 @@
 ---
 layout: docs_page
-title: Platform Release Notes Index 2017
-excerpt: List of changes to the Okta Platform
+title: Okta API Release Notes Index 2017
+excerpt: List of changes to the Okta API
 ---
 
 ## Index of Platform Release Notes for 2017

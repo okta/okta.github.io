@@ -24,7 +24,7 @@ If you'd like to read the Auth SDK's reference page, you will find it here: [Okt
 
 You will need the following things for this quickstart:
 
-- An Okta org - If you don't have an existing org, register for [Okta Developer Edition](https://www.okta.com/developer/signup/).
+- An Okta org - If you don't have an existing org, register for [Okta Developer Edition](https://developer.okta.com/signup/).
 - An OpenID Connect Application. Instructions for creating one can be found on [this page](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm), under the "OpenID Connect Wizard" section.
 - At least one User [assigned to the Application](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning).
 - An entry in your Org's "Trusted Origins" for your application. To do this, follow the steps found under the "Trusted Origins tab" section in our [API Security help page](https://help.okta.com/en/prev/Content/Topics/Security/API.htm).

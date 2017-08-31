@@ -8,6 +8,208 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>Meet the New Okta Identity Platform</title>
+        <description>&lt;p&gt;I’m genuinely excited to announce that today, we’re officially re-launching
+the &lt;em&gt;new and improved&lt;/em&gt; &lt;a href=&quot;https://developer.okta.com/&quot;&gt;Okta Identity Platform&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/authentication-still-sucks/okta-developer-screenshot-e059f167b125ac500df0d5dd68390029a46f16ecc2dbed411111bb1bf4b18a0a.png&quot; alt=&quot;Okta Developer Screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Everything has been molded to our vision, and we’re aiming to do something we
+could not before: build the world’s largest authentication-as-a-service platform
+for developers of all shapes and sizes.&lt;/p&gt;
+
+&lt;p&gt;The new Okta Identity Platform is our attempt to make authentication and
+authorization problems a relic of the past. We want to provide beautiful
+developer libraries across every programming language and framework to make
+adding things like…&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;User registration&lt;/li&gt;
+  &lt;li&gt;User login&lt;/li&gt;
+  &lt;li&gt;Password reset&lt;/li&gt;
+  &lt;li&gt;Social login&lt;/li&gt;
+  &lt;li&gt;Single Sign-On&lt;/li&gt;
+  &lt;li&gt;API authentication&lt;/li&gt;
+  &lt;li&gt;And lots more&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;…a thoughtless five minute task.&lt;/p&gt;
+
+&lt;p&gt;Okta handles things like user credential storage, password hashing, data
+isolation, best practices, etc. If you use one of our new &lt;a href=&quot;https://developer.okta.com/documentation/&quot;&gt;developer
+libraries&lt;/a&gt;, we’ll do our very best to
+solve all your user management problems.&lt;/p&gt;
+
+&lt;p&gt;While the Okta service isn’t perfect, and certainly has some rough edges, it’s
+something we’re all incredibly passionate about, and working hard every single
+day to improve. It will get better.&lt;/p&gt;
+
+&lt;p&gt;We won’t be satisfied until Okta fills the void that exists in the web world
+right now, and provides the absolute best platform for developers of all
+different types to scratch their user management itch.&lt;/p&gt;
+
+&lt;p&gt;This means we’re building the service to cater to actual developers of all
+types: students, hobbyists, 10pm - 4am hackers (like myself), startups, and even
+large enterprises. We’re aiming to build an extremely low-cost, usage-based
+service that anyone can use without the need to commit to expensive plans and
+upsells. We want to make something that WE would want to use in our next passion
+project.&lt;/p&gt;
+
+&lt;p&gt;For applications with fewer than 1,000 active monthly users, this means the
+service will be absolutely free. For applications with more active users than
+that, we’ve got inexpensive usage-based plans.&lt;/p&gt;
+
+&lt;p&gt;We’ll be doing our absolute best to build something that we hope you will love
+as well.&lt;/p&gt;
+
+&lt;p&gt;If you’re interested in trying out the new Okta Identity Platform that
+we’ve been working on, please &lt;a href=&quot;https://developer.okta.com&quot;&gt;sign up today&lt;/a&gt; and
+&lt;a href=&quot;https://twitter.com/oktadev&quot;&gt;hit us up&lt;/a&gt; if you’ve got questions, comments, or
+feedback.&lt;/p&gt;
+
+&lt;p&gt;Finally, if you’d like to read along with the entire story of how we got here,
+you can read my &lt;a href=&quot;https://www.rdegges.com/2017/authentication-still-sucks/&quot;&gt;personal thoughts&lt;/a&gt;
+on the subject.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 29 Aug 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform</guid>
+      </item>
+    
+      <item>
+        <title>A Developer's Guide To Docker - The Dockerfile</title>
+        <description>&lt;p&gt;Creating a consistent environment for development, testing, staging, and production is one of the big benefits of using containers. Not only do containers make the &lt;em&gt;entire&lt;/em&gt; environment portable, they remove &lt;em&gt;environment-specific problems&lt;/em&gt;, like, “Why does it work in test, but not in production?” Usually, it’s a package or framework that’s installed on the test machine that is not on the production server. Containers carry all those dependencies with them, minimizing the possibility for those problems. To help create a consistent container, you need an image that is configured in code that can be versioned and distributed. That’s where the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; comes in.&lt;/p&gt;
+
+&lt;p&gt;A &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; (without an extension) is simply a text file with some keywords and rules that Docker uses to create an image. That image is then used to create a container, or multiple containers that all have the same set up. In this tutorial, you’ll build a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; that you’ll use to create an image for a basic web application.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In &lt;a href=&quot;https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1&quot;&gt;the previous article in this series&lt;/a&gt;, I told you that images are like blueprints for creating containers. Well really, they &lt;em&gt;are&lt;/em&gt; containers. Containers frozen in time that you can use to “stamp out a copy” anytime you want.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To get the base application, just clone it from: &lt;a href=&quot;https://github.com/leebrandt/docker-node-sample&quot;&gt;Github&lt;/a&gt;. This is just a basic Node website. Don’t have Node installed on your machine? Don’t worry, you’re not even going to run this application on your machine, you’re going to run it in a container.&lt;/p&gt;
+
+&lt;h2 id=&quot;start-with-a-base-docker-image&quot;&gt;Start with a Base Docker Image&lt;/h2&gt;
+&lt;p&gt;Most of the time, you won’t start from scratch. You will create a Docker image based on another Docker image. The &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt; line tells Docker what base image you want to use to build your new image. This &lt;em&gt;must&lt;/em&gt; be the first line of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, you can have comments above it, but no other commands. In this case, you’ll be starting from the official &lt;code class=&quot;highlighter-rouge&quot;&gt;node:8.4&lt;/code&gt; image. So create a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; in the root folder of the application and add the &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt; line right at the top:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM node:8.4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This tells Docker that we want to start from the official Node image tagged with the 8.4 version. This comes with a Linux system base (in this case Debian Jessie), and adds Node and NPM to the image.&lt;/p&gt;
+
+&lt;h2 id=&quot;get-your-node-app-into-the-image&quot;&gt;Get your Node App into the Image&lt;/h2&gt;
+
+&lt;p&gt;Next, you’ll run some commands to get your app (and it’s dependencies) into the image you’re creating.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;COPY . /app
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This &lt;code class=&quot;highlighter-rouge&quot;&gt;COPY&lt;/code&gt; command just copies everything from the current directory (since your Dockerfile is in the root folder of your node application) to a folder called &lt;code class=&quot;highlighter-rouge&quot;&gt;/app&lt;/code&gt; inside the image you’re creating.&lt;/p&gt;
+
+&lt;p&gt;Next, you’ll set the working directory in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;WORKDIR /app
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This tells Docker that the rest of the commands will be run in the context of the &lt;code class=&quot;highlighter-rouge&quot;&gt;/app&lt;/code&gt; folder inside the image. Next, you’ll add a RUN command to get the application’s dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RUN [&quot;npm&quot;, &quot;install&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You might be thinking, “That’s a really &lt;em&gt;weird&lt;/em&gt; way to &lt;em&gt;run&lt;/em&gt; things!”&lt;/p&gt;
+
+&lt;p&gt;This style of &lt;code class=&quot;highlighter-rouge&quot;&gt;RUN&lt;/code&gt; command in a Dockerfile is called the “exec form”. You can write these commands in “shell form”, like so:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RUN npm install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Use the exec form to avoid the image’s shell munging string arguments. If your shell command relies on a specific shell and you are not sure if the shell you need is available on the image you’re using. You can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;SHELL&lt;/code&gt; command to change the shell that a shell form command will run in.&lt;/p&gt;
+
+&lt;p&gt;Overall, this command will restore all the &lt;a href=&quot;https://www.npmjs.org/&quot;&gt;NPM&lt;/a&gt; packages for your project.&lt;/p&gt;
+
+&lt;h2 id=&quot;expose-and-run-your-node-app&quot;&gt;Expose and Run Your Node App&lt;/h2&gt;
+
+&lt;p&gt;Next, you’ll open up port 3000 on TCP (where our app runs), to the outside world.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;EXPOSE 3000/tcp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Lastly, you’ll run the application in the container. Remember that Docker is meant to be one-to-one, container to application, so when building this container it is only natural that we have a command that we want to run that will get our application running in the container. To do this, we need to run a &lt;code class=&quot;highlighter-rouge&quot;&gt;CMD&lt;/code&gt; command. Whatever is run by the CMD command will be run at Process ID 1 (PID1) in the container. As long as whatever runs at PID1 in the container is running, the container is running.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CMD [&quot;npm&quot;, &quot;start&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You could also use the ENTRYPOINT command in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, but either work and you will see the ENTRYPOINT command in the next post on &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Your whole &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; is six lines long. The &lt;code class=&quot;highlighter-rouge&quot;&gt;FROM&lt;/code&gt; line starts from a base image that gives you most of what you need, then copies your code to the image and runs a few commands to get dependencies and compile the app. Then opens port 5000 to listen for requests.&lt;/p&gt;
+
+&lt;h2 id=&quot;meet-your-dockerfile&quot;&gt;Meet Your Dockerfile&lt;/h2&gt;
+
+&lt;p&gt;The finished &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM node:8.4
+
+COPY . /app
+
+WORKDIR /app
+
+RUN [&quot;npm&quot;, &quot;install&quot;]
+
+EXPOSE 3000/tcp
+
+CMD [&quot;npm&quot;, &quot;start&quot;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I like to put one line of space between the lines in &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;s because I think it helps with readability and because most examples I’ve read do it that way.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;From the directory where the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; is, simply run&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build -t tutorial:0.0.1 .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Just like when &lt;code class=&quot;highlighter-rouge&quot;&gt;pull&lt;/code&gt;ing images from &lt;a href=&quot;https://hub.docker.com&quot;&gt;Dockerhub&lt;/a&gt;, this command tells the Docker engine to create a repository named “tutorial” and tag it with “0.0.1”.&lt;/p&gt;
+
+&lt;p&gt;When it’s finished, you can run:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker image list
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You’ll see the image in your list named &lt;code class=&quot;highlighter-rouge&quot;&gt;tutorial&lt;/code&gt; with a tag of 0.0.1. If you want to create a container from this image and run it, run the command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -p 3000:3000 -d --name demo tutorial:0.0.1  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;This will create a container based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;tutorial:0.0.1&lt;/code&gt; image that you just creted and name it ‘demo’. This command also has the &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; switch that specifies that you want to run it in daemon mode (in the background). Finally, it also has the &lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt; switch that maps port 3000 on the host machine (your local machine) to the exposed port on the container (formatted like &lt;code class=&quot;highlighter-rouge&quot;&gt;[host port]:[container port]&lt;/code&gt;). This will allow you to go to &lt;a href=&quot;http://localhost:3000&quot;&gt;http://localhost:3000&lt;/a&gt; on your machine and be viewing the container’s response on that same port.&lt;/p&gt;
+
+&lt;h2 id=&quot;learn-more&quot;&gt;Learn More&lt;/h2&gt;
+
+&lt;p&gt;Congratulations! You just built your first container from a base image and added your application to it! As you can see, it’s easy to put together a container when you find the right base image to build from.&lt;/p&gt;
+
+&lt;p&gt;Obviously, there are a lot of other things the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; can do for you. To find out more about what you can do in a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; check out the &lt;a href=&quot;https://docs.docker.com/engine/reference/builder/&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now that you’ve &lt;a href=&quot;https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1&quot;&gt;learned the basics of Docker&lt;/a&gt; and built your first &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, you’re ready to &lt;a href=&quot;https://docs.docker.com/compose/&quot;&gt;start composing containers&lt;/a&gt; and delivering those containers to production!&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2</guid>
+      </item>
+    
+      <item>
         <title>5 Tips for Building your Java API</title>
         <description>&lt;p&gt;Developers use APIs to for everything! You build APIs for your own apps to consume, or as a part of a microservices architecture. Bottom line, you’re building and using APIs to make your life easier. The ongoing effort to simplify development and work more efficiently, sometimes this also means looking for new libraries or processes (or more often less process). For many teams managing authentication and access control for their apps and APIs is more work than it’s worth, or simply not an efficient use of time, so we want to share a few tips that will save you time and code, along with making your applications more secure and easier to maintain.&lt;/p&gt;
 
@@ -144,7 +346,7 @@
     
       <item>
         <title>Build an Ionic App with User Authentication</title>
-        <description>&lt;p&gt;With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows you to authenticate directly against the &lt;a href=&quot;/&quot;&gt;Okta Platform API&lt;/a&gt;, and this article shows you how to do just that in an Ionic application. I’ll demo how to log in with OIDC redirect, using Okta’s Auth SDK, and using OAuth with Cordova’s in-app browser; user registration is omitted as the feature is still under active development.&lt;/p&gt;
+        <description>&lt;p&gt;With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows you to authenticate directly against the &lt;a href=&quot;/&quot;&gt;Okta API&lt;/a&gt;, and this article shows you how to do just that in an Ionic application. I’ll demo how to log in with OIDC redirect, using Okta’s Auth SDK, and using OAuth with Cordova’s in-app browser; user registration is omitted as the feature is still under active development.&lt;/p&gt;
 
 &lt;h2 id=&quot;why-ionic&quot;&gt;Why Ionic?&lt;/h2&gt;
 
@@ -211,7 +413,7 @@ ionic serve
 &lt;p&gt;OpenID Connect (OIDC) builds on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and obtain their basic profile information. To integrate Okta’s Identity Platform for user authentication, you’ll first need to:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Register&lt;/a&gt; and create an OIDC application&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;Register&lt;/a&gt; and create an OIDC application&lt;/li&gt;
   &lt;li&gt;Log in to your Okta account and navigate to &lt;strong&gt;Applications &amp;gt; Add Application&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Select &lt;strong&gt;SPA&lt;/strong&gt; and click &lt;strong&gt;Next&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Give your application a name (e.g. “Ionic OIDC”)&lt;/li&gt;
@@ -4560,7 +4762,7 @@ code=MsCeLvIaQm6bTrgtp7&amp;amp;client_id=812741506391&amp;amp;
 &lt;p&gt;&lt;img src=&quot;/assets/blog/oauth/oidc-flow-3f640eb4b5d82151643a1d7bc2d55cfab1c1c6e14b6c2ad501660216c6d227c8.png&quot; alt=&quot;OIDF Flow&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;oauth--okta&quot;&gt;OAuth + Okta&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.okta.com&quot;&gt;Okta&lt;/a&gt; is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta’s Developer Platform straight from the source, you should attend &lt;a href=&quot;https://www.okta.com/oktane17/&quot;&gt;Oktane17&lt;/a&gt; in late August. There’s a &lt;a href=&quot;https://www.okta.com/oktane17/agenda/#AppDev&quot;&gt;track dedicated to app development&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.okta.com&quot;&gt;Okta&lt;/a&gt; is best known for its single-sign on services that allow you to seamlessly authenticate to the applications you use on a daily basis. But did you know Okta also has an awesome developer platform? Secure single sign-on often uses SAML as the protocol of choice, but Okta also provides several other options, including a Sign-in Widget, Auth SDK (a JavaScript-based library), Social Login, and an Authentication API for any client. If you’re interested in learning about Okta straight from the source, you should attend &lt;a href=&quot;https://www.okta.com/oktane17/&quot;&gt;Oktane17&lt;/a&gt; in late August. There’s a &lt;a href=&quot;https://www.okta.com/oktane17/agenda/#AppDev&quot;&gt;track dedicated to app development&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;See &lt;a href=&quot;http://developer.okta.com/docs/api/resources/oauth2.html&quot;&gt;Okta’s OAuth 2.0 API&lt;/a&gt; for specific information on how we support OAuth.&lt;/p&gt;
 
@@ -9696,9 +9898,9 @@ Example 2: &amp;lt;input [(ngModel)]=&quot;person.firstName&quot; [ngModelOption
 
 &lt;p&gt;OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see &lt;a href=&quot;https://openid.net/connect/&quot;&gt;https://openid.net/connect/&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;To integrate &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt; for user authentication, you’ll first need to &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;register&lt;/a&gt; and create an OIDC application.&lt;/p&gt;
+&lt;p&gt;To integrate &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt; for user authentication, you’ll first need to &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;register&lt;/a&gt; and create an OIDC application.&lt;/p&gt;
 
-&lt;p&gt;Login to your Okta account, or &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;create one&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like the following.&lt;/p&gt;
+&lt;p&gt;Login to your Okta account, or &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;create one&lt;/a&gt; if you don’t have one. Navigate to &lt;strong&gt;Admin &amp;gt; Add Applications&lt;/strong&gt; and click on the &lt;strong&gt;Create New App&lt;/strong&gt; button. Select &lt;strong&gt;Single Page App (SPA)&lt;/strong&gt; for the Platform and &lt;strong&gt;OpenID Connect&lt;/strong&gt; for the sign on method. Click the &lt;strong&gt;Create&lt;/strong&gt; button and give your application a name. On the next screen, add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:4200&lt;/code&gt; as a Redirect URI and click &lt;strong&gt;Finish&lt;/strong&gt;. You should see settings like the following.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/blog/angular-oidc/oidc-settings-ec21ae1ecd7a70f68b887fa6ecf3daeb4f8f82e2f80328a2009272ff8b2c1c02.png&quot; alt=&quot;OIDC App Settings&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
 
@@ -10235,7 +10437,7 @@ npm start
 &lt;h2 id=&quot;react--okta&quot;&gt;React + Okta&lt;/h2&gt;
 &lt;p&gt;You can find a completed version of the application created in this blog post &lt;a href=&quot;https://github.com/leebrandt/okta-react-widget-sample&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Sign up for a forever-free developer account&lt;/a&gt; and try Okta today!&lt;/p&gt;
+&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;Sign up for a forever-free developer account&lt;/a&gt; and try Okta today!&lt;/p&gt;
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;, leave a comment below, or open an issue on GitHub.&lt;/p&gt;
 </description>
@@ -10546,7 +10748,7 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 
 &lt;p&gt;You can find a completed version of the application created in this blog post &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example&quot;&gt;on GitHub&lt;/a&gt;. In a future post, I’ll show you how to create a more Angular-native experience, where you control the HTML for the login form.&lt;/p&gt;
 
-&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;Sign up for a forever-free developer account and try Okta today!&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;Sign up for a forever-free developer account and try Okta today!&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I hope you’ve enjoyed this quick tour of our Angular support. If you have questions about Okta’s features, or what we’re building next, please hit me up &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;on Twitter&lt;/a&gt;, &lt;a href=&quot;http://stackoverflow.com/questions/tagged/okta&quot;&gt;post a question to Stack Overflow with an “okta” tag&lt;/a&gt;, or &lt;a href=&quot;https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/issues/new&quot;&gt;open a new issue on GitHub&lt;/a&gt;.&lt;/p&gt;
 </description>
@@ -10563,7 +10765,7 @@ Chrome 56.0.2924 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Mac OS X 10.11.6&
 
 &lt;p&gt;OAuth doesn’t validate a user’s identity — that’s taken care of by an authentication service like Okta. Authentication is when you validate a user’s identity (like asking for a username / password to log in), whereas authorization is when you check to see what permissions an existing user already has.&lt;/p&gt;
 
-&lt;p&gt;In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta Platform API. You can sign up for a &lt;a href=&quot;https://www.okta.com/developer/signup/&quot;&gt;forever-free Okta developer account here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this tutorial you’ll build an OAuth client for a Spring Boot application, plus add authentication with the Okta API. You can sign up for a &lt;a href=&quot;https://developer.okta.com/signup/&quot;&gt;forever-free Okta developer account here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you don’t want to code along, feel free to grab the &lt;a href=&quot;https://github.com/oktadeveloper/okta-spring-boot-oauth-example&quot;&gt;source code from GitHub&lt;/a&gt;! You can also watch a video of this tutorial below.&lt;/p&gt;
 

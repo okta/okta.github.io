@@ -3107,7 +3107,7 @@ curl -v -X POST \
 
 {% api_lifecycle ea %}
 
-Activation gets the registration information from the U2F token using the platform APIs and passes it to Okta.
+Activation gets the registration information from the U2F token using the API and passes it to Okta.
 
 ##### Get registration information from U2F token by calling the U2F Javascript call
 {:.api .api-response .api-response-example}
