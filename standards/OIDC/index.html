@@ -222,7 +222,7 @@ In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a
 web-based clients, mobile apps, and JavaScript clients.
 The <a href="http://openid.net/connect/">specification suite</a> is extensible, supporting optional features such as encryption of identity data, discovery of OpenID Providers, and session management.</p>
 
-<p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a> for Basic, Implicit, Hybrid, and Configuration Publishing.</p>
+<p>Okta is <a href="http://openid.net/certification/">certified for OpenID Connect</a> for Basic, Implicit, Hybrid, and Publishing Configuration Information (Config OP).</p>
 
 <h2 id="authentication-basics-with-oauth-20-and-openid-connect">Authentication Basics with OAuth 2.0 and OpenID Connect</h2>
 
@@ -385,7 +385,7 @@ response does not include an Access Token.</p>
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"ver"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00uid4BxXw6I6TV4m0g3"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://rain.okta1.com:1802"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"iss"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:{myOktaDomain.com}"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"aud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uAaunofWkaDJxukCFeBx"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449624026</span><span class="p">,</span><span class="w">
   </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1449627626</span><span class="p">,</span><span class="w">
