@@ -192,7 +192,7 @@ CMD [&quot;npm&quot;, &quot;start&quot;]
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -p 3000:3000 -d --name demo tutorial:0.0.1  
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;This will create a container based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;tutorial:0.0.1&lt;/code&gt; image that you just creted and name it ‘demo’. This command also has the &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; switch that specifies that you want to run it in daemon mode (in the background). Finally, it also has the &lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt; switch that maps port 3000 on the host machine (your local machine) to the exposed port on the container (formatted like &lt;code class=&quot;highlighter-rouge&quot;&gt;[host port]:[container port]&lt;/code&gt;). This will allow you to go to (http://localhost:3000) on your machine and be viewing the container’s response on that same port.&lt;/p&gt;
+&lt;p&gt;This will create a container based on the &lt;code class=&quot;highlighter-rouge&quot;&gt;tutorial:0.0.1&lt;/code&gt; image that you just creted and name it ‘demo’. This command also has the &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; switch that specifies that you want to run it in daemon mode (in the background). Finally, it also has the &lt;code class=&quot;highlighter-rouge&quot;&gt;-p&lt;/code&gt; switch that maps port 3000 on the host machine (your local machine) to the exposed port on the container (formatted like &lt;code class=&quot;highlighter-rouge&quot;&gt;[host port]:[container port]&lt;/code&gt;). This will allow you to go to &lt;a href=&quot;http://localhost:3000&quot;&gt;http://localhost:3000&lt;/a&gt; on your machine and be viewing the container’s response on that same port.&lt;/p&gt;
 
 &lt;h2 id=&quot;learn-more&quot;&gt;Learn More&lt;/h2&gt;
 
@@ -202,7 +202,7 @@ CMD [&quot;npm&quot;, &quot;start&quot;]
 
 &lt;p&gt;Now that you’ve &lt;a href=&quot;https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1&quot;&gt;learned the basics of Docker&lt;/a&gt; and built your first &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;, you’re ready to &lt;a href=&quot;https://docs.docker.com/compose/&quot;&gt;start composing containers&lt;/a&gt; and delivering those containers to production!&lt;/p&gt;
 
-&lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2</link>
