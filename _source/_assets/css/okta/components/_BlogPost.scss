@@ -274,10 +274,12 @@
 		.highlight .x { color: #3d3d3d; } /* Other */
 		.highlight .w { color: #3d3d3d; } /* Text Whitespace */
 		
-		p code {
-			@include padding(0 xx-small);
-			background: #f4f4f4;
-			line-height: 24px;
+		p, li {
+			code {
+				@include padding(0 xx-small);
+				background: #f4f4f4;
+				line-height: 24px;
+			}
 		}
 
 		table {
