@@ -31,7 +31,7 @@ This bug fix is expected on preview orgs starting August 31, 2017, and on produc
 
 ### Does Your Org Have This Change Yet?
 
-To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
+To verify the current release for an org, scroll to the bottom of the developer console, or click the **Admin** button and check the footer of the Dashboard page.
 
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
