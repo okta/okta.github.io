@@ -605,5 +605,5 @@ If you have any questions about this article, you can email me at matt.raible@ok
 [with the Okta tag](http://stackoverflow.com/questions/tagged/okta), post to our [Developer Forums](https://devforum.okta.com/), 
 or [create an issue on GitHub](https://github.com/oktadeveloper/spring-boot-microservices-example/issues/new).
 
-**Update:** To learn about how security fits into all this, see [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices).
+**Update:** To learn about how security fits into all this, see [Secure a Spring Microservices Architecture with Spring Security, JWTs, Juiser, and Okta](/blog/2017/08/08/secure-spring-microservices.html).
  
