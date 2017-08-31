@@ -1059,7 +1059,7 @@ The following conditions may be applied to the rules associated with MFA Enrollm
 ## Password Policy
 {: #GroupPasswordPolicy }
 
-> The Password Policy API is an {% api_lifecycle ea %} release.
+> The Password Policy API is generally available (GA).
 
 Password policy controls settings that determine a user&#8217;s password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
 
