@@ -219,8 +219,10 @@
 
 <p>API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints.
 An authorization server defines your security boundary, for example “staging” or “production.”
-Within each authorization server you can define your own OAuth scopes, claims, and access policies.
-This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.</p>
+Within each authorization server you can define your own OAuth scopes, claims, and access policies.</p>
+
+<p>This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta,
+such as Universal Directory for transforming attributes, adaptive MFA for end users, analytics, and system log, and extend it out to the API economy.</p>
 
 <p>At its core, an authorization server is simply an OAuth 2.0 token minting engine.
 Each authorization server has a unique <a href="https://tools.ietf.org/html/rfc7519#section-4.1.1">issuer URI</a>
@@ -238,7 +240,8 @@ built in to your Okta app?</p>
 </ul>
 
 <blockquote>
-  <p>Note: If your employees, partners, and users can all use the same authentication policies for single sign-on, try <a href="https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub">Okta’s built-in SSO</a>.</p>
+  <p>Note: If your employees, partners, and users can all use the same authentication policies for single sign-on,
+try <a href="https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub">Okta’s built in authorization service</a>.</p>
 </blockquote>
 
 <h2 id="set-up-an-authorization-server">Set Up an Authorization Server</h2>
@@ -423,7 +426,7 @@ Be sure to check that your expression returns the results expected–the express
 
 <h3 id="openid-connect-configuration">OpenID Connect Configuration</h3>
 
-<p>To verify that your server was created and has the expected configuration values, you can send an API request to the Server’s OpenID Connect Metadata URI: <code class="highlighter-rouge">/oauth2/{authorizationServerId}/.well-known/openid-configuration</code> using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.</p>
+<p>To verify that your server was created and has the expected configuration values, you can send an API request to the Server’s OpenID Connect Metadata URI: <code class="highlighter-rouge">/oauth2/:authorizationServerId/.well-known/openid-configuration</code> using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.</p>
 
 <p>For more information on this endpoint, see here: <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-openid-connect-metadata">Retrieve Authorization Server OpenID Connect Metadata</a>.</p>
 
@@ -460,7 +463,7 @@ Be sure to check that your expression returns the results expected–the express
 
 <p>Once you have an OpenID Connect Application set-up, and a User assigned to it you can try the authentication flow.</p>
 
-<p>First, you will need your Authorization Server’s Authorization Endpoint, which you can retrieve using the Server’s Metadata URI: <code class="highlighter-rouge">/oauth2/{authorizationServerId}/.well-known/openid-configuration</code>. It will look like this:</p>
+<p>First, you will need your Authorization Server’s Authorization Endpoint, which you can retrieve using the Server’s Metadata URI: <code class="highlighter-rouge">/oauth2/:authorizationServerId/.well-known/openid-configuration</code>. It will look like this:</p>
 
 <p><code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/authorize</code></p>
 

@@ -296,7 +296,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     <p>Web Application</p>
 
     <ul>
-      <li>Server-side app with an end-user</li>
+      <li>Server-side app with an end user</li>
       <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.1">Authorization Code Grant Flow</a></li>
       <li>Assumes Resource Owner and Client are on separate devices</li>
       <li>Most secure flow as tokens never pass through user-agent</li>
@@ -308,7 +308,7 @@ flows defined by <a href="http://oauth.net/documentation">the OAuth 2.0 spec</a>
     <p>Service Application</p>
 
     <ul>
-      <li>Server-side app with no end-user, such as an on-prem agent</li>
+      <li>Server-side app with no end user, such as an on-prem agent</li>
       <li>Uses <a href="https://tools.ietf.org/html/rfc6749#section-4.4">Client Credentials Flow</a></li>
       <li>Optimized for <a href="https://tools.ietf.org/html/rfc6749#section-2.1">Confidential Clients</a> acting on behalf of itself or a user</li>
       <li>Back-channel only flow to obtain an access token using the Client’s credentials</li>
@@ -541,10 +541,32 @@ Custom claims are configured in the Custom Authorization Server, and returned de
 
 <p>The full set of claims for requested scopes is available via the <code class="highlighter-rouge">/oauth2/v1/userinfo</code> endpoint. Call this endpoint using the access token.</p>
 
-<h5 id="custom-claim-values">Custom claim values</h5>
+<h5 id="custom-claim-configuration">Custom claim configuration</h5>
 
-<p>The value of a custom claim can be either an <a href="/reference/okta_expression_language/">expression</a> or a group filter. The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn’t added into the ID token or access token.
-The datatype of a claim is Array if its value is a group filter, or the same datatype as the evaluated result if its value is an expression.</p>
+<p>Define custom claims in <a href="https://help.okta.com/en/prod/Content/Topics/Security/API_Access.htm?Highlight=custom%20claim">the Okta user interface</a> or using <a href="/docs/api/resources/oauth2.html#create-a-claim">the OAuth 2.0 API</a>.</p>
+
+<p>A custom claim can be configured in the following ways:</p>
+
+<ul>
+  <li>Choose whether the claim is included in the ID token or the access token.</li>
+  <li>Choose whether the claim is always included in a token, or only when the claim is specified.</li>
+  <li>Define the scopes that this claim is included in: either any scope or a list of scopes that you define.</li>
+  <li>Disable the claim. This is often used for testing.</li>
+  <li>Define the claim value, using <a href="/reference/okta_expression_language/">Okta’s Expression Language</a> or a group filter.
+    <ul>
+      <li>Example of expressions: <code class="highlighter-rouge">"user.region"</code>, the value of the custom field “region” on the user’s profile. You can create expressions to reference application groups.</li>
+      <li>Example of a set of Okta groups specified by <code class="highlighter-rouge">groupFilterType</code>: If the token recipient wanted to display a badge for all current customers, you could specify a <code class="highlighter-rouge">groupFilterType</code> that start with “Customer” (<code class="highlighter-rouge">STARTS_WITH=Customer</code>). See <a href="/docs/api/resources/oauth2.html#details-for-groupfiltertype"><code class="highlighter-rouge">groupFilterType</code></a> for details.
+  Notice that you can use the group filter (<code class="highlighter-rouge">valueType</code> is <code class="highlighter-rouge">GROUP</code>) for Okta groups. For application groups, <code class="highlighter-rouge">valueType</code> must be <code class="highlighter-rouge">EXPRESSION</code>.</li>
+    </ul>
+
+    <p>The expression is evaluated at runtime, and if the evaluated result is null, that custom claim isn’t added into the ID token or access token.
+The datatype of a claim depends on the type of value. The datatype is:</p>
+    <ul>
+      <li>An array if the claim value is a group filter.</li>
+      <li>The same datatype as the evaluated result if the claim value is an expression.</li>
+    </ul>
+  </li>
+</ul>
 
 <blockquote>
   <p><em>Note:</em> For the custom claim with group filter, its value has a limit of 100. If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.</p>
@@ -631,7 +653,7 @@ OAuth 2.0 (Custom Authorization Server), except the public keys should be retrie
 <p>You can request a token with the endpoint <a href="/docs/api/resources/oauth2.html#request-a-token"><code class="highlighter-rouge">/oauth2/:authorizationServerId/v1/token</code></a>.</p>
 
 <p>The grant type and scope in your request, as well as configurations set in the Custom Authorization Server, determine which
-tokens are returned. For details, see <a href="/docs/api/resources/oauth2.html#response-parameters-1">Response Parameters</a>.</p>
+tokens are returned and what they contain. For details, see <a href="/docs/api/resources/oauth2.html#response-parameters-1">Response Parameters</a> and <a href="#custom-claim-configuration">Custom claim configuration</a>.</p>
 
 <h2 id="access-policies">Access Policies</h2>
 

@@ -40,7 +40,7 @@
 
   <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
   <meta class="swiftype" name="title" data-type="string" content="PHP | Okta Developer" />
-  <meta class="swiftype" name="summary" data-type="string" content="Quickstart guide for using the Okta Sign-In Widget with PHP." />
+  <meta class="swiftype" name="summary" data-type="string" content="Quickstart guide for using the Okta Sign-In Widget with PHP" />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
   <link type="text/css" rel="stylesheet" href="/assets/okta-e0a2f1567b2617a1ac64c3cfe8f94086456f3fb4e1a8ae52fe18398b4ad2ee3f.css">
@@ -48,7 +48,7 @@
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
   <title>PHP | Okta Developer</title>
-  <meta name="description" content="Quickstart guide for using the Okta Sign-In Widget with PHP.">
+  <meta name="description" content="Quickstart guide for using the Okta Sign-In Widget with PHP">
   <link rel="canonical" href="https://developer.okta.com/code/php/quickstart-signin-widget">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
@@ -395,6 +395,7 @@
 <p><img src="/assets/okta-signin-da15ebe650d0258b247d4981a956abec094e9891c0b7f9e2ce7c5731f103d6be.png" alt="Screenshot of basic Okta Sign-In Widget" /></p>
 
 <h1 id="configuring-your-organization">Configuring your Organization</h1>
+
 <p>To see the Sign-in Widget in action, you will need:</p>
 <ul>
   <li>An Okta Developer org, which you can sign-up for here: <a href="https://developer.okta.com/signup/">https://developer.okta.com/signup/</a></li>
@@ -416,6 +417,7 @@
 </blockquote>
 
 <h2 id="create-an-authorization-server">Create an Authorization Server</h2>
+
 <p>An authorization server defines your security boundary, for example “staging” or “production”. Within each authorization server you can define your own OAuth scopes, claims, and access policies. This allows your apps and APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log.</p>
 
 <p>Navigate to <code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/default</code> to see if your default authorization server is setup. If not, <a href="/docs/how-to/set-up-auth-server.html">follow this setup guide</a>.</p>
@@ -425,7 +427,10 @@
 </blockquote>
 
 <h1 id="php-application-set-up">PHP Application Set-up</h1>
-<p>Now that we have all the configuration at Okta done, we can begin setting up our PHP application. There are a couple of different ways to include the sign-in widget in your application. You can use the NPM module by installing <code class="highlighter-rouge">@okta/okta-signin-widget</code> in your project, or by using the Okta CDN, which is what we’ll be using. Once you have the sign-in widget, there’s a little bit of configuration you have to do to talk with your new authorization server.</p>
+<p>Now that we have all the configuration at Okta done, we can begin setting up our PHP application. There are a
+couple of different ways to include the sign-in widget in your application. You can use the NPM module by installing
+<code class="highlighter-rouge">@okta/okta-signin-widget</code> in your project, or by using the Okta CDN, which is what we’ll be using. Once you have the
+ sign-in widget, there’s a little bit of configuration you have to do to talk with your new authorization server.</p>
 
 <h2 id="installing-and-configuring-the-sign-in-widget">Installing and Configuring the Sign In Widget</h2>
 <p>There are 2 files we will require for the sign in widget to work, a JS file and a CSS file. You will also be able to supply a 3rd file from our CDN or supply your own for the theme of the signin widget.</p>
@@ -639,7 +644,8 @@ $jws-&gt;verify($jwk, 'RS256');
 
 <p>Each public key is identified by a <code class="highlighter-rouge">kid</code> attribute, which corresponds with the <code class="highlighter-rouge">kid</code> claim in the <a href="/docs/api/resources/oauth2.html#token-authentication-methods">Access Token header</a>.</p>
 
-<p>The access token is signed by an RSA private key, and we publish the future signing key well in advance. However, in an emergency situation you can still stay in sync with Okta’s key rotation. Have your application check the <code class="highlighter-rouge">kid</code>, and if it has changed and the key is missing from the local cache, check the <code class="highlighter-rouge">jwks_uri</code> value in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">authorization server metadata</a> and you can go back to the <a href="/docs/api/resources/oauth2.html#get-keys">jwks uri</a> to get keys again from Okta</p>
+<p>The access token is signed by an RSA private key, and we publish the future signing key well in advance.
+However, in an emergency situation you can still stay in sync with Okta’s key rotation. Have your application check the <code class="highlighter-rouge">kid</code>, and if it has changed and the key is missing from the local cache, check the <code class="highlighter-rouge">jwks_uri</code> value in the <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata">authorization server metadata</a> and you can go back to the <a href="/docs/api/resources/oauth2.html#get-keys">jwks uri</a> to get keys again from Okta</p>
 
 <p>Please note the following:</p>
 
@@ -649,12 +655,8 @@ $jws-&gt;verify($jwk, 'RS256');
   <li>In case of an emergency, Okta can rotate keys as needed.</li>
   <li>Okta always publishes keys to the JWKS.</li>
   <li>To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.</li>
-</ul>
-<div class="beta">
-<ul>
   <li>The administrator can switch the authorization server key rotation mode to <strong>MANUAL</strong> by <a href="/docs/api/resources/oauth2.html#update-authorization-server">updating the authorization server</a> and then control when to rotate the keys.</li>
 </ul>
-</div>
 
 <p>Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.</p>
 
