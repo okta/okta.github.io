@@ -658,12 +658,12 @@ import { Subscription } from 'rxjs';
 sub: Subscription;
 
 constructor(private searchService: SearchService, private route: ActivatedRoute) {
-this.sub = this.route.params.subscribe(params => {
-  if (params['term']) {
-    this.query = decodeURIComponent(params['term']);
-    this.search();
-  }
-});
+  this.sub = this.route.params.subscribe(params => {
+    if (params['term']) {
+      this.query = decodeURIComponent(params['term']);
+      this.search();
+    }
+  });
 }
 ```
 
@@ -736,10 +736,10 @@ Now values should display in all fields and `name` should be required.
 
 If you want to provide your own validation messages instead of relying on the browser’s, complete the following steps:
 
-* Remove `ngNativeValidate` and add `#editForm="ngForm"` to the `<form>` element.
-* Add `#name="ngModel"` to the `<input id="name">` element.
-* Add `[disabled]="!editForm.form.valid"` to the *Save* button.
-* Add the following under the `name` field to display a validation error.
+1. Remove `ngNativeValidate` and add `#editForm="ngForm"` to the `<form>` element.
+2. Add `#name="ngModel"` to the `<input id="name">` element.
+3. Add `[disabled]="!editForm.form.valid"` to the *Save* button.
+4. Add the following under the `name` field to display a validation error.
 
 ```html
 <div [hidden]="name.valid || name.pristine" style="color: red">
@@ -940,6 +940,7 @@ Modify `src/styles.css` to add a reference to Bootstrap’s CSS file.
 
 Update `src/app/app.component.html` to use Bootstrap classes for its navbar and grid system.
 
+{% raw %}
 ```html
 <nav class="navbar navbar-light bg-secondary">
   <a class="navbar-brand text-light" href="#">Welcome to {{title}}!</a>
@@ -948,6 +949,7 @@ Update `src/app/app.component.html` to use Bootstrap classes for its navbar and 
   <router-outlet></router-outlet>
 </div>
 ```
+{% endraw %}
 
 Create `src/app/shared/auth/okta.auth.wrapper.ts` to wrap the Okta Auth SDK and integrate it with `OAuthService`. Its 
 `login()` method uses `OktaAuth` to get a session token and exchange it for ID and access tokens.
