@@ -825,12 +825,12 @@ The function calls a <code class="highlighter-rouge">gotoList()</code> function 
 <span class="nl">sub</span><span class="p">:</span> <span class="nx">Subscription</span><span class="p">;</span>
 
 <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">searchService</span><span class="err">:</span> <span class="nx">SearchService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">route</span><span class="err">:</span> <span class="nx">ActivatedRoute</span><span class="p">)</span> <span class="p">{</span>
-<span class="k">this</span><span class="p">.</span><span class="nx">sub</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'term'</span><span class="p">])</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">query</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'term'</span><span class="p">]);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">search</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">});</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sub</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'term'</span><span class="p">])</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">query</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'term'</span><span class="p">]);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">search</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
 <span class="p">}</span>
 </code></pre>
 </div>
@@ -902,12 +902,12 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>If you want to provide your own validation messages instead of relying on the browser’s, complete the following steps:</p>
 
-<ul>
+<ol>
   <li>Remove <code class="highlighter-rouge">ngNativeValidate</code> and add <code class="highlighter-rouge">#editForm="ngForm"</code> to the <code class="highlighter-rouge">&lt;form&gt;</code> element.</li>
   <li>Add <code class="highlighter-rouge">#name="ngModel"</code> to the <code class="highlighter-rouge">&lt;input id="name"&gt;</code> element.</li>
   <li>Add <code class="highlighter-rouge">[disabled]="!editForm.form.valid"</code> to the <em>Save</em> button.</li>
   <li>Add the following under the <code class="highlighter-rouge">name</code> field to display a validation error.</li>
-</ul>
+</ol>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="err">[</span><span class="na">hidden</span><span class="err">]="</span><span class="na">name</span><span class="err">.</span><span class="na">valid</span> <span class="err">||</span> <span class="na">name</span><span class="err">.</span><span class="na">pristine</span><span class="err">"</span> <span class="na">style=</span><span class="s">"color: red"</span><span class="nt">&gt;</span>
   Name is required
@@ -1107,7 +1107,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 <p>Update <code class="highlighter-rouge">src/app/app.component.html</code> to use Bootstrap classes for its navbar and grid system.</p>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-secondary"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand text-light"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Welcome to !<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand text-light"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Welcome to {{title}}!<span class="nt">&lt;/a&gt;</span>
 <span class="nt">&lt;/nav&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span>
