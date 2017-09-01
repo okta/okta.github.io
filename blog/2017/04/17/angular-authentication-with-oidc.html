@@ -48,7 +48,7 @@
   <meta class="swiftype" name="summary" data-type="string" content="Angular (formerly called Angular 2.0) is quickly becoming one of the most powerful ways to build a modern single-page app. A core strength is Angular’s focus..." />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-0ad463845f4bfd84716e1efb4e564c23adfe20162d3a34db8901c2be7965b217.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-e0a2f1567b2617a1ac64c3cfe8f94086456f3fb4e1a8ae52fe18398b4ad2ee3f.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -187,7 +187,7 @@
 
 <h2 id="create-an-angular-application">Create an Angular Application</h2>
 
-<p><em>TIP: If you’d like to skip building the Angular application and get right to adding authentication, you can clone my <code class="highlighter-rouge">ng-demo</code> project, then skip to the <a href="#create-open-id-connect-app">Create an OpenID Connect App in Okta</a> section.</em></p>
+<p><em>TIP: If you’d like to skip building the Angular application and get right to adding authentication, you can clone my <code class="highlighter-rouge">ng-demo</code> project, then skip to the <a href="#create-an-openid-connect-app-in-okta">Create an OpenID Connect App in Okta</a> section.</em></p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/mraible/ng-demo.git
 </code></pre>
@@ -259,8 +259,8 @@ Project <span class="s1">'ng-demo'</span> successfully created.
  / ___ <span class="se">\|</span> | | | <span class="o">(</span>_| | |_| | | <span class="o">(</span>_| | |      | |___| |___ | |
 /_/   <span class="se">\_\_</span>| |_|<span class="se">\_</span>_, |<span class="se">\_</span>_,_|_|<span class="se">\_</span>_,_|_|       <span class="se">\_</span>___|_____|___|
                |___/
-@angular/cli: 1.0.0
-node: 6.9.5
+@angular/cli: 1.3.2
+node: 8.4.0
 os: darwin x64
 </code></pre>
 </div>
@@ -275,13 +275,13 @@ os: darwin x64
 
 <p>You should see a screen like the one below at <a href="http://localhost:4200">http://localhost:4200</a>.</p>
 
-<p><img src="/assets/blog/angular-oidc/default-homepage-21ec1ed2afebe3a7e384626a8019479e61b079a939f1c3ed9317e3d7be3331c0.png" alt="Default Homepage" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/default-homepage-073f9f7599c154d38e19f7358a85622bcab268bde6623d640d31349957113934.png" alt="Default Homepage" width="800" /></p>
 
 <p>You can make sure your new project’s tests pass, run <code class="highlighter-rouge">ng test</code>:</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ng <span class="nb">test</span>
 ...
-Chrome 56.0.2924 <span class="o">(</span>Mac OS X 10.12.2<span class="o">)</span>: Executed 3 of 3 SUCCESS <span class="o">(</span>0.377 secs / 0.341 secs<span class="o">)</span>
+Chrome 60.0.3112 <span class="o">(</span>Mac OS X 10.12.6<span class="o">)</span>: Executed 3 of 3 SUCCESS <span class="o">(</span>0.239 secs / 0.213 secs<span class="o">)</span>
 </code></pre>
 </div>
 
@@ -319,8 +319,8 @@ installing component
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Routes</span><span class="p">,</span> <span class="nx">RouterModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">appRoutes</span><span class="err">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'search'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">SearchComponent</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'/search'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span> <span class="p">}</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'search'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">SearchComponent</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'/search'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span><span class="p">}</span>
 <span class="p">];</span>
 
 <span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
@@ -335,17 +335,39 @@ installing component
 </code></pre>
 </div>
 
-<p>In <code class="highlighter-rouge">src/app/app.component.html</code>, add a <code class="highlighter-rouge">RouterOutlet</code> to display routes.</p>
+<p>In <code class="highlighter-rouge">src/app/app.component.html</code>, adjust the placeholder content and add a <code class="highlighter-rouge">&lt;router-outlet&gt;</code> tag to display routes.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>Welcome to !<span class="nt">&lt;/h1&gt;</span>
+<span class="c">&lt;!-- Routed views go here --&gt;</span>
+<span class="nt">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span>
 </code></pre>
 </div>
 
 <p>Now that you have routing setup, you can continue writing the search feature.</p>
 
-<p>If you still have <code class="highlighter-rouge">ng serve</code> running, your browser should refresh automatically. If not, navigate to <a href="http://localhost:4200">http://localhost:4200</a>, and you should see the search form.</p>
+<p>If you still have <code class="highlighter-rouge">ng serve</code> running, your browser should refresh automatically. If not, navigate to http://localhost:4200. You will likely see a blank screen. Open your JavaScript console and you’ll see the problem.</p>
 
-<p><img src="/assets/blog/angular-oidc/search-without-css-664524fe9f5061f8c27851eace27912fa88caa8f999f06b8840ac1b2e21965a2.png" alt="Search component" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/ngmodel-error-b52e91e6cbf9cd3ce3da38d98782ba85b170db2428c01a1033c29cc2d16a0156.png" alt="ngModel error" width="800" /></p>
+
+<p>To solve this, open <code class="highlighter-rouge">src/app/app.module.ts</code> and add <code class="highlighter-rouge">FormsModule</code> as an import in <code class="highlighter-rouge">@NgModule</code>:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">FormsModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/forms'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="p">...</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">FormsModule</span>
+  <span class="p">]</span>
+  <span class="p">...</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Now you should see the search form.</p>
+
+<p><img src="/assets/blog/angular-oidc/search-without-css-3add5390962f7e49a1396554acd0028db32a55cef92e3a769d1de70039557e33.png" alt="Search component" width="800" /></p>
 
 <p>If you want to add CSS for this components, open <code class="highlighter-rouge">src/app/search/search.component.css</code> and add some CSS. For example:</p>
 
@@ -368,7 +390,14 @@ installing service
 </code></pre>
 </div>
 
-<p>Move the generated <code class="highlighter-rouge">search.service.ts</code> and its test to <code class="highlighter-rouge">app/shared/search</code>. You’ll need to create this directory. Create <code class="highlighter-rouge">src/assets/data/people.json</code> to hold your data.</p>
+<p>Move the generated <code class="highlighter-rouge">search.service.ts</code> and its test to <code class="highlighter-rouge">app/shared/search</code>. You’ll need to create this directory.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mkdir -p src/app/shared/search
+mv src/app/search.service.<span class="k">*</span> src/app/shared/search/.
+</code></pre>
+</div>
+
+<p>Create <code class="highlighter-rouge">src/assets/data/people.json</code> to hold your data.</p>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -419,7 +448,8 @@ installing service
   <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span><span class="err">:</span> <span class="nx">Http</span><span class="p">)</span> <span class="p">{}</span>
 
   <span class="nx">getAll</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'assets/data/people.json'</span><span class="p">).</span><span class="nx">map</span><span class="p">((</span><span class="nx">res</span><span class="err">:</span> <span class="nx">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'assets/data/people.json'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">res</span><span class="err">:</span> <span class="nx">Response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -461,7 +491,7 @@ installing service
 
 <p>The reason for creating this file is so you can import multiple classes on a single line rather than having to import each individual class on separate lines.</p>
 
-<p>In <code class="highlighter-rouge">search.component.ts</code>, add imports for these classes.</p>
+<p>In <code class="highlighter-rouge">src/app/search/search.component.ts</code>, add imports for these classes.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Person</span><span class="p">,</span> <span class="nx">SearchService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../shared'</span><span class="p">;</span>
 </code></pre>
@@ -494,15 +524,20 @@ installing service
 </code></pre>
 </div>
 
-<p>To fix the “No provider” error from above, update <code class="highlighter-rouge">app.component.ts</code> to import the <code class="highlighter-rouge">SearchService</code>
-and add the service to the list of providers.</p>
+<p>To fix the “No provider” error from above, update <code class="highlighter-rouge">app.module.ts</code> to import the <code class="highlighter-rouge">SearchService</code>
+and add the service to the list of providers. Because <code class="highlighter-rouge">SearchService</code> depends on <code class="highlighter-rouge">Http</code>, you’ll need to import <code class="highlighter-rouge">HttpModule</code> as well.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">SearchService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./shared'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">HttpModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/http'</span><span class="p">;</span>
 
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
   <span class="p">...</span>
-  <span class="na">styleUrls</span><span class="p">:</span> <span class="p">[</span><span class="s1">'./app.component.css'</span><span class="p">],</span>
-  <span class="na">viewProviders</span><span class="p">:</span> <span class="p">[</span><span class="nx">SearchService</span><span class="p">]</span>
+  <span class="na">imports</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">HttpModule</span>
+  <span class="p">],</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">SearchService</span><span class="p">],</span>
+  <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
 <span class="p">})</span>
 </code></pre>
 </div>
@@ -552,7 +587,7 @@ and add the service to the list of providers.</p>
 
 <p>Now the search results look better.</p>
 
-<p><img src="/assets/blog/angular-oidc/search-results-5564a373ca4b9e85d624289b73d10a486e9ac214ce23d09929fb0dfa42365856.png" alt="Search Results" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/search-results-3114cf1b3c0183acf5f1167103a31fcdfdaa0e278e8a4bf6bc157c3e2ce83fd3.png" alt="Search Results" width="800" /></p>
 
 <p>But wait, you still don’t have search functionality! To add a search feature, add a <code class="highlighter-rouge">search()</code> method to <code class="highlighter-rouge">SearchService</code>.</p>
 
@@ -586,7 +621,7 @@ and add the service to the list of providers.</p>
 
 <h2 id="add-an-edit-feature">Add an Edit Feature</h2>
 
-<p>Modify <code class="highlighter-rouge">search.component.html</code> to add a link for editing a person.</p>
+<p>Modify <code class="highlighter-rouge">src/app/search/search.component.html</code> to add a link for editing a person.</p>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;td&gt;&lt;a</span> <span class="err">[</span><span class="na">routerLink</span><span class="err">]="['/</span><span class="na">edit</span><span class="err">',</span> <span class="na">person</span><span class="err">.</span><span class="na">id</span><span class="err">]"</span><span class="nt">&gt;</span>{{person.name}}<span class="nt">&lt;/a&gt;&lt;/td&gt;</span>
 </code></pre>
@@ -604,12 +639,12 @@ installing component
 </code></pre>
 </div>
 
-<p>Add a route for this component in <code class="highlighter-rouge">app.module.ts</code>:</p>
+<p>Add a route for this component in <code class="highlighter-rouge">src/app/app.module.ts</code>:</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">appRoutes</span><span class="err">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'search'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">SearchComponent</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'edit/:id'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">EditComponent</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'/search'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span> <span class="p">}</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'search'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">SearchComponent</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'edit/:id'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">EditComponent</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'/search'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span><span class="p">}</span>
 <span class="p">];</span>
 </code></pre>
 </div>
@@ -672,7 +707,7 @@ installing component
 
   <span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">sub</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="kd">let</span> <span class="nx">id</span> <span class="o">=</span> <span class="o">+</span> <span class="nx">params</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span> <span class="c1">// (+) converts string 'id' to a number</span>
+      <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="o">+</span> <span class="nx">params</span><span class="p">[</span><span class="s1">'id'</span><span class="p">];</span> <span class="c1">// (+) converts string 'id' to a number</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">service</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">person</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">person</span><span class="p">)</span> <span class="p">{</span>
           <span class="k">this</span><span class="p">.</span><span class="nx">editName</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
@@ -722,7 +757,7 @@ installing component
     <span class="nx">q</span> <span class="o">=</span> <span class="nx">q</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
   <span class="p">}</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">getAll</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="nx">data</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="na">results</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="na">results</span><span class="p">:</span> <span class="kr">any</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="nx">data</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">{</span>
       <span class="c1">// check for item in localStorage</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">localStorage</span><span class="p">[</span><span class="s1">'person'</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">])</span> <span class="p">{</span>
@@ -766,7 +801,7 @@ installing component
 
 <p>At this point, you should be able to search for a person and update their information.</p>
 
-<p><img src="/assets/blog/angular-oidc/edit-form-9e8118d51384c2d0f5e20f464da2bad40278f750311e2f002de265cf403edcb9.png" alt="Edit form" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/edit-form-10b0875bcaa67f5033d69190b1052321da3a905a75ed59e65c5a0822c3cec42e.png" alt="Edit form" width="800" /></p>
 
 <p>The <code class="highlighter-rouge">&lt;form&gt;</code> in <code class="highlighter-rouge">src/app/edit/edit.component.html</code> calls a <code class="highlighter-rouge">save()</code> function to update a person’s data. You already implemented this above.
 The function calls a <code class="highlighter-rouge">gotoList()</code> function that appends the person’s name to the URL when sending the user back to the search screen.</p>
@@ -783,19 +818,20 @@ The function calls a <code class="highlighter-rouge">gotoList()</code> function 
 
 <p>Since the <code class="highlighter-rouge">SearchComponent</code> doesn’t execute a search automatically when you execute this URL, add the following logic to do so in its constructor.</p>
 
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">ActivatedRoute</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">ActivatedRoute</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">Subscription</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'rxjs'</span><span class="p">;</span>
 <span class="p">...</span>
-  <span class="nl">sub</span><span class="p">:</span> <span class="nx">Subscription</span><span class="p">;</span>
 
-  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">searchService</span><span class="err">:</span> <span class="nx">SearchService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">,</span> <span class="k">private</span> <span class="nx">route</span><span class="err">:</span> <span class="nx">ActivatedRoute</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">sub</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'term'</span><span class="p">])</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">query</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'term'</span><span class="p">]);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">search</span><span class="p">();</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
+<span class="nl">sub</span><span class="p">:</span> <span class="nx">Subscription</span><span class="p">;</span>
+
+<span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">searchService</span><span class="err">:</span> <span class="nx">SearchService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">route</span><span class="err">:</span> <span class="nx">ActivatedRoute</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">sub</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">params</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'term'</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">query</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">params</span><span class="p">[</span><span class="s1">'term'</span><span class="p">]);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">search</span><span class="p">();</span>
   <span class="p">}</span>
+<span class="p">});</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 
@@ -837,7 +873,7 @@ The function calls a <code class="highlighter-rouge">gotoList()</code> function 
 
 <p>After making these changes, any field with a <code class="highlighter-rouge">required</code> attribute will be required.</p>
 
-<p><img src="/assets/blog/angular-oidc/edit-form-validation-8fa28d60c24ace53ee83db37b94d719a9d8c6772d99a07131d43b6bc063b5774.png" alt="Edit form with validation" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/edit-form-validation-f082b5b4d30d382d746e72e8039354367bf250ab30dbca0912b5856596f7faac.png" alt="Edit form with validation" width="800" /></p>
 
 <p>In this screenshot, you might notice the address fields are blank. This is explained by the error in your console.</p>
 
@@ -862,33 +898,25 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>Now values should display in all fields and <code class="highlighter-rouge">name</code> should be required.</p>
 
-<p><img src="/assets/blog/angular-oidc/edit-form-names-bf02d6ef39bff4a672ff4323df488fa0be1d10e889a1d5dc0e8cba4b5ec74b05.png" alt="Edit form with names and validation" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/edit-form-names-cb13cfc33184a14c341f67e1e833e5491e83dac660e218b650096208d03304c2.png" alt="Edit form with names and validation" width="800" /></p>
 
-<p>With Angular 2, this is all you’ll need to do. However, with Angular 4+, you need to a little more work to stop the form from submitting.</p>
+<p>If you want to provide your own validation messages instead of relying on the browser’s, complete the following steps:</p>
 
 <ul>
-  <li>To display HTML5 validation messages, add the <code class="highlighter-rouge">ngNativeValidate</code> directive to the <code class="highlighter-rouge">&lt;form&gt;</code> tag.</li>
-  <li>If you want to provide your own validation messages:
-    <ul>
-      <li>Add <code class="highlighter-rouge">#editForm="ngForm"</code> to the <code class="highlighter-rouge">&lt;form&gt;</code> element.</li>
-      <li>Add <code class="highlighter-rouge">#name="ngModel"</code> to the <code class="highlighter-rouge">&lt;input id="name"&gt;</code> element.</li>
-      <li>Add <code class="highlighter-rouge">[disabled]="!editForm.form.valid"</code> to the <em>Save</em> button.</li>
-      <li>
-        <p>Add the following under the <code class="highlighter-rouge">name</code> field to display a validation error.</p>
+  <li>Remove <code class="highlighter-rouge">ngNativeValidate</code> and add <code class="highlighter-rouge">#editForm="ngForm"</code> to the <code class="highlighter-rouge">&lt;form&gt;</code> element.</li>
+  <li>Add <code class="highlighter-rouge">#name="ngModel"</code> to the <code class="highlighter-rouge">&lt;input id="name"&gt;</code> element.</li>
+  <li>Add <code class="highlighter-rouge">[disabled]="!editForm.form.valid"</code> to the <em>Save</em> button.</li>
+  <li>Add the following under the <code class="highlighter-rouge">name</code> field to display a validation error.</li>
+</ul>
 
-        <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="err">[</span><span class="na">hidden</span><span class="err">]="</span><span class="na">name</span><span class="err">.</span><span class="na">valid</span> <span class="err">||</span> <span class="na">name</span><span class="err">.</span><span class="na">pristine</span><span class="err">"</span> <span class="na">style=</span><span class="s">"color: red"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="err">[</span><span class="na">hidden</span><span class="err">]="</span><span class="na">name</span><span class="err">.</span><span class="na">valid</span> <span class="err">||</span> <span class="na">name</span><span class="err">.</span><span class="na">pristine</span><span class="err">"</span> <span class="na">style=</span><span class="s">"color: red"</span><span class="nt">&gt;</span>
   Name is required
 <span class="nt">&lt;/div&gt;</span>
 </code></pre>
-        </div>
-      </li>
-    </ul>
-  </li>
-</ul>
+</div>
 
 <p>To learn more about forms and validation, see <a href="https://angular.io/docs/ts/latest/guide/forms.html">Angular forms documentation</a>.</p>
 
-<p><a name="create-open-id-connect-app"></a></p>
 <h2 id="create-an-openid-connect-app-in-okta">Create an OpenID Connect App in Okta</h2>
 
 <p>OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see <a href="https://openid.net/connect/">https://openid.net/connect/</a>.</p>
@@ -897,7 +925,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>Login to your Okta account, or <a href="https://developer.okta.com/signup/">create one</a> if you don’t have one. Navigate to <strong>Admin &gt; Add Applications</strong> and click on the <strong>Create New App</strong> button. Select <strong>Single Page App (SPA)</strong> for the Platform and <strong>OpenID Connect</strong> for the sign on method. Click the <strong>Create</strong> button and give your application a name. On the next screen, add <code class="highlighter-rouge">http://localhost:4200</code> as a Redirect URI and click <strong>Finish</strong>. You should see settings like the following.</p>
 
-<p><img src="/assets/blog/angular-oidc/oidc-settings-ec21ae1ecd7a70f68b887fa6ecf3daeb4f8f82e2f80328a2009272ff8b2c1c02.png" alt="OIDC App Settings" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/oidc-settings-3de0f7846817ffa83c4ff55df01ae926344c511fd789cbbb5ff41114cc02260e.png" alt="OIDC App Settings" width="800" /></p>
 
 <p>Click on the <strong>People</strong> tab and the <strong>Assign to People</strong> button. Assign yourself as a user, or someone else that you know the credentials for.</p>
 
@@ -907,9 +935,9 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 </code></pre>
 </div>
 
-<p>Modify <code class="highlighter-rouge">app.component.ts</code> to import <code class="highlighter-rouge">OAuthService</code> and configure your app to use your Okta application settings.</p>
+<p>Modify <code class="highlighter-rouge">src/app/app.component.ts</code> to import <code class="highlighter-rouge">OAuthService</code> and configure your app to use your Okta application settings.</p>
 
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span><span class="p">,</span> <span class="nx">JwksValidationHandler</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
 
 <span class="p">...</span>
 
@@ -917,11 +945,12 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
     <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span> <span class="o">=</span> <span class="s1">'[client-id]'</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">scope</span> <span class="o">=</span> <span class="s1">'openid profile email'</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">oidc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">=</span> <span class="s1">'https://dev-[dev-id].oktapreview.com'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">tokenValidationHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JwksValidationHandler</span><span class="p">();</span>
 
+    <span class="c1">// Load Discovery Document and then try to login the user</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">loadDiscoveryDocument</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">tryLogin</span><span class="p">({});</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">tryLogin</span><span class="p">();</span>
     <span class="p">});</span>
   <span class="p">}</span>
 <span class="p">...</span>
@@ -934,17 +963,19 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 <span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
 
 <span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
-  <span class="na">template</span><span class="p">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">div</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"givenName"</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{{</span><span class="nx">givenName</span><span class="p">}}</span><span class="o">!&lt;</span><span class="sr">/h2</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"logout()"</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/search"</span> <span class="nx">routerLinkActive</span><span class="o">=</span><span class="s2">"active"</span><span class="o">&gt;</span><span class="nx">Search</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+  <span class="na">template</span><span class="p">:</span> <span class="err">`</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{{</span><span class="nx">givenName</span><span class="p">}}</span><span class="o">!&lt;</span><span class="sr">/h2</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"logout()"</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/search"</span> <span class="nx">routerLinkActive</span><span class="o">=</span><span class="s2">"active"</span><span class="o">&gt;</span><span class="nx">Search</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>
-<span class="o">&lt;</span><span class="nx">div</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"login()"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">`
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"login()"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">`
 </span><span class="p">})</span>
 <span class="k">export</span> <span class="kr">class</span> <span class="nx">HomeComponent</span> <span class="p">{</span>
+
   <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="na">oauthService</span><span class="p">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
   <span class="p">}</span>
 
@@ -961,7 +992,7 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">claims</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="nx">claims</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">claims</span><span class="p">[</span><span class="s1">'name'</span><span class="p">];</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
@@ -990,18 +1021,24 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 </code></pre>
 </div>
 
-<p>Import the <code class="highlighter-rouge">OAuthModule</code> in <code class="highlighter-rouge">app.module.ts</code>, configure the new <code class="highlighter-rouge">HomeComponent</code>, and lock the <code class="highlighter-rouge">/search</code> and <code class="highlighter-rouge">/edit</code> routes down with the <code class="highlighter-rouge">AuthGuard</code>.</p>
+<p>Export <code class="highlighter-rouge">AuthGuard</code> in <code class="highlighter-rouge">src/shared/index.ts</code>:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="o">*</span> <span class="k">from</span> <span class="s1">'./auth/auth.guard.service'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Import the <code class="highlighter-rouge">OAuthModule</code> in <code class="highlighter-rouge">src/app/app.module.ts</code>, configure the new <code class="highlighter-rouge">HomeComponent</code>, and lock the <code class="highlighter-rouge">/search</code> and <code class="highlighter-rouge">/edit</code> routes down with the <code class="highlighter-rouge">AuthGuard</code>.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthModule</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">HomeComponent</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./home/home.component'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">AuthGuard</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./shared/auth/auth.guard.service'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">SearchService</span><span class="p">,</span> <span class="nx">AuthGuard</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./shared'</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">appRoutes</span><span class="err">:</span> <span class="nx">Routes</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'search'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">SearchComponent</span><span class="p">,</span> <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'edit/:id'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">EditComponent</span><span class="p">,</span> <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]},</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'home'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">HomeComponent</span><span class="p">},</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'home'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">path</span><span class="p">:</span> <span class="s1">'**'</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'home'</span> <span class="p">}</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'search'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">SearchComponent</span><span class="p">,</span> <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'edit/:id'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">EditComponent</span><span class="p">,</span> <span class="na">canActivate</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'home'</span><span class="p">,</span> <span class="na">component</span><span class="p">:</span> <span class="nx">HomeComponent</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'home'</span><span class="p">,</span> <span class="na">pathMatch</span><span class="p">:</span> <span class="s1">'full'</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">path</span><span class="p">:</span> <span class="s1">'**'</span><span class="p">,</span> <span class="na">redirectTo</span><span class="p">:</span> <span class="s1">'home'</span><span class="p">}</span>
 <span class="p">];</span>
 
 <span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
@@ -1013,7 +1050,10 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
     <span class="p">...</span>
     <span class="nx">OAuthModule</span><span class="p">.</span><span class="nx">forRoot</span><span class="p">()</span>
   <span class="p">],</span>
-  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span><span class="nx">AuthGuard</span><span class="p">],</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">AuthGuard</span><span class="p">,</span>
+    <span class="nx">SearchService</span>
+  <span class="p">],</span>
   <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
 <span class="p">})</span>
 <span class="k">export</span> <span class="kr">class</span> <span class="nx">AppModule</span> <span class="p">{</span> <span class="p">}</span>
@@ -1022,15 +1062,15 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 
 <p>After making these changes, you should be able to run <code class="highlighter-rouge">ng serve</code> and see a login button.</p>
 
-<p><img src="/assets/blog/angular-oidc/okta-login-button-6945f18dd8e5eeb22be1d87785578f827769fc3ad2881b94a282a98c87db1363.png" alt="Login button" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/okta-login-button-2ee8674edc8ecbf88bbffac2b40d223797622773da3f8def4135480b3e4923b9.png" alt="Login button" width="800" /></p>
 
 <p>Click the <strong>Login</strong> button and sign-in with one of the people that’s configured in your Okta application.</p>
 
-<p><img src="/assets/blog/angular-oidc/okta-login-form-12ee55c95cbbca0f863e611f9d876968e5d5298101ad7b453ef171b8725573fd.png" alt="Okta Login form" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/okta-login-form-d1905a5f3128aedff316a1730e5f7f54076c0fa739cc8b3ac7101144ddf28980.png" alt="Okta Login form" width="800" /></p>
 
 <p>After logging in, you’ll be able to click <em>Search</em> and view people’s information.</p>
 
-<p><img src="/assets/blog/angular-oidc/okta-post-login-638b4111e0d2fb1f04f9db2da3aa5857de970bf0b33c5b54e7854f5a0856c53f.png" alt="View after login" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/okta-post-login-2c35ca453a4755d0ad3b0ce4717885a735bb43e1c1dfdb26b7aba3af74de8460.png" alt="View after login" width="800" /></p>
 
 <p>If it works - great! If you want to build your own login form in your app, continue reading to learn how to use the <a href="https://github.com/okta/okta-auth-js">Okta Auth SDK</a> with <code class="highlighter-rouge">OAuthService</code>.</p>
 
@@ -1052,85 +1092,57 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 </span></code></pre>
 </div>
 
-<p>The components in this section use Bootstrap CSS classes. Add a reference to Bootstrap’s CSS in the <code class="highlighter-rouge">&lt;head&gt;</code> of <code class="highlighter-rouge">src/index.html</code>.</p>
+<p>The components in this section use Bootstrap CSS classes. Install Bootstrap 4.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
-  ...
-  <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install bootstrap@4.0.0-beta --save
 </code></pre>
 </div>
 
-<p>Change <code class="highlighter-rouge">HomeComponent</code> to declare <code class="highlighter-rouge">OktaAuth</code> and modify its <code class="highlighter-rouge">template</code> so it has a button to login, as well as a sign-in form.</p>
+<p>Modify <code class="highlighter-rouge">src/styles.css</code> to add a reference to Bootstrap’s CSS file.</p>
 
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="kr">declare</span> <span class="kd">let</span> <span class="nx">OktaAuth</span><span class="err">:</span> <span class="kr">any</span><span class="p">;</span>
-
-<span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
-  <span class="na">template</span><span class="p">:</span> <span class="err">`</span><span class="o">&lt;</span><span class="nx">div</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"givenName"</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{{</span><span class="nx">givenName</span><span class="p">}}</span><span class="o">!&lt;</span><span class="sr">/h2</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"logout()"</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"btn btn-default"</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/search"</span> <span class="nx">routerLinkActive</span><span class="o">=</span><span class="s2">"active"</span><span class="o">&gt;</span><span class="nx">Search</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span>
-<span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"panel panel-default"</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"panel-body"</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="kd">with</span> <span class="nx">Authorization</span> <span class="nx">Server</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="nx">button</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"btn btn-default"</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"login()"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span>
-<span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"panel panel-default"</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"panel-body"</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="kd">with</span> <span class="nx">Username</span><span class="o">/</span><span class="nx">Password</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
-</span>
-        <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">style</span><span class="o">=</span><span class="s2">"color:red; font-weight:bold"</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"loginFailed"</span><span class="o">&gt;</span>
-            <span class="nx">Login</span> <span class="nx">wasn</span><span class="err">'</span><span class="nx">t</span> <span class="nx">successful</span><span class="p">.</span>
-        <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
-</span>
-        <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-group"</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Username</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
-</span>            <span class="o">&lt;</span><span class="nx">input</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-control"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"username"</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-group"</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Password</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
-</span>            <span class="o">&lt;</span><span class="nx">input</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-control"</span> <span class="kd">type</span><span class="o">=</span><span class="s2">"password"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"password"</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-group"</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">button</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"btn btn-default"</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"loginWithPassword()"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">`
-</span><span class="p">})</span>
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@import</span> <span class="s1">"~bootstrap/dist/css/bootstrap.css"</span><span class="p">;</span>
 </code></pre>
 </div>
 
-<p>After making these changes, the <code class="highlighter-rouge">HomeComponent</code> should render as follows.</p>
+<p>Update <code class="highlighter-rouge">src/app/app.component.html</code> to use Bootstrap classes for its navbar and grid system.</p>
 
-<p><img src="/assets/blog/angular-oidc/sign-in-form-e80bc5e512db14150307ec1395c35b8032288458363afb1acda6bcde3f08ccde.png" alt="Custom sign-in form" width="800" /></p>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-secondary"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand text-light"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Welcome to !<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/nav&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;router-outlet&gt;&lt;/router-outlet&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+</div>
 
-<p>Import Angular’s <code class="highlighter-rouge">Router</code>, add it as a dependency in the constructor, and add local variables for the username and password fields. Then implement a <code class="highlighter-rouge">loginWithPassword()</code> method in <code class="highlighter-rouge">HomeComponent</code>. This method uses the <code class="highlighter-rouge">OktaAuth</code> library to get a session token and exchange it for ID and access tokens.</p>
+<p>Create <code class="highlighter-rouge">src/app/shared/auth/okta.auth.wrapper.ts</code> to wrap the Okta Auth SDK and integrate it with <code class="highlighter-rouge">OAuthService</code>. Its 
+<code class="highlighter-rouge">login()</code> method uses <code class="highlighter-rouge">OktaAuth</code> to get a session token and exchange it for ID and access tokens.</p>
 
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/router'</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="k">export</span> <span class="kr">class</span> <span class="nx">HomeComponent</span> <span class="p">{</span>
-  <span class="nx">username</span><span class="p">;</span>
-  <span class="nx">password</span><span class="p">;</span>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
 
-  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span><span class="err">:</span> <span class="nx">Router</span><span class="p">)</span> <span class="p">{</span>
+<span class="kr">declare</span> <span class="kd">const</span> <span class="nx">OktaAuth</span><span class="err">:</span> <span class="kr">any</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">Injectable</span><span class="p">()</span>
+<span class="k">export</span> <span class="kr">class</span> <span class="nx">OktaAuthWrapper</span> <span class="p">{</span>
+
+  <span class="k">private</span> <span class="nx">authClient</span><span class="err">:</span> <span class="kr">any</span><span class="p">;</span>
+
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
+      <span class="na">url</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span>
+    <span class="p">});</span>
   <span class="p">}</span>
-  <span class="p">...</span>
-  <span class="nx">loginWithPassword</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
-        <span class="na">url</span><span class="p">:</span> <span class="s1">'https://dev-158606.oktapreview.com'</span>
-      <span class="p">});</span>
-      <span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
-        <span class="na">username</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
-        <span class="na">password</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">password</span>
+
+  <span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="err">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">password</span><span class="err">:</span> <span class="kr">string</span><span class="p">)</span><span class="err">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">authClient</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
+        <span class="na">username</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
+        <span class="na">password</span><span class="p">:</span> <span class="nx">password</span>
       <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">response</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithoutPrompt</span><span class="p">({</span>
-            <span class="na">clientId</span><span class="p">:</span> <span class="s1">'RqjWvpvWO77qMGgDfukY'</span><span class="p">,</span>
+          <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">authClient</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">getWithoutPrompt</span><span class="p">({</span>
+            <span class="na">clientId</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span><span class="p">,</span>
             <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'id_token'</span><span class="p">,</span> <span class="s1">'token'</span><span class="p">],</span>
             <span class="na">scopes</span><span class="p">:</span> <span class="p">[</span><span class="s1">'openid'</span><span class="p">,</span> <span class="s1">'profile'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">],</span>
             <span class="na">sessionToken</span><span class="p">:</span> <span class="nx">response</span><span class="p">.</span><span class="nx">sessionToken</span><span class="p">,</span>
@@ -1138,15 +1150,17 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
             <span class="na">redirectUri</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span>
           <span class="p">})</span>
             <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">tokens</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-              <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">processIdToken</span><span class="p">(</span><span class="nx">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">idToken</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">);</span>
-              <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s1">'/home'</span><span class="p">]);</span>
-            <span class="p">})</span>
-            <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+              <span class="kd">const</span> <span class="nx">idToken</span> <span class="o">=</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">idToken</span><span class="p">;</span>
+              <span class="kd">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">accessToken</span><span class="p">;</span>
+              <span class="kd">const</span> <span class="nx">keyValuePair</span> <span class="o">=</span> <span class="err">`#</span><span class="nx">id_token</span><span class="o">=</span><span class="nx">$</span><span class="p">{</span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">idToken</span><span class="p">)}</span><span class="o">&amp;</span><span class="nx">access_token</span><span class="o">=</span><span class="nx">$</span><span class="p">{</span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">accessToken</span><span class="p">)}</span><span class="err">`</span><span class="p">;</span>
+              <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">tryLogin</span><span class="p">({</span> <span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span>
+                <span class="na">customHashFragment</span><span class="p">:</span> <span class="nx">keyValuePair</span><span class="p">,</span>
+                <span class="na">disableOAuth2StateCheck</span><span class="p">:</span> <span class="kc">true</span>
+              <span class="p">});</span>
+            <span class="p">});</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'We cannot handle the '</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">+</span> <span class="s1">' status'</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="s1">'We cannot handle the '</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">+</span> <span class="s1">' status'</span><span class="p">);</span>
         <span class="p">}</span>
-      <span class="p">}).</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
       <span class="p">});</span>
     <span class="p">});</span>
   <span class="p">}</span>
@@ -1154,15 +1168,105 @@ Example 2: &lt;input [(ngModel)]="person.firstName" [ngModelOptions]="{standalon
 </code></pre>
 </div>
 
+<p>In the above code, <code class="highlighter-rouge">oauthService.tryLogin()</code> parses and stores the <code class="highlighter-rouge">idToken</code> and <code class="highlighter-rouge">accessToken</code> so they can be retrieved 
+using <code class="highlighter-rouge">OAuthService.getIdToken()</code> and <code class="highlighter-rouge">OAuthService.getAccessToken()</code>.</p>
+
+<p>Export <code class="highlighter-rouge">OktaAuthWrapper</code> in <code class="highlighter-rouge">src/shared/index.ts</code>:</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">export</span> <span class="o">*</span> <span class="k">from</span> <span class="s1">'./auth/okta.auth.wrapper'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>Add <code class="highlighter-rouge">OktaAuthWrapper</code> as a provider in <code class="highlighter-rouge">app.module.ts</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">SearchService</span><span class="p">,</span> <span class="nx">AuthGuard</span><span class="p">,</span> <span class="nx">OktaAuthWrapper</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'./shared'</span><span class="p">;</span>
+
+<span class="err">@</span><span class="nx">NgModule</span><span class="p">({</span>
+  <span class="p">...</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+    <span class="nx">OktaAuthWrapper</span>
+  <span class="p">],</span>
+  <span class="na">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="nx">AppComponent</span><span class="p">]</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>Change <code class="highlighter-rouge">HomeComponent</code> to declare <code class="highlighter-rouge">OktaAuth</code> and modify its <code class="highlighter-rouge">template</code> so it has a button to login, as well as a sign-in form.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="err">@</span><span class="nx">Component</span><span class="p">({</span>
+  <span class="na">template</span><span class="p">:</span> <span class="err">`</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"givenName"</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"col-12 mt-2"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">button</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"logout()"</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"btn btn-sm btn-outline-primary float-right"</span><span class="o">&gt;</span><span class="nx">Logout</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{{</span><span class="nx">givenName</span><span class="p">}}</span><span class="o">!&lt;</span><span class="sr">/h2</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="nx">routerLink</span><span class="o">=</span><span class="s2">"/search"</span> <span class="nx">routerLinkActive</span><span class="o">=</span><span class="s2">"active"</span><span class="o">&gt;</span><span class="nx">Search</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"card mt-2"</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"card-body"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">h4</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"card-title"</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="kd">with</span> <span class="nx">Authorization</span> <span class="nx">Server</span><span class="o">&lt;</span><span class="sr">/h4</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">button</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"btn btn-primary"</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"login()"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"card mt-2"</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"!givenName"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"card-body"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">h4</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"card-title"</span><span class="o">&gt;</span><span class="nx">Login</span> <span class="kd">with</span> <span class="nx">Username</span><span class="o">/</span><span class="nx">Password</span><span class="o">&lt;</span><span class="sr">/h4</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">p</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"alert alert-error"</span> <span class="o">*</span><span class="nx">ngIf</span><span class="o">=</span><span class="s2">"loginFailed"</span><span class="o">&gt;</span>
+          <span class="nx">Login</span> <span class="nx">wasn</span><span class="err">'</span><span class="nx">t</span> <span class="nx">successful</span><span class="p">.</span>
+        <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-group"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Username</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">input</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-control"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"username"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-group"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Password</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">input</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-control"</span> <span class="kd">type</span><span class="o">=</span><span class="s2">"password"</span> <span class="p">[(</span><span class="nx">ngModel</span><span class="p">)]</span><span class="o">=</span><span class="s2">"password"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"form-group"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">button</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"btn btn-primary"</span> <span class="p">(</span><span class="nx">click</span><span class="p">)</span><span class="o">=</span><span class="s2">"loginWithPassword()"</span><span class="o">&gt;</span><span class="nx">Login</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">`
+</span><span class="p">})</span>
+</code></pre>
+</div>
+
+<p>After making these changes, the <code class="highlighter-rouge">HomeComponent</code> should render as follows.</p>
+
+<p><img src="/assets/blog/angular-oidc/sign-in-form-f5e01d92405613c4a90eb61ed8974d98e290034eca19dbbe1efbd89a05f8fe56.png" alt="Custom sign-in form" width="800" /></p>
+
+<p>Add local variables for the username and password fields, import <code class="highlighter-rouge">OktaAuthWrapper</code>, and implement a <code class="highlighter-rouge">loginWithPassword()</code> method in <code class="highlighter-rouge">HomeComponent</code>.</p>
+
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">OktaAuthWrapper</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../shared'</span><span class="p">;</span>
+<span class="p">...</span>
+
+<span class="nx">username</span><span class="p">;</span>
+<span class="nx">password</span><span class="p">;</span>
+
+<span class="kd">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">,</span>
+            <span class="k">private</span> <span class="nx">oktaAuthWrapper</span><span class="err">:</span> <span class="nx">OktaAuthWrapper</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+
+<span class="nx">loginWithPassword</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">oktaAuthWrapper</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">password</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">_</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s1">'logged in'</span><span class="p">))</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'error logging in'</span><span class="p">,</span> <span class="nx">err</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
 <p>You should be able to sign in using the form, using one of your app’s registered users. After logging in, you’ll be able to click the <strong>Search</strong> link and view people’s information.</p>
 
-<p><img src="/assets/blog/angular-oidc/sign-in-form-success-4aab12fc46974aa46a57bfb1eb17da947d7c1b78bda68e18d04c0a5d8e3476cc.png" alt="View after sign-in" width="800" /></p>
+<p><img src="/assets/blog/angular-oidc/sign-in-form-success-c2d36d789b09ab7078b25115bf5b7e980843e6cad8759996b9c69286a4b458de.png" alt="View after sign-in" width="800" /></p>
 
 <h2 id="angular--okta">Angular + Okta</h2>
 
 <p>If everything works - congrats! If you encountered issues, please post a question to Stack Overflow with an <a href="http://stackoverflow.com/questions/tagged/okta">okta tag</a>, or hit me up on Twitter <a href="https://twitter.com/mraible">@mraible</a>.</p>
 
-<p>You can find a completed version of the application created in this blog post <a href="https://github.com/oktadeveloper/okta-angular-openid-connect-example">on GitHub</a>. To learn more about security in Angular, see <a href="https://angular.io/docs/ts/latest/guide/security.html">Angular’s Security documentation</a>. If you’d like to learn more about OpenID Connect, I’d recommend watching the soothing video below.</p>
+<p>You can find a completed version of the application created in this blog post <a href="https://github.com/oktadeveloper/okta-angular-openid-connect-example">on GitHub</a>. To learn more about security in Angular, see <a href="https://angular.io/guide/security">Angular’s Security documentation</a>. If you’d like to learn more about OpenID Connect, I’d recommend watching the soothing video below.</p>
 
 <div style="max-width: 560px; margin: 0 auto">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Kb56GzQ2pSk" frameborder="0" allowfullscreen=""></iframe>
