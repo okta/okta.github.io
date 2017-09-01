@@ -161,7 +161,7 @@
     <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
         <span class="na">url</span><span class="p">:</span> <span class="s1">'http://localhost:{serverPort}/api/messages'</span><span class="p">,</span>
         <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-            <span class="na">Authorization</span> <span class="p">:</span> <span class="s1">'Bearer '</span> <span class="o">+</span> <span class="nx">accessToken</span>
+            <span class="na">Authorization</span> <span class="p">:</span> <span class="s1">'Bearer '</span> <span class="o">+</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nx">accessToken</span>
         <span class="p">},</span>
         <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// Received messages!</span>
