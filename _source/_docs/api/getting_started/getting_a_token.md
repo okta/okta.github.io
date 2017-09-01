@@ -12,7 +12,7 @@ redirect_from: "/docs/getting_started/getting_a_token.html"
     and if the user permissions change, the API token permissions will also change.
 	
 	If you don't have an Okta organization, you can create a free Okta
-    Developer Edition organization [at this link](https://www.okta.com/developer/signup/){:target="_blank"}.
+    Developer Edition organization [at this link](https://developer.okta.com/signup/){:target="_blank"}.
 
 2.  Click on the blue **Admin** button.
     {% img okta-admin-ui-button-admin.png alt:"Admin" %}

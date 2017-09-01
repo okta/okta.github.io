@@ -259,6 +259,6 @@ There is one known issue in this tutorial. The widget's CSS takes over the whole
 ## React + Okta
 You can find a completed version of the application created in this blog post [on GitHub](https://github.com/leebrandt/okta-react-widget-sample).
 
-Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! [Sign up for a forever-free developer account](https://www.okta.com/developer/signup/) and try Okta today!
+Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! [Sign up for a forever-free developer account](https://developer.okta.com/signup/) and try Okta today!
 
 I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt), leave a comment below, or open an issue on GitHub.

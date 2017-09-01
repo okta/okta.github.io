@@ -235,7 +235,7 @@ Keys used to sign tokens automatically rotate and should always be resolved dyna
 
 ### References
 
- - [Sign Up For Okta](https://www.okta.com/developer/signup/)
+ - [Sign Up For Okta](https://developer.okta.com/signup/)
  - [Setting Up Authorization Server](/docs/how-to/set-up-auth-server.html)
  - [Gree/Jose JWK Library](https://github.com/nov/jose-php)
  - [JWS Spec](https://tools.ietf.org/html/rfc7515)
