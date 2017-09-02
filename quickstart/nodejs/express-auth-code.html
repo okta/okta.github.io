@@ -1,10 +1,76 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <body>
-    <p>
-  We're hard at work on this Express.js Auth Code Example quickstart, please check back soon!
-  <i class="fa fa-coffee" aria-hidden="true"></i>
-</p>
+    <h3 id="install-the-dependency">Install the dependency</h3>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install express-session @okta/oidc-middleware
+</code></pre>
+</div>
+
+<h3 id="add-the-router-with-your-properties">Add the router with your properties</h3>
+
+<p>We’ll create a server with OpenId Connect middleware that will automatically configure your app to work with Okta.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express-session'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">ExpressOIDC</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'@okta/oidc-middleware'</span><span class="p">);</span>
+
+<span class="c1">// session support is required to use ExpressOIDC</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+  <span class="na">secret</span><span class="p">:</span> <span class="s1">'this should be secure'</span><span class="p">,</span>
+  <span class="na">resave</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">saveUninitialized</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}));</span>
+
+<span class="kr">const</span> <span class="nx">oidc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExpressOIDC</span><span class="p">({</span>
+  <span class="na">issuer</span><span class="p">:</span> <span class="s1">'https://{yourOktaDomain}.com/oauth2/default'</span><span class="p">,</span>
+  <span class="na">client_id</span><span class="p">:</span> <span class="s1">'{clientId}'</span><span class="p">,</span>
+  <span class="na">client_secret</span><span class="p">:</span> <span class="s1">'{clientSecret}'</span><span class="p">,</span>
+  <span class="na">redirect_uri</span><span class="p">:</span> <span class="s1">'http://localhost:3000/authorization-code/callback'</span><span class="p">,</span>
+  <span class="na">scope</span><span class="p">:</span> <span class="s1">'openid profile'</span>
+<span class="p">});</span>
+
+<span class="c1">// Let ExpressOIDC add the /login and /authorization-code/callback routes</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">oidc</span><span class="p">.</span><span class="nx">router</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="protect-your-routes">Protect your routes</h3>
+
+<p>You can use ExpressOIDC to redirect to the login page for authentication:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/protected'</span><span class="p">,</span> <span class="nx">oidc</span><span class="p">.</span><span class="nx">ensureAuthenticated</span><span class="p">(),</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">userinfo</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>Or you can use the userinfo in a route:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">userinfo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="err">`</span><span class="nx">Hi</span> <span class="nx">$</span><span class="p">{</span><span class="nx">req</span><span class="p">.</span><span class="nx">userinfo</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">'Hi!'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<h3 id="start-your-server">Start your server</h3>
+
+<p>Wait to start listening until ExpressOIDC is ready.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">oidc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'ready'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">Started</span><span class="o">!</span><span class="err">`</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">oidc</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Unable to configure ExpressOIDC'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>Now, read more about <a href="https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware">@okta/oidc-middleware</a></p>
 
 </body>
 </html>
