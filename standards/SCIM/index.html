@@ -43,7 +43,7 @@
   <meta class="swiftype" name="summary" data-type="string" content="Enable SCIM-based provisioning from Okta to your application." />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-02e8cdc3d2d5a46c79e19b950147e17ceaefde8981fb953c8ee653cef384c5d6.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-e0a2f1567b2617a1ac64c3cfe8f94086456f3fb4e1a8ae52fe18398b4ad2ee3f.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -75,6 +75,9 @@
           <a href="https://developer.okta.com/product/">Product</a>
         </li>
         <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
           <a href="/blog/">Blog</a>
         </li>
         <li class="leaf">
@@ -84,8 +87,7 @@
           <span class="nolink">Support</span>
           <ul class="menu">
             <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
-            <li class="leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
-            <li class="last leaf"><a href="tel:18887227871">1 (888) 722-7871</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
           </ul>
         </li>
       </ul>
@@ -165,7 +167,7 @@
               <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li>
-              <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+              <a href="/docs/platform-release-notes/platform-release-notes.html">Okta API Release Notes</a>
             </li>
           </ul>
 
@@ -219,7 +221,7 @@ This article describes:</p>
 <ul>
   <li>The provisioning actions and use cases that your integration should consider supporting.</li>
   <li>The technical options for how to build the integration (focusing on SCIM).</li>
-  <li>The process for building, submitting for Okta Review, and publishing in the OAN (if you want the app available for all Okta customers).</li>
+  <li>The process for building, submitting for Okta Review, and publishing in the OIN (if you want the app available for all Okta customers).</li>
 </ul>
 
 <h2 id="understanding-provisioning-use-cases">Understanding Provisioning Use Cases</h2>
@@ -283,7 +285,7 @@ Learn more about the overall use case <a href="https://support.okta.com/help/art
 <blockquote>
   <p>Profile Mastering Users is currently a  <a href="/docs/api/getting_started/releases-at-okta.html#beta"> <span class="api-label api-label-beta "> <i class="fa fa-warning"></i> Beta </span> </a>  feature for Okta’s SCIM-Based Provisioning option.
 <a href="/docs/api/getting_started/releases-at-okta.html#beta">Beta features</a> are made available to a small set of customers for testing and feedback.
-While in Beta, Okta may make breaking changes, so the integration with the feature can’t be published in the Okta Application Network or used by customers in production environments.</p>
+While in Beta, Okta may make breaking changes, so the integration with the feature can’t be published in the Okta Integration Network or used by customers in production environments.</p>
 </blockquote>
 
 <p>Mastering is a more sophisticated version of read (import) Users.
@@ -1168,7 +1170,7 @@ example:</p>
 <h3 id="process">Process</h3>
 
 <p>In order to allow customers to use your SCIM provisioning integration with Okta,
-you’ll need to get your app published in <a href="https://www.okta.com/resources/find-your-apps/">the Okta Application Network</a>.</p>
+you’ll need to get your app published in <a href="https://www.okta.com/resources/find-your-apps/">the Okta Integration Network</a>.</p>
 
 <p>Follow the steps below to test and submit your application for Okta review:</p>
 
@@ -1177,7 +1179,7 @@ you’ll need to get your app published in <a href="https://www.okta.com/resourc
   <li>Test Your SCIM Server</li>
   <li>Submit for Okta Review</li>
   <li>Test with Customers</li>
-  <li>Publish to Okta Application Network (OAN)</li>
+  <li>Publish to Okta Integration Network (OIN)</li>
 </ol>
 
 <blockquote>
@@ -1186,10 +1188,10 @@ you’ll need to get your app published in <a href="https://www.okta.com/resourc
 
 <h3 id="private-app-option">Private App Option</h3>
 
-<p>The OAN is for making an integration publicly discoverable and accessible to all Okta customers.
+<p>The OIN is for making an integration publicly discoverable and accessible to all Okta customers.
 However, you can also just use the integration privately within a few named orgs.
 This could be the case if you are a system integrator, customer, or Okta PS integrating to a custom app.
-If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OAN.
+If this is the case, follow steps 1-3 and you will be able to indicate in step 3 that you don’t want to publish in OIN.
 Okta will create the submitted integration per usual and assign it to Orgs that you specify as a private app.
 Note that you cannot use the SCIM template app used for prototyping, as it has limitations that prevent it from being used in production.</p>
 
@@ -1364,7 +1366,7 @@ result with. Here is an example test result from Runscope:
 <h4 id="testing-your-scim-server-with-okta">Testing your SCIM server with Okta</h4>
 
 <p>Once you have a SCIM server that passes all of the Runscope tests,
-test your SCIM integration directly with Okta. To do so, you will first need to sign up for <a href="https://www.okta.com/developer/signup/">an Okta developer account</a>.</p>
+test your SCIM integration directly with Okta. To do so, you will first need to sign up for <a href="https://developer.okta.com/signup/">an Okta developer account</a>.</p>
 
 <p>Note: If you are using OAuth Authorization Code Grant flow as your authentication method
 or need to support the Profile Master action, Okta will need to custom-configure a template app for you.
@@ -1387,9 +1389,9 @@ Please request this in your email to <a href="mailto:developers@okta.com">develo
 
 <h4 id="submit-for-okta-review">Submit for Okta Review</h4>
 
-<p>Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OAN Manager.</p>
+<p>Once you have a functioning SCIM app integration in your developer org, there are a few steps to submit it for Okta review via the OIN Manager.</p>
 
-<p>Your submission provides Okta with all the metadata needed to create a customized app for publication in <a href="https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324">the Okta Application Network</a>. Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.</p>
+<p>Your submission provides Okta with all the metadata needed to create a customized app for publication in <a href="https://www.okta.com/resources/find-your-apps/?_ga=1.200024301.294942002.1477328324">the Okta Integration Network</a>. Okta will review the submission, create the customized app, run it through our internal QA, and then make it available in your developer org for your own testing.</p>
 
 <p>We recommend completing these five steps before actual submission, with detailed instructions in the next section:</p>
 
@@ -1401,7 +1403,7 @@ Please request this in your email to <a href="mailto:developers@okta.com">develo
   <li>Create a demo video showing working integration (optional)</li>
 </ol>
 
-<p>After performing these steps, navigate to the OAN Manager at <a href="https://oanmanager.okta.com/">https://oanmanager.okta.com/</a> to complete the submission form and track review status.</p>
+<p>After performing these steps, navigate to the OIN Manager at <a href="https://oanmanager.okta.com/">https://oanmanager.okta.com/</a> to complete the submission form and track review status.</p>
 
 <h5 id="check-the-profile-attributes-for-your-application">Check the Profile Attributes for your application</h5>
 
@@ -1507,7 +1509,7 @@ For more details, see the <a href="http://saml-doc.okta.com/Provisioning_Docs/SC
 
 <h4 id="test-with-customers">Test with Customers</h4>
 
-<p>We require that one joint customer successfully validate that the integration is working as expected from their perspective before making it publicly available in the Okta Application Network for any customer to use without assistance.</p>
+<p>We require that one joint customer successfully validate that the integration is working as expected from their perspective before making it publicly available in the Okta Integration Network for any customer to use without assistance.</p>
 
 <p>Here’s the process for getting joint customers involved in testing a newly developed SCIM integration:</p>
 
@@ -1518,9 +1520,9 @@ For more details, see the <a href="http://saml-doc.okta.com/Provisioning_Docs/SC
   <li>The Okta admin emails <a href="mailto:developers@okta.com">developers@okta.com</a> directly stating that the integration is working as expected.</li>
 </ol>
 
-<h4 id="publish-to-okta-application-network">Publish to Okta Application Network</h4>
+<h4 id="publish-to-okta-integration-network">Publish to Okta Integration Network</h4>
 
-<p>In order for an app to be published in the Okta Application Network, it must meet the following criteria:</p>
+<p>In order for an app to be published in the Okta Integration Network, it must meet the following criteria:</p>
 
 <ul>
   <li>ISV configuration guide explaining:
@@ -2144,7 +2146,8 @@ only happen if the User table isn’t defined.</p>
 </footer>
 
     <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
-    <script type="text/javascript" src="/assets/quickstart-4d52a2048893fbcae4c6e696d07942b0e2218cb2a9abcc77167531fd56645117.js"></script>
+    <script type="text/javascript" src="/assets/quickstart-26919e2a466e6346d96282973427a3998da81637fd2a2ceb6917a61da7eaf2a8.js"></script>
+    <script type="text/javascript" src="/assets/docsIndex-aebe0e7212e0f2974ef463f06967cba7144f5eed4f14bb11c346866f3fd4ecb7.js"></script>    
     
     
     

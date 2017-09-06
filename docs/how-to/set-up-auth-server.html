@@ -43,7 +43,7 @@
   <meta class="swiftype" name="summary" data-type="string" content="Set Up an Authorization Service" />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-02e8cdc3d2d5a46c79e19b950147e17ceaefde8981fb953c8ee653cef384c5d6.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-e0a2f1567b2617a1ac64c3cfe8f94086456f3fb4e1a8ae52fe18398b4ad2ee3f.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -75,6 +75,9 @@
           <a href="https://developer.okta.com/product/">Product</a>
         </li>
         <li class="leaf">
+          <a href="https://developer.okta.com/pricing/">Pricing</a>
+        </li>
+        <li class="leaf">
           <a href="/blog/">Blog</a>
         </li>
         <li class="leaf">
@@ -84,8 +87,7 @@
           <span class="nolink">Support</span>
           <ul class="menu">
             <li class="first leaf"><a href="https://devforum.okta.com/">Okta Developer Forums</a></li>
-            <li class="leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
-            <li class="last leaf"><a href="tel:18887227871">1 (888) 722-7871</a></li>
+            <li class="last leaf"><a href="mailto:developers@okta.com">developers@okta.com</a></li>
           </ul>
         </li>
       </ul>
@@ -165,7 +167,7 @@
               <a href="/reference/okta_expression_language/">Okta Expression Language</a>
             </li>
             <li>
-              <a href="/docs/platform-release-notes/platform-release-notes.html">Platform Release Notes</a>
+              <a href="/docs/platform-release-notes/platform-release-notes.html">Okta API Release Notes</a>
             </li>
           </ul>
 
@@ -217,8 +219,10 @@
 
 <p>API Access Management allows you to build custom authorization servers in Okta which can be used to protect your own API endpoints.
 An authorization server defines your security boundary, for example “staging” or “production.”
-Within each authorization server you can define your own OAuth scopes, claims, and access policies.
-This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta, such as Universal Directory for transforming attributes, adaptive MFA for end-users, analytics, and system log, and extend it out to the API economy.</p>
+Within each authorization server you can define your own OAuth scopes, claims, and access policies.</p>
+
+<p>This allows your apps and your APIs to anchor to a central authorization point and leverage the rich identity features of Okta,
+such as Universal Directory for transforming attributes, adaptive MFA for end users, analytics, and system log, and extend it out to the API economy.</p>
 
 <p>At its core, an authorization server is simply an OAuth 2.0 token minting engine.
 Each authorization server has a unique <a href="https://tools.ietf.org/html/rfc7519#section-4.1.1">issuer URI</a>
@@ -236,7 +240,8 @@ built in to your Okta app?</p>
 </ul>
 
 <blockquote>
-  <p>Note: If your employees, partners, and users can all use the same authentication policies for single sign-on, try <a href="https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub">Okta’s built-in SSO</a>.</p>
+  <p>Note: If your employees, partners, and users can all use the same authentication policies for single sign-on,
+try <a href="https://support.okta.com/help/articles/Knowledge_Article/Single-Sign-On-Knowledge-Hub">Okta’s built in authorization service</a>.</p>
 </blockquote>
 
 <h2 id="set-up-an-authorization-server">Set Up an Authorization Server</h2>
@@ -421,7 +426,7 @@ Be sure to check that your expression returns the results expected–the express
 
 <h3 id="openid-connect-configuration">OpenID Connect Configuration</h3>
 
-<p>To verify that your server was created and has the expected configuration values, you can send an API request to the Server’s OpenID Connect Metadata URI: <code class="highlighter-rouge">/oauth2/{authorizationServerId}/.well-known/openid-configuration</code> using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.</p>
+<p>To verify that your server was created and has the expected configuration values, you can send an API request to the Server’s OpenID Connect Metadata URI: <code class="highlighter-rouge">/oauth2/:authorizationServerId/.well-known/openid-configuration</code> using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.</p>
 
 <p>For more information on this endpoint, see here: <a href="/docs/api/resources/oauth2.html#retrieve-authorization-server-openid-connect-metadata">Retrieve Authorization Server OpenID Connect Metadata</a>.</p>
 
@@ -458,7 +463,7 @@ Be sure to check that your expression returns the results expected–the express
 
 <p>Once you have an OpenID Connect Application set-up, and a User assigned to it you can try the authentication flow.</p>
 
-<p>First, you will need your Authorization Server’s Authorization Endpoint, which you can retrieve using the Server’s Metadata URI: <code class="highlighter-rouge">/oauth2/{authorizationServerId}/.well-known/openid-configuration</code>. It will look like this:</p>
+<p>First, you will need your Authorization Server’s Authorization Endpoint, which you can retrieve using the Server’s Metadata URI: <code class="highlighter-rouge">/oauth2/:authorizationServerId/.well-known/openid-configuration</code>. It will look like this:</p>
 
 <p><code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/authorize</code></p>
 
@@ -578,7 +583,8 @@ Be sure to check that your expression returns the results expected–the express
 </footer>
 
     <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
-    <script type="text/javascript" src="/assets/quickstart-4d52a2048893fbcae4c6e696d07942b0e2218cb2a9abcc77167531fd56645117.js"></script>
+    <script type="text/javascript" src="/assets/quickstart-26919e2a466e6346d96282973427a3998da81637fd2a2ceb6917a61da7eaf2a8.js"></script>
+    <script type="text/javascript" src="/assets/docsIndex-aebe0e7212e0f2974ef463f06967cba7144f5eed4f14bb11c346866f3fd4ecb7.js"></script>    
     
     
     

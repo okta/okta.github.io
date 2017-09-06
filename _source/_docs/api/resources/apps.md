@@ -4517,7 +4517,7 @@ Property details
 
 ##### App Names & Settings
 
-The Okta Application Network (OAN) defines the catalog of applications that can be added to your Okta organization.  Each application has a unique name (key) and schema that defines the required and optional settings for the application.  When adding an application, the unique app name must be specified in the request as well as any required settings.
+The Okta Integration Network (OIN) defines the catalog of applications that can be added to your Okta organization.  Each application has a unique name (key) and schema that defines the required and optional settings for the application.  When adding an application, the unique app name must be specified in the request as well as any required settings.
 
 The catalog is currently not exposed via an API.  While additional apps may be added via the API, only the following template applications are documented:
 

@@ -1,6 +1,6 @@
 ---
 layout: software
-title: Okta Sign-In Widget Reference
+title: JavaScript
 weight: 100
 hide_from_layout: 0
 excerpt: Reference information for customizing the Okta Sign-In Widget.

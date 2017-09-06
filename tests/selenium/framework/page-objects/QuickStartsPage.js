@@ -7,6 +7,7 @@ class QuickStartsPage extends BasePage {
   constructor(url) {
     super(url);
     this.$clientSelector = $('#client-selector');
+    this.$androidLink = element(by.linkText('Android'));
     this.$angularLink = element(by.linkText('Angular'));
     this.$iOSLink = element(by.linkText('iOS'));
     this.$siwLink = element(by.linkText('Sign-In Widget'));
@@ -14,10 +15,13 @@ class QuickStartsPage extends BasePage {
     this.$nodeJSLink = element(by.linkText('Node JS'));
     this.$javaLink = element(by.linkText('Java'));
     this.$phpLink = element(by.linkText('PHP'));
+    this.$doenetLink = element(by.linkText('.NET'));
     this.$genericNodeLink = element(by.linkText('Generic Node'));
     this.$expressJSLink = element(by.linkText('Express.js'));   
     this.$genericJavaLink = element(by.linkText('Generic Java'));
     this.$springLink = element(by.linkText('Spring'));
+    this.$aspCore = element(by.linkText('ASP.NET Core'));
+    this.$aspFour = element(by.linkText('ASP.NET 4.x'));
     this.$$activeLinks = $$('.active');
     this.$$frameworkLinks = $$('#framework-selector a');
 
@@ -30,6 +34,10 @@ class QuickStartsPage extends BasePage {
 
   selectHosted(){
     return this.$hostedLink.click();
+  }
+
+  selectAndroid() {
+    return this.$androidLink.click();
   }
 
   selectAngularClient() {
@@ -66,6 +74,18 @@ class QuickStartsPage extends BasePage {
 
   selectGenericNode() {
       return this.$genericNodeLink.click();
+  }
+
+  selectDotNet() {
+    return this.$doenetLink.click();
+  }
+
+  selectDotNetCore() {
+    return this.$aspCore.click();
+  }
+
+  selectDotNetFour() {
+    return this.$aspFour.click();
   }
 
   activeLinksContain(links) {

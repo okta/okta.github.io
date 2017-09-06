@@ -9,7 +9,8 @@ addons:
 
 before_install:
   - gem update bundler
-  - nvm install 7.9
+  - bundle install
+  - nvm install $(cat .nvmrc)
 
 script: ./scripts/travis.sh
 

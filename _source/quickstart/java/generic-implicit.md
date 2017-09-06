@@ -21,19 +21,70 @@ compile 'com.okta.jwt:okta-jwt-verifier:{{ site.versions.jwt_validator_java }}'
 
 ### Use the API
 
+We can create a simple Servlet example by creating a `Filter`:
+
 ```java
-// 1. build the parser
-JwtVerifier jwtVerifier = new JwtHelper()
-                            .setIssuerUrl("https://{yourOktaDomain}.com/oauth2/default")
-                            .setAudience("api://default")
-                            .build();
+@WebFilter(urlPatterns = {"/api/*"})
+public static class OktaAccessTokenFilter implements Filter {
 
-// 2. Process the token (includes validation)
-Jwt jwt = jwtVerifier.decodeAccessToken(jwtString);
+    private JwtVerifier jwtVerifier;
 
-// 3. Do something with the token
-println(jwt.getTokenValue()); // print the token
-println(jwt.getClaims().get("invalidKey")); // an invalid key just returns null
-println((Collection) jwt.getClaims().get("groups")); // handle an array value
-println(jwt.getExpiresAt()); // expiration time
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+        try {
+            this.jwtVerifier = new JwtHelper()
+                    .setIssuerUrl("https://{yourOktaOrg}.com/oauth2/default"))
+                    .setAudience("api://default")
+                    .build();
+
+        } catch (IOException e) {
+            throw new ServletException("Failed to create JWT Verifier", e);
+        }
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
+                                                 throws IOException, ServletException {
+
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        String authHeader = httpRequest.getHeader("Authorization");
+
+        if (authHeader != null
+                && !authHeader.isEmpty()
+                && authHeader.startsWith("Bearer ")) {
+
+            // Strip the auth type
+            String jwtString = authHeader.replaceFirst("^Bearer ", "");
+
+            try {
+                jwtVerifier.decodeAccessToken(jwtString);
+                chain.doFilter(request, response);
+                return;
+
+            } catch (JoseException e) {
+                httpRequest.getServletContext().log("Failed to decode Access Token", e);
+            }
+        }
+
+        httpResponse.setHeader("WWW-Authenticate", "Bearer realm=\"Okta-Servlet-Example\"");
+        httpResponse.sendError(401, "Unauthorized");
+    }
+}
 ```
+
+Next up is to create a `Servlet` for the '/api/messages' endpoint we defined in the above client:
+```java
+@WebServlet(urlPatterns={"/api/messages"})
+public class ExampleServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+                                                     throws ServletException, IOException {
+        // handle request
+    }
+}
+```
+
+For more examples and other project information check out [okta/okta-jwt-verifier-java](https://github.com/okta/okta-jwt-verifier-java) on Github.
