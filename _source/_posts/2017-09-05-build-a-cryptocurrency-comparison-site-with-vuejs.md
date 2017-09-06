@@ -256,7 +256,7 @@ two-way data binding.
 
 {% img blog/cryptocurrency/color-screenshot.png alt:"Color Screenshot" %}
 
-f you go into the JavaScript console and modify this directly yourself, you'll
+If you go into the JavaScript console and modify this directly yourself, you'll
 see it change again.
 
 
@@ -303,10 +303,10 @@ capitalize the color from the example above when clicked:
 
 In this example, we define a function in the `methods` object of Vue, which simply
 capitalizes the `color` variable from before. We then use the `v-on:click` attribute
-on out input tag to tell Vue that when the button is clicked, it should run that
+on our input tag to tell Vue that when the button is clicked, it should run that
 method.
 
-Pretty straight-forward, right?
+Pretty straightforward, right?
 
 
 ## Build a Cryptocurrency Comparison Website with Vue
@@ -325,7 +325,7 @@ things are valued at any given time.
 So… Let's get started!
 
 **NOTE**: If you'd rather just look at the completed project on Github, you can
-check it out on [Github][].
+[check it out on Github][].
 
 
 ### Bootstrapping
@@ -698,7 +698,7 @@ allows us to easily retrieve a cryptocurrency's image.
 ### Load Data When the App Starts
 
 Now that we've built some of our data-retrieval methods, we need to actually run
-them. Otherwise: oup app will open, but nothing will happen.
+them. Otherwise: our app will open, but nothing will happen.
 
 In Vue, we can bind actions to certain events that happen on the page. One of
 these lifecycle events is called “created”, and we can use this lifecycle hook
@@ -721,8 +721,8 @@ This is exactly what we need, because once the page is loaded, we'll call our
 on the page.
 
 Finally, we need to ensure that we actually keep the data on the page updating.
-The CryptoMarketCap API service says that their data is refreshed once every 5
-minutes, so as to not be aggressive, we'll be querying their API once per minute
+The CryptoMarketCap API service says that their data is refreshed once every
+five minutes, so as to not be aggressive, we'll be querying their API once per minute
 to display new results to our users.
 
 We can do this easily outside of our Vue app using a plain old call to
@@ -732,7 +732,6 @@ JavaScript's `setInterval` function:
 /**
  * Once the page has been loaded and all of our app stuff is working, we'll
  * start polling for new cryptocurrency data every minute.
- *
  */
 setInterval(() => {
   app.getCoins();
@@ -790,7 +789,7 @@ Pretty straightforward, right?
 
 The only new thing here is the `v-bind` directive. If you're wondering what that
 does, it tells Vue to run the `getCoinImage` function, grab the result, and use
-that result for the img tag's `src` attribute (this is how we're able to display
+that result for the `<img>` tag's `src` attribute (this is how we're able to display
 the logo to the user).
 
 The final thing we'll want to do now is clean the coloring up a bit:
@@ -809,7 +808,7 @@ So, let's quickly build a method and plug it into our HTML:
  * not the value passed in is negative or positive.
  */
 getColor: (num) => {
-  return num > 0 ? "color:green;" : "color:red;";
+  return num > 0 ? "color:green" : "color:red";
 }
 ```
 
@@ -838,7 +837,7 @@ With these final changes, load the code up in your browser, and give it a go!
 
 {% img blog/cryptocurrency/cryptocompare-final.png alt:"Cryptocompare Final Screenshot" %}
 
-If you play around with the website a bit, you'll notice that every 60 seconds
+If you play around with the app a bit, you'll notice that every 60 seconds
 the data is updated as designed.
 
 In the event one currency takes over another's ranking, all the items will shift
@@ -849,20 +848,20 @@ by modifying `app.coins` directly if you want).
 ## Put It All Together
 
 I hope you had fun learning a bit about Vue, and seeing how to use it to build
-basic web apps.
+a basic web app.
 
 If you're a web developer looking to organize your front-end logic in a simpler
 and maintainable way, I strongly recommend you give Vue.js a try.
 
 And finally, if you're interested in reading other articles about web
-development, APIs, and security, you should check out our awesome [Twitter
+development, APIs, and security, you should follow our [Twitter
 account][].
 
 
   [Vue.js]: https://vuejs.org/ "Vue.js"
   [React]: https://facebook.github.io/react/ "React.js"
   [Angular]: https://angularjs.org/ "Angular.js"
-  [Github]: https://github.com/rdegges/cryptocompare "cryptocompare on Github"
+  [check it out on Github]: https://github.com/rdegges/cryptocompare "cryptocompare on Github"
   [Bootstrap]: http://getbootstrap.com/ "Twitter Bootstrap"
   [vue2-filters]: https://www.npmjs.com/package/vue2-filters "vue2-filters on NPM"
   [axios]: https://github.com/mzabriskie/axios "axios on Github"
