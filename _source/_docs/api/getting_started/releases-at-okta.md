@@ -6,21 +6,19 @@ title: Okta Release Lifecycle
 
 # Okta Release Lifecycle
 
-Features of the Okta platform travel through a regular lifecycle:
+Okta features travel through a regular lifecycle:
 
 * [Beta](#beta)
 * [Early Access (EA)](#early-access-ea)
 * [General Availability (GA)](#general-availability-ga)
 * [Deprecation](#deprecation)
 
-This lifecycle applies to most features and behaviors of the platform.
-
 >Note: Okta reserves the right to add new parameters, properties, or resources to the API without advance notice. 
 These updates are non-breaking because they are additive. Follow [the compatibility rules](/docs/api/getting_started/design_principles.html) to ensure your application doesn't break
 when additive changes are made. 
 Breaking changes such as removing or renaming an attribute are released as a new version of the API, and Okta provides a migration path for new API versions.
 
-Changes, regardless of lifecycle stage, are always reported in the [Platform Release Notes](/docs/platform-release-notes/platform-release-notes.html).
+Changes, regardless of lifecycle stage, are always reported in the [Okta API Release Notes Release Notes](/docs/platform-release-notes/platform-release-notes.html).
 
 ## Quick Reference Table
 
@@ -38,7 +36,7 @@ Changes, regardless of lifecycle stage, are always reported in the [Platform Rel
 ## Beta
 
 Features in Beta are managed and supported by the Product Team and have been internally validated for a set of use cases. 
-Minimal documentation is supplied for platform Beta releases; API endpoint and configuration information are usually supplied.
+Minimal documentation is supplied for API-related Beta releases; API endpoint and configuration information is usually supplied.
 
 >Important: Okta only enables Beta features in non-production or sandbox environments, because features in Beta aren't supported by Okta Customer Support and
 may change at any time during the Beta release.
@@ -46,7 +44,7 @@ may change at any time during the Beta release.
 Okta selects a small number of customers for early testing of features in a Beta release. 
 Customers participating in a Beta program agree to provide feedback which is required for maturing the feature; 
 however, the timeline for addressing specific areas of feedback (including bugs) is determined by Okta's market requirements for that feature.
-Any customer interested in a feature in Beta must apply by visiting [our Beta Signup page](https://oktabeta.zendesk.com/hc/en-us). 
+Any customer interested in a feature in Beta must apply by visiting [our Beta Signup page](https://support.okta.com/help/OktaBetaProgramHome). 
 Only customers with use cases that match our use cases are invited.
 
 Beta releases are either high touch or low touch:
@@ -63,10 +61,10 @@ A feature in an Early Access (EA) release is new or enhanced functionality made 
 Features in EA:
 
 * Are supported by Okta Customer Support.
-* Obey the platform SLAs. APIs are [backwards compatible](/docs/api/getting_started/design_principles.html).
+* Obey the SLAs. APIs are [backwards compatible](/docs/api/getting_started/design_principles.html).
 
->Note: A platform feature may skip EA if it doesn't affect other features or functionality. 
-Also, although we strive for API-first development, a platform feature in EA may add functionality later.
+>Note: A feature may skip EA if it doesn't affect other features or functionality. 
+Also, although we strive for API-first development, a feature in EA may add functionality later.
 
 Any bug fixes or improvements are managed and fixed with the same timeline and processes as those in General Availability.
 
@@ -108,4 +106,4 @@ Other exceptions include:
 Such features may spend more than one month between preview and production for their GA release.
 * Features exposed in the Okta user interface may be EA or GA without the corresponding API being in the same stage of the lifecycle, or available at all.
 
-As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the [Platform Release Notes](/docs/platform-release-notes/platform-release-notes.html).
+As with all changes that affect our customers, changes outside the regular Beta-EA-GA lifecycle are reported in the [Okta API Release Notes](/docs/platform-release-notes/platform-release-notes.html).

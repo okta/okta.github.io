@@ -125,7 +125,7 @@ function callMessagesApi() {
     $.ajax({
         url: 'http://localhost:{serverPort}/api/messages',
         headers: {
-            Authorization : 'Bearer ' + accessToken
+            Authorization : 'Bearer ' + accessToken.accessToken
         },
         success: function(response) {
             // Received messages!

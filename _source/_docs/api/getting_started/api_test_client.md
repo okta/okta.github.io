@@ -15,7 +15,7 @@ To use these collections, you'll need to set up your local environment and impor
 
 ## Sign Up for Okta
 
-You'll need a free Okta developer organization to get started. If you don't have one already, [sign up](https://www.okta.com/developer/signup/){:target="_blank"} to create one.
+You'll need a free Okta developer organization to get started. If you don't have one already, [sign up](https://developer.okta.com/signup/){:target="_blank"} to create one.
 
 When you create a new Okta organization, it will be assigned a base URL like `dev-12345.oktapreview.com`. This is your unique subdomain in Okta. `oktapreview.com` orgs are production-ready and can be used for development work or full-fledged apps, but they don't include SLAs.
 

@@ -136,7 +136,7 @@ Here is how to configure Okta:
 
 	If you don't have an Okta organization, you can create a free Okta
 	Developer Edition organization here:
-	<https://www.okta.com/developer/signup/>
+	<https://developer.okta.com/signup/>
 
 2.  Click on the blue "Admin" button {% img okta-admin-ui-button-admin.png alt:Admin %}
 

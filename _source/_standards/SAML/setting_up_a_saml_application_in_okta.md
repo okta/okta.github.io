@@ -20,7 +20,7 @@ Here is how to set up a SAML application in Okta:
 
  1.  Log in to your Okta organization as a user with administrative
     privileges. If you don't have an Okta organization, you can create a free Okta
-    <a href="https://www.okta.com/developer/signup/" target="_blank">Developer Edition organization</a>.
+    <a href="https://developer.okta.com/signup/" target="_blank">Developer Edition organization</a>.
 
  2.  Click on the blue "Admin" button
     {% img okta-admin-ui-button-admin.png alt:"Admin" %}
