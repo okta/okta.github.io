@@ -243,7 +243,7 @@ Vue to dynamically manage for you upfront in a special <code class="highlighter-
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;h1&gt;&lt;/h1&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>{{ message }}<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -266,7 +266,7 @@ Vue to dynamically manage for you upfront in a special <code class="highlighter-
 <code class="highlighter-rouge">Vue</code> constructor, and defining my data inside of it. In this case, I’m just
 telling Vue that I’d like it to manage a message for me.</p>
 
-<p>You’ll also notice that my HTML code now contains a variable: ``.
+<p>You’ll also notice that my HTML code now contains a variable: <code class="highlighter-rouge"><span class="p">{</span><span class="err">{</span><span class="w"> </span><span class="err">message</span><span class="w"> </span><span class="p">}</span><span class="err">}</span></code>.
 After Vue starts up, and scans the <code class="highlighter-rouge">app</code> div for code, it will start replacing any
 variables it finds with the related <code class="highlighter-rouge">data</code> objects you’ve defined.</p>
 
@@ -301,7 +301,7 @@ logic in your HTML templates.</p>
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;h1&gt;&lt;/h1&gt;</span>
+      <span class="nt">&lt;h1&gt;</span>{{ message }}<span class="nt">&lt;/h1&gt;</span>
       <span class="nt">&lt;p</span> <span class="na">v-if=</span><span class="s">"secretMessage"</span><span class="nt">&gt;</span>This is a secret HTML element.<span class="nt">&lt;/p&gt;</span>
       <span class="nt">&lt;p</span> <span class="na">v-else</span><span class="nt">&gt;</span>Welcome to the website.<span class="nt">&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
@@ -351,7 +351,7 @@ to loop through an array of shopping items, displaying them in an ordered list:<
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;p&gt;</span>Shopping list<span class="nt">&lt;/p&gt;</span>
       <span class="nt">&lt;ol&gt;</span>
-        <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in shoppingList"</span><span class="nt">&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in shoppingList"</span><span class="nt">&gt;</span>{{ item }}<span class="nt">&lt;/li&gt;</span>
       <span class="nt">&lt;/ol&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 
@@ -400,7 +400,7 @@ user (and you) can manage the same pieces of data in your application.</p>
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;p&gt;</span>What's your favorite color?<span class="nt">&lt;/p&gt;</span>
       <span class="nt">&lt;input</span> <span class="na">v-model=</span><span class="s">"color"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;p&gt;</span>Your favorite color is... <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Your favorite color is... {{ color }}<span class="nt">&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 
     <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue"</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -442,7 +442,7 @@ capitalize the color from the example above when clicked:</p>
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;p&gt;</span>What's your favorite color?<span class="nt">&lt;/p&gt;</span>
       <span class="nt">&lt;input</span> <span class="na">v-model=</span><span class="s">"color"</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;p&gt;</span>Your favorite color is... <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Your favorite color is... {{ color }}<span class="nt">&lt;/p&gt;</span>
       <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">v-on:click=</span><span class="s">"capitalizeColor"</span> <span class="na">value=</span><span class="s">"Capitalize"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 
@@ -929,20 +929,20 @@ cryptocurrency data, filling out our table:</p>
   <span class="nt">&lt;/thead&gt;</span>
   <span class="nt">&lt;tbody&gt;</span>
     <span class="nt">&lt;tr</span> <span class="na">v-for=</span><span class="s">"coin in coins"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
-      <span class="nt">&lt;td&gt;&lt;img</span> <span class="na">v-bind:src=</span><span class="s">"getCoinImage(coin.symbol)"</span><span class="nt">&gt;</span> <span class="nt">&lt;/td&gt;</span>
-      <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
-      <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>{{ coin.rank }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;&lt;img</span> <span class="na">v-bind:src=</span><span class="s">"getCoinImage(coin.symbol)"</span><span class="nt">&gt;</span> {{ coin.name }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>{{ coin.symbol }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>{{ coin.price_usd | currency }}<span class="nt">&lt;/td&gt;</span>
       <span class="nt">&lt;td&gt;</span>
-        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_1h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>%
+        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_1h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_1h }}%
       <span class="nt">&lt;/td&gt;</span>
       <span class="nt">&lt;td&gt;</span>
-        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_24h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>%
+        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_24h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_24h }}%
       <span class="nt">&lt;/td&gt;</span>
       <span class="nt">&lt;td&gt;</span>
-        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_7d &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>%
+        <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_7d &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_7d }}%
       <span class="nt">&lt;/td&gt;</span>
-      <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+      <span class="nt">&lt;td&gt;</span>{{ coin.market_cap_usd | currency }}<span class="nt">&lt;/td&gt;</span>
     <span class="nt">&lt;/tr&gt;</span>
   <span class="nt">&lt;/tbody&gt;</span>
 <span class="nt">&lt;/table&gt;</span>
@@ -980,20 +980,20 @@ eyeball the performance of a currency.</p>
 
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;tbody&gt;</span>
   <span class="nt">&lt;tr</span> <span class="na">v-for=</span><span class="s">"coin in coins"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;&lt;img</span> <span class="na">v-bind:src=</span><span class="s">"getCoinImage(coin.symbol)"</span><span class="nt">&gt;</span> <span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ coin.rank }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;&lt;img</span> <span class="na">v-bind:src=</span><span class="s">"getCoinImage(coin.symbol)"</span><span class="nt">&gt;</span> {{ coin.name }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ coin.symbol }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ coin.price_usd | currency }}<span class="nt">&lt;/td&gt;</span>
     <span class="nt">&lt;td</span> <span class="na">v-bind:style=</span><span class="s">"getColor(coin.percent_change_1h)"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_1h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>%
+      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_1h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_1h }}%
     <span class="nt">&lt;/td&gt;</span>
     <span class="nt">&lt;td</span> <span class="na">v-bind:style=</span><span class="s">"getColor(coin.percent_change_24h)"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_24h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>%
+      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_24h &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_24h }}%
     <span class="nt">&lt;/td&gt;</span>
     <span class="nt">&lt;td</span> <span class="na">v-bind:style=</span><span class="s">"getColor(coin.percent_change_7d)"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_7d &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>%
+      <span class="nt">&lt;span</span> <span class="na">v-if=</span><span class="s">"coin.percent_change_7d &gt; 0"</span><span class="nt">&gt;</span>+<span class="nt">&lt;/span&gt;</span>{{ coin.percent_change_7d }}%
     <span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;td&gt;&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ coin.market_cap_usd | currency }}<span class="nt">&lt;/td&gt;</span>
   <span class="nt">&lt;/tr&gt;</span>
 <span class="nt">&lt;/tbody&gt;</span>
 </code></pre>
