@@ -6,8 +6,6 @@ redirect_from: "/docs/getting_started/policy.html"
 
 # Policy API
 
-> The Policy API is an {% api_lifecycle ea %} [release](/docs/api/getting_started/releases-at-okta.html).
-
 The Okta Policy API enables an Administrator to perform policy and policy rule operations.  The policy framework is used by Okta to control rules and settings that govern, among other things, user session lifetime, whether multi-factor authentication is required when logging in, what MFA factors may be employed, password complexity requirements, and what types of self-service operations are permitted under various circumstances.
 
 Policy settings for a particular policy type, such as Sign On Policy, consist of one or more Policy objects, each of which contains one or more Policy Rules.  Policies and rules contain conditions that determine whether they are applicable to a particular user at a particular time.
@@ -1058,8 +1056,6 @@ The following conditions may be applied to the rules associated with MFA Enrollm
 
 ## Password Policy
 {: #GroupPasswordPolicy }
-
-> The Password Policy API is an {% api_lifecycle ea %} release.
 
 Password policy controls settings that determine a user&#8217;s password length and complexity, as well as the frequency with which a password can be changed.  This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
 
