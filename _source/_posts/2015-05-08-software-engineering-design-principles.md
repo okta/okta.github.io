@@ -70,7 +70,7 @@ writing clean code takes practice. At Okta every engineer is constantly honing
 their skills, we rely heavily on code reviews and pair programming to help hone
 each other's skills. 
 
-{% img 2015-05-08-software-engineering-design-principles-code_quality_wtfs_per_minute.jpg alt:"wtfs per minute" %}
+{% img 2015-05-08-wtfs_per_minute.jpg alt:"wtfs per minute" %}
 
 
 ## 3. Know Thy-Service With Data 
