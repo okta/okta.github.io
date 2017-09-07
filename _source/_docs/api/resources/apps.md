@@ -979,6 +979,7 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 | client_id                  | Unique identifier for the client application                   | String                                                                      | TRUE     | TRUE   | TRUE       |
 | client_secret              | OAuth 2.0 client secret string (used for confidential clients) | String                                                                      | TRUE     | FALSE  | TRUE       |
 | token_endpoint_auth_method | Requested authentication method for the token endpoint         | `none`, `client_secret_post`, `client_secret_basic`, or `client_secret_jwt` | FALSE    | FALSE  | FALSE      |
+| autoKeyRotation            | Requested key rotation mode                                    | Boolean                                                                     | TRUE     | FALSE  | FALSE      |
 
 ##### Settings
 {:.api .api-request .api-request-params}
@@ -1032,7 +1033,8 @@ curl -v -X POST \
     "signOnMode": "OPENID_CONNECT",
     "credentials": {
       "oauthClient": {
-        "token_endpoint_auth_method": "client_secret_post"
+        "autoKeyRotation": true
+        "token_endpoint_auth_method": "client_secret_post",
       }
     },
     "settings": {
@@ -1095,6 +1097,7 @@ curl -v -X POST \
       "kid": "cg4-_A_ifCK7fsKIKjHP27P0JGeuhnHHKEID1yXy42M"
     },
     "oauthClient": {
+      "autoKeyRotation": true,
       "client_id": "0oa1hm4POxgJM6CPu0g4",
       "client_secret": "5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z",
       "token_endpoint_auth_method": "client_secret_post"
@@ -4751,6 +4754,7 @@ Determines how to authenticate the OAuth 2.0 client
 | client_id                  | Unique identifier for the OAuth 2.0 client application                           | String   | TRUE     |
 | client_secret              | OAuth 2.0 client secret string                                                   | String   | TRUE     |
 | token_endpoint_auth_method | Requested authentication method for the token endpoint                           | String   | FALSE    |
+| autoKeyRotation            | Requested key rotation mode                                                      | Boolean  | TRUE     |
 |----------------------------+----------------------------------------------------------------------------------+----------+----------|
 
 * When creating an OAuth 2.0 client application, you can specify the `client_id`, or Okta will set it the same value as the application ID. Thereafter, the client_id is immutable.
@@ -4759,9 +4763,12 @@ Determines how to authenticate the OAuth 2.0 client
 
 * The `client_id` must consist of alphanumeric characters or the following special characters `$-_.+!*'(),`. It must contain between 6 and 100 characters, inclusive, and must not be the reserved word `ALL_CLIENTS`. The `client_secret` must consist of printable characters, which are defined in [the OAuth 2.0 Spec](https://tools.ietf.org/html/rfc6749#appendix-A), and must contain between 14 and 100 characters, inclusive.
 
+* If `autoKeyRotation` is not specified, the client automatically opts in for Okta's [key rotation](/docs/api/resources/oidc.html#validating-id-tokens). This property may be updated via the API or via the Okta Admin user interface.
+
 ~~~json
 {
   "oauthClient": {
+    "autoKeyRotation": false,
     "client_id": "0oa1hm4POxgJM6CPu0g4",
     "client_secret": "5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z",
     "token_endpoint_auth_method": "client_secret_post"
