@@ -61,6 +61,11 @@ Use the `[Authorize]` attribute on controllers or actions to require a logged-in
 Alternatively, you can create actions to log the user in (or out):
 
 ```csharp
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 public class AccountController : Controller
 {
     public IActionResult Login()
@@ -85,7 +90,7 @@ public class AccountController : Controller
 }
 ```
 
-Open a private or incognito window in your browser and try navigating to a route that has the `[Authorize]` attribute, or the `/Account/Login` action above. You'll be redirected to the Okta Sign-In page.
+Open a private or incognito window in your browser and try navigating to a route that has the `[Authorize]` attribute, or to the `/Account/Login` action above. You'll be redirected to the Okta Sign-In page.
 
 > Note: If you want to log the user out, you'll need to add a **Logout redirect URI** to the application configuration in Okta with a value of `http://{yourServerUrl}/signout-callback-oidc`. For example, `http://localhost:5000/signout-callback-oidc`.
 
@@ -94,3 +99,7 @@ Open a private or incognito window in your browser and try navigating to a route
 ASP.NET Core automatically populates `HttpContext.User` with the information Okta sends back about the user. You can check whether the user is logged in with `User.Identity.IsAuthenticated` in your actions or views, and see all of the user's claims in `User.Claims`.
 
 If you want to do more with the user, you can use the [Okta .NET SDK](https://github.com/okta/okta-sdk-dotnet) to get or update the user's details stored in Okta.
+
+### Example project
+
+If you want a full, working example, head over to the [ASP.NET Core 2.0 MVC example](https://github.com/oktadeveloper/okta-aspnetcore-mvc-example) repository.
