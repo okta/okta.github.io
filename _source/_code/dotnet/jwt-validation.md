@@ -15,22 +15,20 @@ A common practice is to send one of these tokens in the `Bearer` header of futur
 
 You **don't** need to validate tokens manually if:
 
-* You are using ASP.NET or ASP.NET Core with the `JwtBearer` or `OpenIdConnect` middleware
+* You are using [ASP.NET](https://developer.okta.com/quickstart/#/widget/dotnet/aspnet4) or [ASP.NET Core](https://developer.okta.com/quickstart/#/widget/dotnet/aspnetcore) with the `JwtBearer` or `OpenIdConnect` middleware
 * You want to send tokens to Okta to be validated (this is called [token introspection](/docs/api/resources/oauth2.html#introspection-request))
 
 If you need to validate a token manually, and don't want to make a network call to Okta, this guide will help you validate tokens locally.
 
 ## What you'll need
 
-* Your issuer URL
-* JWT (string)
+* Your authorization server URL
+* A JWT (string)
 * Libraries for retrieving the signing keys and validating the token
 
-The issuer URL is the URL of your Authorization Server (like `https://{yourOktaDomain}.com/oauth2/abc123`), which you can find in the Okta Developer Dashboard:
+When you create a [new Okta developer org](https://www.okta.com/developer/signup), Okta creates an authorization server called `default`. The URL for this authorization server is `https://{yourOktaDomain}.com/oauth2/default`. For example, if your Okta domain is `dev-1234.oktapreview.com`, the authorization server URL would be `https://dev-1234.oktapreview.com/oauth2/default`. If you want to use an authorization server you've created, you can copy the Issuer URL from that authorization server's details.
 
-{% img authz-server-issuer.png alt:"Authorization Server Issuer&58; https&58;//{yourOktaDomain}.com/oauth2/aus9o8wvkhockw9TL0h7" %}
-
-In this guide, you'll use the official Microsoft OpenID Connect and JWT libraries, but you can adapt it to your preferred key parser and JWT validation libraries if necessary.
+In this guide, you'll use the official Microsoft OpenID Connect and JWT libraries, but you can adapt it to your preferred key parser and JWT validation libraries as well.
 
 ## Get the signing keys
 
@@ -39,9 +37,9 @@ Okta signs JWTs using [asymmetric encryption (RS256)](https://stackoverflow.com/
 The `OpenIdConnectConfigurationRetriever` class in the [Microsoft.IdentityModel.Protocols.OpenIdConnect](https://www.nuget.org/packages/Microsoft.IdentityModel.Protocols.OpenIdConnect/) package will download and parse the discovery document to get the key set. You can use it in conjunction with the `ConfigurationManager` class, which will handle caching the response and refreshing it regularly:
 
 ```csharp
-// Replace with your issuer URL:
+// Replace with your authorization server URL:
 
-var issuer = "https://{yourOktaDomain}.com/oauth2/{authorizationServerId}";
+var issuer = "https://{yourOktaDomain}.com/oauth2/default";
 
 var configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(
     issuer + "/.well-known/oauth-authorization-server",
