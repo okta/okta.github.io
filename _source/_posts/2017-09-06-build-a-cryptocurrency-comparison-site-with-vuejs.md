@@ -68,11 +68,12 @@ One of the core things Vue does is manage data. In order to tell Vue what data
 you want to manage, you need to explicitly declare every bit of data you expect
 Vue to dynamically manage for you upfront in a special `data` object, like so:
 
+{% raw %}
 ```html
 <html>
   <body>
     <div id="app">
-      <h1>{% raw %}{{ message }}{% endraw %}</h1>
+      <h1>{{ message }}</h1>
     </div>
 
     <script src="https://unpkg.com/vue"></script>
@@ -87,6 +88,7 @@ Vue to dynamically manage for you upfront in a special `data` object, like so:
   </body>
 </html>
 ```
+{% endraw %}
 
 {% img blog/cryptocurrency/hi-screenshot.png alt:"Hi Screenshot" %}
 
@@ -129,11 +131,12 @@ Vue supports typical if, else if, and else conditionals using the `v-if`,
 
 Let's take a look at a simple Vue application that uses an if-else conditional.
 
+{% raw %}
 ```html
 <html>
   <body>
     <div id="app">
-      <h1>{% raw %}{{ message }}{% endraw %}</h1>
+      <h1>{{ message }}</h1>
       <p v-if="secretMessage">This is a secret HTML element.</p>
       <p v-else>Welcome to the website.</p>
     </div>
@@ -151,6 +154,7 @@ Let's take a look at a simple Vue application that uses an if-else conditional.
   </body>
 </html>
 ```
+{% endraw %}
 
 As you can see above, we now have two paragraph tags, each with a different
 message. If you run this in your browser, you'll see the following:
@@ -178,13 +182,14 @@ the DOM.
 Vue also supports simple loops. Here's a small example application that uses Vue
 to loop through an array of shopping items, displaying them in an ordered list:
 
+{% raw %}
 ```html
 <html>
   <body>
     <div id="app">
       <p>Shopping list</p>
       <ol>
-        <li v-for="item in shoppingList">{% raw %}{{ item }}{% endraw %}</li>
+        <li v-for="item in shoppingList">{{ item }}</li>
       </ol>
     </div>
 
@@ -205,6 +210,7 @@ to loop through an array of shopping items, displaying them in an ordered list:
   </body>
 </html>
 ```
+{% endraw %}
 
 When this runs in the browser, you'll see that the `v-for` directive Vue provides
 will repeat itself, looping over the contents of the `shoppingList` array:
@@ -228,13 +234,14 @@ user (and you) can manage the same pieces of data in your application.
 
 Let's take a look at a simple Vue application that uses two-way data binding:
 
+{% raw %}
 ```html
 <html>
   <body>
     <div id="app">
       <p>What's your favorite color?</p>
       <input v-model="color" type="text">
-      <p>Your favorite color is... {% raw %}{{ color }}{% endraw %}</p>
+      <p>Your favorite color is... {{ color }}</p>
     </div>
 
     <script src="https://unpkg.com/vue"></script>
@@ -249,6 +256,7 @@ Let's take a look at a simple Vue application that uses two-way data binding:
   </body>
 </html>
 ```
+{% endraw %}
 
 As you can see if you try this out yourself, when you enter data into the input
 box, the `color` variable is changed, and then re-rendered on the page. This is
@@ -271,13 +279,14 @@ your JavaScript *actions.*
 Let's take a look at a very simple example application that uses a method to
 capitalize the color from the example above when clicked:
 
+{% raw %}
 ```html
 <html>
   <body>
     <div id="app">
       <p>What's your favorite color?</p>
       <input v-model="color" type="text">
-      <p>Your favorite color is... {% raw %}{{ color }}{% endraw %}</p>
+      <p>Your favorite color is... {{ color }}</p>
       <input type="button" v-on:click="capitalizeColor" value="Capitalize">
     </div>
 
@@ -298,6 +307,7 @@ capitalize the color from the example above when clicked:
   </body>
 </html>
 ```
+{% endraw %}
 
 {% img blog/cryptocurrency/capitalize-screenshot.png alt:"Capitalize Screenshot" %}
 
@@ -751,6 +761,7 @@ HTML code and actually display some of this shiny new data for our users.
 Using the same constructs we learned earlier, we're going to loop through the
 cryptocurrency data, filling out our table:
 
+{% raw %}
 ```html
 <table class="table table-hover">
   <thead>
@@ -766,24 +777,25 @@ cryptocurrency data, filling out our table:
   </thead>
   <tbody>
     <tr v-for="coin in coins">
-      <td>{% raw %}{{ coin.rank }}{% endraw %}</td>
-      <td><img v-bind:src="getCoinImage(coin.symbol)"> {% raw %}{{ coin.name }}{% endraw %}</td>
-      <td>{% raw %}{{ coin.symbol }}{% endraw %}</td>
-      <td>{% raw %}{{ coin.price_usd | currency }}{% endraw %}</td>
+      <td>{{ coin.rank }}</td>
+      <td><img v-bind:src="getCoinImage(coin.symbol)"> {{ coin.name }}</td>
+      <td>{{ coin.symbol }}</td>
+      <td>{{ coin.price_usd | currency }}</td>
       <td>
-        <span v-if="coin.percent_change_1h > 0">+</span>{% raw %}{{ coin.percent_change_1h }}{% endraw %}%
+        <span v-if="coin.percent_change_1h > 0">+</span>{{ coin.percent_change_1h }}%
       </td>
       <td>
-        <span v-if="coin.percent_change_24h > 0">+</span>{% raw %}{{ coin.percent_change_24h }}{% endraw %}%
+        <span v-if="coin.percent_change_24h > 0">+</span>{{ coin.percent_change_24h }}%
       </td>
       <td>
-        <span v-if="coin.percent_change_7d > 0">+</span>{% raw %}{{ coin.percent_change_7d }}{% endraw %}%
+        <span v-if="coin.percent_change_7d > 0">+</span>{{ coin.percent_change_7d }}%
       </td>
-      <td>{% raw %}{{ coin.market_cap_usd | currency }}{% endraw %}</td>
+      <td>{{ coin.market_cap_usd | currency }}</td>
     </tr>
   </tbody>
 </table>
 ```
+{% endraw %}
 
 Pretty straightforward, right?
 
@@ -812,26 +824,28 @@ getColor: (num) => {
 }
 ```
 
+{% raw %}
 ```html
 <tbody>
   <tr v-for="coin in coins">
-    <td>{% raw %}{{ coin.rank }}{% endraw %}</td>
-    <td><img v-bind:src="getCoinImage(coin.symbol)"> {% raw %}{{ coin.name }}{% endraw %}</td>
-    <td>{% raw %}{{ coin.symbol }}{% endraw %}</td>
-    <td>{% raw %}{{ coin.price_usd | currency }}{% endraw %}</td>
+    <td>{{ coin.rank }}</td>
+    <td><img v-bind:src="getCoinImage(coin.symbol)"> {{ coin.name }}
+    <td>{{ coin.symbol }}</td>
+    <td>{{ coin.price_usd | currency }}</td>
     <td v-bind:style="getColor(coin.percent_change_1h)">
-      <span v-if="coin.percent_change_1h > 0">+</span>{% raw %}{{ coin.percent_change_1h }}{% endraw %}%
+      <span v-if="coin.percent_change_1h > 0">+</span>{{ coin.percent_change_1h }}%
     </td>
     <td v-bind:style="getColor(coin.percent_change_24h)">
-      <span v-if="coin.percent_change_24h > 0">+</span>{% raw %}{{ coin.percent_change_24h }}{% endraw %}%
+      <span v-if="coin.percent_change_24h > 0">+</span>{{ coin.percent_change_24h }}%
     </td>
     <td v-bind:style="getColor(coin.percent_change_7d)">
-      <span v-if="coin.percent_change_7d > 0">+</span>{% raw %}{{ coin.percent_change_7d }}{% endraw %}%
+      <span v-if="coin.percent_change_7d > 0">+</span>{{ coin.percent_change_7d }}%
     </td>
-    <td>{% raw %}{{ coin.market_cap_usd | currency }}{% endraw %}</td>
+    <td>{{ coin.market_cap_usd | currency }}</td>
   </tr>
 </tbody>
 ```
+{% endraw %}
 
 With these final changes, load the code up in your browser, and give it a go!
 
