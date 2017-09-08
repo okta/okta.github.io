@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: 'What the Heck Is OAuth?'
+title: 'What the Heck is OAuth?'
 author: mraible
 tags: [oauth, authorization, security, oidc, openid connect, oauth 2.0, okta]
 ---
