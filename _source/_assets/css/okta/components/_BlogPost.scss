@@ -155,6 +155,11 @@
 			width: 150px;
 		}
 
+		.center-image {
+			margin: 0 auto;
+			display: block;
+		}
+
 		/* Don't force small images in tables */
 		table td img {
 			max-width: unset;
@@ -283,10 +288,16 @@
 		}
 
 		table {
-			display: block;
 			white-space: normal;
 			max-width: 100%;
 			overflow: scroll;
+			width: 100%;
+
+			thead th {
+				background: #eee;
+				padding: 10px 10px 10px;
+				font-weight: bold;
+			}
 		}
 	}
 	
