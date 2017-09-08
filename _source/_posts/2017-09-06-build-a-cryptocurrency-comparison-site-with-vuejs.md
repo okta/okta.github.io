@@ -829,7 +829,7 @@ getColor: (num) => {
 <tbody>
   <tr v-for="coin in coins">
     <td>{{ coin.rank }}</td>
-    <td><img v-bind:src="getCoinImage(coin.symbol)"> {{ coin.name }}
+    <td><img v-bind:src="getCoinImage(coin.symbol)"> {{ coin.name }}</td>
     <td>{{ coin.symbol }}</td>
     <td>{{ coin.price_usd | currency }}</td>
     <td v-bind:style="getColor(coin.percent_change_1h)">
