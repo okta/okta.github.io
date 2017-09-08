@@ -68,7 +68,7 @@ You can use Tim Qian's [star-history project](https://github.com/timqian/star-hi
 
 I searched on Stack Overflow for tags for each and found that MongoDB and PostgreSQL are the most popular, followed by Neo4j, Cassandra, and Redis.
 
-{% img blog/nosql-for-java/stackoverflow-tags.png alt:"Stack Overflow Tags, September 2017" width:"800" %}{: .center-image }
+{% img blog/nosql-for-java/stackoverflow-tags.png alt:"Stack Overflow Tags, September 2017" width:"700" %}{: .center-image }
 
 ### Docker Pulls
 
