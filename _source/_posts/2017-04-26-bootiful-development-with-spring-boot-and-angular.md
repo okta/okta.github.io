@@ -452,3 +452,5 @@ To learn more about Angular, Spring Boot, or Okta, check out the following resou
 * [Angular Best Practices by Stephen Fluin](https://youtu.be/hHNUohOPCCo) (ng-conf 2017)
 
 You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example). If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta). Of course, you can always [ping me on Twitter](https://twitter.com/mraible) too.
+
+**Update:** To learn how to turn this application into a progressive web application that can work offline, see [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html). I also wrote a [tutorial that shows how to develop an Ionic mobile app for this Spring Boot backend](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html).

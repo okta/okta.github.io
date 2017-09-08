@@ -39,22 +39,22 @@
  	
 
   <link type="text/css" rel="stylesheet" href="https://developer.okta.com/sites/all/themes/developer/css/master.css" media="all" />
-  <meta class="swiftype" name="title" data-type="string" content="Okta API Release Notes | Okta Developer" />
-  <meta class="swiftype" name="summary" data-type="string" content="Summary of changes to the Okta API since Release 2017.33" />
+  <meta class="swiftype" name="title" data-type="string" content="Okta API Release Notes for 2017.36 | Okta Developer" />
+  <meta class="swiftype" name="summary" data-type="string" content="Summary of changes to the Okta API since Release 2017.35" />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-0ad463845f4bfd84716e1efb4e564c23adfe20162d3a34db8901c2be7965b217.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-e0a2f1567b2617a1ac64c3cfe8f94086456f3fb4e1a8ae52fe18398b4ad2ee3f.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
-  <title>Okta API Release Notes | Okta Developer</title>
-  <meta name="description" content="Summary of changes to the Okta API since Release 2017.33">
+  <title>Okta API Release Notes for 2017.36 | Okta Developer</title>
+  <meta name="description" content="Summary of changes to the Okta API since Release 2017.35">
   <link rel="canonical" href="https://developer.okta.com/docs/platform-release-notes/platform-release-notes.html">
   <link rel="alternate" type="application/rss+xml" title="Okta Developer" href="https://developer.okta.com/feed.xml"><!-- GA -->
 </head>
 
 <body>
-  <div class="Page okta-api-release-notes Page--docs-page">
+  <div class="Page okta-api-release-notes-for-2017.36 Page--docs-page">
     <!-- START Header -->
     
 
@@ -213,67 +213,17 @@
       <!-- START Page Content -->
       <div class="PageContent-main" id="docs-body">
         <a id="edit-link" href="https://github.com/okta/okta.github.io/edit/master/_source/_docs/platform-release-notes/platform-release-notes.md">Edit Page</a>
-      <h2 id="okta-api-release-notes-for-release-201734">Okta API Release Notes for Release 2017.34</h2>
+      <h1 id="okta-api-release-note">Okta API Release Note</h1>
 
-<p>The following feature enhancements and bug fixes related to the Okta API are available in the 2017.34 release.
-Dates for preview and production release are for the earliest possible release date. Always check your org to verify the release version.</p>
+<p>The <a href="/docs/api/resources/policy.html">Policy API</a> and <a href="/docs/api/resources/policy.html#GroupPasswordPolicy">Password Policy API</a> are Generally Available in preview orgs starting on September 7, 2017 and in production orgs starting on October 9, 2017.</p>
 
-<h3 id="feature-enhancements">Feature Enhancements</h3>
+<p>The Policy API enables an Administrator to perform policy and policy rule operations. The policy framework is used by Okta to control rules and settings that govern, among other things, user session lifetime, whether multi-factor authentication is required when logging in, what MFA factors may be employed, password complexity requirements, and what types of self-service operations are permitted under various circumstances.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Feature Enhancement</th>
-      <th style="text-align: left">Expected in Preview Orgs</th>
-      <th style="text-align: left">Expected in Production Orgs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">        <a href="#new-developer-dashboard">New Developer Dashboard</a></td>
-      <td style="text-align: left">Available now in new developer orgs</td>
-      <td style="text-align: left">N/A</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">       <a href="#zones-api-is-an-early-access-release">Zones API is an Early Access Release</a></td>
-      <td style="text-align: left">August 22, 2017</td>
-      <td style="text-align: left">September 5, 2017</td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="new-developer-dashboard">New Developer Dashboard</h4>
-
-<p>The new developer dashboard is available in all new developer orgs in preview:</p>
-
-<p><img src="/assets/release_notes/dev-dashboard-d7b1850164c9a610dc6a2400735c31dfd36d4746ef6c94eb77c7bcfc3e70907f.png" alt="New Developer Dashboard" /></p>
-
-<p>Use the developer dashboard to access quick-start guides for your favorite language and view recent system log events.
-You can also create an OpenID Connect app more easily with this simplified flow:</p>
-
-<p><img src="/assets/release_notes/new-oidc-app-dashboard-521c25eb2f6a017811475f5ca81a0f4bb56b6792795610048ff5ea471ebd68ec.png" alt="New Developer Dashboard" /></p>
-
-<h4 id="zones-api-is-an-early-access-release">Zones API is an Early Access Release</h4>
-<!-- OKTA-129115 -->
-
-<p>Zones are used to group IP Address ranges so that policy decisions can be made based on the client’s IP location.</p>
-
-<p><a href="/docs/api/resources/zones.html">The Zones API</a> is an  <a href="/docs/api/getting_started/releases-at-okta.html#early-access-ea"> <span class="api-label api-label-ea "> <i class="fa fa-flag"></i> Early Access </span> </a>  release. Contact Support to enable it.
-This API can be enabled beginning August 22, 2017 for preview orgs, and beginning September 5, 2017 for production orgs.</p>
-
-<h3 id="platform-bug-fixes">Platform Bug Fixes</h3>
-
-<p>Bug fixes are expected on preview orgs starting August 22, 2017, and on production orgs starting Sept 5, 2017.</p>
-
-<ul>
-  <li>OpenID Connect and OAuth 2.0 client apps with an <code class="highlighter-rouge">application_type</code> of <code class="highlighter-rouge">native</code> or <code class="highlighter-rouge">browser</code> incorrectly allowed the <code class="highlighter-rouge">client_credentials</code> grant type. This fix adheres to the <a href="https://tools.ietf.org/html/rfc6749#section-1.3.4">OAuth 2.0 spec</a>. (OKTA-135853)</li>
-  <li>Requests to <code class="highlighter-rouge">GET /api/v1/apps/:aid/groups?expand=group%2Cmetadata</code> caused an error in orgs with the Application Entitlements Policy enabled. (OKTA-135969)</li>
-  <li>The <code class="highlighter-rouge">AssertionConsumerServiceURL</code> attribute in a SAML authentication requests matched one of the configured SSO URLs but an error was returned. (OKTA-137555)</li>
-</ul>
+<p>The Password Policy type controls settings that determine a user’s password length and complexity, as well as the frequency with which a password can be changed. This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.</p>
 
 <h3 id="does-your-org-have-this-change-yet">Does Your Org Have This Change Yet?</h3>
 
-<p>To verify the current release for an org, click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
+<p>To verify the current release for an org, scroll to the bottom of the developer console, or click the <strong>Admin</strong> button and check the footer of the Dashboard page.</p>
 
 <p><img src="/assets/release_notes/version_footer-6199e00ca76969eed4036e964a53b5598571c5cafe797a4890f152ce68dce49b.png" alt="Release Number in Footer" /></p>
 
@@ -284,7 +234,6 @@ This API can be enabled beginning August 22, 2017 for preview orgs, and beginnin
   <li><a href="platform-release-notes2017-index.html">Okta API Release Note Index for 2017</a></li>
   <li>For changes outside the Okta API, see the <a href="https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm">Product Release Notes</a>.</li>
 </ul>
-
 
       </div>
       <div class="TableOfContents TableOfContentsPreload">

@@ -3,6 +3,21 @@
   
     
     <url>
+      <loc>https://developer.okta.com/blog/2017/09/06/build-a-cryptocurrency-comparison-site-with-vuejs</loc>
+      
+        <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>https://developer.okta.com/blog/2017/08/29/meet-the-new-okta-identity-platform</loc>
       
         <lastmod>2017-08-29T00:00:00+00:00</lastmod>
@@ -1755,6 +1770,19 @@
     
     <url>
       <loc>https://developer.okta.com/blog/page/4/</loc>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.3</priority>
+      
+    </url>
+    
+  
+    
+    <url>
+      <loc>https://developer.okta.com/blog/page/5/</loc>
       
       
         <changefreq>monthly</changefreq>

@@ -11,7 +11,12 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 <ul class='code-list'>
   <li>
     <a href='https://github.com/okta/samples-python-django' class='code-button'>
-      <span class='fa fa-github'></span><span>Python Sample App</span>
+      <span class='fa fa-github'></span><span>Django Sample App</span>
+    </a>
+  </li>
+    <li>
+    <a href='https://github.com/okta/samples-python-flask' class='code-button'>
+      <span class='fa fa-github'></span><span>Flask Sample App</span>
     </a>
   </li>
 </ul>

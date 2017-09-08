@@ -114,7 +114,7 @@ You'll see the image in your list named `tutorial` with a tag of 0.0.1. If you w
 ```bash
 docker run -p 3000:3000 -d --name demo tutorial:0.0.1  
 ```
-This will create a container based on the `tutorial:0.0.1` image that you just creted and name it 'demo'. This command also has the `-d` switch that specifies that you want to run it in daemon mode (in the background). Finally, it also has the `-p` switch that maps port 3000 on the host machine (your local machine) to the exposed port on the container (formatted like `[host port]:[container port]`). This will allow you to go to (http://localhost:3000) on your machine and be viewing the container's response on that same port.
+This will create a container based on the `tutorial:0.0.1` image that you just creted and name it 'demo'. This command also has the `-d` switch that specifies that you want to run it in daemon mode (in the background). Finally, it also has the `-p` switch that maps port 3000 on the host machine (your local machine) to the exposed port on the container (formatted like `[host port]:[container port]`). This will allow you to go to <http://localhost:3000> on your machine and be viewing the container's response on that same port.
 
 ## Learn More
 
@@ -124,4 +124,4 @@ Obviously, there are a lot of other things the `Dockerfile` can do for you. To f
 
 Now that you’ve [learned the basics of Docker](https://developer.okta.com/blog/2017/05/10/developers-guide-to-docker-part-1) and built your first `Dockerfile`, you’re ready to [start composing containers](https://docs.docker.com/compose/) and delivering those containers to production!
 
-If you have any questions, comments, or suggestions, feel free to reach out to me [via email](mailto:lee.brandt@okta.com), or hit me up in the comments or via Twitter [@leebrandt](https://twitter.com/leebrandt)
+If you have any questions, comments, or suggestions, feel free to reach out to me [via email](mailto:lee.brandt@okta.com), or hit me up in the comments or via Twitter [@leebrandt](https://twitter.com/leebrandt).
