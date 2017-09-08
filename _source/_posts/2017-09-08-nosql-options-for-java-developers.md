@@ -13,7 +13,7 @@ NoSQL databases have helped many web-scale companies achieve high scalability th
 
 ## Selecting NoSQL Candidates
 
-Defining the top five can be difficult. Many folks have attempted to this recently. See the [Research & Notes section](#other-research) at the end of this article for reference.
+Defining the top five can be difficult. Many folks have attempted to this recently. See the [Research & Notes section](#research--notes) at the end of this article for reference.
 
 In mid-August, I told my followers on Twitter that I was writing this article. I asked for good/bad stories about NoSQL databases and received a number of options people wanted me to include.
 
