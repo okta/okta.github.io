@@ -26,7 +26,7 @@ If you need to validate a token manually, and don't want to make a network call 
 * A JWT (string)
 * Libraries for retrieving the signing keys and validating the token
 
-When you create a [new Okta developer org](https://www.okta.com/developer/signup), Okta creates an authorization server called `default`. The URL for this authorization server is `https://{yourOktaDomain}.com/oauth2/default`. For example, if your Okta domain is `dev-1234.oktapreview.com`, the authorization server URL would be `https://dev-1234.oktapreview.com/oauth2/default`. If you want to use an authorization server you've created, you can copy the Issuer URL from that authorization server's details.
+When you create a [new Okta developer org](https://www.okta.com/developer/signup), Okta creates an authorization server called `default`. The URL for this authorization server is `https://{yourOktaDomain}.com/oauth2/default`. You can always find the full authorization server URL (also called an Issuer URI) in the Okta developer console by opening the **API** menu and choosing **Authorization Servers**.
 
 In this guide, you'll use the official Microsoft OpenID Connect and JWT libraries, but you can adapt it to your preferred key parser and JWT validation libraries as well.
 
