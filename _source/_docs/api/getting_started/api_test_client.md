@@ -78,7 +78,7 @@ Import any Okta API collection for Postman from the following list:
 | Sessions                                  |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b2e06a22c396bcc94530){:target="_blank"} |
 | Apps                                      |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4857222012c11cf5e8cd){:target="_blank"} |
 | Events                                    |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/f990a71f061a7a16d0bf){:target="_blank"} |
-| Factors                                   |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e07dd59803f9eae8add7){:target="_blank"} |
+| Factors                                   |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9fdda657d134039fcaba){:target="_blank"} |
 | Groups                                    |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0bb414f9594ed93672a0){:target="_blank"} |
 | Identity Providers (IdP)                  |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/00a7a643fc0ab3bb54c8){:target="_blank"} |
 | Logs                                      |   [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6){:target="_blank"} |
