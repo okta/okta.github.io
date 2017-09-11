@@ -13,6 +13,8 @@ class NavPage extends BasePage {
     this.$searchIcon = $('.SearchIcon');
     this.$searchInput = $('#st-search-input-auto');
     this.$resultsBox = $('.SearchResults');
+    this.$supportLink = element(by.cssContainingText('span', 'Support'));
+    this.$$menus = $$('.menu');
     this.setPageLoad(this.$header);
   }
 
@@ -52,6 +54,13 @@ class NavPage extends BasePage {
     return util.wait(this.$resultsBox);
   }
 
+  clickSupportLink() {
+    return this.$supportLink.click()
+  }
+
+  isSupportMenuDisplayed() {
+    return this.$$menus.get(1).isDisplayed();
+  }
 }
 
 module.exports = NavPage;
