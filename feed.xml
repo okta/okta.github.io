@@ -8,6 +8,308 @@
     <atom:link href="https://developer.okta.com/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>NoSQL Options for Java Developers</title>
+        <description>&lt;p&gt;The Java community is one I know and love, so even though a NoSQL database is rarely tied to a language I’m writing this article for you, Java developers around the world. In this article, I’ll show you several options for NoSQL databases. After exploring all the options, I’ll narrow the choices down to the top five based on Indeed Jobs, GitHub stars, and Stack Overflow tags. Then I’ll let you know if they’re supported by Spring Data and Spring Boot.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-nosql&quot;&gt;Why NoSQL?&lt;/h2&gt;
+
+&lt;p&gt;NoSQL databases have helped many web-scale companies achieve high scalability through &lt;a href=&quot;https://en.wikipedia.org/wiki/Eventual_consistency&quot;&gt;eventual consistency&lt;/a&gt;: because a NoSQL database is often distributed across several machines, with some latency, it guarantees only that all instances will eventually be consistent. Eventually consistent services are often called BASE (basically available, soft state, eventual consistency) services in contrast to traditional ACID properties.&lt;/p&gt;
+
+&lt;h2 id=&quot;selecting-nosql-candidates&quot;&gt;Selecting NoSQL Candidates&lt;/h2&gt;
+
+&lt;p&gt;Defining the top five can be difficult. Many folks have attempted to this recently. See the &lt;a href=&quot;#research--notes&quot;&gt;Research &amp;amp; Notes section&lt;/a&gt; at the end of this article for reference.&lt;/p&gt;
+
+&lt;p&gt;In mid-August, I told my followers on Twitter that I was writing this article. I asked for good/bad stories about NoSQL databases and received a number of options people wanted me to include.&lt;/p&gt;
+
+&lt;div style=&quot;margin: 0 auto; max-width: 500px&quot;&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I&amp;#39;m writing an article about NoSQL options for &lt;a href=&quot;https://twitter.com/java&quot;&gt;@Java&lt;/a&gt; developers. I&amp;#39;d 💙 to hear what you prefer, as well as good/bad stories in production.&lt;/p&gt;&amp;mdash; Matt Raible (@mraible) &lt;a href=&quot;https://twitter.com/mraible/status/897492857170280448&quot;&gt;August 15, 2017&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;//platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I received many suggestions, listed in alphabetical order below:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ArangoDB&lt;/li&gt;
+  &lt;li&gt;Cassandra&lt;/li&gt;
+  &lt;li&gt;Couchbase&lt;/li&gt;
+  &lt;li&gt;DynamoDB&lt;/li&gt;
+  &lt;li&gt;FaunaDB&lt;/li&gt;
+  &lt;li&gt;Hazelcast&lt;/li&gt;
+  &lt;li&gt;MongoDB&lt;/li&gt;
+  &lt;li&gt;Neo4j&lt;/li&gt;
+  &lt;li&gt;PostgreSQL JSON&lt;/li&gt;
+  &lt;li&gt;Redis&lt;/li&gt;
+  &lt;li&gt;(JetBrains) Xodus&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;People also mentioned &lt;a href=&quot;http://hibernate.org/ogm/&quot;&gt;Hibernate OGM&lt;/a&gt; (JPA for NoSQL) and &lt;a href=&quot;https://github.com/lordofthejars/nosql-unit/&quot;&gt;NoSQLUnit&lt;/a&gt; as tools to help access and test NoSQL databases.&lt;/p&gt;
+
+&lt;p&gt;Note that I didn’t receive any requests for CouchDB, HBase, Elasticsearch, or Solr. CouchDB and Couchbase are often confused because of similar names, but &lt;a href=&quot;https://www.couchbase.com/couchbase-vs-couchdb&quot;&gt;they’re quite different&lt;/a&gt;. Since CouchDB is a document store, I included it in my rankings. I also added HBase since it is mentioned by ITBusinessEdge, KDnuggets, and DB-Engines (in Research &amp;amp; Notes section). I didn’t include Elasticsearch or Solr because I believe those aren’t often used as the primary data store.&lt;/p&gt;
+
+&lt;h2 id=&quot;raibles-ranking-technique&quot;&gt;Raible’s Ranking Technique&lt;/h2&gt;
+
+&lt;p&gt;I used Indeed Jobs, GitHub Stars, Stack Overflow tags, and Docker pulls to develop my system of ranking the top five NoSQL databases.&lt;/p&gt;
+
+&lt;h3 id=&quot;indeed-jobs&quot;&gt;Indeed Jobs&lt;/h3&gt;
+
+&lt;p&gt;I searched on &lt;a href=&quot;https://www.indeed.com/jobs&quot;&gt;Indeed Jobs&lt;/a&gt; without a location and found very few surprises, save for Amazon’s DynamoDB showing up as a top contender.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/indeed-jobs-d07509c1435c8f744492d6ef6793966d3c8769f0faf32319e8867a753382d2bf.png&quot; alt=&quot;Indeed Jobs, September 2017&quot; width=&quot;700&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; It’s difficult to search for “PostgreSQL JSON” because most listings specify “PostgreSQL” as a requirement, not its NoSQL support. I searched for “postgres + json”. Xodus is the name of a company, so I had to tack on “JetBrains” to ensure accurate results.&lt;/p&gt;
+
+&lt;h3 id=&quot;github-stars&quot;&gt;GitHub Stars&lt;/h3&gt;
+
+&lt;p&gt;I searched and found the top five NoSQL options by GitHub stars are Redis, MongoDB, ArangoDB, Neo4j, and Cassandra.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/github-stars-d52f3abd491f50cfc94c0531258056cd3a78b840a1183ba55cf597518aa9613b.png&quot; alt=&quot;GitHub Stars, September 2017&quot; width=&quot;700&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Cassandra, HBase, PostgreSQL are mirrored repositories. DynamoDB, Couchbase, and FaunaDB don’t have their servers on GitHub, so I counted stars for their Java-based drivers. Using number of stars for each option’s Java driver is a good idea, but &lt;a href=&quot;https://redis.io/clients#java&quot;&gt;there’s 11 just for Redis&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can use Tim Qian’s &lt;a href=&quot;https://github.com/timqian/star-history&quot;&gt;star-history project&lt;/a&gt; to see the star growth of these five.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/github-stars-growth-fb048ee38d653439f761c5cc969f193335d7450e95b32138266462bf9028d01e.png&quot; alt=&quot;GitHub Star History&quot; width=&quot;700&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;stack-overflow-tags&quot;&gt;Stack Overflow Tags&lt;/h3&gt;
+
+&lt;p&gt;I searched on Stack Overflow for tags for each and found that MongoDB and PostgreSQL are the most popular, followed by Neo4j, Cassandra, and Redis.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/stackoverflow-tags-908a348a4937ea6d7521faa77020153f99941e30bea88239f379389dacb992d0.png&quot; alt=&quot;Stack Overflow Tags, September 2017&quot; width=&quot;700&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;docker-pulls&quot;&gt;Docker Pulls&lt;/h3&gt;
+
+&lt;p&gt;I searched on &lt;a href=&quot;https://hub.docker.com/&quot;&gt;Docker Hub&lt;/a&gt; for images and found the stats to be 10M+ for a few, 5M+ for Neo4j, and 1M+ for many others. FaunaDB and JetBrains Xodus don’t seem to have images available.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/docker-pulls-9b06dd611d9d01f247b5da7434952bfba5190a6464116e2a3713a2fddabe085a.png&quot; alt=&quot;Docker Pulls, September 2017&quot; width=&quot;700&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After gathering this information, it didn’t seem very relevant to include these stats in my ranking. My reason is two-fold: because the numbers aren’t exact and because there weren’t “official” images for each option.&lt;/p&gt;
+
+&lt;h2 id=&quot;nosql-options-matrix&quot;&gt;NoSQL Options Matrix&lt;/h2&gt;
+
+&lt;p&gt;I created a matrix to combine jobs, stars, and tags. I awarded 1-5 points based on the ranking they scored in each category. If an option didn’t make the top five, it received a zero. The results – MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL – are in the table below.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;NoSQL Option&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Jobs&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Stars&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Tags&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Total&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MongoDB&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;14&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Redis&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;9&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Cassandra&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Neo4j&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PostgreSQL&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ArangoDB&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;HBase&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DynamoDB&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Couchbase&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CouchDB&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Hazelcast&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;JetBrains Xodus&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;FaunaDB&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;If you look at &lt;a href=&quot;https://db-engines.com/en/ranking&quot;&gt;DB-Engines Ranking&lt;/a&gt; for their top five options, you’ll find PostgreSQL, MongoDB, Cassandra, Redis, and HBase.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/db-engines-ranking-9c091fb940caba489e8912b6a1621827279372225b97134a480905294ddeff94.png&quot; alt=&quot;DB-Engines Ranking, September 2017&quot; width=&quot;800&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Will you look at that - our top five results are pretty close!&lt;/p&gt;
+
+&lt;h2 id=&quot;overview-of-nosql-options&quot;&gt;Overview of NoSQL Options&lt;/h2&gt;
+
+&lt;p&gt;Since my top five results are pretty close to what DB-Engines has, I’ll use mine as the top five. Below is an overview of each one, along with information about their Spring Boot support.&lt;/p&gt;
+
+&lt;p&gt;You might ask “Why Spring Boot?” My answer is simple: because Spring Boot adoption is high. According to &lt;a href=&quot;http://redmonk.com/fryan/2017/06/22/language-framework-popularity-a-look-at-java-june-2017/&quot;&gt;Redmonk’s recent look at Java frameworks&lt;/a&gt;, Spring Boot adoption grew 76% between September 2016 and June 2017.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/java-frameworks-growth-11e7c712f00f458b29a2241cb6b845eb463ef41bd26eb67968eb4621ed187e1f.png&quot; alt=&quot;The Spring Boot Explosion&quot; width=&quot;800&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And things haven’t slowed down since June: &lt;a href=&quot;https://twitter.com/PieterHumphrey/status/905131222094929920&quot;&gt;Maven downloads in August 2017 were 22.2 million&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;mongodb&quot;&gt;MongoDB&lt;/h3&gt;
+
+&lt;p&gt;MongoDB was founded in 2007 by the folks behind DoubleClick, ShopWiki, and Gilt Groupe. It uses the Apache and GNU-APGL licenses on &lt;a href=&quot;https://github.com/mongodb/mongo&quot;&gt;GitHub&lt;/a&gt;. Its many large customers include Adobe, eBay, and eHarmony.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Available on start.spring.io?&lt;/strong&gt; Yes, including embedded MongoDB for testing.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Supported by Spring Data?&lt;/strong&gt; Yes, via &lt;a href=&quot;https://projects.spring.io/spring-data-mongodb/&quot;&gt;Spring Data MongoDB&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bonus:&lt;/strong&gt; Supported by Hibernate OGM, NoSQLUnit, and &lt;a href=&quot;http://www.jhipster.tech&quot;&gt;JHipster&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;redis&quot;&gt;Redis&lt;/h3&gt;
+
+&lt;p&gt;Redis stands for REmote Dictionary Server and was started by &lt;a href=&quot;http://invece.org/&quot;&gt;Salvatore Sanfilippo&lt;/a&gt;. It was initially released on April 10, 2009. According to &lt;a href=&quot;https://redis.io/&quot;&gt;redis.io&lt;/a&gt;, Redis is a BSD-licensed in-memory data structure store and can be used as a database, cache, and message broker. &lt;a href=&quot;https://redis.io/topics/whos-using-redis&quot;&gt;Well known companies using Redis&lt;/a&gt; include Twitter, GitHub, Snapchat, and Craigslist.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Available on start.spring.io?&lt;/strong&gt; Yes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Supported by Spring Data?&lt;/strong&gt; Yes, via &lt;a href=&quot;https://projects.spring.io/spring-data-redis/&quot;&gt;Spring Data Redis&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bonus:&lt;/strong&gt; Supported by NoSQLUnit. Hibernate ORM support is in progress.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cassandra&quot;&gt;Cassandra&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://cassandra.apache.org/&quot;&gt;Cassandra&lt;/a&gt; is “a distributed storage system for managing structured data that is designed to scale to a very large size across many commodity servers, with no single point of failure” (from &lt;a href=&quot;https://www.facebook.com/notes/facebook-engineering/cassandra-a-structured-storage-system-on-a-p2p-network/24413138919&quot;&gt;“Cassandra – A structured storage system on a P2P Network”&lt;/a&gt; on the Facebook Engineering blog). It was initially developed at Facebook to power its Inbox Search feature. Its creators, Avinash Lakshman (one of the creators of Amazon DynamoDB) and Prashant Malik, released it as an open-source project in July 2008. In March 2009, it became an Apache Incubator project and graduated to a top-level project in February 2010.&lt;/p&gt;
+
+&lt;p&gt;In addition to Facebook, Cassandra helps a number of other companies achieve web scale. It has some &lt;a href=&quot;http://cassandra.apache.org&quot;&gt;impressive numbers about scalability on its homepage&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;One of the largest production deployments is Apple’s, with over 75,000 nodes storing over 10 PB of data. Other large Cassandra installations include Netflix (2,500 nodes, 420 TB, over 1 trillion requests per day), Chinese search engine Easou (270 nodes, 300 TB, over 800 million requests per day), and eBay (over 100 nodes, 250 TB).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Available on start.spring.io?&lt;/strong&gt; Yes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Supported by Spring Data?&lt;/strong&gt; Yes, via &lt;a href=&quot;https://projects.spring.io/spring-data-cassandra&quot;&gt;Spring Data Cassandra&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bonus:&lt;/strong&gt;  Supported by NoSQLUnit and JHipster. Hibernate ORM support is in progress.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;neo4j&quot;&gt;Neo4j&lt;/h3&gt;
+
+&lt;p&gt;Neo4j is available as GPL3-licensed “community edition” with some extensions licensed under the Affero GPL. The community edition is limited to running on one node and does not contain clustering support or hot backups. Neo4J’s “enterprise edition” has scale-out capabilities, in-memory page cache, and hot backups. A 30-day trial is available; no pricing is provided.&lt;/p&gt;
+
+&lt;p&gt;Neo4j is best known as a graph database, where everything is stored as an edge, node, or an attribute. Version 1.0 was released in February 2010 and has been developed by Neo4j, Inc. since its beginning. Its &lt;a href=&quot;https://neo4j.com/customers/&quot;&gt;large customers&lt;/a&gt; include Walmart, Airbnb, Monsanto, and eBay.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Available on start.spring.io?&lt;/strong&gt; Yes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Supported by Spring Data?&lt;/strong&gt; Yes, via &lt;a href=&quot;https://projects.spring.io/spring-data-neo4j&quot;&gt;Spring Data Neo4j&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Bonus:&lt;/strong&gt;  Supported by Hibernate ORM and NoSQLUnit.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;postgresql-json&quot;&gt;PostgreSQL JSON&lt;/h3&gt;
+
+&lt;p&gt;PostgreSQL is a traditional relational database management system (RDBMS) that has NoSQL support via its native JSON support (added in version 9.2). In 9.4, they added support for Binary JSON (aka &lt;a href=&quot;https://www.postgresql.org/docs/current/static/datatype-json.html&quot;&gt;JSONB&lt;/a&gt;) and indexes.&lt;/p&gt;
+
+&lt;p&gt;Leigh Halliday explains how you can &lt;a href=&quot;https://blog.codeship.com/unleash-the-power-of-storing-json-in-postgres/&quot;&gt;unleash the power of storing JSON in Postgres&lt;/a&gt; in a blog post dated June 2017. Halliday goes on to show how this can be used with Ruby on Rails. A blog post from Umair Shahid shows &lt;a href=&quot;https://blog.2ndquadrant.com/processing-json/&quot;&gt;how to process PostgreSQL JSON &amp;amp; JSONB data in Java&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’m not sure that PostgreSQL and its JSON support should be included as a recommend NoSQL option. However, it likely makes sense if you’re already using PostgreSQL and want to make your data schema more free-flowing. As &lt;a href=&quot;https://www.compose.com/articles/could-postgresql-9-5-be-your-next-json-database/&quot;&gt;Dj Walker-Morgan says&lt;/a&gt;, “PostgreSQL 9.5 isn’t your next JSON database, but it is a great relational database with a fully fledged JSON story.”&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Available on start.spring.io?&lt;/strong&gt; Yes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Supported by Spring Data?&lt;/strong&gt; Yes, via &lt;a href=&quot;https://projects.spring.io/spring-data-jpa/&quot;&gt;Spring Data JPA&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;recommendation&quot;&gt;Recommendation&lt;/h2&gt;
+
+&lt;p&gt;I feel good about how this analysis played out, and as a committer on the &lt;a href=&quot;http://www.jhipster.tech&quot;&gt;JHipster&lt;/a&gt; project, I’m both well aware of the strength of that team and think that its support for MongoDB and Cassandra is a pretty strong endorsement. It’s interesting to see that there’s &lt;a href=&quot;https://github.com/jhipster/generator-jhipster/issues/6086&quot;&gt;work-in-progress to add Couchbase&lt;/a&gt; too.&lt;/p&gt;
+
+&lt;p&gt;But I’m not stopping there. I shared this analysis with a few experts I know in the Java and NoSQL communities and asked them the following questions:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Do you agree with my choices of the top 5 NoSQL options (MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL with its JSON support)?&lt;/li&gt;
+  &lt;li&gt;Do you have any good or bad stories about using any of these databases in production?&lt;/li&gt;
+  &lt;li&gt;Have you found any of these databases particularly difficult to get started with or maintain over time?&lt;/li&gt;
+  &lt;li&gt;What is your favorite NoSQL database and why?&lt;/li&gt;
+  &lt;li&gt;Anything else you’d like to share?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Please check back in a few weeks! I’ll post the answers to these questions from the experts I interviewed. I’ll also update this post to point to it when I do. If you’re an expert on NoSQL databases, let me know! I’d be happy to include your answers in the interview. Just send me a message to &lt;a href=&quot;https://twitter.com/mraible&quot;&gt;@mraible on Twitter&lt;/a&gt; or matt.raible@okta.com.&lt;/p&gt;
+
+&lt;h2 id=&quot;research--notes&quot;&gt;Research &amp;amp; Notes&lt;/h2&gt;
+
+&lt;p&gt;ITBusinessEdge has a &lt;a href=&quot;http://www.itbusinessedge.com/slideshows/top-five-nosql-databases-and-when-to-use-them.html&quot;&gt;slideshow about the top five NoSQL databases&lt;/a&gt;. However, there’s no date on the article, and it says Redis Labs made the selection. The slideshow lists MongoDB, Cassandra, Redis, Cassandra, CouchDB, and HBase.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/mattmayo13&quot;&gt;Matthew Mayo&lt;/a&gt;, editor of KDnuggets, wrote a similar article about &lt;a href=&quot;http://www.kdnuggets.com/2016/06/top-nosql-database-engines.html&quot;&gt;Top NoSQL Database Engines&lt;/a&gt; in June 2016. Mayo used &lt;a href=&quot;http://db-engines.com/en/ranking&quot;&gt;db-engines.com ranking&lt;/a&gt; and Google Trends to select the top five: MongoDB, Cassandra, Redis, HBase, and Neo4j.&lt;/p&gt;
+
+&lt;p&gt;Hackernoon has an &lt;a href=&quot;https://hackernoon.com/top-4-nosql-databases-infographic-b6acc389befc&quot;&gt;Infographic of the most popular NoSQL databases&lt;/a&gt; that are “worth your notice.” This article is from June 2017, and the comments say the rankings are based on stats from &lt;a href=&quot;https://db-engines.com/en/ranking_trend&quot;&gt;https://db-engines.com/en/ranking_trend&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/hackernoon-infographic-226b39cd37b8bd0bbcb6032f036be943dd9179b1920b2aa3c7f1410f50a979b7.png&quot; alt=&quot;Hackernoon Infographic&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you look at this ranking today (September 6, 2017), you’ll see that Redis has replaced Couchbase. Or maybe Hackernoon skipped over Redis? It also begs the question: is Elasticsearch a NoSQL database, or a search engine? Should Solr be considered a NoSQL database as well? Both show up in &lt;a href=&quot;https://db-engines.com/en/ranking_trend&quot;&gt;DB-Engines Ranking Trends&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/db-engines-ranking-graph-991a4b29a9a9558b48d7998f60dc4a1c505b0dc51a292e0182cf96bb09141cac.png&quot; alt=&quot;DB-Engines Ranking Graph&quot; width=&quot;800&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;JAXenter published the results of their annual survey of &lt;a href=&quot;https://jaxenter.com/top-databases-2017-132912.html&quot;&gt;top database trends&lt;/a&gt; on March 30, 2017. They list Elasticsearch and Solr as databases. They also include Apache Spark and Hadoop. MongoDB, Cassandra, Redis, and Neo4j are the most interesting “NoSQL” databases. Hazelcast is listed as the top in-memory data grid, over CouchDB and Oracle.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/nosql-for-java/jaxenter-top-databases-8a8fde81a3a47bd62684d10020586d5721046cf743d2cb22487560d7b2838771.png&quot; alt=&quot;JAXenter Top Database Trends&quot; width=&quot;645&quot; class=&quot;center-image&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 Sep 2017 00:00:00 +0000</pubDate>
+        <link>https://developer.okta.com/blog/2017/09/08/nosql-options-for-java-developers</link>
+        <guid isPermaLink="true">https://developer.okta.com/blog/2017/09/08/nosql-options-for-java-developers</guid>
+      </item>
+    
+      <item>
         <title>Build a Cryptocurrency Comparison Site with Vue.js</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://vuejs.org/&quot; title=&quot;Vue.js&quot;&gt;Vue.js&lt;/a&gt; is a simple JavaScript framework that lets you build dynamic front-end
 web applications. Lots of people compare it to &lt;a href=&quot;https://facebook.github.io/react/&quot; title=&quot;React.js&quot;&gt;React&lt;/a&gt; and &lt;a href=&quot;https://angularjs.org/&quot; title=&quot;Angular.js&quot;&gt;Angular&lt;/a&gt;.&lt;/p&gt;
@@ -5018,174 +5320,6 @@ Transfer-Encoding: chunked
         <pubDate>Thu, 13 Jul 2017 00:00:00 +0000</pubDate>
         <link>https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot</link>
         <guid isPermaLink="true">https://developer.okta.com/blog/2017/07/13/apache-shiro-spring-boot</guid>
-      </item>
-    
-      <item>
-        <title>OpenID Connect for User Authentication in ASP.NET Core</title>
-        <description>&lt;p&gt;In the age of the “personalized web experience”, authentication and user management is a given, and it’s easier than ever to tap into third-party authentication providers like Facebook, Twitter, and Google. And it’s not just the wild, wild web that needs it. Businesses need ways to secure their APIs, and identify users logged into their apps.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://openid.net/connect/&quot;&gt;OpenID Connect&lt;/a&gt; is a protocol for authenticating users. It is a specification by the OpenID Foundation describing the best way for the authentication “handshake” to happen. It lays out what an Identity Provider needs to provide in order to be considered “OpenID Connect Certified” which makes it easier than ever to consume authentication as a service.&lt;/p&gt;
-
-&lt;h2 id=&quot;why-not-use-oauth-20&quot;&gt;Why Not Use OAuth 2.0?&lt;/h2&gt;
-&lt;p&gt;First, &lt;a href=&quot;https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth&quot;&gt;OAuth 2.0 is NOT an authentication protocol&lt;/a&gt;. I know what you’re thinking: “What?!!?” But it’s not. It &lt;em&gt;is&lt;/em&gt; an delegated authorization framework, which many modern authentication protocols are built on.&lt;/p&gt;
-
-&lt;p&gt;Second, while OAuth 2.0 does a great job of providing the necessary information for consumers to make authorization decisions, it says nothing about how that information will be exchanged securely. This has led to every authentication provider having their own way of exchanging the OAuth 2.0 information, which has led to a few well-publicized hacks. OpenID Connect fixes these problems by providing an authentication protocol that describes exactly how the exchange of authorization information happens between a subscriber and their provider.&lt;/p&gt;
-
-&lt;p&gt;So let’s see how this works.&lt;/p&gt;
-
-&lt;h3 id=&quot;nothing-up-my-sleeve&quot;&gt;Nothing Up My Sleeve&lt;/h3&gt;
-&lt;p&gt;You’ll be using &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; and the command line. You can also use Visual Studio, but Visual Studio Code is cross-platform and lightweight, so it won’t matter what operating system you are using.&lt;/p&gt;
-
-&lt;p&gt;First, get the &lt;a href=&quot;https://dot.net/core&quot;&gt;dotnet command-line program&lt;/a&gt;. Once you have the dotnet-cli installed, run the &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet new mvc --auth None&lt;/code&gt; command. This will create a new MVC application without the built-in authentication. You’re going to do that yourself.&lt;/p&gt;
-
-&lt;p&gt;In just a few seconds you’ll have a simple ASP.NET Core app ready to go. You may need to run a &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; command to install the dependencies for the base application.&lt;/p&gt;
-
-&lt;h2 id=&quot;add-an-identity-provider&quot;&gt;Add an Identity Provider&lt;/h2&gt;
-&lt;p&gt;Now you need an Identity Provider. For this tutorial you’ll  use &lt;a href=&quot;https://developer.okta.com&quot;&gt;Okta&lt;/a&gt;. Once you’ve created an account and logged in, click &lt;em&gt;Admin&lt;/em&gt; on the top menu.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/admin_button-10c629ae4f749f3b0851d3206f3069876fd193d3e9696e7e1a17b150239e11dd.png&quot; alt=&quot;Admin Button&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Then choose the &lt;em&gt;Applications&lt;/em&gt; menu item from the admin dashboard.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/applications_button-08fcd59c5ce94e306dd52a8ca933fafe2ece4d84d66b6840b3bc627b39b1179f.png&quot; alt=&quot;Applications Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;From the Applications page, click the &lt;em&gt;Add Application&lt;/em&gt; button.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/add_application_button-e917c5ac29a95532285ea60c1853c4b849aaaa520add0ee3dd1b5c0cc6d26488.png&quot; alt=&quot;Add Application Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;On the Add Application page, click on the &lt;em&gt;Create New Application&lt;/em&gt; button.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/create_app_button-bd24015c3fac20e164679b100d846be1967927cf6f99b635493b31878769a617.png&quot; alt=&quot;Create Application Button&quot; width=&quot;400&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;When the New Application Integration window pops up, set up the new application. We’ll choose &lt;em&gt;Web&lt;/em&gt; from the Platform dropdown, and OpenID Connect from the Sign On Method.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/create_application_page-9a0ce95a392e87da357853b7733323fa27af824e4c02115c6b12ee8e51b7f9d1.png&quot; alt=&quot;Create Application Page&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Once you’ve created the application, choose it from the list of applications. In the General Settings tab, click the &lt;em&gt;Edit&lt;/em&gt; button and make sure to add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/signin-oidc&lt;/code&gt; to the Redirect URIs.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/redirect_uri-c1a0090e3b1479c44500396f2b2605d04e2f176bdb54fed1112c197d40e5e7bd.png&quot; alt=&quot;Redirect URI Setting&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;While you are on the General Settings tab, scroll down and copy your Client ID and Client Secret somewhere. You’ll use this later when configuring the middleware in your application.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/client_id_secret-b8d9e3ceaa9398eb3ec4b4f3b568bab2b0a1f3960a53bda84fdb719d70ffd72e.png&quot; alt=&quot;Client ID and Secret&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Finally, you’ll need to make sure that you can use the API by adding the localhost URI to your CORS settings. First, choose the &lt;em&gt;Security&lt;/em&gt; menu item from the dashboard and the choose &lt;em&gt;API&lt;/em&gt; from the drop down menu.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/security_drop_down-e7b02e973ce3098c8e540b3dc1afbdd3d83ce8baf934cbc662d2747f90cc9a2c.png&quot; alt=&quot;Security Drop Down Menu&quot; width=&quot;200&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Then select the &lt;em&gt;Trusted Origins&lt;/em&gt; tab.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/aspnet-oidc/trusted_origins_tab-9997990aaf27d68a30f73c99e28f22bc4038d1502f4157de4dcf7b067dcd16ba.png&quot; alt=&quot;Trusted Origins Tab&quot; width=&quot;800&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Click on &lt;em&gt;Add Origin&lt;/em&gt; and add &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000&lt;/code&gt; as a trusted origin. Make sure that CORS and Redirect are selected. Enter “ASP.NET web app (debug)” as the redirect name (or any other name that makes sense to you).&lt;/p&gt;
-
-&lt;p&gt;Now you’re ready to set up authentication!&lt;/p&gt;
-
-&lt;h2 id=&quot;add-authentication&quot;&gt;Add Authentication&lt;/h2&gt;
-&lt;p&gt;When you open your application in Visual Studio or Visual Studio Code, you’ll notice that there’s a &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ProjectName&amp;gt;.csproj&lt;/code&gt; file. You’ll need to make some quick changes to that to get some dependencies you’ll need to make this work. In the &lt;code class=&quot;highlighter-rouge&quot;&gt;ItemGroup&lt;/code&gt; section of the &lt;code class=&quot;highlighter-rouge&quot;&gt;csproj&lt;/code&gt; document add:&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;PackageReference&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Include=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.AspNetCore.Authentication.JwtBearer&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.1.2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;PackageReference&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Include=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.AspNetCore.Authentication.OpenIdConnect&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.1.2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;PackageReference&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Include=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Microsoft.AspNetCore.Authentication.Cookies&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Version=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1.1.2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This will allow you to use &lt;a href=&quot;https://www.jsonwebtoken.io/&quot;&gt;JSON Web Tokens&lt;/a&gt; for authorization information, get the tokens from the OpenID Connect provider (Okta in this case) and store them in cookies for session management. You’ll need to run a quick &lt;code class=&quot;highlighter-rouge&quot;&gt;dotnet restore&lt;/code&gt; command, but don’t worry, once you save the file, VS Code will give you an option to return to the command line.&lt;/p&gt;
-
-&lt;p&gt;Now, open the &lt;code class=&quot;highlighter-rouge&quot;&gt;Startup.cs&lt;/code&gt; file, and on the first line of the Configure method add:&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.IdentityModel.Protocols.OpenIdConnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;System.IdentityModel.Tokens.Jwt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.IdentityModel.Tokens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Then, between the &lt;code class=&quot;highlighter-rouge&quot;&gt;app.UseStaticFiles();&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;app.UseMvc(…);&lt;/code&gt; add:&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseCookieAuthentication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CookieAuthenticationOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;AuthenticationScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Cookies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;AutomaticAuthenticate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This tells the application that you want to store your session tokens in cookies. Then, you just need to add the authentication instructions.&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseOpenIdConnectAuthentication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;OpenIdConnectOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;AuthenticationScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;oidc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;SignInScheme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Cookies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Authority&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;https://&amp;lt;your Okta dev subdomain&amp;gt;.oktapreview.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;ResponseType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OpenIdConnectResponseType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;ClientId&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Your Client ID from Okta}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;ClientSecret&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;{Your Client Secret from Okta}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;GetClaimsFromUserInfoEndpoint&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;TokenValidationParameters&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TokenValidationParameters&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ValidateIssuer&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;SaveTokens&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;  
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;This is the important part, so let’s go through it line by line:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;AuthenticationScheme&lt;/code&gt; gives out scheme a name, and will be used to build the default callback url (~/signin-oidc).&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;SignInScheme&lt;/code&gt; is used to set the sign-in middleware.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Authority&lt;/code&gt; identifies the authorization endpoint for your Identity Provider. It’s discoverable as part of the OpenID specification, and is located at: https://dev-{YOURID}.oktapreview.com/.well-known/openid-configuration.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ResponseType&lt;/code&gt; is also specified in that document under “response_types_supported”. This tells the application you want to start an authorization code flow from from the provider.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientId&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;ClientSecret&lt;/code&gt; are the Client ID and Client Secret you got from the General Settings tab. For production, I would highly suggest &lt;a href=&quot;https://stormpath.com/blog/store-protect-sensitive-data-dotnet-core&quot;&gt;storing these in a secure way&lt;/a&gt; and referencing them here. They’re in line here for demonstration purposes.&lt;/li&gt;
-  &lt;li&gt;Setting &lt;code class=&quot;highlighter-rouge&quot;&gt;GetClaimsFromUserInfoEndpoint = true&lt;/code&gt; tells the provider that if you’re successful authenticating, go ahead and make a call to the &lt;code class=&quot;highlighter-rouge&quot;&gt;userinfo_endpoint&lt;/code&gt; (specified in the configuration document at the same URL you got the &lt;code class=&quot;highlighter-rouge&quot;&gt;authorization_endpoint&lt;/code&gt; and the &lt;code class=&quot;highlighter-rouge&quot;&gt;response_types_supported&lt;/code&gt; from). This will get the claims that we’re going to display from Okta once the authentication has completed.&lt;/li&gt;
-  &lt;li&gt;The TokenValidationParameters tells the middleware that we want to validate that the issuer is who we expect it to be by getting the signing key from the &lt;code class=&quot;highlighter-rouge&quot;&gt;jwks_uri&lt;/code&gt; endpoint in the &lt;code class=&quot;highlighter-rouge&quot;&gt;.well-known/openid_configuration&lt;/code&gt; document.&lt;/li&gt;
-  &lt;li&gt;Finally, we tell the application to save the token once it comes back from the provider.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;That’s all there is to it, but how do you know it’s working? Well, you &lt;em&gt;could&lt;/em&gt; hook up a login form but there is an easier way!&lt;/p&gt;
-
-&lt;h2 id=&quot;check-your-work&quot;&gt;Check Your Work&lt;/h2&gt;
-&lt;p&gt;All you really need to do is add an [Authorize] attribute to a controller method. That will simply and quickly show us that it’s going to the login page on the provider, but it won’t show us what the provider is sending back. Let’s create a page that will show that information so you can make sure you’re getting what you &lt;em&gt;think&lt;/em&gt; you should be getting from the provider.&lt;/p&gt;
-
-&lt;p&gt;First, add a using statement to the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; for the &lt;code class=&quot;highlighter-rouge&quot;&gt;Authorize&lt;/code&gt; attribute.&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Microsoft.AspNetCore.Authorization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Then add a “Secure” method to the &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.cs&lt;/code&gt; controller.&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;[Authorize]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IActionResult&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Secure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Then create a view to return in &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Views/Home&lt;/code&gt; called &lt;code class=&quot;highlighter-rouge&quot;&gt;Security.cshtml&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@{
-    ViewData[&quot;Title&quot;] = &quot;Security&quot;;
-}
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h2&amp;gt;&lt;/span&gt;Secure&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h2&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;dl&amp;gt;&lt;/span&gt;
-    @foreach (var claim in User.Claims)
-    {
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dt&amp;gt;&lt;/span&gt;@claim.Type&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dt&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;dd&amp;gt;&lt;/span&gt;@claim.Value&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dd&amp;gt;&lt;/span&gt;
-    }
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dl&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;This will just loop through the claims and output them. When you navigate to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:5000/Home/Secure&lt;/code&gt;, you should be redirected to a login page. Once you’re logged in (with a user that is assigned to your app), you should now see a list of the claims on the secure page.
-If you do, congratulations! You just set up OpenID Connect for authenticating in your ASP.NET Core app!&lt;/p&gt;
-
-&lt;p&gt;If you have any questions, comments, or suggestions, feel free to reach out to me &lt;a href=&quot;mailto:lee.brandt@okta.com&quot;&gt;via email&lt;/a&gt;, or hit me up in the comments or via Twitter &lt;a href=&quot;https://twitter.com/leebrandt&quot;&gt;@leebrandt&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 29 Jun 2017 00:00:00 +0000</pubDate>
-        <link>https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</link>
-        <guid isPermaLink="true">https://developer.okta.com/blog/2017/06/29/oidc-user-auth-aspnet-core</guid>
       </item>
     
   </channel>
