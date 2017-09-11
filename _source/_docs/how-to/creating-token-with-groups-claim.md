@@ -131,13 +131,13 @@ This example names the group whitelist `groupwhitelist`, but you can name it any
       }
     ~~~
     
-    You can select any group or set of groups, either app groups or user groups. 
+You can add either app groups or user groups to the group white list property. The property value must be an array. 
 
-    To use this group whitelist for every client that gets this claim in a token, put the `groupId` in the first parameter of the `getFilteredGroups` function described below. 
+To use this group whitelist for every client that gets this claim in a token, put the group whitelist in the first parameter of the `getFilteredGroups` function described below. 
  
 ### Step Three: Configure a Custom Claim for Your Groups
 
-Add a custom claim for the ID token on a Custom Authorization Server with the following function: `getFilteredGroups({group ID list}, "{value-to-represent-the-group-in-the-token}", {maximum number of groups to include in token. Must be less than 100.})`.
+Add a custom claim for the ID token on a Custom Authorization Server with the following function: `getFilteredGroups({app.profile.whitelist-name}, "{value-to-represent-the-group-in-the-token}", {maximum number of groups to include in token. Must be less than 100.})`.
  
 #### Request Example
 
@@ -161,6 +161,8 @@ Add a custom claim for the ID token on a Custom Authorization Server with the fo
     ~~~
   
 You can also see this value in the Okta user interface for claims, under **Mapping**: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
+
+If you had only one group to specify and so didn't need the profile, the `valueType` could simply be: `"groupID"`, in this example `00gbso71miOMjxHRW0h7`.
 
 See [group function documentation](/reference/okta_expression_language/#group-functions) for more information about specifying groups with `getFilteredGroups`.
 
