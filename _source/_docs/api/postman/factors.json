@@ -546,7 +546,7 @@
 			"name": "Enroll Okta SMS Factor",
 			"description": "",
 			"collectionId": "427881f9-60e1-407e-7cc1-de1c0f64ced2",
-			"rawModeData": "{\n  \"factorType\": \"token\",\n  \"provider\": \"RSA\",\n  \"profile\": {\n    \"credentialId\": \"{{username}}\"\n  },\n  \"verify\": {\n    \"passCode\": \"875498\"\n  }\n}"
+			"rawModeData": "{\n  \"factorType\": \"sms\",\n  \"provider\": \"OKTA\",\n  \"profile\": {\n    \"phoneNumber\": \"{{phoneNumber}}\"\n  }\n}"
 		}
 	]
 }
