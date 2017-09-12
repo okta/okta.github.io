@@ -1292,7 +1292,7 @@ All custom profile properties are defined in a profile sub-schema with the resol
 
 #### User Profile Schema Property Object
 
-User profile schema properties have the following standard [JSON Schema Draft 6](https://tools.ietf.org/html/draft-wright-json-schema-validation-01) keywords:
+User profile schema properties have the following standard [JSON Schema Draft 6](https://tools.ietf.org/html/draft-wright-json-schema-validation-01) properties:
 
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+------------ |
 | Property      | Description                                     | DataType                                                           | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
@@ -1306,17 +1306,17 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 
 ##### Description Details
 
- * *enum*: he value of the property is limited to one of the pre- defined enumerated value in the enum. 
+ * `enum`: The value of the property is limited to one of the pre-defined enumerated values in the enum. 
  The list of values for the enum has to be made up of unique elements.
  
- * *oneOf*: "non- empty array of valid JSON schemas. each schema has the following format. 
+ * `oneOf`: Non-empty array of valid JSON schemas. Each schema has the following format.  
  ~~~json
 {
   "const": "enumValue",
   "title": "titleValue"
 }
  ~~~
-In case enum is used in conjunction with oneOf, set of enumerated values and their order must be kept.
+In case enum is used in conjunction with `oneOf`, the set of enumerated values and their order must be kept.
 ~~~json
 {"enum": ["S","M","L","XL"],
   "oneOf": [
@@ -1327,7 +1327,7 @@ In case enum is used in conjunction with oneOf, set of enumerated values and the
   ]
 }
  ~~~
-oneOf is only supported in conjunction with enum providing a mechanism to return a display name for the enum value.
+`oneOf` is only supported in conjunction with the `enum` providing a mechanism to return a display name for the enum value.
 
 
 Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) with the following keywords:
@@ -1556,7 +1556,7 @@ All custom profile properties are defined in a profile sub-schema with the resol
 
 #### App User Profile Schema Property Object
 
-User profile schema properties have the following standard [JSON Schema Draft 6](https://tools.ietf.org/html/draft-wright-json-schema-validation-01) keywords:
+User profile schema properties have the following standard [JSON Schema Draft 6](https://tools.ietf.org/html/draft-wright-json-schema-validation-01) properties:
 
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+------------ |
 | Property      | Description                                     | DataType                                                           | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
@@ -1570,17 +1570,17 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 
 ##### Description Details
 
- * *enum*: he value of the property is limited to one of the pre- defined enumerated value in the enum. 
+ * `enum`: The value of the property is limited to one of the pre-defined enumerated values in the enum. 
  The list of values for the enum has to be made up of unique elements.
  
- * *oneOf*: "non- empty array of valid JSON schemas. each schema has the following format. 
+ * `oneOf`: Non-empty array of valid JSON schemas. Each schema has the following format. 
  ~~~json
 {
   "const": "enumValue",
   "title": "titleValue"
 }
  ~~~
-In case enum is used in conjunction with oneOf, set of enumerated values and their order must be kept.
+In case enum is used in conjunction with `oneOf`, the set of enumerated values and their order must be kept.
 ~~~json
 {"enum": ["S","M","L","XL"],
   "oneOf": [
@@ -1591,7 +1591,7 @@ In case enum is used in conjunction with oneOf, set of enumerated values and the
   ]
 }
  ~~~
-oneOf is only supported in conjunction with enum providing a mechanism to return a display name for the enum value.
+`oneOf` is only supported in conjunction with the `enum` providing a mechanism to return a display name for the enum value.
 
 
 Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) with the following keywords:
