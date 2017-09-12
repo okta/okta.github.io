@@ -6,8 +6,8 @@ exampleDescription: Angular Implicit
 This guide will walk you through integrating authentication into an Angular app with Okta by performing these steps:
 
 1. Add an OpenID Connect Client in Okta
-2. Create an Authentication Service
-3. Create Routes
+2. Install the Okta Angular SDK
+3. Attach Components to Routes
 4. Use the Access Token
 
 At the end of the Angular instructions you can choose your server type to learn more about post-authentication workflows, such as verifying tokens that your Angular application can send to your server.
@@ -32,83 +32,41 @@ After you have created the application there are two more values you will need t
 
 | Setting       | Where to Find                                                                  |
 | ------------- | ------------------------------------------------------------------------------ |
-| Client ID     | In the applications list, or on the "General" tab of a specific application.    |
+| Client ID     | In the applications list, or on the "General" tab of a specific application.   |
 | Org URL       | On the home screen of the developer dashboard, in the upper right.             |
 
 
 These values will be used in your Angular application to setup the OpenID Connect flow with Okta.
 
-## Create an Authentication Service
+## Install the Okta Angular SDK
 
-You will need to use the [Okta Auth JS](/code/javascript/okta_auth_sdk.html) library to sign in the user by redirecting to the authorization endpoint on your Okta Org. You can install it via npm:
+You will need to use the [Okta Angular SDK](https://github.com/okta/okta-oidc-js/packages/okta-angular) library to sign in the user by redirecting to the authorization endpoint on your Okta Org. You can install it via npm:
 
 ```bash
-npm install @okta/okta-auth-js --save
+npm install @okta/okta-angular --save
 ```
 
-You will need to create a class that encapsulates the interaction with the [Okta Auth JS](/code/javascript/okta_auth_sdk.html) library.
+### Configuration
+You will need the values from the OIDC client that you created in the previous step to instantiate the middleware. You will also need to know your Okta Org URL, which you can see on the home page of the Okta Developer console.
 
-To create this file, you will need the values from the OIDC client that you created in the previous step.  You will also need to know your Okta Org URL, which you can see on the home page of the Okta Developer console.
-
-Create a new file `src/app/app.service.ts` and add the following code to it, replacing the `{yourOktaDomain}` with your Org URL, and `{clientId}` with the Client ID of the application that you created:
+In your application's `module.ts` file, import the following objects and create a configuration object:
 
 ```typescript
-// app.service.ts
+// myApp.module.ts
 
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import * as OktaAuth from '@okta/okta-auth-js/dist/okta-auth-js.min.js';
+import { 
+  OktaAuthModule,
+  OktaCallbackComponent,
+} from '@okta/okta-angular';
 
-@Injectable()
-export class OktaAuthService {
-
-  oktaAuth = new OktaAuth({
-    url: 'https://{yourOktaDomain}.com/',
-    clientId: '{clientId}',
-    issuer: 'https://{yourOktaDomain}.com/oauth2/default',
-    redirectUri: 'http://localhost:{port}/implicit/callback',
-  });
-
-  constructor(private router: Router) {}
-
-  isAuthenticated() {
-    // Checks if there is a current accessToken in the TokenManger.
-    return !!this.oktaAuth.tokenManager.get('accessToken');
-  }
-
-  login() {
-    // Launches the login redirect.
-    this.oktaAuth.token.getWithRedirect({ 
-      responseType: ['id_token', 'token'],
-      scopes: ['openid', 'email', 'profile']
-    });
-  }
-
-  async handleAuthentication() {
-    const tokens = await this.oktaAuth.token.parseFromUrl();
-    tokens.forEach(token => {
-      if (token.idToken) {
-        this.oktaAuth.tokenManager.add('idToken', token);
-      }
-      if (token.accessToken) {
-        this.oktaAuth.tokenManager.add('accessToken', token);
-      }
-    });
-  }
-
-  getAccessToken() {
-    // Return the token from the accessToken object.
-    return this.oktaAuth.tokenManager.get("accessToken").accessToken;
-  }
-
-  async logout() {
-    this.oktaAuth.tokenManager.clear();
-    await this.oktaAuth.signOut();
-  }
+const config = {
+  issuer: 'https://{yourOktaDomain}.com/oauth2/default',
+  redirectUri: 'http://localhost:{port}/implicit/callback',
+  clientId: '{clientId}'
 }
 ```
 
-## Create Routes
+## Attach Components to Routes
 
 You'll need to provide these routes in your sample application, so that we can sign the user in and handle the callback from Okta:
 
@@ -120,11 +78,11 @@ In the relevant location in your application, you will want to provide `Login` a
 
 ```typescript
 import { Component } from '@angular/core';
-import { OktaAuthService } from './app.service';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
   template: `
-    <button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.login()"> Login </button>
+    <button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.loginRedirect()"> Login </button>
     <button *ngIf="oktaAuth.isAuthenticated()" (click)="oktaAuth.logout()"> Logout </button>
   `,
 })
@@ -134,23 +92,38 @@ export class AppComponent {
 ```
 
 ### Create the Callback Handler
-In order to handle the redirect back from Okta, you need to capture the token values from the URL. You'll use `/implicit/callback` as the callback URL, and again you'll use our `OktaAuthService` to delegate the callback details to the [Okta Auth JS](/code/javascript/okta_auth_sdk) library.
-
-Create a new component `callback.component.ts`, and have it handle the `/implicit/callback` route:
+In order to handle the redirect back from Okta, you need to capture the token values from the URL. You'll use `/implicit/callback` as the callback URL, and specify the default `OktaCallbackComponent` and declare it in your `NgModule`.
 
 ```typescript
+const appRoutes: Routes = [
+  {
+    path: 'implicit/callback',
+    component: OktaCallbackComponent
+  },
+  ...
+]
 
-import { Component } from '@angular/core';
-import { OktaAuthService } from './app.service';
+@NgModule({
+  ...
+  declarations: [
+    ...
+    ProtectedComponent
+  ]
+})
+```
 
-@Component({ template: `` })
-export class CallbackComponent {
+### Update your `NgModule`
+Finally, import the `OktaAuthModule` into your `NgModule`, and instantiate it by passing in your configuration object:
 
-  constructor(private okta: OktaAuthService) {
-    // Handles the response from Okta and parses tokens
-    okta.handleAuthentication();
-  }
-}
+```typescript
+@NgModule({
+  imports: [
+    ...
+    RouterModule.forRoot(appRoutes),
+    OktaAuthModule.initAuth(config)
+  ],
+})
+export class MyAppModule { }
 ```
 
 ## Use the Access Token
@@ -164,20 +137,21 @@ Please continue down to the next section, Server Setup, to learn about access to
 
 import { Component } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { OktaAuthService } from './app.service';
+import { OktaAuthService } from '@okta/okta-angular';
 import 'rxjs/Rx';
 
 @Component({ template: `{{messages}}` })
 export class MessageListComponent {
-  accessToken;
   message;
 
   constructor(private okta: OktaAuthService, private http: Http) {
-      this.accessToken = okta.getAccessToken();
-      const headers = new Headers({ Authorization: 'Bearer ' + this.accessToken });
+      const headers = new Headers({ Authorization: 'Bearer ' + okta.getAccessToken().accessToken; });
       
       // Make request
-      this.http.get('http://localhost:{serverPort}/api/messages', new RequestOptions({ headers: headers }))
+      this.http.get(
+        'http://localhost:{serverPort}/api/messages',
+        new RequestOptions({ headers: headers })
+      )
       .map(res => res.json())
       .subscribe(message => this.message = message);
     }
