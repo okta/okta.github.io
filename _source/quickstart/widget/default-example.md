@@ -57,8 +57,6 @@ type="text/css"
 rel="stylesheet"/>
 ```
 
-<i class="fa fa-files-o" aria-hidden="true"></i>
-
 > The `okta-sign-in.min.js` file will expose a global `OktaSignIn` object that can bootstrap the widget.
 
 ## Configure the Sign-In Widget
