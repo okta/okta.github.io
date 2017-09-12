@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="ltr">
 <body>
-    <p>This guide will walk you through integrating the <a href="https://github.com/okta/okta-signin-widget">Okta Sign-In Widget</a> into an app by performing these steps:</p>
+    <p>This guide will walk you through integrating the <a href="https://github.com/okta/okta-signin-widget">Okta Sign-In Widget</a> into a front-end application by performing these steps:</p>
 
 <ol>
   <li>Add an OpenID Connect Client in Okta</li>
@@ -10,15 +10,19 @@
   <li>Using the Access Token</li>
 </ol>
 
-<p>At the end of the Sign-In Widget instructions you can choose your server type to learn more about post-authentication workflows, such as exchanging the <code class="highlighter-rouge">authorization code</code> for tokens that your server can use to communicate with other servers.</p>
+<p>At the end of this section can choose your server type to learn more about post-authentication workflows, such as using the access tokens (obtained by the Sign-in Widget) to authenticate requests to your server.</p>
 
 <h2 id="prerequisites">Prerequisites</h2>
 <p>If you do not already have a <strong>Developer Edition Account</strong>, you can create one at <a href="https://developer.okta.com/signup/">https://developer.okta.com/signup/</a>.</p>
 
+<blockquote>
+  <p>Note: The rest of these instructions assume you are using the new Developer Dashboard.  If you already have an Okta Org, you can find the new Developer Dashboard by using the drop-down menu in the upper-left of the current Okta Admin Console.</p>
+</blockquote>
+
 <h2 id="add-an-openid-connect-client">Add an OpenID Connect Client</h2>
 <ul>
   <li>Log into the Okta Developer Dashboard, click <strong>Applications</strong> then <strong>Add Application</strong>.</li>
-  <li>Choose <strong>Single Page App (SPA)</strong> as the platform, then populate your new OpenID Connect application with values similar to:</li>
+  <li>Choose <strong>Single Page App (SPA)</strong> as the platform, then populate your new OpenID Connect application with these default values:</li>
 </ul>
 
 <table>
@@ -90,11 +94,13 @@
 </code></pre>
 </div>
 
+<p><i class="fa fa-files-o" aria-hidden="true"></i></p>
+
 <blockquote>
   <p>The <code class="highlighter-rouge">okta-sign-in.min.js</code> file will expose a global <code class="highlighter-rouge">OktaSignIn</code> object that can bootstrap the widget.</p>
 </blockquote>
 
-<h2 id="implement-okta-sign-in">Implement Okta Sign-In</h2>
+<h2 id="configure-the-sign-in-widget">Configure the Sign-In Widget</h2>
 
 <p>You can render the widget anywhere on the page by creating a <code class="highlighter-rouge">&lt;div&gt;</code> with a unique <code class="highlighter-rouge">id</code>.  You can also control the visual look of the widget by adding your own CSS.</p>
 
@@ -107,66 +113,97 @@
 </code></pre>
 </div>
 
-<p>Next, add a <code class="highlighter-rouge">script</code> to configure the widget to your organization and render it inside of the <code class="highlighter-rouge">div</code> you just created:</p>
+<p>Next, add the following JavaScript to configure the Sign-In Widget.  There are many ways to configure the Sign-In Widget, and the following code will instruct the widget to do the following:</p>
+
+<ul>
+  <li>Authenticate the user.</li>
+  <li>Redirect to Okta to create an SSO session.</li>
+  <li>Redirect the user back to your application.</li>
+  <li>Get an access token and ID Token that we can use later.</li>
+</ul>
+
+<p>Copy this example code into your front-end application:</p>
+
 <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+  <span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
+    <span class="na">baseUrl</span><span class="p">:</span> <span class="s2">"https://{yourOktaDomain}"</span><span class="p">,</span>
+    <span class="na">clientId</span><span class="p">:</span> <span class="s2">"{yourClientId}"</span><span class="p">,</span>
+    <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">issuer</span><span class="p">:</span> <span class="s2">"https://{yourOktaDomain}/oauth2/default"</span><span class="p">,</span>
+      <span class="na">responseType</span><span class="p">:</span> <span class="p">[</span><span class="s1">'token'</span><span class="p">,</span> <span class="s1">'id_token'</span><span class="p">],</span>
+      <span class="na">display</span><span class="p">:</span> <span class="s1">'page'</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
 
-    <span class="kd">var</span> <span class="nx">oktaSignIn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaSignIn</span><span class="p">({</span>
-        <span class="na">baseUrl</span><span class="p">:</span> <span class="s2">"https://{yourOktaDomain}.com"</span><span class="p">,</span>
-        <span class="na">clientId</span><span class="p">:</span> <span class="s2">"{clientId}"</span><span class="p">,</span>
-        <span class="na">authParams</span><span class="p">:</span> <span class="p">{</span>
-            <span class="na">issuer</span><span class="p">:</span> <span class="s2">"https://{yourOktaDomain}.com/oauth2/default"</span><span class="p">,</span>
-            <span class="na">responseType</span><span class="p">:</span> <span class="s1">'token id_token'</span><span class="p">,</span>
-            <span class="na">responseMode</span><span class="p">:</span> <span class="s1">'query'</span><span class="p">,</span>
-            <span class="na">scopes</span><span class="p">:</span> <span class="p">[</span><span class="s1">'openid'</span><span class="p">,</span> <span class="s1">'profile'</span><span class="p">,</span> <span class="s1">'email'</span><span class="p">]</span>
-        <span class="p">}</span>
-    <span class="p">});</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">hasTokensInUrl</span><span class="p">())</span> <span class="p">{</span>
+    <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">token</span><span class="p">.</span><span class="nx">parseTokensFromUrl</span><span class="p">(</span>
+      <span class="kd">function</span> <span class="nx">success</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Store the tokens in the token manager in the order requested</span>
+        <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'accessToken'</span><span class="p">,</span> <span class="nx">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">,</span> <span class="nx">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+      <span class="p">},</span>
+      <span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// handle errors as needed</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
-    <span class="c1">// Render the widget to the CSS selector #okta-login-container</span>
-    <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
+    <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Session exists, show logged in state.</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s1">'ACTIVE'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello, '</span> <span class="o">+</span> <span class="nx">res</span><span class="p">.</span><span class="nx">login</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">renderEl</span><span class="p">(</span>
         <span class="p">{</span> <span class="na">el</span><span class="p">:</span> <span class="s1">'#okta-login-container'</span> <span class="p">},</span>
         <span class="kd">function</span> <span class="nx">success</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">status</span> <span class="o">!==</span> <span class="s1">'SUCCESS'</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="c1">// Store the tokens in the TokenManager in the order requested</span>
-            <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'accessToken'</span><span class="p">,</span> <span class="nx">res</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'idToken'</span><span class="p">,</span> <span class="nx">res</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            
-            <span class="k">return</span><span class="p">;</span>
+          <span class="c1">// Nothing to do here, the widget will automatically redirect</span>
+          <span class="c1">// the user to Okta for session creation</span>
         <span class="p">},</span>
         <span class="kd">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// The widget handles most types of errors: CONFIG_ERROR, OAUTH_ERROR, etc</span>
-            <span class="c1">// Add any custom logic to handle uncaught exceptions</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+          <span class="c1">// handle errors as needed</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
         <span class="p">}</span>
-    <span class="p">);</span>
+      <span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
 </code></pre>
 </div>
+
+<h3 id="authenticate-sign-in">Authenticate (Sign In)</h3>
+
+<p>With the above code in your front-end application, you should see the Sign In Widget when you load your application.  At this point you should be able to login, and be redirected back to your application with an access token and ID Token.  Once this is working you can move on to the next section, where we will make use of the access token to make an authenticated request against your server.</p>
 
 <h3 id="using-the-access-token">Using the Access Token</h3>
 
 <p>Your application now has an access token in local storage that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let’s say that you have an API that gives us messages for our user.  You could create a <code class="highlighter-rouge">callMessagesApi</code> function that gets the access token from local storage, and use it to make an authenticated request to your server.</p>
 
-<p>Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the function could look like for this hypothetical example:</p>
+<p>Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the front-end code could look like for this hypothetical example:</p>
 
 <div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">callMessagesApi</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"accessToken"</span><span class="p">);</span>
-    
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">accessToken</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
+  <span class="kd">var</span> <span class="nx">accessToken</span> <span class="o">=</span> <span class="nx">oktaSignIn</span><span class="p">.</span><span class="nx">tokenManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"accessToken"</span><span class="p">);</span>
 
-    <span class="c1">// Make the request using jQuery</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-        <span class="na">url</span><span class="p">:</span> <span class="s1">'http://localhost:{serverPort}/api/messages'</span><span class="p">,</span>
-        <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-            <span class="na">Authorization</span> <span class="p">:</span> <span class="s1">'Bearer '</span> <span class="o">+</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nx">accessToken</span>
-        <span class="p">},</span>
-        <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// Received messages!</span>
-        <span class="p">},</span>
-    <span class="p">});</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">accessToken</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Make the request using jQuery</span>
+  <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="s1">'http://localhost:{serverPort}/api/messages'</span><span class="p">,</span>
+    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">Authorization</span> <span class="p">:</span> <span class="s1">'Bearer '</span> <span class="o">+</span> <span class="nx">accessToken</span><span class="p">.</span><span class="nx">accessToken</span>
+    <span class="p">},</span>
+    <span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Received messages!</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Messages'</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="na">error</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
 <span class="p">}</span>
 </code></pre>
 </div>
