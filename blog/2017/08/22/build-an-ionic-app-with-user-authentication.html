@@ -514,7 +514,7 @@ ionic serve
 <p>In <code class="highlighter-rouge">src/pages/home/home.ts</code>, add a <code class="highlighter-rouge">logout()</code> method, as well as methods to get a name and claims from the identity token. Claims in an ID token are bits of information about the issuer, the user, intended audience, expiration date, and issue date. You can see the <a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">standard claims in the OIDC spec</a>.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">NavController</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavController</span><span class="p">,</span> <span class="nx">App</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">LoginPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../login/login'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
 
@@ -524,13 +524,12 @@ ionic serve
 <span class="p">})</span>
 <span class="k">export</span> <span class="kr">class</span> <span class="nx">HomePage</span> <span class="p">{</span>
 
-  <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span> <span class="k">public</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">app</span><span class="err">:</span> <span class="nx">App</span><span class="p">,</span> <span class="k">public</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span> <span class="k">public</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
   <span class="p">}</span>
 
   <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">logOut</span><span class="p">();</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">setRoot</span><span class="p">(</span><span class="nx">LoginPage</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">popToRoot</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getRootNav</span><span class="p">().</span><span class="nx">setRoot</span><span class="p">(</span><span class="nx">LoginPage</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="nx">get</span> <span class="nx">givenName</span><span class="p">()</span> <span class="p">{</span>
@@ -584,10 +583,7 @@ ionic serve
 
 <p>You should also be able to log out and see the login screen with its logo.</p>
 
-<p><img src="/assets/blog/ionic-authentication/login-with-logo-a356dc76c0bdc401201f590e9b30b0177bca04b4e000f91c1adb5d6dbddf9722.png" alt="Login with logo" /></p>
-
-<p><strong>NOTE:</strong> You might notice that the tabs don’t disappear when logging out. This is <a href="https://forum.ionicframework.com/t/go-back-to-the-root-page-ionic-2-typescript/49861/9">an issue</a> that you might be able to fix
-by upgrading to angular-oauth2-oidc 2.x. However, I’ve been <a href="https://github.com/manfredsteyer/angular-oauth2-oidc/issues/69">unable to make it work</a>.</p>
+<p><img src="/assets/blog/ionic-authentication/login-with-logo-86d82c28b9a0f1e915acd561cc811fa930cc0c009163d20dfd135e7c55a40803.png" alt="Login with logo" /></p>
 
 <h2 id="deploy-to-a-mobile-device">Deploy to a Mobile Device</h2>
 
