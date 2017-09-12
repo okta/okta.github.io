@@ -35,7 +35,6 @@
     $('#docs-languages').append(ul);
   }
 
-  if (window.location.pathname.match('^/documentation/')) {
-    renderCodeLinks();
-  }
+  // Load documentation icons
+  renderCodeLinks();
 })(jQuery);

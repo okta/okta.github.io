@@ -313,8 +313,7 @@
     $('#server_setup_link').removeClass('active');
   };
 
-  if (window.location.pathname.match('^/quickstart')) {
-    main();
-  }
+  // Load the quickstart partials
+  main();
 
 })(jQuery);
