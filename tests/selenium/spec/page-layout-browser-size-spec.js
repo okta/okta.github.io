@@ -14,6 +14,10 @@ describe('page layout and browser size spec', () => {
     expect(navPage.isDesktopNavDisplayed()).toBe(true);
     expect(navPage.isMobileNavDisplayed()).toBe(false);
 
+    // Verify that support link dropdown is visible
+    expect(navPage.isSupportMenuDisplayed()).toBe(false);
+    navPage.clickSupportLink();
+    expect(navPage.isSupportMenuDisplayed()).toBe(true);
   });
 
   // PhantomJS does not support the CSS transform we use to hide the top nav
