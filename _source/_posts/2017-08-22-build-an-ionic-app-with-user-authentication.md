@@ -337,7 +337,7 @@ In `src/pages/home/home.ts`, add a `logout()` method, as well as methods to get 
 
 ```typescript
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { OAuthService } from 'angular-oauth2-oidc';
 
@@ -347,13 +347,12 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public oauthService: OAuthService) {
+  constructor(public app: App, public navCtrl: NavController, public oauthService: OAuthService) {
   }
 
   logout() {
     this.oauthService.logOut();
-    this.navCtrl.setRoot(LoginPage);
-    this.navCtrl.popToRoot();
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
   get givenName() {
@@ -409,9 +408,6 @@ Now you should see your name and claims information displayed when you log in.
 You should also be able to log out and see the login screen with its logo.
 
 {% img blog/ionic-authentication/login-with-logo.png alt:"Login with logo" %}
-
-**NOTE:** You might notice that the tabs don't disappear when logging out. This is [an issue](https://forum.ionicframework.com/t/go-back-to-the-root-page-ionic-2-typescript/49861/9) that you might be able to fix
-by upgrading to angular-oauth2-oidc 2.x. However, I've been [unable to make it work](https://github.com/manfredsteyer/angular-oauth2-oidc/issues/69).
 
 ## Deploy to a Mobile Device
 
