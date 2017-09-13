@@ -1306,14 +1306,14 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 
 ##### Description Details
 
- * `enum`: The value of the property is limited to one of the pre-defined enumerated values in the enum. 
+ * `enum`: The value of the property is limited to one of the values specified in the enum definition. 
  The list of values for the enum has to be made up of unique elements.
  
- * `oneOf`: Non-empty array of valid JSON schemas. Each schema has the following format.  
+ * `oneOf`: Okta only supports `oneOf` for specifying display names for an `enum`, each schema has the following format.  
  ~~~json
 {
   "const": "enumValue",
-  "title": "titleValue"
+  "title": "display name"
 }
  ~~~
 In case enum is used in conjunction with `oneOf`, the set of enumerated values and their order must be kept.
@@ -1570,14 +1570,14 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 
 ##### Description Details
 
- * `enum`: The value of the property is limited to one of the pre-defined enumerated values in the enum. 
+ * `enum`: The value of the property is limited to one of the values specified in the enum definition. 
  The list of values for the enum has to be made up of unique elements.
  
- * `oneOf`: Non-empty array of valid JSON schemas. Each schema has the following format. 
+ * `oneOf`: Okta only supports `oneOf` for specifying display names for an `enum`, each schema has the following format. 
  ~~~json
 {
   "const": "enumValue",
-  "title": "titleValue"
+  "title": "display name"
 }
  ~~~
 In case enum is used in conjunction with `oneOf`, the set of enumerated values and their order must be kept.
