@@ -1301,7 +1301,7 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 | description   | description of the property                     | String                                                             | TRUE     | FALSE  | FALSE    |           |           |             |
 | type          | type of property                                | `string`, `boolean`, `number`, `integer`, `array`          | FALSE    | TRUE  | TRUE    |           |           |             |
 | enum          | enumerated value of the property | array          | TRUE    | TRUE  | FALSE    |           |           |             |
-| oneOf          | non- empty array of valid JSON schemas| array          | TRUE    | TRUE  | FALSE    |           |           |             |
+| oneOf          | non-empty array of valid JSON schemas| array          | TRUE    | TRUE  | FALSE    |           |           |             |
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
 
 ##### Description Details
@@ -1565,7 +1565,7 @@ User profile schema properties have the following standard [JSON Schema Draft 6]
 | description   | description of the property                     | String                                                             | TRUE     | FALSE  | FALSE    |           |           |             |
 | type          | type of property                                | `string`, `boolean`, `number`, `integer`, `array`                  | FALSE    | FALSE  | FALSE    |           |           |             |
 | enum          | enumerated value of the property | array          | TRUE    | TRUE  | FALSE    |           |           |             |
-| oneOf          | non- empty array of valid JSON schemas| array          | TRUE    | TRUE  | FALSE    |           |           |             |
+| oneOf          | non-empty array of valid JSON schemas| array          | TRUE    | TRUE  | FALSE    |           |           |             |
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
 
 ##### Description Details
