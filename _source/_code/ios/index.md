@@ -1,6 +1,7 @@
 ---
 layout: software
-title: iOS
+title: Add Okta authentication to your Swift app
+language: iOS
 integration: client
 ---
 

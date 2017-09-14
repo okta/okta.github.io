@@ -1,6 +1,7 @@
 ---
 layout: software
-title: React
+title: Add Okta authentication to your React app
+language: React
 integration: client
 ---
 

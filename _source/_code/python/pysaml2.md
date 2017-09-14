@@ -1,6 +1,7 @@
 ---
 layout: software
-title: Python
+title: SAML-enable your Python application
+language: Python
 excerpt: Guidance on how to SAML-enable your Python application using open source PySAML2.
 chiclet_name: PySAML2 Example
 programming_language: Python

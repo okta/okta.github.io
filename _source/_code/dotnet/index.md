@@ -1,6 +1,7 @@
 ---
 layout: software
-title: .NET
+title: Add Okta to your .NET app
+language: .NET
 integration: server
 ---
 

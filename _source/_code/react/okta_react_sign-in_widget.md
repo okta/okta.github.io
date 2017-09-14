@@ -1,6 +1,7 @@
 ---
 layout: software
-title: React
+title: Okta Sign-In Widget and React
+language: React
 weight: 30
 excerpt: Integrate Okta with a React app using the Sign-In Widget.
 ---

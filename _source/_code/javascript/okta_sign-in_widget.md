@@ -1,6 +1,7 @@
 ---
 layout: software
-title: JavaScript
+title: Okta Sign-In Widget
+language: JavaScript
 excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta.
 weight: 1
 redirect_from:

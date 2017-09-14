@@ -1,6 +1,7 @@
 ---
 layout: software
-title: Java
+title: Add Okta authentication to your Java app
+language: Java
 integration: server
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: software
-title: Angular
+title: Okta Auth JS and Angular
+language: Angular
 weight: 20
 excerpt: Integrate Okta with an Angular application using Auth JS.
 ---

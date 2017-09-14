@@ -1,6 +1,7 @@
 ---
 layout: software
-title: Angular
+title: Add Okta Authentication to your Angular App
+language: Angular
 integration: client
 ---
 

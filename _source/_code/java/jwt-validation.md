@@ -1,6 +1,7 @@
 ---
 layout: software
 title: JWT Validation Guide
+language: Java
 excerpt: How to validate Okta JWTs with Java.
 support_email: developers@okta.com
 weight: 2
