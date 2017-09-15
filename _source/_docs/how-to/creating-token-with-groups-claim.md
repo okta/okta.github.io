@@ -161,8 +161,6 @@ curl -X POST \
   
 >Hint: You can also see this value in the Okta user interface for claims, under **Mapping**: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
 
-If you had only one group to specify and so didn't need the profile, the `value` could simply be the group ID, in this example `00gbso71miOMjxHRW0h7`.
-
 See [group function documentation](/reference/okta_expression_language/#group-functions) for more information about specifying groups with `getFilteredGroups`.
 
 >Reminder: Be sure that you have a policy and rule set up in your Custom Authorization Server or the request in the next step won't work.
@@ -177,7 +175,7 @@ Send a request for an ID token to `{yourOktaDomain}.com/oauth2/:authorizationSer
 curl -X GET \
   'https://{yourOktaDomain}.com/oauth2/ausain6z9zIedDCxB0h7/v1/authorize?client_id=0oabskvc6442nkvQO0h7
     &response_type=id_token&response_mode=fragment
-    &scope=openid&redirect_uri=https%3A%2F%2FmyOktaDomain.com
+    &scope=openid&redirect_uri=https%3A%2F%2myRedirectUri.com
     &state=myState&nonce=da2b39ed-b116-4dc5-8393-5d1da350e24b' \
 ~~~
 
