@@ -4,7 +4,7 @@ title: How to Create a Token with a Groups Claim
 excerpt: How to create an ID token or access token that contains a groups claim
 ---
 
-## How to Create a Token with a Groups Claim
+## How to Create a Token with a Groups Claim Using the Okta Profile
 
 You can add a groups claim for any application group or user group into ID tokens or access tokens for API Access Management.
 This process optionally uses Okta's flexible profile, which accepts any JSON-compliant content, to create a whitelist of groups
@@ -130,7 +130,7 @@ curl -X POST \
   }
 ~~~
     
-You can add either application groups or user groups to the group white list property. The property value must be an array. 
+You can add application groups, user groups or both to the group whitelist property. The property value must be an array. 
 
 To use this group whitelist for every client that gets this claim in a token, put the group whitelist in the first parameter of the `getFilteredGroups` function described below. 
  
@@ -161,7 +161,7 @@ curl -X POST \
   
 >Hint: You can also see this value in the Okta user interface for claims, under **Mapping**: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
 
-If you had only one group to specify and so didn't need the profile, the `valueType` could simply be: `"groupID"`, in this example `00gbso71miOMjxHRW0h7`.
+If you had only one group to specify and so didn't need the profile, the `value` could simply be the group ID, in this example `00gbso71miOMjxHRW0h7`.
 
 See [group function documentation](/reference/okta_expression_language/#group-functions) for more information about specifying groups with `getFilteredGroups`.
 
@@ -220,6 +220,6 @@ fST36rCGaDHmcm3L60JHlEeIbRArkp_793BB8OKRLdh9weNtcA
 }
 ~~~
 
-The token contains the West Coast Division group so it can be used to evaluate against the claim defined in the authorization server.
+The token contains a claim for the group WestCoastDivision as specified in the Okta profile (and configured in the authorization server).
 
-> Reminder: For flows other than implicit, post to the token endpoint `/{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
+> Reminder: For flows other than implicit, post to the token endpoint `{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
