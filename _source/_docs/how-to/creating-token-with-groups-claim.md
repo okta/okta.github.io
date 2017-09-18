@@ -1,13 +1,13 @@
 ---
 layout: docs_page
-title: How to Create a Token with a Groups Claim
-excerpt: How to create an ID token or access token that contains a groups claim
+title: Create a Token with a Groups Claim Using the App Profile
+excerpt: How to use the app profile to create an ID token or  access token that contains a groups claim
 ---
 
-## How to Create a Token with a Groups Claim Using the Okta Profile
+## How to Create a Token with a Groups Claim Using the App Profile
 
 You can add a groups claim for any application group or user group into ID tokens or access tokens for API Access Management.
-This process optionally uses Okta's flexible profile, which accepts any JSON-compliant content, to create a whitelist of groups
+This process optionally uses Okta's flexible app profile, which accepts any JSON-compliant content, to create a whitelist of groups
 that can then easily be referenced. This is especially useful if you have a large number of groups to whitelist or otherwise
 need to dynamically set group whitelists on a per-application basis.
 
@@ -152,7 +152,7 @@ curl -X POST \
 	"status": "ACTIVE",
 	"claimType": "RESOURCE",
 	"valueType": "EXPRESSION",
-	"value": "\"getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)\"",
+	"value": "\"getFilteredGroups(app.profile.groupwhitelist, \"group.name\", 40)\"",
     "conditions": {
         "scopes": []
     }
