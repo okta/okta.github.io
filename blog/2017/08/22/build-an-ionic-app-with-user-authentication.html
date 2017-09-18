@@ -48,7 +48,7 @@
   <meta class="swiftype" name="summary" data-type="string" content="With Okta and OpenID Connect (OIDC) you can easily integrate authentication into an Ionic application, and never have to build it yourself again. OIDC allows..." />
 
   <link type="text/css" rel="stylesheet" href="/assets/animate-ec43d72c3ed45e08a460b8a2966d8dba6006aebfa0530935c3973fa493a8771f.css">
-  <link type="text/css" rel="stylesheet" href="/assets/okta-e0a2f1567b2617a1ac64c3cfe8f94086456f3fb4e1a8ae52fe18398b4ad2ee3f.css">
+  <link type="text/css" rel="stylesheet" href="/assets/okta-f1c4172443ecf8315776f52e3779c947668f2669e3445bb95c7f3efebea6171b.css">
   
   
   <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
@@ -514,7 +514,7 @@ ionic serve
 <p>In <code class="highlighter-rouge">src/pages/home/home.ts</code>, add a <code class="highlighter-rouge">logout()</code> method, as well as methods to get a name and claims from the identity token. Claims in an ID token are bits of information about the issuer, the user, intended audience, expiration date, and issue date. You can see the <a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">standard claims in the OIDC spec</a>.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'@angular/core'</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">NavController</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">NavController</span><span class="p">,</span> <span class="nx">App</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'ionic-angular'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">LoginPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../login/login'</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">OAuthService</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'angular-oauth2-oidc'</span><span class="p">;</span>
 
@@ -524,13 +524,12 @@ ionic serve
 <span class="p">})</span>
 <span class="k">export</span> <span class="kr">class</span> <span class="nx">HomePage</span> <span class="p">{</span>
 
-  <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span> <span class="k">public</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">app</span><span class="err">:</span> <span class="nx">App</span><span class="p">,</span> <span class="k">public</span> <span class="nx">navCtrl</span><span class="err">:</span> <span class="nx">NavController</span><span class="p">,</span> <span class="k">public</span> <span class="nx">oauthService</span><span class="err">:</span> <span class="nx">OAuthService</span><span class="p">)</span> <span class="p">{</span>
   <span class="p">}</span>
 
   <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">logOut</span><span class="p">();</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">setRoot</span><span class="p">(</span><span class="nx">LoginPage</span><span class="p">);</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">popToRoot</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">getRootNav</span><span class="p">().</span><span class="nx">setRoot</span><span class="p">(</span><span class="nx">LoginPage</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="nx">get</span> <span class="nx">givenName</span><span class="p">()</span> <span class="p">{</span>
@@ -584,10 +583,7 @@ ionic serve
 
 <p>You should also be able to log out and see the login screen with its logo.</p>
 
-<p><img src="/assets/blog/ionic-authentication/login-with-logo-a356dc76c0bdc401201f590e9b30b0177bca04b4e000f91c1adb5d6dbddf9722.png" alt="Login with logo" /></p>
-
-<p><strong>NOTE:</strong> You might notice that the tabs don’t disappear when logging out. This is <a href="https://forum.ionicframework.com/t/go-back-to-the-root-page-ionic-2-typescript/49861/9">an issue</a> that you might be able to fix
-by upgrading to angular-oauth2-oidc 2.x. However, I’ve been <a href="https://github.com/manfredsteyer/angular-oauth2-oidc/issues/69">unable to make it work</a>.</p>
+<p><img src="/assets/blog/ionic-authentication/login-with-logo-86d82c28b9a0f1e915acd561cc811fa930cc0c009163d20dfd135e7c55a40803.png" alt="Login with logo" /></p>
 
 <h2 id="deploy-to-a-mobile-device">Deploy to a Mobile Device</h2>
 
@@ -669,63 +665,63 @@ Error: Cannot read property 'replace' of undefined
 <p>Then add the methods below to facilitate logging in with OAuth.</p>
 
 <div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">redirectLogin</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">oktaLogin</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">success</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'access_token'</span><span class="p">,</span> <span class="nx">success</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">processIdToken</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">id_token</span><span class="p">,</span> <span class="nx">success</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">TabsPage</span><span class="p">);</span>
-    <span class="p">},</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">error</span><span class="p">;</span>
-    <span class="p">});</span>
-  <span class="p">}</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">oktaLogin</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">success</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'access_token'</span><span class="p">,</span> <span class="nx">success</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">processIdToken</span><span class="p">(</span><span class="nx">success</span><span class="p">.</span><span class="nx">id_token</span><span class="p">,</span> <span class="nx">success</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">navCtrl</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">TabsPage</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">error</span> <span class="o">=</span> <span class="nx">error</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="p">}</span>
 
-  <span class="nx">oktaLogin</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="kd">let</span> <span class="na">state</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000000</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">crypto</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">crypto</span><span class="p">.</span><span class="nx">getRandomValues</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
-        <span class="nx">state</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">join</span><span class="p">().</span><span class="nx">toString</span><span class="p">();</span>
-      <span class="p">}</span>
-      <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">oauthUrl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">buildOAuthUrl</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">);</span>
-        <span class="kd">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">InAppBrowser</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">oauthUrl</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span>
-          <span class="s1">'location=no,clearsessioncache=yes,clearcache=yes'</span><span class="p">);</span>
-        <span class="nx">browser</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstart'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-          <span class="k">if</span> <span class="p">((</span><span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'http://localhost:8100'</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">browser</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{});</span>
-            <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-            <span class="kd">const</span> <span class="nx">responseParameters</span> <span class="o">=</span> <span class="p">((</span><span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'#'</span><span class="p">)[</span><span class="mi">1</span><span class="p">]).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'&amp;'</span><span class="p">);</span>
-            <span class="kd">const</span> <span class="nx">parsedResponse</span> <span class="o">=</span> <span class="p">{};</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">responseParameters</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-              <span class="nx">parsedResponse</span><span class="p">[</span><span class="nx">responseParameters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">'='</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span>
-                <span class="nx">responseParameters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">'='</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
-            <span class="p">}</span>
-            <span class="kd">const</span> <span class="nx">defaultError</span> <span class="o">=</span> <span class="s1">'Problem authenticating with Okta'</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">!==</span> <span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-              <span class="nx">reject</span><span class="p">(</span><span class="nx">defaultError</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'access_token'</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span>
-              <span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'access_token'</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-              <span class="nx">resolve</span><span class="p">(</span><span class="nx">parsedResponse</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-              <span class="nx">reject</span><span class="p">(</span><span class="nx">defaultError</span><span class="p">);</span>
-            <span class="p">}</span>
+<span class="nx">oktaLogin</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="na">state</span><span class="p">:</span> <span class="kr">string</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000000000</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">crypto</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint32Array</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">crypto</span><span class="p">.</span><span class="nx">getRandomValues</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
+      <span class="nx">state</span> <span class="o">=</span> <span class="nx">array</span><span class="p">.</span><span class="nx">join</span><span class="p">().</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">oauthUrl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">buildOAuthUrl</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">browser</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">cordova</span><span class="p">.</span><span class="nx">InAppBrowser</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">oauthUrl</span><span class="p">,</span> <span class="s1">'_blank'</span><span class="p">,</span>
+        <span class="s1">'location=no,clearsessioncache=yes,clearcache=yes'</span><span class="p">);</span>
+      <span class="nx">browser</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'loadstart'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">((</span><span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'http://localhost:8100'</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">browser</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{});</span>
+          <span class="nx">browser</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+          <span class="kd">const</span> <span class="nx">responseParameters</span> <span class="o">=</span> <span class="p">((</span><span class="nx">event</span><span class="p">.</span><span class="nx">url</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'#'</span><span class="p">)[</span><span class="mi">1</span><span class="p">]).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'&amp;'</span><span class="p">);</span>
+          <span class="kd">const</span> <span class="nx">parsedResponse</span> <span class="o">=</span> <span class="p">{};</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">responseParameters</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">parsedResponse</span><span class="p">[</span><span class="nx">responseParameters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">'='</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span>
+              <span class="nx">responseParameters</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s1">'='</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
           <span class="p">}</span>
-        <span class="p">});</span>
-        <span class="nx">browser</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">reject</span><span class="p">(</span><span class="s1">'The Okta sign in flow was canceled'</span><span class="p">);</span>
-        <span class="p">});</span>
+          <span class="kd">const</span> <span class="nx">defaultError</span> <span class="o">=</span> <span class="s1">'Problem authenticating with Okta'</span><span class="p">;</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">!==</span> <span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">reject</span><span class="p">(</span><span class="nx">defaultError</span><span class="p">);</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'access_token'</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span>
+            <span class="nx">parsedResponse</span><span class="p">[</span><span class="s1">'access_token'</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">resolve</span><span class="p">(</span><span class="nx">parsedResponse</span><span class="p">);</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">reject</span><span class="p">(</span><span class="nx">defaultError</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+      <span class="nx">browser</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'exit'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">reject</span><span class="p">(</span><span class="s1">'The Okta sign in flow was canceled'</span><span class="p">);</span>
       <span class="p">});</span>
     <span class="p">});</span>
-  <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
 
-  <span class="nx">buildOAuthUrl</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">+</span> <span class="s1">'/v1/authorize?'</span> <span class="o">+</span>
-        <span class="s1">'client_id='</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
-        <span class="s1">'redirect_uri='</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
-        <span class="s1">'response_type=id_token%20token&amp;'</span> <span class="o">+</span>
-        <span class="s1">'scope='</span> <span class="o">+</span> <span class="nb">encodeURI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">scope</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
-        <span class="s1">'state='</span> <span class="o">+</span> <span class="nx">state</span> <span class="o">+</span> <span class="s1">'&amp;nonce='</span> <span class="o">+</span> <span class="nx">nonce</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="nx">buildOAuthUrl</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">):</span> <span class="kr">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">issuer</span> <span class="o">+</span> <span class="s1">'/v1/authorize?'</span> <span class="o">+</span>
+      <span class="s1">'client_id='</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
+      <span class="s1">'redirect_uri='</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">redirectUri</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
+      <span class="s1">'response_type=id_token%20token&amp;'</span> <span class="o">+</span>
+      <span class="s1">'scope='</span> <span class="o">+</span> <span class="nb">encodeURI</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">scope</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&amp;'</span> <span class="o">+</span>
+      <span class="s1">'state='</span> <span class="o">+</span> <span class="nx">state</span> <span class="o">+</span> <span class="s1">'&amp;nonce='</span> <span class="o">+</span> <span class="nx">nonce</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 
@@ -929,8 +925,6 @@ What Progressive Web Apps can do for you</a>.</p>
 </footer>
 
     <script type="text/javascript" src="/assets/master-0365dd27cf276cb2a15c0a43906ca592538204cf1ad4557547bf4e50609b411e.js"></script>
-    <script type="text/javascript" src="/assets/quickstart-26919e2a466e6346d96282973427a3998da81637fd2a2ceb6917a61da7eaf2a8.js"></script>
-    <script type="text/javascript" src="/assets/docsIndex-aebe0e7212e0f2974ef463f06967cba7144f5eed4f14bb11c346866f3fd4ecb7.js"></script>    
     
     
     

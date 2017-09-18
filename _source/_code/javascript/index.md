@@ -1,6 +1,7 @@
 ---
 layout: software
-title: JavaScript
+title: Add Okta authentication to your JavaScript app
+language: JavaScript
 integration: client
 ---
 

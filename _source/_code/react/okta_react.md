@@ -1,6 +1,7 @@
 ---
 layout: software
-title: React
+title: Okta Auth JS and React
+language: React
 weight: 30
 excerpt: Integrate Okta with a React app using Auth JS.
 ---

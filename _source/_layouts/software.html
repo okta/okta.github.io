@@ -29,8 +29,8 @@
               {% endunless %}
               {% assign language = parts[2] %}
               {% assign element = index %}
-              <li {% if element.title == page.title %}class="is-active"{% endif %}>
-                <a href="/code/{{ language | prepend: site.baseurl }}/">{{ element.title | upcase }}</a>
+              <li {% if element.language == page.language %}class="is-active"{% endif %}>
+                <a href="/code/{{ language | prepend: site.baseurl }}/">{{ element.language | upcase }}</a>
               </li>
             {% endfor %}
           </ul>
@@ -50,8 +50,8 @@
               {% endunless %}
               {% assign language = parts[2] %}
               {% assign element = index %}
-              <li {% if element.title == page.title %}class="is-active"{% endif %}>
-                <a href="/code/{{ language | prepend: site.baseurl }}/">{{ element.title | upcase }}</a>
+              <li {% if element.language == page.language %}class="is-active"{% endif %}>
+                <a href="/code/{{ language | prepend: site.baseurl }}/">{{ element.language | upcase }}</a>
               </li>
             {% endfor %}
           </ul>

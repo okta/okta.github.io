@@ -1,6 +1,7 @@
 ---
 layout: software
-title: Node.js
+title: Add Okta authentication to your Node.js app
+language: Node.js
 integration: server
 ---
 

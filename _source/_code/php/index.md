@@ -1,6 +1,7 @@
 ---
 layout: software
-title: PHP
+title: Add Okta authentication to your PHP app
+language: PHP
 integration: server
 ---
 

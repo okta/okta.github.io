@@ -1,6 +1,7 @@
 ---
 layout: software
-title: Java
+title: Add Okta authentication to your Java app
+language: Java
 integration: server
 ---
 
@@ -10,7 +11,7 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 
 <ul class='code-list'>
   <li>
-    <a href='/quickstart/#/okta-sign-in-page/java/generic/' class='code-button inverse'>
+    <a href='/quickstart/#/okta-sign-in-page/java/spring/' class='code-button inverse'>
       <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
     </a>
   </li>

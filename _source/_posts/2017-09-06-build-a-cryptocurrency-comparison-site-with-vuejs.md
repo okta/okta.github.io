@@ -68,6 +68,7 @@ One of the core things Vue does is manage data. In order to tell Vue what data
 you want to manage, you need to explicitly declare every bit of data you expect
 Vue to dynamically manage for you upfront in a special `data` object, like so:
 
+{% raw %}
 ```html
 <html>
   <body>
@@ -87,6 +88,7 @@ Vue to dynamically manage for you upfront in a special `data` object, like so:
   </body>
 </html>
 ```
+{% endraw %}
 
 {% img blog/cryptocurrency/hi-screenshot.png alt:"Hi Screenshot" %}
 
@@ -96,7 +98,7 @@ As you can see in the example above, I'm defining a new `data` object inside the
 telling Vue that I'd like it to manage a message for me.
 
 
-You'll also notice that my HTML code now contains a variable: `{{ message  }}`.
+You'll also notice that my HTML code now contains a variable: `{% raw %}{{ message }}{% endraw %}`.
 After Vue starts up, and scans the `app` div for code, it will start replacing any
 variables it finds with the related `data` objects you've defined.
 
@@ -129,6 +131,7 @@ Vue supports typical if, else if, and else conditionals using the `v-if`,
 
 Let's take a look at a simple Vue application that uses an if-else conditional.
 
+{% raw %}
 ```html
 <html>
   <body>
@@ -151,6 +154,7 @@ Let's take a look at a simple Vue application that uses an if-else conditional.
   </body>
 </html>
 ```
+{% endraw %}
 
 As you can see above, we now have two paragraph tags, each with a different
 message. If you run this in your browser, you'll see the following:
@@ -178,6 +182,7 @@ the DOM.
 Vue also supports simple loops. Here's a small example application that uses Vue
 to loop through an array of shopping items, displaying them in an ordered list:
 
+{% raw %}
 ```html
 <html>
   <body>
@@ -205,6 +210,7 @@ to loop through an array of shopping items, displaying them in an ordered list:
   </body>
 </html>
 ```
+{% endraw %}
 
 When this runs in the browser, you'll see that the `v-for` directive Vue provides
 will repeat itself, looping over the contents of the `shoppingList` array:
@@ -228,6 +234,7 @@ user (and you) can manage the same pieces of data in your application.
 
 Let's take a look at a simple Vue application that uses two-way data binding:
 
+{% raw %}
 ```html
 <html>
   <body>
@@ -249,6 +256,7 @@ Let's take a look at a simple Vue application that uses two-way data binding:
   </body>
 </html>
 ```
+{% endraw %}
 
 As you can see if you try this out yourself, when you enter data into the input
 box, the `color` variable is changed, and then re-rendered on the page. This is
@@ -271,6 +279,7 @@ your JavaScript *actions.*
 Let's take a look at a very simple example application that uses a method to
 capitalize the color from the example above when clicked:
 
+{% raw %}
 ```html
 <html>
   <body>
@@ -298,6 +307,7 @@ capitalize the color from the example above when clicked:
   </body>
 </html>
 ```
+{% endraw %}
 
 {% img blog/cryptocurrency/capitalize-screenshot.png alt:"Capitalize Screenshot" %}
 
@@ -751,6 +761,7 @@ HTML code and actually display some of this shiny new data for our users.
 Using the same constructs we learned earlier, we're going to loop through the
 cryptocurrency data, filling out our table:
 
+{% raw %}
 ```html
 <table class="table table-hover">
   <thead>
@@ -784,6 +795,7 @@ cryptocurrency data, filling out our table:
   </tbody>
 </table>
 ```
+{% endraw %}
 
 Pretty straightforward, right?
 
@@ -812,6 +824,7 @@ getColor: (num) => {
 }
 ```
 
+{% raw %}
 ```html
 <tbody>
   <tr v-for="coin in coins">
@@ -832,6 +845,7 @@ getColor: (num) => {
   </tr>
 </tbody>
 ```
+{% endraw %}
 
 With these final changes, load the code up in your browser, and give it a go!
 

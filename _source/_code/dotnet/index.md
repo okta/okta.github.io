@@ -1,10 +1,11 @@
 ---
 layout: software
-title: .NET
+title: Add Okta to your .NET app
+language: .NET
 integration: server
 ---
 
-# Add Okta authentication to your .NET app
+# Add Okta to your .NET app
 
 New to Okta? Our Quick Start Guide will walk you through adding user authentication to your .NET application in minutes.
 
@@ -15,8 +16,8 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
     </a>
   </li>
   <li>
-    <a href='https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw' class='code-button'>
-      <span class='fa fa-github'></span><span>.NET Sample App</span>
+    <a href='https://github.com/oktadeveloper/okta-aspnetcore-mvc-example' class='code-button'>
+      <span class='fa fa-github'></span><span>ASP.NET Core 2.0 example app</span>
     </a>
   </li>
 </ul>
@@ -27,18 +28,19 @@ Once your users can sign in to your app, use Okta's Management API and SDKs to c
 
 <ul class='code-list'>
   <li>
-    <span class='code-icon expression-16'></span> <a href='https://developer.okta.com/okta-sdk-dotnet/'>.NET SDK Reference</a>
+    <span class='fa fa-archive'></span> <a href='https://www.nuget.org/packages/Okta.Sdk'>.NET SDK</a>
   </li>
   <li>
-    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-sdk-dotnet'>.NET SDK Source</a>
+    <span class='fa fa-github'></span> <a href='https://github.com/okta/okta-sdk-dotnet'>.NET SDK source code</a>
+  </li>
+  <li>
+    <span class='code-icon expression-16'></span> <a href='https://developer.okta.com/okta-sdk-dotnet/'>.NET SDK reference docs</a>
   </li>
 </ul>
 
 ## More Resources
 
 <ul class='code-list'>
-  <li><span class='code-icon info-16-gray'></span> <a href='/code/dotnet/jwt-validation.html'>.NET JWT Validation Guide</a></li>
-  <li><span class='code-icon info-16-gray'></span> <a href='https://github.com/oktadeveloper/okta-oauth-aspnet-codeflow'>OAuth Authorization Code Flow Example</a></li>
-  <li><span class='code-icon info-16-gray'></span> <a href='https://github.com/oktadeveloper/okta-oauth-spa-authjs-osw'>OpenID Connect SPA with Okta Auth JS</a></li>
-  <li><span class='code-icon info-16-gray'></span> <a href='sample_application.html'>Okta Music Store</a></li>
+  <li><span class='fa fa-github'></span> <a href='https://github.com/oktadeveloper/okta-aspnetcore-mvc-example'>ASP.NET Core 2.0 MVC example app</a></li>
+  <li><span class='code-icon info-16-gray'></span> <a href='/code/dotnet/jwt-validation.html'>.NET JWT validation guide</a></li>
 </ul>
