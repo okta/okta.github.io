@@ -4,6 +4,7 @@ const util = require('../framework/shared/util');
 function setup(url) {
   const docsPage = new DocsPage(url);
   docsPage.load();
+  docsPage.resizeXLarge();
   return docsPage;
 }
 
@@ -97,11 +98,12 @@ describe('imported docs string spec', function() {
     });
     util.itNoHeadless('does not break links in headers', () => {
       const page = setupAuthJs();
-      page.clickLinkHeader('LOCKED_OUT');
+      browser.driver.sleep(3000);
+      page.clickLinkHeader('PASSWORD_EXPIRED');
       const authnUrl = '/docs/api/resources/authn';
       const authnPage = new DocsPage(authnUrl);
       authnPage.waitForPageLoad();
-      expect(authnPage.urlContains('#show-lockout-failures')).toBe(true);
+      expect(authnPage.urlContains('#response-example-expired-password')).toBe(true);
     });
   });
 

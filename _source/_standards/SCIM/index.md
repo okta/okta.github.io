@@ -1132,7 +1132,7 @@ We recommend preparing the customer-facing configuration guide before beginning 
 This guide will be exposed externally in Okta’s admin interface to end customers.
 For more details, see the [configuration guide guidelines](http://saml-doc.okta.com/Provisioning_Docs/SCIM_Configuration_Guide_Instructions.pdf).
 
-Note: When you are ready, use [this form](https://docs.google.com/forms/d/e/1FAIpQLSfueMM9vbIt6zXCdcI9MdJ16lZc1FHwyIwMkHwNBWF7Kzdocg/viewform) to submit for Okta review.
+Note: When you are ready, use [this form](https://oanmanager.okta.com/) to submit for Okta review.
 
 #### Test with Customers
 
