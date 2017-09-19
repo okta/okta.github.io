@@ -2075,7 +2075,7 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
 
 <h4 id="user-profile-schema-property-object">User Profile Schema Property Object</h4>
 
-<p>User profile schema properties have the following standard <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a> keywords:</p>
+<p>User profile schema properties have the following standard <a href="https://tools.ietf.org/html/draft-wright-json-schema-validation-01">JSON Schema Draft 6</a> properties:</p>
 
 <table>
   <thead>
@@ -2119,7 +2119,29 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
       <td>type of property</td>
       <td><code class="highlighter-rouge">string</code>, <code class="highlighter-rouge">boolean</code>, <code class="highlighter-rouge">number</code>, <code class="highlighter-rouge">integer</code>, <code class="highlighter-rouge">array</code></td>
       <td>FALSE</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>enum</td>
+      <td>enumerated value of the property</td>
+      <td>array</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
       <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>oneOf</td>
+      <td>non-empty array of valid JSON schemas</td>
+      <td>array</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
       <td>FALSE</td>
       <td> </td>
       <td> </td>
@@ -2127,6 +2149,36 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
     </tr>
   </tbody>
 </table>
+
+<h5 id="description-details">Description Details</h5>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">enum</code>: The value of the property is limited to one of the values specified in the enum definition. 
+ The list of values for the enum has to be made up of unique elements.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">oneOf</code>: Okta only supports <code class="highlighter-rouge">oneOf</code> for specifying display names for an <code class="highlighter-rouge">enum</code>, each schema has the following format.</p>
+    <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enumValue"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"display name"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+    </div>
+    <p>In case enum is used in conjunction with <code class="highlighter-rouge">oneOf</code>, the set of enumerated values and their order must be kept.</p>
+    <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"S"</span><span class="p">,</span><span class="s2">"M"</span><span class="p">,</span><span class="s2">"L"</span><span class="p">,</span><span class="s2">"XL"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"oneOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+ </span><span class="p">{</span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Small"</span><span class="p">},</span><span class="w">
+ </span><span class="p">{</span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">},</span><span class="w">
+ </span><span class="p">{</span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Large"</span><span class="p">},</span><span class="w">
+ </span><span class="p">{</span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Extra Large"</span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+    </div>
+    <p><code class="highlighter-rouge">oneOf</code> is only supported in conjunction with the <code class="highlighter-rouge">enum</code> providing a mechanism to return a display name for the enum value.</p>
+  </li>
+</ul>
 
 <p>Okta has also extended <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a> with the following keywords:</p>
 
@@ -2578,7 +2630,7 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
 
 <h4 id="app-user-profile-schema-property-object">App User Profile Schema Property Object</h4>
 
-<p>User profile schema properties have the following standard <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a> keywords:</p>
+<p>User profile schema properties have the following standard <a href="https://tools.ietf.org/html/draft-wright-json-schema-validation-01">JSON Schema Draft 6</a> properties:</p>
 
 <table>
   <thead>
@@ -2628,8 +2680,60 @@ A property cannot be removed if it is being referenced as a <a href="./idps.html
       <td> </td>
       <td> </td>
     </tr>
+    <tr>
+      <td>enum</td>
+      <td>enumerated value of the property</td>
+      <td>array</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>oneOf</td>
+      <td>non-empty array of valid JSON schemas</td>
+      <td>array</td>
+      <td>TRUE</td>
+      <td>TRUE</td>
+      <td>FALSE</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
   </tbody>
 </table>
+
+<h5 id="description-details-1">Description Details</h5>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">enum</code>: The value of the property is limited to one of the values specified in the enum definition. 
+ The list of values for the enum has to be made up of unique elements.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">oneOf</code>: Okta only supports <code class="highlighter-rouge">oneOf</code> for specifying display names for an <code class="highlighter-rouge">enum</code>, each schema has the following format.</p>
+    <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enumValue"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"display name"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+    </div>
+    <p>In case enum is used in conjunction with <code class="highlighter-rouge">oneOf</code>, the set of enumerated values and their order must be kept.</p>
+    <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"S"</span><span class="p">,</span><span class="s2">"M"</span><span class="p">,</span><span class="s2">"L"</span><span class="p">,</span><span class="s2">"XL"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"oneOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+ </span><span class="p">{</span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Small"</span><span class="p">},</span><span class="w">
+ </span><span class="p">{</span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">},</span><span class="w">
+ </span><span class="p">{</span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"L"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Large"</span><span class="p">},</span><span class="w">
+ </span><span class="p">{</span><span class="nt">"const"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Extra Large"</span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+    </div>
+    <p><code class="highlighter-rouge">oneOf</code> is only supported in conjunction with the <code class="highlighter-rouge">enum</code> providing a mechanism to return a display name for the enum value.</p>
+  </li>
+</ul>
 
 <p>Okta has also extended <a href="https://tools.ietf.org/html/draft-zyp-json-schema-04">JSON Schema Draft 4</a> with the following keywords:</p>
 
