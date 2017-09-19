@@ -313,6 +313,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
+  "type": "PASSWORD",
   "name": "New Policy Rule",
   "conditions": {
     "people": {
@@ -414,6 +415,7 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
+  "type": "PASSWORD",
   "name": "My Updated Policy Rule",
   "conditions": {
     "people": {
