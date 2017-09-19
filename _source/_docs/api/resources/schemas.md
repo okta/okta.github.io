@@ -1292,15 +1292,43 @@ All custom profile properties are defined in a profile sub-schema with the resol
 
 #### User Profile Schema Property Object
 
-User profile schema properties have the following standard [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) keywords:
+User profile schema properties have the following standard [JSON Schema Draft 6](https://tools.ietf.org/html/draft-wright-json-schema-validation-01) properties:
 
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+------------ |
 | Property      | Description                                     | DataType                                                           | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
 | ------------- | ----------------------------------------------- | ------------------------------------------------------------------ |--------- | ------ | -------- | --------- | --------- | ----------  |
 | title         | user-defined display name for the property      | String                                                             | FALSE    | FALSE  | FALSE    |           |           |             |
 | description   | description of the property                     | String                                                             | TRUE     | FALSE  | FALSE    |           |           |             |
-| type          | type of property                                | `string`, `boolean`, `number`, `integer`, `array`          | FALSE    | FALSE  | FALSE    |           |           |             |
+| type          | type of property                                | `string`, `boolean`, `number`, `integer`, `array`          | FALSE    | TRUE  | TRUE    |           |           |             |
+| enum          | enumerated value of the property | array          | TRUE    | TRUE  | FALSE    |           |           |             |
+| oneOf          | non-empty array of valid JSON schemas| array          | TRUE    | TRUE  | FALSE    |           |           |             |
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
+
+##### Description Details
+
+ * `enum`: The value of the property is limited to one of the values specified in the enum definition. 
+ The list of values for the enum has to be made up of unique elements.
+ 
+ * `oneOf`: Okta only supports `oneOf` for specifying display names for an `enum`, each schema has the following format.  
+ ~~~json
+{
+  "const": "enumValue",
+  "title": "display name"
+}
+ ~~~
+In case enum is used in conjunction with `oneOf`, the set of enumerated values and their order must be kept.
+~~~json
+{"enum": ["S","M","L","XL"],
+  "oneOf": [
+    {"const": "S", "title": "Small"},
+    {"const": "M", "title": "Medium"},
+    {"const": "L", "title": "Large"},
+    {"const": "XL", "title": "Extra Large"}
+  ]
+}
+ ~~~
+`oneOf` is only supported in conjunction with the `enum` providing a mechanism to return a display name for the enum value.
+
 
 Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) with the following keywords:
 
@@ -1528,7 +1556,7 @@ All custom profile properties are defined in a profile sub-schema with the resol
 
 #### App User Profile Schema Property Object
 
-User profile schema properties have the following standard [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) keywords:
+User profile schema properties have the following standard [JSON Schema Draft 6](https://tools.ietf.org/html/draft-wright-json-schema-validation-01) properties:
 
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+------------ |
 | Property      | Description                                     | DataType                                                           | Nullable | Unique | Readonly | MinLength | MaxLength | Validation  |
@@ -1536,7 +1564,35 @@ User profile schema properties have the following standard [JSON Schema Draft 4]
 | title         | user-defined display name for the property      | String                                                             | FALSE    | FALSE  | FALSE    |           |           |             |
 | description   | description of the property                     | String                                                             | TRUE     | FALSE  | FALSE    |           |           |             |
 | type          | type of property                                | `string`, `boolean`, `number`, `integer`, `array`                  | FALSE    | FALSE  | FALSE    |           |           |             |
+| enum          | enumerated value of the property | array          | TRUE    | TRUE  | FALSE    |           |           |             |
+| oneOf          | non-empty array of valid JSON schemas| array          | TRUE    | TRUE  | FALSE    |           |           |             |
 |---------------+-------------------------------------------------+--------------------------------------------------------------------+-----------+-------+----------+-----------+-----------+-------------|
+
+##### Description Details
+
+ * `enum`: The value of the property is limited to one of the values specified in the enum definition. 
+ The list of values for the enum has to be made up of unique elements.
+ 
+ * `oneOf`: Okta only supports `oneOf` for specifying display names for an `enum`, each schema has the following format. 
+ ~~~json
+{
+  "const": "enumValue",
+  "title": "display name"
+}
+ ~~~
+In case enum is used in conjunction with `oneOf`, the set of enumerated values and their order must be kept.
+~~~json
+{"enum": ["S","M","L","XL"],
+  "oneOf": [
+    {"const": "S", "title": "Small"},
+    {"const": "M", "title": "Medium"},
+    {"const": "L", "title": "Large"},
+    {"const": "XL", "title": "Extra Large"}
+  ]
+}
+ ~~~
+`oneOf` is only supported in conjunction with the `enum` providing a mechanism to return a display name for the enum value.
+
 
 Okta has also extended [JSON Schema Draft 4](https://tools.ietf.org/html/draft-zyp-json-schema-04) with the following keywords:
 

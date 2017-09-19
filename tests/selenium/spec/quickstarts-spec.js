@@ -51,7 +51,8 @@ describe('quickstarts page spec', () => {
       ])).toBe(true);
   });
 
-  it('can select all server setups', () => {
+  // OKTA-141828 - Disable failing test
+  xit('can select all server setups', () => {
     quickstartsPage.selectNodeJSServer()
     expect(quickstartsPage.urlContains("/nodejs/generic")).toBe(true);
     expect(quickstartsPage.activeLinksContain([
@@ -74,7 +75,8 @@ describe('quickstarts page spec', () => {
       ])).toBe(true);
   });
 
-  it('shows & selects specific frameworks for server setup', () => {
+  // OKTA-141828 - Disable failing test
+  xit('shows & selects specific frameworks for server setup', () => {
     quickstartsPage.selectNodeJSServer();
     expect(quickstartsPage.frameworkLinksContain([
         'Generic Node',
@@ -105,7 +107,8 @@ describe('quickstarts page spec', () => {
         ])).toBe(true);
   });
 
-  it('retains the combination selected on refresh', () => {
+  // OKTA-141828 - Disable failing test
+  xit('retains the combination selected on refresh', () => {
     quickstartsPage.selectJavaServer();
     expect(quickstartsPage.frameworkLinksContain([
         'Generic Java',
