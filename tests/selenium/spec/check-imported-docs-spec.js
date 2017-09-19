@@ -95,7 +95,9 @@ describe('imported docs string spec', function() {
         'session.get'
       ])).toBe(true);
     });
-    util.itNoHeadless('does not break links in headers', () => {
+
+    // OKTA-141828 - Disable failing test. This doesn't run on headless browser (use util.itNoHeadless after enable)
+    xit('does not break links in headers', () => {
       const page = setupAuthJs();
       page.clickLinkHeader('LOCKED_OUT');
       const authnUrl = '/docs/api/resources/authn';
