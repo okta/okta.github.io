@@ -244,6 +244,8 @@ Now the login screen should load. You can use Chrome's Device Toolbar to see wha
 Add a `login()` method in `src/app/pages/login/login.ts` that uses the Okta Auth SDK to 1) login and 2) exchange the session token for an identity and access token. An [ID token](https://openid.net/specs/openid-connect-core-1_0.html#IDToken) is similar to an identity card, in standard JWT format, signed by the OpenID Provider. Access tokens are part of the OAuth specification. An access token can be a JWT. They are used to access protected resources, often by setting them as an `Authentication` header when making a request.
 
 ```typescript
+import { TabsPage } from '../tabs/tabs';
+...
 login(): void {
   this.oauthService.createAndSaveNonce().then(nonce => {
     const authClient = new OktaAuth({
