@@ -56,7 +56,12 @@
 
 <p>Alternatively, you can create actions to log the user in (or out):</p>
 
-<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">AccountController</span> <span class="p">:</span> <span class="n">Controller</span>
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Authentication.Cookies</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Authentication.OpenIdConnect</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Authorization</span><span class="p">;</span>
+<span class="k">using</span> <span class="nn">Microsoft.AspNetCore.Mvc</span><span class="p">;</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">AccountController</span> <span class="p">:</span> <span class="n">Controller</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="n">IActionResult</span> <span class="nf">Login</span><span class="p">()</span>
     <span class="p">{</span>
@@ -81,7 +86,7 @@
 </code></pre>
 </div>
 
-<p>Open a private or incognito window in your browser and try navigating to a route that has the <code class="highlighter-rouge">[Authorize]</code> attribute, or the <code class="highlighter-rouge">/Account/Login</code> action above. You’ll be redirected to the Okta Sign-In page.</p>
+<p>Open a private or incognito window in your browser and try navigating to a route that has the <code class="highlighter-rouge">[Authorize]</code> attribute, or to the <code class="highlighter-rouge">/Account/Login</code> action above. You’ll be redirected to the Okta Sign-In page.</p>
 
 <blockquote>
   <p>Note: If you want to log the user out, you’ll need to add a <strong>Logout redirect URI</strong> to the application configuration in Okta with a value of <code class="highlighter-rouge">http://{yourServerUrl}/signout-callback-oidc</code>. For example, <code class="highlighter-rouge">http://localhost:5000/signout-callback-oidc</code>.</p>
@@ -92,6 +97,10 @@
 <p>ASP.NET Core automatically populates <code class="highlighter-rouge">HttpContext.User</code> with the information Okta sends back about the user. You can check whether the user is logged in with <code class="highlighter-rouge">User.Identity.IsAuthenticated</code> in your actions or views, and see all of the user’s claims in <code class="highlighter-rouge">User.Claims</code>.</p>
 
 <p>If you want to do more with the user, you can use the <a href="https://github.com/okta/okta-sdk-dotnet">Okta .NET SDK</a> to get or update the user’s details stored in Okta.</p>
+
+<h3 id="example-project">Example project</h3>
+
+<p>If you want a full, working example, head over to the <a href="https://github.com/oktadeveloper/okta-aspnetcore-mvc-example">ASP.NET Core 2.0 MVC example</a> repository.</p>
 
 </body>
 </html>

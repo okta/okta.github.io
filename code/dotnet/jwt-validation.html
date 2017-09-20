@@ -169,8 +169,6 @@
               
                 
               
-                
-              
               
                 
               
@@ -240,8 +238,6 @@
               
                 
               
-                
-              
               
               
               
@@ -277,8 +273,6 @@
                 <a href="/code/dotnet/">.NET</a>
               </li>
             
-              
-                
               
                 
               
@@ -375,8 +369,6 @@
               
                 
               
-                
-              
               
                 
               
@@ -400,7 +392,7 @@
 <p>You <strong>don’t</strong> need to validate tokens manually if:</p>
 
 <ul>
-  <li>You are using ASP.NET or ASP.NET Core with the <code class="highlighter-rouge">JwtBearer</code> or <code class="highlighter-rouge">OpenIdConnect</code> middleware</li>
+  <li>You are using <a href="/quickstart/#/widget/dotnet/aspnet4">ASP.NET</a> or <a href="/quickstart/#/widget/dotnet/aspnetcore">ASP.NET Core</a> with the <code class="highlighter-rouge">JwtBearer</code> or <code class="highlighter-rouge">OpenIdConnect</code> middleware</li>
   <li>You want to send tokens to Okta to be validated (this is called <a href="/docs/api/resources/oauth2.html#introspection-request">token introspection</a>)</li>
 </ul>
 
@@ -409,16 +401,14 @@
 <h2 id="what-youll-need">What you’ll need</h2>
 
 <ul>
-  <li>Your issuer URL</li>
-  <li>JWT (string)</li>
+  <li>Your authorization server URL</li>
+  <li>A JWT (string)</li>
   <li>Libraries for retrieving the signing keys and validating the token</li>
 </ul>
 
-<p>The issuer URL is the URL of your Authorization Server (like <code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/abc123</code>), which you can find in the Okta Developer Dashboard:</p>
+<p>When you create a <a href="https://www.okta.com/developer/signup">new Okta developer org</a>, Okta creates an authorization server called <code class="highlighter-rouge">default</code>. The URL for this authorization server is <code class="highlighter-rouge">https://{yourOktaDomain}.com/oauth2/default</code>. You can always find the full authorization server URL (also called an Issuer URI) in the Okta developer console by opening the <strong>API</strong> menu and choosing <strong>Authorization Servers</strong>.</p>
 
-<p><img src="/assets/authz-server-issuer-8ea3bc88d14a7ab82e163e396d23f6a225030cd31ea9791a4044cfc3a8dc4de6.png" alt="Authorization Server Issuer&58; https&58;//{yourOktaDomain}.com/oauth2/aus9o8wvkhockw9TL0h7" /></p>
-
-<p>In this guide, you’ll use the official Microsoft OpenID Connect and JWT libraries, but you can adapt it to your preferred key parser and JWT validation libraries if necessary.</p>
+<p>In this guide, you’ll use the official Microsoft OpenID Connect and JWT libraries, but you can adapt it to your preferred key parser and JWT validation libraries as well.</p>
 
 <h2 id="get-the-signing-keys">Get the signing keys</h2>
 
@@ -426,9 +416,9 @@
 
 <p>The <code class="highlighter-rouge">OpenIdConnectConfigurationRetriever</code> class in the <a href="https://www.nuget.org/packages/Microsoft.IdentityModel.Protocols.OpenIdConnect/">Microsoft.IdentityModel.Protocols.OpenIdConnect</a> package will download and parse the discovery document to get the key set. You can use it in conjunction with the <code class="highlighter-rouge">ConfigurationManager</code> class, which will handle caching the response and refreshing it regularly:</p>
 
-<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="c1">// Replace with your issuer URL:
+<div class="language-csharp highlighter-rouge"><pre class="highlight"><code><span class="c1">// Replace with your authorization server URL:
 </span>
-<span class="kt">var</span> <span class="n">issuer</span> <span class="p">=</span> <span class="s">"https://{yourOktaDomain}.com/oauth2/{authorizationServerId}"</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">issuer</span> <span class="p">=</span> <span class="s">"https://{yourOktaDomain}.com/oauth2/default"</span><span class="p">;</span>
 
 <span class="kt">var</span> <span class="n">configurationManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ConfigurationManager</span><span class="p">&lt;</span><span class="n">OpenIdConnectConfiguration</span><span class="p">&gt;(</span>
     <span class="n">issuer</span> <span class="p">+</span> <span class="s">"/.well-known/oauth-authorization-server"</span><span class="p">,</span>

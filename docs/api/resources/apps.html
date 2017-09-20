@@ -1713,6 +1713,14 @@
       <td style="text-align: left">FALSE</td>
       <td style="text-align: left">FALSE</td>
     </tr>
+    <tr>
+      <td style="text-align: left">autoKeyRotation</td>
+      <td style="text-align: left">Requested key rotation mode</td>
+      <td style="text-align: left">Boolean</td>
+      <td style="text-align: left">TRUE</td>
+      <td style="text-align: left">FALSE</td>
+      <td style="text-align: left">FALSE</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1859,7 +1867,8 @@ then no redirect URI or response type is necessary. In these cases you can pass 
     "signOnMode": "OPENID_CONNECT",
     "credentials": {
       "oauthClient": {
-        "token_endpoint_auth_method": "client_secret_post"
+        "autoKeyRotation": true
+        "token_endpoint_auth_method": "client_secret_post",
       }
     },
     "settings": {
@@ -1921,6 +1930,7 @@ then no redirect URI or response type is necessary. In these cases you can pass 
       </span><span class="nt">"kid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cg4-_A_ifCK7fsKIKjHP27P0JGeuhnHHKEID1yXy42M"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"oauthClient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"autoKeyRotation"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa1hm4POxgJM6CPu0g4"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="w">
@@ -6805,6 +6815,12 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
       <td>String</td>
       <td>FALSE</td>
     </tr>
+    <tr>
+      <td>autoKeyRotation</td>
+      <td>Requested key rotation mode</td>
+      <td>Boolean</td>
+      <td>TRUE</td>
+    </tr>
   </tbody>
 </table>
 
@@ -6818,10 +6834,14 @@ MIIC4DCCAcgCAQAwcTELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNh
   <li>
     <p>The <code class="highlighter-rouge">client_id</code> must consist of alphanumeric characters or the following special characters <code class="highlighter-rouge">$-_.+!*'(),</code>. It must contain between 6 and 100 characters, inclusive, and must not be the reserved word <code class="highlighter-rouge">ALL_CLIENTS</code>. The <code class="highlighter-rouge">client_secret</code> must consist of printable characters, which are defined in <a href="https://tools.ietf.org/html/rfc6749#appendix-A">the OAuth 2.0 Spec</a>, and must contain between 14 and 100 characters, inclusive.</p>
   </li>
+  <li>
+    <p>If <code class="highlighter-rouge">autoKeyRotation</code> is not specified, the client automatically opts in for Okta’s <a href="/docs/api/resources/oidc.html#validating-id-tokens">key rotation</a>. This property may be updated via the API or via the Okta Admin user interface.</p>
+  </li>
 </ul>
 
 <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"oauthClient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"autoKeyRotation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0oa1hm4POxgJM6CPu0g4"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5jVbn2W72FOAWeQCg7-s_PA0aLqHWjHvUCt2xk-z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"token_endpoint_auth_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"client_secret_post"</span><span class="w">
