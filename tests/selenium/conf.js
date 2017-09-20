@@ -21,7 +21,7 @@ const config = {
     defaultTimeoutInterval: 2 * 60 * 1000 // 2 minutes
   },
 
-  specs: ['spec/*.js'],
+  specs: ['spec/check*.js'],
   capabilities: {},
   troubleshoot: true
 };
