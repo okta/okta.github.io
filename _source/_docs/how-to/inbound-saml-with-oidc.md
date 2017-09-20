@@ -48,7 +48,7 @@ The authorize URL looks like this:
 
 `https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&client_id=0oab8om4bars6Y80Z0h7&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A7000&state=WM6D&nonce=YsG76j`
 
-In this URL, replace `example.okta.com` with your org's base URL, and then input the following:
+In this URL, replace `{yourOktaDomain}.com` with your org's base URL, and then input the following:
 
 - `idp=` is the value of your SAML IdP's `id`
 - `client_id=` is your OIDC Client Application's Client ID
