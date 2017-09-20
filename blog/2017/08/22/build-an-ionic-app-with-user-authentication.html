@@ -421,7 +421,9 @@ ionic serve
 
 <p>Add a <code class="highlighter-rouge">login()</code> method in <code class="highlighter-rouge">src/app/pages/login/login.ts</code> that uses the Okta Auth SDK to 1) login and 2) exchange the session token for an identity and access token. An <a href="https://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID token</a> is similar to an identity card, in standard JWT format, signed by the OpenID Provider. Access tokens are part of the OAuth specification. An access token can be a JWT. They are used to access protected resources, often by setting them as an <code class="highlighter-rouge">Authentication</code> header when making a request.</p>
 
-<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="nx">login</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
+<div class="language-typescript highlighter-rouge"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">TabsPage</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">'../tabs/tabs'</span><span class="p">;</span>
+<span class="p">...</span>
+<span class="nx">login</span><span class="p">()</span><span class="err">:</span> <span class="k">void</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">createAndSaveNonce</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">nonce</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">authClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OktaAuth</span><span class="p">({</span>
       <span class="na">clientId</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">oauthService</span><span class="p">.</span><span class="nx">clientId</span><span class="p">,</span>
