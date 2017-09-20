@@ -2830,7 +2830,7 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 | managerId         | `id` of a user&#8217;s manager                                                                                                     | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                  |
 | manager           | displayName of the user&#8217;s manager                                                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                  |
 
-> Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code. For example, 'en_US' specifies the language English and country US. [Okta Support Doc for ISO compliant Locale values](https://support.okta.com/help/articles/Knowledge_Article/Universal-Directory-enforcement-of-ISO-compliant-Locale-values)
+> Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code. For example, 'en_US' specifies the language English and country US.
 
 ##### Okta Login
 

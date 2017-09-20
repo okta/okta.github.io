@@ -23,7 +23,7 @@ Use Okta’s [Single Sign-On with Okta](/docs/guides/saml_guidance.html) guide f
 #### 2. Integrate Your App
 
 * Sign up for an Okta [developer account](https://developer.okta.com/signup/).
-* In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard) to build a Single Sign-on integration with Okta. For the more visually inclined, see our [video](https://support.okta.com/help/articles/Knowledge_Article/Adding-Applications-Using-the-Application-Integration-Wizard-AIW) for using the App Wizard.
+* In your Okta account (make sure you are signed in as an admin), use the [App Wizard](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard.htm) to build a Single Sign-on integration with Okta.
 * When you are ready, navigate to the Feedback tab of the App Wizard:
     {% img saml-step3.png alt:"Feedback page for App wizard" %}
 

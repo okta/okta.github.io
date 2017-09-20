@@ -68,7 +68,7 @@ Because of this, Okta doesn't make delete requests to the user APIs in downstrea
 #### Sync Password
 
 Okta sets the user’s password to either match the Okta password or to be a randomly generated password.
-Learn more about the overall use case [here](https://support.okta.com/help/articles/Knowledge_Article/Using-Sync-Password?retURL=%2Fhelp%2Fapex%2FKnowledgeArticleJson%3Fc%3DOkta_Documentation%253ADirectories%26p%3D101%26inline%3D1&popup=true).
+Learn more about the overall use case in [Using Sync Password: Active Directory Environments](https://help.okta.com/en/prod/Content/Topics/Security/Security_Using_Sync_Password.htm).
 
 #### Profile Mastering Users
 
@@ -95,7 +95,7 @@ Provisioning actions can be combined to solve for end-to-end use cases.
 
 In many enterprises, Active Directory (or LDAP) is the system of record for employee identities.
 Okta has developed a powerful, lightweight agent to sync with Active Directory to populate employee and group information.
-Within Okta, IT admins can leverage features such as [Universal Directory](https://support.okta.com/help/articles/Knowledge_Article/About-Universal-Directory) and [group membership rules](https://support.okta.com/help/articles/Knowledge_Article/About-Universal-Directory) to map that information when provisioning accounts and permissions in downstream apps.
+Within Okta, IT admins can leverage features such as [Universal Directory](https://help.okta.com/en/prod/Content/Topics/Directory/About_Universal_Directory.htm) and [group membership rules](https://help.okta.com/en/prod/Content/Topics/Directory/About_Universal_Directory.htm) to map that information when provisioning accounts and permissions in downstream apps.
 
 Subsequently, any updates to an employee’s profile, such as a change in department, in either Active Directory or Okta flow into the downstream app.
 Similarly, removing or deactivating an employee from Active Directory triggers deactivation in the downstream app as well.
@@ -159,7 +159,7 @@ Okta has doubled down on our investment in our SCIM client and launched our own 
 ### Provisioning to On-Premise Apps
 
 The options above are geared towards cloud apps but we have a solution for on-premise applications as well.
-See [Configuring On-Premise Provisioning](https://support.okta.com/help/articles/Knowledge_Article/29448976-Configuring-On-Premises-Provisioning) for details about Okta’s agent-based provisioning solution.
+See [the product documentation](https://help.okta.com/en/prod/Content/Topics/Directory/Okta%20Active%20Directory%20Agent.htm) for details about Okta’s agent-based provisioning solution.
 
 ### SCIM Facade
 
@@ -1291,9 +1291,9 @@ Zendesk - https://developer.zendesk.com/apps
 
 [SCIM Overview](https://www.lucidchart.com/techblog/2016/08/04/an-implementers-overview-managing-cloud-identity-with-scim/)
 
-[Okta End-User Management](https://support.okta.com/help/articles/Knowledge_Article/28352376-Overview-of-End-User-Management)
+[Okta End-User Management](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_People.htm)
 
-[Okta Provisioning Basics](https://support.okta.com/help/articles/Knowledge_Article/Provisioning-Concepts-and-Methods)
+[Okta Provisioning Basics](https://help.okta.com/en/prod/Content/Topics/Apps/Provisioning_Deprovisioning_Overview.htm)
 
 [SCIM and Facebook](https://developers.facebook.com/docs/facebook-at-work/provisioning/scim-api)
 
