@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Create a Token with a Groups Claim Using the App Profile
-excerpt: How to use the app profile to create an ID token or  access token that contains a groups claim
+excerpt: How to use the app profile to create an ID token or access token that contains a groups claim
 ---
 
 ## How to Create a Token with a Groups Claim Using the App Profile
@@ -78,7 +78,7 @@ curl -X GET \
 
 ### Step Two:  Add List of Groups to Profile of Client App
  
-If you only have one or two groups to specify, simply add the group IDs to the Okta EL function in the next step.
+If you only have one or two groups to specify, simply add the group IDs to the first parameter of the `getFilteredGroups` function described in the next step.
 However, if you have a lot of groups to whitelist, you can put the group IDs in the client app's profile property bag: `{yourOktaDomain}.com/api/v1/apps/:aid`.
 This example names the group whitelist `groupwhitelist`, but you can name it anything.
 
@@ -218,6 +218,6 @@ fST36rCGaDHmcm3L60JHlEeIbRArkp_793BB8OKRLdh9weNtcA
 }
 ~~~
 
-The token contains a claim for the group WestCoastDivision as specified in the Okta profile (and configured in the authorization server).
+The token contains the group WestCoastDivision so the audience (`aud`) has access to the group information about the user.
 
 > Reminder: For flows other than implicit, post to the token endpoint `{yourOktaDomain}.com/oauth2/:authorizationServerId/v1/token` with the user or client you want. Make sure the user is assigned to the app and to one of the groups from your whitelist.
