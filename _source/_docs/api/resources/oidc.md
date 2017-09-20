@@ -150,6 +150,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the     [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.           | String |
 
 ##### Token Authentication Methods
+
 <!--If you change this section, change the section in oauth2.md as well -->
 
 If you authenticate a client with client credentials, provide the [`client_id` and `client_secret`](#request-parameters-1)
