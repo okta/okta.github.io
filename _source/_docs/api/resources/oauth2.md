@@ -224,17 +224,17 @@ For web and native application types, an additional process is required:
 ##### Token Authentication Methods
 <!--If you change this section, change the section in oidc.md as well -->
 
-If you authenticate a client with client credentials, provide the [`client_id`](oidc.html#request-parameters)
-and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) using either of the following methods:
+If you authenticate a client with client credentials, provide the [`client_id` and `client_secret`](oidc.html#request-parameters)
+using either of the following methods:
 
-* Provide [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+* Provide  the [`client_id` and `client_secret`](#request-parameters-1)
   in an Authorization header in the Basic auth scheme (`client_secret_basic`). For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request:
   ~~~sh
   Authorization: Basic ${Base64(<client_id>:<client_secret>)}
   ~~~
-* Provide [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+* Provide [`client_id` and `client_secret`](#request-parameters-1)
   as additional parameters to the POST body (`client_secret_post`)
-* Provide [`client_id`](oidc.html#request-parameters) in a JWT that you sign with the [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+* Provide [`client_id`](#request-parameters-1) in a JWT that you sign with the [`client_secret`](#request-parameters-1)
   using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request. 
 
 Use only one of these methods in a single request or an error will occur.

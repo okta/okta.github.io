@@ -22,7 +22,7 @@ Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 Adds a new group with `OKTA_GROUP` type to your organization.
 
 > Application import operations are responsible for syncing groups with `APP_GROUP` type such as Active Directory groups.<br>
-> See [Importing and Using Groups in Okta](https://support.okta.com/help/articles/Knowledge_Article/92113353-Importing-and-Using-Groups-in-Okta) for more information.
+> See [Importing Groups into Okta](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_Groups.htm) for more information.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}

@@ -74,7 +74,7 @@ In addition to amplifying your launch marketing, we’ll alert our thousands of 
 
 * Product Release Notes
 
-    We’ll include enhancements to your integration in the “Application Update” section of our [Product Release Notes](https://support.okta.com/help/articles/Knowledge_Article/Okta-Production-Release-2017-02).
+    We’ll include enhancements to your integration in the “Application Update” section of our [Product Release Notes](https://help.okta.com).
 
 #### Ongoing Marketing Opportunities
 
