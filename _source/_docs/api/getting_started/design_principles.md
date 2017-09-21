@@ -339,7 +339,7 @@ For all endpoints not listed, the API rate limit is a combined 10,000 requests p
 		</tr>
 		<tr>
 			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users/<i>{:id}</i></span> (exact URL plus query params or other qualifiers)</td>
-			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
 		</tr>
 		<tr>
 			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users</span></td>
