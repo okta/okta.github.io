@@ -4,8 +4,8 @@
     // and make a postMessage request
     var iframe = document.getElementById('myOkta');
     if (!iframe) { return; }
-    iframe.contentWindow.postMessage({messageType: 'get_accounts_json'}, 'https://login.okta.com');        
     window.addEventListener("message", receiveMessage, false);
+    iframe.contentWindow.postMessage({messageType: 'get_accounts_json'}, 'https://login.okta.com');
   });
 
   function receiveMessage(event) {
