@@ -39,7 +39,8 @@ ga_ua_id: "UA-15777010-3"
 # This variable will prevent user from committing sitemap with local url
 production_url: "https://developer.okta.com"
 
-include: [_static]
+include: [_static, .nojekyll]
+
 
 assets:
   compress:
