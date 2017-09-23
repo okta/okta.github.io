@@ -11,7 +11,8 @@ This process optionally uses Okta's flexible app profile, which accepts any JSON
 that can then easily be referenced. This is especially useful if you have a large number of groups to whitelist or otherwise
 need to set group whitelists on a per-application basis.
 
-Once you create the group whitelist and add it to an app, tokens for that app will contain the groups from the whitelist if the user is a member. 
+Once you complete Steps 1-3, tokens for an app will contain the groups from the whitelist as shown in [Step Four](#step-four-test-that-the-claim-is-delivered-in-the-token).
+Remember that the groups from the whitelist are added to the token only if the user is a member of the group. 
 
 ### Before You Start
 
@@ -78,7 +79,6 @@ curl -X GET \
     }
 ]
 ~~~
-    
 
 ### Step Two:  Add List of Groups to Profile of Client App
  
@@ -144,6 +144,8 @@ Add a custom claim for the ID token on a Custom Authorization Server with the fo
 
 #### Request Example
 
+In this example, the `name` for the claim is `groups`, but you can name it whatever you wish.
+
 ~~~curl
 curl -X POST \
   https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/claims \
@@ -163,13 +165,14 @@ curl -X POST \
 }'
 ~~~
   
->Hint: You can also configure this value in the Okta user interface for editing claims, in **Mapping**: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
+Hints:
+
+* You can also configure this value in the Okta user interface for editing claims, in **Mapping**: `getFilteredGroups(app.profile.groupwhitelist, "group.name", 40)`.
+* Be sure that you have a policy and rule set up in your Custom Authorization Server or the request in the next step won't work.
 
 See [group function documentation](/reference/okta_expression_language/#group-functions) for more information about specifying groups with `getFilteredGroups`.
 
-In the token, the dynamically evaluated list of groups appears under the `name` you specify. In this example, `groups`.
-
->Reminder: Be sure that you have a policy and rule set up in your Custom Authorization Server or the request in the next step won't work.
+Now when you mint a token, groups in the `groupwhitelist` that also have the user as a member are included in the `groups` claim. Test your configuration in the next step.
 
 ### Step Four: Test that the Claim Is Delivered in the Token
 
