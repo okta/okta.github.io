@@ -11,9 +11,6 @@ This process optionally uses Okta's flexible app profile, which accepts any JSON
 that can then easily be referenced. This is especially useful if you have a large number of groups to whitelist or otherwise
 need to set group whitelists on a per-application basis.
 
-Once you complete Steps 1-3, tokens for an app will contain the groups from the whitelist as shown in [Step Four](#step-four-test-that-the-claim-is-delivered-in-the-token).
-Remember that the groups from the whitelist are added to the token only if the user is a member of the group. 
-
 ### Before You Start
 
 * Create an OAuth 2.0 or OpenID Connect client with the [Apps API](/docs/api/resources/apps.html#request-example-8). In the instruction examples, the client ID is `0oabskvc6442nkvQO0h7`.
