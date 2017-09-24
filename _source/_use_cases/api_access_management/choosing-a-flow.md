@@ -15,7 +15,7 @@ Each set of transactions from end user to desired resource and back is called a 
 The flows defined in OAuth 2.0 and OpenID Connect overlap and present many options, so you may not be sure which flow to use.
 This topic explain the options we've implemented in Okta in accordance with the specs, and provides guidance around when to use which flow.
 
-## Quick Reference
+## Assess Your Needs
 
 Each flow serves a different basic scenario:
 
@@ -51,9 +51,9 @@ and seeking authentication of a user (OpenID Connect). In practice, you may be c
 
 Now that you've narrowed down the choices of which flow to use, you can learn about the different elements Okta has implemented to refine your choice.
 
-## Refining Your Choice
+## Refine Your Choice
 
-Choosing a flow depends on what you wish to do. Use the following details to ensure the flow(s) you choose fit your specific scenario.
+Choosing between authorization code, implicit, or hybrid flows depends on what you wish to do. Use the following details to ensure the flow(s) you choose fit your specific scenario.
 
 The [OAuth 2.0 spec](https://tools.ietf.org/html/rfc6749#section-1.3) and [OpenID Connect spec](https://openid.net/specs/openid-connect-core-1_0.html#Authentication) have defined a set of flows and the behaviors they should exhibit.
 Okta models the key actors (users, apps or services, resources to be accessed) with properties, and then specifies the behavior of each property for each flow.
