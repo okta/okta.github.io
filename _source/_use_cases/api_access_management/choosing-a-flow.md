@@ -23,17 +23,17 @@ Each flow serves a different basic scenario:
 * Is a user even involved in the transaction? Is there a user context?
 * Is the authenticated user being given access to resources from a third party?
 * Are all parties inside a trusted barrier?
-* Do you have a combination of the above goals for complex goals or complicated environments? 
+* Do you have complex goals or complicated environments? 
 
-Without any other details to consider, use the answer to these questions to choose a flow:
+After answering these basic questions, you can narrow down the choice of flows:
 
 1. Are you working in a trusted environment, for example all clients and resources are behind the same firewall? If no, go to next step. If Yes, choose password or client credentials flow. 
-    a. Is there any human interaction? If yes, use password flow which passes username and password as credentials. If no, use client credentials flow, which passes a client ID and client secret.
+    a. Is there any human interaction? If yes, use **password** flow which passes username and password as credentials. If no, use **client credentials** flow, which passes a client ID and client secret.
     
-2. Do you want to authenticate the user's credentials before authenticating them to access a resource? If No, go to next step. If Yes, choose one:
-    a. Authorization code: In this commonly used flow, user credentials are exchanged for a code that is then passed to access a resource or get a refresh token.
-    b. Implicit: For browser-based apps (JavaScript) with no back-end component. The user credentials are exchanged for an ID token and redirection response that are sent together.
-    c. Hybrid: Seldom used, this flow supports the front-end app and back-end component receiving tokens independent of each other. It is only defined in the OpenID Connect spec. <!-- Why is this only defined in OIDC? -->
+2. Do you want to validate the user's credentials before authenticating them to access a resource? If No, go to next step. If Yes, choose one:
+    a. **Authorization code** flow: In this commonly used flow, user credentials are exchanged for a code that is then passed to access a resource or get a refresh token.
+    b. **Implicit** flow: For browser-based apps (JavaScript) with no back-end component. The user credentials are exchanged for an ID token and redirection response that are sent together.
+    c. **Hybrid** flow: Seldom used, this flow supports the front-end app and back-end component receiving tokens independent of each other. It is only defined in the OpenID Connect spec. <!-- Why is this only defined in OIDC? -->
 
 3. Do you simply want to refresh an existing token due to time limit or other barrier? Use the authorization code flow.
 
@@ -89,10 +89,10 @@ In Okta, all apps and services are represented by a client application defined i
 
 We support the following [app types](https://developer.okta.com/docs/api/resources/oauth-clients.html#client-application-model) for OAuth 2.0 and OpenID Connect:
 
-* Native (iOS, Android) an app on a smart phone or other mobile device
-* Single-Page App (SPA)
-* Web App: may be simple or complex
-* Service App: Common for IoT applications or whenever one service needs to talk to another without a user context.
+* **Native** (iOS, Android): an app on a smart phone or other mobile device.
+* **Single-Page App** (SPA): an app on the web that updates a single page as the user interacts with it, like GMail or (most of) Twitter.
+* **Web App**: an app on the web with more than one page. It may be simple or complex.
+* **Service App**: Common for IoT applications or whenever one service needs to talk to another without a user context.
 
 When you create an app in Okta, you'll choose one of these types, represented by [the `application_type` property](/docs/api/resources/oauth-clients.html#client-application-properties).
 Some apps, like a service app, require specific flows, while other app types may use a range of flows.
@@ -104,20 +104,20 @@ Some apps, like a service app, require specific flows, while other app types may
 A grant type is the method a client app or service uses to obtain a token.
 Okta supports the following `grant_type` values, most named after the flows defined in the OAuth 2.0 and OpenID Connect specs:
 
-* Authorization code (`authorization_code`): the flow will use a code passed to it from the authorization endpoint to complete delegated authentication to the app or service.
-* Implicit: If no grant type is specified, and no response_mode is specified (or is `fragment`, the default), the flow is implicit and <!-- I'm confused. Our docs indicate only OpenID Connect supports implicit, but the spec says it doesn't use it. Que? -->
-* Hybrid (no grant type value):
-* Password (`password`): Use only in a trusted environment. A login page collects a user's credentials, then passes them to the security token service.
-* Client credentials (`client_credentials`): Use only in a trusted environment. For machine-to-machine access. This flow is OAuth 2.0 only, because OpenID Connect is an identity protocol. With no user context, no ID token is needed.
-* Refresh token (`refresh_token`): You may need a refresh token for long-running flows. 
+* **Authorization code** (`authorization_code`): the flow will use a code passed to it from the authorization endpoint to complete delegated authentication to the app or service.
+* **Implicit**: If no grant type is specified, and no `response_mode` is specified (or is specified as `fragment`, the default), the flow is implicit and <!-- I'm confused. Our docs indicate only OpenID Connect supports implicit, but the spec says it doesn't use it. Que? -->
+* **Hybrid** (no grant type value): Hybrid grant types are a combination of the other grant types in a single flow. For example, ______________.
+* **Password** (`password`): Use only in a trusted environment. A login page collects a user's credentials, then passes them to the security token service.
+* **Client credentials** (`client_credentials`): Use only in a trusted environment. For machine-to-machine access. This flow is OAuth 2.0 only, because OpenID Connect is an identity protocol. With no user context, no ID token is needed.
+* **Refresh token** (`refresh_token`): You may need a refresh token for long-running flows. 
 
 So how do you know if these grant types (flows) represent an OAuth 2.0 or OpenID Connect context? As mentioned earlier, if you are requesting the `openid` scope, that's an OpenID Connect flow.
+In Okta production orgs, you must have the API Access Management feature enabled to use custom authorization servers (regardless of the kind of token being requested). <!-- What else to say here to prevent problems? -->
 
 #### Response Types and Tokens
 
-There's one more variable to account for, the response type. The response type indicates what will be returned in the response:
-an ID token, an access token, a refresh token, an authorization code, or some combination of the four. 
-If the information needed is only about the user, an ID token is sufficient. If additional information is needed, , an access token may be required.
+The response type indicates what will be returned in the response: an ID token, an access token, a refresh token, an authorization code, or some combination of the four. 
+If the information needed is only about the user, an ID token is sufficient. If additional information is needed, an access token may be required.
 
 * ID token, for flows where the user needs to be identified. Don't send an ID token to an API.
 * Access token, for flows where the user's access to a particular resource needs to be evaluated. Don't send an access token to identify a user.
@@ -127,7 +127,7 @@ If the information needed is only about the user, an ID token is sufficient. If 
 Why is the authorization code included in this list with the tokens? Because some flows have the user enter their username and password, 
 which you don't want to share with other entities, so the authorization code is used for the duration of the flow.
 
-Once you know the flow you want, you can specify the correction response type:
+Once you know the flow you want, you can specify the correction response type or combination of types:
 
 | Response Type | ID Token | Access Token | Refresh Token | Authorization Code |
 |:--------------|:---------|:-------------|:--------------|:-------------------|
@@ -141,12 +141,21 @@ Remember that developer orgs have most features enabled, but production orgs req
 
 #### Okta API Endpoints
 
-Okta provides two endpoints, `/authorize` and `/token`, for authentication. `/authorize` returns tokens and an authorization grant.
-______________________________________
-Notes from Hipchat:
+Okta provides two endpoints for authentication: `/oauth2/:authorizationServerId/authorize` (`/oauth2/v1/authorize` for the Okta Org authorization server) and `/oauth2/:authorizationServerId/token` (`/oauth2/v1/token` for the Okta Org authorization server).
+The authorize endpoint returns tokens and an authorization grant (`authorization_code`), while the `/token` endpoint consumes the `authorization_code`, and returns the requested tokens.
 
-doc question: We don't have a grant_type value specified for implicit in our doc. However, grant_types_supported does list that value. Should I add "implicit" as one of the values for `grant_type`? Or explain that no values specified = implicit?  Or...?
-2nd question: there's no grant_type value for hybrid--is that because it's a combo of auth code and implicit (i.e. you'll specify different values for grant in different requests during the flow)?
+### Putting It All Together
+
+Let's run through a few examples to help you put it all together.
+
+#### Scenario One: Simple Identity
+
+You need your app to authorize a user and know their email and full name. You aren't trying to access an API or other third-party resource.
+
+* Flow: Implicit
+
+________________________________________________________________________________________________
+Hipchat answers:
 answer: we don't specify grant type in the /authorize call since you don't provide a grant in the request itself, so yes, I think your understanding on the second question is right
 answer: yeah, for /authorize requests, the 'response_type' determine what come back, so it's implicit if its just token and/or id_token, authorization_code if just code, or hybrid if code and one or both of the tokens
 
