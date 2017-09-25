@@ -5,7 +5,7 @@ libraryName: Okta Sign-In Page
 
 ##### Overview
 
-The Okta Sign-In Page provides the easiest, most secure way to allow users to authenticate into your application.
+The Okta Sign-In Page provides the easiest, most secure way to allow users to authenticate into your application.  The Sign-In Page is hosted by Okta on the domain of your Okta Org, as such it is the fastest way to get authentication working in your application.  If you need more customization you can host the Sign-In experience within your own application by using the Okta Sign-In Widget (see tab above).
 
 {% img okta-sign-in-page.png alt:"Okta Sign-In Page" width:"800" %}
 
