@@ -10,10 +10,13 @@ fi
 # 2. Run the npm install to pull in test dependencies
 npm install
 
-# 3. Run tests
+# 3. build the site
+npm run build-prod
+
+# 4. Run tests
 npm test
 
-# 4. Run lint and localhost:4000 checker
+# 5. Run lint and localhost:4000 checker
 export GENERATED_SITE_LOCATION="dist"
 
 # 5. Run Lint checker
