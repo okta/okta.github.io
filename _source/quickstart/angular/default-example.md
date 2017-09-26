@@ -19,7 +19,7 @@ At the end of the Angular instructions you can choose your server type to learn 
 ## Add an OpenID Connect Client in Okta
 In Okta, applications are OpenID Connect clients that can use Okta Authorization servers to authenticate users.  Your Okta Org already has a default authorization server, so you just need to create an OIDC client that will use it.
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
-* Choose **Single Page App (SPA)** as the platform, then submit the form the default values, which should look like this:
+* Choose **Single Page App (SPA)** as the platform, then populate your new OpenID Connect application with values suitable for your app. If you are running this locally and using the defaults from the [Angular Quickstart](https://angular.io/guide/quickstart), your `port` will be `4200`:
 
 | Setting             | Value                                          |
 | ------------------- | ---------------------------------------------- |
@@ -68,7 +68,7 @@ const config = {
 
 ## Attach Components to Routes
 
-You'll need to provide these routes in your sample application, so that we can sign the user in and handle the callback from Okta:
+You'll need to provide these routes in your sample application, so that we can sign the user in and handle the callback from Okta. We will show you how to set these up below using [Angular Router](https://angular.io/guide/router):
 
 - `/`: A default home page to handle basic control of the app.
 - `/implicit/callback`: Handle the response from Okta and store the returned tokens.
@@ -81,6 +81,7 @@ import { Component } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
 
 @Component({
+  selector: 'app-root',
   template: `
     <button *ngIf="!oktaAuth.isAuthenticated()" (click)="oktaAuth.loginRedirect()"> Login </button>
     <button *ngIf="oktaAuth.isAuthenticated()" (click)="oktaAuth.logout()"> Logout </button>
@@ -95,6 +96,8 @@ export class AppComponent {
 In order to handle the redirect back from Okta, you need to capture the token values from the URL. You'll use `/implicit/callback` as the callback URL, and specify the default `OktaCallbackComponent` and declare it in your `NgModule`.
 
 ```typescript
+import { Routes, RouterModule } from '@angular/router';
+
 const appRoutes: Routes = [
   {
     path: 'implicit/callback',
@@ -102,14 +105,6 @@ const appRoutes: Routes = [
   },
   ...
 ]
-
-@NgModule({
-  ...
-  declarations: [
-    ...
-    ProtectedComponent
-  ]
-})
 ```
 
 ### Update your `NgModule`
