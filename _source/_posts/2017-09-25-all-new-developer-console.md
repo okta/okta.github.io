@@ -65,7 +65,7 @@ In the new application wizard you’ll notice that we pre-fill a lot of the valu
 
 ### Contextual Help and Examples
 
-Creating and configuring your Okta application is just the first step, from there you need to integrate it into your actual application or service.  As you know, this is best done by example.  When you are creating or editing your application in Okta, there is a new sidebar on the right that will link you to our new [Quickstart Documentation](https://developer.okta.com/quickstart), tailored to the type of application you are working on.
+Creating and configuring your Okta application is just the first step, from there you need to integrate it into your actual application or service.  As you know, this is best done by example.  When you are creating or editing your application in Okta, there is a new sidebar on the right that will link you to our new [Quickstart Documentation](https://developer.okta.com/quickstart/), tailored to the type of application you are working on.
 
 {% img blog/new-dev-console/quickstarts.png alt:"Default AS" %}{: .center-image }
 
