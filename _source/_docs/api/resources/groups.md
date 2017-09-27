@@ -47,7 +47,7 @@ curl -v -X POST \
 -d '{
   "profile": {
     "name": "West Coast Users",
-    "description": "Straight Outta Compton"
+    "description": "All Users West of The Rockies"
   }
 }' "https://{yourOktaDomain}.com/api/v1/groups"
 ~~~
@@ -67,7 +67,7 @@ curl -v -X POST \
   "type": "OKTA_GROUP",
   "profile": {
     "name": "West Coast Users",
-    "description": "Straight Outta Compton"
+    "description": "All Users West of The Rockies"
   },
   "_links": {
     "logo": [
@@ -137,7 +137,7 @@ curl -v -X GET \
   "type": "OKTA_GROUP",
   "profile": {
     "name": "West Coast Users",
-    "description": "Straight Outta Compton"
+    "description": "All Users West of The Rockies"
   },
   "_links": {
     "logo": [
@@ -280,7 +280,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00garwpuyxHaWOkdV0g4&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -383,7 +383,7 @@ curl -v -X GET \
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -446,7 +446,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00gak46y5hydV6NdM0g4&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -543,7 +543,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -606,7 +606,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -703,7 +703,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -1758,7 +1758,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps?afte
   "type": "OKTA_GROUP",
   "profile": {
     "name": "West Coast Users",
-    "description": "Straight Outta Compton"
+    "description": "All Users West of The Rockies"
   },
   "_links": {
     "logo": [
@@ -1835,7 +1835,7 @@ Profile for any group that is **not** imported from Active Directory
 ~~~json
 {
   "name": "West Coast Users",
-  "description": "Straight Outta Compton"
+  "description": "All Users West of The Rockies"
 }
 ~~~
 
