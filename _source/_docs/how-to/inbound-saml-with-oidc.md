@@ -23,7 +23,7 @@ In addition to a SAML IdP that supports SP-initiated SAML, and an Okta org, this
 
 ### 1. Configure your SAML Identity Provider inside Okta
 
-The configuration information for your external Identity Provider is stored within an Identity Provider entity inside Okta. The instructions for creating a SAML IdP inside Okta can be found on the [Configuring Inbound SAML Support Page](https://support.okta.com/help/Documentation/Knowledge_Article/40561903-Configuring-Inbound-SAML).
+The configuration information for your external Identity Provider is stored within an Identity Provider entity inside Okta. The instructions for creating a SAML IdP inside Okta can be found on the [Configuring Inbound SAML](https://help.okta.com/en/prod/Content/Topics/Security/Identity_Providers.htm).
 
 > If you need a quick and easy SAML Identity Provider to use for testing purposes, you can try using this one: <https://github.com/mcguinness/saml-idp>
 
@@ -31,7 +31,7 @@ Once you are done with the configuration, take note of the value at the end of y
 
 ### 2. Configure an OpenID Connect Client Application
 
-You will also need to add an OIDC Client Application inside Okta. Users that are signing in for the first time will have [user entities](/docs/api/resources/users.html) created for them and associated with this application. You can add an OIDC App using [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm). You will also need to assign the application to either "Everyone" or a particular Group that you'd like your new SAML users to be associated with. For more information, see [How to assign a User to an Application](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning).
+You will also need to add an OIDC Client Application inside Okta. Users that are signing in for the first time will have [user entities](/docs/api/resources/users.html) created for them and associated with this application. You can add an OIDC App using [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm). You will also need to assign the application to either "Everyone" or a particular Group that you'd like your new SAML users to be associated with. For more information, see [Assign Applications](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_Apps_Page.htm).
 
 Once you are done setting this up, be sure to copy the Client ID for your new application.
 

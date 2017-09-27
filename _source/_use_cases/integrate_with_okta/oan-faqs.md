@@ -65,13 +65,13 @@ A: There are two different app certification levels in the OIN – Okta Verified
 
 **Q: I’m setting up a SAML 2.0 app using the App Wizard and we have different domains for each customer. How do you manage these types of situations?**
 
-A: Currently, the App Wizard does not support custom domains. Create an app integration as you normally would using the [App Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard). In step #3 Feedback, please try to include in the “How to enable SAML” section or email <developers@okta.com>. Our team will work with you to add this functionality when they begin to work with you.
+A: Currently, the App Wizard does not support custom domains. Create an app integration as you normally would using the [App Wizard](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard.htm). In step #3 Feedback, please try to include in the “How to enable SAML” section or email <developers@okta.com>. Our team will work with you to add this functionality when they begin to work with you.
 
 <br/>
 
 **Q: My app currently supports WS-FED for single sign-on. Can I use the App Wizard?**
 
-A: The Okta App Wizard only supports SAML 2.0 for federated single sign-on. If your app supports WS-Fed, you will instead need to create a [WS-Fed Template App](https://support.okta.com/help/articles/Knowledge_Article/Web-Security-Federation-WS-Fed-Template-Overview). Once completed, the Template Application you have created will only be able to be used within your account. In order to promote your Template App to the Okta Integration Network, please email a screenshot of the configured app details to <developers@okta.com> with your app name in the subject line.
+A: The Okta App Wizard only supports SAML 2.0 for federated single sign-on. If your app supports WS-Fed, you will instead need to create a [WS-Fed Template App](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_Configure_Okta%20Template_WS_Federation.htm). Once completed, the Template Application you have created will only be able to be used within your account. In order to promote your Template App to the Okta Integration Network, please email a screenshot of the configured app details to <developers@okta.com> with your app name in the subject line.
 
 <br/>
 
@@ -83,7 +83,7 @@ A: Currently, the App Wizard does not support extra login fields. Create an app 
 
 **Q: Does Okta support single logout / single sign-out (SAML protocol)?**
 
-A: Yes. For more information, see [Using the App Integration Wizard](https://support.okta.com/help/articles/Knowledge_Article/Using-the-App-Integration-Wizard#SAML_Single_Logout_section).
+A: Yes. For more information, see [Using the App Integration Wizard: SAML App Wizard: Advanced Settings](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard.htm).
 
 <br/>
 

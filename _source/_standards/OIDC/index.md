@@ -229,7 +229,7 @@ Be aware of the following before you work with scope-dependent claims:
 
 * To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100.
 If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
-For more information about configuring an app for OpenID Connect, including group claims, see [Using OpenID Connect](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect).
+For more information about configuring an app for OpenID Connect, including group claims, see [OpenID Connect Wizard](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard.htm).
 * **Important:** Scope-dependent claims are returned differently depending on the values in `response_type` and the scopes requested:
 
     | Response Type             | Claims Returned in ID Token                                                                        | Claims Returned from the Userinfo Endpoint  |
