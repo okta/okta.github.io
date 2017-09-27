@@ -207,7 +207,7 @@ curl -v -X GET \
     ],
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
