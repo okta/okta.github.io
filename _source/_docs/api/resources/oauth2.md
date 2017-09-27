@@ -224,18 +224,15 @@ For web and native application types, an additional process is required:
 ##### Token Authentication Methods
 <!--If you change this section, change the section in oidc.md as well -->
 
-If you authenticate a client with client credentials, provide the [`client_id`](oidc.html#request-parameters)
-and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) using either of the following methods:
+If you authenticate a client with client credentials, provide the [`client_id` and `client_secret`](#request-parameters-1)
+using either of the following methods:
 
-* Provide [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
-  in an Authorization header in the Basic auth scheme (`client_secret_basic`). For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request:
+* Provide  the `client_id` and `client_secret` in an Authorization header in the Basic auth scheme (`client_secret_basic`). For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request:
   ~~~sh
   Authorization: Basic ${Base64(<client_id>:<client_secret>)}
   ~~~
-* Provide [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
-  as additional parameters to the POST body (`client_secret_post`)
-* Provide [`client_id`](oidc.html#request-parameters) in a JWT that you sign with the [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
-  using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request. 
+* Provide `client_id` and `client_secret` as additional parameters to the POST body (`client_secret_post`)
+* Provide `client_id` in a JWT that you sign with the `client_secret` using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request. 
 
 Use only one of these methods in a single request or an error will occur.
 
@@ -2307,6 +2304,8 @@ If `valueType` is `GROUPS`, then the groups returned are filtered according to t
 * `EQUALS`: Group name is the same as `value` (not case sensitive). For example, if `value` is `group1`, then `group1` and `Group1` are included, but `group123` isn&#8217;t.
 * `CONTAINS`: Group names contain `value` (not case sensitive). For example, if `value` is `group1`, then `MyGroup123` and `group1` are included.
 * `REGEX`: Group names match the REGEX expression in `value` (case sensitive). For example if `value` is `/^[a-z0-9_-]{3,16}$/`, then any group name that has at least 3 letters, no more than 16, and contains lower case letters, a hyphen, or numbers. 
+
+If you have complex filters for groups, you can [create a groups whitelist](/docs/how-to/creating-token-with-groups-claim.html) to put them all in a claim.
 
 ##### Details for `alwaysIncludeInToken`
 

@@ -40,7 +40,7 @@ If you want to see the Sign-in Widget in action for yourself, you will need thre
 
 - An Okta Developer org, which you can sign-up for here: <https://developer.okta.com/signup/>
 - A client Application in Okta: for more information, you can read about [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm)
-- At least one [User assigned to it](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning)
+- At least one [User assigned to it](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_Apps_Page.htm#Assigning)
 
 Once you have these prerequisites, getting the Sign-in Widget working has four steps:
 

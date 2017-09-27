@@ -14,7 +14,7 @@ Explore the Events API: [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 
 ## Data Retention
 
-Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy}(https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
+Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
 ## Event Operations
 

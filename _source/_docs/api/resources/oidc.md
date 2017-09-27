@@ -150,19 +150,20 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the     [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.           | String |
 
 ##### Token Authentication Methods
+
 <!--If you change this section, change the section in oauth2.md as well -->
 
-If you authenticate a client with client credentials, provide the [`client_id`](oidc.html#request-parameters)
-and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect) using either of the following methods:
+If you authenticate a client with client credentials, provide the [`client_id` and `client_secret`](#request-parameters-1)
+using either of the following methods:
 
-* Provide [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+* Provide `client_id` and `client_secret`
   in an Authorization header in the Basic auth scheme (`client_secret_basic`). For authentication with Basic auth, an HTTP header with the following format must be provided with the POST request:
   ~~~sh
   Authorization: Basic ${Base64(<client_id>:<client_secret>)}
   ~~~
-* Provide [`client_id`](oidc.html#request-parameters) and [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+* Provide the `client_id` and `client_secret`
   as additional parameters to the POST body (`client_secret_post`)
-* Provide [`client_id`](oidc.html#request-parameters) in a JWT that you sign with the [`client_secret`](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect)
+* Provide `client_id` in a JWT that you sign with the `client_secret`
   using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request. 
 
 Use only one of these methods in a single request or an error will occur.

@@ -194,7 +194,7 @@ To test your Authorization Server more thoroughly, you can try a full authentica
 
 For more information you can read about: 
 - [The OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm)
-- [How to assign a User to an Application](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning)
+- [Assign Applications](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_Apps_Page.htm)
 
 You will need the following values from your Application:
 
