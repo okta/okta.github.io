@@ -109,7 +109,7 @@ They may not have made my top 10 list, but I’d also like to recognize a few se
 
 ## Have Fun at JavaOne!
 
-There you have it, my list of the top 10 sessions (plus a few more!) to attend as a Java Hipster at JavaOne. I’m sure there are many other excellent talks,ut these are the ones that stood out to me. Of course, you should probably attend the [Developer Keynote](https://events.rainfocus.com/catalog/oracle/oow17/catalogjavaone17?search=%22Developer%20Keynote%22&showEnrolled=false) too. 
+There you have it, my list of the top 10 sessions (plus a few more!) to attend as a Java Hipster at JavaOne. I’m sure there are many other excellent talks, but these are the ones that stood out to me. Of course, you should probably attend the [Developer Keynote](https://events.rainfocus.com/catalog/oracle/oow17/catalogjavaone17?search=%22Developer%20Keynote%22&showEnrolled=false) too. 
 
 Since this post is on the Okta Developer blog, and Okta is a security company, I’d be remiss if I didn’t include some security sessions that caught my eye. Check these out if security is on the top of your mind!
 
