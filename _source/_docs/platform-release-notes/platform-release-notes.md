@@ -23,7 +23,7 @@ Dates for preview and production release are the earliest possible release date.
 In order to protect the service for all customers, Okta enforces concurrent rate limits starting with this release.
 Concurrent limits are distinct from [the org-wide, per-minute API rate limits](/docs/api/getting_started/design_principles.html#org-wide-rate-limits).
 
-For concurrent rate limits, traffic is measured in three different areas (counts in one area aren't included in counts for the other two):
+For concurrent rate limits, traffic is measured in three different areas. Counts in one area aren't included in counts for the other two:
 
 * For agent traffic, Okta measured each org's traffic and set the limit at above the highest usage in the last four weeks.
 * For Office365 traffic, the limit is 70 concurrent transactions per org.
@@ -171,7 +171,7 @@ Transfer-Encoding: chunked
 
 Notice that instead of the typical counts for time-based rate limits, when a request exceeds the limit for concurrent requests,
 `X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining`, and `X-Rate-Limit_Reset` report the concurrent values instead. The reset time
-is only an estimate, there's no guarantee that enough requests will have completed to go below the concurrent rate limit.
+is only a suggestion, there's no guarantee that enough requests will complete to stop exceeding the concurrent rate limit.
 
 For more information, see developer documentation about [rate limit headers](/docs/api/getting_started/design_principles.html#rate-limiting). <!-- OKTA-140976, OKTA-142995 -->
 
