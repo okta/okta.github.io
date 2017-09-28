@@ -751,15 +751,13 @@ To learn more about forms and validation, see [Angular forms documentation](http
 
 ## Create an OpenID Connect App in Okta
 
-OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see [https://openid.net/connect/](https://openid.net/connect/).
+OpenID Connect (OIDC) is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of the user and, as well as to obtain their basic profile information. To learn more, see [https://openid.net/connect](https://openid.net/connect/).
 
 To integrate [Okta](https://developer.okta.com) for user authentication, you'll first need to [register](https://developer.okta.com/signup/) and create an OIDC application.
 
-Login to your Okta account, or [create one](https://developer.okta.com/signup/) if you don’t have one. Navigate to **Admin > Add Applications** and click on the **Create New App** button. Select **Single Page App (SPA)** for the Platform and **OpenID Connect** for the sign on method. Click the **Create** button and give your application a name. On the next screen, add `http://localhost:4200` as a Redirect URI and click **Finish**. You should see settings like the following.
+Login to your Okta account, or [create one](https://developer.okta.com/signup/) if you don’t have one. Navigate to **Applications** and click on the **Add Application** button. Select **SPA** and click **Next**. On the next page, specify `http://localhost:4200` as a Base URI, Login redirect URI, and Logout redirect URI. Click **Done** and you should see settings like the following.
 
-{% img blog/angular-oidc/oidc-settings.png alt:"OIDC App Settings" width:"800" %}
-
-Click on the **People** tab and the **Assign to People** button. Assign yourself as a user, or someone else that you know the credentials for.
+{% img blog/angular-oidc/oidc-settings.png alt:"OIDC App Settings" width:"700" %}{: .center-image }
 
 Install [Manfred Steyer's](https://github.com/manfredsteyer) project to [add OAuth 2 and OpenID Connect support](https://github.com/manfredsteyer/angular-oauth2-oidc) using npm.
 
@@ -767,7 +765,7 @@ Install [Manfred Steyer's](https://github.com/manfredsteyer) project to [add OAu
 npm install --save angular-oauth2-oidc
 ```
 
-Modify `src/app/app.component.ts` to import `OAuthService` and configure your app to use your Okta application settings.
+Modify `src/app/app.component.ts` to import `OAuthService` and configure your app to use your Okta application's settings. 
 
 ```typescript
 import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
@@ -776,9 +774,9 @@ import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
 
   constructor(private oauthService: OAuthService) {
     this.oauthService.redirectUri = window.location.origin;
-    this.oauthService.clientId = '[client-id]';
+    this.oauthService.clientId = '{client-id}';
     this.oauthService.scope = 'openid profile email';
-    this.oauthService.issuer = 'https://dev-[dev-id].oktapreview.com';
+    this.oauthService.issuer = 'https://dev-{dev-id}.oktapreview.com';
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
 
     // Load Discovery Document and then try to login the user
@@ -1110,6 +1108,10 @@ You can find a completed version of the application created in this blog post [o
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Kb56GzQ2pSk" frameborder="0" allowfullscreen></iframe>
 </div>
 
+**Changelog:**
+
+* Aug 31, 2017: Updated to use Angular CLI 1.3.2 and angular-oauth2-oidc 2.0.12. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/2/files).
+* Sep 28, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 
 
 

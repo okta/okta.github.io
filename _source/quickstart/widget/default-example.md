@@ -3,12 +3,12 @@ layout: quickstart_partial
 libraryName: Sign-In Widget
 ---
 
-This guide will walk you through integrating the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) into a front-end application by performing these steps:
+The [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) is a JavaScript widget that allows you to customize the Okta Sign-In experience by hosting it on your own page. This guide will walk you through integrating the Sign-In Widget into your custom front-end application by performing these steps:
 
-1. Add an OpenID Connect Client in Okta
-2. Add Sign-In Widget assets to your project
-3. Implement Okta Sign-In
-4. Using the Access Token
+1. Add and configure an OpenID Connect Client in Okta
+1. Add the Sign-In Widget assets to your project
+1. Configure the Sign-In Widget
+1. Use the Access Token to authenticate requests
 
 At the end of this section can choose your server type to learn more about post-authentication workflows, such as using the access tokens (obtained by the Sign-in Widget) to authenticate requests to your server.
 
@@ -17,28 +17,27 @@ If you do not already have a **Developer Edition Account**, you can create one a
 
 > Note: The rest of these instructions assume you are using the new Developer Dashboard.  If you already have an Okta Org, you can find the new Developer Dashboard by using the drop-down menu in the upper-left of the current Okta Admin Console.
 
-## Add an OpenID Connect Client
+## Add and Configure an OpenID Connect Client
 * Log into the Okta Developer Dashboard, click **Applications** then **Add Application**.
-* Choose **Single Page App (SPA)** as the platform, then populate your new OpenID Connect application with these default values:
+* Choose **Single Page App (SPA)** as the platform, then populate your new OpenID Connect application with the values that are correct for your application (such as the port where it is running).  If you  are running this app locally, your settings would look like this:
 
-| Setting             | Value                                                 |
-| ------------------- | ----------------------------------------------------- |
-| Application Name    | My Web App                                            |
-| Base URIs           | http://localhost:{port}                               |
-| Login redirect URIs | http://localhost:{port}/implicit/callback             |
-| Grant Types Allowed | Implicit                                              |
+| Setting             | Value                          |
+| ------------------- | ------------------------------ |
+| Application Name    | My Web App                     |
+| Base URIs           | http://localhost:{port}        |
+| Login redirect URIs | http://localhost:{port}        |
+| Grant Types Allowed | Implicit                       |
 
-After you have created the application there are two more values you will need to gather:
+> Note: if your login page is on a different URL, such as `/login`, you should change the settings to match.
 
-| Setting       | Where to Find                                                                  |
-| ------------- | ------------------------------------------------------------------------------ |
-| Client ID     | In the applications list, or on the "General" tab of a specific application.    |
-| Org URL       | On the home screen of the developer dashboard, in the upper right.             |
+After you have created the application there are two more values you will need to gather before continuing, these values will be used in your application to setup the OpenID Connect flow with Okta.
 
+| Setting       | Where to Find                                                                                 |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| Client ID     | On the "General" tab of the application you just created, or the parent list of applications. |
+| Org URL       | On the home screen of the developer dashboard, in the upper right.                            |
 
-These values will be used in your application to setup the OpenID Connect flow with Okta.
-
-## Add Sign-In Widget assets to your project
+## Add Sign-In Widget Assets To Your Project
 
 The easiest way to get started with the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) is to load the JS and CSS files directly from the CDN.
 
@@ -61,9 +60,13 @@ rel="stylesheet"/>
 
 ## Configure the Sign-In Widget
 
-You can render the widget anywhere on the page by creating a `<div>` with a unique `id`.  You can also control the visual look of the widget by adding your own CSS.
+There are many ways to configure the Sign-In Widget, though in this case we will use a configuration that will achieve the following:
 
-First, create a `<div>` inside of your HTML file:
+* Determine if the user has an Okta session, and sign them in if needed
+* Perform sign-in by presenting the login form on your page, then redirecting the user to Okta where an SSO session is created before redirecting the user back to your application with an access token and ID Token in the URL fragment (this is the OIDC Implicit flow)
+* Store that access token and ID Token that we can use later
+
+The widget needs to be rendered to a known element on your page. To do this, add the following to your HTML:
 
 ```html
 <body>
@@ -72,33 +75,35 @@ First, create a `<div>` inside of your HTML file:
 </body>
 ```
 
-Next, add the following JavaScript to configure the Sign-In Widget.  There are many ways to configure the Sign-In Widget, and the following code will instruct the widget to do the following:
-
-* Authenticate the user.
-* Redirect to Okta to create an SSO session.
-* Redirect the user back to your application.
-* Get an access token and ID Token that we can use later.
-
-Copy this example code into your front-end application:
+Then copy this widget configuration into your front-end application:
 
 ```html
 <script type="text/javascript">
   var oktaSignIn = new OktaSignIn({
-    baseUrl: "https://{yourOktaDomain}",
+    baseUrl: "https://{yourOktaDomain}.com",
     clientId: "{yourClientId}",
     authParams: {
-      issuer: "https://{yourOktaDomain}/oauth2/default",
+      issuer: "https://{yourOktaDomain}.com/oauth2/default",
       responseType: ['token', 'id_token'],
       display: 'page'
     }
   });
-
   if (oktaSignIn.token.hasTokensInUrl()) {
     oktaSignIn.token.parseTokensFromUrl(
       function success(res) {
-        // Store the tokens in the token manager in the order requested
-        oktaSignIn.tokenManager.add('accessToken', res[0]);
-        oktaSignIn.tokenManager.add('idToken', res[1]);
+        // The tokens are returned in the order requested by `responseType` above
+        var accessToken = res[0];
+        var idToken = res[1]
+
+        // Say hello to the person who just signed in:
+        console.log('Hello, ' + idToken.claims.email);
+
+        // Save the tokens for later use, e.g. if the page gets refreshed:
+        oktaSignIn.tokenManager.add('accessToken', accessToken);
+        oktaSignIn.tokenManager.add('idToken', idToken);
+
+        // Remove the tokens from the window location hash
+        window.location.hash='';
       },
       function error(err) {
         // handle errors as needed
@@ -106,19 +111,18 @@ Copy this example code into your front-end application:
       }
     );
   } else {
-
     oktaSignIn.session.get(function (res) {
       // Session exists, show logged in state.
       if (res.status === 'ACTIVE') {
-        console.log('Hello, ' + res.login);
+        console.log('Welcome back, ' + res.login);
         return;
       }
-
+      // No session, show the login form
       oktaSignIn.renderEl(
         { el: '#okta-login-container' },
         function success(res) {
-          // Nothing to do here, the widget will automatically redirect
-          // the user to Okta for session creation
+          // Nothing to do in this case, the widget will automatically redirect
+          // the user to Okta for authentication, then back to this page if successful
         },
         function error(err) {
           // handle errors as needed
@@ -130,12 +134,10 @@ Copy this example code into your front-end application:
 </script>
 ```
 
-### Authenticate (Sign In)
-
-With the above code in your front-end application, you should see the Sign In Widget when you load your application.  At this point you should be able to login, and be redirected back to your application with an access token and ID Token.  Once this is working you can move on to the next section, where we will make use of the access token to make an authenticated request against your server.
+With the above code in your front-end application, you should see the Sign In Widget when you load your application.  At this point you should be able to login, and be redirected back to your application with an access token and ID Token.  You should have the JavaScript console open in your browser while doing this, it will allow you to see the success messages from the examples and any errors that may arise. Once this is working you can move on to the next section, where we will make use of the access token to make an authenticated request against your server.
 
 
-### Using the Access Token
+### Use the Access Token to Authenticate Requests.
 
 Your application now has an access token in local storage that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that gets the access token from local storage, and use it to make an authenticated request to your server.
 
