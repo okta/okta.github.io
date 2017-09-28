@@ -169,7 +169,7 @@ For more information, see developer documentation about [rate limit headers](/do
 
 We've enhanced the behavior of OpenID Connect scopes:
 
-* OpenID Connect scopes are returned in the response from queries to `/api/v1/authorisationServers/authorizationServers/:authorizationServerID/scopes`.
+* OpenID Connect scopes are returned from requests to `/api/v1/authorisationServers/authorizationServers/:authorizationServerID/scopes`.
 * You can edit scope descriptions in the Okta user interface or via the API. <!--OKTA-136527 -->
 
 #### Help Desk Admin Role Generally Available
