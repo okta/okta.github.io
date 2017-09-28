@@ -262,10 +262,6 @@ Object whose property names are link relation types (as defined by [RFC5988](htt
 }
 ~~~
 
-
-
-
-
 #### Links in collections
 
 Note that HAL links returned in a collection of resources may not reflect the total set of operations that are possible on that resource.  For example, in a user collection links indicating that a given user can be "unlocked" may not be returned and, if returned, may not reflect the correct user state.
@@ -299,25 +295,27 @@ The best way to be sure about your rate limits is to check the relevant headers 
 API request. Rather, it typically reports completed or attempted real-world events such as configuration changes, user logins, or user lockouts.
 The System Log doesn’t report the rate at which you’ve been calling the API.
 
-Okta has two types of rate limits: concurrent rate limits for the number of simultaneous transactions, and org-wide rate limits that vary by API endpoint.
+Okta has two types of rate limits: concurrent rate limits for the number
+of simultaneous transactions, and org-wide rate limits that vary by API
+endpoint.
 
-### Concurrency Rate Limits
+### Concurrent Rate Limits
 
-In order to protect the service for all customers, Okta enforces concurrent rate limits starting in Release 2017.39.
-These limits are distinct from [the org-wide, per-minute API rate limits](/docs/api/getting_started/design_principles.html#org-wide-rate-limits).
+In order to protect the service for all customers, Okta enforces concurrent rate limits starting with this release.
+Concurrent limits are distinct from [the org-wide, per-minute API rate limits](#org-wide-rate-limits).
 
-For concurrent rate limits, traffic is measured in three different areas (counts in one area aren't included in counts for the other two):
+For concurrent rate limits, traffic is measured in three different areas. Counts in one area aren't included in counts for the other two:
 
-* For agent traffic, Okta measured each org's traffic and set the limit at above the highest usage in the last four weeks.
-* For Office365 traffic, the limit is 70 concurrent transactions per org.
-* For all other traffic including API requests, the limit is 70 concurrent transactions per org.
+* For agent traffic, Okta measured each org's traffic and set the limit above the highest usage in the last four weeks.
+* For Office365 traffic, the limit is 75 concurrent transactions per org.
+* For all other traffic including API requests, the limit is 75 concurrent transactions per org.
 
-Okta has verified that these limits are sufficient based on current usage.
+Okta has verified that these limits are sufficient based on current usage. As a result of verification, we increased the limit for some orgs to 150.
 
 The first request to exceed the concurrent limit returns an HTTP 429 error, and the first error every sixty seconds is written to the log.
 Reporting concurrent rate limits once a minute keeps log volume manageable. 
 
-#### Example Error Response for Events
+#### Example Error Response Events
 
 ~~~json
 {
@@ -425,6 +423,27 @@ Reporting concurrent rate limits once a minute keeps log volume manageable.
         "version": "0"
     }
 ~~~
+  
+#### Example Rate Limit Header with Concurrent Rate Limit Error  
+
+This example shows the relevant portion of a rate limit header being returned with the error for a request that exceeded the concurrent rate limit.
+~~~http
+
+HTTP/1.1 429 
+Date: Tue, 26 Sep 2017 21:33:25 GMT
+X-Rate-Limit-Limit: 0
+X-Rate-Limit-Remaining: 0
+X-Rate-Limit-Reset: 1506461721
+
+~~~
+
+Notice that instead of the typical counts for time-based rate limits, when a request exceeds the limit for concurrent requests,
+`X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining`, and `X-Rate-Limit-Reset` report the concurrent values instead. 
+When the number of unfinished requests is below the concurrent rate limit, request headers will switch back to reporting the time-based rate limits.
+
+The `X-Rate-Limit-Reset` time for concurrent rate limits is only a
+suggestion. There's no guarantee that enough requests will complete to
+stop exceeding the concurrent rate limit at the time indicated.
 
 ### Org-Wide Rate Limits
 
@@ -478,6 +497,22 @@ For all endpoints not listed, the API rate limit is a combined 10,000 requests p
 		</tr>
 	</tbody>
 </table>
+
+#### Example Rate Limit Header with Org-Wide Rate Limit Error  
+
+This example shows the relevant portion of a rate limit header being
+returned with the error for a request that exceeded the concurrent rate
+limit.
+
+~~~http
+
+HTTP/1.1 429 
+Date: Tue, 26 Sep 2017 21:33:25 GMT
+X-Rate-Limit-Limit: 5000
+X-Rate-Limit-Remaining: 4198
+X-Rate-Limit-Reset: 1605463723
+
+~~~
 
 ## Request Debugging
 
