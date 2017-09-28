@@ -4,23 +4,24 @@ title: Okta API Release Notes
 excerpt: Summary of changes to the Okta API since Release 2017.38
 ---
 
-## Okta API Release Notes for Release 2017.39
+## Okta API Release Notes for Release 2017.40
 
 The following API feature enhancements<!-- and bug fixes --> are available in the 2017.39 release.
 Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
 
 ### API Feature Enhancements
 
-| Feature Enhancement                                 | Expected in Preview Orgs | Expected in Production Orgs |
-|:----------------------------------------------------|:-------------------------|:----------------------------|
-|   [Concurrent Rate Limits](#concurrency-rate-limits)  | September 27, 2017       | October 1, 2017             |
-|          [ Policy API](#policy-api)                           | September 7, 2017        | October 9, 2017             |
-|           [Password Policy API](#password-policy-api)         | September 7, 2017        | October 9, 2017             |
+| Feature Enhancement                                                                   | Expected in Preview Orgs | Expected in Production Orgs |
+|:--------------------------------------------------------------------------------------|:-------------------------|:----------------------------|
+|      [Concurrent Rate Limits](#concurrency-rate-limits)                                    | October 4, 2017          | October 9, 2017             |
+|   [Help Desk Admin Role Generally Available](#help-desk-admin-role-generally-available) | October 4, 2017          | October 9, 2017             |
+|             [ Policy API](#policy-api)                                                             | September 7, 2017        | October 9, 2017             |
+|              [Password Policy API](#password-policy-api)                                           | September 7, 2017        | October 9, 2017             |
 
 #### Concurrency Rate Limits
 
-In order to protect the service for all customers, Okta enforces concurrent rate limits starting in Release 2017.39.
-These limits are distinct from [the org-wide, per-minute API rate limits](/docs/api/getting_started/design_principles.html#org-wide-rate-limits).
+In order to protect the service for all customers, Okta enforces concurrent rate limits starting with this release.
+Concurrent limits are distinct from [the org-wide, per-minute API rate limits](/docs/api/getting_started/design_principles.html#org-wide-rate-limits).
 
 For concurrent rate limits, traffic is measured in three different areas (counts in one area aren't included in counts for the other two):
 
@@ -142,17 +143,42 @@ Reporting concurrent rate limits once a minute keeps log volume manageable.
     }
 ~~~
 
-<!-- Example Rate Limit Header
+Example Rate Limit Header Returned with Concurrent Rate Limit Error  
 
-~~~json
+~~~http
 
-HTTP/1.1 200 OK
-X-Rate-Limit-Limit: 20
-X-Rate-Limit-Remaining: 15
-X-Rate-Limit-Reset: 1366037820
-~~~ -->
+Response headers:
+HTTP/1.1 429 
+Date: Tue, 26 Sep 2017 21:33:25 GMT
+Server: nginx
+Public-Key-Pins-Report-Only: pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs=";
+pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg=";
+pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY="; 
+max-age=60; 
+report-uri="https://okta.report-uri.io/r/default/hpkp/reportOnly"
+Content-Type: application/json
+X-Okta-Request-Id: WcrHpdduGgIbMK35lE2FwQAACWI
+P3P: CP="HONK"
+X-Rate-Limit-Limit: 0
+X-Rate-Limit-Remaining: 0
+X-Rate-Limit-Reset: 1506461721
+Set-Cookie: sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+~~~
 
-You can find out how close you are to the limit by inspecting the [rate limit headers](/docs/api/getting_started/design_principles.html#rate-limiting).
+Notice that instead of the typical counts for time-based rate limits, when a request exceeds the limit for concurrent requests,
+`X-Rate-Limit-Limit`, `X-Rate-Limit-Remaining`, and `X-Rate-Limit_Reset` report the concurrent values instead. The reset time
+is only an estimate, there's no guarantee that enough requests will have completed to go below the concurrent rate limit.
+
+For more information, see developer documentation about [rate limit headers](/docs/api/getting_started/design_principles.html#rate-limiting). <!-- OKTA-140976, OKTA-142995 -->
+
+#### Help Desk Admin Role Generally Available
+
+The Help Desk Admin Role (`help_desk_admin_role`) is generally available via the [Roles API](/docs/api/resources/roles.html#role-properties). 
+For information about this role, see the [in-app help](https://help.okta.com/en/prod/Content/Topics/Security/The%20Help%20Desk%20Admin%20Role.htm). <!-- OKTA-141867 -->
 
 #### Policy API 
 
@@ -166,7 +192,8 @@ The Password Policy type controls settings that determine a user’s password le
 
 Bug fixes are expected on preview orgs starting September 20, 2017, and on production orgs starting September 25, 2017.
 
-* Using a refresh token for a client application with a client ID longer than 20 characters caused an error. (OKTA-139722)
+* Claim evaluation didn't always respect the Universal Directory schema. (OKTA-137462)
+* The `name` and `description` fields in OpenID Connect scopes weren't editable in the Okta user interface. (OKTA-136527)
 
 ### Does Your Org Have This Change Yet?
 
