@@ -48,16 +48,16 @@ npm install @okta/okta-react --save
 
 ### Configuration
 
-You will need the values from the OIDC client that you created in the previous step to instantiate the middleware. You will also need to know your Okta Org URL, which you can see on the home page of the Okta Developer console.
+You will need the values from the OIDC client that you created in the previous step to instantiate the middleware. You will also need to know your Okta Org URL, which you can see on the home page of the Okta Developer console. Your Okta Org URL + `oauth2/default` will be the `issuer` param.
 
 In your application's `App.js` file, import the following objects and pass in your configuration:
 
-```javascript
+```typescript
 import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
 
 const config = {
   issuer: 'https://{yourOktaDomain}.com/oauth2/default',
-  redirectUri: window.location.origing + '/implicit/callback',
+  redirectUri: window.location.origin + '/implicit/callback',
   clientId: '{clientId}'
 }
 
@@ -74,7 +74,7 @@ You'll need to provide these routes in your sample application, so that we can s
 
 In the relevant location in your application, you will want to provide `Login` and `Logout` buttons for the user. You can show/hide the correct button by using the `auth.isAuthenticated()` method. For example:
 
-```javascript
+```typescript
 /// src/Home.js
 
 import React, { Component } from 'react';
@@ -111,9 +111,9 @@ export default withAuth(class Home extends Component {
 
 ### Update your `App.js`
 
-Finally, instantiate the Secure Router by passing in your configuration into `Security`, and connect your application's paths:
+Finally, passing in your configuration into `Security`, and connect your application's paths:
 
-```javascript
+```typescript
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
@@ -121,7 +121,7 @@ import Home from './Home';
 
 const config = {
   issuer: 'https://{yourOktaDomain}.com/oauth2/default',
-  redirect_uri: window.location.origing + '/implicit/callback',
+  redirect_uri: window.location.origin + '/implicit/callback',
   client_id: '{clientId}'
 }
 
@@ -149,7 +149,7 @@ Your React application now has an access token in local storage that was issued 
 
 Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the React component could look like for this hypothetical example:
 
-```javascript
+```typescript
 import fetch from 'isomorphic-fetch';
 import React, { Component } from 'react';
 import { withAuth } from '@okta/okta-react';
