@@ -34,8 +34,7 @@ You can enable CORS for websites that need cross-origin requests to the
 Okta API on the developer console. Select **API** > **Trusted Origins** to see
 the screen shown below.
 
-{% img okta-admin-ui-cors-dev.png "CORS Settings UI" alt:"CORS Settings
-UI" %}
+{% img okta-admin-ui-cors-dev.png "CORS Settings UI" alt:"CORS Settings UI" %}
 
 > Select **Add Origin** to specify the base URL of website you want to allow cross-origin requests. 
 
@@ -48,8 +47,7 @@ UI" %}
 Test your CORS configuration:
 
 1. Grant cross-origin access to `https://developer.okta.com` from your org's developer console.
-2. Sign in to your Okta organization on a new browser tab.
-3. Enter your Okta organization in the form below and click **Test**. Your Okta user profile displays below the form.
+2. Enter your Okta organization in the form below and click **Test**. Your Okta user profile displays below the form.
 
 <div id="cors-test">
   <form class="form-cors-test" role="form">
