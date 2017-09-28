@@ -13,11 +13,11 @@ Dates for preview and production release are the earliest possible release date.
 
 | Feature Enhancement                                                                   | Expected in Preview Orgs | Expected in Production Orgs |
 |:--------------------------------------------------------------------------------------|:-------------------------|:----------------------------|
-|      [Concurrent Rate Limits](#concurrent-rate-limits)                                     | October 4, 2017          | October 9, 2017             |
-| [OpenID Scope Enhancements](#openid-scope-enhancements)                               | October 4, 2017          | October 9, 2017             |
-|   [Help Desk Admin Role Generally Available](#help-desk-admin-role-generally-available) | October 4, 2017          | October 9, 2017             |
-|             [ Policy API](#policy-api)                                                             | September 7, 2017        | October 9, 2017             |
-|              [Password Policy API](#password-policy-api)                                           | September 7, 2017        | October 9, 2017             |
+|        [Concurrent Rate Limits](#concurrent-rate-limits)                                     | October 4, 2017          | October 9, 2017             |
+|   [OpenID Connect Scope Enhancements](#openid-connect-scope-enhancements)               | October 4, 2017          | October 9, 2017             |
+|     [Help Desk Admin Role Generally Available](#help-desk-admin-role-generally-available) | October 4, 2017          | October 9, 2017             |
+|               [ Policy API](#policy-api)                                                             | September 7, 2017        | October 9, 2017             |
+|                [Password Policy API](#password-policy-api)                                           | September 7, 2017        | October 9, 2017             |
 
 #### Concurrent Rate Limits
 
@@ -27,10 +27,10 @@ Concurrent limits are distinct from [the org-wide, per-minute API rate limits](/
 For concurrent rate limits, traffic is measured in three different areas. Counts in one area aren't included in counts for the other two:
 
 * For agent traffic, Okta measured each org's traffic and set the limit above the highest usage in the last four weeks.
-* For Office365 traffic, the limit is 70 concurrent transactions per org.
-* For all other traffic including API requests, the limit is 70 concurrent transactions per org.
+* For Office365 traffic, the limit is 75 concurrent transactions per org.
+* For all other traffic including API requests, the limit is 75 concurrent transactions per org.
 
-Okta has verified that these limits are sufficient based on current usage.
+Okta has verified that these limits are sufficient based on current usage. As a result of verification, we increased the limit for some orgs to 150.
 
 The first request to exceed the concurrent limit returns an HTTP 429 error, and the first error every sixty seconds is written to the log.
 Reporting concurrent rate limits once a minute keeps log volume manageable. 
@@ -143,8 +143,8 @@ Reporting concurrent rate limits once a minute keeps log volume manageable.
         "version": "0"
     }
 ~~~
-
-#### Example Rate Limit Header with Concurrent Rate Limit Error  
+  
+##### Example Rate Limit Header with Concurrent Rate Limit Error  
 
 This example shows the relevant portion of a rate limit header being returned with the error for a request that exceeded the concurrent rate limit.
 ~~~http
@@ -169,7 +169,7 @@ For more information, see developer documentation about [rate limit headers](/do
 
 We've enhanced the behavior of OpenID Connect scopes:
 
-* OpenID Connect scopes are returned from requests to `/api/v1/authorisationServers/authorizationServers/:authorizationServerID/scopes`.
+* OpenID Connect scopes are returned from requests to `/api/v1/authorizationServers/:authorizationServerID/scopes`.
 * You can edit scope descriptions in the Okta user interface or via the API. <!--OKTA-136527 -->
 
 #### Help Desk Admin Role Generally Available
@@ -187,7 +187,7 @@ The Password Policy type controls settings that determine a user’s password le
 
 ### API Bug Fix
 
-This bug fix is expected on preview orgs starting September October 4, 2017, and on production orgs starting October 9, 2017.
+This bug fix is expected on preview orgs starting October 4, 2017, and on production orgs starting October 9, 2017.
 
 * Claim evaluation didn't always respect the Universal Directory schema. (OKTA-137462)
 
