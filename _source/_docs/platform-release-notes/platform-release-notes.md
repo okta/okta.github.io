@@ -165,7 +165,7 @@ The `X-Rate-Limit-Reset` time for concurrent rate limits is only a suggestion. T
 
 For more information, see developer documentation about [rate limit headers](/docs/api/getting_started/design_principles.html#rate-limiting). <!-- OKTA-140976, OKTA-142995 -->
 
-#### OpenID Connect Scope Enhancement
+#### OpenID Connect Scope Enhancements
 
 We've enhanced the behavior of OpenID Connect scopes:
 
