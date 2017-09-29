@@ -14,13 +14,13 @@ Dates for preview and production release are the earliest possible release date.
 | Feature Enhancement                                                                   | Expected in Preview Orgs | Expected in Production Orgs |
 |:--------------------------------------------------------------------------------------|:-------------------------|:----------------------------|
 |        [Concurrent Rate Limits](#concurrent-rate-limits)                                     | October 4, 2017          | October 9, 2017             |
-|   [OpenID Connect Scope Enhancements](#openid-connect-scope-enhancements)               | October 4, 2017          | October 9, 2017             |
+|   [OpenID Connect Scope Change](#openid-connect-scope-change)               | October 4, 2017          | October 9, 2017             |
 |     [Help Desk Admin Role Generally Available](#help-desk-admin-role-generally-available) | October 4, 2017          | October 9, 2017             |
 |               [ Policy API](#policy-api)                                                             | September 7, 2017        | October 9, 2017             |
 |                [Password Policy API](#password-policy-api)                                           | September 7, 2017        | October 9, 2017             |
 
-#### Concurrent Rate Limits
 
+#### Concurrent Rate Limits
 In order to protect the service for all customers, Okta enforces concurrent rate limits starting with this release.
 Concurrent limits are distinct from [the org-wide, per-minute API rate limits](/docs/api/getting_started/design_principles.html#org-wide-rate-limits).
 
@@ -165,9 +165,9 @@ The `X-Rate-Limit-Reset` time for concurrent rate limits is only a suggestion. T
 
 For more information, see developer documentation about [rate limit headers](/docs/api/getting_started/design_principles.html#rate-limiting). <!-- OKTA-140976, OKTA-142995 -->
 
-#### OpenID Connect Scope Enhancements
+#### OpenID Connect Scope Change
 
-We've enhanced the behavior of OpenID Connect scopes:
+We've changed the behavior of OpenID Connect scopes:
 
 * OpenID Connect scopes are returned from requests to `/api/v1/authorizationServers/:authorizationServerID/scopes`.
 * You can edit scope descriptions in the Okta user interface or via the API. <!--OKTA-136527 -->
