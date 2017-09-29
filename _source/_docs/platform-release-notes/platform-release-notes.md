@@ -185,11 +185,11 @@ The Policy API enables an Administrator to perform policy and policy rule operat
 
 The Password Policy type controls settings that determine a user’s password length and complexity, as well as the frequency with which a password can be changed. This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock. For more information, see Okta's [API Reference](/docs/api/resources/policy.html#GroupPasswordPolicy).
 
-### API Bug Fix
+<!-- ### API Bug Fix
 
-This bug fix is expected on preview orgs starting October 4, 2017, and on production orgs starting October 9, 2017.
+This bug fix is expected on preview orgs starting release-date, and on production orgs starting release-date.
 
-* Claim evaluation didn't always respect the Universal Directory schema. (OKTA-137462)
+* Description. (OKTA-xxxxx) -->
 
 ### Does Your Org Have This Change Yet?
 
