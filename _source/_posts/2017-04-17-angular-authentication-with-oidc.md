@@ -1108,7 +1108,10 @@ You can find a completed version of the application created in this blog post [o
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Kb56GzQ2pSk" frameborder="0" allowfullscreen></iframe>
 </div>
 
-***NOTE:** Updated September 29, 2017 to include instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).*
+**Changelog:**
+
+* Aug 31, 2017: Updated to use Angular CLI 1.3.2 and angular-oauth2-oidc 2.0.12. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-openid-connect-example/pull/2/files).
+* Sep 28, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 
 
 
