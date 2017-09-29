@@ -66,34 +66,19 @@ Navigate to [http://localhost:8080](http://localhost:8080) and you'll be prompte
 
 {% img blog/spring-boot-oauth/0-hello-world.png alt:"Hello World" width:"800" %}
 
-## Create an Authorization Server in Okta
+### Get Your Authorization Server Settings
 
-To start authenticating against Okta'a API, you have to first create a developer account on [https://developer.okta.com](https://developer.okta.com). After activating your account, sign in and navigate to **API** > **Authorization Servers** and click on the **Add Authorization Server** button.
+Log in to your Okta account and navigate to **API** > **Authorization Servers** in the top menu. There should be a "default" server listed with an audience and issuer URI specified.
 
-{% img blog/spring-boot-oauth/1-add-auth-server.png alt:"Add Authorization Server" width:"800" %}
-
-Enter the name and Resource URI of your choosing. The names aren't important at this time. I used the following values:
-
-* **Name:** Oktamus Prime
-* **Resource URI:** http://authenticat.is.easy/withokta
-
-{% img blog/spring-boot-oauth/2-auth-server-settings.png alt:"Authorization Server Settings" width:"800" %}
+{% img blog/spring-boot-oauth/default-as-server.png alt:"Default AS" width:"700" %}{: .center-image }
 
 The Metadata URI you see in this screenshot will come in handy later when you need to specify `accessTokenUri` and `userAuthorizationUri` values.
 
 ## Create an OpenID Connect App in Okta
 
-To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to **Applications > Add Application** and click on the **Create New App** button. The application name isn't important, you can use whatever you like.
+To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to **Applications** and click on **Add Application**. Select **Web** and click **Next**. Give the application a name (e.g. “My OIDC App”) and specify `http://localhost:4200` as a Login redirect URI. Your upcoming Angular client will use this value. Click **Done** and admire your handiwork!
 
-{% img blog/spring-boot-oauth/4-oidc-name.png alt:"OIDC App Name" width:"800" %}
-
-Click **Next** to configure OIDC. Add `http://localhost:8080` as a Redirect URI and click **Finish**.
-
-{% img blog/spring-boot-oauth/5-redirect-uris.png alt:"OIDC Redirects" width:"800" %}
-
-The next screen should look similar to the following screenshot.
-
-{% img blog/spring-boot-oauth/6-oidc-settings.png alt:"OIDC Settings" width:"800" %}
+{% img blog/spring-boot-oauth/oidc-settings.png alt:"My OIDC App" width:"700" %}{: .center-image }
 
 Your `clientId` and `clientSecret` values for this app will be just below the fold.
 
@@ -202,7 +187,9 @@ The source code for this tutorial and the examples in it are available [on GitHu
 
 This tutorial showed you how to use Spring CLI, Groovy, Spring Boot, Spring Security, and Okta to quickly prototype an OAuth client. This information is useful for those that are developing a Spring MVC application with traditional server-rendered pages. However, these days, lots of developers are using JavaScript frameworks and mobile applications to build their UIs.
 
-In a future tutorial, I'll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that's secured by Spring Security and does JWT validation.
+In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta), I'll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that's secured by Spring Security and does JWT validation.
+
+*Updated September 30, 2017 to include instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).*
 
 
 
