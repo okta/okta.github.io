@@ -265,3 +265,7 @@ You can find a completed version of the application created in this blog post [o
 Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! [Sign up for a forever-free developer account](https://developer.okta.com/signup/) and try Okta today!
 
 I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt), leave a comment below, or open an issue on GitHub.
+
+### Changelog
+  
+  * September 30, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console). Updated the widget reference to 2.1.0.
