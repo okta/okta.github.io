@@ -301,56 +301,40 @@ endpoint.
 
 ### Org-Wide Rate Limits
 
-API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
+API rate limits apply per minute to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
+
+| Okta API Endpoint                                                          | Limit |
+|:---------------------------------------------------------------------------|------:|
+| `/api/v1/apps`                                                             |   100 |
+| `/api/v1/apps/{id}` (exact URL only)                                       |   500 |
+| `/api/v1/authn`                                                            |   500 |
+| `/api/v1/groups/{id}` (exact URL only)                                     |  1000 |
+| `/api/v1/groups`                                                           |   500 |
+| `/api/v1/logs`                                                             |    60 |
+| `/api/v1/sessions`                                                         |   750 |
+| `/api/v1/users/{id}` (exact URL plus query params or other qualifiers)     |   600 |
+| `/api/v1/users`                                                            |   600 |
+| `/api/v1` (if no other limit specified in this table)                      |  1000 |
+| `/api/v1/` (if no other limit specified in this table)                     |  1200 |
+| `/oauth2/v1/token`  (per second, not minute)                               |     4 |
+| `/oauth2/v1` (per second, not minute)                                      |    40 |
+
 For all endpoints not listed, the API rate limit is a combined 10,000 requests per minute.
 
-<table border="1" style="width: 100%;">
-	<caption>Org-Wide Rate Limits Per Minute</caption>
-	<thead>
-		<tr>
-			<th colspan="1" rowspan="1">Endpoint</th>
-			<th colspan="1" rowspan="1">Limit</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps/<i>{id}</i></span><span style="font-family: verdana,geneva,sans-serif;"> </span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">100</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/authn</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups/<i>{id}</i>&nbsp;</span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/sessions</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">750</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users/<i>{:id}</i></span> (exact URL plus query params or other qualifiers)</td>
-			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/</span>&nbsp; (if no other limit specified in this table)</td>
-			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
-		</tr>
-	</tbody>
-</table>
+
+| Okta {how to describe these?}            | Limit |
+|:-----------------------------------------|------:|
+| `/login/do-login`                        | 200   |
+| `/login/login.htm`                       | 850   |
+| `/login/sso_iwa_auth`                    | 500   |
+
+
+| App Integration Endpoint                 | Limit |
+|:-----------------------------------------|------:|
+| `/app/{app}/{key}/sso/saml`              |   750 |
+| `/app/office365/{key}/sso/wsfed/active`  |  2000 |
+| `/app/office365/{key}/sso/wsfed/passive` |   250 |
+| `/app/template_saml_2_0/{key}/sso/saml`  |  2500 |
 
 #### Example Rate Limit Header with Org-Wide Rate Limit Error  
 
