@@ -66,7 +66,7 @@ Project 'angular-okta-example' successfully created.
 
 This will create a new `angular-okta-example` directory and install all the necessary dependencies. To verify everything works, run `ng e2e` in a terminal window. All tests should pass and you should see results like the following.
 
-{% img blog/angular-sign-in-widget/e2e-success.png alt:"Running e2e" width:"800" %}
+{% img blog/angular-sign-in-widget/e2e-success.png alt:"Running e2e" width:"800" %}{: .center-image }
 
 ## Integrate Okta’s Sign-In Widget in Angular
 
@@ -118,8 +118,6 @@ import { Okta } from './shared/okta/okta.service';
   bootstrap: [AppComponent]
 })
 ```
-
-_Thanks to [Nic Raboy](https://twitter.com/nraboy) for teaching me that it's pretty easy to [include JavaScript libraries in a TypeScript application](https://www.thepolyglotdeveloper.com/2017/03/javascript-libraries-in-a-typescript-application-revisited/). The key is the `declare` statement in the code above._
 
 Before this will work, you'll need to create an OpenID Connect (OIDC) application in Okta so you can replace the `{yourOktaDomain}` and `{clientId}` references when initializing the widget.
 
@@ -197,18 +195,18 @@ And modify `app.component.html` to have a `<div>` with `id="okta-login-container
 Run `ng serve`, and open your browser to [http://localhost:4200](http://localhost:4200). You should see the sign-in widget. Enter one of 
 your user's credentials to login. You should see a "Hello {email}" message with a logout button.
 
-{% img blog/angular-sign-in-widget/login-success.png alt:"Login Success" width:"800" %}
+{% img blog/angular-sign-in-widget/login-success.png alt:"Login Success" width:"800" %}{: .center-image }
 
-**NOTE:** You may experience an issue where the sign-in process seems to hang. Clicking anywhere in the browser window seems to solve this problem. I’m not sure why this happens. You can track this issue [here]().
+**NOTE:** You may experience an issue where the sign-in process seems to hang. Clicking anywhere in the browser window seems to solve this problem. I’m not sure why this happens. You can track this issue [here](https://github.com/okta/okta-signin-widget/issues/268).
 
 If it works - congrats! If it doesn't, please post a question to Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta), or hit me up [on Twitter](https://twitter.com/mraible).
 
 #### Customize the Widget CSS
 
-If you'd like to customize the widget's CSS, the easiest way is you write your own CSS. Remove the CSS `@import` statements you added to `src/styles.css`. Add an `@import` for [Bootstrap 4](https://v4-alpha.getbootstrap.com/) and a few style rules to position elements. Copy the following code into `src/styles.css`.
+If you'd like to customize the widget's CSS, the easiest way is you write your own CSS. Remove the CSS `@import` statements you added to `src/styles.css`. Add an `@import` for [Bootstrap 4](https://getbootstrap.com/) and a few style rules to position elements. Copy the following code into `src/styles.css`.
 
 ```css
-@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css);
+@import url(hhttps://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css);
 
 #okta-login-container {
   margin: 0 auto;
@@ -231,7 +229,7 @@ If you'd like to customize the widget's CSS, the easiest way is you write your o
 
 After making these changes, the sign-in widget will look like the following screenshot.
 
-{% img blog/angular-sign-in-widget/custom-css.png alt:"Custom CSS" width:"800" %}
+{% img blog/angular-sign-in-widget/custom-css.png alt:"Custom CSS" width:"800" %}{: .center-image }
 
 ## Fix Your Tests
 If you try to run `npm test` or `ng test`, tests will fail:
@@ -277,5 +275,5 @@ I hope you’ve enjoyed this quick tour of our Angular support. If you have ques
 
 **Changelog:**
 
-* Oct 2, 2017: Updated to use Angular CLI 1.4.4 and Okta Sign-In Widget 2.1.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/pull/8). Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
+* Sep 30, 2017: Updated to use Angular CLI 1.4.4 and Okta Sign-In Widget 2.1.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/pull/8). Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 
