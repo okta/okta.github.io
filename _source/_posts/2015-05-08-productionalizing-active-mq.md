@@ -1,7 +1,7 @@
 ---
 layout: blog_post
 title: Productionalizing ActiveMQ
-author: okta_generic_blogger
+author: matt_loughran
 tags: [activemq, jvm]
 ---
 
