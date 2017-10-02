@@ -206,7 +206,7 @@ If it works - congrats! If it doesn't, please post a question to Stack Overflow 
 If you'd like to customize the widget's CSS, the easiest way is you write your own CSS. Remove the CSS `@import` statements you added to `src/styles.css`. Add an `@import` for [Bootstrap 4](https://getbootstrap.com/) and a few style rules to position elements. Copy the following code into `src/styles.css`.
 
 ```css
-@import url(hhttps://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css);
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css);
 
 #okta-login-container {
   margin: 0 auto;
