@@ -514,6 +514,22 @@ The `X-Rate-Limit-Reset` time for concurrent rate limits is only a
 suggestion. There's no guarantee that enough requests will complete to
 stop exceeding the concurrent rate limit at the time indicated.
 
+#### Example Rate Limit Header with Org-Wide Rate Limit Error  
+
+This example shows the relevant portion of a rate limit header being
+returned with the error for a request that exceeded the concurrent rate
+limit.
+
+~~~http
+
+HTTP/1.1 429 
+Date: Tue, 26 Sep 2017 21:33:25 GMT
+X-Rate-Limit-Limit: 5000
+X-Rate-Limit-Remaining: 4198
+X-Rate-Limit-Reset: 1605463723
+
+~~~
+
 ## Request Debugging
 
 The request ID will always be present in every API response and can be used for debugging. This value can be used to correlate events from the [Events API](/docs/api/resources/events.html) as well as the System Log events.
