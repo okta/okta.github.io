@@ -299,6 +299,133 @@ The best way to be sure about your rate limits is to check the relevant headers 
 API request. Rather, it typically reports completed or attempted real-world events such as configuration changes, user logins, or user lockouts.
 The System Log doesn’t report the rate at which you’ve been calling the API.
 
+Okta has two types of rate limits: concurrent rate limits for the number of simultaneous transactions, and org-wide rate limits that vary by API endpoint.
+
+### Concurrency Rate Limits
+
+In order to protect the service for all customers, Okta enforces concurrent rate limits starting in Release 2017.39.
+These limits are distinct from [the org-wide, per-minute API rate limits](/docs/api/getting_started/design_principles.html#org-wide-rate-limits).
+
+For concurrent rate limits, traffic is measured in three different areas (counts in one area aren't included in counts for the other two):
+
+* For agent traffic, Okta measured each org's traffic and set the limit at above the highest usage in the last four weeks.
+* For Office365 traffic, the limit is 70 concurrent transactions per org.
+* For all other traffic including API requests, the limit is 70 concurrent transactions per org.
+
+Okta has verified that these limits are sufficient based on current usage.
+
+The first request to exceed the concurrent limit returns an HTTP 429 error, and the first error every sixty seconds is written to the log.
+Reporting concurrent rate limits once a minute keeps log volume manageable. 
+
+#### Example Error Response for Events
+
+~~~json
+{
+    "eventId": "tevEVgTHo-aQjOhd1OZ7QS3uQ1506395956000",
+    "sessionId": "102oMlafQxwTUGJMLL8FhVNZA",
+    "requestId": "reqIUuPHG7ZSEuHGUXBZxUXEw",
+    "published": "2017-09-26T03:19:16.000Z",
+    "action": {
+      "message": "Too many concurrent requests in flight",
+      "categories": [],
+      "objectType": "core.concurrency.org.limit.violation",
+      "requestUri": "/report/system_log"
+    },
+    "actors": [
+      {
+        "id": "00uo7fD8dXTeWU3g70g3",
+        "displayName": "Test User",
+        "login": "test-user@test.net",
+        "objectType": "User"
+      },
+      {
+        "id": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
+        "displayName": "CHROME",
+        "ipAddress": "127.0.0.1",
+        "objectType": "Client"
+      }
+    ],
+    "targets": []
+  }
+~~~
+
+#### Example Error Response for System Log API (Beta)
+
+~~~json
+{
+        "actor": {
+            "alternateId": "test.user@test.com",
+            "detailEntry": null,
+            "displayName": "Test User",
+            "id": "00u1qqxig80SMWArY0g7",
+            "type": "User"
+        },
+        "authenticationContext": {
+            "authenticationProvider": null,
+            "authenticationStep": 0,
+            "credentialProvider": null,
+            "credentialType": null,
+            "externalSessionId": "trs2TSSLkgWR5iDuebwuH9Vsw",
+            "interface": null,
+            "issuer": null
+        },
+        "client": {
+            "device": "Unknown",
+            "geographicalContext": null,
+            "id": null,
+            "ipAddress": "4.15.16.10",
+            "userAgent": {
+                "browser": "UNKNOWN",
+                "os": "Unknown",
+                "rawUserAgent": "Apache-HttpClient/4.5.2 (Java/1.7.0_76)"
+            },
+            "zone": "null"
+        },
+        "debugContext": {
+            "debugData": {
+                "requestUri": "/api/v1/users"
+            }
+        },
+        "displayMessage": "Too many requests in flight",
+        "eventType": "core.concurrency.org.limit.violation",
+        "legacyEventType": "core.concurrency.org.limit.violation",
+        "outcome": null,
+        "published": "2017-09-26T20:21:32.783Z",
+        "request": {
+            "ipChain": [
+                {
+                    "geographicalContext": null,
+                    "ip": "4.15.16.10",
+                    "source": null,
+                    "version": "V4"
+                },
+                {
+                    "geographicalContext": null,
+                    "ip": "52.22.142.162",
+                    "source": null,
+                    "version": "V4"
+                }
+            ]
+        },
+        "securityContext": {
+            "asNumber": null,
+            "asOrg": null,
+            "domain": null,
+            "isProxy": null,
+            "isp": null
+        },
+        "severity": "INFO",
+        "target": null,
+        "transaction": {
+            "detail": {},
+            "id": "Wcq2zDtj7xjvEu-gRMigPwAACYM",
+            "type": "WEB"
+        },
+        "uuid": "dc7e2385-74ba-4b77-827f-fb84b37a4b3b",
+        "version": "0"
+    }
+~~~
+
 ### Org-Wide Rate Limits
 
 API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
