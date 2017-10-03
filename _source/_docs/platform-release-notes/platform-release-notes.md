@@ -19,7 +19,6 @@ Dates for preview and production release are the earliest possible release date.
 |               [ Policy API](#policy-api)                                                             | September 7, 2017        | October 9, 2017             |
 |                [Password Policy API](#password-policy-api)                                           | September 7, 2017        | October 9, 2017             |
 
-
 #### Concurrent Rate Limits
 In order to protect the service for all customers, Okta enforces concurrent rate limits starting with this release.
 Concurrent limits are distinct from [the org-wide, per-minute API rate limits](/docs/api/getting_started/design_principles.html#org-wide-rate-limits).
