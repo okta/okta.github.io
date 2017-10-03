@@ -5,10 +5,10 @@ libraryName: Sign-In Widget
 
 The [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) is a JavaScript widget that allows you to customize the Okta Sign-In experience by hosting it on your own page. This guide will walk you through integrating the Sign-In Widget into your custom front-end application by performing these steps:
 
-* Add and configure an OpenID Connect Client in Okta
-* Add the Sign-In Widget assets to your project
-* Configure the Sign-In Widget
-* Use the Access Token to authenticate requests
+1. Add and configure an OpenID Connect Client in Okta
+1. Add the Sign-In Widget assets to your project
+1. Configure the Sign-In Widget
+1. Use the Access Token to authenticate requests
 
 At the end of this section can choose your server type to learn more about post-authentication workflows, such as using the access tokens (obtained by the Sign-in Widget) to authenticate requests to your server.
 
