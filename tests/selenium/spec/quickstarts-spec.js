@@ -7,13 +7,13 @@ describe('quickstarts page spec', () => {
     return quickstartsPage.load();
   });
 
-  it('has okta-sign-in-page + nodejs generic selected by default', () => {
-    expect(quickstartsPage.urlContains("/okta-sign-in-page/nodejs/generic")).toBe(true);
+  it('has okta-sign-in-page + nodejs express selected by default', () => {
+    expect(quickstartsPage.urlContains("/okta-sign-in-page/nodejs/express")).toBe(true);
 
     expect(quickstartsPage.activeLinksContain([
         'Okta Sign-In Page',
         'Node JS',
-        'Generic Node'
+        'Express.js'
       ])).toBe(true);
   });
 

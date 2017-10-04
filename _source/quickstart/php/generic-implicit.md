@@ -28,7 +28,7 @@ quickstart will assume the use of the [guzzlehttp/psr7](https://packagist.org/pa
 Let's install these two packages with composer.
 
 ```bash
-composer require spomkylabs/jose guzzlehttp/psr7
+composer require spomky-labs/jose guzzlehttp/psr7
 ```
 
 ## Messages API
@@ -65,16 +65,16 @@ if ( ! isset( $_SERVER['HTTP_AUTHORIZATION'] ) ) {
 ```
 
 Now that we have ignored any requests for `OPTIONS` (prefetch requests) and made sure that the authorization header 
-is present, we can not begin our verification process.  First, we set up some variables to store some information in.
+is present, we can now begin our verification process.  First, we set up some variables to store some information in.
  Next we extract the authentication type and the token from the Authorization header then we need to make sure that 
  the authentication type is a Bearer token.
  
 ```php?start_inline=true
 $authType = null;
-$authToken = null;
+$authData = null;
 
 // Extract the auth type and the data from the Authorization header.
-list( $authType, $authToken ) = explode( " ", $_SERVER['HTTP_AUTHORIZATION'], 2 );
+list( $authType, $authData ) = explode( " ", $_SERVER['HTTP_AUTHORIZATION'], 2 );
 
 // If the Authorization Header is not a bearer type, return a 401.
 if ( $authType != 'Bearer' ) {

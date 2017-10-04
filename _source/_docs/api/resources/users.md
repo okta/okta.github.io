@@ -1049,7 +1049,6 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 | `profile.email eq "email@example.com"`        | Users with a specified `email`*                  |
 | `profile.firstName eq "John"`                 | Users with a specified `firstName`*              |
 | `profile.lastName eq "Smith" `                | Users with a specified `lastName`*               |
-| `profile.lastName sw "Sm" `                   | Users whose `lastName` starts with "Sm"          |
 
 > Hint: If filtering by `email`, `lastName`, or `firstName`, it may be easier to use `q` instead of `filter`.
 
