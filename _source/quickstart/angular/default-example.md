@@ -54,7 +54,7 @@ In your application's `module.ts` file, import the following objects and create 
 ```typescript
 // myApp.module.ts
 
-import { 
+import {
   OktaAuthModule,
   OktaCallbackComponent,
 } from '@okta/okta-angular';
@@ -125,30 +125,36 @@ export class MyAppModule { }
 
 Your Angular application now has an access token in local storage that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `MessageList` component that gets the access token from local storage, and use it to make an authenticated request to your server.
 
-Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the Angular component could look like for this hypothetical example:
+Here is what the Angular component could look like for this hypothetical example:
 
 ```typescript
 // messagelist.component.ts
 
 import { Component } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { OktaAuthService } from '@okta/okta-angular';
 import 'rxjs/Rx';
 
-@Component({ template: `{{messages}}` })
+@Component({
+  template: `
+    <div *ngIf="messages.length">
+      <li *ngFor="let message of messages">{{message.message}}</li>
+    </div>
+  `
+})
 export class MessageListComponent {
-  message;
-
-  constructor(private okta: OktaAuthService, private http: Http) {
-      const headers = new Headers({ Authorization: 'Bearer ' + okta.getAccessToken().accessToken; });
-      
-      // Make request
-      this.http.get(
-        'http://localhost:{serverPort}/api/messages',
-        new RequestOptions({ headers: headers })
-      )
-      .map(res => res.json())
-      .subscribe(message => this.message = message);
-    }
+  messages = [];
+  constructor(private oktaAuth: OktaAuthService, private http: Http) {
+    const headers = new Headers({ Authorization: 'Bearer ' + oktaAuth.getAccessToken().accessToken });
+    // Make request
+    this.http.get(
+      'http://localhost:{serverPort}/api/messages',
+      new RequestOptions({ headers: headers })
+    )
+    .map(res => res.json())
+    .subscribe((messages: Array<Object>) => messages.forEach(message => this.messages.push(message)));
+  }
 }
 ```
+
+In the next section you can select your server technology to see how your server can read this incoming token and validate it.
