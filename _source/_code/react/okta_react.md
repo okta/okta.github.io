@@ -56,7 +56,7 @@ npm install react-router-dom --save
 
 ## Create an Authentication Utility
 Users can sign in to your React app a number of different ways.
-To provide a fully featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget/) is available to handle User Lifecycle operations, MFA, and more.
+To provide a fully featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) is available to handle User Lifecycle operations, MFA, and more.
 
 First, create `src/auth.js` as an authorization utility file and use it to bootstrap the required fields to login. This file will expose a `withAuth` method that makes it easy to create [Higher-Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that include an `auth` prop:
 
