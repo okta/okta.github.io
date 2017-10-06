@@ -4384,7 +4384,7 @@ curl -v -X GET \
 
 * [Application Model](#application-model)
 * [Application User Model](#application-user-model)
-* [Appliction Group Model](#application-group-model)
+* [Application Group Model](#application-group-model)
 
 ### Application Model
 

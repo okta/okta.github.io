@@ -13,6 +13,7 @@ test-app-icons.html
 atlassian-ide-plugin.xml
 classes
 
+
 # Include files from snapshotted ide config (which are ignored otherwise)
 !buildtools/ide/idea/.idea
 !buildtools/ide/idea/*.iml
@@ -36,6 +37,7 @@ vendor/*
 
 dist
 
+.asset-cache/
 _source/.asset-cache
 .asset-cache
 .sass-cache

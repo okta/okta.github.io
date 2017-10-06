@@ -66,6 +66,9 @@ collections:
     output: true
   use_cases:
     output: true
+  authentication-guide:
+    output: true
+    permalink: /:collection/:path:output_ext
   reference:
     output: true
   3rd_party_notices:
