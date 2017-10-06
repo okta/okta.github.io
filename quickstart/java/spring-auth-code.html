@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<body>
+    <h3 id="include-the-dependencies">Include the dependencies</h3>
+
+<p>For Apache Maven:</p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-security<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.5.6.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.security.oauth<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-security-oauth2<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.0.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre>
+</div>
+<p>For Gradle:</p>
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">compile</span> <span class="s1">'org.springframework.boot:spring-boot-starter-security:1.5.6.RELEASE'</span>
+<span class="n">compile</span> <span class="s1">'org.springframework.security.oauth:spring-security-oauth2:2.0.14.RELEASE'</span>
+</code></pre>
+</div>
+
+<h3 id="configuration">Configuration</h3>
+<p>Configure your <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html">Spring properties</a> via environment variables, system properties, your application.yaml:</p>
+
+<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">security</span><span class="pi">:</span>
+  <span class="s">oauth2</span><span class="pi">:</span>
+    <span class="s">client</span><span class="pi">:</span>
+      <span class="c1"># From OIDC app</span>
+      <span class="s">clientId</span><span class="pi">:</span> <span class="c1"># clientId</span>
+      <span class="s">clientSecret</span><span class="pi">:</span> <span class="c1"># clientSecret</span>
+      <span class="c1"># From Authorization Server's metadata</span>
+      <span class="s">accessTokenUri</span><span class="pi">:</span> <span class="c1"># token_endpoint</span>
+      <span class="s">userAuthorizationUri</span><span class="pi">:</span> <span class="c1"># authorization_endpoint </span>
+      <span class="s">clientAuthenticationScheme</span><span class="pi">:</span> <span class="s">form</span>
+    <span class="s">resource</span><span class="pi">:</span>
+      <span class="c1"># from your Auth Server's metadata, check .well-known/openid-configuration </span>
+      <span class="c1"># if not in .well-known/oauth-authorization-server</span>
+      <span class="s">userInfoUri</span><span class="pi">:</span> <span class="c1"># userinfo_endpoint</span>
+      <span class="s">preferTokenInfo</span><span class="pi">:</span> <span class="s">false</span>
+</code></pre>
+</div>
+
+<h3 id="annotate-your-application">Annotate your Application</h3>
+
+<p>Just add a <code class="highlighter-rouge">@EnableOAuth2Sso</code> annotation to your application, for example:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@EnableOAuth2Sso</span>
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleApplication</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">ExampleApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>That’s it! Open an incognito window (to ensure clean browser cache) and browse to <a href="http://localhost:8080/login">http://localhost:8080/login</a> you will be  automatically redirected to the Okta login page.</p>
+
+<p>You can read more about <a href="http://projects.spring.io/spring-security-oauth/docs/oauth2.html">Spring’s OAuth 2 support</a> or take a look at this <a href="https://developer.okta.com/blog/2017/03/21/spring-boot-oauth">blog post</a> that describes the steps and configuration in detail.</p>
+
+</body>
+</html>
