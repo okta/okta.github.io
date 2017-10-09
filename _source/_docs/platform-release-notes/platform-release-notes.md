@@ -185,11 +185,11 @@ The Policy API enables an Administrator to perform policy and policy rule operat
 
 The Password Policy type controls settings that determine a user’s password length and complexity, as well as the frequency with which a password can be changed. This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock. For more information, see Okta's [API Reference](/docs/api/resources/policy.html#GroupPasswordPolicy).
 
-<!-- ### API Bug Fix
+### API Bug Fix
 
-This bug fix is expected on preview orgs starting release-date, and on production orgs starting release-date.
+This bug fix is expected on preview orgs starting October 6, 2017. This issue doesn't affect production orgs.
 
-* Description. (OKTA-xxxxx) -->
+* Slim ID tokens from a custom authorization server didn't include OpenID Connect claims, causing client applications including the Okta Sign-In Widget to not pre-populate the username.
 
 ### Does Your Org Have This Change Yet?
 
