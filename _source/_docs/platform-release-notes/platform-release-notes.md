@@ -189,7 +189,7 @@ The Password Policy type controls settings that determine a user’s password le
 
 This bug fix is expected on preview orgs starting October 6, 2017. This issue doesn't affect production orgs.
 
-* Slim ID tokens from  an custom authorization server didn't include OpenID Connect claims, causing client applications including the Okta Sign-In Widget to not pre-populate the username.
+* Slim ID tokens from a custom authorization server didn't include OpenID Connect claims, causing client applications including the Okta Sign-In Widget to not pre-populate the username.
 
 ### Does Your Org Have This Change Yet?
 
