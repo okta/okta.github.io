@@ -86,6 +86,7 @@ public class LoginActivity extends Activity {
 
     private OktaAppAuth mOktaAuth;
     
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     
@@ -99,7 +100,6 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onSuccess() {
                     // Handle a successful initialization (e.g. display login button)
-                    startAuth();
                 }
             
                 @Override
@@ -115,7 +115,11 @@ public class LoginActivity extends Activity {
 Once the `OktaAppAuth` instance is initialized, you can start the authorization flow by simply calling `login` whenever you're ready:
 
 ```java
-private void startAuth() {
+// LoginActivity.java
+
+public void onSuccess() {
+    // Handle a successful initialization (e.g. display login button)
+
     Intent completionIntent = new Intent(this, AuthorizedActivity.class);
     Intent cancelIntent = new Intent(this, LoginActivity.class);
     cancelIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -135,7 +139,7 @@ When starting up the application, check for the existance of an `access_token` t
 
 ```java
 // LoginActivity.java
-
+@Override
 protected void onCreate(Bundle savedInstanceState) {
     ...
     
@@ -153,8 +157,6 @@ protected void onCreate(Bundle savedInstanceState) {
 ## Using the Access Token
 
 Your Android application now has an access token in private Shared Preferences that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that makes an authenticated request to your server.
-
-Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the request could look like for this hypothetical example:
 
 ```java
 private void callMessagesApi() {
@@ -191,3 +193,5 @@ private void callMessagesApi() {
     });
 }
 ```
+
+In the next section you can select your server technology to see how your server can read this incoming token and validate it.
