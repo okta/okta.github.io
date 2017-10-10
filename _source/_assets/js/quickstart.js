@@ -34,13 +34,13 @@
         serverExampleType: 'implicit'
       },
       {
-        name: 'ios',
-        label: 'iOS',
+        name: 'android',
+        label: 'Android',
         serverExampleType: 'implicit'
       },
       {
-        name: 'android',
-        label: 'Android',
+        name: 'ios',
+        label: 'iOS',
         serverExampleType: 'implicit'
       },
     ],
