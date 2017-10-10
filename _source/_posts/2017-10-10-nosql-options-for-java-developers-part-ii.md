@@ -18,7 +18,7 @@ Today I’m happy to share their answers with you. But first, some introductions
 [**Justin McCarthy**](https://www.linkedin.com/in/justinmccarthy/)  
 Justin is the CTO and co-founder of [strongDM](https://www.strongdm.com/), a company that provides secure access to databases (permissions, monitoring, and compliance reporting). He’s also an Okta customer.
 
-[**Rafal Glowinski**](https://www.linkedin.com/in/rafa%C5%82-g%C5%82owi%C5%84ski-b3979a28/)  
+[**Rafal Glowinski**](https://twitter.com/GlowinskiRafal)  
 Rafal is a Team Leader for the largest Polish e-commerce: allegro.pl. His teams are using lots of Cassandra and MongoDB in their daily operations, and there are many many stories to be told about our struggle with them both when it comes to performance, ease of use (or lack of it), HA+ replication, developer errors, etc.
 
 [**Vlad Mihalcea**](https://www.linkedin.com/in/vladmihalcea/)  
