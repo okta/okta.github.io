@@ -22,7 +22,7 @@ Justin is the CTO and co-founder of [strongDM](https://www.strongdm.com/), a com
 Rafal is a Team Leader for the largest Polish e-commerce: allegro.pl. His teams are using lots of Cassandra and MongoDB in their daily operations, and there are many many stories to be told about our struggle with them both when it comes to performance, ease of use (or lack of it), HA+ replication, developer errors, etc.
 
 [**Vlad Mihalcea**](https://www.linkedin.com/in/vladmihalcea/)  
-Vlad is a Hibernate Developer Advocate working for Red Hat. He is the author of [High-Performance Java Persistence](https://leanpub.com/high-performance-java-persistence) and an expert on most things related to databases.
+Vlad is the CEO of Hypersistence and also a Developer Advocate for the Hibernate project. He is the author of [High-Performance Java Persistence](https://leanpub.com/high-performance-java-persistence) and an expert on most things related to databases.
 
 [**Laurent Doguin**](https://www.linkedin.com/in/ldoguin/)  
 Laurent is the VP of Developer Relations at Clever Cloud. Before Clever Cloud, he was a Developer Advocate for Couchbase and has a vast amount of NoSQL and cloud experience.
