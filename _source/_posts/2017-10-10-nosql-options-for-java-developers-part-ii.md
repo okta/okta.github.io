@@ -29,7 +29,7 @@ Laurent is the VP of Developer Relations at Clever Cloud. Before Clever Cloud, h
 
 Now that you’ve met everyone let's take a look at my questions and their answers about NoSQL options for Java developers.
 
-## 1. Do you agree with my choices of the top 5 NoSQL options (MongoDB, Redis, Cassandra, Neo4j, and PostgreSQL with its JSON support)?
+## 1. Do you agree with my choices of the top 5 NoSQL options?
 
 **Justin:** MongoDB, Redis, Cassandra, Neo4j are the leading representatives of some important and orthogonal categories of non-relational databases: document, in-memory KV, petabyte KV, and graph. 
 
