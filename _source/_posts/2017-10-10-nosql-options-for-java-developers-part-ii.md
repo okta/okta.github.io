@@ -24,7 +24,7 @@ Rafal is a Team Leader for the largest Polish e-commerce: allegro.pl. His teams 
 [**Vlad Mihalcea**](https://www.linkedin.com/in/vladmihalcea/)  
 Vlad is the CEO of Hypersistence and also a Developer Advocate for the Hibernate project. He is the author of [High-Performance Java Persistence](https://leanpub.com/high-performance-java-persistence) and an expert on most things related to databases.
 
-[**Laurent Doguin**](https://www.linkedin.com/in/ldoguin/)  
+[**Laurent Doguin**](https://twitter.com/ldoguin)  
 Laurent is the VP of Developer Relations at Clever Cloud. Before Clever Cloud, he was a Developer Advocate for Couchbase and has a vast amount of NoSQL and cloud experience.
 
 Now that you’ve met everyone let's take a look at my questions and their answers about NoSQL options for Java developers.
