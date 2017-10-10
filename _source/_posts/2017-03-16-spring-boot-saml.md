@@ -215,19 +215,19 @@ Hello SAML!
 
 Start the app using your IDE or `mvn spring-boot:run` and navigate to [https://localhost:8443](https://localhost:8443). If you're using Chrome, you'll likely see a privacy error.
 
-{% img blog/spring-boot-saml/connection-not-private.png alt:"Connection Not Private" width:"800" %}
+{% img blog/spring-boot-saml/connection-not-private.png alt:"Connection Not Private" width:"800" %}{: .center-image }
 
 Click the "ADVANCED" link at the bottom. Then click the "proceed to localhost (unsafe)” link.
 
-{% img blog/spring-boot-saml/connection-not-private-proceed.png alt:"Proceed to localhost" width:"800" %}
+{% img blog/spring-boot-saml/connection-not-private-proceed.png alt:"Proceed to localhost" width:"800" %}{: .center-image }
 
 Next, you'll be redirected to Okta to sign in and redirected back to your app. If you're already logged in, you won't see anything from Okta. If you sign out from Okta, you'll see a login screen such as the one below.
 
-{% img blog/spring-boot-saml/okta-login.png alt:"Okta Login" width:"800" %}
+{% img blog/spring-boot-saml/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
 After you've logged in, you should see a screen like the one below.
 
-{% img blog/spring-boot-saml/hello-saml.png alt:"Hello SAML" width:"800" %}
+{% img blog/spring-boot-saml/hello-saml.png alt:"Hello SAML" width:"800" %}{: .center-image }
 
 ## Source Code
 
