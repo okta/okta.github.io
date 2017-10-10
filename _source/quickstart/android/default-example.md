@@ -139,9 +139,9 @@ When starting up the application, check for the existance of an `access_token` t
 protected void onCreate(Bundle savedInstanceState) {
     ...
     
-    mOktaAppAuth = OktaAppAuth.getInstance(this);
+    mOktaAuth = OktaAppAuth.getInstance(this);
 
-    if (mOktaAppAuth.isUserLoggedIn()) {
+    if (mOktaAuth.isUserLoggedIn()) {
         Log.i(TAG, "User is already authenticated, proceeding to protected activity");        
         startActivity(new Intent(this, ProtectedActivity.class));
         finish();
@@ -158,7 +158,7 @@ Please continue down to the next section, Server Setup, to learn about access to
 
 ```java
 private void callMessagesApi() {
-    mOktaAppAuth.performAuthorizedRequest(new OktaAppAuth.BearerAuthRequest() {
+    mOktaAuth.performAuthorizedRequest(new OktaAppAuth.BearerAuthRequest() {
         @NonNull
         @Override
         public HttpURLConnection createRequest() throws Exception {
