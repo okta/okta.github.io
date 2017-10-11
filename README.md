@@ -9,7 +9,7 @@
 
 Okta developer site [developer.okta.com](https://developer.okta.com) is a custom [Jekyll](http://jekyllrb.com/) site deployed on [GitHub pages](https://pages.github.com/).
 
-All documentation submissions are welcome. To submit a change, please follow the [contribution process](Contributing-to-the-Site#you-are-making-a-non-blog-change).
+All documentation submissions are welcome. To submit a change, please follow the [contribution process](https://github.com/okta/okta.github.io/wiki/Contributing-to-the-Site#you-are-making-a-non-blog-change).
 
 ## Resources
 - [API Reference](https://developer.okta.com/docs/api/resources/)
