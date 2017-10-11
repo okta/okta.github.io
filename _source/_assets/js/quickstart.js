@@ -19,6 +19,12 @@
         active: true
       },
       {
+        name: 'widget',
+        label: 'Okta Sign-In Widget',
+        serverExampleType: 'implicit',
+        codeIconName: 'javascript'
+      },
+      {
         name: 'angular',
         label: 'Angular',
         serverExampleType: 'implicit'
@@ -26,11 +32,6 @@
         name: 'react',
         label: 'React',
         serverExampleType: 'implicit'
-      },
-      {
-        name: 'widget',
-        label: 'Sign-In Widget',
-        serverExampleType: 'implicit',
       },
       {
         name: 'ios',
@@ -50,11 +51,11 @@
         label: 'Node JS',
         frameworks: [
           {
-            active: true,
             name: 'generic',
             label: 'Generic Node'
           },
           {
+            active: true,
             name: 'express',
             label: 'Express.js'
           }
@@ -131,7 +132,7 @@
         class: 'with-icon'
       });
       var icon = $('<i>', {
-        class: 'icon code-' + client.name + '-32'
+        class: 'icon code-' + (client.codeIconName || client.name) + '-32'
       });
       link.prepend(icon);
       listItem.append(link);

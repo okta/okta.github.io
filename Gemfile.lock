@@ -242,7 +242,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  github-pages (= 160)
+  github-pages
   html-proofer
   jekyll-assets
   jekyll-redirect-from
