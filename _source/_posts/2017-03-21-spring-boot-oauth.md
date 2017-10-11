@@ -64,7 +64,7 @@ spring run helloGroovy.groovy
 
 Navigate to [http://localhost:8080](http://localhost:8080) and you'll be prompted to login with your browser's basic authentication dialog. Enter `user` for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you'll see `Hello World` in your browser.
 
-{% img blog/spring-boot-oauth/0-hello-world.png alt:"Hello World" width:"800" %}
+{% img blog/spring-boot-oauth/hello-world.png alt:"Hello World" width:"800" %}{: .center-image }
 
 ### Get Your Authorization Server Settings
 
@@ -76,7 +76,7 @@ The Metadata URI you see in this screenshot will come in handy later when you ne
 
 ## Create an OpenID Connect App in Okta
 
-To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to **Applications** and click on **Add Application**. Select **Web** and click **Next**. Give the application a name (e.g. “My OIDC App”) and specify `http://localhost:4200` as a Login redirect URI. Your upcoming Angular client will use this value. Click **Done** and admire your handiwork!
+To get a client id and secret, you need to create a new OpenID Connect (OIDC) app. Navigate to **Applications** and click on **Add Application**. Select **Web** and click **Next**. Give the application a name (e.g. “My OIDC App”) and specify `http://localhost:8080/login` as a Login redirect URI. Click **Done** and admire your handiwork!
 
 {% img blog/spring-boot-oauth/oidc-settings.png alt:"My OIDC App" width:"700" %}{: .center-image }
 
@@ -84,7 +84,7 @@ Your `clientId` and `clientSecret` values for this app will be just below the fo
 
 ## Create a Spring Boot OAuth Client
 
-Create a `helloOAuth.groovy` file that uses Spring Security and its [OAuth2 support](https://spring.io/guides/tutorials/spring-boot-oauth2/).
+Create a `helloOAuth.groovy` file that uses Spring Security and its [OAuth 2.0 support](https://spring.io/guides/tutorials/spring-boot-oauth2/).
 
 ```groovy
 @Grab('spring-boot-starter-security')
@@ -116,55 +116,13 @@ security:
       # from your Auth Server's metadata, check .well-known/openid-configuration
       # if not in .well-known/oauth-authorization-server
       userInfoUri: # userinfo_endpoint
-      preferTokenInfo: false
 ```
 
-Start your app with `spring run helloOAuth.groovy` and navigate to [http://localhost:8080](http://localhost:8080). You'll be redirected to Okta, but likely see the following error.
+Start your app with `spring run helloOAuth.groovy` and navigate to [http://localhost:8080](http://localhost:8080). You'll be redirected to Okta to login. 
 
-{% img blog/spring-boot-oauth/7-bad-request-invalid-redirect.png alt:"Bad Request, Invalid Redirect" width:"800" %}
+{% img blog/spring-boot-oauth/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 
-This happens because Spring Security sends a `redirect_uri` value of `http://localhost:8080/login`. Navigate to your Okta developer instance and change your OIDC app to have this as a Redirect URI.
-
-{% img blog/spring-boot-oauth/8-add-redirect-uri.png alt:"Add Redirect URI" width:"800" %}
-
-If you hit [http://localhost:8080](http://localhost:8080) again, this time you'll get an error that doesn't explain as much.
-
-{% img blog/spring-boot-oauth/9-no-scopes.png alt:"No Scopes" width:"800" %}
-
-The whitelabel error page doesn't tell you anything, but your browser's address window does: _no scopes were requested_. Modify `application.yml` to have a `scope` property at the same level as `clientAuthenticationScheme`. These are some standard OIDC scopes.
-
-```yaml
-      clientAuthenticationScheme: form
-      scope: openid profile email
-```
-
-Try [http://localhost:8080](http://localhost:8080) again and you'll get an error that _User is not assigned to the client app_. Again, you'll have to look in the address bar to see it.
-
-{% img blog/spring-boot-oauth/10-user-not-assigned.png alt:"User Not Assigned" width:"800" %}
-
-Open your OIDC app in Okta and **Assign People** to it. Adding your own account is the easiest way to do this.
-
-The next error you'll see when trying to authenticate is _Policy evaluation failed_.
-
-{% img blog/spring-boot-oauth/11-policy-evaluation-failure.png alt:"Policy Evaluation Failure" width:"800" %}
-
-In Okta's UI, navigate to **API** > **Authorization Servers** and click on your Authorization Server's name and **Access Policies**. Click **Add Policy** to continue.
-
-{% img blog/spring-boot-oauth/12-access-policies.png alt:"Access Policies" width:"800" %}
-
-Enter a name and description and set it to apply to all clients.
-
-{% img blog/spring-boot-oauth/13-add-policy.png alt:"Add Policy" width:"800" %}
-
-Click **Create Policy** to continue. Once that completes, click the **Add Rule** button.
-
-{% img blog/spring-boot-oauth/14-add-rule.png alt:"Add Rule" width:"800" %}
-
-Give the rule a name, accept the default values, and click the **Create Rule** button.
-
-{% img blog/spring-boot-oauth/15-default-grant-rules.png alt:"Default Grant Rules" width:"800" %}
-
-Try [http://localhost:8080](http://localhost:8080) again and this time it should work. If it does - congrats!
+If you're already logged in, you should be redirected back to your app. If it works - congrats!
 
 You can make one additional change to the `helloOAuth.groovy` file to prove it's really working: change the `home()` method to return `Hello $name` where `$name` is from `javax.security.Principal`.
 
@@ -177,7 +135,7 @@ String home(java.security.Principal user) {
 
 This should result in your app showing a result like the following.
 
-{% img blog/spring-boot-oauth/16-success.png alt:"Success" width:"800" %}
+{% img blog/spring-boot-oauth/login-success.png alt:"Success" width:"800" %}{: .center-image }
 
 ## Get the Source Code
 
@@ -189,7 +147,9 @@ This tutorial showed you how to use Spring CLI, Groovy, Spring Boot, Spring Secu
 
 In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta), I'll show you how to develop one of these fancy UIs in Angular and use the access token retrieved to talk to a Spring Boot API that's secured by Spring Security and does JWT validation.
 
-*Updated September 30, 2017 to include instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).*
+**Changelog:**
+
+* Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 
 
 
