@@ -85,7 +85,7 @@ function oktaCustomRenderFunction(document_type, item) {
     e.preventDefault();
 
     if($('#st-search-input-auto').val() != '') {
-      window.location.href = searchDomain + '/search/#stq=' + encodeURIComponent($('#st-search-input-auto').val());
+      window.location.href = searchDomain + '/search?q=' + encodeURIComponent($('#st-search-input-auto').val());
     }
 
     return false;
