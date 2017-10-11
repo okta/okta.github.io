@@ -39,6 +39,7 @@ security:
       accessTokenUri: # token_endpoint
       userAuthorizationUri: # authorization_endpoint 
       clientAuthenticationScheme: form
+      scope: openid profile email
     resource:
       # from your Auth Server's metadata, check .well-known/openid-configuration 
       # if not in .well-known/oauth-authorization-server
