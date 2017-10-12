@@ -244,7 +244,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   html-proofer
-  jekyll-assets
+  jekyll-assets (= 2.3.2)
   jekyll-redirect-from
   tzinfo-data
 
