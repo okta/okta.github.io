@@ -11,7 +11,7 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 
 <ul class='code-list'>
   <li>
-    <a href='/quickstart/#/okta-sign-in-page/dotnet/aspnetcore' class='code-button inverse'>
+    <a href='/quickstart/#/okta-sign-in-page/dotnet/aspnetcore' class='code-button inverse' data-proofer-ignore>
       <span class='code-icon launch-16'></span><span>Authentication Quick Start Guide</span>
     </a>
   </li>
