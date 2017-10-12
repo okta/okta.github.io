@@ -37,7 +37,7 @@ ng new okta-app
 
 This creates a new project named `okta-app` and installs all required dependencies.
 
-The simplest way to add authentication into an Angular app is using the library [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html). We can install it via `npm`:
+The simplest way to add authentication into an Angular app is using the library [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget/). We can install it via `npm`:
 
 ```bash
 npm install @okta/okta-signin-widget --save
@@ -45,7 +45,7 @@ npm install @okta/okta-signin-widget --save
 
 ## Create an Authentication Service
 Users can sign in to your Angular application a number of different ways.
-To provide a fully-featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) is available to handle User Lifecycle operations, MFA, and more.
+To provide a fully-featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget/) is available to handle User Lifecycle operations, MFA, and more.
 
 First, create `src/app/app.service.ts` as an authorization utility file and use it to bootstrap the required fields to login:
 
@@ -158,7 +158,7 @@ First, update `src/app/app.component.html` to provide the Login logic:
 ```html
 <!-- app.component.html -->
 <link
-  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css"
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-sign-in.min.css"
   type="text/css"
   rel="stylesheet"/>
 
