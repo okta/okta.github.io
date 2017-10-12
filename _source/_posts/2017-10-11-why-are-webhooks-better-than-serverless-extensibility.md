@@ -61,7 +61,7 @@ tricky unless your platform provides either a feature to do this, or
 extensibility options so the customer can do it on their own.
 
 So, you decide to allow serverless extensibility. A customer can now upload some
-code (in Javascript) to run on your platform every time a new piece of
+code (in JavaScript) to run on your platform every time a new piece of
 infrastructure is provisioned.
 
 The customer reads through your docs, and writes a small function that looks
@@ -110,14 +110,14 @@ his team:
   available, etc. This is a high learning curve and requires all of his
   engineers to have a thorough understanding of your product in order to be
   productive.
-- Because your serverless platform only supports running Javascript ES5 code at
+- Because your serverless platform only supports running JavaScript ES5 code at
   the moment, John’s team of C# engineers are having issues writing their
-  complex application logic in Javascript which they are not all familiar with.
+  complex application logic in JavaScript which they are not all familiar with.
 - John’s team doesn’t have any insight into how your serverless platform is
   running his code: they can’t figure out how to monitor server resources, how
   to do proper unit and integration testing, how to look for failures, etc.
 - John’s team now has to manage code in many different places as opposed to just
-  one Github repository. Now, each serverless function John’s team writes must
+  one GitHub repository. Now, each serverless function John’s team writes must
   be manually uploaded into the right place in your platform website,
   maintained, and updated from time to time. Because there is no direct way to
   integrate these serverless functions into the team’s existing codebase, this
@@ -168,7 +168,7 @@ you and your users.
 
 An older approach that’s been tested time and time again, is webhooks. While
 webhooks are not “old” by any means, they predate serverless extensibility
-patterns by at least 7 years. My buddy [Jeff Lindsay](http://progrium.com/blog/)
+patterns by at least seven years. My buddy [Jeff Lindsay](http://progrium.com/blog/)
 coined the term back in 2007.
 
 The idea behind webhooks is simple: instead of *you* running a customer’s code
@@ -244,13 +244,13 @@ Heroku, and perform complex logic to scale their services more easily, cut down
 cost, keep their ops team informed of issues, etc.
 
 
-### Github
+### GitHub
 
-[Github webhooks](https://developer.github.com/webhooks/) have been around
+[GitHub webhooks](https://developer.github.com/webhooks/) have been around
 forever, and are the foundation of many popular developer services like
 [Travis CI](https://travis-ci.org/).
 
-Github webhooks allow you to hook into just about every possible action that can
+GitHub webhooks allow you to hook into just about every possible action that can
 be taken on a source repository. They’re excellent for analyzing code, tracking
 team performance, automating testing and deploys, as well as a number of other
 great use cases.
