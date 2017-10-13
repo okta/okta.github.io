@@ -299,6 +299,75 @@ Okta has two types of rate limits: concurrent rate limits for the number
 of simultaneous transactions, and org-wide rate limits that vary by API
 endpoint.
 
+### Org-Wide Rate Limits
+
+API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
+For all endpoints not listed, the API rate limit is a combined 10,000 requests per minute.
+
+<table border="1" style="width: 100%;">
+	<caption>Org-Wide Rate Limits Per Minute</caption>
+	<thead>
+		<tr>
+			<th colspan="1" rowspan="1">Endpoint</th>
+			<th colspan="1" rowspan="1">Limit</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps/<i>{id}</i></span><span style="font-family: verdana,geneva,sans-serif;"> </span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">100</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/authn</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups/<i>{id}</i>&nbsp;</span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/sessions</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">750</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users/<i>{:id}</i></span> (exact URL plus query params or other qualifiers)</td>
+			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users</span></td>
+			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
+		</tr>
+		<tr>
+			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/</span>&nbsp; (if no other limit specified in this table)</td>
+			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
+		</tr>
+	</tbody>
+</table>
+
+#### Example Rate Limit Header with Org-Wide Rate Limit Error  
+
+This example shows the relevant portion of a rate limit header being
+returned with the error for a request that exceeded the concurrent rate
+limit.
+
+~~~http
+
+HTTP/1.1 429 
+Date: Tue, 26 Sep 2017 21:33:25 GMT
+X-Rate-Limit-Limit: 5000
+X-Rate-Limit-Remaining: 4198
+X-Rate-Limit-Reset: 1605463723
+
+~~~
+
 ### Concurrent Rate Limits
 
 In order to protect the service for all customers, Okta enforces concurrent rate limits starting with this release.
@@ -310,9 +379,9 @@ For concurrent rate limits, traffic is measured in three different areas. Counts
 * For Office365 traffic, the limit is 75 concurrent transactions per org.
 * For all other traffic including API requests, the limit is 75 concurrent transactions per org.
 
-Okta has verified that these limits are sufficient based on current usage. As a result of verification, we increased the limit for some orgs to 150.
+Okta has verified that these limits are sufficient based on current usage or grandfathered higher limits for those orgs that have historically exceeded this limit.
 
-The first request to exceed the concurrent limit returns an HTTP 429 error, and the first error every sixty seconds is written to the log.
+Any request that would cause us to exceed the concurrent limit returns an HTTP 429 error, and the first error every 60 seconds is written to the log.
 Reporting concurrent rate limits once a minute keeps log volume manageable. 
 
 #### Example Error Response Events
@@ -444,75 +513,6 @@ When the number of unfinished requests is below the concurrent rate limit, reque
 The `X-Rate-Limit-Reset` time for concurrent rate limits is only a
 suggestion. There's no guarantee that enough requests will complete to
 stop exceeding the concurrent rate limit at the time indicated.
-
-### Org-Wide Rate Limits
-
-API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
-For all endpoints not listed, the API rate limit is a combined 10,000 requests per minute.
-
-<table border="1" style="width: 100%;">
-	<caption>Org-Wide Rate Limits Per Minute</caption>
-	<thead>
-		<tr>
-			<th colspan="1" rowspan="1">Endpoint</th>
-			<th colspan="1" rowspan="1">Limit</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps/<i>{id}</i></span><span style="font-family: verdana,geneva,sans-serif;"> </span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">100</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/authn</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups/<i>{id}</i>&nbsp;</span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/sessions</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">750</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users/<i>{:id}</i></span> (exact URL plus query params or other qualifiers)</td>
-			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/</span>&nbsp; (if no other limit specified in this table)</td>
-			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
-		</tr>
-	</tbody>
-</table>
-
-#### Example Rate Limit Header with Org-Wide Rate Limit Error  
-
-This example shows the relevant portion of a rate limit header being
-returned with the error for a request that exceeded the concurrent rate
-limit.
-
-~~~http
-
-HTTP/1.1 429 
-Date: Tue, 26 Sep 2017 21:33:25 GMT
-X-Rate-Limit-Limit: 5000
-X-Rate-Limit-Remaining: 4198
-X-Rate-Limit-Reset: 1605463723
-
-~~~
 
 ## Request Debugging
 
