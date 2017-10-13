@@ -10,10 +10,11 @@ excerpt: Integrate Okta with a React app using Auth JS.
 This guide will walk you through integrating authentication into a React app with Okta by performing these steps:
 1. [Add an OpenID Connect Client in Okta](#add-an-openid-connect-client-in-okta)
 2. [Create a React App](#create-a-react-app)
-3. [Create a Custom Login Form](#create-a-custom-login-form)
-4. [Create Routes](#create-routes)
-5. [Connect the Routes](#connect-the-routes)
-6. [Start Your App](#start-your-app)
+3. [Install Dependencies](#install-dependencies)
+4. [Create a Custom Login Form](#create-a-custom-login-form)
+5. [Create Routes](#create-routes)
+6. [Connect the Routes](#connect-the-routes)
+7. [Start Your App](#start-your-app)
 
 ## Prerequisites
 If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](/signup/).
@@ -31,21 +32,12 @@ If you do not already have a **Developer Edition Account**, you can create one a
 > **Note:** CORS is automatically enabled for the granted login redirect URIs.
 
 ## Create a React App
-To quickly create a React app, install the create-react-app CLI:
-```bash
-npm install -g create-react-app
-```
+To quickly create a React app, we recommend the create-react-app CLI. Follow their guide [here](https://github.com/facebookincubator/create-react-app#quick-overview).
 
-Now, create a new app:
-```bash
-create-react-app okta-app
-```
-
-This creates a new project named `okta-app` and installs all React dependencies.
-
+## Install Dependencies
 A simple way to add authentication to a React app is using the [Okta Auth JS](/code/javascript/okta_auth_sdk) library. We can install it via `npm`:
 ```bash
-cd okta-app && npm install @okta/okta-auth-js --save
+npm install @okta/okta-auth-js --save
 ```
 
 We'll also need `@okta/okta-react` and `react-router-dom` to manage our routes:
@@ -54,7 +46,6 @@ npm install @okta/okta-react react-router-dom --save
 ```
 
 ## Create a Custom Login Form
-
 If the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) does not fit your needs, [Auth-JS](/code/javascript/okta_auth_sdk.html) provides lower-level access to User Lifecycle operations, MFA, and more. For this example, we'll create a simple username and password form without MFA.
 
 Create a `src/LoginForm.js` file:

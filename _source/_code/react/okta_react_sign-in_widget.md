@@ -10,10 +10,11 @@ excerpt: Integrate Okta with a React app using the Sign-In Widget.
 This guide will walk you through integrating authentication into a React app with Okta by performing these steps:
 1. [Add an OpenID Connect Client in Okta](#add-an-openid-connect-client-in-okta)
 2. [Create a React App](#create-a-react-app)
-3. [Create a Widget Wrapper](#create-a-widget-wrapper)
-4. [Create Routes](#create-routes)
-5. [Connect the Routes](#connect-the-routes)
-6. [Start Your App](#start-your-app)
+3. [Install Dependencies](#install-dependencies)
+4. [Create a Widget Wrapper](#create-a-widget-wrapper)
+5. [Create Routes](#create-routes)
+6. [Connect the Routes](#connect-the-routes)
+7. [Start Your App](#start-your-app)
 
 ## Prerequisites
 If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](/signup/).
@@ -31,18 +32,9 @@ If you do not already have a **Developer Edition Account**, you can create one a
 > **Note:** CORS is automatically enabled for the granted login redirect URIs.
 
 ## Create a React App
-To quickly create a React app, install the create-react-app CLI:
-```bash
-npm install -g create-react-app
-```
+To quickly create a React app, we recommend the create-react-app CLI. Follow their guide [here](https://github.com/facebookincubator/create-react-app#quick-overview).
 
-Now, create a new app:
-```bash
-create-react-app okta-app
-```
-
-This creates a new project named `okta-app` and installs all React dependencies.
-
+## Install Dependencies
 A simple way to add authentication into a React app is using the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) library. We can install it via `npm`:
 ```bash
 cd okta-app && npm install @okta/okta-signin-widget --save
