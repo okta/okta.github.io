@@ -163,23 +163,23 @@ The demo application [found on GitHub](https://github.com/oktadeveloper/okta-spr
 3. Okta Spring Security Starter
 4. Thymeleaf Templates
 5. Thymeleaf Extras for Spring Security 4
-6. Okta SignIn Widget
+6. Okta Sign-In Widget
 
 The "behind the scenes magic" happens by virtue of the fact that we depend on the `okta-spring-security-starter` (from pom.xml):
 
 ```xml
 ...
 <dependency>
-	<groupId>com.okta.spring</groupId>
-	<artifactId>okta-spring-security-starter</artifactId>
-	<version>0.1.0</version>
+    <groupId>com.okta.spring</groupId>
+    <artifactId>okta-spring-security-starter</artifactId>
+    <version>0.1.0</version>
 </dependency>
 ...
 ```
 
-Let's start at the beginning and take a look at how the Javascript Okta SignIn Widget bridges the gap from the client side to Spring Boot.
+Let's start at the beginning and take a look at how the Javascript Okta Sign-In Widget bridges the gap from the client side to Spring Boot.
 
-### The Okta SignIn Widget
+### The Okta Sign-In Widget
 
 In the `login.html` Thymeleaf template, we set up the login widget like so:
 
@@ -208,7 +208,7 @@ $( document ).ready(function() {
 
 Notice that we've embedded all the settings to connect to our Okta tenant as inline Thymeleaf Template variables (lines 3 - 8). These values are passed in from the Spring Boot controller as part of the model. This is powerful because you only have to specify these settings in one place. Both server side and client side make use of them. You'll see how these settings are managed below. For now, just know that they all come from the `application.yml` file.
 
-After the Okta SignIn Widget is configured and instantiated, we check to see if the user has already logged in. If so, we send them to the `/authenticated` page. If not, we render the widget, which gives the user the opportunity to log in.
+After the Okta Sign-In Widget is configured and instantiated, we check to see if the user has already logged in. If so, we send them to the `/authenticated` page. If not, we render the widget, which gives the user the opportunity to log in.
 
 Here's the `renderWidget` function:
 
@@ -319,8 +319,12 @@ Here's the `SecureController`:
 @Controller
 public class SecureController {
 
+    private AppProperties appProperties;
+
     @Autowired
-    protected AppProperties appProperties;
+    public SecureController(AppProperties appProperties) {
+        this.appProperties = appProperties;
+    }
 
     @RequestMapping("/authenticated")
     public String authenticated(Model model) {
@@ -347,7 +351,7 @@ public class SecureController {
 }
 ```
 
-There are 4 paths defined in this controller and all require an authenticated user at a minimum. The real value comes in with the `/users` and `/admins` paths.
+There are four paths defined in this controller and all require an authenticated user at a minimum. The real value comes in with the `/users` and `/admins` paths.
 
 Notice that they both have the `@PreAuthorize` annotation. This means that the [SpringEL](https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#expressions) expression that follows must be satisfied before the method will even be entered. The `hasAuthority` function looks to see if the authenticated user belongs to those roles. In this case, these are automatically mapped to the Okta groups we created earlier. That's why it was key to ensure that the `groups` claim was included in the access token from Okta.
 
@@ -372,7 +376,7 @@ public class AppProperties {
     private String baseUrl;
     private String redirectUri;
 
-    ... getters and setters ...
+    // getters and setters //
 }
 ```
 
@@ -386,10 +390,13 @@ Here's a snippet from the the `HomeController`:
 @Controller
 public class HomeController {
 
-    @Autowired
-    protected AppProperties appProperties;
-    ...
+    private AppProperties appProperties;
 
+    @Autowired
+    public HomeController(AppProperties appProperties) {
+        this.appProperties = appProperties;
+    }
+    ...
     @RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("appProperties", appProperties);
@@ -427,6 +434,6 @@ This is what makes it available to the Thymeleaf template as you saw before:
 
 Hopefully you've seen the benefit of Okta's Groups mechanism in conjunction with Spring Security's role-based access control.
 
-Try it for yourself and let me know how your experience is with it! You can find me on Twitter at [@afitnerd](https://twitter.com/afitnerd).
+Try it for yourself and let me know how your experience is with it! You can find me on Twitter [@afitnerd](https://twitter.com/afitnerd).
 
 Keep an eye out for upcoming releases of the new Okta Java Spring Boot Integration, which will have support for other OIDC workflows, including `code` as well as hosted, configurable login and registration views.
