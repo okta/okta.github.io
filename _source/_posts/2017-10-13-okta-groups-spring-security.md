@@ -265,9 +265,7 @@ Fortunately, Spring Security makes it pretty easy to override the default behavi
 @Bean
 protected ResourceServerConfigurerAdapter resourceServerConfigurerAdapter() {
     return new ResourceServerConfigurerAdapter() {
-
         ...
-
         @Override
         public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
             resources.tokenExtractor(new TokenExtractor() {
@@ -279,7 +277,6 @@ protected ResourceServerConfigurerAdapter resourceServerConfigurerAdapter() {
 
                     return new PreAuthenticatedAuthenticationToken(tokenValue, "");
                 }
-
                 ...
             });
         }
@@ -391,7 +388,6 @@ public class HomeController {
 
     @Autowired
     protected AppProperties appProperties;
-
     ...
 
     @RequestMapping("/login")
