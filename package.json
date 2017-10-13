@@ -6,6 +6,7 @@
     "dist"
   ],
   "scripts": {
+    "postinstall": "check-node-version --node $(cat .nvmrc) --npm 4.2 && ruby --version | grep -q 2.2.4 || (echo 'Invalid ruby version, expecting 2.2.4' && exit 1)",
     "clean": "node scripts/clean",
     "pregenerate": "npm run clean",
     "generate": "cross-env PID_FINDER=okta_github_io JEKYLL_ENV=production bundle exec jekyll",
@@ -42,6 +43,7 @@
     "protractor": "^5.1.0",
     "recursive-readdir": "^2.2.1",
     "remove": "^0.1.5",
-    "wait-on": "^2.0.2"
+    "wait-on": "^2.0.2",
+    "check-node-version": "^2.1.0"
   }
 }
