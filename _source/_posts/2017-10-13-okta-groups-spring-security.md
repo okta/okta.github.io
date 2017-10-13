@@ -259,7 +259,7 @@ At this point, Spring Security can recognize the authenticated user. Before we l
 
 By default, the Spring Security OAuth 2.0 plugin processes access tokens coming in on an `Authorization` header as a bearer token. This is fine for applications that are creating RESTful responses for clients, such as an Angular client.
 
-For this example, I wanted to keep the architecture and amount of JavaScript minimal,so I wanted full page transitions. This is a little old-school, but it keeps the example code tight and small.
+For this example, I wanted to keep the architecture and amount of JavaScript minimal, so I wanted full page transitions. This is a little old-school, but it keeps the example code tight and small.
 
 In order for Spring Security to recognize that a user has authenticated, we need it to be able to handle the token coming in on a cookie.
 
