@@ -2,6 +2,8 @@
 layout: docs_page
 title: Social Login
 excerpt: Setting up an Okta Social Login provider
+redirect_from:
+  - "/docs/guides/social_authentication.html"
 ---
 
 # Social Login

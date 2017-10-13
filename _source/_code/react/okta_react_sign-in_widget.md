@@ -318,7 +318,7 @@ npm start
 ## Conclusion
 You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
 
-Want to learn how to use the user's `access_token`? Check out our [React Quickstart integrations](/quickstart/#/react/nodejs/generic.html) to learn about protecting routes on your server, validating the `access_token`, and more!
+Want to learn how to use the user's `access_token`? Check out our <a href='/quickstart/#/react/nodejs/generic' data-proofer-ignore>React Quickstart integrations</a> to learn about protecting routes on your server, validating the `access_token`, and more!
 
 ## Support 
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).
