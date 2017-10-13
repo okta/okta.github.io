@@ -3,6 +3,7 @@ layout: software
 title: Add Okta authentication to your Swift app
 language: iOS
 integration: client
+redirect_from: '/code/swift'
 ---
 
 # Add Okta authentication to your Swift app
