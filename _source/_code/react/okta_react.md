@@ -41,7 +41,7 @@ Now, create a new app:
 create-react-app okta-app
 ```
 
-This creates a new project named `okta-app` and installs all required dependencies.
+This creates a new project named `okta-app` and installs all React dependencies.
 
 A simple way to add authentication to a React app is using the [Okta Auth JS](/code/javascript/okta_auth_sdk) library. We can install it via `npm`:
 ```bash
@@ -141,7 +141,7 @@ Some routes require authentication in order to render. Defining those routes is 
 First, create `src/Home.js` to provide links to navigate our app:
 
 ```typescript
-/// src/Home.js
+// src/Home.js
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -168,9 +168,18 @@ export default withAuth(class Home extends Component {
 
   render() {
     if (this.state.authenticated === null) return null;
-    return this.state.authenticated ?
+
+    const button = this.state.authenticated ?
       <button onClick={this.props.auth.logout}>Logout</button> :
       <button onClick={this.props.auth.login}>Login</button>;
+    
+    return (
+      <div>
+        <Link to='/'>Home</Link><br/>
+        <Link to='/protected'>Protected</Link><br/>
+        {button}
+      </div>
+    );
   }
 });
 ```
@@ -258,10 +267,10 @@ class App extends Component {
         <Security issuer='https://{yourOktaDomain}.com/oauth2/default'
                   client_id='{clientId}'
                   redirect_uri={window.location.origin + '/implicit/callback'}
-                  onAuthRequired={onAuthRequired}>
-          <Route path='/' exact={true} component={Home}/>
-          <SecureRoute path='/protected' component={Protected}/>
-          <Route path='/login' render={() => <Login baseUrl='https://{yourOktaDomain}.com' />}>
+                  onAuthRequired={onAuthRequired} >
+          <Route path='/' exact={true} component={Home} />
+          <SecureRoute path='/protected' component={Protected} />
+          <Route path='/login' render={() => <Login baseUrl='https://{yourOktaDomain}.com' />} />
           <Route path='/implicit/callback' component={ImplicitCallback} />
         </Security>
       </Router>
