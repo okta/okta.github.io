@@ -17,7 +17,7 @@ The [Okta Sign-in Widget](/code/javascript/okta_sign-in_widget_ref) provides an 
 
 ## Create an Angular Application
 
-Angular 4 was [recently released](http://angularjs.blogspot.com/2017/03/angular-400-now-available.html), as well as [Angular CLI 1.0](https://github.com/angular/angular-cli/blob/master/CHANGELOG.md#100-2017-03-24). To see how you might use Okta's Sign-In Widget in a simple Angular application, create a new application with Angular CLI. First, you’ll need to install Angular CLI.
+Angular 4 was [recently released](http://angularjs.blogspot.com/2017/03/angular-400-now-available.html), as well as [Angular CLI 1.4.4](https://github.com/angular/angular-cli/releases/tag/v1.4.4). To see how you might use Okta's Sign-In Widget in a simple Angular application, create a new application with Angular CLI. First, you’ll need to install Angular CLI.
 
 ```bash
 npm install -g @angular/cli
