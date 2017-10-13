@@ -24,7 +24,7 @@ See [Examples](#examples) for way you can use the System Log API.
 
 ## Data Retention
 
-Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy}(https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
+Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
 ## Examples
 
@@ -107,7 +107,7 @@ Events published for a target user
 
 Failed login events
 
-    filter=action.eventType eq "core.user_auth.login_failed"
+    filter=eventType eq "user.session.start" and outcome.result eq "FAILURE"
 
 Events published for a target user and application
 
@@ -115,7 +115,7 @@ Events published for a target user and application
 
 App SSO events for a target user and application
 
-    filter=action.eventType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+    filter=eventType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
 
 Events published for a given ip address
 
