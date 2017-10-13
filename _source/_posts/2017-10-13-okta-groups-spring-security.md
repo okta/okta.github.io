@@ -122,7 +122,7 @@ Let's fire up the application and see it in action before we jump into the code.
 
 You can run this from the command line:
 
-```
+```bash
 mvn spring-boot:run
 ```
 
@@ -167,7 +167,7 @@ The demo application [found on GitHub](https://github.com/oktadeveloper/okta-spr
 
 The "behind the scenes magic" happens by virtue of the fact that we depend on the `okta-spring-security-starter` (from pom.xml):
 
-```
+```xml
 ...
 <dependency>
 	<groupId>com.okta.spring</groupId>
@@ -183,7 +183,7 @@ Let's start at the beginning and take a look at how the Javascript Okta SignIn W
 
 In the `login.html` Thymeleaf template, we set up the login widget like so:
 
-```
+```javascript
 $( document ).ready(function() {
     var data = {
         baseUrl: [[${appProperties.baseUrl}]],
@@ -212,7 +212,7 @@ After the Okta SignIn Widget is configured and instantiated, we check to see if 
 
 Here's the `renderWidget` function:
 
-```
+```javascript
 function renderWidget() {
     oktaSignIn.renderEl(
         {el: '#okta-login-container'},
@@ -261,7 +261,7 @@ In order for Spring Security to recognize that a user has authenticated, we need
 
 Fortunately, Spring Security makes it pretty easy to override the default behavior by setting a `TokenExtractor`. Here's the code that makes this happen from `OktaSpringSecurityRolesExampleApplication`:
 
-```
+```java
 @Bean
 protected ResourceServerConfigurerAdapter resourceServerConfigurerAdapter() {
     return new ResourceServerConfigurerAdapter() {
@@ -295,7 +295,7 @@ In the application setup, you define which paths are open. All other paths requi
 
 Here's another excerpt from `OktaSpringSecurityRolesExampleApplication`:
 
-```
+```java
 @Bean
 protected ResourceServerConfigurerAdapter resourceServerConfigurerAdapter() {
     return new ResourceServerConfigurerAdapter() {
@@ -318,7 +318,7 @@ You also define a custom access-denied handler. Every other path is automaticall
 
 Here's the `SecureController`:
 
-```
+```java
 @Controller
 public class SecureController {
 
@@ -364,7 +364,7 @@ Spring makes this easy with the `@Component` and `@ConfigurationProperties` anno
 
 Here's the `AppProperties` class:
 
-```
+```java
 @Component
 @ConfigurationProperties("okta.oauth")
 public class AppProperties {
@@ -385,7 +385,7 @@ The `@Component` annotation causes Spring to instantiate this Object and make it
 
 Here's a snippet from the the `HomeController`:
 
-```
+```java
 @Controller
 public class HomeController {
 
@@ -406,7 +406,7 @@ Before returning the `login` view when the `/login` endpoint is hit, the `AppPro
 
 This is what makes it available to the Thymeleaf template as you saw before:
 
-```
+```javascript
 <script th:inline="javascript">
     /*<![CDATA[*/
     $( document ).ready(function() {
