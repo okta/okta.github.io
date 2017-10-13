@@ -48,9 +48,9 @@ A simple way to add authentication into a React app is using the [Okta Sign-In W
 cd okta-app && npm install @okta/okta-signin-widget --save
 ```
 
-We'll also need `react-router-dom` and `@okta/okta-react` to manage our routes:
+We'll also need `@okta/okta-react` and `react-router-dom` to manage our routes:
 ```bash
-npm install react-router-dom @okta/okta-react --save
+npm install @okta/okta-react react-router-dom --save
 ```
 
 ## Create a Widget Wrapper
@@ -93,30 +93,43 @@ Some routes require authentication in order to render. Defining those routes is 
 - `/`: A default page to handle basic control of the app.
 - `/protected`: A route protected by `SecureRoute`.
 - `/login`: Show the login page.
+- `/implicit/callback`: A route to parse tokens after a redirect.
 
 ### `/`
 First, create `src/Home.js` to provide links to navigate our app:
 
 ```typescript
-// src/Home.js
+/// src/Home.js
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
 
-export default withAuth(props => {
-  // Change the button that's displayed, based on our authentication status
-  const button = props.auth.isAuthenticated() ?
-    <button onClick={props.auth.logout}>Logout</button> :
-    <button onClick={props.auth.login}>Login</button>;
+export default withAuth(class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { authenticated: null };
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.checkAuthentication();
+  }
 
-  return (
-    <div>
-      <Link to='/'>Home</Link><br/>
-      <Link to='/protected'>Protected</Link><br/>
-      {button}
-    </div>
-  );
+  async checkAuthentication() {
+    const authenticated = await this.props.auth.isAuthenticated();
+    if (authenticated !== this.state.authenticated) {
+      this.setState({ authenticated });
+    }
+  }
+
+  componentDidUpdate() {
+    this.checkAuthentication();
+  }
+
+  render() {
+    if (this.state.authenticated === null) return null;
+    return this.state.authenticated ?
+      <button onClick={this.props.auth.logout}>Logout</button> :
+      <button onClick={this.props.auth.login}>Login</button>;
+  }
 });
 ```
 
@@ -155,14 +168,18 @@ export default withAuth(class Login extends Component {
     this.state = {
       authenticated: null
     };
+    this.checkAuthentication();
   }
 
-  componentWillMount() {
-    this.props.auth.isAuthenticated()
-    .then(res => this.setState({
-      authenticated: res
-    }))
-    .catch(err => this.onError(err));
+  async checkAuthentication() {
+    const authenticated = await this.props.auth.isAuthenticated();
+    if (authenticated !== this.state.authenticated) {
+      this.setState({ authenticated });
+    }
+  }
+
+  componentDidUpdate() {
+    this.checkAuthentication();
   }
 
   onSuccess(res) {
@@ -177,17 +194,12 @@ export default withAuth(class Login extends Component {
   
   render() {
     if (this.state.authenticated === null) return null;
-
-    if (this.state.authenticated === true) {
-      return <Redirect to={{ pathname: '/' }}/>;
-    }
-
-    return (
+    return this.state.authenticated ?
+      <Redirect to={{ pathname: '/' }}/> :
       <OktaSignInWidget
         baseUrl={this.props.baseUrl}
         onSuccess={this.onSuccess}
-        onError={this.onError}/>
-    );
+        onError={this.onError}/>;
   }
 });
 ```
