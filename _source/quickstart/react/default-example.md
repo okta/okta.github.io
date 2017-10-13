@@ -44,7 +44,7 @@ These values will be used in your React application to setup the OpenID Connect 
 
 ## Install the Okta React SDK
 
-You will need to use the [Okta React SDK](https://github.com/okta/okta-oidc-js/packages/okta-react) library to sign in the user by redirecting to the authorization endpoint on your Okta Org. You can install it via npm:
+You will need to use the [Okta React SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react) library to sign in the user by redirecting to the authorization endpoint on your Okta Org. You can install it via npm:
 
 ```bash
 npm install @okta/okta-react --save

@@ -50,7 +50,7 @@ This section covers what you need to do to install and configure Tomcat from scr
 How to install the Spring Security SAML sample Okta application on Mac OS X:
 
 1. **Installing Tomcat**
-	- If it’s not already installed, install Tomcat with Homebrew using these directions: <http://blog.bolshchikov.net/post/50277857673/installing-tomcat-on-macos-with-homebrew>
+	- If it’s not already installed, install Tomcat with Homebrew using [these directions](https://github.com/mhulse/mhulse.github.io/wiki/Installing-Apache-Tomcat-using-Homebrew-on-OS-X-Yosemite)
 
 
 2. **Downloading the Spring SAML Extension**
