@@ -52,16 +52,16 @@ The authorize URL looks like this:
 
 In this URL, replace `{yourOktaDomain}.com` with your org's base URL, and then input the following:
 
-- `idp=` is the value of your SAML IdP's `id`
-- `client_id=` is your OIDC Client Application's Client ID
-- `redirect_uri=` needs to be URL encoded and to match a redirect URI that you configured in your OIDC application
+- `idp` is the value of your SAML IdP's `id`
+- `client_id` is your OIDC Client Application's Client ID
+- `redirect_uri` needs to be URL encoded and to match a redirect URI that you configured in your OIDC application
 - `state` and `nonce` can have any value you want for the purposes of this example
 
 For a full explanation of all these parameters, see here: [OAuth 2.0 Request parameters](/docs/api/resources/oauth2.html#request-parameters).
 
 ### Testing the flow
 
-To test the flow, you can enter the completed authorize URL into your browser. For testing purposes, you should try in your browser's privacy mode to ensure you do not have any existing sessions with either Okta or the external IdP. If everything has been configured properly, you should see the following:
+To test the flow, you can enter the completed authorize URL into your browser. For testing purposes, make sure you do this in your browser's privacy or incognito mode. If everything has been configured properly, you will see the following:
 
 1. A redirect to your Identity Provider's sign-in page
 2. On successful authentication, you are redirected back to the redirect URI that you specified, along with an `#id_token=` fragment in the URL. The value of this parameter will be your Okta OpenID Connect ID Token.

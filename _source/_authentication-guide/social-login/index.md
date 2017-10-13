@@ -6,12 +6,14 @@ title: Social Login Overview
 
 # Social Login
 
-Okta allows your users to sign in to your app using their Facebook, Google, LinkedIn, and Microsoft credentials. Once the user has successfully authenticated, they are returned to your app, and their social profile information is pulled into your Okta directory.
+Okta allows your users to sign in to your app using credentials from external social login providers. Once the user has successfully authenticated, they are returned to your app, and their social profile information is pulled into your Okta directory.
 
 Currently Okta supports the following social login providers:
 
 - [Facebook](facebook)
 - [Google](google)
+- [LinkedIn](linkedin)
+- [Microsoft](microsoft)
 
 ### Features
 
@@ -68,4 +70,4 @@ To set up social login, configure the following:
 2. An Identity Provider in Okta
 3. An OpenID Connect Application in Okta
 
-Every Identity Provider in Okta is linked to an Application, and every time a user signs in with a Social Identity Provider for the first time, an Application User is created for them. The Application User represents the external user at the Social Identity Provider and can be used to map attributes to the Okta User. For more information about how to configure this behavior see [Social Identity Provider Settings](#social-idp-settings) below.
+Every Identity Provider in Okta is linked to an Application, and every time a user signs in with a Social Identity Provider for the first time, an Application User is created for them. The Application User represents the external user at the Social Identity Provider and can be used to map attributes to the Okta User. For more information about how to configure this behavior see [Social Identity Provider Settings](social-settings) below.

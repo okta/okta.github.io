@@ -27,7 +27,7 @@ More information about Okta's access tokens can be found here: <https://develope
 
 ## Access Tokens vs ID Tokens
 
-As mentioned above, it is important that the resource server (your server-side application) only take the access token from a client. This is because access tokens are intended for authorizing access to a resource, which is exactly the use case you have here. 
+As mentioned above, it is important that the resource server (your server-side application) accept only the access token from a client. This is because access tokens are intended for authorizing access to a resource. 
 
 ID Tokens, on the other hand, are intended for authentication. They provide information about the resource owner, to allow you verify that they are who they say they are. Authentication is the concern of the clients. Because of this, when a client makes an authentication request, the ID Token that is returned contains the `client_id` in the ID Token's `aud` claim. 
 
@@ -70,12 +70,12 @@ Please note the following:
 You should verify the following:
 
 - The `iss` (issuer) claim matches the identifier of your Okta Authorization Server.
-- The `client_id` claim is your Okta application's Client ID.
+- The `cid` claim is your Okta application's Client ID.
 - The `exp` (Expiry Time) claim is the time at which this token will expire, expressed in Unix time. You should make sure that this has not already passed.
 
 ## Validating A Token Remotely With Okta
 
-Alternatively, you can also validate an access or refresh Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request). This endpoint takes your token as a URL query and returns back a simple JSON response with a boolean `active` property. 
+Alternatively, you can also validate an access or refresh Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oauth2.html#introspection-request). This endpoint takes your token as a URL query parameter and returns back a simple JSON response with a boolean `active` property. 
 
 This incurs a network request which is slower to do verification, but can be used when you want to guarantee that the access token hasn't been revoked. 
 

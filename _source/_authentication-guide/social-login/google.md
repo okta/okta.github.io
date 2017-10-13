@@ -42,7 +42,7 @@ title: Google
 * **Client Secret:** Paste in the App Secret that you got from Google in step 1.3 above.
 * **Scopes:** Leave set to the default.
 
-> For more information about these, see [Social Identity Provider Settings](#social-idp-settings) below.
+> For more information about these, see [Social Identity Provider Settings](social-settings).
 
 2.5. Once you have completed all the fields, click on **Add Identity Provider**. You will be returned to the main “Identity Providers” page. 
 
