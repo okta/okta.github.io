@@ -101,7 +101,11 @@ This ensures that group membership information is included in the Access Token w
 
 ## Configure Your Spring Boot App
 
-Follow this link to clone the [github repo](https://github.com/oktadeveloper/okta-spring-security-roles-example).
+Clone the [GitHub repo](https://github.com/oktadeveloper/okta-spring-security-roles-example).
+
+```bash
+git clone https://github.com/okta/okta.github.io.git
+```
 
 Open up the project in your favorite IDE or editor. The screenshots below are from [IntelliJ IDEA](https://www.jetbrains.com/idea/).
 
@@ -177,7 +181,7 @@ The "behind the scenes magic" happens by virtue of the fact that we depend on th
 ...
 ```
 
-Let's start at the beginning and take a look at how the Javascript Okta Sign-In Widget bridges the gap from the client side to Spring Boot.
+Let's start at the beginning and take a look at how the Okta Sign-In Widget bridges the gap from the client side to Spring Boot.
 
 ### The Okta Sign-In Widget
 
@@ -255,7 +259,7 @@ At this point, Spring Security can recognize the authenticated user. Before we l
 
 By default, the Spring Security OAuth 2.0 plugin processes access tokens coming in on an `Authorization` header as a bearer token. This is fine for applications that are creating RESTful responses for clients, such as an Angular client.
 
-For this example, I wanted to keep the architecture and amount of Javascript minimal,so I wanted full page transitions. This is a little old-school, but it keeps the example code tight and small.
+For this example, I wanted to keep the architecture and amount of JavaScript minimal, so I wanted full page transitions. This is a little old-school, but it keeps the example code tight and small.
 
 In order for Spring Security to recognize that a user has authenticated, we need it to be able to handle the token coming in on a cookie.
 
@@ -321,7 +325,6 @@ public class SecureController {
 
     private AppProperties appProperties;
 
-    @Autowired
     public SecureController(AppProperties appProperties) {
         this.appProperties = appProperties;
     }
@@ -376,7 +379,7 @@ public class AppProperties {
     private String baseUrl;
     private String redirectUri;
 
-    // getters and setters //
+    // getters and setters
 }
 ```
 
@@ -392,7 +395,6 @@ public class HomeController {
 
     private AppProperties appProperties;
 
-    @Autowired
     public HomeController(AppProperties appProperties) {
         this.appProperties = appProperties;
     }
