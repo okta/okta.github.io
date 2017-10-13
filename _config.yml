@@ -27,8 +27,8 @@ kramdown:
 permalink: /blog/:year/:month/:day/:title
 
 support_phone_number: "1-888-722-7871"
-github_base_url: "https://github.com/okta/okta.github.io/tree/master/_source/"
-github_edit_url: "https://github.com/okta/okta.github.io/edit/master/_source/"
+github_base_url: "https://github.com/okta/okta.github.io/tree/source/_source/"
+github_edit_url: "https://github.com/okta/okta.github.io/edit/source/_source/"
 get_started_url: "https://developer.okta.com/signup/"
 stack_overflow_forum_url: "http://stackoverflow.com/search?q=okta"
 
