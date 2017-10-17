@@ -509,7 +509,7 @@ $ go build loghook.go
 At this point, you will have a binary named `loghook` in your current directory. Now you'll need to configure the environment variables that `loghook` uses and then edit the `loghook.csv` file:
 
 ```console
-$ export OKTA_ORG_URL="https://dev-example.oktapreview.com"
+$ export OKTA_ORG_URL="https://dev-12345.oktapreview.com"
 $ export OKTA_API_KEY="01A_BcDE23fgH4IJKLM5nop_QRstUvwXYZ6aBC78dE"
 ```
 
@@ -536,7 +536,7 @@ You'll know it's working if you see output like this:
 $ ./loghook
 INFO[0000] Sending events matching '^example.example' to 'http://example.com'
 INFO[0000] Sending events matching '.*' to 'https://requestb.in/0ab12345'
-INFO[0000] Started polling for events at: https://example.oktapreview.com
+INFO[0000] Started polling for events at: https://dev-12345.oktapreview.com
 ```
 
 I hope that this post has inspired you to think of cool ways you can use webhooks with your own Okta org. I highly suggest checking out [Zapier](https://zapier.com/) and in particular the excellent [Zapier Webhook support](https://zapier.com/blog/how-use-zapier-webhooks/) that Zapier provides. You should also take a look at this post on [the webhooks vs serverless debate](https://developer.okta.com/blog/2017/10/11/why-are-webhooks-better-than-serverless-extensibility) by my friend and colleague Randall Degges.
