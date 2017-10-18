@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Okta API Release Notes
-excerpt: Summary of changes to the Okta API since Release 2017.42
+excerpt: Summary of changes to the Okta API since Release 2017.41
 ---
 
 ## Okta API Release Notes for Release 2017.42
@@ -13,7 +13,7 @@ Dates for preview and production release are the earliest possible release date.
 
 #### Group Rule Evaluations Included in System Log
 
-Group Rule evaluation failures during user authentication are now exposed via the System Log API.
+Group Rule evaluation failures are now exposed via the System Log API.
 
 <!-- OKTA-140086 -->
 
@@ -21,7 +21,6 @@ Group Rule evaluation failures during user authentication are now exposed via th
 
 These bug fixes are expected on preview orgs starting October 18, 2017, and on production orgs starting October 24, 2017.
 
-* Claim evaluation didn't always respect the Universal Directory schema. (OKTA-137462)
 * Slim ID tokens from custom authorization servers did not include OpenID Connect claims, causing client applications including the Okta Sign-In Widget to not pre-populate the username. (OKTA-143857)
 
 ### Does Your Org Have This Change Yet?
