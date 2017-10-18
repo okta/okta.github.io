@@ -322,19 +322,15 @@ API rate limits apply per minute to the endpoints in an org. The rate applies ei
 For all endpoints not listed, the API rate limit is a combined 10,000 requests per minute.
 
 
-| Okta {how to describe these?}            | Limit |
-|:-----------------------------------------|------:|
-| `/login/do-login`                        | 200   |
-| `/login/login.htm`                       | 850   |
-| `/login/sso_iwa_auth`                    | 500   |
-
-
-| App Integration Endpoint                 | Limit |
+| Okta SSO Endpoints                       | Limit |
 |:-----------------------------------------|------:|
 | `/app/{app}/{key}/sso/saml`              |   750 |
 | `/app/office365/{key}/sso/wsfed/active`  |  2000 |
 | `/app/office365/{key}/sso/wsfed/passive` |   250 |
 | `/app/template_saml_2_0/{key}/sso/saml`  |  2500 |
+| `/login/do-login`                        | 200   |
+| `/login/login.htm`                       | 850   |
+| `/login/sso_iwa_auth`                    | 500   |
 
 #### Example Rate Limit Header with Org-Wide Rate Limit Error  
 
