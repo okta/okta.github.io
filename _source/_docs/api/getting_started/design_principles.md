@@ -2,7 +2,10 @@
 layout: docs_page
 weight: 4
 title: Design Principles
-redirect_from: "/docs/getting_started/design_principles.html"
+redirect_from:
+  - "/docs/getting_started/design_principles.html"
+  - "docs/api/index.html"
+  - "docs/api/"
 ---
 
 # Versioning

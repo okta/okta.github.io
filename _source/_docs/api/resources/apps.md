@@ -1,7 +1,10 @@
 ---
 layout: docs_page
 title: Apps
-redirect_from: "/docs/api/rest/apps.html"
+redirect_from:
+ - "/docs/api/rest/apps.html"
+ - "/docs/api/reference/"
+ - "/docs/api/reference/index.html"
 ---
 
 # Apps API

@@ -34,13 +34,13 @@
         serverExampleType: 'implicit'
       },
       {
-        name: 'ios',
-        label: 'iOS',
+        name: 'android',
+        label: 'Android',
         serverExampleType: 'implicit'
       },
       {
-        name: 'android',
-        label: 'Android',
+        name: 'ios',
+        label: 'iOS',
         serverExampleType: 'implicit'
       },
     ],
@@ -304,12 +304,12 @@
 
   // Used to scroll to the right place without anchors, 150 is to account for our header space
   window.scrollToServer = function () {
-    $('body').animate({scrollTop: $('#server_setup').offset().top - 150});
+    $('html, body').animate({scrollTop: $('#server_setup').offset().top - 150});
     $('#server_setup_link').addClass('active');
     $('#client_setup_link').removeClass('active');
   };
   window.scrollToClient = function () {
-    $('body').animate({scrollTop: $('#client_setup').offset().top - 150});
+    $('html, body').animate({scrollTop: $('#client_setup').offset().top - 150});
     $('#client_setup_link').addClass('active');
     $('#server_setup_link').removeClass('active');
   };

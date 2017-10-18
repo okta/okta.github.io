@@ -158,7 +158,7 @@ First, update `src/app/app.component.html` to provide the Login logic:
 ```html
 <!-- app.component.html -->
 <link
-  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css"
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-sign-in.min.css"
   type="text/css"
   rel="stylesheet"/>
 
@@ -256,7 +256,7 @@ export class AppModule { }
 ## Conclusion
 You have now successfully authenticated with Okta! Now what? With a user's `id_token`, you have basic claims for the user's identity. You can extend the set of claims by modifying the `scopes` to retrieve custom information about the user. This includes `locale`, `address`, `groups`, and [more](../../docs/api/resources/oidc.html).
 
-Want to learn how to use the user's `access_token`? Check out our [Angular Quickstart integrations](/quickstart/#/angular/nodejs/generic.html) to learn about protecting routes on your server, validating the `access_token`, and more!
+Want to learn how to use the user's `access_token`? Check out our <a href='/quickstart/#/angular/nodejs/generic' data-proofer-ignore>Angular Quickstart integrations</a> to learn about protecting routes on your server, validating the `access_token`, and more!
 
 ## Support 
 Have a question or see a bug? Post your question on [Okta Developer Forums](https://devforum.okta.com/).

@@ -3,6 +3,9 @@ layout: docs_page
 weight: 3
 title: API Access Management
 excerpt: Secure your APIs with Okta's implementation of the OAuth 2.0 standard.
+redirect_from:
+  - "/docs/api/resources/resource-server-beta/"
+  - "/docs/api/resources/resrouce-server-beta/required-config-changes-for-auth-server.html"
 ---
 
 ## API Access Management with Okta

@@ -16,7 +16,7 @@ A common practice is to send one of these tokens in the `Bearer` header of futur
 
 You **don't** need to validate tokens manually if:
 
-* You are using [ASP.NET](/quickstart/#/widget/dotnet/aspnet4) or [ASP.NET Core](/quickstart/#/widget/dotnet/aspnetcore) with the `JwtBearer` or `OpenIdConnect` middleware
+* You are using <a href='/quickstart/#/widget/dotnet/aspnet4' data-proofer-ignore>ASP.NET</a> or <a href='/quickstart/#/widget/dotnet/aspnetcore' data-proofer-ignore>ASP.NET Core</a> with the `JwtBearer` or `OpenIdConnect` middleware
 * You want to send tokens to Okta to be validated (this is called [token introspection](/docs/api/resources/oauth2.html#introspection-request))
 
 If you need to validate a token manually, and don't want to make a network call to Okta, this guide will help you validate tokens locally.
