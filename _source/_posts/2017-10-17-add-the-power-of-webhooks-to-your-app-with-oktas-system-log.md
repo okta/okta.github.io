@@ -521,7 +521,7 @@ I suggest creating a URL with RequestBin, then updating your `loghook.csv` file 
 
 ```csv
 ^example.example,http://example.com
-'.*,https://requestb.in/0ab12345
+.*,https://requestb.in/0ab12345
 ```
 
 Once you do this, start up `loghook` by running this command:
