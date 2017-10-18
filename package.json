@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "clean": "node scripts/clean",
-    "build-prod": "npm run clean && git fetch --force origin master:master && git clone -b master . dist && cross-env JEKYLL_ENV=production bundle exec jekyll build --verbose",
+    "build-prod": "npm run clean && git fetch --force origin master:master && git clone -b master . dist && rsync -r _source/_assets/img/ ./dist/assets/img/ && cross-env JEKYLL_ENV=production bundle exec jekyll build --verbose",
     "start": "npm run clean && cross-env JEKYLL_ENV=production bundle exec jekyll serve --incremental",
     "stop": "if-env CI=true && exit 0 || (pkill -f clean && kill $(lsof -t -i:4000; lsof -t -i:4444))",
     "test-only": "protractor tests/selenium/conf.js",
