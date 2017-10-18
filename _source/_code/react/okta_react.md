@@ -10,8 +10,8 @@ excerpt: Integrate Okta with a React app using Auth JS.
 This guide will walk you through integrating authentication into a React app with Okta by performing these steps:
 1. [Add an OpenID Connect Client in Okta](#add-an-openid-connect-client-in-okta)
 2. [Create a React App](#create-a-react-app)
-3. [Create an Authentication Utility](#create-an-authentication-utility)
-4. [Create a SecureRoute](#create-a-secureroute)
+3. [Install Dependencies](#install-dependencies)
+4. [Create a Custom Login Form](#create-a-custom-login-form)
 5. [Create Routes](#create-routes)
 6. [Connect the Routes](#connect-the-routes)
 7. [Start Your App](#start-your-app)
@@ -25,137 +25,108 @@ If you do not already have a **Developer Edition Account**, you can create one a
 
 | Setting             | Value                                               |
 | ------------------- | --------------------------------------------------- |
-| App Name    | OpenId Connect App *(must be unique)*               |
-| Login redirect URIs | http://localhost:3000/callback                      |
+| App Name            | OpenId Connect App *(must be unique)*               |
+| Login redirect URIs | http://localhost:3000/implicit/callback             |
 | Logout redirect URIs| http://localhost:3000/login                         |
 
 > **Note:** CORS is automatically enabled for the granted login redirect URIs.
 
 ## Create a React App
-To quickly create a React app, install the create-react-app CLI:
+To quickly create a React app, we recommend the create-react-app CLI. Follow their guide [here](https://github.com/facebookincubator/create-react-app#quick-overview).
+
+## Install Dependencies
+A simple way to add authentication to a React app is using the [Okta Auth JS](/code/javascript/okta_auth_sdk) library. We can install it via `npm`:
 ```bash
-npm install -g create-react-app
+npm install @okta/okta-auth-js --save
 ```
 
-Now, create a new app:
+We'll also need `@okta/okta-react` and `react-router-dom` to manage our routes:
 ```bash
-create-react-app okta-app
+npm install @okta/okta-react react-router-dom --save
 ```
 
-This creates a new project named `okta-app` and installs all required dependencies.
+## Create a Custom Login Form
+If the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) does not fit your needs, [Auth-JS](/code/javascript/okta_auth_sdk.html) provides lower-level access to User Lifecycle operations, MFA, and more. For this example, we'll create a simple username and password form without MFA.
 
-A simple way to add authentication into a React app is using the [Okta Auth JS](/code/javascript/okta_auth_sdk) library. We can install it via `npm`:
-```bash
-cd okta-app && npm install @okta/okta-auth-js --save
-```
-
-We'll also need `react-router-dom` to manage our routes:
-```bash
-npm install react-router-dom --save
-```
-
-## Create an Authentication Utility
-Users can sign in to your React app a number of different ways.
-To provide a fully featured and customizable login experience, the [Okta Sign-In Widget](/code/javascript/okta_sign-in_widget.html) is available to handle User Lifecycle operations, MFA, and more.
-
-First, create `src/auth.js` as an authorization utility file and use it to bootstrap the required fields to login. This file will expose a `withAuth` method that makes it easy to create [Higher-Order Components](https://facebook.github.io/react/docs/higher-order-components.html) that include an `auth` prop:
-
-> Important: We're using Okta's organization authorization server to make setup easy, but it's less flexible than a custom authorization server. Most SPAs send access tokens to access APIs. If you're building an API that will need to accept access tokens, [create an authorization server](/docs/how-to/set-up-auth-server.html#create-an-authorization-server)
+Create a `src/LoginForm.js` file:
 
 ```typescript
-// src/auth.js
+// src/LoginForm.js
 
-import React from 'react';
+import React, { Component } from 'react';
 import OktaAuth from '@okta/okta-auth-js';
+import { withAuth } from '@okta/okta-react';
 
-class Auth {
-  constructor() {
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.redirect = this.redirect.bind(this);
-    this.isAuthenticated = this.isAuthenticated.bind(this);
-    this.handleAuthentication = this.handleAuthentication.bind(this);
-
-    oktaAuth = new OktaAuth({
-      url: 'https://{yourOktaDomain}.com',
-      clientId: '{clientId}',
-      issuer: 'https://{yourOktaDomain}.com',
-      redirectUri: 'http://localhost:3000/callback',
-    });
-  }
-
-  login(history) {
-    // Redirect to the login page
-    history.push('/login');
-  }
-
-  async logout(history) {
-    this.oktaAuth.tokenManager.clear();
-    await this.oktaAuth.signOut();
-    history.push('/');
-  }
-
-  redirect() {
-    // Launches the login redirect.
-    this.oktaAuth.token.getWithRedirect({
-      responseType: ['id_token', 'token'],
-      scopes: ['openid', 'email', 'profile']
-    });
-  }
-
-  isAuthenticated() {
-    // Checks if there is a current accessToken in the TokenManger.
-    return !!this.oktaAuth.tokenManager.get('accessToken');
-  }
-
-  async handleAuthentication() {
-    const tokens = await this.oktaAuth.token.parseFromUrl();
-    for (let token of tokens) {
-      if (token.idToken) {
-        this.oktaAuth.tokenManager.add('idToken', token);
-      } else if (token.accessToken) {
-        this.oktaAuth.tokenManager.add('accessToken', token);
-      }
+export default withAuth(class LoginForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sessionToken: null,
+      username: '',
+      password: ''
     }
+
+    this.oktaAuth = new OktaAuth({ url: props.baseUrl });
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
-}
 
-// create a singleton
-const auth = new Auth();
-export const withAuth = WrappedComponent => props =>
-  <WrappedComponent auth={auth} {...props} />;
+  handleSubmit(e) {
+    e.preventDefault();
+    this.oktaAuth.signIn({
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then(res => this.setState({
+      sessionToken: res.sessionToken
+    }))
+    .catch(err => console.log('Found an error', err));
+  }
+
+  handleUsernameChange(e) {
+    this.setState({username: e.target.value});
+  }
+
+  handlePasswordChange(e) {
+    this.setState({password: e.target.value});
+  }
+
+  render() {
+    if (this.state.sessionToken) {
+      this.props.auth.redirect({sessionToken: this.state.sessionToken});
+      return null;
+    }
+
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Username:
+          <input
+            id="username" type="text"
+            value={this.state.username}
+            onChange={this.handleUsernameChange} />
+          Password:
+          <input
+            id="password" type="password"
+            value={this.state.password}
+            onChange={this.handlePasswordChange} />
+        </label>
+        <input id="submit" type="submit" value="Submit" />
+      </form>
+    );
+  }
+});
 ```
 
-## Create a SecureRoute
-Some routes require authentication in order to render. Defining those routes is easy if we centralize our logic by creating a `src/SecureRoute.js` file:
-{% raw %}
-```typescript
-// src/SecureRoute.js
-
-import React from 'react';
-import { Route, Redirect } from 'react-router';
-import { withAuth } from './auth';
-
-export default withAuth(({ auth, component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    auth.isAuthenticated() ? (
-      <Component {...props}/>
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
-));
-```
-{% endraw %}
 ## Create Routes
-Lets take a look at what routes are needed:
+Some routes require authentication in order to render. Defining those routes is easy using `SecureRoute` from `@okta/okta-react`. Lets take a look at what routes are needed for this example:
+
 - `/`: A default page to handle basic control of the app.
 - `/protected`: A route protected by `SecureRoute`.
-- `/callback`: Handle the response from Okta and store the returned tokens.
 - `/login`: Redirect to the org login page.
+- `/implicit/callback`: A route to parse tokens after a redirect.
 
 ### `/`
 First, create `src/Home.js` to provide links to navigate our app:
@@ -163,25 +134,45 @@ First, create `src/Home.js` to provide links to navigate our app:
 ```typescript
 // src/Home.js
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
-import { withAuth } from './auth';
+import { withAuth } from '@okta/okta-react';
 
-export default withAuth(withRouter(props => {
-  // Change the button that's displayed, based on our authentication status
-  const button = props.auth.isAuthenticated() ?
-    <button onClick={props.auth.logout.bind(null, props.history)}>Logout</button> :
-    <button onClick={props.auth.login.bind(null, props.history)}>Login</button>;
+export default withAuth(class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { authenticated: null };
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.checkAuthentication();
+  }
 
-  return (
-    <div>
-      <Link to='/'>Home</Link><br/>
-      <Link to='/protected'>Protected</Link><br/>
-      {button}
-    </div>
-  );
-}));
+  async checkAuthentication() {
+    const authenticated = await this.props.auth.isAuthenticated();
+    if (authenticated !== this.state.authenticated) {
+      this.setState({ authenticated });
+    }
+  }
+
+  componentDidUpdate() {
+    this.checkAuthentication();
+  }
+
+  render() {
+    if (this.state.authenticated === null) return null;
+
+    const button = this.state.authenticated ?
+      <button onClick={this.props.auth.logout}>Logout</button> :
+      <button onClick={this.props.auth.login}>Login</button>;
+    
+    return (
+      <div>
+        <Link to='/'>Home</Link><br/>
+        <Link to='/protected'>Protected</Link><br/>
+        {button}
+      </div>
+    );
+  }
+});
 ```
 
 ### `/protected`
@@ -197,110 +188,82 @@ import React from 'react';
 export default () => <h3>Protected</h3>;
 ```
 
-### `/callback`
-In order to handle the redirect back from Okta, we need to capture the token values from the URL. Use the `/callback` route to handle the logic of storing these tokens and redirecting back to the main page.
-
-Create a new component `src/Callback.js`:
-
-```typescript
-// src/Callback.js
-
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { withAuth } from './auth';
-
-export default withAuth(class Callback extends Component {
-  state = {
-    parsingTokens: false
-  }
-
-  componentWillMount() {
-    if (window.location.hash) {
-      this.setState({
-        parsingTokens: true
-      });
-
-      this.props.auth.handleAuthentication()
-      .then(() => {
-        this.setState({
-          parsingTokens: false
-        });
-      })
-      .catch(err => {
-        console.log('error logging in', err);
-      });
-    }
-  }
-
-  render() {
-    if (!this.state.parsingTokens) {
-      const pathname = localStorage.getItem('referrerPath') || '/';
-      return (
-        <Redirect to={pathname}/>
-      )
-    }
-
-    return null;
-  }
-});
-```
-
 ### `/login`
 This route redirects if the user is already logged in. If the user is coming from a protected page, they'll be redirected back to the page upon login.
 
 Create a new component `src/Login.js`:
 
+{% raw %}
 ```typescript
 // src/Login.js
 
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { withAuth } from './auth';
+import LoginForm from './LoginForm';
+import { withAuth } from '@okta/okta-react';
 
 export default withAuth(class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { authenticated: null };
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.checkAuthentication();
+  }
+
+  async checkAuthentication() {
+    const authenticated = await this.props.auth.isAuthenticated();
+    if (authenticated !== this.state.authenticated) {
+      this.setState({ authenticated });
+    }
+  }
+
+  componentDidUpdate() {
+    this.checkAuthentication();
+  }
+  
   render() {
-    let from;
-    if (this.props.location && this.props.location.state) {
-      from = this.props.location.state.from;
-    } else {
-      from = { pathname: '/' };
-    }
-
-    if (this.props.auth.isAuthenticated()) {
-      return <Redirect to={from}/>;
-    }
-
-    localStorage.setItem('referrerPath', from.pathname);
-    this.props.auth.redirect();
-    return null;
+    if (this.state.authenticated === null) return null;
+    return this.state.authenticated ?
+      <Redirect to={{ pathname: '/' }}/> :
+      <LoginForm baseUrl={this.props.baseUrl} />;
   }
 });
 ```
+{% endraw %}
+
+### `/implicit/callback`
+The component for this route (ImplicitCallback) comes with `@okta/okta-react`. It handles token parsing, token storage, and redirecting to a protected page if one triggered the login.
 
 ### Connect the Routes
-Update `src/App.js` to include your project components and routes:
+Update `src/App.js` to include your project components and routes. `Security` is the component that controls the authentication flows, so it requires your OpenId Connect configuration. By default, `@okta/okta-react` redirects to Okta's login page when the user isn't authenticated. In this example, `onAuthRequired` is overridden to redirect to the custom login route instead:
 
 ```typescript
 // src/App.js
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import SecureRoute from './SecureRoute';
+import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
 import Home from './Home';
 import Login from './Login';
-import Callback from './Callback';
 import Protected from './Protected';
+
+function onAuthRequired({history}) {
+  history.push('/login');
+}
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Route path='/' exact={true} component={Home}/>
-          <SecureRoute path='/protected' component={Protected}/>
-          <Route path='/login' component={Login}/>
-          <Route path='/callback' component={Callback}/>
-        </div>
+        <Security issuer='https://{yourOktaDomain}.com/oauth2/default'
+                  client_id='{clientId}'
+                  redirect_uri={window.location.origin + '/implicit/callback'}
+                  onAuthRequired={onAuthRequired} >
+          <Route path='/' exact={true} component={Home} />
+          <SecureRoute path='/protected' component={Protected} />
+          <Route path='/login' render={() => <Login baseUrl='https://{yourOktaDomain}.com' />} />
+          <Route path='/implicit/callback' component={ImplicitCallback} />
+        </Security>
       </Router>
     );
   }

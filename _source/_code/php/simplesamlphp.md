@@ -5,6 +5,8 @@ language: PHP
 excerpt: How to use SimpleSAMLphp to add support for Okta via SAML.
 support_email: developers@okta.com
 weight: 2
+redirect_from:
+  - /docs/guides/simplesamlphp.html"
 ---
 
 # Overview
