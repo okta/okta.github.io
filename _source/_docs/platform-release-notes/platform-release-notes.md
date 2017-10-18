@@ -21,7 +21,7 @@ Group Rule evaluation failures are now exposed via the System Log API.
 
 These bug fixes are expected on preview orgs starting October 18, 2017, and on production orgs starting October 24, 2017.
 
-* Slim ID tokens from custom authorization servers did not include OpenID Connect claims, causing client applications including the Okta Sign-In Widget to not pre-populate the username. (OKTA-143857)
+* ID tokens requested alongside access tokens or authorization codes from custom authorization servers did not include OpenID Connect claims. This caused client applications, including the Okta Sign-In Widget, to not pre-populate the username. (OKTA-143857, 2017.40 Preview Fix)
 
 ### Does Your Org Have This Change Yet?
 
