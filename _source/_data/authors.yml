@@ -144,3 +144,12 @@ robert:
   avatar: avatar-robert.png
   email: robert.damphousse@okta.com
   twitter: https://twitter.com/robertjd_
+
+jf:
+  full_name: Joël Franusic
+  display_name: Joël Franusic
+  avatar: avatar-jf.jpg
+  email: joel.franusic@okta.com
+  twitter: https://twitter.com/jf
+  github: https://github.com/jpf
+  web: http://joel.franusic.com
