@@ -5,9 +5,9 @@ author: jf
 tags: [webhooks, go]
 ---
 
-If you've used webhooks before, you probably understand the magical powers they boast. Do you want to build a sleep tracker for your dog? Get notified when it's going to rain? Or maybe have new Eventbrite attendees automatically to Salesforce? You can do all of those things with webhooks and services like Twilio, Zapier and Workato.
+If you've used webhooks before, you probably understand the magical powers they boast. Do you want to build a sleep tracker for your dog? Get notified when it's going to rain? Or maybe have new Eventbrite attendees automatically added to Salesforce? You can do all of those things with webhooks and services like Twilio, Zapier and Workato.
 
-To get webhooks with Okta, this post will show you how to use an underappreciated features in Okta, the System Log which is a record of all activity that happens in your Okta org. Examples of the events that get recorded in your System Log are:
+To get webhooks with Okta, this post will show you how to use an underappreciated features in Okta, the System Log. It's a record of all activity that happens in your Okta org. Examples of the events that get recorded in your System Log are:
 
 -   Failed login attempts
 -   When a user is added or removed from a group
@@ -69,7 +69,7 @@ The innermost `for` loop uses a [stateful iterator](https://ewencp.org/blog/gola
 
 The outermost `for` loop allows us to check for errors fetching events and then sleep after we've processed a batch of events.
 
-Now that you've got an idea of how the main loop works let's take a look at the whole function that runs the main loop. This code above contains the main loop, but also has the code we use to configure the Okta log client as well as the event processing code which loads configuration from a file named `loghook.csv`:
+Now that you've got an idea of how the main loop works let's take a look at the whole function that runs the main loop. This code below contains the main loop, but also has the code we use to configure the Okta log client as well as the event processing code which loads configuration from a file named `loghook.csv`:
 
 ```go
 func main() {
@@ -112,7 +112,7 @@ Note in particular the use of `os.Getenv` which we use to get Okta configuration
 
 As you read through this code, you'll notice a lot of usage of `log`. If you aren't familiar with it yet, this is the [log](https://golang.org/pkg/log/) package that is part of the Go standard library.
 
-In this project, we configure `log` to send log output to the [Standard Out](https://www.gnu.org/software/libc/manual/html_node/Standard-Streams.html) stream and to only display messages marked as the "Information" [severity level](https://tools.ietf.org/html/rfc5424#page-11) higher:
+In this project, we configure `log` to send log output to the [Standard Out](https://www.gnu.org/software/libc/manual/html_node/Standard-Streams.html) stream and to only display messages marked as the "Information" [severity level](https://tools.ietf.org/html/rfc5424#page-11) or higher:
 
 ```go
 log.SetOutput(os.Stdout)
@@ -251,7 +251,7 @@ Astute readers will note that the `Next()` function makes several calls to the p
     return nil
     ```
 
-This section of code is short, but is the most important and interesting part of this project. By defining `l.events` as a slice of `json.RawMessage` types, this code does not need to know anything about the structure of events from the Okta System Log. Thus, you don't need to have a fully defined [struct](https://tour.golang.org/moretypes/2) for System Log events, all you need to do is to parse out what is important to you (in this case, the `eventType`) and then POST the full string as a webhook when you find an event you want to pass on. Without using `json.RawMessage`, you'd have to account for every possible System Log event type or risk losing data in when you serialize a Go object back into a JSON string.
+This section of code is short, but is the most important and interesting part of this project. By defining `l.events` as a slice of `json.RawMessage` types, this code does not need to know anything about the structure of events from the Okta System Log. Thus, you don't need to have a fully defined [struct](https://tour.golang.org/moretypes/2) for System Log events, all you need to do is to parse out what is important to you (in this case, the `eventType`) and then POST the full string as a webhook when you find an event you want to pass on. Without using `json.RawMessage`, you'd have to account for every possible System Log event type or risk losing data when you serialize a Go object back into a JSON string.
 
 Here's what it all looks like when it's put together into one function:
 
