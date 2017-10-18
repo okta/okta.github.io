@@ -2,7 +2,7 @@
 <img src="https://devforum.okta.com/uploads/oktadev/original/1X/bf54a16b5fda189e4ad2706fb57cbb7a1e5b8deb.png" href='https://devforum.okta.com/' width="512px"/>
 </p>
 
-[![Build Status](https://travis-ci.org/okta/okta.github.io.svg?branch=master)](https://travis-ci.org/okta/okta.github.io)
+[![Build Status](https://travis-ci.org/okta/okta.github.io.svg?branch=source)](https://travis-ci.org/okta/okta.github.io)
 [![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)](https://devforum.okta.com/)
 
 # Okta Developer 'Hub
