@@ -3,20 +3,20 @@ set -ex
 
 source "${0%/*}/helpers.sh"
 
-if [ $TRAVIS_EVENT_TYPE != 'push' ]; then
+if [[ $TRAVIS_EVENT_TYPE != 'push' ]]; then
   export CHROME_HEADLESS=true
 fi
 
 # 2. Run the npm install to pull in test dependencies
 npm install
 
-# 3. build the site
-npm run build-prod
-
-# 4. Run tests
+# 3. Build site and Run tests
 npm test
 
 export GENERATED_SITE_LOCATION="dist"
+
+# 4. copy assets and previous history into dist
+npm run post-build-prod
 
 # 5. Run Lint checker
 npm run post-build-lint
