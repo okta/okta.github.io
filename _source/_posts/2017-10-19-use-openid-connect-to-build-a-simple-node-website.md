@@ -124,7 +124,6 @@ login capabilities. It will be very simple (but that's the point!).
 To get started, create a new folder somewhere on your computer, and enter it.
 Then create a `server.js` file and insert the following code:
 
-<div data-proofer-ignore>
 ```javascript
 "use strict";
 
@@ -153,7 +152,6 @@ app.get("/logout", (req, res) => {
 
 app.listen(3000);
 ```
-</div>
 
 This is a basic Express.js application:
 
@@ -200,7 +198,6 @@ for resources online.
 Next, you'll want to create the HTML template that renders the home page of the
 site. Create the file `views/index.pug` and include the following code:
 
-<div data-proofer-ignore>
 ```jade
 extends base.pug
 
@@ -216,7 +213,6 @@ block body
     p.
       Please #[a(href="/login") login] to continue.
 ```
-</div>
 
 This is your simple home page template.
 
@@ -224,7 +220,6 @@ Now, let's create a dashboard page. This page will be what the user sees after
 logging into the website. Create the file `views/dashboard.pug` and include the
 following:
 
-<div data-proofer-ignore>
 ```jade
 extends base.pug
 
@@ -240,7 +235,6 @@ block body
     p.
       If you'd like to logout, please #[a(href="/logout") click here].
 ```
-</div>
 
 Next, let's add a bit of CSS to make things look nice. Create a new folder to store your static assets (css, images, etc.):
 
@@ -365,7 +359,6 @@ Now that you've configured OIDC for your website, it's time to hook up the
 routes:
 
 
-<div data-proofer-ignore>
 ```javascript
 // App routes
 app.use(oidc.router);
@@ -384,7 +377,6 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 ```
-</div>
 
 The first thing that's happening above is that you're using the built-in OIDC
 routes that ship with the oidc-middleware library. This library provides routes
@@ -460,7 +452,6 @@ Now that your application has been built, why not try it out? If you visit
 [http://localhost:3000](http://localhost:3000) and click through the prompts,
 you'll see how everything fits together:
 
-<div data-proofer-ignore>
 Once you click login, you'll be redirected to `/login` The oidc-middleware will
 intercept that `/login` request, and redirect the user to Okta's hosted sign-in
 page where they'll be prompted for their email address and password The user
@@ -469,7 +460,6 @@ to your local website, where the oidc-middleware library will again intercept
 the request, create a session for the user, and log them in Finally, they will
 be redirected to the dashboard page (`/dashboard`), where your route code will
 run and echo their basic information back to them
-</div>
 
 Here's what each of the pages looks like in the flow:
 
