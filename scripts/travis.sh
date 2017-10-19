@@ -28,8 +28,7 @@ if ! url_consistency_check || ! duplicate_slug_in_url || ! check_for_localhost_l
 fi
 
 # 6. Run find-missing-slaehs to find links that will redirect to okta.github.io
-#npm run find-missing-slashes
+npm run find-missing-slashes
 
 # 7. Run htmlproofer to validate links, scripts, and images
-echo HILEN
-#bundle exec htmlproofer ./dist --assume-extension --disable-external --allow-hash-href --empty-alt-ignore --log-level verbose --file-ignore "/3rd_party_notices/","/java_api_sdk/","/python_api_sdk/","/javadoc/","/csharp_api_sdk/","/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website.html"
+bundle exec htmlproofer ./dist --assume-extension --disable-external --allow-hash-href --empty-alt-ignore --log-level verbose --file-ignore "/3rd_party_notices/","/java_api_sdk/","/python_api_sdk/","/javadoc/","/csharp_api_sdk/"
