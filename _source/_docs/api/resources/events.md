@@ -6,7 +6,9 @@ redirect_from: "/docs/api/rest/events.html"
 
 # Events API
 
-The Okta Event API provides read access to your organization's system log. Export event data as a batch job from your organization to another system for reporting or analysis.
+The Okta Events API provides read access to your organization's system log. [Export event data](https://support.okta.com/help/Documentation/Knowledge_Article/Exporting-Okta-Log-Data) as a batch job from your organization to another system for reporting or analysis.
+
+> The new beta [System Log API](/docs/api/resources/system_log.html) will eventually replace the Events API and contains much more [structured data](/docs/api/resources/system_log.html#log-objects).
 
 ## Getting Started
 
@@ -37,9 +39,26 @@ Fetches a list of events from your Okta organization system log
 
 Parameter Details
 
-* Treat the `after` cursor as an opaque value. Obtain it through the next link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination).
+* Treat the `after` cursor as an opaque value as its contents are subject to change without notice. Obtain it through the `next` link relation. See [Pagination](/docs/api/getting_started/design_principles.html#pagination) for more details on link relations.
 * `startDate` and `filter` query parameters are mutually exclusive and cannot be used together in the same request.
+* `startDate` and `after` query parameters are mutually exclusive and cannot be used together in the same request.
 * `startDate` defaults to 1 hour ago when `filter`, `after` and `startDate` query parameters are omitted.
+* `limit` can be no larger than 1000
+
+###### Reliable Ingestion
+
+The most reliable method to ingest all events from Okta is to use a [pagination](/docs/api/getting_started/design_principles.html#pagination) cursor via the `after` parameter. This will ensure that events are not skipped or duplicated due to the lack of timestamp precision.
+
+The general sequence of steps to leverage the `after` parameter:
+
+1. Issue an initial request using `startDate` with a value set to some date in the last 90 days
+1. Retrieve the next page of events through the [`Link` response header](/docs/api/getting_started/design_principles.html#link-header) value with the `next` link relation
+1. Optionally include a `filter` parameter to narrow the returned results
+1. Issue the paginated request
+1. Retrieve the next page of events through the `Link` response header value with the `next` link relation 
+1. Pause and repeat the previous step
+
+Note that if no data is returned, this typically indicates you have caught up with the event stream. To avoid issues with [rate limiting](/docs/api/getting_started/design_principles.html#rate-limiting), ensure your polling frequency is sufficiently long.
 
 ###### Filters
 
@@ -56,30 +75,37 @@ The following expressions are supported for events with the `filter` query param
 
 See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information on expressions.
 
->Note: All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2017-06-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222017-06-01T00:00:00.000Z%22`.
+>Note: All filters must be [URL encoded](http://en.wikipedia.org/wiki/Percent-encoding) where `filter=published gt "2017-10-01T00:00:00.000Z"` is encoded as `filter=published%20gt%20%222017-10-01T00:00:00.000Z%22`.
 
 **Filter Examples**
 
-Events published after 06/01/2017
+Events published after 10/01/2017
 
-    filter=published gt "2017-06-01T00:00:00.000Z"
+    filter=published gt "2017-10-01T00:00:00.000Z"
 
 Events published for a target user
 
     filter=target.id eq "00uxc78lMKUMVIHLTAXY"
 
-Failed login events published after 06/01/2017
+Failed login events published after 10/01/2017
 
-    filter=published gt "2017-06-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
+    filter=published gt "2017-10-01T00:00:00.000Z" and action.objectType eq "core.user_auth.login_failed"
 
-Events published after 06/01/2017 for a target user and application
+Events published after 10/01/2017 for a target user and application
 
-    filter=published gt "2017-06-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+    filter=published gt "2017-10-01T00:00:00.000Z" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
 
 App SSO events for a target user and application
 
     filter=action.objectType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
 
+Note that using `filter` with a value of `published gt "2017-10-01T00:00:00.000Z"` and `startDate` with a value of `2017-10-01T00:00:00.000Z` work the same way. The following two API calls:
+
+    startDate=2017-10-01T00:00:00.000Z
+
+    filter=published gt "2017-10-01T00:00:00.000Z"
+
+return the same results. Since `filter` and `startDate` are [mutually exclusive](#request-parameters), `filter` must be used to simultaneously specify both time and additional filter criteria.
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -103,7 +129,7 @@ curl -v -X GET \
 ~~~http
 HTTP/1.1 200 OK
 Content-Type: application/json
-Link: <https://{yourOktaDomain}.com/api/v1/events?startDate=2013-07-15T16%3A00%3A00.000Z&limit=3>; rel="self"
+Link: <https://{yourOktaDomain}.com/api/v1/events?startDate=2017-09-15T16%3A00%3A00.000Z&limit=3>; rel="self"
 Link: <https://{yourOktaDomain}.com/api/v1/events?after=tevZxTo4IyHR9yUHIFdU0-f0w1373905100000&limit=3>; rel="next"
 
 [
@@ -223,7 +249,7 @@ Every organization has a system log that maintains a history of actions performe
 ~~~ json
 {
    "eventId":"tevGr2BhQTMR72OiBGvKXTp2Q1799593071000",
-   "published":"2014-05-08T23:51:11.000Z",
+   "published":"2017-09-08T23:51:11.000Z",
    "requestId":"req8U_MHmEbSai_0I4RopTnfA",
    "sessionId":"000cWiYg47QSFyk1YjE6cDcEg",
    "action":{

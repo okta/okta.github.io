@@ -785,6 +785,28 @@ curl -v -X POST \
 }' "https://{yourOktaDomain}.com/api/v1/users/${userId}/factors/${factorId}/resend?templateId=${templateId}"
 ~~~
 
+##### Enroll and Auto-Activate Okta SMS Factor
+{:.api .api-operation}
+
+To enroll and immediately activate the Okta `sms` factor, add the `activate` option to the enroll API and set it `true`.  An activation text message will not be sent to the device.
+
+###### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "sms",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337"
+  }
+}' "https://{yourOktaDomain}.com/api/v1/users/${userId}/factors?activate=true"
+~~~
+
 #### Enroll Okta Call Factor
 {:.api .api-operation}
 
@@ -897,6 +919,29 @@ A `400 Bad Request` status code may be returned if you attempt to enroll with a 
        }
     ]
 }
+~~~
+
+##### Enroll and Auto-Activate Okta Call Factor
+{:.api .api-operation}
+
+To enroll and immediately activate the Okta `call` factor, add the `activate` option to the enroll API and set it `true`.  An activation text message will not be sent to the device.
+
+##### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+  "factorType": "call",
+  "provider": "OKTA",
+  "profile": {
+    "phoneNumber": "+1-555-415-1337",
+    "phoneExtension": "1234"
+  }
+}' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors?activate=true"
 ~~~
 
 #### Enroll Okta Verify TOTP Factor
@@ -1432,6 +1477,25 @@ curl -v -X POST \
     "errorId": "oaeeJunJcxXQlCsrYEwGzN2LQ",
     "errorCauses": []
 }
+~~~
+
+##### Enroll and Auto-Activate Okta Email Factor
+{:.api .api-operation}
+
+To enroll and immediately activate the Okta `email` factor, add the `activate` option to the enroll API and set it `true`.  An activation email will not be sent to the user.
+
+~~~sh
+curl -v -X POST \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+-d '{
+    "factorType": "email",
+    "provider": "OKTA",
+    "profile": {
+        "email": "test@gmail.com"
+    }
+  }' "https://{yourOktaDomain}.com/api/v1/users/00u15s1KDETTQMQYABRL/factors?activate=true"
 ~~~
 
 ### Activate Factor

@@ -1,14 +1,14 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Logs (Okta API)",
+		"name": "System Log (Okta API)",
 		"_postman_id": "2a4fcde1-14fd-8403-b9ca-b773ac0a70fe",
-		"description": "The [Okta Log API](/docs/api/resources/system_log.html) provides read access to your organization’s system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.",
+		"description": "The [Okta System Log API](/docs/api/resources/system_log.html) provides read access to your organization’s system log. The API is intended to export event data as a batch job from your organization to another system for reporting or analysis.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get Logs",
+			"name": "Get logs",
 			"request": {
 				"url": "{{url}}/api/v1/logs",
 				"method": "GET",
@@ -35,7 +35,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Logs by query string",
+			"name": "Get logs containing the specified keyword(s)",
 			"request": {
 				"url": "{{url}}/api/v1/logs?q=logout",
 				"method": "GET",
@@ -62,7 +62,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Logs by eventType filter",
+			"name": "Get logs of the specified event type",
 			"request": {
 				"url": "{{url}}/api/v1/logs?filter=eventType eq \"user.session.end\"",
 				"method": "GET",
@@ -89,9 +89,9 @@
 			"response": []
 		},
 		{
-			"name": "Get Logs since date",
+			"name": "Get logs that occurred since the specified date",
 			"request": {
-				"url": "{{url}}/api/v1/events?since=2017-03-11",
+				"url": "{{url}}/api/v1/logs?since=2017-10-01T00:00:00.000Z",
 				"method": "GET",
 				"header": [
 					{
