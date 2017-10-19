@@ -16,7 +16,7 @@ npm test
 export GENERATED_SITE_LOCATION="dist"
 
 # 4. copy assets and previous history into dist
-npm run post-build-prod
+npm run postbuild-prod
 
 # 5. Run Lint checker
 npm run post-build-lint
