@@ -451,6 +451,7 @@ Now that your application has been built, why not try it out? If you visit
 [http://localhost:3000](http://localhost:3000) and click through the prompts,
 you'll see how everything fits together:
 
+<div data-proofer-ignore>
 Once you click login, you'll be redirected to `/login` The oidc-middleware will
 intercept that `/login` request, and redirect the user to Okta's hosted sign-in
 page where they'll be prompted for their email address and password The user
@@ -459,6 +460,7 @@ to your local website, where the oidc-middleware library will again intercept
 the request, create a session for the user, and log them in Finally, they will
 be redirected to the dashboard page (`/dashboard`), where your route code will
 run and echo their basic information back to them
+</div>
 
 Here's what each of the pages looks like in the flow:
 
