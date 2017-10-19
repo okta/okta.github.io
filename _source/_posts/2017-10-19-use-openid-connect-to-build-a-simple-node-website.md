@@ -124,6 +124,7 @@ login capabilities. It will be very simple (but that's the point!).
 To get started, create a new folder somewhere on your computer, and enter it.
 Then create a `server.js` file and insert the following code:
 
+<div data-proofer-ignore>
 ```javascript
 "use strict";
 
@@ -152,6 +153,7 @@ app.get("/logout", (req, res) => {
 
 app.listen(3000);
 ```
+</div>
 
 This is a basic Express.js application:
 
@@ -198,6 +200,7 @@ for resources online.
 Next, you'll want to create the HTML template that renders the home page of the
 site. Create the file `views/index.pug` and include the following code:
 
+<div data-proofer-ignore>
 ```jade
 extends base.pug
 
@@ -213,6 +216,7 @@ block body
     p.
       Please #[a(href="/login") login] to continue.
 ```
+</div>
 
 This is your simple home page template.
 
@@ -220,6 +224,7 @@ Now, let's create a dashboard page. This page will be what the user sees after
 logging into the website. Create the file `views/dashboard.pug` and include the
 following:
 
+<div data-proofer-ignore>
 ```jade
 extends base.pug
 
@@ -235,6 +240,7 @@ block body
     p.
       If you'd like to logout, please #[a(href="/logout") click here].
 ```
+</div>
 
 Next, let's add a bit of CSS to make things look nice. Create a new folder to store your static assets (css, images, etc.):
 
@@ -358,6 +364,8 @@ I'll walk you through them briefly:
 Now that you've configured OIDC for your website, it's time to hook up the
 routes:
 
+
+<div data-proofer-ignore>
 ```javascript
 // App routes
 app.use(oidc.router);
@@ -376,6 +384,7 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 ```
+</div>
 
 The first thing that's happening above is that you're using the built-in OIDC
 routes that ship with the oidc-middleware library. This library provides routes
