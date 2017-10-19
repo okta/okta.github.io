@@ -305,6 +305,7 @@ endpoint.
 ### Org-Wide Rate Limits
 
 API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
+<!-- It says here that for other endpoints, the limit is 10,000. This contradicts the value in the table below. -->
 For all endpoints not listed, the API rate limit is a combined 10,000 requests per minute.
 
 <table border="1" style="width: 100%;">
@@ -349,6 +350,7 @@ For all endpoints not listed, the API rate limit is a combined 10,000 requests p
 			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
 		</tr>
 		<tr>
+		<!-- Here the number is 1000. If these are two different limits, can we be more explicit about the difference? -->
 			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/</span>&nbsp; (if no other limit specified in this table)</td>
 			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
 		</tr>
