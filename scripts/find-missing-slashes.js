@@ -13,7 +13,7 @@ const fs = require('fs');
 const readdir = require('recursive-readdir');
 const chalk = require('chalk');
 
-const linkExpr = 'href\\s*=\\s*"([^"]+)"';
+const linkExpr = '<(?:a|area|base|link)[^>]*href\s*=\s*"([^"]+)"';
 const globalLinkRe = new RegExp(linkExpr, 'g');
 const localLinkRe = new RegExp(linkExpr);
 const linkExtRe = new RegExp('/[^/]+\\.[a-z]+$');
