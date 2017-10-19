@@ -31,5 +31,5 @@ fi
 npm run find-missing-slashes
 
 # 7. Run htmlproofer to validate links, scripts, and images
-echo "HILEN"
-bundle exec htmlproofer ./dist --assume-extension --disable-external --allow-hash-href --empty-alt-ignore --log-level verbose --file-ignore "/3rd_party_notices/","/java_api_sdk/","/python_api_sdk/","/javadoc/","/csharp_api_sdk/","/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website.html"
+echo HILEN
+#bundle exec htmlproofer ./dist --assume-extension --disable-external --allow-hash-href --empty-alt-ignore --log-level verbose --file-ignore "/3rd_party_notices/","/java_api_sdk/","/python_api_sdk/","/javadoc/","/csharp_api_sdk/","/blog/2017/10/19/use-openid-connect-to-build-a-simple-node-website.html"
