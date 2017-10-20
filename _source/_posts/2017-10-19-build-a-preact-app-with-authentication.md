@@ -1,6 +1,6 @@
 ---
 layout: blog_post
-title: "Built a Preact App with Authentication"
+title: "Build a Preact App with Authentication"
 author: leebrandt
 tags: [react, preact, javascript, security]
 ---
