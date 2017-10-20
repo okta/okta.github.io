@@ -21,12 +21,12 @@ Description
 
 These bug fixes are expected on preview orgs starting October 25, 2017, and on production orgs starting November 8, 2017.
 
-* When [setting a password via the API](/docs/api/resources/users.html#set-password), spaces in the password were incorrectly allowed.(OKTA-140668)
+* When [setting a password via the API](/docs/api/resources/users.html#set-password), spaces or an empty string as the password were incorrectly allowed.(OKTA-140668)
 *  An error for invalid `okta_key` was incorrectly returned in this sequence:
     1. A request to `/authorize` is made for a user with two-factor authentication.
     2. Too much time elapsed before the second factor was supplied, so the session timed out and displayed another login page.
-    3. A second attempt to log is completed correctly with the second factor supplied before session expiration.
-    4. Instead of returning the expected code string, the response was an error message for invalid `okay_key`.
+    3. A second attempt to log in is completed correctly with the second factor supplied before session expiration.
+    4. Instead of returning the expected code string, the response was an error message for invalid `okta_key`.
 
 ### Does Your Org Have This Change Yet?
 
