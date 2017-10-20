@@ -23,6 +23,7 @@ Install the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) us
 ```bash
 npm install @okta/okta-signin-widget@2.3.0 --save
 ```
+
 This will add the Okta Sign-In Widget code to your `node_modules` folder. We’ll be using version 2.3.0 of the Sign-In Widget.
 
 {% img blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener.png alt:"Okta in node_modules" %}
@@ -185,7 +186,7 @@ We’re almost there, but you don't necessarily want to render the widget right 
   }
 ```
 
->*You might have noticed a weird bit of code in that `showLogin` method. That first line: `Backbone.history.stop()`. The widget itself uses [Backbone.js](http://backbonejs.org/) to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the `Backbone.history`. Since you've now moved it out into a `showLogin` function, the widget is going to re-render whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because it’s going to restart when the widget is rendered.*
+You might have noticed a weird bit of code in that `showLogin` method. That first line: `Backbone.history.stop()`. The widget itself uses [Backbone.js](http://backbonejs.org/) to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the `Backbone.history`. Since you've now moved it out into a `showLogin` function, the widget is going to re-render whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because it’s going to restart when the widget is rendered.
 
 ## The Final LoginPage React Component
 
@@ -283,7 +284,7 @@ When you run the app now (with `npm start`), you should see something like this:
 
 {% img blog/react-sign-in-widget/Finished-Sample-Screener.gif alt:"Finished Sample" %}
 
->* If you have any problems with the application, one thing to try first is, delete the `node_modules` folder **and** the `package-lock.json` file and re-run the `npm install` command. This should fix any problems with package dependency management.
+If you have any problems with the application, one thing to try first is, delete the `node_modules` folder **and** the `package-lock.json` file and re-run the `npm install` command. This should fix any problems with package dependency management.
 
 If it works - congrats! If it doesn't, please post a question to Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta), or hit me up on Twitter [@leebrandt](https://twitter.com/leebrandt).
 
@@ -297,6 +298,6 @@ I hope you’ve enjoyed this quick tour of our React support. If you have questi
 
 ### Changelog
 
-* October 20, 2017: Changed npm install to latest version of widget and removed npm install at beginning. Also added instructions for fixing dependency issues in NPM.
+* October 20, 2017: Changed npm install to version 2.3.0 of widget and removed npm install at beginning. Also added instructions for fixing dependency issues in NPM.
 * October 17, 2017: Fixed bugs and added navbar instructions.
 * September 30, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console). Updated the widget reference to 2.1.0.
