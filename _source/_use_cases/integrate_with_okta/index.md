@@ -3,6 +3,9 @@ layout: docs_page
 title: Integrate with Okta
 weight: 4
 excerpt: Make your app enterprise ready and connect with thousands of customers with the Okta Integration Network.
+redirect_from:
+  - "/docs/api/getting_started/oan_guidance.html"
+  - "/docs/guides/oan_guidance.html"
 ---
 
 ## Integrate with Okta

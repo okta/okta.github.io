@@ -22,8 +22,8 @@
       }
 
       .PrimaryNav {
-        a,
-        span {
+        ul.menu a,
+        ul.menu span {
           color: get-color('default');
 
           &.active {

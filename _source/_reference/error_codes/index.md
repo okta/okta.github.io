@@ -44,7 +44,7 @@ This document provides further information about the errors that the Okta API re
 |<a name="E0000026"></a>E0000026|This endpoint has been deprecated.|404|
 |<a name="E0000027"></a>E0000027|Bad group push request.|400|
 |<a name="E0000028"></a>E0000028|The request is missing a required parameter.|400|
-|<a name="E0000029"></a>E0000029|Invalid paging request.|400|
+|<a name="E0000029"></a>E0000029|Invalid paging request. Ensure the pagination cursor has not been altered|400|
 |<a name="E0000030"></a>E0000030|Bad request. Invalid date. Dates must be of the form yyyy-MM-dd''T''HH:mm:ss.SSSZZ, e.g. 2013-01-01T12:00:00.000-07:00.|400|
 |<a name="E0000031"></a>E0000031|Bad request. Invalid filter parameter.|400|
 |<a name="E0000032"></a>E0000032|Unlock is not allowed for this user.|403|

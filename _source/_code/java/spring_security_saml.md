@@ -3,7 +3,9 @@ layout: software
 title: Spring Security SAML
 language: Java
 excerpt: Guidance on how to SAML-enable your application using open source Spring Security library.
-redirect_from: "/docs/examples/spring_security_saml.html"
+redirect_from:
+  - "/docs/examples/spring_security_saml.html"
+  - "/docs/guides/spring_security_saml.html"
 weight: 4
 ---
 

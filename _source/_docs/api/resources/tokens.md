@@ -30,7 +30,6 @@ curl -v -H "Content-type:application/json" \
 }'
 ~~~
 
-
 #### Response Example
 
 ~~~ json
