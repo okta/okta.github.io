@@ -20,19 +20,19 @@ The System Log API has one endpoint:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9cfb0dd661a5432a77c6){:target="_blank"}
 
-See [Examples](#examples) for way you can use the System Log API.
+See [Examples](#examples) for ways you can use the System Log API. For common use cases see [Useful System Log Queries](https://support.okta.com/help/Documentation/Knowledge_Article/Useful-System-Log-Queries).
 
 ## Data Retention
 
-Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy}(https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
+Log data older than 90 days is not returned, in accordance with Okta's [Data Retention Policy](https://support.okta.com/help/Documentation/Knowledge_Article/Okta-Data-Retention-Policy).
 
 ## Examples
 
 ### Debugging
-The System Logs API can be used to troubleshoot user problems. For example, you
+The System Log API can be used to troubleshoot user problems. For example, you
 can use the following `curl` command to see events from user "Jane Doe":
 
-```
+```sh
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -40,10 +40,9 @@ curl -v -X GET \
 "https://{yourOktaDomain}.com/api/v1/logs?q=Jane+Doe"
 ```
 
-### Polling
 You can also use this API to search for particular types of events:
 
-```
+```sh
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -51,16 +50,20 @@ curl -v -X GET \
 "https://{yourOktaDomain}.com/api/v1/logs?filter=event_type+eq+%22user.session.start%22"
 ```
 
-### Transferring Data to a separate system
+### Transferring Data to a Separate System
 You can export your logs to a separate system for analysis or compliance. To obtain the entire dataset, query from the appropriate point of time in the past.
 
-```
+```sh
 curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/logs?since=2017-03-11"
+"https://{yourOktaDomain}.com/api/v1/logs?since=2017-10-01T00:00:00.000Z"
 ```
+
+and retrieve the next page of events through the [`Link` response header](/docs/api/getting_started/design_principles.html#link-header) value with the `next` link relation. Continue this process until no events are returned.
+
+> Do not attempt to transfer data by manually paginating using `since` and `until` as this may lead to skipped or duplicated events. Instead, always follow the `next` links. 
 
 ## Event Operations
 
@@ -107,7 +110,7 @@ Events published for a target user
 
 Failed login events
 
-    filter=action.eventType eq "core.user_auth.login_failed"
+    filter=eventType eq "user.session.start" and outcome.result eq "FAILURE"
 
 Events published for a target user and application
 
@@ -115,7 +118,7 @@ Events published for a target user and application
 
 App SSO events for a target user and application
 
-    filter=action.eventType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
+    filter=eventType eq "app.auth.sso" and target.id eq "00uxc78lMKUMVIHLTAXY" and target.id eq "0oabe82gnXOFVCDUMVAK"
 
 Events published for a given ip address
 
@@ -168,7 +171,7 @@ Each Log object describes a single action performed by a set of actors for a set
     "result": "SUCCESS"
   },
   "uuid": "f790999f-fe87-467a-9880-6982a583986c",
-  "published": "2017-05-31T22:23:07.777Z",
+  "published": "2017-09-31T22:23:07.777Z",
   "eventType": "user.session.start",
   "displayMessage": "User login to Okta",
   "transaction": {
@@ -573,7 +576,7 @@ Link: <url>; rel="self"
 
 For example:
 ```
-Link: <https://{yourOktaDomain}.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T23%3A59%3A59%2B00%3A00&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="self"
+Link: <https://{yourOktaDomain}.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-09-17T23%3A59%3A59%2B00%3A00&since=2017-06-10T00%3A00%3A00%2B00%3A00>; rel="self"
 ```
 
 ### Next Link Response Header
@@ -586,7 +589,7 @@ Link: <url>; rel="next"
 
 For example:
 ```
-Link: <https://{yourOktaDomain}.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-03-17T15%3A41%3A12.994Z&after=349996bd-5091-45dc-a39f-d357867a30d7&since=2017-03-10T00%3A00%3A00%2B00%3A00>; rel="next"
+Link: <https://{yourOktaDomain}.com/api/v1/logs?q=&sortOrder=DESCENDING&limit=20&until=2017-09-17T15%3A41%3A12.994Z&after=349996bd-5091-45dc-a39f-d357867a30d7&since=2017-06-10T00%3A00%3A00%2B00%3A00>; rel="next"
 ```
 
 ## Timeouts
@@ -659,6 +662,7 @@ A free form query that is too long:
   "errorCode": "E0000001",
   "errorSummary": "Api validation failed: 'q': Freeform search cannot contain items longer than 40 characters. Please shorten the items in your search or use an advanced filter to query by specific fields."
 }
+~~~
 
 Exceeding the rate limit results in:
 ~~~json

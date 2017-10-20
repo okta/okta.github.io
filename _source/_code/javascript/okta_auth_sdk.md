@@ -4,6 +4,8 @@ title: Okta Auth JS SDK
 language: JavaScript
 weight: 10
 excerpt: A JavaScript wrapper for Okta's Authentication APIs.
+redirect_from:
+  - "/docs/guides/okta_auth_sdk.html"
 ---
 
 ## Overview
