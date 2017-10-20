@@ -242,11 +242,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  github-pages
-  html-proofer
+  github-pages (= 160)
+  html-proofer (= 3.7.2)
   jekyll-assets (= 2.3.2)
-  jekyll-redirect-from
-  tzinfo-data
+  jekyll-redirect-from (= 0.12.1)
+  tzinfo-data (= 1.2017.2)
 
 BUNDLED WITH
    1.15.4
