@@ -112,6 +112,7 @@ security:
       accessTokenUri: # token_endpoint
       userAuthorizationUri: # authorization_endpoint
       clientAuthenticationScheme: form
+      scope: openid profile email
     resource:
       # from your Auth Server's metadata, check .well-known/openid-configuration
       # if not in .well-known/oauth-authorization-server
@@ -150,6 +151,7 @@ In a [future tutorial](/blog/2017/09/19/build-a-secure-notes-application-with-ko
 **Changelog:**
 
 * Oct 11, 2017: Updated instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
+* Oct 20, 2017: Added missing `scope: openid profile email` to `application.yaml`. 
 
 
 
