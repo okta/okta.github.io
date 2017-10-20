@@ -30,13 +30,13 @@ A week later, it won an honorable bronze at the [JAX Innovation Awards 2017](htt
 
 I’ve been a committer on the JHipster project ever since I [started writing the JHipster Mini-Book for InfoQ in June of 2015](http://www.jhipster-book.com/#!/news/entry/welcome-to-the-jhipster-mini-book). After developing a couple of apps with it, finding and fixing bugs along the way, I was invited to be a part of the project. Fast forward two years later, and version 4.0 of the book is [available for download](https://www.infoq.com/minibooks/jhipster-4-mini-book), and I’ve spoken about JHipster around the world at several conferences including Devoxx Belgium, Devoxx France, Angular Summit, and JavaOne. 
 
-## Enter OAuth
+## Enter OAuth 2.0
 
 I’m a fan of [OAuth 2.0](https://oauth.net/) and [OpenID Connect](http://openid.net/connect/) (OIDC). It helps that I work for Okta, where we implement both options in our API and allow developers to use our libraries &mdash; or third party libraries &mdash; to connect. I like how OAuth will enable me to use my existing credentials at an Identity Provider (e.g., Google, Facebook, or even Okta) to log in to applications without creating a new account.
 
 > If you want to know more about how OAuth and OIDC work, check out my article [What the Heck is OAuth](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth) or watch Karl McGuinness’s [What the Heck is OpenID Connect talk from Oktane 17](https://www.youtube.com/watch?v=6ypYXxRPKgk). 
 
-About a month ago, I started looking into creating a JHipster Module that’d work with Okta, much like [the one I created at Stormpath](https://stormpath.com/blog/stormpath-jhipster-application). I knew that JHipster had OAuth as one of its’ authentication options, but I was unfamiliar with how it worked. I discovered when you chose OAuth as your authentication mechanism; it created an OAuth server and an Angular client with the client ID and client secret embedded in the code. 
+About a month ago, I started looking into creating a JHipster Module that’d work with Okta, much like [the one I created at Stormpath](https://stormpath.com/blog/stormpath-jhipster-application). I knew that JHipster had OAuth as one of its authentication options, but I was unfamiliar with how it worked. I discovered when you chose OAuth as your authentication mechanism; it created an OAuth server and an Angular client with the client ID and client secret embedded in the code. 
 
 Embedding a client secret in a SPA (single-page app) is a no-no in OAuth-land, and should only be done for confidential clients that can hide the secret. I spoke to the team about the current OAuth implementation and since no-one was proud of it, and hardly anyone was using it, I decided to refactor the existing implementation rather than create a module.
 
@@ -66,7 +66,7 @@ security:
             preferTokenInfo: false
 ```
 
-To make Keycloak work out-of-the-box, JHipster automatically creates a `src/main/docker/keycloak.yml` file for Docker Compose that has a realm and users configured. This file uses Keycloak’s image, imports the default data, and exposes the default port at 9080.
+To make Keycloak work out-of-the-box, JHipster automatically creates a `src/main/docker/keycloak.yml` file for Docker Compose that has a realm and users configured. This file uses Keycloak’s image, imports the default data, and exposes the default port at `9080`.
 
 ```yml
 version: '2'
@@ -120,9 +120,9 @@ In case you don’t know how to set up an OIDC app on Okta, here’s a quick tut
 
 ## Set Up an OIDC App on Okta
 
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you’ll remember, and specify "http://localhost:8080" as a Base URI and Login Redirect URI. Click **Done** and copy the client ID and secret into your `application.yml` file.
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Web** and click **Next**. Give the app a name you’ll remember, and specify `http://localhost:8080` as a Base URI and Login Redirect URI. Click **Done** and copy the client ID and secret into your `application.yml` file.
 
-Create a `ROLE_ADMIN` and `ROLE_USER` group and add users to them. Create a user (e.g., "admin@jhipster.org" with password "Java is hip in 2017!"). Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "groups" or "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
+Create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. You can use the account you signed up with, or create a new user (**Users** > **Add Person**). Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "groups" or "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
 
 **NOTE:** If you want to use Okta all the time (instead of Keycloak), modify JHipster’s Protractor tests to use this account when running. Do this by changing the credentials in `src/test/javascript/e2e/account/account.spec.ts` and `src/test/javascript/e2e/admin/administration.spec.ts`.
 
