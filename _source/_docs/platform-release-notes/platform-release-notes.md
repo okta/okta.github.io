@@ -26,7 +26,7 @@ These bug fixes are expected on preview orgs starting October 25, 2017, and on p
     1. A request to `/authorize` is made for a user with two-factor authentication.
     2. Too much time elapsed before the second factor was supplied, so the session timed out and displayed another login page.
     3. A second attempt to log in is completed correctly with the second factor supplied before session expiration.
-    4. Instead of returning the expected code string, the response was an error message for invalid `okta_key`.
+    4. Instead of returning the expected code string, the response was an error message for invalid `okta_key`. (OKTA-143916)
 
 ### Does Your Org Have This Change Yet?
 
