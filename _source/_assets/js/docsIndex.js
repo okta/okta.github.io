@@ -3,6 +3,7 @@
   var code = [
     { name: 'angular', label: 'Angular' },
     { name: 'react',label: 'React' },
+    { name: 'android', label: 'Android' },
     { name: 'ios',  label: 'iOS' },
     { name: 'nodejs', label: 'Node.js' },
     { name: 'java', label: 'Java' },
@@ -27,9 +28,6 @@
       link.prepend($('<br />'));
       link.prepend(icon);
       li.append(link);
-      
-      // li.append(icon);
-      // li.append(link);
       ul.append(li);
     });
     $('#docs-languages').append(ul);
