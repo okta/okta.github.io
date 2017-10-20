@@ -131,6 +131,8 @@ The Okta API currently requires the custom HTTP authentication scheme `SSWS` for
 
 > See [Obtaining a token](getting_a_token.html) for instructions on how to get an API key for your organization.
 
+The API key (API token) isn't interchangeable with access tokens or ID tokens used with [OAuth 2.0 and OpenID Connect](/docs/api/resources/oauth2.html).
+
 ## Pagination
 
 Requests that return a list of resources may support paging.  Pagination is based on cursor and not on page number. The cursor is opaque to the client and specified in either the `?before` or `?after` query parameter.  For some resources, you can also set a custom page size with the `?limit` parameter.
