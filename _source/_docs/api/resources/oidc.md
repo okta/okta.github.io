@@ -16,6 +16,7 @@ If you are new to OpenID Connect, read [the standards topic](/standards/OIDC/ind
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2)
 
+You can also view the video [Getting Started with the Okta API and OpenID Connect](https://www.youtube.com/watch?v=fPW66abobMI). 
 
 ## Endpoints
 
