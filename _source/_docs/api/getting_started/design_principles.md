@@ -330,9 +330,9 @@ For all API endpoints not listed in the table above, the API rate limit is a com
 | `/app/office365/{key}/sso/wsfed/active`  |  2000 |
 | `/app/office365/{key}/sso/wsfed/passive` |   250 |
 | `/app/template_saml_2_0/{key}/sso/saml`  |  2500 |
-| `/login/do-login`                        | 200   |
-| `/login/login.htm`                       | 850   |
-| `/login/sso_iwa_auth`                    | 500   |
+| `/login/do-login`                        |   200 |
+| `/login/login.htm`                       |   850 |
+| `/login/sso_iwa_auth`                    |   500 |
 
 #### Example Rate Limit Header with Org-Wide Rate Limit Error  
 
