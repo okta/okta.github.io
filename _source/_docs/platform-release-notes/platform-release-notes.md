@@ -1,10 +1,12 @@
 ---
 layout: docs_page
 title: Okta API Release Notes
-excerpt: Changes to the Okta API since Release 2017.42: bug fixes to Developer Console, the set password endpoint, and an improved error strings
+excerpt: Change to App Wizard in Developer Console, new error string
 ---
 
-## Okta API Release Notes for Release 2017.43
+# Okta API Release Notes for Release 2017.43
+
+This release note summarizes the changes to API Products since Release 2017.42.
 
 <!-- The following API feature enhancements are available in the 2017.43 release. -->
 Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
@@ -22,7 +24,6 @@ Description
 These bug fixes are expected on preview orgs starting October 25, 2017, and on production orgs starting November 8, 2017.
 
 * The default ports in the App Wizard in the Developer Console have been changed from `3000` to `8080`. (OKTA-144916)
-* When [setting a password via the API](/docs/api/resources/users.html#set-password), spaces or an empty string as the password were incorrectly allowed.(OKTA-140668)
 * An error string was unclear. The string is returned when a session times out while waiting for a user to enter MFA credentials during an OpenID Connect `/authorize` call. (OKTA-143916)
 
 ### Does Your Org Have This Change Yet?
