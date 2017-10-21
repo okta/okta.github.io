@@ -2,7 +2,10 @@
 layout: docs_page
 weight: 4
 title: Design Principles
-redirect_from: "/docs/getting_started/design_principles.html"
+redirect_from:
+  - "/docs/getting_started/design_principles.html"
+  - "docs/api/index.html"
+  - "docs/api/"
 ---
 
 # Versioning
@@ -133,9 +136,9 @@ The Okta API currently requires the custom HTTP authentication scheme `SSWS` for
 
 ## Pagination
 
-Requests that return a list of resources may support paging.  Pagination is based on cursor and not on page number. The cursor is opaque to the client and specified in either the `?before` or `?after` query parameter.  For some resources, you can also set a custom page size with the `?limit` parameter.
+Requests that return a list of resources may support paging.  Pagination is based on a cursor and not on page number. The cursor is opaque to the client and specified in either the `before` or `after` query parameter.  For some resources, you can also set a custom page size with the `limit` parameter.
 
-Note that for technical reasons not all APIs respect pagination or the `?limit` parameter, see the [Events API](/docs/api/resources/events.html) for example.
+Note that for technical reasons not all APIs respect pagination or the `before` and `limit` parameters, see the [Events API](/docs/api/resources/events.html) for example.
 
 Param    | Description
 -------- | ------------
