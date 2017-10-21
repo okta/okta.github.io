@@ -1,7 +1,7 @@
 ---
 layout: docs_page
 title: Okta API Release Notes
-excerpt: Summary of changes to the Okta API since Release 2017.42
+excerpt: Changes to the Okta API since Release 2017.42: bug fixes to Developer Console, the set password endpoint, and an improved error strings
 ---
 
 ## Okta API Release Notes for Release 2017.43
