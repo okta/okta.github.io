@@ -19,11 +19,11 @@ npm start
 ```
 When you open `http://localhost:3000`, you should see something like this:
 
- {% img blog/react-sign-in-widget/react-sample-app-settings.png alt:"Running Seed" %}
+ {% img blog/react-sign-in-widget/React-Simple-Seed-Screener alt:"Running Seed" %}
 
 When you click on the navigation links, you should see page placeholders for those links.
 ## Add the Okta Sign-In Widget
-Install the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) using npm. We’ll be using version 2.1.0 of the Sign-In Widget, which is the most recent version at the time of this writing.
+Install the [Okta Sign-In Widget](https://github.com/okta/okta-signin-widget) using npm. We’ll be using version 2.1.0 of the Sign-In Widget.
 
 ```bash
 npm install @okta/okta-signin-widget@2.1.0 --save
@@ -32,18 +32,18 @@ This will add the Okta Sign-In Widget code to your `node_modules` folder.
 
 {% img blog/react-sign-in-widget/Okta-Widget-NPM-Modules-Screener.png alt:"Okta in node_modules" %}
 
-Then add the styles for the widget in your `index.html` file from the Okta CDN:
+Then add the styles for the widget in your `index.html` file from the Okta CDN. Add these lines inside the `<head>` tag:
 ```html
-    <link
-     href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-sign-in.min.css"
-      type="text/css"
-      rel="stylesheet"/>
+<link
+ href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-sign-in.min.css"
+ type="text/css"
+ rel="stylesheet"/>
 
-    <!-- Theme file: Customize or replace this file if you want to override our default styles -->
-    <link
-      href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-theme.css"
-      type="text/css"
-      rel="stylesheet"/>
+<!-- Theme file: Customize or replace this file if you want to override our default styles -->
+<link
+ href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.1.0/css/okta-theme.css"
+ type="text/css"
+ rel="stylesheet"/>
 ```
 
 ## The LoginPage Component
@@ -63,7 +63,7 @@ export default class LoginPage extends React.Component{
 }
 ```
 
-This little component doesn't *do* much but at least you now have a handle to add the `LoginPage` to your routing. So in your `./src/app.js` file, you'll import the component with:
+This little component doesn't *do* much but at least you now have a handle to add the `LoginPage` to your routing. So in your `./src/app.js` file, you'll import the component at the top:
 
 ```js
 import LoginPage from './components/auth/LoginPage';
@@ -75,13 +75,18 @@ and then add the route inside the main route (the one with the path of "/")
 ## Add the OpenID Connect Application in Okta
 In order to use Okta as your OpenID Connect provider for authentication, you’ll need to set up an application in the [Okta developer console](https://developer.okta.com).
 
-If you don't have an Okta developer account, [go create one](https://developer.okta.com/signup/)! Once you're logged in, click on **Applications** in the top navbar, then click **Add Application**. Select SPA as the platform and click Next. Change the redirect URI to `http://localhost:3000`, and click Done. The application will be created with the following settings:
+If you don't have an Okta developer account, [go create one](https://developer.okta.com/signup/)!
+
+Once you're logged in, click on **Applications** in the top navbar, then click **Add Application**. Select Single-Page App as the platform and click Next. Change the login redirect URI to `http://localhost:3000`, and click Done. The application will be created with the following settings:
 
 {% img blog/react-sign-in-widget/react-sample-app-settings.png alt:"OIDC Application Settings" width:"800" %}
 
 
 Now that you have an application created in Okta, you can set up the widget to talk to your new app!
 ## Add the Widget to Your Component
+
+Update `LoginPage.js` to look like:
+
 ```js
 import React from 'react';
 import OktaSignIn from '@okta/okta-signin-widget';
@@ -252,6 +257,17 @@ export default class LoginPage extends React.Component{
   }
 }
 ```
+
+## Add a Login Link
+
+React is now wired up to handle the `/login` route and display the Okta Sign-In Widget to prompt the user to log in.
+
+Add a Login link to the top navbar by editing `./src/components/common/Navigation.js` and adding a new link under the existing Contact link:
+
+```html
+<li><Link to="login">Login</Link></li>
+```
+
 ## Check It Out
 When you run the app now (with `npm start`), you should see something like this:
 
@@ -268,4 +284,6 @@ I hope you’ve enjoyed this quick tour of our React support. If you have questi
 
 ### Changelog
   
+  * October 17, 2017: Fixed bugs and added navbar instructions.
+
   * September 30, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console). Updated the widget reference to 2.1.0.
