@@ -274,7 +274,7 @@ Add a Login link to the top navbar by editing `./src/components/common/Navigatio
 
 ## Check It Out
 
-Now install the NPM packages:
+Now install the npm packages:
 
 ```bash
 npm install
@@ -298,6 +298,6 @@ I hope you’ve enjoyed this quick tour of our React support. If you have questi
 
 ### Changelog
 
-* October 20, 2017: Changed npm install to version 2.3.0 of widget and removed npm install at beginning. Also added instructions for fixing dependency issues in NPM.
+* October 20, 2017: Changed npm install to version 2.3.0 of widget and removed npm install at beginning. Also added instructions for fixing dependency issues in npm.
 * October 17, 2017: Fixed bugs and added navbar instructions.
 * September 30, 2017: Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console). Updated the widget reference to 2.1.0.
