@@ -1,27 +1,29 @@
 ---
 layout: docs_page
 title: Okta API Release Notes
-excerpt: Summary of changes to the Okta API since Release 2017.41
+excerpt: Changes to the Okta API since Release 2017.42: bug fixes to Developer Console, the set password endpoint, and an improved error strings
 ---
 
-## Okta API Release Notes for Release 2017.42
+## Okta API Release Notes for Release 2017.43
 
-The following API feature enhancements are available in the 2017.42 release.
+<!-- The following API feature enhancements are available in the 2017.43 release. -->
 Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
 
-### API Feature Enhancements
+<!-- ### API Feature Enhancements
 
-#### Group Rule Evaluations Included in System Log
+#### Title
 
-Group Rule evaluation failures are now exposed via the System Log API.
-
-<!-- OKTA-140086 -->
+Description
+-->
+<!-- OKTA-xxxxx -->
 
 ### API Bug Fixes
 
-These bug fixes are expected on preview orgs starting October 18, 2017, and on production orgs starting October 24, 2017.
+These bug fixes are expected on preview orgs starting October 25, 2017, and on production orgs starting November 8, 2017.
 
-* ID tokens requested alongside access tokens or authorization codes from custom authorization servers did not include OpenID Connect claims. This caused client applications, including the Okta Sign-In Widget, to not pre-populate the username. (OKTA-143857, 2017.40 Preview Fix)
+* The default ports in the App Wizard in the Developer Console have been changed from `3000` to `8080`. (OKTA-144916)
+* When [setting a password via the API](/docs/api/resources/users.html#set-password), spaces or an empty string as the password were incorrectly allowed.(OKTA-140668)
+* An error string was unclear. The string is returned when a session times out while waiting for a user to enter MFA credentials during an OpenID Connect `/authorize` call. (OKTA-143916)
 
 ### Does Your Org Have This Change Yet?
 
