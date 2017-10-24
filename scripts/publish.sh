@@ -1,8 +1,21 @@
 #!/bin/bash -vx
 
 DEPLOY_BRANCH="weekly"
+DEPLOY_ENVIRONMENT=""
 TARGET_S3_BUCKET="s3://developer.okta.com-staging"
 REGISTRY="${ARTIFACTORY_URL}/api/npm/npm-okta"
+
+declare -A branch_environment_map
+branch_environment_map[source]=developer-okta-com-prod
+branch_environment_map[weekly]=developer-okta-com-preprod
+
+# Check if we are in one of our publish branches
+if [[ -z "${branch_environment_map[$BRANCH]+unset}" ]]; then
+    echo "Current branch is not a publish branch"
+    exit ${BUILD_FAILURE};
+else
+    DEPLOY_ENVIRONMENT=${branch_environment_map[$BRANCH]}
+fi
 
 source "${0%/*}/setup.sh"
 
@@ -25,6 +38,13 @@ then
     exit ${BUILD_FAILURE};
 fi
 
+interject "Generating conductor file in $(pwd)"
+if ! generate_conductor_file;
+then
+    echo "Error generating conductor file"
+    exit ${BUILD_FAILURE};
+fi
+
 # ----- Start (Temporary) Deploy to S3 -----
 if [[ "${BRANCH}" == "${DEPLOY_BRANCH}" ]];
 then
@@ -36,7 +56,6 @@ then
     fi
 fi
 # ----- End (Temporary) Deploy to S3 -----
-
 
 # Create NPM package
 # ------------------
@@ -63,6 +82,15 @@ DATALOAD=$(ci-pkginfo -t dataload)
 if ! artifactory_curl -X PUT -u ${ARTIFACTORY_CREDS} ${DATALOAD} -v -f; then
   echo "artifactory_curl failed! Exiting..."
   exit $PUBLISH_ARTIFACTORY_FAILURE
+fi
+
+ARTIFACT_FILE="$([[ $DATALOAD =~ okta\.github\.io-(.*)\.tgz ]] && echo $BASH_REMATCH)"
+DEPLOY_VERSION="$([[ $ARTIFACT_FILE =~ okta\.github\.io-(.*)\.tgz ]] && echo ${BASH_REMATCH[1]})"
+ARTIFACT="@okta/okta.github.io/-/@okta/${ARTIFACT_FILE}"
+
+if ! send_promotion_message "${DEPLOY_ENVIRONMENT}" "${ARTIFACT}" "${DEPLOY_VERSION}" ; then
+  echo "Error sending promotion event to aperture"
+  exit ${BUILD_FAILURE};
 fi
 
 exit $SUCCESS

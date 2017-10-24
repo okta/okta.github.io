@@ -164,7 +164,7 @@ function header_checker() {
 function check_sample_code_orgs() {
     # Sample code URLS should be in the following format:
     # Currently: https://your-org.okta.com
-    
+
     local dir=$(pwd)
     local yourOrgUrls=$(grep -EoR "(http|https)://your-org.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
     local yourExampleUrls=$(grep -EoR "(http|https)://example.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
@@ -173,7 +173,7 @@ function check_sample_code_orgs() {
     local yourDomainUrls=$(grep -EoR "(http|https)://your-domain.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist} | sort | uniq)
     local jspUrls=$(grep -EoR "(http|https)://.*{org}.okta*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,s} | sort | uniq)
     local oktaPreviewUrls=$(grep -EoR "(http|https)://.*oktapreview.com*" --include="*.md" $dir --exclude-dir={node_modules,scripts,tests,dist,_posts,getting_started} | sort | uniq)
-    
+
     if [ "$yourOrgUrls" ];
     then
         echo "$yourOrgUrls"
@@ -231,4 +231,11 @@ function fold() {
     echo "\$ ${command}"
     ${command}
     echo -en "travis_fold:end:${name}\\r"
+}
+
+function send_promotion_message() {
+    curl -H "Authorization: Bearer ${TESTSERVICE_SLAVE_JWT}" \
+      -H "Content-Type: application/json" \
+      -X POST -d "[{\"artifactId\":\"$1\",\"repository\":\"npm-okta\",\"artifact\":\"$2\",\"version\":\"$3\",\"promotionType\":\"ARTIFACT\"}]" \
+      -k "${APERTURE_BASE_URL}/v1/artifact-promotion/createPromotionEvent"
 }
