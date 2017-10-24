@@ -319,12 +319,13 @@ API rate limits apply per minute to the endpoints in an org. The rate applies ei
 | `/api/v1/sessions`                                                         |   750 |
 | `/api/v1/users/{id}` (exact URL plus query params or other qualifiers)     |   600 |
 | `/api/v1/users`                                                            |   600 |
-| `/api/v1/` (if no other limit specified in this table)                     |  1200 |
+| `/api/v1/` (if no other `/api/v1` limit specified in this table)           |  1200 |
 | `/oauth2/v1/token`  (per second, not minute)                               |     4 |
 | `/oauth2/v1` (per second, not minute)                                      |    40 |
 
 For all API endpoints not listed in the table above, the API rate limit is a combined 10,000 requests per minute.
 
+End-user endpoints have org-wide rate limits as well:
 
 | Okta End-User Endpoints                  | Limit |
 |:-----------------------------------------|------:|
