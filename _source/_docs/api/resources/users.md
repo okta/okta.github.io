@@ -2628,7 +2628,8 @@ curl -v -X POST \
 
 {% api_lifecycle beta %}
 
-A consent represents a resource owner&#8217;s explicit permission to allow a certain application to access scopes. This is separated from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. Consents will remain valid until the user manually revokes them, or until the user or application is deactivated.
+A consent represents a resource owner&#8217;s explicit permission to allow an application to access resources protected by scopes. This is separated from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. 
+Consents remain valid until the user manually revokes them, or until the user, application, authorization server or scope is deactivated or deleted.
 
 ### List Grants
 {:.api .api-operation}
@@ -2664,7 +2665,7 @@ curl -v -X GET \
 
 Array of [Grant Objects](#grant-object)
 
-### Fetch a Grant
+### Get a Grant
 {:.api .api-operation}
 
 {% api_operation get /api/v1/users/*:userId*/grants/:grantId: %}
@@ -2697,7 +2698,7 @@ curl -v -X GET \
 Single [Grant Object](#grant-object)
 
 ### Revoke All Grants
-{% api_operation delete /api/v1/users/:userId:/grants %}
+{% api_operation delete /api/v1/users/:userId:/grants/:grantId: %}
 
 Revokes all grants for the specified user
      
@@ -2725,7 +2726,7 @@ curl -v -X DELETE \
 Empty response
 
 ### Revoke a Grant
-{% api_operation delete /api/v1/users/:userId:/grants %}
+{% api_operation delete /api/v1/users/:userId:/grants/:grantsId: %}
 
 Revokes a grant for the specified user
      
@@ -2745,7 +2746,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/:userId:/grants"
+"https://{yourOktaDomain}.com/api/v1/users/:userId:/grants/:grantsId:"
 ~~~  
 
 #### Response Example
@@ -2781,37 +2782,6 @@ curl -v -X DELETE \
 
 Empty response
 
-### Revoke Grants for User and Client
-{% api_operation delete /api/v1/users/:userId:/clients/:clientId:/grants %}
-
-Revokes all grants for the specified user and client
-
-Grants for a different client and the same user won&#8217;t be revoked.
-     
-#### Request Paramters
-{:.api .api-request .api-request-params}
-
-| Parameter | Description      | Parameter Type | DataType | Required |
-|:----------|:-----------------|:---------------|:---------|:---------|
-| userId    | ID of the user   | URL            | String   | TRUE     |
-| clientId  | ID of the client | URL            | String   | TRUE     |
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X DELETE \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/:userId:/grants"
-~~~  
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-Empty response
-
 ## User-Client Grant Reference Operations
 
 {% api_lifecycle beta %}
@@ -2826,7 +2796,6 @@ Each grant references a user and a client.
 Lists all grant references for the specified user
 
 #### Request Parameters
-
 {:.api .api-request .api-request-params}
 
 | Parameter | Description                                     | Parameter Type | DataType | Required |
@@ -2848,6 +2817,37 @@ curl -v -X GET \
 {:.api .api-response .api-response-example}
 
 List of User-Client [Grant References](#client-grant-object)
+
+### Revoke Grants for User and Client
+{% api_operation delete /api/v1/users/:userId:/clients/:clientId:/grants %}
+
+Revokes all grants for the specified user and client
+
+Grants for a different client and the same user won&#8217;t be revoked.
+     
+#### Request Parameters
+{:.api .api-request .api-request-params}
+
+| Parameter | Description      | Parameter Type | DataType | Required |
+|:----------|:-----------------|:---------------|:---------|:---------|
+| userId    | ID of the user   | URL            | String   | TRUE     |
+| clientId  | ID of the client | URL            | String   | TRUE     |
+
+#### Request Example
+{:.api .api-request .api-request-example}
+
+~~~sh
+curl -v -X DELETE \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: SSWS ${api_token}" \
+"https://{yourOktaDomain}.com/api/v1/users/:userId:/clients/:clientId:/grants"
+~~~  
+
+#### Response Example
+{:.api .api-response .api-response-example}
+
+Empty response
 
 ## User Model
 
@@ -3251,9 +3251,6 @@ For an individual User result, the Links Object contains a full set of link rela
   "_links": {
      "grants": {
         "href": "/api/v1/users/:userId/clients/:clientId:/grants"
-     },
-     "tokens": {
-        "href": "/api/v1/users/:userId/clients/:clientId:/tokens"
      }
   }
 }
