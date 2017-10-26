@@ -987,22 +987,25 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 ##### Settings
 {:.api .api-request .api-request-params}
 
-| Parameter          | Description                                                      | DataType                                                                                     | Nullable | Unique | Validation |
-|:-------------------|:-----------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|
-| client_uri         | URL string of a web page providing information about the client  | String                                                                                       | TRUE     | FALSE  | FALSE      |
-| logo_uri           | URL string that references a logo for the client                 | String                                                                                       | TRUE     | FALSE  | FALSE      |
-| application_type   | The type of client application                                   | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE       |
-| redirect_uris      | Array of redirection URI strings for use in redirect-based flows | Array                                                                                        | TRUE     | FALSE  | TRUE       |
-| response_types     | Array of OAuth 2.0 response type strings                         | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |
-| grant_types        | Array of OAuth 2.0 grant type strings                            | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |
-| initiate_login_uri | URL that a third party can use to initiate a login by the client | String                                                                                       | TRUE     | FALSE  | TRUE       |
+| Parameter                               | Description                                                                      | DataType                                                                                     | Nullable | Unique | Validation |
+|:----------------------------------------|:---------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|
+| client_uri                              | URL string of a web page providing information about the client                  | String                                                                                       | TRUE     | FALSE  | FALSE      |
+| logo_uri                                | URL string that references a logo for the client                                 | String                                                                                       | TRUE     | FALSE  | FALSE      |
+| redirect_uris                           | Array of redirection URI strings for use in redirect-based flows                 | Array                                                                                        | TRUE     | FALSE  | TRUE       |
+| response_types                          | Array of OAuth 2.0 response type strings                                         | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |
+| grant_types                             | Array of OAuth 2.0 grant type strings                                            | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |
+| initiate_login_uri                      | URL that a third party can use to initiate a login by the client                 | String                                                                                       | TRUE     | FALSE  | TRUE       |
+| application_type                        | The type of client application                                                   | `web`, `native`, `browser`, or `service`                                                     | TRUE     | FALSE  | TRUE       |
+| tos_uri {% api_lifecycle beta %}        | Client's terms of service document                                               | URL                                                                                          | TRUE     | FALSE  | FALSE      |
+| policy_uri {% api_lifecycle beta %}     | Client's policy document                                                         | URL                                                                                          | TRUE     | FALSE  | FALSE      |
+| consent_method {% api_lifecycle beta %} | Valid values: `REQUIRED` , `TRUSTED`. Read-only: configure in the App Wizard UI. | String                                                                                       | TRUE     | FALSE  | TRUE       |
 
 * At least one redirect URI and response type is required for all client types, with exceptions: if the client uses the
   [Resource Owner Password](https://tools.ietf.org/html/rfc6749#section-4.3) flow (if `grant_types` contains the value `password`)
   or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
   then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
 
-* All redirect URIs must be absolute URIs and must not include a fragment compontent.
+* All redirect URIs must be absolute URIs and must not include a fragment component.
 
 * Different application types have different valid values for the corresponding grant type:
 
@@ -1020,6 +1023,17 @@ Adds an OAuth 2.0 client application. This application is only available to the 
     value that includes `authorization_code` implies a `response_types` value that includes `code`, as both values are defined as part of
     the OAuth 2.0 authorization code grant.
 
+* {% api_lifecycle beta %} A consent dialog is displayed depending on the values of `prompt`, `consent_method`, and `consent`:
+
+    | `prompt` Value    | `consent_method` (Apps Property) | `consent` (Scopes Property) | Result       |
+    |:------------------|:---------------------------------|:----------------------------|:-------------|
+    | `CONSENT`         | `TRUSTED` or `REQUIRED`          | `REQUIRED`                  | Prompted     |
+    | `CONSENT`         | `TRUSTED`                        | `IMPLICIT`                  | Not prompted |
+    | `NONE` or `LOGIN` | `TRUSTED`                        | `REQUIRED` or `IMPLICIT`    | Not prompted |
+    | `NONE` or `LOGIN` | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
+    | `NONE` or `LOGIN` | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this, change the table in /oauth2.md too --> |
+
+
 ##### Request Example
 {:.api .api-request .api-request-example}
 
@@ -1036,8 +1050,9 @@ curl -v -X POST \
     "signOnMode": "OPENID_CONNECT",
     "credentials": {
       "oauthClient": {
-        "autoKeyRotation": true
-        "token_endpoint_auth_method": "client_secret_post",
+        "client_id":"example.client", //Is this correct? Why not an ID of the form 0oa1hm4POxgJM6CPu0g4 ? See response.
+        "autoKeyRotation": true,
+        "token_endpoint_auth_method": "client_secret_post"
       }
     },
     "settings": {
@@ -1058,6 +1073,8 @@ curl -v -X POST \
           "authorization_code"
         ],
         "application_type": "native"
+        "tos_uri":"https://example.com/client/tos",
+        "policy_uri":"https://example.com/client/policy",
       }
     }
     }' "https://{yourOktaDomain}.com/api/v1/apps"
@@ -1133,7 +1150,10 @@ curl -v -X POST \
         "implicit",
         "authorization_code"
       ],
-      "application_type": "native"
+      "application_type": "native",
+      "tos_uri": "https://example.com/client/tos",
+      "policy_uri":"https://example.com/client/policy",
+      "consent_method": "REQUIRED"
     }
   },
   "_links": {
