@@ -1198,7 +1198,7 @@ For example, `search=profile.department eq "Engineering"` is encoded as `search=
 Examples use cURL-style escaping instead of URL encoding to make them easier to read.
 * Queries data from a replicated store, so changes aren&#8217;t always immediately available in search results.
 Don&#8217;t use search results directly for record updates, as the data might be stale and therefore overwrite newer data (data loss).
-Use an Id lookup for records that you update to ensure your results contain the latest data.
+Use an ID lookup for records that you update to ensure your results contain the latest data.
 * Searches many properties:
    - Any user profile property, including custom-defined properties
    - The top-level properties `id`, `status`, `created`, `activated`, `statusChanged` and `lastUpdated`
@@ -1356,7 +1356,7 @@ curl -v -X GET \
 
 > Note: Use the `POST` method to make a partial update and the `PUT` method to delete unspecified properties.
 
-{% api_operation put /api/v1/users/*:id* %}
+{% api_operation put /api/v1/users/*:userId* %}
 
 Updates a user&#8217;s profile and/or credentials using strict-update semantics
 
@@ -1370,7 +1370,7 @@ in the request is deleted.
 
 | Parameter   | Description                 | Param Type | DataType                                  | Required |
 |:------------|:----------------------------|:-----------|:------------------------------------------|:---------|
-| id          | `id` of user to update      | URL        | String                                    | TRUE     |
+| userId      | ID of user to update        | URL        | String                                    | TRUE     |
 | profile     | Updated profile for user    | Body       |   [Profile Object](#profile-object)         | FALSE    |
 | credentials | Update credentials for user | Body       |   [Credentials Object](#credentials-object) | FALSE    |
 
@@ -1384,7 +1384,7 @@ Updated [User](#user-model)
 #### Update Profile
 {:.api .api-operation}
 
-{% api_operation post /api/v1/users/*:id* %}
+{% api_operation post /api/v1/users/*:userId* %}
 
 Updates a user&#8217;s profile or credentials with partial update semantics
 
@@ -1395,7 +1395,7 @@ Updates a user&#8217;s profile or credentials with partial update semantics
 
 | Parameter   | Description                 | Param Type | DataType                                  | Required |
 |:------------|:----------------------------|:-----------|:------------------------------------------|:---------|
-| id          | `id` of user to update      | URL        | String                                    | TRUE     |
+| userId      | ID of user to update        | URL        | String                                    | TRUE     |
 | profile     | Updated profile for user    | Body       |   [Profile Object](#profile-object)         | FALSE    |
 | credentials | Update credentials for user | Body       |   [Credentials Object](#credentials-object) | FALSE    |
 
@@ -1932,7 +1932,7 @@ This operation can only be performed on users that do not have a `DEPROVISIONED`
 
 Parameter | Description  | Param Type | DataType | Required |
 --------- | ------------ | ---------- | -------- | -------- |
-id        | `id` of user | URL        | String   | TRUE     |
+userId    | ID of user   | URL        | String   | TRUE     |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -2383,7 +2383,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/${userId}/sessions"
+"https://{yourOktaDomain}.com/api/v1/users/*:userId*/sessions"
 ~~~
 
 #### Response Example
@@ -2624,17 +2624,17 @@ curl -v -X POST \
 }
 ~~~
 
-## User Grant Operations
+## User-Consent Grant Operations
 
 {% api_lifecycle beta %}
 
-A consent represents a resource owner&#8217;s explicit permission to allow an application to access resources protected by scopes. This is separated from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. 
+A consent represents a user&#8217;s explicit permission to allow an application to access resources protected by scopes. This is separated from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. 
 Consents remain valid until the user manually revokes them, or until the user, application, authorization server or scope is deactivated or deleted.
 
 ### List Grants
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/:userId:/grants %}
+{% api_operation get /api/v1/users/*:userId*/grants %}
 
 Lists all grants for the specified user
 
@@ -2646,9 +2646,11 @@ Lists all grants for the specified user
 | userId    | ID of the user for whom you are fetching grants              | URL        | String   | TRUE     |         |
 | expand    | Valid value: `scope`. Include scope details in the response  | Query      | String   | FALSE    |         |
 | scopeId   | The scope ID to filter on                                    | Query      | String   | FALSE    |         |
-| after     | Specifies the pagination cursor for the next page of grants  | Query      | String   | FALSE    |         |
 | limit     | The maximum number of grants to return                       | Query      | Number   | FALSE    | 20      |
- 
+| after     | Specifies the pagination cursor for the next page of grants  | Query      | String   | FALSE    |         |
+
+> Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles.html#pagination).
+
 #### Request Example
 {:.api .api-request .api-request-example}
 
@@ -2657,7 +2659,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${yourOktaDomain}.com/api/v1/users/${userId}/grants"
+"https://${yourOktaDomain}.com/api/v1/users/*:userId*/grants"
 ~~~
 
 #### Response Example
@@ -2668,9 +2670,9 @@ Array of [Grant Objects](#grant-object)
 ### Get a Grant
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/*:userId*/grants/:grantId: %}
+{% api_operation get /api/v1/users/*:userId*/grants/*:grantId* %}
 
-Fetches a grant for the specified user
+Get a grant for the specified user
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2689,7 +2691,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${yourOktaDomain}.com/api/v1/users/${userId}/grants/${grantId}"
+"https://${yourOktaDomain}.com/api/v1/users/*:userId*/grants/*:grantId*"
 ~~~
 
 #### Response Example
@@ -2697,10 +2699,10 @@ curl -v -X GET \
 
 Single [Grant Object](#grant-object)
 
-### Revoke All Grants
-{% api_operation delete /api/v1/users/:userId:/grants/:grantId: %}
+### Revoke All Grants for a User
+{% api_operation delete /api/v1/users/*:userId*/grants/*:grantId* %}
 
-Revokes all grants for the specified user
+Revokes all grants for a specified user
      
 #### Request Paramters
 {:.api .api-request .api-request-params}
@@ -2717,7 +2719,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/:userId:/grants"
+"https://{yourOktaDomain}.com/api/v1/users/*:userId*/grants"
 ~~~  
 
 #### Response Example
@@ -2725,10 +2727,10 @@ curl -v -X DELETE \
 
 Empty response
 
-### Revoke a Grant
-{% api_operation delete /api/v1/users/:userId:/grants/:grantsId: %}
+### Revoke a Grant for a User
+{% api_operation delete /api/v1/users/*:userId*/grants/*:grantsId* %}
 
-Revokes a grant for the specified user
+Revokes a grant for a specified user
      
 #### Request Paramters
 {:.api .api-request .api-request-params}
@@ -2746,35 +2748,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/:userId:/grants/:grantsId:"
-~~~  
-
-#### Response Example
-{:.api .api-response .api-response-example}
-
-Empty response
-
-### Revoke All Grants
-{% api_operation delete /api/v1/users/:userId:/grants %}
-
-Revokes all grants for the specified user
-     
-#### Request Paramters
-{:.api .api-request .api-request-params}
-
-| Parameter | Description    | Parameter Type | DataType | Required |
-|:----------|:---------------|:---------------|:---------|:---------|
-| userId    | ID of the user | URL            | String   | TRUE     |
-
-#### Request Example
-{:.api .api-request .api-request-example}
-
-~~~sh
-curl -v -X DELETE \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/:userId:/grants"
+"https://{yourOktaDomain}.com/api/v1/users/*:userId*/grants/*:grantsId*"
 ~~~  
 
 #### Response Example
@@ -2791,7 +2765,7 @@ Each grant references a user and a client.
 ### List User-Client Grant References
 {:.api .api-operation}
 
-{% api_operation get /api/v1/users/:userId:/clients %}
+{% api_operation get /api/v1/users/*:userId*/clients %}
 
 Lists all grant references for the specified user
 
@@ -2810,7 +2784,7 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${yourOktaDomain}.com/api/v1/users/${userId}/clients"
+"https://${yourOktaDomain}.com/api/v1/users/*:userId*/clients"
 ~~~
 
 #### Response Example
@@ -2819,11 +2793,9 @@ curl -v -X GET \
 List of User-Client [Grant References](#client-grant-object)
 
 ### Revoke Grants for User and Client
-{% api_operation delete /api/v1/users/:userId:/clients/:clientId:/grants %}
+{% api_operation delete /api/v1/users/*:userId*/clients/*:clientId*/grants %}
 
 Revokes all grants for the specified user and client
-
-Grants for a different client and the same user won&#8217;t be revoked.
      
 #### Request Parameters
 {:.api .api-request .api-request-params}
@@ -2841,7 +2813,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/:userId:/clients/:clientId:/grants"
+"https://{yourOktaDomain}.com/api/v1/users/*:userId*/clients/*:clientId*/grants"
 ~~~  
 
 #### Response Example
@@ -2930,7 +2902,7 @@ The User model defines several read-only properties:
 
 | Property              | Description                                                           | DataType                                                                                                         | Nullable | Unique | Readonly |
 |:----------------------|:----------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------|:---------|:-------|:---------|
-| id                    | unique key for user                                                   | String                                                                                                           | FALSE    | TRUE   | TRUE     |
+| userId                | unique key for user                                                   | String                                                                                                           | FALSE    | TRUE   | TRUE     |
 | status                | current    [status](#user-status) of user                                |`STAGED`, `PROVISIONED`, `ACTIVE`, `RECOVERY`, `LOCKED_OUT`, `PASSWORD_EXPIRED`, `SUSPENDED`, or `DEPROVISIONED`  | FALSE    | FALSE  | TRUE     |
 | created               | timestamp when user was created                                       | Date                                                                                                             | FALSE    | FALSE  | TRUE     |
 | activated             | timestamp when transition to `ACTIVE` status completed                | Date                                                                                                             | FALSE    | FALSE  | TRUE     |
@@ -3224,7 +3196,7 @@ For an individual User result, the Links Object contains a full set of link rela
 }
 ~~~
 
-#### User Grant Properties
+#### User-Consent Grant Properties
 
 | Property    | Description                                                         | Datatype                                                        | Unique |
 |:------------|:--------------------------------------------------------------------|:----------------------------------------------------------------|:-------|
@@ -3233,7 +3205,7 @@ For an individual User result, the Links Object contains a full set of link rela
 | scopeId     | ID of the scope to which this grant applies                         | String                                                          | FALSE  |
 | lastUpdated | Timestamp when the grant was last updated                           | Date                                                            | FALSE  |
 | issuerId    | ID of the authorization server for this grant                       | String                                                          | FALSE  |
-| id          | Unique ID of the  grant                                             | String                                                          | TRUE   |
+| grantId     | Unique ID of the  grant                                             | String                                                          | TRUE   |
 | expiresAt   | Timestamp when the grant expires                                    | Date                                                            | FALSE  |
 | created     | Timestamp when the grant was created                                | Date                                                            | FALSE  |
 | clientId    | ID of the client for this grant                                     | String                                                          | FALSE  |
@@ -3250,7 +3222,7 @@ For an individual User result, the Links Object contains a full set of link rela
   "logo_uri": null,
   "_links": {
      "grants": {
-        "href": "/api/v1/users/:userId/clients/:clientId:/grants"
+        "href": "/api/v1/users/*:userId*/clients/*:clientId*/grants"
      }
   }
 }
