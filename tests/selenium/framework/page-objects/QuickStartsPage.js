@@ -10,7 +10,8 @@ class QuickStartsPage extends BasePage {
     this.$androidLink = element(by.linkText('Android'));
     this.$angularLink = element(by.linkText('Angular'));
     this.$iOSLink = element(by.linkText('iOS'));
-    this.$siwLink = element(by.linkText('Sign-In Widget'));
+    this.$siwLink = element(by.linkText('Okta Sign-In Widget'));
+    this.$reactLink = element(by.linkText('React'));
     this.$hostedLink = element(by.linkText('Okta Sign-In Page'));
     this.$nodeJSLink = element(by.linkText('Node JS'));
     this.$javaLink = element(by.linkText('Java'));
@@ -19,6 +20,7 @@ class QuickStartsPage extends BasePage {
     this.$genericNodeLink = element(by.linkText('Generic Node'));
     this.$expressJSLink = element(by.linkText('Express.js'));   
     this.$genericJavaLink = element(by.linkText('Generic Java'));
+    this.$genericPHPLink = element(by.linkText('Generic PHP'));
     this.$springLink = element(by.linkText('Spring'));
     this.$aspCore = element(by.linkText('ASP.NET Core'));
     this.$aspFour = element(by.linkText('ASP.NET 4.x'));
@@ -48,6 +50,10 @@ class QuickStartsPage extends BasePage {
     return this.$iOSLink.click();
   }
 
+  selectReactClient() {
+    return this.$reactLink.click();
+  }
+
   selectNodeJSServer() {
     return this.$nodeJSLink.click();
   }
@@ -71,6 +77,10 @@ class QuickStartsPage extends BasePage {
   selectGenericJava() {
       return this.$genericJavaLink.click();
   }
+
+  selectGenericPHP() {
+    return this.$genericPHPLink.click();
+}
 
   selectGenericNode() {
       return this.$genericNodeLink.click();

@@ -16,6 +16,7 @@ If you are new to OpenID Connect, read [the standards topic](/standards/OIDC/ind
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fd92d7c1ab0fbfdecab2)
 
+You can also view the video [Getting Started with the Okta API and OpenID Connect](https://www.youtube.com/watch?v=fPW66abobMI).
 
 ## Endpoints
 
@@ -164,7 +165,7 @@ using either of the following methods:
 * Provide the `client_id` and `client_secret`
   as additional parameters to the POST body (`client_secret_post`)
 * Provide `client_id` in a JWT that you sign with the `client_secret`
-  using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request. 
+  using HMAC algorithms HS256, HS384, or HS512. Specify the JWT in `client_assertion` and the type, `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`, in `client_assertion_type` in the request.
 
 Use only one of these methods in a single request or an error will occur.
 
@@ -186,7 +187,7 @@ Parameter Details
 * If `jti` is specified, the token can only be used once. So, for example, subsequent token requests won&#8217;t succeed.
 * The `exp` claim will fail the request if the expiration time is more than one hour in the future or has already expired.
 * If `iat` is specified, then it must be a time before the request is received.
-* 
+
 #### Response Parameters
 
 Based on the type of token and whether it is active or not, the returned JSON contains a different set of information. Besides the claims in the token, the possible top-level members include:
@@ -686,7 +687,7 @@ https://www.example.com/#error=invalid_scope&error_description=The+requested+sco
 
 {% api_operation post /oauth2/v1/token %}
 
-The API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters. 
+The API returns Access Tokens, ID Tokens, and Refresh Tokens, depending on the request parameters.
 
 >Because this endpoint works with the [Okta Authorization Server](/standards/OAuth/index.html#authorization-servers), you don&#8217;t need an authorization server ID.
 
@@ -722,7 +723,7 @@ For more information about token authentication, see [Token Authentication Metho
 #### Response Parameters
 
 Based on the `grant_type` and sometimes `scope`, the response contains different token sets.
-Generally speaking, the scopes specified in a request are included in the Access Tokens in the response. 
+Generally speaking, the scopes specified in a request are included in the Access Tokens in the response.
 
 | Requested grant type | Requested scope                                     | Response tokens                                                   |
 |:---------------------|:----------------------------------------------------|:------------------------------------------------------------------|
@@ -823,5 +824,3 @@ curl -v -X GET \
   post_logout_redirect_uri=${post_logout_redirect_uri}&
   state=${state}
 ~~~
-
-

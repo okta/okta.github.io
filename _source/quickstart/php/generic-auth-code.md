@@ -19,7 +19,7 @@ $query = http_build_query([
     'nonce' => $nonce
 ]);
 
-header('Location: ' . 'https://{yourOktaDomain}}/oauth2/default/v1/authorize?'.$query);
+header('Location: ' . 'https://{yourOktaDomain}/oauth2/default/v1/authorize?'.$query);
 ```
 > The `nonce` should be a generated string such as UUID, and the `state` can be any string representing state of the 
 application.
@@ -41,7 +41,7 @@ if(array_key_exists('code', $_REQUEST)) {
 }
 
 function exchangeCode($code) {
-    $authHeaderSecret = base64_encode( '{{CLIENT_ID}}:{{CLIENT_SECRET}}' );
+    $authHeaderSecret = base64_encode( '{CLIENT_ID}:{CLIENT_SECRET}' );
     $query = http_build_query([
         'grant_type' => 'authorization_code',
         'code' => $code

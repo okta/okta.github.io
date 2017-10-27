@@ -134,6 +134,8 @@ The Okta API currently requires the custom HTTP authentication scheme `SSWS` for
 
 > See [Obtaining a token](getting_a_token.html) for instructions on how to get an API key for your organization.
 
+The API key (API token) isn't interchangeable with an Okta [session token](/docs/api/resources/authn.html#session-token), access tokens or ID tokens used with [OAuth 2.0 and OpenID Connect](/docs/api/resources/oauth2.html).
+
 ## Pagination
 
 Requests that return a list of resources may support paging.  Pagination is based on a cursor and not on page number. The cursor is opaque to the client and specified in either the `before` or `after` query parameter.  For some resources, you can also set a custom page size with the `limit` parameter.
@@ -304,56 +306,36 @@ endpoint.
 
 ### Org-Wide Rate Limits
 
-API rate limits apply to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
-For all endpoints not listed, the API rate limit is a combined 10,000 requests per minute.
+API rate limits apply per minute to the endpoints in an org. The rate applies either to all the endpoints with the same base URL or to an exact URL, as noted in the following table.
 
-<table border="1" style="width: 100%;">
-	<caption>Org-Wide Rate Limits Per Minute</caption>
-	<thead>
-		<tr>
-			<th colspan="1" rowspan="1">Endpoint</th>
-			<th colspan="1" rowspan="1">Limit</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps/<i>{id}</i></span><span style="font-family: verdana,geneva,sans-serif;"> </span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/apps</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">100</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/authn</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups/<i>{id}</i>&nbsp;</span><span style="font-family: arial,helvetica,sans-serif;">(exact URL only)</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/groups</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">500</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/sessions</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">750</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users/<i>{:id}</i></span> (exact URL plus query params or other qualifiers)</td>
-			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/users</span></td>
-			<td colspan="1" rowspan="1" style="text-align: right;">600</td>
-		</tr>
-		<tr>
-			<td colspan="1" rowspan="1"><span style="font-family: courier new,courier,monospace;">/api/v1/</span>&nbsp; (if no other limit specified in this table)</td>
-			<td colspan="1" rowspan="1" style="text-align: right;">1000</td>
-		</tr>
-	</tbody>
-</table>
+| Okta API Endpoint                                                          | Limit |
+|:---------------------------------------------------------------------------|------:|
+| `/api/v1/apps`                                                             |   100 |
+| `/api/v1/apps/{id}` (exact URL only)                                       |   500 |
+| `/api/v1/authn`                                                            |   500 |
+| `/api/v1/groups/{id}` (exact URL only)                                     |  1000 |
+| `/api/v1/groups`                                                           |   500 |
+| `/api/v1/logs`                                                             |    60 |
+| `/api/v1/sessions`                                                         |   750 |
+| `/api/v1/users/{id}` (exact URL plus query params or other qualifiers)     |   600 |
+| `/api/v1/users`                                                            |   600 |
+| `/api/v1/` (if no other `/api/v1` limit specified in this table)           |  1200 |
+| `/oauth2/v1/token`  (per second, not minute)                               |     4 |
+| `/oauth2/v1` (per second, not minute)                                      |    40 |
+
+For all API endpoints not listed in the table above, the API rate limit is a combined 10,000 requests per minute.
+
+End-user endpoints have org-wide rate limits as well:
+
+| Okta End-User Endpoints                  | Limit |
+|:-----------------------------------------|------:|
+| `/app/{app}/{key}/sso/saml`              |   750 |
+| `/app/office365/{key}/sso/wsfed/active`  |  2000 |
+| `/app/office365/{key}/sso/wsfed/passive` |   250 |
+| `/app/template_saml_2_0/{key}/sso/saml`  |  2500 |
+| `/login/do-login`                        |   200 |
+| `/login/login.htm`                       |   850 |
+| `/login/sso_iwa_auth`                    |   500 |
 
 #### Example Rate Limit Header with Org-Wide Rate Limit Error  
 
@@ -542,3 +524,7 @@ In Okta, CORS allows JavaScript hosted on your websites to make an XHR to the Ok
 ### API Support
 
 The Okta API supports CORS on an API by API basis. If you’re building an application that needs CORS, please check that the specific operation supports CORS for your use case. APIs that support CORS are marked with the following icon <span class="api-label api-label-small api-label-cors"><i class="fa fa-cloud-download"></i> CORS</span>.
+
+## Additional Help
+
+In addition to all the information in this portal, you can view developer videos in our [YouTube channel](https://www.youtube.com/watch?v=JBtyGfrz-jA&list=PLIid085fSVdvYrfP6XchcOckCiyPSJN60).
