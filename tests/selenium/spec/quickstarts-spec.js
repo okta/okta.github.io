@@ -67,20 +67,19 @@ describe('quickstarts page spec', () => {
         'Express.js'
       ])).toBe(true);
 
-    // OKTA-146417 - Quickstart does not auto-select any framework when switching server language
-    // quickstartsPage.selectJavaServer();
-    // expect(quickstartsPage.urlContains("/java/spring")).toBe(true);
-    // expect(quickstartsPage.activeLinksContain([
-    //     'Java',
-    //     'Spring'
-    //   ])).toBe(true);
+    quickstartsPage.selectJavaServer();
+    expect(quickstartsPage.urlContains("/java/spring")).toBe(true);
+    expect(quickstartsPage.activeLinksContain([
+        'Java',
+        'Spring'
+      ])).toBe(true);
 
-    // quickstartsPage.selectPHPServer();
-    // expect(quickstartsPage.urlContains("/php/generic")).toBe(true);
-    // expect(quickstartsPage.activeLinksContain([
-    //     'PHP',
-    //     'Generic PHP'
-    //   ])).toBe(true);
+    quickstartsPage.selectPHPServer();
+    expect(quickstartsPage.urlContains("/php/generic")).toBe(true);
+    expect(quickstartsPage.activeLinksContain([
+        'PHP',
+        'Generic PHP'
+      ])).toBe(true);
   });
 
   it('shows & selects specific frameworks for server setup', () => {
