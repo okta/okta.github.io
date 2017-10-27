@@ -90,7 +90,7 @@ The Okta Identity Provider that you created in section 2 above generated an Auth
 * **nonce:** A string included in the returned ID Token. Use it to associate a client session with an ID Token, and to mitigate replay attacks.
 * **redirect_uri:** The location where Okta returns a browser after the user has finished authenticating against their social login provider. This URL must start with “https” and must match one of the Redirect URIs that you configured previously in step 4.6.
 
-For a full explanation of all these parameters, see here: [OAuth 2.0 Request parameters](https://developer.okta.com/docs/api/resources/oauth2.html#request-parameters).
+For a full explanation of all these parameters, see here: [OAuth 2.0 Request parameters](/docs/api/resources/oauth2.html#request-parameters).
 
 An example of a complete URL looks like this: `https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oaaq9pjc2ujmFZexample&client_id=GkGw4K49N4UEE1example&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=https%3A%2F%2FyourAppUrlHere.com%2Fsocial_auth&state=WM6D&nonce=YsG76jo`
 
@@ -110,6 +110,6 @@ After clicking this link, the user will be prompted to sign in with the social p
 
 Okta also offers an easily embeddable JavaScript widget that reproduces the look and behavior of the standard Okta sign-in page. You can find out more about it [on GitHub](https://github.com/okta/okta-signin-widget#okta-sign-in-widget). Implementing login with Google would use the Widget's [OpenID Connect authentication flow](https://github.com/okta/okta-signin-widget#openid-connect).
 
-**Auth.js**
+**AuthJS**
 
 If you don't want pre-built views, or need deeper levels of customization, then you can use the same AuthJS SDK that the Sign-in Widget is built with. For further information see [the AuthJS GitHub repo](https://github.com/okta/okta-auth-js#install). Implementing login with Google would use the SDK's [OpenID Connect authentication flow](https://github.com/okta/okta-auth-js#openid-connect-options).

@@ -42,7 +42,7 @@ Once the Authorization Server is created you can also edit the Signing Key Rotat
 
 ## Create Access Policies
 
-Access policies are containers for rules. Each access policy applies to a particular OAuth 2.0 application, and the rules it contains define different access and refresh token lifetimes depending on the nature of the token request. 
+Access policies are containers for rules. Each access policy applies to a particular OpenID Connect application, and the rules it contains define different access and refresh token lifetimes depending on the nature of the token request. 
 
 1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 2. Choose the name of an Authorization Server.
@@ -51,7 +51,7 @@ Access policies are containers for rules. Each access policy applies to a partic
 4. Provide the requested information:
     * **Name**
     * **Description**
-    * Assign to **All clients**, or select **The following clients:** and enter the name of the Okta OAuth 2.0 applications covered by this access policy. This field will auto-complete the names of your OAuth 2.0 applications as you type.
+    * Assign to **All clients**, or select **The following clients:** and enter the name of the Okta OpenID Connect applications covered by this access policy. This field will auto-complete the names of your OpenID Connect applications as you type.
     {% img access_policy2.png alt:"Access Policy Configuration" width:"640px" %}
 
 While in the Access Policy list, you can:
@@ -192,7 +192,7 @@ For more information you can read about:
 - [The OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm)
 - [How to assign a User to an Application](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning)
 
-You will need the following values from your Okta OAuth 2.0 Application, both of which can be found on your Application's General tab:
+You will need the following values from your Okta OpenID Connect application, both of which can be found on your Application's General tab:
 
 - Client ID
 - A valid Redirect URI

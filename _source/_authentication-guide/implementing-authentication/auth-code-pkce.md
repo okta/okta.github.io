@@ -2,7 +2,7 @@
 layout: docs_page
 title: Authorization Code Flow with PKCE
 weight: 4
-excerpt: How to implement the authorization code flow with PKCE in Okta
+excerpt: How to implement the authorization code flow with PKCE with Okta
 ---
 
 # Implementing the Authorization Code Flow with PKCE
@@ -21,7 +21,7 @@ For more information on the authorization code with PKCE flow, including why to 
 
 ### 1. Setting up your Application
 
-You set up your OAuth 2.0 application inside the Okta Developer Console:
+You set up your OpenID Connect application inside the Okta Developer Console:
 
 1. From the Applications page, choose **Add Application**.
 2. On the Create New Application page, select **Native**.
@@ -53,7 +53,7 @@ If you are using the default Okta authorization server, then your request URL wo
 
 ```
 https://{yourOktaDomain}.com/oauth2/default/v1/authorize?client_id=0oabygpxgk9l
-XaMgF0h7&response_type=code&scope=openid&redirect_uri=http%3A%2F%2Flocalhost&st
+XaMgF0h7&response_type=code&scope=openid&redirect_uri=yourApp%3A%2Fcallback&st
 ate=state-8600b31f-52d1-4dca-987c-386e3d8967e9&code_challenge_method=S256&code_
 challenge=qjrzSW9gMiUgpUvqgEPE4_-8swvyCtfOVvg55o5S_es
 ```
@@ -73,7 +73,7 @@ For more information on these parameters, see [the OAuth 2.0 API reference](/doc
 If the user does not have an existing session, this will open the Okta Sign-in Page. If they have an existing session, or after they authenticate, they will arrive at the specified `redirect_uri` along with an authorization `code`:
 
 ```
-yourApp://callback?code=BdLDvZvO3ZfSwg-asLNk&state=state-8600b31f-52d1-4dca-
+yourApp:/callback?code=BdLDvZvO3ZfSwg-asLNk&state=state-8600b31f-52d1-4dca-
 987c-386e3d8967e9
 ```
 
@@ -90,7 +90,7 @@ curl --request POST \
   --header 'cache-control: no-cache' \
   --header 'content-type: application/x-www-form-urlencoded' \
   --data 'grant_type=authorization_code&client_id=0oabygpxgk9lXaMgF0h7&redirect
-  _uri=http%3A%2F%2Flocalhost&code=CKA9Utz2GkWlsrmnqehz&code_verifier=M25iVXpKU
+  _uri=yourApp%3A%2Fcallback&code=CKA9Utz2GkWlsrmnqehz&code_verifier=M25iVXpKU
   3puUjFaYWg3T1NDTDQtcW1ROUY5YXlwalNoc0hhakxifmZHag'
 ```
 
@@ -103,7 +103,7 @@ Note the parameters that are being passed:
 - `code` is the authorization code that you got from the `/authorize` endpoint.
 - `code_verifier` is the PKCE code verifier that your app generated at the beginning of this flow.
 
-For more information on these parameters, see the [OAuth 2.0 API reference](https://developer.okta.com/docs/api/resources/oauth2.html#request-a-token).
+For more information on these parameters, see the [OAuth 2.0 API reference](/docs/api/resources/oauth2.html#request-a-token).
 
 If the code is still valid, and the code verifier matches, your application will receive back access and ID tokens:
 
@@ -126,6 +126,6 @@ When your application passes a request with an `access_token`, the resource serv
 The following native application examples show the authorization code flow, as it would be implemented by a native application that needs to authenticate a user.  These are complete example applications that show the entire experience.
 
 |                                      | Environment | Example Repository                                 |
-| ------------------------------------ | ----------- | -------------------------------------------------- |
+|:------------------------------------:| ----------- | -------------------------------------------------- |
 | <i class="icon code-android-32"></i> | Android     | <https://github.com/okta/okta-sdk-appauth-android> |
 | <i class="icon code-ios-32"></i>     | iOS         | <https://github.com/okta/okta-sdk-appauth-ios>     |

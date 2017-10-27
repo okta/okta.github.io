@@ -46,7 +46,7 @@ The high-level overview of validating an ID token looks like this:
 
 The JSON Web Key Set (JWKS) needs to be retrieved from your [Okta Authorization Server](/authentication-guide/implementing-authentication/set-up-authz-server), though your application should have it cached. Specifically, your Authorization Server's Metadata endpoint contains the `jwks_uri`, which you can use to get the JWKS. 
 
-> For more information about retrieving this metadata, see [Retrieve Authorization Server Metadata](https://developer.okta.com/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata).
+> For more information about retrieving this metadata, see [Retrieve Authorization Server Metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata).
 
 ### Decode the ID Token
 
@@ -65,7 +65,7 @@ Please note the following:
 - In case of an emergency, Okta can rotate keys as needed.
 - Okta always publishes keys to the `jwks_uri`.
 - To save the network round trip, your app should cache the `jwks_uri` response locally. The [standard HTTP caching headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) are used and should be respected.
-- The administrator can switch the Authorization Server key rotation mode by updating the Authorization Server's `rotationMode` property. For more information see the API Reference: [Authorization Server Credentials Signing Object](https://developer.okta.com/docs/api/resources/oauth2.html#authorization-server-credentials-signing-object).
+- The administrator can switch the Authorization Server key rotation mode by updating the Authorization Server's `rotationMode` property. For more information see the API Reference: [Authorization Server Credentials Signing Object](/docs/api/resources/oauth2.html#authorization-server-credentials-signing-object).
 
 ### Verify the Claims
 
@@ -74,12 +74,12 @@ You should verify the following:
 - The `iss` (issuer) claim matches the identifier of your Okta Authorization Server.
 - The `aud` (audience) claim should match the Client ID that you used to request the ID Token. This will be the Client ID for the Application you created in Okta.
 - The `iat` (issued at time) claim indicates when this ID token was issued, expressed in Unix time.
-- The `exp` (Expiry Time) claim is the time at which this token will expire., expressed in Unix time. You should make sure that this time has not already passed.
+- The `exp` (expiry time) claim is the time at which this token will expire., expressed in Unix time. You should make sure that this time has not already passed.
 - The `nonce` claim value should match whatever was passed when you requested the ID token. 
 
 ## Validating A Token Remotely With Okta
 
-Alternatively, you can also validate an ID Token using the Token Introspection endpoint: [Introspection Request](https://developer.okta.com/docs/api/resources/oidc.html#introspection-request). This endpoint takes your token as a URL query and returns back a JSON response with a boolean `active` property. If `active` is `true` then further information about the token is returned as well. 
+Alternatively, you can also validate an ID Token using the Token Introspection endpoint: [Introspection Request](/docs/api/resources/oidc.html#introspection-request). This endpoint takes your token as a URL query and returns back a JSON response with a boolean `active` property. If `active` is `true` then further information about the token is returned as well. 
 
 This incurs a network request which is slower to do verification, but can be used when you want to guarantee that the access token hasn't been revoked. 
 

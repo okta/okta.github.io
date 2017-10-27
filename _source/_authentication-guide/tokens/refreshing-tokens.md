@@ -13,7 +13,7 @@ A refresh token is a special token that is used to generate additional access to
 
 ## Setting Up Your Application
 
-Refresh tokens are available for a subset of Okta OAuth 2.0 Client Applications, specifically web or native applications. For more about creating an OAuth 2.0 application see [Implementing Authentication](/authentication-guide/implementing-authentication/).
+Refresh tokens are available for a subset of Okta OAuth 2.0 Client Applications, specifically web or native applications. For more about creating an OpenID Connect application see [Implementing Authentication](/authentication-guide/implementing-authentication/).
 
 Once you have an application, you need to make sure that the "Allowed grant types" include "Refresh Token".
 
@@ -45,7 +45,7 @@ The following combinations of grant type and scope, when sent to `/token` endpoi
 This table only shows the minimum requirements. For example, with the `password` grant type you can also include an `openid` scope alongside the `offline_scope`:
 
 ```
-'grant_type=password&redirect_uri=http%3A%2F%2Flocalhost&username=example%40mailinator.com&password=a.gReAt.pasSword&scope=openid%20offline_access'
+'grant_type=password&redirect_uri=http%3A%2F%2Flocalhost%3A8080&username=example%40mailinator.com&password=a.gReAt.pasSword&scope=openid%20offline_access'
 ```
 
 You would then get back an ID token alongside your access and refresh tokens.
@@ -65,14 +65,13 @@ For more information on the `/authorize` endpoint, see the [Authentication Reque
 To refresh your access token, you send a token request with a `grant_type` of `refresh_token`.
 
 ```
-http --form POST https://{yourOktaDomain}.com/oauth2/ausaw8fz3q4Yd3Zk70h7/v1/
-token \
+http --form POST https://{yourOktaDomain}.com/oauth2/default/v1/token \
   accept:application/json \
   authorization:'Basic MG9hYmg3M...' \
   cache-control:no-cache \
   content-type:application/x-www-form-urlencoded \
   grant_type=refresh_token \
-  redirect_uri=http://localhost \
+  redirect_uri=http://localhost:8080 \
   scope=offline_access \
   refresh_token=MIOf-U1zQbyfa3MUfJHhvnUqIut9ClH0xjlDXGJAyqo
 ```

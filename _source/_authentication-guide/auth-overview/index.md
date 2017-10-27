@@ -59,7 +59,7 @@ The usual OAuth 2.0 grant flow looks like this:
 3. If the grant is valid, the authorization server returns an access token, possibly alongside a refresh and/or ID token.
 4. The client now uses that access token to access the resource server.
 
-> For a deeper dive into OAuth 2.0, see [What the Heck is OAuth?](https://developer.okta.com/blog/2017/06/21/what-the-heck-is-oauth) over on the Okta Developer blog.
+> For a deeper dive into OAuth 2.0, see [What the Heck is OAuth?](/blog/2017/06/21/what-the-heck-is-oauth) over on the Okta Developer blog.
 > 
 > If you'd like to see the OAuth 2.0 spec, you can find it here: <https://tools.ietf.org/html/rfc6749>
 

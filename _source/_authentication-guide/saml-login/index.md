@@ -25,7 +25,11 @@ In addition to a SAML IdP that supports SP-initiated SAML, and an Okta org, this
 
 ### 1. Configure your SAML Identity Provider inside Okta
 
-The configuration information for your external Identity Provider is stored within an Identity Provider entity inside Okta. The instructions for creating a SAML IdP inside Okta can be found on the [Configuring Inbound SAML Support Page](https://support.okta.com/help/Documentation/Knowledge_Article/40561903-Configuring-Inbound-SAML).
+The configuration information for your external Identity Provider is stored within an Identity Provider entity inside Okta. You can create a SAML Identity Provider from your Developer Console:
+
+1. Hover over Users in the top navigation bar, then select **Social & Identity Providers**.
+2. Click on **Add Identity Provider** > **Add SAML 2.0 IdP**.
+3. Fill in your SAML Identity Provider's settings here. If you need more information about these values, you can find it in the [Okta Knowledge base](https://support.okta.com/help/Documentation/Knowledge_Article/40561903-Configuring-Inbound-SAML#Part1).
 
 > If you need a quick and easy SAML Identity Provider to use for testing purposes, you can try using this one: <https://github.com/mcguinness/saml-idp>
 
@@ -48,7 +52,7 @@ You will now input these into an Authorize URL in order to kick off the authenti
 
 The authorize URL looks like this:
 
-`https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&client_id=0oab8om4bars6Y80Z0h7&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A7000&state=WM6D&nonce=YsG76j`
+`https://{yourOktaDomain}.com/oauth2/v1/authorize?idp=0oab8rlwfoo5Atqv60h7&client_id=0oab8om4bars6Y80Z0h7&response_type=id_token&response_mode=fragment&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3A8080&state=WM6D&nonce=YsG76j`
 
 In this URL, replace `{yourOktaDomain}.com` with your org's base URL, and then input the following:
 

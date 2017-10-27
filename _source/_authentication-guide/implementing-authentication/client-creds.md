@@ -2,7 +2,7 @@
 layout: docs_page
 title: Client Credentials Flow
 weight: 6
-excerpt: How to implement the client credentials flow in Okta
+excerpt: How to implement the client credentials flow with Okta
 ---
 
 # Implementing the Client Credentials Flow
@@ -14,7 +14,7 @@ The Client Credentials flow is recommended for use in machine-to-machine authent
 
 ### 1. Setting up your Application
 
-You set up your OAuth 2.0 application inside the Okta Developer Console:
+You set up your OpenID Connect application inside the Okta Developer Console:
 
 1. From the Applications page, choose **Add Application**.
 2. On the Create New Application page, select **Service**.
@@ -35,7 +35,7 @@ curl --request POST \
   --header 'authorization: Basic MG9hY...' \
   --header 'cache-control: no-cache' \
   --header 'content-type: application/x-www-form-urlencoded' \
-  --data 'grant_type=client_credentials&redirect_uri=http%3A%2F%2Flocalhost&
+  --data 'grant_type=client_credentials&redirect_uri=http%3A%2F%2Flocalhost%3A8080&
   scope=customScope'
 ```
 

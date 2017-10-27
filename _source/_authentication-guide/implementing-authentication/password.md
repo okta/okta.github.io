@@ -2,7 +2,7 @@
 layout: docs_page
 title: Resource Owner Password Flow
 weight: 5
-excerpt: How to implement the resource owner password flow in Okta
+excerpt: How to implement the resource owner password flow with Okta
 ---
 
 # Implementing the Resource Owner Password Flow
@@ -17,7 +17,7 @@ For more information on the resource owner password flow, including why to use i
 
 ### 1. Setting up your Application
 
-You set up your OAuth 2.0 application inside the Okta Developer Console:
+You set up your OpenID Connect application inside the Okta Developer Console:
 
 1. From the Applications page, choose **Add Application**.
 2. On the Create New Application page, select **Native**.
@@ -41,7 +41,7 @@ curl --request POST \
   rlnU9oZU4qWGrhQSM%3Dyd&scope=openid'
 ```
 
-> Important: The call to the `/token` endpoint requires authentication. In this case, it is a Basic Auth digest of the Client ID and Secret. You can find the client ID and secret in your application's General tab. For more on Basic Auth, please see [Token Authentication Methods](https://developer.okta.com/docs/api/resources/oauth2.html#token-authentication-methods).
+> Important: The call to the `/token` endpoint requires authentication. In this case, it is a Basic Auth digest of the Client ID and Secret. You can find the client ID and secret in your application's General tab. For more on Basic Auth, please see [Token Authentication Methods](/docs/api/resources/oauth2.html#token-authentication-methods).
 
 Note the parameters that are being passed:
 

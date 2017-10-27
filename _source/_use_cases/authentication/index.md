@@ -22,7 +22,7 @@ Okta provides the OAuth 2.0 and OpenID Connect implementations, the Authenticati
 * [Auth SDK](#auth-sdk)
 * [Authentication API](#authentication-api)
 
-### OAuth 2.0, OpenID Connect and Social Login
+### OAuth 2.0, OpenID Connect, and Social Login
 
 Okta allows you to control access to your application using both the OAuth 2.0 and OpenID Connect specifications. You can use Okta as your authorization server to retain all of your user information, and grant users tokens to control their authorization and authentication. Okta also supports using social login and pulling user's external data into your Okta org.
 

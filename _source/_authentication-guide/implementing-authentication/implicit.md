@@ -2,7 +2,7 @@
 layout: docs_page
 title: Implicit Flow
 weight: 3
-excerpt: How to implement the implicit code flow in Okta
+excerpt: How to implement the implicit code flow with Okta
 ---
 
 # Implementing the Implicit Flow
@@ -20,7 +20,7 @@ For more information on the implicit flow, including why to use it, see [our OAu
 
 ### 1. Setting up your Application
 
-You set up your OAuth 2.0 application inside the Okta Developer Console:
+You set up your OpenID Connect application inside the Okta Developer Console:
 
 1. From the Applications page, choose **Add Application**.
 2. On the Create New Application page, select **SPA**.
@@ -34,8 +34,8 @@ Your browser makes a request to your authorization server's `/authorize` endpoin
 
 ```
 https://{yourOktaDomain}.com/oauth2/default/v1/authorize?client_id=0oabv6kx4qq6
-h1U5l0h7&response_type=token&scope=openid&redirect_uri=http%3A%2F%2Flocalhost&
-state=state-296bc9a0-a2a2-4a57-be1a-d0e2fd9bb601&nonce=foo'
+h1U5l0h7&response_type=token&scope=openid&redirect_uri=http%3A%2F%2Flocalhost%3
+A8080&state=state-296bc9a0-a2a2-4a57-be1a-d0e2fd9bb601&nonce=foo'
 ```
 
 Note the parameters that are being passed:
@@ -46,12 +46,12 @@ Note the parameters that are being passed:
 - `redirect_uri` is the callback location where the user-agent will be directed to along with the `access_token`. This must match one of the "Login redirect URIs" you specified when you were creating your Okta application in Step 1.
 - `state` is an arbitrary alphanumeric string that the authorization server will reproduce when redirecting the user-agent back to the client. This is used to help prevent cross-site request forgery.
 
-For more information on these parameters, see [the OAuth 2.0 API reference](https://developer.okta.com/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user).
+For more information on these parameters, see [the OAuth 2.0 API reference](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user).
 
 If the user does not have an existing session, this will open the Okta Sign-in Page. If they have an existing session, or after they authenticate, they will arrive at the specified `redirect_uri` along with a `token` as a hash fragment:
 
 ```
-http://localhost:3000/#access_token=eyJhb[...]erw&token_type=Bearer&expires_in=
+http://localhost:8080/#access_token=eyJhb[...]erw&token_type=Bearer&expires_in=
 3600&scope=openid&state=state-296bc9a0-a2a2-4a57-be1a-d0e2fd9bb601
 ```
 
@@ -66,7 +66,7 @@ When your application passes a request with an `access_token`, the resource serv
 The following quickstart guides will show you how to integrate the implicit flow into your front-end application.
 
 |                                         | Framework         | Quickstart Link                                   |
-| --------------------------------------- | ----------------- | ------------------------------------------------- |
+|:---------------------------------------:| ----------------- | ------------------------------------------------- |
 | <i class="icon code-angular-32"></i>    | Angular           | <https://developer.okta.com/quickstart/#/angular> |
 | <i class="icon code-react-32"></i>      | React             | <https://developer.okta.com/quickstart/#/react>   |
-| <i class="icon code-javascript-32"></i> | None (Vanilla JS) | <https://developer.okta.com/quickstart/#/widget>  |
+| <i class="icon code-javascript-32"></i> | Vanilla JS | <https://developer.okta.com/quickstart/#/widget>  |
