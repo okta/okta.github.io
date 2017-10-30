@@ -184,7 +184,7 @@
 
       server.frameworks.forEach(function (framework) {
         var link = $('<a>', {
-          id: framework.name,
+          id: 'framework-' + framework.name,
           text: framework.label,
           class: framework.active ? 'active' : '',
           click: function () {
@@ -224,7 +224,7 @@
       $('#server_content').html( html );
 
       // Set the framework to active
-      document.getElementById(framework).setAttribute('class', 'active');
+      document.getElementById('framework-' + framework).setAttribute('class', 'active');
     });
   };
 
