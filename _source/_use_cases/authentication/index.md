@@ -4,6 +4,9 @@ weight: 1
 title: Authentication
 excerpt: Overview of the ways Okta can be used to authenticate users depending on your needs.
 ---
+# Demo adding somthing to the docs
+
+This is a platform lab showing how to edit the docs - PLEASE IGNORE
 
 # Authentication with Okta
 
