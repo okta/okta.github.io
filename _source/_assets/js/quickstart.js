@@ -51,13 +51,13 @@
         label: 'Node JS',
         frameworks: [
           {
-            name: 'generic',
-            label: 'Generic Node'
-          },
-          {
             active: true,
             name: 'express',
             label: 'Express.js'
+          },
+          {
+            name: 'generic',
+            label: 'Generic Node'
           }
         ]
       },
@@ -152,6 +152,13 @@
           renderFrameworkLinks(server);
           $(this).addClass('active');
           server.active = true;
+
+          // Sets the first framework to active if one is not set
+          var framework = server.frameworks.filter(function(fwork){
+            return fwork.active == true;
+          })[0] || server.frameworks[0];
+          framework.active = true;
+
           applySelectionTuple(getSelectionTupleFromLinkSate());
         }
       });
@@ -177,6 +184,7 @@
 
       server.frameworks.forEach(function (framework) {
         var link = $('<a>', {
+          id: 'framework-' + framework.name,
           text: framework.label,
           class: framework.active ? 'active' : '',
           click: function () {
@@ -199,7 +207,7 @@
    * Fetches the content for a given selection tuple
    */
   function loadContent(clientName, server, framework) {
-    var client = linkState.clients.filter(function(client) {
+    var client = linkState.clients.filter(function (client) {
       return client.name === clientName;
     })[0];
     var clientContentUrl = clientName + '/default-example.html';
@@ -208,12 +216,15 @@
     $.ajax({
       url: clientContentUrl
     }).done(function( html ) {
-      $( "#client_content" ).html( html );
+      $('#client_content').html(html);
     });
     $.ajax({
       url: serverContentUrl
-    }).done(function( html ) {
-      $( "#server_content" ).html( html );
+    }).done(function (html) {
+      $('#server_content').html( html );
+
+      // Set the framework to active
+      document.getElementById('framework-' + framework).setAttribute('class', 'active');
     });
   };
 
