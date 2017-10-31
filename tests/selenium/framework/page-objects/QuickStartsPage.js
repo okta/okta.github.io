@@ -16,7 +16,7 @@ class QuickStartsPage extends BasePage {
     this.$nodeJSLink = element(by.linkText('Node JS'));
     this.$javaLink = element(by.linkText('Java'));
     this.$phpLink = element(by.linkText('PHP'));
-    this.$doenetLink = element(by.linkText('.NET'));
+    this.$dotnetLink = element(by.linkText('.NET'));
     this.$genericNodeLink = element(by.linkText('Generic Node'));
     this.$expressJSLink = element(by.linkText('Express.js'));   
     this.$genericJavaLink = element(by.linkText('Generic Java'));
@@ -67,34 +67,41 @@ class QuickStartsPage extends BasePage {
   }
 
   selectExpressJS() {
+    this.waitForPresence(this.$expressJSLink);
     return this.$expressJSLink.click();
   }
 
   selectSpring() {
+    this.waitForPresence(this.$springLink);
     return this.$springLink.click();
   }
 
   selectGenericJava() {
-      return this.$genericJavaLink.click();
+    this.waitForPresence(this.$genericJavaLink);
+    return this.$genericJavaLink.click();
   }
 
   selectGenericPHP() {
+    this.waitForPresence(this.$genericPHPLink);
     return this.$genericPHPLink.click();
 }
 
   selectGenericNode() {
-      return this.$genericNodeLink.click();
+    this.waitForPresence(this.$genericNodeLink);
+    return this.$genericNodeLink.click();
   }
 
   selectDotNet() {
-    return this.$doenetLink.click();
+    return this.$dotnetLink.click();
   }
 
   selectDotNetCore() {
+    this.waitForPresence(this.$aspCore);
     return this.$aspCore.click();
   }
 
   selectDotNetFour() {
+    this.waitForPresence(this.$aspFour);
     return this.$aspFour.click();
   }
 
