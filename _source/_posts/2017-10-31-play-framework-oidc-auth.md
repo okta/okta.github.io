@@ -415,6 +415,10 @@ After integrating groups with roles, logging in with a user that belongs to both
 
 {% img blog/play-oidc-pac4j/roles-from-okta.png alt:"Roles from Okta" width:"800" %}{: .center-image }
 
+## Source Code
+
+You can see the full source code for the application developed in this tutorial [on GitHub](https://github.com/oktadeveloper/okta-play-oidc-example). 
+
 ## Have Fun Playing With Play!
 
 I hope you’ve enjoyed this quick tutorial on how to add authentication with OIDC and play-pac4j to your Play application. I was tempted to look at other solutions, and even try Silhouette + Scala, but pac4j made it pretty easy to accomplish my goal. 
