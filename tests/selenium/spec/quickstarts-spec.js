@@ -1,4 +1,5 @@
 const QuickStartsPage = require('../framework/page-objects/QuickStartsPage');
+const util = require('../framework/shared/util');
 
 describe('quickstarts page spec', () => {
   const quickstartsPage = new QuickStartsPage('/quickstart');
@@ -59,7 +60,7 @@ describe('quickstarts page spec', () => {
       ])).toBe(true);
   });
 
-  it('can select all server setups', () => {
+  util.itNoHeadless('can select all server setups', () => {
     quickstartsPage.selectNodeJSServer()
     expect(quickstartsPage.urlContains("/nodejs/express")).toBe(true);
     expect(quickstartsPage.activeLinksContain([
