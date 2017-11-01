@@ -12,5 +12,4 @@ The following guides are aimed at describing ISV integration use cases.  These u
 
 + [Security Analytics](/use_cases/isv/security-analytics.html)
 + [Security Enforcement](/use_cases/isv/security-enforcement.html)
-+ [Embedded MFA](/use_cases/isv/embedded-mfa.html)
 + [Embedded OCC](/use_cases/isv/embedded-occ.html)

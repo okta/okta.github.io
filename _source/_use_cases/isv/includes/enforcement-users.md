@@ -1,5 +1,9 @@
 
-An individual user’s [state](#changeState), [sessions](#changesession), [credentials](#changecreds) and [profile](#changeprofile) can be updated depending on the specific use case.
+An individual user’s
+ [state](./security-enforcement.html#user---change-state),
+ [sessions](./security-enforcement.html#user---clear-sessions),
+ [credentials](./security-enforcement.html#user---credentials) and
+ [profile](./security-enforcement.html#user---profile) can be updated depending on the specific use case.
 
 #### User - Change State
 
@@ -190,7 +194,7 @@ User attributes are:
 
 Even with all this power and flexibility a partial update of a user profile to a known or set of known attributes is a simple operation.
 
-[Update Profile](../../docs/api/resources/users.html#update-profile-1)
+[Update Profile](../../docs/api/resources/users.html#update-profile)
 
 Request
 {:.api .api-request .api-request-example}

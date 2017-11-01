@@ -175,7 +175,7 @@ Response
 
 ##### Groups - Retrieve Apps assigned by a group
 
-Using the logic described online with [List Assigned Applications](../../docs/api/resources/groups.html#list-assigned-applications) you can retrieve a collection of applications that are assigned based on membership of that group. *Hint*: _Use the `group._embedded.stats.appsCount` value discussed [above](#above) to know if *ANY* apps are assigned_
+Using the logic described online with [List Assigned Applications](../../docs/api/resources/groups.html#list-assigned-applications) you can retrieve a collection of applications that are assigned based on membership of that group. *Hint*: _Use the `group._embedded.stats.appsCount` value discussed [above](#groups---retrieve-with-stats-and-app-details) to know if *ANY* apps are assigned_
 
 Request
 {:.api .api-request .api-request-example}
