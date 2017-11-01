@@ -15,7 +15,7 @@ Related articles
 [API Test Client]: ../../docs/api/getting_started/api_test_client.html "test client"
 [Auth Principals]: ../../docs/api/getting_started/design_principles.html#authentication "Authentication"
 [User Agent]: ../../docs/api/getting_started/design_principles.html#user-agent "User-Agent"
-[Pagination]: ../../docs/api/getting_started/design_principles.html#pagination) "Pagination"
+[Pagination]: ../../docs/api/getting_started/design_principles.html#pagination "Pagination"
 [Rate Limiting]: ../../docs/api/getting_started/design_principles.html#rate-limiting "Rate Limiting"
 [System Log API]: ../../docs/api/resources/system_log.html "System Log API"
 [Users API]: ../../docs/api/resources/users.html "Users API"

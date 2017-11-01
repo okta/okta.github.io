@@ -73,7 +73,7 @@ Response
 
 ##### appUsers - Retrieve App and appUser objects for a given user
 
-Using [this Method](../../docs/api/resources/apps.html#list-applications-assigned-to-user), you can make a single call to retrieve a collection of all application objects with an AppUser object -- as shown [above](#linkabove) -- nested within each Application in the _embedded object. This approach will reduce the need to make iterative calls to fully elaborate a user's application footprint.
+Using [this Method](../../docs/api/resources/apps.html#list-applications-assigned-to-user), you can make a single call to retrieve a collection of all application objects with an AppUser object -- as shown [above](#appusers---retrieve-list-of-appusers-for-an-app) -- nested within each Application in the _embedded object. This approach will reduce the need to make iterative calls to fully elaborate a user's application footprint.
 
 Request
 {:.api .api-request .api-request-example}

@@ -215,7 +215,7 @@ Response
 
 ##### Groups - Change Membership
 
-Methods of, and reasons to, manipulate Groups and Group membership are discussed in our “Write back to enforce policy in Okta” [Groups](#wb-groups) section below.
+Methods of, and reasons to, manipulate Groups and Group membership are discussed in our “Write back to enforce policy in Okta” [Groups](./security-enforcement.html#groups) section below.
 
 #### Groups More
 
