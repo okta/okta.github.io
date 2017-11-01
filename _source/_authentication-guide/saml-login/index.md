@@ -2,6 +2,8 @@
 layout: docs_page
 weight: 1
 title: SAML Authentication with OIDC
+redirect_from:
+    - "/docs/how-to/inbound-saml-with-oidc.html"
 ---
 
 # Authenticating Against an External SAML IdP
