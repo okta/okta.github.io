@@ -17,7 +17,7 @@ This guide will walk you through integrating authentication into an Angular appl
 6. [Start your App](#start-your-app)
 
 ## Prerequisites
-If you do not already have a  **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](/signup/).
+If you do not already have a  **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 ## Add an OpenID Connect Client
 * Log into the Okta Developer Dashboard, and **Create New App**

@@ -250,7 +250,7 @@ http --auth user:'kotlin is fun!' PUT localhost:8080/notes/4 text='Remember the 
 http --auth user:'kotlin is fun!' DELETE localhost:8080/notes/4
 ```
 
-Your API works and is locked down, but you still only have one user. Rather than spending time setting up database tables and encrypting passwords, you can use Okta’s APIs to manage, authenticate, and authorize your users securely. To get started with  Okta, [sign up for a  free-forever developer account](/signup/).  
+Your API works and is locked down, but you still only have one user. Rather than spending time setting up database tables and encrypting passwords, you can use Okta’s APIs to manage, authenticate, and authorize your users securely. To get started with  Okta, [sign up for a  free-forever developer account](https://developer.okta.com/signup/).  
 
 ## The Okta Spring Boot Starter
 

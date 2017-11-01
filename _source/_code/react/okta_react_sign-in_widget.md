@@ -17,7 +17,7 @@ This guide will walk you through integrating authentication into a React app wit
 7. [Start Your App](#start-your-app)
 
 ## Prerequisites
-If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](/signup/).
+If you do not already have a **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 ## Add an OpenID Connect Client in Okta
 * Log into the Okta Developer Dashboard, and **Create New App**

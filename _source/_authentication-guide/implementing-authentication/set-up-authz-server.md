@@ -9,7 +9,7 @@ excerpt: How to set up a custom authorization server in Okta
 
 Okta allows you to create multiple custom OAuth 2.0 authorization servers which can be used to protect your own resource servers. Within each authorization server you can define your own OAuth 2.0 scopes, claims, and access policies.
 
-If you have an [Okta Developer Edition](/signup/) account, you already have a custom Authorization Server created for you, called "default". For simple use cases the default Authorization Server should suffice. If your application has requirements, such as additional scopes, customizing rules for when to grant scopes, or you need additional authorization servers with different scopes and claims, then this chapter is for you.
+If you have an [Okta Developer Edition](https://developer.okta.com/signup/) account, you already have a custom Authorization Server created for you, called "default". For simple use cases the default Authorization Server should suffice. If your application has requirements, such as additional scopes, customizing rules for when to grant scopes, or you need additional authorization servers with different scopes and claims, then this chapter is for you.
 
 If you only need one Authorization Server, but you'd like to know more about customizing it, you can skip ahead and find out how to:
 
@@ -23,7 +23,7 @@ If you only need one Authorization Server, but you'd like to know more about cus
 
 ## Create an Authorization Server
 
-> NOTE: If you have an [Okta Developer Edition](/signup/) account, you can skip this step because you already have a custom Authorization Server created for you, called "default". The `{authorizationServerId}` for the default server is `default`.
+> NOTE: If you have an [Okta Developer Edition](https://developer.okta.com/signup/) account, you can skip this step because you already have a custom Authorization Server created for you, called "default". The `{authorizationServerId}` for the default server is `default`.
 
 1. In the Okta Developer Dashboard, navigate to **API > Authorization Servers**.
 {% img okta-admin-auth-server-toolbar-dev alt:"Authorization Server" %}

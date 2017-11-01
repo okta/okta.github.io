@@ -10,7 +10,7 @@ excerpt: Integrate Okta with an Angular application using Auth JS.
 This guide will walk you through integrating authentication and authorization into an Angular application with Okta.
 
 ## Prerequisites
-If you do not already have a  **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](/signup/).
+If you do not already have a  **Developer Edition Account**, you can create one at [https://developer.okta.com/signup/](https://developer.okta.com/signup/).
 
 ### Add an OpenID Connect Client
 * Log into the Okta Developer Dashboard, and **Create New App**
