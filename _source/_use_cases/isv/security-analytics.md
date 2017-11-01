@@ -63,7 +63,7 @@ Engage in joint go-to-market opportunities
 
 ### How do I interact with Okta
 
-Okta has well documented public [API endpoints](../../documentation/). In this document, we will discuss partner integration guidance that builds on that documentation.
+Okta has well documented public [API endpoints], In this document, we will discuss partner integration guidance that builds on that documentation.
 
 ### Common Guidance and Requirements
 
@@ -133,12 +133,12 @@ To protect both parties from wasting resources we have recommended guidelines fo
 
 | Endpoint | User Agent | Page Size | Interval | Delta Polling | Rate Limited | More Resources |
 |:----|:----:|:----:|:----:|:----:|:----:|:----|
-| Logs | Required | 100 | 300 | Yes | Yes *(60/Minute)* | [System Log API] |
-| Users | Required | 200 | 86400 | Yes | Yes | [Users API] |
-| Groups | Required | 1000 | 86400 | Yes | Yes | [Groups API] |
-| Apps | Required | 20 | 86400 | No | Yes | [Apps API] |
-| appUsers | Required | 20 | - | No | Yes | [appUser Object] |
-| appGroups | Required | 20 | - | No | Yes | [appGroup Object] |
+| [Logs](#logs) | Required | 100 | 300 | Yes | Yes *(60/Minute)* | [System Log API] |
+| [Users](#users) | Required | 200 | 86400 | Yes | Yes | [Users API] |
+| [Groups](#groups) | Required | 1000 | 86400 | Yes | Yes | [Groups API] |
+| [Apps](#apps) | Required | 20 | 86400 | No | Yes | [Apps API] |
+| [appUsers](#appusers) | Required | 20 | - | No | Yes | [appUser Object] |
+| [appGroups](#appgroups) | Required | 20 | - | No | Yes | [appGroup Object] |
 
 </div>
 

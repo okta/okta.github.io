@@ -23,3 +23,5 @@ Related articles
 [Apps API]: ../../docs/api/resources/apps.html "Apps API"
 [appUser Object]: ../../docs/api/resources/apps.html#application-user-model "App User Object"
 [appGroup Object]: ../../docs/api/resources/apps.html#application-group-model "App Group Object"
+[API endpoints]: ../../documentation/index.html "API Endpoints"
+[SCIM Standards]: ../../standards/SCIM/index.html "SCIM Standards"

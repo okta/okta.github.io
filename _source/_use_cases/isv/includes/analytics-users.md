@@ -18,7 +18,7 @@ The page size (`limit` _parameter_) should be a configurable value with a range 
 
 The interval of ongoing polling should be configurable. Frequent polling of user objects is generally discouraged and only warranted with strict stipulations described below. While user objects and associated profiles are volatile they are not fluid.  Consider the cost/benefit associated with queries you perform.
 
-If your goal is to populate and synchronize an external system with Okta identities a SCIM integration might be warranted. Please review our online resource for [more information](../../standards/SCIM).
+If your goal is to populate and synchronize an external system with Okta identities a SCIM integration might be warranted. Please review our [SCIM Standards] documentation resource for more information.
 
 When using the API to sync user data with an external system keep in mind the desired outcome of the integration and perform delta queries using the most appropriate date filter, or query the Logs API to watch for user authentication, lifecycle and profile events.
 
