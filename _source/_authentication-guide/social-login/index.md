@@ -2,6 +2,8 @@
 layout: docs_page
 weight: 1
 title: Social Login Overview
+redirect_from:
+    - "/docs/api/resources/social_authentication.html"
 ---
 
 # Social Login
