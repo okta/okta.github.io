@@ -540,4 +540,4 @@ More user profile attributes are available for matching as an {% api_lifecycle e
 
 ## Error Codes
 
-See the [OpenID Connect and Okta Social Authentication](/reference/error_codes/index#openid-connect-and-okta-social-authentication) section of the [Error Codes](/docs/api/getting_started/error_codes.html) API documentation.
+See the [OpenID Connect and Okta Social Authentication](/reference/error_codes/index.html#openid-connect-and-okta-social-authentication) section of the [Error Codes](/docs/api/getting_started/error_codes.html) API documentation.
