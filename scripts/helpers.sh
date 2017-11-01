@@ -125,6 +125,18 @@ function check_for_localhost_links() {
     fi
 }
 
+# Verify for occurences of 'index' contain .html
+function check_index_links() {
+    local dir=$(pwd)/_source
+    local links=$(grep -EoR "index#"  --include="*.md" $dir --exclude={README.md,package.json} | sort | uniq )
+    if [ "$links" ];
+    then
+        echo $links
+        echo "A link contains index without the filetype!"
+        return 1
+    fi
+}
+
 # Check for broken markdown headers
 function header_checker() {
     local dir=$(pwd)

@@ -64,6 +64,7 @@ collections:
     output: true
   code:
     output: true
+    parmalink: /:collection/:path:output_ext
   use_cases:
     output: true
   authentication-guide:

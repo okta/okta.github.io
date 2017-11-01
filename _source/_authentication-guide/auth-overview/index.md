@@ -67,7 +67,7 @@ At the core of both OAuth 2.0 and its OpenID Connect extension is the authorizat
 and its own signing key for tokens in order to keep proper boundary between security domains. In the context of this guide, Okta is your authorization server.
 
 The authorization server also acts as an OpenID Connect Provider,
-which means you can request [ID tokens](/standards/OIDC/index#id-token)
+which means you can request [ID tokens](/standards/OIDC/index.html#id-token)
 in addition to [access tokens](/standards/OAuth/#access-token) from the authorization server endpoints.
 
 ### OpenID Connect

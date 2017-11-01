@@ -10,7 +10,7 @@ Okta supports authentication with an external SAML Identity Provider (IdP) that 
 
 The SAML flow is initiated with the Service Provider (SP), in this case Okta, who then redirects you to the IdP for authentication. On successful authentication, a user is created inside Okta, and you are redirected back to the URL you specified along with an ID token. 
 
-For more high-level information, you can read about [Understanding SP-initiated Login Flow](/standards/SAML/index#understanding-sp-initiated-login-flow).
+For more high-level information, you can read about [Understanding SP-initiated Login Flow](/standards/SAML/index.html#understanding-sp-initiated-login-flow).
 
 ## Set-up
 
