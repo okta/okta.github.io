@@ -23,7 +23,7 @@ A high-level overview of OpenID Connect can be found [here](/authentication-guid
 
 The ID tokens are in JSON Web Token (JWT) format, the specification for which can be found here: <https://tools.ietf.org/html/rfc7519>. They are signed using private JSON Web Keys (JWK), the specification for which you can find here: <https://tools.ietf.org/html/rfc7517>.
 
-More information about Okta's ID tokens can be found here: <https://developer.okta.com/standards/OIDC/index#id-token>
+More information about Okta's ID tokens can be found here: <https://developer.okta.com/standards/OIDC/index.html#id-token>
 
 ## ID Tokens vs Access Tokens
 

@@ -110,7 +110,7 @@ Clients should always [validate ID Tokens](/docs/api/resources/oidc.html#validat
 
 The ID Tokens returned by the authentication endpoint (implicit flow) or the Token endpoint (authorization code flow)
 are identical, except that in the implicit flow, the *nonce* parameter is required (and hence must have been included
-in the request), and the *at_hash* parameter is required if the response includes [an Access Token](/standards/OAuth/index#access-token) but prohibited if the
+in the request), and the *at_hash* parameter is required if the response includes [an Access Token](/standards/OAuth/index.html#access-token) but prohibited if the
 response does not include an Access Token.
 
 The ID Token (*id_token*) consists of three period-separated, base64URL-encoded JSON segments: [a header](#id-token-header), [the payload](#id-token-payload), and [the signature](#id-token-signature).

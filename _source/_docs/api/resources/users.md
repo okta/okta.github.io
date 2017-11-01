@@ -33,13 +33,14 @@ Creates a new user in your Okta organization with or without credentials
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-| Parameter   | Description                                                                       | Param Type | DataType                                  | Required | Default |
-|:------------|:----------------------------------------------------------------------------------|:-----------|:------------------------------------------|:---------|:--------|
-| activate    | Executes     [activation lifecycle](#activate-user) operation when creating the user  | Query      | Boolean                                   | FALSE    | TRUE    |
-| provider    | Indicates whether to create a user with a specified authentication provider       | Query      | Boolean                                   | FALSE    | FALSE   |
-| profile     | Profile properties for user                                                       | Body       |     [Profile Object](#profile-object)         | TRUE     |         |
-| credentials | Credentials for user                                                              | Body       |     [Credentials Object](#credentials-object) | FALSE    |         |
-| groupIds    | Ids of groups that user will be immediately added to at time of creation          | Body       | Array of Group Ids                        | FALSE    |         |
+| Parameter   | Description                                                                                                                                                         | Param Type | DataType                                   | Required | Default |
+|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------|:-------------------------------------------|:---------|:--------|
+| activate    | Executes       [activation lifecycle](#activate-user) operation when creating the user                                                                                    | Query      | Boolean                                    | FALSE    | TRUE    |
+| provider    | Indicates whether to create a user with a specified authentication provider                                                                                         | Query      | Boolean                                    | FALSE    | FALSE   |
+| profile     | Profile properties for user                                                                                                                                         | Body       |       [Profile Object](#profile-object)         | TRUE     |         |
+| credentials | Credentials for user                                                                                                                                                | Body       |       [Credentials Object](#credentials-object) | FALSE    |         |
+| groupIds    | Ids of groups that user will be immediately added to at time of creation                                                                                            | Body       | Array of Group Ids                         | FALSE    |         |
+| nextLogin   | With `activate=true`, if `nextLogin=changePassword`, a user is created, activated, and the password is set to `EXPIRED`, so user must change it the next time they log in. | Query      | String                                     | FALSE    | FALSE   |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -64,7 +65,7 @@ The user is emailed a one-time activation token if activated without a password.
 |       X        |    X     |          FALSE           |   `STAGED`    |                        |                |
 |       X        |    X     |           TRUE           |   `ACTIVE`    |        Password        |                |
 
-Creating users with `FEDERATION` or `SOCIAL` provider will be either `ACTIVE` or `STAGED` based on the `activate` query parameter since they do not support a `password` or `recovery_question` credential.
+Creating users with a `FEDERATION` or `SOCIAL` provider sets the user status to either `ACTIVE` or `STAGED` based on the `activate` query parameter since these two providers don't support a `password` or `recovery_question` credential.
 
 #### Create User without Credentials
 {:.api .api-operation}
