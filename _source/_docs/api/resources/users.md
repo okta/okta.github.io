@@ -2383,7 +2383,7 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/*:userId*/sessions"
+"https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/sessions"
 ~~~
 
 #### Response Example
@@ -2628,11 +2628,15 @@ curl -v -X POST \
 
 {% api_lifecycle beta %}
 
-A consent represents a user&#8217;s explicit permission to allow an application to access resources protected by scopes. This is separated from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. 
+A consent represents a user&#8217;s explicit permission to allow an application to access resources protected by scopes. Consents are different from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. 
 Consents remain valid until the user manually revokes them, or until the user, application, authorization server or scope is deactivated or deleted.
+
+>Hint: For all grant operations, you can substitute `me` for the `userId` to specify the user who already has a session in this org.
 
 ### List Grants
 {:.api .api-operation}
+
+{% api_lifecycle beta %}
 
 {% api_operation get /api/v1/users/*:userId*/grants %}
 
@@ -2659,29 +2663,77 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${yourOktaDomain}.com/api/v1/users/*:userId*/grants"
+"https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/grants"
 ~~~
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Array of [Grant Objects](#grant-object)
+~~~sh
+[
+    {
+        "id": "oag3ih1zrm1cBFOiq0h6",
+        "status": "ACTIVE",
+        "created": "2017-10-30T22:06:53.000Z",
+        "lastUpdated": "2017-10-30T22:06:53.000Z",
+        "issuerId": "ausain6z9zIedDCxB0h7",
+        "clientId": "0oabskvc6442nkvQO0h7",
+        "userId": "00u5t60iloOHN9pBi0h7",
+        "scopeId": "scpCmCCV1DpxVkCaye2X",
+        "_links": {
+            "revoke": {
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6",
+                "hints": {
+                    "allow": [
+                        "DELETE"
+                    ]
+                }
+            },
+            "app": {
+                "href": "https://{yourOktaDomain}.com/api/v1/apps/0oabskvc6442nkvQO0h7",
+                "title": "My App"
+            },
+            "scope": {
+                "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/scopes/scpCmCCV1DpxVkCaye2X",
+                "title": "My phone"
+            },
+            "client": {
+                "href": "https://{yourOktaDomain}.com/oauth2/v1/clients/0oabskvc6442nkvQO0h7",
+                "title": "My App"
+            },
+            "issuer": {
+                "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
+                "title": "My Custom Authorization Server"
+            },
+            "self": {
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6"
+            },
+            "user": {
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7",
+                "title": "SAML Jackson"
+            }
+        }
+    }
+]
+~~~
 
 ### Get a Grant
 {:.api .api-operation}
 
+{% api_lifecycle beta %}
+
 {% api_operation get /api/v1/users/*:userId*/grants/*:grantId* %}
 
-Get a grant for the specified user
+Gets a grant for the specified user
 
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-| Parameter | Description                                                  | Param Type | DataType | Required |
-|:----------|:-------------------------------------------------------------|:-----------|:---------|:---------|
-| userId    | ID of the user to whom the grant belongs                     | URL        | String   | TRUE     |
-| grantId   | ID of the grant being fetched                                | Query      | String   | TRUE     |
-| expand    | Valid value: `scope`. Include scope details in the response  | Query      | String   | FALSE    |
+| Parameter | Description                                                                                  | Param Type | DataType | Required |
+|:----------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|
+| userId    | ID of the user to whom the grant belongs                                                     | URL        | String   | TRUE     |
+| grantId   | ID of the grant being fetched                                                                | Query      | String   | TRUE     |
+| expand    | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |
  
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -2691,25 +2743,73 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${yourOktaDomain}.com/api/v1/users/*:userId*/grants/*:grantId*"
+"https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6"
 ~~~
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Single [Grant Object](#grant-object)
+~~~sh
+{
+    "id": "oag3ih1zrm1cBFOiq0h6",
+    "status": "ACTIVE",
+    "created": "2017-10-30T22:06:53.000Z",
+    "lastUpdated": "2017-10-30T22:06:53.000Z",
+    "issuerId": "ausain6z9zIedDCxB0h7",
+    "clientId": "0oabskvc6442nkvQO0h7",
+    "userId": "00u5t60iloOHN9pBi0h7",
+    "scopeId": "scpCmCCV1DpxVkCaye2X",
+    "_links": {
+        "revoke": {
+            "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6",
+            "hints": {
+                "allow": [
+                    "DELETE"
+                ]
+            }
+        },
+        "app": {
+            "href": "https://{yourOktaDomain}.com/api/v1/apps/0oabskvc6442nkvQO0h7",
+            "title": "My App"
+        },
+        "scope": {
+            "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7/scopes/scpCmCCV1DpxVkCaye2X",
+            "title": "My phone"
+        },
+        "client": {
+            "href": "https://{yourOktaDomain}.com/oauth2/v1/clients/0oabskvc6442nkvQO0h7",
+            "title": "My App"
+        },
+        "issuer": {
+            "href": "https://{yourOktaDomain}.com/api/v1/authorizationServers/ausain6z9zIedDCxB0h7",
+            "title": "My Custom Authorization Server"
+        },
+        "self": {
+            "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/grants/oag3ih1zrm1cBFOiq0h6"
+        },
+        "user": {
+            "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7",
+            "title": "SAML Jackson"
+        }
+    }
+}
+~~~
 
 ### Revoke All Grants for a User
-{% api_operation delete /api/v1/users/*:userId*/grants/*:grantId* %}
+{:.api .api-operation}
+
+{% api_lifecycle beta %}
+
+{% api_operation delete /api/v1/users/*:userId*/grants %}
 
 Revokes all grants for a specified user
      
 #### Request Paramters
 {:.api .api-request .api-request-params}
 
-| Parameter | Description    | Parameter Type | DataType | Required |
-|:----------|:---------------|:---------------|:---------|:---------|
-| userId    | ID of the user | URL            | String   | TRUE     |
+| Parameter | Description                                 | Parameter Type | DataType | Required |
+|:----------|:--------------------------------------------|:---------------|:---------|:---------|
+| userId    | ID of the user whose grant is being revoked | URL            | String   | TRUE     |
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -2719,26 +2819,32 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/*:userId*/grants"
+"https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/grants"
 ~~~  
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Empty response
+~~~sh
+HTTP/1.1 204 No Content
+~~~
 
 ### Revoke a Grant for a User
-{% api_operation delete /api/v1/users/*:userId*/grants/*:grantsId* %}
+{:.api .api-operation}
 
-Revokes a grant for a specified user
+{% api_lifecycle beta %}
+
+{% api_operation delete /api/v1/users/*:userId*/grants/*:grantId* %}
+
+Revokes one grant for a specified user
      
 #### Request Paramters
 {:.api .api-request .api-request-params}
 
-| Parameter | Description     | Parameter Type | DataType | Required |
-|:----------|:----------------|:---------------|:---------|:---------|
-| userId    | ID of the user  | URL            | String   | TRUE     |
-| grantId   | ID of the grant | URL            | String   | TRUE     |
+| Parameter | Description                                 | Parameter Type | DataType | Required |
+|:----------|:--------------------------------------------|:---------------|:---------|:---------|
+| userId    | ID of the user whose grant is being revoked | URL            | String   | TRUE     |
+| grantId   | ID of the grant being revoked               | URL            | String   | TRUE     |
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -2748,13 +2854,15 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/*:userId*/grants/*:grantsId*"
+"https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/grants/oag3ih1zrm1cBFOiq0h6"
 ~~~  
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Empty response
+~~~sh
+HTTP/1.1 204 No Content
+~~~
 
 ## User-Client Grant Reference Operations
 
@@ -2765,6 +2873,8 @@ Each grant references a user and a client.
 ### List User-Client Grant References
 {:.api .api-operation}
 
+{% api_lifecycle beta %}
+
 {% api_operation get /api/v1/users/*:userId*/clients %}
 
 Lists all grant references for the specified user
@@ -2774,7 +2884,7 @@ Lists all grant references for the specified user
 
 | Parameter | Description                                     | Parameter Type | DataType | Required |
 |:----------|:------------------------------------------------|:---------------|:---------|:---------|
-| userId    | ID of the user for whom you are fetching grants | URL            | String   | TRUE     |
+| userId    | ID of the user whose grants you are listing     | URL            | String   | TRUE     |
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -2784,15 +2894,33 @@ curl -v -X GET \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://${yourOktaDomain}.com/api/v1/users/*:userId*/clients"
+"https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients"
 ~~~
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-List of User-Client [Grant References](#client-grant-object)
+~~~sh
+[
+    {
+        "client_id": "0oabskvc6442nkvQO0h7",
+        "client_name": "My App",
+        "client_uri": null,
+        "logo_uri": null,
+        "_links": {
+            "grants": {
+                "href": "https://{yourOktaDomain}.com/api/v1/users/00u5t60iloOHN9pBi0h7/clients/0oabskvc6442nkvQO0h7/grants"
+            }
+        }
+    }
+]
+~~~
 
 ### Revoke Grants for User and Client
+{:.api .api-operation}
+
+{% api_lifecycle beta %}
+
 {% api_operation delete /api/v1/users/*:userId*/clients/*:clientId*/grants %}
 
 Revokes all grants for the specified user and client
@@ -2800,10 +2928,10 @@ Revokes all grants for the specified user and client
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-| Parameter | Description      | Parameter Type | DataType | Required |
-|:----------|:-----------------|:---------------|:---------|:---------|
-| userId    | ID of the user   | URL            | String   | TRUE     |
-| clientId  | ID of the client | URL            | String   | TRUE     |
+| Parameter | Description                                                            | Parameter Type | DataType | Required |
+|:----------|:-----------------------------------------------------------------------|:---------------|:---------|:---------|
+| userId    | ID of the user whose grants are being revoked for the specified client | URL            | String   | TRUE     |
+| clientId  | ID of the client who was granted consent by the specified user         | URL            | String   | TRUE     |
 
 #### Request Example
 {:.api .api-request .api-request-example}
@@ -2813,13 +2941,15 @@ curl -v -X DELETE \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/*:userId*/clients/*:clientId*/grants"
+"https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oabskvc6442nkvQO0h7/grants"
 ~~~  
 
 #### Response Example
 {:.api .api-response .api-response-example}
 
-Empty response
+~~~sh
+HTTP/1.1 204 No Content
+~~~
 
 ## User Model
 
@@ -3140,7 +3270,9 @@ For an individual User result, the Links Object contains a full set of link rela
 | changePassword         |   [Changes a user&#8217;s password](#change-password) validating the user&#8217;s current password                                                      |
 | changeRecoveryQuestion |   [Changes a user&#8217;s recovery credential](#change-recovery-question) by validating the user&#8217;s current password                               |
 
-### Grant Object
+### User-Consent Grant Object
+
+{% api_lifecycle beta %}
 
 ~~~sh
 {
@@ -3148,7 +3280,6 @@ For an individual User result, the Links Object contains a full set of link rela
   "status": "ACTIVE | REVOKED | EXPIRED",
   "created": "2015-02-02T10:33:09.000Z",
   "lastUpdated": "2016-01-15T20:29:01.000Z",
-  "expiresAt": "2016-04-06T10:56:49.000Z",
   "issuerId": "aus5m9r1o4AsDJLe50g4"
   "clientId": "6VhquoHCadPxffhBeUwk",
   "userId": "00ulwodIu7wCfdiVR0g3",
@@ -3170,7 +3301,7 @@ For an individual User result, the Links Object contains a full set of link rela
     },
     "scope": {
       "href": "/api/v1/authorizationServer/aus5m9r1o4AsDJLe50g4/scopes/scpt7adLYakbLiwLp0g3",
-      "title": "Grants ability to read stuff"
+      "title": "Grants ability to execute API read requests"
     },
     "revoke": {
       "href": "/api/v1/users/00ulwodIu7wCfdiVR0g3/grants/00T196qTp3LIMZQ0L0g3",
@@ -3200,19 +3331,20 @@ For an individual User result, the Links Object contains a full set of link rela
 
 | Property    | Description                                                         | Datatype                                                        | Unique |
 |:------------|:--------------------------------------------------------------------|:----------------------------------------------------------------|:-------|
-| userId      | ID of the user who owns this grant                                  | String                                                          | FALSE  |
+| Id          | ID of this grant                                                    | String                                                          | TRUE   |
 | status      | Status of the grant. Valid values: `ACTIVE`, `REVOKED` or `EXPIRED` | String                                                          | FALSE  |
-| scopeId     | ID of the scope to which this grant applies                         | String                                                          | FALSE  |
+| created     | Timestamp when the grant was created                                | Date                                                            | FALSE  |
 | lastUpdated | Timestamp when the grant was last updated                           | Date                                                            | FALSE  |
 | issuerId    | ID of the authorization server for this grant                       | String                                                          | FALSE  |
-| grantId     | Unique ID of the  grant                                             | String                                                          | TRUE   |
-| expiresAt   | Timestamp when the grant expires                                    | Date                                                            | FALSE  |
-| created     | Timestamp when the grant was created                                | Date                                                            | FALSE  |
 | clientId    | ID of the client for this grant                                     | String                                                          | FALSE  |
+| userId      | ID of the user who consented to this grant                          | String                                                          | FALSE  |
+| scopeId     | ID of the scope to which this grant applies                         | String                                                          | FALSE  |
 | _links      | Discoverable resources related to the grant                         |     [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | FALSE  |
 | _embedded   | Embedded scope resource related to the grant                        |     [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | FALSE  |
 
 ### Client Grant Object
+
+{% api_lifecycle beta %}
 
 ~~~sh
 {
@@ -3222,7 +3354,13 @@ For an individual User result, the Links Object contains a full set of link rela
   "logo_uri": null,
   "_links": {
      "grants": {
-        "href": "/api/v1/users/*:userId*/clients/*:clientId*/grants"
+        "href": "/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oab57tu2q6C0rYwM0h7/grants"
+        "hints": {
+            "allow": [
+                "GET",
+                "DELETE"
+            ]
+        }
      }
   }
 }
