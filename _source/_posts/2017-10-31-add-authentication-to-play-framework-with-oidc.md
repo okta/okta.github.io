@@ -378,7 +378,7 @@ You might notice (in the bottom right corner) that roles are set to `ROLE_ADMIN`
 
 ## Mapping Okta Groups to Roles
 
-You can create groups and include them as claims. For example, create a `ROLE_ADMIN` and `ROLE_USER` group ((**Users** > **Groups** > **Add Group**) and add users to them. You can use the account you signed up with, or create a new user (**Users** > **Add Person**).
+You can create groups and include them as claims. For example, create a `ROLE_ADMIN` and `ROLE_USER` group (**Users** > **Groups** > **Add Group**) and add users to them. You can use the account you signed up with, or create a new user (**Users** > **Add Person**).
 
 Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the `default` one. Click the **Claims** tab and **Add Claim**. Name it "groups" or "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
 
