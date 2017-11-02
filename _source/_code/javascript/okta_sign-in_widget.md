@@ -431,4 +431,4 @@ You can find more information about the Widget on the [Okta Sign-In Widget Refer
 
 If you'd like to see the code that powers the Widget, you can [find it on GitHub](https://github.com/okta/okta-signin-widget).
 
-[widget-reference]: https://github.com/okta/okta-signin-widget
+[widget-reference]: https://github.com/okta/okta-signin-widget#okta-sign-in-widget
