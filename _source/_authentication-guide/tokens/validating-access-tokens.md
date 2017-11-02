@@ -65,9 +65,9 @@ Please note the following:
 - To save the network round trip, your app should cache the `jwks_uri` response locally. The [standard HTTP caching headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) are used and should be respected.
 - The administrator can switch the Authorization Server key rotation mode by updating the Authorization Server's `rotationMode` property. For more information see the API Reference: [Authorization Server Credentials Signing Object](/docs/api/resources/oauth2.html#authorization-server-credentials-signing-object).
 
-> NOTE: Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app might fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
+> Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app might fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
 
-> NOTE: If your application cannot retrieve keys dynamically, the administrator can disable the automatic key rotation in the administration UI, [generate a key credential](/docs/api/resources/apps.html#generate-new-application-key-credential) and [update the application](/docs/api/resources/apps.html#update-key-credential-for-application) to use it for signing.
+> If your application cannot retrieve keys dynamically, the administrator can disable the automatic key rotation in the administration UI, [generate a key credential](/docs/api/resources/apps.html#generate-new-application-key-credential) and [update the application](/docs/api/resources/apps.html#update-key-credential-for-application) to use it for signing.
 
 ### Verify the Claims
 
