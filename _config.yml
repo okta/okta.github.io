@@ -64,8 +64,12 @@ collections:
     output: true
   code:
     output: true
+    parmalink: /:collection/:path:output_ext
   use_cases:
     output: true
+  authentication-guide:
+    output: true
+    permalink: /:collection/:path:output_ext
   reference:
     output: true
   3rd_party_notices:
@@ -99,7 +103,7 @@ defaults:
 # Okta Library versions
 versions:
   jwt_validator_java: 0.2.0
-  spring_security_starter: 0.1.0
+  spring_boot_starter: 0.2.0
   okta_signin_widget: 2.1.0
 
 signup_error_email_address: "BD-ISV@okta.com"

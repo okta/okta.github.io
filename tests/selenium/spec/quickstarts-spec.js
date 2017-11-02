@@ -1,15 +1,16 @@
 const QuickStartsPage = require('../framework/page-objects/QuickStartsPage');
+const util = require('../framework/shared/util');
 
 describe('quickstarts page spec', () => {
   const quickstartsPage = new QuickStartsPage('/quickstart');
 
   beforeEach(() => {
+    quickstartsPage.resizeMedium();
     return quickstartsPage.load();
   });
 
   it('has okta-sign-in-page + nodejs express selected by default', () => {
     expect(quickstartsPage.urlContains("/okta-sign-in-page/nodejs/express")).toBe(true);
-
     expect(quickstartsPage.activeLinksContain([
         'Okta Sign-In Page',
         'Node JS',
@@ -17,13 +18,13 @@ describe('quickstarts page spec', () => {
       ])).toBe(true);
   });
 
-  xit('can select all client setups', () => {
-    quickstartsPage.selectAndroid();
-    expect(quickstartsPage.urlContains("/android")).toBe(true);
+  it('can select all client setups', () => {
+    quickstartsPage.selectSignInWidget();
+    expect(quickstartsPage.urlContains("/widget")).toBe(true);
     expect(quickstartsPage.activeLinksContain([
-        'Android',
+        'Okta Sign-In Widget',
         'Node JS',
-        'Generic Node'
+        'Express.js'
       ])).toBe(true);
 
     quickstartsPage.selectAngularClient();
@@ -31,7 +32,23 @@ describe('quickstarts page spec', () => {
     expect(quickstartsPage.activeLinksContain([
         'Angular',
         'Node JS',
-        'Generic Node'
+        'Express.js'
+      ])).toBe(true);
+
+    quickstartsPage.selectReactClient();
+    expect(quickstartsPage.urlContains("/react")).toBe(true);
+    expect(quickstartsPage.activeLinksContain([
+      'React',
+      'Node JS',
+      'Express.js'
+    ])).toBe(true);
+
+    quickstartsPage.selectAndroid();
+    expect(quickstartsPage.urlContains("/android")).toBe(true);
+    expect(quickstartsPage.activeLinksContain([
+        'Android',
+        'Node JS',
+        'Express.js'
       ])).toBe(true);
 
     quickstartsPage.selectiOSClient();
@@ -39,32 +56,23 @@ describe('quickstarts page spec', () => {
     expect(quickstartsPage.activeLinksContain([
         'iOS',
         'Node JS',
-        'Generic Node'
-      ])).toBe(true);
-
-    quickstartsPage.selectSignInWidget();
-    expect(quickstartsPage.urlContains("/widget")).toBe(true);
-    expect(quickstartsPage.activeLinksContain([
-        'Sign-In Widget',
-        'Node JS',
-        'Generic Node'
+        'Express.js'
       ])).toBe(true);
   });
 
-  // OKTA-141828 - Disable failing test
-  xit('can select all server setups', () => {
+  util.itNoHeadless('can select all server setups', () => {
     quickstartsPage.selectNodeJSServer()
-    expect(quickstartsPage.urlContains("/nodejs/generic")).toBe(true);
+    expect(quickstartsPage.urlContains("/nodejs/express")).toBe(true);
     expect(quickstartsPage.activeLinksContain([
         'Node JS',
-        'Generic Node'
+        'Express.js'
       ])).toBe(true);
 
     quickstartsPage.selectJavaServer();
-    expect(quickstartsPage.urlContains("/java/generic")).toBe(true);
+    expect(quickstartsPage.urlContains("/java/spring")).toBe(true);
     expect(quickstartsPage.activeLinksContain([
         'Java',
-        'Generic Java'
+        'Spring'
       ])).toBe(true);
 
     quickstartsPage.selectPHPServer();
@@ -75,8 +83,7 @@ describe('quickstarts page spec', () => {
       ])).toBe(true);
   });
 
-  // OKTA-141828 - Disable failing test
-  xit('shows & selects specific frameworks for server setup', () => {
+  it('shows & selects specific frameworks for server setup', () => {
     quickstartsPage.selectNodeJSServer();
     expect(quickstartsPage.frameworkLinksContain([
         'Generic Node',
@@ -105,10 +112,24 @@ describe('quickstarts page spec', () => {
     expect(quickstartsPage.frameworkLinksContain([
         'Generic PHP',
         ])).toBe(true);
+
+    quickstartsPage.selectGenericPHP();
+    expect(quickstartsPage.urlContains("/php/generic")).toBe(true);
+
+    quickstartsPage.selectDotNet();
+    expect(quickstartsPage.frameworkLinksContain([
+      'ASP.NET Core',
+      'ASP.NET 4.x'
+    ])).toBe(true);
+
+    quickstartsPage.selectDotNetCore();
+    expect(quickstartsPage.urlContains("/dotnet/aspnetcore")).toBe(true);
+
+    quickstartsPage.selectDotNetFour();
+    expect(quickstartsPage.urlContains("/dotnet/aspnet4")).toBe(true);
   });
 
-  // OKTA-141828 - Disable failing test
-  xit('retains the combination selected on refresh', () => {
+  it('retains the combination selected on refresh', () => {
     quickstartsPage.selectJavaServer();
     expect(quickstartsPage.frameworkLinksContain([
         'Generic Java',
@@ -122,5 +143,4 @@ describe('quickstarts page spec', () => {
         'Spring'
     ])).toBe(true);
   });
-
 });

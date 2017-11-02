@@ -2,7 +2,7 @@ const NavPage = require('../framework/page-objects/NavPage');
 const util = require('../framework/shared/util');
 
 describe('page layout and browser size spec', () => {
-  const navPage = new NavPage();
+  const navPage = new NavPage('/test_page');
 
   beforeEach(() => {
     navPage.load();

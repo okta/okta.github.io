@@ -8,6 +8,12 @@ then
     exit 1;
 fi
 
+if ! check_index_links ;
+then
+    echo "Failed index href check. Please use the proper file type"
+    exit 1;
+fi
+
 if ! header_checker ;
 then
     echo "Failed header checker!"

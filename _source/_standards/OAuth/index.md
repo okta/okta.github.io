@@ -252,41 +252,7 @@ A custom claim can be configured in the following ways:
 
 ## Validating Access Tokens
 
-Okta uses public key cryptography to sign tokens and verify that they are valid.
-
-The resource server must validate the Access Token before allowing the client to access protected resources.
-
-Access Tokens are sensitive and can be misused if intercepted. Transmit them only over HTTPS and only via POST data or within request headers. If you store them on your application, you must store them securely.
-
-An Access Token must be validated in the following manner:
-
-1. Verify that the `iss` (issuer) claim matches the identifier of your Authorization Server.
-2. Verify that the `aud` (audience) claim is the value configured in the Authorization Server.
-3. Verify `cid` (client id) claim is your client id.
-4. Verify the signature of the Access Token according to [JWS](https://tools.ietf.org/html/rfc7515) using the algorithm specified in the JWT *alg* header property. Use the public keys provided by Okta via the [Get Keys endpoint](/docs/api/resources/oauth2.html#get-keys).
-5. Verify that the expiry time (from the `exp` claim) has not already passed.
-
-Step 4 involves downloading the public JWKS from Okta (specified by the *jwks_uri* property in the [Authorization Server metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata). The result of this call is a [JSON Web Key](https://tools.ietf.org/html/rfc7517) set.
-
-Each public key is identified by a *kid* attribute, which corresponds with the *kid* claim in the [Access Token header](/docs/api/resources/oauth2.html#token-authentication-methods).
-
-The Access Token is signed by an RSA private key, and we publish the future signing key well in advance.
-However, in an emergency situation you can still stay in sync with Okta&#8217;s key rotation. Have your application check the `kid`, and if it has changed and the key is missing from the local cache, check the `jwks_uri` value in the [Authorization Server metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-metadata) and you can go back to the [jwks uri](/docs/api/resources/oauth2.html#get-keys) to get keys again from Okta
-
-Please note the following:
-
-* For security purposes, Okta automatically rotates keys used to sign the token.
-* The current key rotation schedule is four times a year. This schedule can change without notice.
-* In case of an emergency, Okta can rotate keys as needed.
-* Okta always publishes keys to the JWKS.
-* To save the network round trip, your app can cache the JWKS response locally. The standard HTTP caching headers are used and should be respected.
-* The administrator can switch the Authorization Server key rotation mode to `MANUAL` by [updating the Authorization Server](/docs/api/resources/oauth2.html#update-authorization-server) and then control when to [rotate the keys](/docs/api/resources/oauth2.html#rotate-authorization-server-keys).
-
-Keys used to sign tokens automatically rotate and should always be resolved dynamically against the published JWKS. Your app can fail if you hardcode public keys in your applications. Be sure to include key rollover in your implementation.
-
-### Alternative Validation
-
-You can use an [introspection endpoint](/docs/api/resources/oauth2.html#introspection-request) for validation.
+For more information on validating access tokens, see our [Authentication Guide](/authentication-guide/tokens/validating-access-tokens).
 
 ## Refresh Token
 

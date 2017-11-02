@@ -22,7 +22,7 @@ export GENERATED_SITE_LOCATION="dist"
 # 5. Run Lint checker
 npm run post-build-lint
 
-if ! url_consistency_check || ! duplicate_slug_in_url || ! check_for_localhost_links ; then
+if ! url_consistency_check || ! duplicate_slug_in_url || ! check_for_localhost_links || ! check_index_links; then
   echo "FAILED LINT CHECK!"
   exit 1;
 fi
