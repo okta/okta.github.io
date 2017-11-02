@@ -1,14 +1,11 @@
 (function($) {    
   $(function() {
-    // Once the page is loaded, find the hidden iframe element
-    // and make a postMessage request
-
-    var iframe = $('<iframe id="myOktaIFrame" src="https://login.okta.com/discovery/iframe.html" style="display:none"></iframe>').get(0);
+    var iframe = $('<iframe id="myOktaIFrame" src="https://login.okta.com/discovery/iframe.html" style="display:none"></iframe>');
 
     $('body').append(iframe);
 
     $('#myOktaIFrame').load(function() {
-      iframe.contentWindow.postMessage({messageType: 'get_accounts_json'}, 'https://login.okta.com');
+      iframe.get(0).contentWindow.postMessage({messageType: 'get_accounts_json'}, 'https://login.okta.com');
     });
     window.addEventListener('message', receiveMessage, false);
   });
