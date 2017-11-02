@@ -1,6 +1,6 @@
 (function($) {    
   $(function() {
-    var iframe = $('<iframe id="myOktaIFrame" src="https://login.okta.com/discovery/iframe.html" style="display:none"></iframe>');
+    var iframe = $('<iframe id="myOktaIFrame" src="https://login.okta.com" style="display:none"></iframe>');
 
     $('body').append(iframe);
 
