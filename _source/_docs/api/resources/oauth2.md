@@ -94,7 +94,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
  * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
      * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
      * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
-     * `consent`, a property on [scopes](/docs/api/resources/apps.html#scopes-properties)
+     * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
  
      | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
      |:------------------|:---------------------------------|:----------------------------|:-------------|
@@ -2272,7 +2272,7 @@ Token limits:
 * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
     * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
-    * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
+    * `consent`, a property on scopes as listed in the table above
 
     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
     |:------------------|:---------------------------------|:----------------------------|:-------------|
