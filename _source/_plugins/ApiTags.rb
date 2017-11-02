@@ -58,12 +58,15 @@ module Okta
       '<div class="beta">' + converter.convert(super) + "</div>"
     end
   end
-end
 
+  Jekyll::Hooks.register [:pages, :posts], :post_render do |pages|
+    # Replaces all occurences of 'yourOktaDomain' with a searchable span
+    pages.output = pages.output.gsub(/https:\/\/{yourOktaDomain}.com/, '<span class="okta-preview-domain">https://{yourOktaDomain}.com</span>')
+  end
+
+end
 
 Liquid::Template.register_tag('api_lifecycle', Okta::ApiLifecycleTag)
 Liquid::Template.register_tag('api_operation', Okta::ApiUriTag)
 Liquid::Template.register_tag('api_cors', Okta::CorsTag)
 Liquid::Template.register_tag('beta', Okta::BetaBlock)
-
-
