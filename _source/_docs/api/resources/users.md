@@ -2628,8 +2628,8 @@ curl -v -X POST \
 
 {% api_lifecycle beta %}
 
-A consent represents a user&#8217;s explicit permission to allow an application to access resources protected by scopes. Consents are different from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. 
-Consents remain valid until the user manually revokes them, or until the user, application, authorization server or scope is deactivated or deleted.
+A consent represents a user&#8217;s explicit permission to allow an application to access resources protected by scopes. Consent grants are different from tokens because a consent can outlast a token, and there can be multiple tokens with varying sets of scopes derived from a single consent. When an application comes back and needs to get a new access token, it may not need to prompt the user for consent if they have already consented to the specified scopes. 
+Consent grants remain valid until the user manually revokes them, or until the user, application, authorization server or scope is deactivated or deleted.
 
 >Hint: For all grant operations, you can substitute `me` for the `userId` to specify the user who already has a session in this org.
 
@@ -2645,13 +2645,13 @@ Lists all grants for the specified user
 #### Request Parameters
 {:.api .api-request .api-request-params}
 
-| Parameter | Description                                                  | Param Type | DataType | Required | Default |
-|:----------|:-------------------------------------------------------------|:-----------|:---------|:---------|:--------|
-| userId    | ID of the user for whom you are fetching grants              | URL        | String   | TRUE     |         |
-| expand    | Valid value: `scope`. Include scope details in the response  | Query      | String   | FALSE    |         |
-| scopeId   | The scope ID to filter on                                    | Query      | String   | FALSE    |         |
-| limit     | The maximum number of grants to return                       | Query      | Number   | FALSE    | 20      |
-| after     | Specifies the pagination cursor for the next page of grants  | Query      | String   | FALSE    |         |
+| Parameter | Description                                                                                  | Param Type | DataType | Required | Default |
+|:----------|:---------------------------------------------------------------------------------------------|:-----------|:---------|:---------|:--------|
+| userId    | ID of the user for whom you are fetching grants                                              | URL        | String   | TRUE     |         |
+| expand    | Valid value: `scope`. If specified, scope details are included in the `_embedded` attribute. | Query      | String   | FALSE    |         |
+| scopeId   | The scope ID to filter on                                                                    | Query      | String   | FALSE    |         |
+| limit     | The maximum number of grants to return                                                       | Query      | Number   | FALSE    | 20      |
+| after     | Specifies the pagination cursor for the next page of grants                                  | Query      | String   | FALSE    |         |
 
 > Note: The after cursor should treated as an opaque value and obtained through [the next link relation](/docs/api/getting_started/design_principles.html#pagination).
 
@@ -3043,8 +3043,8 @@ The User model defines several read-only properties:
 | transitioningToStatus | target status of an in-progress asynchronous status transition        | `PROVISIONED`, `ACTIVE`, or `DEPROVISIONED`                                                                      | TRUE     | FALSE  | TRUE     |
 | profile               | user profile properties                                               |    [Profile Object](#profile-object)                                                                                | FALSE    | FALSE  | FALSE    |
 | credentials           | user&#8217;s primary authentication and recovery credentials          |    [Credentials Object](#credentials-object)                                                                        | FALSE    | FALSE  | FALSE    |
-| _embedded             | embedded resources related to the user                                |    [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                                   | TRUE     | FALSE  | TRUE     |
 | _links                |    [link relations](#links-object) for the user&#8217;s current `status` |    [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                                    | TRUE     | FALSE  | TRUE     |
+| _embedded             | embedded resources related to the user                                |    [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                                   | TRUE     | FALSE  | TRUE     |
 
 {% beta %}
 
@@ -3276,71 +3276,71 @@ For an individual User result, the Links Object contains a full set of link rela
 
 ~~~sh
 {
-  "id": "00T196qTp3LIMZQ0L0g3",
-  "status": "ACTIVE | REVOKED | EXPIRED",
-  "created": "2015-02-02T10:33:09.000Z",
-  "lastUpdated": "2016-01-15T20:29:01.000Z",
-  "issuerId": "aus5m9r1o4AsDJLe50g4"
-  "clientId": "6VhquoHCadPxffhBeUwk",
-  "userId": "00ulwodIu7wCfdiVR0g3",
-  "scopeId": "scpt7adLYakbLiwLp0g3",
-  "_embedded": {
-    "scope": {
-      "name": "api:read",
-      "displayName": "Ability to read protected data",
-      "description": "This scope will give the application the ability to read protected data"
+    “id”: “oag2n8HU1vTmvCdQ50g3",
+    “status”: “ACTIVE”,
+    “created”: “2017-11-07T21:46:36.000Z”,
+    “lastUpdated”: “2017-11-07T21:46:36.000Z”,
+    “issuerId”: “ausoxdmNlCV4Rw9Ec0g3",
+    “clientId”: “customClientIdNative”,
+    “userId”: “00uol9oQZaWN47WQZ0g3",
+    “scopeId”: “scpp4bmzfCV7dHf8y0g3",
+    “_embedded”: {
+        “scope”: {
+            “name”: “bus:drive”,
+            “displayName”: “test”,
+            “description”: “Drive bus”
+        }
+    },
+    “_links”: {
+        “app”: {
+            “href”: “http://rain.okta1.com:1802/api/v1/apps/0oaozwn7Qlfx0wl280g3“,
+            “title”: “Native client”
+        },
+        “scope”: {
+            “href”: “http://rain.okta1.com:1802/api/v1/authorizationServers/ausoxdmNlCV4Rw9Ec0g3/scopes/scpp4bmzfCV7dHf8y0g3”,
+            “title”: “test”
+        },
+        “self”: {
+            “href”: “http://rain.okta1.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3"
+        },
+        “revoke”: {
+            “href”: “http://rain.okta1.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3”,
+            “hints”: {
+                “allow”: [
+                    “DELETE”
+                ]
+            }
+        },
+        “client”: {
+            “href”: “http://rain.okta1.com:1802/oauth2/v1/clients/customClientIdNative”,
+            “title”: “Native client”
+        },
+        “user”: {
+            “href”: “http://rain.okta1.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
+            “title”: “Add-Min O’Cloudy”
+        },
+        “issuer”: {
+            “href”: “http://rain.okta1.com:1802/api/v1/authorizationServers/default”,
+            “title”: “default”
+        }
     }
-  }
-  "_links": {
-    "self": {
-      "href": "/api/v1/users/00ulwodIu7wCfdiVR0g3/grants/00T196qTp3LIMZQ0L0g3"
-    },
-    "issuer": {
-      "href": "/api/v1/authorizationServers/aus5m9r1o4AsDJLe50g4",
-      "title": "My Resource Domain"
-    },
-    "scope": {
-      "href": "/api/v1/authorizationServer/aus5m9r1o4AsDJLe50g4/scopes/scpt7adLYakbLiwLp0g3",
-      "title": "Grants ability to execute API read requests"
-    },
-    "revoke": {
-      "href": "/api/v1/users/00ulwodIu7wCfdiVR0g3/grants/00T196qTp3LIMZQ0L0g3",
-      "hints": {
-        "allow": [
-          "DELETE"
-        ]
-      }
-    },
-    "client": {
-      "href": "/oauth2/v1/clients/6VhquoHCadPxffhBeUwk",
-      "title": "OIDC SPA"
-    },
-    "app": {
-      "href": "/api/v1/apps/0oacjvo4fvLvHPnGn0g4",
-      "title": "OIDC SPA"
-    },
-    "user": {
-      "href": "/api/v1/users/00ulwodIu7wCfdiVR0g3",
-      "title": "Saml Jackson"
-    }
-  }
 }
 ~~~
 
 #### User-Consent Grant Properties
 
-| Property    | Description                                                         | Datatype                                                        | Unique |
-|:------------|:--------------------------------------------------------------------|:----------------------------------------------------------------|:-------|
-| Id          | ID of this grant                                                    | String                                                          | TRUE   |
-| status      | Status of the grant. Valid values: `ACTIVE`, `REVOKED` or `EXPIRED` | String                                                          | FALSE  |
-| created     | Timestamp when the grant was created                                | Date                                                            | FALSE  |
-| lastUpdated | Timestamp when the grant was last updated                           | Date                                                            | FALSE  |
-| issuerId    | ID of the authorization server for this grant                       | String                                                          | FALSE  |
-| clientId    | ID of the client for this grant                                     | String                                                          | FALSE  |
-| userId      | ID of the user who consented to this grant                          | String                                                          | FALSE  |
-| scopeId     | ID of the scope to which this grant applies                         | String                                                          | FALSE  |
-| _links      | Discoverable resources related to the grant                         |     [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | FALSE  |
-| _embedded   | Embedded scope resource related to the grant                        |     [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)  | FALSE  |
+| Property    | Description                                                         | Datatype                                                        |
+|:------------|:--------------------------------------------------------------------|:----------------------------------------------------------------|
+| Id          | ID of this grant                                                    | String                                                          |
+| status      | Status of the grant. Valid values: `ACTIVE`, `REVOKED` or `EXPIRED` | String                                                          |
+| created     | Timestamp when the grant was created                                | Date                                                            |
+| lastUpdated | Timestamp when the grant was last updated                           | Date                                                            |
+| issuerId    | ID of the authorization server for this grant                       | String                                                          |
+| clientId    | ID of the client for this grant                                     | String                                                          |
+| userId      | ID of the user who consented to this grant                          | String                                                          |
+| scopeId     | ID of the scope to which this grant applies                         | String                                                          |
+| _links      | Discoverable resources related to the grant                         |      [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |
+| _embedded   | Information about the scope specified by `scopeId`                  |      [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |
 
 ### Client Grant Object
 
@@ -3351,10 +3351,10 @@ For an individual User result, the Links Object contains a full set of link rela
   "client_id": "0oab57tu2q6C0rYwM0h7",
   "client_name": "AWS Cognito",
   "client_uri": null,
-  "logo_uri": null,
+  "logo_uri": “https://pbs.twimg.com/profile_images/1612291889/_Logo_2.0_400x400.jpg“,
   "_links": {
      "grants": {
-        "href": "/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oab57tu2q6C0rYwM0h7/grants"
+        "href": "http://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oab57tu2q6C0rYwM0h7/grants"
         "hints": {
             "allow": [
                 "GET",
