@@ -30,7 +30,7 @@ endpoint is listed in your authorization server dashboard and looks like
 Once you have your .well-known URL, have your application make a request to this endpoint and `json_decode` the results.
 
 ```php
-$keys = json_decode(file_get_contents('https://{yourOktaDomain}/oauth2/{authorizationServerId}/v1/keys'));
+$keys = json_decode(file_get_contents('https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/keys'));
 ```
 
 This will return a JSON object of any keys. Typically, this will return a single key entry, but can return a set of keys. 
