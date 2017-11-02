@@ -990,7 +990,7 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 | Parameter                                 | Description                                                                                 | DataType                                                                                     | Nullable | Unique | Validation | Default   |
 |:------------------------------------------|:--------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|:---------|:-------|:-----------|:----------|
 | client_uri                                | URL string of a web page providing information about the client                             | String                                                                                       | TRUE     | FALSE  | FALSE      |           |
-| logo_uri                                  | URL string that references a logo for the client                                            | String                                                                                       | TRUE     | FALSE  | FALSE      |           |
+| logo_uri                                  | URL string that references a logo for the client                                            | URL                                                                                          | TRUE     | FALSE  | FALSE      |           |
 | redirect_uris                             | Array of redirection URI strings for use in redirect-based flows                            | Array                                                                                        | TRUE     | FALSE  | TRUE       |           |
 | response_types                            | Array of OAuth 2.0 response type strings                                                    | Array of `code`, `token`, `id_token`                                                         | TRUE     | FALSE  | TRUE       |           |
 | grant_types                               | Array of OAuth 2.0 grant type strings                                                       | Array of `authorization_code`, `implicit`, `password`, `refresh_token`, `client_credentials` | FALSE    | FALSE  | TRUE       |           |
@@ -1025,8 +1025,8 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 
 * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
-    * `consent_method`, a property (listed in the Settings table above) that is set in the Okta user interface
-    * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties) that is set in the Okta user interface
+    * `consent_method`, a property listed in the Settings table above
+    * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
 
     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
     |:------------------|:---------------------------------|:----------------------------|:-------------|

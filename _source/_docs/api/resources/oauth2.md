@@ -92,18 +92,19 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
     Since *code_challenge_method* only supports S256, this means that the value for *code_challenge* must be: `BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))`. According to the [PKCE spec](https://tools.ietf.org/html/rfc7636), the *code_verifier* must be at least 43 characters and no more than 128 characters.
  
  * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
-     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html##obtain-an-authorization-grant-from-a-user) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html).
-     * `consent_method`, a property on apps that is set in the Okta user interface.
-     * `consent`, a property on scopes that is set in the Okta user interface.
+     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
+     * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
+     * `consent`, a property on [scopes](/docs/api/resources/apps.html#scopes-properties)
  
-     | `prompt` Value    | `consent_method` (Apps Property) | `consent` (Scopes Property) | Result       |
+     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
      |:------------------|:---------------------------------|:----------------------------|:-------------|
      | `CONSENT`         | `TRUSTED` or `REQUIRED`          | `REQUIRED`                  | Prompted     |
      | `CONSENT`         | `TRUSTED`                        | `IMPLICIT`                  | Not prompted |
      | `NONE`            | `TRUSTED`                        | `REQUIRED` or `IMPLICIT`    | Not prompted |
-     | `NONE'            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
-     | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this, change the other table in this topic and the table in /apps.md too. Add 'LOGIN` to last three rows when we support it. --> 
-
+     | `NONE`            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
+     | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this, change the table in /oauth2.md too. Add 'LOGIN' to first three rows when supported -->
+ 
+ > {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
 
 ##### postMessage() Data Model
 
@@ -2268,11 +2269,10 @@ Token limits:
 | displayName {% api_lifecycle beta %} | Name of the end user displayed in a consent dialog                                                | String  |            | FALSE                         |
 | consent {% api_lifecycle beta %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`. | Enum    | `IMPLICIT` | FALSE                         |
 
-{% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
-
-* `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html)
-* `consent_method`, a property on apps that is set in the Okta user interface.
-* `consent`, a property on scopes that is set in the Okta user interface.
+* {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
+    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
+    * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
+    * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
 
     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
     |:------------------|:---------------------------------|:----------------------------|:-------------|
@@ -2280,7 +2280,9 @@ Token limits:
     | `CONSENT`         | `TRUSTED`                        | `IMPLICIT`                  | Not prompted |
     | `NONE`            | `TRUSTED`                        | `REQUIRED` or `IMPLICIT`    | Not prompted |
     | `NONE`            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
-    | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this table, change the table in /apps.md too. Also, may add LOGIN to last three rows when supported. --> 
+    | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this, change the table in /oauth2.md too. Add 'LOGIN' to first three rows when supported -->
+
+> {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
 
 #### Claims Object
 
