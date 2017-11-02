@@ -49,7 +49,7 @@ Adds a new client application to your organization.
 
 The created [OAuth Client](#client-application-model).
 
-> {% api_lifecycle beta %} Note: Registering a client with this API sets the `consent_method` to `REQUIRED`. Thus, a consent dialog is displayed during authentication whenever scopes that require consent are requested.
+> {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -600,7 +600,7 @@ Property Details
   or [Client Credentials](https://tools.ietf.org/html/rfc6749#section-4.4) flow (if `grant_types` contains the value `client_credentials`)
   then no redirect URI or response type is necessary. In these cases you can pass either null or an empty array for these attributes.
 
-* All redirect URIs must be absolute URIs and must not include a fragment compontent.
+* All redirect URIs must be absolute URIs and must not include a fragment component.
 
 * Different application types have different valid values for the corresponding grant type:
 

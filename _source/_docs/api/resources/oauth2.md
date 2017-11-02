@@ -92,7 +92,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
     Since *code_challenge_method* only supports S256, this means that the value for *code_challenge* must be: `BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))`. According to the [PKCE spec](https://tools.ietf.org/html/rfc7636), the *code_verifier* must be at least 43 characters and no more than 128 characters.
  
  * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
-     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](docs/api/resources/oauth2.html) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html).
+     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html##obtain-an-authorization-grant-from-a-user) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html).
      * `consent_method`, a property on apps that is set in the Okta user interface.
      * `consent`, a property on scopes that is set in the Okta user interface.
  
@@ -229,7 +229,7 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.     [JWT Details](#token-authentication-methods)                                                                                                                                                                                     | String |
 | client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the     [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.                                                                                  | String |
 
-{% api_lifecycle beta %} Note: Use the grant type `password` with scopes that require consent only if [the `consent_method`](docs/api/resources/apps.html#settings-7) for the client is `TRUSTED`. 
+{% api_lifecycle beta %} Note: Use the grant type `password` with scopes that require consent only if [the `consent_method`](/docs/api/resources/apps.html#settings-7) for the client is `TRUSTED`. 
 Requests for scopes that require consent using the `password` grant type receive a `consent_required` error response if `consent_method` is `REQUIRED`.
 
 ##### Refresh Tokens for Web and Native Applications
@@ -2258,27 +2258,29 @@ Token limits:
 
 ##### Scopes Properties
 
-| Parameter                            | Description                                                                                             | Type    | Required for create or update |
-|:-------------------------------------|:--------------------------------------------------------------------------------------------------------|:--------|:------------------------------|
-| id                                   | ID of the scope                                                                                         | String  | FALSE                         |
-| name                                 | Name of the scope                                                                                       | String  | TRUE                          |
-| description                          | Description of the scope                                                                                | String  | FALSE                         |
-| system                               | Whether Okta created the scope                                                                          | Boolean | FALSE                         |
-| default                              | Whether the scope is a default scope                                                                    | Boolean | FALSE                         |
-| displayName {% api_lifecycle beta %} | Name of the end user displayed in a consent dialog                                                      | String  | FALSE                         |
-| consent {% api_lifecycle beta %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`.       | Enum    | FALSE                         |
+| Parameter                            | Description                                                                                       | Type    | Default    | Required for create or update |
+|:-------------------------------------|:--------------------------------------------------------------------------------------------------|:--------|:-----------|:------------------------------|
+| id                                   | ID of the scope                                                                                   | String  |            | FALSE                         |
+| name                                 | Name of the scope                                                                                 | String  |            | TRUE                          |
+| description                          | Description of the scope                                                                          | String  |            | FALSE                         |
+| system                               | Whether Okta created the scope                                                                    | Boolean |            | FALSE                         |
+| default                              | Whether the scope is a default scope                                                              | Boolean |            | FALSE                         |
+| displayName {% api_lifecycle beta %} | Name of the end user displayed in a consent dialog                                                | String  |            | FALSE                         |
+| consent {% api_lifecycle beta %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`. | Enum    | `IMPLICIT` | FALSE                         |
 
-{% api_lifecycle beta %} A consent dialog is displayed when the end user signs in depending on the values of `prompt`, `consent_method`, and `consent`:
+{% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
 
-| `prompt` Value    | `consent_method` (Apps Property) | `consent` (Scopes Property) | Result       |
-|:------------------|:---------------------------------|:----------------------------|:-------------|
-| `CONSENT`         | `TRUSTED` or `REQUIRED`          | `REQUIRED`                  | Prompted     |
-| `CONSENT`         | `TRUSTED`                        | `IMPLICIT`                  | Not prompted |
-| `NONE`            | `TRUSTED`                        | `REQUIRED` or `IMPLICIT`    | Not prompted |
-| `NONE`            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
-| `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted |
+* `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html)
+* `consent_method`, a property on apps that is set in the Okta user interface.
+* `consent`, a property on scopes that is set in the Okta user interface.
 
-<!--If you change this table, change the table in /apps.md too. Also, may add LOGIN to last three rows when supported. --> 
+    | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
+    |:------------------|:---------------------------------|:----------------------------|:-------------|
+    | `CONSENT`         | `TRUSTED` or `REQUIRED`          | `REQUIRED`                  | Prompted     |
+    | `CONSENT`         | `TRUSTED`                        | `IMPLICIT`                  | Not prompted |
+    | `NONE`            | `TRUSTED`                        | `REQUIRED` or `IMPLICIT`    | Not prompted |
+    | `NONE`            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
+    | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this table, change the table in /apps.md too. Also, may add LOGIN to last three rows when supported. --> 
 
 #### Claims Object
 
