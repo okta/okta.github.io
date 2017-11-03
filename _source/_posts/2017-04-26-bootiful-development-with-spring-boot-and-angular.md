@@ -27,7 +27,7 @@ To get started with Spring Boot, navigate to [start.spring.io](https://start.spr
 * [Rest Repositories](http://projects.spring.io/spring-data-rest/): Allows you to expose your JPA repositories as REST endpoints
 * [Web](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-starters/spring-boot-starter-web/pom.xml): Spring MVC with Jackson (for JSON), Hibernate Validator, and embedded Tomcat
 
-{% img blog/angular-spring-boot/start.spring.png alt:"start.spring.io" width:"800" %}
+{% img blog/angular-spring-boot/start.spring.png alt:"start.spring.io" width:"800" %}{: .center-image }
 
 If you like the command-line better, you can use the following command to download a `demo.zip` file with [HTTPie](https://httpie.org/).
 
@@ -40,10 +40,10 @@ Create a directory called `spring-boot-angular-example`, with a `server` directo
 
 Open the “server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
 
-Create a `com.example.beer` package and a `Beer.java` file in it. This will be the entity that holds your data.
+Create a `com.example.demo.beer` package and a `Beer.java` file in it. This will be the entity that holds your data.
 
 ```java
-package com.example.beer;
+package com.example.demo.beer;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -92,7 +92,7 @@ public class Beer {
 Add a `BeerRepository` class that leverages Spring Data to do CRUD on this entity.
 
 ```java
-package com.example.beer;
+package com.example.demo.beer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -103,7 +103,7 @@ interface BeerRepository extends JpaRepository<Beer, Long> {
 Add a `BeerCommandLineRunner` that uses this repository and creates a default set of data.
 
 ```java
-package com.example.beer;
+package com.example.demo.beer;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -133,7 +133,7 @@ public class BeerCommandLineRunner implements CommandLineRunner {
 
 Rebuild your project and you should see a list of beers printed in your terminal.
 
-{% img blog/angular-spring-boot/beers-in-terminal.png alt:"Beers printed in terminal" width:"800" %}
+{% img blog/angular-spring-boot/beers-in-terminal.png alt:"Beers printed in terminal" width:"800" %}{: .center-image }
 
 Add a [`@RepositoryRestResource`](http://docs.spring.io/spring-data/rest/docs/current/api/org/springframework/data/rest/core/annotation/RepositoryRestResource.html) annotation to `BeerRepository` to expose all its CRUD operations as REST endpoints.
 
@@ -148,7 +148,7 @@ interface BeerRepository extends JpaRepository<Beer, Long> {
 Add a `BeerController` class to create an endpoint that filters out less-than-great beers.
 
 ```java
-package com.example.beer;
+package com.example.demo.beer;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -184,7 +184,7 @@ public class BeerController {
 
 Re-build your application and navigate to http://localhost:8080/good-beers. You should see the list of good beers in your browser.
 
-{% img blog/angular-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}
+{% img blog/angular-spring-boot/good-beers-json.png alt:"Good Beers JSON" width:"800" %}{: .center-image }
 
 You should also see this same result in your terminal window when using HTTPie.
 
@@ -211,23 +211,23 @@ ng new client
 This will create a new `client` directory and run `npm install` to install all the necessary dependencies. To verify everything works, run `ng e2e` in a terminal window. If everything works, you should see output like the following in your terminal.
 
 ```bash
-[09:02:35] I/direct - Using ChromeDriver directly...
-[09:02:35] I/launcher - Running 1 instances of WebDriver
-Spec started
+[10:02:13] I/launcher - Running 1 instances of WebDriver
+[10:02:13] I/direct - Using ChromeDriver directly...
+Jasmine started
 
   client App
-    ✓ should display message saying app works
+    ✓ should display welcome message
 
-Executed 1 of 1 spec SUCCESS in 0.77 sec.
-[09:02:38] I/launcher - 0 instance(s) of WebDriver still running
-[09:02:38] I/launcher - chrome #01 passed
+Executed 1 of 1 spec SUCCESS in 1 sec.
+[10:02:16] I/launcher - 0 instance(s) of WebDriver still running
+[10:02:16] I/launcher - chrome #01 passed
 ```
 
 **TIP:** If you’re just getting started with Angular, you might want to [watch this video of my recent Getting Started with Angular webinar](https://www.youtube.com/watch?v=Jq3szz2KOOs).
 
 If you’d rather not use the command line and have [IntelliJ IDEA](https://www.jetbrains.com/idea/) (or [WebStorm](https://www.jetbrains.com/webstorm/)) installed, you can create a new Static Web Project and select Angular CLI.
 
-{% img blog/angular-spring-boot/intellij-new-static-web-project.png alt:"IntelliJ new Static Web project" width:"800" %}
+{% img blog/angular-spring-boot/intellij-new-static-web-project.png alt:"IntelliJ new Static Web project" width:"800" %}{: .center-image }
 
 ### Create a BeerListComponent and BeerService
 
@@ -235,12 +235,11 @@ Thus far, you’ve created a `good-beers` API and an Angular app, but you haven�
 
 ```bash
 $ ng generate component beer-list
-installing component
-  create src/app/beer-list/beer-list.component.css
-  create src/app/beer-list/beer-list.component.html
-  create src/app/beer-list/beer-list.component.spec.ts
-  create src/app/beer-list/beer-list.component.ts
-  update src/app/app.module.ts
+  create src/app/beer-list/beer-list.component.css (0 bytes)
+  create src/app/beer-list/beer-list.component.html (28 bytes)
+  create src/app/beer-list/beer-list.component.spec.ts (643 bytes)
+  create src/app/beer-list/beer-list.component.ts (280 bytes)
+  update src/app/app.module.ts (406 bytes)
 ```
 
 **TIP:** There is a `g` alias for `generate` and a `c` alias for `component`, so you can type `ng g c beer-list` too.
@@ -249,10 +248,8 @@ Create a `beer` service:
 
 ```bash
 $ ng g s beer
-installing service
-  create src/app/beer.service.spec.ts
-  create src/app/beer.service.ts
-  WARNING Service is generated but not provided, it must be provided to be used
+  create src/app/beer.service.spec.ts (362 bytes)
+  create src/app/beer.service.ts (110 bytes)
 ```
 
 Create a `src/app/shared/beer` directory and move `beer.service.*` into it.
@@ -272,20 +269,33 @@ Modify `beer.service.ts` to call the “good-beers" API service.
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BeerService {
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get('http://localhost:8080/good-beers')
-      .map((response: Response) => response.json());
+    return this.http.get('http://localhost:8080/good-beers');
   }
 }
+```
+
+Open `src/app/app.module.ts` and add `HttpClientModule` as an import.
+
+```typescript
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  ...
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  ...
+})
 ```
 
 Modify `beer-list.component.ts` to use the `BeerService` and store the results in a local variable. Notice that you need to add the service as a provider in the `@Component` definition or you will see an error.
@@ -337,8 +347,7 @@ Update `app.component.html` to have the `BeerListComponent` rendered when you’
 Make sure both apps are started (with `mvn spring-boot:run` in the server directory, and `ng serve` in the client directory) and navigate to <http://localhost:4200>. You should see an error in your console that you means you have to configure cross-origin resource sharing (CORS) on the server.
 
 <pre style="color: red">
-XMLHttpRequest cannot load http://localhost:8080/good-beers. No 'Access-Control-Allow-Origin' header
-is present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
+Failed to load http://localhost:8080/good-beers: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:4200' is therefore not allowed access.
 </pre>
 
 To fix this issue, you’ll need to configure Spring Boot to allow cross-domain access from `http://localhost:4200`.
@@ -357,30 +366,33 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 After making these changes, you should be able to see a list of beers from your Spring Boot API.
 
-{% img blog/angular-spring-boot/angular-beer-list.png alt:"Beer List in Angular" width:"800" %}
+{% img blog/angular-spring-boot/angular-beer-list.png alt:"Beer List in Angular" width:"800" %}{: .center-image }
 
 To make it look a little better, add a [Giphy](http://giphy.com) service to fetch images based on the beer’s name. Create `src/app/shared/giphy/giphy.service.ts` and place the following code inside it.
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 // http://tutorials.pluralsight.com/front-end-javascript/getting-started-with-angular-2-by-building-a-giphy-search-application
 export class GiphyService {
 
-
   // Public beta key: https://github.com/Giphy/GiphyAPI#public-beta-key
   giphyApi = '//api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=';
 
-  constructor(public http: Http) {}
+  constructor(public http: HttpClient) {
+  }
 
-  get(searchTerm): Observable<any> {
-    let apiLink = this.giphyApi + searchTerm;
-    return this.http.request(apiLink).map((res: Response) => {
-      let giphies = res.json().data;
-      return giphies[0].images.original.url;
+  get(searchTerm) {
+    const apiLink = this.giphyApi + searchTerm;
+    return this.http.get(apiLink).map((response: any) => {
+      if (response.data.length > 0) {
+        return response.data[0].images.original.url;
+      } else {
+        return 'https://media.giphy.com/media/YaOxRsmrv9IeA/giphy.gif'; // dancing cat for 404
+      }
     });
   }
 }
@@ -415,7 +427,7 @@ export class BeerListComponent implements OnInit {
     this.beerService.getAll().subscribe(
       data => {
         this.beers = data;
-        for (let beer of this.beers) {
+        for (const beer of this.beers) {
           this.giphyService.get(beer.name).subscribe(url => beer.giphyUrl = url);
         }
       },
@@ -438,7 +450,7 @@ Then update `beer-list.component.html` to include a reference to this image.
 
 The result should look something like the following list of beer names with images.
 
-{% img blog/angular-spring-boot/angular-beer-list-giphy.png alt:"Beer list with Giphy images" width:"800" %}
+{% img blog/angular-spring-boot/angular-beer-list-giphy.png alt:"Beer list with Giphy images" width:"800" %}{: .center-image }
 
 You’ve just created an Angular app that talks to a Spring Boot API using cross-domain requests. Congratulations!
 
@@ -454,3 +466,7 @@ To learn more about Angular, Spring Boot, or Okta, check out the following resou
 You can find the source code associated with this article [on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example). If you find any bugs, please file an issue on GitHub, or ask your question on Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta). Of course, you can always [ping me on Twitter](https://twitter.com/mraible) too.
 
 **Update:** To learn how to turn this application into a progressive web application that can work offline, see [Build Your First Progressive Web Application with Angular and Spring Boot](/blog/2017/05/09/progressive-web-applications-with-angular-and-spring-boot.html). I also wrote a [tutorial that shows how to develop an Ionic mobile app for this Spring Boot backend](/blog/2017/05/17/develop-a-mobile-app-with-ionic-and-spring-boot.html).
+
+**Changelog:**
+
+* Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/spring-boot-angular-example/pull/5). 
