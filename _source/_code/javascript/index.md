@@ -27,7 +27,7 @@ New to Okta? Our Quick Start Guide will walk you through adding user authenticat
 The Auth SDK builds on top of our Authentication API and OAuth 2.0 API to enable you to create a fully branded sign-in experience using JavaScript.  This SDK is meant to be used in front-end applications.
 
 <ul class='code-list'>
-  <li><span class='code-icon launch-16'></span> <a href='okta_auth_sdk.html'>Okta Auth SDK Guide</a></li>
+  <li><span class='code-icon launch-16'></span> <a href='/code/javascript/okta_auth_sdk'>Okta Auth SDK Guide</a></li>
   <li><span class='code-icon expression-16'></span> <a href='https://github.com/okta/okta-auth-js'>Okta Auth SDK Source &amp; API Reference</a></li>
 </ul>
 
