@@ -50,4 +50,4 @@ class MessagesRestController {
 
 Okta's Spring Security integration will [parse the JWT access token](/blog/2017/06/21/what-the-heck-is-oauth#oauth-flows) from the HTTP request's `Authorization: Bearer` header value.
 
-Check out a [Spring Boot example](https://github.com/okta/okta-spring-boot/tree/master/examples) or this [blog post](https://scotch.io/@mraible/build-a-secure-notes-application-with-kotlin-typescript-and-okta). 
+Check out a [Spring Boot example](https://github.com/okta/okta-spring-boot/tree/master/examples) or this [blog post](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta). 
