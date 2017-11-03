@@ -13,7 +13,7 @@ In this article, I’ll show you a quick way to get started with Angular, and ad
 
 Okta provides an API service that allows developers to create, edit, and securely store user accounts and user account data, and connect them with one or multiple applications. We make user account management easier, more secure, and scalable so you can get to production sooner.
 
-The [Okta Sign-in Widget](/code/javascript/okta_sign-in_widget_ref) provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.
+The [Okta Sign-in Widget][widget-reference] provides an embeddable JavaScript sign-in implementation that can be easily customized. The Sign-in Widget carries the same feature set in the standard Okta sign-in page of every tenant – with the added flexibility to change the look-and-feel. Included in the widget is support for password reset, forgotten password and strong authentication – all of which are driven by policies configured in Okta. Developers don’t have to write a single line of code to trigger these functions from within the widget. For consumer facing sites, social providers are also supported in the widget.
 
 ## Create an Angular Application
 
@@ -192,7 +192,7 @@ And modify `app.component.html` to have a `<div>` with `id="okta-login-container
 ```
 {% endraw %}
 
-Run `ng serve`, and open your browser to [http://localhost:4200](http://localhost:4200). You should see the sign-in widget. Enter one of 
+Run `ng serve`, and open your browser to [http://localhost:4200](http://localhost:4200). You should see the sign-in widget. Enter one of
 your user's credentials to login. You should see a "Hello {email}" message with a logout button.
 
 {% img blog/angular-sign-in-widget/login-success.png alt:"Login Success" width:"800" %}{: .center-image }
@@ -277,3 +277,4 @@ I hope you’ve enjoyed this quick tour of our Angular support. If you have ques
 
 * Sep 30, 2017: Updated to use Angular CLI 1.4.4 and Okta Sign-In Widget 2.1.0. See the code changes in the [example app on GitHub](https://github.com/oktadeveloper/okta-angular-sign-in-widget-example/pull/8). Updated "create an OIDC app" instructions for the [Okta Developer Console](/blog/2017/09/25/all-new-developer-console).
 
+[widget-reference]: https://github.com/okta/okta-signin-widget

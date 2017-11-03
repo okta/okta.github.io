@@ -21,7 +21,7 @@ $query = http_build_query([
 
 header('Location: ' . 'https://{yourOktaDomain}.com/oauth2/default/v1/authorize?'.$query);
 ```
-> The `nonce` should be a generated string such as UUID, and the `state` can be any string representing state of the 
+> The `nonce` should be a generated string such as UUID, and the `state` can be any string representing state of the
 application.
 
 ## Exchange Auth Code
@@ -70,13 +70,13 @@ function exchangeCode($code) {
 }
 ```
 
-The result of this will provide you with a JWT for that user.
+The result of this will provide you with an access token for that user.
 
 ```php?start_inline=true
 $jwt = $exchange->access_token;
 ```
 
-Once you have the JWT, you should verify it using [this guide](/code/php/jwt-validation.html)
+This access token is a JWT and should be verified according to the process described in [Working With OAuth 2.0 Tokens](/authentication-guide/tokens/).  This verification can be done easily with the [Okta JWT Verifier for PHP](https://github.com/okta/okta-jwt-verifier-php).
 
 ### Handling Errors
 If an error is present in the login, an `error` query parameter will be present.
