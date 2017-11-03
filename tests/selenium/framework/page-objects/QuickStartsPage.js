@@ -18,7 +18,7 @@ class QuickStartsPage extends BasePage {
     this.$phpLink = element(by.linkText('PHP'));
     this.$dotnetLink = element(by.linkText('.NET'));
     this.$genericNodeLink = element(by.linkText('Generic Node'));
-    this.$expressJSLink = element(by.linkText('Express.js'));   
+    this.$expressJSLink = element(by.linkText('Express.js'));
     this.$genericJavaLink = element(by.linkText('Generic Java'));
     this.$genericPHPLink = element(by.linkText('Generic PHP'));
     this.$springLink = element(by.linkText('Spring'));
@@ -28,6 +28,19 @@ class QuickStartsPage extends BasePage {
     this.$$frameworkLinks = $$('#framework-selector a');
 
     this.setPageLoad(this.$clientSelector);
+  }
+
+  /**
+   * In order to test default selections, we need to leave the page and then come back.
+   * Why? Because changing the URL fragment in-page will not cause the quickstart app's
+   * main() function to re-run, which is what we want to test.  We want to test when
+   * the app is bootstrapped with specific URL fragments.
+   */
+  leave() {
+    browser.ignoreSynchronization = true;
+    // Remove the quickstart URL, navigate back to the root of the site
+    browser.get(this.url.replace(/\/quickstart\/.*/,'/'));
+    return browser.sleep(1000);
   }
 
   selectSignInWidget() {

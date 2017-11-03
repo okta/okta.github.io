@@ -1,21 +1,70 @@
 const QuickStartsPage = require('../framework/page-objects/QuickStartsPage');
 const util = require('../framework/shared/util');
 
-describe('quickstarts page spec', () => {
+
+describe('quickstarts page default selections spec', () => {
+
+  it('selects okta-sign-in-page + nodejs + express if nothing is specified', () => {
+    const quickstartsPage = new QuickStartsPage('/quickstart');
+    return quickstartsPage.load().then(() => {
+      expect(quickstartsPage.urlContains("/okta-sign-in-page/nodejs/express")).toBe(true);
+      expect(quickstartsPage.activeLinksContain([
+        'Okta Sign-In Page',
+        'Node JS',
+        'Express.js'
+      ])).toBe(true);
+    });
+  });
+
+  it('selects spring if only java is specified', () => {
+    const quickstartsPage = new QuickStartsPage('/quickstart/#/okta-sign-in-page/java');
+    return quickstartsPage.leave().then(() => {
+      return quickstartsPage.load().then(() => {
+        expect(quickstartsPage.urlContains("/okta-sign-in-page/java/spring")).toBe(true);
+        expect(quickstartsPage.activeLinksContain([
+          'Okta Sign-In Page',
+          'Java',
+          'Spring'
+        ])).toBe(true);
+      });
+    });
+  });
+
+  it('selects express if only node is specified', () => {
+    const quickstartsPage = new QuickStartsPage('/quickstart/#/okta-sign-in-page/nodejs');
+    return quickstartsPage.leave().then(() => {
+      return quickstartsPage.load().then(() => {
+        expect(quickstartsPage.urlContains("/okta-sign-in-page/nodejs/express")).toBe(true);
+        expect(quickstartsPage.activeLinksContain([
+          'Okta Sign-In Page',
+          'Node JS',
+          'Express.js'
+        ])).toBe(true);
+      });
+    });
+  });
+
+  it('selects ASP.NET Core if only dotnet is specified', () => {
+    const quickstartsPage = new QuickStartsPage('/quickstart/#/okta-sign-in-page/dotnet');
+    return quickstartsPage.leave().then(() => {
+      return quickstartsPage.load().then(() => {
+        expect(quickstartsPage.urlContains("/okta-sign-in-page/dotnet/aspnetcore")).toBe(true);
+        expect(quickstartsPage.activeLinksContain([
+          'Okta Sign-In Page',
+          '.NET',
+          'ASP.NET Core'
+        ])).toBe(true);
+      });
+    });
+  });
+});
+
+describe('quickstarts page navigation spec', () => {
   const quickstartsPage = new QuickStartsPage('/quickstart');
 
   beforeEach(() => {
     quickstartsPage.resizeMedium();
     return quickstartsPage.load();
-  });
-
-  it('has okta-sign-in-page + nodejs express selected by default', () => {
-    expect(quickstartsPage.urlContains("/okta-sign-in-page/nodejs/express")).toBe(true);
-    expect(quickstartsPage.activeLinksContain([
-        'Okta Sign-In Page',
-        'Node JS',
-        'Express.js'
-      ])).toBe(true);
   });
 
   it('can select all client setups', () => {

@@ -4,10 +4,10 @@
    *
    * This object defines the links that will appear, and serves as a state object once
    * the app begins.  If you need to add new libraries, add them to this object.  If
-   * you need to change the default active libraries, change the active states in this
+   * you need to change the default libraries, change the `default` states in this
    * object.
    *
-   * `active` links will be selected by default. As the user navigates, the active
+   * `default` links will be selected by default. As the user navigates, the active
    * properties will be modified accordingly.
    */
   var linkState = {
@@ -16,7 +16,7 @@
         name: 'okta-sign-in-page',
         label: 'Okta Sign-In Page',
         serverExampleType: 'auth-code',
-        active: true
+        default: true
       },
       {
         name: 'widget',
@@ -46,12 +46,12 @@
     ],
     servers: [
       {
-        active: true,
+        default: true,
         name: 'nodejs',
         label: 'Node JS',
         frameworks: [
           {
-            active: true,
+            default: true,
             name: 'express',
             label: 'Express.js'
           },
@@ -68,7 +68,7 @@
           {
             name: 'spring',
             label: 'Spring',
-            active: true
+            default: true
           },
           {
             name: 'generic',
@@ -83,7 +83,7 @@
           {
             name: 'generic',
             label: 'Generic PHP',
-            active: true
+            default: true
           }
         ]
       },
@@ -94,7 +94,7 @@
           {
             name: 'aspnetcore',
             label: 'ASP.NET Core',
-            active: true
+            default: true
           },
           {
             name: 'aspnet4',
@@ -293,6 +293,31 @@
     });
   }
 
+  function getDefaultClient(serverName) {
+    return linkState.clients.filter(function (client) {
+      return client.default;
+    })[0];
+  }
+
+  function getDefaultServer(serverName) {
+    return linkState.servers.filter(function (server) {
+      return server.default;
+    })[0];
+  }
+
+  function getDefaultFrameworkForServer(serverName) {
+    var server = linkState.servers.filter(function (server) {
+      return server.name == serverName;
+    })[0];
+    if (!server) {
+      return
+    }
+    var defaultFramework = server.frameworks.filter(function (framework) {
+      return framework.default === true;
+    })[0];
+    return defaultFramework;
+  }
+
 
   /**
    * Begin application.  Fetch default selections from link state, and current
@@ -300,11 +325,13 @@
    */
   function main() {
     var hashTuple = getSelectionTupleFromHash();
-    var stateTuple = getSelectionTupleFromLinkSate();
+    var defaultClient = getDefaultClient();
+    var defaultServer = getDefaultServer();
+    var defaultFramework = getDefaultFrameworkForServer(hashTuple[1] || defaultServer.name);
     var initialTuple = [
-      hashTuple[0] || stateTuple[0],
-      hashTuple[1] || stateTuple[1],
-      hashTuple[2] || stateTuple[2]
+      hashTuple[0] || defaultClient.name,
+      hashTuple[1] || defaultServer.name,
+      hashTuple[2] || defaultFramework.name
     ];
 
     applySelectionTupleToLinkSate(initialTuple);
