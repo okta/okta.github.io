@@ -1,8 +1,9 @@
-(function($) {    
+(function($) {
   // Handle building the icons and code languages
   var code = [
     { name: 'angular', label: 'Angular' },
     { name: 'react',label: 'React' },
+    { name: 'javascript', label: 'JavaScript' },
     { name: 'android', label: 'Android' },
     { name: 'ios',  label: 'iOS' },
     { name: 'nodejs', label: 'Node.js' },
@@ -24,7 +25,7 @@
       var link = $('<a>', {
         text: language.label + ' ›',
         href: '/code/' + language.name + '/',
-      });      
+      });
       link.prepend($('<br />'));
       link.prepend(icon);
       li.append(link);

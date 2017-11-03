@@ -17,7 +17,6 @@
     "pretest": "npm start & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
     "test": "npm run test-only || (npm stop && exit 1)",
     "posttest": "npm stop",
-    "import-external": "node scripts/import-external 2>&1",
     "find-missing-slashes": "node scripts/find-missing-slashes",
     "post-build-lint": "bash scripts/post-build-lint.sh"
   },
