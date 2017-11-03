@@ -382,4 +382,4 @@ I’d also recommend visiting the following websites:
 
 **Changelog:**
 
-* Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. You can see what changed in this article via [this pull request on GitHub](). For code changes, see [spring-boot-angular-pwa-example#2](https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/2).
+* Nov 3, 2017: Updated to use Spring Boot 1.5.8, Angular 5.0.0, and Angular CLI 1.5.0. You can see what changed in this article via [this pull request on GitHub](https://github.com/okta/okta.github.io/pull/1453). For code changes, see [oktadeveloper/spring-boot-angular-pwa-example#2](https://github.com/oktadeveloper/spring-boot-angular-pwa-example/pull/2).
