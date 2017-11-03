@@ -168,7 +168,7 @@ We have included here a few things that you can try to ensure that your Authoriz
 
 ### OpenID Connect Configuration
 
-To verify that your server was created and has the expected configuration values, you can send an API request to the Server's OpenID Connect Metadata URI: `https://{yourOktaDomain}/oauth2/{authorizationServerId}/.well-known/openid-configuration` using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.
+To verify that your server was created and has the expected configuration values, you can send an API request to the Server's OpenID Connect Metadata URI: `https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/.well-known/openid-configuration` using an HTTP client or by typing the URI inside of a browser. This will return information about the OpenID configuration of your Authorization Server, though it does not currently return any custom scopes or claims that you might have created.
 
 For more information on this endpoint, see here: [Retrieve Authorization Server OpenID Connect Metadata](/docs/api/resources/oauth2.html#retrieve-authorization-server-openid-connect-metadata).
 
@@ -201,7 +201,7 @@ You will need the following values from your Okta OpenID Connect application, bo
 
 Once you have an OpenID Connect Application set-up, and a User assigned to it you can try the authentication flow.
 
-First, you will need your Authorization Server's Authorization Endpoint, which you can retrieve using the Server's Metadata URI: `https://{yourOktaDomain}/oauth2/:authorizationServerId/.well-known/openid-configuration`. It will look like this:
+First, you will need your Authorization Server's Authorization Endpoint, which you can retrieve using the Server's Metadata URI: `https://{yourOktaDomain}.com/oauth2/:authorizationServerId/.well-known/openid-configuration`. It will look like this:
 
 `https://{yourOktaDomain}.com/oauth2/{authorizationServerId}/v1/authorize`
 

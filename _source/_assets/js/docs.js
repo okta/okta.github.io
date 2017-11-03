@@ -207,11 +207,13 @@ $(function() {
 
 			if (footerRect.top < $window.height()) {
 				$toc.css({
-					'bottom': ($window.height() - footerRect.top) + 'px'
+					'bottom': ($window.height() - footerRect.top) + 'px',
+					'top': "auto"
 				});
 			} else {
 				$toc.css({
-					'bottom': 0
+					'bottom': 0,
+					'top': "100px"
 				})
 			}
 
