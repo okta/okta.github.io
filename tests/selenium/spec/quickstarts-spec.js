@@ -67,6 +67,14 @@ describe('quickstarts page navigation spec', () => {
     return quickstartsPage.load();
   });
 
+  it('can toggle to client and server setup via right-side nav', () => {
+    quickstartsPage.resizeXLarge();
+    quickstartsPage.waitUntilOnScreen(quickstartsPage.getSkipLink());    
+    quickstartsPage.selectServerSetupLink();
+    quickstartsPage.waitUntilOnScreen(quickstartsPage.getNodeJSLink());
+    quickstartsPage.selectClientSetupLink();
+  });
+
   it('can select all client setups', () => {
     quickstartsPage.selectSignInWidget();
     expect(quickstartsPage.urlContains("/widget")).toBe(true);

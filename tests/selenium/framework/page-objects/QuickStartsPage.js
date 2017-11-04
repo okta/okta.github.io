@@ -7,6 +7,9 @@ class QuickStartsPage extends BasePage {
   constructor(url) {
     super(url);
     this.$clientSelector = $('#client-selector');
+    this.$skipToServerSetup = element(by.linkText('Skip to server setup'));
+    this.$clientSetupLink = $('#client_setup_link');
+    this.$serverSetupLink = $('#server_setup_link');
     this.$androidLink = element(by.linkText('Android'));
     this.$angularLink = element(by.linkText('Angular'));
     this.$iOSLink = element(by.linkText('iOS'));
@@ -41,6 +44,22 @@ class QuickStartsPage extends BasePage {
     // Remove the quickstart URL, navigate back to the root of the site
     browser.get(this.url.replace(/\/quickstart\/.*/,'/'));
     return browser.sleep(1000);
+  }
+
+  selectClientSetupLink() {
+    return this.$clientSetupLink.click();
+  }
+
+  selectServerSetupLink() {
+    return this.$serverSetupLink.click();
+  }
+
+  getSkipLink() {
+    return this.$skipToServerSetup;
+  }
+
+  getNodeJSLink() {
+    return this.$nodeJSLink;
   }
 
   selectSignInWidget() {

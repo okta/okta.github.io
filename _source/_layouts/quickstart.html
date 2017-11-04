@@ -2,7 +2,7 @@
 layout: base
 js: quickstart
 ---
-<section class="PageContent quickstart-page">
+<section class="PageContent quickstart-page has-tableOfContents">
   <!-- START Page Content -->
   <div class="PageContent-main" id="docs-body">
     <h1>{{ page.title }}</h1>
@@ -31,6 +31,11 @@ js: quickstart
     </div>
     
     <div id="server_content" class="example-content-well"></div>
+  </div>
+
+  <div class="TableOfContents TableOfContentsPreload">
+     <a class="TableOfContents-item is-level2" style="display: block;" onclick="scrollToClient()" id="client_setup_link">Client Setup</a>
+     <a class="TableOfContents-item is-level2" style="display: block;" onclick="scrollToServer()" id="server_setup_link">Server Setup</a>
   </div>
   <!-- END Page Content -->
 </section><!-- END Page Center w/Sub Nav & Content -->
