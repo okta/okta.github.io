@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: React Implicit
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta React Quickstart
 
 This guide will walk you through integrating authentication into a React app with Okta by performing these steps:
 

@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: Spring Auth Code Example
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Java/Spring Quickstart
 
 ### Include the dependencies
 
@@ -43,7 +47,7 @@ public class ExampleApplication {
     public static void main(String[] args) {
         SpringApplication.run(ExampleApplication.class, args);
     }
-    
+
     ...
 }
 ```

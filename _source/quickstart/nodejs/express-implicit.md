@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: Express.js Implicit Flow Example
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Node.js/Express.js Quickstart
 
 In the Generic Node example (see other tab) we show you how to use the simplified [Okta JWT Verifier](https://www.npmjs.com/package/@okta/jwt-verifier) to verify Okta's JWTs.  In the example below we use the same verifier to create a simple Express middleware function that can prevent a request from completing if the request is not authenticated with a valid access token.  To learn more about validating Okta access tokens, please see [Validating Access Tokens](https://developer.okta.com/standards/OAuth/index.html#validating-access-tokens).
 

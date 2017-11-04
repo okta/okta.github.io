@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: Spring Implicit Example
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Java/Spring Quickstart
 
 ### Include the dependency
 
@@ -33,7 +37,7 @@ You can configure your applications properties with environment variables, syste
 
 ### Create a Controller
 
-The above client makes a request to `/api/messages`, we simply need to create a `Controller` to handle the response: 
+The above client makes a request to `/api/messages`, we simply need to create a `Controller` to handle the response:
 
 ```java
 @RestController
@@ -50,4 +54,4 @@ class MessagesRestController {
 
 Okta's Spring Security integration will [parse the JWT access token](/blog/2017/06/21/what-the-heck-is-oauth#oauth-flows) from the HTTP request's `Authorization: Bearer` header value.
 
-Check out a [Spring Boot example](https://github.com/okta/okta-spring-boot/tree/master/examples) or this [blog post](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta). 
+Check out a [Spring Boot example](https://github.com/okta/okta-spring-boot/tree/master/examples) or this [blog post](/blog/2017/09/19/build-a-secure-notes-application-with-kotlin-typescript-and-okta).

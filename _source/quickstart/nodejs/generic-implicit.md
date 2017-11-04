@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: NodeJS Implicit Example
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Node.js Quickstart
 
 Okta has created a simplified Node library to make this easy for Okta applications, [Okta JWT Verifier](https://www.npmjs.com/package/@okta/jwt-verifier).  Below is an example that shows you how to validate access tokens for a specific Okta authorization server (the issuer) and adds a secondary check for the audience of the token. To learn more about validating Okta access tokens, please see [Validating Access Tokens](https://developer.okta.com/standards/OAuth/index.html#validating-access-tokens).
 

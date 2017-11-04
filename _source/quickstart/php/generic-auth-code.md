@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: PHP Auth Code Example
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta PHP Quickstart
 
 ## Redirecting to Authorization Endpoint
 First you need to generate a URL to the authorization endpoint for the Authorization Server and redirect the user.

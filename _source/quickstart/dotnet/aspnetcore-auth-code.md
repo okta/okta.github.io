@@ -1,8 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: ASP.NET Core 2.0 Auth Code Example
+sitemap:
+  exclude: "yes"
 ---
 
+## Okta ASP.NET Core Quickstart
 
 ### Create a new project
 
@@ -74,7 +77,7 @@ public class AccountController : Controller
         {
             return Challenge(OpenIdConnectDefaults.AuthenticationScheme);
         }
-        
+
         return RedirectToAction("Index", "Home");
     }
 
@@ -84,7 +87,7 @@ public class AccountController : Controller
         {
             return SignOut(CookieAuthenticationDefaults.AuthenticationScheme, OpenIdConnectDefaults.AuthenticationScheme);
         }
-        
+
         return RedirectToAction("Index", "Home");
     }
 }

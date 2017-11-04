@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: Java Implicit Example
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Java Quickstart
 
 ### Include the dependency
 
@@ -44,7 +48,7 @@ public static class OktaAccessTokenFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) 
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
                                                  throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -80,7 +84,7 @@ Next up is to create a `Servlet` for the '/api/messages' endpoint we defined in 
 @WebServlet(urlPatterns={"/api/messages"})
 public class ExampleServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
                                                      throws ServletException, IOException {
         // handle request
     }

@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: Angular Implicit
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta Angular Quickstart
 
 This guide will walk you through integrating authentication into an Angular app with Okta by performing these steps:
 
