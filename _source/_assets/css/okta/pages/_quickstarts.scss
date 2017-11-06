@@ -1,3 +1,6 @@
+.Page.authentication-quickstart-guide {
+  background: #20313b;
+}
 .code-selector {
   background-color: rgb(32, 49, 59);
   border-radius: 5px;
@@ -29,13 +32,13 @@
       border-bottom: 2px solid #fff;
     }
     .icon {
-      left: 15px;
+      left: 5px;
       position: absolute;
     }
   }
 
   li.with-icon a{
-    padding-left: 55px;
+    padding-left: 45px;
   }
 
   ul {
@@ -49,10 +52,13 @@
 }
 
 // Disable the margin width determined by the parent CSS.
-.PageContent.has-tableOfContents
-.PageContent-main {
-	max-width: none;
+.PageContent.quickstart-page.has-tableOfContents
+.PageContent-main#quickstart-body {
+  max-width: none;
+  padding: 30px;
+  padding-right: 0px;
 }
+
 
 .example-content-well {
   padding: 10px 0;
