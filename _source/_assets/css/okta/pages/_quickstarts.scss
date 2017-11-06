@@ -1,4 +1,4 @@
-.Page.authentication-quickstart-guide {
+.Page.okta-authentication-quickstart-guides {
   background: #20313b;
 }
 .code-selector {
@@ -79,6 +79,16 @@
   h2 {
     border-bottom: none;
     font-size: 23px;
+    font-weight: lighter;
+  }
+  h3 {
+    border-bottom: none;
+    font-size: 21px;
+    font-weight: lighter;
+  }
+  h4 {
+    border-bottom: none;
+    font-size: 18px;
     font-weight: lighter;
   }
   .TableOfContents-item{
