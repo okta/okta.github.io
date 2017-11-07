@@ -317,7 +317,7 @@ API rate limits apply per minute to the endpoints in an org. The rate applies ei
 | `/api/v1/groups`                                                           |   500 |
 | `/api/v1/logs`                                                             |    60 |
 | `/api/v1/sessions`                                                         |   750 |
-| `/api/v1/users/{id}` (exact URL plus query params or other qualifiers)     |   600 |
+| `/api/v1/users/{id}` (exact URL plus query params or other qualifiers)     |  2000 |
 | `/api/v1/users`                                                            |   600 |
 | `/api/v1/` (if no other `/api/v1` limit specified in this table)           |  1200 |
 | `/oauth2/v1/token`  (per second, not minute)                               |     4 |
