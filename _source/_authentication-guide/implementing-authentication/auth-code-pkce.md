@@ -32,7 +32,6 @@ You set up your OpenID Connect application inside the Okta Developer Console:
 Just like with the regular authorization code flow, you start by making a request to your authorization server’s `/authorize` endpoint. However, in this instance you will also have to pass along a code challenge.
 
 Your first step is to generate a code verifier and challenge:
-
 * Code verifier: Random URL-safe string with a minimum length of 43 characters.
 * Code challenge: Base64 URL-encoded SHA-256 hash of the code verifier.
 

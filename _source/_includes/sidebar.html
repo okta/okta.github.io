@@ -92,7 +92,6 @@
         <a href="{{ document.url | remove: '/index' | append: '/'}}">{{ document.title }}</a>
       </li>{% endfor %}
     </ul>
-
     <h3 class="Sidebar-title">Reference</h3>
     <ul class="Sidebar-nav">
       <li{% if page.title contains '/getting_started' %} class="is-active"{% endif %}>
@@ -130,7 +129,6 @@
       </li>
       {% endfor %}
     </ul>
-
     <script>
       if (document.querySelectorAll("#Sidebar_Resources .is-active").length) {
         document.getElementById('Sidebar_Resources').classList.remove('Sidebar-hide');
