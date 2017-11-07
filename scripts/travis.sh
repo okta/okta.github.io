@@ -27,7 +27,7 @@ if ! url_consistency_check || ! duplicate_slug_in_url || ! check_for_localhost_l
   exit 1;
 fi
 
-# 6. Run find-missing-slaehs to find links that will redirect to okta.github.io
+# 6. Run find-missing-slashes to find links that will redirect to okta.github.io
 npm run find-missing-slashes
 
 # 7. Run htmlproofer to validate links, scripts, and images

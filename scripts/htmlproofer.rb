@@ -6,12 +6,12 @@ options = {
     :assume_extension => true,
     :allow_hash_href => true,
     :empty_alt_ignore => true,
-    :log_level => :debug,
-    :only_4xx => true,
+    :log_level => :error,
     # # cache external results for 1 day in ~/.htmlproofer/cache
     # :cache => { :timeframe => '1d', :storage_dir => "#{Dir.home}/.htmlproofer/cache"},
     # 8 threads, any more doesn't seem to make a difference
     :parallel => { :in_processes => 8},
+    :only_4xx => true,
     :file_ignore => [
         /3rd_party_notices/,
 

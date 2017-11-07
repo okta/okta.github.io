@@ -224,7 +224,7 @@ We’ll use the same model and DAO for the JAX-RS example, all we’re going to 
 
 Since JAX-RS is an API spec you need to pick an implementation, we will use [Jersey](https://jersey.java.net/) for this example. While it’s possible to create a JAX-RS application with no direct dependencies on a specific JAX-RS implementation, it would make for a more verbose example.
 
-I picked Jersey for a couple reasons, mostly though it was because I already knew how get simple dependency injection working without jumping through any hoops, we are comparing this to Spring after all. Apache Shiro has an [example](https://github.com/apache/shiro/blob/master/samples/jaxrs/) that runs the same code on [Jersey](https://jersey.java.net/), [RestEasy](http://resteasy.jboss.org/), and [Apache CXF](http://cxf.apache.org/), if you’re interested in seeing a portable example.
+I picked Jersey for a couple reasons, mostly though it was because I already knew how get simple dependency injection working without jumping through any hoops, we are comparing this to Spring after all. Apache Shiro has an [example](https://github.com/apache/shiro/blob/master/samples/jaxrs/) that runs the same code on [Jersey](https://jersey.java.net/), [RestEasy](http://resteasy.jboss.org/), and [Apache CXF](https://cxf.apache.org/), if you’re interested in seeing a portable example.
 
 This example also differs a bit from the Spring Boot one in that this example is packaged as a WAR, and Spring Boot was a single JAR. Packing this example in an executable jar is possible, but outside the scope of this post
 
