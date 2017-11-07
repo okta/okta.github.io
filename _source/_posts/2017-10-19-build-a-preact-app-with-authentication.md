@@ -50,7 +50,7 @@ npm start
 ```
 
 You should see a quick build run and the screen will clear and show you that the
-application is running at <http://localhost:8080>. When you open up that URL in
+application is running at `http://localhost:8080`. When you open up that URL in
 your browser, you should see a page like this:
 
 {% img blog/build-a-preact-app-with-authentication/base-preact-app.png alt:"Base Preact Application" width:"700" %}{: .center-image }
@@ -72,9 +72,9 @@ Helpers](https://github.com/developit/preact-cli/blob/HEAD/docs/webpack-helpers.
 and exporting functions to change the way Webpack behaves.
 
 Even though the PreactCLI says the application is running at
-<http://0.0.0.0:8080>, use <http://localhost:8080>. It’s the same thing and when
+`http://0.0.0.0:8080`, use `http://localhost:8080`. It’s the same thing and when
 you set up your application in the Okta dashboard, you’ll set
-<http://localhost:8080> as your base URL and callback URL, so this just makes
+`http://localhost:8080` as your base URL and callback URL, so this just makes
 sure that you can call the Okta APIs.
 
 
@@ -96,7 +96,7 @@ Connect](http://openid.net/connect/) will already be chosen for you. Click the
 
 This will take you to a screen to "Application Settings" page of the Create
 Application wizard. Enter "OktaPreactExample" in the Application name field and
-add <http://localhost:8080> as your base URI and as a login redirect URI. When
+add `http://localhost:8080` as your base URI and as a login redirect URI. When
 you're done, your form should look like this:
 
 {% img blog/build-a-preact-app-with-authentication/create-integration-screen.png alt:"Create Integration Screen" width:"700" %}{: .center-image }
@@ -217,7 +217,7 @@ out):
 
 {% img blog/build-a-preact-app-with-authentication/client-id-screen.png alt:"Client ID Screen" width:"700" %}{: .center-image }
 
-You'll also want to change the `redirectUri` property to <http://localhost:8080>
+You'll also want to change the `redirectUri` property to `http://localhost:8080`
 because the Preact uses port `8080` instead of `3000` for normal React apps.
 
 The `login` function simply routes the user to the login page, while the

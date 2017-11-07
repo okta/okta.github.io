@@ -174,7 +174,7 @@ JHipster Registry starts on port 8761 by default.
 {% img blog/microservices-jhipster/jhipster-registry.png alt:"JHipster Registry" width:"800" %}
 
 In a new terminal window, navigate to `jhipster-microservices-example/blog` and run `./mvnw` to start the blog application 
-and open <http://localhost:8080> in your favorite browser. The first thing you'll notice is a dapper-looking fellow 
+and open `http://localhost:8080` in your favorite browser. The first thing you'll notice is a dapper-looking fellow 
 explaining how you can sign in or register.
 
 {% img blog/microservices-jhipster/default-homepage.png alt:"Default homepage" width:"800" %}
@@ -321,7 +321,7 @@ public interface BlogRepository extends JpaRepository<Blog,Long> {
 
 After making this change, re-compiling `BlogResource` should trigger a restart of the application thanks to 
 [Spring Boot's Developer tools](http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html). 
-If you navigate to <http://localhost:9000/blogs>, you should only see the blog for the current user.
+If you navigate to `http://localhost:9000/blogs`, you should only see the blog for the current user.
 
 {% img blog/microservices-jhipster/blogs-admin.png alt:"Admin's blog" width:"800" %}
 
@@ -736,7 +736,7 @@ them as a daemon
 
 {% img blog/microservices-jhipster/kitematic.png alt:"Kitematic" width:"800" %}
 
-You can view the JHipster Registry at <http://localhost:8761>.
+You can view the JHipster Registry at `http://localhost:8761`.
 
 To produce data for the JHipster Console to display, run some Gatling tests in the `blog` app.
 
@@ -748,7 +748,7 @@ These simulations can take a while (> 10m) to complete. When they're finished, y
 
 {% img blog/microservices-jhipster/gatling-results.png alt:"Gatling Results" width:"800" %}
 
-You can see the JHipster Console at <http://localhost:5601>. Navigate to Dashboards > Open to display some pre-built 
+You can see the JHipster Console at `http://localhost:5601`. Navigate to Dashboards > Open to display some pre-built 
 dashboards for the JVM, logs, metrics, microservices, and performance. The screenshots below show you what some of 
 these look like.
 

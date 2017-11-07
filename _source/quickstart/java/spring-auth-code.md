@@ -52,6 +52,6 @@ public class ExampleApplication {
 }
 ```
 
-That's it! Open an incognito window (to ensure clean browser cache) and browse to [http://localhost:8080/login](http://localhost:8080/login) you will be  automatically redirected to the Okta login page.
+That's it! Open an incognito window (to ensure clean browser cache) and browse to `http://localhost:8080/login` you will be  automatically redirected to the Okta login page.
 
 You can read more about [Spring's OAuth 2 support](http://projects.spring.io/spring-security-oauth/docs/oauth2.html) or take a look at this [blog post](https://developer.okta.com/blog/2017/03/21/spring-boot-oauth) that describes the steps and configuration in detail.

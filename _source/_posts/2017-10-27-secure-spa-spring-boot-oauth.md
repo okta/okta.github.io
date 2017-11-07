@@ -53,7 +53,7 @@ public class MessageOfTheDayController {
 }
 ```
 
-That is it! It's basically hello world with an extra annotation. Start your app back up with `./mvnw spring-boot:run`. You should be able to hit [http://localhost:8080/mod](http://localhost:8080/mod):
+That is it! It's basically hello world with an extra annotation. Start your app back up with `./mvnw spring-boot:run`. You should be able to hit `http://localhost:8080/mod`:
 
 ```bash
 curl -v http://localhost:8080/mod
@@ -308,7 +308,7 @@ protected ResourceServerConfigurerAdapter resourceServerConfigurerAdapter() {
 
 ### Fire it up!
 
-Start up your application again with `./mvnw spring-boot:run`, and browse to [http://localhost:8080/](http://localhost:8080/). You should be able to log in with your new Okta account and view the message of the day.
+Start up your application again with `./mvnw spring-boot:run`, and browse to `http://localhost:8080/`. You should be able to log in with your new Okta account and view the message of the day.
 
 ## Try the Okta Spring Boot Starter
 

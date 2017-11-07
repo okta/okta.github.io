@@ -192,7 +192,7 @@ And modify `app.component.html` to have a `<div>` with `id="okta-login-container
 ```
 {% endraw %}
 
-Run `ng serve`, and open your browser to [http://localhost:4200](http://localhost:4200). You should see the sign-in widget. Enter one of
+Run `ng serve`, and open your browser to `http://localhost:4200`. You should see the sign-in widget. Enter one of
 your user's credentials to login. You should see a "Hello {email}" message with a logout button.
 
 {% img blog/angular-sign-in-widget/login-success.png alt:"Login Success" width:"800" %}{: .center-image }

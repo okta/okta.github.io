@@ -148,7 +148,7 @@ Or if you're using Windows:
 mvnw.bat spring-boot:run
 ```
 
-After it starts, you should be able to open <http://localhost:8761> and see there are no services available.
+After it starts, you should be able to open `http://localhost:8761` and see there are no services available.
 
 {% img blog/microservices-spring-boot/eureka-service-ui.png alt:"Eureka Server" width:"800" %}
 
@@ -257,7 +257,7 @@ http localhost:8080/beers
 
 {% img blog/microservices-spring-boot/httpie-beers.png alt:"HTTPie Beers" width:"800" %}
 
-However, if you open the Eureka Service at <http://localhost:8761>, you will not see the service registered. To register 
+However, if you open the Eureka Service at `http://localhost:8761`, you will not see the service registered. To register 
 the beer-catalog-service, you need to add `@EnableDiscoveryClient` to `BeerCatalogServiceApplication.java`.
 
 ```java
@@ -273,7 +273,7 @@ public class BeerCatalogServiceApplication {
 }
 ```
 
-Re-compile this class, watch devtools restart your application, and return to <http://localhost:8761>. If you’re not 
+Re-compile this class, watch devtools restart your application, and return to `http://localhost:8761`. If you’re not 
 using an IDE, it might be easiest to cancel and restart `mvn spring-boot:run`. Now the service should show up.
 
 {% img blog/microservices-spring-boot/eureka-instances-registered.png alt:"Eureka instances registered" width:"800" %}
@@ -519,7 +519,7 @@ public Collection<Beer> goodBeers() {
 
 Restart the `edge-service` and start the Angular client by running `npm start` in the client directory.
 
-Open <http://localhost:4200> in your browser and verify that network calls to `/good-beers` go over port `8081`.
+Open `http://localhost:4200` in your browser and verify that network calls to `/good-beers` go over port `8081`.
 
 {% img blog/microservices-spring-boot/angular-pwa.png alt:"Angular PWA Client" width:"800" %}
 

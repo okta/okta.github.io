@@ -97,7 +97,7 @@ The project is configured with [webpack dev server](https://webpack.github.io/do
 ng serve
 ```
 
-You should see a screen like the one below at <http://localhost:4200>.
+You should see a screen like the one below at `http://localhost:4200`.
 
 {% img blog/angular-oidc/default-homepage.png alt:"Default Homepage" width:"800" %}
 
@@ -171,7 +171,7 @@ In `src/app/app.component.html`, adjust the placeholder content and add a `<rout
 
 Now that you have routing setup, you can continue writing the search feature.
 
-If you still have `ng serve` running, your browser should refresh automatically. If not, navigate to http://localhost:4200. You will likely see a blank screen. Open your JavaScript console and you'll see the problem.
+If you still have `ng serve` running, your browser should refresh automatically. If not, navigate to `http://localhost:4200`. You will likely see a blank screen. Open your JavaScript console and you'll see the problem.
 
 {% img blog/angular-oidc/ngmodel-error.png alt:"ngModel error" width:"800" %}
 

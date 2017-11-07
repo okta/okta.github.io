@@ -62,7 +62,7 @@ Run this app with the following command:
 spring run helloGroovy.groovy
 ```
 
-Navigate to [http://localhost:8080](http://localhost:8080) and you'll be prompted to login with your browser's basic authentication dialog. Enter `user` for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you'll see `Hello World` in your browser.
+Navigate to `http://localhost:8080` and you'll be prompted to login with your browser's basic authentication dialog. Enter `user` for the username and copy/paste the generated password from your console. If you copied and pasted the password successfully, you'll see `Hello World` in your browser.
 
 {% img blog/spring-boot-oauth/hello-world.png alt:"Hello World" width:"800" %}{: .center-image }
 
@@ -119,7 +119,7 @@ security:
       userInfoUri: # userinfo_endpoint
 ```
 
-Start your app with `spring run helloOAuth.groovy` and navigate to [http://localhost:8080](http://localhost:8080). You'll be redirected to Okta to login. 
+Start your app with `spring run helloOAuth.groovy` and navigate to `http://localhost:8080`. You'll be redirected to Okta to login. 
 
 {% img blog/spring-boot-oauth/okta-login.png alt:"Okta Login" width:"800" %}{: .center-image }
 

@@ -51,7 +51,7 @@ git clone https://github.com/oktadeveloper/spring-boot-angular-example.git
 
 Open the "server" project in your favorite IDE and run `DemoApplication` or start it from the command line using `./mvnw spring-boot:run`.
 
-Re-build your application and navigate to [http://localhost:8080/good-beers](http://localhost:8080/good-beers). You should see the list of good beers in your browser.
+Re-build your application and navigate to `http://localhost:8080/good-beers`. You should see the list of good beers in your browser.
 
 {% img blog/angular-spring-boot-pwa/good-beers-json.png alt:"Good Beers JSON" width:"800" %}{: .center-image }
 

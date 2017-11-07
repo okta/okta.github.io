@@ -49,8 +49,8 @@ Here's how you should configure an app powered by Kentor AuthServices to make it
   {% img KentorOkta/VendorOrCustomerOption.png alt:"Select the customer or vendor option" %}
 14. Now edit the web.config file of the SampleApplication project.
 15. In the `<kentor.authServices>` section, enter the following values:
-  - **entityId** = same value as the Audience URI for the Okta app, e.g. [http://localhost:18714/SamplePath/AuthServices](http://localhost:18714/SamplePath/AuthServices)
-  - **returnUrl** = value of the web application's url, i.e. [http://localhost:18714/SamplePath](http://localhost:18714/SamplePath)
+  - **entityId** = same value as the Audience URI for the Okta app, e.g. `http://localhost:18714/SamplePath/AuthServices`
+  - **returnUrl** = value of the web application's url, i.e. `http://localhost:18714/SamplePath`
 16. In the <identityProviders> section, enter the following values:
   - **entityId** = **Identity Provider Issuer** from **Sign On** => **View Setup Instructions**
     {% img KentorOkta/ViewSetupInstructions.png alt:"View setup instructions" %}

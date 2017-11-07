@@ -276,7 +276,7 @@ function requireAuth (to, from, next) {
 
 After making these changes, you should be able to run `npm start` and authenticate with the hard coded values from `auth.js` (joe@example.com / password1). 
 
-If you open your browser to <http://localhost:8080>, you should see a screen that resembles the one below.
+If you open your browser to `http://localhost:8080`, you should see a screen that resembles the one below.
 
 {% img blog/vue-auth-sdk/auth-flow-home.png alt:"Auth Flow Home" %}{: .center-image }
 
@@ -498,7 +498,7 @@ Now the ID token will provide you with the user’s name, and you can show it on
 ```
 {% endraw %}
 
-If your project is not running, start it with `npm start` and navigate to <http://localhost:8080>. Rejoice if it works!
+If your project is not running, start it with `npm start` and navigate to `http://localhost:8080`. Rejoice if it works!
 
 {% img blog/vue-auth-sdk/welcome-okta.png alt:"Welcome Okta" %}{: .center-image }
 
@@ -512,7 +512,7 @@ cd dist
 python -m SimpleHTTPServer 8080
 ```
 
-If you run Lighthouse on your app at <http://localhost:8080>, you should see similar results to the screenshot below. 
+If you run Lighthouse on your app at `http://localhost:8080`, you should see similar results to the screenshot below. 
 
 {% img blog/vue-auth-sdk/lighthouse-localhost.png alt:"Lighthouse Audits on localhost" %}{: .center-image }
 

@@ -415,7 +415,7 @@ cd edge-service
 ./mvnw spring-boot:run
 ```
 
-Open your browser and navigate to <http://localhost:8081/home>. You should see a login page, prompting for your credentials.
+Open your browser and navigate to `http://localhost:8081/home`. You should see a login page, prompting for your credentials.
 
 {% img blog/microservices-spring-secure/zuul-login.png alt:"Stormpath Zuul Login" width:"800" %}
 
@@ -631,7 +631,7 @@ Okta's Sign-In Widget ships with CSS that make it looks good out-of-the-box. To 
 
 ### Verify Authentication Works
 
-Navigate to <http://localhost:4200>, and you should see a login form like the following. 
+Navigate to `http://localhost:4200`, and you should see a login form like the following. 
 
 {% img blog/microservices-spring-secure/angular-login.png alt:"Angular Login" width:"800" %}
 
