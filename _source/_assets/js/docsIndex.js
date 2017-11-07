@@ -17,7 +17,7 @@
   ]
 
   function renderCodeLinks(codeLanguages) {
-    var row = $('<tr>');
+    var row = $('<tr class="docsPageTableRow">');
     codeLanguages.forEach(function(language) {
       var td = $('<td class="docsPageTableData">');
       var icon = $('<i>', {
@@ -38,7 +38,6 @@
 
   function renderCodeRows() {
     var table = $('<table class="docsPageTable">');  
-    
     // Build first row of frontend languages
     table.append(renderCodeLinks(frontend));
 

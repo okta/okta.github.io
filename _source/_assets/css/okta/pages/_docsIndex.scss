@@ -96,13 +96,28 @@
 		border-style: hidden;
 		border-collapse: collapse;
 	}
+
 	table td.docsPageTableData {
 		border-style: hidden;
 		padding: 20px;
 	}
 
-	// When viewed from a mobile device, we move each code icon to its own row.
+	// When viewed from a mobile device, we break the table into two columns.
 	@media screen and (max-width: 750px) {
-		td.docsPageTableData { display: block }
+		table.docsPageTable {
+			tbody {
+				display: flex;
+				border-style: hidden;			
+			}
+		}
+
+		td.docsPageTableRow {
+			display: flex;
+			flex-direction: column;
+		}
+
+		td.docsPageTableData {
+			display: block
+		}
 	}
 }
