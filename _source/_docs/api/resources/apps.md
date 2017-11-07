@@ -4501,7 +4501,7 @@ Applications have the following properties:
 |:-----------------|:---------------------------------------------|:-------------------------------------------------------------------|:-----------|:---------|:-----------|:------------|:------------|
 | id               | unique key for app                           | String                                                             | FALSE      | TRUE     | TRUE       |             |             |
 | name             | unique key for app definition                | String ( [App Names & Settings](#app-names--settings))              | FALSE      | TRUE     | TRUE       | 1           | 255         |
-| label            | unique user-defined display name for app     | String                                                             | FALSE      | TRUE     | FALSE      | 1           | 50          |
+| label            | unique user-defined display name for app     | String                                                             | FALSE      | TRUE     | FALSE      | 1           | 100         |
 | created          | timestamp when app was created               | Date                                                               | FALSE      | FALSE    | TRUE       |             |             |
 | lastUpdated      | timestamp when app was last updated          | Date                                                               | FALSE      | FALSE    | TRUE       |             |             |
 | status           | status of app                                | `ACTIVE` or `INACTIVE`                                             | FALSE      | FALSE    | TRUE       |             |             |
