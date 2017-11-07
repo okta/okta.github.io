@@ -30,7 +30,9 @@ Not all browsers supports CORS.  The following table describes which browsers su
 
 ## Granting Cross-Origin Access to Websites
 
-You can enable CORS for websites that need cross-origin requests to the Okta API on the Okta Developer Dashboard. Select **API** > **Trusted Origins** to see the screen shown below.
+You can enable CORS for websites that need cross-origin requests to the
+Okta API on the developer console. Select **API** > **Trusted Origins** to see
+the screen shown below.
 
 {% img okta-admin-ui-cors-dev.png "CORS Settings UI" alt:"CORS Settings UI" %}
 
@@ -42,13 +44,10 @@ You can enable CORS for websites that need cross-origin requests to the Okta API
 
 ## Testing
 
-You can test your CORS configuration with the following test tool
+Test your CORS configuration:
 
-1. Explicitly allowing this website (https://developer.okta.com) on the Okta Developer Dashboard
-2. Sign-in to your Okta organization on another browser tab
-3. Enter your Okta organization in the form below and click **Test**
-
-If you successfully completed the steps above, you should see your Okta User Profile
+1. Grant cross-origin access to `https://developer.okta.com` from your org's developer console.
+2. Enter your Okta organization in the form below and click **Test**. Your Okta user profile displays below the form.
 
 <div id="cors-test">
   <form class="form-cors-test" role="form">
@@ -65,12 +64,12 @@ If you successfully completed the steps above, you should see your Okta User Pro
   </div>
 </div>
 
-##### Request Examples
+## Request Examples
 {:.api .api-request .api-request-example}
 
 The following code samples can be added to your website to test your CORS configuration.  Remember to replace the `baseUrl` with the URL for your Okta organization.
 
-###### XMLHttpRequest
+### XMLHttpRequest
 
 ~~~ javascript
 var baseUrl = 'https://{yourOktaDomain}.com';
@@ -90,7 +89,7 @@ if ("withCredentials" in xhr) {
 }
 ~~~
 
-###### jQuery
+### jQuery
 
 ~~~ javascript
 var baseUrl = 'https://{yourOktaDomain}.com';
@@ -118,30 +117,31 @@ $.ajax({
 });
 ~~~
 
-##### Response Example
+## Response Example: Error
 {:.api .api-response .api-response-example}
 
-If you did not enable CORS and allow your website cross-origin access, then you should see the following errors in your browser's developer tool console:
+If you did not enable CORS, or your CORS configuration is incorrect, you
+will see an error in your browser's developer tool or JavaScript console:
 
-###### Chrome
+### Chrome
 
 ~~~
 XMLHttpRequest cannot load https://{yourOktaDomain}.com/api/v1/users/me. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'https://your-website.com' is therefore not allowed access.
 ~~~
 
-###### Safari
+### Safari
 
 ~~~
 XMLHttpRequest cannot load https://{yourOktaDomain}.com/api/v1/users/me. Origin https://{yourOktaDomain}.com is not allowed by Access-Control-Allow-Origin.
 ~~~
 
-###### Firefox
+### Firefox
 
 ~~~
 Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at https://{yourOktaDomain}.com/api/v1/users/me. This can be fixed by moving the resource to the same domain or enabling CORS.
 ~~~
 
-###### Internet Explorer
+### Internet Explorer
 
 ~~~
 SEC7118: XMLHttpRequest for https://{yourOktaDomain}.com/api/v1/users/me required Cross Origin Resource Sharing (CORS).

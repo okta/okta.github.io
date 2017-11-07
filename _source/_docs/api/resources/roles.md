@@ -207,7 +207,7 @@ curl -v -X GET \
     ],
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -535,16 +535,16 @@ HTTP/1.1 204 No Content
 
 The role model defines several **read-only** properties:
 
-| Property      | Description                                           | DataType                                                                                  | Nullable | Unique | Read Only |
-|:------------- |:----------------------------------------------------- |:----------------------------------------------------------------------------------------- |:-------- |:------ |:--------- |
-| id            | Unique key for the role assignment                    | String                                                                                    | FALSE    | TRUE   | TRUE      |
-| label         | Display name of role                                  | String                                                                                    | FALSE    | FALSE  | TRUE      |
-| type          | Type of role                                          | `SUPER_ADMIN`, `ORG_ADMIN`, `APP_ADMIN`, `USER_ADMIN`, `MOBILE_ADMIN`, `READ_ONLY_ADMIN`  | FALSE    | FALSE  | TRUE      |
-| status        | Status of role assignment                             | `ACTIVE`                                                                                  | FALSE    | FALSE  | TRUE      |
-| created       | Timestamp when app user was created                   | Date                                                                                      | FALSE    | FALSE  | TRUE      |
-| lastUpdated   | Timestamp when app user was last updated              | Date                                                                                      | FALSE    | FALSE  | TRUE      |
-| _embedded     | Embedded resources related to the role assignment     |        [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                            | TRUE     | FALSE  | TRUE      |
-| _links        | Discoverable resources related to the role assignment |        [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                            | TRUE     | FALSE  | TRUE      |
+| Property    | Description                                           | DataType                                                                                                    | Nullable | Unique | Read Only |
+|:------------|:------------------------------------------------------|:------------------------------------------------------------------------------------------------------------|:---------|:-------|:----------|
+| id          | Unique key for the role assignment                    | String                                                                                                      | FALSE    | TRUE   | TRUE      |
+| label       | Display name of role                                  | String                                                                                                      | FALSE    | FALSE  | TRUE      |
+| type        | Type of role                                          | `SUPER_ADMIN`, `ORG_ADMIN`, `APP_ADMIN`, `USER_ADMIN`, `MOBILE_ADMIN`, `READ_ONLY_ADMIN`, `HELP_DESK_ADMIN` | FALSE    | FALSE  | TRUE      |
+| status      | Status of role assignment                             | `ACTIVE`                                                                                                    | FALSE    | FALSE  | TRUE      |
+| created     | Timestamp when app user was created                   | Date                                                                                                        | FALSE    | FALSE  | TRUE      |
+| lastUpdated | Timestamp when app user was last updated              | Date                                                                                                        | FALSE    | FALSE  | TRUE      |
+| _embedded   | Embedded resources related to the role assignment     |          [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                              | TRUE     | FALSE  | TRUE      |
+| _links      | Discoverable resources related to the role assignment |          [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06)                                              | TRUE     | FALSE  | TRUE      |
 
 #### Role Types
 

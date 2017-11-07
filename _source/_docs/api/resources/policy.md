@@ -313,6 +313,7 @@ curl -v -X POST \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
+  "type": "PASSWORD",
   "name": "New Policy Rule",
   "conditions": {
     "people": {
@@ -414,6 +415,7 @@ curl -v -X PUT \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
 -d '{
+  "type": "PASSWORD",
   "name": "My Updated Policy Rule",
   "conditions": {
     "people": {
@@ -1146,6 +1148,7 @@ minUpperCase | Indicates if a password must contain at least one upper case lett
 minNumber | Indicates if a password must contain at least one number: 0 indicates no, 1 indicates yes | integer | No | 1
 minSymbol | Indicates if a password must contain at least one symbol (e.g., !@#$%^&*): 0 indicates no, 1 indicates yes | integer | No | 1
 excludeUsername | Indicates if the user name must be excluded from the password | boolean | No | true
+excludeAttributes | The user profile attributes whose values must be excluded from the password: currently only supports `firstName` and `lastName` | Array | No | Empty Array
 dictionary {%api_lifecycle beta %} | Weak password dictionary lookup settings | <a href="#WeakPasswordDictionaryObject">Weak Password Dictionary Object</a> | No | N/A
 
 ###### Weak Password Dictionary Object

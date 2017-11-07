@@ -244,6 +244,8 @@ Now the login screen should load. You can use Chrome's Device Toolbar to see wha
 Add a `login()` method in `src/app/pages/login/login.ts` that uses the Okta Auth SDK to 1) login and 2) exchange the session token for an identity and access token. An [ID token](https://openid.net/specs/openid-connect-core-1_0.html#IDToken) is similar to an identity card, in standard JWT format, signed by the OpenID Provider. Access tokens are part of the OAuth specification. An access token can be a JWT. They are used to access protected resources, often by setting them as an `Authentication` header when making a request.
 
 ```typescript
+import { TabsPage } from '../tabs/tabs';
+...
 login(): void {
   this.oauthService.createAndSaveNonce().then(nonce => {
     const authClient = new OktaAuth({
@@ -337,7 +339,7 @@ In `src/pages/home/home.ts`, add a `logout()` method, as well as methods to get 
 
 ```typescript
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { OAuthService } from 'angular-oauth2-oidc';
 
@@ -347,13 +349,12 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public oauthService: OAuthService) {
+  constructor(public app: App, public navCtrl: NavController, public oauthService: OAuthService) {
   }
 
   logout() {
     this.oauthService.logOut();
-    this.navCtrl.setRoot(LoginPage);
-    this.navCtrl.popToRoot();
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
   get givenName() {
@@ -409,9 +410,6 @@ Now you should see your name and claims information displayed when you log in.
 You should also be able to log out and see the login screen with its logo.
 
 {% img blog/ionic-authentication/login-with-logo.png alt:"Login with logo" %}
-
-**NOTE:** You might notice that the tabs don't disappear when logging out. This is [an issue](https://forum.ionicframework.com/t/go-back-to-the-root-page-ionic-2-typescript/49861/9) that you might be able to fix
-by upgrading to angular-oauth2-oidc 2.x. However, I've been [unable to make it work](https://github.com/manfredsteyer/angular-oauth2-oidc/issues/69).
 
 ## Deploy to a Mobile Device
 
@@ -494,63 +492,63 @@ Then add the methods below to facilitate logging in with OAuth.
 
 ```typescript
 redirectLogin() {
-    this.oktaLogin().then(success => {
-      localStorage.setItem('access_token', success.access_token);
-      this.oauthService.processIdToken(success.id_token, success.access_token);
-      this.navCtrl.push(TabsPage);
-    }, (error) => {
-      this.error = error;
-    });
-  }
+  this.oktaLogin().then(success => {
+    localStorage.setItem('access_token', success.access_token);
+    this.oauthService.processIdToken(success.id_token, success.access_token);
+    this.navCtrl.push(TabsPage);
+  }, (error) => {
+    this.error = error;
+  });
+}
 
-  oktaLogin(): Promise<any> {
-    return this.oauthService.createAndSaveNonce().then(nonce => {
-      let state: string = Math.floor(Math.random() * 1000000000).toString();
-      if (window.crypto) {
-        const array = new Uint32Array(1);
-        window.crypto.getRandomValues(array);
-        state = array.join().toString();
-      }
-      return new Promise((resolve, reject) => {
-        const oauthUrl = this.buildOAuthUrl(state, nonce);
-        const browser = window.cordova.InAppBrowser.open(oauthUrl, '_blank',
-          'location=no,clearsessioncache=yes,clearcache=yes');
-        browser.addEventListener('loadstart', (event) => {
-          if ((event.url).indexOf('http://localhost:8100') === 0) {
-            browser.removeEventListener('exit', () => {});
-            browser.close();
-            const responseParameters = ((event.url).split('#')[1]).split('&');
-            const parsedResponse = {};
-            for (let i = 0; i < responseParameters.length; i++) {
-              parsedResponse[responseParameters[i].split('=')[0]] =
-                responseParameters[i].split('=')[1];
-            }
-            const defaultError = 'Problem authenticating with Okta';
-            if (parsedResponse['state'] !== state) {
-              reject(defaultError);
-            } else if (parsedResponse['access_token'] !== undefined &&
-              parsedResponse['access_token'] !== null) {
-              resolve(parsedResponse);
-            } else {
-              reject(defaultError);
-            }
+oktaLogin(): Promise<any> {
+  return this.oauthService.createAndSaveNonce().then(nonce => {
+    let state: string = Math.floor(Math.random() * 1000000000).toString();
+    if (window.crypto) {
+      const array = new Uint32Array(1);
+      window.crypto.getRandomValues(array);
+      state = array.join().toString();
+    }
+    return new Promise((resolve, reject) => {
+      const oauthUrl = this.buildOAuthUrl(state, nonce);
+      const browser = window.cordova.InAppBrowser.open(oauthUrl, '_blank',
+        'location=no,clearsessioncache=yes,clearcache=yes');
+      browser.addEventListener('loadstart', (event) => {
+        if ((event.url).indexOf('http://localhost:8100') === 0) {
+          browser.removeEventListener('exit', () => {});
+          browser.close();
+          const responseParameters = ((event.url).split('#')[1]).split('&');
+          const parsedResponse = {};
+          for (let i = 0; i < responseParameters.length; i++) {
+            parsedResponse[responseParameters[i].split('=')[0]] =
+              responseParameters[i].split('=')[1];
           }
-        });
-        browser.addEventListener('exit', function (event) {
-          reject('The Okta sign in flow was canceled');
-        });
+          const defaultError = 'Problem authenticating with Okta';
+          if (parsedResponse['state'] !== state) {
+            reject(defaultError);
+          } else if (parsedResponse['access_token'] !== undefined &&
+            parsedResponse['access_token'] !== null) {
+            resolve(parsedResponse);
+          } else {
+            reject(defaultError);
+          }
+        }
+      });
+      browser.addEventListener('exit', function (event) {
+        reject('The Okta sign in flow was canceled');
       });
     });
-  }
+  });
+}
 
-  buildOAuthUrl(state, nonce): string {
-    return this.oauthService.issuer + '/v1/authorize?' +
-        'client_id=' + this.oauthService.clientId + '&' +
-        'redirect_uri=' + this.oauthService.redirectUri + '&' +
-        'response_type=id_token%20token&' +
-        'scope=' + encodeURI(this.oauthService.scope) + '&' +
-        'state=' + state + '&nonce=' + nonce;
-  }
+buildOAuthUrl(state, nonce): string {
+  return this.oauthService.issuer + '/v1/authorize?' +
+      'client_id=' + this.oauthService.clientId + '&' +
+      'redirect_uri=' + this.oauthService.redirectUri + '&' +
+      'response_type=id_token%20token&' +
+      'scope=' + encodeURI(this.oauthService.scope) + '&' +
+      'state=' + state + '&nonce=' + nonce;
+}
 ```
 
 Change the `redirectUri` that's set in the constructor to hard-code `http://localhost:8100`. If you skip this step `window.location.origin` will result in a `file://` origin being sent when the app is running on a device. By making it a known URL, we can look for it with the in-app browser on the “loadstart” event.

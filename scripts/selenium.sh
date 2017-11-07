@@ -6,8 +6,11 @@
 # Author: Joël Franusic (joel.franusic@okta.com)
 # Copyright 2016 Okta, Inc.
 
-source $OKTA_HOME/robo-warrior/setupfiles/google-chrome-stable/google-chrome-stable-setup.sh 53.0.2785.143-1
-source $OKTA_HOME/robo-warrior/setupfiles/xvfb/xvfb-entrypoint.sh start
+# Chrome 61 requires a newer version of NSS
+apt-get install -fy libnss3
+setup_service google-chrome-stable 61.0.3163.91-1
+
+source $OKTA_HOME/$REPO/scripts/setup.sh
 
 export TEST_SUITE_TYPE="junit"
 export TEST_RESULT_FILE_DIR="${REPO}/build2/reports/junit"

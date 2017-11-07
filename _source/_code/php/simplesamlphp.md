@@ -1,9 +1,12 @@
 ---
 layout: software
-title: PHP
+title: SimpleSAMPphp
+language: PHP
 excerpt: How to use SimpleSAMLphp to add support for Okta via SAML.
 support_email: developers@okta.com
 weight: 2
+redirect_from:
+  - /docs/guides/simplesamlphp.html"
 ---
 
 # Overview
@@ -35,9 +38,7 @@ section titled "Configuring SimpleSAMLphp to work with Okta."
 ## Configuring Okta to work with SimpleSAMLphp
 
 Before you can configure the example application and SimpleSAMLphp
-you will need to set up an Okta
-"[chiclet](https://support.okta.com/articles/Knowledge_Article/27838096-Okta-Terminology)"
-(application icon) that an Okta user would select to sign in to your to your
+you need to set up an Okta chiclet (application icon) that an Okta user selects to sign in to your to your
 application using SAML via SimpleSAMLphp.
 
 To set up Okta to connect to your application, follow the guide to

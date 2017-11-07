@@ -34,7 +34,7 @@ hector_aguilar:
 matt_loughran:
   full_name: Matt Loughran
   display_name: Matt Loughran
-  avatar: avatar-matt_loughran.jpg
+  avatar: avatar-mloughran.png
   email: matt.loughran@okta.com
   github: https://github.com/mattloughran-okta
 
@@ -137,3 +137,19 @@ alexsalazar:
   avatar: avatar-alex_salazar.jpg
   email: alex.salazar@okta.com
   twitter: https://twitter.com/SalaTzar
+
+robert:
+  full_name: Robert Damphousse
+  display_name: Robert Damphousse
+  avatar: avatar-robert.png
+  email: robert.damphousse@okta.com
+  twitter: https://twitter.com/robertjd_
+
+jf:
+  full_name: Joël Franusic
+  display_name: Joël Franusic
+  avatar: avatar-jf.jpg
+  email: joel.franusic@okta.com
+  twitter: https://twitter.com/jf
+  github: https://github.com/jpf
+  web: http://joel.franusic.com

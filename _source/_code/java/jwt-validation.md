@@ -1,6 +1,7 @@
 ---
 layout: software
 title: JWT Validation Guide
+language: Java
 excerpt: How to validate Okta JWTs with Java.
 support_email: developers@okta.com
 weight: 2
@@ -14,7 +15,7 @@ inside of the Bearer authentication header to let your application know who the 
 order for you to know this use is valid, you will need to know how to validate the token against Okta. This guide gives 
 you an example of how to do this using Okta's JWT Validation library for Java.
 
-> If you are validating access tokens from a Spring application take a look at the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-security).
+> If you are validating access tokens from a Spring application take a look at the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot).
 
 ## Things you will need
 For validating a JWT, you will need a few different items:

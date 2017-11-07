@@ -161,7 +161,7 @@ curl -X POST
 ~~~
 
 ### Get an IP Zone
-{% api_operation post /api/v1/zones/*:zoneId* %}
+{% api_operation get /api/v1/zones/*:zoneId* %}
 
 Gets an IP zone by id
 

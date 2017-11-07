@@ -1,25 +1,42 @@
 ---
 layout: docs_page
-title: Okta API Release Notes for 2017.36
-excerpt: Summary of changes to the Okta API since Release 2017.35
+title: Okta API Release Notes
+excerpt: New parameter for creating users and bug fixes
 ---
 
-# Okta API Release Note
+# Okta API Release Notes for Release 2017.44
 
-The [Policy API](/docs/api/resources/policy.html) and [Password Policy API](/docs/api/resources/policy.html#GroupPasswordPolicy) are Generally Available in preview orgs starting on September 7, 2017 and in production orgs starting on October 9, 2017.
+This release note summarizes the changes since 2017.43. Dates for preview and production release are the earliest possible release date. Always check your org to verify the release version.
 
-The Policy API enables an Administrator to perform policy and policy rule operations. The policy framework is used by Okta to control rules and settings that govern, among other things, user session lifetime, whether multi-factor authentication is required when logging in, what MFA factors may be employed, password complexity requirements, and what types of self-service operations are permitted under various circumstances.
+## API Feature Enhancements: New Query Parameter for Create User 
 
-The Password Policy type controls settings that determine a user’s password length and complexity, as well as the frequency with which a password can be changed. This policy also governs the recovery operations that may be performed by the user, including change password, reset (forgot) password and self-service password unlock.
+Use [the new query parameter `nextLogin`](/docs/api/resources/users.html#request-parameters) with a create user API request to create and activate a user with an expired password.
+The user has to change his or her password the next time they log in. This new query parameter eliminates the need to use two API calls to achieve the same result. <!-- OKTA-142029 -->
+
+This feature enhancement is expected in preview orgs starting November 1, 2017, and in production orgs starting November 6, 2017.
+
+## API Bug Fixes
+
+Three bug fixes are available now on preview orgs, and will be available on production orgs starting November 6, 2017:
+
+* The default ports in the App Wizard in the Developer Console have been changed from `3000` to `8080`. (OKTA-144916)
+* An error string was unclear. The string is returned when a session times out while waiting for a user to enter MFA credentials during an OpenID Connect `/oauth2/v1/authorize` or OAuth 2.0 `/oauth2/:authorizationServerId/v1/authorize` request. (OKTA-143916)
+* An error, `User not assigned to app` was incorrectly returned from a `GET /oauth2/v1/authorize` request for Oauth 2.0 clients with a custom client ID. (OKTA-146566)
+
+Two bug fixes are expected on preview orgs starting Nov 1, 2017, and will be available on production orgs starting November 6, 2017:
+
+* System log entries for API Access Management and OpenID Connect now correctly report client IDs and the number of tokens which were revoked in a refresh token. (OKTA-145486)
+* The OpenID Connect claim `phone_number_verified` was returned from some authorization servers. The claim has been removed because Okta doesn't support this claim yet. (OKTA-146470)
+
 
 ### Does Your Org Have This Change Yet?
 
-To verify the current release for an org, scroll to the bottom of the developer console, or click the **Admin** button and check the footer of the Dashboard page.
+To verify the current release for an org, click the **Admin** button and check the footer of the Dashboard page.
 
 {% img release_notes/version_footer.png alt:"Release Number in Footer" %}
 
 ### Looking for Something Else?
 
-* [Okta API Release Note Index for 2016](platform-release-notes2016-index.html) 
-* [Okta API Release Note Index for 2017](platform-release-notes2017-index.html)
-* For changes outside the Okta API, see the [Product Release Notes](https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm).
+* [Platform Release Note Index for 2016](platform-release-notes2016-index.html)
+* [Platform Release Note Index for 2017](platform-release-notes2017-index.html)
+* For changes outside the Okta platform, see the [Product Release Notes](https://help.okta.com/en/prev/Content/Topics/ReleaseNotes/preview.htm).

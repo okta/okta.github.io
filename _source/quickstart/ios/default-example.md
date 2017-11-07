@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 libraryName: Native iOS
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta iOS Quickstart
 
 This guide will walk you through integrating authentication into an iOS (Swift) app with Okta by performing these steps:
 
@@ -98,7 +102,7 @@ Then, you can start the authorization flow by simply calling `login`:
 ```swift
 OktaAuth
   .login()
-  .start(self) { response, error in    
+  .start(self) { response, error in
     if error != nil { print(error!) }
 
     // Success
@@ -118,7 +122,7 @@ Tokens are securly stored in the Keychain. They are easily set and retrieved wit
 ```swift
 OktaAuth
   .login()
-  .start(self) { response, error in    
+  .start(self) { response, error in
     if error != nil { print(error!) }
 
     // Success
@@ -153,8 +157,6 @@ if let currentToken = OktaAuth.tokens.get(forKey: "accessToken") {
 
 Your iOS application now has an access token in the Keychain that was issued by your Okta Authorization server. You can use this token to authenticate requests for resources on your server or API. As a hypothetical example, let's say that you have an API that gives us messages for our user.  You could create a `callMessagesApi` function that gets the access token from the Keychain, and use it to make an authenticated request to your server.
 
-Please continue down to the next section, Server Setup, to learn about access token validation on the server.  Here is what the iOS HTTP request could look like for this hypothetical example:
-
 ```swift
 
 func callMessagesApi() {
@@ -169,7 +171,7 @@ func callMessagesApi() {
   var request = URLRequest(url: url!)
   request.allHTTPHeaderFields = headers
 
-  let task = URLSession.shared.dataTask(with: request){ data, response, error in 
+  let task = URLSession.shared.dataTask(with: request){ data, response, error in
     if error != nil { return }
 
     let serverResponse = response {
@@ -179,3 +181,5 @@ func callMessagesApi() {
   task.resume()
 }
 ```
+
+In the next section you can select your server technology to see how your server can read this incoming token and validate it.

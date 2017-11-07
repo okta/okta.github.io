@@ -22,7 +22,7 @@ Explore the Groups API: [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 Adds a new group with `OKTA_GROUP` type to your organization.
 
 > Application import operations are responsible for syncing groups with `APP_GROUP` type such as Active Directory groups.<br>
-> See [Importing and Using Groups in Okta](https://support.okta.com/help/articles/Knowledge_Article/92113353-Importing-and-Using-Groups-in-Okta) for more information.
+> See [Importing Groups into Okta](https://help.okta.com/en/prod/Content/Topics/Directory/Directory_Groups.htm) for more information.
 
 ##### Request Parameters
 {:.api .api-request .api-request-params}
@@ -47,7 +47,7 @@ curl -v -X POST \
 -d '{
   "profile": {
     "name": "West Coast Users",
-    "description": "Straight Outta Compton"
+    "description": "All Users West of The Rockies"
   }
 }' "https://{yourOktaDomain}.com/api/v1/groups"
 ~~~
@@ -67,7 +67,7 @@ curl -v -X POST \
   "type": "OKTA_GROUP",
   "profile": {
     "name": "West Coast Users",
-    "description": "Straight Outta Compton"
+    "description": "All Users West of The Rockies"
   },
   "_links": {
     "logo": [
@@ -137,7 +137,7 @@ curl -v -X GET \
   "type": "OKTA_GROUP",
   "profile": {
     "name": "West Coast Users",
-    "description": "Straight Outta Compton"
+    "description": "All Users West of The Rockies"
   },
   "_links": {
     "logo": [
@@ -280,7 +280,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00garwpuyxHaWOkdV0g4&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -383,7 +383,7 @@ curl -v -X GET \
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -446,7 +446,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00gak46y5hydV6NdM0g4&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -543,7 +543,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -606,7 +606,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -703,7 +703,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups?after=00g1emaKYZTWRYYRRTSK&lim
     "type": "OKTA_GROUP",
     "profile": {
       "name": "West Coast Users",
-      "description": "Straight Outta Compton"
+      "description": "All Users West of The Rockies"
     },
     "_links": {
       "logo": [
@@ -1758,7 +1758,7 @@ Link: <https://{yourOktaDomain}.com/api/v1/groups/00g1fanEFIQHMQQJMHZP/apps?afte
   "type": "OKTA_GROUP",
   "profile": {
     "name": "West Coast Users",
-    "description": "Straight Outta Compton"
+    "description": "All Users West of The Rockies"
   },
   "_links": {
     "logo": [
@@ -1835,7 +1835,7 @@ Profile for any group that is **not** imported from Active Directory
 ~~~json
 {
   "name": "West Coast Users",
-  "description": "Straight Outta Compton"
+  "description": "All Users West of The Rockies"
 }
 ~~~
 

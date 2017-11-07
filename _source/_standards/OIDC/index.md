@@ -110,7 +110,7 @@ Clients should always [validate ID Tokens](/docs/api/resources/oidc.html#validat
 
 The ID Tokens returned by the authentication endpoint (implicit flow) or the Token endpoint (authorization code flow)
 are identical, except that in the implicit flow, the *nonce* parameter is required (and hence must have been included
-in the request), and the *at_hash* parameter is required if the response includes [an Access Token](/standards/OAuth/index#access-token) but prohibited if the
+in the request), and the *at_hash* parameter is required if the response includes [an Access Token](/standards/OAuth/index.html#access-token) but prohibited if the
 response does not include an Access Token.
 
 The ID Token (*id_token*) consists of three period-separated, base64URL-encoded JSON segments: [a header](#id-token-header), [the payload](#id-token-payload), and [the signature](#id-token-signature).
@@ -229,7 +229,7 @@ Be aware of the following before you work with scope-dependent claims:
 
 * To protect against arbitrarily large numbers of groups matching the group filter, the groups claim has a limit of 100.
 If more than 100 groups match the filter, then the request fails. Expect that this limit may change in the future.
-For more information about configuring an app for OpenID Connect, including group claims, see [Using OpenID Connect](https://support.okta.com/help/articles/Knowledge_Article/Using-OpenID-Connect).
+For more information about configuring an app for OpenID Connect, including group claims, see [OpenID Connect Wizard](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard.htm).
 * **Important:** Scope-dependent claims are returned differently depending on the values in `response_type` and the scopes requested:
 
     | Response Type             | Claims Returned in ID Token                                                                        | Claims Returned from the Userinfo Endpoint  |

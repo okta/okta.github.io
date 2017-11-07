@@ -1,23 +1,30 @@
 ---
 layout: software
-title: JavaScript
+title: Okta Sign-In Widget Guide
+language: JavaScript
 excerpt: A drop-in widget with custom UI capabilities to power sign-in with Okta.
 weight: 1
 redirect_from:
     - "/docs/guides/okta_sign-in_widget.html"
 ---
 
-## Overview
+## Okta Sign-In Widget Guide
 
 The Okta Sign-In Widget is a JavaScript library that gives
 you a fully-featured and customizable login experience which
-can be used to authenticate users on any website. This guide will introduce you to the Widget and show you how to create a simple page that uses it. 
+can be used to authenticate users on any website. This guide will introduce you to the Sign-In Widget and show you how to create a simple page that uses it.
 
-{% img okta-signin.png alt:"Screenshot of basic Okta Sign-In Widget" %}
 
-If you'd like to jump right into the Widget's code, you can find it on GitHub here: <https://github.com/okta/okta-signin-widget>.
+{% img okta-signin.png alt:"Screenshot of basic Okta Sign-In Widget" %}{: .center-image }
 
-If you'd like to read the Widget's reference page, you will find it here: [Okta Sign-In Widget Reference Page](/code/javascript/okta_sign-in_widget_ref).
+### Who Should Use This Guide?
+
+Follow this guide if you would like to create a simple page from scratch while learning how to use the Sign-In Widget.
+
+If you already have an application and would to integrate the Sign-In Widget into it, please see one of the following:
+
+* [Okta Sign-In Widget Source & API Reference][widget-reference]
+* <a href="/quickstart/#/widget" data-proofer-ignore>Okta Sign-In Widget Quickstart Guide</a>
 
 ### Features
 
@@ -27,7 +34,7 @@ The Sign-in Widget supports the following use cases:
 
 - **Multi-Factor Authentication:** The Widget also handles enrollment and verification of multiple authentication factors. It comes with built-in support for SMS authentication, security questions, and Google Authenticator, among others.
 
-- **Self-Service Password Reset:** Support for sending reset notifications as well as prompting users to verify themselves by prompting them to answer a security question. 
+- **Self-Service Password Reset:** Support for sending reset notifications as well as prompting users to verify themselves by prompting them to answer a security question.
 
 - **Password Expiration:** The Widget can notify users when their password has expired and prompt them to update their password before allowing them to sign in.
 
@@ -39,7 +46,7 @@ If you want to see the Sign-in Widget in action for yourself, you will need thre
 
 - An Okta Developer org, which you can sign-up for here: <https://developer.okta.com/signup/>
 - A client Application in Okta: for more information, you can read about [the OpenID Connect Application Wizard](https://help.okta.com/en/prev/Content/Topics/Apps/Apps_App_Integration_Wizard.htm)
-- At least one [User assigned to it](https://support.okta.com/help/Documentation/Knowledge_Article/27418177-Using-the-Okta-Applications-Page#Assigning)
+- At least one [User assigned to it](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_Apps_Page.htm#Assigning)
 
 Once you have these prerequisites, getting the Sign-in Widget working has four steps:
 
@@ -61,10 +68,10 @@ The below code will render a login page using the Okta Sign-in Widget. You can c
 
   <!-- Core widget js and css -->
 
-  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/js/okta-sign-in.min.js" type="text/javascript"></script>
-  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
+  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/js/okta-sign-in.min.js" type="text/javascript"></script>
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
   <!-- Optional, customizable css theme options. Link your own customized copy of this file or override styles in-line -->
-  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css" type="text/css" rel="stylesheet">
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-theme.css" type="text/css" rel="stylesheet">
 </head>
 <body>
   <!-- Render the login widget here -->
@@ -123,7 +130,7 @@ In the simple example above, you already performed the following steps:
 3.  Served the HTML file with a web server
 4.  Configured a Trusted Origin in your Okta organization
 
-In that example, you redirect the user to their Okta dashboard (as defined in the `orgUrl` variable). Now you will configure a redirect to a custom authentication landing page hosted on your server. 
+In that example, you redirect the user to their Okta dashboard (as defined in the `orgUrl` variable). Now you will configure a redirect to a custom authentication landing page hosted on your server.
 
 To do this, you will now perform the following steps:
 
@@ -230,9 +237,9 @@ is up to you. Customization of the widget itself will be done on
 the `#okta-login-container` selector and its child elements.
 
 A full list of the CSS selectors that you can use to style the
-Okta Sign-In Widget are in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css) file. We strongly
+Okta Sign-In Widget are in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-theme.css) file. We strongly
 urge you to style your widget using only the selectors that are
-present in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css) file as other stylistic elements in the widget may be subject to change and may cause your styling to break in
+present in the [okta-theme.css](https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-theme.css) file as other stylistic elements in the widget may be subject to change and may cause your styling to break in
 future versions of the Okta Sign-In Widget.
 
 #### Example CSS styling for the Okta Sign-In Widget
@@ -280,7 +287,7 @@ your HTML:
 The configuration options that are passed to the `OktaSignIn()`
 constructor are used to configure the functionality and text labels
 of the Okta Sign-In Widget. An example of how to configure
-`OktaSignIn()` is below. If you'd like to see the full list of configuration options, see the [Sign-in Widget Reference page](/code/javascript/okta_sign-in_widget_ref.html#configuration).
+`OktaSignIn()` is below. If you'd like to see the full list of configuration options, see the [Sign-in Widget Reference page][widget-reference].
 
 #### A Walkthrough of the Widget Code
 
@@ -297,10 +304,10 @@ needed to get it working. The HTML below is the same as the HTML you added above
 
   <!-- Core widget js and css -->
 
-  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/js/okta-sign-in.min.js" type="text/javascript"></script>
-  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
+  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/js/okta-sign-in.min.js" type="text/javascript"></script>
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-sign-in.min.css" type="text/css" rel="stylesheet">
   <!-- Optional, customizable css theme options. Link your own customized copy of this file or override styles in-line -->
-  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/1.13.0/css/okta-theme.css" type="text/css" rel="stylesheet">
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/{{ site.versions.okta_signin_widget }}/css/okta-theme.css" type="text/css" rel="stylesheet">
 </head>
 <body>
   <!-- Render the login widget here -->
@@ -336,7 +343,7 @@ We also include the `okta-theme.css` file, which adds Okta's own custom theme. T
 #### Body
 
 In the `<body>`, we add a `<div>` tag with an `id` value of
-`okta-login-container`. 
+`okta-login-container`.
 
 >Note: You can use any `id` value in this tag, we are just using `okta-login-container` here for the sake of clarity.
 
@@ -347,10 +354,10 @@ this code on your own site, you will need to run these functions
 in the parts of your code that are run when the DOM is ready.
 
 Here is what that JavaScript code is doing: first, the line below
-initializes the Okta Sign-In Widget object. 
+initializes the Okta Sign-In Widget object.
 
 > The `baseUrl` value must be the domain for your Okta
-organization. 
+organization.
 
 For example, if your Okta organization is `acme.okta.com` you
 would replace the string `example.okta.com` below with
@@ -374,7 +381,7 @@ oktaSignIn.renderEl(
 
 Below is a working example of a customized version of the Okta Sign-In Widget. You can see what these customizations do by copying this code into your
 `login-to-okta.html` example file and reloading the page in your
-web browser. 
+web browser.
 
 ~~~ javascript
 var oktaSignIn = new OktaSignIn({
@@ -408,7 +415,7 @@ var oktaSignIn = new OktaSignIn({
 });
 ~~~
 
-For more information about these configuration options, see the [Sign-in Widget Reference page](/code/javascript/okta_sign-in_widget_ref.html#configuration). 
+For more information about these configuration options, see the [Okta Sign-In Widget Reference page][widget-reference].
 
 ## Troubleshooting
 
@@ -418,8 +425,10 @@ For other questions, please get in touch with <developers@okta.com>.
 
 ## Next Steps
 
-You can find more information about the Widget on the [Okta Sign-In Widget Reference Page](/code/javascript/okta_sign-in_widget_ref).
+You can find more information about the Widget on the [Okta Sign-In Widget Reference Page][widget-reference].
 
 ## GitHub Project
 
 If you'd like to see the code that powers the Widget, you can [find it on GitHub](https://github.com/okta/okta-signin-widget).
+
+[widget-reference]: https://github.com/okta/okta-signin-widget#okta-sign-in-widget

@@ -1,6 +1,7 @@
 ---
 layout: software
-title: Python
+title: SAML-enable your Python application
+language: Python
 excerpt: Guidance on how to SAML-enable your Python application using open source PySAML2.
 chiclet_name: PySAML2 Example
 programming_language: Python
@@ -11,7 +12,9 @@ saml_library: PySAML2
 saml_library_url: https://github.com/rohe/pysaml2
 git_url: git@github.com:jpf/okta-pysaml2-example.git
 github_repo_name: okta-pysaml2-example
-redirect_from: "/docs/examples/pysaml2.html"
+redirect_from:
+  - "/docs/examples/pysaml2.html"
+  - "/docs/guides/pysaml2.html"
 weight: 2
 ---
 
@@ -42,7 +45,7 @@ section titled "Configuring {{ page.saml_library }} to work with Okta."
 ## Configuring Okta to work with {{ page.saml_library }}
 
 Before you can configure your application and {{ page.saml_library }} set up an
-Okta "[chiclet](https://support.okta.com/articles/Knowledge_Article/27838096-Okta-Terminology)" (application icon) that enables an Okta user to sign in to your to your application with SAML and {{ page.saml_library }}.
+Okta chiclet (application icon) that enables an Okta user to sign in to your to your application with SAML and {{ page.saml_library }}.
 
 To set up Okta to connect to your application, follow the
 [setting up a SAML application in Okta](/docs/guides/setting_up_a_saml_application_in_okta.html)

@@ -33,13 +33,14 @@ Creates a new user in your Okta organization with or without credentials
 ##### Request Parameters
 {:.api .api-request .api-request-params}
 
-| Parameter   | Description                                                                       | Param Type | DataType                                  | Required | Default |
-|:------------|:----------------------------------------------------------------------------------|:-----------|:------------------------------------------|:---------|:--------|
-| activate    | Executes     [activation lifecycle](#activate-user) operation when creating the user  | Query      | Boolean                                   | FALSE    | TRUE    |
-| provider    | Indicates whether to create a user with a specified authentication provider       | Query      | Boolean                                   | FALSE    | FALSE   |
-| profile     | Profile properties for user                                                       | Body       |     [Profile Object](#profile-object)         | TRUE     |         |
-| credentials | Credentials for user                                                              | Body       |     [Credentials Object](#credentials-object) | FALSE    |         |
-| groupIds    | Ids of groups that user will be immediately added to at time of creation          | Body       | Array of Group Ids                        | FALSE    |         |
+| Parameter   | Description                                                                                                                                                         | Param Type | DataType                                   | Required | Default |
+|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------|:-------------------------------------------|:---------|:--------|
+| activate    | Executes       [activation lifecycle](#activate-user) operation when creating the user                                                                                    | Query      | Boolean                                    | FALSE    | TRUE    |
+| provider    | Indicates whether to create a user with a specified authentication provider                                                                                         | Query      | Boolean                                    | FALSE    | FALSE   |
+| profile     | Profile properties for user                                                                                                                                         | Body       |       [Profile Object](#profile-object)         | TRUE     |         |
+| credentials | Credentials for user                                                                                                                                                | Body       |       [Credentials Object](#credentials-object) | FALSE    |         |
+| groupIds    | Ids of groups that user will be immediately added to at time of creation                                                                                            | Body       | Array of Group Ids                         | FALSE    |         |
+| nextLogin   | With `activate=true`, if `nextLogin=changePassword`, a user is created, activated, and the password is set to `EXPIRED`, so user must change it the next time they log in. | Query      | String                                     | FALSE    | FALSE   |
 
 ##### Response Parameters
 {:.api .api-response .api-response-params}
@@ -64,7 +65,7 @@ The user is emailed a one-time activation token if activated without a password.
 |       X        |    X     |          FALSE           |   `STAGED`    |                        |                |
 |       X        |    X     |           TRUE           |   `ACTIVE`    |        Password        |                |
 
-Creating users with `FEDERATION` or `SOCIAL` provider will be either `ACTIVE` or `STAGED` based on the `activate` query parameter since they do not support a `password` or `recovery_question` credential.
+Creating users with a `FEDERATION` or `SOCIAL` provider sets the user status to either `ACTIVE` or `STAGED` based on the `activate` query parameter since these two providers don't support a `password` or `recovery_question` credential.
 
 #### Create User without Credentials
 {:.api .api-operation}
@@ -1049,7 +1050,6 @@ Examples use cURL-style escaping instead of URL encoding to make them easier to 
 | `profile.email eq "email@example.com"`        | Users with a specified `email`*                  |
 | `profile.firstName eq "John"`                 | Users with a specified `firstName`*              |
 | `profile.lastName eq "Smith" `                | Users with a specified `lastName`*               |
-| `profile.lastName sw "Sm" `                   | Users whose `lastName` starts with "Sm"          |
 
 > Hint: If filtering by `email`, `lastName`, or `firstName`, it may be easier to use `q` instead of `filter`.
 
@@ -2830,7 +2830,7 @@ The default user profile is based on the [System for Cross-Domain Identity Manag
 | managerId         | `id` of a user&#8217;s manager                                                                                                     | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                  |
 | manager           | displayName of the user&#8217;s manager                                                                                            | String   | TRUE     | FALSE  | FALSE    |           |           |                                                                                                                  |
 
-> Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code. For example, 'en_US' specifies the language English and country US. [Okta Support Doc for ISO compliant Locale values](https://support.okta.com/help/articles/Knowledge_Article/Universal-Directory-enforcement-of-ISO-compliant-Locale-values)
+> Note: A locale value is a concatenation of the ISO 639-1 two letter language code, an underscore, and the ISO 3166-1 2 letter country code. For example, 'en_US' specifies the language English and country US.
 
 ##### Okta Login
 

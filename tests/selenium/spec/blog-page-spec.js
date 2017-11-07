@@ -1,21 +1,22 @@
 const BlogPage = require('../framework/page-objects/BlogPage');
+const util = require('../framework/shared/util');
 
 describe('blog page spec', () => {
   const blogPage = new BlogPage('/blog/');
 
   beforeEach(() => {
+    blogPage.resizeXLarge();
     blogPage.load();
   });
 
   it('has blog posts with read more links to open them', () => {
     expect(blogPage.getBlogPostCount()).toBeGreaterThan(0);
-
     const blogLink = blogPage.getBlogLink(1);
     blogPage.clickReadMoreOnPost(1);
     expect(blogLink).toContain(blogPage.getCurrentURL());
   });
 
-  xit('has pagination and navigates to next and previous links', () => {
+  util.itNoHeadless('has pagination and navigates to next and previous links', () => {
     expect(blogPage.isPaginationVisible()).toBe(true);
 
     blogPage.clickNext();

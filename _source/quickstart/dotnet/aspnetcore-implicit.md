@@ -1,7 +1,11 @@
 ---
 layout: quickstart_partial
 exampleDescription: ASP.NET Core 2.0 Implicit Example
+sitemap:
+  exclude: "yes"
 ---
+
+## Okta ASP.NET Core Quickstart
 
 ### Create a new project
 
@@ -77,4 +81,4 @@ The JWT Bearer middleware automatically validates tokens and populates `HttpCont
 
 If you want to do more with the user, you can use the [Okta .NET SDK](https://github.com/okta/okta-sdk-dotnet) to get or update the user's details stored in Okta.
 
-> Note: If your client application is running on a different server (or port) than your ASP.NET Core server, you'll need to add [CORS middleware](https://docs.microsoft.com/en-us/aspnet/core/security/cors) to the pipeline as well. 
+> Note: If your client application is running on a different server (or port) than your ASP.NET Core server, you'll need to add [CORS middleware](https://docs.microsoft.com/en-us/aspnet/core/security/cors) to the pipeline as well.
