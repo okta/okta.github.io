@@ -660,7 +660,7 @@
 		/* -------------------------- PYGMENTS */
 
 		pre {
-			@include padding(medium large);
+			@include padding(15px);
 			background: #f4f4f4;
 			display: block;
 			margin: get-spacing('large') 0;

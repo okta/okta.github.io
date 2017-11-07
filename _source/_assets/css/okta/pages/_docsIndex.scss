@@ -34,9 +34,11 @@
 		line-height: 30px;
         margin: 0, 0px, 0, auto;
 		a {
-			display: block;
+			display: inline-table;
+			font-size: 14px;
 			color: #d2d2d6;
-			padding: 30px 20px 30px;
+			text-transform: uppercase;
+			padding: 0px 20px 30px;
 			border-bottom: 2px solid get-color('ebony-clay');
 			&:hover{
 				cursor: pointer;
@@ -46,16 +48,6 @@
 			&:hover {
 				border-bottom-color:  #fff;
 			}
-		}
-		ul {
-			margin: 0;
-		}
-		li {
-			display: inline-block;
-            position: relative;
-		}
-		i {
-			display: absolute;
 		}
 	}
 
@@ -86,5 +78,46 @@
 
 	%Row {
 		align-items: left;
+	}
+
+	// Update the icon size
+	i.icon.docsPage::before {
+		font-size: 40px;
+	}
+
+	i.icon.docsPage::after {
+		font-size: 40px;
+	}
+
+	table.docsPageTable {
+		width: auto;
+		margin-left: auto;
+		margin-right: auto;
+		border-style: hidden;
+		border-collapse: collapse;
+	}
+
+	table td.docsPageTableData {
+		border-style: hidden;
+		padding: 20px;
+	}
+
+	// When viewed from a mobile device, we break the table into two columns.
+	@media screen and (max-width: 750px) {
+		table.docsPageTable {
+			tbody {
+				display: flex;
+				border-style: hidden;			
+			}
+		}
+
+		td.docsPageTableRow {
+			display: flex;
+			flex-direction: column;
+		}
+
+		td.docsPageTableData {
+			display: block
+		}
 	}
 }
