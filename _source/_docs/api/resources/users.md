@@ -3317,7 +3317,7 @@ For an individual User result, the Links Object contains a full set of link rela
         },
         “user”: {
             “href”: “http://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
-            “title”: “Add-Min O’Cloudy”
+            “title”: “Saml Jackson”
         },
         “issuer”: {
             “href”: “http://{yourOktaDomain}.com:1802/api/v1/authorizationServers/default”,
@@ -3329,18 +3329,18 @@ For an individual User result, the Links Object contains a full set of link rela
 
 #### User-Consent Grant Properties
 
-| Property    | Description                                                         | Datatype                                                        |
-|:------------|:--------------------------------------------------------------------|:----------------------------------------------------------------|
-| Id          | ID of this grant                                                    | String                                                          |
-| status      | Status of the grant. Valid values: `ACTIVE`, `REVOKED` or `EXPIRED` | String                                                          |
-| created     | Timestamp when the grant was created                                | Date                                                            |
-| lastUpdated | Timestamp when the grant was last updated                           | Date                                                            |
-| issuerId    | ID of the authorization server for this grant                       | String                                                          |
-| clientId    | ID of the client for this grant                                     | String                                                          |
-| userId      | ID of the user who consented to this grant                          | String                                                          |
-| scopeId     | ID of the scope to which this grant applies                         | String                                                          |
-| _links      | Discoverable resources related to the grant                         |      [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |
-| _embedded   | Information about the scope specified by `scopeId`                  |      [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |
+| Property    | Description                                                                                                                    | Datatype                                                        |
+|:------------|:-------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
+| Id          | ID of this grant                                                                                                               | String                                                          |
+| status      | Status of the grant. Valid values: `ACTIVE`, `REVOKED` or `EXPIRED`                                                            | String                                                          |
+| created     | Timestamp when the grant was created                                                                                           | Date                                                            |
+| lastUpdated | Timestamp when the grant was last updated                                                                                      | Date                                                            |
+| issuerId    | ID of the authorization server for this grant                                                                                  | String                                                          |
+| clientId    | ID of the client for this grant                                                                                                | String                                                          |
+| userId      | ID of the user who consented to this grant                                                                                     | String                                                          |
+| scopeId     | ID of the scope to which this grant applies                                                                                    | String                                                          |
+| _links      | Discoverable resources related to the grant                                                                                    |        [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |
+| _embedded   | If `expand`=`scope` is included in the request, information about the scope specified by `scopeId` is included in the response. |        [JSON HAL](http://tools.ietf.org/html/draft-kelly-json-hal-06) |
 
 ### Client Grant Object
 
@@ -3351,7 +3351,7 @@ For an individual User result, the Links Object contains a full set of link rela
   "client_id": "0oab57tu2q6C0rYwM0h7",
   "client_name": "AWS Cognito",
   "client_uri": null,
-  "logo_uri": “https://pbs.twimg.com/profile_images/1612291889/_Logo_2.0_400x400.jpg“,
+  "logo_uri": “https://example.com/profile_images/1612291889/Logo_2.0_400x400.jpg“,
   "_links": {
      "grants": {
         "href": "http://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oab57tu2q6C0rYwM0h7/grants"
