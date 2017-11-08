@@ -125,6 +125,18 @@ function check_for_localhost_links() {
     fi
 }
 
+# Verify for occurences of localhost have been removed
+function check_for_all_localhost_links() {
+    local dir=$(pwd)/dist
+    local links=$(grep -EoR "href=\"(http|https)://localhost"  --include="*.html" $dir)
+    if [ "$links" ];
+    then
+        echo $links
+        echo "Links contain localhost!"
+        return 1
+    fi
+}
+
 # Verify for occurences of 'index' contain .html
 function check_index_links() {
     local dir=$(pwd)/_source

@@ -19,3 +19,9 @@ then
     echo "Failed header checker!"
     exit 1;
 fi
+
+if ! check_for_all_localhost_links ;
+then
+    echo "Failed localhost checker! Please remove all localhost links"
+    exit 1;
+fi
