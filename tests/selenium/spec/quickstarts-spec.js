@@ -1,6 +1,23 @@
 const QuickStartsPage = require('../framework/page-objects/QuickStartsPage');
 const util = require('../framework/shared/util');
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                                                                   *
+ *        DO NOT Remove or disable these tests.                      *
+ *                                                                   *
+ * These URLs are linked to directly from the Developer Dashboard.   *
+ *                                                                   *
+ * Changing any of the following links will result in broken links:  *
+ *   - quickstart/#/android                                          *
+ *   - quickstart/#/angular                                          *
+ *   - quickstart/#/ios                                              *
+ *   - quickstart/#/okta-sign-in-page/java                           *
+ *   - quickstart/#/okta-sign-in-page/dotnet                         *
+ *   - quickstart/#/okta-sign-in-page/nodejs                         *
+ *   - quickstart/#/okta-sign-in-page/php                            *
+ *   - quickstart/#/react                                            *
+ *                                                                   *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 describe('quickstarts page default selections spec', () => {
 
