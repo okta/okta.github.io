@@ -3293,18 +3293,18 @@ For an individual User result, the Links Object contains a full set of link rela
     },
     “_links”: {
         “app”: {
-            “href”: “http://rain.okta1.com:1802/api/v1/apps/0oaozwn7Qlfx0wl280g3“,
+            “href”: “http://{yourOktaDomain}.com:1802/api/v1/apps/0oaozwn7Qlfx0wl280g3“,
             “title”: “Native client”
         },
         “scope”: {
-            “href”: “http://rain.okta1.com:1802/api/v1/authorizationServers/ausoxdmNlCV4Rw9Ec0g3/scopes/scpp4bmzfCV7dHf8y0g3”,
+            “href”: “http://{yourOktaDomain}.com:1802/api/v1/authorizationServers/ausoxdmNlCV4Rw9Ec0g3/scopes/scpp4bmzfCV7dHf8y0g3”,
             “title”: “test”
         },
         “self”: {
-            “href”: “http://rain.okta1.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3"
+            “href”: “http://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3"
         },
         “revoke”: {
-            “href”: “http://rain.okta1.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3”,
+            “href”: “http://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3”,
             “hints”: {
                 “allow”: [
                     “DELETE”
@@ -3312,15 +3312,15 @@ For an individual User result, the Links Object contains a full set of link rela
             }
         },
         “client”: {
-            “href”: “http://rain.okta1.com:1802/oauth2/v1/clients/customClientIdNative”,
+            “href”: “http://{yourOktaDomain}.com:1802/oauth2/v1/clients/customClientIdNative”,
             “title”: “Native client”
         },
         “user”: {
-            “href”: “http://rain.okta1.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
+            “href”: “http://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
             “title”: “Add-Min O’Cloudy”
         },
         “issuer”: {
-            “href”: “http://rain.okta1.com:1802/api/v1/authorizationServers/default”,
+            “href”: “http://{yourOktaDomain}.com:1802/api/v1/authorizationServers/default”,
             “title”: “default”
         }
     }
