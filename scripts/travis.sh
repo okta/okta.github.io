@@ -16,7 +16,6 @@ npm run build-prod
 # 4. Run tests
 npm test
 
-# 5. Run lint and localhost:4000 checker
 export GENERATED_SITE_LOCATION="dist"
 
 # 5. Run Lint checker
