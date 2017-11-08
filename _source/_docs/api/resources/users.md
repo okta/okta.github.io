@@ -3293,18 +3293,18 @@ For an individual User result, the Links Object contains a full set of link rela
     },
     “_links”: {
         “app”: {
-            “href”: “http://{yourOktaDomain}.com:1802/api/v1/apps/0oaozwn7Qlfx0wl280g3“,
+            “href”: “https://{yourOktaDomain}.com:1802/api/v1/apps/0oaozwn7Qlfx0wl280g3“,
             “title”: “Native client”
         },
         “scope”: {
-            “href”: “http://{yourOktaDomain}.com:1802/api/v1/authorizationServers/ausoxdmNlCV4Rw9Ec0g3/scopes/scpp4bmzfCV7dHf8y0g3”,
+            “href”: “https://{yourOktaDomain}.com:1802/api/v1/authorizationServers/ausoxdmNlCV4Rw9Ec0g3/scopes/scpp4bmzfCV7dHf8y0g3”,
             “title”: “test”
         },
         “self”: {
-            “href”: “http://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3"
+            “href”: “https://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3"
         },
         “revoke”: {
-            “href”: “http://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3”,
+            “href”: “https://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3/grants/oag2n8HU1vTmvCdQ50g3”,
             “hints”: {
                 “allow”: [
                     “DELETE”
@@ -3312,15 +3312,15 @@ For an individual User result, the Links Object contains a full set of link rela
             }
         },
         “client”: {
-            “href”: “http://{yourOktaDomain}.com:1802/oauth2/v1/clients/customClientIdNative”,
+            “href”: “https://{yourOktaDomain}.com:1802/oauth2/v1/clients/customClientIdNative”,
             “title”: “Native client”
         },
         “user”: {
-            “href”: “http://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
+            “href”: “https://{yourOktaDomain}.com:1802/api/v1/users/00uol9oQZaWN47WQZ0g3",
             “title”: “Saml Jackson”
         },
         “issuer”: {
-            “href”: “http://{yourOktaDomain}.com:1802/api/v1/authorizationServers/default”,
+            “href”: “https://{yourOktaDomain}.com:1802/api/v1/authorizationServers/default”,
             “title”: “default”
         }
     }
@@ -3354,7 +3354,7 @@ For an individual User result, the Links Object contains a full set of link rela
   "logo_uri": “https://example.com/image/logo.jpg“,
   "_links": {
      "grants": {
-        "href": "http://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oab57tu2q6C0rYwM0h7/grants"
+        "href": "https://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oab57tu2q6C0rYwM0h7/grants"
         "hints": {
             "allow": [
                 "GET",
