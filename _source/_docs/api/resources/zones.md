@@ -378,7 +378,7 @@ curl -X GET \
 
 Lists all zones that match the filter criteria
 
-This operation requires [URL encoding](/docs/api/getting_started/design_principles.html#filtering). For example, `filter=type eq "IP"` is encoded as `filter=type%20eq%20%22IP%22`.
+This operation requires [URL encoding](/docs/api/getting_started/design_principles.html#filtering). For example, `filter=(id eq "nzoul0wf9jyb8xwZm0g3" or id eq "nzoul1MxmGN18NDQT0g3")` is encoded as `filter=%28id+eq+%22nzoul0wf9jyb8xwZm0g3%22+or+id+eq+%22nzoul1MxmGN18NDQT0g3%22%29`.
 
 See [Filtering](/docs/api/getting_started/design_principles.html#filtering) for more information about the expressions used in filtering.
 
