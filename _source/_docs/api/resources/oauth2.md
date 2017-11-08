@@ -62,7 +62,7 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
 | response_mode         | Specifies how the authorization response should be returned.     [Valid values: ``fragment``, ``form_post``, ``query`` or ``okta_post_message``](#request-parameter-details). If ``id_token`` or ``token`` is specified as the *response_type*, then ``query`` isn&#8217;t allowed as a *response_mode*. Defaults to ``fragment`` in implicit and hybrid flows. Defaults to ``query`` in authorization code flow and cannot be set as ``okta_post_message``. | Query | String   | FALSE    | See Description. |
 | scope                 | Can be a combination of reserved scopes and custom scopes. The combination determines the claims that are returned in the Access Token and ID Token. The ``openid`` scope has to be specified to get back an ID Token. If omitted, the default scopes configured in the Custom Authorization Server are used.                                                                                                                                            | Query | String   | TRUE     |                  |
 | state                 | A client application provided state string that might be useful to the application upon receipt of the response. It can contain alphanumeric, comma, period, underscore and hyphen characters.                                                                                                                                                                                                                                                           | Query | String   | TRUE     |                  |
-| prompt                | Can be either ``none`` or ``login``. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there&#8217;s an existing Okta session.                                                                                                                                                                              | Query | String   | FALSE    | See Description. |
+| prompt                | Can be either `none` or `login`. The value determines if Okta should not prompt for authentication (if needed), or force a prompt (even if the user had an existing session). Default: The default behavior is based on whether there&#8217;s an existing Okta session.                                                                                                                                                                              | Query | String   | FALSE    | See Description. |
 | nonce                 | Specifies a nonce that is reflected back in the ID Token. It is used to mitigate replay attacks.                                                                                                                                                                                                                                                                                                                                                         | Query | String   | TRUE     |                  |
 | code_challenge        | Specifies a challenge of     [PKCE](#request-parameter-details). The challenge is verified in the Token request.                                                                                                                                                                                                                                                                                                                                             | Query | String   | FALSE    |                  |
 | code_challenge_method | Specifies the method that was used to derive the code challenge. Only S256 is supported.                                                                                                                                                                                                                                                                                                                                                                 | Query | String   | FALSE    |                  |
@@ -90,6 +90,21 @@ This is a starting point for OAuth 2.0 flows such as implicit and authorization 
  * [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636) (PKCE) is a stronger mechanism for binding the authorization code to the client than just a client secret, and prevents [a code interception attack](https://tools.ietf.org/html/rfc7636#section-1) if both the code and the client credentials are intercepted (which can happen on mobile/native devices). The PKCE-enabled client creates a large random string as *code_verifier* and derives *code_challenge* from it using the method specified in *code_challenge_method*.
     Then the client passes the *code_challenge* and *code_challenge_method* in the authorization request for code flow. When a client tries to redeem the code, it must pass the *code_verifier*. Okta recomputes the challenge and returns the requested token only if it matches the *code_challenge* in the original authorization request. When a client, whose *token_endpoint_auth_method* is ``none``, makes a code flow authorization request, *code_challenge* is required.
     Since *code_challenge_method* only supports S256, this means that the value for *code_challenge* must be: `BASE64URL-ENCODE(SHA256(ASCII(*code_verifier*)))`. According to the [PKCE spec](https://tools.ietf.org/html/rfc7636), the *code_verifier* must be at least 43 characters and no more than 128 characters.
+ 
+ * {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
+     * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
+     * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
+     * `consent`, a property on [scopes](/docs/api/resources/oauth2.html#scopes-properties)
+ 
+     | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
+     |:------------------|:---------------------------------|:----------------------------|:-------------|
+     | `CONSENT`         | `TRUSTED` or `REQUIRED`          | `REQUIRED`                  | Prompted     |
+     | `CONSENT`         | `TRUSTED`                        | `IMPLICIT`                  | Not prompted |
+     | `NONE`            | `TRUSTED`                        | `REQUIRED` or `IMPLICIT`    | Not prompted |
+     | `NONE`            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
+     | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this, change the table in /oauth2.md too. Add 'LOGIN' to first three rows when supported -->
+ 
+ > {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
 
 ##### postMessage() Data Model
 
@@ -214,6 +229,9 @@ The following parameters can be posted as a part of the URL-encoded form values 
 | client_secret         | Required if the client has a secret and client credentials are not provided in the Authorization header, and if `client_assertion_type` isn&#8217;t specified. This client secret is used in conjunction with `client_id` to authenticate the client application.                                                                        | String |
 | client_assertion      | Required if the `client_assertion_type` is specified. Contains the JWT signed with the `client_secret`.     [JWT Details](#token-authentication-methods)                                                                                                                                                                                     | String |
 | client_assertion_type | Indicates a JWT is being used to authenticate the client. Per the     [Client Authentication spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), the valid value is `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`.                                                                                  | String |
+
+{% api_lifecycle beta %} Note: Use the grant type `password` with scopes that require consent only if [the `consent_method`](/docs/api/resources/apps.html#settings-7) for the client is `TRUSTED`. 
+Requests for scopes that require consent using the `password` grant type receive a `consent_required` error response if `consent_method` is `REQUIRED`.
 
 ##### Refresh Tokens for Web and Native Applications
 
@@ -2232,20 +2250,39 @@ Token limits:
     "name": "car:drive",
     "description": "Drive car",
     "system": false,
-    "default": false
+    "default": false,
+    "displayName": "Saml Jackson",
+    "consent": "REQUIRED"
   }
 ]
 ~~~
 
 ##### Scopes Properties
 
-| Parameter   | Description                          | Type    | Required for create or update |
-|:------------|:-------------------------------------|:--------|:------------------------------|
-| id          | ID of the scope                      | String  | FALSE                         |
-| name        | Name of the scope                    | String  | TRUE                          |
-| description | Description of the scope             | String  | FALSE                         |
-| system      | Whether Okta created the scope       | Boolean | FALSE                         |
-| default     | Whether the scope is a default scope | Boolean | FALSE                         |
+| Parameter                            | Description                                                                                       | Type    | Default    | Required for create or update |
+|:-------------------------------------|:--------------------------------------------------------------------------------------------------|:--------|:-----------|:------------------------------|
+| id                                   | ID of the scope                                                                                   | String  |            | FALSE                         |
+| name                                 | Name of the scope                                                                                 | String  |            | TRUE                          |
+| description                          | Description of the scope                                                                          | String  |            | FALSE                         |
+| system                               | Whether Okta created the scope                                                                    | Boolean |            | FALSE                         |
+| default                              | Whether the scope is a default scope                                                              | Boolean |            | FALSE                         |
+| displayName {% api_lifecycle beta %} | Name of the end user displayed in a consent dialog                                                | String  |            | FALSE                         |
+| consent {% api_lifecycle beta %}     | Indicates whether a consent dialog is needed for the scope. Valid values: `REQUIRED`, `IMPLICIT`. | Enum    | `IMPLICIT` | FALSE                         |
+
+* {% api_lifecycle beta %} A consent dialog is displayed depending on the values of three elements:
+    * `prompt`, a query parameter used in requests to [`/oauth2/:authorizationServerId/v1/authorize`](/docs/api/resources/oauth2.html#obtain-an-authorization-grant-from-a-user)(custom authorization server) or [`/oauth2/v1/authorize`](/docs/api/resources/oidc.html#authentication-request) (Org authorization server)
+    * `consent_method`, a property on [apps](/docs/api/resources/apps.html#settings-7)
+    * `consent`, a property on scopes as listed in the table above
+
+    | `prompt` Value    | `consent_method`                 | `consent`                   | Result       |
+    |:------------------|:---------------------------------|:----------------------------|:-------------|
+    | `CONSENT`         | `TRUSTED` or `REQUIRED`          | `REQUIRED`                  | Prompted     |
+    | `CONSENT`         | `TRUSTED`                        | `IMPLICIT`                  | Not prompted |
+    | `NONE`            | `TRUSTED`                        | `REQUIRED` or `IMPLICIT`    | Not prompted |
+    | `NONE`            | `REQUIRED`                       | `REQUIRED`                  | Prompted     |
+    | `NONE`            | `REQUIRED`                       | `IMPLICIT`                  | Not prompted | <!--If you change this, change the table in /oauth2.md too. Add 'LOGIN' to first three rows when supported -->
+
+> {% api_lifecycle beta %} Note: Apps created on `/api/v1/apps` default to `consent_method=TRUSTED`, while those created on `/api/v1/clients` default to `consent_method=REQUIRED`.
 
 #### Claims Object
 
