@@ -3351,7 +3351,7 @@ For an individual User result, the Links Object contains a full set of link rela
   "client_id": "0oab57tu2q6C0rYwM0h7",
   "client_name": "AWS Cognito",
   "client_uri": null,
-  "logo_uri": “https://example.com/profile_images/1612291889/Logo_2.0_400x400.jpg“,
+  "logo_uri": “https://example.com/image/logo.jpg“,
   "_links": {
      "grants": {
         "href": "http://{yourOktaDomain}.com/api/v1/users/00ucmukel4KHsPARU0h7/clients/0oab57tu2q6C0rYwM0h7/grants"
