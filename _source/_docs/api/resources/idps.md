@@ -4589,7 +4589,7 @@ Specifies the behavior for just-in-time (JIT) provisioning of an IdP user as a n
 | profileMaster                       | Determines if the IdP should act as a source of truth for user profile attributes | Boolean                                                               | FALSE    | FALSE    |           |           |            |
 | callout                             | Webhook settings for the `CALLOUT` action                                         | [Callout Object](#callout-object)                                     | TRUE     | FALSE    |           |           |            |
 | groups                              | Provisioning settings for a user's group memberships                              | [Group Provisioning Policy Object](#group-provisioning-policy-object) | FALSE    | FALSE    |           |           |            |
-| conditions {%api_lifecycle EA %}  | Conditional behaviors for an IdP user during authentication                       | [Provisioning Conditions Object](#provisioning-conditions-object)     | FALSE    | FALSE    |           |           |            |
+| conditions | Conditional behaviors for an IdP user during authentication                       | [Provisioning Conditions Object](#provisioning-conditions-object)     | FALSE    | FALSE    |           |           |            |
 |---------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------+----------+----------+-----------+-----------+----------------------------------|
 
 ~~~json
