@@ -2196,7 +2196,7 @@ curl -v -X POST \
 ##### Request Example (Convert a User to a Federated User)
 {:.api .api-request .api-request-example}
 
-To convert a user to a federated user, pass `FEDERATED` as the `provider` in the [Provider Object](#provider-object). The `sendEmail`
+To convert a user to a federated user, pass `FEDERATION` as the `provider` in the [Provider Object](#provider-object). The `sendEmail`
 parameter must be false or omitted for this type of conversion.
 
 ~~~sh
@@ -2204,7 +2204,7 @@ curl -v -X POST \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
 -H "Authorization: SSWS ${api_token}" \
-"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATED&sendEmail=false"
+"https://{yourOktaDomain}.com/api/v1/users/00ub0oNGTSWTBKOLGLNR/lifecycle/reset_password?provider=FEDERATION&sendEmail=false"
 ~~~
 
 ##### Response Example
