@@ -182,7 +182,7 @@
 			@include padding(15px);
 			background: #f4f4f4;
 			display: block;
-			margin: get-spacing('large') 0;
+			margin: get-spacing('small') 0;
 			max-width: 900px;
 			overflow: auto;
 
@@ -193,11 +193,11 @@
 		}
 
 		.highlighter-rouge:first-child > pre {
-			margin-top: 0;
+			margin-top: 20px;
 		}
 
 		.highlighter-rouge:last-child > pre {
-			margin-bottom: 0;
+			margin-bottom: 20px;
 		}
 
 		/* -------------------------- PYGMENTS */
