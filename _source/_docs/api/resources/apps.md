@@ -367,9 +367,9 @@ curl -v -X POST \
   "signOnMode": "BROWSER_PLUGIN",
   "settings": {
     "app": {
-      "buttonField": "#btn-login",
-      "passwordField": "#txtbox-password",
-      "usernameField": "#txtbox-username",
+      "buttonSelector": "#btn-login",
+      "passwordSelector": "#txtbox-password",
+      "userNameSelector": "#txtbox-username",
       "url": "https://example.com/login.html",
       "extraFieldSelector": ".login",
       "extraFieldValue": "SOMEVALUE"
