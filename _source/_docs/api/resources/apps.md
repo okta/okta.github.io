@@ -367,9 +367,9 @@ curl -v -X POST \
   "signOnMode": "BROWSER_PLUGIN",
   "settings": {
     "app": {
-      "buttonField": "#btn-login",
-      "passwordField": "#txtbox-password",
-      "usernameField": "#txtbox-username",
+      "buttonSelector": "#btn-login",
+      "passwordSelector": "#txtbox-password",
+      "userNameSelector": "#txtbox-username",
       "url": "https://example.com/login.html",
       "extraFieldSelector": ".login",
       "extraFieldValue": "SOMEVALUE"
@@ -4689,10 +4689,10 @@ Specifies credentials and scheme for the application's `signOnMode`.
 | ---------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | -------- | --------------- | --------- | --------- | ---------- |
 | scheme           | Determines how credentials are managed for the `signOnMode`                                                    | [Authentication Scheme](#authentication-schemes)          | TRUE     |                 |           |           |            |
 | userNameTemplate | Template used to generate a user’s username when the application is assigned via a group or directly to a user | [UserName Template Object](#username-template-object)     | TRUE     | *Okta UserName* |           |           |            |
-| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | False    |                 |           |           |            |
+| signing          | Signing credential for the `signOnMode`                                                                        | [Signing Credential Object](#signing-credential-object)   | FALSE    |                 |           |           |            |
 | userName         | Shared username for app                                                                                        | String                                                    | TRUE     |                 | 1         | 100       |            |
 | password         | Shared password for app                                                                                        | [Password Object](#password-object)                       | TRUE     |                 |           |           |            |
-| oauthClient      | Credential for OAuth 2.0 client                                                                                | [OAuth Credential Object](#oauth-credential-object)   | False    |                 |           |           |            |
+| oauthClient      | Credential for OAuth 2.0 client                                                                                | [OAuth Credential Object](#oauth-credential-object)   | FALSE    |                 |           |           |            |
 |------------------+----------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+----------+-----------------+-----------+-----------+------------|
 
 ~~~json

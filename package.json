@@ -1,24 +1,27 @@
 {
   "name": "@okta/okta.github.io",
   "version": "0.0.4",
-  "publishConfig": {
-    "registry": "https://artifacts.aue1d.saasure.com/artifactory/api/npm/npm-okta"
-  },
   "description": "NPM dependencies for testing and building developer.okta.com",
   "files": [
     "dist"
   ],
   "scripts": {
     "clean": "node scripts/clean",
-    "build-prod": "npm run clean && git fetch --force origin master:master && git clone -b master . dist && rsync -r _source/_assets/img/ ./dist/assets/img/ && cross-env JEKYLL_ENV=production bundle exec jekyll build --verbose",
-    "start": "npm run clean && cross-env JEKYLL_ENV=production bundle exec jekyll serve --incremental",
+    "generate": "cross-env JEKYLL_ENV=production bundle exec jekyll",
     "stop": "if-env CI=true && exit 0 || (pkill -f clean && kill $(lsof -t -i:4000; lsof -t -i:4444))",
-    "test-only": "protractor tests/selenium/conf.js",
-    "pretest": "npm start & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
-    "test": "npm run test-only || (npm stop && exit 1)",
-    "posttest": "npm stop",
+    "sync-assets": "git fetch --force origin master:master && git clone -b master . dist && rsync -r _source/_assets/img/ ./dist/assets/img/",    
     "find-missing-slashes": "node scripts/find-missing-slashes",
-    "post-build-lint": "bash scripts/post-build-lint.sh"
+    "post-build-lint": "bash scripts/post-build-lint.sh",
+
+    "build-prod": "npm run clean && npm run sync-assets && npm run generate build --verbose",
+
+    "prestart": "npm run clean",
+    "start": "npm run generate serve -- --incremental",
+
+    "test-only": "protractor tests/selenium/conf.js",
+    "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
+    "test": "npm run test-only || (npm stop && exit 1)",
+    "posttest": "npm run stop"
   },
   "repository": {
     "type": "git",
