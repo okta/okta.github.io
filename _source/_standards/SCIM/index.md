@@ -161,7 +161,7 @@ Okta has doubled down on our investment in our SCIM client and launched our own 
 ### Provisioning to On-Premise Apps
 
 The options above are geared towards cloud apps but we have a solution for on-premise applications as well.
-See [the product documentation](https://help.okta.com/en/prod/Content/Topics/Directory/Okta%20Active%20Directory%20Agent.htm) for details about Okta’s agent-based provisioning solution.
+See [the product documentation](https://support.okta.com/help/Documentation/Knowledge_Article/46749316-On-Premises-Provisioning-Deployment-Guide) for details about Okta’s agent-based provisioning solution.
 
 ### SCIM Facade
 
