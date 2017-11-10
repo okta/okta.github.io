@@ -6,7 +6,6 @@
     "dist"
   ],
   "scripts": {
-    "//" : "Utility scripts",
     "clean": "node scripts/clean",
     "generate": "cross-env JEKYLL_ENV=production bundle exec jekyll",
     "stop": "if-env CI=true && exit 0 || (pkill -f clean && kill $(lsof -t -i:4000; lsof -t -i:4444))",
@@ -14,14 +13,11 @@
     "find-missing-slashes": "node scripts/find-missing-slashes",
     "post-build-lint": "bash scripts/post-build-lint.sh",
 
-    "//": "Build for production",
     "build-prod": "npm run clean && npm run sync-assets && npm run generate build --verbose",
 
-    "//": "Start app",
     "prestart": "npm run clean",
     "start": "npm run generate serve -- --incremental",
 
-    "//": "Test app",
     "test-only": "protractor tests/selenium/conf.js",
     "pretest": "npm run generate serve -- --no-watch & wait-on http://localhost:4000 && webdriver-manager update --gecko false",
     "test": "npm run test-only || (npm stop && exit 1)",
