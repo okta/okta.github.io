@@ -1007,6 +1007,8 @@ Adds an OAuth 2.0 client application. This application is only available to the 
 
 * All redirect URIs must be absolute URIs and must not include a fragment component.
 
+* `authorization_code` has a lifetime of 60 seconds and can't be configured. Okta reserves the right to change this value in the future.
+
 * Different application types have different valid values for the corresponding grant type:
 
     |-------------------+---------------------------------------------------------------+-----------------------------------------------------------------------------------|
