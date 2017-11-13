@@ -246,6 +246,7 @@ url           | The URL of the login page for this app                | String  
 usernameField | CSS selector for the username field in the login form | String   | FALSE    | FALSE  |
 passwordField | CSS selector for the password field in the login form | String   | FALSE    | FALSE  |
 buttonField   | CSS selector for the login button in the login form   | String   | FALSE    | FALSE  |
+loginUrlRegex     | A regular expression that further restricts `targetURL` to the specified regular expression | String | FALSE | FALSE |
 
 ##### Request Example
 {:.api .api-request .api-request-example}
@@ -264,7 +265,8 @@ curl -v -X POST \
       "buttonField": "btn-login",
       "passwordField": "txtbox-password",
       "usernameField": "txtbox-username",
-      "url": "https://example.com/login.html"
+      "url": "https://example.com/login.html",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   }
 }' "https://{yourOktaDomain}.com/api/v1/apps"
@@ -309,7 +311,8 @@ curl -v -X POST \
       "buttonField": "btn-login",
       "passwordField": "txtbox-password",
       "usernameField": "txtbox-username",
-      "url": "https://example.com/login.html"
+      "url": "https://example.com/login.html",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   },
   "_links": {
@@ -421,7 +424,8 @@ curl -v -X POST \
       "usernameField": "#txtbox-username",
       "url": "https://example.com/login.html",
       "extraFieldSelector": ".login",
-      "extraFieldValue": "SOMEVALUE"
+      "extraFieldValue": "SOMEVALUE",
+      "loginUrlRegex": "REGEX_EXPRESSION"
     }
   },
   "_links": {
